@@ -47,24 +47,9 @@ Nothing in it is written for a particular mod, so a pack released tomorrow works
 
 Each one's weapon code was checked against the model menu, so the menu lists the guns you can actually hold and leaves out the vehicles, meat shields, ledge grabs and other helpers a mod builds out of weapon code.
 
-Brutal Doom, before and after that check. The rows that went are things you never hold: vehicle guns, meat shields, a ledge grab, and the base classes a mod's whole arsenal is built on.
-
-![Brutal Doom's model list before](media/bd-before.png)
-![Brutal Doom's model list after](media/bd-after.png)
 
 36 models across 22 weapon families, built from 34 meshes (the rest are alternate finishes), about 30 MB in all. 
 
-These are the renders the tools produced along the way. Each one shows top, side and front views. The green ring is the model's origin and the red box is the bounds stored in the file.
-
-The Bolter, before and after:
-
-![Bolter before centring](renders/Bolter_Bolter_before.png)
-![Bolter after centring](renders/Bolter_Bolter_after.png)
-
-The BFG, before and after:
-
-![BFG before centring](renders/BFG_BFG9000_before.png)
-![BFG after centring](renders/BFG_BFG9000_after.png)
 
 All 35 are in renders/, and renders/sheets/ lays the before and after views side by side.
 
