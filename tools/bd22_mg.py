@@ -38,6 +38,12 @@ READY_FRAME = 4            # MGN1 A
 SND = {'"GRLLO1"': '"Rifle/Grenade1"', '"GRLLO2"': '"Rifle/Grenade2"', '"insertshell"': '"GrenadeLauncher/Load"',
        '"weapons/empty"': '"Weapon/Empty"', '"weapons/firegrenade"': '"GrenadeLauncher/Fire"'}
 
+# BD21 -> BD22 class names. BD21's "weapon selected" token for the SMG is SubMachineGunSelected;
+# brutal22test6 defines SMGSelected and never defines the long name (parsed: every `actor <name>` in
+# the pk3's .dec/.txt). Without this the pack loads with "Unknown class name 'SubMachineGunSelected'
+# of type 'Inventory'". BD22's own 23Player.dec still calls the old name -- that one is BD22's, not ours.
+CLS = {'"SubMachineGunSelected"': '"SMGSelected"'}
+
 log = {}
 
 
@@ -124,6 +130,8 @@ def decorate():
     t = open(BD21, 'rb').read().decode('latin-1').replace('\r\n', '\n')
     for a, b in SND.items():
         t = t.replace(a, b)
+    for a, b in CLS.items():
+        t = t.replace(a, b)
     lines = t.split('\n')
     # slot like MG42 (BD22 KEYCONF setslot 4 ... MG42): KEYCONF.rsq addslot below
     # the launcher by hand (RSM): mirror Rifle.dec's 1.30/1.33 states
@@ -180,8 +188,11 @@ def decorate():
     open(S + 'DECORATE.rsqmg', 'w').write('// 1.97: the BD21 Machinegun (c2q/bd22_mg.py)\n#include "actors/Weapons/Machinegun.dec"\n')
     kc = S + 'KEYCONF.rsq'
     with open(kc, 'a') as f:
-        f.write('\n// 1.97: the Machinegun on slot 4 with the MG42 (BD22 KEYCONF setslot 4 ... MG42)\naddslot 4 Machinegun\n')
-    log['decorate'] = 'actors/Weapons/Machinegun.dec, DECORATE.rsqmg, KEYCONF.rsq addslot 4'
+        # addslotdefault, not addslot: KEYCONF has no `addslot` ("Invalid command for KEYCONF:
+        # addslot 4 Machinegun"). The pack's own slot-1 line above already uses addslotdefault,
+        # which appends to BD22's `setslot 4 ... MG42` instead of replacing it.
+        f.write('\n// 1.97: the Machinegun on slot 4 with the MG42 (BD22 KEYCONF setslot 4 ... MG42)\naddslotdefault 4 Machinegun\n')
+    log['decorate'] = 'actors/Weapons/Machinegun.dec, DECORATE.rsqmg, KEYCONF.rsq addslotdefault 4'
 
 
 # ------------------------------------------------------------------ the M203 module, per gun
@@ -190,7 +201,10 @@ def module(g, frames):
     t = open(gz).read()
     # constants -> per-gun functions (gun 1 rifle = the file's own numbers, gun 2 machinegun)
     consts = dict(AXIS_L=('AxisL', g['axis_l']), AXIS_U=('AxisU', g['axis_u']), FRAME_FRONT=('FrameFront', g['frame_front']),
-                  TUBE_REAR=('TubeRear', g['tube_rear']), TUBE_FRONT=('TubeFront', g['tube_front']), TRAVEL=('Travel', g['travel']),
+                  TUBE_REAR=('TubeRear', g['tube_rear']), TUBE_FRONT=('TubeFront', g['tube_front']),
+                  # TravelOf, not Travel: ZScript identifiers are case-insensitive, so a Travel() beside
+                  # `const TRAVEL` is "Attempt to redefine 'travel'". The other seven have an underscore.
+                  TRAVEL=('TravelOf', g['travel']),
                   ROUND_LEN=('RoundLen', None), ROUND_SEAT=('RoundSeat', None))
     rifle = {}
     for c in consts:
@@ -244,9 +258,20 @@ def module(g, frames):
         if t.count(old) != 1:
             raise SystemExit('rsr_m203.zs: %r found %d times' % (old[:50], t.count(old)))
         t = t.replace(old, new)
-    # the handler's layer transform uses s.<field>: its RSM_Geo calls take s.gun
-    t = re.sub(r'RSM_Geo\.(\w+)\(gun\)(?=[^\n]*\bs\.)', lambda m: 'RSM_Geo.%s(s.gun)' % m.group(1), t)
-    # any RSM_Geo.X(gun) outside RSM_State (no `gun` in scope) -> check by hand below
+    # Who owns `gun`: inside class RSM_State it is that class's own field, so RSM_Geo.X(gun) is right.
+    # Everywhere else (RSK_M203Handler.Place) the state is a local `s = Peek(owner)` and the calls must
+    # take s.gun. This used to be a line-local lookahead for "s." on the same line, which missed
+    # Place()'s three return lines (their `s.` reads are on earlier lines) -> "Unknown identifier 'Gun'".
+    ms = re.search(r'^class RSM_State play\b.*?^\}', t, re.S | re.M)
+    if not ms:
+        raise SystemExit('rsr_m203.zs: class RSM_State not found (the gun field is scoped to it)')
+    fix = lambda s: re.sub(r'RSM_Geo\.(\w+)\(gun\)', r'RSM_Geo.\1(s.gun)', s)
+    t = fix(t[:ms.start()]) + ms.group(0) + fix(t[ms.end():])
+    for blk, where in ((t[:ms.start()], 'before'), (t[ms.end():], 'after')):
+        if re.search(r'RSM_Geo\.\w+\(gun\)', blk):
+            raise SystemExit('rsr_m203.zs: bare (gun) left %s RSM_State -- no `gun` in scope there' % where)
+        if '(s.gun)' in blk and 'let s = Peek(' not in blk:
+            raise SystemExit('rsr_m203.zs: s.gun used %s RSM_State but no `let s = Peek(` defines s' % where)
     open(mz, 'w').write(t)
     log['module'] = dict(geo_refs=n0, twins=twins)
     # the sprites the new layers use
@@ -383,4 +408,10 @@ if __name__ == '__main__':
     roster()
     sprites(frames)
     json.dump(log, open(OUT + 'mg_apply.json', 'w'), indent=1)
+    # the stamp tools/check_plan.py looks for beside src/: this tree came out of the generators, not a
+    # hand edit. bd22_mg.py is the last stage, so it is written here. Copy it with the set.
+    import bd22_plus
+    open(OUT + '.generated', 'w').write(
+        'tools/bd22_plus.py geometry + apply, then tools/bd22_mg.py\n'
+        'SRC (1.96b) = %s\nOUT = %s\n' % (bd22_plus.SRC, OUT))
     print(json.dumps(log, indent=1))

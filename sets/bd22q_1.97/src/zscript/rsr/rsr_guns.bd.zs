@@ -46,7 +46,7 @@ class RSR_Guns abstract
 		case 9:	return (-12.200, 2.200, 6.700);
 		case 10:	return (13.926, 3.115, 11.593);
 		case 11:	return (28.489, 0.010, 0.460);
-		case 12:	return (11.814, 1.253, 12.280);
+		case 12:	return (11.788, 0.614, 12.329);
 		}
 		return (0, 0, 0);
 	}
@@ -88,7 +88,7 @@ class RSR_Guns abstract
 		case 9:	return 9.10;
 		case 10:	return 6.03;
 		case 11:	return 14.89;
-		case 12:	return 4.66;
+		case 12:	return 4.61;
 		}
 		return 0;
 	}
@@ -108,7 +108,7 @@ class RSR_Guns abstract
 		case 9:	return 22.59;
 		case 10:	return 12.25;
 		case 11:	return 12.11;
-		case 12:	return 4.64;
+		case 12:	return 4.59;
 		}
 		return 0;
 	}
@@ -149,7 +149,7 @@ class RSR_Guns abstract
 		case 9:	return (-0.911, 18.899, -9.154);
 		case 10:	return (-0.590, -5.238, -1.178);
 		case 11:	return (-0.700, 3.900, 11.201);
-		case 12:	return (-1.468, 4.571, -6.950);
+		case 12:	return (-1.481, 4.252, -6.901);
 		}
 		return (0, 0, 0);
 	}
@@ -170,7 +170,7 @@ class RSR_Guns abstract
 		case 9:	return (16.699, -15.854, -11.289);
 		case 10:	return (-8.353, -12.771, 14.516);
 		case 11:	return (3.890, 10.741, 29.189);
-		case 12:	return (3.318, -19.230, 13.282);
+		case 12:	return (3.637, -19.230, 13.269);
 		}
 		return (0, 0, 0);
 	}
@@ -762,6 +762,15 @@ class RSR_GunSprites : Actor
 		RQDM A 0;	// BD22/Rocket_Launcher
 		RQDP A 0;
 		RQDW A 0;
+		RQXM A 0;	// BD22/MG42
+		RQXP A 0;
+		RQXW A 0;
+		RQYM A 0;	// BD22/Flamethrower2
+		RQYP A 0;
+		RQYW A 0;
+		RQWM A 0;	// BD22/Unmaker
+		RQWP A 0;
+		RQWW A 0;
 		Stop;
 	}
 }

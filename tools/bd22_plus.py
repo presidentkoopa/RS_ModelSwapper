@@ -25,7 +25,8 @@ sys.path.insert(0, KIT)
 import genpack, carve_by_ref, rgeo
 
 REPO = os.path.dirname(TOOLS)
-SRC = REPO.replace('\\', '/') + '/runtime/'                        # frozen 1.96b src snapshot
+SRC = 'E:/DOOMWork/_buildtemp/rs_brutal22weaponsq/src/'            # RS_Brutal22WeaponsQ 1.96b src @ 27bef2b
+                                                                   # (the repo's runtime/ is a 33-file subset, not the snapshot)
 REMA = 'E:/DOOMWork/RS_VR_Weapons/bd22/'                           # RS_VR_Weapons checkout, bd22/
 OUT = 'E:/DOOMWork/_buildtemp/rsq_bd22/'                           # build dir (outside the repo)
 BD22SRC = 'E:/DOOMWork/_buildtemp/bd22src/'                        # brutal22test6.pk3 extracted (actors/Weapons/*.dec)
@@ -256,6 +257,16 @@ def merge_tables(old, new, newcls):
         out = out[:mo.end(2)] + '\n' + '\n'.join(ren) + out[mo.end(2):]
         added[name] = len(ren)
     missing = [n for n in fn_new if n not in fn_old]
+    # RSR_GunSprites: a sprite name is only known to the engine if some actor's states use it -- the
+    # pack ships no RQ** lumps. Merging the switches but not this list is fatal at load:
+    # "Unknown sprite RQXM in model definition for MG42" (gen_rsr writes the list, we append its lines).
+    sp_new = re.search(r'class RSR_GunSprites : Actor.*?\tSpawn:\n(.*?)\n\t\tStop;', new, re.S)
+    sp_old = re.search(r'class RSR_GunSprites : Actor.*?\tSpawn:\n.*?(?=\n\t\tStop;)', out, re.S)
+    if not sp_new or not sp_old:
+        raise SystemExit('rsr_guns.bd.zs: RSR_GunSprites Spawn block not found (new=%s, old=%s)'
+                         % (bool(sp_new), bool(sp_old)))
+    out = out[:sp_old.end()] + '\n' + sp_new.group(1) + out[sp_old.end():]
+    added['sprites'] = [l.split()[0] for l in sp_new.group(1).split('\n') if l.strip()]
     # the held-rounds classes
     held = [l for l in new.split('\n') if l.startswith('class RSR_Held_')]
     out = out.rstrip('\n') + '\n' + '\n'.join(held) + '\n'

@@ -5,4 +5,4 @@ weaponsection "Brutal_Doom"
 addslotdefault 1 RSQ_Hands
 
 // 1.97: the Machinegun on slot 4 with the MG42 (BD22 KEYCONF setslot 4 ... MG42)
-addslot 4 Machinegun
+addslotdefault 4 Machinegun

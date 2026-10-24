@@ -1,7 +1,7 @@
 {
  "geometry": {
-  "rigid_mean": 2.963914124768292e-15,
-  "rigid_max": 1.449255726278473e-14,
+  "rigid_mean": 2.7667306510923394e-15,
+  "rigid_max": 1.4383281002407285e-14,
   "t": [
    52.875,
    0.203,
@@ -52,7 +52,7 @@
   "gun_frames": 37,
   "shared_blocks": 4
  },
- "decorate": "actors/Weapons/Machinegun.dec, DECORATE.rsqmg, KEYCONF.rsq addslot 4",
+ "decorate": "actors/Weapons/Machinegun.dec, DECORATE.rsqmg, KEYCONF.rsq addslotdefault 4",
  "module": {
   "geo_refs": 36,
   "twins": {

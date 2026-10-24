@@ -19,7 +19,7 @@ class RSM_Geo abstract
 	clearscope static double FrameFront(int gun) { return gun == 2 ? 29.272 : FRAME_FRONT; }
 	clearscope static double TubeRear(int gun) { return gun == 2 ? 29.272 : TUBE_REAR; }
 	clearscope static double TubeFront(int gun) { return gun == 2 ? 63.856 : TUBE_FRONT; }
-	clearscope static double Travel(int gun) { return gun == 2 ? 9.694 : TRAVEL; }
+	clearscope static double TravelOf(int gun) { return gun == 2 ? 9.694 : TRAVEL; }
 	clearscope static double RoundLen(int gun) { return gun == 2 ? 8.550 : ROUND_LEN; }
 	clearscope static double RoundSeat(int gun) { return gun == 2 ? 0.400 : ROUND_SEAT; }
 	clearscope static Vector3 FwdHook(int gun) { return gun == 2 ? (0.0000, 0.0000, -1.0000) : (0.0000, 0.0000, -1.0000); }
