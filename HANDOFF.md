@@ -356,21 +356,54 @@ Stages `recoil`, `impacts` and `bullet`, all after `butt`. **The owner's yes was
   goes, `psp.x`/`psp.y` rotate the model. So `bloom` and `brace` have nothing to act on and are not
   carried, and the channel has no roll, so each profile's roll and backward shove are dropped.
 
-  **CORRECTION (2026-10-24): the roll and the shove are NOT engine-blocked. I said twice that they
-  were, and that was wrong — it was true of the `psp` channel and I generalised it to the pack.**
-  `Weapon.ModifyBobLayer3D` is **stock GZDoom** — `wadsrc/static/zscript/actors/inventory/
-  weapons.zs:46`, `virtual ui Vector3, Vector3 ModifyBobLayer3D(Vector3 Translation, Vector3
-  Rotation, int layer, double ticfrac)` — it returns a translation AND a full three-axis rotation,
-  and `hw_weapon.cpp:108` renders at `huds->rotation + FVector3(mx/4, (my - WEAPONTOP)/-4, 0)`, so
-  the psp term contributes **zero** to roll and whatever that hook returns is the roll.
-  **The pack already overrides it** (`zscript/rsq/hands.zs:505`) and `fistmoves.zs` already uses it
-  for "a ModifyBobLayer3D turn (yaw, pitch, roll)". So F5 used the wrong channel, and roll plus the
-  backward shove are reachable from ZScript with no engine change at all. The work is: carry
-  `back` and `roll` (the first and third of each profile's `view = back, rise, roll, tics`, which
-  `impacts()` currently logs as `dropped_back` and `dropped_roll`) as decaying playsim state in
-  `RSQ_Recoil`, and add them in that hook — `ui` scope, so it may READ playsim and must not write
-  it. `bloom` and `brace` genuinely do stay out: in VR the controller decides where rounds land.
-  Take care — that override is load-bearing for every hand and gun placement in the pack.
+  **CORRECTION, AND THEN THE CORRECTION WAS WRONG TOO (2026-10-24). Read to the end before acting
+  on this.** The first note said the roll could not be done without an engine change. I then found
+  `ModifyBobLayer3D`, decided that was wrong, and wrote the paragraph below. Then I checked what
+  dispatches it, and the original call was right after all — for a sharper reason than it gave.
+  Both are left here because the wrong turn is the useful part.
+  **What I found, and why it looked right.** `Weapon.ModifyBobLayer3D` IS stock GZDoom
+  (`wadsrc/static/zscript/actors/inventory/weapons.zs:46`) and it DOES return a full three-axis
+  rotation, and `hw_weapon.cpp:108` renders at `huds->rotation + FVector3(mx/4, (my-WEAPONTOP)/-4,
+  0)` — the psp term contributes zero to roll, so whatever that hook returns IS the roll. The pack
+  even overrides it already (`zscript/rsq/hands.zs:505`) and `fistmoves.zs` uses it for roll.
+
+  **Why it is still unreachable for the GUN.** The hook is dispatched on the class that owns the
+  LAYER. `hw_weapon.cpp:332` is decisive:
+
+      w.weapon = psp->GetCaller() == player->ReadyWeapon ? readyWeaponPsp : offhandWeaponPsp;
+
+  and `:944` then takes `weap.weapon->GetCaller()->GetClass()`. The gun's own layer resolves to the
+  BD22 weapon class — `BrutalPistol`, `Shot_Gun` — which has no override and which the pack cannot
+  give one: **ZScript cannot inherit a DECORATE class.** `hands.zs`'s override is on `RSQ_Hands`,
+  the OFFHAND weapon, so it only reaches the hand layers (2100 / 2101 / 2200). Rolling those
+  without the gun would just detach the hands from it.
+
+  **The one escape, tested and closed.** `RECOIL_AND_ANIMATION_2026-10-24.md` §6 lists as *not
+  established*: "Whether `extend class Weapon { override ... ModifyBobLayer3D }` compiles in
+  ZScript 4.14. If it does, 6-DOF becomes reachable on the foreign layer with no proxy … Worth a
+  compile test before committing." **It was tested on 2026-10-24 and it does NOT compile:**
+
+      exttest.zs, line 10: Class Weapon cannot be found in the current translation unit.
+
+  `extend class` only reaches classes declared in the same translation unit, and `Weapon` is in the
+  engine's own. So that question is answered: **no.** The document's §4 ranking stands unchanged,
+  and `psp.x` / `psp.y` — yaw and pitch, no roll — remains the only channel the pack can write for
+  the gun model. The original F5 note was right; my correction to it was not.
+
+  **The two things that ARE reachable**, from the same document's §2, neither shipped:
+  - `Weapon.BobPivot3D` is a plain writable field (`weapons.zs:42`) read off the weapon actor BY
+    NAME at `hw_weapon.cpp:350` (`weaponActor->ScriptVar(NAME_BobPivot3D, nullptr)`) under only an
+    `IsKindOf(NAME_Weapon)` test — **no override needed, so the pack can write it on BD22's guns.**
+    `models.cpp:260-266` applies it as translate(pivot) · rotate · translate(-pivot), so the kick
+    would pivot at the GRIP instead of the model origin, which in VR is the whole point. Not
+    shipped because the pivot's space is the same as ModifyBobLayer3D's translation — (L, U, −F) cm
+    over the layer's MODELDEF scale — and getting it wrong swings the gun about a point in mid-air.
+    Only the headset can tell, so it waits for the owner.
+  - Haptics: **nothing to do, it is already there.** `P_LineAttack` buzzes at `p_map.cpp:4769`,
+    `P_RailAttack` at `:5698` and `P_SpawnPlayerMissile` at `p_mobj.cpp:7556`, each picking the hand
+    itself from `vr_control_scheme`. Adding `RSM_Melee.Buzz`-style rumble on fire would double it.
+
+  `bloom` and `brace` stay out regardless: in VR the controller decides where rounds land.
   Additive in WorldTick, never assigned — A_WeaponReady rewrites that channel every tic.
 - **Ballistics is Stock / Low / Max.** Low is exactly 1.96b (24 tracers, 64 debris); Max doubles the
   caps and multiplies counts by 1.8. `rsq_recoil` is its OWN row, not on that dial: it costs one
@@ -423,11 +456,18 @@ each entry says which.
    arbitrary: **MP40** (every `korpus` slot is mirrored at ±1.44 — the tube's cooling slots; `zamek`
    is the bolt, y +1.2 being its left-side handle), **Minigun** (91 loops, all of them bores in
    `Pipe`), **Machinegun** (an M249 body with no port loop).
-3. **The round in flight — written, inert.** `zscript/rsq/rounds.zs` DOES ship and IS included, but
-   it is `class RSQ_Rounds abstract` with nothing calling it and `MODELDEF.rsbullet` left out of the
-   pk3, so it is dead code, not a working bullet — do not read its presence as "done". Every gun with
-   a cartridge is HITSCAN, and the only carrier is a PROJECTILE follower, so it can never fire as
-   wired. It needs spawning and flying from the muzzle (each card has one) to the impact.
+3. **The round in flight — DONE.** It was written to RIDE a player projectile and every cartridge
+   gun is HITSCAN, so it never fired and shipped as dead code. It flies the shot itself now, muzzle
+   to where the hitscan landed (`e.AttackPos` → `e.DamagePosition`, the same event the impact
+   uses). Eleven guns; both numbers read from the data — `roundlook.look = model, RSBM<letter>` for
+   the size and `ballistics.speed` for the velocity — which removed `BULLET_FOR`, a hand-typed map
+   duplicating it. The rockets, plasma and both BFGs say `look = none` and correctly get nothing.
+   **It is fast because the data is:** 330–874 map units a TIC, so it reads as a streak, not a
+   dart. `rsq_round_speed` is the slider; it cannot move where anything lands.
+   **Verified by instrumentation, not by the gate** — a clean compile is exactly what the dead
+   version had. An instrumented build printed 19 spawns, and that check found a bug the gate never
+   would: at 777 units a tic a 400-unit shot flew clean through the wall it had just hit. The step
+   is `dist/ttl` now, so it lands on the impact point.
 4. **Impact character — the sound, the ricochet and the light are DONE** (`bd22_plus.py hits`,
    `zscript/rsq/hit.zs`). The pack had none of the three: grep ballistics.zs for `A_StartSound` or
    `A_AttachLight` before that commit and the count is zero. Sound is per MATERIAL (checked across
@@ -528,7 +568,7 @@ file was missing eight of them:
 
 ```
 geometry  apply  [bd22_mg.py]  revolver  options  bash  whip  butt  recoil  impacts  flash
-casings  readme        then:  pk3 dist/BD22Q_197pre.pk3
+casings  hits  bullet  readme        then:  pk3 dist/BD22Q_197pre.pk3
 ```
 
 i.e. `python tools/bd22_plus.py geometry`, … , with `python tools/bd22_mg.py` (no argument) in
@@ -536,9 +576,10 @@ third place. The result must equal `sets/bd22q_1.97/src` (diff it; that is the d
 generators themselves). **Order matters**: `revolver` must follow `bd22_mg.py` (it edits the roster
 handler `bd22_mg.py` writes), `options` must come after both (it restructures the menu page they
 add rows to), and `apply` must precede everything that edits a 1.96b file — `bash`, `whip`, `butt`,
-`impacts` and `casings` all patch files `apply` copies in, so running one twice on an already-built
-tree is what their "is not there exactly once" guards are for. `bullet` is deliberately NOT in the
-pipeline. (`python`, not `python3`, on the owner's PC.)
+`impacts`, `casings`, `hits` and `bullet` all patch files `apply` copies in, so running one twice on
+an already-built tree is what their "is not there exactly once" guards are for. `hits` and `bullet`
+must both follow `impacts`, which writes the `rounds.zs` include they anchor on. (`python`, not
+`python3`, on the owner's PC.)
 
 ## Known failure already fixed (so nobody re-learns it)
 `counters.zs` called `RSR.WantsHands`; the function lives on `RSR_ReloadHandler`. The first pk3 handed to the owner had this and died at script parse. Lesson for every ZScript addition: grep the class a static lives in; then run the gate before anything leaves the repo.
