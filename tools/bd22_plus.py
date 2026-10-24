@@ -553,6 +553,76 @@ def rsb_fifth(text, fname):
                        gaps_deg=[round(float(g), 2) for g in gaps])
 
 
+# F3 -- the options menu standard (tools/README.md): one page, Options -> RS VR Weapons, owned by the
+# runtime and carrying the same rows in every pack; a set adds its own rows with
+# AddOptionMenu "RSQ_Options", one block per set, never a page of its own, so several packs loaded
+# together share one page. 1.96b instead defined the page itself, titled it for BD22 and mixed its own
+# rows into it. Ranges on the two sliders are the code's own: rsr_assist is clamp(x, 0.5, 3.0) in
+# rsr_assist.zs; rsvr_melee_swing is max(0.2, x) in melee.zs, which gives the floor but no ceiling, so
+# 3.0 is a menu limit only -- the console can still set it higher.
+SHARED_ROWS = [
+    ('\tOption "VR Hands", "rsq_hands", "OnOff"', 'rsq_hands'),
+    ('\tOption "Reloading", "rsr_reload", "RSR_ReloadMode"', 'rsr_reload'),
+    ('\tOption "Grab ammo with", "rsr_grab_with", "RSR_GrabWith"', 'rsr_grab_with'),
+    ('\tOption "New magazine from", "rsr_pouch", "RSR_Pouch"', 'rsr_pouch'),
+    ('\tOption "Check the Chamber by Hand", "rsr_freecharge", "OnOff"', 'rsr_freecharge'),
+    ('\tOption "Shotgun Shells Per Insert", "rsr_shell_credit", "RSR_ShellCredit"', 'rsr_shell_credit'),
+    ('\tSlider "Reload assist", "rsr_assist", 0.5, 3.0, 0.1', 'rsr_assist'),
+    ('\tOption "VR Punching", "rsq_punch", "OnOff"', 'rsq_punch'),
+    ('\tOption "Punch Switches Open", "rsq_punch_use", "OnOff"', 'rsq_punch_use'),
+    ('\tSlider "Melee swing strength", "rsvr_melee_swing", 0.2, 3.0, 0.1', 'rsvr_melee_swing'),
+]
+
+
+def options():
+    """F3: 1.96b's page onto the shared standard. Runs LAST -- bd22_mg.py and revolver() add their
+    rows to the page by exact-match anchors, and this restructures whatever is there."""
+    mp = OUT_SRC + 'MENUDEF.rsq'
+    t = open(mp).read()
+    st = {}
+    cvars = ''.join(open(OUT_SRC + f).read() for f in os.listdir(OUT_SRC) if f.startswith('CVARINFO.'))
+    for row, cv in SHARED_ROWS:
+        if not re.search(r'^(?:server|user) +\w+ +%s\b' % cv, cvars, re.M):
+            raise SystemExit('MENUDEF.rsq: shared row wants %s, which no CVARINFO declares' % cv)
+    m = re.search(r'OptionMenu "RSQ_Options"\n\{\n(.*?)\n\}\n', t, re.S)
+    if not m:
+        raise SystemExit('MENUDEF.rsq: no OptionMenu "RSQ_Options" to move')
+    shared_cv = {cv for _, cv in SHARED_ROWS}
+    mine = []
+    for ln in m.group(1).split('\n'):
+        if re.match(r'\s*Title\b', ln):
+            continue
+        q = re.findall(r'"([^"]*)"', ln)
+        cv = q[1] if len(q) > 1 and re.match(r'^[a-z][a-z_0-9]*$', q[1]) else None
+        if cv in shared_cv:
+            continue                      # the runtime owns it; it is re-emitted in the standard's order
+        if ln.strip():
+            mine.append(ln)
+    while mine and re.match(r'\s*StaticText\b', mine[0]):
+        mine.pop(0)
+    page = ('OptionMenu "RSQ_Options"\n{\n\tTitle "RS VR WEAPONS"\n'
+            + '\n'.join(r for r, _ in SHARED_ROWS)
+            + '\n\tStaticText " "\n\tSubmenu "Reload: tuning and debug", "RSR_Debug"\n}\n\n'
+            + '// the bd22 set\'s own rows, added to the shared page (tools/README.md: one block per set)\n'
+            + 'AddOptionMenu "RSQ_Options"\n{\n\tStaticText " "\n' + '\n'.join(mine) + '\n}\n')
+    t = t[:m.start()] + page + t[m.end():]
+    # the page is shared, so it is not named for one set
+    n = t.count('"BD22 VR Weapons"')
+    if n != 2:
+        raise SystemExit('MENUDEF.rsq: expected 2 "BD22 VR Weapons" submenu labels, found %d' % n)
+    t = t.replace('"BD22 VR Weapons"', '"RS VR Weapons"')
+    open(mp, 'w').write(t)
+    st['shared'] = [cv for _, cv in SHARED_ROWS]
+    st['set_rows'] = len([r for r in mine if 'Option' in r or 'Submenu' in r or 'Slider' in r])
+    st['added'] = ['rsr_pouch (its OptionValue was defined but no row used it)', 'rsr_assist',
+                   'rsvr_melee_swing', 'Submenu RSR_Debug (the page existed but nothing opened it)']
+    st['renamed'] = 'BD22 VR Weapons -> RS VR Weapons (2 submenu labels, and the page Title)'
+    json.dump(st, open(OUT + 'opt_apply.json', 'w'), indent=1)
+    with open(OUT + '.generated', 'a') as f:
+        f.write('then tools/bd22_plus.py options\n')
+    print(json.dumps(st, indent=1))
+
+
 def slug_revolver():
     """BD21's Revolver2 into the pack: its own file verbatim bar the renames below, the RSB states,
     the slot, and the menu row that makes it replace BD22's Shotvolver. It shares BD22's Revolver
@@ -688,5 +758,7 @@ if __name__ == '__main__':
         apply()
     if sys.argv[1:2] == ['revolver']:
         revolver()
+    if sys.argv[1:2] == ['options']:
+        options()
     if sys.argv[1:2] == ['pk3']:
         pk3(sys.argv[2])

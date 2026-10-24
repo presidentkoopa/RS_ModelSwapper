@@ -1,0 +1,22 @@
+{
+ "shared": [
+  "rsq_hands",
+  "rsr_reload",
+  "rsr_grab_with",
+  "rsr_pouch",
+  "rsr_freecharge",
+  "rsr_shell_credit",
+  "rsr_assist",
+  "rsq_punch",
+  "rsq_punch_use",
+  "rsvr_melee_swing"
+ ],
+ "set_rows": 15,
+ "added": [
+  "rsr_pouch (its OptionValue was defined but no row used it)",
+  "rsr_assist",
+  "rsvr_melee_swing",
+  "Submenu RSR_Debug (the page existed but nothing opened it)"
+ ],
+ "renamed": "BD22 VR Weapons -> RS VR Weapons (2 submenu labels, and the page Title)"
+}
