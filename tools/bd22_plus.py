@@ -1696,40 +1696,48 @@ def impacts():
             d[k] = v.strip()
         ball[m.group(1)] = d
 
-    def energy(p):
-        b = ball.get(p)
-        if not b or 'speed' not in b or 'roundmass' not in b:
-            return None
-        return float(b['roundmass']) * float(b['speed']) ** 2
+    # THE WEIGHT IS AUTHORED, NOT DERIVED (2026-10-24). Deriving it from kinetic energy --
+    # (roundmass * speed^2) normalised on the 9mm, cube-rooted -- looked principled and was wrong
+    # exactly where it mattered. `WorldHitscanFired` is raised once per PELLET: it is called from
+    # inside P_LineAttack, and A_FireBullets calls P_LineAttack once per bullet. BD22's Shot_Gun,
+    # SSG and AssaultShotgun all carry `shotpellets = 9` on the sheet. So one shotgun blast ran
+    # Spall() NINE times at k = 1.659 -- on the order of fifteen times a 9mm's spall for one
+    # trigger pull -- when RS_Ballistics says a buckshot pellet is 0.45, and says it in words:
+    # "buckshot is per pellet, with no ricochet sound or light per pellet". The energy of nine
+    # pellets together is not the weight of one of them.
+    #
+    # RSBDEFS' own `scale` IS the per-pellet authority, so read it rather than invent one. It
+    # also reaches further than the ballistics chain did: roundprofile -> round.roundlook ->
+    # roundlook.impact resolves 17 of 25 guns where energy resolved 10, picking up the rockets,
+    # the plasma and both BFGs, which had no weight at all. The 8 it does not reach have no
+    # roundprofile: four are melee or thrown, two are flamers that say outright "A FLAME IS NOT A
+    # BULLET", and the Railgun and Unmaker name only a `trail`, which carries no `impact` key.
+    def kindof(kind):
+        out = {}
+        for m in re.finditer(r'(?ms)^%s (\S+)[^\n]*\n(.*?)^end' % kind, defs):
+            d = {}
+            for k, v in re.findall(r'^\s*(\w+)\s*=\s*([^\n#]+)', m.group(2), re.M):
+                d[k] = v.strip()
+            out[m.group(1)] = d
+        return out
 
-    base = energy('pistol_9mm')
-    if not base:
-        raise SystemExit('impacts: no ballistics block for pistol_9mm to normalise against')
-    # a gun's roundprofile is not always a cartridge name -- chaingun_556, machinegun_762 and
-    # smg_9mm have no ballistics block of their own. Their RECOIL profile names the cartridge
-    # (`cartridge = rifle_556`), which is the link RS_Ballistics itself uses, so fall back to it.
-    rec = {}
-    for m in re.finditer(r'(?ms)^recoil (\S+)[^\n]*\n(.*?)^end', defs):
-        c = re.search(r'cartridge\s*=\s*(\S+)', m.group(2))
-        if c:
-            rec[m.group(1)] = c.group(1).strip()
+    rnds, looks, imps = kindof('round'), kindof('roundlook'), kindof('impact')
     rows, log = '', {}
     for card, cls in CARD2CLS:
         g = guns.get(card, {})
         p = g.get('roundprofile')
-        e = energy(p) if p else None
-        src = p
-        if e is None:
-            alt = rec.get(g.get('recoilprofile', ''))
-            if alt:
-                e = energy(alt)
-                src = '%s via %s' % (alt, g.get('recoilprofile'))
-        if e is None:
+        if not p:
             continue
-        p = src
-        k = round(min(2.5, max(0.6, (e / base) ** (1.0 / 3.0))), 3)
-        rows += "\t\tcase '%s':\treturn %.3f;\t// %s\n" % (cls, k, p)
-        log[cls] = dict(round=p, scale=k)
+        # a missing `round` block falls through to the roundlook of the same name, which is how
+        # rocket / plasma_ball / bfg_ball / bfg_heavy / rocket_rpg resolve at all
+        look = rnds.get(p, {}).get('roundlook') or (p if p in looks else None)
+        base = looks.get(look, {}).get('impact') if look else None
+        blk = imps.get(base) if base else None
+        if not blk:
+            continue
+        k = round(float(blk.get('scale', '1.0').split(',')[0]), 3)
+        rows += "\t\tcase '%s':\treturn %.3f;\t// %s -> impact %s\n" % (cls, k, p, base)
+        log[cls] = dict(round=p, roundlook=look, impact=base, scale=k)
     open(OUT_SRC + 'zscript/rsq/rounds.zs', 'w').write(ROUNDS_ZS % dict(rows=rows))
     zp = OUT_SRC + 'ZSCRIPT.rsvr'
     zt = open(zp).read()
@@ -2354,6 +2362,53 @@ def slug_hands():
     return st
 
 
+# ---------------------------------------------------------------------------------------------
+# F6 item 2, the rest of it: FOUR CARTRIDGES SHARE ONE CASING.
+#
+# BD22 throws `EmptyBrass` for the Rifle (5.56), the Minigun (5.56), the Machinegun (7.62) and
+# the MG42 (7.92) at one size, and its 9mm brass is 2.25 map units long -- 6.6 cm at
+# vr_vunits_per_meter 34, about three and a half times a real 9mm case. What it DOES get right,
+# and what I assumed it got wrong: its three casings are already three sprite sets at three
+# scales and three colours -- a 12-gauge hull really is red and 2.6x a pistol case today. The
+# gap is between the rifle calibres, not between a hull and a 9mm.
+#
+# Each casing is scaled to the length of the round the gun actually fires, anchored on BD22's own
+# 12-gauge so the shotgun is unchanged and everything else is measured against it:
+#     mu per mm = (23 px * Scale 0.25) / 70.06 mm        BD22's ShotgunCasing, its own art
+#     scale     = mm * (mu per mm) / this sprite's px
+# Sprite widths are measured off brutal22test6.pk3 (C4S1 15, C4S2 23, C4S3 24, CLIN 17 px).
+#
+# WHERE THE LENGTHS COME FROM, because they are not all from one place:
+#   19.20  RS_Ballistics' own casing_9mm.md3
+#   44.70  its casing_rifle.md3
+#   51.00  the same mesh at the 7.62 MODELDEF scale (44.70 * 0.03741 / 0.03279) -- RS's own ruler
+#   70.06  its shell_12ga.md3
+#   57.00  the real 7.92x57 Mauser. NOT RS's: `ejecta ww2_mg42` is the 9mm mesh at scale 1.35,
+#          a 25.9 mm case, which is not a Mauser round. RS's own profile is wrong here.
+#   76.20  the real 12ga 3" magnum. NOT RS's: `hull_12ga` and `hull_12ga_magnum` differ ONLY in
+#          portsmoke and wisp, both PARTICLEDEFS keys, so on stock the two are byte-identical
+#          and the magnum would read as a standard hull.
+#
+# NOT CHANGED, deliberately: the Revolver. REMA's sheet gives it `brass_357`, but BD22's Revolver
+# takes `Weapon.AmmoType1 "AmmoShell"`, carries `shotpellets = 9`, and fires SSGCaseSpawner -- it
+# is a BUCKSHOT revolver and the red hull it throws is correct. A .357 case here would be a
+# regression dressed as a fix.
+CASE_ANCHOR = (23, 0.25, 70.06)          # BD22's ShotgunCasing: sprite px, its Scale, hull mm
+CASE_SIZES = [
+    # casing class, sprite px, mm, label, the gun classes that throw it
+    ('PistolCasing', 15, 19.20, '9x19, casing_9mm.md3',
+     ['BrutalPistol', 'BrutalSMG', 'MP40']),
+    ('EmptyBrass', 24, 44.70, '5.56x45, casing_rifle.md3',
+     ['Rifle', 'Minigun']),
+    ('EmptyBrass', 24, 51.00, '7.62x51, the same mesh at its 7.62 MODELDEF scale',
+     ['Machinegun']),
+    ('EmptyBrass', 24, 57.00, '7.92x57 Mauser, the real round: RS has no mesh for it',
+     ['MG42']),
+    ('ShotgunCasing', 23, 76.20, '12ga 3in magnum, the real round: RS cannot tell it from 2.75in',
+     ['SSG']),
+]
+
+
 # How the case leaves, which is three different things and not two:
 #   SIDE  flicked out of a port in the receiver wall, to the gun's right. The default.
 #   DOWN  thrown out of a chute in the receiver FLOOR, under its own gas pressure. The MG42.
@@ -2518,6 +2573,31 @@ def casings():
     t = t.replace(anchor, "\t\tif (w is 'AssaultShotgun')\t\treturn (16.0, -1.4, -0.6);\n"
                   + lines + "\t\treturn (0, 0, 0);\n")
 
+    # per-cartridge casing size (CASE_SIZES above)
+    px_a, sc_a, mm_a = CASE_ANCHOR
+    mupermm = px_a * sc_a / mm_a
+    sz, szlog = '', {}
+    for casing, px, mm, why, classes in CASE_SIZES:
+        s = round(mm * mupermm / px, 4)
+        for cls in classes:
+            sz += ("\t\tif (gun == '%s' && casing == '%s')\n\t\t\treturn %.4f;"
+                   "\t// 1.97: %s\n" % (cls, casing, s, why))
+            szlog[cls] = dict(casing=casing, mm=mm, scale=s, source=why)
+    t = t.replace("\t// the player who fired:",
+                  "\t// 1.97: BD22 throws one EmptyBrass for the Rifle (5.56), the Minigun (5.56),\n"
+                  "\t// the Machinegun (7.62) and the MG42 (7.92), and its 9mm brass is 2.25 map\n"
+                  "\t// units -- about three and a half times a real case. Each casing is scaled to\n"
+                  "\t// the round the gun actually fires, anchored on BD22's OWN 12-gauge (23 px at\n"
+                  "\t// Scale 0.25 for a 70.06 mm hull), so the shotgun is unchanged and everything\n"
+                  "\t// else is measured against it. 0 = leave BD22's own size alone.\n"
+                  "\t//\n"
+                  "\t// The Revolver is deliberately NOT here. REMA's sheet calls it brass_357, but\n"
+                  "\t// BD22's Revolver takes AmmoType1 \"AmmoShell\", carries shotpellets = 9 and\n"
+                  "\t// fires SSGCaseSpawner: it is a BUCKSHOT revolver and its red hull is right.\n"
+                  "\tstatic double Size(Name gun, Name casing)\n\t{\n" + sz + "\t\treturn 0;\n\t}\n\n"
+                  "\t// the player who fired:", 1)
+    st['_sizes'] = szlog
+
     # how the case leaves: three things, not two
     thr = ''.join("\t\tif (w is '%s')\n\t\t\treturn %s;\n" % (cls, ['SIDE', 'DOWN', 'TIP'][m])
                   for cls, _, _, _, _, _, _, m in EJECT if m)
@@ -2560,6 +2640,19 @@ def casings():
         raise SystemExit('casings.zs: the class filter is not there exactly once')
     t = t.replace(old, "\t\tif (n != 'PistolCasing' && n != 'EmptyBrass' && n != 'ShotgunCasing'\n"
                        "\t\t\t&& n != 'MGLinks')\n")
+
+    # Size() runs HERE, at spawn, and not in Place(): Place returns early on Port() == (0,0,0),
+    # and the Machinegun, the Minigun and the MP40 have no port, so a casing from those three
+    # would never be reached. Scaling is also the one thing that is right whether or not we know
+    # where the brass came out of.
+    old = "\t\tpend.Push(c);\n"
+    if t.count(old) != 1:
+        raise SystemExit('casings.zs: the pend.Push is not there exactly once')
+    t = t.replace(old,
+                  "\t\tdouble sz = Size(mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName()"
+                  " : 'None', n);\n"
+                  "\t\tif (sz > 0)\n\t\t\tc.A_SetScale(sz, sz);\n"
+                  "\t\tpend.Push(c);\n")
     old = "\t\tc.vel = d * spd + mo.vel;\n"
     if t.count(old) != 1:
         raise SystemExit('casings.zs: the velocity line is not there exactly once')

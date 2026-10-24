@@ -28,6 +28,37 @@ class RSA_Casings : EventHandler
 		return (0, 0, 0);
 	}
 
+	// 1.97: BD22 throws one EmptyBrass for the Rifle (5.56), the Minigun (5.56),
+	// the Machinegun (7.62) and the MG42 (7.92), and its 9mm brass is 2.25 map
+	// units -- about three and a half times a real case. Each casing is scaled to
+	// the round the gun actually fires, anchored on BD22's OWN 12-gauge (23 px at
+	// Scale 0.25 for a 70.06 mm hull), so the shotgun is unchanged and everything
+	// else is measured against it. 0 = leave BD22's own size alone.
+	//
+	// The Revolver is deliberately NOT here. REMA's sheet calls it brass_357, but
+	// BD22's Revolver takes AmmoType1 "AmmoShell", carries shotpellets = 9 and
+	// fires SSGCaseSpawner: it is a BUCKSHOT revolver and its red hull is right.
+	static double Size(Name gun, Name casing)
+	{
+		if (gun == 'BrutalPistol' && casing == 'PistolCasing')
+			return 0.1051;	// 1.97: 9x19, casing_9mm.md3
+		if (gun == 'BrutalSMG' && casing == 'PistolCasing')
+			return 0.1051;	// 1.97: 9x19, casing_9mm.md3
+		if (gun == 'MP40' && casing == 'PistolCasing')
+			return 0.1051;	// 1.97: 9x19, casing_9mm.md3
+		if (gun == 'Rifle' && casing == 'EmptyBrass')
+			return 0.1529;	// 1.97: 5.56x45, casing_rifle.md3
+		if (gun == 'Minigun' && casing == 'EmptyBrass')
+			return 0.1529;	// 1.97: 5.56x45, casing_rifle.md3
+		if (gun == 'Machinegun' && casing == 'EmptyBrass')
+			return 0.1744;	// 1.97: 7.62x51, the same mesh at its 7.62 MODELDEF scale
+		if (gun == 'MG42' && casing == 'EmptyBrass')
+			return 0.1949;	// 1.97: 7.92x57 Mauser, the real round: RS has no mesh for it
+		if (gun == 'SSG' && casing == 'ShotgunCasing')
+			return 0.2719;	// 1.97: 12ga 3in magnum, the real round: RS cannot tell it from 2.75in
+		return 0;
+	}
+
 	// 1.97: not every gun throws its case the same way, and it is three things.
 	// SIDE is flicked out of a port in the receiver wall, which is the default and
 	// what 1.38 wrote. DOWN is thrown out of a chute in the receiver FLOOR under the
@@ -74,6 +105,9 @@ class RSA_Casings : EventHandler
 		let mo = Shooter(c);
 		if (!mo || !mo.player || !RSVR_VRHand.InVR(mo))
 			return;
+		double sz = Size(mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName() : 'None', n);
+		if (sz > 0)
+			c.A_SetScale(sz, sz);
 		pend.Push(c);
 	}
 

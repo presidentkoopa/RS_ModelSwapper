@@ -19,16 +19,23 @@ class RSQ_Rounds abstract
 	{
 		switch (cls)
 		{
-		case 'BrutalPistol':	return 1.000;	// pistol_9mm
-		case 'Revolver':	return 1.265;	// revolver_357
-		case 'Shot_Gun':	return 1.659;	// buckshot
-		case 'SSG':	return 1.659;	// buckshot via shotgun_ssg
-		case 'MP40':	return 0.980;	// ww2_9mm via ww2_mp40
-		case 'MG42':	return 2.209;	// rifle_762
-		case 'AssaultShotgun':	return 1.659;	// buckshot
-		case 'Machinegun':	return 2.209;	// rifle_762 via machinegun_762
-		case 'Minigun':	return 1.914;	// rifle_556 via chaingun_556
-		case 'Rifle':	return 1.914;	// rifle_556
+		case 'BrutalPistol':	return 0.900;	// pistol_9mm -> impact pistol_9mm
+		case 'Revolver':	return 1.300;	// revolver_357 -> impact magnum
+		case 'Shot_Gun':	return 0.450;	// buckshot -> impact buckshot
+		case 'SSG':	return 0.600;	// buckshot_magnum -> impact buckshot_magnum
+		case 'MP40':	return 0.800;	// smg_9mm -> impact pistol
+		case 'GrenadeLauncher':	return 1.000;	// rocket -> impact rocket
+		case 'HellishMissileLauncher':	return 1.000;	// rocket -> impact rocket
+		case 'MG42':	return 1.600;	// rifle_762 -> impact rifle
+		case 'AssaultShotgun':	return 0.450;	// buckshot -> impact buckshot
+		case 'BIG_FUCKING_GUN':	return 1.000;	// bfg_ball -> impact bfg
+		case 'BFG10k':	return 1.400;	// bfg_heavy -> impact bfg_heavy
+		case 'BrutalSMG':	return 0.800;	// smg_9mm -> impact pistol
+		case 'Machinegun':	return 1.250;	// machinegun_762 -> impact machinegun_762
+		case 'Minigun':	return 0.800;	// chaingun_556 -> impact chaingun_556
+		case 'Plasma_Gun':	return 1.000;	// plasma_ball -> impact plasma
+		case 'Rocket_Launcher':	return 1.250;	// rocket_rpg -> impact rocket_rpg
+		case 'Rifle':	return 1.600;	// rifle_556 -> impact rifle
 		}
 		return 1.0;
 	}
