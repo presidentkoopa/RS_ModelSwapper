@@ -1,10 +1,27 @@
 # Samsara -- surveyed, not imported
 
-Samsara-ViewModels-main is a view-model dev build: meshes and nothing else.
-There is no MODELDEF anywhere in it, its zscript.zs is nine lines declaring
-one class, and build_pk3.bat only zips the folder. Every other package in
-the tree arrived with its authors' MODELDEF carrying Path, Skin, Scale,
-Offset, ZOffset and a FrameIndex table. Samsara has none of that.
+Samsara-ViewModels-main holds 271 MD3s, 194 PNGs, 39 JPGs, the 7-zip binaries,
+build_pk3.bat and a nine-line zscript.zs declaring one empty actor. That is the
+whole folder -- verified by listing every file type in it, not by grep.
+
+**There is no MODELDEF in it, and the owner is right that there has to be one
+somewhere**: GZDoom cannot load an MD3 without a Model block naming it. So the
+MODELDEF exists, it is just not in this copy. Two readings, and the evidence
+does not settle between them:
+
+- This repo supplies REPLACEMENT view models and the MODELDEF that points at
+  them ships in Samsara-Reincarnation itself, which is not on this disk --
+  searched E:\DOOMWork, the Desktop, Downloads and D: and found no Samsara
+  pk3, wad or folder.
+- Or the copy is partial. There is no .git, so the files were copied rather
+  than cloned. build_pk3.bat excludes `filter\` and `src\`, neither of which
+  is present, and ZDoom's `filter/` tree is exactly where a per-game MODELDEF
+  would live -- but that script says "Stolen from COG lol" at the top, so its
+  exclusion list is inherited boilerplate and proves nothing on its own.
+
+Either way nothing can be imported from this folder as it stands, and writing a
+MODELDEF from scratch for 180 guns would be throwing away one that already
+exists. The thing to find is Samsara-Reincarnation, or the rest of this repo.
 
 It is also eight weapon sets in one folder, not one:
 
