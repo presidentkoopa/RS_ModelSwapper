@@ -132,9 +132,12 @@ class RSQ_Ballistics : EventHandler
 		// 1.97 F5: the level dial, and the weight of the round that got here. Spall's
 		// counts are per SURFACE; this is what makes a 12-gauge differ from a 9mm on the
 		// same wall. Max is 1.8x Low, and Low is what 1.96b shipped.
+		// NB the parameter is named `tracer` but RSQ_Tracer passes the SHOOTER:
+		// h.Impact(shooter, lastPos, ...). Going through .target here finds nothing on a
+		// player and every gun silently weighed 1.0.
 		Name gun = 'None';
-		if (tracer && tracer.target && tracer.target.player && tracer.target.player.ReadyWeapon)
-			gun = tracer.target.player.ReadyWeapon.GetClassName();
+		if (tracer && tracer.player && tracer.player.ReadyWeapon)
+			gun = tracer.player.ReadyWeapon.GetClassName();
 		Spall(t.HitLocation + n * 2, n, surf.Of(t.HitTexture, flat),
 			(FxLevel() >= 2 ? 1.8 : 1.0) * RSQ_Rounds.Scale(gun));
 	}
