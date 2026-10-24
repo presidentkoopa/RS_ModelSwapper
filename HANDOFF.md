@@ -121,3 +121,16 @@ geometry from the mesh). `md3label.py` names surfaces, `obj2md3.py` converts wit
 This is the "HQT" of PLAN.md's foundation line. Wiring it as step 2 of "Per set" (measure every mesh
 fresh) is not done. The REMA cards' comments mention `CardPipeline/` -- a desktop folder with the dead
 Forges, not needed.
+
+## The tools that matter (owner, 04:36) -- everything else in tools/ is clutter to be removed
+A gun passes through these, in order:
+1. `tools/hqt/md3label.py` -- name the surfaces of a new mesh (mag, slide, pump, bolt, cyl, latch, trigger...)
+2. `tools/hqt/namedcard.py` -- mesh -> card (the numbers)
+3. `tools/kit/gen_rsr.py` -- card numbers -> reload tables + MODELDEF.rsr (the kit's own, unmodified)
+4. `tools/handfit_cards.py` -- hands onto the gun from the card's palm / supportat
+5. `tools/genpack.py` + `tools/assemble.py` -- weapon classes, sounds, the 1.96b runtime -> a pack folder
+6. `tools/check.py` -- static check of that folder
+Then the OWNER tests in the headset on his load order. The headless engine gate (`gate/`) is optional
+tooling for catching parse errors; the owner does not want it in the required chain.
+`carve_by_ref.py` when a part must be cut out of a mesh; `bd22_plus.py` / `bd22_mg.py` are steps 3-5
+applied to 1.96b for the flagship. Cleanup task (after F1): delete every other script in tools/.
