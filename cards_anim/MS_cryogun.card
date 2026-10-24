@@ -1,0 +1,14 @@
+weapon MS_cryogun
+  archetype   shotgun_pump        # owner-confirmed
+  model       cryogun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    slide    surf 4  rest [54.86, -0.01, -8.79]  axis [-1.0, -0.0, -0.0]  travel 10.00  frames 3..3
+    muzzle    [89.05, 1.66, 3.81]
+  grip        line [40.41, 0.7, -1.33] [32.53, 1.41, -10.08]  trigger [43.64, -0.0, -2.03]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [47.64, -0.0, -2.03]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..7
+    lower        8..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4788

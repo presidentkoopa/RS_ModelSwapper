@@ -1,0 +1,19 @@
+weapon MS_STG44
+  archetype   pistol_mag        # owner-confirmed
+  model       STG44.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 2  rest [42.87, -0.0, -6.6]  axis [0.0, -0.0, -1.0]  travel 14.00  frames 5..9
+    trigger  surf 14  rest [30.67, -0.03, -4.62]  axis [-0.982, 0.0, 0.19]  travel 0.56  frames 1..1  rot 20deg axis [-0.0, 1.0, 0.0]
+    slide    surf 17  rest [30.77, -0.47, 4.83]  axis [-1.0, 0.0, 0.0]  travel 9.00  frames 2..9
+    part     surf 21  rest [41.19, -2.46, 5.04]  axis [-1.0, 0.0, 0.0]  travel 9.00  frames 2..9
+    mag_well  [42.87, -0.0, -6.6]  mouth [42.92, -0.66, 2.39]  axis [0.0, -0.0, -1.0]  travel_clear 14.00
+    muzzle    [87.25, -0.56, 2.62]
+  grip        line [27.34, -0.72, -3.7] [23.19, -0.39, -11.61]  trigger [30.67, -0.03, -4.62]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [37.32, 0.05, 0.21]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..9
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 9056
+  carved      mag  seat_origin [42.87, -0.0, -6.6]  file STG44_mag.md3

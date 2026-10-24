@@ -1,0 +1,23 @@
+weapon MS_CHAING
+  archetype   pistol_mag        # owner-confirmed
+  model       CHAING.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 2  rest [33.33, 0.23, -4.0]  axis [-0.774, -0.0, 0.633]  travel 0.75  frames 4..5  rot 15deg axis [-0.0, 1.0, 0.0]
+    part2    surf 6  rest [31.02, 0.23, 1.53]  axis [0.276, 0.002, -0.961]  travel 0.36  frames -..-
+    part3    surf 8  rest [67.12, 0.79, -7.34]  axis [0.001, -0.381, 0.925]  travel 0.44  frames -..-  rot 45deg axis [1.0, -0.0, 0.0]
+    part4    surf 9  rest [76.52, 0.79, -7.34]  axis [0.001, -0.381, 0.925]  travel 0.44  frames -..-  rot 45deg axis [1.0, -0.0, 0.0]
+    part5    surf 10  rest [97.84, 0.79, -7.34]  axis [0.001, -0.38, 0.925]  travel 0.44  frames -..-  rot 45deg axis [1.0, -0.0, 0.0]
+    part6    surf 12  rest [84.98, -5.7, -10.53]  axis [0.0, 0.775, -0.632]  travel 5.15  frames 1..5  rot 45deg axis [1.0, -0.0, -0.0]
+    part7    surf 13  rest [84.98, -5.7, -3.84]  axis [0.0, -0.141, -0.99]  travel 5.27  frames 1..5  rot 45deg axis [1.0, -0.0, -0.0]
+    part8    surf 14  rest [84.98, 0.1, -13.89]  axis [0.0, 0.931, 0.365]  travel 5.01  frames 1..5  rot 45deg axis [1.0, -0.0, 0.0]
+    part9    surf 15  rest [84.98, 0.1, -0.49]  axis [0.0, -0.917, -0.4]  travel 5.24  frames 1..5  rot 45deg axis [1.0, -0.0, -0.0]
+    part10   surf 16  rest [84.98, 5.9, -3.84]  axis [0.0, -0.811, 0.585]  travel 5.11  frames 1..5  rot 45deg axis [1.0, -0.0, 0.0]
+    part11   surf 17  rest [84.98, 5.9, -10.53]  axis [0.0, 0.12, 0.993]  travel 4.98  frames 1..5  rot 45deg axis [1.0, -0.0, 0.0]
+    muzzle    [106.56, 1.41, -4.5]
+  grip        line [46.47, 8.5, -0.42] [37.47, 0.22, -15.72]  trigger [46.85, -4.0, -1.26]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [50.85, -4.0, -1.26]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..5
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1175

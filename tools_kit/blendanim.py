@@ -18,6 +18,23 @@ sc = bpy.context.scene
 f0, f1 = sc.frame_start, sc.frame_end
 print(f"ANIM range {f0}..{f1}")
 
+# --range-only: answer "is there an animation here at all" without stepping every
+# frame and evaluating every mesh. Surveying thirty guns that way takes minutes;
+# this takes a second, and the full walk is only worth running on the ones that
+# actually move. An action on the object OR on its parent armature both count --
+# the Wolfenstein blends animate the armature, the HacX ones the mesh.
+if '--range-only' in bpy.sys.argv if hasattr(bpy, 'sys') else '--range-only' in __import__('sys').argv:
+    import sys as _s
+    movers = 0
+    for o in bpy.data.objects:
+        for src in (o, o.parent):
+            if src and src.animation_data and src.animation_data.action:
+                movers += 1
+                break
+    print(f"ANIM movers {movers}")
+    print(f"ANIM verdict {'ANIMATED' if (f1 > f0 and movers) else 'STATIC'}")
+    _s.exit(0)
+
 meshes = [o for o in bpy.data.objects if o.type == 'MESH']
 print(f"ANIM meshes {len(meshes)}")
 

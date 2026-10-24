@@ -9,6 +9,14 @@ out = sys.argv[sys.argv.index('--out')+1]
 if '--frame' in sys.argv:
     bpy.context.scene.frame_set(int(sys.argv[sys.argv.index('--frame')+1]))
 
+# --frames A B exports the whole range from ONE Blender launch, writing <out-dir>/fNN.obj.
+# Thirty-four guns at fifteen to twenty-six frames each is six hundred launches done one
+# frame at a time, and Blender costs seconds just to start. This does it in thirty-four.
+FRANGE = None
+if '--frames' in sys.argv:
+    k = sys.argv.index('--frames')
+    FRANGE = (int(sys.argv[k+1]), int(sys.argv[k+2]))
+
 # namedcard.py reads a role off the surface name. The blends are inconsistent about
 # WHERE the meaningful name lives: the Wolfenstein ones name the meshes MP40.001 and
 # the armatures Magazine/Trigger/Handle; the HacX and Meatgrinder ones name the meshes
@@ -41,7 +49,19 @@ for o in list(bpy.data.objects):
     o.name = pick if used[pick] == 1 else "%s_%d" % (pick, used[pick])
 
 bpy.ops.object.select_all(action='DESELECT')
-bpy.ops.wm.obj_export(filepath=out, export_selected_objects=False, export_materials=False,
-                      export_triangulated_mesh=True, export_normals=True, export_uv=True,
-                      apply_modifiers=True, export_object_groups=False)
+
+def _write(path):
+    bpy.ops.wm.obj_export(filepath=path, export_selected_objects=False, export_materials=False,
+                          export_triangulated_mesh=True, export_normals=True, export_uv=True,
+                          apply_modifiers=True, export_object_groups=False)
+
+if FRANGE:
+    import os
+    d = out if os.path.isdir(out) else os.path.dirname(out)
+    for _f in range(FRANGE[0], FRANGE[1] + 1):
+        bpy.context.scene.frame_set(_f)
+        _write(os.path.join(d, "f%02d.obj" % _f))
+    print("@@@FRAMES %d %d" % FRANGE)
+else:
+    _write(out)
 print("@@@OK")
