@@ -1,6 +1,22 @@
 """Split any MD3 surface over the per-surface vertex cap into slabs along the bore,
 using the kit's own md3_carve_surface.py. Lossless: it moves triangles between
-surfaces and never changes geometry."""
+surfaces and never changes geometry.
+
+DO NOT REACH FOR THIS TO GET UNDER 4096 VERTS. That cap is Quake 3's and does not
+apply here: src/common/models/models_md3.cpp has no vertex limit, it just Resize()s
+to whatever the header declares, and 112 surfaces already shipping in this mod are
+over 4096 -- the largest 18929, four and a half times the supposed ceiling. The only
+real MD3 constraint is the int16 position format, +/- 512 model units.
+
+Splitting on that mistaken premise did active damage, all of it traced in
+HANDOFF_2026-10-24.md section 11: the MG42's belt drum became the largest surface on
+the gun and was claimed for the body, the Kar98's grip search found nothing because
+the biggest slab did not contain the trigger, and the tec9's magazine was swallowed
+whole into a slab and stopped being addressable.
+
+What this IS still for: making a piece the game must treat on its own -- a lens, a
+bulb, a panel needing its own SurfaceSkin -- into its own surface. That is a real
+need and md3_carve_surface.py is the right tool for it. Bulk is not a reason."""
 import sys, os, subprocess, shutil
 sys.path.insert(0, "E:/DOOMWork/RS_ModelSwapper/tools_kit")
 import numpy as np

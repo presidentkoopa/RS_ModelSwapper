@@ -58,8 +58,19 @@ def main():
                 ids.append(vmap[key])
             tri_idx.append(ids)
         verts = np.array(verts); tri_idx = np.array(tri_idx, dtype='<i4')
+        # 4096/8192 are QUAKE 3's limits, not this engine's. models_md3.cpp has no cap
+        # at all -- it Resize()s to whatever the header says -- and 112 surfaces already
+        # shipping in this mod are over 4096, the largest at 18929 verts. The only real
+        # MD3 constraint is the int16 position format: coordinates are stored as a short
+        # over 64, so nothing may leave +/- 512 model units. Splitting a surface to get
+        # under 4096 buys nothing here and costs plenty (see splitfit.py).
         if len(verts) > 4096 or len(tri_idx) > 8192:
-            print(f"WARNING {name}: {len(verts)} verts / {len(tri_idx)} tris exceeds MD3 limits (4096/8192)")
+            print(f"note {name}: {len(verts)} verts / {len(tri_idx)} tris is over Quake 3's "
+                  f"limits (4096/8192). This engine has no such cap -- only the +/-512 unit range.")
+        ext = np.abs(np.clip(np.round(verts * 64.0), -32768, 32767) / 64.0).max() if len(verts) else 0
+        if ext > 512:
+            print(f"WARNING {name}: reaches {ext:.1f} model units; MD3 stores positions as "
+                  f"int16/64 and cannot hold more than 512. This WILL wrap.")
         xyz = np.zeros((len(verts), 4), dtype='<i2')
         xyz[:, :3] = np.clip(np.round(verts * 64.0), -32768, 32767)
         xyz[:, 3] = [enc_normal(np.array(n)) for n in nrm]
