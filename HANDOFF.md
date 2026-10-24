@@ -100,3 +100,14 @@ one of the numbered items; or a new top-level directory appears that PLAN.md doe
 commit message starts with `[step N]` matching PLAN.md. If you need to do something the plan does not
 list, add it to PLAN.md first in its own commit `[plan]` with one line of reason, and get the owner's
 yes before building it.
+
+## Paths you must change before running anything (they are the previous machine's)
+Each tool has its paths at the top. Set them once:
+- `tools/bd22_plus.py`: `SRC` → `runtime/` (1.96b src), `REMA` → your checkout of RS_VR_Weapons `bd22/`, `OUT` → a build dir; the kit path on the `sys.path.insert` line → `tools/kit` (gen_rsr.py, rgeo.py live there).
+- `tools/bd22_mg.py`: `OUT`, `BR` (br_vr `PK3_pbr/` from E:\DOOMWork\VR_WeaponSetRebuild), `BD21` → `docs/BD21_Machinegun.txt`, `REMA`, the kit path.
+- `tools/genpack.py`, `assemble.py`, `handfit_cards.py`: the `/mnt/user-data/uploads/Quest_Weapons_Kit/...` and `/home/claude/...` lines → `tools/kit` and your paths.
+- `gate/bd22_gate.sh`: the four paths at the top. This is the F1 command.
+Regenerating is: `python3 tools/bd22_plus.py geometry && python3 tools/bd22_plus.py apply && python3 tools/bd22_mg.py && python3 tools/bd22_plus.py pk3 dist/BD22Q_197pre.pk3`. The result must equal `sets/bd22q_1.97/src` (diff it; that is the drift check for the generators themselves).
+
+## Known failure already fixed (so nobody re-learns it)
+`counters.zs` called `RSR.WantsHands`; the function lives on `RSR_ReloadHandler`. The first pk3 handed to the owner had this and died at script parse. Lesson for every ZScript addition: grep the class a static lives in; then run the gate before anything leaves the repo.
