@@ -493,9 +493,36 @@ each entry says which.
    **Worth repeating as a check:** every system that keys on class name was audited —
    casings.zs, melee.zs and rsb_guns.zs all had Revolver2; roster.zs correctly has only Revolver
    (it is the handler that does the replacing); handtable.zs was the one that did not.
-7. **The melee doc's §9 architecture** — the netevent pose-history spine it calls the single
-   highest-leverage thing in the three codebases. `melee.zs` was extended instead, so its snap-turn
-   and teleport patches remain.
+7. **The melee doc's §9 spine — DONE, and melee is on it.** `zscript/rsq/pose.zs`: 8 samples of
+   `{point, body pos, body yaw, stamp}` per hand per player, fed by one `rsq-pose` netevent a tic
+   from the console player, read only from the history by everyone **including the sender**.
+   Three packed ints — position relative to the pawn in quarter units (11/11/10 bits), three
+   10-bit angles, two button bits, hand index and handedness. It is RS_ShieldSawQ's `SSQ_Pose`,
+   which the document names as the thing to copy, widened to both hands.
+
+   **Why it had to exist:** stock QZD writes `AttackPos`/`OffhandPos` on the CONSOLE PLAYER'S
+   PAWN ONLY and never sends them, so for any other player they are zero. melee had read them
+   directly since 1.11 — correct for one player, wrong for two.
+
+   **The snap-turn and teleport patch is DELETED, not retuned.** `BodyFrame()` now converts each
+   sample against the body pose recorded beside it (`pBod`/`pByaw`), so a turn cancels
+   arithmetically. The old `settle = 2` threshold is the shape of fix the document records
+   failing in the saber both ways. The velocity also divides by the real stamp gap now.
+
+   **`Turn()` is deliberately NOT applied in melee.** `rise = vel.z/speed` and `fwd = vel.x/speed`
+   read vel as BODY-frame components; the spine's `Turn()` is for callers comparing against world
+   directions (the shield's). Applying it would invert the up-swing and butt-lead tests.
+
+   **Two things that would have shipped silently**, both caught by instrumenting rather than by
+   the gate: a plain `EventHandler` not listed in MAPINFO's `AddEventHandlers` compiles, ships and
+   never runs (the first build printed zero of either half); and the migration is testable
+   headless precisely *because* `Frame()` now gates on pose freshness rather than `InVR` — feed
+   the sender a synthetic hand and melee's whole path runs under the gate. 50 axe resolutions,
+   including a `gap 3` line proving the dt fix.
+
+   **Left for the headset:** the thresholds were tuned against the old, turn-contaminated numbers
+   and may want lowering now the body's motion is properly removed. SHIELD's own commit says the
+   same of its defaults after the same fix.
 
 **Two bugs that looked fine and did nothing** — both found only by reading the CALLER:
 - `Impact(Actor tracer, …)` is misnamed; `RSQ_Tracer` passes the **shooter**. The per-gun impact
@@ -568,7 +595,7 @@ file was missing eight of them:
 
 ```
 geometry  apply  [bd22_mg.py]  revolver  options  bash  whip  butt  recoil  impacts  flash
-casings  hits  bullet  readme        then:  pk3 dist/BD22Q_197pre.pk3
+casings  hits  bullet  pose  spine  readme    then:  pk3 dist/BD22Q_197pre.pk3
 ```
 
 i.e. `python tools/bd22_plus.py geometry`, … , with `python tools/bd22_mg.py` (no argument) in
@@ -576,10 +603,11 @@ third place. The result must equal `sets/bd22q_1.97/src` (diff it; that is the d
 generators themselves). **Order matters**: `revolver` must follow `bd22_mg.py` (it edits the roster
 handler `bd22_mg.py` writes), `options` must come after both (it restructures the menu page they
 add rows to), and `apply` must precede everything that edits a 1.96b file — `bash`, `whip`, `butt`,
-`impacts`, `casings`, `hits` and `bullet` all patch files `apply` copies in, so running one twice on
-an already-built tree is what their "is not there exactly once" guards are for. `hits` and `bullet`
-must both follow `impacts`, which writes the `rounds.zs` include they anchor on. (`python`, not
-`python3`, on the owner's PC.)
+`impacts`, `casings`, `hits`, `bullet` and `spine` all patch files `apply` copies in, so running one
+twice on an already-built tree is what their "is not there exactly once" guards are for. `hits` and
+`bullet` must both follow `impacts`, which writes the `rounds.zs` include they anchor on; and
+**`spine` must come after `pose` (it reads the class `pose` writes) and after `butt` and `whip`
+(all three edit `melee.zs`)**. (`python`, not `python3`, on the owner's PC.)
 
 ## Known failure already fixed (so nobody re-learns it)
 `counters.zs` called `RSR.WantsHands`; the function lives on `RSR_ReloadHandler`. The first pk3 handed to the owner had this and died at script parse. Lesson for every ZScript addition: grep the class a static lives in; then run the gate before anything leaves the repo.
