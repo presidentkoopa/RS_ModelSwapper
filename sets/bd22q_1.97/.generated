@@ -1,3 +1,6 @@
+bd22q 1.99 -- generated, do not hand-edit sets/bd22q_1.97/src
+677 files, written by tools/bd22_plus.py sync at 2026-10-24T18:56:57
+
 tools/bd22_plus.py geometry + apply, then tools/bd22_mg.py
 SRC (1.96b) = E:/DOOMWork/_buildtemp/rs_brutal22weaponsq/src/
 OUT = E:/DOOMWork/_buildtemp/rsq_bd22/
@@ -9,4 +12,9 @@ then tools/bd22_plus.py butt
 then tools/bd22_plus.py recoil
 then tools/bd22_plus.py impacts
 then tools/bd22_plus.py flash
+then tools/bd22_plus.py casings
+then tools/bd22_plus.py hits
+then tools/bd22_plus.py bullet
+then tools/bd22_plus.py pose
+then tools/bd22_plus.py spine
 then tools/bd22_plus.py readme

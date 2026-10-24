@@ -26,10 +26,23 @@ for p in staged:
     if '/' in p and top not in known:
         errs.append('new top-level directory %r is not in the plan (HANDOFF.md table). Add it to PLAN.md in a [plan] commit first.' % top)
         break
-if any(p.startswith('sets/bd22q_1.97/src/') for p in staged):
+staged_src = [p for p in staged if p.startswith('sets/bd22q_1.97/src/')]
+if staged_src:
+    # THE STAMP MUST BE CURRENT, not merely present. Until 2026-10-24 this only asked whether
+    # the file existed -- and the stages wrote their stamp to the BUILD dir, so the one in the
+    # set was never touched by anything and the check passed unconditionally from the day it
+    # was added. `bd22_plus.py sync` writes it now, as part of the copy, so it certifies the
+    # copy. Anything staged that is newer than the stamp did not come out of that run.
     stamp = os.path.join(R, 'sets/bd22q_1.97/.generated')
     if not os.path.exists(stamp):
-        errs.append('sets/bd22q_1.97/src changed without the generators (no .generated stamp): run tools/bd22_plus.py apply && tools/bd22_mg.py, do not hand-edit.')
+        errs.append('sets/bd22q_1.97/src changed without the generators (no .generated stamp): run tools/bd22_plus.py sync, do not hand-edit.')
+    else:
+        ts = os.path.getmtime(stamp)
+        newer = [p for p in staged_src
+                 if os.path.exists(os.path.join(R, p)) and os.path.getmtime(os.path.join(R, p)) > ts + 2]
+        if newer:
+            errs.append('%d staged file(s) under sets/bd22q_1.97/src are NEWER than the .generated stamp, so they did not come from the generators: %s%s. Run tools/bd22_plus.py sync.'
+                        % (len(newer), ', '.join(newer[:3]), ' ...' if len(newer) > 3 else ''))
 if errs:
     print('check_plan: REFUSED\n  - ' + '\n  - '.join(errs)); sys.exit(1)
 print('check_plan: ok (step %s)' % cur.group(1))

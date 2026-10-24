@@ -3742,6 +3742,35 @@ def spine():
     print(json.dumps(st, indent=1))
 
 
+def sync():
+    """Copy the built src/ into the set and write the stamp check_plan.py reads.
+
+    This replaces a hand-run robocopy. That is the point: the stamp has to be written by the
+    thing that does the copy, or it certifies nothing. The old stamp lived in the BUILD dir
+    (OUT + '.generated') while check_plan.py looked in the SET, so the check passed on a file
+    nothing had touched since the day it was created."""
+    import shutil
+    src = OUT_SRC.rstrip('/')
+    dst = os.path.join(REPO, 'sets', 'bd22q_1.97', 'src')
+    if not os.path.isdir(src):
+        raise SystemExit('sync: no build at %s -- run the pipeline first' % src)
+    if os.path.isdir(dst):
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst)
+    n = sum(len(f) for _, _, f in os.walk(dst))
+    stages = ''
+    sp = OUT + '.generated'
+    if os.path.exists(sp):
+        stages = open(sp).read()
+    stamp = os.path.join(REPO, 'sets', 'bd22q_1.97', '.generated')
+    open(stamp, 'w').write(
+        'bd22q %s -- generated, do not hand-edit sets/bd22q_1.97/src\n'
+        '%d files, written by tools/bd22_plus.py sync at %s\n\n%s'
+        % (VERSION, n, __import__('datetime').datetime.now().isoformat(timespec='seconds'), stages))
+    st = dict(files=n, dest='sets/bd22q_1.97/src', stamp='sets/bd22q_1.97/.generated')
+    print(json.dumps(st, indent=1))
+
+
 if __name__ == '__main__':
     if sys.argv[1:2] == ['apply']:
         apply()
@@ -3773,5 +3802,7 @@ if __name__ == '__main__':
         pose()
     if sys.argv[1:2] == ['spine']:
         spine()
+    if sys.argv[1:2] == ['sync']:
+        sync()
     if sys.argv[1:2] == ['pk3']:
         pk3(sys.argv[2])
