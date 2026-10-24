@@ -1,3 +1,6 @@
 dist/BD22Q_*.pk3
 __pycache__/
 *.pyc
+
+gate/*.log
+gate/*.log.engine

@@ -2165,6 +2165,167 @@ def revolver():
     print(json.dumps(log, indent=1))
 
 
+# ---------------------------------------------------------------------------------------------
+# F6: the ejection port, per gun.
+#
+# 1.38 gave four guns a hand-tuned port and left the rest throwing brass from the pawn. The
+# obvious way to finish it was REMA's card: all 25 carry an `ejectport`. That way is WRONG, and
+# the card says so itself -- every one of the 25 is annotated
+#       "side measured (286 vertices on -y against 292 on +y) ... the point and the direction
+#        are estimates"
+# so what was measured is the SIDE, by counting vertices on each wall, and the point is a guess.
+# Carried onto the held model by the exact rigid transform (residual 0.0000) it misses all four
+# hand-tuned ports -- BrutalPistol by 3.8 cm, BrutalSMG by 10.8 cm. A guess transformed exactly
+# is still a guess, so the card's point is not used here.
+#
+# WHAT IS MEASURED: the port is in the mesh. The model-makers named it --
+#       Rifle     surface `ejectport`      Shot_Gun  surface `eject`
+#       SSG       surface `Open`           Revolver  five surfaces `shells`, one per chamber
+# -- and where nobody named it, it is still there as a HOLE: weld the ready frame's vertices and
+# every edge used by one triangle only is a boundary, and the boundaries close into loops.
+#
+# THE PROOF, on the two guns that have both a modelled port and a hand-tuned number:
+#       BrutalPistol    a 3.9 x 0.2 x 0.3 slot, 10 verts, facing right and up   0.84 units away
+#       AssaultShotgun  a 7.8 x 0.7 x 2.0 slot, 10 verts, the same signature    0.44 units away
+# Under a unit and a half on both, so the holes are the ports. On Shot_Gun the two readings agree
+# with each other to 0.06 units (named surface 41.96, boundary loop 41.97), which is the third
+# check. The four hand-tuned ports are NOT touched: they are the thing this was measured against.
+#
+# NOT DONE, and why -- these four have no port in their mesh to find:
+#       MP40      every slot in `korpus` is mirrored at +-1.44: the receiver tube's cooling
+#                 slots, not a port. `zamek` is the bolt (y +1.2 = the left-side handle).
+#       Minigun   91 loops, all of them bores in `Pipe`. Six barrels and no port.
+#       Machinegun  an M249 body with no port loop. Its ready frame IS now settled: 4.
+#       MG42      no port loop, and buzzsaw_wm.md3 splits the body 3059+15853 where the pack's
+#                 HitlersBuzzsaw.md3 has one surface of 18912, so no frame can be fitted either.
+# Guessing those four would put brass somewhere arbitrary on the gun, which is what the card does.
+#
+# HOW IT LEAVES. RSBDEFS is explicit that two of these are not thrown at all:
+#       ejecta brass_357          "dumped from a cylinder, not thrown by a port: slow, no glow"
+#       ejecta hull_12ga_magnum   "the Super Shotgun's hulls, dumped from an open breech"
+# so the Revolver, the Shotvolver and the SSG drop their cases down and back, slowly, instead of
+# flicking them out to the right.
+
+EJECT = [
+    # class, the class whose MODELDEF block holds the mesh, REMA wm, ready frame (residual 0.0000
+    # against it), surface(s), what the surface is, dumped
+    ('Shot_Gun', 'Shot_Gun', 'shotgun_wm.md3', 4, ['eject'],
+     'the port the model-maker named `eject`', False),
+    ('SSG', 'SSG', 'ssg_wm.md3', 1, ['Open'],
+     'the break-open breech, surface `Open`', True),
+    ('Revolver', 'Revolver', 'revolver_wm.md3', 0, ['shells'],
+     'the cylinder: the mean of its five `shells`', True),
+    # the Shotvolver draws on sprite REVO and has no MODELDEF block of its own: it IS the
+    # Revolver's mesh, so it is the Revolver's port.
+    ('Revolver2', 'Revolver', 'revolver_wm.md3', 0, ['shells'],
+     'the Shotvolver, on the Revolver\'s own mesh', True),
+]
+WEAPON_SCALE = 1.02          # vr_weaponScale's default, the scale melee.zs's Place() applies
+
+
+def eject_port(cls, frame, names):
+    """The named surface's centroid on the ready frame, in the held model's own units, and then
+    in the (forward, left, up) cm that casings.zs speaks -- which is Place()'s arithmetic read
+    backwards: f = .01*(ws*m.x - 30), r = .01*(-ws*m.y), u = .01*(ws*m.z), and casings' L is
+    melee's -R."""
+    md = open(OUT_SRC + 'MODELDEF.bd.txt', encoding='latin-1').read()
+    b = re.search(r'(?mi)^Model %s\s*$.*?^\}' % re.escape(cls), md, re.S)
+    if not b:
+        raise SystemExit('MODELDEF.bd.txt: no block for ' + cls)
+    pa = re.search(r'Path\s+"([^"]+)"', b.group(0)).group(1)
+    mo = re.search(r'Model 0 "([^"]+)"', b.group(0)).group(1)
+    n, surfs = genpack.md3_surfaces(OUT_SRC + pa + '/' + mo)
+    if frame >= n:
+        raise SystemExit('%s: frame %d but the mesh has %d' % (cls, frame, n))
+    hit = [s for s in surfs if s['name'] in names]
+    if not hit:
+        raise SystemExit('%s: no surface named %s (it has %s)'
+                         % (cls, names, [s['name'] for s in surfs]))
+    c = np.vstack([np.asarray(s['xyz'][frame], float).mean(0) for s in hit]).mean(0)
+    port = (WEAPON_SCALE * c[0] - 30.0, WEAPON_SCALE * c[1], WEAPON_SCALE * c[2])
+    return c, port, len(hit), '%s/%s' % (pa, mo)
+
+
+def casings():
+    """F6: the three guns whose ejection port is actually in the mesh, and the two that dump."""
+    p = OUT_SRC + 'zscript/rsq/casings.zs'
+    t = open(p).read()
+    st, lines = {}, ''
+    for cls, meshcls, wm, fr, names, what, dumped in EJECT:
+        c, port, nsurf, mesh = eject_port(meshcls, fr, names)
+        port = tuple(round(x, 1) + 0.0 for x in port)       # round FIRST: -0.026 prints as -0.0
+        test = "if (w is '%s')" % cls
+        tabs = max(1, (40 - (8 + len(test)) + 3) // 4)      # `return` at column 40, as the four above
+        lines += ("\t\t%s%sreturn (%.1f, %.1f, %.1f);\t// 1.97: %s\n"
+                  % (test, '\t' * tabs, port[0], port[1], port[2], what))
+        st[cls] = dict(mesh=mesh, ready_frame=fr, ref=wm, surfaces=names, surface_count=nsurf,
+                       model_units=[round(float(x), 3) for x in c],
+                       port_cm=[round(x, 1) for x in port], dumped=dumped, measured=what)
+
+    # the header names the four 1.38 shipped with; it is not the four any more
+    head = "// ready frame (kitbash/ports.png).\n"
+    if t.count(head) != 1:
+        raise SystemExit('casings.zs: the 1.38 header is not there exactly once')
+    t = t.replace(head, head +
+                  "// 1.97: and of the pump gun, the SSG, the Revolver and the Shotvolver. Those four are\n"
+                  "// measured off the held mesh -- the surface the model-maker named, or the hole itself --\n"
+                  "// NOT from WMCARD.bd22, whose ejectport every one of the 25 cards annotates \"the point\n"
+                  "// and the direction are estimates\", and which misses all four of the ports above by\n"
+                  "// between 0.8 and 10.8 cm. See tools/bd22_plus.py casings for the measurement and the\n"
+                  "// four guns whose mesh has no port in it at all.\n")
+
+    anchor = "\t\tif (w is 'AssaultShotgun')\t\treturn (16.0, -1.4, -0.6);\n\t\treturn (0, 0, 0);\n"
+    if t.count(anchor) != 1:
+        raise SystemExit('casings.zs: the four hand-tuned ports are not there as expected')
+    t = t.replace(anchor, "\t\tif (w is 'AssaultShotgun')\t\treturn (16.0, -1.4, -0.6);\n"
+                  + lines + "\t\treturn (0, 0, 0);\n")
+
+    # a gun that dumps its cases rather than throwing them
+    dmp = ''.join("\t\tif (w is '%s')\n\t\t\treturn true;\n" % cls
+                  for cls, _, _, _, _, _, d in EJECT if d)
+    t = t.replace("\t// the player who fired:",
+                  "\t// 1.97: not every gun THROWS. RSBDEFS calls brass_357 \"dumped from a cylinder,\n"
+                  "\t// not thrown by a port: slow, no glow\" and hull_12ga_magnum \"dumped from an open\n"
+                  "\t// breech\", so these fall out of the gun instead of being flicked clear of it.\n"
+                  "\tstatic bool Dumped(Weapon w)\n\t{\n" + dmp + "\t\treturn false;\n\t}\n\n"
+                  "\t// the player who fired:", 1)
+
+    old = ("\t\t// out to the right and up, a little back, as each gun's own casing speed\n"
+           "\t\tVector3 d = -L * 0.75 + U * frandom(0.45, 0.7) - F * frandom(0.05, 0.25);\n")
+    if t.count(old) != 1:
+        raise SystemExit('casings.zs: the flick is not there exactly once')
+    t = t.replace(old,
+                  "\t\t// out to the right and up, a little back, as each gun's own casing speed --\n"
+                  "\t\t// except where the gun does not throw at all, and the cases just fall out.\n"
+                  "\t\tVector3 d;\n"
+                  "\t\tdouble slow = 1.0;\n"
+                  "\t\tif (Dumped(w))\n\t\t{\n"
+                  "\t\t\td = -U * frandom(0.8, 1.0) - F * frandom(0.1, 0.3) + L * frandom(-0.25, 0.25);\n"
+                  "\t\t\tslow = frandom(0.35, 0.5);\n"
+                  "\t\t}\n"
+                  "\t\telse\n"
+                  "\t\t\td = -L * 0.75 + U * frandom(0.45, 0.7) - F * frandom(0.05, 0.25);\n")
+    old = "\t\tc.vel = d * spd + mo.vel;\n"
+    if t.count(old) != 1:
+        raise SystemExit('casings.zs: the velocity line is not there exactly once')
+    t = t.replace(old, "\t\tc.vel = d * spd * slow + mo.vel;\n")
+    open(p, 'w').write(t)
+
+    st['_not_done'] = {
+        'MP40': 'every korpus slot is mirrored at +-1.44 (the tube\'s cooling slots); `zamek` is the bolt',
+        'Minigun': '91 boundary loops, all bores in `Pipe`: six barrels and no port',
+        'Machinegun': 'an M249 body with no port loop (its ready frame is settled: 4)',
+        'MG42': 'no port loop, and buzzsaw_wm.md3 splits the body 3059+15853 against one surface of 18912',
+    }
+    st['_card_rejected'] = ('WMCARD.bd22 ejectport: all 25 say "the point and the direction are '
+                            'estimates"; carried exactly it misses the four hand-tuned ports by '
+                            '0.8 to 10.8 cm')
+    json.dump(st, open(OUT + 'casings_apply.json', 'w'), indent=1)
+    with open(OUT + '.generated', 'a') as f:
+        f.write('then tools/bd22_plus.py casings\n')
+    print(json.dumps(st, indent=1))
+
+
 if __name__ == '__main__':
     if sys.argv[1:2] == ['apply']:
         apply()
@@ -2188,5 +2349,7 @@ if __name__ == '__main__':
         bash()
     if sys.argv[1:2] == ['options']:
         options()
+    if sys.argv[1:2] == ['casings']:
+        casings()
     if sys.argv[1:2] == ['pk3']:
         pk3(sys.argv[2])

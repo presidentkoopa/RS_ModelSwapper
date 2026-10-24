@@ -247,15 +247,49 @@ idle sprite, read off the MODELDEF lines pointing at that frame — never the sh
 | Shot_Gun | SHTN / 2HTN / SHTA | 4 | 23.7, 0.0, −5.4 | 0.9, 0.0, −10.7 |
 | SSG | VSSG / SHT2 / VSHZ | 1 | 27.9, 0.1, −2.8 | 15.3, 0.1, −7.0 |
 | AssaultShotgun | USAS / 2SAS / A12P | 4 | 20.0, 0.0, −2.6 | −1.7, 0.0, −6.0 |
+| MP40 | MP40 / MP42 / PP40 | 2 | 24.8, 0.2, −3.1 | −1.2, 0.0, −3.5 |
+| BrutalSMG | SMGF / SMGR / VSMG | 3 | 18.6, −0.3, −1.2 | 0.6, 0.0, −10.4 |
 
-The Machinegun, MP40, SMG and MG42 have stocks too and are the obvious next ones; the plan said
-"rifle/shotgun", so they are not in.
+**The Machinegun and the MG42 are still out, and the reason I gave was wrong.** I wrote that their
+fit (residual 11.26 and 24.26 against everyone else's 0.0000) meant "the lookup is finding the
+wrong model". It is the right model. The fit stacks every surface's vertices in order and calls the
+correspondence identity, and **these two files split the mesh differently from REMA's**:
+
+| | pack | REMA `*_wm.md3` |
+|---|---|---|
+| `Machinegun.md3` | 6 surfaces `[104, 1014, 106, 3470, 58, 11996]` | 7 surfaces `[104, 1014, 106, 3470, 58, 415, 11581]` |
+| `HitlersBuzzsaw.md3` | 2 surfaces `[18912, 60]` | 3 surfaces `[3059, 15853, 60]` |
+
+Same total either way — 16748 and 18972 — so the stack is the same length and nothing complained,
+but the body's vertices are not in the same order and one rigid transform over the lot is
+least-squares nonsense. Fit only the surfaces that correspond one for one and the Machinegun
+answers: **ready frame 4, residual 0.0000** on its 4752 matching vertices (frame 3, the old answer,
+was never right). Its butt strike is unblocked and only wants the in/out pair measured off frame 4.
+The MG42 has nothing to fit on — no surface corresponds, and the one 60-vertex part that does is a
+2.4 × 0.8 × 3.2 sliver whose fit is degenerate (the body lands 24 units out under it).
 
 **`god` is now the first thing `gate/bd22_gate.sh` does** (owner, 2026-10-24). A gate that dies
 partway still prints GATE_DONE and still exits 0 — the quit at the end runs either way — it just
 stops firing and reloading anything, so the run passes while testing nothing and the log never says
 so. Full run with it on: `Degreelessness Mode ON`, all markers, exit 0, no fault, 9 warnings and
 none ours.
+
+**Three more ways that gate was passing without testing** (2026-10-24), all now fixed:
+- `$PK3` and `$LOG` were relative and the run line `cd`s to `$QZD` first, so **the pack was not
+  found and the engine loaded without it** — and still reached GATE_DONE, still exited 0. Both are
+  resolved to absolute paths now, and a missing pk3 exits 2.
+- `xvfb-run` came off the Linux container this script started on. There is none on the owner's PC,
+  so `timeout` answered *"failed to run command 'xvfb-run'"* and the line still reported exit 0.
+  It is used only where it exists; on Windows the engine opens its own 640×480 window
+  (`+vid_fullscreen 0` either way — **it is never to be run fullscreen**).
+- `echo "exit $?"` sat *after* the grep, so it printed the GREP's status, not the engine's: a
+  crashed run said "exit 0" as long as the grep found nothing. The run's own code is captured
+  first, and the gate now prints a hit count for each of its markers, because "no errors found" is
+  not the same claim as "it ran".
+
+The gate also **fires the casing guns** now (`GATE_CASINGS`: Shot_Gun, SSG, Revolver). `Place()` is
+only reached from `WorldThingSpawned` on a casing, so until this leg existed a gun that was never
+fired never touched the new `Port()` rows and the gate passed without exercising a line of it.
 
 ## F6, done bar the headset pass (2026-10-24) — reload foley and the pack README
 
@@ -316,15 +350,39 @@ Stages `recoil`, `impacts` and `bullet`, all after `butt`. **The owner's yes was
 **NOT done, and this is the honest list.**
 1. **Muzzle flashes — nothing.** The sheet names 20 distinct `flashprofile`s. Every shot still has
    Brutal Doom's own flash. This is the most visible thing on a gun and it is the real gap.
-2. **Casings — nothing per-gun.** 8 `ejectaprofile`s, with casing models in RS_Ballistics. The pack
-   keeps 1.96b's own `casings.zs`.
+2. **Casings — eight guns now, not four.** `bd22_plus.py casings` added Shot_Gun, SSG, Revolver and
+   Revolver2 to the four 1.38 hand-tuned, and gave the Revolver, the Shotvolver and the SSG a
+   *dump* instead of a flick (RSBDEFS: `brass_357` is "dumped from a cylinder, not thrown by a
+   port: slow, no glow"; `hull_12ga_magnum` "dumped from an open breech"). Still open: the casing
+   MODELS and smoke behind the 11 `ejectaprofile`s, and the four guns below.
+
+   **Do not use WMCARD.bd22's `ejectport` for this.** All 25 cards carry one and every one of them
+   is annotated *"the point and the direction are estimates"* — what was measured is the SIDE, by
+   counting vertices on each wall. Carried onto the held mesh by the exact rigid transform
+   (residual 0.0000) it misses all four hand-tuned ports: BrutalPistol by 3.8 cm, BrutalSMG by
+   10.8 cm, Rifle by 3.0, AssaultShotgun by 0.8. A guess transformed exactly is still a guess.
+
+   **What is measured is the mesh.** The model-makers named the port — Rifle `ejectport`, Shot_Gun
+   `eject`, SSG `Open`, Revolver five × `shells` — and where nobody named it, it is still a HOLE:
+   weld the ready frame and every edge used by one triangle only is a boundary, and the boundaries
+   close into loops. The check, on the two guns that have both a modelled port and a hand-tuned
+   number: BrutalPistol lands **0.84** units away (a 3.9 × 0.2 × 0.3 slot, 10 verts, facing right
+   and up) and AssaultShotgun **0.44** (7.8 × 0.7 × 2.0, same signature). On Shot_Gun the named
+   surface and the boundary loop agree with each other to 0.06.
+
+   **Four guns have no port in their mesh to find**, and guessing them would put brass somewhere
+   arbitrary: **MP40** (every `korpus` slot is mirrored at ±1.44 — the tube's cooling slots; `zamek`
+   is the bolt, y +1.2 being its left-side handle), **Minigun** (91 loops, all of them bores in
+   `Pipe`), **Machinegun** (an M249 body with no port loop), **MG42** (none, and its body will not
+   fit either — see the butt-strike section).
 3. **The round in flight — written, switched off, not in the pk3.** See the commit: every gun with
    a cartridge is HITSCAN, and the only carrier is a PROJECTILE follower, so it can never fire as
    wired. It needs spawning and flying from the muzzle (each card has one) to the impact.
 4. **Impact character.** Only a strength multiplier crossed. RS_Ballistics' 572 impact blocks decide
    what a 9mm does to metal versus wood versus glass; none of that came, and it cannot come as
    written — bursts resolve PARTICLEDEFS, a REMA renderer feature.
-5. **Butt strikes** exist on four long guns; the Machinegun, MP40, SMG and MG42 have stocks too.
+5. **Butt strikes** exist on six long guns. The Machinegun is unblocked (ready frame 4) and wants
+   only its in/out pair; the MG42's mesh cannot be fitted at all.
 6. **The slug revolver has no hand-fit sheet.** The Machinegun got one.
 7. **The melee doc's §9 architecture** — the netevent pose-history spine it calls the single
    highest-leverage thing in the three codebases. `melee.zs` was extended instead, so its snap-turn
@@ -396,7 +454,22 @@ Each tool has its paths at the top. Set them once:
 - `tools/bd22_mg.py`: `OUT`, `BR` (br_vr `PK3_pbr/` from E:\DOOMWork\VR_WeaponSetRebuild), `BD21` → `docs/BD21_Machinegun.txt`, `REMA`, the kit path.
 - `tools/genpack.py`, `assemble.py`, `handfit_cards.py`: the `/mnt/user-data/uploads/Quest_Weapons_Kit/...` and `/home/claude/...` lines → `tools/kit` and your paths.
 - `gate/bd22_gate.sh`: the four paths at the top. This is the F1 command.
-Regenerating is: `python tools/bd22_plus.py geometry && python tools/bd22_plus.py apply && python tools/bd22_mg.py && python tools/bd22_plus.py revolver && python tools/bd22_plus.py options && python tools/bd22_plus.py pk3 dist/BD22Q_197pre.pk3`. The result must equal `sets/bd22q_1.97/src` (diff it; that is the drift check for the generators themselves). **Order matters**: `revolver` must follow `bd22_mg.py` (it edits the roster handler `bd22_mg.py` writes), and `options` must come after both (it restructures the menu page they add rows to). (`python`, not `python3`, on the owner's PC.)
+Regenerating is every stage below, in this order, then the pk3 — the earlier short form in this
+file was missing eight of them:
+
+```
+geometry  apply  [bd22_mg.py]  revolver  options  bash  whip  butt  recoil  impacts  flash
+casings  readme        then:  pk3 dist/BD22Q_197pre.pk3
+```
+
+i.e. `python tools/bd22_plus.py geometry`, … , with `python tools/bd22_mg.py` (no argument) in
+third place. The result must equal `sets/bd22q_1.97/src` (diff it; that is the drift check for the
+generators themselves). **Order matters**: `revolver` must follow `bd22_mg.py` (it edits the roster
+handler `bd22_mg.py` writes), `options` must come after both (it restructures the menu page they
+add rows to), and `apply` must precede everything that edits a 1.96b file — `bash`, `whip`, `butt`,
+`impacts` and `casings` all patch files `apply` copies in, so running one twice on an already-built
+tree is what their "is not there exactly once" guards are for. `bullet` is deliberately NOT in the
+pipeline. (`python`, not `python3`, on the owner's PC.)
 
 ## Known failure already fixed (so nobody re-learns it)
 `counters.zs` called `RSR.WantsHands`; the function lives on `RSR_ReloadHandler`. The first pk3 handed to the owner had this and died at script parse. Lesson for every ZScript addition: grep the class a static lives in; then run the gate before anything leaves the repo.
