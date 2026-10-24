@@ -34,18 +34,32 @@ SCALE, OFF = (-1.0, 1.0, 1.0), (0.0, 0.0, 0.0)        # MODELDEF.bd.txt: all thr
 
 # the three toggles: 1.96b class -> sources
 PLUS = {
+    # F6 reload foley. Brutal Doom never reloads these three, so it has no sound for it -- and
+    # neither does REMA's bd22 set. Each name below is one BD22 ALREADY HAS, checked in
+    # brutal22test6's own SNDINFO, and is REFERENCED, not declared: this pack always loads after
+    # brutal22test6, so naming its sounds costs nothing and ships no files. (REMA renames its copies
+    # to bd22/... because that set is standalone and a bare `Pistol/Reload1` would collide with the
+    # mod's own and silently lose on load order. That reasoning does not apply to an addon.)
+    #   MG42        the drum is a big box magazine -> the USAS-12's drum (USASOUT / USASIN)
+    #   Flamethrower a canister is a heavy cylinder -> the railgun's cell (RGREL1 / RGREL2)
+    #   Unmaker     the gun itself answers the skull: it dies as it leaves, wakes as it seats
+    # Alternatives, if any of these sound wrong in the headset: Chaingun/belt (MINIBELT, the literal
+    # belt), Chaingun/beltQuiet, Plasma/Reload1-2, Flamer/Select, MG42/Draw.
     'MG42': dict(card='BD_Buzzsaw', ref='buzzsaw_wm.md3', mesh='HitlersBuzzsaw/HitlersBuzzsaw.md3',
                  part='magazine', ref_parts={'magazine': 'magazine'}, ready_frame=0,
+                 snd_out='rsr/drumout', snd_in='rsr/drumin', snd_land='rsr/bigdrop',
                  toggle='rsq_plus_mg42', label='MG42: Belt Drum Reload',
                  reserve='Clip2', magammo='RSQ_MG42Drum', nomag='RSQ_NoDrum_MG42', ammouse=1,
                  ready_sprites=['HBUS A'], spr=('RQXM', 'RQXP', 'RQXW')),
     'Flamethrower2': dict(card='BD_Flamethrower', ref='flamethrower_wm.md3', mesh='Flamethrower2/Flamethrower2.md3',
                  part='canister', ref_parts={'canister': 'magazine'}, ready_frame=0,
+                 snd_out='rsr/canout', snd_in='rsr/canin', snd_land='rsr/bigdrop',
                  toggle='rsq_plus_flamer', label='Flamethrower: Canister Reload',
                  reserve='Gas', magammo='RSQ_FlamerCanister', nomag='RSQ_NoCanister_Flamer', ammouse=1,
                  ready_sprites=['FLMT A', '2LMT A'], spr=('RQYM', 'RQYP', 'RQYW')),
     'Unmaker': dict(card='BD_Unmaker', ref='unmaker_wm.md3', mesh='Unmaker/Unmaker.md3',
                  part='skull', ref_parts={'skull': 'magazine', 'skull2': 'magazine'}, ready_frame=0,
+                 snd_out='Unmaker/Stop', snd_in='Unmaker/Start', snd_land='rsr/bigdrop',
                  toggle='rsq_plus_unmaker', label='Unmaker: Skull Reload',
                  reserve='SoulAmmo', magammo='RSQ_UnmakerSkull', nomag='RSQ_NoSkull_Unmaker', ammouse=2,
                  ready_sprites=['UNHG A', '2NHG A'], spr=('RQWM', 'RQWP', 'RQWW')),
@@ -382,6 +396,26 @@ def apply():
         m = gen_rsr.modeldef(g); md += (m if isinstance(m, str) else '\n'.join(m)) + '\n'
     with open(OUT_SRC + 'MODELDEF.rsr', 'a') as f:
         f.write('\n// ---- 1.97: the drum / canister / skull reloads (tools: c2q/bd22_plus.py)\n' + md)
+    # F6 foley for the three reloads BD22 has no sound for. Same pattern SNDINFO.rsr already uses
+    # for its racking sounds ("where BD22 has none", from RS_Main): our own rsr/ names, our own
+    # copies of the files. The owner allowed RS_VR_Weapons' library for what BD22 lacks
+    # (2026-10-24). Declared under rsr/, never under wm/ or BD22's own names -- REMA's SNDINFO
+    # says why: a bare `Pistol/Reload1` collides the moment both packs load and the last one wins
+    # silently, on load order.
+    sd = OUT_SRC + 'sounds/rsr/'
+    os.makedirs(sd, exist_ok=True)
+    lines = ['', "// 1.97: the drum / canister / skull reloads. BD22 never reloads these three and has",
+             '// no foley for it; neither does REMA\'s bd22 set. From RS_VR_Weapons, with the owner\'s',
+             '// say-so, under our own names so nothing collides.']
+    for nm, src_rel, why in FOLEY:
+        shutil.copy(RSVRW + src_rel, sd + os.path.basename(src_rel))
+        lines.append('%-14s sounds/rsr/%s\t// %s' % (nm, os.path.basename(src_rel), why))
+    # a $random must be declared before the names it draws from (REMA's SNDINFO says so)
+    drops = [n for n, _, _ in FOLEY if n.startswith('rsr/bigdrop')]
+    lines.insert(4, '$random rsr/bigdrop { %s }' % ' '.join(drops))
+    with open(OUT_SRC + 'SNDINFO.rsr', 'a') as f:
+        f.write('\n'.join(lines) + '\n')
+    log['foley'] = {n: os.path.basename(s) for n, s, _ in FOLEY}
     # DECORATE
     for cls, p in PLUS.items():
         fn = {'MG42': 'MG42.dec', 'Flamethrower2': 'Flamethrower.dec', 'Unmaker': 'Unmaker.dec'}[cls]
@@ -580,6 +614,23 @@ FX = [
     ('RSH0', 'hitflash'),
 ]
 FXROOT = 'E:/DOOMWork/RS_CombatFX'
+RSVRW = 'E:/DOOMWork/RS_VR_Weapons/'
+
+# F6 -- foley for the three reloads Brutal Doom has no sound for, because it never reloads them.
+# REMA's bd22 set has none either, so these come from the wider RS_VR_Weapons library, which the
+# owner allowed for exactly this (2026-10-24: "you cvan use rs vr weapons souinds for sthings we
+# dont have sounds for"). wm/magdrop/large is described in its own SNDINFO as "a chaingun box, a
+# rocket magazine, a canister" -- written for this case. The Unmaker keeps BD22's own Unmaker/Start
+# and Unmaker/Stop, which are the same UNMSTA / UNMSTO lumps RS_VR_Weapons ships, so no file moves.
+FOLEY = [
+    ('rsr/drumout', 'sounds/chainguns/MGCHAIN.ogg', 'MG42 belt drum out (the V+ minigun box)'),
+    ('rsr/drumin', 'sounds/chainguns/MGLOAD.ogg', 'MG42 belt drum home'),
+    ('rsr/canout', 'sounds/launchers/RLCOUT.ogg', 'Flamethrower canister out (the V+ rocket canister)'),
+    ('rsr/canin', 'sounds/launchers/RLCIN.ogg', 'Flamethrower canister home'),
+    ('rsr/bigdrop1', 'sounds/magdrops/DSAOUNC1.ogg', 'a big magazine hitting the floor'),
+    ('rsr/bigdrop2', 'sounds/magdrops/DSAOUNC2.ogg', ''),
+    ('rsr/bigdrop3', 'sounds/magdrops/DSAOUNC3.ogg', ''),
+]
 FXSTD = 96.0
 
 # RSH0's red is what the owner's headshot mod already uses, so ours is tintable (owner, 2026-10-24:

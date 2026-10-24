@@ -2,3 +2,15 @@
 rsr/slideback	sounds/rsr/rsrslide.wav
 rsr/smgback	sounds/rsr/rsrslide.wav
 rsr/smgfwd	sounds/rsr/rsrsmgfw.wav
+
+// 1.97: the drum / canister / skull reloads. BD22 never reloads these three and has
+// no foley for it; neither does REMA's bd22 set. From RS_VR_Weapons, with the owner's
+// say-so, under our own names so nothing collides.
+$random rsr/bigdrop { rsr/bigdrop1 rsr/bigdrop2 rsr/bigdrop3 }
+rsr/drumout    sounds/rsr/MGCHAIN.ogg	// MG42 belt drum out (the V+ minigun box)
+rsr/drumin     sounds/rsr/MGLOAD.ogg	// MG42 belt drum home
+rsr/canout     sounds/rsr/RLCOUT.ogg	// Flamethrower canister out (the V+ rocket canister)
+rsr/canin      sounds/rsr/RLCIN.ogg	// Flamethrower canister home
+rsr/bigdrop1   sounds/rsr/DSAOUNC1.ogg	// a big magazine hitting the floor
+rsr/bigdrop2   sounds/rsr/DSAOUNC2.ogg	// 
+rsr/bigdrop3   sounds/rsr/DSAOUNC3.ogg	// 

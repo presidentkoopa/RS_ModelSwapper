@@ -49,6 +49,15 @@
   },
   "functions_new_only": []
  },
+ "foley": {
+  "rsr/drumout": "MGCHAIN.ogg",
+  "rsr/drumin": "MGLOAD.ogg",
+  "rsr/canout": "RLCOUT.ogg",
+  "rsr/canin": "RLCIN.ogg",
+  "rsr/bigdrop1": "DSAOUNC1.ogg",
+  "rsr/bigdrop2": "DSAOUNC2.ogg",
+  "rsr/bigdrop3": "DSAOUNC3.ogg"
+ },
  "MG42": {
   "guards_after_check": 1,
   "guards_before_shot": 4

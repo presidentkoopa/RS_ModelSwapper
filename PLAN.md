@@ -36,6 +36,13 @@ per-gun checklist below, in a headset, signed by the owner.
       `sets/aliens/` = presidentkoopa/RS_Aliens_VR-WeaponsQ @ 1ee0cd2, verbatim (owner, 2026-10-24).
 - P   Plus pass per set (menu-row extras), only after that set stands.
 
+## To consider, not scheduled
+- C1  RS_VR_Reload's own meshes for clips and magazines, instead of carving each one out of the
+      gun's mesh. Port over its DROPPED MAGAZINE in particular: it glows, and it shows the ammo
+      still in it. (owner, 2026-10-24.) Today every set carves its magazine from the gun's own mesh
+      and the dropped one is that carved piece, unlit and empty-looking. Not scheduled, and not to
+      be started without the owner's yes.
+
 ## Per set
 1 inventory the parent mod · 2 measure every mesh fresh, carve/bake parts, sheets, owner signs placement ·
 3 numbers parsed from the parent, diffed · 4 build, static check, engine gate (start item, pickups, every

@@ -534,9 +534,9 @@ class RSR_Guns abstract
 		case 7:	return "Plasma/Reload1";
 		case 8:	return "Sniper/MagOut";
 		case 9:	return "rocket/reload1";
-		case 10:	return "";
-		case 11:	return "";
-		case 12:	return "";
+		case 10:	return "rsr/drumout";
+		case 11:	return "rsr/canout";
+		case 12:	return "Unmaker/Stop";
 		}
 		return "";
 	}
@@ -554,9 +554,9 @@ class RSR_Guns abstract
 		case 7:	return "Plasma/Reload2";
 		case 8:	return "Sniper/MagIn";
 		case 9:	return "rocket/reload2";
-		case 10:	return "";
-		case 11:	return "";
-		case 12:	return "";
+		case 10:	return "rsr/drumin";
+		case 11:	return "rsr/canin";
+		case 12:	return "Unmaker/Start";
 		}
 		return "";
 	}
@@ -614,9 +614,9 @@ class RSR_Guns abstract
 		case 7:	return "weapons/largemagdrop";
 		case 8:	return "weapons/largemagdrop";
 		case 9:	return "weapons/barrelpain";
-		case 10:	return "";
-		case 11:	return "";
-		case 12:	return "";
+		case 10:	return "rsr/bigdrop";
+		case 11:	return "rsr/bigdrop";
+		case 12:	return "rsr/bigdrop";
 		}
 		return "";
 	}
