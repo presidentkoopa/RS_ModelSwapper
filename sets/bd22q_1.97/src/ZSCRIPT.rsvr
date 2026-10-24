@@ -38,6 +38,7 @@ version "4.14"	// 1.97 F5: WorldHitscanPreFired is 4.13+; qzd17.3 is 4.14.3
 #include "zscript/rsq/roster.zs"
 #include "zscript/rsq/bash.zs"
 #include "zscript/rsq/recoil.zs"
+#include "zscript/rsq/rounds.zs"
 #include "zscript/rsr/rsr_pump.zs"
 #include "zscript/rsr/rsr_pump_guns.zs"
 #include "zscript/rsr/rsr_m203_geo.zs"

@@ -1,7 +1,7 @@
 // RS VR hands / reload / ballistics. Options: RSQ_Options in MENUDEF.rsq. v9.
 user bool rsq_hands = true;			// VR hands on the controllers
 user int rsr_reload = 1;			// Reloading: 1 VR (zscript/rsr, on the guns that have it; the rest stock), 0 stock
-server bool rsq_ballistics = false;	// enhanced impacts and projectile trails (server: they use playsim random)
+server int rsq_ballistics = 0;	// 1.97 F5: 0 Stock (BD22), 1 Low, 2 Max	// enhanced impacts and projectile trails (server: they use playsim random)
 user int rsq_punch = 0;			// VR punching: a real punch with either fist lands (zscript/rsq/fists.zs)
 // 2026-10-23: a punch that lands on a switch or any usable line works it, at the fist's own reach
 // instead of the engine's 64-unit use range. The LINE'S SPECIAL decides, not its texture.

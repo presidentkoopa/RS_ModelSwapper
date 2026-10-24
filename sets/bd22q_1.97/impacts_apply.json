@@ -1,0 +1,46 @@
+{
+ "guns": 10,
+ "scales": {
+  "BrutalPistol": {
+   "round": "pistol_9mm",
+   "scale": 1.0
+  },
+  "Revolver": {
+   "round": "revolver_357",
+   "scale": 1.265
+  },
+  "Shot_Gun": {
+   "round": "buckshot",
+   "scale": 1.659
+  },
+  "SSG": {
+   "round": "buckshot via shotgun_ssg",
+   "scale": 1.659
+  },
+  "MP40": {
+   "round": "ww2_9mm via ww2_mp40",
+   "scale": 0.98
+  },
+  "MG42": {
+   "round": "rifle_762",
+   "scale": 2.209
+  },
+  "AssaultShotgun": {
+   "round": "buckshot",
+   "scale": 1.659
+  },
+  "Machinegun": {
+   "round": "rifle_762 via machinegun_762",
+   "scale": 2.209
+  },
+  "Minigun": {
+   "round": "rifle_556 via chaingun_556",
+   "scale": 1.914
+  },
+  "Rifle": {
+   "round": "rifle_556",
+   "scale": 1.914
+  }
+ },
+ "caps": "Low 24/64 (as 1.96b), Max 48/128, counts x1.8"
+}

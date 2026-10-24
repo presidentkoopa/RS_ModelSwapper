@@ -31,7 +31,8 @@ OptionValue "RSR_GrabWith"
 OptionValue "RSQ_Ballistics"
 {
 	0, "Stock (BD22)"
-	1, "Enhanced"
+	1, "Low"
+	2, "Max"
 }
 
 OptionValue "RSR_Pouch"

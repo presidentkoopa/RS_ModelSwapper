@@ -10,17 +10,28 @@
 
 class RSQ_Ballistics : EventHandler
 {
+	// 1.97 F5: these are the LOW budget, which is what 1.96b shipped. Max doubles them.
 	const MAX_TRACERS = 24;
 	const MAX_DEBRIS = 64;
+	static int CapTracers() { return FxLevel() >= 2 ? MAX_TRACERS * 2 : MAX_TRACERS; }
+	static int CapDebris()  { return FxLevel() >= 2 ? MAX_DEBRIS * 2 : MAX_DEBRIS; }
 
 	RSQ_Surfaces surf;
 	int liveTracers;
 	int liveDebris;
 
-	static bool On()
+	// 1.97 F5: 0 Stock (BD22's own, nothing here runs), 1 Low, 2 Max.
+	// NOT named Level(): that shadows ZScript's global Level inside this class and
+	// every Level.SpawnParticle below stops compiling.
+	static int FxLevel()
 	{
 		let cv = CVar.FindCVar('rsq_ballistics');
-		return cv && cv.GetInt() != 0;
+		return cv ? clamp(cv.GetInt(), 0, 2) : 0;
+	}
+
+	static bool On()
+	{
+		return FxLevel() > 0;
 	}
 
 	static RSQ_Ballistics Get()
@@ -35,7 +46,7 @@ class RSQ_Ballistics : EventHandler
 		let a = e.Thing;
 		if (!a || !a.bMISSILE || a.bNOINTERACTION || !a.target || !a.target.player)
 			return;
-		if (liveTracers >= MAX_TRACERS || a.GetMissileDamage(0, 1) <= 0)
+		if (liveTracers >= CapTracers() || a.GetMissileDamage(0, 1) <= 0)
 			return;
 		if (IsMelee(a) || MeleeHeld(a.target) || a.DamageType == 'Trample')	// 1.11: BD22's footsteps are damaging missiles too
 			return;					// no trails on fists, kicks, axe, chainsaw, sword (owner, 2026-10-16)
@@ -118,11 +129,18 @@ class RSQ_Ballistics : EventHandler
 			surf = new('RSQ_Surfaces');
 			surf.Load();
 		}
-		Spall(t.HitLocation + n * 2, n, surf.Of(t.HitTexture, flat));
+		// 1.97 F5: the level dial, and the weight of the round that got here. Spall's
+		// counts are per SURFACE; this is what makes a 12-gauge differ from a 9mm on the
+		// same wall. Max is 1.8x Low, and Low is what 1.96b shipped.
+		Name gun = 'None';
+		if (tracer && tracer.target && tracer.target.player && tracer.target.player.ReadyWeapon)
+			gun = tracer.target.player.ReadyWeapon.GetClassName();
+		Spall(t.HitLocation + n * 2, n, surf.Of(t.HitTexture, flat),
+			(FxLevel() >= 2 ? 1.8 : 1.0) * RSQ_Rounds.Scale(gun));
 	}
 
 	// dust or sparks or a splash, and a few chips
-	void Spall(Vector3 at, Vector3 n, Name mat)
+	void Spall(Vector3 at, Vector3 n, Name mat, double k = 1.0)
 	{
 		Color c = Color(150, 145, 135);		// concrete and anything unnamed
 		int dust = 8, chips = 2, chipBase = 0, sparks = 0;
@@ -149,6 +167,8 @@ class RSQ_Ballistics : EventHandler
 		case 'lava':
 			c = Color(255, 130, 30); dust = 10; chips = 0; sparks = 4; break;
 		}
+
+		dust = int(dust * k); chips = int(chips * k); sparks = int(sparks * k);
 
 		FSpawnParticleParams p;
 		p.style = STYLE_Translucent;
@@ -179,7 +199,7 @@ class RSQ_Ballistics : EventHandler
 			p.flags = SPF_FULLBRIGHT;
 			Level.SpawnParticle(p);
 		}
-		for (int i = 0; i < chips && liveDebris < MAX_DEBRIS; i++)
+		for (int i = 0; i < chips && liveDebris < CapDebris(); i++)
 		{
 			let a = RSQ_Debris(Actor.Spawn('RSQ_Debris', at, NO_REPLACE));
 			if (!a)
