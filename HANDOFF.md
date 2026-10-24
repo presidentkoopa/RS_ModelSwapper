@@ -181,6 +181,54 @@ Gated on the owner's load order: both pages opened in a run (`openmenu RSQ_Optio
 `openmenu RSR_Debug`) with nothing logged against either, and the restored page loads clean. **The
 layout itself is the owner's headset pass**, as the plan says.
 
+## F4, in progress (2026-10-24) — the gun bash and the pistol whip
+Two of the three built; the two-handed butt strike is not. Stages `bash` and `whip`, both run after
+`options`. **Switch-punching with either hand was already built** — `zscript/rsq/fists.zs` runs an
+`RSQ_FistHand` for `mainH` and `offH` and the same path ends in `PunchUse`, so F4's fourth item
+needed nothing. **"The spike" is still undefined**: the word appears only in PLAN.md and in the
+sentence HANDOFF copied from it — not in brutal22test6, not in the pack, not in the melee doc.
+
+**The gun bash** is a BUTTON, not a gesture, and deliberately: a gun is a thing you hold still and
+point, so gesture detection on one starts worse off than the axe did, and the melee doc's trap table
+is largely BD22 learning that (speed alone made *raising* the axe a hit; `rsvr_melee_up` at 0.55
+still cut on the upswing). BD22's own kick is the trigger — `+zoom` gives `Kicking`, DEFAULTWEAPON's
+Ready jumps to `DoKick` — so a three-line branch at the top of `DoKick` asks ZScript, and BD22's
+whole kick body is kept behind `RSQ_BashStock`. Out of VR, option off, or a melee weapon in hand and
+the boot runs untouched. **BD22's own `KickAttack` still decides the result**; what changes is no
+`KickFlash` (no boot over the gun), a lighter quake, and the impact effect. The mid-tic question
+uses the pack's own idiom from `rsr_break.zs`: `Inventory.TryPickup` runs *synchronously* inside
+`A_GiveInventory`. **Load order forces where classes live** — ZSCRIPT compiles before DECORATE, so
+`RSQ_BashAttack` must be DECORATE to inherit `KickAttack`, while anything reading a cvar is ZScript;
+DECORATE can name a ZScript class, not the reverse.
+
+**The impact**: the owner's five from RS_CombatFX (RSS3, RSU1, RSU4, RSU5, RSH0), 44 frames. Each
+actor's `Scale` is computed from its own art so all draw at **RSH0's 96 px frame, the owner's
+standard** (2026-10-24): RSS3 0.384 from 250 px, RSU1 1.6 from 60, RSU4 6.4 from 15, RSU5 0.857 from
+112, RSH0 1.0. RSH0's red is what his headshot mod uses, so it is tintable (Original/Blue/Green/
+Amber/White) by a luminance ramp in `TRNSLATE.rsq`. Drawing every candidate at one size is what
+ruled the others out — RSU0/RSU4 are 5×5 and RSU3 13×12 natively, and they turn to mush at 96.
+
+**The pistol whip** IS a gesture: a pistol is the one gun you genuinely swing. Two more kinds in
+1.96b's own `melee.zs` (nine exact-match edits), reusing its body-frame sample history, its gates
+and its swept segment. `BladeIn`/`BladeOut` are raw md3 coordinates **at the gun's ready frame**,
+which is not frame 0 — it is whatever MODELDEF binds the Ready sprite to:
+
+| gun | ready sprites | frame | in | out |
+|---|---|---|---|---|
+| BrutalPistol | PIST / 2IST | 3 | 26.2, 0.0, −7.0 | 44.2, 0.0, −0.2 |
+| Revolver, Revolver2 | REVO / 2EVO | 0 | 29.4, 0.1, −1.5 | 50.2, 0.0, 2.4 |
+
+Measuring the pistol at frame 0 would have put the segment in a stowed pose (it reads U −28..−10
+there). Revolver2 has no Model block of its own and rides the Revolver's by sprite, so the slug
+revolver whips too. `WHIP_SWING` 3.2 m/s against the axe's 3.0; the result is BD22's own
+`MeleeStrikeNormal` / `MeleeStrike1Berserked`, which is what `fists.zs` already lands.
+
+**`god` is now the first thing `gate/bd22_gate.sh` does** (owner, 2026-10-24). A gate that dies
+partway still prints GATE_DONE and still exits 0 — the quit at the end runs either way — it just
+stops firing and reloading anything, so the run passes while testing nothing and the log never says
+so. Full run with it on: `Degreelessness Mode ON`, all markers, exit 0, no fault, 9 warnings and
+none ours.
+
 ## What is NOT done (the plan's remaining flagship items, in order)
 1. ~~Gate `sets/bd22q_1.97` on the owner's exact load order.~~ **Done 2026-10-24** (see "F1 IS DONE"):
    runs clean, pk3 handed over. What is left of F1 is the owner's headset pass, which is his to do.
