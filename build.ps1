@@ -80,6 +80,17 @@ $files = $files | Where-Object { $_.Extension -ne '.pdn' }
 # with their textures and their authors' MODELDEFs. Packing blend/ put 577MB of
 # unreferenced geometry in the pk3 and took it from 30MB to 567MB.
 $files = $files | Where-Object { $_.FullName -notmatch '\\models\\blend\\' }
+# Pack only the model folders modeldef actually names. The imported weapon packages
+# arrive whole -- weapons, pickups, ammo, decorations -- and a package nothing has
+# been wired to yet is 177MB of geometry the engine will never ask for. This is
+# derived, not a list, so a folder starts shipping the moment a Model block points
+# at it. The asset-ref check below is what catches an over-exclusion.
+$mdRefs = [regex]::Matches((Get-Content (Join-Path $root 'modeldef') -Raw), '(?i)Path\s+"models/([^/"]+)') |
+          ForEach-Object { $_.Groups[1].Value.ToLower() } | Sort-Object -Unique
+$files = $files | Where-Object {
+    if ($_.FullName -notmatch '\\models\\([^\\]+)\\') { return $true }
+    $mdRefs -contains $matches[1].ToLower()
+}
 
 $fs  = [System.IO.File]::Open($out, 'Create')
 $zip = New-Object System.IO.Compression.ZipArchive($fs, [System.IO.Compression.ZipArchiveMode]::Create)
