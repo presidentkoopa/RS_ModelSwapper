@@ -3,11 +3,15 @@
 // (map pickups, spawners, drops). Server cvars: the playsim must agree.
 class RSQ_Roster : EventHandler
 {
+	// 1.97: the slug revolver (BD21 Revolver2) in place of BD22's Shotvolver, when the option is on
 	override void CheckReplacement(ReplaceEvent e)
 	{
 		if (!e.Replacee) return;
-		let cv = CVar.FindCVar('rsq_mg_replaces_mg42');
-		if (cv && cv.GetInt() != 0 && e.Replacee.GetClassName() == 'MG42')
+		let mg = CVar.FindCVar('rsq_mg_replaces_mg42');
+		if (mg && mg.GetInt() != 0 && e.Replacee.GetClassName() == 'MG42')
 			e.Replacement = 'Machinegun';
+		let sv = CVar.FindCVar('rsq_slug_replaces_shotvolver');
+		if (sv && sv.GetInt() != 0 && e.Replacee.GetClassName() == 'Revolver')
+			e.Replacement = 'Revolver2';
 	}
 }

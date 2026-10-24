@@ -1,1 +1,5 @@
-2026-10-24T08:20Z bd22_plus.py apply + bd22_mg.py (session c9d0fd42)
+tools/bd22_plus.py geometry + apply, then tools/bd22_mg.py
+SRC (1.96b) = E:/DOOMWork/_buildtemp/rs_brutal22weaponsq/src/
+OUT = E:/DOOMWork/_buildtemp/rsq_bd22/
+then tools/bd22_plus.py revolver
+then tools/bd22_plus.py options

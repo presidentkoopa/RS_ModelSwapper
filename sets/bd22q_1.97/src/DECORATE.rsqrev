@@ -1,0 +1,2 @@
+// 1.97: the BD21 slug revolver (tools/bd22_plus.py revolver)
+#include "actors/Weapons/Revolver2.dec"
