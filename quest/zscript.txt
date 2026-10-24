@@ -110,6 +110,289 @@ class MS_PU_VR_BFG9000 : MS_PickupModel {}
 #include "zscript/RS_ForeignEffects.zs"
 #include "zscript/RS_ForeignDebug.zs"
 
+// Stubs for the imported VR weapon packages. The engine binds a model to a
+// CLASS, so every Model block in modeldef needs one of these or the donor is
+// silently dropped -- which looks like it worked.
+class MS_brt_AssaultShotgun : Actor {}
+class MS_brt_Grenade : Actor {}
+class MS_brt_Boot : Actor {}
+class MS_brt_FIST : Actor {}
+class MS_brt_BFG : Actor {}
+class MS_brt_BrutalAxe : Actor {}
+class MS_brt_Chainsaw : Actor {}
+class MS_brt_Minigun : Actor {}
+class MS_brt_BrutalPistol : Actor {}
+class MS_brt_PlasmaGun : Actor {}
+class MS_brt_RPG : Actor {}
+class MS_brt_BrutalSMG : Actor {}
+class MS_brt_SSG : Actor {}
+class MS_brt_Shotgun : Actor {}
+class MS_brt_DSweap : Actor {}
+class MS_brt_FlameCannon : Actor {}
+class MS_brt_Flamethrower2 : Actor {}
+class MS_brt_HellishMissile : Actor {}
+class MS_brt_HitlersBuzzsaw : Actor {}
+class MS_brt_M79 : Actor {}
+class MS_brt_MP40 : Actor {}
+class MS_brt_Machinegun : Actor {}
+class MS_brt_RailGun : Actor {}
+class MS_brt_Revolver : Actor {}
+class MS_brt_Rifle : Actor {}
+class MS_brt_Unmaker : Actor {}
+class MS_hacx_Cryogun : Actor {}
+class MS_hacx_Melee : Actor {}
+class MS_hacx_Nuker : Actor {}
+class MS_hacx_Pistol : Actor {}
+class MS_hacx_Reznator : Actor {}
+class MS_hacx_Stick : Actor {}
+class MS_hacx_tazer : Actor {}
+class MS_hacx_UZI : Actor {}
+class MS_hacx_Zooka : Actor {}
+class MS_meat_BFG : Actor {}
+class MS_meat_Bolter : Actor {}
+class MS_meat_ChainGun : Actor {}
+class MS_meat_Knife : Actor {}
+class MS_meat_RPG : Actor {}
+class MS_meat_SSG : Actor {}
+class MS_meat_Saw : Actor {}
+class MS_meat_Shotgun : Actor {}
+class MS_meat_TEC9 : Actor {}
+class MS_wolf_1911 : Actor {}
+class MS_wolf_Knife : Actor {}
+class MS_wolf_Axe : Actor {}
+class MS_wolf_Grenade : Actor {}
+class MS_wolf_BAR : Actor {}
+class MS_wolf_Chaingun : Actor {}
+class MS_wolf_Flame : Actor {}
+class MS_wolf_Garand : Actor {}
+class MS_wolf_KAR98 : Actor {}
+class MS_wolf_Luger : Actor {}
+class MS_wolf_MG42 : Actor {}
+class MS_wolf_MP40 : Actor {}
+class MS_wolf_PP41 : Actor {}
+class MS_wolf_STG44 : Actor {}
+class MS_wolf_Shotgun : Actor {}
+class MS_wolf_Tommy : Actor {}
+
+// Stubs for the remaining imported packages.
+class MS_alien_flamer : Actor {}
+class MS_alien_grenade : Actor {}
+class MS_alien_knife : Actor {}
+class MS_alien_mech : Actor {}
+class MS_alien_pistol : Actor {}
+class MS_alien_rifle : Actor {}
+class MS_alien_shotgun : Actor {}
+class MS_alien_smartgun : Actor {}
+class MS_chex_minizorcher : Actor {}
+class MS_chex_sigil : Actor {}
+class MS_chex_lazdevice : Actor {}
+class MS_chex_rapidzorcher : Actor {}
+class MS_chex_spork : Actor {}
+class MS_chex_spoon : Actor {}
+class MS_chex_phasingzorcher : Actor {}
+class MS_chex_zorchpropulsor : Actor {}
+class MS_chex_largezorcher : Actor {}
+class MS_chex_superlargezorcher : Actor {}
+class MS_classic_CHAINGUN : Actor {}
+class MS_classic_BFG9000 : Actor {}
+class MS_classic_Chainsaw : Actor {}
+class MS_classic_Fist : Actor {}
+class MS_classic_SHOTGUN : Actor {}
+class MS_classic_SSG : Actor {}
+class MS_classic_Pistol : Actor {}
+class MS_cola_pistol : Actor {}
+class MS_cola_shotgun : Actor {}
+class MS_cola_plasmagun : Actor {}
+class MS_cola_piledriver : Actor {}
+class MS_d64_BFG : Actor {}
+class MS_d64_Chainsaw : Actor {}
+class MS_d64_Minigun : Actor {}
+class MS_d64_BrutalPistol : Actor {}
+class MS_d64_PlasmaGun : Actor {}
+class MS_d64_RPG : Actor {}
+class MS_d64_SSG : Actor {}
+class MS_d64_ShotGun : Actor {}
+class MS_hdvr_Chainsaw : Actor {}
+class MS_hdvr_Fist : Actor {}
+class MS_hdvr_Pistol : Actor {}
+class MS_hdvr_SHOTGUN : Actor {}
+class MS_hdvr_SSG : Actor {}
+class MS_hdvr_CHAINGUN : Actor {}
+class MS_hdvr_RPG : Actor {}
+class MS_hdvr_PlasmaRifle : Actor {}
+class MS_hdvr_BFG9000 : Actor {}
+class MS_hocus_blaster : Actor {}
+class MS_hocus_cannon : Actor {}
+class MS_hocus_rifle : Actor {}
+class MS_punch_glove : Actor {}
+class MS_qvplus_gats : Actor {}
+class MS_qvplus_guns : Actor {}
+class MS_univ_sigil : Actor {}
+class MS_univ_BFG9000 : Actor {}
+class MS_univ_Chaingun : Actor {}
+class MS_univ_Chainsaw : Actor {}
+class MS_univ_PlasmaRifle : Actor {}
+class MS_univ_RPG : Actor {}
+class MS_univ_Shotgun : Actor {}
+class MS_univ_SSG : Actor {}
+class MS_voxel_Pistol : Actor {}
+class MS_voxel_Pistolalt : Actor {}
+class MS_voxel_sigil : Actor {}
+class MS_voxel_BFG9000 : Actor {}
+class MS_voxel_BFG9000alt : Actor {}
+class MS_voxel_BFG9000D4 : Actor {}
+class MS_voxel_Chaingun : Actor {}
+class MS_voxel_Chaingunalt : Actor {}
+class MS_voxel_ChaingunD4 : Actor {}
+class MS_voxel_Chainsaw : Actor {}
+class MS_voxel_Chainsawalt : Actor {}
+class MS_voxel_ChainsawD4 : Actor {}
+class MS_voxel_Fist : Actor {}
+class MS_voxel_Fistalt : Actor {}
+class MS_voxel_FistD4 : Actor {}
+class MS_voxel_PistolD4 : Actor {}
+class MS_voxel_PlasmaRifle : Actor {}
+class MS_voxel_PlasmaRiflealt : Actor {}
+class MS_voxel_RocketLauncher : Actor {}
+class MS_voxel_RocketLauncheralt : Actor {}
+class MS_voxel_RocketLauncherD4 : Actor {}
+class MS_voxel_SHOTGUN : Actor {}
+class MS_voxel_Shotgunalt : Actor {}
+class MS_voxel_ShotgunD4 : Actor {}
+class MS_voxel_SSG : Actor {}
+class MS_voxel_SSGalt : Actor {}
+class MS_voxel_SSGD4 : Actor {}
+class MS_vplus_Chainsaw : Actor {}
+class MS_vplus_Fist : Actor {}
+class MS_vplus_Pistol : Actor {}
+class MS_vplus_SHOTGUN : Actor {}
+class MS_vplus_SSG : Actor {}
+class MS_vplus_CHAINGUN : Actor {}
+class MS_vplus_RPG : Actor {}
+class MS_vplus_PlasmaRifle : Actor {}
+class MS_vplus_BFG9000 : Actor {}
+class MS_vplus_gats : Actor {}
+class MS_vplus_guns : Actor {}
+class MS_vplus_sigil : Actor {}
+class MS_zblood_sigil : Actor {}
+class MS_zblood_shotgun : Actor {}
+class MS_zblood_teslagun : Actor {}
+class MS_zblood_tommygun : Actor {}
+class MS_zblood_voodoo : Actor {}
+class MS_zblood_zippo : Actor {}
+class MS_ziono_HeadOnAStick : Actor {}
+class MS_ziono_HeadsOnAStick : Actor {}
+class MS_ziono_Candlestick : Actor {}
+class MS_ziono_ShortRGBTorch : Actor {}
+
+// Stubs for ZionVR.
+class MS_zion_D4Pistol : Actor {}
+class MS_zion_D4SHOTGUN : Actor {}
+class MS_zion_D4SUPERSHOTGUN : Actor {}
+class MS_zion_D4CHAINGUN : Actor {}
+class MS_zion_D4MACHINEGUN : Actor {}
+class MS_zion_D4PLASMARIFLE : Actor {}
+class MS_zion_D4ROCKETLAUNCHER : Actor {}
+class MS_zion_D4BFGGUN : Actor {}
+class MS_zion_Dumb4gausscannon : Actor {}
+class MS_zion_D4CHAINSAW : Actor {}
+class MS_zion_CG_Gatling : Actor {}
+class MS_zion_CG_Turret : Actor {}
+class MS_zion_CSG_Bomb : Actor {}
+class MS_zion_CSG_Triple : Actor {}
+class MS_zion_PLRF_Stun : Actor {}
+class MS_zion_PLRF_Heat : Actor {}
+class MS_zion_RL_Det : Actor {}
+class MS_zion_RL_Lock : Actor {}
+class MS_zion_GC_Siege : Actor {}
+class MS_zion_HAR_Micro : Actor {}
+
+// ============================================================================
+// ModelSwapper -- donor stubs. A MODELDEF block is inert unless a real Actor
+// class owns its name, and A_ChangeModel takes an actor class name. These must
+// NOT derive from Weapon and must NOT be subclassed (FindModelFrameRaw is an
+// exact class-pointer test).
+// ============================================================================
+
+
+// World-anchored display classes. Named by RS_Holsters via string
+// substitution -- see zscript/RS_ForeignWorldModels.zs.
+// MSBL -- THE PRIVATE BLANK ANCHOR.
+//
+// Every donor's MODELDEF block carries one row pointing at frame 9999, which
+// BlankWeaponFlashes pins a flash layer to so the layer resolves a model that
+// draws nothing. That row USED to be letter B of the donor's stock anchor
+// (PISG, SHTG, CHGG ...). The interpolation target is taken from the DECLARED
+// next state's sprite (models.cpp, FindModelFrame(actor, nextState->sprite,
+// ...)) against the foreign weapon carrying our modelDef -- and vanilla's own
+// pistol chain is literally PISG A -> PISG B. So a foreign weapon could
+// resolve our out-of-range row by accident and the held weapon vanished for
+// that rendered frame.
+//
+// MSBL is a name no mod uses. A MODELDEF FrameIndex row is a hard parse error
+// if its sprite name does not already exist, and GetSpriteIndex only registers
+// a name it has seen in a STATE -- so this class exists for no other reason
+// than to declare that state. It is never spawned.
+
+
+#include "zscript/RS_ForeignFork.zs"
+#include "zscript/RS_ForeignPersist.zs"
+#include "zscript/RS_ForeignAnim.zs"
+#include "zscript/RS_ForeignRemap.zs"
+#include "zscript/RS_ForeignModels.zs"
+#include "zscript/RS_ForeignArchetypeService.zs"
+#include "zscript/RS_ForeignModelsMenu.zs"
+#include "zscript/RS_ForeignWorldModels.zs"
+#include "zscript/RS_ForeignEffects.zs"
+#include "zscript/RS_ForeignDebug.zs"
+
+// Stubs for the imported VR weapon packages. The engine binds a model to a
+// CLASS, so every Model block in modeldef needs one of these or the donor is
+// silently dropped -- which looks like it worked.
+
+// Stubs for the remaining imported packages.
+
+// Stubs for ZionVR.
+
+// ============================================================================
+// ModelSwapper -- donor stubs. A MODELDEF block is inert unless a real Actor
+// class owns its name, and A_ChangeModel takes an actor class name. These must
+// NOT derive from Weapon and must NOT be subclassed (FindModelFrameRaw is an
+// exact class-pointer test).
+// ============================================================================
+
+
+// World-anchored display classes. Named by RS_Holsters via string
+// substitution -- see zscript/RS_ForeignWorldModels.zs.
+// MSBL -- THE PRIVATE BLANK ANCHOR.
+//
+// Every donor's MODELDEF block carries one row pointing at frame 9999, which
+// BlankWeaponFlashes pins a flash layer to so the layer resolves a model that
+// draws nothing. That row USED to be letter B of the donor's stock anchor
+// (PISG, SHTG, CHGG ...). The interpolation target is taken from the DECLARED
+// next state's sprite (models.cpp, FindModelFrame(actor, nextState->sprite,
+// ...)) against the foreign weapon carrying our modelDef -- and vanilla's own
+// pistol chain is literally PISG A -> PISG B. So a foreign weapon could
+// resolve our out-of-range row by accident and the held weapon vanished for
+// that rendered frame.
+//
+// MSBL is a name no mod uses. A MODELDEF FrameIndex row is a hard parse error
+// if its sprite name does not already exist, and GetSpriteIndex only registers
+// a name it has seen in a STATE -- so this class exists for no other reason
+// than to declare that state. It is never spawned.
+
+
+#include "zscript/RS_ForeignFork.zs"
+#include "zscript/RS_ForeignPersist.zs"
+#include "zscript/RS_ForeignAnim.zs"
+#include "zscript/RS_ForeignRemap.zs"
+#include "zscript/RS_ForeignModels.zs"
+#include "zscript/RS_ForeignArchetypeService.zs"
+#include "zscript/RS_ForeignModelsMenu.zs"
+#include "zscript/RS_ForeignWorldModels.zs"
+#include "zscript/RS_ForeignEffects.zs"
+#include "zscript/RS_ForeignDebug.zs"
+
 // ===========================================================================
 // QUEST BUILD ONLY. build.ps1 -Static ships this file in place of the root
 // zscript.txt. The part above this line is a COPY of the root zscript.txt and
