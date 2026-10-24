@@ -1,0 +1,22 @@
+weapon MS_Machinegun
+  archetype   shotgun_pump        # owner-confirmed
+  model       Machinegun.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 0  rest [1.07, -0.32, -9.34]  axis [0.984, 0.0, 0.18]  travel 0.35  frames -..-  rot 19deg axis [0.0, -1.0, -0.0]
+    trigger2 surf 2  rest [-2.19, -0.31, -9.25]  axis [-0.931, 0.0, 0.366]  travel 0.48  frames -..-  rot 20deg axis [0.0, 1.0, 0.0]
+    slide    surf 3  rest [17.79, -0.27, -6.81]  axis [1.0, 0.0, 0.0]  travel 9.50  frames 19..35
+    trigger3 surf 4  rest [-18.45, -0.24, -6.65]  axis [-1.0, 0.0, 0.0]  travel 0.59  frames 5..6
+    muzzle    [44.23, 0.41, 5.02]
+  grip        line [-0.66, 0.11, -8.34] [-7.39, -1.5, -13.25]  trigger [1.07, -0.32, -9.34]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [-0.62, 0.11, 2.83]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..2
+    idle         3..4
+    fire         5..7
+    idle         8..10
+    fire         11..13
+    idle         14..17
+    fire         18..35
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 16748

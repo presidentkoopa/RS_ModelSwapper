@@ -1,0 +1,45 @@
+weapon MS_Cola_Revolver
+  archetype   pistol_mag        # owner-confirmed
+  model       revolver.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 1  rest [3.14, 0.3, -1.48]  axis [0.0, 0.639, -0.769]  travel 4.07  frames 31..42  rot 90deg axis [-1.0, -0.0, 0.0]
+    part2    surf 2  rest [-2.83, 0.0, 0.09]  axis [-0.948, 0.226, -0.223]  travel 19.76  frames 31..42  rot 90deg axis [-1.0, 0.0, 0.0]
+    part3    surf 3  rest [-6.39, 0.01, 0.08]  axis [-0.001, 0.711, -0.704]  travel 6.27  frames 31..42  rot 90deg axis [-1.0, 0.0, 0.0]
+    part4    surf 4  rest [-0.54, 0.0, 0.19]  axis [0.0, 0.712, -0.703]  travel 6.41  frames 31..42  rot 90deg axis [-1.0, -0.0, 0.0]
+    part5    surf 5  rest [-10.57, -0.05, 1.46]  axis [-0.999, -0.0, 0.044]  travel 1.91  frames 1..27  rot 30deg axis [-0.0, -1.0, -0.0]
+    trigger  surf 6  rest [-5.59, 0.02, -6.25]  axis [0.952, -0.0, 0.305]  travel 1.00  frames 1..29  rot 30deg axis [-0.0, -1.0, 0.0]
+    muzzle    [26.52, -2.02, 3.83]
+  grip        line [-15.53, 2.08, -5.44] [-12.8, 0.03, -16.16]  trigger [-5.59, 0.02, -6.25]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [9.68, -0.03, 0.08]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..5
+    fire         6..6
+    idle         7..7
+    fire         8..8
+    idle         9..10
+    fire         11..11
+    idle         12..12
+    fire         13..13
+    idle         14..15
+    fire         16..16
+    idle         17..17
+    fire         18..18
+    idle         19..20
+    fire         21..21
+    idle         22..22
+    fire         23..23
+    idle         24..25
+    fire         26..26
+    idle         27..27
+    fire         28..28
+    idle         29..35
+    lower        36..46
+    idle         47..54
+  baked_cant   frames 31..35 up to 41.2 deg   # psprite-era hand sway; removed in revolver_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 3345

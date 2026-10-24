@@ -1,0 +1,30 @@
+weapon MS_Pistol
+  archetype   pistol_mag        # owner-confirmed
+  model       pistolet.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [0.52, -0.11, 0.48]  axis [1.0, -0.0, 0.024]  travel 1.97  frames 0..31
+    mag      surf 1  rest [-3.27, -0.11, -5.65]  axis [-0.168, 0.0, -0.986]  travel 16.82  frames 0..31  rot 16deg axis [0.04, -1.0, 0.0]
+    round    surf 2  rest [-1.59, 9.21, -1.1]  axis [0.011, 0.873, -0.488]  travel 27.95  frames 0..31  rot 178deg axis [-0.1, -0.97, -0.21]
+    round2   surf 3  rest [-3.24, -0.11, 0.49]  axis [-0.125, 0.0, -0.992]  travel 22.90  frames 0..31  rot 85deg axis [0.83, -0.45, 0.33]
+    round3   surf 5  rest [-1.0, -0.11, -0.6]  axis [0.977, -0.0, -0.214]  travel 2.69  frames 0..31  rot 40deg axis [-0.0, -1.0, -0.0]
+  ports
+    chamber   [1.66, 0.23, -0.65]  frame 19
+    eject     [1.66, 1.77, -0.65]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    mag_well  [-3.27, -0.11, -5.65]  mouth [-4.33, -0.88, 0.69]  axis [-0.168, 0.0, -0.986]  travel_clear 16.82
+    muzzle    [12.19, 0.67, 4.06]
+  grip        line [-5.81, -0.11, 3.92] [-9.22, 1.16, 0.47]  trigger [-1.69, -0.09, 2.94]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [2.31, -0.09, 2.94]   # one-handed gun; placeholder
+  carve       mag round
+  phases
+    mag_in       0..1
+    idle         2..2
+    mag_out      3..3
+    mag_in       4..26
+    idle         27..28
+    mag_out      29..29
+    idle         30..30
+    mag_out      31..31
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 704
+  carved      mag  seat_origin [-3.27, -0.11, -5.65]  file pistolet_mag.md3
+  carved      round  seat_origin [-1.59, 9.21, -1.1]  file pistolet_round.md3

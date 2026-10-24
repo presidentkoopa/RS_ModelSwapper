@@ -1,0 +1,20 @@
+weapon MS_Beretta
+  archetype   revolver_topbreak        # owner-confirmed
+  model       Beretta.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [-7.08, -0.07, 3.06]  axis [-0.709, 0.0, -0.706]  travel 2.98  frames 1..14  rot 57deg axis [-0.0, -1.0, 0.0]
+    trigger  surf 1  rest [1.61, -0.08, -2.49]  axis [-0.95, -0.0, 0.313]  travel 1.25  frames 1..23  rot 41deg axis [0.0, 1.0, -0.0]
+    slide    surf 2  rest [1.14, 0.04, 2.88]  axis [-1.0, 0.0, 0.0]  travel 6.02  frames 3..23
+    muzzle    [16.66, 0.5, 3.69]
+  grip        line [-7.36, 0.16, -1.63] [-8.78, 0.0, -12.12]  trigger [1.61, -0.08, -2.49]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [3.48, -0.02, -1.85]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..7
+    idle         8..13
+    fire         14..20
+    idle         21..22
+    fire         23..23
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 3331
