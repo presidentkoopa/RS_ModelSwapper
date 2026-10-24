@@ -832,13 +832,30 @@ BUTT = [
     ('ASGBUTT', ["'AssaultShotgun'"], ['USAS', '2SAS', 'A12P'], 4, (20.0, 0.0, -2.6), (-1.7, 0.0, -6.0),
      'AssaultShotgun.md3 frame 4'),
     # 2026-10-24: the other stocked guns. The MP40 and the SMG rigid-fit their wm mesh at 0.0000,
-    # same as the four above. The MACHINEGUN and the MG42 do NOT -- residual 11.26 and 24.26, and
-    # the MG42 resolves a 3-frame mesh that is plainly not the Buzzsaw -- so they are left out
-    # rather than guessed. They both have stocks and are the obvious next two once that is sorted.
+    # same as the four above.
     ('MP40BUTT', ["'MP40'"], ['MP40', 'MP42', 'PP40'], 2, (24.8, 0.2, -3.1), (-1.2, 0.0, -3.5),
      'MP40.md3 frame 2'),
     ('SMGBUTT', ["'BrutalSMG'"], ['SMGF', 'SMGR', 'VSMG'], 3, (18.6, -0.3, -1.2), (0.6, 0.0, -10.4),
      'BrutalSMG.md3 frame 3'),
+    # THE MACHINEGUN, and why it took a second pass. Its fit came out at 11.26 where everyone
+    # else's was 0.0000 and I called that "the lookup is finding the wrong model". It is the right
+    # model: the fit stacks every surface's vertices in order and calls the correspondence
+    # identity, and this pair SPLITS THE MESH DIFFERENTLY --
+    #     Machinegun.md3     6 surfaces [104, 1014, 106, 3470, 58, 11996]
+    #     machinegun_wm.md3  7 surfaces [104, 1014, 106, 3470, 58, 415, 11581]
+    # 16748 either way, so the stack is the same length and nothing complained, but the body is not
+    # in the same order and one rigid transform over the lot is least-squares nonsense. Fitting
+    # only the five surfaces that correspond one for one gives frame 4 at residual 0.0000, and
+    # MODELDEF.bd.txt says the same thing independently: `FrameIndex MGN1 A 0 4`, MGN1 A being the
+    # sprite this gun's Ready state holds. One sprite, not three: it is BD21's and has no dual.
+    # The butt is measured off `M249_lowpoly` ALONE -- the model carries an `alt-` block of 4694
+    # vertices about 40 units below the gun, and a span taken over everything measures the pair.
+    ('MGBUTT', ["'Machinegun'"], ['MGN1'], 4, (20.1, 0.0, 4.3), (-1.4, 0.0, 2.0),
+     'Machinegun.md3 frame 4, surface M249_lowpoly'),
+    # THE MG42 IS STILL OUT. HitlersBuzzsaw.md3 is [18912, 60] against buzzsaw_wm.md3's
+    # [3059, 15853, 60]: no surface corresponds, and the one 60-vertex part that does is a
+    # 2.4 x 0.8 x 3.2 sliver whose rigid fit is degenerate (the body lands 24 units out under it).
+    # There is no frame to find until that mesh is matched some other way, so it is not guessed.
 ]
 
 

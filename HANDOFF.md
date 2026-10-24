@@ -249,8 +249,14 @@ idle sprite, read off the MODELDEF lines pointing at that frame — never the sh
 | AssaultShotgun | USAS / 2SAS / A12P | 4 | 20.0, 0.0, −2.6 | −1.7, 0.0, −6.0 |
 | MP40 | MP40 / MP42 / PP40 | 2 | 24.8, 0.2, −3.1 | −1.2, 0.0, −3.5 |
 | BrutalSMG | SMGF / SMGR / VSMG | 3 | 18.6, −0.3, −1.2 | 0.6, 0.0, −10.4 |
+| Machinegun | MGN1 | 4 | 20.1, 0.0, 4.3 | −1.4, 0.0, 2.0 |
 
-**The Machinegun and the MG42 are still out, and the reason I gave was wrong.** I wrote that their
+Seven. The Machinegun is one sprite, not three — it is BD21's and has no dual — and its butt is
+measured off `M249_lowpoly` **alone**, because the model carries an `alt-` block of 4694 vertices
+about 40 units below the gun and a span over everything measures the pair, not the gun. Its
+segment is 21.6, inside the other six's 13.3–26.0.
+
+**The MG42 is still out, and the reason I first gave was wrong.** I wrote that their
 fit (residual 11.26 and 24.26 against everyone else's 0.0000) meant "the lookup is finding the
 wrong model". It is the right model. The fit stacks every surface's vertices in order and calls the
 correspondence identity, and **these two files split the mesh differently from REMA's**:
@@ -264,9 +270,17 @@ Same total either way — 16748 and 18972 — so the stack is the same length an
 but the body's vertices are not in the same order and one rigid transform over the lot is
 least-squares nonsense. Fit only the surfaces that correspond one for one and the Machinegun
 answers: **ready frame 4, residual 0.0000** on its 4752 matching vertices (frame 3, the old answer,
-was never right). Its butt strike is unblocked and only wants the in/out pair measured off frame 4.
+was never right), and `MODELDEF.bd.txt` says the same thing independently — `FrameIndex MGN1 A 0 4`,
+MGN1 A being the sprite the gun's Ready state holds. Its butt strike is in, above.
+
 The MG42 has nothing to fit on — no surface corresponds, and the one 60-vertex part that does is a
-2.4 × 0.8 × 3.2 sliver whose fit is degenerate (the body lands 24 units out under it).
+2.4 × 0.8 × 3.2 sliver whose fit is degenerate (the body lands 24 units out under it). It needs its
+mesh matched some other way (a correspondence found by position rather than assumed by order)
+before it can have either a ready frame or a butt strike.
+
+**None of the seven can be gated.** `RSM_Melee.Tick` returns at `!RSVR_VRHand.InVR(mo)`, so a
+headless run with `vr_mode 0` never reaches a line of it; the gate proves they compile and that
+nothing faults, and the headset is what proves they swing.
 
 **`god` is now the first thing `gate/bd22_gate.sh` does** (owner, 2026-10-24). A gate that dies
 partway still prints GATE_DONE and still exits 0 — the quit at the end runs either way — it just
@@ -381,8 +395,8 @@ Stages `recoil`, `impacts` and `bullet`, all after `butt`. **The owner's yes was
 4. **Impact character.** Only a strength multiplier crossed. RS_Ballistics' 572 impact blocks decide
    what a 9mm does to metal versus wood versus glass; none of that came, and it cannot come as
    written — bursts resolve PARTICLEDEFS, a REMA renderer feature.
-5. **Butt strikes** exist on six long guns. The Machinegun is unblocked (ready frame 4) and wants
-   only its in/out pair; the MG42's mesh cannot be fitted at all.
+5. **Butt strikes** exist on seven long guns. Only the MG42 is left, and its mesh cannot be fitted
+   at all until a correspondence is found by position rather than assumed by vertex order.
 6. **The slug revolver has no hand-fit sheet.** The Machinegun got one.
 7. **The melee doc's §9 architecture** — the netevent pose-history spine it calls the single
    highest-leverage thing in the three codebases. `melee.zs` was extended instead, so its snap-turn

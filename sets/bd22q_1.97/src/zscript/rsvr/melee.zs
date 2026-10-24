@@ -148,6 +148,7 @@ class RSVR_Hand play
 	const ASGBUTT = 8;
 	const MP40BUTT = 9;
 	const SMGBUTT = 10;
+	const MGBUTT = 11;
 
 	// swing speed (m/s at the blade's outer point, relative to the player's own
 	// movement) that counts as a blow, and the slowest release that throws
@@ -247,6 +248,7 @@ class RSVR_Hand play
 	transient SpriteID sSMGF;
 	transient SpriteID sSMGR;
 	transient SpriteID sVSMG;
+	transient SpriteID sMGN1;
 	transient SpriteID sPIST;
 	transient SpriteID s2IST;
 	transient SpriteID sREVO;
@@ -278,6 +280,8 @@ class RSVR_Hand play
 			return (24.8, 0.2, -3.1);	// 1.97: MP40.md3 frame 2, toward the muzzle
 		if (k == SMGBUTT)
 			return (18.6, -0.3, -1.2);	// 1.97: BrutalSMG.md3 frame 3, toward the muzzle
+		if (k == MGBUTT)
+			return (20.1, 0.0, 4.3);	// 1.97: Machinegun.md3 frame 4, surface M249_lowpoly, toward the muzzle
 		if (k == PISTOL)
 			return (26.2, 0.0, -7.0);	// 1.97: BrutalPistol.md3 frame 3, just forward of the hand
 		if (k == REVOLVER)
@@ -301,6 +305,8 @@ class RSVR_Hand play
 			return (-1.2, 0.0, -3.5);	// 1.97: MP40.md3 frame 2, the butt
 		if (k == SMGBUTT)
 			return (0.6, 0.0, -10.4);	// 1.97: BrutalSMG.md3 frame 3, the butt
+		if (k == MGBUTT)
+			return (-1.4, 0.0, 2.0);	// 1.97: Machinegun.md3 frame 4, surface M249_lowpoly, the butt
 		if (k == PISTOL)
 			return (44.2, 0.0, -0.2);	// 1.97: BrutalPistol.md3 frame 3, the muzzle
 		if (k == REVOLVER)
@@ -335,6 +341,7 @@ class RSVR_Hand play
 		sSMGF = Actor.GetSpriteIndex('SMGF');
 		sSMGR = Actor.GetSpriteIndex('SMGR');
 		sVSMG = Actor.GetSpriteIndex('VSMG');
+		sMGN1 = Actor.GetSpriteIndex('MGN1');
 		sPIST = Actor.GetSpriteIndex('PIST');
 		s2IST = Actor.GetSpriteIndex('2IST');
 		sREVO = Actor.GetSpriteIndex('REVO');
@@ -373,6 +380,8 @@ class RSVR_Hand play
 				return MP40BUTT;
 			if (n == 'BrutalSMG')
 				return SMGBUTT;
+			if (n == 'Machinegun')
+				return MGBUTT;
 		}
 		if (n == 'BrutalPistol')
 			return PISTOL;
@@ -405,6 +414,8 @@ class RSVR_Hand play
 			return s == sMP40 || s == sMP42 || s == sPP40;
 		if (k == SMGBUTT)
 			return s == sSMGF || s == sSMGR || s == sVSMG;
+		if (k == MGBUTT)
+			return s == sMGN1;
 		if (k == PISTOL)
 			return s == sPIST || s == s2IST;
 		if (k == REVOLVER)
@@ -526,7 +537,7 @@ class RSVR_Hand play
 			return;
 		}
 
-		bool isButt = k == RIFLEBUTT || k == SGBUTT || k == SSGBUTT || k == ASGBUTT || k == MP40BUTT || k == SMGBUTT;
+		bool isButt = k == RIFLEBUTT || k == SGBUTT || k == SSGBUTT || k == ASGBUTT || k == MP40BUTT || k == SMGBUTT || k == MGBUTT;
 		double thr = (k == AXE ? AXE_SWING : k == SWORD ? SWORD_SWING
 			: isButt ? BUTT_SWING : WHIP_SWING) * vu / 35.
 			* max(0.2, Cv(mo, 'rsvr_melee_swing', 1.0));
