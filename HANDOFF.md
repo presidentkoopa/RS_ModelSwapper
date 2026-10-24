@@ -111,3 +111,9 @@ Regenerating is: `python3 tools/bd22_plus.py geometry && python3 tools/bd22_plus
 
 ## Known failure already fixed (so nobody re-learns it)
 `counters.zs` called `RSR.WantsHands`; the function lives on `RSR_ReloadHandler`. The first pk3 handed to the owner had this and died at script parse. Lesson for every ZScript addition: grep the class a static lives in; then run the gate before anything leaves the repo.
+
+## What the depot's tools do NOT do (owner, 04:32)
+They go card → Quest pack. **Model → card** (measuring a new mesh into a WMCARD: surfaces, slide axes
+and travel, hinges, grab points, palm/support) is REMA's card pipeline in the owner's RS_VR_Weapons
+repo (`CardPipeline/`, HQT, `set.py`). Every new gun with no REMA card needs that first. The plan's
+foundation line "one toolset: HQT (parts/axes/travel/islands)" is that work, and it is not done here.
