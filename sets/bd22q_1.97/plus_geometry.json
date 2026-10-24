@@ -2,7 +2,7 @@
  "MG42": {
   "cls": "MG42",
   "card": "BD_Buzzsaw",
-  "carved": "/home/claude/c2q/build/bd22/models/HitlersBuzzsaw_rsr.md3",
+  "carved": "E:/DOOMWork/_buildtemp/rsq_bd22/models/HitlersBuzzsaw_rsr.md3",
   "surfaces": [
    [
     "body",
@@ -82,7 +82,7 @@
  "Flamethrower2": {
   "cls": "Flamethrower2",
   "card": "BD_Flamethrower",
-  "carved": "/home/claude/c2q/build/bd22/models/Flamethrower2_rsr.md3",
+  "carved": "E:/DOOMWork/_buildtemp/rsq_bd22/models/Flamethrower2_rsr.md3",
   "surfaces": [
    [
     "body",
@@ -167,7 +167,7 @@
  "Unmaker": {
   "cls": "Unmaker",
   "card": "BD_Unmaker",
-  "carved": "/home/claude/c2q/build/bd22/models/Unmaker_rsr.md3",
+  "carved": "E:/DOOMWork/_buildtemp/rsq_bd22/models/Unmaker_rsr.md3",
   "surfaces": [
    [
     "body",
@@ -195,16 +195,16 @@
    "parts": {
     "magazine": {
      "well_point": [
-      11.814,
-      1.253,
-      12.28
+      11.788,
+      0.614,
+      12.329
      ],
      "insert_dir": [
       -0.0,
       0.0,
       -1.0
      ],
-     "insert_depth_cm": 4.66,
+     "insert_depth_cm": 4.61,
      "base_point": [
       13.35,
       -0.089,

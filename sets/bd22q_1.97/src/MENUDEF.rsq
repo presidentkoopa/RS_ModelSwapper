@@ -61,13 +61,17 @@ OptionMenu "RSQ_Options"
 	Option "VR Hands", "rsq_hands", "OnOff"
 	Option "Reloading", "rsr_reload", "RSR_ReloadMode"
 	Option "Grab ammo with", "rsr_grab_with", "RSR_GrabWith"
+	Option "New magazine from", "rsr_pouch", "RSR_Pouch"
 	Option "Check the Chamber by Hand", "rsr_freecharge", "OnOff"
 	Option "Shotgun Shells Per Insert", "rsr_shell_credit", "RSR_ShellCredit"
+	Slider "Reload assist", "rsr_assist", 0.5, 3.0, 0.1
 	Option "Pistol Semi Auto", "rsa_pistol_semi", "OnOff"
 	Option "Shotgun Slugshot Alt Fire", "rsa_sg_slug", "OnOff"
 	Option "Shotvolver Slugshot Alt Fire", "rsa_rev_magnum", "OnOff"
+	Option "Shot/Revolver Reload", "rsb_revolver_feed", "RSB_RevFeed"
 	Option "Rifle Underbarrel Ammo", "rsm_ammo", "RSM_Ammo"
 	Option "Machinegun replaces MG42", "rsq_mg_replaces_mg42", "OnOff"
+	Option "Slug revolver replaces Shotvolver", "rsq_slug_replaces_shotvolver", "OnOff"
 	Option "Sniper Scope", "rsq_scope_sniper", "RSQ_ScopeMode"
 	Option "Railgun Scope", "rsq_scope_railgun", "RSQ_ScopeMode"
 	Option "Ballistics", "rsq_ballistics", "RSQ_Ballistics"
@@ -80,8 +84,11 @@ OptionMenu "RSQ_Options"
 	Option "VR Throwing", "rsg_vr", "OnOff"
 	Option "VR Punching", "rsq_punch", "OnOff"
 	Option "Punch Switches Open", "rsq_punch_use", "OnOff"
+	Slider "Melee swing strength", "rsvr_melee_swing", 0.2, 3.0, 0.1
 	StaticText " "
 	Option "Extra weapons with cheats", "rsq_extra_weapons", "OnOff"
+	StaticText " "
+	Submenu "Reload: tuning and debug", "RSR_Debug"
 }
 
 OptionMenu "RSR_Debug"
@@ -96,4 +103,10 @@ OptionValue "RSM_Ammo"
 {
 	0, "Rockets"
 	1, "Hand grenades"
+}
+
+OptionValue "RSB_RevFeed"
+{
+	0, "Speedloader"
+	1, "Per Round"
 }

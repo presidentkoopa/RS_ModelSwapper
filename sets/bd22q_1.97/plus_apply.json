@@ -34,7 +34,18 @@
    "MagLen": 3,
    "Mouth": 3,
    "Axis": 3,
-   "Well": 3
+   "Well": 3,
+   "sprites": [
+    "RQXM",
+    "RQXP",
+    "RQXW",
+    "RQYM",
+    "RQYP",
+    "RQYW",
+    "RQWM",
+    "RQWP",
+    "RQWW"
+   ]
   },
   "functions_new_only": []
  },

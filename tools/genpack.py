@@ -15,7 +15,7 @@ import sys, os, re, json, glob, shutil, zipfile, struct
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-sys.path.insert(0, '/mnt/user-data/uploads/Quest_Weapons_Kit/kit/kit/team/reload_merged/tools')   # gen_rsr, rgeo (kit, unmodified)
+sys.path.insert(0, os.path.join(HERE, 'kit'))   # gen_rsr, rgeo (kit, unmodified)
 import card2quest as c2q
 import gen_rsr, rgeo
 

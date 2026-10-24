@@ -215,14 +215,14 @@ class RSM_State play
 				grabS = palm.x;
 				np = 0;
 			}
-			else if (np > RSM_Geo.Travel(gun))
+			else if (np > RSM_Geo.TravelOf(gun))
 			{
-				grabS = palm.x - RSM_Geo.Travel(gun);
-				np = RSM_Geo.Travel(gun);
+				grabS = palm.x - RSM_Geo.TravelOf(gun);
+				np = RSM_Geo.TravelOf(gun);
 			}
 			pull = np;
 		}
-		if (!isOpen && pull >= RSM.OPEN_FRAC * RSM_Geo.Travel(gun))
+		if (!isOpen && pull >= RSM.OPEN_FRAC * RSM_Geo.TravelOf(gun))
 		{
 			isOpen = true;
 			Snd(mo, "GrenadeLauncher/Open");
@@ -234,7 +234,7 @@ class RSM_State play
 			}
 			Log(mo, "open");
 		}
-		if (isOpen && pull <= RSM.SHUT_FRAC * RSM_Geo.Travel(gun))
+		if (isOpen && pull <= RSM.SHUT_FRAC * RSM_Geo.TravelOf(gun))
 		{
 			pull = 0;
 			isOpen = held = unlatched = false;
@@ -511,13 +511,13 @@ class RSK_M203Handler : EventHandler
 			return t, r;
 		double pl = s.pullPrev + (s.pull - s.pullPrev) * ticfrac;
 		if (layer == RSM.TUBE)
-			return t + RSM_Geo.FwdHook(gun) * pl, r;
+			return t + RSM_Geo.FwdHook(s.gun) * pl, r;
 		if (s.hand == RSM.INSERT)
 		{
 			double rv = s.rrPrev + (s.rr - s.rrPrev) * ticfrac;
-			return t + RSM_Geo.FwdHook(gun) * (rv - RSM_Geo.TubeRear(gun) - RSM_Geo.RoundSeat(gun)), r;
+			return t + RSM_Geo.FwdHook(s.gun) * (rv - RSM_Geo.TubeRear(s.gun) - RSM_Geo.RoundSeat(s.gun)), r;
 		}
-		return t + RSM_Geo.FwdHook(gun) * pl, r;
+		return t + RSM_Geo.FwdHook(s.gun) * pl, r;
 	}
 
 	// 2026-10-23 (owner): a new map starts clean. Level.maptime restarts at 0, so anything

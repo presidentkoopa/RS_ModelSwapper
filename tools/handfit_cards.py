@@ -17,13 +17,13 @@ import numpy as np
 from scipy.spatial import cKDTree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KIT = '/mnt/user-data/uploads/Quest_Weapons_Kit/kit/kit/tool/hands'
+KIT = os.path.join(HERE, 'kit')                                   # gunview, hudrender, gripregions.json
 sys.path.insert(0, HERE)
 sys.path.insert(0, KIT)
 import gunview, hudrender                      # kit, unmodified
 import card2quest as c2q, genpack
 
-ERMAC = '/mnt/user-data/uploads/Quest_Weapons_Kit/hands/ermac_original'   # the 211 / 196-frame originals the regions were measured on
+ERMAC = 'E:/DOOMWork/_assets_safe/hands/ermac'   # the 211 / 196-frame originals the regions were measured on (verified: hand.md3 211, hand2.md3 196)
 PL = dict(scale=[-1.0, 1.0, 1.0], off=[0.0, -24.0, -10.0])                # Ermac's placement (ermac.PL)
 REGIONS = json.load(open(KIT + '/gripregions.json'))['poses']
 
