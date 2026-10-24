@@ -55,7 +55,7 @@ Out of VR, or with these turned off, Brutal Doom's own melee is untouched.
 
 OPTIONS
 -------
-Options -> BD22 VR Weapons. 30 rows, including Reloading (VR or Stock), what grabs the
+Options -> BD22 VR Weapons. 31 rows, including Reloading (VR or Stock), what grabs the
 ammo, where a new magazine comes from, reload assist, the per-gun scopes, the dual-wield and
 voxel pages, and "Reload: tuning and debug" for the capture zones and a step-by-step print.
 

@@ -11,7 +11,12 @@ LOG=gate/bd22_197.log
 # because the quit at the end runs either way -- it just stops firing and reloading anything. The
 # run passes while testing nothing, and nothing in the log says so.
 cmd="wait 40; god; echo GATE_START; give MG42; give Flamethrower2; give Unmaker; give Machinegun; give Clip2 200; give Gas 200; give SoulAmmo 60; give AmmoRocket 5; wait 5; use Machinegun; wait 10; echo GATE_FIRE; +attack; wait 15; -attack; wait 5; +altattack; wait 3; -altattack; wait 10; +reload; wait 3; -reload; wait 40; use MG42; wait 10; +attack; wait 15; -attack; wait 5; +reload; wait 3; -reload; wait 20; use Flamethrower2; wait 10; +attack; wait 15; -attack; wait 5; +reload; wait 3; -reload; wait 20; use Unmaker; wait 10; +attack; wait 15; -attack; wait 5; +reload; wait 3; -reload; wait 20; echo GATE_DONE; quit"
-cd "$QZD" && HOME=$(dirname "$LOG") LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe timeout 420 xvfb-run -a -s "-screen 0 1024x768x24 +extension GLX" stdbuf -oL -eL ./qzdoom -iwad "$IWAD" -file "$BD22" "$VOX" "$PK3" -nosound -nomusic +vr_mode 0 +vid_preferbackend 0 -width 640 -height 480 -warp 1 +"$cmd" -stdout > "$LOG" 2>&1
+# +logfile, not just the redirect. A FATAL script error does NOT reach the redirected stream --
+# it cost three diagnoses in one session: "Unknown sprite RQXM", "cvar already exists" and
+# "Unexpected 'version'" all showed a clean-looking log that simply stopped, and the owner had to
+# paste the real error each time. The engine's own logfile catches them.
+cd "$QZD" && HOME=$(dirname "$LOG") LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe timeout 420 xvfb-run -a -s "-screen 0 1024x768x24 +extension GLX" stdbuf -oL -eL ./qzdoom -iwad "$IWAD" -file "$BD22" "$VOX" "$PK3" -nosound -nomusic +logfile "$LOG.engine" +vid_fullscreen 0 +vr_mode 0 +vid_preferbackend 0 -width 640 -height 480 -warp 1 +"$cmd" -stdout > "$LOG" 2>&1
+grep -n -i "script error\|execution could not\|already exists\|unexpected" "$LOG.engine" 2>/dev/null | grep -vi "voxeldef" | head
 echo "exit $?"
 grep -n -i "script error\|GATE_\|execution could not\|abort\|crash\|errors,\|VM execution\|Tried to\|Unknown\|not found\|invalid" "$LOG" | grep -v "FindModel\|Deh_Actor\|REGT\|BrutalWeapon\|limbs.dec\|aaliens\|eeevilll\|BDMummy\|Crush from actor Actor\|BBled1\|BrutalNightmareDemon"
 # On Windows (the owner's PC): same -file order in ZDL; read the log for the same strings.

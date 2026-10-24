@@ -33,3 +33,7 @@ user int rsq_bash_tint = 0;		// recolours the RSH0 flash only; 0 is the art as d
 user int rsq_butt = 0;
 user float rsvr_butt_fwd = 0.5;		// of the butt's speed that must point forward
 user float rsvr_butt_lead = 1.3;	// how much faster the butt must be than the muzzle
+
+// 1.97 F5: per-gun recoil. Its own row, not the ballistics dial -- this costs one
+// float a tic, the effects cost a frame budget, and they are not the same decision.
+user int rsq_recoil = 1;

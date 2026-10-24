@@ -1,0 +1,362 @@
+{
+ "guns": 22,
+ "skipped": [
+  "BrutalAxe (BD_Axe): profile \"none\"",
+  "DSweap (BD_Dragonslayer): profile \"none\"",
+  "HandGrenades (BD_Grenade): profile \"none\""
+ ],
+ "table": {
+  "BrutalPistol": {
+   "profile": "pistol_9mm",
+   "rise": 6.0,
+   "tics": 7,
+   "climb": 1.62,
+   "max": [
+    6.6,
+    2.0
+   ],
+   "recover": [
+    12.0,
+    6.0
+   ],
+   "dropped_roll": 1.5,
+   "dropped_back": 1.2
+  },
+  "Revolver": {
+   "profile": "revolver",
+   "rise": 7.0,
+   "tics": 8,
+   "climb": 2.57,
+   "max": [
+    8.7,
+    3.0
+   ],
+   "recover": [
+    16.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 2.2
+  },
+  "Shot_Gun": {
+   "profile": "shotgun_doom",
+   "rise": 15.0,
+   "tics": 15,
+   "climb": 3.19,
+   "max": [
+    9.0,
+    3.0
+   ],
+   "recover": [
+    6.0,
+    4.0
+   ],
+   "dropped_roll": 4.0,
+   "dropped_back": 3.8
+  },
+  "SSG": {
+   "profile": "shotgun_ssg",
+   "rise": 22.0,
+   "tics": 18,
+   "climb": 4.2,
+   "max": [
+    9.0,
+    4.0
+   ],
+   "recover": [
+    8.0,
+    6.0
+   ],
+   "dropped_roll": 5.0,
+   "dropped_back": 5.5
+  },
+  "MP40": {
+   "profile": "ww2_mp40",
+   "rise": 4.0,
+   "tics": 6,
+   "climb": 0.35,
+   "max": [
+    4.0,
+    2.0
+   ],
+   "recover": [
+    21.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.2
+  },
+  "GrenadeLauncher": {
+   "profile": "rocket",
+   "rise": 5.0,
+   "tics": 8,
+   "climb": 1.1,
+   "max": [
+    5.4,
+    3.0
+   ],
+   "recover": [
+    12.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.5
+  },
+  "FlameCannon": {
+   "profile": "flamer_heavy",
+   "rise": 5.0,
+   "tics": 7,
+   "climb": 0.2,
+   "max": [
+    5.2,
+    3.2
+   ],
+   "recover": [
+    24.0,
+    7.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.2
+  },
+  "HellishMissileLauncher": {
+   "profile": "rocket",
+   "rise": 5.0,
+   "tics": 8,
+   "climb": 1.1,
+   "max": [
+    5.4,
+    3.0
+   ],
+   "recover": [
+    12.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.5
+  },
+  "MG42": {
+   "profile": "ww2_mg42",
+   "rise": 4.0,
+   "tics": 6,
+   "climb": 0.27,
+   "max": [
+    4.0,
+    2.0
+   ],
+   "recover": [
+    18.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.1
+  },
+  "Chain_saw": {
+   "profile": "chainsaw",
+   "rise": 4.0,
+   "tics": 8,
+   "climb": 0.1,
+   "max": [
+    3.5,
+    3.0
+   ],
+   "recover": [
+    10.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.0
+  },
+  "AssaultShotgun": {
+   "profile": "shotgun_assault",
+   "rise": 7.0,
+   "tics": 8,
+   "climb": 2.06,
+   "max": [
+    7.5,
+    3.0
+   ],
+   "recover": [
+    16.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 2.0
+  },
+  "BIG_FUCKING_GUN": {
+   "profile": "bfg_9000",
+   "rise": 8.0,
+   "tics": 8,
+   "climb": 2.8,
+   "max": [
+    8.0,
+    3.0
+   ],
+   "recover": [
+    26.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 2.3
+  },
+  "BFG10k": {
+   "profile": "bfg_heavy",
+   "rise": 8.0,
+   "tics": 8,
+   "climb": 3.0,
+   "max": [
+    8.0,
+    3.0
+   ],
+   "recover": [
+    28.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 2.4
+  },
+  "BrutalSMG": {
+   "profile": "smg",
+   "rise": 4.0,
+   "tics": 8,
+   "climb": 0.44,
+   "max": [
+    4.0,
+    3.0
+   ],
+   "recover": [
+    16.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.2
+  },
+  "Flamethrower2": {
+   "profile": "ww2_flame",
+   "rise": 4.0,
+   "tics": 6,
+   "climb": 0.18,
+   "max": [
+    5.0,
+    3.0
+   ],
+   "recover": [
+    22.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.1
+  },
+  "Machinegun": {
+   "profile": "machinegun_762",
+   "rise": 2.5,
+   "tics": 5,
+   "climb": 0.24,
+   "max": [
+    3.5,
+    2.0
+   ],
+   "recover": [
+    4.0,
+    6.0
+   ],
+   "dropped_roll": 1.2,
+   "dropped_back": 1.0
+  },
+  "Minigun": {
+   "profile": "chaingun_556",
+   "rise": 1.5,
+   "tics": 4,
+   "climb": 0.08,
+   "max": [
+    3.2,
+    1.5
+   ],
+   "recover": [
+    4.0,
+    6.0
+   ],
+   "dropped_roll": 0.8,
+   "dropped_back": 0.6
+  },
+  "Plasma_Gun": {
+   "profile": "plasma_rifle",
+   "rise": 4.0,
+   "tics": 8,
+   "climb": 0.32,
+   "max": [
+    4.2,
+    3.0
+   ],
+   "recover": [
+    12.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.1
+  },
+  "Rocket_Launcher": {
+   "profile": "rocket_rpg",
+   "rise": 3.0,
+   "tics": 12,
+   "climb": 1.0,
+   "max": [
+    5.2,
+    0.0
+   ],
+   "recover": [
+    8.0,
+    4.0
+   ],
+   "dropped_roll": 0.5,
+   "dropped_back": 1.5
+  },
+  "RailGun": {
+   "profile": "rail",
+   "rise": 7.0,
+   "tics": 8,
+   "climb": 2.2,
+   "max": [
+    7.0,
+    3.0
+   ],
+   "recover": [
+    22.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 2.0
+  },
+  "Rifle": {
+   "profile": "rifle",
+   "rise": 5.0,
+   "tics": 8,
+   "climb": 0.94,
+   "max": [
+    5.1,
+    3.0
+   ],
+   "recover": [
+    16.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.4
+  },
+  "Unmaker": {
+   "profile": "unmaker",
+   "rise": 4.0,
+   "tics": 8,
+   "climb": 0.06,
+   "max": [
+    3.0,
+    3.0
+   ],
+   "recover": [
+    8.0,
+    6.0
+   ],
+   "dropped_roll": 1.0,
+   "dropped_back": 1.0
+  }
+ }
+}
