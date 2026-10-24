@@ -29,9 +29,7 @@ per-gun checklist below, in a headset, signed by the owner.
 - S2  Modern: player class, every Doom drop/pickup → a modern gun, start Glock.
 - S3  BW_Quest (Brutal Wolfenstein; E:\DOOMWork\BW_Quest; parent mod from the owner).
 - S4  Aliens, Meatgrinder, survivors of the discarded sets whose parent the owner keeps (re-measure or ditch).
-      Aliens source is IN the repo as of 2026-10-24 (owner's instruction): `sets/aliens/src/` =
-      presidentkoopa/RS_Aliens_VR-WeaponsQ @ 1ee0cd2, verbatim. Importing it is not building it —
-      the six "Per set" steps below are all still owed. `sets/aliens/PROVENANCE.txt` lists them.
+      `sets/aliens/` = presidentkoopa/RS_Aliens_VR-WeaponsQ @ 1ee0cd2, verbatim (owner, 2026-10-24).
 - P   Plus pass per set (menu-row extras), only after that set stands.
 
 ## Per set
