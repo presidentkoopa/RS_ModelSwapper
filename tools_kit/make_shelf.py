@@ -76,7 +76,7 @@ def one(field, text, default=None):
     return m.group(1).strip() if m else default
 
 
-blocks, rows, unknown = [], [], []
+blocks, rows, unknown, notmd3 = [], [], [], []
 for path in [a for a in sys.argv[1:] if not a.startswith('--')]:
     text = open(path, encoding='utf-8', errors='replace').read()
     for b in BLOCK.findall(text):
@@ -92,6 +92,14 @@ for path in [a for a in sys.argv[1:] if not a.startswith('--')]:
             continue
         md3 = os.path.join(mpath, mfile)
         if not os.path.exists(md3):
+            continue
+        # These packages are not all MD3. Breach is the IQM showcase and a few
+        # others declare MD2, and read_md3 does not crash politely on either --
+        # it reads the header as MD3 and asks struct for a buffer of 1.6GB. The
+        # shelf needs a real frame count, so anything that is not an MD3 is
+        # reported rather than guessed at.
+        if open(md3, 'rb').read(4) != b'IDP3':
+            notmd3.append((name, mfile))
             continue
         nframes = read_md3(md3)['nframes']
         fi = FI.findall(b)
