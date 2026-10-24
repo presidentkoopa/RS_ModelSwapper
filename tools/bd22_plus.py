@@ -2182,6 +2182,7 @@ def revolver():
     open(mp, 'w').write(mt)
     log['option'] = 'rsb_revolver_feed (server, 0 = speedloader); menu row after the Shotvolver alt fire'
     log['slug'] = slug_revolver()
+    log['slug_hands'] = slug_hands()
     json.dump(log, open(OUT + 'rev_apply.json', 'w'), indent=1)
     with open(OUT + '.generated', 'a') as f:          # bd22_mg.py opened it; this stage runs last
         f.write('then tools/bd22_plus.py revolver\n')
@@ -2228,6 +2229,130 @@ def revolver():
 #       ejecta hull_12ga_magnum   "the Super Shotgun's hulls, dumped from an open breech"
 # so the Revolver, the Shotvolver and the SSG drop their cases down and back, slowly, instead of
 # flicking them out to the right.
+
+# ---------------------------------------------------------------------------------------------
+# F6 item 9: the Shotvolver's hands, and the bug the hand-fit sheet turned up.
+#
+# Revolver2 is NOT in RSQ_HandTable.Index, and `Revolver2 : BrutalWeapon` so `w is 'Revolver'`
+# does not catch it. It falls through to `return 0` -- index 0, the UNFITTED default. Its hands
+# have been wrong in VR since F2 built the gun, and nothing said so because nothing checks.
+#
+# It draws sprite REVO on the Revolver's own mesh and has no MODELDEF block of its own, so its
+# fit IS the Revolver's: index 17. That is a fact about the mesh, not a judgement.
+#
+# The sheet is for the owner to sign or reject. It renders that mesh at its ready frame with the
+# gun's own points carried off REMA's card by the rigid transform (residual 0.0000; MODELDEF
+# agrees -- `FrameIndex REVO A 0 0`). Note what it is NOT: the gun hand is FITTED FRESH to the
+# card's palm for the picture, because handtable stores a runtime hook rather than a mesh-space
+# placement. So the sheet shows where the card says the hand goes, not a readback of the shipped
+# hook. The support hand is drawn at the same point as the gun hand, which is not a shortcut --
+# row 17 carries GunHook and SupportHook as the IDENTICAL vector, because on a revolver the off
+# hand cups the shooting hand rather than the gun. handfit_cards.fit_support says the same thing
+# the hard way: "no gun surface at the support point". REMA's card says it in words, of the
+# pistol: "PALM AND SUPPORTAT ARE THE SAME POINT ON PURPOSE ... two hands on a pistol cup each
+# other on the handle's axis".
+SLUG_FRAME = 0
+SLUG_CARD = dict(palm=(-11.190, -0.104, -7.209), supportat=(-8.626, -0.104, -8.734),
+                 triggerat=(-2.827, 0.039, -5.580), muzzle=(13.226, -0.031, 2.960))
+
+
+def slug_hands():
+    """Revolver2 -> the Revolver's hand fit, plus the check sheet."""
+    import handfit_cards
+    import hudrender
+    import gunview
+    from PIL import Image
+    st = {}
+    mesh = OUT_SRC + 'models/bd/Revolver/Revolver.md3'
+    Rm, tv, mean, mx = rigid(REMA + 'models/bd22/revolver_wm.md3', mesh, SLUG_FRAME)
+    if mean > 0.05:
+        raise SystemExit('Revolver: the wm fit is %.4f, not ~0; the sheet would be drawn on the '
+                         'wrong geometry' % mean)
+    P = {k: (Rm @ np.array(v) + tv) for k, v in SLUG_CARD.items()}
+    _, surfs = genpack.md3_surfaces(mesh)
+    sh = [s for s in surfs if s['name'] == 'shells']
+    if len(sh) != 5:
+        raise SystemExit('Revolver: %d `shells` surfaces, expected 5 (one per chamber)' % len(sh))
+    cyl = np.vstack([np.asarray(s['xyz'][SLUG_FRAME], float).mean(0) for s in sh]).mean(0)
+
+    # the one line that matters
+    hz = OUT_SRC + 'zscript/rsq/handtable.zs'
+    t = open(hz).read()
+    old = "\t\tif (w is 'Revolver')\treturn 17;"
+    if t.count(old) != 1:
+        raise SystemExit('handtable.zs: the Revolver row is not there exactly once')
+    if "'Revolver2'" in t:
+        raise SystemExit('handtable.zs: Revolver2 is already in; this stage has run twice')
+    t = t.replace(old, old + "\n\t\tif (w is 'Revolver2')\treturn 17;"
+                  "\t// 1.97: the Shotvolver draws sprite REVO on this same mesh and has no"
+                  " MODELDEF of its own, so it is the Revolver's fit. Without this line it fell"
+                  " through to 0, the unfitted default.")
+    open(hz, 'w').write(t)
+    st['handtable'] = "Revolver2 -> 17 (was falling through to 0, unfitted)"
+
+    # the sheet
+    ht = open(hz).read()
+
+    def row_str(fn, i=17):
+        m = re.search(r'static String %s\(int i\)\n\t\{\n\t\tstatic const String v\[\] = \{(.*?)\};'
+                      % fn, ht, re.S)
+        return [x.strip().strip('"') for x in m.group(1).split(',')][i]
+
+    def row_vec(fn, i=17):
+        m = re.search(r'static Vector3 %s\(int i\)\n\t\{\n\t\tstatic const double x\[\] = \{(.*?)\};\n'
+                      r'\t\tstatic const double y\[\] = \{(.*?)\};\n'
+                      r'\t\tstatic const double z\[\] = \{(.*?)\};' % fn, ht, re.S)
+        return [float(g.split(',')[i]) for g in m.groups()]
+
+    it = dict(path=mesh, frame=SLUG_FRAME, scale=[-1.0, 1.0, 1.0], off=[0.0, 0.0, -5.0],
+              color=[150, 155, 170])
+    gun_pts = handfit_cards.surface_points(it)
+    two = [k for k, v in handfit_cards.GUN_LETTER.items() if v == row_str('GunTwo')][0]
+    sup = [k for k, v in handfit_cards.SUP_LETTER.items() if v == row_str('Support')][0]
+    tg, err, why = handfit_cards.fit_gun(gun_pts, P['palm'], 'hand:%d' % two)
+    if tg is None:
+        raise SystemExit('Revolver2 gun hand: ' + str(why))
+    hk, sk = row_vec('GunHook'), row_vec('SupportHook')
+    if hk != sk:
+        raise SystemExit('handtable 17: GunHook %s and SupportHook %s differ, so the off hand is '
+                         'NOT on the shooting hand and this sheet must fit it properly' % (hk, sk))
+    items = [it, handfit_cards.hand_item('hand', two, np.array(tg)),
+             handfit_cards.hand_item('hand2', sup, np.array(tg), color=(120, 200, 140))]
+
+    # gunview draws the MESH through hudrender.to_local -> to_fl (the controller frame, cm) but
+    # takes `marks` RAW. md3 units land nowhere near the gun.
+    def fl(p):
+        return tuple(gunview.to_fl(hudrender.to_local(np.array([p], float), it))[0])
+
+    marks = [(*fl(P['palm']), 'palm', (255, 200, 60)),
+             (*fl(P['supportat']), 'support', (120, 230, 140)),
+             (*fl(P['triggerat']), 'trigger', (255, 120, 120)),
+             (*fl(cyl), 'cylinder', (120, 160, 255)),
+             (*fl(P['muzzle']), 'muzzle', (230, 230, 230))]
+    os.makedirs(OUT + '_hands', exist_ok=True)
+    a, b = OUT + '_hands/Revolver2.side.png', OUT + '_hands/Revolver2.bottom.png'
+    gunview.view(items, a, 'side', px=5, marks=marks, title='Shotvolver (Revolver2) hands')
+    gunview.view(items, b, 'bottom', px=5, marks=marks, title='Shotvolver (Revolver2) hands')
+    A, B = Image.open(a), Image.open(b)
+    O = Image.new('RGB', (max(A.width, B.width), A.height + B.height))
+    O.paste(A, (0, 0))
+    O.paste(B, (0, A.height))
+    O.save(OUT + '_hands/Revolver2.png')
+    os.remove(a)
+    os.remove(b)
+    st['sheet'] = '_hands/Revolver2.png'
+    st['letters'] = dict(one=row_str('GunOne'), two=row_str('GunTwo'), sup=row_str('Support'),
+                         trig=row_str('Trigger'))
+    st['fit_err_cm'] = round(float(err), 2)
+    st['wm_fit'] = dict(mean=round(mean, 4), max=round(mx, 4), frame=SLUG_FRAME)
+    st['marks_cm'] = {lab: [round(x, 2) for x in m[:3]]
+                      for m in marks for lab in [m[3]]}
+    # the cylinder is also the casings port: two separate measurements that must agree
+    st['cross_check'] = ('the cylinder reads F %.2f cm here and the casings stage put the '
+                         'Revolver port at F 7.9 cm, measured independently'
+                         % fl(cyl)[0])
+    return st
+
 
 # How the case leaves, which is three different things and not two:
 #   SIDE  flicked out of a port in the receiver wall, to the gun's right. The default.
