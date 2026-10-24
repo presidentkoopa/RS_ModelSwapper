@@ -1528,10 +1528,35 @@ class RSQ_FlashHandler : EventHandler
 	Array<int> rad;
 	Array<int> col;
 	Array<int> len;
+	Array<String> tin;
+	Array<String> tex;
+	Array<double> tvol;
 
 	override void OnRegister()
 	{
 %(table)s	}
+
+	// THE TAIL: the room answering the shot, indoors or out. `rsb/tail/<set>` is not
+	// itself a sound -- only /int and /ext are -- so both names are resolved at build
+	// time and the one over the muzzle is picked here, the way RS_Ballistics picks it:
+	// on whether the ceiling at that point is sky. Three of the nine sets have no
+	// interior recording, and for those the generator has already put the exterior in
+	// both slots, so nothing here can name a sound that does not exist.
+	//
+	// ON THE PAWN, ONE CHANNEL, NO OVERLAP, deliberately. A held trigger would stack
+	// tails into mush; RS stops the previous through a SoundHandle, which this engine
+	// does not have (stock S_StartSoundAt returns void). A new sound on the same actor
+	// and channel replaces the old, which is the same behaviour by the only route there
+	// is. It costs the half metre between the pawn and the muzzle, on an echo.
+	static void Tail(PlayerPawn mo, String sin, String sex, double vol)
+	{
+		if (!mo || vol <= 0 || sin == "")
+			return;
+		Vector3 at = RSVR_VRHand.InVR(mo) ? RSVR_VRHand.HandPos(mo) : mo.pos;
+		let sec = mo.Level.PointInSector(at.xy);
+		bool openSky = sec && sec.GetTexture(Sector.ceiling) == skyflatnum;
+		mo.A_StartSound(openSky ? sex : sin, CHAN_7, 0, min(vol, 1.0));
+	}
 
 	void Shot(PlayerPawn mo)
 	{
@@ -1545,6 +1570,7 @@ class RSQ_FlashHandler : EventHandler
 			if (cls[i] ~== n)
 			{
 				RSQ_Flash.Fire(mo, rad[i], Color(col[i]), len[i]);
+				Tail(mo, tin[i], tex[i], tvol[i]);
 				return;
 			}
 	}
@@ -1592,7 +1618,8 @@ def flash():
         for k, v in re.findall(r'^\s*(\w+)\s*=\s*([^\n#]+)', m.group(2), re.M):
             d[k] = v.strip()
         fl[m.group(1)] = d
-    rows, log, skipped = '', {}, []
+    RSBALL = 'E:/DOOMWork/RS_Ballistics/'
+    rows, log, skipped, tails = '', {}, [], set()
     for card, cls in CARD2CLS:
         p = guns.get(card, {}).get('flashprofile', 'none')
         b = fl.get(p)
@@ -1604,9 +1631,91 @@ def flash():
         radius = int(float(lt[0]))
         tics = int(float(lt[2])) if len(lt) > 2 else 2
         packed = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2]
-        rows += ('\t\tcls.Push("%s"); rad.Push(%d); col.Push(0x%06X); len.Push(%d);\t// %s\n'
-                 % (cls, radius, packed, tics, p))
-        log[cls] = dict(profile=p, radius=radius, color=rgb, tics=tics)
+        # the TAIL off the same block, resolved to its two real alias names here rather
+        # than concatenated at runtime. Optional: the energy weapons have a light and no tail,
+        # because a plasma bolt has no report.
+        tl = [x.strip() for x in b['tail'].split(',')] if b.get('tail') else []
+        base = tl[0] if tl else ''
+        tvolume = float(tl[1]) if len(tl) > 1 else 1.0
+        s_in = s_ex = ''
+        if base:
+            leaf = base.split('/')[-1]
+            has_int = os.path.isdir(RSBALL + 'sounds/rsb/tail/%s/int' % leaf)
+            s_ex = base + '/ext'
+            s_in = base + '/int' if has_int else s_ex
+            tails.add(base)
+        rows += ('\t\tcls.Push("%s"); rad.Push(%d); col.Push(0x%06X); len.Push(%d);'
+                 ' tin.Push("%s"); tex.Push("%s"); tvol.Push(%.2f);\t// %s\n'
+                 % (cls, radius, packed, tics, s_in, s_ex, tvolume, p))
+        log[cls] = dict(profile=p, radius=radius, color=rgb, tics=tics,
+                        tail=base or None, tail_int=s_in or None, tail_ext=s_ex or None,
+                        tail_volume=tvolume if base else None)
+    # Shot() looks a gun up in this one table, and the table only holds guns that have a
+    # LIGHT, so a gun with a tail and no light would never be reached. Nothing is in that state
+    # today; this refuses to ship quietly if that changes.
+    for card2, cls2 in CARD2CLS:
+        pr = guns.get(card2, {}).get('flashprofile', 'none')
+        bb = fl.get(pr) or {}
+        if bb.get('tail') and cls2 not in log:
+            raise SystemExit('flash: %s has a tail (%s) and no light, so it would never play'
+                             % (cls2, bb['tail']))
+
+    # the sounds. Each set is a folder of folders -- <set>/int and <set>/ext -- and three sets
+    # have no int, so this copies what is there and no more.
+    import shutil
+    n_files, rooms = 0, {}
+    for s in sorted(tails):
+        leaf = s.split('/')[-1]
+        rooms[s] = []
+        for room in ('int', 'ext'):
+            src = RSBALL + 'sounds/rsb/tail/%s/%s' % (leaf, room)
+            if not os.path.isdir(src):
+                continue
+            rooms[s].append(room)
+            dst = OUT_SRC + 'sounds/rsb/tail/%s/%s' % (leaf, room)
+            os.makedirs(dst, exist_ok=True)
+            for f in os.listdir(src):
+                if os.path.isfile(src + '/' + f):
+                    shutil.copy(src + '/' + f, dst + '/' + f)
+                    n_files += 1
+        if 'ext' not in rooms[s]:
+            raise SystemExit('flash: tail set %s has no exterior, which every gun falls back to' % s)
+    snd = open(RSBALL + 'SNDINFO.txt', encoding='latin-1').read()
+    keep = []
+    for ln in snd.splitlines():
+        s2 = ln.strip()
+        hit = False
+        for x in sorted(tails):
+            for room in rooms[x]:
+                nm = x + '/' + room
+                if re.match(re.escape(nm) + r'\d*\s', s2) or \
+                   re.match(r'\$(random|limit)\s+' + re.escape(nm) + r'\d*(\s|\{|$)', s2):
+                    hit = True
+                    break
+            if hit:
+                break
+        if hit:
+            keep.append(ln)
+    # every alias a gun can name must actually be a $random set, or the shot is silent
+    for cls2, v in log.items():
+        for nm in (v.get('tail_int'), v.get('tail_ext')):
+            if nm and not re.search(r'(?m)^\$random ' + re.escape(nm) + r'\s*\{', snd):
+                raise SystemExit('flash: %s names tail %s and SNDINFO has no $random for it'
+                                 % (cls2, nm))
+    want = set()
+    for ln in keep:
+        mm = re.match(r'^\s*\S+\s+(sounds/\S+\.ogg)\s*$', ln)
+        if mm:
+            want.add(mm.group(1))
+    gone = sorted(f for f in want if not os.path.exists(OUT_SRC + f))
+    if gone:
+        raise SystemExit('flash: SNDINFO would name %d tail sounds the pack does not ship: %s'
+                         % (len(gone), gone[:4]))
+    with open(OUT_SRC + 'SNDINFO.rsq', 'a') as f:
+        f.write('\n// 1.97 F5: the flash TAIL -- the room answering the shot, /int and /ext per\n'
+                '// set. Lifted from RS_Ballistics with full paths, as the impact sounds were.\n'
+                + '\n'.join(keep) + '\n')
+
     open(OUT_SRC + 'zscript/rsq/flash.zs', 'w').write(FLASH_ZS % dict(table=rows))
     zp = OUT_SRC + 'ZSCRIPT.rsvr'
     zt = open(zp).read()
@@ -1620,7 +1729,10 @@ def flash():
     if mt.count(k) != 1:
         raise SystemExit('MAPINFO.rsvr: RSQ_Recoil is not registered once (recoil must run first)')
     open(mp, 'w').write(mt.replace(k, k + '"RSQ_FlashHandler", '))
-    st = dict(guns=len(log), skipped=skipped, table=log)
+    st = dict(guns=len(log), skipped=skipped, tail_sets=sorted(tails),
+              tail_guns=len([1 for v in log.values() if v.get('tail')]),
+              tail_files=n_files, ext_only=sorted(k for k, v in rooms.items()
+                                                 if 'int' not in v), table=log)
     json.dump(st, open(OUT + 'flash_apply.json', 'w'), indent=1)
     with open(OUT + '.generated', 'a') as f:
         f.write('then tools/bd22_plus.py flash\n')

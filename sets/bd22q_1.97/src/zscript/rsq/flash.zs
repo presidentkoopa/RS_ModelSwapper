@@ -49,27 +49,52 @@ class RSQ_FlashHandler : EventHandler
 	Array<int> rad;
 	Array<int> col;
 	Array<int> len;
+	Array<String> tin;
+	Array<String> tex;
+	Array<double> tvol;
 
 	override void OnRegister()
 	{
-		cls.Push("BrutalPistol"); rad.Push(210); col.Push(0xFFDEAA); len.Push(2);	// pistol_9mm
-		cls.Push("Revolver"); rad.Push(240); col.Push(0xFFCD8C); len.Push(2);	// revolver
-		cls.Push("Shot_Gun"); rad.Push(560); col.Push(0xFFC276); len.Push(4);	// shotgun_doom
-		cls.Push("SSG"); rad.Push(760); col.Push(0xFFDEAC); len.Push(4);	// shotgun_ssg
-		cls.Push("MP40"); rad.Push(99); col.Push(0xFFC882); len.Push(3);	// ww2_mp40
-		cls.Push("GrenadeLauncher"); rad.Push(120); col.Push(0xFFBE78); len.Push(2);	// launcher_40mm
-		cls.Push("HellishMissileLauncher"); rad.Push(520); col.Push(0xFFBA6E); len.Push(4);	// rocket_launcher
-		cls.Push("MG42"); rad.Push(208); col.Push(0xFFC882); len.Push(2);	// ww2_mg42
-		cls.Push("AssaultShotgun"); rad.Push(240); col.Push(0xFFCE96); len.Push(3);	// shotgun_assault
-		cls.Push("BIG_FUCKING_GUN"); rad.Push(380); col.Push(0x78FF8C); len.Push(5);	// bfg_9000
-		cls.Push("BFG10k"); rad.Push(480); col.Push(0x82FF96); len.Push(6);	// bfg_heavy
-		cls.Push("BrutalSMG"); rad.Push(160); col.Push(0xFFD296); len.Push(1);	// smg
-		cls.Push("Machinegun"); rad.Push(240); col.Push(0xFFCE8C); len.Push(2);	// machinegun_762
-		cls.Push("Minigun"); rad.Push(190); col.Push(0xFFE2B4); len.Push(1);	// chaingun_556
-		cls.Push("Plasma_Gun"); rad.Push(170); col.Push(0x78B4FF); len.Push(2);	// plasma_rifle
-		cls.Push("Rocket_Launcher"); rad.Push(600); col.Push(0xFFC47C); len.Push(4);	// rocket_rpg
-		cls.Push("Rifle"); rad.Push(220); col.Push(0xFFDCAA); len.Push(2);	// rifle
-		cls.Push("Unmaker"); rad.Push(84); col.Push(0xFF2C1A); len.Push(1);	// unmaker
+		cls.Push("BrutalPistol"); rad.Push(210); col.Push(0xFFDEAA); len.Push(2); tin.Push("rsb/tail/pistol/int"); tex.Push("rsb/tail/pistol/ext"); tvol.Push(0.75);	// pistol_9mm
+		cls.Push("Revolver"); rad.Push(240); col.Push(0xFFCD8C); len.Push(2); tin.Push("rsb/tail/pistol_mag/ext"); tex.Push("rsb/tail/pistol_mag/ext"); tvol.Push(0.85);	// revolver
+		cls.Push("Shot_Gun"); rad.Push(560); col.Push(0xFFC276); len.Push(4); tin.Push("rsb/tail/shotgun/int"); tex.Push("rsb/tail/shotgun/ext"); tvol.Push(0.85);	// shotgun_doom
+		cls.Push("SSG"); rad.Push(760); col.Push(0xFFDEAC); len.Push(4); tin.Push("rsb/tail/dbshotgun/ext"); tex.Push("rsb/tail/dbshotgun/ext"); tvol.Push(1.00);	// shotgun_ssg
+		cls.Push("MP40"); rad.Push(99); col.Push(0xFFC882); len.Push(3); tin.Push("rsb/tail/smg/int"); tex.Push("rsb/tail/smg/ext"); tvol.Push(0.70);	// ww2_mp40
+		cls.Push("GrenadeLauncher"); rad.Push(120); col.Push(0xFFBE78); len.Push(2); tin.Push("rsb/tail/rpg/int"); tex.Push("rsb/tail/rpg/ext"); tvol.Push(0.50);	// launcher_40mm
+		cls.Push("HellishMissileLauncher"); rad.Push(520); col.Push(0xFFBA6E); len.Push(4); tin.Push("rsb/tail/rpg/int"); tex.Push("rsb/tail/rpg/ext"); tvol.Push(0.90);	// rocket_launcher
+		cls.Push("MG42"); rad.Push(208); col.Push(0xFFC882); len.Push(2); tin.Push("rsb/tail/br/ext"); tex.Push("rsb/tail/br/ext"); tvol.Push(0.90);	// ww2_mg42
+		cls.Push("AssaultShotgun"); rad.Push(240); col.Push(0xFFCE96); len.Push(3); tin.Push("rsb/tail/br/ext"); tex.Push("rsb/tail/br/ext"); tvol.Push(0.90);	// shotgun_assault
+		cls.Push("BIG_FUCKING_GUN"); rad.Push(380); col.Push(0x78FF8C); len.Push(5); tin.Push(""); tex.Push(""); tvol.Push(1.00);	// bfg_9000
+		cls.Push("BFG10k"); rad.Push(480); col.Push(0x82FF96); len.Push(6); tin.Push(""); tex.Push(""); tvol.Push(1.00);	// bfg_heavy
+		cls.Push("BrutalSMG"); rad.Push(160); col.Push(0xFFD296); len.Push(1); tin.Push("rsb/tail/smg/int"); tex.Push("rsb/tail/smg/ext"); tvol.Push(0.60);	// smg
+		cls.Push("Machinegun"); rad.Push(240); col.Push(0xFFCE8C); len.Push(2); tin.Push("rsb/tail/lmg/int"); tex.Push("rsb/tail/lmg/ext"); tvol.Push(0.70);	// machinegun_762
+		cls.Push("Minigun"); rad.Push(190); col.Push(0xFFE2B4); len.Push(1); tin.Push("rsb/tail/ar/int"); tex.Push("rsb/tail/ar/ext"); tvol.Push(0.60);	// chaingun_556
+		cls.Push("Plasma_Gun"); rad.Push(170); col.Push(0x78B4FF); len.Push(2); tin.Push(""); tex.Push(""); tvol.Push(1.00);	// plasma_rifle
+		cls.Push("Rocket_Launcher"); rad.Push(600); col.Push(0xFFC47C); len.Push(4); tin.Push("rsb/tail/rpg/int"); tex.Push("rsb/tail/rpg/ext"); tvol.Push(1.00);	// rocket_rpg
+		cls.Push("Rifle"); rad.Push(220); col.Push(0xFFDCAA); len.Push(2); tin.Push("rsb/tail/br/ext"); tex.Push("rsb/tail/br/ext"); tvol.Push(0.80);	// rifle
+		cls.Push("Unmaker"); rad.Push(84); col.Push(0xFF2C1A); len.Push(1); tin.Push(""); tex.Push(""); tvol.Push(1.00);	// unmaker
+	}
+
+	// THE TAIL: the room answering the shot, indoors or out. `rsb/tail/<set>` is not
+	// itself a sound -- only /int and /ext are -- so both names are resolved at build
+	// time and the one over the muzzle is picked here, the way RS_Ballistics picks it:
+	// on whether the ceiling at that point is sky. Three of the nine sets have no
+	// interior recording, and for those the generator has already put the exterior in
+	// both slots, so nothing here can name a sound that does not exist.
+	//
+	// ON THE PAWN, ONE CHANNEL, NO OVERLAP, deliberately. A held trigger would stack
+	// tails into mush; RS stops the previous through a SoundHandle, which this engine
+	// does not have (stock S_StartSoundAt returns void). A new sound on the same actor
+	// and channel replaces the old, which is the same behaviour by the only route there
+	// is. It costs the half metre between the pawn and the muzzle, on an echo.
+	static void Tail(PlayerPawn mo, String sin, String sex, double vol)
+	{
+		if (!mo || vol <= 0 || sin == "")
+			return;
+		Vector3 at = RSVR_VRHand.InVR(mo) ? RSVR_VRHand.HandPos(mo) : mo.pos;
+		let sec = mo.Level.PointInSector(at.xy);
+		bool openSky = sec && sec.GetTexture(Sector.ceiling) == skyflatnum;
+		mo.A_StartSound(openSky ? sex : sin, CHAN_7, 0, min(vol, 1.0));
 	}
 
 	void Shot(PlayerPawn mo)
@@ -84,6 +109,7 @@ class RSQ_FlashHandler : EventHandler
 			if (cls[i] ~== n)
 			{
 				RSQ_Flash.Fire(mo, rad[i], Color(col[i]), len[i]);
+				Tail(mo, tin[i], tex[i], tvol[i]);
 				return;
 			}
 	}
