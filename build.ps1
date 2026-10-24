@@ -41,6 +41,13 @@ if ($Static) { $dirs += @('zscript_depot') }
 # name (filesystem.cpp, SetFromLump) -- so Wads.FindLump("WMCARD", ...), which
 # is how the card reader finds them, would match nothing at all.
 if ($Static) { $include += (Get-ChildItem $PSScriptRoot -Filter 'WMCARD.*' -File | ForEach-Object { $_.Name }) }
+# MODELDEF.rsb is the break-open reload's re-keyed models, written by gen_rsb.
+# It ships as its OWN lump rather than being merged into modeldef: GZDoom reads
+# every MODELDEF* lump and treats repeated Model blocks as additive, which is
+# what the reload needs (the gun again with its hinged part hidden). Merging it
+# would trip the duplicate-donor check below, which exists to catch a different
+# fault -- a donor shipped twice as a ZScript stub, which will not compile.
+if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsb'))) { $include += 'MODELDEF.rsb' }
 # SYNTAX CHECK BEFORE PACKING.
 #
 # build.ps1 only zips -- it never read the ZScript, and compile-testing

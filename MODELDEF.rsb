@@ -1,0 +1,336 @@
+
+// RS real VR reload, break-open / revolver (zscript/rsr/rsr_break.zs, tools/gen_rsb.py): MS/SuperShotgun.
+// The gun's own model and frames; pieces shown or hidden by a clear skin.
+
+// the gun without its hinged part and rounds (the gun's layer while the action is open)
+Model MS_SuperShotgun
+{
+	Path "models/hud/SuperShotgun"
+	Model 0 "ssg.md3"
+	SurfaceSkin 0 0 "WPN-GUNS-k1.png"
+	SurfaceSkin 0 1 "WPN-GUNS-k1.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "WPN-GUNS-k1.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBMG A 0 0
+}
+
+// the hinged part (main controller), turned about the hinge
+Model RSB_GunParts
+{
+	Path "models/hud/SuperShotgun"
+	Model 0 "ssg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "WPN-GUNS-k1.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBMP A 0 0
+}
+
+// chamber 0: its round (surface 2)
+Model RSB_GunParts
+{
+	Path "models/hud/SuperShotgun"
+	Model 0 "ssg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "WPN-GUNS-k1.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBMP B 0 0
+}
+
+// the round in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/hud/SuperShotgun"
+	Model 0 "ssg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "WPN-GUNS-k1.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBMP H 0 0
+}
+
+// a round let go of (world)
+Model RSB_Round
+{
+	Path "models/hud/SuperShotgun"
+	Model 0 "ssg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "WPN-GUNS-k1.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale 0.4682 0.4682 0.4682
+	Offset -0.3255 -0.4333 0.0
+	ZOffset -0.4361
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RBMW A 0 0
+}
+
+// chamber 1: its round (surface 3)
+Model RSB_GunParts
+{
+	Path "models/hud/SuperShotgun"
+	Model 0 "ssg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "WPN-GUNS-k1.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBMP C 0 0
+}
+
+// RS real VR reload, break-open / revolver (zscript/rsr/rsr_break.zs, tools/gen_rsb.py): MS/M79.
+// The gun's own model and frames; pieces shown or hidden by a clear skin.
+
+// the gun without its hinged part and rounds (the gun's layer while the action is open)
+Model MS_brt_M79
+{
+	Path "models/bd/M79"
+	Model 0 "M79.md3"
+	SurfaceSkin 0 0 "M79.png"
+	SurfaceSkin 0 1 "M79.png"
+	SurfaceSkin 0 2 "M79.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBNG A 0 0
+}
+
+// the hinged part (main controller), turned about the hinge
+Model RSB_GunParts
+{
+	Path "models/bd/M79"
+	Model 0 "M79.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "M79.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBNP A 0 0
+}
+
+// chamber 0: its round (surface 3)
+Model RSB_GunParts
+{
+	Path "models/bd/M79"
+	Model 0 "M79.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "M79.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBNP B 0 0
+}
+
+// the round in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/M79"
+	Model 0 "M79.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "M79.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBNP H 0 0
+}
+
+// a round let go of (world)
+Model RSB_Round
+{
+	Path "models/bd/M79"
+	Model 0 "M79.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "M79.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -10.2879 0.0001 0.0
+	ZOffset 8.5767
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RBNW A 0 0
+}
+
+// RS real VR reload, break-open / revolver (zscript/rsr/rsr_break.zs, tools/gen_rsb.py): MS/Revolver.
+// The gun's own model and frames; pieces shown or hidden by a clear skin.
+
+// the gun without its hinged part and rounds (the gun's layer while the action is open)
+Model MS_Revolver
+{
+	Path "models/hud/Revolver"
+	Model 0 "rev.md3"
+	SurfaceSkin 0 0 "rev.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rev.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rev.png"
+	SurfaceSkin 0 5 "rev.png"
+	SurfaceSkin 0 6 "rev.png"
+	SurfaceSkin 0 7 "rev.png"
+	SurfaceSkin 0 8 "rev.png"
+	SurfaceSkin 0 9 "rev.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBOG A 0 0
+}
+
+// the hinged part (main controller), turned about the hinge
+Model RSB_GunParts
+{
+	Path "models/hud/Revolver"
+	Model 0 "rev.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rev.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rev.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBOP A 0 0
+}
+
+// the loader's rounds, in the cylinder
+Model RSB_GunParts
+{
+	Path "models/hud/Revolver"
+	Model 0 "rsb_vrev_loader.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rev.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBOP B 0 0
+}
+
+// the speedloader seated on the cylinder
+Model RSB_GunParts
+{
+	Path "models/hud/Revolver"
+	Model 0 "rsb_vrev_loader.md3"
+	SurfaceSkin 0 0 "rev.png"
+	SurfaceSkin 0 1 "rev.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBOP I 0 0
+}
+
+// the speedloader in the off hand
+Model RSQ_Hands
+{
+	Path "models/hud/Revolver"
+	Model 0 "rsb_vrev_loader.md3"
+	SurfaceSkin 0 0 "rev.png"
+	SurfaceSkin 0 1 "rev.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBOP H 0 0
+}
+
+// the empty speedloader in the off hand
+Model RSQ_Hands
+{
+	Path "models/hud/Revolver"
+	Model 0 "rsb_vrev_loader.md3"
+	SurfaceSkin 0 0 "rev.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	Scale -1.3500 1.3500 1.3500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBOP J 0 0
+}
+
+// the empty speedloader let go of (world)
+Model RSB_Round
+{
+	Path "models/hud/Revolver"
+	Model 0 "rsb_vrev_loader.md3"
+	SurfaceSkin 0 0 "rev.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	Scale 0.4682 0.4682 0.4682
+	Offset -4.8551 -0.0389 0.0
+	ZOffset 0.1567
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RBOW A 0 0
+}
+
+// the full speedloader let go of (world)
+Model RSB_Round
+{
+	Path "models/hud/Revolver"
+	Model 0 "rsb_vrev_loader.md3"
+	SurfaceSkin 0 0 "rev.png"
+	SurfaceSkin 0 1 "rev.png"
+	Scale 0.4682 0.4682 0.4682
+	Offset -4.8551 -0.0389 0.0
+	ZOffset 0.1567
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RBOW B 0 0
+}
