@@ -112,8 +112,12 @@ Regenerating is: `python3 tools/bd22_plus.py geometry && python3 tools/bd22_plus
 ## Known failure already fixed (so nobody re-learns it)
 `counters.zs` called `RSR.WantsHands`; the function lives on `RSR_ReloadHandler`. The first pk3 handed to the owner had this and died at script parse. Lesson for every ZScript addition: grep the class a static lives in; then run the gate before anything leaves the repo.
 
-## What the depot's tools do NOT do (owner, 04:32)
-They go card → Quest pack. **Model → card** (measuring a new mesh into a WMCARD: surfaces, slide axes
-and travel, hinges, grab points, palm/support) is REMA's card pipeline in the owner's RS_VR_Weapons
-repo (`CardPipeline/`, HQT, `set.py`). Every new gun with no REMA card needs that first. The plan's
-foundation line "one toolset: HQT (parts/axes/travel/islands)" is that work, and it is not done here.
+## Model -> card: tools/hqt (the kit's HighQualityTools; I had wrongly said none existed -- owner, 04:34)
+`tools/hqt/namedcard.py model.md3 Name archetype > Name.card`: an MD3 with NAMED surfaces -> a card
+(roles from the surface names: mag, slide, pump, bolt, cyl, crane, latch, trigger, round, case...;
+geometry from the mesh). `md3label.py` names surfaces, `obj2md3.py` converts with the right axes,
+`motion.py` / `phase.py` read part travel from the frames, `render.py` draws, `batch.py` runs a folder,
+`diff.py` compares cards. Its own paths (`sys.path.insert(0, '/home/claude/md3')`) need fixing like the rest.
+This is the "HQT" of PLAN.md's foundation line. Wiring it as step 2 of "Per set" (measure every mesh
+fresh) is not done. The REMA cards' comments mention `CardPipeline/` -- a desktop folder with the dead
+Forges, not needed.
