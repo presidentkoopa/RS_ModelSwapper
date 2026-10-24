@@ -284,3 +284,25 @@ class MS_ziono_HeadOnAStick : Actor {}
 class MS_ziono_HeadsOnAStick : Actor {}
 class MS_ziono_Candlestick : Actor {}
 class MS_ziono_ShortRGBTorch : Actor {}
+
+// Stubs for ZionVR.
+class MS_zion_D4Pistol : Actor {}
+class MS_zion_D4SHOTGUN : Actor {}
+class MS_zion_D4SUPERSHOTGUN : Actor {}
+class MS_zion_D4CHAINGUN : Actor {}
+class MS_zion_D4MACHINEGUN : Actor {}
+class MS_zion_D4PLASMARIFLE : Actor {}
+class MS_zion_D4ROCKETLAUNCHER : Actor {}
+class MS_zion_D4BFGGUN : Actor {}
+class MS_zion_Dumb4gausscannon : Actor {}
+class MS_zion_D4CHAINSAW : Actor {}
+class MS_zion_CG_Gatling : Actor {}
+class MS_zion_CG_Turret : Actor {}
+class MS_zion_CSG_Bomb : Actor {}
+class MS_zion_CSG_Triple : Actor {}
+class MS_zion_PLRF_Stun : Actor {}
+class MS_zion_PLRF_Heat : Actor {}
+class MS_zion_RL_Det : Actor {}
+class MS_zion_RL_Lock : Actor {}
+class MS_zion_GC_Siege : Actor {}
+class MS_zion_HAR_Micro : Actor {}

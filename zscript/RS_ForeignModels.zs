@@ -307,7 +307,28 @@ class RS_ForeignShelf
 			"grenade|MS_ziono_HeadOnAStick|MISG|0|0|1",
 			"grenade|MS_ziono_HeadsOnAStick|MISG|0|0|1",
 			"grenade|MS_ziono_Candlestick|MISG|0|0|1",
-			"grenade|MS_ziono_ShortRGBTorch|MISG|0|0|1"
+			"grenade|MS_ziono_ShortRGBTorch|MISG|0|0|1",
+			// --- ZionVR, Doom 2016 ---
+			"pistol|MS_zion_D4Pistol|PISG|0|58|149",
+			"shotgun|MS_zion_D4SHOTGUN|SHTG|0|61|113",
+			"supershotgun|MS_zion_D4SUPERSHOTGUN|SHT2|0|62|151",
+			"machinegun|MS_zion_D4CHAINGUN|CHGG|0|57|65",
+			"smg|MS_zion_D4MACHINEGUN|CHGG|0|26|64",
+			"plasma|MS_zion_D4PLASMARIFLE|PLSG|0|21|109",
+			"rocket|MS_zion_D4ROCKETLAUNCHER|MISG|0|27|92",
+			"bfg|MS_zion_D4BFGGUN|BFGG|0|22|201",
+			"railgun|MS_zion_Dumb4gausscannon|PLSG|0|21|85",
+			"saw|MS_zion_D4CHAINSAW|SAWG|0|21|22",
+			"machinegun|MS_zion_CG_Gatling|CHGG|0|57|65",
+			"machinegun|MS_zion_CG_Turret|CHGG|0|57|65",
+			"shotgun|MS_zion_CSG_Bomb|SHTG|0|61|113",
+			"shotgun|MS_zion_CSG_Triple|SHTG|0|61|113",
+			"plasma|MS_zion_PLRF_Stun|PLSG|0|21|109",
+			"plasma|MS_zion_PLRF_Heat|PLSG|0|21|109",
+			"rocket|MS_zion_RL_Det|MISG|0|27|92",
+			"rocket|MS_zion_RL_Lock|MISG|0|27|92",
+			"railgun|MS_zion_GC_Siege|PLSG|0|21|85",
+			"smg|MS_zion_HAR_Micro|CHGG|0|26|67"
 		};
 		mRows.Clear();
 		// Addon rows come first, so loading an addon makes its models the

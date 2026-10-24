@@ -2849,3 +2849,282 @@ Model MS_ziono_ShortRGBTorch
 	FrameIndex MISG A 0 0
 	FrameIndex MSBL A 0 9999
 }
+
+// ---------------------------------------------------------------------
+// ZionVR -- the Doom 2016 arsenal. Ten guns and their ten weapon mods.
+// Unlike every other package these are COMPOSITES: a weapon is two to four
+// meshes at separate MODEL indices, co-animated on one frame index, which is
+// why a chaingun taken as a single file arrives with no barrels. A mod is the
+// same base gun with an attachment added or swapped at another index.
+// Skins come from Zion's own modeldef, not the meshes -- those carry internal
+// shader names like models_weapons_bfg_base_c. Per-surface assignments stay
+// as SurfaceSkin because a flat Skin cannot reproduce them.
+// The held frame is the last of each gun's Unhide run, which is also its
+// first fire frame; Scale and ZOffset are Zion's own and will want adjusting.
+// ---------------------------------------------------------------------
+
+Model MS_zion_D4Pistol
+{
+	Path "models/zion/D4Pistol"
+	Skin 0 "Pistol.jpg"
+	Model 0 "Pistol.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex PISG A 0 58
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_D4SHOTGUN
+{
+	Path "models/zion/D4SHOTGUN"
+	SurfaceSkin 0 1 "CombatShotgunShells.png"
+	SurfaceSkin 0 2 "CombatShotgun1.png"
+	SurfaceSkin 0 3 "CombatShotgunBase.png"
+	Model 0 "CombatShotGunBase.md3"
+	Skin 1 "CombatShotgun1.png"
+	Model 1 "CombatShotGunBase2.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex SHTG A 0 61
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_D4SUPERSHOTGUN
+{
+	Path "models/zion/D4SUPERSHOTGUN"
+	Skin 0 "SuperShotGun.png"
+	Model 0 "SuperShotgun.md3"
+	Skin 1 "SuperShotGunShells.png"
+	Model 1 "SuperShotgunShells.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex SHT2 A 0 62
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_D4CHAINGUN
+{
+	Path "models/zion/D4CHAINGUN"
+	Skin 0 "CGBase.png"
+	Model 0 "CGBase.md3"
+	Skin 1 "CGBase.png"
+	Model 1 "CGBarell.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex CHGG A 0 57
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_D4MACHINEGUN
+{
+	Path "models/zion/D4MACHINEGUN"
+	Skin 0 "HARBase.png"
+	Model 0 "HARBase.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex CHGG A 0 26
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_D4PLASMARIFLE
+{
+	Path "models/zion/D4PLASMARIFLE"
+	Skin 0 "PLRFBase.png"
+	Model 0 "PLRFBase.md3"
+	SurfaceSkin 1 0 "PLRFStunt.png"
+	SurfaceSkin 1 1 "PLRFHeat.png"
+	SurfaceSkin 1 2 "PLRFHeat.png"
+	Model 1 "PLRFBase1.md3"
+	Skin 2 "PLRFPlate.png"
+	Model 2 "PLRFBase2.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex PLSG A 0 21
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_D4ROCKETLAUNCHER
+{
+	Path "models/zion/D4ROCKETLAUNCHER"
+	Skin 0 "RLBase.png"
+	Model 0 "RLBase.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex MISG A 0 27
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_D4BFGGUN
+{
+	Path "models/zion/D4BFGGUN"
+	SurfaceSkin 0 0 "BFGBurn.png"
+	SurfaceSkin 0 1 "BFGBase.png"
+	Model 0 "BFGBaseBurn.md3"
+	SurfaceSkin 1 0 "BFGSign.png"
+	SurfaceSkin 1 1 "BFGOrb.png"
+	SurfaceSkin 1 2 "BFGElectric.png"
+	Model 1 "BFGElOrbSin.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex BFGG A 0 22
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_Dumb4gausscannon
+{
+	Path "models/zion/Dumb4gausscannon"
+	Skin 0 "GCBase.png"
+	Model 0 "GCBase.md3"
+	Skin 1 "GCBarrel.png"
+	Model 1 "GCBarrel.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex PLSG A 0 21
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_D4CHAINSAW
+{
+	Path "models/zion/D4CHAINSAW"
+	Skin 0 "CSAW.png"
+	Model 0 "CSAW.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex SAWG A 0 21
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_CG_Gatling
+{
+	Path "models/zion/CG_Gatling"
+	Skin 0 "CGBase.png"
+	Model 0 "CGBase.md3"
+	Skin 1 "CGBase.png"
+	Model 1 "CGBarell.md3"
+	Skin 2 "CGGatling.png"
+	Model 2 "CGGatling.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex CHGG A 0 57
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_CG_Turret
+{
+	Path "models/zion/CG_Turret"
+	Skin 0 "CGBase.png"
+	Model 0 "CGBase.md3"
+	Skin 1 "CGTurret.png"
+	Model 1 "CGTurret.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex CHGG A 0 57
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_CSG_Bomb
+{
+	Path "models/zion/CSG_Bomb"
+	SurfaceSkin 0 1 "CombatShotgunShells.png"
+	SurfaceSkin 0 2 "CombatShotgun1.png"
+	SurfaceSkin 0 3 "CombatShotgunBase.png"
+	Model 0 "CombatShotGunBase.md3"
+	Skin 1 "CombatShotgunBomb.png"
+	Model 1 "CombatShotGunBomb.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex SHTG A 0 61
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_CSG_Triple
+{
+	Path "models/zion/CSG_Triple"
+	SurfaceSkin 0 1 "CombatShotgunShells.png"
+	SurfaceSkin 0 2 "CombatShotgun1.png"
+	SurfaceSkin 0 3 "CombatShotgunBase.png"
+	Model 0 "CombatShotGunBase.md3"
+	Skin 1 "CombatShotgun1.png"
+	Model 1 "CombatShotGunBase2.md3"
+	Skin 2 "CombatShotgunTriple.png"
+	Model 2 "CombatShotGunTriple.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex SHTG A 0 61
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_PLRF_Stun
+{
+	Path "models/zion/PLRF_Stun"
+	Skin 0 "PLRFBase.png"
+	Model 0 "PLRFBase.md3"
+	Skin 1 "PLRFStunt.png"
+	Model 1 "PLRFStuntBase.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex PLSG A 0 21
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_PLRF_Heat
+{
+	Path "models/zion/PLRF_Heat"
+	Skin 0 "PLRFBase.png"
+	Model 0 "PLRFBase.md3"
+	Skin 1 "PLRFHeat.png"
+	Model 1 "PLRFHeatBase.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex PLSG A 0 21
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_RL_Det
+{
+	Path "models/zion/RL_Det"
+	Skin 0 "RLBase.png"
+	Model 0 "RLBase.md3"
+	Model 1 "RLDet.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex MISG A 0 27
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_RL_Lock
+{
+	Path "models/zion/RL_Lock"
+	Skin 0 "RLBase.png"
+	Model 0 "RLBase.md3"
+	Model 1 "RLLock.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex MISG A 0 27
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_GC_Siege
+{
+	Path "models/zion/GC_Siege"
+	Skin 0 "GCBase.png"
+	Model 0 "GCBase.md3"
+	Skin 1 "GCSigge.png"
+	Model 1 "GCSigge.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex PLSG A 0 21
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_zion_HAR_Micro
+{
+	Path "models/zion/HAR_Micro"
+	Skin 0 "HARBase.png"
+	Model 0 "HARBase.md3"
+	Model 1 "HARMicro.md3"
+	Scale -3.0 3.0 3.0
+	ZOffset 20
+	FrameIndex CHGG A 0 26
+	FrameIndex MSBL A 0 9999
+}
