@@ -1,4 +1,7 @@
-# RSQ Weapon Depot — HANDOFF (2026-10-24 04:20, owner: presidentkoopa)
+# RSQ Weapon Depot — HANDOFF (2026-10-24 04:40, owner: presidentkoopa)
+
+**Addressed to: the next Claude session, any coding agent, and the local coding team.** `CLAUDE.md` at the
+root is the ten rules; this file is the state. Both are binding.
 
 **Read this whole file before touching anything. Then read `PLAN.md`. Do not drift from the plan.
 `tools/check_plan.py` is run before every commit (pre-commit hook, see "No drift") and refuses work
