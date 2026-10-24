@@ -1,0 +1,6 @@
+// 1.97: the gun bash flash, tintable so RSH0 does not clash with the headshot mod the
+// owner runs separately (owner, 2026-10-24). 0 is the art as drawn and sets nothing.
+RSQ_BashTint1 = "0:255=%[0,0,0]:[80,170,255]"
+RSQ_BashTint2 = "0:255=%[0,0,0]:[90,255,120]"
+RSQ_BashTint3 = "0:255=%[0,0,0]:[255,190,70]"
+RSQ_BashTint4 = "0:255=%[0,0,0]:[255,255,255]"

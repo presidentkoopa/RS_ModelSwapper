@@ -84,6 +84,9 @@ OptionMenu "RSQ_Options"
 	Option "VR Throwing", "rsg_vr", "OnOff"
 	Option "VR Punching", "rsq_punch", "OnOff"
 	Option "Punch Switches Open", "rsq_punch_use", "OnOff"
+	Option "Gun Bash (kick key)", "rsq_bash", "OnOff"
+	Option "Bash Impact", "rsq_bash_fx", "RSQ_BashFXOpt"
+	Option "Bash Impact Colour", "rsq_bash_tint", "RSQ_BashTintOpt"
 	Slider "Melee swing strength", "rsvr_melee_swing", 0.2, 3.0, 0.1
 	StaticText " "
 	Option "Extra weapons with cheats", "rsq_extra_weapons", "OnOff"
@@ -109,4 +112,22 @@ OptionValue "RSB_RevFeed"
 {
 	0, "Speedloader"
 	1, "Per Round"
+}
+
+OptionValue "RSQ_BashFXOpt"
+{
+	0, "RSS3"
+	1, "RSU1"
+	2, "RSU4"
+	3, "RSU5"
+	4, "RSH0"
+}
+
+OptionValue "RSQ_BashTintOpt"
+{
+	0, "Original"
+	1, "Blue"
+	2, "Green"
+	3, "Amber"
+	4, "White"
 }

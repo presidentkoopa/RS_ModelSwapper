@@ -129,7 +129,7 @@ if __name__ == '__main__':
 # ======================================================================= stage 2: apply
 # Writes a patched copy of 1.96b's src (OUT/src) -- the pack's own files, every change an exact-match
 # edit or an append, listed here -- and zips it. 1.96b's repo is never written.
-import shutil, zipfile, importlib, re
+import shutil, zipfile, importlib, re, glob
 
 OUT_SRC = OUT + 'src/'
 WAIT = [
@@ -553,6 +553,42 @@ def rsb_fifth(text, fname):
                        gaps_deg=[round(float(g), 2) for g in gaps])
 
 
+# F4 -- the gun bash on BD22's own kick.
+#
+# The owner's "quick melee move like you see in left 4 dead or a modern shooter" (2026-10-24). It is
+# a BUTTON, not a gesture, and that is the point: a gun is a thing you hold still and point, so
+# gesture detection on one starts far worse off than the axe did -- and BD22's own melee history is
+# a list of that going wrong (speed alone made RAISING the axe a hit; rsvr_melee_up at 0.55 still cut
+# on the upswing). A button has no false positives at all.
+#
+# BD22 already has the trigger: +zoom gives the Kicking token and DEFAULTWEAPON's Ready jumps to
+# DoKick, from every weapon. So the bash is a branch at the top of DoKick, taken when a gun is held.
+# BD22's own KickAttack still decides the result, so its gore rules are untouched; what changes is
+# that no boot is drawn, the quake is lighter, and the impact gets one of the owner's RS_CombatFX
+# effects at the contact point.
+#
+# Load order decides where each class can live: ZSCRIPT is compiled BEFORE DECORATE, so a ZScript
+# class cannot inherit BD22's KickAttack (DECORATE), while DECORATE can name a ZScript class. Hence
+# the attack actor is DECORATE and everything that has to read a cvar is ZScript.
+FX = [
+    # (id, RS_CombatFX folder, the owner's pick order). Scale is computed from the art: every effect
+    # is drawn at RSH0's 96 px frame, which the owner set as the standard on 2026-10-24.
+    ('RSS3', 'sparks'),
+    ('RSU1', 'puffs'),
+    ('RSU4', 'puffs'),
+    ('RSU5', 'puffs'),
+    ('RSH0', 'hitflash'),
+]
+FXROOT = 'E:/DOOMWork/RS_CombatFX'
+FXSTD = 96.0
+
+# RSH0's red is what the owner's headshot mod already uses, so ours is tintable (owner, 2026-10-24:
+# "that color is for headshot mod i use seporatelui"). A luminance->colour ramp keeps the flash's
+# shape and only moves its hue; 0 leaves the art alone.
+TINTS = [('Original', ''), ('Blue', '[0,0,0]:[80,170,255]'), ('Green', '[0,0,0]:[90,255,120]'),
+         ('Amber', '[0,0,0]:[255,190,70]'), ('White', '[0,0,0]:[255,255,255]')]
+
+
 # F4 -- rows the page was missing. NOT a restructure: the owner's page keeps its name, its title and
 # its order. (An earlier pass moved it onto tools/README.md's shared-page standard -- one runtime page
 # called "RS VR Weapons" with each set's rows in an AddOptionMenu block, so two packs loaded together
@@ -571,6 +607,219 @@ ADDED_ROWS = [
     ('\tOption "Punch Switches Open", "rsq_punch_use", "OnOff"\n',
      '\tSlider "Melee swing strength", "rsvr_melee_swing", 0.2, 3.0, 0.1\n', 'rsvr_melee_swing'),
 ]
+
+
+BASH_ZS = '''// bash.zs (1.97) -- the gun bash: BD22's own kick, with a gun in your hands instead of a boot.
+// The trigger is BD22's: +zoom gives Kicking and DEFAULTWEAPON's DoKick runs. Our branch is taken
+// only in VR, only with the option on, and only when what you are holding is not already a melee
+// weapon -- so the axe, the Dragonslayer, the chainsaw and the fists keep BD22's kick exactly.
+//
+// RSQ_BashAsk is the pack's own handshake idiom (rsr_break.zs RSB_Call): Inventory.TryPickup runs
+// SYNCHRONOUSLY inside A_GiveInventory, so a 0-tic DECORATE state can ask ZScript a question and
+// branch on the answer in the same tic. The token is never kept.
+
+// play, not the default data context: PlayerInt and InVR are both play functions
+// ("Can't call play function PlayerInt from data context").
+class RSQ_Bash abstract play
+{
+	// not a gun = BD22's kick, untouched
+	static bool IsMelee(Name n)
+	{
+		return n == 'BrutalAxe' || n == 'DSweap' || n == 'Chain_saw' || n == 'Melee_Attacks';
+	}
+
+	static bool Wanted(PlayerPawn mo)
+	{
+		if (!mo || !mo.player || mo.health <= 0)
+			return false;
+		if (RSQ.PlayerInt(mo, 'rsq_bash', 1) == 0)
+			return false;
+		if (!RSVR_VRHand.InVR(mo))
+			return false;			// desktop keeps the boot
+		let w = mo.player.ReadyWeapon;
+		return w && !IsMelee(w.GetClassName());
+	}
+}
+
+class RSQ_BashGo : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+
+class RSQ_BashAsk : Inventory
+{
+	Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET }
+	override bool TryPickup(in out Actor toucher)
+	{
+		let mo = PlayerPawn(toucher);
+		if (mo && RSQ_Bash.Wanted(mo))
+			mo.GiveInventory('RSQ_BashGo', 1);
+		return false;			// never kept
+	}
+}
+
+// the impact: the effect the owner picked, at the point the bash landed. DECORATE's
+// RSQ_BashAttack spawns this; this picks which of the five to draw, and tints RSH0.
+class RSQ_BashFX : Actor
+{
+	Default { +NOINTERACTION; +NOBLOCKMAP; +DONTSPLASH; RenderStyle "Add"; Alpha 1.0; }
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		int n = RSQ.PlayerInt(PlayerPawn(target), 'rsq_bash_fx', %(deffx)d);
+		static const Name FXC[] = { %(classes)s };
+		if (n < 0 || n >= %(nfx)d)
+			n = %(deffx)d;
+		let a = Spawn(FXC[n], pos, ALLOW_REPLACE);
+		if (a)
+		{
+			a.target = target;
+			int t = RSQ.PlayerInt(PlayerPawn(target), 'rsq_bash_tint', 0);
+			if (FXC[n] == 'RSQ_FX_RSH0' && t > 0 && t < %(ntint)d)
+				a.A_SetTranslation(String.Format("RSQ_BashTint%%d", t));
+		}
+		Destroy();
+	}
+}
+
+%(actors)s'''
+
+BASH_DEC = '''// 1.97: the gun bash (tools/bd22_plus.py bash). BD22's own KickAttack decides the result --
+// same damage, same DamageType Kick, so its gore, its obituary and its KickHasHit all still apply.
+// The only addition is the impact effect at the point it landed. ZSCRIPT is compiled before
+// DECORATE, so this has to live here to inherit KickAttack, and it names the ZScript FX actor.
+ACTOR RSQ_BashAttack : KickAttack
+{
+	Obituary "$OBBD_KICK"
+	States
+	{
+	Death:
+	Crash:
+		TNT1 A 0 A_SpawnItemEx("RSQ_BashFX", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
+		Goto Super::Death
+	XDeath:
+		TNT1 A 0 A_SpawnItemEx("RSQ_BashFX", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
+		Goto Super::XDeath
+	}
+}
+'''
+
+# the branch at the top of BD22's DoKick, and the bash itself. "####" "#" keeps the gun on screen:
+# no A_GunFlash("KickFlash"), so no boot is drawn over the weapon you are holding.
+BASH_STATES = '''	// 1.97: the gun bash (zscript/rsq/bash.zs). Not VR, option off, or a melee weapon in hand:
+	// RSQ_BashGo is never given and BD22's own kick below runs untouched.
+	RSQ_BashCheck:
+		TNT1 A 0 A_TakeInventory("RSQ_BashGo", 1)
+		TNT1 A 0 A_GiveInventory("RSQ_BashAsk", 1)
+		TNT1 A 0 A_JumpIfInventory("RSQ_BashGo", 1, "RSQ_Bash")
+		Goto RSQ_BashStock
+	RSQ_Bash:
+		"####" "#" 0 A_TakeInventory("RSQ_BashGo", 1)
+		"####" "#" 0 A_PlaySound("Kick/Swing", 5)
+		"####" "#" 0 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		"####" "#" 2 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		"####" "#" 0 A_Quake(1, 3, 0, 8, "")
+		"####" "#" 0 A_JumpIfInventory("PowerStrength", 1, 2)
+		"####" "#" 0 A_FireCustomMissile("RSQ_BashAttack", 0, 0, 0, -7)
+		"####" "#" 0 A_Jump(256, 1)
+		"####" "#" 0 A_FireCustomMissile("SuperKickAttack", 0, 0, 0, -7)
+		"####" "#" 6 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		TNT1 A 0 A_TakeInventory("Kicking", 1)
+		TNT1 A 0 A_JumpIfInventory("ExecuteDownedEnemy", 1, "DoExecution")
+		TNT1 A 0 A_JumpIfInventory("GoFatality", 1, "Steady")
+		Goto GoingToReady
+	RSQ_BashStock:
+'''
+
+
+def bash():
+    """F4: BD22's kick becomes a gun bash when a gun is in your hands, with the owner's own
+    RS_CombatFX impact. Runs after options()."""
+    from PIL import Image
+    st = {}
+    # the art, at the owner's standard: every effect drawn at RSH0's 96 px frame
+    sd = OUT_SRC + 'sprites/'
+    os.makedirs(sd, exist_ok=True)
+    scales, copied = {}, 0
+    for eid, cat in FX:
+        best, names = 0, []
+        for p in sorted(glob.glob('%s/%s/%s*' % (FXROOT, cat, eid)), key=lambda s: os.path.basename(s).lower()):
+            nm = os.path.basename(p)
+            if not re.match(r'^%s[A-Za-z]0(\.png|\.lmp)?$' % eid, nm):
+                continue            # <id>.png on its own is the catalog's strip, not a frame
+            im = Image.open(p).convert('RGBA')
+            best = max(best, im.width, im.height)
+            # .lmp / no extension / a lowercase frame letter all become <ID><LETTER>0.png
+            im.save(sd + nm[:len(eid) + 2].upper() + '.png')
+            names.append(nm[:len(eid) + 2].upper())
+            copied += 1
+        if not names:
+            raise SystemExit('bash: no frames found for %s in %s/%s' % (eid, FXROOT, cat))
+        scales[eid] = (round(FXSTD / best, 3), sorted({n[len(eid)] for n in names}), best)
+    st['sprites'] = dict(frames=copied, scale={k: v[0] for k, v in scales.items()},
+                         source_px={k: v[2] for k, v in scales.items()})
+    # one actor per effect, its frames and its measured scale
+    acts = []
+    for eid, cat in FX:
+        sc, letters, _ = scales[eid]
+        acts.append('class RSQ_FX_%s : RSQ_FXBase\n{\n\tDefault { Scale %.3f; }\t// %d px art at the 96 px standard\n'
+                    '\tStates\n\t{\n\tSpawn:\n\t\t%s %s 2 Bright;\n\t\tStop;\n\t}\n}'
+                    % (eid, sc, scales[eid][2], eid, ''.join(letters)))
+    base = ('class RSQ_FXBase : Actor\n{\n\tDefault { +NOINTERACTION; +NOBLOCKMAP; +DONTSPLASH;\n'
+            '\t\t+FORCEXYBILLBOARD; RenderStyle "Add"; Alpha 1.0; }\n}\n')
+    zs = BASH_ZS % dict(classes=', '.join("'RSQ_FX_%s'" % e for e, _ in FX), nfx=len(FX),
+                        deffx=0, ntint=len(TINTS), actors=base + '\n'.join(acts) + '\n')
+    open(OUT_SRC + 'zscript/rsq/bash.zs', 'w').write(zs)
+    zp = OUT_SRC + 'ZSCRIPT.rsvr'
+    zt = open(zp).read()
+    anchor = '#include "zscript/rsq/roster.zs"\n'
+    if zt.count(anchor) != 1:
+        raise SystemExit('ZSCRIPT.rsvr: the roster include is not there once (bd22_mg.py must run first)')
+    open(zp, 'w').write(zt.replace(anchor, anchor + '#include "zscript/rsq/bash.zs"\n'))
+    open(OUT_SRC + 'DECORATE.rsqbash', 'w').write(BASH_DEC)
+    # the tints
+    tl = ['// 1.97: the gun bash flash, tintable so RSH0 does not clash with the headshot mod the',
+          '// owner runs separately (owner, 2026-10-24). 0 is the art as drawn and sets nothing.']
+    for i, (nm, ramp) in enumerate(TINTS):
+        if ramp:
+            tl.append('RSQ_BashTint%d = "0:255=%%%s"' % (i, ramp))
+    open(OUT_SRC + 'TRNSLATE.rsq', 'w').write('\n'.join(tl) + '\n')
+    # BD22's DoKick: our branch first, its own body kept whole behind RSQ_BashStock
+    dp = OUT_SRC + 'actors/Weapons/DEFAULTWEAPON.dec'
+    dt = open(dp, 'rb').read().decode('latin-1')
+    eol = '\r\n' if '\r\n' in dt else '\n'          # BD22's files are CRLF; match them
+    anchor = '\tDoKick:' + eol
+    if dt.count(anchor) != 1:
+        raise SystemExit('DEFAULTWEAPON.dec: DoKick is not there exactly once')
+    dt = dt.replace(anchor, anchor + BASH_STATES.replace('\n', eol))
+    open(dp, 'wb').write(dt.encode('latin-1'))
+    st['decorate'] = 'DEFAULTWEAPON.dec DoKick -> RSQ_BashCheck, RSQ_BashStock keeps BD22\'s own kick'
+    # the options
+    with open(OUT_SRC + 'CVARINFO.rsq', 'a') as f:
+        f.write('\n// 1.97: the gun bash (BD22\'s kick, with the gun you are holding)\n'
+                'user int rsq_bash = 1;\t\t\t// 0: the boot, as BD22 ships it\n'
+                'user int rsq_bash_fx = 0;\t\t// which RS_CombatFX impact\n'
+                'user int rsq_bash_tint = 0;\t\t// recolours the RSH0 flash only; 0 is the art as drawn\n')
+    mp = OUT_SRC + 'MENUDEF.rsq'
+    mt = open(mp).read()
+    a = '\tOption "Punch Switches Open", "rsq_punch_use", "OnOff"\n'
+    if mt.count(a) != 1:
+        raise SystemExit('MENUDEF.rsq: the punch-switches row is not there once')
+    mt = mt.replace(a, a + '\tOption "Gun Bash (kick key)", "rsq_bash", "OnOff"\n'
+                          '\tOption "Bash Impact", "rsq_bash_fx", "RSQ_BashFXOpt"\n'
+                          '\tOption "Bash Impact Colour", "rsq_bash_tint", "RSQ_BashTintOpt"\n')
+    mt = mt.rstrip('\n') + '\n\nOptionValue "RSQ_BashFXOpt"\n{\n'
+    for i, (eid, _) in enumerate(FX):
+        mt += '\t%d, "%s"\n' % (i, eid)
+    mt += '}\n\nOptionValue "RSQ_BashTintOpt"\n{\n'
+    for i, (nm, _) in enumerate(TINTS):
+        mt += '\t%d, "%s"\n' % (i, nm)
+    mt += '}\n'
+    open(mp, 'w').write(mt)
+    st['options'] = 'rsq_bash, rsq_bash_fx (%s), rsq_bash_tint (%s)' % (
+        '/'.join(e for e, _ in FX), '/'.join(n for n, _ in TINTS))
+    json.dump(st, open(OUT + 'bash_apply.json', 'w'), indent=1)
+    with open(OUT + '.generated', 'a') as f:
+        f.write('then tools/bd22_plus.py bash\n')
+    print(json.dumps(st, indent=1))
 
 
 def options():
@@ -737,6 +986,8 @@ if __name__ == '__main__':
         apply()
     if sys.argv[1:2] == ['revolver']:
         revolver()
+    if sys.argv[1:2] == ['bash']:
+        bash()
     if sys.argv[1:2] == ['options']:
         options()
     if sys.argv[1:2] == ['pk3']:

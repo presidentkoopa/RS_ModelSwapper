@@ -1,0 +1,18 @@
+// 1.97: the gun bash (tools/bd22_plus.py bash). BD22's own KickAttack decides the result --
+// same damage, same DamageType Kick, so its gore, its obituary and its KickHasHit all still apply.
+// The only addition is the impact effect at the point it landed. ZSCRIPT is compiled before
+// DECORATE, so this has to live here to inherit KickAttack, and it names the ZScript FX actor.
+ACTOR RSQ_BashAttack : KickAttack
+{
+	Obituary "$OBBD_KICK"
+	States
+	{
+	Death:
+	Crash:
+		TNT1 A 0 A_SpawnItemEx("RSQ_BashFX", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
+		Goto Super::Death
+	XDeath:
+		TNT1 A 0 A_SpawnItemEx("RSQ_BashFX", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
+		Goto Super::XDeath
+	}
+}

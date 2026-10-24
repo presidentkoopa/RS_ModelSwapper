@@ -1,0 +1,21 @@
+{
+ "sprites": {
+  "frames": 44,
+  "scale": {
+   "RSS3": 0.384,
+   "RSU1": 1.6,
+   "RSU4": 6.4,
+   "RSU5": 0.857,
+   "RSH0": 1.0
+  },
+  "source_px": {
+   "RSS3": 250,
+   "RSU1": 60,
+   "RSU4": 15,
+   "RSU5": 112,
+   "RSH0": 96
+  }
+ },
+ "decorate": "DEFAULTWEAPON.dec DoKick -> RSQ_BashCheck, RSQ_BashStock keeps BD22's own kick",
+ "options": "rsq_bash, rsq_bash_fx (RSS3/RSU1/RSU4/RSU5/RSH0), rsq_bash_tint (Original/Blue/Green/Amber/White)"
+}

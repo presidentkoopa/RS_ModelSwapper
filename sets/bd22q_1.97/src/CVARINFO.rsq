@@ -21,3 +21,8 @@ server bool rsq_mg_replaces_mg42 = false;	// every MG42 spawn is the BD21 Machin
 
 // 1.97: roster
 server bool rsq_slug_replaces_shotvolver = false;	// every Shotvolver spawn is the slug revolver
+
+// 1.97: the gun bash (BD22's kick, with the gun you are holding)
+user int rsq_bash = 1;			// 0: the boot, as BD22 ships it
+user int rsq_bash_fx = 0;		// which RS_CombatFX impact
+user int rsq_bash_tint = 0;		// recolours the RSH0 flash only; 0 is the art as drawn
