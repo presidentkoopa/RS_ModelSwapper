@@ -256,9 +256,9 @@ measured off `M249_lowpoly` **alone**, because the model carries an `alt-` block
 about 40 units below the gun and a span over everything measures the pair, not the gun. Its
 segment is 21.6, inside the other six's 13.3–26.0.
 
-**The MG42 is still out, and the reason I first gave was wrong.** I wrote that their
-fit (residual 11.26 and 24.26 against everyone else's 0.0000) meant "the lookup is finding the
-wrong model". It is the right model. The fit stacks every surface's vertices in order and calls the
+**Both of the two that would not fit are in now, and the reason I first gave was wrong.** I wrote
+that their fit (residual 11.26 and 24.26 against everyone else's 0.0000) meant "the lookup is
+finding the wrong model". It is the right model. The fit stacks every surface's vertices in order and calls the
 correspondence identity, and **these two files split the mesh differently from REMA's**:
 
 | | pack | REMA `*_wm.md3` |
@@ -273,12 +273,20 @@ answers: **ready frame 4, residual 0.0000** on its 4752 matching vertices (frame
 was never right), and `MODELDEF.bd.txt` says the same thing independently — `FrameIndex MGN1 A 0 4`,
 MGN1 A being the sprite the gun's Ready state holds. Its butt strike is in, above.
 
-The MG42 has nothing to fit on — no surface corresponds, and the one 60-vertex part that does is a
-2.4 × 0.8 × 3.2 sliver whose fit is degenerate (the body lands 24 units out under it). It needs its
-mesh matched some other way (a correspondence found by position rather than assumed by order)
-before it can have either a ready frame or a butt strike.
+The MG42 has no surface that corresponds at all, so there is nothing to fit one-for-one on: it
+needed **the correspondence found by position rather than assumed by order**, and the tool to do
+that was already in `bd22_plus.py` and went unused for two sessions. `rigid()` is ICP with a
+cKDTree, and the `geometry` stage has been reporting this very mesh at **mean 0.0 cm, max 0.0 cm,
+rotation 1.7e-06°** the whole time. Per frame it gives frame 0 at 0.0000 and frames 1 and 2 at
+0.0105, and `MODELDEF.bd.txt` agrees independently — `FrameIndex HBUS A 0 0`. Its butt strike is
+in, above; `PBUS` is the same frames again (what BD22 draws in Purist mode), so both sprites count.
 
-**None of the seven can be gated.** `RSM_Melee.Tick` returns at `!RSVR_VRHand.InVR(mo)`, so a
+**The lesson worth keeping: an order-identity Kabsch silently returns a plausible number when the
+two meshes hold the same points in a different order.** Nothing errors — the arrays are the same
+length. Any future gun whose residual is not ~0.0000 should go to `rigid()` before it is written
+off, and the surface vertex counts should be compared first.
+
+**None of the eight can be gated.** `RSM_Melee.Tick` returns at `!RSVR_VRHand.InVR(mo)`, so a
 headless run with `vr_mode 0` never reaches a line of it; the gate proves they compile and that
 nothing faults, and the headset is what proves they swing.
 
@@ -384,19 +392,28 @@ Stages `recoil`, `impacts` and `bullet`, all after `butt`. **The owner's yes was
    and up) and AssaultShotgun **0.44** (7.8 × 0.7 × 2.0, same signature). On Shot_Gun the named
    surface and the boundary loop agree with each other to 0.06.
 
-   **Four guns have no port in their mesh to find**, and guessing them would put brass somewhere
+   **The MG42's port is DOWN, not sideways**, and looking only at the walls is what hid it. The
+   regular loops down its flank at x 68–108 are the barrel jacket's cooling slots. A real MG42
+   ejects through the floor of the receiver, and the chute is modelled: one flat opening 10.1 × 2.8,
+   centred (y −0.04), below the bore (z −0.57), under the breech. So the case leaves three ways,
+   not two — `Throw()` returns SIDE, DOWN or TIP — and a belt gun at 1200 rpm is not TIP. `MGLinks`
+   are caught too: same chute, and an `EmptyBrass` subclass the exact-name filter was missing.
+
+   **Three guns have no port in their mesh to find**, and guessing them would put brass somewhere
    arbitrary: **MP40** (every `korpus` slot is mirrored at ±1.44 — the tube's cooling slots; `zamek`
    is the bolt, y +1.2 being its left-side handle), **Minigun** (91 loops, all of them bores in
-   `Pipe`), **Machinegun** (an M249 body with no port loop), **MG42** (none, and its body will not
-   fit either — see the butt-strike section).
-3. **The round in flight — written, switched off, not in the pk3.** See the commit: every gun with
+   `Pipe`), **Machinegun** (an M249 body with no port loop).
+3. **The round in flight — written, inert.** `zscript/rsq/rounds.zs` DOES ship and IS included, but
+   it is `class RSQ_Rounds abstract` with nothing calling it and `MODELDEF.rsbullet` left out of the
+   pk3, so it is dead code, not a working bullet — do not read its presence as "done". Every gun with
    a cartridge is HITSCAN, and the only carrier is a PROJECTILE follower, so it can never fire as
    wired. It needs spawning and flying from the muzzle (each card has one) to the impact.
 4. **Impact character.** Only a strength multiplier crossed. RS_Ballistics' 572 impact blocks decide
    what a 9mm does to metal versus wood versus glass; none of that came, and it cannot come as
    written — bursts resolve PARTICLEDEFS, a REMA renderer feature.
-5. **Butt strikes** exist on seven long guns. Only the MG42 is left, and its mesh cannot be fitted
-   at all until a correspondence is found by position rather than assumed by vertex order.
+5. **Butt strikes — done.** All eight stocked guns: Rifle, Shot_Gun, SSG, AssaultShotgun, MP40,
+   BrutalSMG, Machinegun, MG42. None of them can be gated (melee is VR-only), so the headset is
+   what proves they swing.
 6. **The slug revolver has no hand-fit sheet.** The Machinegun got one.
 7. **The melee doc's §9 architecture** — the netevent pose-history spine it calls the single
    highest-leverage thing in the three codebases. `melee.zs` was extended instead, so its snap-turn
