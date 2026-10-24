@@ -1655,10 +1655,12 @@ Model MS_wolf_Tommy
 }
 
 // ---------------------------------------------------------------------
-// The remaining VR weapon packages, weapons only. make_shelf classifies by
-// name against the archetypes RS_ForeignShelf already uses and drops what it
-// cannot place -- pickups, ammo, decorations and the odd tracer -- so a pack
-// of 93 models contributes the four guns in it and nothing else.
+// The remaining VR weapon packages, weapons only. The classifier drops what
+// it cannot place as a weapon -- gibs, tracers, pickups, player models -- so
+// a pack of 93 contributes only the guns in it. It now also knows the sets
+// this mod used to filter out: Chex zorches rather than shoots (the Mini
+// Zorcher is its pistol, the LAZ Device its BFG, the Bootspork its chainsaw)
+// and Aliens' M56 Smartgun is a squad machinegun.
 // ---------------------------------------------------------------------
 
 Model MS_alien_flamer
@@ -1693,6 +1695,16 @@ Model MS_alien_knife
 	FrameIndex MSBL A 0 9999
 }
 
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "mechloader.md3"
+	Scale -1.0 1.0 1.0
+	Offset -10.0 40.0 -10.0
+	FrameIndex MISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
 Model MS_alien_pistol
 {
 	Path "models/alien/pistol"
@@ -1722,6 +1734,123 @@ Model MS_alien_shotgun
 	Skin 0 "m37a2.png"
 	Scale -1.1 1.1 1.1
 	Offset 0.0 -34.0 -4.0
+	FrameIndex SHTG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56.png"
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_minizorcher
+{
+	Path "models/chex/minizorcher"
+	Model 0 "MiniZorcher.md3"
+	Scale -1.0 1.0 1.0
+	Offset 1.0 -26.0 -14.0
+	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_sigil
+{
+	Path "models/chex/sigil"
+	Model 0 "sigil_handle.md3"
+	Skin 0 "sigil.png"
+	Scale -1.6 1.6 1.6
+	Offset 0.0 -28.0 -15.0
+	FrameIndex BFGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_lazdevice
+{
+	Path "models/chex/lazdevice"
+	Model 0 "LAZDevice.md3"
+	Scale -1.0 1.0 1.0
+	Offset 5.0 -26.0 -14.0
+	FrameIndex BFGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_rapidzorcher
+{
+	Path "models/chex/rapidzorcher"
+	Model 0 "RapidZorcher.md3"
+	Scale -1.0 1.0 1.0
+	Offset 1.0 -26.0 -14.0
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_spork
+{
+	Path "models/chex/spork"
+	Model 0 "spork.md3"
+	Skin 0 "spork.png"
+	Scale -1.0 1.0 1.0
+	Offset 1.0 -26.0 -14.0
+	FrameIndex SAWG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_spoon
+{
+	Path "models/chex/spoon"
+	Model 0 "spoon.md3"
+	Skin 0 "spoon.png"
+	Scale -1.0 1.0 1.0
+	Offset 1.0 -26.0 -14.0
+	FrameIndex SAWG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_phasingzorcher
+{
+	Path "models/chex/phasingzorcher"
+	Model 0 "PhasingZorcher.md3"
+	Scale -1.0 1.0 1.0
+	Offset 2.0 -26.0 -12.0
+	FrameIndex MISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_zorchpropulsor
+{
+	Path "models/chex/zorchpropulsor"
+	Model 0 "ZorchPropulsor.md3"
+	Skin 0 "ZorchPropulsor.png"
+	Scale -1.0 1.0 1.0
+	Offset 4.0 -26.0 -12.0
+	FrameIndex MISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_largezorcher
+{
+	Path "models/chex/largezorcher"
+	Model 0 "LargeZorcher.md3"
+	Skin 0 "LargeZorcher_clip_g.png"
+	Scale -1.0 1.0 1.0
+	Offset 1.0 -26.0 -14.0
+	FrameIndex SHTG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_chex_superlargezorcher
+{
+	Path "models/chex/superlargezorcher"
+	Model 0 "SuperLargeZorcher.md3"
+	Skin 0 "LargeZorcher_clip_g.png"
+	Scale -1.0 1.0 1.0
+	Offset 1.0 -26.0 -14.0
 	FrameIndex SHTG A 0 0
 	FrameIndex MSBL A 0 9999
 }
@@ -2039,6 +2168,27 @@ Model MS_hdvr_BFG9000
 	FrameIndex MSBL A 0 9999
 }
 
+Model MS_hocus_blaster
+{
+	Path "models/hocus/blaster"
+	Model 0 "blaster.md3"
+	Scale -0.95 0.95 0.95
+	Offset 0.0 -28.0 -10.0
+	FrameIndex PLSG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hocus_cannon
+{
+	Path "models/hocus/cannon"
+	Model 0 "cannon.md3"
+	Skin 0 "cannon.png"
+	Scale -0.72 0.72 0.72
+	Offset 0.0 -24.0 -15.0
+	FrameIndex BFGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
 Model MS_hocus_rifle
 {
 	Path "models/hocus/rifle"
@@ -2050,13 +2200,44 @@ Model MS_hocus_rifle
 	FrameIndex MSBL A 0 9999
 }
 
+Model MS_punch_glove
+{
+	Path "models/punch/glove"
+	Model 0 "glove.md3"
+	Scale -1.2 1.2 1.2
+	Offset 0.0 -10.0 -10.0
+	FrameIndex PUNG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_qvplus_gats
+{
+	Path "models/qvplus/gats"
+	Model 0 "rev.md3"
+	Skin 0 "WPN-REV.png"
+	Scale 1.35 1.35 1.35
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
 Model MS_qvplus_guns
 {
 	Path "models/qvplus/guns"
-	Model 0 "shotgun.md3"
-	Skin 0 "WPN-GUNS.png"
+	Model 0 "m16.md3"
+	Skin 0 "WPN-M16.png"
 	Scale 1.35 1.35 1.35
-	FrameIndex SHTG A 0 0
+	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_univ_sigil
+{
+	Path "models/univ/sigil"
+	Model 0 "sigil_handle.md3"
+	Skin 0 "sigil.png"
+	Scale -1.6 1.6 1.6
+	Offset 0.0 -28.0 -15.0
+	FrameIndex BFGG A 0 0
 	FrameIndex MSBL A 0 9999
 }
 
@@ -2154,6 +2335,17 @@ Model MS_voxel_Pistolalt
 	Scale 0.6 -0.6 0.6
 	Offset 0.0 -32.0 -16.0
 	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_voxel_sigil
+{
+	Path "models/voxel/sigil"
+	Model 0 "sigil_handle.md3"
+	Skin 0 "sigil.png"
+	Scale -1.6 1.6 1.6
+	Offset 0.0 -28.0 -15.0
+	FrameIndex BFGG A 0 0
 	FrameIndex MSBL A 0 9999
 }
 
@@ -2520,16 +2712,48 @@ Model MS_vplus_BFG9000
 	FrameIndex MSBL A 0 9999
 }
 
-Model MS_vplus_guns
+Model MS_vplus_gats
 {
-	Path "models/vplus/guns"
-	Model 0 "shotgun.md3"
-	Skin 0 "WPN-GUNS.png"
+	Path "models/vplus/gats"
+	Model 0 "rev.md3"
+	Skin 0 "WPN-REV.png"
 	Scale 1.35 1.35 1.35
-	FrameIndex SHTG A 0 0
+	FrameIndex CHGG A 0 0
 	FrameIndex MSBL A 0 9999
 }
 
+Model MS_vplus_guns
+{
+	Path "models/vplus/guns"
+	Model 0 "m16.md3"
+	Skin 0 "WPN-M16.png"
+	Scale 1.35 1.35 1.35
+	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_vplus_sigil
+{
+	Path "models/vplus/sigil"
+	Model 0 "sigil_handle.md3"
+	Skin 0 "sigil.png"
+	Scale -1.6 1.6 1.6
+	Offset 0.0 -28.0 -15.0
+	FrameIndex BFGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+
+Model MS_zblood_sigil
+{
+	Path "models/zblood/sigil"
+	Model 0 "sigil_handle.md3"
+	Skin 0 "sigil.png"
+	Scale -1.6 1.6 1.6
+	Offset 0.0 -28.0 -15.0
+	FrameIndex BFGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
 
 Model MS_zblood_shotgun
 {

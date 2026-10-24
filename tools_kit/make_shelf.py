@@ -59,7 +59,23 @@ KIND = [
     (r'axe', ('axe', 'PUNG')),
     (r'dslayer|dsweap|sword', ('sword', 'PUNG')),
     (r'boot|kick', ('kick', 'PUNG')),
-    (r'knife|melee|fist|canister|xplose|bolt', ('melee', 'PUNG')),
+    (r'knife|melee|fist|canister|xplose|bolt|glove', ('melee', 'PUNG')),
+    # Non-Doom sets name their guns their own way, and the table used to drop them
+    # because the mod did not want them. It does now. Chex zorches rather than
+    # shoots: the Mini Zorcher is its pistol, the Rapid Zorcher its chaingun, the
+    # LAZ Device its BFG. Sigil sits in the BFG slot too.
+    (r'minizorcher|zorcher.*mini', ('pistol', 'PISG')),
+    (r'rapidzorcher|zorcher.*rapid', ('machinegun', 'CHGG')),
+    (r'largezorcher|zorcher.*large', ('shotgun', 'SHTG')),
+    (r'phasingzorcher|propulsor', ('launcher', 'MISG')),
+    (r'lazdevice|sigil', ('bfg', 'BFGG')),
+    (r'bootspork|spork|spoon', ('saw', 'SAWG')),   # Chex's chainsaw is a spork
+    (r'zorcher', ('plasma', 'PLSG')),
+    (r'blaster', ('plasma', 'PLSG')),
+    (r'gats|gatling|smartgun', ('machinegun', 'CHGG')),   # the M56 Smartgun is Aliens' squad MG
+    (r'cannon', ('bfg', 'BFGG')),
+    (r'mech', ('launcher', 'MISG')),
+    (r'\bguns?\b', ('pistol', 'PISG')),
 ]
 
 
