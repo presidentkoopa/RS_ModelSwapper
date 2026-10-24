@@ -19,13 +19,33 @@ gen = open(sys.argv[1], encoding='utf-8', errors='replace').read()
 for cls, slot in re.findall(r"n == '(\w+)'\)\s*return (\d+)", gen):
     RELOADING[cls] = int(slot)
 
+# A card may carry no model of its own and inherit one with `base =`. The blue
+# handgun is the black one recoloured, the blue plasma rifle likewise, and
+# WM_RocketLauncher is WM_RPG under another name -- same mesh, different skin.
+# Reading only cards with a `model` line missed all three, and left their slots
+# looking as though we had no gun for them.
+_cards = {c['cls']: c for c in wmcard.load(glob.glob(RS + '/WMCARD.*'))}
+
+
+def model_of(cls, _seen=None):
+    _seen = _seen or set()
+    if cls in _seen or cls not in _cards:
+        return None
+    _seen.add(cls)
+    k = _cards[cls]['keys']
+    if k.get('model'):
+        return k['model']
+    base = k.get('base')
+    return model_of(base, _seen) if base else None
+
+
 cardof = {}
-for c in wmcard.load(glob.glob(RS + '/WMCARD.*')):
-    mod = c['keys'].get('model')
+for cls in _cards:
+    mod = model_of(cls)
     if not mod:
         continue
     d, mesh = (list(mod) + [''])[:2]
-    cardof[norm(os.path.join(RS, *d.split('/'), mesh))] = c['cls']
+    cardof.setdefault(norm(os.path.join(RS, *d.split('/'), mesh)), []).append(cls)
 
 # a card class may be the Vanilla+ copy (WM_VP_X) of a Vanilla card (WM_X)
 def slot_for(cls):
@@ -71,12 +91,21 @@ for path, name in sorted(owner.items()):
         continue
     B = np.vstack([s['xyz'][0] for s in m['surfs']])
     for cand in rs.get(len(B), []):
-        cls = cardof.get(cand)
-        if not cls:
+        # Where several cards share a mesh -- a recolour and its base -- prefer the
+        # one that actually declares the model. Their reload GEOMETRY is identical;
+        # they differ only in sprite and ammo-class names, which belong to the
+        # standalone pack and mean nothing to a swapped model. Preferring the owner
+        # just keeps the assignment stable between runs.
+        owns = lambda c: bool(_cards.get(c, {}).get('keys', {}).get('model'))
+        hit = None
+        for cls in sorted(cardof.get(cand, []), key=lambda c: (not owns(c), c)):
+            used, slot = slot_for(cls)
+            if slot is not None and name not in found.get(slot, []):
+                hit = (used, slot)
+                break
+        if not hit:
             continue
-        used, slot = slot_for(cls)
-        if slot is None:
-            continue
+        used, slot = hit
         A = np.vstack([s['xyz'][0] for s in read_md3(cand)['surfs']])
         if A.shape != B.shape or float(np.abs(sig(A) - sig(B)).max()) > 0.5:
             continue

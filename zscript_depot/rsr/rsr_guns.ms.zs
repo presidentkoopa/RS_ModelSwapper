@@ -13,13 +13,12 @@ class RSR_Guns abstract
 	// the model in hand.
 	//
 	// A model earns a slot only where it is provably the SAME MESH as a gun the
-	// cards already measure: same vertex count, and the sorted distances from the
-	// centroid agreeing to within half a unit. That second test is what matters --
+	// cards measure: same vertex count, and the sorted distances from the centroid
+	// agreeing to within half a unit. The second test is the one that matters --
 	// three pairs matched on vertex count alone and were different guns.
 	//
-	// Several of our models are the same mesh under different names (the tec9
-	// ships as MS_MG_Tec9 and MS_meat_TEC9), so every one of them claims the slot
-	// and the reload is the same whichever the player picks.
+	// Several of our models are the same mesh under different names, so each one
+	// claims the slot and reloads identically whichever the player picks.
 	clearscope static int Index(Weapon w)
 	{
 		if (!w) return 0;
