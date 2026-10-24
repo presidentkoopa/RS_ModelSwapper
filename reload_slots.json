@@ -56,5 +56,37 @@
  "11": [
   "MS_MG_Tec9",
   "MS_meat_TEC9"
+ ],
+ "18": [
+  "MS_wolf_KAR98"
+ ],
+ "19": [
+  "MS_brt_HitlersBuzzsaw",
+  "MS_wolf_MG42"
+ ],
+ "20": [
+  "MS_wolf_MP40"
+ ],
+ "21": [
+  "MS_wolf_PP41"
+ ],
+ "22": [
+  "MS_wolf_BAR"
+ ],
+ "23": [
+  "MS_wolf_Garand"
+ ],
+ "24": [
+  "MS_PU_PlasmaRifle",
+  "MS_PlasmaRifle",
+  "MS_brt_PlasmaGun",
+  "MS_d64_PlasmaGun",
+  "MS_hdvr_PlasmaRifle",
+  "MS_vplus_PlasmaRifle"
+ ],
+ "25": [
+  "MS_BD_RailGun",
+  "MS_PU_BD_RailGun",
+  "MS_brt_RailGun"
  ]
 }
