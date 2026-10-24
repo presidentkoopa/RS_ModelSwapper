@@ -87,6 +87,50 @@
     -6.0
    ],
    "source": "AssaultShotgun.md3 frame 4"
+  },
+  "MP40BUTT": {
+   "classes": [
+    "MP40"
+   ],
+   "sprites": [
+    "MP40",
+    "MP42",
+    "PP40"
+   ],
+   "ready_frame": 2,
+   "blade_in": [
+    24.8,
+    0.2,
+    -3.1
+   ],
+   "blade_out": [
+    -1.2,
+    0.0,
+    -3.5
+   ],
+   "source": "MP40.md3 frame 2"
+  },
+  "SMGBUTT": {
+   "classes": [
+    "BrutalSMG"
+   ],
+   "sprites": [
+    "SMGF",
+    "SMGR",
+    "VSMG"
+   ],
+   "ready_frame": 3,
+   "blade_in": [
+    18.6,
+    -0.3,
+    -1.2
+   ],
+   "blade_out": [
+    0.6,
+    0.0,
+    -10.4
+   ],
+   "source": "BrutalSMG.md3 frame 3"
   }
  },
  "gate": "Steadied (WF_TWOHANDSTABILIZED) + butt forward >= rsvr_butt_fwd + butt outruns the muzzle by rsvr_butt_lead",

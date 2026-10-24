@@ -831,6 +831,14 @@ BUTT = [
      'SSG.md3 frame 1'),
     ('ASGBUTT', ["'AssaultShotgun'"], ['USAS', '2SAS', 'A12P'], 4, (20.0, 0.0, -2.6), (-1.7, 0.0, -6.0),
      'AssaultShotgun.md3 frame 4'),
+    # 2026-10-24: the other stocked guns. The MP40 and the SMG rigid-fit their wm mesh at 0.0000,
+    # same as the four above. The MACHINEGUN and the MG42 do NOT -- residual 11.26 and 24.26, and
+    # the MG42 resolves a 3-frame mesh that is plainly not the Buzzsaw -- so they are left out
+    # rather than guessed. They both have stocks and are the obvious next two once that is sorted.
+    ('MP40BUTT', ["'MP40'"], ['MP40', 'MP42', 'PP40'], 2, (24.8, 0.2, -3.1), (-1.2, 0.0, -3.5),
+     'MP40.md3 frame 2'),
+    ('SMGBUTT', ["'BrutalSMG'"], ['SMGF', 'SMGR', 'VSMG'], 3, (18.6, -0.3, -1.2), (0.6, 0.0, -10.4),
+     'BrutalSMG.md3 frame 3'),
 ]
 
 

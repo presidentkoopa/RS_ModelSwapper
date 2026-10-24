@@ -146,6 +146,8 @@ class RSVR_Hand play
 	const SGBUTT = 6;
 	const SSGBUTT = 7;
 	const ASGBUTT = 8;
+	const MP40BUTT = 9;
+	const SMGBUTT = 10;
 
 	// swing speed (m/s at the blade's outer point, relative to the player's own
 	// movement) that counts as a blow, and the slowest release that throws
@@ -239,6 +241,12 @@ class RSVR_Hand play
 	transient SpriteID sUSAS;
 	transient SpriteID s2SAS;
 	transient SpriteID sA12P;
+	transient SpriteID sMP40;
+	transient SpriteID sMP42;
+	transient SpriteID sPP40;
+	transient SpriteID sSMGF;
+	transient SpriteID sSMGR;
+	transient SpriteID sVSMG;
 	transient SpriteID sPIST;
 	transient SpriteID s2IST;
 	transient SpriteID sREVO;
@@ -266,6 +274,10 @@ class RSVR_Hand play
 			return (27.9, 0.1, -2.8);	// 1.97: SSG.md3 frame 1, toward the muzzle
 		if (k == ASGBUTT)
 			return (20.0, 0.0, -2.6);	// 1.97: AssaultShotgun.md3 frame 4, toward the muzzle
+		if (k == MP40BUTT)
+			return (24.8, 0.2, -3.1);	// 1.97: MP40.md3 frame 2, toward the muzzle
+		if (k == SMGBUTT)
+			return (18.6, -0.3, -1.2);	// 1.97: BrutalSMG.md3 frame 3, toward the muzzle
 		if (k == PISTOL)
 			return (26.2, 0.0, -7.0);	// 1.97: BrutalPistol.md3 frame 3, just forward of the hand
 		if (k == REVOLVER)
@@ -285,6 +297,10 @@ class RSVR_Hand play
 			return (15.3, 0.1, -7.0);	// 1.97: SSG.md3 frame 1, the butt
 		if (k == ASGBUTT)
 			return (-1.7, 0.0, -6.0);	// 1.97: AssaultShotgun.md3 frame 4, the butt
+		if (k == MP40BUTT)
+			return (-1.2, 0.0, -3.5);	// 1.97: MP40.md3 frame 2, the butt
+		if (k == SMGBUTT)
+			return (0.6, 0.0, -10.4);	// 1.97: BrutalSMG.md3 frame 3, the butt
 		if (k == PISTOL)
 			return (44.2, 0.0, -0.2);	// 1.97: BrutalPistol.md3 frame 3, the muzzle
 		if (k == REVOLVER)
@@ -313,6 +329,12 @@ class RSVR_Hand play
 		sUSAS = Actor.GetSpriteIndex('USAS');
 		s2SAS = Actor.GetSpriteIndex('2SAS');
 		sA12P = Actor.GetSpriteIndex('A12P');
+		sMP40 = Actor.GetSpriteIndex('MP40');
+		sMP42 = Actor.GetSpriteIndex('MP42');
+		sPP40 = Actor.GetSpriteIndex('PP40');
+		sSMGF = Actor.GetSpriteIndex('SMGF');
+		sSMGR = Actor.GetSpriteIndex('SMGR');
+		sVSMG = Actor.GetSpriteIndex('VSMG');
 		sPIST = Actor.GetSpriteIndex('PIST');
 		s2IST = Actor.GetSpriteIndex('2IST');
 		sREVO = Actor.GetSpriteIndex('REVO');
@@ -347,6 +369,10 @@ class RSVR_Hand play
 				return SSGBUTT;
 			if (n == 'AssaultShotgun')
 				return ASGBUTT;
+			if (n == 'MP40')
+				return MP40BUTT;
+			if (n == 'BrutalSMG')
+				return SMGBUTT;
 		}
 		if (n == 'BrutalPistol')
 			return PISTOL;
@@ -375,6 +401,10 @@ class RSVR_Hand play
 			return s == sVSSG || s == sSHT2 || s == sVSHZ;
 		if (k == ASGBUTT)
 			return s == sUSAS || s == s2SAS || s == sA12P;
+		if (k == MP40BUTT)
+			return s == sMP40 || s == sMP42 || s == sPP40;
+		if (k == SMGBUTT)
+			return s == sSMGF || s == sSMGR || s == sVSMG;
 		if (k == PISTOL)
 			return s == sPIST || s == s2IST;
 		if (k == REVOLVER)
@@ -496,7 +526,7 @@ class RSVR_Hand play
 			return;
 		}
 
-		bool isButt = k == RIFLEBUTT || k == SGBUTT || k == SSGBUTT || k == ASGBUTT;
+		bool isButt = k == RIFLEBUTT || k == SGBUTT || k == SSGBUTT || k == ASGBUTT || k == MP40BUTT || k == SMGBUTT;
 		double thr = (k == AXE ? AXE_SWING : k == SWORD ? SWORD_SWING
 			: isButt ? BUTT_SWING : WHIP_SWING) * vu / 35.
 			* max(0.2, Cv(mo, 'rsvr_melee_swing', 1.0));
