@@ -1,3 +1,7 @@
+**NO DRIFT. FOCUS ON WEAPON SET PRODUCTION.**
+**USE TOOLS IN REPO. NOWHERE ELSE.**
+(owner, 2026-10-24 04:39 -- these two instructions stand above everything else in this repo)
+
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
 Current step: **F1**

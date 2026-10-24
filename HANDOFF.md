@@ -1,3 +1,7 @@
+**NO DRIFT. FOCUS ON WEAPON SET PRODUCTION.**
+**USE TOOLS IN REPO. NOWHERE ELSE.**
+(owner, 2026-10-24 04:39 -- these two instructions stand above everything else in this repo)
+
 # RSQ Weapon Depot — HANDOFF (2026-10-24 04:40, owner: presidentkoopa)
 
 **Addressed to: the next Claude session, any coding agent, and the local coding team.** `CLAUDE.md` at the

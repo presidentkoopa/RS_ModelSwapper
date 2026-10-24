@@ -1,3 +1,7 @@
+**NO DRIFT. FOCUS ON WEAPON SET PRODUCTION.**
+**USE TOOLS IN REPO. NOWHERE ELSE.**
+(owner, 2026-10-24 04:39 -- these two instructions stand above everything else in this repo)
+
 # To every Claude, coding agent or human picking this repo up
 
 1. Read `HANDOFF.md` in full, then `PLAN.md`. The plan's "Current step" is your job. Nothing else is.
