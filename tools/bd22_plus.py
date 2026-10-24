@@ -30,6 +30,12 @@ SRC = 'E:/DOOMWork/_buildtemp/rs_brutal22weaponsq/src/'            # RS_Brutal22
 REMA = 'E:/DOOMWork/RS_VR_Weapons/bd22/'                           # RS_VR_Weapons checkout, bd22/
 OUT = 'E:/DOOMWork/_buildtemp/rsq_bd22/'                           # build dir (outside the repo)
 BD22SRC = 'E:/DOOMWork/_buildtemp/bd22src/'                        # brutal22test6.pk3 extracted (actors/Weapons/*.dec)
+# THE RELEASE VERSION, in one place. readme() builds both the title and the pk3 name
+# from it, so the two cannot say different things -- which is how a stale pk3 on the
+# Desktop cost a diagnosis on 2026-10-24. The repo folder stays sets/bd22q_1.97:
+# renaming it would break check_plan.py and PLAN.md for nothing.
+VERSION = '1.99'
+
 SCALE, OFF = (-1.0, 1.0, 1.0), (0.0, 0.0, 0.0)        # MODELDEF.bd.txt: all three guns
 
 # the three toggles: 1.96b class -> sources
@@ -1042,9 +1048,33 @@ def whip():
 README = '''RS_Brutal22WeaponsQ -- bd22q %(ver)s
 =====================================
 
-VR hands, hand-driven reloading and VR melee for Brutal Doom v22, on stock QuestZDoom 17.3.
-An ADDON: it needs Brutal Doom loaded, it replaces none of its guns, and with its options off it
-behaves as Brutal Doom shipped.
+BRUTAL DOOM v22, IN VR, ON A QUEST. As an addon, on the stock engine.
+
+Not a port and not a fork. Brutal Doom stays Brutal Doom: this loads after it, replaces none of
+its guns, and with its options off behaves exactly as it shipped. What it adds is hands -- you
+reload by pulling the magazine out and pushing a fresh one home, you bash with the gun you are
+holding, and the brass leaves the port it is supposed to leave.
+
+AND IT RUNS ON STOCK QUESTZDOOM 17.3. No engine changes, no patched build, no fork required.
+That constraint is the point of the whole thing, and it is why anything here runs on your
+headset instead of on one machine.
+
+
+WHERE THIS CAME FROM
+--------------------
+TeamBeef brought Doom to VR and built the community that made the rest of it possible. Everyone
+here found it through them.
+
+Emawind's QuestZDoom is the engine this targets -- the one that put GZDoom on a standalone
+headset. Ermac's DoomXR is the other half of the lineage, and the hands you are wearing are his.
+
+REMA, our own GZDoom fork, is named for the two of them -- eRmac and EMAwind. REMA is where VR
+reloading was worked out: real magazines, measured wells, a hand that takes hold of a part and
+moves it. REMA can do things stock QuestZDoom cannot, because we wrote them into it.
+
+This pack is that work coming BACK. Everything REMA taught us, carried to the stock engine and
+made to run there -- a little more of it each release. Where stock cannot do what REMA does, it
+says so plainly here rather than faking it.
 
 
 LOAD ORDER
@@ -1052,31 +1082,21 @@ LOAD ORDER
     doom2.wad  ->  brutal22test6.pk3  ->  BD_VoxelPack.pk3  ->  %(pk3)s
 
 Doom 2, not Freedoom: BD_VoxelPack's voxeldef names Doom 2's own sprites and Freedoom fails on it.
-No engine changes. Stock QuestZDoom 17.3.
 
 
-WHAT IT ADDS
-------------
-Hands on every Brutal Doom gun, and reloading you do WITH YOUR HANDS instead of a keypress:
-
-  magazine    %(nrsr)d guns -- Rifle, Pistol, SMG, MP40, Assault Shotgun, Railgun, Plasma,
-              Sniper, Rocket Launcher, and (new in 1.97) the MG42's belt drum, the
-              Flamethrower's canister and the Unmaker's skull
+RELOADING, WITH YOUR HANDS
+--------------------------
+  magazine    12 guns -- Rifle, Pistol, SMG, MP40, Assault Shotgun, Railgun, Plasma,
+              Sniper, Rocket Launcher, and the MG42's belt drum, the Flamethrower's
+              canister and the Unmaker's skull
   pump        the Shotgun
   break-open  the SSG, the Grenade Launcher, the Shotvolver, and the slug revolver
 
 Take the magazine out with your off hand, bring a fresh one up, push it home. Break guns swing
 open, take a round at a time or a speedloader, and a flick of the wrist shuts them.
 
-NEW IN 1.97
-  * The MG42 belt drum, the Flamethrower canister and the Unmaker skull now reload. Brutal Doom
-    never reloads those three; the parts were carved out of their own meshes to do it.
-  * The BD21 MACHINEGUN (M249 with an over-under launcher), on slot 4. Its launcher is loaded by
-    hand. Menu row: "Machinegun replaces MG42".
-  * The BD21 SLUG REVOLVER, on slot 2 beside the Shotvolver. Menu row: "Slug revolver replaces
-    Shotvolver".
-  * Both revolvers take a SPEEDLOADER or a ROUND AT A TIME, your choice: "Shot/Revolver Reload".
-  * VR MELEE with a gun in your hands -- see below.
+Brutal Doom never reloads the MG42, the Flamethrower or the Unmaker at all. Their drum, canister
+and skull were carved out of their own meshes so they could come off.
 
 
 MELEE
@@ -1085,13 +1105,41 @@ MELEE
                     kicking. Brutal Doom's own kick damage; the boot is simply not drawn.
                     Pick its impact effect and its colour in the menu.
   PISTOL WHIP       swing a pistol or a revolver and it hits what it passes through.
-  BUTT STRIKE       drive the stock of a rifle or shotgun forward with both hands on it.
+  BUTT STRIKE       drive the stock forward with both hands on it. All eight stocked guns:
+                    Rifle, Shotgun, SSG, Assault Shotgun, MP40, SMG, Machinegun, MG42.
                     OFF by default -- two hands on a rifle is also how you aim one, so this is
                     the one most likely to go off when you did not mean it. Turn it on and judge.
   FISTS             a real punch with either hand, and punching a switch works it.
   AXE / DRAGONSLAYER  swing them; two hands and the edge leading bite harder.
 
+It reads your arm, not your body. Walking, strafing and turning move the gun and are subtracted;
+only the swing counts.
+
 Out of VR, or with these turned off, Brutal Doom's own melee is untouched.
+
+
+EVERY GUN SHOOTS LIKE ITSELF
+----------------------------
+Behind the Ballistics switch -- Stock / Low / Max. Stock is Brutal Doom's own and nothing of ours.
+
+  RECOIL        22 guns, each from its own cartridge: bullet weight, muzzle velocity, powder and
+                the loaded gun's weight. An MG42 and a Kar98k fire the same round out of a 25 lb
+                gun and a 9 lb gun, and the numbers say so. In VR this moves the GUN IN YOUR
+                HANDS, never your aim and never the camera.
+  MUZZLE FLASH  18 guns, each with its own light. The SSG throws 760 units of near-white; the
+                SMG throws a sixth of that; the Unmaker throws red.
+  FLASH TAIL    14 guns -- the room answering the shot, with separate indoor and outdoor
+                recordings. Your rifle cracks differently in a corridor than it does under sky.
+  THE ROUND     11 guns draw the round in flight, at the size and the speed its cartridge says.
+                340 m/s for a 9mm, 900 for 5.56 -- which is fast, so you see a streak.
+  IMPACT        a sound for the material you hit -- concrete, metal, wood, glass, pipe, tech,
+                lava. A ricochet, per gun, when the round comes in shallow: a magnum skips off
+                stone inside 20 degrees where a rifle needs 14. Buckshot never ricochets, because
+                nine pellets would be nine ricochets. A light on the hot surfaces.
+  BRASS         out of the gun's own ejection port, measured off the mesh, for 9 guns -- and
+                three different ways: flicked from a side port, thrown down a chute (the MG42
+                ejects through the floor of its receiver, which is what an MG42 does), or tipped
+                out by hand from a cylinder or a broken breech. Sized to the round it fired.
 
 
 OPTIONS
@@ -1106,11 +1154,28 @@ and reloading themselves. Turn Reloading to "Stock (BD22)" and the guns reload a
 
 CREDITS
 -------
-Brutal Doom v22 is Sergeant_Mark_IV's; this pack is an addon to it and ships none of its guns.
-The hands and much of the art are Ermac's (Rusted Legacy, MIT -- see
-models/rsq/LICENSE_RustedLegacy_MIT.txt). The engine this targets is Emawind's QuestZDoom.
-Reload foley the mod itself has none of comes from RS_VR_Weapons.
+Brutal Doom v22 is Sergeant_Mark_IV's. It is the mod that reinvented Doom and brought a
+generation back to it, and this is an addon to it that ships none of its guns.
+
+TeamBeef built Doom VR and the community around it.
+Emawind's QuestZDoom is the engine. Ermac's DoomXR is the other half of REMA, and the hands are
+his (Rusted Legacy, MIT -- models/rsq/LICENSE_RustedLegacy_MIT.txt).
 The BD21 Machinegun and slug revolver are Brutal Doom 21's, brought forward.
+Reload foley, impact and tail sounds the mod itself has none of come from RS_Ballistics and
+RS_VR_Weapons.
+
+
+WHAT STOCK CANNOT DO, SAID PLAINLY
+----------------------------------
+Some of what REMA does has not crossed, and will not until the engine does:
+
+  * Recoil's ROLL and its backward shove. The one hook that carries roll is resolved on the
+    weapon's own class, and this pack does not own Brutal Doom's weapons; ZScript cannot add an
+    override to them. Tested, not assumed. Yaw and pitch are the whole channel here.
+  * Impact PARTICLE BURSTS, heat shimmer, volumetric smoke, wall damage, flash blindness and
+    ear ringing. All of them are REMA renderer or engine features with no stock equivalent.
+  * Per-part motion at runtime -- a slide that rides back under its own power. On stock a part
+    moves only if the motion is baked into the mesh's frames.
 
 
 KNOWN GAPS
@@ -1119,6 +1184,8 @@ KNOWN GAPS
   * The Shotvolver's cylinder has five chambers and a capacity of six; that is how Brutal Doom
     counts it, and loading a round at a time inherits it.
   * The Machinegun's HUD is its model: its sprite lumps are placeholders.
+  * The MP40, the Minigun and the Machinegun throw their brass from the body, not a port: there
+    is no ejection port modelled in those three meshes to measure.
 
 Built from the RSQ Weapon Depot. Every number in it is measured off a mesh or parsed out of the
 parent mod -- sets/bd22q_1.97/PROVENANCE.txt says what came from where and how to rebuild it.
@@ -2128,7 +2195,8 @@ def readme():
     if not page:
         raise SystemExit('MENUDEF.rsq: no RSQ_Options page')
     rows = len(re.findall(r'^\t(?:Option|Slider|Submenu) ', page.group(1), re.M))
-    txt = README % dict(ver='1.97-pre', pk3='BD22Q_197pre.pk3', nrsr=int(m.group(1)), nmenu=rows)
+    txt = README % dict(ver=VERSION, pk3='BD22Q_%s.pk3' % VERSION.replace('.', ''),
+                        nrsr=int(m.group(1)), nmenu=rows)
     open(OUT_SRC + 'README.txt', 'w').write(txt)
     st = dict(reload_entries=int(m.group(1)), menu_rows=rows, bytes=len(txt))
     json.dump(st, open(OUT + 'readme_apply.json', 'w'), indent=1)
