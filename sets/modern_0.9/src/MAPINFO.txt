@@ -1,0 +1,5 @@
+// RS Quest VR weapons: hands and the real VR reload
+gameinfo
+{
+	AddEventHandlers = "RSVR_MeleeHandler", "RSQ_Handler", "RSR_ReloadHandler", "RSB_Handler", "RSP_Handler", "RSQ_Fists", "RSQ_ScopeReal"
+}

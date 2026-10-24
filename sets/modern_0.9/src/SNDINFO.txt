@@ -1,0 +1,16 @@
+// RS Quest VR weapons: the sounds this set names, pulled from RS_VR_Weapons / rs_vr_reload (sndpack.py)
+rsm/breach/boltback       sounds/breach/boltback.wav
+rsm/breach/boltclose      sounds/breach/boltclose.wav
+rsm/breach/clipin         sounds/breach/clipin.wav
+rsm/breach/clipout        sounds/breach/clipout.wav
+rsm/breach/cmagin         sounds/breach/cmagin.wav
+rsm/breach/cmagout        sounds/breach/cmagout.wav
+rsm/breachglock/magin      sounds/breach/clipin2.wav
+rsm/breachglock/magout     sounds/breach/clipout2.wav
+rsm/breachglock/slideback  sounds/breach/slidebk.wav
+rsm/breachglock/slidefwd   sounds/breach/sliderel.wav
+wm/dry              sounds/wm/AKEMPT
+$random wm/magdrop { wm/magdrop1 wm/magdrop2 wm/magdrop3 }
+wm/magdrop1         sounds/wm/DSBOUNC1.ogg
+wm/magdrop2         sounds/wm/DSBOUNC2.ogg
+wm/magdrop3         sounds/wm/DSBOUNC3.ogg

@@ -1,0 +1,5 @@
+// the set's player: starts with its pistol
+gameinfo
+{
+	PlayerClasses = "RSQ_Player"
+}

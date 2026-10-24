@@ -1,0 +1,41 @@
+RS Quest VR Weapons -- vanilla_0.9 set, src/ unpacked from the built pk3
+======================================================================
+
+WHERE src/ CAME FROM
+  dist/RSQ_vanilla.pk3, unpacked verbatim on 2026-10-24 on the owner's instruction.
+  sha256 d9845647c2e2ed250a1523233b5bb31317c6518edbe98dcacb51ddb214ea4cb7
+  124 files, no more and no less. Nothing was edited, renamed, measured or regenerated.
+
+WHY
+  Before this, this set existed in the depot only as that pk3 plus its build reports:
+  the files were there but zipped, so the set could not be read or diffed the way
+  sets/bd22q_1.97/src can. The pk3 in dist/ is unchanged and is still the built
+  artefact; this is a readable copy of the same bytes.
+
+WHAT THIS IS NOT
+  It is not the set's SOURCE in the sense bd22q_1.97/src is. That set is regenerated
+  by the tools in this repo. This one was generated from cards (genpack -> assemble ->
+  mkpk3), and those cards live in RS_VR_Weapons, outside this depot. So this tree can
+  be read and edited, but it cannot be regenerated from anything in here.
+
+TOP-LEVEL ENTRIES
+  ANIMDEFS.txt
+  CVARINFO.txt
+  MAPINFO.player
+  MAPINFO.txt
+  MENUDEF.txt
+  MODELDEF.rsq
+  MODELDEF.rsr
+  MODELDEF.wmq
+  README_vanilla.txt
+  SNDINFO.txt
+  ZSCRIPT.txt
+  _hands
+  _sheets
+  assemble_report.json
+  genpack_report.json
+  handfit_report.json
+  models
+  sounds
+  sprites
+  zscript

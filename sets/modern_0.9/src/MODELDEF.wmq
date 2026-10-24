@@ -1,0 +1,396 @@
+// the guns themselves (genpack.py from the REMA cards)
+Model WM_BreachGlock
+{
+	Path "models/breach/glock"
+	Model 0 "glockrerig_q.md3"
+	SurfaceSkin 0 0 "skin.png"
+	SurfaceSkin 0 1 "skin.png"
+	SurfaceSkin 0 2 "skin.png"
+	SurfaceSkin 0 3 "skin.png"
+	Scale 1.1450 1.1450 1.1450
+	Offset -6.7832 16.0565 0.0
+	ZOffset -1.2125
+	NoInterpolation
+	FrameIndex Q01R A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachGlock
+{
+	Path "models/breach/glock"
+	Model 0 "glockrerig_q.md3"
+	SurfaceSkin 0 0 "skin.png"
+	SurfaceSkin 0 1 "skin.png"
+	SurfaceSkin 0 2 "skin.png"
+	SurfaceSkin 0 3 "skin.png"
+	Scale 0.3893 0.3893 0.3893
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q01S A 0 0
+}
+
+Model WM_BreachGlockS
+{
+	Path "models/breach/glocksil"
+	Model 0 "glocksil_q.md3"
+	SurfaceSkin 0 0 "skin.png"
+	SurfaceSkin 0 1 "skin.png"
+	SurfaceSkin 0 2 "Kobra.bmp"
+	SurfaceSkin 0 3 "skin.png"
+	SurfaceSkin 0 4 "skin.png"
+	Scale 1.1450 1.1450 1.1450
+	Offset -6.6956 16.0752 0.0
+	ZOffset -1.2441
+	NoInterpolation
+	FrameIndex Q02R A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachGlockS
+{
+	Path "models/breach/glocksil"
+	Model 0 "glocksil_q.md3"
+	SurfaceSkin 0 0 "skin.png"
+	SurfaceSkin 0 1 "skin.png"
+	SurfaceSkin 0 2 "Kobra.bmp"
+	SurfaceSkin 0 3 "skin.png"
+	SurfaceSkin 0 4 "skin.png"
+	Scale 0.3893 0.3893 0.3893
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q02S A 0 0
+}
+
+Model WM_BreachKimber
+{
+	Path "models/breach/kimber"
+	Model 0 "kimber_q.md3"
+	SurfaceSkin 0 0 "body.bmp"
+	SurfaceSkin 0 1 "body.bmp"
+	SurfaceSkin 0 2 "slide.bmp"
+	Scale 1.1450 1.1450 1.1450
+	Offset -6.6722 15.0708 0.0
+	ZOffset -0.8119
+	NoInterpolation
+	FrameIndex Q03R A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachKimber
+{
+	Path "models/breach/kimber"
+	Model 0 "kimber_q.md3"
+	SurfaceSkin 0 0 "body.bmp"
+	SurfaceSkin 0 1 "body.bmp"
+	SurfaceSkin 0 2 "slide.bmp"
+	Scale 0.3893 0.3893 0.3893
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q03S A 0 0
+}
+
+Model WM_BreachMK18
+{
+	Path "models/breach/mk18"
+	Model 0 "mk18nosil_25_q.md3"
+	SurfaceSkin 0 0 "barrel_ar15_370mm_lod0_diff.bmp"
+	SurfaceSkin 0 1 "eotech_exps3.bmp"
+	SurfaceSkin 0 2 "handguard_ar15.bmp"
+	SurfaceSkin 0 3 "kac_vertical_d.bmp"
+	SurfaceSkin 0 4 "lens.png"
+	SurfaceSkin 0 5 "pistolgrip_ar15_magpul_moe.bmp"
+	SurfaceSkin 0 6 "reciever_ar15_noveske_gen3.bmp"
+	SurfaceSkin 0 7 "stock_ar15_high_standart_m4ss.bmp"
+	SurfaceSkin 0 8 "stock_ar15_magpul_ctr_.bmp"
+	SurfaceSkin 0 9 "weapon_lone_star.bmp"
+	SurfaceSkin 0 10 "charge_ar15_gry.bmp"
+	SurfaceSkin 0 11 "mag.bmp"
+	SurfaceSkin 0 12 "patron_556x45nato_dif.bmp"
+	Scale 1.1450 1.1450 1.1450
+	Offset -5.8290 -7.5363 0.0
+	ZOffset 3.0141
+	NoInterpolation
+	FrameIndex Q04R A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachMK18
+{
+	Path "models/breach/mk18"
+	Model 0 "mk18nosil_25_q.md3"
+	SurfaceSkin 0 0 "barrel_ar15_370mm_lod0_diff.bmp"
+	SurfaceSkin 0 1 "eotech_exps3.bmp"
+	SurfaceSkin 0 2 "handguard_ar15.bmp"
+	SurfaceSkin 0 3 "kac_vertical_d.bmp"
+	SurfaceSkin 0 4 "lens.png"
+	SurfaceSkin 0 5 "pistolgrip_ar15_magpul_moe.bmp"
+	SurfaceSkin 0 6 "reciever_ar15_noveske_gen3.bmp"
+	SurfaceSkin 0 7 "stock_ar15_high_standart_m4ss.bmp"
+	SurfaceSkin 0 8 "stock_ar15_magpul_ctr_.bmp"
+	SurfaceSkin 0 9 "weapon_lone_star.bmp"
+	SurfaceSkin 0 10 "charge_ar15_gry.bmp"
+	SurfaceSkin 0 11 "mag.bmp"
+	SurfaceSkin 0 12 "patron_556x45nato_dif.bmp"
+	Scale 0.3893 0.3893 0.3893
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q04S A 0 0
+}
+
+Model WM_BreachMK18S
+{
+	Path "models/breach/mk18"
+	Model 0 "mk18nosil_25_x2_q.md3"
+	SurfaceSkin 0 0 "anpeq15_tan.bmp"
+	SurfaceSkin 0 1 "barrel_ar15_370mm_lod0_diff.bmp"
+	SurfaceSkin 0 2 "eotech_exps3.bmp"
+	SurfaceSkin 0 3 "handguard_ar15.bmp"
+	SurfaceSkin 0 4 "kac_vertical_d.bmp"
+	SurfaceSkin 0 5 "lens.png"
+	SurfaceSkin 0 6 "pistolgrip_ar15_magpul_moe.bmp"
+	SurfaceSkin 0 7 "reciever_ar15_noveske_gen3.bmp"
+	SurfaceSkin 0 8 "silencer2.bmp"
+	SurfaceSkin 0 9 "stock_ar15_high_standart_m4ss.bmp"
+	SurfaceSkin 0 10 "stock_ar15_magpul_ctr_.bmp"
+	SurfaceSkin 0 11 "weapon_lone_star.bmp"
+	SurfaceSkin 0 12 "charge_ar15_gry.bmp"
+	SurfaceSkin 0 13 "mag.bmp"
+	SurfaceSkin 0 14 "patron_556x45nato_dif.bmp"
+	Scale 1.1450 1.1450 1.1450
+	Offset -5.8290 -7.5363 0.0
+	ZOffset 3.0141
+	NoInterpolation
+	FrameIndex Q05R A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachMK18S
+{
+	Path "models/breach/mk18"
+	Model 0 "mk18nosil_25_x2_q.md3"
+	SurfaceSkin 0 0 "anpeq15_tan.bmp"
+	SurfaceSkin 0 1 "barrel_ar15_370mm_lod0_diff.bmp"
+	SurfaceSkin 0 2 "eotech_exps3.bmp"
+	SurfaceSkin 0 3 "handguard_ar15.bmp"
+	SurfaceSkin 0 4 "kac_vertical_d.bmp"
+	SurfaceSkin 0 5 "lens.png"
+	SurfaceSkin 0 6 "pistolgrip_ar15_magpul_moe.bmp"
+	SurfaceSkin 0 7 "reciever_ar15_noveske_gen3.bmp"
+	SurfaceSkin 0 8 "silencer2.bmp"
+	SurfaceSkin 0 9 "stock_ar15_high_standart_m4ss.bmp"
+	SurfaceSkin 0 10 "stock_ar15_magpul_ctr_.bmp"
+	SurfaceSkin 0 11 "weapon_lone_star.bmp"
+	SurfaceSkin 0 12 "charge_ar15_gry.bmp"
+	SurfaceSkin 0 13 "mag.bmp"
+	SurfaceSkin 0 14 "patron_556x45nato_dif.bmp"
+	Scale 0.3893 0.3893 0.3893
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q05S A 0 0
+}
+
+Model WM_BreachHK416S
+{
+	Path "models/breach/hk416"
+	Model 0 "hk416_25_q.md3"
+	SurfaceSkin 0 0 "1.bmp"
+	SurfaceSkin 0 1 "9.bmp"
+	SurfaceSkin 0 2 "Grip2.bmp"
+	SurfaceSkin 0 3 "SUP.bmp"
+	SurfaceSkin 0 4 "anpaq.bmp"
+	SurfaceSkin 0 5 "cock.bmp"
+	SurfaceSkin 0 6 "eotech553.bmp"
+	SurfaceSkin 0 7 "f1.bmp"
+	SurfaceSkin 0 8 "glass.png"
+	SurfaceSkin 0 9 "marg-ris.bmp"
+	SurfaceSkin 0 10 "1.bmp"
+	SurfaceSkin 0 11 "Magpul_Diffuse.bmp"
+	SurfaceSkin 0 12 "mag.bmp"
+	Scale 1.1450 1.1450 1.1450
+	Offset -6.0042 -5.2834 0.0
+	ZOffset 3.1671
+	NoInterpolation
+	FrameIndex Q06R A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachHK416S
+{
+	Path "models/breach/hk416"
+	Model 0 "hk416_25_q.md3"
+	SurfaceSkin 0 0 "1.bmp"
+	SurfaceSkin 0 1 "9.bmp"
+	SurfaceSkin 0 2 "Grip2.bmp"
+	SurfaceSkin 0 3 "SUP.bmp"
+	SurfaceSkin 0 4 "anpaq.bmp"
+	SurfaceSkin 0 5 "cock.bmp"
+	SurfaceSkin 0 6 "eotech553.bmp"
+	SurfaceSkin 0 7 "f1.bmp"
+	SurfaceSkin 0 8 "glass.png"
+	SurfaceSkin 0 9 "marg-ris.bmp"
+	SurfaceSkin 0 10 "1.bmp"
+	SurfaceSkin 0 11 "Magpul_Diffuse.bmp"
+	SurfaceSkin 0 12 "mag.bmp"
+	Scale 0.3893 0.3893 0.3893
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q06S A 0 0
+}
+
+Model WM_BreachMCX
+{
+	Path "models/breach/mcx"
+	Model 0 "mcxrig_25_q.md3"
+	SurfaceSkin 0 0 "Grip2.bmp"
+	SurfaceSkin 0 1 "SIG-Sauer_MCX.png"
+	SurfaceSkin 0 2 "eotech553.bmp"
+	SurfaceSkin 0 3 "glass.png"
+	SurfaceSkin 0 4 "silencer.bmp"
+	SurfaceSkin 0 5 "SIG-Sauer_MCX.png"
+	SurfaceSkin 0 6 "SIG-Sauer_MCX.png"
+	SurfaceSkin 0 7 "bullet.bmp"
+	Scale 1.1450 1.1450 1.1450
+	Offset -6.0497 -4.7578 0.0
+	ZOffset 2.8448
+	NoInterpolation
+	FrameIndex Q07R A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachMCX
+{
+	Path "models/breach/mcx"
+	Model 0 "mcxrig_25_q.md3"
+	SurfaceSkin 0 0 "Grip2.bmp"
+	SurfaceSkin 0 1 "SIG-Sauer_MCX.png"
+	SurfaceSkin 0 2 "eotech553.bmp"
+	SurfaceSkin 0 3 "glass.png"
+	SurfaceSkin 0 4 "silencer.bmp"
+	SurfaceSkin 0 5 "SIG-Sauer_MCX.png"
+	SurfaceSkin 0 6 "SIG-Sauer_MCX.png"
+	SurfaceSkin 0 7 "bullet.bmp"
+	Scale 0.3893 0.3893 0.3893
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q07S A 0 0
+}
+
+Model WM_BreachG36C
+{
+	Path "models/breach/g36"
+	Model 0 "g36rerig_25_q.md3"
+	SurfaceSkin 0 0 "C_Grip_NO_Rails.bmp"
+	SurfaceSkin 0 1 "C_Rail_NO_ACOG.bmp"
+	SurfaceSkin 0 2 "Eotech.bmp"
+	SurfaceSkin 0 3 "frame.bmp"
+	SurfaceSkin 0 4 "holo1.png"
+	SurfaceSkin 0 5 "silencer.bmp"
+	SurfaceSkin 0 6 "stock.bmp"
+	SurfaceSkin 0 7 "mag.bmp"
+	Scale 1.1450 1.1450 1.1450
+	Offset -6.3207 -6.0670 0.0
+	ZOffset 2.6147
+	NoInterpolation
+	FrameIndex Q08R A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachG36C
+{
+	Path "models/breach/g36"
+	Model 0 "g36rerig_25_q.md3"
+	SurfaceSkin 0 0 "C_Grip_NO_Rails.bmp"
+	SurfaceSkin 0 1 "C_Rail_NO_ACOG.bmp"
+	SurfaceSkin 0 2 "Eotech.bmp"
+	SurfaceSkin 0 3 "frame.bmp"
+	SurfaceSkin 0 4 "holo1.png"
+	SurfaceSkin 0 5 "silencer.bmp"
+	SurfaceSkin 0 6 "stock.bmp"
+	SurfaceSkin 0 7 "mag.bmp"
+	Scale 0.3893 0.3893 0.3893
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q08S A 0 0
+}
+
+Model WM_BreachMP5
+{
+	Path "models/breach/mp5"
+	Model 0 "mp5_109_q.md3"
+	SurfaceSkin 0 0 "Dot.png"
+	SurfaceSkin 0 1 "Lens.png"
+	SurfaceSkin 0 2 "Sight.bmp"
+	SurfaceSkin 0 3 "base.bmp"
+	SurfaceSkin 0 4 "cock.bmp"
+	SurfaceSkin 0 5 "flash-hider.bmp"
+	SurfaceSkin 0 6 "frame.bmp"
+	SurfaceSkin 0 7 "marg-mp5body.bmp"
+	SurfaceSkin 0 8 "marg-recA4.bmp"
+	SurfaceSkin 0 9 "marg-retrac-stock.bmp"
+	SurfaceSkin 0 10 "marg-ris.bmp"
+	SurfaceSkin 0 11 "marg-mp5body.bmp"
+	SurfaceSkin 0 12 "marg-9mmclip.bmp"
+	Scale 2.2900 2.2900 2.2900
+	Offset -8.0095 -2.5271 0.0
+	ZOffset 5.2752
+	NoInterpolation
+	FrameIndex Q09R A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachMP5
+{
+	Path "models/breach/mp5"
+	Model 0 "mp5_109_q.md3"
+	SurfaceSkin 0 0 "Dot.png"
+	SurfaceSkin 0 1 "Lens.png"
+	SurfaceSkin 0 2 "Sight.bmp"
+	SurfaceSkin 0 3 "base.bmp"
+	SurfaceSkin 0 4 "cock.bmp"
+	SurfaceSkin 0 5 "flash-hider.bmp"
+	SurfaceSkin 0 6 "frame.bmp"
+	SurfaceSkin 0 7 "marg-mp5body.bmp"
+	SurfaceSkin 0 8 "marg-recA4.bmp"
+	SurfaceSkin 0 9 "marg-retrac-stock.bmp"
+	SurfaceSkin 0 10 "marg-ris.bmp"
+	SurfaceSkin 0 11 "marg-mp5body.bmp"
+	SurfaceSkin 0 12 "marg-9mmclip.bmp"
+	Scale 0.7786 0.7786 0.7786
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q09S A 0 0
+}
+
+Model WM_BreachBenelli
+{
+	Path "models/breach/benelli"
+	Model 0 "benelli_59_q.md3"
+	SurfaceSkin 0 0 "front.bmp"
+	SurfaceSkin 0 1 "parts.bmp"
+	SurfaceSkin 0 2 "recievah.bmp"
+	SurfaceSkin 0 3 "synth.bmp"
+	SurfaceSkin 0 4 "recievah.bmp"
+	SurfaceSkin 0 5 "parts.bmp"
+	Scale 2.6200 2.6200 2.6200
+	Offset -9.4336 -5.5179 0.0
+	ZOffset 4.8888
+	NoInterpolation
+	FrameIndex Q0AR A 0 0
+}
+
+// its pickup in the world: the same mesh at REMA's world scale (HUD x 0.34)
+Model WM_BreachBenelli
+{
+	Path "models/breach/benelli"
+	Model 0 "benelli_59_q.md3"
+	SurfaceSkin 0 0 "front.bmp"
+	SurfaceSkin 0 1 "parts.bmp"
+	SurfaceSkin 0 2 "recievah.bmp"
+	SurfaceSkin 0 3 "synth.bmp"
+	SurfaceSkin 0 4 "recievah.bmp"
+	SurfaceSkin 0 5 "parts.bmp"
+	Scale 0.8908 0.8908 0.8908
+	ZOffset 8.0
+	AngleOffset 90
+	FrameIndex Q0AS A 0 0
+}

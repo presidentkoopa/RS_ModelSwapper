@@ -1,0 +1,922 @@
+{
+ "set": "plus",
+ "guns": [
+  "WM_VP_Unmaker",
+  "WM_VP_Bolter",
+  "WM_VP_AssaultShotgun",
+  "WM_VP_PlasmaCarbine",
+  "WM_Rifle",
+  "WM_M16",
+  "WM_PistoletBlue",
+  "WM_Flamer",
+  "WM_Flamethrower",
+  "WM_SMG",
+  "WM_Tec9",
+  "WM_VP_RocketLauncher",
+  "WM_VP_RPG",
+  "WM_VP_M4A3",
+  "WM_VP_Pistolet",
+  "WM_VP_PlasmaRifle",
+  "WM_VP_PlasmaRifleBlue"
+ ],
+ "report": [
+  [
+   "WM_VP_BFG",
+   "stock reload (feed part cell names no surface (joint / baked part)); fire as bfg [card], slot 7; shotclass RSB_BFGBall -> BFGBall; chargetics 30 not carried; replaces BFG9000; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_BFGHeavy",
+   "stock reload (feed part cell names no surface (joint / baked part)); fire as bfg [card], slot 7; shotclass RSB_BFGBallHeavy -> BFGBall; chargetics 30 not carried; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_Chaingun",
+   "stock reload (no feed part); fire as chaingun [card], slot 4; spinuptics 10 not carried; replaces Chaingun; scale x -1.000 (REMA sign); eject port RIGHT (L -13.7)"
+  ],
+  [
+   "WM_VP_MachineGun",
+   "stock reload (no feed part); fire as chaingun [card], slot 4; scale x -1.000 (REMA sign); eject port RIGHT (L -3.5)"
+  ],
+  [
+   "WM_VP_Chainsaw",
+   "stock reload (no feed part); fire as chainsaw [card], slot 1; replaces Chainsaw; scale x +1.350 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_ChainsawHeavy",
+   "stock reload (no feed part); fire as chainsaw [card], slot 1; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_Unmaker",
+   "VR reload: magazine; fire as bfg [card], slot 7; shotclass WM_UnmakerBolt -> PlasmaBall; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_Bolter",
+   "VR reload: magazine; fire as plasma [card], slot 6; shotclass WM_BolterBolt -> PlasmaBall; scale x -1.100 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_AssaultShotgun",
+   "VR reload: magazine + handle, slide lock False [default rule (part charginghandle)]; fire as shotgun [card], slot 3; scale x -1.000 (REMA sign); eject port LEFT (L +2.0)"
+  ],
+  [
+   "WM_VP_BFGRifle",
+   "stock reload (feed part cell names no surface (joint / baked part)); fire as bfg [card], slot 7; shotclass RSB_BFGBall -> BFGBall; scale x -1.100 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_PlasmaCarbine",
+   "VR reload: magazine; fire as plasma [card], slot 6; shotclass RSB_PlasmaBallCarbine -> PlasmaBall; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_LongbarChainsaw",
+   "stock reload (no feed part); fire as chainsaw [card], slot 1; scale x -1.100 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_RotaryGun",
+   "stock reload (no feed part); fire as chaingun [card], slot 4; scale x -1.100 (REMA sign); eject port RIGHT (L -11.2)"
+  ],
+  [
+   "WM_VP_RotaryLauncher",
+   "stock reload (no feed part); fire as launcher [card], slot 5; shotclass RSB_Rocket -> Rocket; scale x -1.100 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_Moonlight",
+   "stock reload (no feed part); fire as revolver [card], slot 2; altmode fan not carried; scale x +1.350 (REMA sign); eject port centre (L -0.0)"
+  ],
+  [
+   "WM_Sunset",
+   "stock reload (no feed part); fire as revolver [card], slot 2; altmode fan not carried; scale x +1.350 (REMA sign); eject port centre (L -0.0)"
+  ],
+  [
+   "WM_ColaRevolver",
+   "stock reload (no feed part); fire as revolver [card], slot 2; altmode fan not carried; scale x -0.700 (REMA sign); eject port centre (L +0.0)"
+  ],
+  [
+   "WM_Rifle",
+   "VR reload: magazine + handle, slide lock False [default rule (part charginghandle)]; fire as rifle [card], slot 4; altmode selectfire not carried; altburst 3 not carried; scale x -1.000 (REMA sign); eject port RIGHT (L -1.4)"
+  ],
+  [
+   "WM_M16",
+   "VR reload: magazine + handle, slide lock False [default rule (part charginghandle)]; fire as rifle [card], slot 4; altmode selectfire not carried; altburst 3 not carried; scale x +1.350 (REMA sign); eject port LEFT (L +2.0)"
+  ],
+  [
+   "WM_PistoletBlue",
+   "VR reload: magazine + handle, slide lock True [default rule (part slide)]; fire as pistol [card], slot 2; altmode burst not carried; altburst 3 not carried; scale x +1.350 (REMA sign); eject port RIGHT (L -1.8)"
+  ],
+  [
+   "WM_Flamer",
+   "VR reload: magazine; fire as flamethrower [card], slot 6; shotclass WM_FlameShot -> FatShot; scale x -1.100 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_Flamethrower",
+   "VR reload: magazine; fire as flamethrower [card], slot 6; shotclass WM_NapalmShot -> FatShot; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_SMG",
+   "VR reload: magazine; action part charginghandle is a hinge: not driven (the Quest handle is a straight pull); fire as smg [card], slot 4; altmode shred not carried; scale x -1.000 (REMA sign); eject port RIGHT (L -2.7)"
+  ],
+  [
+   "WM_Tec9",
+   "VR reload: magazine + handle, slide lock True [default rule (part bolt)]; fire as smg [card], slot 4; altmode shred not carried; scale x -1.100 (REMA sign); eject port RIGHT (L -2.4)"
+  ],
+  [
+   "WM_VP_RocketLauncher",
+   "VR reload: magazine; fire as launcher [card], slot 5; shotclass RSB_Rocket -> Rocket; replaces RocketLauncher; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_RPG",
+   "VR reload: magazine; fire as launcher [card], slot 5; shotclass RSB_RocketRPG -> Rocket; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_M4A3",
+   "VR reload: magazine + handle, slide lock True [default rule (part slide)]; fire as pistol [card], slot 2; altmode burst not carried; altburst 3 not carried; replaces Pistol; scale x -0.820 (REMA sign); eject port RIGHT (L -1.2)"
+  ],
+  [
+   "WM_VP_Pistolet",
+   "VR reload: magazine + handle, slide lock True [default rule (part slide)]; fire as pistol [card], slot 2; altmode burst not carried; altburst 3 not carried; scale x +1.350 (REMA sign); eject port RIGHT (L -1.8)"
+  ],
+  [
+   "WM_VP_PlasmaRifle",
+   "VR reload: magazine; fire as plasma [card], slot 6; shotclass RSB_PlasmaBall -> PlasmaBall; replaces PlasmaRifle; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_PlasmaRifleBlue",
+   "VR reload: magazine; fire as plasma [card], slot 6; shotclass RSB_PlasmaBallCarbine -> PlasmaBall; scale x -1.000 (REMA sign); no eject port on card"
+  ],
+  [
+   "WM_VP_PumpM37",
+   "stock reload (no feed part); fire as shotgun [card], slot 3; altmode slamfire not carried; scale x -1.100 (REMA sign); eject port centre (L +0.0)"
+  ],
+  [
+   "WM_VP_PumpDoom",
+   "stock reload (no feed part); fire as shotgun [card], slot 3; altmode slamfire not carried; replaces Shotgun; scale x +1.350 (REMA sign); eject port RIGHT (L -1.9)"
+  ],
+  [
+   "WM_VP_SSG",
+   "stock reload (no feed part); fire as breakaction [card], slot 3; altmode onebarrel not carried; replaces SuperShotgun; scale x +1.350 (REMA sign); eject port centre (L +0.0)"
+  ],
+  [
+   "WM_VP_BullpupPump",
+   "stock reload (no feed part); fire as shotgun [card], slot 3; altmode doubleshell not carried; scale x -1.100 (REMA sign); eject port LEFT (L +2.7)"
+  ],
+  [
+   "(sprites)",
+   "133 placeholder lumps"
+  ],
+  [
+   "(sounds)",
+   "50 resolved"
+  ]
+ ],
+ "sounds": {
+  "ok": [
+   "wm/chaingun/fire",
+   "wm/dry",
+   "wm/m4a3/fire",
+   "wm/m4a3/fire1",
+   "wm/m4a3/fire2",
+   "wm/m4a3/fire3",
+   "wm/m4a3/magin",
+   "wm/m4a3/magout",
+   "wm/m4a3/slideback",
+   "wm/m4a3/slidefwd",
+   "wm/machinegun/fire",
+   "wm/magdrop",
+   "wm/magdrop/large",
+   "wm/magdrop/large1",
+   "wm/magdrop/large2",
+   "wm/magdrop/large3",
+   "wm/magdrop1",
+   "wm/magdrop2",
+   "wm/magdrop3",
+   "wm/pistolet/fire",
+   "wm/pistolet/magin",
+   "wm/pistolet/magout",
+   "wm/pistolet/slideback",
+   "wm/pistolet/slidefwd",
+   "wm/plasma/carbine_fire",
+   "wm/plasma/carbine_magin",
+   "wm/plasma/carbine_magout",
+   "wm/plasma/fire",
+   "wm/plasma/fire1",
+   "wm/plasma/fire2",
+   "wm/plasma/fire3",
+   "wm/plasma/magin",
+   "wm/plasma/magout",
+   "wm/revolver/fire",
+   "wm/revolver/fire1",
+   "wm/revolver/fire2",
+   "wm/rifle/fire",
+   "wm/rifle/fire1",
+   "wm/rifle/fire2",
+   "wm/rifle/fire3",
+   "wm/rifle/magin",
+   "wm/rifle/magout",
+   "wm/rifle/rackback",
+   "wm/rifle/rackfwd",
+   "wm/rocket/fire",
+   "wm/rocket/rpg_fire",
+   "wm/rocket/rpg_magin",
+   "wm/rocket/rpg_magout",
+   "wm/shotgun/bullpup_fire",
+   "wm/shotgun/m37_fire"
+  ],
+  "unresolved": []
+ },
+ "geometry": {
+  "WM_VP_Unmaker": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    -0.0092,
+    -53.6292,
+    -3.4367
+   ],
+   "ready_frame": 0,
+   "grip": [
+    6.464434118852456,
+    -0.11916219262295069,
+    13.902
+   ],
+   "well": [
+    7.009,
+    0.819,
+    5.432
+   ],
+   "axis": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "mouth": 5.47,
+   "mag_len": 5.413,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_VP_Bolter": {
+   "scale": [
+    -1.1,
+    1.1,
+    1.1
+   ],
+   "off": [
+    -0.0213,
+    -35.6729,
+    -10.971
+   ],
+   "ready_frame": 0,
+   "grip": [
+    9.765726241432821,
+    0.029054206730774683,
+    -25.07080970393564
+   ],
+   "well": [
+    6.547,
+    0.029,
+    -11.3
+   ],
+   "axis": [
+    -0.17298668053837807,
+    -0.0,
+    0.9849241637589735
+   ],
+   "mouth": 11.12,
+   "mag_len": 9.14116615730279,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_VP_AssaultShotgun": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    0.0224,
+    -52.1859,
+    -11.8639
+   ],
+   "ready_frame": 0,
+   "grip": [
+    11.9136252906977,
+    0.04644629360465103,
+    -16.66529375
+   ],
+   "well": [
+    12.034,
+    0.025,
+    -10.147
+   ],
+   "axis": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "mouth": 0.94,
+   "mag_len": 11.81,
+   "grab": [
+    18.616,
+    3.058,
+    -6.354
+   ],
+   "pull": [
+    -0.9999875002343701,
+    0.0,
+    0.004999937501171851
+   ],
+   "travel": 10.2
+  },
+  "WM_VP_PlasmaCarbine": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    -0.1183,
+    -23.3647,
+    -15.389
+   ],
+   "ready_frame": 0,
+   "grip": [
+    19.40990887453514,
+    0.12486249999999975,
+    -7.905273874793595
+   ],
+   "well": [
+    26.53,
+    0.118,
+    -1.185
+   ],
+   "axis": [
+    0.2309896057016099,
+    -0.0,
+    0.9729562179552659
+   ],
+   "mouth": 2.16,
+   "mag_len": 13.883931237151176,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_Rifle": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    0.1102,
+    -38.1945,
+    -3.1664
+   ],
+   "ready_frame": 3,
+   "grip": [
+    9.740729825178544,
+    -0.029015607734807013,
+    -14.8219859983825
+   ],
+   "well": [
+    9.88,
+    -0.026,
+    0.505
+   ],
+   "axis": [
+    0.024992191160203066,
+    -0.0,
+    0.9996876464081226
+   ],
+   "mouth": 8.85,
+   "mag_len": 20.548504595345477,
+   "grab": [
+    -8.615,
+    0.879,
+    4.475
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 7.259
+  },
+  "WM_M16": {
+   "scale": [
+    1.35,
+    1.35,
+    1.35
+   ],
+   "off": [
+    0.1983,
+    -44.6992,
+    -4.4917
+   ],
+   "ready_frame": 0,
+   "grip": [
+    11.137510999379991,
+    -0.026174999999999858,
+    -12.70791709565434
+   ],
+   "well": [
+    9.865,
+    -0.026,
+    -2.029
+   ],
+   "axis": [
+    0.10504933224495336,
+    -0.0,
+    0.9944670119188919
+   ],
+   "mouth": 5.56,
+   "mag_len": 15.412529882271638,
+   "grab": [
+    12.331,
+    -3.393,
+    3.496
+   ],
+   "pull": [
+    -0.9997356048941353,
+    0.0,
+    -0.02299391891256511
+   ],
+   "travel": 7.711
+  },
+  "WM_PistoletBlue": {
+   "scale": [
+    1.35,
+    1.35,
+    1.35
+   ],
+   "off": [
+    0.1763,
+    -29.7519,
+    -6.0077
+   ],
+   "ready_frame": 2,
+   "grip": [
+    -7.500460828371561,
+    -0.025690625000000022,
+    -14.495047754939847
+   ],
+   "well": [
+    -4.349,
+    -0.026,
+    -0.324
+   ],
+   "axis": [
+    0.3099223741666894,
+    -0.0,
+    0.9507618639758761
+   ],
+   "mouth": 11.45,
+   "mag_len": 11.756436381453735,
+   "grab": [
+    -6.954,
+    -0.025,
+    2.573
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 5.355
+  },
+  "WM_Flamer": {
+   "scale": [
+    -1.1,
+    1.1,
+    1.1
+   ],
+   "off": [
+    -0.5621,
+    -65.361,
+    -0.7978
+   ],
+   "ready_frame": 0,
+   "grip": [
+    24.291659179687503,
+    0.03543203124999972,
+    -13.057306250000002
+   ],
+   "well": [
+    24.435,
+    -0.011,
+    2.964
+   ],
+   "axis": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "mouth": 1.97,
+   "mag_len": 29.293,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_Flamethrower": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    -0.4927,
+    -55.2897,
+    -19.4527
+   ],
+   "ready_frame": 0,
+   "grip": [
+    24.820800689126855,
+    0.02716879785604682,
+    -28.356
+   ],
+   "well": [
+    25.607,
+    0.024,
+    -10.466
+   ],
+   "axis": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "mouth": 14.89,
+   "mag_len": 12.111000000000002,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_SMG": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    -0.1846,
+    -36.2647,
+    -11.4008
+   ],
+   "ready_frame": 0,
+   "grip": [
+    7.20919645654577,
+    0.02522500000000005,
+    -23.36123752800111
+   ],
+   "well": [
+    14.827,
+    0.024,
+    -5.084
+   ],
+   "axis": [
+    0.29787655574616473,
+    -0.0,
+    0.9546043984482796
+   ],
+   "mouth": 13.65,
+   "mag_len": 24.647603684750955,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_Tec9": {
+   "scale": [
+    -1.1,
+    1.1,
+    1.1
+   ],
+   "off": [
+    -0.1133,
+    -39.141,
+    -7.1484
+   ],
+   "ready_frame": 0,
+   "grip": [
+    8.225163541926381,
+    0.025643750000000194,
+    -15.056388851087714
+   ],
+   "well": [
+    7.867,
+    0.06,
+    -0.485
+   ],
+   "axis": [
+    -0.012998901639215268,
+    -0.0,
+    0.9999155107088668
+   ],
+   "mouth": 9.66,
+   "mag_len": 19.219822993568418,
+   "grab": [
+    8.041,
+    3.771,
+    1.666
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 7.956
+  },
+  "WM_VP_RocketLauncher": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    3.2895,
+    -11.1717,
+    4.1491
+   ],
+   "ready_frame": 0,
+   "grip": [
+    -15.146228856382983,
+    -21.04417931822909,
+    15.526520370557638
+   ],
+   "well": [
+    -15.041,
+    3.112,
+    8.661
+   ],
+   "axis": [
+    -0.0,
+    0.9442941934690372,
+    -0.3291025314102895
+   ],
+   "mouth": 22.07,
+   "mag_len": 22.636998523641804,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_VP_RPG": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    3.2895,
+    -11.1717,
+    4.1491
+   ],
+   "ready_frame": 0,
+   "grip": [
+    -15.146228856382983,
+    -21.04417931822909,
+    15.526520370557638
+   ],
+   "well": [
+    -15.041,
+    3.112,
+    8.661
+   ],
+   "axis": [
+    -0.0,
+    0.9442941934690372,
+    -0.3291025314102895
+   ],
+   "mouth": 22.07,
+   "mag_len": 22.636998523641804,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_VP_M4A3": {
+   "scale": [
+    -0.82,
+    0.82,
+    0.82
+   ],
+   "off": [
+    0.0033,
+    -29.0609,
+    -9.2001
+   ],
+   "ready_frame": 0,
+   "grip": [
+    -11.460613687092705,
+    0.014521022727272747,
+    -16.458489269516807
+   ],
+   "well": [
+    -2.435,
+    0.015,
+    -2.917
+   ],
+   "axis": [
+    0.3540812709786047,
+    -0.0,
+    0.9352146563982923
+   ],
+   "mouth": 12.86,
+   "mag_len": 12.250288763958276,
+   "grab": [
+    -6.033,
+    0.072,
+    0.986
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 5.674
+  },
+  "WM_VP_Pistolet": {
+   "scale": [
+    1.35,
+    1.35,
+    1.35
+   ],
+   "off": [
+    0.1763,
+    -29.7519,
+    -6.0077
+   ],
+   "ready_frame": 2,
+   "grip": [
+    -7.500460828371561,
+    -0.025690625000000022,
+    -14.495047754939847
+   ],
+   "well": [
+    -4.349,
+    -0.026,
+    -0.324
+   ],
+   "axis": [
+    0.3099223741666894,
+    -0.0,
+    0.9507618639758761
+   ],
+   "mouth": 11.45,
+   "mag_len": 11.756436381453735,
+   "grab": [
+    -6.954,
+    -0.025,
+    2.573
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 5.355
+  },
+  "WM_VP_PlasmaRifle": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    0.461,
+    -58.3783,
+    -6.0071
+   ],
+   "ready_frame": 0,
+   "grip": [
+    14.282014531868697,
+    -0.18607812499999993,
+    -16.79928181530638
+   ],
+   "well": [
+    9.03,
+    0.017,
+    -9.693
+   ],
+   "axis": [
+    -0.19400029100065475,
+    -0.0,
+    0.9810014715033109
+   ],
+   "mouth": 3.41,
+   "mag_len": 12.570614855936425,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_VP_PlasmaRifleBlue": {
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "off": [
+    0.461,
+    -58.3783,
+    -6.0071
+   ],
+   "ready_frame": 0,
+   "grip": [
+    14.282014531868697,
+    -0.18607812499999993,
+    -16.79928181530638
+   ],
+   "well": [
+    9.03,
+    0.017,
+    -9.693
+   ],
+   "axis": [
+    -0.19400029100065475,
+    -0.0,
+    0.9810014715033109
+   ],
+   "mouth": 3.41,
+   "mag_len": 12.570614855936425,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  }
+ }
+}

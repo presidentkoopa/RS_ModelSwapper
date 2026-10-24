@@ -1,0 +1,65 @@
+// RS VR Weapons: the shared options page (menu standard: tools/README.md). Every pack defines
+// the same page; a set adds its own rows below with AddOptionMenu "RSQ_Options".
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "RS VR Weapons", "RSQ_Options"
+}
+
+OptionValue "RSR_ReloadMode"
+{
+	1, "VR"
+	0, "Stock"
+}
+
+OptionValue "RSR_GrabWith"
+{
+	0, "Off-hand trigger"
+	1, "Off-hand grip"
+	2, "Use key"
+}
+
+OptionValue "RSR_Pouch"
+{
+	0, "Anywhere, 20 cm from the gun"
+	1, "Low, 40 cm below the eyes"
+}
+
+OptionValue "RSR_ShellCredit"
+{
+	1, "1"
+	2, "2"
+	3, "3"
+	4, "4"
+}
+
+OptionValue "RSQ_ScopeMode"
+{
+	0, "Dot"
+	1, "Real"
+}
+
+OptionMenu "RSQ_Options"
+{
+	Title "RS VR WEAPONS"
+	Option "VR Hands", "rsq_hands", "OnOff"
+	Option "Reloading", "rsr_reload", "RSR_ReloadMode"
+	Option "Grab ammo with", "rsr_grab_with", "RSR_GrabWith"
+	Option "New magazine from", "rsr_pouch", "RSR_Pouch"
+	Option "Check the Chamber by Hand", "rsr_freecharge", "OnOff"
+	Option "Shotgun Shells Per Insert", "rsr_shell_credit", "RSR_ShellCredit"
+	Slider "Reload Assist", "rsr_assist", 0.5, 3.0, 0.25, 2
+	StaticText " "
+	Option "VR Punching", "rsq_punch", "OnOff"
+	Option "Punch Switches Open", "rsq_punch_use", "OnOff"
+	Slider "Melee Swing Strength", "rsvr_melee_swing", 0.5, 2.0, 0.1, 1
+	StaticText " "
+	Submenu "Reload: Tuning and Debug", "RSR_Debug"
+}
+
+OptionMenu "RSR_Debug"
+{
+	Title "RELOAD: TUNING AND DEBUG"
+	Slider "Reload Assist", "rsr_assist", 0.5, 3.0, 0.25, 2
+	Option "Show the Capture Zones", "rsr_assist_debug", "OnOff"
+	Option "Print Each Reload Step", "rsr_debug", "OnOff"
+}

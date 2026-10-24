@@ -1,0 +1,184 @@
+{
+ "set": "vanilla",
+ "edits": [
+  [
+   "rsvr/vrhand.zs",
+   "verbatim"
+  ],
+  [
+   "rsvr/melee.zs",
+   "verbatim"
+  ],
+  [
+   "rsq/handler.zs",
+   "verbatim"
+  ],
+  [
+   "rsq/fistmoves.zs",
+   "verbatim"
+  ],
+  [
+   "rsq/scope.zs",
+   "verbatim"
+  ],
+  [
+   "rsq/scope_real.zs",
+   "verbatim"
+  ],
+  [
+   "rsr/rsr_break.zs",
+   "verbatim"
+  ],
+  [
+   "rsr/rsr_pump.zs",
+   "verbatim"
+  ],
+  [
+   "rsq/hands.zs",
+   [
+    "no dual wield module",
+    "no grenade module",
+    "no BD22 purist rifle",
+    "no BD22 purist rifle",
+    "no BD22 purist rifle",
+    "punch strike: this pack's own"
+   ]
+  ],
+  [
+   "rsq/fists.zs",
+   [
+    "punch strike: this pack's own"
+   ]
+  ],
+  [
+   "rsr/vreload.zs",
+   [
+    "slide lock from the table, not BD22 indexes",
+    "no BD22 purist mode"
+   ]
+  ],
+  [
+   "rsr/rsr_assist.zs",
+   [
+    "rocket capture by part length, not BD22 index",
+    "rocket tilt by part length, not BD22 index"
+   ]
+  ],
+  [
+   "MODELDEF.rsq",
+   "pack 1.92 hand blocks: RSQ_GunSide (hand.md3, hand2.md3, fist, ammo hand), RSQ_Hands free hand; reload holds RQHN I (rsr), J L (rsb), RQUN A (pump); grenade ring and debris blocks left out"
+  ]
+ ],
+ "stubs": {
+  "RSB_Guns": [
+   "Axis",
+   "Base",
+   "Bore",
+   "Cap",
+   "Casing",
+   "Chambers",
+   "Channel",
+   "Cls",
+   "Hand0",
+   "Hand1",
+   "Hand2",
+   "HandBase",
+   "HandT",
+   "HandTip",
+   "Hinge",
+   "HoldState",
+   "Index",
+   "Loaded",
+   "Loader",
+   "LoaderDepth",
+   "LoaderEmptyInHand",
+   "Offset",
+   "OpenDeg",
+   "PerLoad",
+   "PushEdge",
+   "PushR0",
+   "PushR1",
+   "PushRef",
+   "PushZ0",
+   "PushZ1",
+   "ReadySprite",
+   "ReloadToken",
+   "Reserve",
+   "ReserveHoldsLoaded",
+   "Rest0",
+   "Rest1",
+   "Rest2",
+   "RestT",
+   "Scale",
+   "SndClose",
+   "SndClose2",
+   "SndLoad",
+   "SndOpen",
+   "SndOpen2",
+   "SprGun",
+   "SprPart",
+   "SprWorld",
+   "Tip",
+   "Unloaded",
+   "WorldEject"
+  ],
+  "RSP_Guns": [
+   "AxisInHand",
+   "BoltRatio",
+   "Cap",
+   "ChanBack",
+   "ChanFwd",
+   "ChanShell",
+   "Depth",
+   "EjectFrames",
+   "EjectHook",
+   "Grab",
+   "HandHook",
+   "HandRot",
+   "Index",
+   "Loaded",
+   "MagAmmo",
+   "Offset",
+   "Port",
+   "PortHook",
+   "Pull",
+   "PumpHook",
+   "Push",
+   "ReadySprite",
+   "Reserve",
+   "Scale",
+   "ShellInHand",
+   "SndBack",
+   "SndFwd",
+   "SndLand",
+   "SndShell",
+   "SprGun",
+   "SprPart",
+   "SprWorld",
+   "SupportHook",
+   "Travel",
+   "WaitLabels"
+  ]
+ },
+ "sprites_without_models": {
+  "hand states of modules not carried (grenade ring, M203, BD22 fist / grenade holds)": [
+   "RQHR",
+   "RQ2H",
+   "RQ2S"
+  ],
+  "pump module internals (no pump guns generated yet)": [
+   "RQUG",
+   "RQUH",
+   "RQUP",
+   "RQUQ",
+   "RQUW",
+   "RQUX"
+  ],
+  "break module internals (no break-open guns generated yet)": [
+   "RBSP"
+  ],
+  "axe lock-on ring: 1.96b itself ships no RQLK lump (flagged to the owner 2026-10-24)": [
+   "RQLK"
+  ]
+ }
+}

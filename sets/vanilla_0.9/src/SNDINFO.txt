@@ -1,0 +1,27 @@
+// RS Quest VR weapons: the sounds this set names, pulled from RS_VR_Weapons / rs_vr_reload (sndpack.py)
+wm/chaingun/fire       sounds/chainguns/MGFIRE.ogg
+wm/dry              sounds/wm/AKEMPT
+$random wm/m4a3/fire { wm/m4a3/fire1 wm/m4a3/fire2 wm/m4a3/fire3 }
+wm/m4a3/magin       sounds/pistols/PCIN.ogg
+$volume wm/m4a3/magin     0.8
+wm/m4a3/magout      sounds/pistols/PCOUT.ogg
+$volume wm/m4a3/magout    0.8
+wm/m4a3/slideback   sounds/pistols/PSLID.ogg
+$volume wm/m4a3/slideback 0.85
+wm/m4a3/slidefwd    sounds/pistols/PSNAP.ogg
+$volume wm/m4a3/slidefwd  0.8
+$random wm/magdrop { wm/magdrop1 wm/magdrop2 wm/magdrop3 }
+$random wm/magdrop/large { wm/magdrop/large1 wm/magdrop/large2 wm/magdrop/large3 }
+wm/plasma/magin        sounds/plasma/PLCIN.ogg
+wm/plasma/magout       sounds/plasma/PLCOUT.ogg
+wm/rocket/rpg_magin          sounds/launchers/RPG/RLANDRAW.wav
+wm/rocket/rpg_magout         sounds/launchers/RLCYCL.ogg
+wm/m4a3/fire1       sounds/pistols/PFIRE01.ogg
+wm/m4a3/fire2       sounds/pistols/PFIRE02.ogg
+wm/m4a3/fire3       sounds/pistols/PFIRE03.ogg
+wm/magdrop1         sounds/wm/DSBOUNC1.ogg
+wm/magdrop2         sounds/wm/DSBOUNC2.ogg
+wm/magdrop3         sounds/wm/DSBOUNC3.ogg
+wm/magdrop/large1      sounds/magdrops/DSAOUNC1.ogg
+wm/magdrop/large2      sounds/magdrops/DSAOUNC2.ogg
+wm/magdrop/large3      sounds/magdrops/DSAOUNC3.ogg
