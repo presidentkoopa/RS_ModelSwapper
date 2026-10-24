@@ -56,10 +56,11 @@ Added tonight (all generated, all exact-match edits, logs in `sets/bd22q_1.97/*.
    (RSB) with Clip2 reserve, menu row "Slug revolver replaces Shotvolver". Same pattern as the Machinegun.
 3. Options page: move 1.96b's page onto the shared `RSQ_Options` standard (`tools/README.md`). The
    owner does the headset pass on the layout.
-4. README for the pack release; this handoff updated.
-Then the plan's next sets (PLAN.md): BW_Quest, Aliens, Meatgrinder, Modern wiring, Plus passes per
-set, melee pass (`docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md`: pistol whip, butt strikes, spike) —
-**none of the melee doc is built**.
+4. **Melee** on bd22q from `docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md`: pistol whip, rifle/shotgun butt
+   strikes, the spike, switch-punching with either hand. **None of it is built.** It is flagship work,
+   not a later pass (owner, 04:24).
+5. README for the pack release; this handoff updated; owner headset pass.
+Then the plan's next sets (PLAN.md): BW_Quest, Aliens, Meatgrinder, Modern wiring, Plus passes per set.
 
 ## Owner's rules (violating these ended the last session's trust)
 - **Never from memory. Re-check source.** Every number comes from a mesh (tool-measured) or a parent

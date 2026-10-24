@@ -7,11 +7,13 @@ Every shipped gun is built from two sources only: its MESH (tool-measured) and i
 parsed from the mod's own code). Nothing retyped from old folders. Quality over speed. "Done" = the
 per-gun checklist below, in a headset, signed by the owner.
 
-## Flagship: bd22q (sets/bd22q_1.97, base runtime/ = 1.96b)
+## Flagship: bd22q (sets/bd22q_1.97, base runtime/ = 1.96b) -- the COMPLETE BD22 VR experience; nothing of it is deferred
 - F1  Gate 1.97 on the owner's load order (doom2 → brutal22test6 → BD_VoxelPack → pack); fix; deliver pk3.
 - F2  Slug revolver (BD21 Revolver2): roster + RSB break entry (Clip2) + "replaces Shotvolver" row.
 - F3  Options page onto the shared RSQ_Options standard (owner's headset turn for layout).
-- F4  Pack README + HANDOFF update. Owner headset pass on: drum / canister / skull reloads, Machinegun launcher.
+- F4  Melee on bd22q from docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md: pistol whip, rifle/shotgun butt strikes, the spike,
+      switch-punching with either hand. Nothing of it exists yet.
+- F5  Pack README + HANDOFF update. Owner headset pass on: drum / canister / skull reloads, Machinegun launcher, melee.
 
 ## Then, in this order
 - S1  BW_Quest (Brutal Wolfenstein; E:\DOOMWork\BW_Quest; parent mod from the owner).
@@ -19,7 +21,6 @@ per-gun checklist below, in a headset, signed by the owner.
 - S3  Modern: player class, every Doom drop/pickup → a modern gun, start Glock.
 - S4  Aliens, Meatgrinder, survivors of the discarded sets whose parent the owner keeps (re-measure or ditch).
 - P   Plus pass per set (menu-row extras), only after that set stands.
-- M   Melee pass from docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md (pistol whip, butt strikes, spike, off-hand switch punch).
 - B   Ballistics / CombatFX per-gun profiles (REMA WMSHEET) as a shared layer, after two sets stand.
 
 ## Per set
