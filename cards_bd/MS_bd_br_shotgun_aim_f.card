@@ -1,0 +1,20 @@
+weapon MS_bd_br_shotgun_aim_f
+  archetype   shotgun_pump        # owner-confirmed
+  model       bd_br_shotgun_aim_f.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [47.22, -0.02, 0.19]  axis [-0.684, 0.0, -0.729]  travel 17.09  frames 15..35
+    trigger  surf 1  rest [33.54, -0.02, -5.19]  axis [-1.0, 0.0, 0.0]  travel 0.45  frames -..-
+    slide    surf 2  rest [68.57, -0.05, -2.74]  axis [-1.0, 0.0, 0.0]  travel 6.27  frames 15..35
+    part2    surf 3  rest [41.98, 1.46, 0.0]  axis [-1.0, 0.0, -0.0]  travel 6.27  frames 15..35
+    muzzle    [93.47, 0.11, 1.36]
+  grip        line [22.39, -1.62, -4.19] [24.41, 0.16, -9.02]  trigger [33.54, -0.02, -5.19]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [61.37, 0.02, -1.92]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..2
+    idle         3..4
+    fire         5..6
+    idle         7..35
+  baked_cant   frames 11..31 up to 18.2 deg   # psprite-era hand sway; removed in bd_br_shotgun_aim_f_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 19428

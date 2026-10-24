@@ -48,7 +48,14 @@ for o in list(bpy.data.objects):
     used[pick] = used.get(pick, 0) + 1
     o.name = pick if used[pick] == 1 else "%s_%d" % (pick, used[pick])
 
-bpy.ops.object.select_all(action='DESELECT')
+# A scene whose objects are all on hidden or excluded view layers gives select_all no
+# context to poll and it raises, killing the export before a single frame is written
+# (br_plasma_f). Nothing here depends on the selection -- the export is
+# export_selected_objects=False -- so a failure to deselect is not a reason to stop.
+try:
+    bpy.ops.object.select_all(action='DESELECT')
+except RuntimeError:
+    pass
 
 def _write(path):
     bpy.ops.wm.obj_export(filepath=path, export_selected_objects=False, export_materials=False,

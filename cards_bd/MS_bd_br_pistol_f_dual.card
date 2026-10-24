@@ -1,0 +1,41 @@
+weapon MS_bd_br_pistol_f_dual
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_br_pistol_f_dual.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 0  rest [30.96, 0.01, -5.01]  axis [-0.995, 0.0, 0.098]  travel 1.32  frames 5..6  rot 37deg axis [-0.0, 1.0, 0.0]
+    part     surf 2  rest [25.2, 0.04, -8.44]  axis [-0.203, -0.0, -0.979]  travel 13.54  frames 14..21
+    round    surf 3  rest [25.6, 0.03, -2.06]  axis [-0.203, -0.0, -0.979]  travel 13.55  frames 6..28
+    slide    surf 4  rest [30.63, 0.07, 0.02]  axis [-1.0, 0.0, -0.0]  travel 4.59  frames 6..27
+    hammer   surf 5  rest [22.29, -0.02, 0.48]  axis [-0.856, -0.0, -0.518]  travel 1.18  frames 5..5  rot 27deg axis [0.0, -1.0, -0.0]
+    round2   surf 6  rest [22.29, -20.02, 0.48]  axis [0.702, -0.056, -0.71]  travel 7.93  frames 6..44  rot 21deg axis [0.7, -0.09, 0.7]
+    slide2   surf 7  rest [30.63, -19.93, 0.02]  axis [-1.0, 0.0, -0.003]  travel 5.85  frames 6..45
+    round3   surf 8  rest [25.6, -19.97, -2.06]  axis [-0.202, 0.003, -0.979]  travel 13.55  frames 6..46
+    mag      surf 9  rest [25.2, -19.96, -8.44]  axis [-0.202, 0.005, -0.979]  travel 13.55  frames 6..43
+    part2    surf 10  rest [28.88, -20.05, -4.6]  axis [0.69, 0.324, -0.647]  travel 7.76  frames 6..43  rot 21deg axis [0.7, -0.09, 0.7]
+    round4   surf 11  rest [30.96, -19.99, -5.01]  axis [0.674, 0.402, -0.62]  travel 7.82  frames 6..44  rot 21deg axis [0.7, -0.09, 0.7]
+  ports
+    chamber   [31.91, -0.01, 0.12]  frame 8
+    eject     [31.91, 1.66, 0.12]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    mag_well  [25.2, -19.96, -8.44]  mouth [26.75, -19.97, -1.5]  axis [-0.202, 0.005, -0.979]  travel_clear 13.55
+    muzzle    [44.34, 0.16, -0.66]
+  grip        line [28.59, -1.09, -4.02] [21.05, 0.12, -14.03]  trigger [30.96, 0.01, -5.01]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [32.88, -0.05, -4.6]   # one-handed gun; placeholder
+  carve       mag round
+  phases
+    raise        0..2
+    idle         3..4
+    fire         5..8
+    idle         9..9
+    rack         10..14
+    slide_lock   15..15
+    mag_out      16..16
+    mag_in       17..27
+    idle         28..29
+    mag_out      30..30
+    mag_in       31..41
+    idle         42..46
+  baked_cant   frames 7..27 up to 21.2 deg   # psprite-era hand sway; removed in bd_br_pistol_f_dual_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 13418
+  carved      mag  seat_origin [25.2, -19.96, -8.44]  file bd_br_pistol_f_dual_mag.md3
+  carved      round  seat_origin [25.6, 0.03, -2.06]  file bd_br_pistol_f_dual_round.md3

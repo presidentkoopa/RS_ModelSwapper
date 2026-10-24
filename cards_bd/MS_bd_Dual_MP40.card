@@ -1,0 +1,38 @@
+weapon MS_bd_Dual_MP40
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_Dual_MP40.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 0  rest [60.14, -19.98, -4.58]  axis [0.0, 0.0, -1.0]  travel 25.00  frames 14..19
+    trigger  surf 1  rest [33.51, -20.0, -4.82]  axis [-0.998, 0.0, 0.066]  travel 0.86  frames 4..5  rot 28deg axis [0.0, 1.0, 0.0]
+    slide    surf 10  rest [55.69, -21.21, 3.2]  axis [-0.999, 0.028, 0.046]  travel 16.79  frames 4..19  rot 44deg axis [-1.0, -0.0, -0.0]
+    slide2   surf 11  rest [55.69, -1.21, 3.2]  axis [-0.998, -0.0, 0.056]  travel 17.52  frames 3..19  rot 18deg axis [-0.79, -0.2, -0.58]
+    part     surf 12  rest [53.05, -0.09, 0.73]  axis [0.324, -0.351, -0.879]  travel 6.03  frames 3..19  rot 12deg axis [-0.81, 0.38, -0.45]
+    part2    surf 13  rest [40.53, 0.0, 3.07]  axis [0.449, -0.093, -0.888]  travel 5.03  frames 3..19  rot 12deg axis [-0.81, 0.38, -0.45]
+    part3    surf 14  rest [-1.12, 0.01, -3.45]  axis [0.092, 0.896, -0.434]  travel 5.80  frames 3..19  rot 18deg axis [-0.79, -0.2, -0.58]
+    part4    surf 15  rest [24.95, -2.29, -1.28]  axis [0.524, 0.123, -0.843]  travel 3.44  frames 3..19  rot 12deg axis [-0.81, 0.38, -0.45]
+    part5    surf 16  rest [49.75, 0.0, -3.59]  axis [0.277, -0.429, -0.86]  travel 5.82  frames 3..19  rot 12deg axis [-0.81, 0.38, -0.45]
+    round    surf 17  rest [43.19, 0.0, 5.77]  axis [0.465, -0.054, -0.884]  travel 5.33  frames 3..19  rot 12deg axis [-0.81, 0.38, -0.45]
+    part6    surf 18  rest [50.8, 0.0, 2.89]  axis [0.372, -0.263, -0.89]  travel 5.83  frames 3..19  rot 12deg axis [-0.81, 0.38, -0.45]
+    part7    surf 19  rest [19.94, -0.31, -1.68]  axis [0.552, 0.229, -0.802]  travel 3.59  frames 3..19  rot 12deg axis [-0.81, 0.38, -0.45]
+    part8    surf 20  rest [33.51, -0.0, -4.82]  axis [0.379, -0.249, -0.891]  travel 4.30  frames 3..19  rot 12deg axis [-0.81, 0.38, -0.45]
+    part9    surf 21  rest [60.14, 0.02, -4.58]  axis [0.016, -0.493, -0.87]  travel 24.57  frames 3..19  rot 18deg axis [-0.79, -0.2, -0.58]
+  ports
+    chamber   [45.66, -0.29, 1.06]  frame 14
+    eject     [45.66, 2.78, 1.06]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    mag_well  [60.14, -19.98, -4.58]  mouth [58.61, -20.11, 2.67]  axis [0.0, 0.0, -1.0]  travel_clear 25.00
+    muzzle    [90.61, -19.39, 2.08]
+  grip        line [25.27, -20.8, -3.88] [25.44, -20.8, -14.69]  trigger [33.51, -20.0, -4.82]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [57.05, -20.09, 0.73]   # one-handed gun; placeholder
+  carve       mag round
+  phases
+    raise        0..1
+    idle         2..3
+    fire         4..6
+    idle         7..13
+    mag_out      14..14
+    mag_in       15..19
+  baked_cant   frames 14..19 up to 12.1 deg   # psprite-era hand sway; removed in bd_Dual_MP40_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 9758
+  carved      mag  seat_origin [60.14, -19.98, -4.58]  file bd_Dual_MP40_mag.md3
+  carved      round  seat_origin [43.19, 0.0, 5.77]  file bd_Dual_MP40_round.md3

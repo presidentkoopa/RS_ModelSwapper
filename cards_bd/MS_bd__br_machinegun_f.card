@@ -1,0 +1,22 @@
+weapon MS_bd__br_machinegun_f
+  archetype   shotgun_pump        # owner-confirmed
+  model       bd__br_machinegun_f.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 0  rest [53.67, 0.12, -8.53]  axis [0.986, 0.0, 0.166]  travel 0.35  frames -..-  rot 19deg axis [0.0, -1.0, 0.0]
+    trigger2 surf 2  rest [50.42, 0.09, -8.47]  axis [-0.932, 0.0, 0.363]  travel 0.49  frames -..-  rot 20deg axis [-0.0, 1.0, 0.0]
+    slide    surf 3  rest [70.32, 0.07, -6.26]  axis [1.0, 0.0, 0.0]  travel 9.50  frames 19..35
+    trigger3 surf 4  rest [34.15, 0.04, -5.85]  axis [-1.0, 0.0, 0.0]  travel 0.59  frames 5..6
+    muzzle    [96.83, -0.62, 5.83]
+  grip        line [47.62, 0.62, -7.53] [45.2, 1.31, -12.44]  trigger [53.67, 0.12, -8.53]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [51.99, -0.31, 3.64]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..2
+    idle         3..4
+    fire         5..7
+    idle         8..10
+    fire         11..13
+    idle         14..17
+    fire         18..35
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 15786

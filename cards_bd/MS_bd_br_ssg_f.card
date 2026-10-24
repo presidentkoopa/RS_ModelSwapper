@@ -1,0 +1,30 @@
+weapon MS_bd_br_ssg_f
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_br_ssg_f.md3   space WPN   idle_frame 1
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    round    surf 1  rest [38.21, -1.39, 1.14]  axis [-0.784, 0.0, 0.621]  travel 9.62  frames 17..42  rot 30deg axis [0.0, 1.0, -0.0]
+    round2   surf 2  rest [38.21, 1.31, 1.14]  axis [-0.784, 0.0, 0.621]  travel 9.62  frames 17..42  rot 30deg axis [0.0, 1.0, -0.0]
+    part     surf 3  rest [50.68, -0.04, 0.41]  axis [-0.005, -0.0, -1.0]  travel 5.81  frames 15..42  rot 30deg axis [-0.0, 1.0, 0.0]
+    hammer   surf 4  rest [33.77, -0.04, 1.77]  axis [0.194, -0.981, 0.0]  travel 0.60  frames 14..42  rot 20deg axis [0.0, 0.0, 1.0]
+    part2    surf 5  rest [33.07, -0.19, -5.14]  axis [-0.915, -0.0, 0.404]  travel 1.17  frames 2..7  rot 27deg axis [-0.0, 1.0, -0.0]
+  ports
+    chamber   [40.26, -1.39, 1.52]  frame 30
+    eject     [40.26, 1.28, 1.52]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    muzzle    [41.56, 1.75, -2.33]
+  grip        line [20.8, -1.03, -2.36] [18.89, 0.31, -10.84]  trigger [28.26, -0.25, -3.35]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [32.26, -0.25, -3.35]   # one-handed gun; placeholder
+  carve       round
+  phases
+    idle         0..13
+    fire         14..14
+    idle         15..15
+    fire         16..32
+    lower        33..37
+    fire         38..42
+    lower        43..45
+    idle         46..46
+    lower        47..49
+    idle         50..51
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 20427
+  carved      round  seat_origin [38.21, -1.39, 1.14]  file bd_br_ssg_f_round.md3
