@@ -288,6 +288,55 @@ count read out of the built files rather than retyped. It states the load order,
 family is, the 1.97 additions, the melee, the credits (Brutal Doom is Sergeant_Mark_IV's; the hands
 are Ermac's under Rusted Legacy MIT; the engine is Emawind's) and the known gaps.
 
+## F5, PART DONE (2026-10-24) — recoil and the dial are in; flashes and casings are NOT
+
+Stages `recoil`, `impacts` and `bullet`, all after `butt`. **The owner's yes was given 2026-10-24.**
+
+**Done.**
+- **Per-gun recoil, 22 guns.** REMA's own numbers: each gun's `recoilprofile` on WMSHEET.bd22
+  against RS_Ballistics' recoil blocks, computed there from free-recoil arithmetic. SSG rises 22°
+  over 18 tics, the minigun 1.5° over 4. Axe, Dragonslayer and grenades are `none` and get nothing.
+  **In VR this is the gun moving in your hands, not your aim**: the controller decides where a shot
+  goes, `psp.x`/`psp.y` rotate the model. So `bloom` and `brace` have nothing to act on and are not
+  carried, and the channel has no roll, so each profile's roll and backward shove are dropped.
+  Additive in WorldTick, never assigned — A_WeaponReady rewrites that channel every tic.
+- **Ballistics is Stock / Low / Max.** Low is exactly 1.96b (24 tracers, 64 debris); Max doubles the
+  caps and multiplies counts by 1.8. `rsq_recoil` is its OWN row, not on that dial: it costs one
+  float a tic, the effects cost a frame budget.
+- **Per-gun impact weight**, derived not typed: mass × speed² from the `ballistics` blocks, cube
+  root of the ratio against the 9mm. 7.62 2.21, 5.56 1.91, buckshot 1.66, .357 1.26, 9mm 1.00.
+  Ten guns; the rest have no cartridge and take 1.0.
+- **The pack is raised to ZScript 4.14** (ZSCRIPT.rsvr). 1.96b declared 4.10, which HIDES
+  `WorldHitscanPreFired` (added Nov 2024). A `version` line in an included file is refused, so it
+  has to be the root lump. qzd17.3 is GZDoom 4.14.3 and the pack compiles clean at it.
+- **`gate/bd22_gate.sh` now passes `+logfile`.** A fatal script error does NOT reach the redirected
+  stream — the log just stops looking clean. That cost three diagnoses in one session and the owner
+  had to paste the real error each time.
+
+**NOT done, and this is the honest list.**
+1. **Muzzle flashes — nothing.** The sheet names 20 distinct `flashprofile`s. Every shot still has
+   Brutal Doom's own flash. This is the most visible thing on a gun and it is the real gap.
+2. **Casings — nothing per-gun.** 8 `ejectaprofile`s, with casing models in RS_Ballistics. The pack
+   keeps 1.96b's own `casings.zs`.
+3. **The round in flight — written, switched off, not in the pk3.** See the commit: every gun with
+   a cartridge is HITSCAN, and the only carrier is a PROJECTILE follower, so it can never fire as
+   wired. It needs spawning and flying from the muzzle (each card has one) to the impact.
+4. **Impact character.** Only a strength multiplier crossed. RS_Ballistics' 572 impact blocks decide
+   what a 9mm does to metal versus wood versus glass; none of that came, and it cannot come as
+   written — bursts resolve PARTICLEDEFS, a REMA renderer feature.
+5. **Butt strikes** exist on four long guns; the Machinegun, MP40, SMG and MG42 have stocks too.
+6. **The slug revolver has no hand-fit sheet.** The Machinegun got one.
+7. **The melee doc's §9 architecture** — the netevent pose-history spine it calls the single
+   highest-leverage thing in the three codebases. `melee.zs` was extended instead, so its snap-turn
+   and teleport patches remain.
+
+**Two bugs that looked fine and did nothing** — both found only by reading the CALLER:
+- `Impact(Actor tracer, …)` is misnamed; `RSQ_Tracer` passes the **shooter**. The per-gun impact
+  weight looked the gun up through `tracer.target`, null on a player, so **every gun weighed 1.0**
+  and the whole table did nothing. Fixed.
+- A regex over RSBDEFS required a block name to end its line, but those headers carry trailing
+  comments. It matched almost nothing and produced a plausible six-gun table instead of ten.
+
 ## What is NOT done (the plan's remaining flagship items, in order)
 1. ~~Gate `sets/bd22q_1.97` on the owner's exact load order.~~ **Done 2026-10-24** (see "F1 IS DONE"):
    runs clean, pk3 handed over. What is left of F1 is the owner's headset pass, which is his to do.
