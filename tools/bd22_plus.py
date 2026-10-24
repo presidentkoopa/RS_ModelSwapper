@@ -730,6 +730,93 @@ BASH_STATES = '''	// 1.97: the gun bash (zscript/rsq/bash.zs). Not VR, option of
 '''
 
 
+# F4 -- the pistol whip. Unlike the bash this IS a gesture, because a pistol is the one gun you
+# genuinely swing: one hand, light, and nothing about aiming it looks like a sideways chop. It
+# reuses melee.zs wholesale -- the sample history in the body frame, the speed and direction gates,
+# the backswing rejection, the swept segment, the per-swing strike list -- by adding two kinds to
+# it, which is all the axe and the Dragonslayer are.
+#
+# The segments are measured on each gun's mesh at ITS OWN ready frame, in model units, because that
+# is what BladeIn/BladeOut are (the axe's are "BrutalAxe.md3 frame 5 = AXEG A"). The ready frame is
+# not frame 0: it is whatever MODELDEF binds the gun's Ready sprite to -- BrutalPistol's is frame 3
+# (2IST/PIST), the Revolver's frame 0 (REVO/2EVO). Revolver2 has no Model block of its own; it
+# rides the Revolver's by sprite, so it shares the geometry.
+WHIP = [
+    # kind, classes, ready sprites, md3 frame, BladeIn, BladeOut, source
+    ('PISTOL', ["'BrutalPistol'"], ['PIST', '2IST'], 3, (26.2, 0.0, -7.0), (44.2, 0.0, -0.2),
+     'BrutalPistol.md3 frame 3'),
+    ('REVOLVER', ["'Revolver'", "'Revolver2'"], ['REVO', '2EVO'], 0, (29.4, 0.1, -1.5), (50.2, 0.0, 2.4),
+     'Revolver.md3 frame 0'),
+]
+
+
+def whip():
+    """F4: the pistol whip, as two more kinds in 1.96b's own melee.zs."""
+    p = OUT_SRC + 'zscript/rsvr/melee.zs'
+    t = open(p).read()
+    st = {}
+
+    def once(old, new, what):
+        if t.count(old) != 1:
+            raise SystemExit('melee.zs: %s is not there exactly once' % what)
+        return t.replace(old, new)
+
+    # the kinds, and how hard the swing has to be
+    t = once('\tconst AXE = 1;\n\tconst SWORD = 2;\n',
+             '\tconst AXE = 1;\n\tconst SWORD = 2;\n\tconst PISTOL = 3;\t\t// 1.97: the pistol whip\n'
+             '\tconst REVOLVER = 4;\n', 'the kind constants')
+    t = once('\tconst SWORD_SWING = 3.5;\n',
+             '\tconst SWORD_SWING = 3.5;\n\tconst WHIP_SWING = 3.2;\t\t// 1.97: a pistol is lighter than the axe\n',
+             'SWORD_SWING')
+    # the striking segment, measured per gun
+    ins = ''.join('\t\tif (k == %s)\n\t\t\treturn (%.1f, %.1f, %.1f);\t// 1.97: %s, just forward of the hand\n'
+                  % (kd, g[0], g[1], g[2], src) for kd, _, _, _, g, _, src in WHIP)
+    outs = ''.join('\t\tif (k == %s)\n\t\t\treturn (%.1f, %.1f, %.1f);\t// 1.97: %s, the muzzle\n'
+                   % (kd, g[0], g[1], g[2], src) for kd, _, _, _, _, g, src in WHIP)
+    t = once('\t\tif (k == AXE)\n\t\t\treturn (44, 0, 26);\t\t// top of the axe head\n',
+             '\t\tif (k == AXE)\n\t\t\treturn (44, 0, 26);\t\t// top of the axe head\n' + ins, 'BladeIn')
+    t = once('\t\tif (k == AXE)\n\t\t\treturn (55, 0, 16);\t\t// the axe\'s cutting edge\n',
+             '\t\tif (k == AXE)\n\t\t\treturn (55, 0, 16);\t\t// the axe\'s cutting edge\n' + outs, 'BladeOut')
+    # which weapon is which kind
+    kinds = ''.join('\t\tif (%s)\n\t\t\treturn %s;\n' % (' || '.join('n == %s' % c for c in cls), kd)
+                    for kd, cls, _, _, _, _, _ in WHIP)
+    t = once("\t\tif (n == 'DSweap')\n\t\t\treturn SWORD;\n\t\treturn 0;\n",
+             "\t\tif (n == 'DSweap')\n\t\t\treturn SWORD;\n" + kinds + '\t\treturn 0;\n', 'KindOf')
+    # the ready pose: the gun is where the model shows it
+    decl = ''.join('\ttransient SpriteID s%s;\n' % s for _, _, sp, _, _, _, _ in WHIP for s in sp)
+    init = ''.join("\t\ts%s = Actor.GetSpriteIndex('%s');\n" % (s, s) for _, _, sp, _, _, _, _ in WHIP for s in sp)
+    pose = ''.join('\t\tif (k == %s)\n\t\t\treturn %s;\n' % (kd, ' || '.join('s == s%s' % s for s in sp))
+                   for kd, _, sp, _, _, _, _ in WHIP)
+    t = once('\ttransient SpriteID sAXEG;\n', '\ttransient SpriteID sAXEG;\n' + decl, 'the sprite fields')
+    t = once("\t\tsAXEG = Actor.GetSpriteIndex('AXEG');\n",
+             "\t\tsAXEG = Actor.GetSpriteIndex('AXEG');\n" + init, 'InitSprites')
+    t = once('\t\tif (k == SWORD)\n\t\t\treturn s == sDSLA;\n',
+             '\t\tif (k == SWORD)\n\t\t\treturn s == sDSLA;\n' + pose, 'ReadyPose')
+    # the threshold
+    t = once('\t\tdouble thr = (k == AXE ? AXE_SWING : SWORD_SWING) * vu / 35.\n',
+             '\t\tdouble thr = (k == AXE ? AXE_SWING : k == SWORD ? SWORD_SWING : WHIP_SWING) * vu / 35.\n',
+             'the swing threshold')
+    # the result: BD22's own punch, which is what the pack's fists already land
+    t = once("\t\telse\n\t\t{\n\t\t\tLaunch(mo, 'DSAttack', p, dir);\n\t\t\tLaunch(mo, 'DSAttack2', p, dir);\n\t\t}\n",
+             "\t\telse if (k == SWORD)\n\t\t{\n\t\t\tLaunch(mo, 'DSAttack', p, dir);\n"
+             "\t\t\tLaunch(mo, 'DSAttack2', p, dir);\n\t\t}\n"
+             "\t\telse\n\t\t{\n"
+             "\t\t\t// 1.97 the pistol whip: BD22's own punch, which is what this pack's fists\n"
+             "\t\t\t// already land (zscript/rsq/fists.zs), so its gore decides the result.\n"
+             "\t\t\tLaunch(mo, mo.CountInv('PowerStrength') > 0 ? 'MeleeStrike1Berserked' : 'MeleeStrikeNormal', p, dir);\n"
+             "\t\t\tif (power >= 2.0)\n"
+             "\t\t\t\tLaunch(mo, 'MeleeStrikeNormal', p, dir);\n\t\t}\n", 'the strike result')
+    open(p, 'w').write(t)
+    st['kinds'] = {kd: dict(classes=[c.strip("'") for c in cls], sprites=sp, frame=fr,
+                            blade_in=list(bi), blade_out=list(bo), source=src)
+                   for kd, cls, sp, fr, bi, bo, src in WHIP}
+    st['result'] = "MeleeStrikeNormal / MeleeStrike1Berserked, as fists.zs lands"
+    json.dump(st, open(OUT + 'whip_apply.json', 'w'), indent=1)
+    with open(OUT + '.generated', 'a') as f:
+        f.write('then tools/bd22_plus.py whip\n')
+    print(json.dumps(st, indent=1))
+
+
 def bash():
     """F4: BD22's kick becomes a gun bash when a gun is in your hands, with the owner's own
     RS_CombatFX impact. Runs after options()."""
@@ -986,6 +1073,8 @@ if __name__ == '__main__':
         apply()
     if sys.argv[1:2] == ['revolver']:
         revolver()
+    if sys.argv[1:2] == ['whip']:
+        whip()
     if sys.argv[1:2] == ['bash']:
         bash()
     if sys.argv[1:2] == ['options']:

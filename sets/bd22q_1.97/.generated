@@ -4,3 +4,4 @@ OUT = E:/DOOMWork/_buildtemp/rsq_bd22/
 then tools/bd22_plus.py revolver
 then tools/bd22_plus.py options
 then tools/bd22_plus.py bash
+then tools/bd22_plus.py whip

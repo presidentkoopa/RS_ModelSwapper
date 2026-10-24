@@ -140,11 +140,14 @@ class RSVR_Hand play
 	const HIST = 6;
 	const AXE = 1;
 	const SWORD = 2;
+	const PISTOL = 3;		// 1.97: the pistol whip
+	const REVOLVER = 4;
 
 	// swing speed (m/s at the blade's outer point, relative to the player's own
 	// movement) that counts as a blow, and the slowest release that throws
 	const AXE_SWING = 3.0;
 	const SWORD_SWING = 3.5;
+	const WHIP_SWING = 3.2;		// 1.97: a pistol is lighter than the axe
 	const THROW_MIN = 2.5;
 	const RISE = 0.15;			// of the blade's speed that may be upward before it is a backswing (about 9 degrees)
 
@@ -218,6 +221,10 @@ class RSVR_Hand play
 
 	transient bool spritesSet;
 	transient SpriteID sAXEG;
+	transient SpriteID sPIST;
+	transient SpriteID s2IST;
+	transient SpriteID sREVO;
+	transient SpriteID s2EVO;
 	transient SpriteID sAXE2;
 	transient SpriteID s1XEG;
 	transient SpriteID s2XEG;
@@ -233,6 +240,10 @@ class RSVR_Hand play
 	{
 		if (k == AXE)
 			return (44, 0, 26);		// top of the axe head
+		if (k == PISTOL)
+			return (26.2, 0.0, -7.0);	// 1.97: BrutalPistol.md3 frame 3, just forward of the hand
+		if (k == REVOLVER)
+			return (29.4, 0.1, -1.5);	// 1.97: Revolver.md3 frame 0, just forward of the hand
 		return (38, 0, 16);			// Dragonslayer: guard
 	}
 
@@ -240,6 +251,10 @@ class RSVR_Hand play
 	{
 		if (k == AXE)
 			return (55, 0, 16);		// the axe's cutting edge
+		if (k == PISTOL)
+			return (44.2, 0.0, -0.2);	// 1.97: BrutalPistol.md3 frame 3, the muzzle
+		if (k == REVOLVER)
+			return (50.2, 0.0, 2.4);	// 1.97: Revolver.md3 frame 0, the muzzle
 		return (90, 0, 159);		// Dragonslayer: point
 	}
 
@@ -252,6 +267,10 @@ class RSVR_Hand play
 	void InitSprites()
 	{
 		sAXEG = Actor.GetSpriteIndex('AXEG');
+		sPIST = Actor.GetSpriteIndex('PIST');
+		s2IST = Actor.GetSpriteIndex('2IST');
+		sREVO = Actor.GetSpriteIndex('REVO');
+		s2EVO = Actor.GetSpriteIndex('2EVO');
 		sAXE2 = Actor.GetSpriteIndex('AXE2');	// the two-handed placement
 		s1XEG = Actor.GetSpriteIndex('1XEG');
 		s2XEG = Actor.GetSpriteIndex('2XEG');
@@ -272,6 +291,10 @@ class RSVR_Hand play
 			return AXE;
 		if (n == 'DSweap')
 			return SWORD;
+		if (n == 'BrutalPistol')
+			return PISTOL;
+		if (n == 'Revolver' || n == 'Revolver2')
+			return REVOLVER;
 		return 0;
 	}
 
@@ -287,6 +310,10 @@ class RSVR_Hand play
 		SpriteID s = psp.Sprite;
 		if (k == SWORD)
 			return s == sDSLA;
+		if (k == PISTOL)
+			return s == sPIST || s == s2IST;
+		if (k == REVOLVER)
+			return s == sREVO || s == s2EVO;
 		// AXE2 is the same axe drawn at the TWO-HANDED placement (MODELDEF, Axe.dec
 		// TwoHand). poseFrame tells Place which transform the blade sits in.
 		poseFrame = s == sAXE2 ? 1 : 0;
@@ -403,7 +430,7 @@ class RSVR_Hand play
 			return;
 		}
 
-		double thr = (k == AXE ? AXE_SWING : SWORD_SWING) * vu / 35.
+		double thr = (k == AXE ? AXE_SWING : k == SWORD ? SWORD_SWING : WHIP_SWING) * vu / 35.
 			* max(0.2, Cv(mo, 'rsvr_melee_swing', 1.0));
 		// 1.11 (owner: "goes insane with attacks just when I move around"). The blade is measured
 		// in the BODY's own frame (from the pawn, turned by the pawn's angle), so walking,
@@ -597,10 +624,18 @@ class RSVR_Hand play
 			if (TwoHandedBite(mo, dir, edge))
 				Launch(mo, 'RSVR_AxeHalf', p, dir);
 		}
-		else
+		else if (k == SWORD)
 		{
 			Launch(mo, 'DSAttack', p, dir);
 			Launch(mo, 'DSAttack2', p, dir);
+		}
+		else
+		{
+			// 1.97 the pistol whip: BD22's own punch, which is what this pack's fists
+			// already land (zscript/rsq/fists.zs), so its gore decides the result.
+			Launch(mo, mo.CountInv('PowerStrength') > 0 ? 'MeleeStrike1Berserked' : 'MeleeStrikeNormal', p, dir);
+			if (power >= 2.0)
+				Launch(mo, 'MeleeStrikeNormal', p, dir);
 		}
 		Buzz(mo);
 	}
