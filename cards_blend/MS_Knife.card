@@ -1,6 +1,6 @@
-weapon MS_knife
+weapon MS_Knife
   archetype   rifle_mag        # from source names
-  model       MS_knife.md3   space WPN   idle_frame 0
+  model       MS_Knife.md3   space WPN   idle_frame 0
   bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
   parts
     muzzle    [35.72, 0.00, -8.06]

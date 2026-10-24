@@ -3,9 +3,9 @@ weapon MS_Chaingun
   model       MS_Chaingun.md3   space WPN   idle_frame 0
   bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
   parts
-    mag      surf 1  rest [31.38, 0.01, -2.22]  axis [-0.263, 0.000, -0.965]  size [2.36, 0.52, 6.00]
-    mag2     surf 2  rest [59.49, 36.84, -8.55]  axis [0.134, -0.932, -0.338]  size [31.52, 44.52, 34.12]
-    mag3     surf 3  rest [108.10, -0.02, -8.33]  axis [-1.000, -0.000, 0.000]  size [61.73, 12.86, 12.86]
+    part     surf 1  rest [31.38, 0.01, -2.22]  axis [-0.263, 0.000, -0.965]  size [2.36, 0.52, 6.00]
+    part2    surf 2  rest [59.49, 36.84, -8.55]  axis [0.134, -0.932, -0.338]  size [31.52, 44.52, 34.12]
+    part3    surf 3  rest [108.10, -0.02, -8.33]  axis [-1.000, -0.000, 0.000]  size [61.73, 12.86, 12.86]
     muzzle    [65.94, 0.00, -0.90]
   grip        line [35.72, 0.04, -15.92] [47.69, 0.05, -28.83]  trigger [35.72, 0.04, -15.92]   # centroid-based; owner's hand fit supersedes
   support     feature palm [39.72, 0.04, -15.92]   # one-handed gun; placeholder

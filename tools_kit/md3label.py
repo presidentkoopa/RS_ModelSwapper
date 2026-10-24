@@ -118,9 +118,13 @@ def kabsch(P,Q):
 def unit(v):
     n=np.linalg.norm(v); return v/n if n>1e-9 else v
 
-def analyse(m, idle):
+def analyse(m, idle, exclude=()):
     S=[dict(xyz=surf_xyz(s), nverts=s['nverts'], name=s['name']) for s in m['surfs']]
-    body=max(range(len(S)), key=lambda i:S[i]['nverts'])
+    # 'exclude' holds surfaces the caller has already named something other than the
+    # body (see --assign in main). Without it the biggest surface wins regardless,
+    # and a belt drum or a split slab ends up as the frame everything is measured in.
+    body=max([i for i in range(len(S)) if i not in exclude] or list(range(len(S))),
+             key=lambda i:S[i]['nverts'])
     B=S[body]['xyz']; nf=m['nframes']
     # everything in WPN = body space at the idle frame
     Rs=[kabsch(B[f], B[idle]) for f in range(nf)]   # maps frame f body -> idle body
@@ -197,11 +201,18 @@ def main():
         for f in range(1,nf):
             ang=np.degrees(np.arccos(np.clip((np.trace(kabsch(B[f-1],B[f])[0])-1)/2,-1,1)))
             if ang<2.0: a.idle=f-1; break
-    S, body, Rs, to_wpn, rest, resid, sway, cant = analyse(m, a.idle)
+    # Read --assign BEFORE picking the body. The body is chosen as the surface with
+    # the most verts, and on the MG42 that is the belt drum -- bigger than anything
+    # it hangs off. classify() then builds no motion record for the body, so
+    # '--assign 2=mag' left the drum a magazine with no entry in info and the run
+    # died on a KeyError. A surface the caller has explicitly called something else
+    # is not a candidate for the body.
+    _assign={int(kv.split('=')[0]): kv.split('=')[1] for kv in filter(None, a.assign.split(','))}
+    S, body, Rs, to_wpn, rest, resid, sway, cant = analyse(
+        m, a.idle, exclude={i for i, r in _assign.items() if r != 'body'})
     bore=unit(np.array([float(x) for x in a.bore.split(',')])); down=unit(np.array([float(x) for x in a.down.split(',')]))
     roles, info = classify(S, body, rest, resid, bore, down)
-    for kv in filter(None, a.assign.split(',')):
-        k,v=kv.split('='); roles[int(k)]=v
+    roles.update(_assign)
     # unique names: body, body2 ...
     seen={}; names={}
     for i in range(len(S)):
@@ -326,7 +337,13 @@ def main():
     # muzzle: body point furthest along bore among points near the bore line (top half)
     barrels=[i for i in range(len(S)) if roles[i] in ('barrel','body')]
     W=np.vstack([to_wpn(i,a.idle) for i in barrels]); top=W[W@(-down) > np.median(W@(-down))]; muz=top[np.argmax(top@bore)]
-    W=to_wpn(body,a.idle)
+    # The grip search below looks for body vertices behind and under the trigger.
+    # 'body' is a single surface, which was fine until a gun too big for the MD3
+    # caps got split into bore-slabs: the Kar98's largest slab spans x 58..116 and
+    # its trigger is at x 33, so the search found nothing and argmin blew up on an
+    # empty array. A split body is still one body -- take every slab.
+    _bodies=[i for i in range(len(S)) if roles[i]=='body'] or [body]
+    W=np.vstack([to_wpn(i,a.idle) for i in _bodies])
     card.append(f"    muzzle    {np.round(muz,2).tolist()}")
     tagdefs.append(("tag_muzzle", tag_per_frame(muz, frame_axes(bore,-down))))
     # grip: body points below the trigger along 'down'
@@ -346,6 +363,11 @@ def main():
         sel=W[(along < refa) & (along > refa-12) & ((W@down) > (ref@down)-1.0)]
         if len(sel) < 10: sel=W[(W@down) > (ref@down)+1.0]
         if len(sel) < 10: sel = W[(W@down) > (ref@down)]
+        # Three narrowing filters in a row and nothing guaranteeing a survivor --
+        # the last one still returns empty on a gun whose body sits entirely above
+        # its trigger, and mean/argmin of an empty array ends the run. The whole
+        # body is a poor grip but an honest one, and the card says as much.
+        if len(sel) < 1: sel = W
         grip=sel.mean(0)
         gl0=sel[np.argmin(sel@down)]; gl1=sel[np.argmax(sel@down)]
         card.append(f"  grip        line {np.round(gl0,2).tolist()} {np.round(gl1,2).tolist()}  trigger {np.round(trg,2).tolist()}   # centroid-based; owner's hand fit supersedes")

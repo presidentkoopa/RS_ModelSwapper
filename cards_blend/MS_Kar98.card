@@ -3,17 +3,13 @@ weapon MS_Kar98
   model       MS_Kar98.md3   space WPN   idle_frame 0
   bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
   parts
-    grip     surf 0  rest [34.60, 0.01, -0.25]  axis [-0.984, 0.000, -0.178]  size [64.14, 5.67, 19.34]
-    mag      surf 1  rest [3.13, -0.01, -9.63]  axis [-0.999, 0.002, -0.054]  size [8.80, 1.19, 1.45]
-    part     surf 2  rest [30.23, -0.02, 2.27]  axis [-0.989, -0.000, 0.147]  size [3.72, 1.34, 1.97]
-    part2    surf 3  rest [32.58, -0.32, 3.17]  axis [-0.965, -0.223, 0.136]  size [5.25, 4.09, 2.69]
-    part3    surf 4  rest [39.27, 1.75, 1.93]  axis [-0.979, 0.192, -0.072]  size [17.58, 7.08, 4.55]
+    round    surf 1  rest [3.13, -0.01, -9.63]  axis [-0.999, 0.002, -0.054]  size [8.80, 1.19, 1.45]  chamber 1   # seated; hide to show empty
     trigger  surf 5  rest [33.08, -0.02, -3.86]  axis [-0.285, -0.000, -0.958]  size [2.05, 0.78, 4.92]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [33.91, -0.02, -1.06]
-    mag2     surf 6  rest [-0.26, 0.00, -7.00]  axis [0.000, 0.000, 1.000]  size [0.39, 1.41, 6.59]
-    mag3     surf 7  rest [3.13, -0.01, -8.33]  axis [-0.999, 0.002, -0.036]  size [8.80, 1.19, 1.38]
-    mag4     surf 8  rest [3.13, -0.01, -7.02]  axis [-1.000, 0.002, -0.002]  size [8.80, 1.19, 1.20]
-    mag5     surf 9  rest [3.13, -0.01, -5.72]  axis [-0.999, 0.002, 0.033]  size [8.80, 1.19, 1.36]
-    mag6     surf 10  rest [3.13, -0.01, -4.42]  axis [-0.999, 0.002, 0.051]  size [8.80, 1.19, 1.44]
+    mag      surf 6  rest [-0.26, 0.00, -7.00]  axis [0.000, 0.000, 1.000]  size [0.39, 1.41, 6.59]
+    round2   surf 7  rest [3.13, -0.01, -8.33]  axis [-0.999, 0.002, -0.036]  size [8.80, 1.19, 1.38]  chamber 2   # seated; hide to show empty
+    round3   surf 8  rest [3.13, -0.01, -7.02]  axis [-1.000, 0.002, -0.002]  size [8.80, 1.19, 1.20]  chamber 3   # seated; hide to show empty
+    round4   surf 9  rest [3.13, -0.01, -5.72]  axis [-0.999, 0.002, 0.033]  size [8.80, 1.19, 1.36]  chamber 4   # seated; hide to show empty
+    round5   surf 10  rest [3.13, -0.01, -4.42]  axis [-0.999, 0.002, 0.051]  size [8.80, 1.19, 1.44]  chamber 5   # seated; hide to show empty
     muzzle    [116.08, 0.00, 3.46]
   grip        line [99.04, -0.32, 0.17] [61.44, 0.00, -2.08]  trigger [33.08, -0.02, -3.86]   # centroid-based; owner's hand fit supersedes
   support     feature palm [103.04, -0.32, 0.17]   # one-handed gun; placeholder

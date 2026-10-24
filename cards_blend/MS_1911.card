@@ -1,18 +1,15 @@
-weapon 1911
-  archetype   pistol_mag        # owner-confirmed
-  model       1911.md3   space WPN   idle_frame 0
-  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+weapon MS_1911
+  archetype   pistol_mag        # from source names
+  model       MS_1911.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
   parts
-    trigger  surf 1  rest [29.77, -0.0, -4.51]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
-    hammer   surf 2  rest [22.15, 0.0, -0.5]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
-    slide    surf 3  rest [28.73, -0.01, -0.16]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
-    mag      surf 4  rest [21.98, -0.04, -17.42]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
-    mag_well  [21.98, -0.04, -17.42]  mouth [22.84, -0.75, -14.0]  axis [0.0, 0.0, 0.0]  travel_clear 0.00
-    muzzle    [44.64, -0.7, 0.48]
-  grip        line [22.48, -1.09, -3.53] [25.12, -0.75, -13.61]  trigger [29.77, -0.0, -4.51]   # centroid-based; owner's hand fit supersedes
-  support     feature palm [31.54, -0.19, -3.82]   # one-handed gun; placeholder
-  carve       mag
+    trigger  surf 1  rest [29.77, 0.00, -4.51]  axis [0.080, 0.000, 0.997]  size [1.28, 0.62, 2.64]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [29.88, 0.00, -3.40]
+    hammer   surf 2  rest [22.15, 0.00, -0.50]  axis [-0.379, 0.000, 0.925]  size [2.61, 0.84, 3.41]  rot 35deg axis [0.000, 1.000, 0.000]  pivot [22.53, 0.00, -2.21]
+    slide    surf 3  rest [28.73, -0.01, -0.16]  axis [-0.999, -0.006, 0.041]  size [22.23, 2.28, 4.39]
+    mag      surf 4  rest [21.98, -0.04, -17.42]  axis [-0.174, 0.003, -0.985]  size [7.55, 1.50, 12.48]
+    muzzle    [44.64, 0.00, 0.08]
+  grip        line [19.97, 0.00, -10.22] [24.91, 0.00, -13.37]  trigger [29.77, 0.00, -4.51]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [23.97, 0.00, -10.22]   # one-handed gun; placeholder
   phases
     idle         0..0
-  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2440
-  carved      mag  seat_origin [21.98, -0.04, -17.42]  file 1911_mag.md3
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 2440  frames 1

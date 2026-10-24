@@ -20,7 +20,12 @@ NAMES = [  # (regex on surface name, role)
     # 'clip' and its release 'clipRelease', and with only 'mag' in this table the
     # tool saw a magazine and called it nothing. Order matters: clipRelease must
     # hit 'release' above before this line turns it into a magazine.
-    (r'mag|clip', 'mag'), (r'pump|forend|foregrip', 'pump'),
+    # ...but 'mag' as a bare substring also swallows the magazine's FURNITURE. The
+    # Chaingun names its feed panels mag_cover, mag_cover.001..003 and got four
+    # magazines, one of them 61 units long. A cover, well, housing, guide or feed
+    # is the hole the magazine goes into, never the magazine, so it stays a part.
+    (r'(?:mag|clip)(?!\w*(?:cover|well|hous|guide|catch|port|chute|feed|plate|lip))', 'mag'),
+    (r'pump|forend|foregrip', 'pump'),
     (r'bolt', 'bolt'), (r'barrel', 'barrel'), (r'body|frame|receiver', 'body'), (r'sight', 'sight'), (r'stock', 'stock'),
     (r'grip|handle', 'grip'), (r'loader', 'loader'), (r'lever', 'lever'),
 ]
@@ -47,7 +52,19 @@ def ax(v): return "[" + ", ".join(f"{x:.3f}" for x in v) + "]"
 m = read_md3(sys.argv[1]); name = sys.argv[2]; arche = sys.argv[3]
 S = m['surfs']; X = {s['name']: s['xyz'][0] for s in S}
 roles = {s['name']: role_of(s['name']) for s in S}
-body = max(S, key=lambda s: s['nverts'])['name']; roles[body] = 'body'
+# The largest surface is USUALLY the receiver -- but not always, and forcing it
+# to 'body' unconditionally ate the MG42's belt drum, which outweighs every piece
+# of the gun it hangs off. Once a body is split into bore-slabs the biggest piece
+# is arbitrary anyway. So only a surface whose own name does not already say what
+# it is may be claimed for the body; a mag, slide or trigger keeps its role.
+# Only a name that marks a DETACHABLE or MOVING piece blocks the claim. Authors
+# routinely call a whole gun 'Handle' -- the MP40, Kar98, Tommy and STG44 all do --
+# so treating 'grip'/'handle'/'stock'/'barrel' as disqualifying handed the STG44's
+# 34-unit receiver the role 'grip' and left the body to a scrap.
+_KEEPS_ROLE = {'mag', 'slide', 'bolt', 'trigger', 'hammer', 'round',
+               'case', 'latch', 'cyl', 'crane', 'ejector', 'pump'}
+_cand = [s for s in S if role_of(s['name']) not in _KEEPS_ROLE] or S
+body = max(_cand, key=lambda s: s['nverts'])['name']; roles[body] = 'body'
 B = X[body]; bore = np.array([1.0, 0, 0]); down = np.array([0, 0, -1.0])
 out = [f"weapon {name}", f"  archetype   {arche}        # from source names", f"  model       {name}.md3   space WPN   idle_frame 0",
        f"  bore        {ax(bore)}   down {ax(down)}", "  parts"]
