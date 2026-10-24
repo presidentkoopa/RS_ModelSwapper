@@ -4,7 +4,7 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F4**
+Current step: **F6**
 
 ## Principle
 Every shipped gun is built from two sources only: its MESH (tool-measured) and its PARENT MOD (behaviour
@@ -18,8 +18,12 @@ per-gun checklist below, in a headset, signed by the owner.
       (owner, 2026-10-24): the 2026-10-13 hand patch put BD22's Revolver on a speedloader and left its
       per-chamber rows unused; this makes that a choice instead of a fixed decision, for both guns.
 - F3  Options page onto the shared RSQ_Options standard (owner's headset turn for layout).
-- F4  Melee on bd22q from docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md: pistol whip, rifle/shotgun butt strikes, the spike,
-      switch-punching with either hand. Nothing of it exists yet.
+- F4  DONE 2026-10-24. Melee on bd22q: the gun bash (BD22's kick, with the gun in your hands, and an
+      RS_CombatFX impact), the pistol whip, the two-handed butt strike (off by default).
+      Switch-punching with either hand was ALREADY BUILT in zscript/rsq/fists.zs and needed nothing.
+      "The spike" was struck from this line on the owner's instruction: the word entered in this
+      repo's first commit, attributed to a melee doc that does not contain it, and exists nowhere
+      else -- not in brutal22test6, not in the pack, not in any transcript on the machine.
 - F5  Per-gun ballistics / CombatFX profiles (REMA WMSHEET round/flash/recoil) on bd22q, behind the existing
       Ballistics switch (off = stock BD22). PENDING the owner's yes (added 04:25).
 - F6  Reload sounds for the drum / canister / skull (empty today); pack README; HANDOFF update; owner headset pass.
