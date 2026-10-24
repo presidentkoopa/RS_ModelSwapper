@@ -1,0 +1,87 @@
+# WM_RotaryGun, carried from WMCARD.09_chaingun onto the ANIMATED mesh.
+# source card measured against the static _wm copy;
+#   rotation 0.0 deg, translation [60.83, 0.47, -4.97], fit residual 0.0
+# points rotated and shifted; directions rotated only; lengths untouched.
+weapon "WM_RotaryGun"
+  hand      = main
+  type      = chaingun
+  prop      = "WM_PropRotaryGun"
+  model     = "models/meat/ChainGun" "Chaingun.md3"
+  skin      = "models/vanilla/chainguns/RotaryGun" "Chaingun.png"
+
+  firesfrom = reserve
+  hands     = 1
+
+  # THE TOP BARREL'S BORE at the barrels' front face (x 46.64): six barrels about (y -0.69, z -2.37), the
+  # one at twelve o'clock 6.70 above the axis.
+  muzzle    = 107.468, -0.031, -0.639
+  barrel    = 1.000, 0.000, 0.000
+
+  # ESTIMATE: on the housing's side away from the handle (-y), behind the barrels.
+  ejectport = 47.998, -10.201, -7.299
+  ejectdir  = -0.300, -0.900, 0.400
+
+  # A BELT LINK WITH EVERY CASE: it is belt-fed. The chaingun's link on the chaingun's skin, as
+  # WM_MachineGun's.
+  linkmodel = "models/vanilla/chainguns/Chaingun" "cg_ammoclip.md3"
+  linkskin  = "models/vanilla/chainguns/Chaingun" "chaingun_HD.png"
+  linkscale = 0.34
+
+  # This package's chaingun sounds (SNDINFO wm/chaingun/*); the last three are the barrels' spin.
+  firesound     = "wm/chaingun/fire"
+  drysound      = "wm/dry"
+  spinupsound   = "wm/chaingun/spinup"
+  spinsound     = "wm/chaingun/spin"
+  spindownsound = "wm/chaingun/spindown"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropRotaryGun is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 30.840, -0.226, 1.418
+  supportat = 48.811, 10.036, 2.955
+  palm = 28.653, -0.246, -3.591
+  rake = 51.7
+  seat = 25.909, -0.000, 0.176
+end
+
+# 15.15 degrees about the pin at -26.033, 3.374 (source frame 5, fit 0.007). Sign checked: +15.15 lands
+# the rest centroid 0.000 off frame 5; -15.15 misses by 1.583.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0.000, 1.000, 0.000
+    degrees = 15.15
+    pivot   = 34.795, 0.469, -1.595
+  end
+end
+
+# THE OTHER HAND ON THE ANGLED FRONT HANDLE: its centroid (the source's surface 0, x -19.6..-9.5).
+# ESTIMATE: where on it the hand goes.
+part support
+  role    = support
+  subject = support
+  grab       = 47.188, 4.039, -0.539
+  grabradius = 3.0
+end
+
+# THE BARRELS SPIN while the trigger is held, about the cluster's axis (1, 0, 0) through (y -0.69,
+# z -2.37); every barrel surface turns 45.0 degrees about -x over source frames 1-3, fit 0.016 or better.
+# Six barrels, so one period is 60 degrees. Rate, wind-up and wind-down ESTIMATE, as WM_Chaingun's, turning
+# the donor's way. Looks only -- it never holds off the shot.
+part barrels
+  surface  = barrels
+  spin     = trigger
+  spinrate = -15
+  spinup   = 4
+  spindown = 20
+  dof
+    kind    = hinge
+    axis    = 1.000, 0.000, 0.000
+    pivot   = 60.828, -0.221, -7.339
+    degrees = 60
+  end
+end

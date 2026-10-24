@@ -1,0 +1,97 @@
+# WM_BullpupPump, carried from WMCARD.02_pump onto the ANIMATED mesh.
+# source card measured against the static _wm copy;
+#   rotation 0.0 deg, translation [41.27, 0.00, 0.70], fit residual 0.0
+# points rotated and shifted; directions rotated only; lengths untouched.
+weapon "WM_BullpupPump"
+  hand      = off
+  type      = shotgun
+  prop      = "WM_PropBullpupPump"
+  mechanism = pump
+  model     = "models/meat/SSG" "SSG.md3"
+  skin      = "models/vanilla/shotguns/BullpupPump" "ssg.png"
+
+  # The owner's 4 shots. The tube store below holds the same four.
+  capacity  = 4
+  magfamily = "12ga"
+
+  # The front face (x 28.17) is two tubes with a gap at z 1.3 to 2.3: the barrel above (z 2.3 to 6.3,
+  # under the front sight post) and the magazine tube below. The barrel's middle.
+  muzzle    = 69.436, 0.000, 5.003
+  barrel    = 1.000, 0.000, 0.000
+
+  # ESTIMATE: a bullpup's chamber is behind its grip, and the mesh shows no port.
+  ejectport = 17.996, 2.400, 1.503
+  ejectdir  = -0.200, 0.900, 0.400
+
+  roundmodel = "models/shared/shell" "shell.md3"
+  roundskin  = "models/shared/shell" "shell.png"
+  roundscale = 0.228
+
+  # THE SHOT is the class's: the SSG's blast, one a shell.
+
+  firesound     = "wm/shotgun/bullpup_fire"
+  cycleoutsound = "wm/shotgun/bullpup_rack"
+  drysound      = "wm/dry"
+  loadsound    = "wm/shotgun/bullpup_load"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropBullpupPump is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 33.494, -0.002, -5.513
+  supportat = 58.332, -0.023, -8.499
+  palm = 28.373, -0.023, -8.853
+  rake = 24.5
+  seat = 34.291, 0.000, -1.395
+end
+
+store tube
+  kind     = counted
+  capacity = 4
+  detach   = no
+end
+
+store chamber
+  kind  = slotted
+  slots = 1
+end
+
+# THE FOREND AND ITS VERTICAL FOREGRIP, one surface: 10.778 along (-1, 0, 0.0012) at full travel
+# (source frame 11), 0.02 degrees of turn, fit 0.011. No `role`: the pump verb makes it grabbable.
+part forend
+  subject  = forend
+  surface  = forend
+  grab     = 57.236, 0.010, -11.197      # the vertical foregrip's centroid
+  # The foregrip runs x 11.70..21.11 and z -16.34..-5.61: half of that along is 4.71 units x 0.374 =
+  # 1.76 map units, and up 2.01. Across: room for a hand round it -- a starting value.
+  grabsize = 2.000, 2.500, 2.500
+  # WHERE THE HAND SITS: round the vertical foregrip, at its middle. wm_hs_shotgun_off_forend_* trims it.
+  handseat = 57.236, 0.000, -9.375      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  handaxis = 0.000, 0.000, -1.000      # the line the hand closes round, index to little finger, fitted 2026-10-11 to c_doom_marine (reload hands)
+  dof
+    kind     = slide
+    axis     = -1.000, 0.000, 0.001
+    distance = 10.778
+  end
+end
+
+# 10.00 degrees about the pin at -7.314, -3.964 (source frame 1, fit 0.008). Sign checked: +10.00 lands
+# the rest centroid 0.001 off frame 1; -10.00 misses by 0.798.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0.000, 1.000, 0.000
+    degrees = 10.00
+    pivot   = 33.952, 0.000, -3.261
+  end
+end
+
+# IN FROM BELOW, LOADING UPWARD. ESTIMATE: a bullpup loads under its stock, behind the grip. MEASURED:
+# the stock's underside is lowest, z -5.84, at x -25.3 to -21.3; the zone's centre sits 1.4 below it.
+load gate
+  at  = 17.996, 0.000, -6.497
+  dir = 0.000, 0.000, 1.000
+end

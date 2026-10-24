@@ -1,0 +1,106 @@
+# WM_Railgun, carried from WMCARD.08_cell onto the ANIMATED mesh.
+# source card measured against the static _wm copy;
+#   rotation 45.0 deg, translation [39.08, 0.14, -35.19], fit residual 0.0251
+# points rotated and shifted; directions rotated only; lengths untouched.
+weapon "WM_Railgun"
+  # Its hand seats: the railgun profile (wm_hs_railgun_*), landed in c688186.
+  type      = railgun
+  hand      = off
+  # a shoulder stock, a pistol grip and a
+  # handguard, 51.9 map units long.
+  hands     = 1
+  prop      = "WM_PropRailgun"
+  model     = "models/bd/RailGun" "RailGun.md3"
+  skin      = "models/vanilla/railguns/Railgun" "railgun.png"
+
+  # RS_Main's railgun: 50 cells, 10 a shot, 5 shots a magazine.
+  capacity  = 50
+  magfamily = "rail"
+
+  # no chamber and no rack -- the shot
+  # draws straight from the magazine. No role = action part, no cycle verb.
+  firesfrom = magazine
+  # nothing leaves the gun on a shot.
+  casing    = none
+
+  # The barrel's front face (x 86.22); the bore holds y -0.11, z -2.17 from x 40 to it.
+  muzzle    = 98.509, 0.031, -97.689
+  barrel    = 0.707, 0.000, -0.707
+
+  # No ejectport, ejectdir or roundmodel: no brass and no loose round.
+
+  # The loose magazine: its magazine surface lifted out and re-origined on its
+  # centroid; it already drops straight down, so it stands as it sat.
+  magmodel  = "models/vanilla/railguns/Railgun" "wm_railgun_mag.md3"
+  magskin   = "models/vanilla/railguns/Railgun" "railgun.png"
+  magscale  = 0.34
+  magcenter = 30.197, 0.043, -40.558
+
+  # SNDINFO's railgun set: the Vanilla+ plasma rifle's rail-beam shot and its cell foley.
+  firesound      = "wm/rail/fire"
+  drysound       = "wm/dry"
+  magoutsound    = "wm/rail/magout"
+  maginsound     = "wm/rail/magin"
+  magdropsound   = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropRailgun is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 20.635, 0.049, -27.272
+  supportat = 51.677, 0.047, -61.266
+  palm = 14.541, 0.011, -23.997
+  rake = 29.5
+  seat = 24.369, 0.332, -24.785
+end
+
+# THE MAGAZINE: a cell pack and its two side contacts, one surface of three islands.
+# 29.99 straight down (0, 0, -1) at frame 16, 0.02 degrees, fit 0.013; the same axis
+# on every frame 12-29. 10.03 long along it; it sits 4.37 deep between the trigger
+# guard and the handguard. The drop button and seating key on this part, and the swap
+# is synthesised from it: no verbs declared.
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = magazine
+  grab       = 27.149, -0.049, -46.195   # the floor of the pack
+  grabradius = 3.0                    # ESTIMATE, the SMG's
+  dof
+    kind     = slide
+    axis     = -0.707, 0.000, -0.707
+    distance = 10.03
+    detach   = 0.9                    # ESTIMATE, the SMG's
+  end
+end
+
+# 22.85 degrees about the pin at -18.554, -5.441 (frame 4, fit 0.008). Sign checked:
+# +22.85 lands its rest centroid on frame 4's (0.0000); -22.85 misses by 1.56.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0.000, 1.000, 0.000
+    degrees = 22.85
+    pivot   = 22.112, 0.141, -25.913
+  end
+end
+
+# The second hand. ESTIMATE: where the hand goes. The point is the centroid of the
+# handguard's bottom strip (body island 19, x 7.66..36.16).
+part support
+  role    = support
+  subject = support
+  grab       = 46.594, 0.051, -58.655
+  grabradius = 3.0
+end
+
+
+# ========================================================== BOLTER -- OFF HAND
+# RS_ModelSwapper's re-centred copy of MeatGrinder's Bolter.md3, frame 0, as bolter_wm.md3: surfaces body,
+# mag (a separate 468-vertex piece split out of the body), trigger. Shift from the MeatGrinder source,
+# measured on the trigger: (37.6719, 0.2031, -4.4688). A heavy bolt gun in the plasma rifle's slot (RS_Main
+# binds it to its plasma rifle). The owner: a high-damage, single-shot plasma gun with a 10-round
+# magazine -- "we can make it anything once we get the card working".

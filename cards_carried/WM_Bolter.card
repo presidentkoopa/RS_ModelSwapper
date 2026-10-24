@@ -1,0 +1,86 @@
+# WM_Bolter, carried from WMCARD.08_cell onto the ANIMATED mesh.
+# source card measured against the static _wm copy;
+#   rotation 0.0 deg, translation [37.67, 0.20, -4.47], fit residual 0.0
+# points rotated and shifted; directions rotated only; lengths untouched.
+weapon "WM_Bolter"
+  hand      = off
+  type      = plasma
+  prop      = "WM_PropBolter"
+  model     = "models/meat/Bolter" "Bolter.md3"
+  skin      = "models/vanilla/plasma/Bolter" "bolter.png"
+
+  # The owner's number: a 10-round magazine.
+  capacity  = 10
+  magfamily = "bolter"
+
+  # FIRED STRAIGHT FROM THE MAGAZINE, as the plasma rifle: nothing on the mesh racks.
+  firesfrom = magazine
+  casing    = none
+
+  # Front-most vertices (66 at x 23.91), centred: y -2.15..2.16, z 0.50..4.83. Level along +x.
+  muzzle    = 61.582, 0.203, -1.809
+  barrel    = 1.000, 0.000, 0.000
+
+  # The loose magazine: the mag surface lifted out, standing as authored. magcenter is its centroid in the
+  # gun's space.
+  magmodel  = "models/vanilla/plasma/Bolter" "wm_bolter_mag.md3"
+  magskin   = "models/vanilla/plasma/Bolter" "bolter.png"
+  magscale  = 0.374
+  magcenter = 39.832, 0.213, -13.019
+
+  # The plasma rifle's sounds (SNDINFO wm/plasma/*).
+  firesound    = "wm/plasma/fire"
+  drysound     = "wm/dry"
+  magoutsound  = "wm/plasma/magout"
+  maginsound   = "wm/plasma/magin"
+  magdropsound = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropBolter is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 32.554, 0.208, -4.875
+  supportat = 46.212, 0.211, -6.300
+  palm = 27.714, 0.184, -6.723
+  rake = 41.5
+  seat = 28.364, 0.406, 4.712
+end
+
+# THE MAGAZINE (x -1.86..5.69, z -13.64..-4.75). No frame moves it, so its axis is its own long axis -- the
+# principal axis of its vertices, (0.1734, 0, -0.9849), 10.0 degrees forward of straight down, the way its
+# curve points. Distance is its length along that axis.
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no          # out by its button, in by the hand carrying one
+  surface = mag
+  grab       = 38.432, 0.213, -17.719     # its bottom end
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0.173, 0.000, -0.985
+    distance = 9.01
+    detach   = 0.9
+  end
+end
+
+# A sliding trigger: 0.898 back at source frames 1 and 2, the body's own recoil (3.0 and 4.0 back) divided
+# out, fit 0.008.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind     = slide
+    axis     = -1.000, 0.000, -0.004
+    distance = 0.898
+  end
+end
+
+# MEASURED: the underside beneath the barrel is z -3.97 from x 12.3 to 23.9; its middle.
+part support
+  role    = support
+  subject = support
+  grab       = 56.002, 0.213, -8.439
+  grabradius = 3.0
+end

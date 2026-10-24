@@ -1,0 +1,158 @@
+# WM_MachineGun, carried from WMCARD.09_chaingun onto the ANIMATED mesh.
+# source card measured against the static _wm copy;
+#   rotation 35.1 deg, translation [42.22, 0.20, -32.01], fit residual 0.0312
+# points rotated and shifted; directions rotated only; lengths untouched.
+weapon "WM_MachineGun"
+  type      = chaingun
+  hand      = off
+  prop      = "WM_PropMachineGun"
+  model     = "models/bd/Machinegun" "Machinegun.md3"
+  skin      = "models/vanilla/chainguns/MachineGun" "Machinegun.png"
+
+  firesfrom = reserve      # the bullets, from Weapon.AmmoType1 (Clip); gl below is the launcher's
+  # ITS OWN FAMILY: the launcher grenade is the one thing a hand brings this gun, so only a 40mm round loads
+  # into gl. Unstated, the card counted as "pistol" and a loose pistol round could load there (the 09-15 sweep).
+  magfamily = "40mm"
+  hands     = 1            # for both barrels
+
+  muzzle    = 80.468, -0.037, -54.023
+  barrel    = 0.818, -0.000, -0.575
+  ejectport = 39.236, -3.497, -29.301          # ESTIMATE
+  ejectdir  = -0.016, -0.900, 0.500          # ESTIMATE
+
+  # THE LAUNCHER'S LOOSE ROUND: RS_Grenade's grenade, sized to the bore. ESTIMATE scale.
+  roundmodel = "models/vanilla/grenades" "nade.md3"
+  roundskin  = "models/vanilla/grenades" "nade.png"
+  roundscale = 0.165
+
+  # A BELT LINK WITH EVERY CASE: it is a belt-fed gun. The chaingun's link (FU's cg_ammoclip.md3)
+  # on the chaingun's skin; its rounds are the chaingun's size, so the same 0.34.
+  linkmodel = "models/vanilla/chainguns/Chaingun" "cg_ammoclip.md3"
+  linkskin  = "models/vanilla/chainguns/Chaingun" "chaingun_HD.png"
+  linkscale = 0.34
+
+  firesound   = "wm/machinegun/fire"
+  drysound    = "wm/dry"
+  opensound   = "wm/ubl/open"
+  closesound  = "wm/ubl/close"
+  loadsound   = "wm/ubl/load"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropMachineGun is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 23.089, -0.038, -26.681
+  supportat = 47.860, -0.062, -44.701
+  palm = 16.021, -0.063, -25.014
+  rake = 23.7
+  seat = 26.427, 0.366, -23.450
+end
+
+# THE GRENADE CHAMBER: one round, the launcher's alone (its barrel's `from`). A fired round
+# stays in it SPENT until the breech opens.
+store gl
+  kind  = slotted
+  slots = 1
+end
+
+# THE TUBE slides forward to open the breech.
+part launchertube
+  subject = foregrip
+  surface = launchertube
+  grab       = 49.684, -0.106, -49.147    # measured 09-14: the tube's full-width underside, x 11.05 to 20.88 (its island x 5.30 to 26.62)
+  handseat = 51.519, -0.062, -46.536      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0.819, -0.000, -0.574
+    distance = 9.504
+  end
+end
+
+# THE LATCH: press it to free the tube.
+part launcherlatch
+  surface = launcherlatch
+  grab       = 36.724, -0.136, -40.736
+  grabradius = 2.0
+  dof
+    kind    = hinge
+    axis    = -0.000, -1.000, -0.000
+    degrees = 18.93
+    pivot   = 38.145, 0.204, -39.203
+  end
+end
+
+# THE LAUNCHER'S OWN TRIGGER: the barrel's `trigger`, drawn pulled while the alt button is
+# held. No role, and no verb moves it.
+part launchertrigger
+  surface = launchertrigger
+  dof
+    kind    = hinge
+    axis    = 0.000, 1.000, 0.000
+    degrees = 19.99
+    pivot   = 35.918, 0.204, -37.192
+  end
+end
+
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind     = slide
+    axis     = -0.823, 0.000, 0.568
+    distance = 0.598
+  end
+end
+
+part support
+  role    = support
+  subject = support
+  grab       = 33.384, -0.166, -40.601   # measured 09-14: under the launcher's frame, its lowest run x -3.23 to -1.34
+  grabradius = 3.0
+end
+
+# THE BREECH. Opening it throws the spent case out of gl. It stops only the launcher (the
+# barrel's needs = shut:breech), so the machine gun fires with it open.
+open breech
+  part    = launchertube
+  latch   = launcherlatch
+  latchreturn = spring    # an M203-style latch snaps back when let go; the tube stays free a second
+  openat  = 0.85
+  closeat = 0.05
+  rest    = stay
+  onopen  = ejectall
+  from    = gl
+end
+
+load grenade
+  into    = gl
+  slot    = next
+  subject = round
+  at      = 42.386, -0.066, -40.889        # the tube's rear face on the bore; rides the tube
+  size    = 2.786, 2.000, 0.487
+  dir     = 0.818, -0.000, -0.575
+  rides   = launchertube
+  needs   = open:breech
+end
+
+# THE UNDERBARREL LAUNCHER: a second barrel on the alt-fire button, fed from gl.
+barrel launcher
+  input     = altfire
+  trigger   = launchertrigger
+  from      = gl
+  shotclass = "WM_LauncherGrenade"
+  ammo      = "RSVG_Ammo"             # what the pouch hands for `load grenade`, by name
+  muzzle    = 70.138, -0.067, -60.392     # the tube's front face on the bore
+  barrel    = 0.818, -0.000, -0.575
+  firesound = "wm/ubl/fire"
+  needs     = shut:breech
+end
+
+
+# ======================================================= ROTARY GUN -- MAIN HAND
+# MeatGrinder's Chaingun.md3 at frame 0 as rotarygun_wm.md3: surfaces body, barrels (the six barrels and
+# their rings), trigger, button. Shift (60.8281, 0.4688, -4.9688). A six-barrel rotary gun with an angled
+# front handle.
+# THE BULLETS COME FROM THE RESERVE, as WM_MachineGun's: the mesh has no magazine piece, so it is fed by
+# its belt from Weapon.AmmoType1.
