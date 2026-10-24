@@ -153,18 +153,21 @@ and that needs `RSVR_VRHand.InVR`. The gate runs `+vr_mode 0`, so `RSB_Start` fa
 F1 drum, canister and skull, and both revolvers — is still only testable in the headset.** The gate
 proves the pack loads, the guns compile and select, and nothing faults when they fire and reload.
 
-## F3, done (2026-10-24) — the options page on the shared standard
-New stage `python tools/bd22_plus.py options`, run **last** (it restructures the page that
-`bd22_mg.py` and `revolver` have already added rows to by exact-match anchors).
+## F3, done (2026-10-24) — four rows the options page was missing
 
-1.96b defined `OptionMenu "RSQ_Options"` itself, titled it for BD22, and mixed the set's own rows in
-among the shared ones. The standard (`tools/README.md`) is one page owned by the runtime, **Options →
-RS VR Weapons**, with a set adding its rows via `AddOptionMenu "RSQ_Options"`, one block per set, so
-several packs loaded together share one page. That is what it is now: the runtime page carries the
-standard's shared rows in its order, the two submenu labels no longer say "BD22", and the set's 15
-rows sit in an `AddOptionMenu` block below.
+> **The shared-page standard does not apply to this pack. Do not apply it again.** `tools/README.md`
+> ("The options menu standard") says one runtime page called **RS VR Weapons** with each set's rows
+> in an `AddOptionMenu` block, so several packs loaded together share one page, and PLAN.md's F3 line
+> named it. It was applied on 2026-10-24 and reverted the same day: **the owner never loads two packs
+> together**, so it bought nothing and cost him his own menu. The page keeps its name
+> (`Submenu "BD22 VR Weapons"`), its `Title "BD22 VR WEAPONS"`, and its order. The README is wrong
+> for this pack — it was never the owner's standard.
 
-Three shared rows the standard names were missing, all for cvars the pack already declared:
+What `python tools/bd22_plus.py options` does, and all it does, is insert four rows the page was
+missing. It runs **last**, after `bd22_mg.py` and `revolver`, which add their own rows by anchors.
+Each insertion is after a named existing line; nothing is reordered or renamed.
+
+Three were for cvars the pack already declared:
 **New magazine from** (`rsr_pouch` — its `OptionValue RSR_Pouch` was defined and *no row used it*),
 **Reload assist** (`rsr_assist`), **Melee swing strength** (`rsvr_melee_swing`). The stage refuses to
 write a row for a cvar no CVARINFO declares. Slider ranges are the code's own, not chosen:
@@ -174,8 +177,8 @@ still go higher. **"Reload: tuning and debug" now has a row** — `OptionMenu "R
 1.96b and nothing opened it, so it was unreachable, and a console is no use in a headset.
 
 Gated on the owner's load order: both pages opened in a run (`openmenu RSQ_Options`,
-`openmenu RSR_Debug`) with nothing logged against either. **The layout itself is the owner's headset
-pass**, as the plan says.
+`openmenu RSR_Debug`) with nothing logged against either, and the restored page loads clean. **The
+layout itself is the owner's headset pass**, as the plan says.
 
 ## What is NOT done (the plan's remaining flagship items, in order)
 1. ~~Gate `sets/bd22q_1.97` on the owner's exact load order.~~ **Done 2026-10-24** (see "F1 IS DONE"):

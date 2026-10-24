@@ -6,13 +6,13 @@
 // LOAD_ORDER.md and docs/RELOAD_ON_QUEST.md in presidentkoopa/RS_Quest.
 AddOptionMenu "OptionsMenu"
 {
-	Submenu "RS VR Weapons", "RSQ_Options"
+	Submenu "BD22 VR Weapons", "RSQ_Options"
 }
 
 AddOptionMenu "BrutalMenu"
 {
 	StaticText " "
-	Submenu "RS VR Weapons", "RSQ_Options"
+	Submenu "BD22 VR Weapons", "RSQ_Options"
 }
 
 OptionValue "RSR_ReloadMode"
@@ -57,7 +57,7 @@ OptionValue "RSR_ShellCredit"
 
 OptionMenu "RSQ_Options"
 {
-	Title "RS VR WEAPONS"
+	Title "BD22 VR WEAPONS"
 	Option "VR Hands", "rsq_hands", "OnOff"
 	Option "Reloading", "rsr_reload", "RSR_ReloadMode"
 	Option "Grab ammo with", "rsr_grab_with", "RSR_GrabWith"
@@ -65,17 +65,6 @@ OptionMenu "RSQ_Options"
 	Option "Check the Chamber by Hand", "rsr_freecharge", "OnOff"
 	Option "Shotgun Shells Per Insert", "rsr_shell_credit", "RSR_ShellCredit"
 	Slider "Reload assist", "rsr_assist", 0.5, 3.0, 0.1
-	Option "VR Punching", "rsq_punch", "OnOff"
-	Option "Punch Switches Open", "rsq_punch_use", "OnOff"
-	Slider "Melee swing strength", "rsvr_melee_swing", 0.2, 3.0, 0.1
-	StaticText " "
-	Submenu "Reload: tuning and debug", "RSR_Debug"
-}
-
-// the bd22 set's own rows, added to the shared page (tools/README.md: one block per set)
-AddOptionMenu "RSQ_Options"
-{
-	StaticText " "
 	Option "Pistol Semi Auto", "rsa_pistol_semi", "OnOff"
 	Option "Shotgun Slugshot Alt Fire", "rsa_sg_slug", "OnOff"
 	Option "Shotvolver Slugshot Alt Fire", "rsa_rev_magnum", "OnOff"
@@ -93,8 +82,13 @@ AddOptionMenu "RSQ_Options"
 	Option "Dual Flick to Reload", "rsq_flick", "OnOff"
 	StaticText " "
 	Option "VR Throwing", "rsg_vr", "OnOff"
+	Option "VR Punching", "rsq_punch", "OnOff"
+	Option "Punch Switches Open", "rsq_punch_use", "OnOff"
+	Slider "Melee swing strength", "rsvr_melee_swing", 0.2, 3.0, 0.1
 	StaticText " "
 	Option "Extra weapons with cheats", "rsq_extra_weapons", "OnOff"
+	StaticText " "
+	Submenu "Reload: tuning and debug", "RSR_Debug"
 }
 
 OptionMenu "RSR_Debug"
