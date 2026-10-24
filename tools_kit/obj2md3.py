@@ -16,6 +16,14 @@ def main():
     src, out, skin = sys.argv[1:4]
     axes = 'zxy'
     if '--axes' in sys.argv: axes = sys.argv[sys.argv.index('--axes') + 1]
+    # Corners are normally deduplicated on (vertex, uv, normal). That splits a vertex
+    # whenever its normal index differs -- fine for one mesh, fatal across the frames
+    # of an animation, because a rotating part gets different normal indices per frame
+    # and the surface comes out with a different vertex COUNT each time (the Kar98's
+    # frame 3 had 887 where frame 0 had 886). MD3 stores a normal per vertex per frame
+    # anyway, so the normal has no business in the identity of a vertex.
+    # --stable-verts keys on (vertex, uv) only, which is what a frame stack needs.
+    stable = '--stable-verts' in sys.argv
     V, VT, VN = [], [], []
     objs = {}; order = []; cur = None
     for ln in open(src, errors='replace'):
@@ -43,10 +51,11 @@ def main():
         for tri in tris:
             ids = []
             for c in tri:
-                if c not in vmap:
-                    vmap[c] = len(verts)
+                key = (c[0], c[1]) if stable else c
+                if key not in vmap:
+                    vmap[key] = len(verts)
                     verts.append(remap(V[c[0]])); sts.append(VT[c[1]] if c[1] >= 0 else (0, 0)); nrm.append(remap(VN[c[2]]) if c[2] >= 0 else (0, 0, 1))
-                ids.append(vmap[c])
+                ids.append(vmap[key])
             tri_idx.append(ids)
         verts = np.array(verts); tri_idx = np.array(tri_idx, dtype='<i4')
         if len(verts) > 4096 or len(tri_idx) > 8192:

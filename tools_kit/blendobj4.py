@@ -1,6 +1,14 @@
 import bpy, sys, re
 out = sys.argv[sys.argv.index('--out')+1]
 
+# --frame N exports the scene AT that frame instead of at the rest pose. The guns
+# were all exported at frame 0, which is where an author parks the parts that the
+# reload moves -- the Kar98's stripper clip and its five cartridges sit inside the
+# buttstock there. One frame per call, stacked afterwards by md3_stack.py, is what
+# turns a static mesh into something md3label can classify by motion.
+if '--frame' in sys.argv:
+    bpy.context.scene.frame_set(int(sys.argv[sys.argv.index('--frame')+1]))
+
 # namedcard.py reads a role off the surface name. The blends are inconsistent about
 # WHERE the meaningful name lives: the Wolfenstein ones name the meshes MP40.001 and
 # the armatures Magazine/Trigger/Handle; the HacX and Meatgrinder ones name the meshes

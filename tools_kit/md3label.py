@@ -185,6 +185,9 @@ def main():
     ap.add_argument('src'); ap.add_argument('out'); ap.add_argument('name')
     ap.add_argument('--idle', type=int, default=None, help='idle frame (default: first frame with no sway)')
     ap.add_argument('--carve', default='mag,round')
+    ap.add_argument('--carve-frame', type=int, default=None, dest='carve_frame',
+                    help='frame to carve and seat parts from (default: the idle frame). '
+                         'Use it when a part is parked out of position at rest.')
     ap.add_argument('--assign', default='', help='surf=role,... overrides')
     ap.add_argument('--archetype', default='pistol_mag', help='pistol_mag | shotgun_pump | revolver_topbreak | shotgun_break')
     ap.add_argument('--no-stabilize-check', action='store_true')
@@ -331,9 +334,16 @@ def main():
         tagdefs.append(("tag_chamber", tag_per_frame(chamber, frame_axes(bore,-down))))
         tagdefs.append(("tag_eject", tag_per_frame(eject, frame_axes(np.array([0,1,0]),-down))))
     if 'mag' in by_role:
-        i=by_role['mag']; W=to_wpn(i,a.idle); mouth=W[np.argmax(W@(-down))]  # top of mag at rest
-        card.append(f"    mag_well  {np.round(rest[i],2).tolist()}  mouth {np.round(mouth,2).tolist()}  axis {np.round(info[i]['axis'],3).tolist()}  travel_clear {info[i]['travel']:.2f}")
-        tagdefs.append(("tag_mag_well", tag_per_frame(rest[i], frame_axes(-info[i]['axis'],bore))))
+        # The well is where the magazine SITS WHEN LOADED. At idle that is the same
+        # place -- unless the author parked the part somewhere else when the gun is at
+        # rest, which is the Kar98 all over: its clip waits inside the buttstock and
+        # the well came out at the butt. --carve-frame names the frame that holds the
+        # loaded position, and the well follows it.
+        _mf = a.carve_frame if a.carve_frame is not None else a.idle
+        i=by_role['mag']; W=to_wpn(i,_mf); mouth=W[np.argmax(W@(-down))]  # top of mag, loaded
+        seat=W.mean(0)
+        card.append(f"    mag_well  {np.round(seat,2).tolist()}  mouth {np.round(mouth,2).tolist()}  axis {np.round(info[i]['axis'],3).tolist()}  travel_clear {info[i]['travel']:.2f}")
+        tagdefs.append(("tag_mag_well", tag_per_frame(seat, frame_axes(-info[i]['axis'],bore))))
     # muzzle: body point furthest along bore among points near the bore line (top half)
     barrels=[i for i in range(len(S)) if roles[i] in ('barrel','body')]
     W=np.vstack([to_wpn(i,a.idle) for i in barrels]); top=W[W@(-down) > np.median(W@(-down))]; muz=top[np.argmax(top@bore)]
@@ -419,10 +429,19 @@ def main():
     stable_tags=[(tn,[(per[a.idle][0],per[a.idle][1])]*nf) for tn,per in tagdefs]
     write_raw(ms, os.path.join(a.out,a.name+'_stable.md3'), fnames, stable_tags)
     # ---- carves
+    # The carve is taken at the idle frame, which is right for a box magazine seated
+    # in its well at rest. It is wrong for anything an author PARKS when the gun is
+    # idle: the Kar98's stripper clip and its five cartridges sit inside the buttstock
+    # at frame 0, so the seat came out at x -0.26 on a rifle 121 units long -- the far
+    # end from the receiver it actually loads into. --carve-frame walks to the frame
+    # where the part is free of the gun and seats it there instead. A rigid part has
+    # the same shape at every frame; it is the ORIGIN this changes.
+    cf = a.carve_frame if a.carve_frame is not None else a.idle
     for role in carve:
-        i=by_role[role]; W=to_wpn(i,a.idle); c=W.mean(0)
+        i=by_role[role]; W=to_wpn(i,cf); c=W.mean(0)
         write_single(m['surfs'][i], role, W-c, os.path.join(a.out,f"{a.name}_{role}.md3"))
-        card.append(f"  carved      {role}  seat_origin {np.round(c,2).tolist()}  file {a.name}_{role}.md3")
+        note = '' if cf == a.idle else f'  from_frame {cf}'
+        card.append(f"  carved      {role}  seat_origin {np.round(c,2).tolist()}{note}  file {a.name}_{role}.md3")
     open(os.path.join(a.out,a.name+'.card'),'w').write('\n'.join(card)+'\n')
     print('\n'.join(card))
     print("\nframe names:", fnames)
