@@ -1,0 +1,30 @@
+weapon MS_bd_Dualplasma
+  archetype   pistol_mag        # owner-confirmed
+  model       Dualplasma.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [33.03, 19.92, -5.41]  axis [-0.997, 0.0, 0.075]  travel 0.64  frames 6..7  rot 20deg axis [-0.0, 1.0, -0.0]
+    mag      surf 2  rest [47.99, 19.99, -13.5]  axis [0.158, -0.016, -0.987]  travel 41.02  frames 31..36
+    part     surf 3  rest [36.97, 22.76, -8.26]  axis [0.108, -0.015, -0.994]  travel 0.01  frames -..-
+    part2    surf 4  rest [36.97, 2.76, -8.26]  axis [0.168, 0.445, -0.88]  travel 6.92  frames 6..41  rot 21deg axis [0.94, 0.19, 0.28]
+    part3    surf 5  rest [47.99, 0.0, -13.5]  axis [0.158, -0.0, -0.988]  travel 41.01  frames 6..41
+    part4    surf 6  rest [33.03, -0.07, -5.41]  axis [0.226, 0.251, -0.941]  travel 7.46  frames 5..41  rot 21deg axis [0.94, 0.19, 0.28]
+    part5    surf 7  rest [61.09, -0.48, -1.15]  axis [0.192, 0.369, -0.91]  travel 9.77  frames 6..41  rot 21deg axis [0.94, 0.19, 0.28]
+    mag_well  [47.99, 19.99, -13.5]  mouth [53.69, 21.59, -8.11]  axis [0.158, -0.016, -0.987]  travel_clear 41.02
+    muzzle    [100.09, 18.22, -1.13]
+  grip        line [27.23, 22.05, -4.72] [25.25, 22.05, -15.67]  trigger [33.03, 19.92, -5.41]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [65.09, 19.52, -1.15]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..2
+    idle         3..5
+    fire         6..6
+    idle         7..7
+    fire         8..8
+    idle         9..30
+    mag_out      31..31
+    mag_in       32..35
+    idle         36..43
+  baked_cant   frames 32..41 up to 21.0 deg   # psprite-era hand sway; removed in Dualplasma_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 15186
+  carved      mag  seat_origin [47.99, 19.99, -13.5]  file Dualplasma_mag.md3

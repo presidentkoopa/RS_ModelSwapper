@@ -1,0 +1,48 @@
+weapon MS_bd_AssaultShotgun
+  archetype   pistol_mag        # owner-confirmed
+  model       AssaultShotgun.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    sight    surf 0  rest [80.41, 0.0, 3.11]  axis [-0.272, -0.165, 0.948]  travel 0.01  frames -..-
+    trigger  surf 1  rest [43.77, -0.14, -1.08]  axis [-0.028, 0.005, -1.0]  travel 31.22  frames 6..31
+    part     surf 2  rest [48.96, 1.34, -0.66]  axis [-1.0, -0.0, -0.001]  travel 10.00  frames 6..31
+    sight2   surf 4  rest [38.7, -0.32, 2.77]  axis [0.073, -0.0, 0.997]  travel 0.01  frames -..-
+    part2    surf 5  rest [33.2, -0.0, -5.45]  axis [-1.0, 0.0, 0.0]  travel 0.56  frames 5..6  rot 20deg axis [0.0, 1.0, -0.0]
+    mag      surf 6  rest [44.6, 0.02, -10.37]  axis [0.0, -0.0, -1.0]  travel 28.00  frames 14..21
+    mag_well  [44.6, 0.02, -10.37]  mouth [40.8, 1.2, -3.83]  axis [0.0, -0.0, -1.0]  travel_clear 28.00
+    muzzle    [91.05, 1.02, -0.69]
+  grip        line [40.5, 1.69, -0.42] [33.03, -0.42, -7.14]  trigger [43.77, -0.14, -1.08]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [59.45, -0.0, -1.67]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..2
+    idle         3..5
+    fire         6..6
+    idle         7..7
+    fire         8..8
+    idle         9..9
+    fire         10..10
+    idle         11..11
+    fire         12..12
+    idle         13..13
+    fire         14..14
+    idle         15..15
+    fire         16..16
+    idle         17..17
+    fire         18..18
+    idle         19..19
+    fire         20..20
+    idle         21..21
+    fire         22..22
+    idle         23..23
+    fire         24..24
+    idle         25..25
+    fire         26..26
+    idle         27..27
+    fire         28..28
+    idle         29..29
+    fire         30..30
+    idle         31..31
+  baked_cant   frames 17..30 up to 15.8 deg   # psprite-era hand sway; removed in AssaultShotgun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5002
+  carved      mag  seat_origin [44.6, 0.02, -10.37]  file AssaultShotgun_mag.md3

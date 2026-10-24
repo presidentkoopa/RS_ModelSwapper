@@ -1,0 +1,26 @@
+weapon MS_bd_Plasma
+  archetype   pistol_mag        # owner-confirmed
+  model       Plasma.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 1  rest [47.99, 0.0, -14.5]  axis [0.159, -0.017, -0.987]  travel 40.99  frames 19..24
+    trigger  surf 2  rest [33.03, -0.07, -5.41]  axis [-0.997, -0.0, 0.075]  travel 0.64  frames 5..6  rot 20deg axis [-0.0, 1.0, -0.0]
+    part     surf 3  rest [61.09, -0.47, -1.15]  axis [0.04, 0.953, 0.3]  travel 0.17  frames -..-
+    mag_well  [47.99, 0.0, -14.5]  mouth [53.69, 1.59, -9.11]  axis [0.159, -0.017, -0.987]  travel_clear 40.99
+    muzzle    [37.12, 3.42, -5.64]
+  grip        line [37.12, 3.42, -5.64] [36.84, 2.09, -11.11]  trigger [33.03, -0.07, -5.41]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [40.97, 2.76, -8.26]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..2
+    idle         3..4
+    fire         5..5
+    idle         6..6
+    fire         7..7
+    idle         8..18
+    mag_out      19..19
+    mag_in       20..23
+    idle         24..29
+  baked_cant   frames 20..29 up to 21.9 deg   # psprite-era hand sway; removed in Plasma_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7593
+  carved      mag  seat_origin [47.99, 0.0, -14.5]  file Plasma_mag.md3

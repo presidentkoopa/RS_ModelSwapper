@@ -1,0 +1,18 @@
+weapon MS_blend_tazer
+  archetype   pistol_mag        # owner-confirmed
+  model       tazer.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [30.22, -0.01, -5.97]  axis [-0.967, 0.0, -0.256]  travel 0.44  frames -..-  rot 10deg axis [-0.0, 1.0, 0.0]
+    muzzle    [34.02, 0.69, 0.02]
+  grip        line [28.59, -0.2, -4.98] [19.73, -0.81, -17.0]  trigger [30.22, -0.01, -5.97]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [22.28, -0.86, -6.22]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..6
+    lower        7..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 15467

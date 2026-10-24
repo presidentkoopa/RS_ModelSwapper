@@ -1,0 +1,21 @@
+weapon MS_bd_M79
+  archetype   pistol_mag        # owner-confirmed
+  model       M79.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    latch    surf 0  rest [32.57, -0.0, 2.68]  axis [0.384, -0.923, -0.003]  travel 0.94  frames 8..29  rot 45deg axis [-0.0, -0.0, 1.0]
+    trigger  surf 2  rest [32.88, -0.0, -6.13]  axis [-0.669, 0.0, 0.743]  travel 0.70  frames 4..5  rot 15deg axis [-0.0, 1.0, 0.0]
+    shell    surf 3  rest [41.96, -0.0, -0.01]  axis [-0.776, 0.0, 0.63]  travel 20.24  frames 11..31  rot 30deg axis [-0.0, 1.0, -0.0]
+    barrel   surf 4  rest [59.02, -0.12, 0.95]  axis [0.116, -0.0, -0.993]  travel 6.47  frames 10..31  rot 30deg axis [-0.0, 1.0, 0.0]
+    muzzle    [74.89, -2.05, 0.69]
+  grip        line [27.14, -1.91, -5.16] [32.44, 0.53, -8.56]  trigger [32.88, -0.0, -6.13]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [30.37, -0.0, -2.69]   # one-handed gun; placeholder
+    load      [32.18, 0.0, 8.86]  frame 20   # where the shell ends up: the loading port
+  carve       
+  phases
+    raise        0..1
+    idle         2..3
+    fire         4..4
+    idle         5..32
+  baked_cant   frames 10..31 up to 25.0 deg   # psprite-era hand sway; removed in M79_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6858

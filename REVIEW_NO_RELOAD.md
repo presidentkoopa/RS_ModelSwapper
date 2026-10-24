@@ -1,38 +1,32 @@
-# REVIEW: not melee, and no reload or rack found
+# REVIEW: not melee, and still no reload or rack
 
-From batch.py's own motion survey, minus everything already carded.
-Each of these is a gun whose magazine is hidden inside the body, whose
-reload lives in frames the survey did not recognise, or that still needs
-render + md3label --assign. A render of every one is in renders_packs/.
+Everything here was taken through render + md3label --assign. What
+remains is not a labelling gap: these meshes animate FIRING and their
+frames contain no reload to measure. Listed so the next pass knows not
+to re-derive them -- they need either a reload animation that exists
+elsewhere, or a hand-measured card like RS_VR_Weapons' WMCARD.*
 
-Note: RS_VR_Weapons already holds a hand-measured WMCARD for several of
-these (Unmaker, RailGun, RPG, AssaultShotgun, Flamethrower, Bolter,
-PlasmaRifle, MachineGun). Those cards were measured against the STATIC
-_wm world models, whose vertex counts match the animated meshes exactly
-but whose bounding boxes do not -- same mesh, re-origined. The numbers
-transfer only with that transform applied; they cannot be repointed blind.
+| model                  | frames   | what its frames do contain |
+|------------------------|----------|----------------------------|
+| bd/Unmaker             | 16f      | body only; three salvo-cannon surfaces, none move |
+| hacx/Nuker             | 11f      | trigger only |
+| hacx/Reznator          | 6f       | nothing moves relative to the body |
+| meat/Bolter            | 5f       | trigger only |
+| meat/RPG               | 7f       | trigger, hinging 45 degrees |
+| meat/Shotgun           | 4f       | trigger and slide; its Mag surface never moves |
+| blend/tazer            | 11f      | trigger only -- a stun weapon |
+| bd/minigun             | 16f      | barrel spins 106 degrees, trigger; belt-fed, no magazine |
+| bd/BFG                 | 16f      | one small mover (trigger class) |
+| bd/BFG_10k             | 21f      | one small mover (trigger class) |
+| bd/FlameCannon         | 8f       | a single surface; nothing separable |
+| bd/Flamethrower2       | 6f       | two small movers (trigger class) |
+| meat/BFG               | 11f      | one small mover (trigger class) |
+| meat/tec9              | 6f       | bolt strokes 7 along the bore; magazine fused into the body |
+| blend/tec9             | 6f       | bolt strokes 7 along the bore; magazine fused into the body |
 
-| model                | frames           | archetype              | what moves |
-|----------------------|------------------|------------------------|------------|
-| AssaultShotgun       |  32f/7s/5002v    |  mag_only (MED)        | part drops 28 with no slide: mag change, no ra |
-| BFG                  |  16f/2s/7173v    |  arcade (MED)          | 1 small movers only (trigger/hammer class)  |
-| BFG_10k              |  21f/2s/7173v    |  arcade (MED)          | 1 small movers only (trigger/hammer class)  |
-| FlameCannon          |  8f/1s/5085v     |  arcade (HIGH)         | one surface: nothing separable; tier 0 only  |
-| Flamethrower2        |  6f/3s/6155v     |  arcade (MED)          | 2 small movers only (trigger/hammer class)  |
-| M79                  |  33f/5s/6858v    |  mag_only (MED)        | part drops 6 with no slide: mag change, no rac |
-| minigun              |  16f/6s/5817v    |  mag_only (MED)        | part drops 40 with no slide: mag change, no ra |
-| Dualplasma           |  44f/8s/15186v   |  mag_only (MED)        | part drops 41 with no slide: mag change, no ra |
-| Plasma               |  30f/4s/7593v    |  mag_only (MED)        | part drops 41 with no slide: mag change, no ra |
-| RPG                  |  39f/13s/8482v   |  mag_only (MED)        | part drops 50 with no slide: mag change, no ra |
-| RailGun              |  37f/5s/7552v    |  arcade (MED)          | 4 small movers only (trigger/hammer class)  |
-| Unmaker              |  16f/3s/11541v   |  arcade (MED)          | 1 small movers only (trigger/hammer class)  |
-| Nuker                |  11f/6s/7101v    |  mag_only (MED)        | part drops 8 with no slide: mag change, no rac |
-| Reznator             |  6f/4s/7698v     |  arcade (HIGH)         | nothing moves relative to the body  |
-| Zooka                |  11f/7s/11996v   |  mag_only (MED)        | part drops 87 with no slide: mag change, no ra |
-| tazer                |  11f/2s/15509v   |  arcade (HIGH)         | nothing moves relative to the body  |
-| BFG                  |  11f/2s/7173v    |  arcade (MED)          | 1 small movers only (trigger/hammer class)  |
-| Bolter               |  5f/2s/4565v     |  arcade (HIGH)         | nothing moves relative to the body  |
-| RPG                  |  7f/18s/9707v    |  mag_only (MED)        | part drops 6 with no slide: mag change, no rac |
-| tec9                 |  6f/4s/5469v     |  bolt_or_slide (MED)   | rear part strokes 7 along bore, no mag drop  |
+Newly carded this pass: AssaultShotgun (mag drops 28), M79 (break action,
+shell ejects 20 with a 30 degree hinge), Plasma and Dualplasma (battery drops
+41), RailGun (Mag-Bat drops 30), bd Shotgun (pump strokes 6.3 with a shell),
+Zooka (crossbow bolt travels 87, rotating 152 degrees), RPG (nine rockets).
 
 Melee, effects and single-surface props are excluded: nothing to reload.

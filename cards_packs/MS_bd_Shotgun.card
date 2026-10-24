@@ -1,0 +1,42 @@
+weapon MS_bd_Shotgun
+  archetype   pistol_mag        # owner-confirmed
+  model       bdShotgun.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [34.76, -0.0, 1.98]  axis [0.12, 0.25, 0.961]  travel 0.01  frames -..-
+    part2    surf 1  rest [89.67, -0.01, 1.91]  axis [-0.107, -0.994, -0.018]  travel 0.01  frames -..-
+    trigger  surf 2  rest [46.93, 0.02, 0.18]  axis [-0.684, 0.0, -0.729]  travel 17.08  frames 15..35
+    part3    surf 3  rest [33.48, 0.02, -5.07]  axis [-1.0, -0.0, 0.001]  travel 0.45  frames -..-
+    pump     surf 4  rest [68.73, 0.02, -2.73]  axis [-1.0, 0.0, -0.002]  travel 6.27  frames 15..35
+    shell    surf 5  rest [41.96, -1.46, 0.0]  axis [-1.0, -0.0, 0.0]  travel 6.27  frames 15..35
+    muzzle    [93.45, -0.11, 1.34]
+  grip        line [38.89, -1.25, 1.17] [35.06, -0.25, -7.23]  trigger [46.93, 0.02, 0.18]   # centroid-based; owner's hand fit supersedes
+  support     feature bar [68.73, 0.02, -2.73]  axis [-1.0, 0.0, -0.002]  travel 6.27   # the pump: the support hand works it
+    load      [41.96, -1.46, 0.0]  frame 13   # where the shell ends up: the loading port
+  carve       
+  phases
+    raise        0..2
+    idle         3..14
+    fire         15..15
+    idle         16..16
+    fire         17..17
+    idle         18..18
+    fire         19..19
+    idle         20..20
+    fire         21..21
+    idle         22..22
+    fire         23..23
+    idle         24..24
+    fire         25..25
+    idle         26..26
+    fire         27..27
+    idle         28..28
+    fire         29..29
+    idle         30..30
+    fire         31..31
+    idle         32..32
+    fire         33..33
+    idle         34..34
+    fire         35..35
+  baked_cant   frames 11..31 up to 18.1 deg   # psprite-era hand sway; removed in bdShotgun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 21884

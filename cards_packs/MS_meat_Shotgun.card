@@ -1,0 +1,21 @@
+weapon MS_meat_Shotgun
+  archetype   pistol_mag        # owner-confirmed
+  model       meatShotgun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    sight    surf 0  rest [85.08, 0.0, 4.74]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    trigger  surf 1  rest [52.38, -0.15, 0.17]  axis [-0.995, 0.0, -0.103]  travel 7.32  frames 1..3
+    slide    surf 2  rest [50.82, 1.46, 0.62]  axis [-1.0, 0.0, 0.0]  travel 10.79  frames 1..3
+    sight2   surf 4  rest [39.65, -0.35, 4.37]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    trigger2 surf 5  rest [33.66, -0.0, -4.58]  axis [-1.0, 0.0, 0.002]  travel 0.61  frames 1..3  rot 20deg axis [0.0, 1.0, -0.0]
+    mag      surf 6  rest [46.08, 0.02, -9.94]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    mag_well  [46.08, 0.02, -9.94]  mouth [50.44, -1.3, -2.81]  axis [0.0, 0.0, 0.0]  travel_clear 0.00
+    muzzle    [96.66, 1.11, 0.59]
+  grip        line [41.61, 1.84, 0.87] [51.94, -1.62, -3.28]  trigger [52.38, -0.15, 0.17]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [61.95, -0.0, -0.44]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4994
+  carved      mag  seat_origin [46.08, 0.02, -9.94]  file meatShotgun_mag.md3
