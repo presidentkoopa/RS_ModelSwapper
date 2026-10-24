@@ -4,7 +4,7 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F6**
+Current step: **F6** -- and the only thing left in it is the owner's headset pass.
 
 ## Principle
 Every shipped gun is built from two sources only: its MESH (tool-measured) and its PARENT MOD (behaviour
@@ -20,12 +20,29 @@ per-gun checklist below, in a headset, signed by the owner.
 - F3  Options page onto the shared RSQ_Options standard (owner's headset turn for layout).
 - F4  DONE 2026-10-24. Melee on bd22q: the gun bash (BD22's kick, with the gun in your hands, and an
       RS_CombatFX impact), the pistol whip, the two-handed butt strike (off by default).
+      Later the same day, on the owner's instruction: butt strikes extended to all EIGHT stocked
+      guns, and melee moved onto the pose spine of the melee document's Part Two section 9 --
+      a per-player, per-hand netevent history, which made the snap-turn and teleport patch
+      deletable rather than tunable. Two commits were tagged `[step F7]`, which is not a step in
+      this file; the work is melee and belongs here. Do not read F7 as a plan item.
       Switch-punching with either hand was ALREADY BUILT in zscript/rsq/fists.zs and needed nothing.
       "The spike" was struck from this line on the owner's instruction: the word entered in this
       repo's first commit, attributed to a melee doc that does not contain it, and exists nowhere
       else -- not in brutal22test6, not in the pack, not in any transcript on the machine.
-- F5  Per-gun ballistics / CombatFX profiles (REMA WMSHEET round/flash/recoil) on bd22q, behind the existing
-      Ballistics switch (off = stock BD22). PENDING the owner's yes (added 04:25).
+- F5  DONE 2026-10-24. Per-gun ballistics / CombatFX profiles (REMA WMSHEET round/flash/recoil) on
+      bd22q, behind the existing Ballistics switch (off = stock BD22). The owner's yes was given on
+      2026-10-24 ("Yes - build F5, the per-gun ballistics and recoil"), so the PENDING note this
+      line carried is spent.
+      ROUND: the bullet in flight, 11 guns, flying the hitscan itself from muzzle to impact.
+      FLASH: the light, 18 guns; the tail, 14 guns, with its interior / exterior pair chosen on
+      whether the ceiling over the muzzle is sky.
+      RECOIL: 22 guns. Its `roll` and backward shove are NOT carried and cannot be -- tested, not
+      assumed: `extend class Weapon` does not compile ("Class Weapon cannot be found in the current
+      translation unit"), so the only hook with roll is unreachable on a weapon class this pack does
+      not own. `psp.x`/`psp.y`, yaw and pitch, is the whole channel.
+      BEYOND THE LINE, from the owner's own list: per-gun impact weight (17 guns, read from
+      RSBDEFS' authored `scale` after the derived one proved wrong on every shotgun), impact sound /
+      ricochet / light, and the ejection ports and casing sizes.
 - F6  Reload sounds for the drum / canister / skull (empty today); pack README; HANDOFF update; owner headset pass.
 
 ## Then, in this order
