@@ -1,0 +1,194 @@
+{
+ "guns": 18,
+ "skipped": [
+  "FlameCannon (none)",
+  "BrutalAxe (none)",
+  "DSweap (none)",
+  "Chain_saw (none)",
+  "Flamethrower2 (none)",
+  "HandGrenades (none)",
+  "RailGun (bd_rail)"
+ ],
+ "table": {
+  "BrutalPistol": {
+   "profile": "pistol_9mm",
+   "radius": 210,
+   "color": [
+    255,
+    222,
+    170
+   ],
+   "tics": 2
+  },
+  "Revolver": {
+   "profile": "revolver",
+   "radius": 240,
+   "color": [
+    255,
+    205,
+    140
+   ],
+   "tics": 2
+  },
+  "Shot_Gun": {
+   "profile": "shotgun_doom",
+   "radius": 560,
+   "color": [
+    255,
+    194,
+    118
+   ],
+   "tics": 4
+  },
+  "SSG": {
+   "profile": "shotgun_ssg",
+   "radius": 760,
+   "color": [
+    255,
+    222,
+    172
+   ],
+   "tics": 4
+  },
+  "MP40": {
+   "profile": "ww2_mp40",
+   "radius": 99,
+   "color": [
+    255,
+    200,
+    130
+   ],
+   "tics": 3
+  },
+  "GrenadeLauncher": {
+   "profile": "launcher_40mm",
+   "radius": 120,
+   "color": [
+    255,
+    190,
+    120
+   ],
+   "tics": 2
+  },
+  "HellishMissileLauncher": {
+   "profile": "rocket_launcher",
+   "radius": 520,
+   "color": [
+    255,
+    186,
+    110
+   ],
+   "tics": 4
+  },
+  "MG42": {
+   "profile": "ww2_mg42",
+   "radius": 208,
+   "color": [
+    255,
+    200,
+    130
+   ],
+   "tics": 2
+  },
+  "AssaultShotgun": {
+   "profile": "shotgun_assault",
+   "radius": 240,
+   "color": [
+    255,
+    206,
+    150
+   ],
+   "tics": 3
+  },
+  "BIG_FUCKING_GUN": {
+   "profile": "bfg_9000",
+   "radius": 380,
+   "color": [
+    120,
+    255,
+    140
+   ],
+   "tics": 5
+  },
+  "BFG10k": {
+   "profile": "bfg_heavy",
+   "radius": 480,
+   "color": [
+    130,
+    255,
+    150
+   ],
+   "tics": 6
+  },
+  "BrutalSMG": {
+   "profile": "smg",
+   "radius": 160,
+   "color": [
+    255,
+    210,
+    150
+   ],
+   "tics": 1
+  },
+  "Machinegun": {
+   "profile": "machinegun_762",
+   "radius": 240,
+   "color": [
+    255,
+    206,
+    140
+   ],
+   "tics": 2
+  },
+  "Minigun": {
+   "profile": "chaingun_556",
+   "radius": 190,
+   "color": [
+    255,
+    226,
+    180
+   ],
+   "tics": 1
+  },
+  "Plasma_Gun": {
+   "profile": "plasma_rifle",
+   "radius": 170,
+   "color": [
+    120,
+    180,
+    255
+   ],
+   "tics": 2
+  },
+  "Rocket_Launcher": {
+   "profile": "rocket_rpg",
+   "radius": 600,
+   "color": [
+    255,
+    196,
+    124
+   ],
+   "tics": 4
+  },
+  "Rifle": {
+   "profile": "rifle",
+   "radius": 220,
+   "color": [
+    255,
+    220,
+    170
+   ],
+   "tics": 2
+  },
+  "Unmaker": {
+   "profile": "unmaker",
+   "radius": 84,
+   "color": [
+    255,
+    44,
+    26
+   ],
+   "tics": 1
+  }
+ }
+}
