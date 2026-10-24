@@ -85,6 +85,7 @@ OptionMenu "RSQ_Options"
 	Option "VR Punching", "rsq_punch", "OnOff"
 	Option "Punch Switches Open", "rsq_punch_use", "OnOff"
 	Option "Gun Bash (kick key)", "rsq_bash", "OnOff"
+	Option "Two-Handed Butt Strike", "rsq_butt", "OnOff"
 	Option "Bash Impact", "rsq_bash_fx", "RSQ_BashFXOpt"
 	Option "Bash Impact Colour", "rsq_bash_tint", "RSQ_BashTintOpt"
 	Slider "Melee swing strength", "rsvr_melee_swing", 0.2, 3.0, 0.1

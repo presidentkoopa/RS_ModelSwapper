@@ -1,0 +1,94 @@
+{
+ "kinds": {
+  "RIFLEBUTT": {
+   "classes": [
+    "Rifle"
+   ],
+   "sprites": [
+    "RIFG",
+    "2IFG",
+    "RI2G"
+   ],
+   "ready_frame": 3,
+   "blade_in": [
+    25.1,
+    0.1,
+    6.3
+   ],
+   "blade_out": [
+    2.5,
+    0.5,
+    -1.0
+   ],
+   "source": "Rifle.md3 frame 3"
+  },
+  "SGBUTT": {
+   "classes": [
+    "Shot_Gun"
+   ],
+   "sprites": [
+    "SHTN",
+    "2HTN",
+    "SHTA"
+   ],
+   "ready_frame": 4,
+   "blade_in": [
+    23.7,
+    0.0,
+    -5.4
+   ],
+   "blade_out": [
+    0.9,
+    0.0,
+    -10.7
+   ],
+   "source": "ShotGun.md3 frame 4"
+  },
+  "SSGBUTT": {
+   "classes": [
+    "SSG"
+   ],
+   "sprites": [
+    "VSSG",
+    "SHT2",
+    "VSHZ"
+   ],
+   "ready_frame": 1,
+   "blade_in": [
+    27.9,
+    0.1,
+    -2.8
+   ],
+   "blade_out": [
+    15.3,
+    0.1,
+    -7.0
+   ],
+   "source": "SSG.md3 frame 1"
+  },
+  "ASGBUTT": {
+   "classes": [
+    "AssaultShotgun"
+   ],
+   "sprites": [
+    "USAS",
+    "2SAS",
+    "A12P"
+   ],
+   "ready_frame": 4,
+   "blade_in": [
+    20.0,
+    0.0,
+    -2.6
+   ],
+   "blade_out": [
+    -1.7,
+    0.0,
+    -6.0
+   ],
+   "source": "AssaultShotgun.md3 frame 4"
+  }
+ },
+ "gate": "Steadied (WF_TWOHANDSTABILIZED) + butt forward >= rsvr_butt_fwd + butt outruns the muzzle by rsvr_butt_lead",
+ "default": "rsq_butt = 0 (off)"
+}

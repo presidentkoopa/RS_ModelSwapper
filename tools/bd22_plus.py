@@ -750,6 +750,146 @@ WHIP = [
 ]
 
 
+# F4 -- the two-handed butt strike. The hard one, and it ships OFF.
+#
+# Two hands CANNOT be the gate: two hands on a rifle is how you hold a rifle, so it is the aiming
+# posture, not an intent -- "two hands + motion" is precisely the false-positive case. And the axe's
+# must-point-DOWN test is exactly wrong here, because a butt strike drives forward and up.
+#
+# What separates the blow is the BUTT LEADING. The gun pivots about the front hand, so the stock
+# outruns the muzzle. Walking moves both ends alike (and melee.zs has already cancelled body motion
+# by measuring in the pawn's own frame); raising or lowering the gun moves both ends together; only
+# the pivot makes the butt the fast end. So the test is: both hands on the gun (the engine's own
+# WF_TWOHANDSTABILIZED, via RSVR_VRHand.Steadied -- the same flag hands.zs draws the support hand
+# from, so the damage and the hands the player sees can never disagree), the butt moving forward in
+# the body frame, and the butt outrunning the muzzle.
+#
+# Ready frames were found the way bd22_mg.py found the Machinegun's: REMA's <gun>_wm.md3 is the gun
+# at its ready pose, in its own coordinate frame, so the frame is the one with the lowest residual
+# after a rigid fit -- all four land at 0.0000. (Several frames tie, because the idle pose repeats
+# across animation frames; the frame is not unique but the geometry is.) Their Ready states say
+# "####" and name no sprite, so the pose check gates on each gun's OWN idle sprite instead, taken
+# from the MODELDEF lines that point at that frame -- never the shared PLAY / RIFF ones.
+BUTT = [
+    # kind, classes, own idle sprites, ready frame, BladeIn (forward), BladeOut (the butt), source
+    ('RIFLEBUTT', ["'Rifle'"], ['RIFG', '2IFG', 'RI2G'], 3, (25.1, 0.1, 6.3), (2.5, 0.5, -1.0),
+     'Rifle.md3 frame 3'),
+    ('SGBUTT', ["'Shot_Gun'"], ['SHTN', '2HTN', 'SHTA'], 4, (23.7, 0.0, -5.4), (0.9, 0.0, -10.7),
+     'ShotGun.md3 frame 4'),
+    ('SSGBUTT', ["'SSG'"], ['VSSG', 'SHT2', 'VSHZ'], 1, (27.9, 0.1, -2.8), (15.3, 0.1, -7.0),
+     'SSG.md3 frame 1'),
+    ('ASGBUTT', ["'AssaultShotgun'"], ['USAS', '2SAS', 'A12P'], 4, (20.0, 0.0, -2.6), (-1.7, 0.0, -6.0),
+     'AssaultShotgun.md3 frame 4'),
+]
+
+
+def butt():
+    """F4: the two-handed butt strike, as four more kinds in melee.zs. Ships off."""
+    p = OUT_SRC + 'zscript/rsvr/melee.zs'
+    t = open(p).read()
+    st = {}
+
+    def once(old, new, what):
+        if t.count(old) != 1:
+            raise SystemExit('melee.zs: %s is not there exactly once' % what)
+        return t.replace(old, new)
+
+    kd0 = 5
+    t = once('\tconst REVOLVER = 4;\n',
+             '\tconst REVOLVER = 4;\n' + ''.join('\tconst %s = %d;\n' % (k[0], kd0 + i)
+                                                 for i, k in enumerate(BUTT)), 'the whip constants')
+    t = once('\tconst WHIP_SWING = 3.2;\t\t// 1.97: a pistol is lighter than the axe\n',
+             '\tconst WHIP_SWING = 3.2;\t\t// 1.97: a pistol is lighter than the axe\n'
+             '\tconst BUTT_SWING = 3.6;\t\t// 1.97: a long gun is heavy and swung short\n', 'WHIP_SWING')
+    ins = ''.join('\t\tif (k == %s)\n\t\t\treturn (%.1f, %.1f, %.1f);\t// 1.97: %s, toward the muzzle\n'
+                  % (kd, g[0], g[1], g[2], src) for kd, _, _, _, g, _, src in BUTT)
+    outs = ''.join('\t\tif (k == %s)\n\t\t\treturn (%.1f, %.1f, %.1f);\t// 1.97: %s, the butt\n'
+                   % (kd, g[0], g[1], g[2], src) for kd, _, _, _, _, g, src in BUTT)
+    t = once('\t\tif (k == AXE)\n\t\t\treturn (44, 0, 26);\t\t// top of the axe head\n',
+             '\t\tif (k == AXE)\n\t\t\treturn (44, 0, 26);\t\t// top of the axe head\n' + ins, 'BladeIn')
+    t = once('\t\tif (k == AXE)\n\t\t\treturn (55, 0, 16);\t\t// the axe\'s cutting edge\n',
+             '\t\tif (k == AXE)\n\t\t\treturn (55, 0, 16);\t\t// the axe\'s cutting edge\n' + outs, 'BladeOut')
+    kinds = ''.join('\t\tif (%s)\n\t\t\treturn %s;\n' % (' || '.join('n == %s' % c for c in cls), kd)
+                    for kd, cls, _, _, _, _, _ in BUTT)
+    t = once("\t\tif (n == 'DSweap')\n\t\t\treturn SWORD;\n",
+             "\t\tif (n == 'DSweap')\n\t\t\treturn SWORD;\n"
+             "\t\tif (RSQ.PlayerInt(mo, 'rsq_butt', 0) != 0)\n\t\t{\n"
+             + ''.join('\t' + l + '\n' for l in kinds.rstrip('\n').split('\n')) + '\t\t}\n', 'KindOf')
+    decl = ''.join('\ttransient SpriteID s%s;\n' % s for _, _, sp, _, _, _, _ in BUTT for s in sp)
+    init = ''.join("\t\ts%s = Actor.GetSpriteIndex('%s');\n" % (s, s) for _, _, sp, _, _, _, _ in BUTT for s in sp)
+    pose = ''.join('\t\tif (k == %s)\n\t\t\treturn %s;\n' % (kd, ' || '.join('s == s%s' % s for s in sp))
+                   for kd, _, sp, _, _, _, _ in BUTT)
+    t = once('\ttransient SpriteID sAXEG;\n', '\ttransient SpriteID sAXEG;\n' + decl, 'the sprite fields')
+    t = once("\t\tsAXEG = Actor.GetSpriteIndex('AXEG');\n",
+             "\t\tsAXEG = Actor.GetSpriteIndex('AXEG');\n" + init, 'InitSprites')
+    t = once('\t\tif (k == SWORD)\n\t\t\treturn s == sDSLA;\n',
+             '\t\tif (k == SWORD)\n\t\t\treturn s == sDSLA;\n' + pose, 'ReadyPose')
+    isbutt = ' || '.join('k == %s' % k[0] for k in BUTT)
+    t = once('\t\tdouble thr = (k == AXE ? AXE_SWING : k == SWORD ? SWORD_SWING : WHIP_SWING) * vu / 35.\n',
+             '\t\tbool isButt = %s;\n'
+             '\t\tdouble thr = (k == AXE ? AXE_SWING : k == SWORD ? SWORD_SWING\n'
+             '\t\t\t: isButt ? BUTT_SWING : WHIP_SWING) * vu / 35.\n' % isbutt, 'the swing threshold')
+    # the muzzle end's own motion, so the butt can be asked to outrun it
+    t = once('\tVector3 prevRel;\t\t// 1.11: the blade tip in the BODY\'s frame last tic (forward, left, up)\n',
+             '\tVector3 prevRel;\t\t// 1.11: the blade tip in the BODY\'s frame last tic (forward, left, up)\n'
+             '\tVector3 prevRelIn;\t\t// 1.97: and the inner end, so a butt strike can be asked to lead\n',
+             'prevRel')
+    t = once('\t\t\tprevRel = BodyFrame(mo, bout);\n\t\t\thavePrev = true;\n',
+             '\t\t\tprevRel = BodyFrame(mo, bout);\n\t\t\tprevRelIn = BodyFrame(mo, bin);\n'
+             '\t\t\thavePrev = true;\n', 'the first-sample init')
+    t = once('\t\tVector3 rel = BodyFrame(mo, bout);\n\t\tVector3 vel = rel - prevRel;\n\t\tprevRel = rel;\n',
+             '\t\tVector3 rel = BodyFrame(mo, bout);\n\t\tVector3 vel = rel - prevRel;\n\t\tprevRel = rel;\n'
+             '\t\tVector3 relIn = BodyFrame(mo, bin);\n\t\tVector3 velIn = relIn - prevRelIn;\n'
+             '\t\tprevRelIn = relIn;\n', 'the per-tic body-frame step')
+    t = once('\t\tbool backswing = rise > -clamp(Cv(mo, \'rsvr_melee_down\', 0.25), 0.0, 0.9);\n',
+             '\t\tbool backswing = rise > -clamp(Cv(mo, \'rsvr_melee_down\', 0.25), 0.0, 0.9);\n'
+             '\t\tif (isButt)\n\t\t{\n'
+             '\t\t\t// 1.97 the butt strike. Not the axe\'s must-point-DOWN test: this blow drives\n'
+             '\t\t\t// forward and up. And two hands is NOT the gate -- two hands on a rifle is how\n'
+             '\t\t\t// you hold a rifle. What separates it is the butt LEADING: the gun pivots about\n'
+             '\t\t\t// the front hand, so the stock outruns the muzzle. Walking moves both ends alike\n'
+             '\t\t\t// (and the body frame has already cancelled it) and raising the gun moves both;\n'
+             '\t\t\t// only the pivot does this.\n'
+             '\t\t\tdouble fwd = speed > 0 ? vel.x / speed : 0;\n'
+             '\t\t\tbackswing = !RSVR_VRHand.Steadied(mo)\n'
+             '\t\t\t\t|| fwd < clamp(Cv(mo, \'rsvr_butt_fwd\', 0.5), 0.0, 1.0)\n'
+             '\t\t\t\t|| velIn.Length() * clamp(Cv(mo, \'rsvr_butt_lead\', 1.3), 1.0, 4.0) > speed;\n'
+             '\t\t}\n', 'the backswing test')
+    t = once("\t\t\tLaunch(mo, mo.CountInv('PowerStrength') > 0 ? 'MeleeStrike1Berserked' : 'MeleeStrikeNormal', p, dir);\n"
+             "\t\t\tif (power >= 2.0)\n\t\t\t\tLaunch(mo, 'MeleeStrikeNormal', p, dir);\n",
+             "\t\t\tif (k == PISTOL || k == REVOLVER)\n\t\t\t{\n"
+             "\t\t\t\tLaunch(mo, mo.CountInv('PowerStrength') > 0 ? 'MeleeStrike1Berserked' : 'MeleeStrikeNormal', p, dir);\n"
+             "\t\t\t\tif (power >= 2.0)\n\t\t\t\t\tLaunch(mo, 'MeleeStrikeNormal', p, dir);\n\t\t\t}\n"
+             "\t\t\telse\n\t\t\t{\n"
+             "\t\t\t\t// 1.97 the butt strike: BD22's own kick, which is what a stock to the face is\n"
+             "\t\t\t\t// and what the gun bash already lands.\n"
+             "\t\t\t\tLaunch(mo, mo.CountInv('PowerStrength') > 0 ? 'SuperKickAttack' : 'KickAttack', p, dir);\n"
+             "\t\t\t}\n", 'the strike result')
+    open(p, 'w').write(t)
+    with open(OUT_SRC + 'CVARINFO.rsq', 'a') as f:
+        f.write('\n// 1.97: the two-handed butt strike. OFF by default: of the three melee moves this\n'
+                '// is the one most likely to misfire, because two hands on a rifle is the aiming\n'
+                '// posture, so it is the player\'s choice to turn on.\n'
+                'user int rsq_butt = 0;\n'
+                'user float rsvr_butt_fwd = 0.5;\t\t// of the butt\'s speed that must point forward\n'
+                'user float rsvr_butt_lead = 1.3;\t// how much faster the butt must be than the muzzle\n')
+    mp = OUT_SRC + 'MENUDEF.rsq'
+    mt = open(mp).read()
+    a = '\tOption "Gun Bash (kick key)", "rsq_bash", "OnOff"\n'
+    if mt.count(a) != 1:
+        raise SystemExit('MENUDEF.rsq: the gun bash row is not there once')
+    open(mp, 'w').write(mt.replace(a, a + '\tOption "Two-Handed Butt Strike", "rsq_butt", "OnOff"\n'))
+    st['kinds'] = {kd: dict(classes=[c.strip("'") for c in cls], sprites=sp, ready_frame=fr,
+                            blade_in=list(bi), blade_out=list(bo), source=src)
+                   for kd, cls, sp, fr, bi, bo, src in BUTT}
+    st['gate'] = 'Steadied (WF_TWOHANDSTABILIZED) + butt forward >= rsvr_butt_fwd + butt outruns the muzzle by rsvr_butt_lead'
+    st['default'] = 'rsq_butt = 0 (off)'
+    json.dump(st, open(OUT + 'butt_apply.json', 'w'), indent=1)
+    with open(OUT + '.generated', 'a') as f:
+        f.write('then tools/bd22_plus.py butt\n')
+    print(json.dumps(st, indent=1))
+
+
 def whip():
     """F4: the pistol whip, as two more kinds in 1.96b's own melee.zs."""
     p = OUT_SRC + 'zscript/rsvr/melee.zs'
@@ -1073,6 +1213,8 @@ if __name__ == '__main__':
         apply()
     if sys.argv[1:2] == ['revolver']:
         revolver()
+    if sys.argv[1:2] == ['butt']:
+        butt()
     if sys.argv[1:2] == ['whip']:
         whip()
     if sys.argv[1:2] == ['bash']:

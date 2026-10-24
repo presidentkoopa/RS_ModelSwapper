@@ -181,9 +181,8 @@ Gated on the owner's load order: both pages opened in a run (`openmenu RSQ_Optio
 `openmenu RSR_Debug`) with nothing logged against either, and the restored page loads clean. **The
 layout itself is the owner's headset pass**, as the plan says.
 
-## F4, in progress (2026-10-24) — the gun bash and the pistol whip
-Two of the three built; the two-handed butt strike is not. Stages `bash` and `whip`, both run after
-`options`. **Switch-punching with either hand was already built** — `zscript/rsq/fists.zs` runs an
+## F4, done but for "the spike" (2026-10-24) — bash, whip, butt strike
+All three melee moves built. Stages `bash`, `whip` and `butt`, all run after `options`. **Switch-punching with either hand was already built** — `zscript/rsq/fists.zs` runs an
 `RSQ_FistHand` for `mainH` and `offH` and the same path ends in `PunchUse`, so F4's fourth item
 needed nothing. **"The spike" is still undefined**: the word appears only in PLAN.md and in the
 sentence HANDOFF copied from it — not in brutal22test6, not in the pack, not in the melee doc.
@@ -222,6 +221,35 @@ Measuring the pistol at frame 0 would have put the segment in a stowed pose (it 
 there). Revolver2 has no Model block of its own and rides the Revolver's by sprite, so the slug
 revolver whips too. `WHIP_SWING` 3.2 m/s against the axe's 3.0; the result is BD22's own
 `MeleeStrikeNormal` / `MeleeStrike1Berserked`, which is what `fists.zs` already lands.
+
+**The two-handed butt strike ships OFF** (`rsq_butt`, default 0) — of the three it is the one most
+likely to misfire, so it is the player's choice. Four more kinds in `melee.zs`. **Two hands cannot
+be the gate**: two hands on a rifle is how you *hold* a rifle, so "two hands + motion" is precisely
+the false-positive case, and the axe's must-point-**down** test is exactly wrong because this blow
+drives forward and up. What separates it is the **butt leading** — the gun pivots about the front
+hand, so the stock outruns the muzzle; walking moves both ends alike (already cancelled by the body
+frame) and raising the gun moves both. So: `RSVR_VRHand.Steadied` (the engine's own
+`WF_TWOHANDSTABILIZED`, the same flag `hands.zs` draws the support hand from), the butt moving
+forward by `rsvr_butt_fwd` (0.5), and the butt outrunning the muzzle by `rsvr_butt_lead` (1.3). That
+needed a second tracked end, `prevRelIn`. The result is BD22's own `KickAttack` /
+`SuperKickAttack` — what a stock to the face is, and what the bash already lands.
+
+Ready frames came the way `bd22_mg.py` found the Machinegun's: REMA's `<gun>_wm.md3` is the gun at
+its ready pose **in its own coordinate frame**, so the frame is the one with the lowest residual
+*after a rigid fit* — all four at 0.0000. A raw vertex compare gave 22–52 and picked wrong. Several
+frames tie at 0.0000 because the idle pose repeats, so the frame is not unique but the geometry is.
+These guns' Ready states say `"####"` and name no sprite, so the pose check gates on each gun's own
+idle sprite, read off the MODELDEF lines pointing at that frame — never the shared `PLAY` / `RIFF`.
+
+| gun | sprites | frame | in (toward muzzle) | out (the butt) |
+|---|---|---|---|---|
+| Rifle | RIFG / 2IFG / RI2G | 3 | 25.1, 0.1, 6.3 | 2.5, 0.5, −1.0 |
+| Shot_Gun | SHTN / 2HTN / SHTA | 4 | 23.7, 0.0, −5.4 | 0.9, 0.0, −10.7 |
+| SSG | VSSG / SHT2 / VSHZ | 1 | 27.9, 0.1, −2.8 | 15.3, 0.1, −7.0 |
+| AssaultShotgun | USAS / 2SAS / A12P | 4 | 20.0, 0.0, −2.6 | −1.7, 0.0, −6.0 |
+
+The Machinegun, MP40, SMG and MG42 have stocks too and are the obvious next ones; the plan said
+"rifle/shotgun", so they are not in.
 
 **`god` is now the first thing `gate/bd22_gate.sh` does** (owner, 2026-10-24). A gate that dies
 partway still prints GATE_DONE and still exits 0 — the quit at the end runs either way — it just

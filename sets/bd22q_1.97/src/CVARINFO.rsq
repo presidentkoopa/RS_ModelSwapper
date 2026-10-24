@@ -26,3 +26,10 @@ server bool rsq_slug_replaces_shotvolver = false;	// every Shotvolver spawn is t
 user int rsq_bash = 1;			// 0: the boot, as BD22 ships it
 user int rsq_bash_fx = 0;		// which RS_CombatFX impact
 user int rsq_bash_tint = 0;		// recolours the RSH0 flash only; 0 is the art as drawn
+
+// 1.97: the two-handed butt strike. OFF by default: of the three melee moves this
+// is the one most likely to misfire, because two hands on a rifle is the aiming
+// posture, so it is the player's choice to turn on.
+user int rsq_butt = 0;
+user float rsvr_butt_fwd = 0.5;		// of the butt's speed that must point forward
+user float rsvr_butt_lead = 1.3;	// how much faster the butt must be than the muzzle

@@ -142,12 +142,17 @@ class RSVR_Hand play
 	const SWORD = 2;
 	const PISTOL = 3;		// 1.97: the pistol whip
 	const REVOLVER = 4;
+	const RIFLEBUTT = 5;
+	const SGBUTT = 6;
+	const SSGBUTT = 7;
+	const ASGBUTT = 8;
 
 	// swing speed (m/s at the blade's outer point, relative to the player's own
 	// movement) that counts as a blow, and the slowest release that throws
 	const AXE_SWING = 3.0;
 	const SWORD_SWING = 3.5;
 	const WHIP_SWING = 3.2;		// 1.97: a pistol is lighter than the axe
+	const BUTT_SWING = 3.6;		// 1.97: a long gun is heavy and swung short
 	const THROW_MIN = 2.5;
 	const RISE = 0.15;			// of the blade's speed that may be upward before it is a backswing (about 9 degrees)
 
@@ -195,6 +200,7 @@ class RSVR_Hand play
 	Vector3 prevOut;
 	Vector3 prevPos;
 	Vector3 prevRel;		// 1.11: the blade tip in the BODY's frame last tic (forward, left, up)
+	Vector3 prevRelIn;		// 1.97: and the inner end, so a butt strike can be asked to lead
 	double lastAngle;
 	int settle;
 	Actor lockTarget;	// the monster painted while a throw is readied
@@ -221,6 +227,18 @@ class RSVR_Hand play
 
 	transient bool spritesSet;
 	transient SpriteID sAXEG;
+	transient SpriteID sRIFG;
+	transient SpriteID s2IFG;
+	transient SpriteID sRI2G;
+	transient SpriteID sSHTN;
+	transient SpriteID s2HTN;
+	transient SpriteID sSHTA;
+	transient SpriteID sVSSG;
+	transient SpriteID sSHT2;
+	transient SpriteID sVSHZ;
+	transient SpriteID sUSAS;
+	transient SpriteID s2SAS;
+	transient SpriteID sA12P;
 	transient SpriteID sPIST;
 	transient SpriteID s2IST;
 	transient SpriteID sREVO;
@@ -240,6 +258,14 @@ class RSVR_Hand play
 	{
 		if (k == AXE)
 			return (44, 0, 26);		// top of the axe head
+		if (k == RIFLEBUTT)
+			return (25.1, 0.1, 6.3);	// 1.97: Rifle.md3 frame 3, toward the muzzle
+		if (k == SGBUTT)
+			return (23.7, 0.0, -5.4);	// 1.97: ShotGun.md3 frame 4, toward the muzzle
+		if (k == SSGBUTT)
+			return (27.9, 0.1, -2.8);	// 1.97: SSG.md3 frame 1, toward the muzzle
+		if (k == ASGBUTT)
+			return (20.0, 0.0, -2.6);	// 1.97: AssaultShotgun.md3 frame 4, toward the muzzle
 		if (k == PISTOL)
 			return (26.2, 0.0, -7.0);	// 1.97: BrutalPistol.md3 frame 3, just forward of the hand
 		if (k == REVOLVER)
@@ -251,6 +277,14 @@ class RSVR_Hand play
 	{
 		if (k == AXE)
 			return (55, 0, 16);		// the axe's cutting edge
+		if (k == RIFLEBUTT)
+			return (2.5, 0.5, -1.0);	// 1.97: Rifle.md3 frame 3, the butt
+		if (k == SGBUTT)
+			return (0.9, 0.0, -10.7);	// 1.97: ShotGun.md3 frame 4, the butt
+		if (k == SSGBUTT)
+			return (15.3, 0.1, -7.0);	// 1.97: SSG.md3 frame 1, the butt
+		if (k == ASGBUTT)
+			return (-1.7, 0.0, -6.0);	// 1.97: AssaultShotgun.md3 frame 4, the butt
 		if (k == PISTOL)
 			return (44.2, 0.0, -0.2);	// 1.97: BrutalPistol.md3 frame 3, the muzzle
 		if (k == REVOLVER)
@@ -267,6 +301,18 @@ class RSVR_Hand play
 	void InitSprites()
 	{
 		sAXEG = Actor.GetSpriteIndex('AXEG');
+		sRIFG = Actor.GetSpriteIndex('RIFG');
+		s2IFG = Actor.GetSpriteIndex('2IFG');
+		sRI2G = Actor.GetSpriteIndex('RI2G');
+		sSHTN = Actor.GetSpriteIndex('SHTN');
+		s2HTN = Actor.GetSpriteIndex('2HTN');
+		sSHTA = Actor.GetSpriteIndex('SHTA');
+		sVSSG = Actor.GetSpriteIndex('VSSG');
+		sSHT2 = Actor.GetSpriteIndex('SHT2');
+		sVSHZ = Actor.GetSpriteIndex('VSHZ');
+		sUSAS = Actor.GetSpriteIndex('USAS');
+		s2SAS = Actor.GetSpriteIndex('2SAS');
+		sA12P = Actor.GetSpriteIndex('A12P');
 		sPIST = Actor.GetSpriteIndex('PIST');
 		s2IST = Actor.GetSpriteIndex('2IST');
 		sREVO = Actor.GetSpriteIndex('REVO');
@@ -291,6 +337,17 @@ class RSVR_Hand play
 			return AXE;
 		if (n == 'DSweap')
 			return SWORD;
+		if (RSQ.PlayerInt(mo, 'rsq_butt', 0) != 0)
+		{
+			if (n == 'Rifle')
+				return RIFLEBUTT;
+			if (n == 'Shot_Gun')
+				return SGBUTT;
+			if (n == 'SSG')
+				return SSGBUTT;
+			if (n == 'AssaultShotgun')
+				return ASGBUTT;
+		}
 		if (n == 'BrutalPistol')
 			return PISTOL;
 		if (n == 'Revolver' || n == 'Revolver2')
@@ -310,6 +367,14 @@ class RSVR_Hand play
 		SpriteID s = psp.Sprite;
 		if (k == SWORD)
 			return s == sDSLA;
+		if (k == RIFLEBUTT)
+			return s == sRIFG || s == s2IFG || s == sRI2G;
+		if (k == SGBUTT)
+			return s == sSHTN || s == s2HTN || s == sSHTA;
+		if (k == SSGBUTT)
+			return s == sVSSG || s == sSHT2 || s == sVSHZ;
+		if (k == ASGBUTT)
+			return s == sUSAS || s == s2SAS || s == sA12P;
 		if (k == PISTOL)
 			return s == sPIST || s == s2IST;
 		if (k == REVOLVER)
@@ -426,11 +491,14 @@ class RSVR_Hand play
 			prevOut = bout;
 			prevPos = mo.pos;
 			prevRel = BodyFrame(mo, bout);
+			prevRelIn = BodyFrame(mo, bin);
 			havePrev = true;
 			return;
 		}
 
-		double thr = (k == AXE ? AXE_SWING : k == SWORD ? SWORD_SWING : WHIP_SWING) * vu / 35.
+		bool isButt = k == RIFLEBUTT || k == SGBUTT || k == SSGBUTT || k == ASGBUTT;
+		double thr = (k == AXE ? AXE_SWING : k == SWORD ? SWORD_SWING
+			: isButt ? BUTT_SWING : WHIP_SWING) * vu / 35.
 			* max(0.2, Cv(mo, 'rsvr_melee_swing', 1.0));
 		// 1.11 (owner: "goes insane with attacks just when I move around"). The blade is measured
 		// in the BODY's own frame (from the pawn, turned by the pawn's angle), so walking,
@@ -440,6 +508,9 @@ class RSVR_Hand play
 		Vector3 rel = BodyFrame(mo, bout);
 		Vector3 vel = rel - prevRel;
 		prevRel = rel;
+		Vector3 relIn = BodyFrame(mo, bin);
+		Vector3 velIn = relIn - prevRelIn;
+		prevRelIn = relIn;
 		double speed = vel.Length();
 		double power = speed / thr;
 
@@ -455,6 +526,19 @@ class RSVR_Hand play
 		// least rsvr_melee_down of its speed (default 0.25, about 15 degrees below level); a
 		// level or rising blade never cuts.
 		bool backswing = rise > -clamp(Cv(mo, 'rsvr_melee_down', 0.25), 0.0, 0.9);
+		if (isButt)
+		{
+			// 1.97 the butt strike. Not the axe's must-point-DOWN test: this blow drives
+			// forward and up. And two hands is NOT the gate -- two hands on a rifle is how
+			// you hold a rifle. What separates it is the butt LEADING: the gun pivots about
+			// the front hand, so the stock outruns the muzzle. Walking moves both ends alike
+			// (and the body frame has already cancelled it) and raising the gun moves both;
+			// only the pivot does this.
+			double fwd = speed > 0 ? vel.x / speed : 0;
+			backswing = !RSVR_VRHand.Steadied(mo)
+				|| fwd < clamp(Cv(mo, 'rsvr_butt_fwd', 0.5), 0.0, 1.0)
+				|| velIn.Length() * clamp(Cv(mo, 'rsvr_butt_lead', 1.3), 1.0, 4.0) > speed;
+		}
 
 		if (power >= 1 && !backswing)
 		{
@@ -633,9 +717,18 @@ class RSVR_Hand play
 		{
 			// 1.97 the pistol whip: BD22's own punch, which is what this pack's fists
 			// already land (zscript/rsq/fists.zs), so its gore decides the result.
-			Launch(mo, mo.CountInv('PowerStrength') > 0 ? 'MeleeStrike1Berserked' : 'MeleeStrikeNormal', p, dir);
-			if (power >= 2.0)
-				Launch(mo, 'MeleeStrikeNormal', p, dir);
+			if (k == PISTOL || k == REVOLVER)
+			{
+				Launch(mo, mo.CountInv('PowerStrength') > 0 ? 'MeleeStrike1Berserked' : 'MeleeStrikeNormal', p, dir);
+				if (power >= 2.0)
+					Launch(mo, 'MeleeStrikeNormal', p, dir);
+			}
+			else
+			{
+				// 1.97 the butt strike: BD22's own kick, which is what a stock to the face is
+				// and what the gun bash already lands.
+				Launch(mo, mo.CountInv('PowerStrength') > 0 ? 'SuperKickAttack' : 'KickAttack', p, dir);
+			}
 		}
 		Buzz(mo);
 	}
