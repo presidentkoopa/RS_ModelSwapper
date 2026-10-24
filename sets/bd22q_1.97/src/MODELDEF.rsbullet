@@ -1,0 +1,100 @@
+// 1.97 F6: the round in flight (tools/bd22_plus.py bullet). RS_Ballistics' btracer.obj,
+// one tube at eight sizes. RSBM is a 1x1 transparent lump -- a mount point that draws
+// nothing, because GZDoom has to hang a model on a sprite frame.
+
+Model RSQ_Bullet	// pistol -- a 9mm, .45 or .38 in flight: a short thin dart
+{
+	Path "models/rsb"
+	Model 0 "btracer.obj"
+	SurfaceSkin 0 0 "btracer.png"
+	Scale 0.2500 0.2286 0.2286
+	DontCullBackfaces
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RSBM A 0 0
+}
+
+Model RSQ_Bullet	// smg -- the same round out of a submachine gun
+{
+	Path "models/rsb"
+	Model 0 "btracer.obj"
+	SurfaceSkin 0 0 "btracer.png"
+	Scale 0.3250 0.2714 0.2714
+	DontCullBackfaces
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RSBM B 0 0
+}
+
+Model RSQ_Bullet	// intermediate -- 5.56, 7.92 Kurz: the assault-rifle streak
+{
+	Path "models/rsb"
+	Model 0 "btracer.obj"
+	SurfaceSkin 0 0 "btracer.png"
+	Scale 0.4250 0.2857 0.2857
+	DontCullBackfaces
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RSBM C 0 0
+}
+
+Model RSQ_Bullet	// rifle -- full-power: 7.62, .30-06, 7.62x54R
+{
+	Path "models/rsb"
+	Model 0 "btracer.obj"
+	SurfaceSkin 0 0 "btracer.png"
+	Scale 0.5750 0.3286 0.3286
+	DontCullBackfaces
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RSBM D 0 0
+}
+
+Model RSQ_Bullet	// heavy -- 9.3x74R and the extreme machine-gun look
+{
+	Path "models/rsb"
+	Model 0 "btracer.obj"
+	SurfaceSkin 0 0 "btracer.png"
+	Scale 0.7250 0.4143 0.4143
+	DontCullBackfaces
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RSBM E 0 0
+}
+
+Model RSQ_Bullet	// pellet -- one pellet of buckshot: a stub
+{
+	Path "models/rsb"
+	Model 0 "btracer.obj"
+	SurfaceSkin 0 0 "btracer.png"
+	Scale 0.1250 0.1714 0.1714
+	DontCullBackfaces
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RSBM F 0 0
+}
+
+Model RSQ_Bullet	// tracer -- long and bright, the round you are meant to read
+{
+	Path "models/rsb"
+	Model 0 "btracer.obj"
+	SurfaceSkin 0 0 "btracer.png"
+	Scale 0.8000 0.4571 0.4571
+	DontCullBackfaces
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RSBM G 0 0
+}
+
+Model RSQ_Bullet	// tracerheavy -- the mesh at its full authored size
+{
+	Path "models/rsb"
+	Model 0 "btracer.obj"
+	SurfaceSkin 0 0 "btracer.png"
+	Scale 1.0000 0.5571 0.5571
+	DontCullBackfaces
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RSBM H 0 0
+}
+

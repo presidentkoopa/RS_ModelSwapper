@@ -37,3 +37,9 @@ user float rsvr_butt_lead = 1.3;	// how much faster the butt must be than the mu
 // 1.97 F5: per-gun recoil. Its own row, not the ballistics dial -- this costs one
 // float a tic, the effects cost a frame budget, and they are not the same decision.
 user int rsq_recoil = 1;
+
+// 1.97 F6: the round in flight. 1.0 is RS_Ballistics' authored speed, which is
+// 330 to 874 map units a tic -- a streak, because that is what a real round is.
+// Lower to read it in the headset. It cannot change where anything lands: the
+// hitscan has already hit by the time this is drawn.
+user float rsq_round_speed = 1.0;

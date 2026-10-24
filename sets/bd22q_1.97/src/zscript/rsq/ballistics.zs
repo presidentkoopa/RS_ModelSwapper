@@ -91,6 +91,11 @@ class RSQ_Ballistics : EventHandler
 		if (len < 1)
 			return;
 		d /= len;
+		// 1.97 F6: the round itself, muzzle to where the shot actually landed.
+		// Same event as the impact below, so the two cannot disagree about it.
+		if (e.Thing.player && e.Thing.player.ReadyWeapon)
+			RSQ_Bullet.Fire(e.Thing, e.AttackPos, e.DamagePosition,
+				e.Thing.player.ReadyWeapon.GetClassName());
 		Impact(e.Thing, e.DamagePosition - d * min(12, len), d, 24);
 	}
 
