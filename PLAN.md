@@ -4,7 +4,7 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F3**
+Current step: **F4**
 
 ## Principle
 Every shipped gun is built from two sources only: its MESH (tool-measured) and its PARENT MOD (behaviour
