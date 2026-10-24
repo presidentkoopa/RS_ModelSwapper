@@ -32,6 +32,15 @@ $include = @('zscript.txt', 'modeldef', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCO
 # Donors anchor on stock Doom sprite names, so this pk3 ships no sprite lumps
 # at all.
 $dirs    = @('zscript', 'models')
+# -Static (Quest) additionally ships the VR reload / hands / melee code and the
+# model cards. The desktop build does not: that code is QuestZDoom 17.3's, and the
+# REMA version of it is a separate pass.
+if ($Static) { $dirs += @('zscript_depot') }
+# The model cards must be ROOT lumps, never a subfolder. GZDoom gives a pk3
+# entry in an unrecognised subfolder Namespace ns_hidden and ZEROES its short
+# name (filesystem.cpp, SetFromLump) -- so Wads.FindLump("WMCARD", ...), which
+# is how the card reader finds them, would match nothing at all.
+if ($Static) { $include += (Get-ChildItem $PSScriptRoot -Filter 'WMCARD.*' -File | ForEach-Object { $_.Name }) }
 # SYNTAX CHECK BEFORE PACKING.
 #
 # build.ps1 only zips -- it never read the ZScript, and compile-testing
@@ -59,6 +68,12 @@ foreach ($d in $dirs) {
 # it is either substituted for zscript/RS_ForeignFork.zs (-Static) or
 # left out entirely. Two RS_Fork classes in one pk3 would not compile.
 $files = $files | Where-Object { $_.FullName -notmatch '\\zscript\\static\\' }
+# quest/ holds -Static replacements for root lumps; never shipped at that path.
+$files = $files | Where-Object { $_.FullName -notmatch '\\quest\\' }
+# .pdn is Paint.NET's layered source for a skin -- the engine cannot read it, and
+# the ones that came in beside the blend-file meshes were 26MB of dead weight.
+# Keep them on disk next to the mesh they belong to; just never pack them.
+$files = $files | Where-Object { $_.Extension -ne '.pdn' }
 
 $fs  = [System.IO.File]::Open($out, 'Create')
 $zip = New-Object System.IO.Compression.ZipArchive($fs, [System.IO.Compression.ZipArchiveMode]::Create)
@@ -71,6 +86,12 @@ foreach ($f in $files) {
     if ($Static -and $rel -eq 'zscript/RS_ForeignFork.zs') {
         $src = Join-Path $root 'zscript/static/RS_ForeignFork.zs'
     }
+
+    # -Static overrides, generally: a root lump with a counterpart under quest/
+    # ships that one instead. Additive and default-off -- with no quest/ directory,
+    # or no counterpart for a lump, nothing changes for either build.
+    $qp = Join-Path $root ('quest/' + $rel)
+    if ($Static -and (Test-Path $qp)) { $src = $qp }
 
     $b = [System.IO.File]::ReadAllBytes($src)
 

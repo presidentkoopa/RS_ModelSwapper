@@ -1,0 +1,285 @@
+# ============================================================================
+# WMCARD.12_chainsaw -- the model card library, archetype chainsaw: WM_Chainsaw, WM_ChainsawHeavy, WM_LongbarChainsaw.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+# ==========================================================================
+# LIVE: the chainsaws family (WM_Chainsaw, WM_ChainsawHeavy).
+# Measured and drafted in _pending/CHAINSAW_CARDS.md.
+# ==========================================================================
+
+# ============================================================ CHAINSAW -- MAIN HAND
+# RS_ModelSwapper's chainsaw.md3 (MS_Chainsaw) as chainsaw_wm.md3: surfaces body, chain,
+# ripcord, cord. Every number measured at the source's rest frame 13 against Cube.020's
+# largest island. _pending/CHAINSAW_CARDS.md.
+#
+# SCALE: MODELDEF Scale 1.35 x 0.34 = 0.459 map units per model unit.
+weapon "MS_Chainsaw"
+  type      = chainsaw     # its hand-seat profile (the key landed in c688186)
+  hand      = main
+  prop      = "WM_PropChainsaw"
+  model     = "models/vanilla/chainsaws/Chainsaw" "chainsaw_wm.md3"
+  skin      = "models/vanilla/chainsaws/Chainsaw" "chainsaw.png"
+
+  # no ammo, no stores.
+  firesfrom = none
+  # nothing leaves the saw.
+  casing    = none
+
+  # THE BAR'S NOSE, on its centre line: the front-most of bar and chain along the bar's
+  # own long axis (island 5's shape), which is tilted 17.12 degrees up in the mesh. The
+  # same line's rear end is 1.01, 2.03, -3.71: 33.61 units, 15.4 map units of cutting edge.
+  muzzle    = 33.75, 2.03, 6.38
+  barrel    = 0.956, 0, 0.294
+  # THE EXHAUST PORT (RSB_Exhaust while the ripcord has caught). ESTIMATE, WHICH FEATURE: the mesh models no muffler, so
+  # it is the front block below the bar, where a real saw's muffler sits -- MEASURED: its front face x 7.88, z -4.7..-1.1,
+  # y -2.3..6.1; the point is on the face, away from the bar (y 2). Blowing forward and out, away from the bar.
+  exhaustport = 7.9, 4.5, -3.0
+  exhaustdir  = 0.90, 0.44, 0
+
+  # No ejectport, magazine or round. The cut's sounds are the class's (SawSounds). The ENGINE's
+  # are the card's, for its ripcord (start ripcord, below): the cord as the pull begins, the
+  # engine catching, its idle looped while it runs with the trigger up, and the stop when the
+  # saw leaves the hand.
+  pullsound  = "wm/saw/cord"
+  startsound = "wm/saw/start"
+  idlesound  = "wm/saw/idle"
+  stopsound  = "wm/saw/stop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropChainsaw is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -11.849, -0.002, 1.156
+  supportat = -1.503, -0.889, 9.887
+  palm = -16.523, 1.930, 4.650
+  rake = 80.0
+  seat = -12.319, -0.002, 11.136
+end
+
+# THE CHAIN RUNS (CS-G4, RS_VR_Reload.pk3 09-13 15:46): 17 tooth sections round the bar's edge
+# (islands 10-26), and chain2, the same teeth at the donor's fire frame 8 (top run -0.716 along
+# the bar, bottom run +0.755, nose turned), taken byte for byte. Shown by turns while the
+# trigger is held, a tic each -- the donor's own fire state steps its two poses a tic a frame
+# (6@1 .. 12@1). At rest only chain (phase 0) shows.
+part chain
+  surface   = chain
+  flip      = trigger
+  fliptics  = 1
+  flipphase = 0
+end
+
+part chain2
+  surface   = chain2
+  flip      = trigger
+  fliptics  = 1
+  flipphase = 1
+end
+
+# THE RIPCORD: the T-grip on the engine's -y side. The donor's select clip (frames 1-4) pulls
+# it 9.864 along -0.433, 0.001, 0.901 at frame 2, turning 16.17 degrees about
+# -0.791, -0.585, -0.177 through its own centroid (rigid fit 0.009). Moved the way this dof
+# moves it, every vertex lands within 0.014 of frame 2, and within 0.029 of frame 1 at half
+# the pull; turned the other way it misses by 1.23. 9.864 units is 4.5 map units.
+# `start ripcord` below names it, so it is grabbable: pull it to start the engine. The hand on
+# it reads the chainsaw type's slide seat (it has no subject), a set nothing else on the saw uses.
+part ripcord
+  surface = ripcord
+  grab       = -7.52, -6.26, -2.46     # the T-grip's centroid
+  grabradius = 2.5                     # ESTIMATE
+  dof
+    kind      = slide
+    axis      = -0.433, 0.001, 0.901
+    distance  = 9.864
+    pivot     = -7.515, -6.255, -2.464
+    twist     = 16.17
+    twistaxis = -0.791, -0.585, -0.177
+  end
+end
+
+# THE CORD: stretches from the housing (anchor end -7.00, -5.71, -4.41) to the grip -- its
+# vertices 0-3 ride the ripcord, 4-7 stay on the body. A surface moves whole, so it is
+# hidden. At rest it lies inside the grip's own extent, so nothing visible is lost.
+# GAP: a surface that stretches between a part and the body.
+part cord
+  role    = hidden
+  surface = cord
+end
+
+# PULL TO START (CS-G1, RS_VR_Reload.pk3 09-13 15:45). Pulled past outat the engine catches and
+# the saw cuts; let go and the grip springs home. Until then the trigger only clicks, and the
+# engine stops when the saw leaves the hand, so every draw takes a pull. outat 0.85 is the
+# reload system's default, stated: 0.85 of the 4.5-map-unit pull.
+start ripcord
+  part  = ripcord
+  outat = 0.85
+end
+
+# NO TRIGGER PART: nothing in the mesh moves on the fire frames (6-12) but the chain.
+
+# THE OTHER HAND on the wrap-round front handle's top bar (islands 1 + 2). ESTIMATE: where
+# the hand goes. The point is measured: the bar's top (z > 9) centroid.
+part support
+  role    = support
+  subject = support
+  grab       = -1.49, -1.16, 10.04
+  grabradius = 3.0                     # ESTIMATE
+end
+
+# ======================================================= CHAINSAW HEAVY -- OFF HAND
+# Force Unleashed's chainsaw (Ermac's mod, cleared by the owner) -- chainsaw.md3,
+# saw_blade1.md3 and saw_blade2.md3 in one shared space -- merged as chainsaw_heavy_wm.md3:
+# surfaces body, trigger, chain, chain2. A one-frame mesh: every number is measured from its
+# shape, none from motion. _pending/CHAINSAW_CARDS.md.
+#
+# SCALE: MODELDEF Scale 1.0 x 0.34 = 0.34 map units per model unit.
+weapon "MS_ChainsawHeavy"
+  type      = chainsaw     # its hand-seat profile (the key landed in c688186)
+  hand      = off
+  prop      = "WM_PropChainsawHeavy"
+  model     = "models/vanilla/chainsaws/ChainsawHeavy" "chainsaw_heavy_wm.md3"
+  skin      = "models/vanilla/chainsaws/ChainsawHeavy" "chainsaw.png"
+
+  # no ammo, no stores.
+  firesfrom = none
+  # nothing leaves the saw.
+  casing    = none
+  # ITS ENGINE'S IDLE, looped while it is drawn with the trigger up (RS_VR_Reload's EngineIdle idles a
+  # card with an idlesound and no start verb): the hum Weapon.ReadySound restarted every tic (VANILLA_PARITY F4).
+  idlesound = "wm/saw/idle_heavy"   # the deeper hum (SNDINFO); the ripcord Chainsaw keeps wm/saw/idle
+
+  # THE BAR'S NOSE, on its centre line: the front-most of bar and chain along the bar's own
+  # long axis (island 3's shape), tilted 20.30 degrees up in the mesh. The same line's rear
+  # end is 35.05, -0.18, -12.46: 63.29 units, 21.5 map units; the chain starts at x 33.95.
+  muzzle    = 97.78, 0.11, 10.75
+  barrel    = 0.938, 0.004, 0.347
+  # THE EXHAUST PORT (RSB_Exhaust while it is drawn). MEASURED: the twin exhaust pipes low on the -y side (body islands
+  # of 114 and 106 vertices), their rear openings at (13.67, -11.63, -19.32) and (14.79, -11.66, -22.24); the port is
+  # between them, blowing back out along the pipes (front ends at x 23.75 and 24.87).
+  exhaustport = 14.23, -11.65, -20.78
+  exhaustdir  = -0.90, -0.30, -0.33
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropChainsawHeavy is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 10.428, 3.664, -1.039
+  supportat = 29.019, 23.905, -11.269
+  palm = 6.636, 3.662, -2.799
+  rake = 45.9
+  seat = 11.300, 3.660, 4.644
+end
+
+# THE THROTTLE: the wedge under the top of the rear handle (island 12). ESTIMATE, all of it:
+# the mesh never moves it. A hinge at its front end, so pulling lifts its rear end up into
+# the grip -- turned +15 about +y, the rear end (8.83, -1.33) rises. It may clip the
+# handle's underside (z -0.53 over x 10-13).
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 15.0
+    pivot   = 11.84, 3.87, -0.27
+  end
+end
+
+# THE CHAIN RUNS (CS-G4, RS_VR_Reload.pk3 09-13 15:46): saw_blade1.md3's chain and
+# saw_blade2.md3's second pose, in the same place, shown by turns while the trigger is held --
+# as Force Unleashed's Fire state swaps SAWG A and B, about 2 tics a pose. At rest only chain
+# (phase 0) shows.
+part chain
+  surface   = chain
+  flip      = trigger
+  fliptics  = 2
+  flipphase = 0
+end
+
+part chain2
+  surface   = chain2
+  flip      = trigger
+  fliptics  = 2
+  flipphase = 1
+end
+
+# THE OTHER HAND on the front bail's top (saw_handle island 0). ESTIMATE: where the hand
+# goes. The point is measured: the bail's top (z > 1.24) centroid.
+part support
+  role    = support
+  subject = support
+  grab       = 23.68, 16.22, 1.87
+  grabradius = 3.0                     # ESTIMATE
+end
+
+
+# =================================================== LONGBAR CHAINSAW -- MAIN HAND
+# MeatGrinder's Saw.md3 as longbarchainsaw_wm.md3: surfaces body (the engine, top handle, side bar and the
+# bar's plates), chain (source frame 0), chain2 (source frame 1, moved back up by the frame's 13/64 view
+# bob). Shift (66.1562, 2.5312, -0.3281). A chainsaw with a long guide bar.
+weapon "MS_LongbarChainsaw"
+  hand      = main
+  type      = chainsaw
+  prop      = "WM_PropLongbarChainsaw"
+  model     = "models/vanilla/chainsaws/LongbarChainsaw" "longbarchainsaw_wm.md3"
+  skin      = "models/vanilla/chainsaws/LongbarChainsaw" "Saw.png"
+
+  # no ammo, no stores.
+  firesfrom = none
+  # nothing leaves the saw.
+  casing    = none
+  # ITS ENGINE'S IDLE, looped while it is drawn with the trigger up (RS_VR_Reload's EngineIdle idles a
+  # card with an idlesound and no start verb): the hum Weapon.ReadySound restarted every tic (VANILLA_PARITY F4).
+  idlesound = "wm/saw/idle_longbar"   # the rougher hum (SNDINFO); the ripcord Chainsaw keeps wm/saw/idle
+
+  # THE BAR'S NOSE, on its centre line: the bar plates' own long axis (their principal axis), tilted 8.13
+  # degrees up in the mesh. The same line's rear end is -18.03, -5.66, -7.75: 88.83 units, 33.2 map units.
+  muzzle    = 69.91, -5.66, 4.81
+  barrel    = 0.990, 0, 0.141
+  # THE EXHAUST PORT (RSB_Exhaust while it is drawn). ESTIMATE, WHICH FEATURE: no separate muffler in the mesh, so it is
+  # the round cover on the engine's front face above the bar, where a real saw's muffler sits -- MEASURED: that face at
+  # x -1.9..1.4, y -3.7..9.2, z 2.5..11.7. Blowing forward.
+  exhaustport = 1.2, 2.8, 6.5
+  exhaustdir  = 1, 0, 0
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropLongbarChainsaw is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -40.430, -2.531, -0.475
+  supportat = -12.343, 3.383, 16.099
+  palm = -42.284, -2.327, -5.146
+  rake = 80.0
+  seat = -40.247, -2.531, -0.424
+end
+
+# THE CHAIN RUNS: the source shows chain on its even frames and chain2 on its odd ones. Shown by turns while
+# the trigger is held; fliptics ESTIMATE, as WM_ChainsawHeavy's. At rest only chain (phase 0) shows.
+part chain
+  surface   = chain
+  flip      = trigger
+  fliptics  = 2
+  flipphase = 0
+end
+
+part chain2
+  surface   = chain2
+  flip      = trigger
+  fliptics  = 2
+  flipphase = 1
+end
+
+# NO TRIGGER PART AND NO RIPCORD: nothing in the mesh moves but the chain, and no cord is modelled -- so no
+# start verb, as WM_ChainsawHeavy.
+
+# THE OTHER HAND on the top handle's bar. MEASURED: the handle's top (z past 18.5) centroid. ESTIMATE:
+# where the hand goes.
+part support
+  role    = support
+  subject = support
+  grab       = -3.82, 1.73, 20.62
+  grabradius = 3.0
+end

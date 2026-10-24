@@ -1,0 +1,331 @@
+# ============================================================================
+# WMCARD.10_launcher -- the model card library, archetype launcher: WM_RocketLauncher, WM_RPG, WM_RotaryLauncher.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+# ==========================================================================
+# LIVE: the launchers family (WM_RocketLauncher, WM_RPG).
+# WM_RocketLauncher re-carded 09-15 on the RPG's mesh (the owner: the Force Unleashed rocket launcher comes out
+# of Vanilla and Vanilla+, and RS_Main's RS_GH_RocketLauncher is that mesh), loaded one rocket at a time into
+# the front of the tube. The Force Unleashed launcher's and the RPG's measurements stay in _pending/ROCKET_CARDS.md.
+# ==========================================================================
+
+# ============================================================ ROCKET LAUNCHER -- MAIN HAND
+# RS_Main's RS_GH_RocketLauncher (RPG.md3) is RS_ModelSwapper's RPG.md3 shifted whole; its frame 5 is rpg_wm.md3
+# vertex for vertex (8482). So the Rocket Launcher STARTS FROM WM_RPG's card (inheritance, the owner's go 2026-09-15):
+# the same mesh, muzzle, trigger, support and loose rocket, and a fix to that card reaches this one too.
+# THE OWNER'S RELOAD (09-15) is what differs: no rack and no drum swap. The drum stays on and holds seven rockets, one a
+# chamber. A hand pushes single rockets into the front of the tube, and the drum turns with the count, so the rocket
+# just loaded always stands in the bore behind the tube it went down. The RPG keeps its drum swap. (The RPG's loose-drum
+# magmodel and its magazine sounds come along with the base; a gun with no swap never shows or plays them.)
+#
+# SCALE: MODELDEF Scale 1.0 x 0.34 = 0.34 map units per model unit.
+weapon "WM_RocketLauncher"
+  base = WM_RPG
+  hand = main
+  prop = "WM_PropRocketLauncher"
+  # SEVEN ROCKETS, one a chamber (the owner, 09-15).
+  capacity  = 7
+  # Its own family: a rocket drawn for this gun loads only here -- never a shell, nor the RPG's drum.
+  magfamily = "rocket"
+  firesound = "weapons/rocklf"
+  loadsound = "wm/rocket/magin"
+  # THE DRUM AS ITS OWN OBJECT, lifted out of this gun's own mesh (drum + rocket1-7) and
+  # re-origined on its centroid. Normals compared PER SURFACE BY NAME against the donor:
+  # identical, all eight. ALL FOUR LINES, because magmodel alone resolves, packs, passes the
+  # verifier and still draws in the wrong place at the wrong size -- and with none of them the
+  # gun silently drops the base pack's default, which is an M4A3 PISTOL MAGAZINE.
+  magmodel  = "models/vanilla/launchers/RPG" "wm_rocket_mag.md3"
+  magskin   = "models/vanilla/launchers/RPG" "rpg.png"
+  magscale  = 0.34
+  magcenter = 3.520, -4.660, 2.325
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropRocketLauncher is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 19.140, 3.250, -14.068
+  supportat = 45.000, 3.288, -4.017
+  palm = 13.067, 3.225, -17.303
+  rake = 29.4
+  seat = 17.218, 3.250, -9.802
+end
+
+# THE SEVENTH CHAMBER IS LOADED HERE: seven rockets fill all seven, so the RPG's hidden empty chamber goes.
+remove part emptychamber
+
+# THE DRUM'S ROCKETS: a counted store, and THE DRUM COMES OFF (the owner, 09-19).
+# It held `detach = no` and the drum had no dof at all, so the whole thing was fixed to the gun
+# and seven rockets went in one at a time at the muzzle. It detaches.
+store drum
+  kind     = counted
+  capacity = 7
+  detach   = yes
+end
+
+# THE DRUM, replacing the RPG's whole. IT COMES OFF, and its motion is not invented: this is the
+# SAME MESH and the SAME SURFACE as WM_RPG's drum (both draw rpg_wm.md3), so WM_RPG's measurement
+# of it applies unchanged -- the drum's centroid over insert frames 29-33 gives the axis
+# (0, -0.944, 0.329), straight off the bore, and 10.75 is where its footprint (outer radius
+# 12.683) clears every body triangle in its x span. detach 0.95 ESTIMATE.
+#
+# WHAT DIFFERS FROM WM_RPG IS THE COUNT, and it is why this gun needs its OWN loose drum rather
+# than borrowing wm_rpg_mag.md3: the RPG leaves its seventh chamber empty and its lifted drum
+# carries no rocket7, while this one loads all seven. Dropping the RPG's drum here would show a
+# full gun throwing away a six-rocket cylinder.
+# THE DRUM TURNS WITH THE COUNT (index, below), WM_RPG's measured step: -51.43 degrees (a seventh of a
+# turn, the donor's frames 4-7) about +x through the drum's axis, one step for every rocket short of
+# seven. With seven in, rocket1 is in the bore. A shot turns the next rocket in; a rocket loaded turns
+# the drum back a step, so the new one stands in the bore. The rockets show the count in firing order
+# (a roundsurface on the counted store is drawn while it holds MORE than its number).
+part drum
+  role    = feed
+  subject = magazine
+  take    = no          # out by its button, in by the hand carrying one
+  surface = drum
+  # The drum's outer rim on its out axis, as WM_RPG measures it: the axis (y -4.562, z 2.026)
+  # plus 12.683 along (0, -0.944, 0.329), at the drum's middle x.
+  grab       = 3.64, -16.54, 6.20
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0, -0.944, 0.329
+    distance = 10.75
+    detach   = 0.95
+  end
+  roundsurface = rocket1, drum, 6
+  roundsurface = rocket2, drum, 5
+  roundsurface = rocket3, drum, 4
+  roundsurface = rocket4, drum, 3
+  roundsurface = rocket5, drum, 2
+  roundsurface = rocket6, drum, 1
+  roundsurface = rocket7, drum, 0
+  index
+    kind    = hinge
+    axis    = 1, 0, 0
+    pivot   = 3.636, -4.562, 2.026
+    degrees = -51.43
+  end
+end
+
+# ROCKETS GO IN AT THE FRONT OF THE TUBE: one rocket brought to the tube's front ring, on the bore, and
+# pushed down it (-x). size is the oval's half-sizes in map units: a rocket is 4.9 long and 1.7 across.
+load muzzle
+  into    = drum
+  subject = round
+  at      = 65.88, 3.25, -1.33
+  size    = 2.5, 2.5, 2.5
+  dir     = -1, 0, 0
+end
+
+# ======================================================================= RPG -- OFF HAND
+# RS_ModelSwapper's rocket launcher (MS_RocketLauncher) as rpg_wm.md3: a SEVEN-CHAMBER DRUM on
+# the tube, swapped whole. Rest frame 4 (frame 5 with the drum home, not mid-index). Surfaces
+# body, trigger, drum, rocket1-7 (rocket1 in the bore, the rest in firing order). Every number
+# measured in that mesh's space against the body; _pending/ROCKET_CARDS.md.
+#
+# SCALE: MODELDEF Scale 1.0 x 0.34 = 0.34 map units per model unit.
+// DUPLICATE of MS_RocketLauncher -- not kept: fewer surfaces bind
+// weapon "WM_RPG"
+//   type      = launcher     # its hand-seat profile (the key landed in c688186)
+//   hand      = off
+//   prop      = "WM_PropRPG"
+//   model     = "models/vanilla/launchers/RPG" "rpg_wm.md3"
+//   skin      = "models/vanilla/launchers/RPG" "rpg.png"
+// 
+//   # The owner's six-rocket magazine. The drum has seven chambers: see `part drum`.
+//   capacity  = 6
+//   # Its own family: a drum seats only here, never the RocketLauncher's rack.
+//   magfamily = "rocketdrum"
+// 
+//   # fires straight from the magazine.
+//   firesfrom = magazine
+//   # nothing is thrown out, so no ejectport.
+//   casing    = none
+//   # two-handed; `part support` below.
+//   hands     = 1
+// 
+//   # The tube's front ring (x 65.875), centred on the bore (y 3.25, z -1.33). The rockets'
+//   # noses point +x.
+//   muzzle    = 65.88, 3.25, -1.33
+//   barrel    = 1, 0, 0
+// 
+//   # THE LOOSE DRUM: drum + rocket1-7 lifted out, re-origined on their centroid and stood so
+//   # the out axis points down. magcenter is that centroid in the gun's space.
+//   magmodel  = "models/vanilla/launchers/RPG" "wm_rpg_mag.md3"
+//   magskin   = "models/vanilla/launchers/RPG" "rpg.png"
+//   magscale  = 0.34
+//   magcenter = 3.520, -4.660, 2.325
+// 
+//   # ONE ROCKET, this drum's own rocket1, lying along x. 14.27 units = 4.9 map units.
+//   roundmodel = "models/vanilla/launchers/RPG" "wm_rocket.md3"
+//   roundskin  = "models/vanilla/launchers/RPG" "rpg.png"
+//   roundscale = 0.34
+// 
+//   firesound    = "wm/rocket/rpg_fire"
+//   drysound     = "wm/dry"
+//   magoutsound  = "wm/rocket/rpg_magout"
+//   maginsound   = "wm/rocket/rpg_magin"
+//   magdropsound = "wm/magdrop/large"
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+// # Computed 2026-09-29 from where WM_PropRPG is drawn today, so switching to it moves nothing.
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   triggerat = 19.140, 3.250, -14.068
+//   supportat = 45.271, 3.289, -4.017
+//   palm = 13.067, 3.225, -17.303
+//   rake = 29.4
+//   seat = 18.518, -3.250, -6.790
+// end
+// 
+// # THE DRUM and its seven rockets, one part (rigid together on all 39 frames, fit <= 0.015).
+// # Axis: the drum's centroid over insert frames 29-33, relative to home -- (0, -0.944, 0.329),
+// # straight off the bore (the bore-to-drum-axis line is (0, -0.919, 0.395)). Distance: where the
+// # drum's footprint (outer radius 12.683) clears every body triangle in its x span, 10.75. detach
+// # 0.95 ESTIMATE.
+// # THE DRUM TURNS ON THE SHOT (index, below) and its rockets show the count (a roundsurface on the
+// # counted mag is drawn while it holds MORE than its number). They go in firing order: at 5 rocket1
+// # is gone and the drum has turned rocket2 into the bore, and so on to rocket6 at 1; at 0 the bore
+// # faces the seventh chamber, which is never loaded (part emptychamber, below).
+// part drum
+//   role    = feed
+//   subject = magazine
+//   take    = no          # out by its button, in by the hand carrying one
+//   surface = drum
+//   roundsurface = rocket1, mag, 5
+//   roundsurface = rocket2, mag, 4
+//   roundsurface = rocket3, mag, 3
+//   roundsurface = rocket4, mag, 2
+//   roundsurface = rocket5, mag, 1
+//   roundsurface = rocket6, mag, 0
+//   # The drum's outer rim on its out axis: the axis (y -4.562, z 2.026) plus 12.683 along
+//   # (0, -0.944, 0.329), at the drum's middle x. Radius 3.0: the house reach tolerance for the grab
+//   # page, not a mesh size.
+//   grab       = 3.64, -16.54, 6.20
+//   grabradius = 3.0
+//   dof
+//     kind     = slide
+//     axis     = 0, -0.944, 0.329
+//     distance = 10.75
+//     detach   = 0.95
+//   end
+//   # THE PER-SHOT TURN, measured from the donor's frames 4-7: -51.43 degrees (a seventh of a turn)
+//   # about +x through the drum's axis. Steps = clamp(6 - rounds, 0, 6), the defaults.
+//   index
+//     kind    = hinge
+//     axis    = 1, 0, 0
+//     pivot   = 3.636, -4.562, 2.026
+//     degrees = -51.43
+//   end
+// end
+// 
+// # THE SEVENTH CHAMBER STAYS EMPTY: capacity 6 in a seven-chamber drum. Hidden, not counted -- a
+// # count of 6 would never show. The loose drum (wm_rpg_mag.md3) carries no rocket7 either.
+// part emptychamber
+//   role    = hidden
+//   surface = rocket7
+// end
+// 
+// # A sliding trigger: 1.397 along (-1.000, 0, -0.011) at frame 8, 0.05 degrees, fit 0.007.
+// part trigger
+//   role    = trigger
+//   surface = trigger
+//   dof
+//     kind     = slide
+//     axis     = -1, 0, -0.011
+//     distance = 1.397
+//   end
+// end
+// 
+// # The mesh has no forward grip, so the hand goes under the front tube, well ahead of the trigger guard (which
+// # ends at x 29) and short of the muzzle (65.9): the middle of that stretch. Measured 09-14: the tube's bottom
+// # is z -6.44 on y 1.67 to 4.83 (the mesh has no vertices between x 36 and 58, only the tube's long faces).
+// part support
+//   role    = support
+//   subject = support
+//   grab       = 47.5, 3.25, -6.44
+//   grabradius = 3.0
+// end
+// 
+// 
+// # =================================================== ROTARY LAUNCHER -- OFF HAND
+// # MeatGrinder's RPG.md3 at frame 0 as rotarylauncher_wm.md3: surfaces body, tubes (six rockets in their
+// # rings), trigger, button. Shift (54.9375, 0.1250, -7.3281). The rotary gun's receiver carrying a cluster
+// # of six rocket tubes.
+// # THE ROCKETS COME FROM THE RESERVE: the tubes are fixed and nothing detaches, so it fires from
+// # Weapon.AmmoType1.
+
+weapon "MS_RotaryLauncher"
+  hand      = off
+  type      = launcher
+  prop      = "WM_PropRotaryLauncher"
+  model     = "models/vanilla/launchers/RotaryLauncher" "rotarylauncher_wm.md3"
+  skin      = "models/vanilla/launchers/RotaryLauncher" "RPG.png"
+
+  firesfrom = reserve
+  casing    = none
+  hands     = 1
+
+  # ESTIMATE, WHICH TUBE: the top one, 11.1 above the cluster's axis (y -0.35, z -1.68), at its front
+  # (x 42.68). The rockets' noses point +x.
+  muzzle    = 42.68, -0.32, 9.44
+  barrel    = 1, 0, 0
+
+  # This package's launcher sounds (SNDINFO wm/rocket/*).
+  firesound = "wm/rocket/fire"
+  drysound  = "wm/dry"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropRotaryLauncher is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -23.913, -0.352, 7.318
+  supportat = -6.196, 9.636, 9.146
+  palm = -26.189, -0.372, 2.153
+  rake = 52.8
+  seat = -26.574, 0.125, 12.612
+end
+
+# 15.05 degrees about the pin at -20.125, 4.086 (source frame 6, fit 0.010). Sign checked: +15.05 lands the
+# rest centroid 0.001 off frame 6; -15.05 misses by 1.583.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 15.05
+    pivot   = -20.125, 0, 4.086
+  end
+end
+
+# THE OTHER HAND ON THE ANGLED FRONT HANDLE: its centroid, as the rotary gun's. ESTIMATE: where on it the
+# hand goes.
+part support
+  role    = support
+  subject = support
+  grab       = -7.90, 3.92, 5.45
+  grabradius = 3.0
+end
+
+# THE TUBES TURN AS IT FIRES: the donor turns every tube surface 45.0 degrees about +x over source frames
+# 1-3 (fit 0.014 or better), about the cluster's axis through (y -0.35, z -1.68). Six tubes, so one period
+# is 60 degrees. `spin = fire` turns it for one fire cycle after each shot; 3 degrees a tic over a vanilla
+# rocket cycle of about 20 tics steps it about one tube a rocket. Rate ESTIMATE. Looks only.
+part tubes
+  surface  = tubes
+  spin     = fire
+  spinrate = 3
+  spinup   = 0
+  spindown = 0
+  dof
+    kind    = hinge
+    axis    = 1, 0, 0
+    pivot   = 0, -0.35, -1.68
+    degrees = 60
+  end
+end

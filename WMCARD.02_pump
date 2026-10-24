@@ -1,0 +1,356 @@
+# ============================================================================
+# WMCARD.02_pump -- the model card library, archetype pump: WM_PumpM37, WM_PumpDoom, WM_BullpupPump.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+
+# ============================================================================
+# THE PUMP SHOTGUNS: two cards on the reload system's `pump` archetype.
+#
+# The archetype says what a pump gun DOES; each card says only where its own
+# parts are and how far they move. Surveyed first in
+# RS_VR_Reload/SHOTGUN_CANDIDATES.md; the numbers below were measured again for
+# these cards and agree with it.
+# ============================================================================
+
+
+# ============================================================ M37A2 -- MAIN HAND
+weapon "MS_AE_Shotgun"
+  hand      = main
+  type      = shotgun
+  prop      = "WM_PropPumpM37"
+  mechanism = pump
+  model     = "models/vanilla/shotguns/AE_Shotgun" "m37a2.md3"
+  skin      = "models/vanilla/shotguns/AE_Shotgun" "m37a2.png"
+
+  # The owner's vanilla set: eight. Not a mesh number: the tube
+  # store below holds the same eight, and the bind log reads this one.
+  capacity  = 8
+
+  # THE SHELL'S FAMILY. A load takes only rounds of its own gun's family, and
+  # unstated means "pistol" -- so the shells this gun throws and takes are 12ga
+  # because this line says so. No box magazine carries it, so none seats here.
+  magfamily = "12ga"
+
+  # Front-most vertices (x 38.34), centred on the bore. The barrel is level
+  # along +x.
+  muzzle    = 38.34, -0.20, 3.52
+  barrel    = 1, 0, 0
+
+  # The Ithaca loads AND ejects through one port in the BOTTOM of the receiver.
+  # MEASURED: the receiver's underside has no vertex from x -10 to -4, and its
+  # downward-facing triangles stop at x -11.42 (z -1.18) and start again at
+  # x -3.88 (z -1.23) -- that gap is the port, and this is its middle. The
+  # mesh's own shell comes up along a line (frame 18, a pure translation of
+  # 12.659 along -0.440, 0, -0.898) that crosses the underside at x -8.41,
+  # inside the gap. SHOTGUN_CANDIDATES.md's first estimate was -6.2, -0.2, -1.8.
+  ejectport = -7.65, -0.22, -1.20
+  ejectdir  = 0, 0, -1
+
+  # THE SHELL. The Doom shotgun's own hull surface (shotshl) at frame 12, the
+  # first frame it is a real object, lifted out, re-origined on its centroid
+  # and stood upright BRASS DOWN (the brass-coloured texels are at that end).
+  # 3.81 units long and 1.70 across. roundscale 0.459 is the Doom shotgun's
+  # 1.35 x 0.34, so it is the size that gun's artist drew it -- 1.75 map units --
+  # and this gun's own shell surface, 4.70 units x 0.374, is 1.76: the same
+  # shell to within 1%, so one number serves both cards.
+  # SHELL: Force Unleashed's shotgun shell (Ermac's mod, cleared by the owner), 51 verts, 7.672
+  # model units long along x. 0.228 makes it 1.75 map units -- the size the old hull had.
+  roundmodel = "models/shared/shell" "shell.md3"
+  roundskin  = "models/shared/shell" "shell.png"
+  roundscale = 0.228
+
+  # THE SHOT is the weapon class's, not the card's (shotguns.zs): Doom's own
+  # A_FireShotgun is A_FireBullets(5.6, 0, 7, 5) -- seven pellets, 5.6 degrees
+  # either side, level, each 5 x 1d3 -- so WM_PumpM37 sets ShotPellets 7 and
+  # ShotSpread 5.6, 0 and keeps its round profile's own damage.
+
+  # The IWAD's own shotgun sounds, not copies: DSSHOTGN and DSSGCOCK. The
+  # cock is one whole rack, so it plays on the pull; home and each shell
+  # going in are left silent (no such sound exists in the load order).
+  firesound     = "wm/shotgun/m37_fire"
+  cycleoutsound = "wm/shotgun/m37_rack"
+  drysound      = "wm/dry"
+  loadsound    = "wm/shotgun/m37_load"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropPumpM37 is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -17.356, -0.173, -3.254
+  supportat = 19.495, -0.249, -0.042
+  palm = -24.013, -0.229, -5.327
+  rake = 35.5
+  seat = -17.745, -0.170, -1.282
+end
+
+store tube
+  kind     = counted
+  capacity = 8
+  detach   = no
+end
+
+store chamber
+  kind  = slotted
+  slots = 1
+end
+
+# 11.205 along -x at full travel (frames 8 and 26 agree, 11.205 / 11.203),
+# 0.011 degrees of turn, fit 0.015. The cleanest slide on either mesh.
+# No `role`: the cycle verb that names this part is what makes it grabbable.
+part forend
+  subject  = forend
+  surface  = m37a2_pump
+  grab     = 19.20, -0.20, 0.17    # the forend's centroid at rest
+  # Along: its half-length, 9.20 units x 0.374 = 3.44 map units. Across and
+  # up: room for a hand round a forend under a map unit thick -- a starting
+  # value, for the grab-point page.
+  grabsize = 3.5, 2.5, 2.5
+  # WHERE THE HAND SITS: under the forend, at its middle -- a pump is held from
+  # below, toward the muzzle, not on top at the back like a slide. MEASURED at
+  # rest: the forend runs x 9.75 to 28.14 and its underside is z -2.42. The hand
+  # rides the forend through the whole stroke; wm_hs_shotgun_main_forend_* (the shotgun
+  # hand-seat profile) trims it live.
+  handseat = 19.2, -0.227, -0.086      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  dof
+    kind     = slide
+    axis     = -1, 0, 0
+    distance = 11.205
+  end
+end
+
+# 31.11 degrees about the pin at x -17.88, z -1.11 (frame 2, fit 0.012) --
+# follows your finger.
+part trigger
+  role    = trigger
+  surface = m37a2_trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 31.11
+    pivot   = -17.88, 0, -1.11
+  end
+end
+
+# The artist's own shell, sitting in the receiver at rest. Its skin,
+# shotgun_shell.png, exists nowhere, so it would be drawn with the gun's
+# texture smeared across it. A real shell is thrown on every pump instead.
+part bakedshell
+  role    = hidden
+  surface = shell
+end
+
+# IN FROM BELOW, LOADING UPWARD (the owner: this gun loads from the bottom). The
+# port is the gap in the receiver's underside, ejectport above. The zone sits UNDER
+# it, its centre one map unit down the mesh's own shell line: frame 18 moves the
+# shell 12.659 along -0.440, 0, -0.898, so a shell goes IN along +0.440, 0, +0.898.
+# One map unit is 2.67 model units at 0.374, so -7.65 - 0.440 x 2.67 = -8.83 and
+# -1.20 - 0.898 x 2.67 = -3.60. The archetype's 2.0 up reaches one unit into the
+# port and three below it. Its sliders: the grab-point page, "load zone: gate".
+load gate
+  at  = -8.83, -0.22, -3.60
+  dir = 0.440, 0, 0.898
+end
+
+
+# ======================================================= DOOM SHOTGUN -- OFF HAND
+weapon "MS_Shotgun"
+  hand      = off
+  type      = shotgun
+  prop      = "WM_PropPumpDoom"
+  mechanism = pump
+  model     = "models/vanilla/shotguns/Shotgun" "shotgun.md3"
+  skin      = "models/vanilla/shotguns/Shotgun" "WPN-GUNS-k1.png"
+
+  # No real gun behind it to take a tube from. Eight, as the M37A2 (the owner's vanilla set).
+  capacity  = 8
+  magfamily = "12ga"     # the shell's family -- see the M37A2's card
+
+  # Front-most vertices (x 30.61), bore centre as surveyed. Level along +x.
+  muzzle    = 30.6, 0.0, 2.75
+  barrel    = 1, 0, 0
+
+  # The hull first exists at frame 12, at -0.06, 0.33, 1.74 once the body's own
+  # drift that frame is divided out, and leaves along -0.84, 0.53, 0.10 -- out
+  # of the RIGHT side. The port is cut in that side wall, which stands at
+  # y +1.28 to +1.34 over the receiver (measured).
+  ejectport = 0.0, 1.3, 1.7
+  ejectdir  = -0.84, 0.53, 0.10
+
+  # The same shell as the M37A2's, taken from THIS mesh -- see that card.
+  # SHELL: Force Unleashed's shotgun shell (Ermac's mod, cleared by the owner), 51 verts, 7.672
+  # model units long along x. 0.228 makes it 1.75 map units -- the size the old hull had.
+  roundmodel = "models/shared/shell" "shell.md3"
+  roundskin  = "models/shared/shell" "shell.png"
+  roundscale = 0.228
+
+  # THE SHOT: the weapon class's, as on the M37A2 (shotguns.zs).
+
+  firesound     = "weapons/shotgf"
+  cycleoutsound = "wm/shotgun/doom_rack"
+  drysound      = "wm/dry"
+  loadsound    = "wm/shotgun/doom_load"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropPumpDoom is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -7.867, 0.031, -3.122
+  supportat = 15.799, -0.031, 0.474
+  palm = -13.026, -0.068, -1.562
+  rake = 62.2
+  seat = -7.811, 0.031, 1.358
+end
+
+store tube
+  kind     = counted
+  capacity = 8
+  detach   = no
+end
+
+store chamber
+  kind  = slotted
+  slots = 1
+end
+
+# 7.400 along -1, 0, +0.002 at full travel (frame 13), 0.003 degrees of turn,
+# fit 0.009.
+# No `role`, as on the M37A2: the pump verb makes it grabbable.
+part forend
+  subject  = forend
+  surface  = doomshot.001
+  grab     = 15.89, -0.03, 0.27    # the forend's centroid at rest
+  # Along: its half-length, 6.55 units x 0.459 = 3.01 map units. Across and
+  # up as on the M37A2.
+  grabsize = 3.0, 2.5, 2.5
+  # WHERE THE HAND SITS: under the forend, at its middle, as on the M37A2.
+  # MEASURED at rest: the forend runs x 9.62 to 22.73 and its underside is
+  # z -2.55. wm_hs_shotgun_off_forend_* (the shotgun hand-seat profile) trims it live.
+  handseat = 15.89, -0.031, -0.039      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  dof
+    kind     = slide
+    axis     = -1, 0, 0.002
+    distance = 7.400
+  end
+end
+
+# NO TRIGGER PART: this mesh's trigger and loading gate are fused into the body.
+# Its hull (shotshl) is collapsed to a point at rest, so nothing needs hiding.
+
+# IN THROUGH THE SIDE PORT, on the RIGHT (+y) -- the owner: this gun loads from the
+# side. It is the port the hull leaves by (ejectport above; the side wall stands at
+# y +1.28 to +1.34). The zone sits OUTSIDE that wall, its centre one map unit out
+# along the hull's own measured line reversed: frame 12 sends the hull out along
+# -0.84, 0.53, 0.10, so a shell goes IN along +0.84, -0.53, -0.10. One map unit is
+# 2.18 model units at 0.459: 0.0 - 0.84 x 2.18 = -1.83, 1.3 + 0.53 x 2.18 = 2.46,
+# 1.7 + 0.10 x 2.18 = 1.92. Thinner across (1.5) than the archetype's 2.0, so it
+# hugs the wall instead of reaching through the gun. No gate surface exists to
+# confirm the port. Replaces the old ESTIMATE under the receiver (-2.6, 0.0, -2.2).
+# Its sliders: the grab-point page, "load zone: gate".
+load gate
+  at   = -1.83, 2.46, 1.92
+  size = 2.5, 1.5, 2.0
+  dir  = 0.84, -0.53, -0.10
+end
+
+
+# ==================================================== BULLPUP PUMP -- OFF HAND
+# MeatGrinder's SSG.md3 at frame 0 as bullpuppump_wm.md3: surfaces body, forend (the source's two forend
+# surfaces, with the vertical foregrip), trigger. Shift (41.2656, 0, 0.7031). A bullpup pump shotgun --
+# nothing hinges open -- on the reload system's `pump` archetype. The owner: a 4-shot SSG, so an SSG
+# blast a shell (the class's shot) from a 4-shell tube. REVISITABLE when the owner designs Vanilla+ fires.
+weapon "MS_BullpupPump"
+  hand      = off
+  type      = shotgun
+  prop      = "WM_PropBullpupPump"
+  mechanism = pump
+  model     = "models/vanilla/shotguns/BullpupPump" "bullpuppump_wm.md3"
+  skin      = "models/vanilla/shotguns/BullpupPump" "ssg.png"
+
+  # The owner's 4 shots. The tube store below holds the same four.
+  capacity  = 4
+  magfamily = "12ga"
+
+  # The front face (x 28.17) is two tubes with a gap at z 1.3 to 2.3: the barrel above (z 2.3 to 6.3,
+  # under the front sight post) and the magazine tube below. The barrel's middle.
+  muzzle    = 28.17, 0.0, 4.30
+  barrel    = 1, 0, 0
+
+  # ESTIMATE: a bullpup's chamber is behind its grip, and the mesh shows no port.
+  ejectport = -23.27, 2.4, 0.80
+  ejectdir  = -0.2, 0.9, 0.4
+
+  roundmodel = "models/shared/shell" "shell.md3"
+  roundskin  = "models/shared/shell" "shell.png"
+  roundscale = 0.228
+
+  # THE SHOT is the class's: the SSG's blast, one a shell.
+
+  firesound     = "wm/shotgun/bullpup_fire"
+  cycleoutsound = "wm/shotgun/bullpup_rack"
+  drysound      = "wm/dry"
+  loadsound    = "wm/shotgun/bullpup_load"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropBullpupPump is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -7.772, -0.002, -6.216
+  supportat = 17.066, -0.023, -9.202
+  palm = -12.893, -0.023, -9.556
+  rake = 24.5
+  seat = -6.975, 0.000, -2.098
+end
+
+store tube
+  kind     = counted
+  capacity = 4
+  detach   = no
+end
+
+store chamber
+  kind  = slotted
+  slots = 1
+end
+
+# THE FOREND AND ITS VERTICAL FOREGRIP, one surface: 10.778 along (-1, 0, 0.0012) at full travel
+# (source frame 11), 0.02 degrees of turn, fit 0.011. No `role`: the pump verb makes it grabbable.
+part forend
+  subject  = forend
+  surface  = forend
+  grab     = 15.97, 0.01, -11.90      # the vertical foregrip's centroid
+  # The foregrip runs x 11.70..21.11 and z -16.34..-5.61: half of that along is 4.71 units x 0.374 =
+  # 1.76 map units, and up 2.01. Across: room for a hand round it -- a starting value.
+  grabsize = 2.0, 2.5, 2.5
+  # WHERE THE HAND SITS: round the vertical foregrip, at its middle. wm_hs_shotgun_off_forend_* trims it.
+  handseat = 15.97, 0, -10.078      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  handaxis = 0, 0, -1      # the line the hand closes round, index to little finger, fitted 2026-10-11 to c_doom_marine (reload hands)
+  dof
+    kind     = slide
+    axis     = -1, 0, 0.001
+    distance = 10.778
+  end
+end
+
+# 10.00 degrees about the pin at -7.314, -3.964 (source frame 1, fit 0.008). Sign checked: +10.00 lands
+# the rest centroid 0.001 off frame 1; -10.00 misses by 0.798.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 10.00
+    pivot   = -7.314, 0, -3.964
+  end
+end
+
+# IN FROM BELOW, LOADING UPWARD. ESTIMATE: a bullpup loads under its stock, behind the grip. MEASURED:
+# the stock's underside is lowest, z -5.84, at x -25.3 to -21.3; the zone's centre sits 1.4 below it.
+load gate
+  at  = -23.27, 0.0, -7.20
+  dir = 0, 0, 1
+end

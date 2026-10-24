@@ -1,0 +1,281 @@
+# ============================================================================
+# WMCARD.01_pistol -- the model card library, archetype pistol: WM_M4A3, WM_Pistolet.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+# ============================================================================
+# THE PISTOLS. Moved here from the reload system on 2026-09-12 with every number
+# and comment unchanged; only the mesh paths moved (models/ -> models/vanilla/pistols/).
+#
+# THE MAGAZINE MOVES STRAIGHT. Both meshes animate a tilt as the magazine
+# leaves -- but a magazine inside its well cannot turn; the tilt is free fall,
+# after it has cleared. So the axis is the one measured from the INSERT frames,
+# where the motion is a pure translation, and the distance is the magazine's
+# own length along it: how far your hand pulls before it is free.
+#
+# NO MECHANISM AND NO VERBS: each pistol's slide cycle and magazine swap are
+# synthesised from its `role = action` and `role = feed` parts (card.zs
+# SynthesiseVerbs). EVERY SOUND IS STATED -- the reload system names no gun's
+# sounds, so a moment a card leaves out is silent.
+# ============================================================================
+
+
+# ============================================================ M4A3 -- MAIN HAND
+weapon "MS_AE_Pistol"
+  hand     = main
+  type     = pistol
+  prop     = "WM_PropM4A3"
+  model    = "models/vanilla/pistols" "m4a3.md3"
+  skin     = "models/vanilla/pistols" "m4a3.png"
+  capacity = 15
+  # EITHER PISTOL'S MAGAZINE SEATS IN EITHER GUN (the owner, 2026-09-14): one family, 15 rounds, each its own look.
+  magfamily = "pistol"
+
+  # Front-most slide vertices; the bore points along +x.
+  muzzle    = 18.99, -0.07, 4.27
+  barrel    = 1, 0, 0
+
+  # The port cut is on the -y side of the slide (14 vertices there against 5
+  # opposite), which is the right side of a 1911. Brass goes right, up, back.
+  ejectport = 2.0, -1.4, 5.3
+  ejectdir  = -0.3, -0.9, 0.4
+
+  # The loose magazine: this gun's own m4a3_magazine surface, lifted out,
+  # re-origined on its centroid and stood upright. magcenter is that centroid
+  # in the GUN's space, so a dropped magazine appears exactly where the one in
+  # the gun was. magscale 0.279 = the gun's 0.82 x 0.34 (the follow-hand
+  # frame's model units per map unit), so it is the same size on the floor as
+  # it was in the gun.
+  magmodel  = "models/vanilla/pistols" "wm_m4a3_mag.md3"
+  magskin   = "models/vanilla/pistols" "m4a3.png"
+  magscale  = 0.279
+  magcenter = -5.181, 0.022, -8.665
+
+  # A .45 ACP cartridge is 32mm: 1.1 map units over bullet.md3's 6.27.
+  roundmodel = "models/vanilla/pistols" "bullet.md3"
+  roundskin  = "models/vanilla/pistols" "bullet.png"
+  roundscale = 0.175
+
+  firesound      = "wm/m4a3/fire"
+  drysound       = "wm/dry"
+  magoutsound    = "wm/m4a3/magout"
+  maginsound     = "wm/m4a3/magin"
+  rackapexsound  ="wm/m4a3/slideback"
+  rackresetsound ="wm/m4a3/slidefwd"
+  magdropsound   = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropM4A3 is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 1.005, 0.016, -0.878
+  supportat = -2.193, 0.004, -6.758
+  palm = -5.453, 0.004, -5.141
+  rake = 19.3
+  seat = 0.484, 0.016, 5.393
+end
+
+# 6.784 along pure -x, 0.01 degrees of turn, fit error 0.013. A slide.
+part slide
+  role    = action
+  subject = slide
+  surface = m4a3_slide
+  grab       = -6.09, 0.09, 6.20      # the rear serrations, top of the slide
+  handseat = -6.09, 0.008, 4.953      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -1, 0, 0
+    distance = 6.784
+    detach   = 0.95
+  end
+end
+
+# Axis from frames 11-12, pure translation (0.05-0.07 deg). 16.2 units long.
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no          # out by its button, in by the hand carrying one
+  surface = m4a3_magazine
+  grab       = -10.5, 0.0, -12.0      # the floorplate, where you pull it
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -0.354, 0, -0.935
+    distance = 17.0
+    detach   = 0.9
+  end
+end
+
+# 62.15 degrees about the pin at -6.967, 2.004 (fit 0.012). Rest frame is the
+# hammer DOWN; value 1 is cocked, which is how a 1911 is carried.
+part hammer
+  role    = hammer
+  surface = m4a3_hammer
+  dof
+    kind    = hinge
+    axis    = 0, -1, 0
+    degrees = 62.15
+    pivot   = -6.967, 0, 2.004
+  end
+end
+
+# 11 degrees about the pin at 1.646, 1.182 -- follows your finger.
+part trigger
+  role    = trigger
+  surface = m4a3_trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 11.0
+    pivot   = 1.646, 0, 1.182
+  end
+end
+
+# Not a moving part: where the other hand wraps the front of the grip. Well
+# above the floorplate, so bracing and pulling the magazine are never the
+# same place.
+part support
+  role    = support
+  subject = support
+  grab       = -1.0, 0.0, -5.5
+  grabradius = 3.0
+end
+
+
+# ======================================================== PISTOLET -- OFF HAND
+weapon "MS_Pistol"
+  hand     = off
+  type     = pistol
+  prop     = "WM_PropPistolet"
+  model    = "models/vanilla/pistols" "pistolet.md3"
+  skin     = "models/vanilla/pistols" "WPN-9mm.png"
+  capacity = 15
+  # EITHER PISTOL'S MAGAZINE SEATS IN EITHER GUN (the owner, 2026-09-14): one family, 15 rounds, each its own look.
+  magfamily = "pistol"
+
+  muzzle    = 14.16, -0.11, 1.59
+  barrel    = 1, 0, 0
+
+  # This mesh's own baked brass sits at +y and flies +y, so that is the side
+  # its port is on. wm_eject_mirror_off flips it if you want it the other way.
+  ejectport = 0.5, 1.2, 2.2
+  ejectdir  = -0.3, 0.9, 0.4
+
+  # mag + mag.001 lifted out together -- one magazine the artist split in two. This gun's own look; the
+  # M4A3's magazine seats here too (magfamily above).
+  magmodel  = "models/vanilla/pistols" "wm_pistolet_mag.md3"
+  magskin   = "models/vanilla/pistols" "WPN-9mm.png"
+  magscale  = 0.459
+  magcenter = -3.336, -0.109, -3.870
+
+  # 9mm Parabellum, 29.7mm: 1.0 map unit.
+  roundmodel = "models/vanilla/pistols" "bullet.md3"
+  roundskin  = "models/vanilla/pistols" "bullet.png"
+  roundscale = 0.16
+
+  firesound      = "wm/pistolet/fire"
+  drysound       = "wm/dry"
+  magoutsound    = "wm/pistolet/magout"
+  maginsound     = "wm/pistolet/magin"
+  rackapexsound  ="wm/pistolet/slideback"
+  rackresetsound ="wm/pistolet/slidefwd"
+  magdropsound   = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropPistolet is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 0.900, 0.110, -2.153
+  supportat = -1.695, -0.128, -6.070
+  palm = -3.814, -0.128, -5.441
+  rake = 9.5
+  seat = 0.267, 0.110, 1.491
+end
+
+# 3.889 along -x at full travel (frame 7), fit 0.011.
+part slide
+  role    = action
+  subject = slide
+  surface = slide
+  grab       = -4.87, -0.11, 2.60
+  handseat = -4.87, -0.109, 1.336      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -1, 0, 0
+    distance = 3.889
+    detach   = 0.95
+  end
+end
+
+# BOTH SURFACES. mag.001's own frames are useless (collapsed 7-14), but it is
+# one object with mag -- they track to 0.006 at frames 15 and 20 -- so it is
+# driven along mag's measurement. Axis from the insert frames 16-18.
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no          # out by its button, in by the hand carrying one
+  surface = mag
+  surface = mag.001
+  grab       = -4.6, 0.0, -9.0
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -0.31, 0, -0.95
+    distance = 10.0
+    detach   = 0.9
+  end
+end
+
+# rec.001, 40.8 degrees about the pin at 0.181, -1.227 (fit 0.008).
+part trigger
+  role    = trigger
+  surface = rec.001
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 40.8
+    pivot   = 0.181, 0, -1.227
+  end
+end
+
+# The artist's baked brass: a real casing is thrown on every shot instead.
+part brass
+  role    = hidden
+  surface = casing
+end
+
+part support
+  role    = support
+  subject = support
+  grab       = -0.3, 0.0, -5.0
+  grabradius = 3.0
+end
+
+
+# ================================================== PISTOLET BLUE -- OFF HAND
+# The Blue Handgun (the owner, 2026-09-15, Vanilla+: three pistols, "Black Handgun, Blue Handgun, Pistol"). The
+# Pistolet's own mesh in RS_Main VR_Pistol's steel-blue skin. It STARTS FROM WM_Pistolet's card (inheritance): the
+# same parts, magazine, muzzle, rounds and sounds, so a fix to that card reaches this one too. It says only what
+# differs -- its prop class and the blue skin, on the gun and on its magazine (a dropped or seated magazine wears
+# its own gun's look; magfamily stays "pistol", so either handgun's magazine seats in either gun).
+weapon "WM_PistoletBlue"
+  base    = WM_Pistolet
+  prop    = "WM_PropPistoletBlue"
+  skin    = "models/vanilla/pistols" "WPN-9mm2.png"
+  magskin = "models/vanilla/pistols" "WPN-9mm2.png"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropPistoletBlue is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 0.244, 0.110, -2.357
+  supportat = -1.695, -0.128, -6.070
+  palm = -3.814, -0.128, -5.441
+  rake = 9.5
+  seat = 0.267, 0.110, 1.491
+end

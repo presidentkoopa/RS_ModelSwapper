@@ -1,0 +1,1259 @@
+// 2026-10-23 RS VR scopes, REAL mode: XM21.md3 now carries the Ruger's ocular lens as
+// its own surface 10 "ScopeGlass" (carved out of 3 leupold_scope by
+// kit/tool/md3_carve_surface.py), so every block that uses that mesh needs a
+// SurfaceSkin for index 10 -- the blocks that hide the scope must hide the glass too or
+// a disc of lens floats beside the dropped magazine. THIS FILE IS GENERATED: gen_rsr.py
+// has to learn the scope surface, or the next regenerate drops these lines again.
+
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/Rifle.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model Rifle
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "Rifle.png"
+	SurfaceSkin 0 1 "Rifle.png"
+	SurfaceSkin 0 2 "Rifle.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "Rifle.png"
+	SurfaceSkin 0 5 "Rifle.png"
+	Model 1 "M203.md3"	// 1.30: the M203 stays on the gun while the hand reloads it
+	SurfaceSkin 1 0 "M203.png"
+	SurfaceSkin 1 1 "M203.png"
+	SurfaceSkin 1 2 "M203.png"
+	SurfaceSkin 1 3 "M203.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQRM A 0 3
+	FrameIndex RQRM A 1 3
+}
+
+// the gun without its handle / slide (and what moves with it): they are on their own layers while pulled
+Model Rifle
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "Rifle.png"
+	SurfaceSkin 0 3 "Rifle.png"
+	SurfaceSkin 0 4 "Rifle.png"
+	SurfaceSkin 0 5 "Rifle.png"
+	Model 1 "M203.md3"	// 1.30: the M203 stays on the gun while the hand reloads it
+	SurfaceSkin 1 0 "M203.png"
+	SurfaceSkin 1 1 "M203.png"
+	SurfaceSkin 1 2 "M203.png"
+	SurfaceSkin 1 3 "M203.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQRM B 0 3
+	FrameIndex RQRM B 1 3
+}
+
+// the handle / slide alone
+Model RSR_GunParts
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "Rifle.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQRP B 0 3
+}
+
+// the bolt carrier alone
+Model RSR_GunParts
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "Rifle.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQRP C 0 3
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "Rifle.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQRP A 0 3
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "Rifle.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQRP A 0 3
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "Rifle.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -14.1698 -0.1433 0.0
+	ZOffset 1.6769
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQRW A 0 3
+}
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/BrutalPistol.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model BrutalPistol
+{
+	Path "models/bd/BrutalPistol"
+	Model 0 "BrutalPistol.md3"
+	SurfaceSkin 0 0 "BrutalPistol.png"
+	SurfaceSkin 0 1 "BrutalPistol.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "BrutalPistol.png"
+	SurfaceSkin 0 5 "BrutalPistol.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQPM A 0 3
+}
+
+// the gun without its handle / slide (and what moves with it): they are on their own layers while pulled
+Model BrutalPistol
+{
+	Path "models/bd/BrutalPistol"
+	Model 0 "BrutalPistol.md3"
+	SurfaceSkin 0 0 "BrutalPistol.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "BrutalPistol.png"
+	SurfaceSkin 0 3 "BrutalPistol.png"
+	SurfaceSkin 0 4 "BrutalPistol.png"
+	SurfaceSkin 0 5 "BrutalPistol.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQPM B 0 3
+}
+// 1.13: the gun without its magazine AND its slide (slide locked back, on its own layer)
+Model BrutalPistol
+{
+	Path "models/bd/BrutalPistol"
+	Model 0 "BrutalPistol.md3"
+	SurfaceSkin 0 0 "BrutalPistol.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "BrutalPistol.png"
+	SurfaceSkin 0 5 "BrutalPistol.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQPM C 0 3
+}
+
+// the handle / slide alone
+Model RSR_GunParts
+{
+	Path "models/bd/BrutalPistol"
+	Model 0 "BrutalPistol.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "BrutalPistol.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQPP B 0 3
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/BrutalPistol"
+	Model 0 "BrutalPistol.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "BrutalPistol.png"
+	SurfaceSkin 0 3 "BrutalPistol.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQPP A 0 3
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/BrutalPistol"
+	Model 0 "BrutalPistol.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "BrutalPistol.png"
+	SurfaceSkin 0 3 "BrutalPistol.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQPP A 0 3
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/BrutalPistol"
+	Model 0 "BrutalPistol.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "BrutalPistol.png"
+	SurfaceSkin 0 3 "BrutalPistol.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -8.8114 0.0117 0.0
+	ZOffset 1.4405
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQPW A 0 3
+}
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/BrutalSMG.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model BrutalSMG
+{
+	Path "models/bd/BrutalSMG"
+	Model 0 "BrutalSMG.md3"
+	SurfaceSkin 0 0 "BrutalSMG.png"
+	SurfaceSkin 0 1 "BrutalSMG.png"
+	SurfaceSkin 0 2 "BrutalSMG.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQBM A 0 3
+}
+
+// the gun without its handle / slide (and what moves with it): they are on their own layers while pulled
+Model BrutalSMG
+{
+	Path "models/bd/BrutalSMG"
+	Model 0 "BrutalSMG.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "BrutalSMG.png"
+	SurfaceSkin 0 2 "BrutalSMG.png"
+	SurfaceSkin 0 3 "BrutalSMG.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQBM B 0 3
+}
+
+// the handle / slide alone
+Model RSR_GunParts
+{
+	Path "models/bd/BrutalSMG"
+	Model 0 "BrutalSMG.md3"
+	SurfaceSkin 0 0 "BrutalSMG.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQBP B 0 3
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/BrutalSMG"
+	Model 0 "BrutalSMG.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "BrutalSMG.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQBP A 0 3
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/BrutalSMG"
+	Model 0 "BrutalSMG.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "BrutalSMG.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQBP A 0 3
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/BrutalSMG"
+	Model 0 "BrutalSMG.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "BrutalSMG.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -14.7193 0.0090 0.0
+	ZOffset 4.1062
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQBW A 0 3
+}
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/MP40.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model MP40
+{
+	Path "models/bd/MP40"
+	Model 0 "MP40.md3"
+	SurfaceSkin 0 0 "MP40.png"
+	SurfaceSkin 0 1 "MP40.png"
+	SurfaceSkin 0 2 "MP40.png"
+	SurfaceSkin 0 3 "MP40.png"
+	SurfaceSkin 0 4 "MP40.png"
+	SurfaceSkin 0 5 "MP40.png"
+	SurfaceSkin 0 6 "MP40.png"
+	SurfaceSkin 0 7 "MP40.png"
+	SurfaceSkin 0 8 "MP40.png"
+	SurfaceSkin 0 9 "MP40.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQMM A 0 2
+}
+
+// the gun without its handle / slide (and what moves with it): they are on their own layers while pulled
+Model MP40
+{
+	Path "models/bd/MP40"
+	Model 0 "MP40.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "MP40.png"
+	SurfaceSkin 0 2 "MP40.png"
+	SurfaceSkin 0 3 "MP40.png"
+	SurfaceSkin 0 4 "MP40.png"
+	SurfaceSkin 0 5 "MP40.png"
+	SurfaceSkin 0 6 "MP40.png"
+	SurfaceSkin 0 7 "MP40.png"
+	SurfaceSkin 0 8 "MP40.png"
+	SurfaceSkin 0 9 "MP40.png"
+	SurfaceSkin 0 10 "MP40.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQMM B 0 2
+}
+
+// the handle / slide alone
+Model RSR_GunParts
+{
+	Path "models/bd/MP40"
+	Model 0 "MP40.md3"
+	SurfaceSkin 0 0 "MP40.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQMP B 0 2
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/MP40"
+	Model 0 "MP40.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "MP40.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQMP A 0 2
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/MP40"
+	Model 0 "MP40.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "MP40.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQMP A 0 2
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/MP40"
+	Model 0 "MP40.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "MP40.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -20.8554 0.0050 0.0
+	ZOffset 1.3215
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQMW A 0 2
+}
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/AssaultShotgun.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model AssaultShotgun
+{
+	Path "models/bd/AssaultShotgun"
+	Model 0 "AssaultShotgun.md3"
+	SurfaceSkin 0 0 "AssaultShotgun.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "AssaultShotgun.png"
+	SurfaceSkin 0 3 "AssaultShotgun.png"
+	SurfaceSkin 0 4 "AssaultShotgun.png"
+	SurfaceSkin 0 5 "AssaultShotgun.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQAM A 0 4
+}
+
+// the gun without its handle / slide (and what moves with it): they are on their own layers while pulled
+Model AssaultShotgun
+{
+	Path "models/bd/AssaultShotgun"
+	Model 0 "AssaultShotgun.md3"
+	SurfaceSkin 0 0 "AssaultShotgun.png"
+	SurfaceSkin 0 1 "AssaultShotgun.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "AssaultShotgun.png"
+	SurfaceSkin 0 4 "AssaultShotgun.png"
+	SurfaceSkin 0 5 "AssaultShotgun.png"
+	SurfaceSkin 0 6 "AssaultShotgun.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQAM B 0 4
+}
+
+// the handle / slide alone
+Model RSR_GunParts
+{
+	Path "models/bd/AssaultShotgun"
+	Model 0 "AssaultShotgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "AssaultShotgun.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQAP B 0 4
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/AssaultShotgun"
+	Model 0 "AssaultShotgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "AssaultShotgun.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "AssaultShotgun.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQAP A 0 4
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/AssaultShotgun"
+	Model 0 "AssaultShotgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "AssaultShotgun.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "AssaultShotgun.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQAP A 0 4
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/AssaultShotgun"
+	Model 0 "AssaultShotgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "AssaultShotgun.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "AssaultShotgun.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -15.2330 0.0386 0.0
+	ZOffset 0.8165
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQAW A 0 4
+}
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/RailGun.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model RailGun
+{
+	Path "models/bd/RailGun"
+	Model 0 "RailGun.md3"
+	SurfaceSkin 0 0 "RailGun.png"
+	// The lens wears its own glass tile, not the gun atlas: both scope lenses were
+	// reprojected to 0..1 (tool/md3_carve_surface.py --project-only) so REAL mode can
+	// render a camera texture through them, which means they no longer sample the
+	// authored skin at all. scope_real.zs swaps this for the camera texture when REAL.
+	SurfaceSkin 0 1 "scope_glass.png"
+	SurfaceSkin 0 2 "RailGun.png"
+	SurfaceSkin 0 3 "RailGun.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQLM A 0 3
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/RailGun"
+	Model 0 "RailGun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "RailGun.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQLP A 0 3
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/RailGun"
+	Model 0 "RailGun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "RailGun.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQLP A 0 3
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/RailGun"
+	Model 0 "RailGun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "RailGun.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -17.3520 -0.0147 0.0
+	ZOffset 2.1180
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQLW A 0 3
+}
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/Plasma_Gun.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model Plasma_Gun
+{
+	Path "models/bd/Plasma_Gun"
+	Model 0 "Plasma.md3"
+	SurfaceSkin 0 0 "Plasma.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "Plasma.png"
+	SurfaceSkin 0 3 "Plasma.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQZM A 0 4
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/Plasma_Gun"
+	Model 0 "Plasma.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "Plasma.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQZP A 0 4
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/Plasma_Gun"
+	Model 0 "Plasma.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "Plasma.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQZP A 0 4
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/Plasma_Gun"
+	Model 0 "Plasma.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "Plasma.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -16.6418 -0.0000 0.0
+	ZOffset 4.1917
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQZW A 0 4
+}
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/Sniper.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+
+// the gun without its handle / slide (and what moves with it): they are on their own layers while pulled
+
+// the handle / slide alone
+
+// the magazine alone, at the gun (main controller)
+
+// the magazine alone, in the off hand (off controller)
+
+// the dropped magazine (world)
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/Rocket_Launcher.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model Rocket_Launcher
+{
+	Path "models/bd/RPG"
+	Model 0 "RPG.md3"
+	SurfaceSkin 0 0 "RPG.png"
+	SurfaceSkin 0 1 "RPG.png"
+	SurfaceSkin 0 2 "RPG.png"
+	SurfaceSkin 0 3 "RPG.png"
+	SurfaceSkin 0 4 "RPG.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	SurfaceSkin 0 11 "rsr_clear.png"
+	SurfaceSkin 0 12 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQDM A 0 5
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/RPG"
+	Model 0 "RPG.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "RPG.png"
+	SurfaceSkin 0 6 "RPG.png"
+	SurfaceSkin 0 7 "RPG.png"
+	SurfaceSkin 0 8 "RPG.png"
+	SurfaceSkin 0 9 "RPG.png"
+	SurfaceSkin 0 10 "RPG.png"
+	SurfaceSkin 0 11 "RPG.png"
+	SurfaceSkin 0 12 "RPG.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQDP A 0 5
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/RPG"
+	Model 0 "RPG.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "RPG.png"
+	SurfaceSkin 0 6 "RPG.png"
+	SurfaceSkin 0 7 "RPG.png"
+	SurfaceSkin 0 8 "RPG.png"
+	SurfaceSkin 0 9 "RPG.png"
+	SurfaceSkin 0 10 "RPG.png"
+	SurfaceSkin 0 11 "RPG.png"
+	SurfaceSkin 0 12 "RPG.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQDP A 0 5
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/RPG"
+	Model 0 "RPG.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "RPG.png"
+	SurfaceSkin 0 6 "RPG.png"
+	SurfaceSkin 0 7 "RPG.png"
+	SurfaceSkin 0 8 "RPG.png"
+	SurfaceSkin 0 9 "RPG.png"
+	SurfaceSkin 0 10 "RPG.png"
+	SurfaceSkin 0 11 "RPG.png"
+	SurfaceSkin 0 12 "RPG.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -6.1354 2.7233 0.0
+	ZOffset -3.2269
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQDW A 0 5
+}
+
+
+// RS real VR reload: Ermac's off hand holding a magazine (ammo_hand frame 3), without his
+// magazine: the gun's own magazine is drawn in it on layer 2201 (RSR, MODELDEF above)
+Model RSQ_Hands
+{
+	Path "models/rsq"
+	Model 0 "ammo_hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQHN I 0 3
+}
+
+// 1.13: the gun without its magazine AND its handle / bolt (locked back on its own layer)
+Model Rifle
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "Rifle.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "Rifle.png"
+	SurfaceSkin 0 5 "Rifle.png"
+	Model 1 "M203.md3"	// 1.30: the M203 stays on the gun while the hand reloads it
+	SurfaceSkin 1 0 "M203.png"
+	SurfaceSkin 1 1 "M203.png"
+	SurfaceSkin 1 2 "M203.png"
+	SurfaceSkin 1 3 "M203.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQRM C 0 3
+	FrameIndex RQRM C 1 3
+}
+
+// 1.13: the gun without its magazine AND its handle / bolt (locked back on its own layer)
+Model BrutalSMG
+{
+	Path "models/bd/BrutalSMG"
+	Model 0 "BrutalSMG.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "BrutalSMG.png"
+	SurfaceSkin 0 2 "BrutalSMG.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQBM C 0 3
+}
+
+// 1.14: the gun without its magazine AND its bolt handle (locked back on its own layer)
+Model AssaultShotgun
+{
+	Path "models/bd/AssaultShotgun"
+	Model 0 "AssaultShotgun.md3"
+	SurfaceSkin 0 0 "AssaultShotgun.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "AssaultShotgun.png"
+	SurfaceSkin 0 4 "AssaultShotgun.png"
+	SurfaceSkin 0 5 "AssaultShotgun.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQAM C 0 4
+}
+
+
+
+// RS real VR reload: BD22/Sniper drawn as the Ruger Mini-14 Ranch (1.93).
+// The sniper is a weapon again (zscript/nosniper/nosniper.zs). Placement solved through
+// team/reload_merged/tools/rgeo.py: Scale for a 95.25 cm rifle, Offset / ZOffset to sit
+// where BD22/Rifle's body sits. Pieces shown or hidden by a clear skin, as every other gun.
+// Surfaces: 0 round 1 bolt 2 charging handle 3 scope 4 mag release 5 magazine 6 safety
+//           7 scope rings 8 trigger 9 body
+
+// the whole gun, on BD22's own sprite runs
+Model Sniper
+{
+	Path "models/bd/XM21"
+	Model 0 "XM21.md3"
+	SurfaceSkin 0 0 "223_rem.png"
+	SurfaceSkin 0 1 "mini14.png"
+	SurfaceSkin 0 2 "mini14.png"
+	SurfaceSkin 0 3 "leupold_vx1.png"
+	SurfaceSkin 0 4 "mini14.png"
+	SurfaceSkin 0 5 "mini14.png"
+	SurfaceSkin 0 6 "mini14.png"
+	SurfaceSkin 0 7 "leupold_vx1.png"
+	SurfaceSkin 0 8 "mini14.png"
+	SurfaceSkin 0 9 "mini14.png"
+	// The lens wears its own glass tile, not the gun atlas: both scope lenses were
+	// reprojected to 0..1 (tool/md3_carve_surface.py --project-only) so REAL mode can
+	// render a camera texture through them, which means they no longer sample the
+	// authored skin at all. scope_real.zs swaps this for the camera texture when REAL.
+	SurfaceSkin 0 10 "scope_glass.png"
+	Scale -10.4850 10.4850 10.4850
+	Offset -0.2816 -44.5467 0.0
+	ZOffset -6.3157
+	NoInterpolation
+	FrameIndex X21G A 0 0
+	// X21F / P21F: the FIRING pose, same single mesh frame as the ready pose. Without
+	// these the model silently stops drawing the instant the gun fires and the 2D sprite
+	// shows for the whole rest of the sequence, because every state after it is "####"
+	// and inherits X21F. gen_rsr.py knows ready_sprites only; it needs the fire sprites
+	// too or a regenerate drops this.
+	FrameIndex	X21F	A	0	0
+	FrameIndex	P21F	A	0	0
+	FrameIndex X21G B 0 0
+	FrameIndex X21G C 0 0
+	FrameIndex X21G D 0 0
+	FrameIndex X21G E 0 0
+	FrameIndex X21G F 0 0
+	FrameIndex X21R A 0 0
+	FrameIndex X21R B 0 0
+	FrameIndex X21R C 0 0
+	FrameIndex X21R D 0 0
+	FrameIndex X21R E 0 0
+	FrameIndex X21R F 0 0
+	FrameIndex X21R G 0 0
+	FrameIndex X21R H 0 0
+	FrameIndex X21R I 0 0
+	FrameIndex X21R J 0 0
+	FrameIndex X21R K 0 0
+	FrameIndex X21R L 0 0
+	FrameIndex X21R M 0 0
+	FrameIndex X21R N 0 0
+	FrameIndex X21R O 0 0
+	FrameIndex X21R P 0 0
+	FrameIndex X21R Q 0 0
+	FrameIndex X21R R 0 0
+	FrameIndex X21R S 0 0
+	FrameIndex X21R T 0 0
+	FrameIndex X21R U 0 0
+	FrameIndex X21R V 0 0
+	FrameIndex X21R W 0 0
+	FrameIndex X22R A 0 0
+	FrameIndex X22R B 0 0
+	FrameIndex X22R C 0 0
+	FrameIndex X22R D 0 0
+	FrameIndex X22R E 0 0
+	FrameIndex X22R F 0 0
+	FrameIndex X22R G 0 0
+	FrameIndex X22R H 0 0
+	FrameIndex X22R I 0 0
+	FrameIndex X22R J 0 0
+	FrameIndex X22R K 0 0
+	FrameIndex X22R L 0 0
+	FrameIndex X22R M 0 0
+	FrameIndex X22R N 0 0
+	FrameIndex X22R O 0 0
+	FrameIndex X22R P 0 0
+	FrameIndex X22R Q 0 0
+	FrameIndex X22R R 0 0
+	FrameIndex X22R S 0 0
+	FrameIndex X23R A 0 0
+	FrameIndex X23R B 0 0
+	FrameIndex X23R C 0 0
+	FrameIndex X23R D 0 0
+	FrameIndex X23R E 0 0
+	FrameIndex X23R F 0 0
+	FrameIndex X23R G 0 0
+	FrameIndex X23R H 0 0
+	FrameIndex X23R I 0 0
+	FrameIndex X23R J 0 0
+	FrameIndex X23R K 0 0
+	FrameIndex X23R L 0 0
+	FrameIndex X23R M 0 0
+	FrameIndex X21S A 0 0
+	FrameIndex X21S B 0 0
+	FrameIndex X21S C 0 0
+	FrameIndex X21S D 0 0
+	FrameIndex X21S E 0 0
+	FrameIndex X21S F 0 0
+	FrameIndex X21S G 0 0
+	FrameIndex X21S H 0 0
+	FrameIndex X21A A 0 0
+	FrameIndex X21A B 0 0
+	FrameIndex X21A C 0 0
+	FrameIndex P21G A 0 0
+}
+
+// RQKM A: without its magazine
+Model Sniper
+{
+	Path "models/bd/XM21"
+	Model 0 "XM21.md3"
+	SurfaceSkin 0 0 "223_rem.png"
+	SurfaceSkin 0 1 "mini14.png"
+	SurfaceSkin 0 2 "mini14.png"
+	SurfaceSkin 0 3 "leupold_vx1.png"
+	SurfaceSkin 0 4 "mini14.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "mini14.png"
+	SurfaceSkin 0 7 "leupold_vx1.png"
+	SurfaceSkin 0 8 "mini14.png"
+	SurfaceSkin 0 9 "mini14.png"
+	// The lens wears its own glass tile, not the gun atlas: both scope lenses were
+	// reprojected to 0..1 (tool/md3_carve_surface.py --project-only) so REAL mode can
+	// render a camera texture through them, which means they no longer sample the
+	// authored skin at all. scope_real.zs swaps this for the camera texture when REAL.
+	SurfaceSkin 0 10 "scope_glass.png"
+	Scale -10.4850 10.4850 10.4850
+	Offset -0.2816 -44.5467 0.0
+	ZOffset -6.3157
+	NoInterpolation
+	FrameIndex RQKM A 0 0
+}
+
+// RQKM B: without its charging handle and bolt (they are on their own layers)
+Model Sniper
+{
+	Path "models/bd/XM21"
+	Model 0 "XM21.md3"
+	SurfaceSkin 0 0 "223_rem.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "leupold_vx1.png"
+	SurfaceSkin 0 4 "mini14.png"
+	SurfaceSkin 0 5 "mini14.png"
+	SurfaceSkin 0 6 "mini14.png"
+	SurfaceSkin 0 7 "leupold_vx1.png"
+	SurfaceSkin 0 8 "mini14.png"
+	SurfaceSkin 0 9 "mini14.png"
+	// The lens wears its own glass tile, not the gun atlas: both scope lenses were
+	// reprojected to 0..1 (tool/md3_carve_surface.py --project-only) so REAL mode can
+	// render a camera texture through them, which means they no longer sample the
+	// authored skin at all. scope_real.zs swaps this for the camera texture when REAL.
+	SurfaceSkin 0 10 "scope_glass.png"
+	Scale -10.4850 10.4850 10.4850
+	Offset -0.2816 -44.5467 0.0
+	ZOffset -6.3157
+	NoInterpolation
+	FrameIndex RQKM B 0 0
+}
+
+// RQKP A: the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/XM21"
+	Model 0 "XM21.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "mini14.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -10.4850 10.4850 10.4850
+	Offset -0.2816 -44.5467 0.0
+	ZOffset -6.3157
+	NoInterpolation
+	FrameIndex RQKP A 0 0
+}
+
+// RQKP B: the charging handle alone
+Model RSR_GunParts
+{
+	Path "models/bd/XM21"
+	Model 0 "XM21.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "mini14.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -10.4850 10.4850 10.4850
+	Offset -0.2816 -44.5467 0.0
+	ZOffset -6.3157
+	NoInterpolation
+	FrameIndex RQKP B 0 0
+}
+
+// RQKP C: the bolt alone. BoltRatio is 1.0 -- a Mini-14's bolt rides with the op rod.
+Model RSR_GunParts
+{
+	Path "models/bd/XM21"
+	Model 0 "XM21.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "mini14.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -10.4850 10.4850 10.4850
+	Offset -0.2816 -44.5467 0.0
+	ZOffset -6.3157
+	NoInterpolation
+	FrameIndex RQKP C 0 0
+}
+
+// RQKP A: the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/XM21"
+	Model 0 "XM21.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "mini14.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -10.4850 10.4850 10.4850
+	Offset -0.2816 -44.5467 0.0
+	ZOffset -6.3157
+	NoInterpolation
+	FrameIndex RQKP A 0 0
+}
+
+// RQKW A: the dropped magazine, world scale
+Model RSR_DroppedMag
+{
+	Path "models/bd/XM21"
+	Model 0 "XM21.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "mini14.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 3.6362 3.6362 3.6362
+	Offset -0.0084 -30.3444 0.0
+	ZOffset -5.4471
+	NoInterpolation
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQKW A 0 0
+}

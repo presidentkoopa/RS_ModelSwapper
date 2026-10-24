@@ -46,6 +46,24 @@ class MS_VR_BFG9000 : Actor {}
 
 // World-anchored display classes. Named by RS_Holsters via string
 // substitution -- see zscript/RS_ForeignWorldModels.zs.
+// MSBL -- THE PRIVATE BLANK ANCHOR.
+//
+// Every donor's MODELDEF block carries one row pointing at frame 9999, which
+// BlankWeaponFlashes pins a flash layer to so the layer resolves a model that
+// draws nothing. That row USED to be letter B of the donor's stock anchor
+// (PISG, SHTG, CHGG ...). The interpolation target is taken from the DECLARED
+// next state's sprite (models.cpp, FindModelFrame(actor, nextState->sprite,
+// ...)) against the foreign weapon carrying our modelDef -- and vanilla's own
+// pistol chain is literally PISG A -> PISG B. So a foreign weapon could
+// resolve our out-of-range row by accident and the held weapon vanished for
+// that rendered frame.
+//
+// MSBL is a name no mod uses. A MODELDEF FrameIndex row is a hard parse error
+// if its sprite name does not already exist, and GetSpriteIndex only registers
+// a name it has seen in a STATE -- so this class exists for no other reason
+// than to declare that state. It is never spawned.
+class MS_BlankAnchor : Actor { States { Spawn: MSBL A -1; Stop; } }
+
 class MS_PU_AE_Flamer : MS_PickupModel {}
 class MS_PU_AE_Pistol : MS_PickupModel {}
 class MS_PU_AE_Shotgun : MS_PickupModel {}

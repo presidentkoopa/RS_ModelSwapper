@@ -1,0 +1,133 @@
+# ============================================================================
+# WMCARD.04_revolver_swingout -- the model card library, archetype revolver_swingout: WM_ColaRevolver.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+
+# ==================================================== COLA REVOLVER -- OFF HAND
+# revolver.md3, a second model to compare (the owner: "try 2 diff models"). A
+# SWING-OUT: the cylinder (Magazine.wheel), the ejector rod (Magazine_rod) and the
+# chamber backs (Bullet_holes) swing out together on a crane; the barrel stays on
+# the frame (Revolver). The rounds are ONE surface (Bullet_set), all twelve.
+weapon "MS_Cola_Revolver"
+  hand      = off
+  type      = revolver
+  prop      = "WM_PropCola"
+  mechanism = swingout_revolver
+  model     = "models/vanilla/revolvers/Cola_Revolver" "revolver.md3"
+  skin      = "models/vanilla/revolvers/Cola_Revolver" "revolver.png"
+
+  # TWELVE CHAMBERS, counted off the mesh: Bullet_set is 36 separate pieces, a
+  # head, a body and a tip for each of twelve rounds at 30 degrees apart round the
+  # axis. Not six.
+  capacity  = 12
+  magfamily = "revolver"
+
+  # "Revolver" (frame and barrel, one surface), front-most vertices.
+  muzzle    = 26.52, -0.01, 1.65
+  barrel    = 1, 0, 0
+
+  # The cylinder's rear face (x -6.77) on its axis (y 0.03, z 0.10 -- the centre the
+  # cylinder spins about in frames 6 and 28), backward: the ejector's measured
+  # stroke pushes Bullet_set 18.74 units along -x. Carried by the crane.
+  ejectport = -7.0, 0.03, 0.10
+  ejectdir  = -1, 0, 0
+
+  # THE LOADER: Bullet_set at rest, the twelve rounds as one group, re-origined and
+  # stood so it goes in upward. magscale 0.238 = MODELDEF 0.7 x 0.34.
+  magmodel  = "models/vanilla/revolvers/Cola_Revolver" "wm_cola_rounds.md3"
+  magskin   = "models/vanilla/revolvers/Cola_Revolver" "revolver.png"
+  magscale  = 0.238
+  magcenter = -2.828, 0.005, 0.086
+
+  # A round here is 6.67 units x 0.238 = 1.59 map units; bullet.md3 6.27 -> 0.25.
+  roundmodel = "models/vanilla/pistols" "bullet.md3"
+  roundskin  = "models/vanilla/pistols" "bullet.png"
+  roundscale = 0.25
+
+  firesound    = "wm/revolver/fire"
+  opensound    = "wm/revolver/open"
+  closesound   = "wm/revolver/close"
+  loadsound    = "wm/revolver/load"
+  drysound     = "wm/dry"
+  magdropsound = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropCola is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -5.678, 0.023, -6.847
+  supportat = -11.184, 0.018, -13.017
+  palm = -15.051, 0.018, -11.224
+  rake = 17.8
+  seat = -4.346, -0.046, 0.924
+end
+
+store cylinder
+  kind    = slotted
+  slots   = 12
+  indexed = yes
+  advance = onshot
+end
+
+# THE CRANE: 90.00 degrees about (0, 0.029, -4.347), frames 33-40 plateau, fit
+# 0.013-0.017, Magazine.wheel, Magazine_rod and Bullet_holes each alone and all
+# three agreeing. THE AXIS IS -X: the fit's own rotation matrix says (-1, 0, 0), and
+# turned +90 about -x the cylinder's centroid lands at (-0.54, +4.53, -4.34) where
+# the mesh has (-0.54, 4.56, -4.32). REVOLVER_CANDIDATES.md's first write-up said
+# (1, 0, 0), which swings it the other way, into the frame.
+part crane
+  subject = foregrip
+  surface = Magazine.wheel
+  surface = Magazine_rod
+  surface = Bullet_holes
+  roundsurface = Bullet_set, cylinder, any
+  # THE CYLINDER'S CENTROID. Take it with the palm on top of the cylinder (the palm
+  # gate wants it square to the gun) and sweep it out sideways. ESTIMATE sizes.
+  grab     = -0.54, 0.0, 0.19
+  grabsize = 2.0, 1.5, 1.5
+  # On top of the cylinder (its top is z 3.16). wm_hs_revolver_off_foregrip_* (the revolver
+  # hand-seat profile) trims it live.
+  handseat = -0.54, 0.016, 0.086      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  dof
+    kind    = hinge
+    axis    = -1, 0, 0
+    degrees = 90.0
+    pivot   = 0, 0.029, -4.347
+  end
+end
+
+# 29.98 degrees about (0, -1, 0) through (-11.685, 0, -2.063), frame 6, fit 0.009;
+# checked the way round. DOUBLE ACTION.
+part hammer
+  role    = hammer
+  cock    = trigger
+  surface = Hammer
+  dof
+    kind    = hinge
+    axis    = 0, -1, 0
+    degrees = 29.98
+    pivot   = -11.685, 0, -2.063
+  end
+end
+
+# 30.17 degrees about (0, -1, 0) through (-5.681, 0, -4.337), frame 28, fit 0.010 --
+# follows your finger.
+part trigger
+  role    = trigger
+  surface = Trigger
+  dof
+    kind    = hinge
+    axis    = 0, -1, 0
+    degrees = 30.17
+    pivot   = -5.681, 0, -4.337
+  end
+end
+
+# THE CYLINDER'S REAR FACE on its axis, half a map unit behind it (2 units at
+# 0.238 -> x -8.8), going in along +x. It rides the crane out beside the frame.
+load cylinder
+  at  = -8.8, 0.03, 0.10
+  dir = 1, 0, 0
+end

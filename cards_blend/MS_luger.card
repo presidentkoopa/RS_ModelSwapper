@@ -1,0 +1,19 @@
+weapon luger
+  archetype   pistol_mag        # owner-confirmed
+  model       luger.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    bolt     surf 1  rest [22.83, 0.01, 0.79]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    bolt2    surf 2  rest [26.92, -0.0, 0.86]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    bolt3    surf 3  rest [30.28, 0.0, 0.63]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    trigger  surf 4  rest [31.69, -0.02, -3.78]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    mag      surf 5  rest [23.87, 0.08, -8.96]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    mag_well  [23.87, 0.08, -8.96]  mouth [27.36, 0.53, -0.41]  axis [0.0, 0.0, 0.0]  travel_clear 0.00
+    muzzle    [44.77, -0.09, 0.47]
+  grip        line [22.58, 1.41, -2.78] [22.14, -0.12, -14.28]  trigger [31.69, -0.02, -3.78]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [31.37, -0.2, -2.81]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5912
+  carved      mag  seat_origin [23.87, 0.08, -8.96]  file luger_mag.md3

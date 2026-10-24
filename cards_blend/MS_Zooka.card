@@ -1,0 +1,17 @@
+weapon MS_Zooka
+  archetype   rifle_mag        # from source names
+  model       MS_Zooka.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    bolt     surf 0  rest [34.75, 14.05, 1.08]  axis [-0.951, 0.255, 0.174]  size [59.23, 16.47, 11.75]
+    grip     surf 1  rest [23.07, 17.16, 5.31]  axis [0.948, -0.261, -0.181]  size [55.52, 39.91, 18.81]
+    part     surf 2  rest [37.43, 13.35, 0.74]  axis [-0.950, 0.255, 0.180]  size [47.78, 40.88, 8.23]
+    part2    surf 3  rest [18.62, 18.39, 3.94]  axis [0.000, 0.000, 1.000]  size [0.00, 0.00, 0.00]
+    trigger  surf 4  rest [51.57, 9.56, 5.97]  axis [-0.292, 0.086, -0.953]  size [1.78, 1.12, 3.45]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [51.79, 9.50, 7.14]
+    bolt2    surf 6  rest [-3.90, 24.43, 8.14]  axis [-0.952, 0.253, 0.170]  size [12.22, 4.56, 4.06]
+    muzzle    [12.42, 0.00, 5.98]
+  grip        line [-0.36, 20.95, 5.41] [11.24, 1.06, 2.33]  trigger [51.57, 9.56, 5.97]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [3.64, 20.95, 5.41]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 11813  frames 1

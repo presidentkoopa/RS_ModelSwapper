@@ -1,0 +1,26 @@
+weapon MS_UZI
+  archetype   rifle_mag        # from source names
+  model       MS_UZI.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    bolt     surf 0  rest [30.26, 0.00, 1.61]  axis [-0.999, 0.036, -0.027]  size [13.53, 3.47, 2.73]
+    grip     surf 1  rest [22.05, -0.04, -6.36]  axis [-0.026, -0.011, -1.000]  size [1.77, 1.50, 4.45]
+    mag      surf 3  rest [25.92, -0.03, -11.98]  axis [-0.011, -0.003, 1.000]  size [3.56, 2.69, 23.30]
+    latch    surf 4  rest [26.02, -1.71, -13.42]  axis [1.000, 0.000, 0.000]  size [2.33, 0.33, 1.62]  travel 0.58  dir [1.000, 0.000, 0.000]   # thumb pushes the release forward
+    grip2    surf 5  rest [26.90, -1.65, -4.37]  axis [-0.053, -0.011, 0.999]  size [1.91, 0.73, 1.89]
+    slide    surf 6  rest [35.19, 0.00, 4.11]  axis [-0.999, -0.000, -0.032]  size [15.53, 2.28, 2.38]
+    stock    surf 7  rest [9.85, 0.01, -1.57]  axis [-0.992, -0.003, 0.129]  size [13.92, 4.47, 4.05]
+    stock2   surf 8  rest [10.75, -0.00, -6.66]  axis [-0.845, -0.000, -0.534]  size [14.53, 4.47, 12.53]
+    trigger  surf 9  rest [30.21, 0.00, -4.59]  axis [-0.287, 0.000, 0.958]  size [1.44, 0.88, 3.30]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [29.98, 0.00, -3.09]
+    grip3    surf 10  rest [53.47, 0.00, -2.84]  axis [-1.000, 0.000, -0.005]  size [29.70, 1.28, 3.69]
+    grip4    surf 11  rest [49.20, 0.00, -0.09]  axis [0.000, 0.000, 1.000]  size [1.44, 3.59, 4.80]
+    grip5    surf 12  rest [49.23, 0.00, -2.00]  axis [-0.000, -1.000, 0.000]  size [0.70, 2.59, 0.80]
+    grip6    surf 13  rest [46.50, 0.00, -3.38]  axis [0.000, 1.000, 0.000]  size [0.69, 1.50, 0.80]
+    grip7    surf 14  rest [55.98, 0.00, -0.42]  axis [0.002, 0.000, -1.000]  size [1.00, 2.31, 4.12]
+    grip8    surf 15  rest [55.99, 0.00, -2.26]  axis [0.000, 1.000, 0.000]  size [0.48, 1.53, 0.55]
+    muzzle    [56.78, 0.00, 0.01]
+  grip        line [31.11, 0.00, -7.19] [26.31, -0.12, -13.69]  trigger [30.21, 0.00, -4.59]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [35.11, 0.00, -7.19]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 4153  frames 1

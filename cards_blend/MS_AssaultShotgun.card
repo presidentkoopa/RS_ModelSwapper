@@ -1,0 +1,16 @@
+weapon MS_AssaultShotgun
+  archetype   rifle_mag        # from source names
+  model       MS_AssaultShotgun.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    sight    surf 2  rest [37.66, 0.35, 4.38]  axis [-0.972, 0.100, -0.212]  size [7.36, 4.72, 4.52]
+    trigger  surf 3  rest [31.06, 0.00, -4.58]  axis [-0.026, 0.000, -1.000]  size [0.77, 0.66, 2.80]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [31.12, 0.00, -3.30]
+    mag      surf 4  rest [44.08, -0.02, -9.94]  axis [-0.989, -0.014, -0.148]  size [8.50, 12.41, 13.25]
+    sight2   surf 5  rest [83.12, -0.00, 4.67]  axis [0.648, 0.007, -0.761]  size [3.56, 3.44, 3.81]
+    trigger2 surf 6  rest [46.46, 0.16, 0.18]  axis [-1.000, -0.004, 0.007]  size [6.19, 2.36, 2.38]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [46.72, 0.16, 1.00]
+    muzzle    [94.67, 0.00, 0.24]
+  grip        line [17.84, 0.00, -6.28] [-6.16, 0.00, -10.60]  trigger [31.06, 0.00, -4.58]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [21.84, 0.00, -6.28]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 4551  frames 1

@@ -1,0 +1,238 @@
+﻿// TOP LEVEL, not nested. This sits directly in Options as a peer of
+// "Radiant Silvergun Options" rather than inside it -- the swapper works
+// standalone next to any mod, so burying it under one particular mod's
+// page would be wrong even when that mod is loaded.
+//
+// AddOptionMenu APPENDS rather than replaces, so whatever we are loaded
+// next to keeps its own options page intact.
+
+AddOptionMenu "OptionsMenu"
+{
+    StaticText " "
+    Submenu "Weapon Model Swap Program", "RSFM_Main"
+}
+
+OptionMenu "RSFM_Main"
+{
+    Title "Weapon Model Swap Program"
+    StaticText " "
+    StaticText "Puts our 3D weapon models onto weapons from any mod", "DarkGray"
+    StaticText "loaded alongside. Their code, damage and sounds stay", "DarkGray"
+    StaticText "theirs -- only the gun in your hands is ours.", "DarkGray"
+    StaticText " "
+
+    Option "Enable", "rs_foreignmodels", "OnOff"
+    StaticText " "
+
+    Slider "Muzzle Flash Opacity", "r_hudflatoverlay", 0.0, 1.0, 0.05, 2
+    StaticText "A muzzle flash is a separate FLAT sprite, drawn by the weapon", "DarkGray"
+    StaticText "on its own layer. Beside a 3D model it hangs in the air like a", "DarkGray"
+    StaticText "billboard. 0 hides it, 1 leaves the mod exactly as drawn.", "DarkGray"
+    StaticText "Only ever affects a weapon wearing one of our models -- a mod's", "DarkGray"
+    StaticText "own sprite weapons keep their flashes.", "DarkGray"
+    StaticText "Engine setting: does nothing on the Quest build.", "DarkGray"
+    StaticText " "
+
+    Option "Only Weapons I'm Carrying", "rs_foreignmodels_carried", "OnOff"
+    StaticText "Hides everything not in your inventory right now. Cuts the", "DarkGray"
+    StaticText "list to what your character actually gets -- useful on mods", "DarkGray"
+    StaticText "that ship several classes' worth of guns.", "DarkGray"
+    StaticText " "
+
+    Option "Offer Models to Modelled Weapons", "rs_foreignmodels_replaceown", "OnOff"
+    StaticText "ON by default. The engine only tells us a weapon has a model", "DarkGray"
+    StaticText "SOMEWHERE -- not whether it is the gun in your hands. Mods that", "DarkGray"
+    StaticText "model only the pickup on the floor (Project Brutality) look the", "DarkGray"
+    StaticText "same as ones with real first-person models, so skipping them", "DarkGray"
+    StaticText "hid the weapons that needed us most.", "DarkGray"
+    StaticText "OFF leaves any modelled weapon alone. Rescan after changing.", "DarkGray"
+    StaticText " "
+
+    Option "One Row Per Family", "rs_foreignmodels_byfamily", "OnOff"
+    StaticText "OFF by default: a row for every weapon the scan found, by", "DarkGray"
+    StaticText "name, so you can put a model on each one.", "DarkGray"
+    StaticText "ON: one row per weapon family -- one shotgun row, one smg", "DarkGray"
+    StaticText "row. Turn it on for mods that ship the same gun many times", "DarkGray"
+    StaticText "over (Brutal Doom 22 lists 85 weapons, and most of them are", "DarkGray"
+    StaticText "modes of the same few guns).", "DarkGray"
+    StaticText " "
+
+    Submenu "Choose Models", "RSFM_Picker"
+    Submenu "Scan Report",   "RSFM_Report"
+    StaticText " "
+
+    Command  "Rescan Now", "netevent rs-fm-rescan"
+    StaticText "Re-reads the loaded mod. Models you picked are kept.", "DarkGray"
+    StaticText " "
+
+    Command  "Randomize -- One-Handed", "netevent rs-fm-random-onehand"
+    StaticText "Slaps a random pistol, revolver or smg model on every weapon", "DarkGray"
+    StaticText "in the list -- a mixed, varied loadout in one press. Overwrites", "DarkGray"
+    StaticText "any models you already picked.", "DarkGray"
+    StaticText " "
+
+    Command  "Forget Saved Models", "netevent rs-fm-forget-picks"
+    StaticText "Model choices are remembered per weapon, kept between sessions --", "DarkGray"
+    StaticText "one archive shared across every mod you load. Clear it to go back", "DarkGray"
+    StaticText "to auto-picked models everywhere.", "DarkGray"
+    StaticText " "
+
+    Option "List Unbound Weapons", "rs_foreignmodels_showall", "OnOff"
+    StaticText "Shows every weapon class the scan found, including ones with no", "DarkGray"
+    StaticText "slot binding and the vehicles, shields and other helper", "DarkGray"
+    StaticText "'weapons' hidden by default -- useful when a mod's weapons are", "DarkGray"
+    StaticText "missing from the list. The Heretic, Hexen, Strife and Chex", "DarkGray"
+    StaticText "arsenals are excluded outright and never appear either way.", "DarkGray"
+    StaticText " "
+
+    Submenu "Weapon Effects", "RSFM_Effects"
+    Submenu "Fit In Hand", "RSFM_Fit"
+}
+
+// ---------------------------------------------------------------------
+// FIT IN HAND. Nothing here is ours: every slider is an engine cvar the
+// fork already applies in its HUD-model matrix (hw_vrmodes.cpp), and it
+// is applied AFTER the model is rotated. NOTE the per-hand offsets go
+// into the matrix as (x, z, y): hand_ofs_z is the UP slot and hand_ofs_y
+// is the IN/OUT slot (models.cpp, the translate that also carries Offset),
+// so the labels below follow the slot, not the letter.
+// The whole-weapon offsets are applied -- so "in/out, left/right,
+// up/down" mean the hand's own frame, which is what they should mean in
+// a headset. Exposed rather than reinvented: a value dialled in here can
+// be baked into a MODELDEF Offset later and mean exactly the same thing.
+//
+// Engine settings: do nothing on the Quest build, same as Muzzle Flash
+// Opacity above. Units are map units; angles are degrees.
+// ---------------------------------------------------------------------
+OptionMenu "RSFM_Fit"
+{
+    Title "Fit In Hand"
+    StaticText " "
+    StaticText "Move and size every model at once, in the hand's own", "DarkGray"
+    StaticText "frame. All engine settings -- nothing here is ModelSwapper's,", "DarkGray"
+    StaticText "so they also apply to any other 3D weapon you load.", "DarkGray"
+    StaticText "Engine settings: do nothing on the Quest build.", "DarkGray"
+    StaticText " "
+
+    StaticText "Size", "Gold"
+    Slider "Weapon Scale",        "vr_weaponScale",       0.50, 2.00, 0.01, 2
+    StaticText " "
+
+    StaticText "Position -- every weapon", "Gold"
+    Slider "In / Out",            "vr_3dweaponOffsetZ",   -40, 40, 0.5, 1
+    Slider "Left / Right",        "vr_3dweaponOffsetX",   -40, 40, 0.5, 1
+    Slider "Down / Up",           "vr_3dweaponOffsetY",   -40, 40, 0.5, 1
+    StaticText "Applied after the model is rotated, so these follow the", "DarkGray"
+    StaticText "hand rather than the map.", "DarkGray"
+    StaticText " "
+
+    StaticText "Main hand", "Gold"
+    Slider "Down / Up",           "vr_hand_ofs_z",        -20, 20, 0.25, 2
+    Slider "Left / Right",        "vr_hand_ofs_x",        -20, 20, 0.25, 2
+    Slider "In / Out",            "vr_hand_ofs_y",        -20, 20, 0.25, 2
+    Slider "Yaw",                 "vr_hand_yaw",          -45, 45, 1, 0
+    Slider "Pitch",               "vr_hand_pitch",        -45, 45, 1, 0
+    Slider "Roll",                "vr_hand_roll",         -45, 45, 1, 0
+    StaticText " "
+
+    StaticText "Off hand", "Gold"
+    Slider "Down / Up",           "vr_offhand_ofs_z",     -20, 20, 0.25, 2
+    Slider "Left / Right",        "vr_offhand_ofs_x",     -20, 20, 0.25, 2
+    Slider "In / Out",            "vr_offhand_ofs_y",     -20, 20, 0.25, 2
+    Slider "Yaw",                 "vr_offhand_yaw",       -45, 45, 1, 0
+    Slider "Pitch",               "vr_offhand_pitch",     -45, 45, 1, 0
+    Slider "Roll",                "vr_offhand_roll",      -45, 45, 1, 0
+    StaticText " "
+    StaticText "Every model is now centred on its own origin, so these", "DarkGray"
+    StaticText "rotate a gun about its middle rather than a point off it.", "DarkGray"
+}
+
+// The one page for effects that are OURS to place: a mod's own brass and
+// smoke, which it spawns where the gun sits on a monitor -- your face.
+OptionMenu "RSFM_Effects"
+{
+    Title "Weapon Effects"
+    StaticText " "
+
+    Option "Effects Follow The Gun", "rs_fm_effects", "OnOff"
+    StaticText "Mods spawn brass and smoke relative to the PLAYER, because", "DarkGray"
+    StaticText "on a monitor the player and the gun are the same place. In a", "DarkGray"
+    StaticText "headset they are not, so the casings leave your face. This", "DarkGray"
+    StaticText "shifts them onto the muzzle, keeping the arc the author drew.", "DarkGray"
+    StaticText "Only affects weapons wearing one of our models.", "DarkGray"
+    StaticText " "
+
+    Slider "Muzzle Trim", "rs_fm_muzzle", -20, 80, 1, 0
+    StaticText "How far past your hand the muzzle sits. Each weapon family", "DarkGray"
+    StaticText "already gets its own guess; nudge this if brass still comes", "DarkGray"
+    StaticText "off the grip, or from out in front of the gun.", "DarkGray"
+}
+
+OptionMenu "RSFM_Picker"
+{
+    class RS_Menu_ForeignModels
+    Title "Choose Models"
+}
+
+OptionMenu "RSFM_Report"
+{
+    class RS_Menu_ForeignReport
+    Title "Scan Report"
+}
+
+// ===========================================================================
+// QUEST BUILD ONLY -- VR reload options. Built from the RSQ Weapon Depot's
+// MENUDEF.rsq, keeping only the rows whose module is in quest/zscript.txt.
+// Left out deliberately: the BD22-specific rows (Shotvolver slug, MG42
+// replacement, M203 ammo), the per-gun scope rows, and the voxel / dual /
+// ballistics / throwing submenus -- none of those modules are included.
+// ===========================================================================
+
+OptionValue "RSR_ReloadMode"
+{
+	1, "VR"
+	0, "Stock (BD22)"
+}
+
+OptionValue "RSR_GrabWith"
+{
+	0, "Off-hand trigger"
+	1, "Off-hand grip"
+	2, "Use key"
+}
+
+OptionValue "RSR_ShellCredit"
+{
+	1, "1"
+	2, "2"
+	3, "3"
+	4, "4"
+}
+
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "VR Reload", "RSMS_Reload"
+}
+
+OptionMenu "RSMS_Reload"
+{
+	Title "VR RELOAD"
+	Option "VR Hands", "rsq_hands", "OnOff"
+	Option "Reloading", "rsr_reload", "RSR_ReloadMode"
+	Option "Grab ammo with", "rsr_grab_with", "RSR_GrabWith"
+	Option "Check the Chamber by Hand", "rsr_freecharge", "OnOff"
+	Option "Shotgun Shells Per Insert", "rsr_shell_credit", "RSR_ShellCredit"
+	Option "Reload assist", "rsr_assist", "OnOff"
+	StaticText " "
+	Option "VR Punching", "rsq_punch", "OnOff"
+	Option "Punch Switches Open", "rsq_punch_use", "OnOff"
+	StaticText " "
+	Submenu "Reload: tuning and debug", "RSR_Debug"
+}
+
+OptionMenu "RSR_Debug"
+{
+	Title "RELOAD: TUNING AND DEBUG"
+	Option "Show the capture zones", "rsr_assist_debug", "OnOff"
+	Option "Print each reload step", "rsr_debug", "OnOff"
+}

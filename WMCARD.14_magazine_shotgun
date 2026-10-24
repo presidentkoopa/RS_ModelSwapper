@@ -1,0 +1,142 @@
+# ============================================================================
+# WMCARD.14_magazine_shotgun -- the model card library, archetype magazine_shotgun: WM_AssaultShotgun.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+
+# ============================================================================
+# THE MEATGRINDER GUNS: seven meshes from RS_Main's MeatGrinder set (cleared by the owner), each built
+# as a _wm by the weapons lane -- surfaces named, re-origined on the rest frame's vertex centroid -- and
+# carded by the reload lane. Ids approved and frozen by the build lane, 2026-09-14.
+#
+# EVERY NUMBER WAS MEASURED ON THE SOURCE MESH AND MOVED INTO THE _wm BY ITS SHIFT (source minus shift;
+# each shift checked against the _wm's own surface centroids, to 0.0001). Motion is a rigid fit against
+# the body, with the body's own motion divided out. The numbers that are not measured say ESTIMATE.
+#
+# THE SHOT IS EACH CLASS'S. The owner's specs: the assault shotgun a 14-round auto shotgun at 1.6 times
+# the shotgun's rate; the Bolter a high-damage, single-shot plasma gun; the bullpup a 4-shot SSG. The
+# other four are vanilla BFG, chaingun, rocket launcher and chainsaw.
+#
+# SCALE: MODELDEF |Scale| 1.0 x 0.34 = 0.340 map units per model unit for the assault shotgun, and
+# |Scale| 1.1 x 0.34 = 0.374 for the six MeatGrinder meshes.
+# ============================================================================
+
+
+# ================================================= ASSAULT SHOTGUN -- MAIN HAND
+# RS_GH's AssaultShotgun.md3 at frame 4, its level ready pose, as assaultshotgun_wm.md3: surfaces body,
+# chargehandle, trigger, mag, shell. Shift (54.6562, -0.0469, -0.9062). MeatGrinder's Shotgun.md3 is the
+# same design with firing frames only.
+// DUPLICATE of MS_BD_AssaultShotgun -- not kept: fewer surfaces bind
+// weapon "WM_AssaultShotgun"
+//   hand      = main
+//   type      = shotgun
+//   prop      = "WM_PropAssaultShotgun"
+//   model     = "models/vanilla/shotguns/AssaultShotgunGH" "assaultshotgun_wm.md3"
+//   skin      = "models/vanilla/shotguns/AssaultShotgunGH" "AssaultShotgun.png"
+// 
+//   # The owner's number: a 14-round box magazine.
+//   capacity  = 14
+//   # Its own box magazines, which fit no other gun.
+//   magfamily = "assaultshotgun"
+// 
+//   # Front-most vertices (56 at x 36.39), centred: y -1.25..1.10, z -1.31..1.02. Level along +x.
+//   muzzle    = 36.39, -0.08, -0.15
+//   barrel    = 1, 0, 0
+// 
+//   # ESTIMATE, POINT AND SIDE. The receiver's walls have no vertex below z 2.21 from x -10.7 to -6.7 --
+//   # the opening the top shell shows through -- on the side the charging handle rides (+y, out to 3.20).
+//   ejectport = -9.66, 1.95, 0.01
+//   ejectdir  = -0.3, 0.9, 0.4
+// 
+//   # The loose magazine: the mag surface lifted out and re-origined on its centroid. It drops along -z, so
+//   # it stands as it sits. magcenter is that centroid in the gun's space.
+//   magmodel  = "models/vanilla/shotguns/AssaultShotgunGH" "wm_assaultshotgun_mag.md3"
+//   magskin   = "models/vanilla/shotguns/AssaultShotgunGH" "AssaultShotgun.png"
+//   magscale  = 0.34
+//   magcenter = -10.06, 0.06, -9.46
+// 
+//   # The pumps' shell: Force Unleashed's (Ermac's mod, cleared by the owner), 1.75 map units.
+//   roundmodel = "models/shared/shell" "shell.md3"
+//   roundskin  = "models/shared/shell" "shell.png"
+//   roundscale = 0.228
+// 
+//   # THE SHOT is the class's: an auto shotgun at 1.6 times the Doom shotgun's rate (the owner).
+// 
+//   firesound      = "weapons/shotgf"
+//   drysound       = "wm/dry"
+//   magoutsound    = "wm/rifle/magout"
+//   maginsound     = "wm/rifle/magin"
+//   rackapexsound  = "wm/rifle/rackback"
+//   rackresetsound = "wm/rifle/rackfwd"
+//   magdropsound   = "wm/magdrop"
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+// # Computed 2026-09-29 from where WM_PropAssaultShotgun is drawn today, so switching to it moves nothing.
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   triggerat = -21.315, 0.047, -4.289
+//   supportat = 9.510, 0.022, -3.405
+//   palm = -27.143, 0.022, -1.604
+//   rake = 73.2
+//   seat = -26.156, 0.047, -1.013
+// end
+// 
+// # THE CHARGING HANDLE: the whole chargehandle surface, 10.000 along (-1, 0.0003, 0.0047) on every shot
+// # (source frame 6) and held back through the reload (frames 14-27), 0.12 degrees of turn, fit 0.012.
+// part charginghandle
+//   role    = action
+//   subject = slide
+//   surface = chargehandle
+//   grab       = -3.50, 3.02, 0.50      # the knob's tip: its 16 vertices past y 2.65
+//   handseat = -3.5, 2.383, 0.219      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+//   grabradius = 3.0
+//   dof
+//     kind     = slide
+//     axis     = -1, 0, 0.005
+//     distance = 10.000
+//     detach   = 0.95
+//   end
+// end
+// 
+// # THE MAGAZINE: 28.000 straight down in the reload (source frame 16), no turn, fit 0.000. Distance is
+// # its own length along that axis, z -15.08 to -2.92.
+// # ITS TOP SHELL is its own surface. It sits on the magazine and leaves with it in the reload, so it is a
+// # round surface of the magazine, drawn while the magazine holds a round.
+// part magazine
+//   role    = feed
+//   subject = magazine
+//   take    = no          # out by its button, in by the hand carrying one
+//   surface = mag
+//   roundsurface = shell, mag, 0
+//   grab       = -10.06, 0.07, -15.08   # the floorplate
+//   grabradius = 3.0
+//   dof
+//     kind     = slide
+//     axis     = 0, 0, -1
+//     distance = 12.16
+//     detach   = 0.9
+//   end
+// end
+// 
+// # 19.93 degrees about the pin at -21.740, -2.936 (source frame 5, fit 0.011). Sign checked: +19.93
+// # lands the rest centroid 0.000 off frame 5; -19.93 misses by 1.111.
+// part trigger
+//   role    = trigger
+//   surface = trigger
+//   dof
+//     kind    = hinge
+//     axis    = 0, 1, 0
+//     degrees = 19.93
+//     pivot   = -21.740, 0, -2.936
+//   end
+// end
+// 
+// # MEASURED: the handguard's underside is flat at z -4.03 from x -2.7 to 29.3; its middle.
+// part support
+//   role    = support
+//   subject = support
+//   grab       = 13.34, 0.05, -4.03
+//   grabradius = 3.0
+// end
+

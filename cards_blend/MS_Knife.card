@@ -1,0 +1,11 @@
+weapon MS_knife
+  archetype   rifle_mag        # from source names
+  model       MS_knife.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    muzzle    [35.72, 0.00, -8.06]
+  grip        line [28.39, 0.00, -18.97] [33.32, 0.00, -26.78]  trigger [28.39, 0.00, -18.97]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [32.39, 0.00, -18.97]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 1042  frames 1

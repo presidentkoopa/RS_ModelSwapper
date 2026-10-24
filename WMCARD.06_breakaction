@@ -1,0 +1,252 @@
+# ============================================================================
+# WMCARD.06_breakaction -- the model card library, archetype breakaction: WM_SSG, WM_DoubleBarrel.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+
+# ============================================================================
+# THE SUPER SHOTGUN: a break-action double, on the reload system's `breakaction`
+# archetype (RS_VR_Reload/WMCARD.txt).
+#
+# The archetype says what a double DOES -- open (by hand or the drop-mag button), tip the
+# open gun past its side or over and the hulls fall out (or the button throws them), a shell
+# at a time into the breech, shut by hand or with a flick up. This card says where its parts
+# are and how far they
+# move. Measured in SSG_CANDIDATES.md, and again for this card: every number says
+# how. What a pull fires is the class's (ssg.zs): both loaded barrels at once,
+# vanilla's twenty pellets between them.
+#
+# SCALE: MODELDEF Scale 1.35 x 0.34 = 0.459 map units per model unit.
+# ============================================================================
+
+
+# ============================================================== SSG -- MAIN HAND
+# ssg.md3, RS_ModelSwapper's own mesh (byte-identical to models/hud/SuperShotgun).
+# 26 frames; frame 0 is the rest pose, both shells seated, and it is what is drawn.
+#
+# NO HIDDEN PARTS: every surface was split into its disconnected islands and each
+# island rigid-fit against the body over all 26 frames. ssgbase.006's four islands --
+# the stock and receiver, the breech block, the top lever (x -4.1..-2.4, on top) and
+# the trigger guard -- move at most 0.29 degrees and 0.01 units: they never move, so
+# there is no lever or trigger to drive. ssgbarrel.006's three islands -- the barrels,
+# the forend under them, the front sight -- all turn 58.55 degrees about (0, 1, 0): one
+# part. newshell1/2 are collapsed to a point at rest (the donor's loading shells).
+weapon "MS_SuperShotgun"
+  hand      = main
+  type      = breakaction
+  prop      = "WM_PropSSG"
+  mechanism = breakaction
+  model     = "models/vanilla/shotguns/SuperShotgun" "ssg.md3"
+  skin      = "models/vanilla/shotguns/SuperShotgun" "WPN-GUNS-k1.png"
+
+  # Two barrels. The chambers store below is the truth; the bind log reads this.
+  capacity  = 2
+  magfamily = "12ga"     # the shell's family -- the pumps' shells load here too
+
+  # ONE MUZZLE BETWEEN THE BORES (the flash and sparks come from one point, G8). The
+  # front-most barrel vertices (x 24.63-24.65) form two clusters, one a bore; their
+  # middle is (24.64, 0.02, 1.49). Level along +x.
+  muzzle    = 24.64, 0.0, 1.49
+  barrel    = 1, 0, 0
+
+  # WHERE THE HULLS LEAVE: the breech face (the barrels' rear-most vertices are all at
+  # x -1.125; the shells' rims stand 0.08 proud, at -1.203), level with the shells'
+  # centres (z 1.118, y between +0.926 and -0.969), backward out of the chambers.
+  # Carried by the barrels as they tip, so with the gun open they fly up and back.
+  ejectport = -1.3, -0.02, 1.12
+  ejectdir  = -1, 0, 0
+
+  # THE SHELL: the pumps' own (Force Unleashed's shell.md3). This mesh's shells are
+  # 3.80 units long x 0.459 = 1.74 map units, and 0.228 makes shell.md3 1.75.
+  roundmodel = "models/shared/shell" "shell.md3"
+  roundskin  = "models/shared/shell" "shell.png"
+  roundscale = 0.228
+
+  # THE IWAD'S OWN SUPER SHOTGUN SOUNDS, by the logical names the engine's Doom SNDINFO
+  # gives them (wadsrc filter/game-doomchex/sndinfo.txt): weapons/sshotf DSDSHTGN,
+  # sshoto DSDBOPN, sshotl DSDBLOAD, sshotc DSDBCLS. No file copied, no SNDINFO line.
+  firesound   = "weapons/sshotf"
+  opensound   = "weapons/sshoto"
+  loadsound   = "weapons/sshotl"
+  closesound  = "weapons/sshotc"
+  drysound    = "wm/dry"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropSSG is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -4.322, 0.000, -3.333
+  supportat = 11.690, 0.023, -0.198
+  palm = -9.840, -0.011, -2.862
+  rake = 43.6
+  seat = -4.818, 0.000, -1.222
+end
+
+# ONE SLOT A BARREL, not indexed: a pull fires every live one (WM_Gun.ChambersPerPull),
+# so there is no "selected" barrel to turn to.
+store chambers
+  kind  = slotted
+  slots = 2
+end
+
+# THE BARRELS, THE FOREND AND THE FRONT SIGHT, ONE SURFACE AND ONE PART. Hinge off the
+# rigid-fit rotation matrix, ssgbase.006's own motion divided out, frame 12 (frames
+# 11-21 agree to 0.02 degrees): axis pure (0, 1, 0), 58.55 degrees about
+# (3.965, 0, -1.238), fit 0.012. Checked the way round: the barrels' centroid turned
+# +58.55 about +y lands where frame 12 has it -- down, muzzle first -- and the render
+# (tools_md3_render.py --frame 0 --frame2 12) shows the barrels hanging below the
+# closed line with the breech lifted.
+part barrels
+  subject = foregrip
+  surface = ssgbarrel.006
+  # THE TWO SHELLS ride the barrels and show which chambers hold a hull. shotshell1.006
+  # sits in the +y barrel (centroid 0.695, 0.926, 1.118), shotshell2.007 in the -y one
+  # (0.695, -0.969, 1.118). Rigid at rest through frame 8.
+  roundsurface = shotshell1.006, chambers, 0
+  roundsurface = shotshell2.007, chambers, 1
+  # WHERE THE OTHER HAND TAKES IT: the forend under the barrels -- ssgbarrel.006's own
+  # second island, x 3.02 to 17.08, z -2.66 to 0.92 -- at its middle, 6 units ahead of
+  # the pin so the hand's swing round it reads cleanly. Along: its half-length, 7.03
+  # units x 0.459 = 3.2 map units. Across and up measured 09-14: the same island's half-width 2.48 and
+  # half-height 1.79 units x 0.459.
+  grab     = 10.0, 0.0, -0.9
+  grabsize = 3.2, 1.14, 0.82
+  # WHERE THE HAND SITS: under the forend, palm up -- a double is broken from beneath.
+  # Its underside is z -2.66. wm_hs_breakaction_main_foregrip_* (the break-action hand-seat
+  # profile) trims it live.
+  handseat = 10, 0.023, 0.305      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 58.55
+    pivot   = 3.965, 0, -1.238
+  end
+end
+
+# THE BREECH, where a shell goes in: between the two chambers (y -0.02, z 1.12), one
+# map unit behind the rims (x -1.203, less 1 / 0.459 = 2.18 units), going in along +x.
+# It rides the barrels (the archetype's `rides`): open, the breech lifts to about
+# (2.2, 0, 6.2), clear above the receiver's top (z 2.78). Its sliders: the grab-point
+# page, "load zone: breech".
+load breech
+  at  = -3.38, -0.02, 1.12
+  dir = 1, 0, 0
+end
+
+
+# ======================================================= DOUBLE BARREL -- OFF HAND
+# The second break-action double, on the same `breakaction` archetype. Force Unleashed's super
+# shotgun (Ermac's Rusted Legacy, MIT) -- models/ssg ssg.md3 and ssg_shell.md3, drawn by one
+# MODELDEF block in one space -- as doublebarrel_wm.md3: frame 0 of both, byte for byte, which is
+# the rest pose with both shells seated. Surfaces body, barrels, trigger, hammerleft, hammerright,
+# shell1, shell2. Every number measured against the stock over all 37 frames, the stock's own
+# recoil (frames 3-5, 9-11, 15-17) divided out. SSG_CANDIDATES.md, "Double Barrel".
+#
+# The hammers fall only on the donor's fire frames; with no verb to cock them they are drawn fixed.
+#
+# SCALE: MODELDEF Scale 0.524 x 0.34 = 0.178 map units per model unit. Shrunk from 1.0 (0.34) by the
+# owner, 2026-09-14, so its shells are the size of every other shotgun's. Model-unit numbers below stand.
+weapon "MS_DoubleBarrel"
+  hand      = off
+  type      = breakaction
+  prop      = "WM_PropDoubleBarrel"
+  mechanism = breakaction
+  model     = "models/vanilla/shotguns/DoubleBarrel" "doublebarrel_wm.md3"
+  skin      = "models/vanilla/shotguns/DoubleBarrel" "ssg_HD.png"
+
+  # Two barrels; the chambers store below is the truth.
+  capacity  = 2
+  magfamily = "12ga"     # the pumps' and the SSG's shells load here too
+
+  # ONE MUZZLE BETWEEN THE BORES: the barrels' front face (x 77.87) holds two, centred
+  # (y 1.90, z 14.93) and (y -2.21, z 15.08); this is their middle. Level along +x.
+  muzzle    = 77.87, -0.15, 15.0
+  barrel    = 1, 0, 0
+
+  # WHERE THE HULLS LEAVE: the breech face -- the barrels' rear face, x 16.86, centred y 0.15,
+  # z 15.01 -- backward out of the chambers. Carried by the barrels as they tip.
+  ejectport = 16.7, 0.0, 15.0
+  ejectdir  = -1, 0, 0
+
+  # THE SHELL: the shotguns' shared one (the owner's Vanilla rule: every shotgun loads the same
+  # shell). shell.md3 is 7.67 units long and 2.84 across; 0.228 draws it 1.75 map units by 0.65, as on
+  # the pumps and the SSG. At this gun's 0.178 the two shells it seats in its chambers (shell1 and
+  # shell2, 9.86 by 3.67 units) draw 1.76 by 0.65, so a hull goes into the breech the size it shows there.
+  roundmodel = "models/shared/shell" "shell.md3"
+  roundskin  = "models/shared/shell" "shell.png"
+  roundscale = 0.228
+
+  # Force Unleashed's own super shotgun sounds (SNDINFO wm/dbarrel/*).
+  firesound   = "wm/dbarrel/fire"
+  opensound   = "wm/dbarrel/open"
+  loadsound   = "wm/dbarrel/load"
+  closesound  = "wm/dbarrel/close"
+  drysound    = "wm/dry"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropDoubleBarrel is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 8.043, 0.205, 6.308
+  supportat = 21.730, 0.010, 13.216
+  palm = 5.239, 0.016, 8.466
+  rake = 59.3
+  seat = -53.095, 0.187, 16.022
+end
+
+# ONE SLOT A BARREL, not indexed: a pull fires every live one (WM_Gun.ChambersPerPull).
+store chambers
+  kind  = slotted
+  slots = 2
+end
+
+# THE BARRELS AND THEIR HINGE BLOCK, ONE PART: ssg_barrel and ssg_barrel_base turn together, 36.96
+# degrees about (0, 1, 0) through (29.29, 0, 11.78) on the donor's open frames 22-33 (fits
+# 0.009-0.011; the in-between frames 20, 21, 34, 35 lie on the same axis at 9.5 and 27.4). Sign
+# checked: +36.96 about +y carries the front of the barrels down and lifts the breech.
+part barrels
+  subject = foregrip
+  surface = barrels
+  # THE TWO SHELLS ride the barrels and show which chambers hold a hull: shell1 in the +y barrel
+  # (centroid 21.99, 3.34, 14.98), shell2 in the -y one (21.99, -3.33, 14.98). Seated in the
+  # barrels' own rest space on every frame the donor draws them loaded.
+  roundsurface = shell1, chambers, 0
+  roundsurface = shell2, chambers, 1
+  # WHERE THE OTHER HAND TAKES IT: under the hinge block and forend (ssg_barrel_base, x 26.80 to
+  # 48.41, z 8.16 up), at its middle. Along: its half-length, 10.8 units x 0.178 = 1.92 map units.
+  # Across and up measured 09-14: that island (barrels #1, x 26.80 to 48.41) is 4.23 wide and 3.01 tall
+  # either side of its middle, x 0.178.
+  grab     = 37.6, 0.0, 8.8
+  grabsize = 1.92, 0.75, 0.54
+  # WHERE THE HAND SITS: under it, palm up -- a double is broken from beneath.
+  handseat = 37.6, 0.094, 12.477      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 36.96
+    pivot   = 29.29, 0, 11.78
+  end
+end
+
+# THE TRIGGER: 19.24 degrees about (0, 1, 0) through (9.09, 0, 8.41) on every fire frame (fit
+# 0.007). Sign checked: the blade below the pin swings back. Follows your finger.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 19.24
+    pivot   = 9.09, 0, 8.41
+  end
+end
+
+# THE BREECH, where a shell goes in: between the chambers (y 0, z 15.0), one map unit behind the
+# shells' rims (x 17.70, shell1's rearmost vertex at rest, less 1 / 0.178 = 5.61 units), going in along
+# +x. It rides the barrels (the archetype's `rides`). Its sliders: the grab-point page, "load zone: breech".
+load breech
+  at  = 12.1, 0.0, 15.0
+  dir = 1, 0, 0
+end

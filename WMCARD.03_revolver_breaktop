@@ -1,0 +1,192 @@
+# ============================================================================
+# WMCARD.03_revolver_breaktop -- the model card library, archetype revolver_breaktop: WM_Moonlight, WM_Sunset.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+
+# ============================================================================
+# THE REVOLVERS: two break-tops and a swing-out, on the reload system's
+# `breaktop_revolver` and `swingout_revolver` archetypes (RS_VR_Reload/WMCARD.txt).
+#
+# The archetype says what a revolver of that kind DOES -- open, throw the cases
+# out, take a speedloader, shut, fire a chamber a pull. Each card says where its
+# own parts are and how far they move. Surveyed and measured in
+# REVOLVER_CANDIDATES.md; every number below says how it was got.
+#
+# THE CYLINDER IS THE CHAMBER. A slotted, indexed store that turns on the shot:
+# each trigger pull fires the chamber under the hammer and turns the next one
+# round -- on a click too. It is the gun's only store, so the trigger fires from
+# it and nothing else (WM_Ammo's facade takes the first slotted store).
+#
+# THE SPEEDLOADER IS THE AMMO IN YOUR HAND. The pouch hands a revolver a loader
+# of up to its capacity, drawn as the card's magmodel and held on the
+# held-magazine sliders; let go of at the open cylinder's face, it fills every
+# empty chamber at once. A single loose round fills one.
+# ============================================================================
+
+
+# ============================================================ MOONLIGHT -- MAIN HAND
+# rev.md3, first skin. A BREAK-TOP: the barrel (python.007) and the cylinder
+# (python.005) move as one rigid assembly (pooled rigid fit rmsd 0.094) on one
+# hinge ahead of the cylinder, tipping down away from the grip frame (python.004).
+#
+# THE MESH IS rev_wm.md3, rev.md3 made for this card: one frame, and the six
+# rounds (python.008-013) put INTO the cylinder at rest. In rev.md3 they are
+# collapsed to a point at frame 0 and only exist in frames 20-29, the donor's
+# reload. Their frame-20 geometry -- seated in the chambers, measured against the
+# cylinder's own motion (fit 0.093) -- was carried back into the cylinder's rest
+# frame and pushed home so each rim stands 0.17 proud of the rear face (x -1.28).
+# The collapsed speedloader (python.014) is left out. Scratch script and renders:
+# REVOLVER_CANDIDATES.md, "Built".
+weapon "MS_Revolver"
+  hand      = main
+  type      = revolver
+  prop      = "WM_PropMoonlight"
+  mechanism = breaktop_revolver
+  model     = "models/vanilla/revolvers/Revolver" "rev_wm.md3"
+  skin      = "models/vanilla/revolvers/Revolver" "WPN-REV.png"
+
+  # Six chambers (six rounds measured, one per chamber, 1.4 units off the axis).
+  # The pouch's speedloader holds this many.
+  capacity  = 6
+  magfamily = "revolver"
+
+  # python.007's front-most vertices, centred on the bore.
+  muzzle    = 17.41, 0.0, 3.29
+  barrel    = 1, 0, 0
+
+  # WHERE THE CASES LEAVE: the cylinder's rear face, at the chambers' circle centre
+  # (the six seated rounds' centroids circle y 0, z 0.98), backward out of the
+  # chambers. Carried by the barrel as it tips, so with the gun open they fly up
+  # and back, off the extractor.
+  ejectport = -1.6, 0.0, 0.98
+  ejectdir  = -1, 0, 0
+
+  # THE SPEEDLOADER: python.014 at frame 26, where it sits seated against the
+  # cylinder (it holds its own six rounds), carried into the cylinder's rest frame,
+  # re-origined and stood so it goes in UPWARD, like a magazine. magcenter is that
+  # centroid in the gun's space. magscale 0.459 = MODELDEF 1.35 x 0.34.
+  magmodel  = "models/vanilla/revolvers/Revolver" "wm_speedloader.md3"
+  magskin   = "models/vanilla/revolvers/Revolver" "WPN-REV.png"
+  magscale  = 0.459
+  magcenter = -1.519, 0.091, 0.901
+
+  # A LOOSE ROUND: the pistols' bullet, sized to this mesh's own. A seated round is
+  # 3.56 units long x 0.459 = 1.63 map units; bullet.md3 is 6.27 long, so 0.26.
+  roundmodel = "models/vanilla/pistols" "bullet.md3"
+  roundskin  = "models/vanilla/pistols" "bullet.png"
+  roundscale = 0.26
+
+  # This package's revolver sounds (SNDINFO wm/revolver/*): the pistol pool's
+  # heaviest shot, a magazine-out click opening, the slide snap shutting, a
+  # magazine-in click for the loader.
+  firesound    = "wm/revolver/fire"
+  opensound    = "wm/revolver/open"
+  closesound   = "wm/revolver/close"
+  loadsound    = "wm/revolver/load"
+  drysound     = "wm/dry"
+  magdropsound = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropMoonlight is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -1.987, 0.000, -3.517
+  supportat = -4.467, -0.019, -7.276
+  palm = -6.616, -0.019, -6.762
+  rake = 6.4
+  seat = -0.813, 0.000, -0.860
+end
+
+store cylinder
+  kind    = slotted
+  slots   = 6
+  indexed = yes
+  advance = onshot
+end
+
+# THE BARREL AND THE CYLINDER, ONE PART. Hinge measured off the rigid-fit rotation
+# matrix, python.004's own motion divided out: axis pure (0, 1, 0), 63.07 degrees
+# about (3.448, 0, -1.432), singular values (0, s, s) -- a clean single pin. Checked
+# the way round: the barrel's centroid turned +63.07 about +y lands at
+# (7.655, 0, -3.076); the mesh has it at (7.676, 0, -3.027). Down and back.
+part barrel
+  subject = foregrip
+  surface = python.007      # barrel
+  surface = python.005      # cylinder
+  # THE SIX ROUNDS ride the barrel and show which chambers hold a case.
+  roundsurface = python.008, cylinder, 0
+  roundsurface = python.009, cylinder, 1
+  roundsurface = python.010, cylinder, 2
+  roundsurface = python.011, cylinder, 3
+  roundsurface = python.012, cylinder, 4
+  roundsurface = python.013, cylinder, 5
+  # WHERE THE OTHER HAND TAKES IT: along the barrel ahead of the cylinder, 7.5 units
+  # ahead of the pin -- far enough out that the hand's swing round the pin reads
+  # cleanly. The barrel runs x 3.4 to 17.4 above the frame; this is its middle
+  # height. Along: 3 map units each way (13 units x 0.459 / 2). ESTIMATE sizes,
+  # for the grab-point page.
+  grab     = 11.0, 0.0, 1.5
+  grabsize = 3.0, 1.5, 2.0
+  # WHERE THE HAND SITS: under the barrel at the grab, palm up -- you pull a
+  # break-top down from beneath. The barrel's underside is z -1.11 at its front.
+  # wm_hs_revolver_<main|off>_foregrip_* (the revolver hand-seat profile) trims it live.
+  handseat = 11, 0, 1.211      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 63.07
+    pivot   = 3.448, 0, -1.432
+  end
+end
+
+# 54.66 degrees about (0, -1, 0) through (-3.36, 0, 1.094), frame 2 of 41, fit
+# 0.0087; turned that way from rest the centroid lands exactly where frame 2 has it.
+# Rest is DOWN. DOUBLE ACTION: it comes back with your finger and falls on the shot.
+part hammer
+  role    = hammer
+  cock    = trigger
+  surface = python.006
+  dof
+    kind    = hinge
+    axis    = 0, -1, 0
+    degrees = 54.66
+    pivot   = -3.36, 0, 1.094
+  end
+end
+
+# THE CYLINDER'S REAR FACE, where the speedloader goes in: the chambers' circle
+# centre (y 0, z 0.98), one map unit behind the face (x -1.28, less 1 / 0.459 =
+# 2.18 units), going in along +x. It rides the barrel (the archetype's `rides`), so
+# it is on the face wherever the barrel has tipped to. Its sliders: the grab-point
+# page, "load zone: cylinder".
+load cylinder
+  at  = -3.46, 0.0, 0.98
+  dir = 1, 0, 0
+end
+
+
+# ============================================================== SUNSET -- OFF HAND
+# Moonlight's second skin on the same mesh (rev_wm.md3). It STARTS FROM WM_Moonlight's card (inheritance, the owner's
+# go 2026-09-15): every measured number, part, store and verb is Moonlight's -- see that card for how each was got --
+# and a fix there reaches this one too. It says only what differs: the off hand, its prop class, and the second skin
+# on the gun and on its speedloader.
+weapon "WM_Sunset"
+  base    = WM_Moonlight
+  hand    = off
+  prop    = "WM_PropSunset"
+  skin    = "models/vanilla/revolvers/Revolver" "WPN-REV2.png"
+  magskin = "models/vanilla/revolvers/Revolver" "WPN-REV2.png"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropSunset is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -2.004, 0.000, -3.650
+  supportat = -4.467, -0.019, -7.276
+  palm = -6.616, -0.019, -6.762
+  rake = 6.4
+  seat = 0.150, -0.000, 1.362
+end

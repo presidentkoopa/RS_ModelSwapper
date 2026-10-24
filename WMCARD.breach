@@ -1,0 +1,130 @@
+# ============================================================================
+# WMCARD.breach -- RS_Modern's first gun and the first rigged IQM gun: WM_BreachGlock (the owner, 2026-09-15: "Yes,
+# start it"; "Start RS_Modern").
+#
+# ZeroDoomThirty's BREACH Weapons glockrerig.iqm (licenses/breach_weapons_CREDIT.txt): a skeleton whose slide,
+# trigger and magazine are bones. Its parts are those JOINTS (`joint = ...`), moved by the engine's bone drive; the
+# rig's own view arms are its mesh 0, hidden (`hidesurface`). No mechanism and no verbs: the slide cycle and the
+# magazine swap are synthesised from `role = action` and `role = feed`, as the pistols' are.
+#
+# EVERY NUMBER IS MEASURED off the pose the prop draws -- animation frame 0, skinned exactly as the renderer skins it
+# (tools/breach_glock: glock_measure.py, glock_points.py) -- in the file's own axes, as every card: x toward the
+# muzzle, y across (+y is this gun's right, the extractor side), z up. Grab radii are MAP units.
+# ============================================================================
+
+
+# ====================================================== BREACH GLOCK -- MAIN HAND
+weapon "MS_BreachGlock"
+  hand     = main
+  type     = pistol
+  prop     = "WM_PropBreachGlock"
+  model    = "models/breach/glock" "glockrerig.iqm"
+  skin     = "models/breach/glock" "skin.png"
+  # A Glock 17's seventeen (the owner, 2026-09-15: "Let's make it 17"; Breach's GlockMagazine holds 17). ITS OWN
+  # FAMILY: a Glock magazine fits Glocks, and the 15-round pistols' magazines do not fit it -- a shared "pistol" family
+  # would let 17 rounds into a 15-round gun. The pouch draws each gun its own magazine (its card's capacity and family,
+  # WM_System), so the Glock still reloads from the reserve.
+  capacity  = 17
+  magfamily = "glock"
+
+  # BREACH'S VIEW ARMS: mesh 0 of the rig, never drawn in a VR hand.
+  hidesurface = v_hands.bmp
+
+  # The mesh's front face, centred on its verts within 0.3; the bore points along +x.
+  muzzle    = 50.914, 5.767, -4.034
+  barrel    = 1, 0, 0
+
+  # The slide's right side (+y) at the extractor. Brass goes right, up, back.
+  ejectport = 39.612, 7.023, -3.366
+  ejectdir  = -0.3, 0.9, 0.4
+
+  # THE LOOSE MAGAZINE: the rig's own magazine -- every triangle riding j_mag1 -- cut out at the pose the prop draws,
+  # re-origined on its centroid and turned so its slide-out axis points straight down, as the pistols' loose magazines
+  # are (tools/breach_glock/extract_mag.py; 1014 triangles, 4.03 x 2.75 x 12.97). magcenter is that centroid in the
+  # GUN's space, so a dropped magazine appears exactly where the one in the gun was. magscale 0.389 = the gun's 1.145
+  # x 0.34 (the follow-hand frame's model units per map unit), the same size on the floor as in the gun.
+  magmodel  = "models/breach/glock" "wm_breachglock_mag.md3"
+  magskin   = "models/breach/glock" "skin.png"
+  magscale  = 0.389
+  magcenter = 34.998, 5.806, -8.619
+
+  # 9mm Parabellum, as the Pistolet's (RS_VR_Weapons' shared round).
+  roundmodel = "models/vanilla/pistols" "bullet.md3"
+  roundskin  = "models/vanilla/pistols" "bullet.png"
+  roundscale = 0.16
+
+  # Breach's own sounds: its two fire sounds as one, its magazine out and in, its slide back and home, and its brass
+  # landing (one of three).
+  firesound      = "rsm/breachglock/fire"
+  drysound       = "wm/dry"
+  magoutsound    = "rsm/breachglock/magout"
+  maginsound     = "rsm/breachglock/magin"
+  rackapexsound  = "rsm/breachglock/slideback"
+  rackresetsound = "rsm/breachglock/slidefwd"
+  magdropsound   = "wm/magdrop"
+  casingsound    = "rsm/breachglock/casing"
+end
+
+# THE GRIP: placed by the owner on the mesh, two-handed hold averaged to the handle axis
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  palm = 34.726, 5.808, -10.521
+  rake = 23.7
+  supportat = 36.966, 5.808, -11.853
+  triggerat = 39.470, 5.801, -7.904
+end
+
+# THE SLIDE: joint j_slide, 4.50 straight back along -x on the rig's fire frames 1-2 (no turn). The grab is the rear
+# serrations, top of the slide.
+part slide
+  role    = action
+  subject = slide
+  joint   = j_slide
+  grab       = 32.844, 5.813, -2.770
+  handseat = 32.844, 5.823, -3.76      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -1, 0, 0
+    distance = 4.5
+    detach   = 0.95
+  end
+end
+
+# THE MAGAZINE: joint j_mag1. The axis is the magazine's own long axis, 19.8 degrees off vertical in the gun's middle
+# plane -- a magazine inside its well cannot turn, and the rig's reload frames swing it by hand -- and the distance is
+# its length along that axis, 12.96, and a little to clear the well. The grab is the floorplate.
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no          # out by its button, in by the hand carrying one
+  joint   = j_mag1
+  grab       = 31.506, 5.827, -15.934
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -0.339, 0, -0.941
+    distance = 13.5
+    detach   = 0.9
+  end
+end
+
+# THE TRIGGER: joint j_trigger, 0.96 straight back along -x on fire frames 1-9 -- a Glock's trigger slides, it does not
+# swing. Follows your finger.
+part trigger
+  role    = trigger
+  joint   = j_trigger
+  dof
+    kind     = slide
+    axis     = -1, 0, 0
+    distance = 0.96
+  end
+end
+
+# Not a moving part: where the other hand wraps the front strap, mid-grip.
+part support
+  role    = support
+  subject = support
+  grab       = 37.191, 5.801, -11.811
+  grabradius = 3.0
+end

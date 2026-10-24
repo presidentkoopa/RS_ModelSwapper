@@ -1,0 +1,360 @@
+# ============================================================================
+# WMCARD.09_chaingun -- the model card library, archetype chaingun: WM_Chaingun, WM_MachineGun, WM_RotaryGun.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+# ==========================================================================
+# LIVE: the chaingun family (WM_Chaingun).
+# Re-measured 09-15 on RS_Main's RS_GH_Minigun (the owner: the Force Unleashed chaingun comes out of Vanilla and
+# Vanilla+). The Force Unleashed chaingun's measurements stay in _pending/CHAINGUN_CARDS.md.
+# ==========================================================================
+
+# ============================================================================
+# THE CHAINGUN: fed from the reserve. No magazine, no chamber, no reload.
+#
+# The owner, 09-15: its model has no box and no belt, so there is no reload -- a trigger pull fires
+# straight from Weapon.AmmoType1 (Clip), as vanilla Doom's chaingun does. The shot is the class's (a
+# 5 x 1d3 RS_Ballistics round every 4 tics, 5.6 degrees on refire).
+#
+# SCALE: MODELDEF Scale 1.0 x 0.34 = 0.34 map units per model unit.
+# ============================================================================
+
+
+# ============================================================ CHAINGUN -- MAIN HAND
+# RS_Main's RS_GH_Minigun (Minigun.md3, the same mesh as RS_ModelSwapper's hud/Chaingun/Chaingun.md3 shifted
+# whole) as chaingungh_wm.md3: the donor's frame 4, its ready pose (frames 0-3 are the raise), surfaces body
+# (receiver, side handle, under plate and grip -- all static), trigger, barrels. Re-origined on the rest
+# centroid in whole 1/64 steps: shift (69.3281, 0.4844, -8.4688). Length 103.73 (x -49.61..54.12).
+weapon "MS_Chaingun"
+  type      = chaingun     # its hand-seat profile (the key landed in c688186)
+  hand      = main
+  prop      = "WM_PropChaingun"
+  model     = "models/vanilla/chainguns/ChaingunGH" "chaingungh_wm.md3"
+  skin      = "models/vanilla/chainguns/ChaingunGH" "Minigun.png"
+
+  # FIRES FROM THE RESERVE, as WM_MachineGun and WM_RotaryGun: nothing on the mesh holds rounds.
+  # No capacity, no magazine part, no chamber, no cycle verb.
+  firesfrom = reserve
+  # ONE HAND FIRES, ALWAYS (the owner, 2026-09-26). The support part below stays:
+  # the other hand may steady it, but it is never required to shoot.
+  hands     = 1
+
+  # THE CLUSTER'S AXIS AT THE BARRELS' FRONT FACE (donor x 123.45). Six tubes turn about it at
+  # radius 8.1 and none stands at twelve o'clock (the top two are 30 degrees either side), so the
+  # shot leaves on the axis.
+  muzzle    = 54.12, -0.15, 0.68
+  barrel    = 1, 0, 0
+
+  # ESTIMATE: the receiver's -y wall behind the barrels (donor x 56..66, z -14..-4), the side
+  # away from the handle, as WM_RotaryGun's. ejectdir ESTIMATE, the rifles'.
+  ejectport = -7.19, -13.90, -1.24
+  ejectdir  = -0.3, -0.9, 0.4
+
+  # This package's chaingun sounds (SNDINFO wm/chaingun/*). The last three are the barrels'
+  # wind-up, loop and wind-down (part barrels' spin).
+  firesound     = "wm/chaingun/fire"
+  drysound      = "wm/dry"
+  spinupsound   = "wm/chaingun/spinup"
+  spinsound     = "wm/chaingun/spin"
+  spindownsound = "wm/chaingun/spindown"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropChaingun is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -37.098, -0.484, 4.002
+  supportat = -7.250, 22.600, 5.400
+  palm = -43.264, -0.498, 1.522
+  rake = 25.9
+  seat = -38.930, -0.470, 9.444
+end
+
+# 20.01 degrees about the pin at -35.631, 6.618 (donor frames 8-11 against the body, fit 0.007).
+# Sign checked: +20.01 lands its rest centroid 0.000 off frame 8; -20.01 misses by 2.05. Follows
+# your finger.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 20.01
+    pivot   = -35.631, 0, 6.618
+  end
+end
+
+# THE OTHER HAND ON THE SIDE HANDLE: the bar standing out of the receiver's +y side (y 9.88..26.75
+# in the donor, radius 2.0), its middle. The only handle ahead of the grip.
+part support
+  role    = support
+  subject = support
+  grab       = -7.30, 17.83, 5.46
+  grabradius = 3.0
+end
+
+# THE BARRELS SPIN while the trigger is held, about the cluster's axis (1, 0, 0) through
+# (y -0.151, z 0.678). The donor's frames 4-7 turn its barrels 0 / 25.60 / 80.39 / 106.00 degrees
+# about +x (fit 0.012-0.014) and wrap. Its clamps repeat every 120 degrees (turned 120 the
+# barrels land on themselves, median miss 0.017; turned 60 they do not), so one period is 120,
+# which the donor turns in 4 tics: 30 degrees a tic at full speed. spinup 4 and spindown 20 are
+# kept from before, ESTIMATE. Looks only -- it never holds off the shot.
+part barrels
+  surface  = barrels
+  spin     = trigger
+  spinrate = 30
+  spinup   = 4
+  spindown = 20
+  dof
+    kind    = hinge
+    axis    = 1, 0, 0
+    pivot   = 0, -0.151, 0.678
+    degrees = 120
+  end
+end
+
+# ==========================================================================
+# LIVE: the machinegun family (WM_MachineGun).
+# Measured and drafted in _pending/MACHINEGUN_UBL.md.
+# ==========================================================================
+
+# ======================================================== MACHINE GUN -- OFF HAND
+# RS_ModelSwapper's belt-fed machine gun as machinegun_wm.md3. THE BULLETS COME FROM THE
+# RESERVE; THE RELOAD IS THE UNDERBARREL GRENADE LAUNCHER. _pending/MACHINEGUN_UBL.md.
+weapon "MS_BD_Machinegun"
+  type      = chaingun
+  hand      = off
+  prop      = "WM_PropMachineGun"
+  model     = "models/vanilla/chainguns/MachineGun" "machinegun_wm.md3"
+  skin      = "models/vanilla/chainguns/MachineGun" "Machinegun.png"
+
+  firesfrom = reserve      # the bullets, from Weapon.AmmoType1 (Clip); gl below is the launcher's
+  # ITS OWN FAMILY: the launcher grenade is the one thing a hand brings this gun, so only a 40mm round loads
+  # into gl. Unstated, the card counted as "pistol" and a loose pistol round could load there (the 09-15 sweep).
+  magfamily = "40mm"
+  hands     = 1            # for both barrels
+
+  muzzle    = 43.95, -0.24, 3.98
+  barrel    = 1, 0, 0
+  ejectport = -4.0, -3.7, 0.5          # ESTIMATE
+  ejectdir  = -0.3, -0.9, 0.4          # ESTIMATE
+
+  # THE LAUNCHER'S LOOSE ROUND: RS_Grenade's grenade, sized to the bore. ESTIMATE scale.
+  roundmodel = "models/vanilla/grenades" "nade.md3"
+  roundskin  = "models/vanilla/grenades" "nade.png"
+  roundscale = 0.165
+
+  # A BELT LINK WITH EVERY CASE: it is a belt-fed gun. The chaingun's link (FU's cg_ammoclip.md3)
+  # on the chaingun's skin; its rounds are the chaingun's size, so the same 0.34.
+  linkmodel = "models/vanilla/chainguns/Chaingun" "cg_ammoclip.md3"
+  linkskin  = "models/vanilla/chainguns/Chaingun" "chaingun_HD.png"
+  linkscale = 0.34
+
+  firesound   = "wm/machinegun/fire"
+  drysound    = "wm/dry"
+  opensound   = "wm/ubl/open"
+  closesound  = "wm/ubl/close"
+  loadsound   = "wm/ubl/load"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropMachineGun is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -18.717, -0.242, -6.641
+  supportat = 11.911, -0.266, -7.142
+  palm = -25.458, -0.267, -9.341
+  rake = 23.7
+  seat = -17.844, 0.163, -2.078
+end
+
+# THE GRENADE CHAMBER: one round, the launcher's alone (its barrel's `from`). A fired round
+# stays in it SPENT until the breech opens.
+store gl
+  kind  = slotted
+  slots = 1
+end
+
+# THE TUBE slides forward to open the breech.
+part launchertube
+  subject = foregrip
+  surface = launchertube
+  grab       = 15.96, -0.31, -9.73    # measured 09-14: the tube's full-width underside, x 11.05 to 20.88 (its island x 5.30 to 26.62)
+  handseat = 15.96, -0.266, -6.539      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 1, 0, 0.001
+    distance = 9.504
+  end
+end
+
+# THE LATCH: press it to free the tube.
+part launcherlatch
+  surface = launcherlatch
+  grab       = 0.52, -0.34, -10.30
+  grabradius = 2.0
+  dof
+    kind    = hinge
+    axis    = 0, -1, 0
+    degrees = 18.93
+    pivot   = 0.801, 0, -8.229
+  end
+end
+
+# THE LAUNCHER'S OWN TRIGGER: the barrel's `trigger`, drawn pulled while the alt button is
+# held. No role, and no verb moves it.
+part launchertrigger
+  surface = launchertrigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 19.99
+    pivot   = -2.177, 0, -7.864
+  end
+end
+
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind     = slide
+    axis     = -1, 0, -0.008
+    distance = 0.598
+  end
+end
+
+part support
+  role    = support
+  subject = support
+  grab       = -2.29, -0.37, -12.11   # measured 09-14: under the launcher's frame, its lowest run x -3.23 to -1.34
+  grabradius = 3.0
+end
+
+# THE BREECH. Opening it throws the spent case out of gl. It stops only the launcher (the
+# barrel's needs = shut:breech), so the machine gun fires with it open.
+open breech
+  part    = launchertube
+  latch   = launcherlatch
+  latchreturn = spring    # an M203-style latch snaps back when let go; the tube stays free a second
+  openat  = 0.85
+  closeat = 0.05
+  rest    = stay
+  onopen  = ejectall
+  from    = gl
+end
+
+load grenade
+  into    = gl
+  slot    = next
+  subject = round
+  at      = 5.24, -0.27, -7.17        # the tube's rear face on the bore; rides the tube
+  size    = 2.0, 2.0, 2.0
+  dir     = 1, 0, 0
+  rides   = launchertube
+  needs   = open:breech
+end
+
+# THE UNDERBARREL LAUNCHER: a second barrel on the alt-fire button, fed from gl.
+barrel launcher
+  input     = altfire
+  trigger   = launchertrigger
+  from      = gl
+  shotclass = "WM_LauncherGrenade"
+  ammo      = "RSVG_Ammo"             # what the pouch hands for `load grenade`, by name
+  muzzle    = 39.16, -0.27, -7.17     # the tube's front face on the bore
+  barrel    = 1, 0, 0
+  firesound = "wm/ubl/fire"
+  needs     = shut:breech
+end
+
+
+# ======================================================= ROTARY GUN -- MAIN HAND
+# MeatGrinder's Chaingun.md3 at frame 0 as rotarygun_wm.md3: surfaces body, barrels (the six barrels and
+# their rings), trigger, button. Shift (60.8281, 0.4688, -4.9688). A six-barrel rotary gun with an angled
+# front handle.
+# THE BULLETS COME FROM THE RESERVE, as WM_MachineGun's: the mesh has no magazine piece, so it is fed by
+# its belt from Weapon.AmmoType1.
+weapon "MS_RotaryGun"
+  hand      = main
+  type      = chaingun
+  prop      = "WM_PropRotaryGun"
+  model     = "models/vanilla/chainguns/RotaryGun" "rotarygun_wm.md3"
+  skin      = "models/vanilla/chainguns/RotaryGun" "Chaingun.png"
+
+  firesfrom = reserve
+  hands     = 1
+
+  # THE TOP BARREL'S BORE at the barrels' front face (x 46.64): six barrels about (y -0.69, z -2.37), the
+  # one at twelve o'clock 6.70 above the axis.
+  muzzle    = 46.64, -0.50, 4.33
+  barrel    = 1, 0, 0
+
+  # ESTIMATE: on the housing's side away from the handle (-y), behind the barrels.
+  ejectport = -12.83, -10.67, -2.33
+  ejectdir  = -0.3, -0.9, 0.4
+
+  # A BELT LINK WITH EVERY CASE: it is belt-fed. The chaingun's link on the chaingun's skin, as
+  # WM_MachineGun's.
+  linkmodel = "models/vanilla/chainguns/Chaingun" "cg_ammoclip.md3"
+  linkskin  = "models/vanilla/chainguns/Chaingun" "chaingun_HD.png"
+  linkscale = 0.34
+
+  # This package's chaingun sounds (SNDINFO wm/chaingun/*); the last three are the barrels' spin.
+  firesound     = "wm/chaingun/fire"
+  drysound      = "wm/dry"
+  spinupsound   = "wm/chaingun/spinup"
+  spinsound     = "wm/chaingun/spin"
+  spindownsound = "wm/chaingun/spindown"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropRotaryGun is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -29.988, -0.695, 6.387
+  supportat = -12.017, 9.567, 7.924
+  palm = -32.175, -0.715, 1.378
+  rake = 51.7
+  seat = -34.919, -0.469, 5.145
+end
+
+# 15.15 degrees about the pin at -26.033, 3.374 (source frame 5, fit 0.007). Sign checked: +15.15 lands
+# the rest centroid 0.000 off frame 5; -15.15 misses by 1.583.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 15.15
+    pivot   = -26.033, 0, 3.374
+  end
+end
+
+# THE OTHER HAND ON THE ANGLED FRONT HANDLE: its centroid (the source's surface 0, x -19.6..-9.5).
+# ESTIMATE: where on it the hand goes.
+part support
+  role    = support
+  subject = support
+  grab       = -13.64, 3.57, 4.43
+  grabradius = 3.0
+end
+
+# THE BARRELS SPIN while the trigger is held, about the cluster's axis (1, 0, 0) through (y -0.69,
+# z -2.37); every barrel surface turns 45.0 degrees about -x over source frames 1-3, fit 0.016 or better.
+# Six barrels, so one period is 60 degrees. Rate, wind-up and wind-down ESTIMATE, as WM_Chaingun's, turning
+# the donor's way. Looks only -- it never holds off the shot.
+part barrels
+  surface  = barrels
+  spin     = trigger
+  spinrate = -15
+  spinup   = 4
+  spindown = 20
+  dof
+    kind    = hinge
+    axis    = 1, 0, 0
+    pivot   = 0, -0.69, -2.37
+    degrees = 60
+  end
+end

@@ -1,0 +1,13 @@
+weapon MS_tazer
+  archetype   rifle_mag        # from source names
+  model       MS_tazer.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    grip     surf 0  rest [9.02, 0.04, 0.33]  axis [-0.175, -0.015, 0.984]  size [7.64, 3.12, 14.09]
+    trigger  surf 1  rest [30.22, -0.01, -5.97]  axis [-0.486, 0.019, 0.874]  size [2.09, 0.72, 3.27]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [29.83, 0.02, -4.42]
+    muzzle    [15.58, 0.00, -7.42]
+  grip        line [12.35, -2.06, -9.97] [14.43, -0.20, -15.11]  trigger [30.22, -0.01, -5.97]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [16.35, -2.06, -9.97]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 16402  frames 1

@@ -1,0 +1,28 @@
+weapon MS_CHAINGRPG
+  archetype   rifle_mag        # from source names
+  model       MS_CHAINGRPG.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    part     surf 0  rest [55.48, 0.22, -6.20]  axis [-0.087, 0.000, 0.996]  size [6.64, 23.19, 23.50]
+    part2    surf 1  rest [71.39, 0.22, -4.40]  axis [-0.994, 0.000, -0.105]  size [19.83, 9.64, 12.73]
+    part3    surf 2  rest [22.07, 0.23, -7.08]  axis [-0.700, 0.000, -0.714]  size [17.28, 6.64, 16.86]
+    part4    surf 3  rest [27.82, 0.23, -4.86]  axis [-0.501, 0.000, -0.865]  size [3.12, 1.20, 3.55]
+    part5    surf 4  rest [24.39, 0.22, -15.89]  axis [-0.987, 0.000, -0.161]  size [18.22, 6.41, 6.61]
+    part6    surf 5  rest [44.53, 0.22, -6.71]  axis [-1.000, -0.000, 0.004]  size [23.08, 19.89, 20.14]
+    part7    surf 6  rest [25.82, 0.22, -0.33]  axis [-0.004, 1.000, -0.002]  size [2.92, 3.09, 1.92]
+    part8    surf 7  rest [25.63, 0.22, 0.05]  axis [0.912, -0.130, 0.389]  size [2.36, 2.22, 1.62]
+    part9    surf 8  rest [65.52, -9.40, 0.52]  axis [-0.996, -0.001, -0.090]  size [34.52, 10.80, 13.25]
+    part10   surf 9  rest [58.96, 0.48, -5.66]  axis [-0.000, 1.000, 0.000]  size [4.80, 25.64, 25.75]
+    part11   surf 10  rest [-7.52, 0.22, -7.53]  axis [-0.986, -0.002, 0.164]  size [37.92, 4.14, 17.67]
+    part12   surf 11  rest [75.80, 0.54, -4.19]  axis [0.000, -1.000, -0.000]  size [5.92, 31.67, 31.84]
+    part13   surf 12  rest [66.49, -9.40, -10.57]  axis [-0.996, -0.001, -0.090]  size [34.52, 10.80, 13.27]
+    part14   surf 13  rest [66.98, 0.24, -16.11]  axis [-0.996, -0.001, -0.090]  size [34.52, 10.80, 13.27]
+    part15   surf 14  rest [65.04, 0.24, 6.06]  axis [-0.996, -0.001, -0.090]  size [34.52, 10.80, 13.27]
+    part16   surf 15  rest [65.52, 9.88, 0.52]  axis [-0.996, -0.001, -0.090]  size [34.52, 10.78, 13.25]
+    part17   surf 16  rest [66.49, 9.88, -10.57]  axis [-0.996, -0.001, -0.090]  size [34.52, 10.78, 13.27]
+    muzzle    [45.27, 0.00, 3.92]
+  grip        line [38.30, -12.06, -5.71] [37.99, -6.45, -11.49]  trigger [38.30, -12.06, -5.71]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [42.30, -12.06, -5.71]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 6959  frames 1

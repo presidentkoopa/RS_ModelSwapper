@@ -1,0 +1,2162 @@
+# WMCARD.bd22 -- written by WeaponForge. Do not edit by hand:
+# fix the tool or sets/bd22/set.py and run RUN_SET again.
+// DUPLICATE of MS_Pistol -- not kept: mesh is not one ModelSwapper ships
+// weapon "BD_Pistol"
+//   hand      = main
+//   type      = pistol
+//   prop      = "BD_PropPistol"
+//   model     = "models/bd22" "pistol_wm.md3"
+//   skin      = "models/bd22" "pistol.png"
+//   capacity  = 15
+//   magfamily = "bd_9mm"
+// 
+//   muzzle    = 15.593, -0.000, 3.614
+//   barrel    = 1, 0, 0
+//   # side measured (286 vertices on -y against 292 on +y), the side away from the action; the point and the direction are estimates
+//   ejectport = -4.028, 1.656, 0.946
+//   ejectdir  = -0.2914, 0.8742, 0.3885
+// 
+//   magmodel  = "models/bd22" "pistol_magazine.md3"
+//   magskin   = "models/bd22" "pistol.png"
+//   magscale  = 0.34
+//   magcenter = -3.508, -0.036, -4.916
+// 
+//   magoutsound    = "bd22/pistol/magout"
+//   maginsound     = "bd22/pistol/magin"
+//   rackapexsound  = "bd22/pistol/slideback"
+//   rackresetsound = "bd22/pistol/slidefwd"
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+// # 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   # PALM AND SUPPORTAT ARE THE SAME POINT ON PURPOSE. Two hands on a pistol cup each
+//   # other on the handle's axis -- his words were "taking aim with a pistol, two handed,
+//   # FREEZE, POLICE" -- so he clicked both sides of the centreline and this is the midpoint
+//   # of the two. The separation between the hands is the engine's job, not the card's.
+//   # Do not "fix" these to differ.
+//   palm       = -4.504, -0.032, -5.208
+//   rake      = 16.5
+//   supportat  = -1.768, -0.032, -6.398
+//   triggerat  = 2.085, 0.070, -2.018
+//   seat = -1.154, 0.070, 2.748
+// end
+// # WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+// # body there. The length along the gun is an ESTIMATE: the middle of the
+// # body's thick run forward of the magazine, since a handguard is thick and
+// # a barrel is thin. Check it in the headset.
+// part support
+//   role    = support
+//   subject = support
+//   grab       = -0.539, 0.000, -10.609
+//   grabradius = 3.0
+// end
+// 
+// part bolt2
+//   role    = action
+//   subject = slide
+//   surface = bolt2
+//   grab       = -5.767, 0.130, 3.462
+//   handseat = -5.767, -0.078, 3.32      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+//   grabradius = 3.0
+//   dof
+//     kind     = slide
+//     axis     = -1.000, -0.000, 0.000
+//     distance = 4.591
+//     detach   = 0.95
+//   end
+// end
+// 
+// part magazine
+//   role    = feed
+//   subject = magazine
+//   take    = no
+//   surface = magazine
+//   grab       = -4.225, -0.036, -10.181
+//   grabradius = 3.0
+//   dof
+//     kind     = slide
+//     axis     = -0.174, 0.000, -0.985
+//     distance = 13.285
+//     detach   = 0.9
+//   end
+// end
+
+// DUPLICATE of MS_Cola_Revolver -- not kept: fewer surfaces bind
+// weapon "BD_Revolver"
+//   hand      = main
+//   type      = revolver
+//   prop      = "BD_PropRevolver"
+//   model     = "models/bd22" "revolver_wm.md3"
+//   skin      = "models/bd22" "revolver.png"
+//   capacity  = 6
+//   magfamily = "bd_357"
+//   mechanism = swingout_revolver
+// 
+//   muzzle    = 13.226, -0.031, 2.960
+//   barrel    = 1, 0, 0
+//   # side measured (420 vertices on -y against 389 on +y), the emptier wall of the receiver; the point and the direction are estimates
+//   ejectport = -2.252, 2.328, -2.437
+//   ejectdir  = -0.2914, 0.8742, 0.3885
+// 
+//   opensound      = "bd22/revolver/open"
+//   closesound     = "bd22/revolver/close"
+//   ejectsound     = "bd22/revolver/unload"
+//   loadsound      = "bd22/revolver/load"
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+// # 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   # PALM AND SUPPORTAT ARE THE SAME POINT ON PURPOSE. Two hands on a pistol cup each
+//   # other on the handle's axis -- his words were "taking aim with a pistol, two handed,
+//   # FREEZE, POLICE" -- so he clicked both sides of the centreline and this is the midpoint
+//   # of the two. The separation between the hands is the engine's job, not the card's.
+//   # Do not "fix" these to differ.
+//   palm       = -11.190, -0.104, -7.209
+//   rake      = 23.7
+//   supportat  = -8.626, -0.104, -8.734
+//   triggerat  = -2.827, 0.039, -5.580
+//   seat = -7.254, 0.039, 1.548
+// end
+// # INDEXED, AND IT TURNS ON THE SHOT (2026-10-02). Six slots alone are not a revolver.
+// # With no `indexed` a slotted store has no SELECTED position -- WM_Store.SelectedSlot
+// # always answers 0 (store.zs:269-273) -- so every trigger pull fired chamber 0 and this
+// # gun took ONE SHOT PER LOAD. `advance = onshot` turns the cylinder a chamber on each
+// # pull, a click included, which is the half that makes it a revolver rather than a
+// # magazine with six holes in it.
+// #
+// # NOT EVERY SLOTTED STORE WANTS THIS: BD_SSG's and BD_M79's chambers are slotted and
+// # stay un-indexed on purpose, because a pull on a break-action fires every live one and
+// # there is no "selected" barrel to turn to (WMCARD.06_breakaction).
+// store cylinder
+//   kind     = slotted
+//   slots    = 6
+//   indexed  = yes
+//   advance  = onshot
+// end
+// 
+// # WHERE A ROUND GOES IN. The face is the set file's choice (breech);
+// # the point is the body's own surface on that face at the breech, and the
+// # direction is into the gun.
+// load cylinder
+//   into = cylinder
+//   slot = next
+//   at   = -9.335, 0.174, -5.238
+//   dir  = 1.0000, -0.0000, -0.0000
+// end
+// 
+// # WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+// # body there. The length along the gun is an ESTIMATE: the middle of the
+// # body's thick run forward of the magazine, since a handguard is thick and
+// # a barrel is thin. Check it in the headset.
+// part support
+//   role    = support
+//   subject = support
+//   grab       = -4.519, 0.000, -7.391
+//   grabradius = 3.0
+// end
+// 
+// part crane
+//   subject = cylinder
+//   surface = crane
+//   surface = crane2
+//   grab       = 10.847, -0.046, 1.012
+//   grabradius = 3.0
+//   dof
+//     kind     = hinge
+//     axis     = -1.000, -0.000, 0.000
+//     degrees  = 90.01
+//     pivot    = 0.000, -0.014, -2.522
+//   end
+// end
+
+// DUPLICATE of MS_Shotgun -- not kept: fewer surfaces bind
+// weapon "BD_Shotgun"
+//   hand      = main
+//   # NOT "pump" (2026-10-02). `type` is this card's HAND-SEAT PROFILE, and
+//   # WM_HandProfile.TypeAt has no "pump" in it -- so this gun read wm_hs_default_* for
+//   # every seat, and wm_feel_default_home (0.0) rather than wm_feel_shotgun_home (0.25),
+//   # which is the threshold added on 2026-09-13 for "a pump moved a hair would not fire".
+//   # DefaultGripClass already treats pump and shotgun as one thing. The word for how this
+//   # gun works is `mechanism = pump`, below, where it already is.
+//   type      = shotgun
+//   prop      = "BD_PropShotgun"
+//   model     = "models/bd22" "shotgun_wm.md3"
+//   skin      = "models/bd22" "shotgun.png"
+//   capacity  = 9     # BD's own: ShotgunAmmo Inventory.MaxAmount 9
+//   magfamily = "12ga"
+//   mechanism = pump
+// 
+//   muzzle    = 36.125, 0.104, 2.000
+//   barrel    = 1, 0, 0
+//   # side measured (375 vertices on -y against 502 on +y), the emptier wall of the receiver; the point and the direction are estimates
+//   ejectport = -18.530, -2.000, -3.181
+//   ejectdir  = -0.2914, -0.8742, 0.3885
+// 
+//   cycleoutsound  = "bd22/shotgun/pumpout"
+//   cyclehomesound = "bd22/shotgun/pumphome"
+//   loadsound      = "bd22/shotgun/load"
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+// # 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+//   palm       = -29.972, 0.044, -1.814
+//   rake      = 62.4
+//   supportat  = 10.100, 0.059, -0.688
+//   triggerat  = -23.711, 0.175, -3.962
+//   seat = -23.854, 0.175, 7.548
+// end
+// store tube
+//   kind     = counted
+//   capacity = 8
+//   detach   = no
+// end
+// 
+// store chamber
+//   kind     = slotted
+//   slots    = 1
+// end
+// 
+// # WHERE A ROUND GOES IN. The face is the set file's choice (under);
+// # the point is the body's own surface on that face at the breech, and the
+// # direction is into the gun.
+// load gate
+//   into = tube
+//   at   = -10.265, -0.035, -2.578
+//   size = 2.50, 1.50, 2.00
+//   dir  = -0.0000, -0.0000, 1.0000
+// end
+// 
+// # WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+// # body there. The length along the gun is an ESTIMATE: the middle of the
+// # body's thick run forward of the magazine, since a handguard is thick and
+// # a barrel is thin. Check it in the headset.
+// part support
+//   role    = support
+//   subject = support
+//   grab       = -15.276, 0.000, 0.547
+//   grabradius = 3.0
+// end
+// 
+// part forend
+//   subject = forend
+//   surface = forend
+//   grab       = 4.965, 0.038, -0.940
+//   handseat = 4.965, 0.063, -0.914      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+//   grabradius = 3.0
+//   dof
+//     kind     = slide
+//     axis     = -1.000, 0.000, -0.002
+//     distance = 6.274
+//   end
+// end
+
+// DUPLICATE of MS_SuperShotgun -- not kept: fewer surfaces bind
+// weapon "BD_SSG"
+//   hand      = main
+//   type      = breakaction
+//   prop      = "BD_PropSSG"
+//   model     = "models/bd22" "ssg_wm.md3"
+//   skin      = "models/bd22" "ssg.png"
+//   capacity  = 2
+//   magfamily = "12ga"
+//   mechanism = breakaction
+// 
+//   muzzle    = 34.216, -0.123, 3.464
+//   barrel    = 1, 0, 0
+//   # side measured (2539 vertices on -y against 2276 on +y), the emptier wall of the receiver; the point and the direction are estimates
+//   ejectport = -2.003, 1.938, -0.434
+//   ejectdir  = -0.2914, 0.8742, 0.3885
+// 
+//   opensound      = "bd22/ssg/open"
+//   closesound     = "bd22/ssg/close"
+//   loadsound      = "bd22/ssg/load"
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+// # 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+//   palm       = -5.000, -0.066, -0.358
+//   rake      = 75.9
+//   supportat  = 15.800, -0.117, 1.096
+//   triggerat  = 1.640, 1.245, -2.964
+//   seat = -6.854, -0.053, 6.348
+// end
+// store chambers
+//   kind     = slotted
+//   slots    = 2
+// end
+// 
+// # WHERE A ROUND GOES IN. The face is the set file's choice (breech);
+// # the point is the body's own surface on that face at the breech, and the
+// # direction is into the gun.
+// load breech
+//   into = chambers
+//   slot = next
+//   at   = -13.428, -0.021, -4.925
+//   dir  = 1.0000, -0.0000, -0.0000
+// end
+// 
+// # WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+// # body there. The length along the gun is an ESTIMATE: the middle of the
+// # body's thick run forward of the magazine, since a handguard is thick and
+// # a barrel is thin. Check it in the headset.
+// part support
+//   role    = support
+//   subject = support
+//   grab       = -2.607, 0.000, -4.516
+//   grabradius = 3.0
+// end
+// 
+// part barrels
+//   subject = forend
+//   surface = barrels
+//   grab       = 34.129, -0.124, 3.616
+//   handseat = 34.129, -0.117, 3.758      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+//   grabradius = 3.0
+//   dof
+//     kind     = hinge
+//     axis     = 0.000, 1.000, 0.000
+//     degrees  = 30.28
+//     pivot    = 8.658, 0.000, -0.027
+//   end
+// end
+// 
+// part trigger
+//   role    = trigger
+//   surface = trigger
+//   dof
+//     kind     = hinge
+//     axis     = 0.000, 1.000, -0.000
+//     degrees  = 30.32
+//     pivot    = 8.674, 0.000, -0.022
+//   end
+// end
+
+weapon "MS_MP40"
+  hand      = main
+  type      = smg
+  prop      = "BD_PropMP40"
+  model     = "models/bd22" "mp40_wm.md3"
+  skin      = "models/bd22" "mp40.png"
+  capacity  = 32
+  magfamily = "bd_9mm"
+
+  muzzle    = 42.422, -0.191, 3.002
+  barrel    = 1, 0, 0
+  # side measured (14 vertices on -y against 11 on +y), the side away from the action; the point and the direction are estimates
+  ejectport = 13.578, -1.078, 1.660
+  ejectdir  = -0.2914, -0.8742, 0.3885
+
+  magmodel  = "models/bd22" "mp40_magazine.md3"
+  magskin   = "models/bd22" "mp40.png"
+  magscale  = 0.34
+  magcenter = 12.137, -0.171, -4.698
+
+  magoutsound    = "bd22/mp40/magout"
+  maginsound     = "bd22/mp40/magin"
+  rackapexsound  = "bd22/mp40/rackback"
+  rackresetsound = "bd22/mp40/rackfwd"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -20.632, -0.184, -6.932
+  rake      = 35.2
+  supportat  = 12.227, -0.189, -6.141
+  triggerat  = -14.553, -0.120, -5.099
+  seat = -13.854, -0.120, 0.348
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 15.722, 0.000, -23.172
+  grabradius = 3.0
+end
+
+part bolt
+  role    = action
+  subject = slide
+  surface = bolt
+  grab       = 3.931, 1.332, 3.042
+  handseat = 3.931, 1.141, 3.078      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -1.000, 0.000, -0.000
+    distance = 16.77
+    detach   = 0.95
+  end
+end
+
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = magazine
+  grab       = 12.235, -0.195, -22.991
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -0.000, 0.000, -1.000
+    distance = 25.766
+    detach   = 0.9
+  end
+end
+
+
+# AN MP40 (owner). Open-bolt, and the cocking handle is attached to the bolt,
+# so it DOES ride back and forth as it fires -- that half was already right.
+# What is wrong is the hold-open: an MP40 does not lock back on an empty
+# magazine.
+#
+# IT WAS CARDED LIKE A PISTOL: only `role = action`, so SynthCycle gave it the
+# defaults it carries for a slide -- holdOpenWhenEmpty and autoOnShot
+# (verb.zs:326-344). Right for BD_Pistol, which is a Beretta. Not right here.
+#
+# `auto = onshotstill` is the key the system already had for this, and verb.zs:124-126
+# names a real gun in its comment: the shot does the stroke's bookkeeping -- eject,
+# feed, hold-open -- and DRAWS NO MOTION.
+#
+# BOTH VERBS DECLARED, not just the one being changed: SynthesiseVerbs is
+# all-or-nothing (card.zs:918), so one declared verb synthesises NONE. That is how the
+# machine gun lost its magazine swap this morning. The numbers are SynthCycle's and
+# SynthSwap's own, so nothing but the two intended keys moves.
+cycle rack
+  part     = bolt
+  outat    = 0.6
+  apex     = 0.95
+  onout    = eject
+  from     = chamber
+  onhome   = feed
+  feed     = mag
+  into     = chamber
+  return   = spring
+  auto     = onshot
+  holdopen = never
+end
+
+swap magwell
+  part     = magazine
+  store    = mag
+  detachat = 0.9
+  pullout  = 0.97
+  button   = yes
+  handtake = no
+end
+weapon "MS_BD_M79"
+  hand      = main
+  type      = launcher
+  prop      = "BD_PropM79"
+  model     = "models/bd22" "m79_wm.md3"
+  skin      = "models/bd22" "m79.png"
+  capacity  = 1
+  magfamily = "bd_40mm"
+  mechanism = breakaction
+
+  muzzle    = 33.441, 0.044, 1.552
+  barrel    = 1, 0, 0
+  # side measured (9 vertices on -y against 13 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = -8.693, -0.188, 3.375
+  ejectdir  = -0.2914, -0.8742, 0.3885
+
+  opensound      = "bd22/m79/open"
+  closesound     = "bd22/m79/close"
+  loadsound      = "bd22/m79/load"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -14.769, 0.022, -2.299
+  rake      = 71.8
+  supportat  = 16.535, 0.047, -1.403
+  triggerat  = -8.699, 0.114, -4.988
+  seat = -10.354, 0.114, 6.948
+end
+store chambers
+  kind     = slotted
+  slots    = 1
+end
+
+# WHERE A ROUND GOES IN. The face is the set file's choice (breech);
+# the point is the body's own surface on that face at the breech, and the
+# direction is into the gun.
+load breech
+  into = chambers
+  slot = next
+  at   = -10.394, 0.037, 3.301
+  dir  = 1.0000, -0.0000, -0.0000
+end
+
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = -12.766, 0.000, -5.094
+  grabradius = 3.0
+end
+
+# IT BREAKS DOWN, NOT SIDEWAYS (2026-10-02). Owner: "glauncher breaks to the leff and
+# not down". The axis was 0, 0, -1 -- the Z axis -- and a hinge about Z yaws the barrel
+# across the gun. A break action hinges about Y and drops.
+#
+# MEASURED, not guessed: the donor barrel turns 45.00 degrees about (0, 1, 0) between its
+# rest frame 3 and frame 0, and the forge got the ANGLE right (45.04) and lost the AXIS.
+# The forge proposal for this gun says the same thing in its own words -- surface #1
+# "turns 45.0 deg", direction "+Y". BD_SSG, the same mechanism in this same set, already
+# carries 0, 1, 0.
+#
+# THE PIVOT IS KEPT, AND THAT IS A DECISION. Solved from the same rotation it comes out at
+# x -41.3, which is the butt of the stock -- because the DONOR ANIMATES A VIEWMODEL CHEAT:
+# surface #1 is the stock (x -43.7 to 7.2) and #4 is the barrel (-4.7 to 33.6), and BD tips
+# BOTH of them 45 degrees around a 241-vertex stub rather than tipping the barrel alone.
+# Reproducing that would swing the whole weapon about its butt plate. The pivot below sits
+# between the body (x -10.7 to -6.4) and the barrel, which is where a break action's pin
+# actually is and where BD_SSG's is.
+part barrels
+  subject = barrels
+  surface = barrels
+  surface = barrels2
+  grab       = 33.271, 0.045, 2.455
+  grabradius = 3.0
+  dof
+    kind     = hinge
+    axis     = 0.000, 1.000, 0.000
+    degrees  = 45.04
+    pivot    = -7.505, 0.047, 0.000
+  end
+end
+
+weapon "MS_FlameCannon"
+  hand      = main
+  type      = flamethrower
+  prop      = "BD_PropFlameCannon"
+  model     = "models/bd22" "flamecannon_wm.md3"
+  skin      = "models/bd22" "flamecannon.png"
+  # FIRES FROM THE RESERVE, as Brutal Doom does (owner, 2026-10-02).
+  # Without this the gun fires ONCE and stops. "It has no magazine" is the wrong
+  # explanation: with no store and no firesfrom, SynthesiseStores (card.zs:715-730)
+  # gives it a counted magazine at its capacity plus a live chamber. The magazine is
+  # not absent, it is UNREACHABLE -- SynthesiseVerbs (card.zs:917-926) makes a SWAP
+  # only on a role = feed part and a CYCLE only on role = action, and this gun has
+  # neither, so nothing can refill either store. BD agrees: FlameCannon.dec and
+  # HellishMissile.dec have no A_ReFire and just spend from the pool.
+  firesfrom = reserve
+  capacity  = 100
+  magfamily = "bd_fuel"
+  # NO CASE LEAVES THIS GUN (2026-10-02): a flame gun: nothing is chambered and nothing comes out. Unstated, a card MEANS
+  # yes (parser.zs:1776-1781), so this gun threw brass out of the ejectport below --
+  # which on a gun with no port at all is just the emptier wall of the receiver, so the
+  # brass appeared beside the gun rather than from it. The port stays: rig.zs:3122
+  # throws LIVE rounds from that same point when a breech opens.
+  casing    = none
+
+  muzzle    = 36.303, -1.976, 5.641
+  barrel    = 1, 0, 0
+  # side measured (464 vertices on -y against 564 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = 1.501, -12.609, -0.691
+  ejectdir  = -0.2914, -0.8742, 0.3885
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = 12.027, -2.030, -0.720
+  supportat  = 3.138, -0.848, -9.643
+  triggerat  = 15.515, -2.191, -0.770
+
+  seat = -11.354, -1.930, 3.348
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 1.514, 0.000, -12.016
+  grabradius = 3.0
+end
+
+weapon "MS_Hellish"
+  hand      = main
+  type      = launcher
+  prop      = "BD_PropHellish"
+  model     = "models/bd22" "hellish_wm.md3"
+  skin      = "models/bd22" "hellish.png"
+  # FIRES FROM THE RESERVE, as Brutal Doom does (owner, 2026-10-02).
+  # Without this the gun fires ONCE and stops. "It has no magazine" is the wrong
+  # explanation: with no store and no firesfrom, SynthesiseStores (card.zs:715-730)
+  # gives it a counted magazine at its capacity plus a live chamber. The magazine is
+  # not absent, it is UNREACHABLE -- SynthesiseVerbs (card.zs:917-926) makes a SWAP
+  # only on a role = feed part and a CYCLE only on role = action, and this gun has
+  # neither, so nothing can refill either store. BD agrees: FlameCannon.dec and
+  # HellishMissile.dec have no A_ReFire and just spend from the pool.
+  firesfrom = reserve
+  capacity  = 6
+  magfamily = "bd_hell"
+  # NO CASE LEAVES THIS GUN (2026-10-02): a missile tube: nothing is chambered and nothing comes out. Unstated, a card MEANS
+  # yes (parser.zs:1776-1781), so this gun threw brass out of the ejectport below --
+  # which on a gun with no port at all is just the emptier wall of the receiver, so the
+  # brass appeared beside the gun rather than from it. The port stays: rig.zs:3122
+  # throws LIVE rounds from that same point when a breech opens.
+  casing    = none
+
+  muzzle    = 49.484, -0.729, 11.062
+  barrel    = 1, 0, 0
+  # side measured (121 vertices on -y against 142 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = 1.245, -14.734, -1.720
+  ejectdir  = -0.2914, -0.8742, 0.3885
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -1.651, 0.216, -16.290
+  rake      = 70.3
+  supportat  = 33.934, -0.736, -2.792
+  triggerat  = 3.380, -0.680, -15.511
+
+  seat = -9.354, -0.680, -12.252
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = -3.309, 0.000, -10.875
+  grabradius = 3.0
+end
+
+weapon "MS_Buzzsaw"
+  hand      = main
+  type      = chaingun
+  prop      = "BD_PropBuzzsaw"
+  model     = "models/bd22" "buzzsaw_wm.md3"
+  skin      = "models/bd22" "buzzsaw.png"
+  # FIRES FROM THE MAGAZINE, not through a chamber (owner, 2026-10-02).
+  # This gun has a feed part, so it gets a SWAP and the magazine can be changed -- but
+  # it has no role = action part, so it gets no CYCLE. Unstated, firesfrom defaults to
+  # firing through a CHAMBER (card.zs:916-926) that nothing can ever refill: one shot
+  # per magazine. Saying magazine takes the chamber out of the path.
+  firesfrom = magazine
+  capacity  = 200
+  magfamily = "bd_762"
+
+  muzzle    = 80.345, -1.102, -1.550
+  barrel    = 1, 0, 0
+  # side measured (2589 vertices on -y against 1850 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = -1.812, 14.953, -0.389
+  ejectdir  = -0.2914, 0.8742, 0.3885
+
+  magmodel  = "models/bd22" "buzzsaw_magazine.md3"
+  magskin   = "models/bd22" "buzzsaw.png"
+  magscale  = 0.34
+  magcenter = -4.267, 6.396, 1.931
+
+  magoutsound    = "bd22/generic/magout"
+  maginsound     = "bd22/generic/magin"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -20.082, -1.150, -10.702
+  rake      = 27.8
+  supportat  = 27.440, -3.142, -3.855
+  triggerat  = -13.330, -1.117, -8.614
+
+  seat = -18.354, -1.031, -0.252
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 6.988, 0.000, -5.594
+  grabradius = 3.0
+end
+
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = magazine
+  grab       = -4.803, 13.788, 1.016
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0.000, 1.000, 0.000
+    distance = 11.438
+    detach   = 0.9
+  end
+end
+
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind     = hinge
+    axis     = -0.000, 1.000, -0.000
+    degrees  = 20.0
+    pivot    = -12.014, 0.000, -5.885
+  end
+end
+
+weapon "MS_Axe"
+  hand      = main
+  type      = melee
+  prop      = "BD_PropAxe"
+  model     = "models/bd22" "axe_wm.md3"
+  skin      = "models/bd22" "axe.png"
+  firesfrom = none
+
+  muzzle    = 18.977, -0.035, 11.475
+  barrel    = 1, 0, 0
+  # side measured (97 vertices on -y against 81 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = -4.760, 1.266, -4.078
+  ejectdir  = -0.2914, 0.8742, 0.3885
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# From this gun's MODELDEF Offset and seat as WeaponForge placed it (bd22).
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -15.778, -0.048, -16.224
+  rake      = 36.6
+  supportat  = 1.471, -0.051, 3.211
+  triggerat  = -20.503, -0.031, -27.310
+
+  seat = -17.406, -0.031, -21.225
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = -4.453, 0.000, -7.656
+  grabradius = 3.0
+end
+
+weapon "MS_Dragonslayer"
+  hand      = main
+  type      = melee
+  prop      = "BD_PropDragonslayer"
+  model     = "models/bd22" "dragonslayer_wm.md3"
+  skin      = "models/bd22" "dragonslayer.png"
+  firesfrom = none
+
+  muzzle    = 63.703, 1.812, 134.219
+  barrel    = 1, 0, 0
+  # side measured (26 vertices on -y against 42 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = 20.068, -3.922, 46.704
+  ejectdir  = -0.2914, -0.8742, 0.3885
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# From this gun's MODELDEF Offset and seat as WeaponForge placed it (bd22).
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -4.074, 2.193, -10.897
+  rake      = 19.8
+  supportat  = -9.551, 2.185, -25.733
+  triggerat  = -3.377, 2.203, -9.334
+
+  seat = -4.125, 2.203, -3.131
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 13.488, 0.000, -0.312
+  grabradius = 3.0
+end
+
+// DUPLICATE of MS_Chainsaw -- not kept: fewer surfaces bind
+// weapon "BD_Chainsaw"
+//   hand      = main
+//   type      = melee
+//   prop      = "BD_PropChainsaw"
+//   model     = "models/bd22" "chainsaw_wm.md3"
+//   skin      = "models/bd22" "chainsaw.png"
+//   firesfrom = none
+// 
+//   muzzle    = 34.028, -0.872, 1.252
+//   barrel    = 1, 0, 0
+//   # side measured (299 vertices on -y against 0 on +y), the emptier wall of the receiver; the point and the direction are estimates
+//   ejectport = -4.325, -0.594, 2.621
+//   ejectdir  = -0.2914, 0.8742, 0.3885
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+// # 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+//   palm       = -44.608, 1.452, -0.414
+//   rake      = 80.0
+//   supportat  = -16.484, 5.216, 16.350
+//   triggerat  = -42.165, 1.313, 1.358
+//   seat = -20.903, 1.313, 16.632
+// end
+// # WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+// # body there. The length along the gun is an ESTIMATE: the middle of the
+// # body's thick run forward of the magazine, since a handguard is thick and
+// # a barrel is thin. Check it in the headset.
+// part support
+//   role    = support
+//   subject = support
+//   grab       = -29.812, 0.000, -6.141
+//   grabradius = 3.0
+// end
+
+weapon "MS_BD_AssaultShotgun"
+  hand      = main
+  # NOT "pump" (2026-10-02): see BD_Shotgun above. `type` is the hand-seat profile and
+  # there is no "pump" one, so this gun read the uncalibrated seats and a home leniency
+  # of 0.0. This gun is not a pump in any case -- it has a bolt (`part bolt`), which is
+  # why it gets no `mechanism = pump` with the fix.
+  type      = shotgun
+  prop      = "BD_PropAssaultShotgun"
+  model     = "models/bd22" "assaultshotgun_wm.md3"
+  skin      = "models/bd22" "assaultshotgun.png"
+  capacity  = 8
+  magfamily = "12ga"
+
+  muzzle    = 36.164, 0.023, -0.114
+  barrel    = 1, 0, 0
+  # side measured (90 vertices on -y against 61 on +y), the side away from the action; the point and the direction are estimates
+  ejectport = -10.322, -2.078, 1.923
+  ejectdir  = -0.2914, -0.8742, 0.3885
+
+  magmodel  = "models/bd22" "assaultshotgun_magazine.md3"
+  magskin   = "models/bd22" "assaultshotgun.png"
+  magscale  = 0.34
+  magcenter = -10.056, 0.065, -9.462
+
+  magoutsound    = "bd22/asg/magout"
+  maginsound     = "bd22/asg/magin"
+  rackapexsound  = "bd22/asg/rackback"
+  rackresetsound = "bd22/asg/rackfwd"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -27.143, 0.022, -1.604
+  rake      = 73.2
+  supportat  = 13.708, 0.022, -3.273
+  triggerat  = -21.760, 0.093, -3.715
+  seat = -17.114, 0.093, 5.412
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = -4.697, 0.000, -15.078
+  grabradius = 3.0
+end
+
+part bolt
+  role    = action
+  subject = slide
+  surface = bolt
+  grab       = -13.754, -0.654, 0.098
+  handseat = -13.754, 0.625, 0.133      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -1.000, -0.000, -0.001
+    distance = 10.003
+    detach   = 0.95
+  end
+end
+
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = magazine
+  grab       = -10.109, 0.047, -14.029
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0.000, 0.000, -1.000
+    distance = 12.156
+    detach   = 0.9
+  end
+end
+
+
+# THE TRIGGER, which this card never drove although the mesh has always had it. The
+# surface is called `hidden2` in this set's export and `trigger` in Vanilla's -- the same
+# geometry under a name that says nothing -- so it was found by matching 44 verts, centroid 0.00 apart
+# against Vanilla's, not by reading the name. The hinge is Vanilla's measurement for this
+# mesh, unchanged.
+part trigger
+  role    = trigger
+  surface = hidden2
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 19.93
+    pivot   = -21.740, 0, -2.936
+  end
+end
+weapon "MS_VR_BFG9000"
+  hand      = main
+  type      = bfg
+  prop      = "BD_PropBFG"
+  model     = "models/bd22" "bfg_wm.md3"
+  skin      = "models/bd22" "bfg.png"
+  # FIRES FROM THE RESERVE, as Brutal Doom does (owner, 2026-10-02).
+  # Without this the gun fires ONCE and stops. "It has no magazine" is the wrong
+  # explanation: with no store and no firesfrom, SynthesiseStores (card.zs:715-730)
+  # gives it a counted magazine at its capacity plus a live chamber. The magazine is
+  # not absent, it is UNREACHABLE -- SynthesiseVerbs (card.zs:917-926) makes a SWAP
+  # only on a role = feed part and a CYCLE only on role = action, and this gun has
+  # neither, so nothing can refill either store. BD agrees: FlameCannon.dec and
+  # HellishMissile.dec have no A_ReFire and just spend from the pool.
+  firesfrom = reserve
+  capacity  = 40
+  magfamily = "bd_cell"
+  # NO CASE LEAVES THIS GUN (2026-10-02): a cell gun: no case. Unstated, a card MEANS
+  # yes (parser.zs:1776-1781), so this gun threw brass out of the ejectport below --
+  # which on a gun with no port at all is just the emptier wall of the receiver, so the
+  # brass appeared beside the gun rather than from it. The port stays: rig.zs:3122
+  # throws LIVE rounds from that same point when a breech opens.
+  casing    = none
+
+  muzzle    = 57.877, 0.078, 8.301
+  barrel    = 1, 0, 0
+  # side measured (1095 vertices on -y against 1035 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = 1.296, 13.203, -1.508
+  ejectdir  = -0.2914, 0.8742, 0.3885
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -25.673, 0.053, -9.258
+  rake      = 31.9
+  supportat  = 30.660, 0.086, -6.403
+  triggerat  = -21.510, 0.150, -5.015
+  seat = -20.854, 0.150, -0.252
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 0.945, 0.000, -12.594
+  grabradius = 3.0
+end
+
+
+# THE TRIGGER, which this card never drove although the mesh has always had it. The
+# surface is called `hidden` in this set's export and `trigger` in Vanilla's -- the same
+# geometry under a name that says nothing -- so it was found by matching 52 verts, centroid 0.00 apart
+# against Vanilla's, not by reading the name. The hinge is Vanilla's measurement for this
+# mesh, unchanged.
+part trigger
+  role    = trigger
+  surface = hidden
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 30.15
+    pivot   = -21.722, 0, -3.952
+  end
+end
+weapon "MS_BFG10k"
+  hand      = main
+  type      = bfg
+  prop      = "BD_PropBFG10k"
+  model     = "models/bd22" "bfg10k_wm.md3"
+  skin      = "models/bd22" "bfg10k.png"
+  # FIRES FROM THE RESERVE, as Brutal Doom does (owner, 2026-10-02).
+  # Without this the gun fires ONCE and stops. "It has no magazine" is the wrong
+  # explanation: with no store and no firesfrom, SynthesiseStores (card.zs:715-730)
+  # gives it a counted magazine at its capacity plus a live chamber. The magazine is
+  # not absent, it is UNREACHABLE -- SynthesiseVerbs (card.zs:917-926) makes a SWAP
+  # only on a role = feed part and a CYCLE only on role = action, and this gun has
+  # neither, so nothing can refill either store. BD agrees: FlameCannon.dec and
+  # HellishMissile.dec have no A_ReFire and just spend from the pool.
+  firesfrom = reserve
+  capacity  = 99
+  magfamily = "bd_cell"
+  # NO CASE LEAVES THIS GUN (2026-10-02): a cell gun: no case. Unstated, a card MEANS
+  # yes (parser.zs:1776-1781), so this gun threw brass out of the ejectport below --
+  # which on a gun with no port at all is just the emptier wall of the receiver, so the
+  # brass appeared beside the gun rather than from it. The port stays: rig.zs:3122
+  # throws LIVE rounds from that same point when a breech opens.
+  casing    = none
+
+  muzzle    = 58.516, 0.082, -4.222
+  barrel    = 1, 0, 0
+  # side measured (1037 vertices on -y against 987 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = -0.805, 13.203, -1.149
+  ejectdir  = -0.2914, 0.8742, 0.3885
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -28.154, 0.053, -9.453
+  rake      = 32.0
+  supportat  = 17.840, 0.086, -6.562
+  triggerat  = -24.194, 0.150, -5.232
+
+  seat = -27.354, 0.150, -0.252
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 0.141, 0.000, -12.688
+  grabradius = 3.0
+end
+
+# THE TRIGGER, MEASURED RATHER THAN COPIED (2026-10-02).
+#
+# An earlier pass REFUSED to card this one and was right to. It assumed one rigid origin
+# delta per export and took it from the bodies -- which are 0.019 units apart, so it then
+# found the trigger 2.42 units from where Vanilla's lands and would not guess across that.
+#
+# The two triggers were then compared directly. Both are 52 verts and 42 tris, and with each
+# centred on its own centroid the MAXIMUM PER-VERTEX DIFFERENCE IS 0.000000 -- the same part,
+# purely translated, not rotated and not reshaped:
+#
+#     -2.4219, 0.0000, -0.0938
+#
+# So Vanilla's hinge for this mesh applies unchanged and only the pivot moves. Its axis and
+# its 30.15 degrees are kept; its pivot -21.722, 0, -3.952 is shifted by that delta. The
+# surface is called `hidden` here and `trigger` in Vanilla's export, which is why it had to be
+# found by geometry -- the name says nothing and the body's own delta actively misleads.
+part trigger
+  role    = trigger
+  surface = hidden
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 30.15
+    pivot   = -24.144, 0.000, -4.046
+  end
+end
+
+// DUPLICATE of MS_SMG -- not kept: mesh is not one ModelSwapper ships
+// weapon "BD_SMG"
+//   hand      = main
+//   type      = smg
+//   prop      = "BD_PropSMG"
+//   model     = "models/bd22" "smg_wm.md3"
+//   skin      = "models/bd22" "smg.png"
+//   # FIRES FROM THE MAGAZINE, not through a chamber (owner, 2026-10-02).
+//   # This gun has a feed part, so it gets a SWAP and the magazine can be changed -- but
+//   # it has no role = action part, so it gets no CYCLE. Unstated, firesfrom defaults to
+//   # firing through a CHAMBER (card.zs:916-926) that nothing can ever refill: one shot
+//   # per magazine. Saying magazine takes the chamber out of the path.
+//   # firesfrom REMOVED (2026-10-02): it said `magazine` only because this gun had no
+//   # action part to feed a chamber. It has one now -- see `part charginghandle` -- so it
+//   # feeds a chamber like every other rifle in the set.
+//   capacity  = 40
+//   magfamily = "bd_9mm"
+// 
+//   muzzle    = 25.359, -0.156, 1.347
+//   barrel    = 1, 0, 0
+//   # side measured (961 vertices on -y against 904 on +y), the emptier wall of the receiver; the point and the direction are estimates
+//   ejectport = -5.931, 2.719, 3.525
+//   ejectdir  = -0.2914, 0.8742, 0.3885
+// 
+//   magmodel  = "models/bd22" "smg_magazine.md3"
+//   magskin   = "models/bd22" "smg.png"
+//   magscale  = 0.34
+//   magcenter = 4.006, -0.182, -8.224
+// 
+//   magoutsound    = "bd22/smg/magout"
+//   maginsound     = "bd22/smg/magin"
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+// # 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+//   palm       = -11.534, -0.181, -2.058
+//   rake      = 22.1
+//   supportat  = 17.251, 0.375, 0.874
+//   triggerat  = -5.778, -0.156, 1.393
+//   seat = -7.854, -0.086, 5.748
+// end
+// # WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+// # body there. The length along the gun is an ESTIMATE: the middle of the
+// # body's thick run forward of the magazine, since a handguard is thick and
+// # a barrel is thin. Check it in the headset.
+// part support
+//   role    = support
+//   subject = support
+//   grab       = 15.596, 0.000, -1.391
+//   grabradius = 3.0
+// end
+// 
+// part magazine
+//   role    = feed
+//   subject = magazine
+//   take    = no
+//   surface = magazine
+//   grab       = 0.942, -0.156, -22.235
+//   grabradius = 3.0
+//   dof
+//     kind     = slide
+//     axis     = -0.299, 0.000, -0.954
+//     distance = 26.162
+//     detach   = 0.9
+//   end
+// end
+// 
+// part trigger
+//   role    = trigger
+//   surface = trigger
+//   dof
+//     kind     = slide
+//     axis     = -1.000, 0.000, 0.000
+//     distance = 0.978
+//   end
+// end
+// 
+// # THE CHARGING HANDLE, which this card never had. The surface was always in the mesh --
+// # BD22's export calls it `fixed`, Vanilla's card for the SAME MESH calls it
+// # `charginghandle` and drives it, which is why Vanilla's SMG racks and this one did not.
+// # Paired by geometry (239 verts, centroids 0.00 apart), so every number here is Vanilla's
+// # own measurement and not a new one.
+// #
+// # TWO STAGES, the Vector's folding handle: a 90-degree hinge for the first half of the
+// # pull, then a 5.26 slide for the second.
+// part charginghandle
+//   role    = action
+//   subject = slide
+//   surface = fixed
+//   grab       = 20.16, 2.81, 3.65      # the handle's front end, the part you pinch
+//   handseat = 20.16, 2.656, 3.672      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+//   grabradius = 2.5
+//   dof
+//     kind    = hinge
+//     axis    = 0, 0, 1
+//     degrees = 90.0
+//     pivot   = 9.910, -1.183, 0
+//   end
+//   dof2
+//     kind     = slide
+//     axis     = -1, 0, 0
+//     distance = 5.26
+//     split    = 0.5
+//   end
+// end
+// 
+// # VANILLA'S CYCLE FOR THIS MESH, verbatim. Declaring it means declaring the swap too --
+// # SynthesiseVerbs is all-or-nothing (card.zs:918), and one declared verb synthesises none.
+// #
+// # `auto = onshot` is kept as Vanilla has it. The engine's own comment names a
+// # Vector-style SMG as its example of a NON-reciprocating handle, which argues the other
+// # way -- but this is Vanilla's measured, shipped card for this exact mesh, and the rule is
+// # to copy what is known right rather than redesign it. If the headset says otherwise it is
+// # one word, and it must change on BOTH cards together or they will disagree about one gun.
+// cycle rack
+//   part     = charginghandle
+//   outat    = 0.85
+//   apex     = 0.95
+//   onout    = eject
+//   from     = chamber
+//   onhome   = feed
+//   feed     = mag
+//   into     = chamber
+//   return   = spring
+//   holdopen = whenempty
+//   auto     = onshot
+// end
+// 
+// swap magwell
+//   part     = magazine
+//   store    = mag
+//   detachat = 0.9
+//   pullout  = 0.97
+//   button   = yes
+//   handtake = no
+// end
+
+weapon "MS_Flamethrower"
+  hand      = main
+  type      = flamethrower
+  prop      = "BD_PropFlamethrower"
+  model     = "models/bd22" "flamethrower_wm.md3"
+  skin      = "models/bd22" "flamethrower.png"
+  # FIRES FROM THE MAGAZINE, not through a chamber (owner, 2026-10-02).
+  # This gun has a feed part, so it gets a SWAP and the magazine can be changed -- but
+  # it has no role = action part, so it gets no CYCLE. Unstated, firesfrom defaults to
+  # firing through a CHAMBER (card.zs:916-926) that nothing can ever refill: one shot
+  # per magazine. Saying magazine takes the chamber out of the path.
+  firesfrom = magazine
+  capacity  = 200
+  magfamily = "bd_fuel"
+  # NO CASE LEAVES THIS GUN (2026-10-02): a flame gun: nothing is chambered and nothing comes out. Unstated, a card MEANS
+  # yes (parser.zs:1776-1781), so this gun threw brass out of the ejectport below --
+  # which on a gun with no port at all is just the emptier wall of the receiver, so the
+  # brass appeared beside the gun rather than from it. The port stays: rig.zs:3122
+  # throws LIVE rounds from that same point when a breech opens.
+  casing    = none
+
+  muzzle    = 56.609, 3.531, 2.328
+  barrel    = 1, 0, 0
+  # side measured (1458 vertices on -y against 1231 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = 3.781, 6.234, -1.630
+  ejectdir  = -0.2914, 0.8742, 0.3885
+
+  magmodel  = "models/bd22" "flamethrower_canister.md3"
+  magskin   = "models/bd22" "flamethrower.png"
+  magscale  = 0.34
+  magcenter = -0.460, -0.456, -1.811
+
+  magoutsound    = "bd22/generic/magout"
+  maginsound     = "bd22/generic/magin"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -30.186, -0.483, 5.836
+  rake      = 75.2
+  supportat  = 0.478, -0.453, -6.470
+  triggerat  = -27.972, -0.458, 0.118
+
+  seat = -23.354, -0.469, 18.948
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 15.605, 0.000, -6.016
+  grabradius = 3.0
+end
+
+part canister
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = canister
+  grab       = 0.326, -0.458, -7.697
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0.000, 0.000, -1.000
+    distance = 13.406
+    detach   = 0.9
+  end
+end
+
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind     = hinge
+    axis     = -0.000, 1.000, -0.000
+    degrees  = 14.98
+    pivot    = -21.910, 0.000, 1.344
+  end
+end
+
+weapon "MS_Grenade"
+  hand      = main
+  type      = melee
+  prop      = "BD_PropGrenade"
+  model     = "models/bd22" "grenade_wm.md3"
+  skin      = "models/bd22" "grenade.png"
+  capacity  = 1
+  firesfrom = none
+
+  muzzle    = 4.602, -0.300, -4.616
+  barrel    = 1, 0, 0
+  # side measured (22 vertices on -y against 22 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = 0.862, 3.641, -1.661
+  ejectdir  = -0.2914, 0.8742, 0.3885
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# From this gun's MODELDEF Offset and seat as WeaponForge placed it (bd22).
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = 0.430, 0.367, -2.752
+  rake      = 0.0
+  supportat  = 0.430, 0.367, -2.752
+  triggerat  = -1.183, -0.297, 0.393
+
+  seat = 0.953, -0.297, 1.444
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = -0.118, 0.000, -11.781
+  grabradius = 3.0
+end
+
+# ================================================================ BD_Machinegun
+# THE MG42 / GENERAL PURPOSE MACHINE GUN (owner, 2026-10-02), belt-fed, with an
+# underslung grenade launcher. Its mesh is Vanilla WM_MachineGun's, and every number
+# below is Vanilla's measurement against this set's own copy -- the surfaces were paired
+# by GEOMETRY and match within 0.04 units, so nothing had to be re-measured or converted.
+#
+# IT WAS A BOX-MAG RIFLE UNTIL NOW, and that was my error this morning: firesfrom =
+# magazine with a magazine swap, because the mesh carries a carved magazine. Three things
+# say belt feed instead. BD's own Machinegun.txt has NO BULLET RELOAD -- its Reload state
+# jumps to ReloadGrenade if a grenade was fired and otherwise returns straight to Ready,
+# and nothing ever refills Clip2. Vanilla cards this same mesh as reserve-fed and does not
+# work its magazine either. And a GPMG is belt-fed.
+#
+# THE MAGAZINE PART IS GONE WITH IT. Nothing works it by hand, and a `role = feed` part
+# with no verb is the "a hand can take it and nothing will happen" warning the load log
+# has been printing all day.
+// DUPLICATE of MS_BD_Machinegun -- not kept: fewer surfaces bind
+// weapon "BD_Machinegun"
+//   hand      = main
+//   type      = chaingun
+//   prop      = "BD_PropMachinegun"
+//   model     = "models/bd22" "machinegun_wm.md3"
+//   skin      = "models/bd22" "machinegun.png"
+// 
+//   # THE BELT, from Weapon.AmmoType1 (Clip2). `gl` below is the launcher's own.
+//   firesfrom = reserve
+//   capacity  = 100
+//   # THE GRENADE IS THE ONLY THING A HAND BRINGS THIS GUN, so it gets the family. This is
+//   # the conflict I could not resolve this morning -- it only existed because I had given
+//   # the gun a magazine swap that it should never have had.
+//   magfamily = "bd_40mm"
+// 
+//   muzzle    = 43.953, -0.241, 3.902
+//   barrel    = 1, 0, 0
+//   # side measured (157 vertices on -y against 180 on +y), the side away from the action
+//   ejectport = -9.049, 4.938, -4.206
+//   ejectdir  = -0.2914, 0.8742, 0.3885
+// 
+//   opensound      = "bd22/machinegun/rackback"
+//   closesound     = "bd22/machinegun/rackfwd"
+//   loadsound      = "bd22/generic/magin"
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm.
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+//   palm       = -25.484, -0.267, -9.278
+//   rake      = 23.2
+//   supportat  = 14.585, -0.266, -7.173
+//   triggerat  = -19.308, -0.313, -6.156
+// 
+//   seat = -21.654, -0.171, 0.948
+// end
+// # THE GRENADE CHAMBER: one round, the launcher's alone. A fired round stays in it SPENT
+// # until the breech opens.
+// store gl
+//   kind  = slotted
+//   slots = 1
+// end
+// 
+// part support
+//   role    = support
+//   subject = support
+//   grab       = 2.957, 0.000, -11.391
+//   grabradius = 3.0
+// end
+// 
+// part trigger
+//   role    = trigger
+//   surface = trigger
+//   dof
+//     kind     = slide
+//     axis     = -1.000, 0.000, 0.000
+//     distance = 0.594
+//   end
+// end
+// 
+// # THE TUBE slides forward to open the breech. NOT this gun's action -- the M249's own
+// # bolt is not a separate surface, and driving the launcher as a rack is what made
+// # "racking" this gun slide its grenade launcher forward.
+// part launchertube
+//   subject = foregrip
+//   surface = launchertube
+//   grab       = 39.128, -0.310, -6.667
+//   handseat = 39.128, -0.281, -6.68      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+//   grabradius = 3.0
+//   dof
+//     kind     = slide
+//     axis     = 1.000, -0.000, -0.000
+//     distance = 9.504
+//   end
+// end
+// 
+// # THE LATCH: press it to free the tube.
+// part launcherlatch
+//   surface = launcherlatch
+//   grab       = 0.860, -0.322, -9.276
+//   grabradius = 2.0
+//   dof
+//     kind    = hinge
+//     axis    = 0.000, -1.000, -0.000
+//     degrees = 19.09
+//     pivot   = 0.777, 0.000, -8.250
+//   end
+// end
+// 
+// # THE LAUNCHER'S OWN TRIGGER, drawn pulled while the alt button is held.
+// part launchertrigger
+//   surface = launchertrigger
+//   dof
+//     kind    = hinge
+//     axis    = 0.000, 1.000, 0.000
+//     degrees = 20.02
+//     pivot   = -2.193, 0.000, -7.863
+//   end
+// end
+// 
+// # THE BREECH. Opening it throws the spent case out of gl. It stops only the launcher, so
+// # the machine gun keeps firing with it open. BD's own ReloadGrenade plays GRLLO1,
+// # insertshell, GRLLO2 (Machinegun.txt:222-236), which is this sequence.
+// open breech
+//   part        = launchertube
+//   latch       = launcherlatch
+//   latchreturn = spring
+//   openat      = 0.85
+//   closeat     = 0.05
+//   rest        = stay
+//   onopen      = ejectall
+//   from        = gl
+// end
+// 
+// load grenade
+//   into    = gl
+//   slot    = next
+//   subject = round
+//   at      = 5.24, -0.27, -7.17
+//   size    = 2.0, 2.0, 2.0
+//   dir     = 1, 0, 0
+//   rides   = launchertube
+//   needs   = open:breech
+// end
+// 
+// # THE UNDERBARREL LAUNCHER: a second barrel on the alt-fire button, fed from gl. BD's own
+// # AltFire fires ShortGrenade off AmmoRocket, one at a time, gated by a FiredMGGrenade
+// # token until ReloadGrenade clears it -- which is this store of one.
+// barrel launcher
+//   input     = altfire
+//   trigger   = launchertrigger
+//   from      = gl
+//   shotclass = "ShortGrenade"
+//   ammo      = "AmmoRocket"
+//   muzzle    = 39.16, -0.27, -7.17
+//   barrel    = 1, 0, 0
+//   needs     = shut:breech
+// end
+
+weapon "MS_Minigun"
+  hand      = main
+  type      = chaingun
+  prop      = "BD_PropMinigun"
+  model     = "models/bd22" "minigun_wm.md3"
+  skin      = "models/bd22" "minigun.png"
+  # FIRES FROM THE RESERVE, as Brutal Doom does (owner, 2026-10-02).
+  # Without this the gun fires ONCE and stops. "It has no magazine" is the wrong
+  # explanation: with no store and no firesfrom, SynthesiseStores (card.zs:715-730)
+  # gives it a counted magazine at its capacity plus a live chamber. The magazine is
+  # not absent, it is UNREACHABLE -- SynthesiseVerbs (card.zs:917-926) makes a SWAP
+  # only on a role = feed part and a CYCLE only on role = action, and this gun has
+  # neither, so nothing can refill either store. BD agrees: FlameCannon.dec and
+  # HellishMissile.dec have no A_ReFire and just spend from the pool.
+  firesfrom = reserve
+  capacity  = 200
+  magfamily = "bd_762"
+
+  muzzle    = 54.015, -0.174, 0.673
+  barrel    = 1, 0, 0
+  # side measured (258 vertices on -y against 274 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = -15.380, -9.578, -5.873
+  ejectdir  = -0.2914, -0.8742, 0.3885
+
+  spinupsound    = "bd22/minigun/spinup"
+  spinsound      = "bd22/minigun/spin"
+  spindownsound  = "bd22/minigun/spindown"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -43.264, -0.498, 1.522
+  rake      = 25.9
+  # THE LEFT-SIDE HANDLE, recovered 2026-10-03. His click was held back as 11.25 units off
+  # the mesh, and he was right about the gun and the page was wrong about the depth:
+  #
+  #     his click      -7.311   21.548   -9.530
+  #     the forend     -7.241   24.373    5.404
+  #
+  # x out by 0.07 and z out by 14.9. He picked the handle correctly in the view he had; an
+  # orthographic page cannot say how far THROUGH a part a click lands, so the depth axis is
+  # the one it gets wrong. `forend` is a real 111-vertex surface running y 9.4 to 27.0 at
+  # x -9.3 to -5.3 -- a grip standing off to the left, 24.4 units from the trigger, which is
+  # exactly the handle he described from memory. This is its centre, 2.15 units inside the
+  # surface, which is where a hand wrapped round a bar sits.
+  supportat  = -7.266, 24.373, 5.404
+  triggerat  = -37.098, -0.484, 4.002
+  seat = -38.854, -0.103, 12.948
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = -26.269, 0.000, -10.688
+  grabradius = 3.0
+end
+
+part barrels
+  spin    = trigger
+  spinrate = 20.0
+  spinup   = 14
+  spindown = 25
+  surface = barrels
+  dof
+    kind     = hinge
+    axis     = 1.000, 0.000, -0.000
+    degrees  = 120.0
+    pivot    = 0.000, -0.151, 0.678
+  end
+end
+
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind     = hinge
+    axis     = 0.001, 1.000, 0.001
+    degrees  = 20.01
+    pivot    = -35.631, 0.000, 6.617
+  end
+end
+
+part forend
+  subject = forend
+  surface = forend
+  grab       = -7.429, 26.274, 4.666
+  handseat = -7.429, 26.297, 5.461      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  handaxis = 0, 1, 0      # the line the hand closes round, index to little finger, fitted 2026-10-11 to c_doom_marine (reload hands)
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -0.325, 0.106, -0.940
+    distance = 0.002
+  end
+end
+
+weapon "MS_Plasma"
+  hand      = main
+  type      = plasma
+  prop      = "BD_PropPlasma"
+  model     = "models/bd22" "plasma_wm.md3"
+  skin      = "models/bd22" "plasma.png"
+  # FIRES FROM THE MAGAZINE, not through a chamber (owner, 2026-10-02).
+  # This gun has a feed part, so it gets a SWAP and the magazine can be changed -- but
+  # it has no role = action part, so it gets no CYCLE. Unstated, firesfrom defaults to
+  # firing through a CHAMBER (card.zs:916-926) that nothing can ever refill: one shot
+  # per magazine. Saying magazine takes the chamber out of the path.
+  firesfrom = magazine
+  capacity  = 60
+  magfamily = "bd_cell"
+  # NO CASE LEAVES THIS GUN (2026-10-02): a cell gun: no case. Unstated, a card MEANS
+  # yes (parser.zs:1776-1781), so this gun threw brass out of the ejectport below --
+  # which on a gun with no port at all is just the emptier wall of the receiver, so the
+  # brass appeared beside the gun rather than from it. The port stays: rig.zs:3122
+  # throws LIVE rounds from that same point when a breech opens.
+  casing    = none
+
+  muzzle    = 39.278, 0.537, 0.134
+  barrel    = 1, 0, 0
+  # side measured (949 vertices on -y against 1004 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = -6.831, -9.672, -2.056
+  ejectdir  = -0.2914, -0.8742, 0.3885
+
+  magmodel  = "models/bd22" "plasma_cell.md3"
+  magskin   = "models/bd22" "plasma.png"
+  magscale  = 0.34
+  magcenter = -12.701, 0.469, -13.239
+
+  magoutsound    = "bd22/plasma/magout"
+  maginsound     = "bd22/plasma/magin"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -33.214, 0.452, -7.346
+  rake      = 30.0
+  supportat  = 8.750, 0.506, -8.592
+  triggerat  = -27.836, 0.607, -4.242
+  seat = -28.004, 0.607, -2.484
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 15.406, 0.000, -8.094
+  grabradius = 3.0
+end
+
+part cell
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = cell
+  grab       = -13.130, 0.270, -18.972
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0.194, 0.000, -0.981
+    distance = 12.326
+    detach   = 0.9
+  end
+end
+
+
+# THE TRIGGER, which this card never drove although the mesh has always had it. The
+# surface is called `fixed` in this set's export and `trigger` in Vanilla's -- the same
+# geometry under a name that says nothing -- so it was found by matching 88 verts, centroid 0.00 apart
+# against Vanilla's, not by reading the name. The hinge is Vanilla's measurement for this
+# mesh, unchanged.
+part trigger
+  role    = trigger
+  surface = fixed
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 19.96
+    pivot   = -27.838, 0, -2.315
+  end
+end
+weapon "MS_RocketLauncher"
+  hand      = main
+  type      = launcher
+  prop      = "BD_PropRPG"
+  model     = "models/bd22" "rpg_wm.md3"
+  skin      = "models/bd22" "rpg.png"
+  # FIRES FROM THE MAGAZINE, not through a chamber (owner, 2026-10-02).
+  # This gun has a feed part, so it gets a SWAP and the magazine can be changed -- but
+  # it has no role = action part, so it gets no CYCLE. Unstated, firesfrom defaults to
+  # firing through a CHAMBER (card.zs:916-926) that nothing can ever refill: one shot
+  # per magazine. Saying magazine takes the chamber out of the path.
+  firesfrom = magazine
+  # SIX, NOT ONE (2026-10-02). BD's own RocketLauncher.txt states it twice: RocketRounds
+  # is Inventory.MaxAmount 6 (line 395-401) and the reload loop stops at
+  # A_JumpIfInventory("RocketRounds", 6, "NoNeedToReload") (lines 264, 287). The drum has
+  # SEVEN chambers and the seventh is never loaded, which is why the two numbers differ.
+  capacity  = 6
+  magfamily = "bd_rocket"
+  # NO CASE LEAVES THIS GUN (2026-10-02): rockets leave by the bore; nothing is thrown out. Unstated, a card MEANS
+  # yes (parser.zs:1776-1781), so this gun threw brass out of the ejectport below --
+  # which on a gun with no port at all is just the emptier wall of the receiver, so the
+  # brass appeared beside the gun rather than from it. The port stays: rig.zs:3122
+  # throws LIVE rounds from that same point when a breech opens.
+  casing    = none
+
+  muzzle    = 65.789, 3.235, -1.433
+  barrel    = 1, 0, 0
+  # side measured (62 vertices on -y against 685 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = -5.203, -2.156, -2.027
+  ejectdir  = -0.2914, -0.8742, 0.3885
+
+  magoutsound    = "bd22/rpg/magout"
+  maginsound     = "bd22/rpg/magin"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = 13.045, 3.225, -17.293
+  rake      = 29.4
+  supportat  = 46.600, 3.297, -4.017
+  triggerat  = 19.140, 3.250, -14.068
+
+  seat = 23.646, 3.306, -8.652
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 14.681, 0.000, -25.203
+  grabradius = 3.0
+end
+
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind     = slide
+    axis     = -1.000, -0.000, 0.000
+    distance = 1.386
+  end
+end
+
+# THE ROCKETS LIVE IN THE DRUM, and the drum stays on the gun: a hand pushes single
+# rockets into the front of the tube, as BD's own reload does (RocketLauncher.txt
+# FinishReload gives RocketRounds one at a time). Declared rather than synthesised so the
+# roundsurface and load lines below can name it.
+store drum
+  kind     = counted
+  capacity = 6
+end
+
+# THE DRUM -- A SEVEN-CHAMBER CYLINDER THAT INDEXES, NOT A MAGAZINE THAT ROTATES OFF.
+#
+# WHAT WAS WRONG: its only motion was `hinge 51.43 degrees about +x`, written as the dof
+# a hand pulls the magazine out by. 51.43 is 360/7 -- it is the PER-SHOT INDEX STEP, and
+# it had been fitted into the swap slot. So the drum's whole reload was a 51-degree
+# twist in place, the rockets never moved with the count, and nothing could be loaded.
+#
+# THESE ARE THE SAME MESH AS VANILLA'S WM_RPG, which is not obvious: both cards draw a
+# file called rpg_wm.md3 and the two files have a different surface count (13 vs 10) and
+# different names -- this export kept three extra pieces and lost rocket1-7, which came
+# out as fixed2..fixed10 off the emitter's counter. Checked rather than assumed, in the
+# BD donor (D:\...\BrutalDoom\_BD_1.01_WeaponModels\Models\Weapons\Hud\RPG\RPG.md3):
+#   * the out axis over the insert frames 30-33 is (0, -0.9458, 0.3248); Vanilla quotes
+#     (0, -0.944, 0.329), measured the same way on its own donor -- 0.004 apart
+#   * the drum centroid lands at 3.636, -4.595, 2.353 in this card's space; Vanilla's
+#     index pivot is 3.636, -4.562, 2.026
+#   * the trigger slides 1.386 here and 1.397 there
+# so Vanilla's numbers are this gun's numbers, measured twice by two routes.
+#
+# DISTANCE 10.75 is Vanilla's. Mine, by a cruder vertex sweep, came out 8.884; the longer
+# travel cannot bind where the shorter one clears, so the conservative one is kept.
+# NO `detach`: this gun has no loose drum mesh, and `role = feed` with a detach and no
+# magmodel is something coming off the gun with nothing to draw (card_lint:575-583).
+part drum
+  role    = feed
+  subject = magazine
+  take    = no          # it stays on the gun; rockets go in at the muzzle
+  surface = drum
+  # The drum's axis plus its own outer radius (12.395, measured in THIS mesh -- Vanilla's
+  # export reads 12.683) along the out axis: the rim a hand would take.
+  grab       = 3.636, -16.296, 6.431
+  grabradius = 3.0
+  # NO PULL-OUT DOF, AND THAT IS THE FIX FOR THE FLOATING ROCKETS (2026-10-02, second
+  # pass). Owner: "the bd22 launcher ejects the correct part but keeps the rockets
+  # floating in air for some reason while the vanilla does it correctly".
+  #
+  # I had copied Vanilla WM_RPG's slide -- (0, -0.944, 0.329) by 10.75 -- and VANILLA CAN
+  # AFFORD IT BECAUSE IT HAS A LOOSE DRUM MESH. wm_rpg_mag.md3 is the drum WITH its seven
+  # rockets baked in, so when Vanilla's drum detaches the hand draws that one object and
+  # the on-gun copy hides. This set has no such mesh: pulling the drum moved the drum
+  # surface ALONE and left fixed2..fixed9 hanging in the air where they were.
+  #
+  # So the drum stays on the gun, which is what take = no already said and what the
+  # mechanism actually is here -- rockets go in at the muzzle (the load muzzle block
+  # below) and the drum turns with the count. Nothing detaches, so nothing is left behind.
+  #
+  # To give it a real pull-out, the drum and its seven rockets would have to be carved
+  # into one loose mesh the way Vanilla's are. That is a forge carve, not a card line.
+  # THE SEVEN CHAMBERS IN FIRING ORDER, by clock angle about the drum's own axis measured
+  # at the rest frame -- the surface names carry no order at all, so they were sorted by
+  # where they actually sit. fixed2 is the one in the bore; each next is 51.4 degrees
+  # round, and the index step below is NEGATIVE, which is the direction that brings them
+  # up in this order. A roundsurface is drawn while the store holds MORE than its number.
+  roundsurface = fixed2, drum, 5
+  roundsurface = fixed3, drum, 4
+  roundsurface = fixed4, drum, 3
+  roundsurface = fixed7, drum, 2
+  roundsurface = fixed8, drum, 1
+  roundsurface = fixed9, drum, 0
+  # `role = feed` WITH NO VERB IS DELIBERATE HERE, and the load log will say so:
+  # "part drum is role = feed and no verb works it". The role cannot go -- an index
+  # belongs on the feed part and the parser refuses it anywhere else
+  # (parser.zs:1334) -- and the verb cannot come: a swap takes the drum OFF, and this
+  # set has no loose drum mesh to draw in the hand once it is off. The drum is still
+  # drawn, because `present` follows magIn and a store with no `detach` is never
+  # detached (rig.zs:200, ammo.zs:714). Rockets go in at the muzzle instead.
+  #
+  # THE PER-SHOT TURN: a seventh of a turn about +x through the drum's axis. The emitter
+  # measured this and put it in the dof above; here it is in the slot that means it.
+  index
+    kind    = hinge
+    axis    = 1, 0, 0
+    pivot   = 3.636, -4.595, 2.353
+    degrees = -51.43
+  end
+end
+
+# THE SEVENTH CHAMBER STAYS EMPTY: capacity 6 in a seven-chamber drum, as Vanilla's
+# WM_RPG has it. Hidden, not counted -- a roundsurface at 6 would never show.
+part emptychamber
+  role    = hidden
+  surface = fixed10
+end
+
+# ROCKETS GO IN AT THE FRONT OF THE TUBE: one rocket brought to the tube's front ring, on
+# the bore, and pushed down it. The point is this card's own muzzle.
+#
+# WRITTEN HERE AND NOT GENERATED: emit_card places a load from set.py's `where` face,
+# which is under | left | right | breech. A muzzle load has no face in that list yet.
+load muzzle
+  into    = drum
+  subject = round
+  at      = 65.789, 3.235, -1.433
+  size    = 2.5, 2.5, 2.5
+  dir     = -1, 0, 0
+end
+
+// DUPLICATE of MS_BD_RailGun -- not kept: fewer surfaces bind
+// weapon "BD_Railgun"
+//   hand      = main
+//   type      = plasma
+//   prop      = "BD_PropRailgun"
+//   model     = "models/bd22" "railgun_wm.md3"
+//   skin      = "models/bd22" "railgun.png"
+//   # FIRES FROM THE MAGAZINE, not through a chamber (owner, 2026-10-02).
+//   # This gun has a feed part, so it gets a SWAP and the magazine can be changed -- but
+//   # it has no role = action part, so it gets no CYCLE. Unstated, firesfrom defaults to
+//   # firing through a CHAMBER (card.zs:916-926) that nothing can ever refill: one shot
+//   # per magazine. Saying magazine takes the chamber out of the path.
+//   firesfrom = magazine
+//   capacity  = 5     # BD's own: RailgunAmmo Inventory.MaxAmount 5
+//   magfamily = "bd_rail"
+//   # NO CASE LEAVES THIS GUN (2026-10-02): a rail: no case. Unstated, a card MEANS
+//   # yes (parser.zs:1776-1781), so this gun threw brass out of the ejectport below --
+//   # which on a gun with no port at all is just the emptier wall of the receiver, so the
+//   # brass appeared beside the gun rather than from it. The port stays: rig.zs:3122
+//   # throws LIVE rounds from that same point when a breech opens.
+//   casing    = none
+// 
+//   muzzle    = 86.219, -0.113, -2.164
+//   barrel    = 1, 0, 0
+//   # side measured (463 vertices on -y against 420 on +y), the emptier wall of the receiver; the point and the direction are estimates
+//   ejectport = 11.621, 4.516, -4.413
+//   ejectdir  = -0.2914, 0.8742, 0.3885
+// 
+//   magmodel  = "models/bd22" "railgun_magazine.md3"
+//   magskin   = "models/bd22" "railgun.png"
+//   magscale  = 0.34
+//   magcenter = -2.481, -0.098, -10.079
+// 
+//   magoutsound    = "bd22/railgun/magout"
+//   maginsound     = "bd22/railgun/magin"
+// end
+// 
+// # THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+// # 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+// grip
+//   # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+//   # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+//   palm       = -25.262, -0.130, -9.440
+//   rake      = 29.5
+//   supportat  = 22.040, -0.094, -9.532
+//   triggerat  = -18.637, -0.092, -7.447
+//   seat = -23.344, -0.042, -4.536
+// end
+// # WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+// # body there. The length along the gun is an ESTIMATE: the middle of the
+// # body's thick run forward of the magazine, since a handguard is thick and
+// # a barrel is thin. Check it in the headset.
+// part support
+//   role    = support
+//   subject = support
+//   grab       = 7.336, 0.000, -11.797
+//   grabradius = 3.0
+// end
+// 
+// part trigger
+//   role    = trigger
+//   surface = trigger
+//   dof
+//     kind     = hinge
+//     axis     = -0.000, 1.000, -0.000
+//     degrees  = 22.85
+//     pivot    = -18.554, 0.000, -5.441
+//   end
+// end
+// 
+// part magazine
+//   role    = feed
+//   subject = magazine
+//   take    = no
+//   surface = magazine
+//   grab       = 0.582, -0.099, -15.969
+//   grabradius = 3.0
+//   dof
+//     kind     = slide
+//     axis     = -0.000, 0.000, -1.000
+//     distance = 10.031
+//     detach   = 0.9
+//   end
+// end
+
+weapon "MS_BD_Rifle"
+  hand      = main
+  type      = rifle
+  prop      = "BD_PropRifle"
+  model     = "models/bd22" "rifle_wm.md3"
+  skin      = "models/bd22" "rifle.png"
+  capacity  = 30
+  magfamily = "bd_762"
+
+  muzzle    = 54.241, 0.134, 0.203
+  barrel    = 1, 0, 0
+  # side measured (435 vertices on -y against 504 on +y), the side away from the action; the point and the direction are estimates
+  ejectport = 2.662, -2.234, 2.261
+  ejectdir  = -0.2914, -0.8742, 0.3885
+
+  magmodel  = "models/bd22" "rifle_magazine.md3"
+  magskin   = "models/bd22" "rifle.png"
+  magscale  = 0.34
+  magcenter = 1.343, 0.069, -8.068
+
+  magoutsound    = "bd22/rifle/magout"
+  maginsound     = "bd22/rifle/magin"
+  rackapexsound  = "bd22/rifle/rackback"
+  rackresetsound = "bd22/rifle/rackfwd"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -13.426, 0.108, -10.131
+  rake      = 33.0
+  supportat  = 18.482, 0.141, -1.064
+  triggerat  = -7.745, 0.205, -7.981
+  seat = -10.054, 0.205, -0.252
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 8.793, 0.000, -20.219
+  grabradius = 3.0
+end
+
+part charginghandle
+  role    = action
+  subject = slide
+  surface = charginghandle
+  surface = charginghandle2
+  grab       = -16.481, 0.969, 2.587
+  handseat = -16.481, 0.18, 2.602      # where the avatar's palm goes on this part, fitted 2026-10-11 to c_doom_marine (reload hands)
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -1.000, -0.001, -0.000
+    distance = 7.117
+    detach   = 0.95
+  end
+end
+
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = magazine
+  grab       = 1.541, 0.080, -21.664
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = -0.025, 0.000, -1.000
+    distance = 22.467
+    detach   = 0.9
+  end
+end
+
+
+# AN M16 (owner). An AR-15 charging handle is NON-RECIPROCATING: it sits
+# still while the bolt carrier cycles inside the receiver, and an AR has no
+# last-round bolt hold-open -- which is exactly why its shooters hit the bolt
+# catch by hand.
+#
+# IT WAS CARDED LIKE A PISTOL: only `role = action`, so SynthCycle gave it the
+# defaults it carries for a slide -- holdOpenWhenEmpty and autoOnShot
+# (verb.zs:326-344). Right for BD_Pistol, which is a Beretta. Not right here.
+#
+# `auto = onshotstill` is the key the system already had for this, and verb.zs:124-126
+# names a real gun in its comment: the shot does the stroke's bookkeeping -- eject,
+# feed, hold-open -- and DRAWS NO MOTION.
+#
+# BOTH VERBS DECLARED, not just the one being changed: SynthesiseVerbs is
+# all-or-nothing (card.zs:918), so one declared verb synthesises NONE. That is how the
+# machine gun lost its magazine swap this morning. The numbers are SynthCycle's and
+# SynthSwap's own, so nothing but the two intended keys moves.
+cycle rack
+  part     = charginghandle
+  outat    = 0.6
+  apex     = 0.95
+  onout    = eject
+  from     = chamber
+  onhome   = feed
+  feed     = mag
+  into     = chamber
+  return   = spring
+  auto     = onshotstill
+  holdopen = never
+end
+
+swap magwell
+  part     = magazine
+  store    = mag
+  detachat = 0.9
+  pullout  = 0.97
+  button   = yes
+  handtake = no
+end
+weapon "MS_BD_Unmaker"
+  hand      = main
+  type      = bfg
+  prop      = "BD_PropUnmaker"
+  model     = "models/bd22" "unmaker_wm.md3"
+  skin      = "models/bd22" "unmaker.png"
+  # FIRES FROM THE MAGAZINE, not through a chamber (owner, 2026-10-02).
+  # This gun has a feed part, so it gets a SWAP and the magazine can be changed -- but
+  # it has no role = action part, so it gets no CYCLE. Unstated, firesfrom defaults to
+  # firing through a CHAMBER (card.zs:916-926) that nothing can ever refill: one shot
+  # per magazine. Saying magazine takes the chamber out of the path.
+  firesfrom = magazine
+  capacity  = 60
+  magfamily = "bd_rune"
+  # NO CASE LEAVES THIS GUN (2026-10-02): a cell gun: no case. Unstated, a card MEANS
+  # yes (parser.zs:1776-1781), so this gun threw brass out of the ejectport below --
+  # which on a gun with no port at all is just the emptier wall of the receiver, so the
+  # brass appeared beside the gun rather than from it. The port stays: rig.zs:3122
+  # throws LIVE rounds from that same point when a breech opens.
+  casing    = none
+
+  muzzle    = 38.054, 0.012, 3.813
+  barrel    = 1, 0, 0
+  # side measured (599 vertices on -y against 655 on +y), the emptier wall of the receiver; the point and the direction are estimates
+  ejectport = 0.070, -17.656, -6.202
+  ejectdir  = -0.2914, -0.8742, 0.3885
+
+  magmodel  = "models/bd22" "unmaker_skull.md3"
+  magskin   = "models/bd22" "unmaker.png"
+  magscale  = 0.34
+  magcenter = -16.828, -0.126, 6.614
+
+  magoutsound    = "bd22/generic/magout"
+  maginsound     = "bd22/generic/magin"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# 2026-10-01: this gun's own handle on the M4A3's grip (set.py FIRING_LINE "hand").
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  # PLACED BY THE OWNER, 2026-10-03, on a shaded render of this gun's own mesh.
+  palm       = -28.558, -0.009, -9.866
+  rake      = 15.0
+  supportat  = 6.959, 0.006, -7.162
+  triggerat  = -21.508, 0.083, -7.139
+
+  seat = -19.354, 0.083, -6.252
+end
+# WHERE THE OFF HAND GOES. The height is measured -- the underside of the
+# body there. The length along the gun is an ESTIMATE: the middle of the
+# body's thick run forward of the magazine, since a handguard is thick and
+# a barrel is thin. Check it in the headset.
+part support
+  role    = support
+  subject = support
+  grab       = 13.664, 0.000, -10.016
+  grabradius = 3.0
+end
+
+part skull
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = skull
+  surface = skull2
+  grab       = -16.149, -0.072, 7.874
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0.000, 0.000, 1.000
+    distance = 5.906
+    detach   = 0.9
+  end
+end

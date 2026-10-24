@@ -1,0 +1,59 @@
+# ============================================================================
+# THE TEST GUNS: two pistols and two pump shotguns, one of each per hand.
+#
+# Each card says only what that gun is: where its parts are and how far they
+# move, its stores, its meshes and sounds. What a TYPE of gun does with those
+# parts is the reload system's (RS_VR_Reload/WMCARD.txt), taken with
+# `mechanism = <archetype>`. What a trigger pull puts in the air is the weapon
+# CLASS's (WM_Gun.ShotPellets / ShotSpread / ShotDamage, zscript/rs_vr_weapons/),
+# not the card's. Read from every WMCARD lump in the load order.
+#
+# CARD ORDER IS SPAWN ORDER. For a second after you spawn the reload system puts
+# each carded gun into its hand, in card order (system.zs Equip), so the pistols
+# come first: they are the guns raised when you spawn. WM_PumpTestHandler then puts
+# the shotguns in hand (zscript/rs_vr_weapons/loadout.zs, wm_pump_start_in_hands).
+#
+# EVERY MESH NUMBER IS MEASURED, NOT GUESSED, and each says how:
+#
+#     python E:\DOOMWork\tools\md3.py MODEL            -- structure
+#     md3.part_motion(model, part, ref)                 -- travel, turn, fit error
+#     python E:\DOOMWork\tools\md3_write.py extract ... -- the loose magazine / shell
+#
+# Rigid fit with the receiver's own motion divided out (the receivers of the
+# pistols and both shotgun meshes move in their reload frames). Frames where a
+# part is collapsed to a point (pistolet's magazine at 12-14, its second piece at
+# 7-14) are flagged `degenerate` and never measured from. The few numbers that are
+# NOT measured say ESTIMATE, and why.
+#
+# ALL POINTS AND AXES ARE MD3 MODEL SPACE: x along the barrel toward the
+# muzzle, y across, z up, in the mesh's own units. The system converts to the
+# renderer's own axes (which swap y and z) at the one place that needs it.
+# Grab radii and oval half-sizes are MAP units.
+#
+# SCALE, for turning mesh units into map units: MODELDEF Scale x 0.34, the
+# controller frame's own ratio. M4A3 0.82 x 0.34 = 0.279; M37A2 1.1 x 0.34 =
+# 0.374; Doom shotgun 1.35 x 0.34 = 0.459.
+# ============================================================================
+
+
+# ============================================================================
+# THE MODEL CARD LIBRARY (the reload lane, 2026-09-14). The cards live in root files, one an archetype:
+# WMCARD.<NN>_<archetype>. Every file's lump name is WMCARD, so the reload system reads them all. The number
+# keeps the cards in their old order, which matters: spawn puts guns in hand in card order (system.zs Equip)
+# and a clip becomes the magazine of the first card that fires it (WM_System.CardForAmmo).
+#
+#   WMCARD.01_pistol              WM_M4A3, WM_Pistolet
+#   WMCARD.02_pump                WM_PumpM37, WM_PumpDoom, WM_BullpupPump
+#   WMCARD.03_revolver_breaktop   WM_Moonlight, WM_Sunset
+#   WMCARD.04_revolver_swingout   WM_ColaRevolver
+#   WMCARD.05_rifle               WM_Rifle, WM_M16
+#   WMCARD.06_breakaction         WM_SSG, WM_DoubleBarrel
+#   WMCARD.07_smg                 WM_Tec9, WM_SMG
+#   WMCARD.08_cell                WM_PlasmaRifle, WM_PlasmaCarbine, WM_Railgun, WM_Bolter
+#   WMCARD.09_chaingun            WM_Chaingun, WM_MachineGun, WM_RotaryGun
+#   WMCARD.10_launcher            WM_RocketLauncher, WM_RPG, WM_RotaryLauncher
+#   WMCARD.11_bfg                 WM_BFG, WM_BFGHeavy, WM_BFGRifle, WM_Unmaker
+#   WMCARD.12_chainsaw            WM_Chainsaw, WM_ChainsawHeavy, WM_LongbarChainsaw
+#   WMCARD.13_flamethrower        WM_Flamer, WM_Flamethrower
+#   WMCARD.14_magazine_shotgun    WM_AssaultShotgun
+# ============================================================================

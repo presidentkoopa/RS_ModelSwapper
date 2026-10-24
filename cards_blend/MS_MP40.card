@@ -1,0 +1,18 @@
+weapon MS_MP40
+  archetype   rifle_mag        # from source names
+  model       MS_MP40.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    grip     surf 0  rest [27.83, -0.05, -1.84]  axis [-0.825, 0.008, -0.565]  size [28.73, 4.83, 19.02]
+    grip2    surf 1  rest [27.44, 0.01, 4.28]  axis [-0.004, -1.000, 0.004]  size [2.61, 4.72, 2.67]
+    mag      surf 2  rest [32.83, -0.00, -1.37]  axis [-0.999, -0.000, 0.053]  size [23.17, 6.55, 2.22]
+    mag2     surf 3  rest [44.62, -0.01, -2.99]  axis [-0.974, -0.000, -0.226]  size [11.12, 7.50, 4.20]
+    mag3     surf 4  rest [55.11, -0.01, -5.47]  axis [-0.019, 0.000, 1.000]  size [3.77, 2.17, 22.02]
+    trigger  surf 5  rest [30.60, -0.00, -3.97]  axis [-0.088, -0.000, 0.996]  size [1.69, 0.83, 3.77]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [30.78, -0.00, -1.86]
+    part     surf 6  rest [36.22, -2.61, 3.21]  axis [-1.000, -0.006, 0.003]  size [1.70, 1.28, 1.05]
+    muzzle    [62.03, 0.00, 2.77]
+  grip        line [53.27, 0.00, -1.84] [55.80, -0.01, -4.11]  trigger [30.60, -0.00, -3.97]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [57.27, 0.00, -1.84]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 13481  frames 1

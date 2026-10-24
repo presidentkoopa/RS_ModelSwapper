@@ -1,0 +1,14 @@
+weapon MS_Tommy
+  archetype   rifle_mag        # from source names
+  model       MS_Tommy.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    bolt     surf 1  rest [25.71, 1.37, 2.52]  axis [-0.979, 0.206, 0.008]  size [21.39, 4.41, 2.45]
+    trigger  surf 2  rest [30.88, 0.01, -3.95]  axis [-0.284, -0.004, -0.959]  size [2.98, 1.27, 4.00]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [31.61, 0.01, -1.66]
+    mag      surf 3  rest [37.04, 0.01, -1.83]  axis [-0.049, 0.001, -0.999]  size [4.50, 2.81, 22.00]
+    muzzle    [34.52, 0.00, 2.08]
+  grip        line [19.46, 0.00, -11.75] [-16.38, 0.00, -18.90]  trigger [30.88, 0.01, -3.95]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [23.46, 0.00, -11.75]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 7133  frames 1

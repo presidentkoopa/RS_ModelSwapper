@@ -1,0 +1,190 @@
+// ModelSwapper cvars.
+
+// CONFIG VERSION. Bumped whenever a shipped DEFAULT changes, so an existing
+// ini picks the change up instead of silently overriding it -- an archived
+// server cvar always beats this file. See RS_ForeignModelHandler.MigrateConfig,
+// which applies the change once and stamps this.
+//
+//   0 -- never migrated. A fresh install starts here, already holds the
+//        current defaults from below, and is stamped on first load.
+//   1 -- rs_foreignmodels_byfamily defaults off.
+server int rs_fm_cfgver = 0;
+
+server bool rs_foreignmodels         = true;   // master switch
+server bool rs_foreignmodels_dump    = false;  // dump the scan to console
+server bool rs_foreignmodels_showall = false;  // include weapons with no slot binding
+
+// (rs_foreignmodels_natural and rs_fm_learned are gone: the remap engine
+// reads timing off the weapon's own state table every tic, so there is
+// no learned timing to store and no "natural rate" distinct from theirs.
+// A stale archived copy in an old ini is ignored harmlessly.)
+
+// The player's own model choices, packed as class:archetype:pick1:pick2;...
+// Written every time a pick changes. Keyed on class name only -- no notion
+// of "which mod" anywhere -- which is what makes this work as a per-mod
+// profile with nothing tracking which mod is loaded: only one mod's classes
+// exist in the world at a time. Clear it with the menu.
+server string rs_fm_picks = "";
+
+// THEIR CASINGS COME OUT OF YOUR FACE. A weapon mod spawns brass, smoke
+// and ejection effects relative to the PLAYER, because on a monitor the
+// player and the gun are the same place. In a headset they are not: the
+// gun is in a tracked hand and the eye is your face, so the brass leaves
+// your cheekbone and swings around as you look up and down.
+//
+// This shifts anything a mod spawns next to the eye, in the moment after
+// you work the weapon, by the vector from the eye to the muzzle. It
+// TRANSLATES rather than repositions, so every offset and every velocity
+// the author wrote survives intact -- the ejection arc is the one they
+// drew, starting from the gun instead of your face.
+//
+// Only for weapons wearing one of our models, because we are the reason
+// the gun moved. On by default: the displacement it corrects is one this
+// mod causes.
+server bool rs_fm_effects = true;
+
+// Extra distance from the grip to the muzzle, on top of the per-family
+// figure. The engine has no muzzle concept -- a weapon acts from the
+// hand -- so this is where the casing relocator aims its shift.
+server int rs_fm_muzzle = 0;   // map units, clamped -20..80
+
+// Collapse the picker to ONE ROW PER FAMILY -- one shotgun row, one smg row.
+//
+// OFF by default. The picker exists to show the weapons the scan actually
+// found, by name, and let you put a model on each one. A row labelled
+// "all shotgun" answers a question nobody asked first.
+//
+// Turn it ON when a mod's class count makes that unworkable: Brutal Doom 22
+// shows 85 rows, DoomRL Arsenal about 150, and across the test corpus there
+// are 934 weapon classes of which only 276 even declare a slot. Most of
+// those rows are the same gun in a different mode -- BrutalPistol,
+// DualPistols and PuristPistol are all your pistol -- and one row per
+// family is the escape hatch for exactly that case.
+server bool rs_foreignmodels_byfamily = false;
+
+// Show only weapons you are CARRYING. The cheapest honest filter there is:
+// a mod can invent classes without limit, but you only ever hold the ones
+// your player class was given. Guncaster and Trailblazer name their weapons
+// Brimstone and Bitchmaker -- no token list will ever classify those, and no
+// filter built on names will ever shorten that menu. Your inventory answers
+// both questions without asking the mod anything.
+//
+// Off by default: a player who wants to dress a gun before finding it should
+// meet the whole list first.
+server bool rs_foreignmodels_carried = false;
+
+// Offer models even when a weapon already has one of its own.
+//
+// ON by default, because the flag we can read cannot answer the question we
+// actually have. Actor.hasmodel means "this class has a model bound to SOME
+// sprite" -- it says nothing about WHICH. A mod that models its dropped
+// pickup and leaves the first-person view as flat sprites reads identically
+// to one that ships full HUD models.
+//
+// Project Brutality is exactly that mod. Its MODELDEF binds sprite VIFL and
+// its Spawn state runs A_PBVPFramework -- the pickup lying on the floor. Its
+// Fire states use R0F8 and have no model at all. hasmodel came back true, we
+// stood down, and we withheld models from the weapons that most needed them.
+//
+// Pickup models are common; first-person weapon models are rare -- a mod
+// that had them would not need this one. So offering is the right default.
+// Turn this off to leave any modelled weapon alone.
+server bool rs_foreignmodels_replaceown = true;
+
+// ===========================================================================
+// QUEST BUILD ONLY. build.ps1 -Static ships this file in place of the root
+// lump of the same name; the desktop build never sees it. Added 2026-10-24
+// for the VR reload / hands / melee code brought in from the RSQ Weapon
+// Depot runtime, which is QuestZDoom 17.3 code. The REMA version is separate.
+// ===========================================================================
+
+// ---- CVARINFO.rsvr ----
+// RS VR melee (zscript/rsvr/melee.zs): the axe and the Dragonslayer.
+
+// How hard a swing has to be before the blade cuts. 1.0 is the shipped feel; higher asks for a
+// harder swing, lower cuts on less. Multiplies the per-weapon threshold.
+user float rsvr_melee_swing = 1.0;
+// How much of the blade's motion must point DOWN for a swing to cut: 0.25 is about 15 degrees
+// below level (owner, 2026-10-16: only a meaningful downward swing cuts; never level, never up).
+user float rsvr_melee_down = 0.25;
+
+// What you HOLD to ready the axe throw, as a usercmd button mask. Default 16 = BT_ALTATTACK,
+// which is how it has always worked. QuestZDoom has no usercmd bit for the weapon hand's grip,
+// so to throw on the grip either bind the grip to one of the engine's user buttons and set this
+// to it (BT_USER1 2097152, BT_USER2 4194304, BT_USER3 8388608, BT_USER4 16777216), or put the
+// grip's raw key codes in rsvr_axe_keys below. 0 = never hold, so the throw is off.
+user int rsvr_axe_hold = 16;
+// Raw key codes that also ready the throw, space separated, read the way rsr_grip_keys is.
+// Empty by default. Turn on Print each reload step (rsr_debug) and press your grip to read its
+// code, then put it here.
+user string rsvr_axe_keys = "";
+
+// Two-handed axe: how squarely the cutting edge must lead the swing before the second
+// hand is worth anything. 0.5 is about 60 degrees off the edge; 1.0 demands a perfect
+// edge-on blow, 0 pays for any direction. The axe is bladed on one side, so holding it
+// with both hands is not the reward -- landing the edge is (owner, 2026-10-23).
+user float rsvr_axe_edge = 0.5;
+
+// Axe lock-on (one-handed throw). Hold the throw and the axe paints the monster your
+// hand is pointing at; release into the throw and it goes there. The cone is how far
+// off your aim a target may be to be picked up; a lock already made is kept out to
+// a little over twice that before it drops, so it does not flicker as you wind up.
+user float rsvr_axe_lock_cone = 16.0;
+user float rsvr_axe_lock_range = 1200.0;
+
+// ---- CVARINFO.rsq ----
+// RS VR hands / reload / ballistics. Options: RSQ_Options in MENUDEF.rsq. v9.
+user bool rsq_hands = true;			// VR hands on the controllers
+user int rsr_reload = 1;			// Reloading: 1 VR (zscript/rsr, on the guns that have it; the rest stock), 0 stock
+server bool rsq_ballistics = false;	// enhanced impacts and projectile trails (server: they use playsim random)
+user int rsq_punch = 0;			// VR punching: a real punch with either fist lands (zscript/rsq/fists.zs)
+// 2026-10-23: a punch that lands on a switch or any usable line works it, at the fist's own reach
+// instead of the engine's 64-unit use range. The LINE'S SPECIAL decides, not its texture.
+user bool rsq_punch_use = true;
+server bool rsq_extra_weapons = false;	// cheats also give the MP40, MG42, Devastator, Hellish launcher, flame cannon (zscript/nosniper)
+user int rsr_grab_with = 0;		// 1.17 Grab ammo with: 0 off trigger, 1 off grip (1.14 rule), 2 Use key (only while a reload has the hand)
+user bool rsq_flick = true;		// 1.17 Flick to reload: a gun in each hand, snap a barrel down to reload that gun (zscript/rsq/flick.zs)
+// 2026-10-23: the VR scopes (zscript/rsq/scope.zs). Per gun, 0 DOT (a collimated red dot on
+// the gun's own glass, no magnification) or 1 REAL (the view down the bore rendered into it).
+// RSQ_ScopeTable.ModeCVar() maps the table index to these names, so a new scoped gun needs a
+// row in that table and a cvar here and nothing else.
+user int rsq_scope_sniper = 0;
+user int rsq_scope_railgun = 0;
+
+// ---- CVARINFO.rsr ----
+// RS real VR reload (zscript/rsr/vreload.zs). rsr_reload 1 (CVARINFO.rsq) turns it on for the guns that have it.
+user string rsr_grip_keys = "443 436";	// key codes that are the off-hand grip (it grabs only 50 cm or more from the gun hand, or with vr_two_handed_weapons 0): 443 KEY_PAD_RTHUMB, 436 KEY_PAD_DPAD_UP (with the main grip held as a shift)
+user int rsr_grab_buttons = 67108864;	// usercmd buttons that grab anywhere: BT_OFFHANDATTACK (off-hand trigger); 0 = none
+user int rsr_magrelease = 268435456;	// usercmd buttons that drop the magazine: BT_OFFHANDRELOAD; the gun's own reload always does
+user int rsr_pouch = 0;				// where a new magazine is taken: 0 anywhere 20 cm from the gun, 1 low (40 cm below the eyes)
+user bool rsr_eat_grip = true;		// while a reload has the off hand, its grip key does nothing else (rthumb is +speed in some layouts)
+user bool rsr_debug = false;		// print every key code pressed, and each reload step
+
+// 1.93: take the charging handle / slide with no reload running, so the action can be cracked
+// open on a loaded gun and let go again (a press check). A look, not a rack: no ammo moves and
+// nothing chambers. Needs "Grab ammo with" set to the trigger or the grip, because the Use key
+// is only taken over while a reload has the off hand.
+user bool rsr_freecharge = false;
+
+// Reload assist (zscript/rsr/rsr_assist.zs): one number scales every capture radius and
+// tolerance of the real VR reload at once, and how little of a push or a stroke counts as
+// done. 1.0 is the shipped feel; 0.5 asks for the old precision; 3.0 is very forgiving.
+user float rsr_assist = 1.0;
+// Draw the capture zones as rings. A tuning aid, not a play feature -- but it IS in the menu
+// (Reload: tuning and debug), because a console command is no use with a headset on. With it
+// off not one particle is spawned, and these are particles, never actors, so nothing becomes
+// a marker in the world.
+user bool rsr_assist_debug = false;
+
+// Pump shotguns: how many shells one pushed home counts as, 1 to 4. The reserve pays for every
+// one of them; this only saves you inserting eight times to fill a tube.
+user int rsr_shell_credit = 1;
+
+// 1.30 the rifle's M203 (zscript/rsr/rsr_m203.zs): what a hand-loaded round costs. 0 a rocket (as
+// BD22's own launcher reload), 1 a hand grenade. A server setting: it changes what you have.
+server int rsm_ammo = 0;
+
+// 1.37 secondary fire on the zoom buttons (zscript/rsq/alts.zs): off = BD22 as it was
+server bool rsa_pistol_semi = false;	// pistol: one shot per trigger pull
+server bool rsa_rev_magnum = false;	// revolver: secondary fires a slug
+server bool rsa_sg_slug = false;		// pump shotgun: secondary fires a slug

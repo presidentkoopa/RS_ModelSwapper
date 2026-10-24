@@ -1128,10 +1128,16 @@ class RS_ForeignModelHandler : StaticEventHandler
 	// the same way and for the same reason as the two hands above.
 	Array<Actor> mOvlBound;
 
-	// Anchor sprite index each hand is pinned to. A flash layer gets pinned to
-	// the SAME sprite, letter B, which resolves a model and draws nothing.
+	// Anchor sprite index each hand is pinned to. A flash layer is pinned to
+	// MSBL instead -- our own private sprite name -- which resolves a model and
+	// draws nothing. It used to be letter B of this same stock anchor, until
+	// that turned out to let a foreign weapon's own next state resolve our
+	// out-of-range row and blank the held weapon for a frame. See
+	// BlankWeaponFlashes.
 	int mFlashSprMain;
 	int mFlashSprOff;
+	int  mBlankSpr;    // MSBL's sprite index, resolved once
+	bool mBlankTried;  // ... and resolved only once, hit or miss
 
 	// LAYERS WE HAVE BLANKED, one entry per (caller, layer) the first time
 	// we touch it. Purely a report -- nothing reads it back.
@@ -2338,8 +2344,27 @@ class RS_ForeignModelHandler : StaticEventHandler
 			// entirely. The pin stays underneath it for the static build, where
 			// there is no such field and the frame trick is all we have.
 			RS_Fork.SetNoDraw(psp, true);
-			psp.Sprite = si;
-			psp.Frame  = 1;      // letter B -- the out-of-range anchor
+			// MSBL IS OURS ALONE, AND THAT IS THE POINT.
+			//
+			// This used to pin letter B of the donor's STOCK anchor (PISG,
+			// SHTG, CHGG ...). The engine takes a model's interpolation target
+			// from the DECLARED next state's sprite -- FindModelFrame(actor,
+			// nextState->sprite, ...) -- resolved against the foreign weapon,
+			// which carries OUR modelDef. Vanilla's pistol chain is literally
+			// PISG A -> PISG B, so a foreign weapon's own next state could
+			// resolve our out-of-range row, and an out-of-range frame makes
+			// FMD3Model::RenderFrame return without drawing: the held weapon
+			// vanished for that rendered frame, intermittently, on 36 donors.
+			//
+			// MSBL is a private sprite name, registered by MS_BlankAnchor's
+			// state (zscript.txt) and used by nothing else, so no foreign state
+			// can reach this row at all.
+			if (!mBlankTried) { mBlankTried = true; mBlankSpr = Actor.GetSpriteIndex("MSBL"); }
+			if (mBlankSpr > 0)
+			{
+				psp.Sprite = mBlankSpr;
+				psp.Frame  = 0;   // MSBL letter A -- the out-of-range blank
+			}
 
 			// Fork only: a stale ModelFrame on this layer would override the
 			// out-of-range anchor and draw a real gun frame where the flash was.

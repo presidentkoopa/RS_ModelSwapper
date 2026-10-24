@@ -1,0 +1,211 @@
+# ============================================================================
+# WMCARD.13_flamethrower -- the model card library, archetype flamethrower: WM_Flamer, WM_Flamethrower.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+# ==========================================================================
+# LIVE: the flamers family (WM_Flamer, WM_Flamethrower).
+# Measured and drafted in _pending/FLAMER_CARDS.md.
+# ==========================================================================
+
+# ============================================================== FLAMER -- MAIN HAND
+# RS_ModelSwapper's MS_AE_Flamer (m260b.md3) as flamer_wm.md3 -- rest frame 0 written as its
+# only frame, parts named: body, pilotflame, canister, trigger. Every number measured at frame 0
+# against the body's largest island. _pending/FLAMER_CARDS.md.
+#
+# A MAGAZINE CARD WITH A CANISTER FOR A MAGAZINE: no action part, no cycle, no declared verbs --
+# the swap is synthesised from the feed part.
+#
+# SCALE: MODELDEF Scale 1.1 x 0.34 = 0.374 map units per model unit.
+weapon "MS_Flamer"
+  type      = flamethrower     # its hand-seat profile (the key landed in c688186)
+  hand      = main
+  prop      = "WM_PropFlamer"
+  model     = "models/vanilla/flamers/Flamer" "flamer_wm.md3"
+  skin      = "models/vanilla/flamers/Flamer" "flamer.png"
+
+  # fires straight from the canister's store.
+  firesfrom = magazine
+  # FALLBACK: `firesfrom = reserve` -- no stores, fires from the player's Cells; also take
+  # `role = feed` off the canister part below.
+  # a flame throws no brass.
+  casing    = none
+
+  # ONE DOOM CELL PACK: 100 cells, 5.7 seconds of flame at FireTics 2 (17.5 a second). ESTIMATE.
+  capacity  = 100
+  # Its own family: this canister seats only here.
+  magfamily = "flamer"
+
+  # The nozzle's orifice ring: 20 vertices at x 36.30-36.31, radius 0.73, centred on the bore
+  # (y -0.40, z -1.00). The bore is level: z -0.977 at x 32, -1.000 at x 36.
+  muzzle    = 36.31, -0.40, -1.00
+  barrel    = 1, 0, 0
+
+  # The loose canister: this gun's own canister surface, lifted out, re-origined on its centroid.
+  # Its pull axis is already -z, so it is upright untouched. magscale 0.374 = 1.1 x 0.34.
+  magmodel  = "models/vanilla/flamers/Flamer" "wm_flamer_can.md3"
+  magskin   = "models/vanilla/flamers/Flamer" "flamer.png"
+  magscale  = 0.374
+  magcenter = -9.808, -0.488, -10.237
+
+  # The flame's own sound is RS_Ballistics' (rsb/flame/*). The canister takes the Vanilla+
+  # plasma rifle's cell foley already in this package's SNDINFO. ESTIMATE choice.
+  magoutsound  = "wm/plasma/magout"
+  maginsound   = "wm/plasma/magin"
+  drysound     = "wm/dry"
+  magdropsound = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropFlamer is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -30.862, -0.462, -8.788
+  supportat = 5.582, -0.418, -4.926
+  palm = -36.418, -0.501, -11.321
+  rake = 23.6
+  seat = -29.818, -0.462, -8.746
+end
+
+# THE CANISTER. Straight down: a pure slide along (0, 0, -1), frames 5-9 (0.00 degrees, fit
+# 0.009), and back in on the same line over 11-13. The donor drops it 185.8, off screen; the
+# hand's pull is only until it is free. Its neck sits 1.03 up inside a collar under the body
+# (neck top z 0.359, collar rim z -0.672), and nothing else of the body stands over it.
+part canister
+  role    = feed
+  subject = magazine
+  take    = no          # out by its button, in by the hand carrying one
+  surface = canister
+  grab       = -10.03, -0.45, -27.89    # the bottom face's centre
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0, 0, -1
+    distance = 1.03
+    detach   = 0.9
+  end
+end
+
+# 16.70 degrees about the pin at -29.304, -2.348 (frame 1, fit 0.012). Sign checked: +16.70
+# lands the rest centroid within 0.000 of frame 1; -16.70 misses by 4.097. Follows your finger.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 16.70
+    pivot   = -29.304, 0, -2.348
+  end
+end
+
+# THE DONOR'S BAKED PILOT FLAME: fourteen orange quads at the pilot burner's tip. Hidden while
+# RSB_Flame.Pilot draws the live one; delete this part to see the baked flame instead.
+part pilotflame
+  role    = hidden
+  surface = pilotflame
+end
+
+# ESTIMATE: under the box beneath the barrel (x 12-14, underside z -8.88), well ahead of the
+# canister (front edge x -4.52).
+part support
+  role    = support
+  subject = support
+  grab       = 12.0, -0.45, -8.5
+  grabradius = 3.0
+end
+
+# ============================================================ FLAMETHROWER -- OFF HAND
+# RS_Main's RS_GH_Flamethrower (Flamethrower2.md3) as flamethrower2_wm.md3: the owner's pick, 2026-09-14, in place of the
+# Force Unleashed incinerator. Mesh prep (reload lane): the donor's frame 0, its rest (frames 1-5 are its HUD fire kick);
+# 15.l split into body and canister, 13.l the trigger, the untextured Cylinder the pilotflame; re-origined on the rest
+# centroid, shifted (57.0312, 0.4688, -8.3594) from the donor. Every number below is MEASURED on flamethrower2_wm.md3
+# unless it says ESTIMATE.
+weapon "MS_BD_Flamethrower2"
+  type      = flamethrower     # its hand-seat profile (the key landed in c688186)
+  hand      = off
+  prop      = "WM_PropFlamethrower"
+  model     = "models/vanilla/flamers/Flamethrower2" "flamethrower2_wm.md3"
+  skin      = "models/vanilla/flamers/Flamethrower2" "Flamethrower2.png"
+  # fires straight from the canister's store.
+  firesfrom = magazine
+  casing    = none
+  # ONE DOOM CELL PACK, as the Flamer's: 100 cells, 5.7 seconds at FireTics 2. ESTIMATE.
+  capacity  = 100
+  magfamily = "flamethrower"
+  # THE MAIN NOZZLE: the shroud's mouth ring at x 53.28 (y -4.70..3.80, z 3.83..7.22), its centre. Level.
+  muzzle    = 53.28, -0.45, 5.52
+  barrel    = 1, 0, 0
+  # The loose canister: this gun's own canister surface lifted out and re-origined on its centroid (md3_write.extract).
+  # It lies as it lies in the gun, along x; its pull axis is -z. magscale 0.34 = 1.0 x 0.34.
+  magmodel  = "models/vanilla/flamers/Flamethrower2" "wm_flamethrower2_can.md3"
+  magskin   = "models/vanilla/flamers/Flamethrower2" "Flamethrower2.png"
+  magscale  = 0.34
+  magcenter = -0.460, -0.456, -1.811
+  # As the Flamer's: the flame is RS_Ballistics'; the canister takes the plasma cell foley. ESTIMATE.
+  magoutsound  = "wm/plasma/magout"
+  maginsound   = "wm/plasma/magin"
+  drysound     = "wm/dry"
+  magdropsound = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropFlamethrower is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -28.430, -0.458, 0.445
+  supportat = 0.151, -0.459, -6.187
+  palm = -30.186, -0.483, 5.836
+  rake = 75.2
+  seat = -24.790, -0.460, 7.092
+end
+
+# THE CANISTER, STRAIGHT DOWN. The tank (a body island of 496 vertices) and its two end caps, ringed by two straps and
+# sitting over a valve pipe at its rear underside. No line out of it is clear of the gun -- back is the grip and hose,
+# forward the heat shield, up the barrel -- so it drops straight down, the least in the way: it passes through the
+# straps' lower loops and the top of the rear valve pipe (z -3.25, x -12.6..-10.2) as it goes. Distance: its top (z 4.67)
+# down past the straps' bottoms (z -8.55), plus 0.4.
+part canister
+  role    = feed
+  subject = magazine
+  take    = no          # out by its button, in by the hand carrying one
+  surface = canister
+  # Its underside, the lowest half unit of it: the hand takes it from below.
+  grab       = 0.38, -0.46, -8.52
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0, 0, -1
+    distance = 13.62
+    detach   = 0.9
+  end
+end
+
+# THE TRIGGER: a hinge in the donor, 14.98 degrees about (0, 1, 0) through its pin, fit 0.009 (tools/card_skeleton.py at
+# frame 3; +14.98 lands it, -14.98 misses by 1.949). The pin as the re-origin moved it.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 14.98
+    pivot   = -21.91, -0.47, 1.34
+  end
+end
+
+# THE DONOR'S PILOT FLAME: an untextured cone on the side igniter's tip (centroid 55.50, 3.53, 0.19). Hidden, as the
+# Flamer's, while RS_Ballistics draws the live one.
+part pilotflame
+  role    = hidden
+  surface = pilotflame
+end
+
+# THE OTHER HAND ON THE BARREL: the top tube's underside just ahead of the heat shield (x 25.55..27.44, z 6.02), before
+# the tube bends down to the shroud. The point is MEASURED; that the hand goes there is an ESTIMATE.
+part support
+  role    = support
+  subject = support
+  grab       = 26.68, -0.47, 6.02
+  grabradius = 3.0
+end

@@ -1,0 +1,414 @@
+# ============================================================================
+# WMCARD.08_cell -- the model card library, archetype cell: WM_PlasmaRifle, WM_PlasmaCarbine, WM_Railgun, WM_Bolter.
+# Moved from WMCARD.txt on 2026-09-14 with every line unchanged. Index and order: WMCARD.txt.
+# ============================================================================
+
+# ==========================================================================
+# LIVE: the plasma family (WM_PlasmaRifle, WM_PlasmaCarbine).
+# Measured and drafted in _pending/PLASMA_CARDS.md.
+# ==========================================================================
+
+# ======================================================= PLASMA RIFLE -- MAIN HAND
+# RS_ModelSwapper's plasma rifle as plasmarifle_wm.md3: rest frame 4 as its only frame,
+# its two surfaces named "Frame" and the Battery renamed body and cell. Every number
+# measured at frame 4 against every island of the body. _pending/PLASMA_CARDS.md.
+#
+# IT FIRES FROM THE CELL: no chamber, no action part, no cycle, no verbs declared --
+# the swap is synthesised from the feed part.
+weapon "MS_PlasmaRifle"
+  type      = plasma     # its hand-seat profile (the key landed in c688186)
+  hand      = main
+  prop      = "WM_PropPlasmaRifle"
+  model     = "models/vanilla/plasma/PlasmaRifle" "plasmarifle_wm.md3"
+  skin      = "models/vanilla/plasma/PlasmaRifle" "PlasmaRifle.png"
+
+  # Fifty cells, the owner's number.
+  capacity  = 50
+  # Its own family: the two plasma guns' cells are different shapes.
+  magfamily = "plasmarifle"
+
+  firesfrom = magazine
+  casing    = none
+
+  # The body's front face (x 39.41), on the barrel rings' centre (y 0.54, z 0.14). Level.
+  muzzle    = 39.41, 0.54, 0.14
+  barrel    = 1, 0, 0
+
+  # The loose cell: its Battery surface lifted out, re-origined on its centroid and
+  # stood along its pull-out axis. magcenter is that centroid in the gun's space.
+  magmodel  = "models/vanilla/plasma/PlasmaRifle" "wm_plasmarifle_cell.md3"
+  magskin   = "models/vanilla/plasma/PlasmaRifle" "PlasmaRifle.png"
+  magscale  = 0.34
+  magcenter = -12.701, 0.469, -13.239
+
+  # This package's SNDINFO wm/plasma/* (the Vanilla+ plasma rifle's shots and cell foley).
+  firesound    = "weapons/plasmaf"
+  drysound     = "wm/dry"
+  magoutsound  = "wm/plasma/magout"
+  maginsound   = "wm/plasma/magin"
+  magdropsound = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropPlasmaRifle is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -27.656, 0.398, -4.143
+  supportat = 10.970, 0.506, -8.590
+  palm = -33.214, 0.452, -7.346
+  rake = 30.0
+  seat = -28.088, 0.399, -2.081
+end
+
+# THE CELL. A pure slide on its insert frames 20-25 (0.05 degrees of turn at most, fit
+# 0.013), dx/dz constant at -0.198: (0.1942, 0, -0.9810), 11.2 degrees forward of straight
+# down. The donor's eased sideways drift (0.63 at most) is left out -- a well cannot let a
+# cell slide sideways. Distance is the cell's own length along the axis.
+part cell
+  role    = feed
+  subject = magazine
+  take    = no          # out by its button, in by the hand carrying one
+  surface = cell
+  grab       = -12.38, 0.47, -18.93   # the cell's bottom face
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0.1942, 0, -0.9810
+    distance = 12.33
+    detach   = 0.9
+  end
+end
+
+# 19.96 degrees about the pin at -27.838, -2.315 (frame 5, fit 0.009). Sign checked:
+# +19.96 lands the rest centroid 0.000 off frame 5; -19.96 misses by 1.255.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 19.96
+    pivot   = -27.838, 0, -2.315
+  end
+end
+
+# Measured 09-14: under the rail beneath the barrel. Its bottom (z -8.09) runs x 8.12 to 15.77 and y -1.23
+# to 2.30; this is its middle.
+part support
+  role    = support
+  subject = support
+  grab       = 11.95, 0.54, -8.09
+  grabradius = 3.0
+end
+
+# ================================================== PLASMA RIFLE BLUE -- OFF HAND
+# The Plasma Rifle in blue (the owner, 2026-09-14: "just copy and rename what we have now and change the skin to be
+# more blue"), for the Plasma Rifle pickup's off hand in place of the Railgun. It STARTS FROM WM_PlasmaRifle's card
+# (inheritance, the owner's go 2026-09-15): the same mesh, parts, cell, muzzle and sounds, so a fix to that card reaches
+# this one too. It says only what differs -- the off hand, its prop class and its blue skin.
+weapon "WM_PlasmaRifleBlue"
+  base = WM_PlasmaRifle
+  hand = off
+  prop = "WM_PropPlasmaRifleBlue"
+  skin = "models/vanilla/plasma/PlasmaRifle" "PlasmaRifleBlue.png"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropPlasmaRifleBlue is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -27.656, 0.398, -4.143
+  supportat = 10.750, 0.506, -8.595
+  palm = -33.214, 0.452, -7.346
+  rake = 30.0
+  seat = -26.778, -0.539, 0.919
+end
+
+# ===================================================== PLASMA CARBINE -- OFF HAND
+# Force Unleashed's plasma rifle and its cell as plasmacarbine_wm.md3: the rifle's idle
+# frame and the cell seated, one frame, surfaces body, cell and trigger. Every number
+# measured in that shared space. _pending/PLASMA_CARDS.md.
+#
+# IT FIRES FROM THE CELL, as the plasma rifle's card: no chamber, no action, no verbs.
+weapon "MS_PlasmaCarbine"
+  type      = plasma     # its hand-seat profile (the key landed in c688186)
+  hand      = off
+  prop      = "WM_PropPlasmaCarbine"
+  model     = "models/vanilla/plasma/PlasmaCarbine" "plasmacarbine_wm.md3"
+  skin      = "models/vanilla/plasma/PlasmaCarbine" "plasmacarbine.png"
+
+  capacity  = 50
+  magfamily = "plasmacarbine"
+
+  firesfrom = magazine
+  casing    = none
+
+  # The emitter block's front face (x 87.67), centred (y 0.0, z 15.38). Level.
+  muzzle    = 87.67, 0.0, 15.38
+  barrel    = 1, 0, 0
+
+  magmodel  = "models/vanilla/plasma/PlasmaCarbine" "wm_plasmacarbine_cell.md3"
+  magskin   = "models/vanilla/plasma/PlasmaCarbine" "plasmacarbine.png"
+  magscale  = 0.34
+  magcenter = 26.560, 0.005, 3.176
+
+  firesound    = "wm/plasma/carbine_fire"
+  drysound     = "wm/dry"
+  magoutsound  = "wm/plasma/carbine_magout"
+  maginsound   = "wm/plasma/carbine_magin"
+  magdropsound = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropPlasmaCarbine is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = 11.542, -0.028, 4.491
+  supportat = 59.527, 0.004, 10.296
+  palm = 1.113, -0.116, 1.852
+  rake = 11.5
+  seat = -24.000, 0.000, 12.000
+end
+
+# THE CELL ROCKS OUT: ONE SLIDE THAT TURNS AS IT GOES. The donor's reload frames 1-4 are
+# one motion scaled -- the centroid 10.387 along (-0.2308, 0, -0.9730) while turning 20.19
+# degrees about +y -- and this dof lands every vertex of every one within 0.04 (the other
+# way round misses by 6.5). The cell's top, the part in the well, comes straight down;
+# the bottom rocks back past the trigger guard. Pivot is the cell's rest centroid, which
+# is magcenter, so a dropped cell appears where the drawn one is.
+part cell
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = cell
+  grab       = 29.45, 0.0, -3.69     # the cell's bottom face
+  grabradius = 3.0
+  dof
+    kind      = slide
+    axis      = -0.2308, 0, -0.9730
+    distance  = 10.387
+    twist     = 20.19
+    twistaxis = 0, 1, 0
+    pivot     = 26.560, 0.005, 3.176
+    detach    = 0.9
+  end
+end
+
+# 25.04 degrees about the pin at 12.290, 6.588 (frame 1, fit 0.009). Sign checked:
+# +25.04 lands the rest centroid 0.000 off; -25.04 misses by 1.885.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 25.04
+    pivot   = 12.290, 0, 6.588
+  end
+end
+
+# Measured 09-14: under the heatsink. Its underside is flat at z 8.03 from x 41.33 to 73.52, on the centre
+# line; this is its middle.
+part support
+  role    = support
+  subject = support
+  grab       = 57.42, 0.0, 8.03
+  grabradius = 3.0
+end
+
+# ==========================================================================
+# LIVE: the railgun family (WM_Railgun).
+# Measured and drafted in _pending/RAILGUN_CARDS.md.
+# ==========================================================================
+
+# ============================================================== RAILGUN -- MAIN HAND
+# RS_ModelSwapper's RailGun.md3 (MS_BD_RailGun) as railgun_wm.md3: surfaces body, scope,
+# scopeglass, magazine, trigger. Every number measured at the source's rest frame 3
+# against the Gun surface's largest island; frame 36 (the ads clip) excluded.
+# _pending/RAILGUN_CARDS.md.
+#
+# SCALE: MODELDEF Scale 1.0 x 0.34 = 0.34 map units per model unit.
+weapon "MS_BD_RailGun"
+  # Its hand seats: the railgun profile (wm_hs_railgun_*), landed in c688186.
+  type      = railgun
+  hand      = off
+  # a shoulder stock, a pistol grip and a
+  # handguard, 51.9 map units long.
+  hands     = 1
+  prop      = "WM_PropRailgun"
+  model     = "models/vanilla/railguns/Railgun" "railgun_wm.md3"
+  skin      = "models/vanilla/railguns/Railgun" "railgun.png"
+
+  # RS_Main's railgun: 50 cells, 10 a shot, 5 shots a magazine.
+  capacity  = 50
+  magfamily = "rail"
+
+  # no chamber and no rack -- the shot
+  # draws straight from the magazine. No role = action part, no cycle verb.
+  firesfrom = magazine
+  # nothing leaves the gun on a shot.
+  casing    = none
+
+  # The barrel's front face (x 86.22); the bore holds y -0.11, z -2.17 from x 40 to it.
+  muzzle    = 86.22, -0.11, -2.17
+  barrel    = 1, 0, 0
+
+  # No ejectport, ejectdir or roundmodel: no brass and no loose round.
+
+  # The loose magazine: its magazine surface lifted out and re-origined on its
+  # centroid; it already drops straight down, so it stands as it sat.
+  magmodel  = "models/vanilla/railguns/Railgun" "wm_railgun_mag.md3"
+  magskin   = "models/vanilla/railguns/Railgun" "railgun.png"
+  magscale  = 0.34
+  magcenter = -2.481, -0.098, -10.079
+
+  # SNDINFO's railgun set: the Vanilla+ plasma rifle's rail-beam shot and its cell foley.
+  firesound      = "wm/rail/fire"
+  drysound       = "wm/dry"
+  magoutsound    = "wm/rail/magout"
+  maginsound     = "wm/rail/magin"
+  magdropsound   = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropRailgun is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -18.637, -0.092, -7.447
+  supportat = 27.350, -0.094, -9.532
+  palm = -25.262, -0.130, -9.440
+  rake = 29.5
+  seat = -17.756, 0.191, -3.048
+end
+
+# THE MAGAZINE: a cell pack and its two side contacts, one surface of three islands.
+# 29.99 straight down (0, 0, -1) at frame 16, 0.02 degrees, fit 0.013; the same axis
+# on every frame 12-29. 10.03 long along it; it sits 4.37 deep between the trigger
+# guard and the handguard. The drop button and seating key on this part, and the swap
+# is synthesised from it: no verbs declared.
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no
+  surface = magazine
+  grab       = -0.65, -0.19, -16.22   # the floor of the pack
+  grabradius = 3.0                    # ESTIMATE, the SMG's
+  dof
+    kind     = slide
+    axis     = 0, 0, -1
+    distance = 10.03
+    detach   = 0.9                    # ESTIMATE, the SMG's
+  end
+end
+
+# 22.85 degrees about the pin at -18.554, -5.441 (frame 4, fit 0.008). Sign checked:
+# +22.85 lands its rest centroid on frame 4's (0.0000); -22.85 misses by 1.56.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind    = hinge
+    axis    = 0, 1, 0
+    degrees = 22.85
+    pivot   = -18.554, 0, -5.441
+  end
+end
+
+# The second hand. ESTIMATE: where the hand goes. The point is the centroid of the
+# handguard's bottom strip (body island 19, x 7.66..36.16).
+part support
+  role    = support
+  subject = support
+  grab       = 21.91, -0.09, -11.28
+  grabradius = 3.0
+end
+
+
+# ========================================================== BOLTER -- OFF HAND
+# RS_ModelSwapper's re-centred copy of MeatGrinder's Bolter.md3, frame 0, as bolter_wm.md3: surfaces body,
+# mag (a separate 468-vertex piece split out of the body), trigger. Shift from the MeatGrinder source,
+# measured on the trigger: (37.6719, 0.2031, -4.4688). A heavy bolt gun in the plasma rifle's slot (RS_Main
+# binds it to its plasma rifle). The owner: a high-damage, single-shot plasma gun with a 10-round
+# magazine -- "we can make it anything once we get the card working".
+weapon "MS_MG_Bolter"
+  hand      = off
+  type      = plasma
+  prop      = "WM_PropBolter"
+  model     = "models/vanilla/plasma/Bolter" "bolter_wm.md3"
+  skin      = "models/vanilla/plasma/Bolter" "bolter.png"
+
+  # The owner's number: a 10-round magazine.
+  capacity  = 10
+  magfamily = "bolter"
+
+  # FIRED STRAIGHT FROM THE MAGAZINE, as the plasma rifle: nothing on the mesh racks.
+  firesfrom = magazine
+  casing    = none
+
+  # Front-most vertices (66 at x 23.91), centred: y -2.15..2.16, z 0.50..4.83. Level along +x.
+  muzzle    = 23.91, 0.0, 2.66
+  barrel    = 1, 0, 0
+
+  # The loose magazine: the mag surface lifted out, standing as authored. magcenter is its centroid in the
+  # gun's space.
+  magmodel  = "models/vanilla/plasma/Bolter" "wm_bolter_mag.md3"
+  magskin   = "models/vanilla/plasma/Bolter" "bolter.png"
+  magscale  = 0.374
+  magcenter = 2.16, 0.01, -8.55
+
+  # The plasma rifle's sounds (SNDINFO wm/plasma/*).
+  firesound    = "wm/plasma/fire"
+  drysound     = "wm/dry"
+  magoutsound  = "wm/plasma/magout"
+  maginsound   = "wm/plasma/magin"
+  magdropsound = "wm/magdrop"
+end
+
+# THE GRIP: the point of this mesh that is in the palm (CardPipeline/GUN_IN_HAND_PLAN.md).
+# Computed 2026-09-29 from where WM_PropBolter is drawn today, so switching to it moves nothing.
+grip
+  # palm, rake, supportat: fitted 2026-10-10 to c_doom_marine's hand (avatar grip review)
+  triggerat = -5.118, 0.005, -0.406
+  supportat = 8.540, 0.008, -1.831
+  palm = -9.958, -0.019, -2.254
+  rake = 41.5
+  seat = -9.308, 0.203, 9.181
+end
+
+# THE MAGAZINE (x -1.86..5.69, z -13.64..-4.75). No frame moves it, so its axis is its own long axis -- the
+# principal axis of its vertices, (0.1734, 0, -0.9849), 10.0 degrees forward of straight down, the way its
+# curve points. Distance is its length along that axis.
+part magazine
+  role    = feed
+  subject = magazine
+  take    = no          # out by its button, in by the hand carrying one
+  surface = mag
+  grab       = 0.76, 0.01, -13.25     # its bottom end
+  grabradius = 3.0
+  dof
+    kind     = slide
+    axis     = 0.1734, 0, -0.9849
+    distance = 9.01
+    detach   = 0.9
+  end
+end
+
+# A sliding trigger: 0.898 back at source frames 1 and 2, the body's own recoil (3.0 and 4.0 back) divided
+# out, fit 0.008.
+part trigger
+  role    = trigger
+  surface = trigger
+  dof
+    kind     = slide
+    axis     = -1, 0, -0.004
+    distance = 0.898
+  end
+end
+
+# MEASURED: the underside beneath the barrel is z -3.97 from x 12.3 to 23.9; its middle.
+part support
+  role    = support
+  subject = support
+  grab       = 18.33, 0.01, -3.97
+  grabradius = 3.0
+end
