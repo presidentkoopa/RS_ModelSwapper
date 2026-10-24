@@ -56,6 +56,38 @@ Added tonight (all generated, all exact-match edits, logs in `sets/bd22q_1.97/*.
    CheckReplacement. **Not yet run in the engine** — the gate run was interrupted. Run it first.
 3. Vanilla set rebuilt as Doom's eight with `RSQ_Player` (start pistol, pickups measured). Gate 5/5.
 
+## BLOCKERS (2026-10-24, local lane on the owner's PC — F1 stopped here)
+1. **`runtime/` is not the 1.96b src; the flagship cannot be regenerated.** Measured: `runtime/` holds
+   34 files / 1.1 MB, and 33 of them are a strict subset of `sets/bd22q_1.97/src` (459 files / 85 MB);
+   only `PROVENANCE.txt` is its own. Absent from it: all of `models/bd/` (every gun mesh), all of
+   `actors/`, `zscript/rsr/rsr_guns.bd.zs`, `ZSCRIPT.rsvr`, `MAPINFO.rsvr` — i.e. every file the
+   generators read or patch. `python tools/bd22_plus.py geometry` stops on the first one it opens
+   (`runtime/models/bd/HitlersBuzzsaw/HitlersBuzzsaw.md3`, FileNotFoundError). Searched `E:\DOOMWork`
+   and `D:\SteamLibrary\steamapps\Common`: no RS_Brutal22WeaponsQ checkout, no second copy of
+   `rsr_guns.bd.zs`. **Needs from the owner: RS_Brutal22WeaponsQ 1.96b `src/` at commit 27bef2b**
+   (a path on this PC, or the repo to clone). Until then the regenerate-and-diff drift check on the
+   generators cannot run, and nothing under `sets/bd22q_1.97/src` can be rebuilt.
+2. **`gate/bd22_gate.sh` cannot run on Windows.** Its four paths are now set (below), but the run line
+   is `xvfb-run` + `LIBGL_ALWAYS_SOFTWARE` — Linux only; `xvfb-run` is not on this machine. On the
+   owner's PC the gate means launching `QZD17-engine/build/Release/qzdoom.exe` with that `-file` order
+   in a window on his desktop, and the owner does all launching (CLAUDE.md 5: the gate is optional
+   tooling, the headset pass is the test). **Needs from the owner: his own run of that load order and
+   the log** — or an explicit "launch it" for one desktop run here.
+3. Minor, downstream: `handfit_cards.ERMAC` (Ermac's 211/196-frame original hand md3s) is not on this
+   PC. Only `bd22_mg.py`'s hand-fit sheet (`_hands/Machinegun.png`) reads it; the pack build does not.
+4. Minor: the pre-commit hook's shebang is `#!/usr/bin/env python3`; this PC has `python` / `py` only,
+   so commits need a `python3` on PATH. Owner's call whether to shim it or make the hook portable.
+
+## Paths, now set for this PC (committed, `[step F1]`)
+`bd22_plus.py` / `bd22_mg.py`: `TOOLS`/`KIT` from `__file__` (`tools/`, `tools/kit`); `SRC` → `runtime/`;
+`REMA` → `E:/DOOMWork/RS_VR_Weapons/bd22/`; `BR` → `E:/DOOMWork/VR_WeaponSetRebuild/br_vr/PK3_pbr/`;
+`BD21` → `docs/BD21_Machinegun.txt`; `OUT` → `E:/DOOMWork/_buildtemp/rsq_bd22/` (outside the repo, so
+the hook sees no new top-level directory); new `BD22SRC` → `E:/DOOMWork/_buildtemp/bd22src/`
+(brutal22test6.pk3's `actors/Weapons/*.dec`, extracted) in place of the hardcoded `/home/claude/bd22src/`.
+`genpack.py`, `handfit_cards.py`: the two kit paths that blocked `import bd22_mg` → `tools/kit`.
+`gate/bd22_gate.sh`: `QZD17-engine/build/Release`, its `doom2.wad`, `E:/DOOMWork/brutal22test6.pk3`,
+the owner's `BD_VoxelPack.pk3`. Both tools import clean and every path they hold resolves.
+
 ## What is NOT done (the plan's remaining flagship items, in order)
 1. Gate `sets/bd22q_1.97` on the owner's exact load order (Doom 2 → brutal22test6 → BD_VoxelPack →
    pack). Fix what it finds. Only then hand the owner a pk3.
