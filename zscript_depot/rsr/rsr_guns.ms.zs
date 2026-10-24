@@ -7,12 +7,19 @@ class RSR_Guns abstract
 	clearscope static int Count() { return 17; }
 
 	// ModelSwapper's Index(), hand-written -- the one function the generator does
-	// not own. In an RSQ pack the weapon IS the gun, so the generated Index()
-	// matches on the weapon's class name. Here the weapon belongs to whatever mod
-	// is loaded and only its MODEL is ours, so the slot has to come from the model
-	// in hand. A model earns a slot only where it is the same mesh as a gun the
-	// cards already measure (card_transforms.json records which, and how far the
-	// two copies are apart).
+	// not own. In a standalone RSQ pack the weapon IS the gun, so the generated
+	// Index() matches on the weapon's class name. Here the weapon belongs to
+	// whatever mod is loaded and only its MODEL is ours, so the slot comes from
+	// the model in hand.
+	//
+	// A model earns a slot only where it is provably the SAME MESH as a gun the
+	// cards already measure: same vertex count, and the sorted distances from the
+	// centroid agreeing to within half a unit. That second test is what matters --
+	// three pairs matched on vertex count alone and were different guns.
+	//
+	// Several of our models are the same mesh under different names (the tec9
+	// ships as MS_MG_Tec9 and MS_meat_TEC9), so every one of them claims the slot
+	// and the reload is the same whichever the player picks.
 	clearscope static int Index(Weapon w)
 	{
 		if (!w) return 0;
@@ -36,13 +43,38 @@ class RSR_Guns abstract
 	clearscope static int SlotForDonor(string donor)
 	{
 		if (donor.Length() == 0) return 0;
+		if (donor == "MS_BD_Unmaker")	return 1;
 		if (donor == "MS_brt_Unmaker")	return 1;
+		if (donor == "MS_MG_Bolter")	return 2;
 		if (donor == "MS_meat_Bolter")	return 2;
+		if (donor == "MS_BD_AssaultShotgun")	return 3;
 		if (donor == "MS_brt_AssaultShotgun")	return 3;
+		if (donor == "MS_BD_Rifle")	return 5;
 		if (donor == "MS_brt_Rifle")	return 5;
+		if (donor == "MS_Rifle")	return 6;
+		if (donor == "MS_qvplus_guns")	return 6;
+		if (donor == "MS_vplus_guns")	return 6;
+		if (donor == "MS_AE_Flamer")	return 8;
+		if (donor == "MS_alien_flamer")	return 8;
+		if (donor == "MS_BD_Flamethrower2")	return 9;
 		if (donor == "MS_brt_Flamethrower2")	return 9;
+		if (donor == "MS_BD_BrutalSMG")	return 10;
 		if (donor == "MS_brt_BrutalSMG")	return 10;
+		if (donor == "MS_MG_Tec9")	return 11;
 		if (donor == "MS_meat_TEC9")	return 11;
+		if (donor == "MS_RocketLauncher")	return 13;
+		if (donor == "MS_brt_RPG")	return 13;
+		if (donor == "MS_d64_RPG")	return 13;
+		if (donor == "MS_hdvr_RPG")	return 13;
+		if (donor == "MS_vplus_RPG")	return 13;
+		if (donor == "MS_AE_Pistol")	return 14;
+		if (donor == "MS_alien_pistol")	return 14;
+		if (donor == "MS_Pistol")	return 15;
+		if (donor == "MS_PlasmaRifle")	return 16;
+		if (donor == "MS_brt_PlasmaGun")	return 16;
+		if (donor == "MS_d64_PlasmaGun")	return 16;
+		if (donor == "MS_hdvr_PlasmaRifle")	return 16;
+		if (donor == "MS_vplus_PlasmaRifle")	return 16;
 		return 0;
 	}
 
