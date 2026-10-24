@@ -4,24 +4,32 @@ Samsara-ViewModels-main holds 271 MD3s, 194 PNGs, 39 JPGs, the 7-zip binaries,
 build_pk3.bat and a nine-line zscript.zs declaring one empty actor. That is the
 whole folder -- verified by listing every file type in it, not by grep.
 
-**There is no MODELDEF in it, and the owner is right that there has to be one
-somewhere**: GZDoom cannot load an MD3 without a Model block naming it. So the
-MODELDEF exists, it is just not in this copy. Two readings, and the evidence
-does not settle between them:
+**FOUND IT.** The owner was right that a MODELDEF has to exist, and it does --
+in a different repository.
 
-- This repo supplies REPLACEMENT view models and the MODELDEF that points at
-  them ships in Samsara-Reincarnation itself, which is not on this disk --
-  searched E:\DOOMWork, the Desktop, Downloads and D: and found no Samsara
-  pk3, wad or folder.
-- Or the copy is partial. There is no .git, so the files were copied rather
-  than cloned. build_pk3.bat excludes `filter\` and `src\`, neither of which
-  is present, and ZDoom's `filter/` tree is exactly where a per-game MODELDEF
-  would live -- but that script says "Stolen from COG lol" at the top, so its
-  exclusion list is inherited boilerplate and proves nothing on its own.
+`Samsara-Reincarnation/Samsara-ViewModels` ships the MESHES. The MODELDEFs live
+in `Samsara-Reincarnation/Samsara-Reincarnation`, the mod itself, one per set:
+MODELDEF.rtcw, .ge, .gf, .q3, .sof, .pk, ModelDef.dx, ModelDef.U1, plus d64, de,
+df, dn64, hex2, hl, ol, q1, q2, str and a filter/doom.ce.doom64/MODELDEF.txt.
 
-Either way nothing can be imported from this folder as it stands, and writing a
-MODELDEF from scratch for 180 guns would be throwing away one that already
-exists. The thing to find is Samsara-Reincarnation, or the rest of this repo.
+Checked rather than assumed -- every viewmodel mesh name resolves in the mod:
+
+    bj_colt.md3        -> MODELDEF.rtcw
+    bj_bar.md3         -> MODELDEF.rtcw
+    sarge_bfg10k.md3   -> MODELDEF.q3
+    daniel_asg.md3     -> MODELDEF.pk
+    w_autoshotgun.md3  -> MODELDEF.sof and zscript/Core/sof.zs
+    asmd.md3           -> ModelDef.U1
+    AssaultGun3rd.md3  -> ModelDef.dx
+    ar33_left.md3      -> zscript/Core/goldeneye.zs
+
+The ViewModels copy on disk is NOT partial: the GitHub repo holds 530 entries
+against 511 files here, and the difference is directories. That repo genuinely
+carries no MODELDEF, because it was never meant to.
+
+Cloned to VR_WeaponSetRebuild/Samsara-Reincarnation -- 47,346 files, 1.2 GB.
+MODELDEF.rtcw alone is 276 Model blocks, and its frame tables run past 500,
+with blocks compositing several MODEL indices over one shared animation.
 
 It is also eight weapon sets in one folder, not one:
 
@@ -57,6 +65,9 @@ seen twice.
 
 ## Before any of it lands
 
-Someone decides whether 180 guns are worth fitting by hand, and in what order.
-A per-set Scale gets them to the right size; nothing gets them into the right
-place in the hand except fitting.
+The Offset and ZOffset are no longer ours to invent -- the mod's MODELDEFs carry
+the authors' numbers, the same as every other package. What does still need
+deciding is the scale. Samsara's own Scale lines are flatscreen values (0.8, 1.0,
+1.5, 2.0 and a lot of -1.0), which is why the meshes measure 10 to 65 units
+against 90 to 120 for a gun already working here. Those are the numbers that
+would have to be adjusted for VR -- not guessed from the mesh.
