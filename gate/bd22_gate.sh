@@ -14,6 +14,13 @@ LOG=gate/bd22_197.log
 # and fail now rather than silently.
 [ -f "$PK3" ] || { echo "no pk3 at $PK3 (run from the repo root)"; exit 2; }
 PK3=$(cd "$(dirname "$PK3")" && pwd)/$(basename "$PK3")
+# WHICH BUILD DID THIS GATE ACTUALLY RUN (2026-10-24). The owner launched a copy of the pk3 he
+# had dragged to his Desktop eight hours earlier, hit a fatal "Unknown function WantsHands", and
+# the gate was passing all the while -- on a different file. The engine names the build in its
+# own log ("adding .../BD22Q_197pre.pk3, 519 lumps"), so printing the same three facts here is
+# all it takes to tell at a glance whether a pasted log is the build that was gated.
+echo "pk3  $PK3"
+echo "     $(stat -c '%s bytes, %y' "$PK3" 2>/dev/null | cut -d. -f1), $(unzip -l "$PK3" 2>/dev/null | tail -1 | awk '{print $2}') lumps"
 mkdir -p "$(dirname "$LOG")"
 LOG=$(cd "$(dirname "$LOG")" && pwd)/$(basename "$LOG")
 # god first (owner, 2026-10-24): a gate that dies partway still prints GATE_DONE and still exits 0,

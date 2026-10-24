@@ -852,10 +852,16 @@ BUTT = [
     # vertices about 40 units below the gun, and a span taken over everything measures the pair.
     ('MGBUTT', ["'Machinegun'"], ['MGN1'], 4, (20.1, 0.0, 4.3), (-1.4, 0.0, 2.0),
      'Machinegun.md3 frame 4, surface M249_lowpoly'),
-    # THE MG42 IS STILL OUT. HitlersBuzzsaw.md3 is [18912, 60] against buzzsaw_wm.md3's
-    # [3059, 15853, 60]: no surface corresponds, and the one 60-vertex part that does is a
-    # 2.4 x 0.8 x 3.2 sliver whose rigid fit is degenerate (the body lands 24 units out under it).
-    # There is no frame to find until that mesh is matched some other way, so it is not guessed.
+    # THE MG42, matched by POSITION. HitlersBuzzsaw.md3 is [18912, 60] against buzzsaw_wm.md3's
+    # [3059, 15853, 60]: no surface corresponds by index, so the order-identity Kabsch above gave
+    # 24.26 and I twice wrote the gun off. The answer was already in this file -- `rigid()` is ICP
+    # with a cKDTree, correspondence by POSITION rather than by order, and the geometry stage has
+    # been reporting this very mesh at mean 0.0 cm, max 0.0 cm, rotation 1.7e-06 deg all along.
+    # Run per frame: frame 0 matches at 0.0000 and frames 1 and 2 at 0.0105, and MODELDEF agrees
+    # independently -- `FrameIndex HBUS A 0 0`, HBUS A being the sprite the Ready loop holds.
+    # PBUS is the same frames again: it is what BD22 draws in Purist mode, so both are ready.
+    ('MG42BUTT', ["'MG42'"], ['HBUS', 'PBUS'], 0, (21.6, -1.0, 1.2), (-10.8, -0.1, 1.6),
+     'HitlersBuzzsaw.md3 frame 0'),
 ]
 
 
@@ -2223,37 +2229,125 @@ def revolver():
 # so the Revolver, the Shotvolver and the SSG drop their cases down and back, slowly, instead of
 # flicking them out to the right.
 
+# How the case leaves, which is three different things and not two:
+#   SIDE  flicked out of a port in the receiver wall, to the gun's right. The default.
+#   DOWN  thrown out of a chute in the receiver FLOOR, under its own gas pressure. The MG42.
+#   TIP   not thrown at all -- tipped out by the shooter, slowly. RSBDEFS is explicit:
+#         `brass_357` is "dumped from a cylinder, not thrown by a port: slow, no glow" and
+#         `hull_12ga_magnum` is "dumped from an open breech". A belt gun at 1200 rpm is NOT
+#         this, which is why DOWN exists separately: same direction, nothing like the speed.
+SIDE, DOWN, TIP = 0, 1, 2
+
 EJECT = [
     # class, the class whose MODELDEF block holds the mesh, REMA wm, ready frame (residual 0.0000
-    # against it), surface(s), what the surface is, dumped
-    ('Shot_Gun', 'Shot_Gun', 'shotgun_wm.md3', 4, ['eject'],
-     'the port the model-maker named `eject`', False),
-    ('SSG', 'SSG', 'ssg_wm.md3', 1, ['Open'],
-     'the break-open breech, surface `Open`', True),
-    ('Revolver', 'Revolver', 'revolver_wm.md3', 0, ['shells'],
-     'the cylinder: the mean of its five `shells`', True),
+    # against it), surface(s) OR a hole box, what it is, how the case leaves
+    ('Shot_Gun', 'Shot_Gun', 'shotgun_wm.md3', 4, ['eject'], None,
+     'the port the model-maker named `eject`', SIDE),
+    ('SSG', 'SSG', 'ssg_wm.md3', 1, ['Open'], None,
+     'the break-open breech, surface `Open`', TIP),
+    ('Revolver', 'Revolver', 'revolver_wm.md3', 0, ['shells'], None,
+     'the cylinder: the mean of its five `shells`', TIP),
     # the Shotvolver draws on sprite REVO and has no MODELDEF block of its own: it IS the
     # Revolver's mesh, so it is the Revolver's port.
-    ('Revolver2', 'Revolver', 'revolver_wm.md3', 0, ['shells'],
-     'the Shotvolver, on the Revolver\'s own mesh', True),
+    ('Revolver2', 'Revolver', 'revolver_wm.md3', 0, ['shells'], None,
+     'the Shotvolver, on the Revolver\'s own mesh', TIP),
+    # THE MG42, once its mesh could be matched at all (see BUTT). Nobody named its port and it
+    # has none in either wall -- the regular loops down its flank at x 68..108 are the barrel
+    # jacket's cooling slots, which is what fooled me into writing it off. A real MG42 ejects
+    # DOWNWARD, and the chute is there in the floor of the receiver: one flat opening, 10.1 long
+    # and 2.8 wide, centred on the gun (y -0.04) and below the bore (z -0.57), directly under the
+    # breech. The box below is the rule that picks it, and the stage stops if it ever picks two:
+    # a down-facing loop under the bore, near the breech, centred, and of a size a 7.92 case fits.
+    ('MG42', 'MG42', 'buzzsaw_wm.md3', 0, None,
+     dict(axis=2, facing=(0.6, 1.0), z=(-5.0, 2.0), x=(35.0, 55.0), off_centre=(0.0, 1.5),
+          long=(5.0, 15.0), wide=(1.0, 6.0)),
+     'the chute in the receiver floor, the hole itself', DOWN),
 ]
 WEAPON_SCALE = 1.02          # vr_weaponScale's default, the scale melee.zs's Place() applies
 
 
-def eject_port(cls, frame, names):
-    """The named surface's centroid on the ready frame, in the held model's own units, and then
-    in the (forward, left, up) cm that casings.zs speaks -- which is Place()'s arithmetic read
-    backwards: f = .01*(ws*m.x - 30), r = .01*(-ws*m.y), u = .01*(ws*m.z), and casings' L is
-    melee's -R."""
+def md3_tris(path):
+    """genpack.md3_surfaces keeps the vertices and drops the triangles; a hole needs both."""
+    import struct
+    d = open(path, 'rb').read()
+    nsurf, osurf = struct.unpack_from('<8i', d, 76)[2], struct.unpack_from('<8i', d, 76)[6]
+    out, off = [], osurf
+    for _ in range(nsurf):
+        nt, otri, oend = struct.unpack_from('<10i', d, off + 68)[4], \
+            struct.unpack_from('<10i', d, off + 68)[5], struct.unpack_from('<10i', d, off + 68)[9]
+        out.append(np.frombuffer(d, dtype='<i4', count=nt * 3, offset=off + otri).reshape(nt, 3).copy())
+        off += oend
+    return out
+
+
+def boundary_loops(V, T):
+    """Every closed boundary of one surface: weld by position, take the edges that belong to a
+    single triangle, walk them into connected groups. A modelled port IS one of these."""
+    _, inv = np.unique(np.round(V, 3), axis=0, return_inverse=True)
+    W, edge = inv[T], {}
+    for a, b, c in W:
+        for u, v in ((a, b), (b, c), (c, a)):
+            k = (u, v) if u < v else (v, u)
+            edge[k] = edge.get(k, 0) + 1
+    adj = {}
+    for u, v in [k for k, m in edge.items() if m == 1]:
+        adj.setdefault(u, []).append(v)
+        adj.setdefault(v, []).append(u)
+    pos = {}
+    for i, w in enumerate(inv):
+        pos.setdefault(w, V[i])
+    seen, out = set(), []
+    for start in adj:
+        if start in seen:
+            continue
+        stack, grp = [start], []
+        seen.add(start)
+        while stack:
+            k = stack.pop()
+            grp.append(k)
+            for m in adj[k]:
+                if m not in seen:
+                    seen.add(m)
+                    stack.append(m)
+        P = np.vstack([pos[g] for g in grp])
+        c = P.mean(0)
+        nrm = np.zeros(3) if P.shape[0] < 3 else np.linalg.svd(P - c, full_matrices=False)[2][2]
+        out.append((c, P.max(0) - P.min(0), len(grp), nrm))
+    return out
+
+
+def eject_port(cls, frame, names, hole=None):
+    """Where the brass leaves, in the held model's own units and then in the (forward, left, up)
+    cm casings.zs speaks -- Place()'s arithmetic read backwards: f = .01*(ws*m.x - 30),
+    r = .01*(-ws*m.y), u = .01*(ws*m.z), and casings' L is melee's -R.
+
+    `names`: the surface the model-maker named the port. `hole`: a box the port's boundary loop
+    must fall in, for a gun where nobody named it -- and exactly one loop must, or this stops."""
     md = open(OUT_SRC + 'MODELDEF.bd.txt', encoding='latin-1').read()
     b = re.search(r'(?mi)^Model %s\s*$.*?^\}' % re.escape(cls), md, re.S)
     if not b:
         raise SystemExit('MODELDEF.bd.txt: no block for ' + cls)
     pa = re.search(r'Path\s+"([^"]+)"', b.group(0)).group(1)
     mo = re.search(r'Model 0 "([^"]+)"', b.group(0)).group(1)
-    n, surfs = genpack.md3_surfaces(OUT_SRC + pa + '/' + mo)
+    path = OUT_SRC + pa + '/' + mo
+    n, surfs = genpack.md3_surfaces(path)
     if frame >= n:
         raise SystemExit('%s: frame %d but the mesh has %d' % (cls, frame, n))
+    if hole:
+        found = []
+        for s, t in zip(surfs, md3_tris(path)):
+            for c, span, nv, nrm in boundary_loops(np.asarray(s['xyz'][frame], float), t):
+                if all(lo <= v <= hi for v, (lo, hi) in
+                       ((abs(nrm[hole['axis']]), hole['facing']), (c[2], hole['z']),
+                        (c[0], hole['x']), (abs(c[1]), hole['off_centre']),
+                        (span[0], hole['long']), (span[1], hole['wide']))):
+                    found.append((c, span, nv))
+        if len(found) != 1:
+            raise SystemExit('%s: the port box matches %d boundary loops, not 1: %s'
+                             % (cls, len(found), [(np.round(f[0], 2).tolist()) for f in found]))
+        c, span, nv = found[0]
+        port = (WEAPON_SCALE * c[0] - 30.0, WEAPON_SCALE * c[1], WEAPON_SCALE * c[2])
+        return c, port, nv, '%s/%s' % (pa, mo)
     hit = [s for s in surfs if s['name'] in names]
     if not hit:
         raise SystemExit('%s: no surface named %s (it has %s)'
@@ -2268,8 +2362,8 @@ def casings():
     p = OUT_SRC + 'zscript/rsq/casings.zs'
     t = open(p).read()
     st, lines = {}, ''
-    for cls, meshcls, wm, fr, names, what, dumped in EJECT:
-        c, port, nsurf, mesh = eject_port(meshcls, fr, names)
+    for cls, meshcls, wm, fr, names, hole, what, mode in EJECT:
+        c, port, nsurf, mesh = eject_port(meshcls, fr, names, hole)
         port = tuple(round(x, 1) + 0.0 for x in port)       # round FIRST: -0.026 prints as -0.0
         test = "if (w is '%s')" % cls
         tabs = max(1, (40 - (8 + len(test)) + 3) // 4)      # `return` at column 40, as the four above
@@ -2277,7 +2371,9 @@ def casings():
                   % (test, '\t' * tabs, port[0], port[1], port[2], what))
         st[cls] = dict(mesh=mesh, ready_frame=fr, ref=wm, surfaces=names, surface_count=nsurf,
                        model_units=[round(float(x), 3) for x in c],
-                       port_cm=[round(x, 1) for x in port], dumped=dumped, measured=what)
+                       port_cm=[round(x, 1) for x in port], measured=what,
+                       leaves=['flicked out of a side port', 'thrown down a chute',
+                               'tipped out by hand'][mode])
 
     # the header names the four 1.38 shipped with; it is not the four any more
     head = "// ready frame (kitbash/ports.png).\n"
@@ -2297,14 +2393,20 @@ def casings():
     t = t.replace(anchor, "\t\tif (w is 'AssaultShotgun')\t\treturn (16.0, -1.4, -0.6);\n"
                   + lines + "\t\treturn (0, 0, 0);\n")
 
-    # a gun that dumps its cases rather than throwing them
-    dmp = ''.join("\t\tif (w is '%s')\n\t\t\treturn true;\n" % cls
-                  for cls, _, _, _, _, _, d in EJECT if d)
+    # how the case leaves: three things, not two
+    thr = ''.join("\t\tif (w is '%s')\n\t\t\treturn %s;\n" % (cls, ['SIDE', 'DOWN', 'TIP'][m])
+                  for cls, _, _, _, _, _, _, m in EJECT if m)
     t = t.replace("\t// the player who fired:",
-                  "\t// 1.97: not every gun THROWS. RSBDEFS calls brass_357 \"dumped from a cylinder,\n"
-                  "\t// not thrown by a port: slow, no glow\" and hull_12ga_magnum \"dumped from an open\n"
-                  "\t// breech\", so these fall out of the gun instead of being flicked clear of it.\n"
-                  "\tstatic bool Dumped(Weapon w)\n\t{\n" + dmp + "\t\treturn false;\n\t}\n\n"
+                  "\t// 1.97: not every gun throws its case the same way, and it is three things.\n"
+                  "\t// SIDE is flicked out of a port in the receiver wall, which is the default and\n"
+                  "\t// what 1.38 wrote. DOWN is thrown out of a chute in the receiver FLOOR under the\n"
+                  "\t// gun's own gas -- the MG42, whose port is exactly that and nothing in either\n"
+                  "\t// wall. TIP is not thrown at all: RSBDEFS calls brass_357 \"dumped from a\n"
+                  "\t// cylinder, not thrown by a port: slow, no glow\" and hull_12ga_magnum \"dumped\n"
+                  "\t// from an open breech\", so the shooter tips those out. A belt gun at 1200 rpm is\n"
+                  "\t// NOT that, which is why DOWN is its own: the same direction, nothing like the speed.\n"
+                  "\tconst SIDE = 0;\n\tconst DOWN = 1;\n\tconst TIP = 2;\n\n"
+                  "\tstatic int Throw(Weapon w)\n\t{\n" + thr + "\t\treturn SIDE;\n\t}\n\n"
                   "\t// the player who fired:", 1)
 
     old = ("\t\t// out to the right and up, a little back, as each gun's own casing speed\n"
@@ -2312,16 +2414,27 @@ def casings():
     if t.count(old) != 1:
         raise SystemExit('casings.zs: the flick is not there exactly once')
     t = t.replace(old,
-                  "\t\t// out to the right and up, a little back, as each gun's own casing speed --\n"
-                  "\t\t// except where the gun does not throw at all, and the cases just fall out.\n"
+                  "\t\t// out of the port, each gun its own way, at its own casing speed\n"
                   "\t\tVector3 d;\n"
                   "\t\tdouble slow = 1.0;\n"
-                  "\t\tif (Dumped(w))\n\t\t{\n"
+                  "\t\tint mode = Throw(w);\n"
+                  "\t\tif (mode == TIP)\n\t\t{\n"
                   "\t\t\td = -U * frandom(0.8, 1.0) - F * frandom(0.1, 0.3) + L * frandom(-0.25, 0.25);\n"
                   "\t\t\tslow = frandom(0.35, 0.5);\n"
                   "\t\t}\n"
+                  "\t\telse if (mode == DOWN)\n"
+                  "\t\t\td = -U * frandom(0.85, 1.0) - F * frandom(0.0, 0.2) + L * frandom(-0.3, 0.3);\n"
                   "\t\telse\n"
                   "\t\t\td = -L * 0.75 + U * frandom(0.45, 0.7) - F * frandom(0.05, 0.25);\n")
+
+    # the MG42's links come out of that same chute, and are EmptyBrass's own subclass, but the
+    # filter matches on the exact class name so they were never caught. (Minigun, Machinegun and
+    # the MG42 all spawn them; the two with no port return early on Port() == (0, 0, 0).)
+    old = ("\t\tif (n != 'PistolCasing' && n != 'EmptyBrass' && n != 'ShotgunCasing')\n")
+    if t.count(old) != 1:
+        raise SystemExit('casings.zs: the class filter is not there exactly once')
+    t = t.replace(old, "\t\tif (n != 'PistolCasing' && n != 'EmptyBrass' && n != 'ShotgunCasing'\n"
+                       "\t\t\t&& n != 'MGLinks')\n")
     old = "\t\tc.vel = d * spd + mo.vel;\n"
     if t.count(old) != 1:
         raise SystemExit('casings.zs: the velocity line is not there exactly once')
