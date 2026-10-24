@@ -138,8 +138,11 @@ class RSQ_Ballistics : EventHandler
 		Name gun = 'None';
 		if (tracer && tracer.player && tracer.player.ReadyWeapon)
 			gun = tracer.player.ReadyWeapon.GetClassName();
-		Spall(t.HitLocation + n * 2, n, surf.Of(t.HitTexture, flat),
-			(FxLevel() >= 2 ? 1.8 : 1.0) * RSQ_Rounds.Scale(gun));
+		Name sname = surf.Of(t.HitTexture, flat);
+		Vector3 hp = t.HitLocation + n * 2;
+		// 1.97 F6: the sound, the ricochet and the light, which the pack had none of
+		RSQ_Hit.At(tracer, hp, n, dir, sname, gun);
+		Spall(hp, n, sname, (FxLevel() >= 2 ? 1.8 : 1.0) * RSQ_Rounds.Scale(gun));
 	}
 
 	// dust or sparks or a splash, and a few chips

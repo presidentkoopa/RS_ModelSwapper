@@ -1,0 +1,72 @@
+
+// 1.97 F6: impact sounds, lifted from RS_Ballistics with their full paths, so a
+// short lump name in another package cannot shadow them (RS's own reasoning).
+rsb/impact/concrete1         sounds/rsb/impact_concrete/bulletimpact1.ogg
+rsb/impact/concrete2         sounds/rsb/impact_concrete/bulletimpact2.ogg
+rsb/impact/concrete3         sounds/rsb/impact_concrete/bulletimpact3.ogg
+rsb/impact/concrete4         sounds/rsb/impact_concrete/bulletimpact4.ogg
+rsb/impact/concrete5         sounds/rsb/impact_concrete/bulletimpact5.ogg
+rsb/impact/concrete6         sounds/rsb/impact_concrete/bulletimpact6.ogg
+rsb/impact/concrete7         sounds/rsb/impact_concrete/bulletimpact7.ogg
+rsb/impact/concrete8         sounds/rsb/impact_concrete/bulletimpact8.ogg
+rsb/impact/concrete9         sounds/rsb/impact_concrete/bulletimpact9.ogg
+rsb/impact/concrete10        sounds/rsb/impact_concrete/bulletimpact10.ogg
+rsb/impact/concrete11        sounds/rsb/impact_concrete/bulletimpact11.ogg
+$random rsb/impact/concrete { rsb/impact/concrete1 rsb/impact/concrete2 rsb/impact/concrete3 rsb/impact/concrete4 rsb/impact/concrete5 rsb/impact/concrete6 rsb/impact/concrete7 rsb/impact/concrete8 rsb/impact/concrete9 rsb/impact/concrete10 rsb/impact/concrete11 }
+$limit rsb/impact/concrete 6
+rsb/impact/metal1            sounds/rsb/impact_metal/blt_imp_metal_thick_near_01.ogg
+rsb/impact/metal2            sounds/rsb/impact_metal/blt_imp_metal_thick_near_02.ogg
+rsb/impact/metal3            sounds/rsb/impact_metal/blt_imp_metal_thick_near_03.ogg
+rsb/impact/metal4            sounds/rsb/impact_metal/blt_imp_metal_thick_near_04.ogg
+rsb/impact/metal5            sounds/rsb/impact_metal/blt_imp_metal_thick_near_05.ogg
+rsb/impact/metal6            sounds/rsb/impact_metal/blt_imp_metal_thick_near_06.ogg
+$random rsb/impact/metal { rsb/impact/metal1 rsb/impact/metal2 rsb/impact/metal3 rsb/impact/metal4 rsb/impact/metal5 rsb/impact/metal6 }
+$limit rsb/impact/metal 6
+rsb/impact/wood1             sounds/rsb/impact_wood/blt_imp_wood_near_01.ogg
+rsb/impact/wood2             sounds/rsb/impact_wood/blt_imp_wood_near_02.ogg
+rsb/impact/wood3             sounds/rsb/impact_wood/blt_imp_wood_near_03.ogg
+rsb/impact/wood4             sounds/rsb/impact_wood/blt_imp_wood_near_04.ogg
+rsb/impact/wood5             sounds/rsb/impact_wood/blt_imp_wood_near_05.ogg
+rsb/impact/wood6             sounds/rsb/impact_wood/blt_imp_wood_near_06.ogg
+$random rsb/impact/wood { rsb/impact/wood1 rsb/impact/wood2 rsb/impact/wood3 rsb/impact/wood4 rsb/impact/wood5 rsb/impact/wood6 }
+$limit rsb/impact/wood 6
+rsb/ricochet1                sounds/rsb/ricochet/ricoche1.ogg
+rsb/ricochet2                sounds/rsb/ricochet/ricoche2.ogg
+rsb/ricochet3                sounds/rsb/ricochet/ricoche3.ogg
+rsb/ricochet4                sounds/rsb/ricochet/ricoche4.ogg
+rsb/ricochet5                sounds/rsb/ricochet/ricoche5.ogg
+rsb/ricochet6                sounds/rsb/ricochet/ricoche6.ogg
+rsb/ricochet7                sounds/rsb/ricochet/ricoche7.ogg
+rsb/ricochet8                sounds/rsb/ricochet/ricoche8.ogg
+rsb/ricochet9                sounds/rsb/ricochet/ricoche9.ogg
+rsb/ricochet10               sounds/rsb/ricochet/ricoche10.ogg
+rsb/ricochet11               sounds/rsb/ricochet/ricoche11.ogg
+rsb/ricochet12               sounds/rsb/ricochet/ricoche12.ogg
+rsb/ricochet13               sounds/rsb/ricochet/ricoche13.ogg
+rsb/ricochet14               sounds/rsb/ricochet/ricoche14.ogg
+rsb/ricochet15               sounds/rsb/ricochet/ricoche15.ogg
+rsb/ricochet16               sounds/rsb/ricochet/ricoche16.ogg
+$random rsb/ricochet { rsb/ricochet1 rsb/ricochet2 rsb/ricochet3 rsb/ricochet4 rsb/ricochet5 rsb/ricochet6 rsb/ricochet7 rsb/ricochet8 rsb/ricochet9 rsb/ricochet10 rsb/ricochet11 rsb/ricochet12 rsb/ricochet13 rsb/ricochet14 rsb/ricochet15 rsb/ricochet16 }
+$limit rsb/ricochet 4
+rsb/glass1                   sounds/rsb/glass/dsbottle.ogg
+rsb/glass2                   sounds/rsb/glass/glsfal.ogg
+rsb/glass3                   sounds/rsb/glass/winbrea.ogg
+$random rsb/glass { rsb/glass1 rsb/glass2 rsb/glass3 }
+$limit rsb/glass 4
+rsb/flame/hiss1              sounds/rsb/flame/flamerhiss1.ogg
+rsb/flame/hiss2              sounds/rsb/flame/flamerhiss2.wav
+$random rsb/flame/hiss { rsb/flame/hiss1 rsb/flame/hiss2 }
+$limit rsb/flame/hiss 2
+rsb/impact/electric1         sounds/rsb/impact_electric/electro8.wav
+rsb/impact/electric2         sounds/rsb/impact_electric/pzaphit.ogg
+rsb/impact/electric3         sounds/rsb/impact_electric/dsdevzap.ogg
+rsb/impact/electric4         sounds/rsb/impact_electric/electro7.ogg
+rsb/impact/electric5         sounds/rsb/impact_electric/sparks1.ogg
+$random rsb/impact/electric { rsb/impact/electric1 rsb/impact/electric2 rsb/impact/electric3 rsb/impact/electric4 rsb/impact/electric5 }
+rsb/impact/pipe1             sounds/rsb/impact_pipe/pipe_hit1.ogg
+rsb/impact/pipe2             sounds/rsb/impact_pipe/pipe_hit2.ogg
+rsb/impact/pipe3             sounds/rsb/impact_pipe/pipe_hit3.ogg
+rsb/impact/pipe4             sounds/rsb/impact_pipe/pipe_hit4.ogg
+rsb/impact/pipe5             sounds/rsb/impact_pipe/pipe_hit5.ogg
+rsb/impact/pipe6             sounds/rsb/impact_pipe/pipe_hit6.ogg
+$random rsb/impact/pipe { rsb/impact/pipe1 rsb/impact/pipe2 rsb/impact/pipe3 rsb/impact/pipe4 rsb/impact/pipe5 rsb/impact/pipe6 }
