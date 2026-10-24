@@ -59,7 +59,12 @@ Added tonight (all generated, all exact-match edits, logs in `sets/bd22q_1.97/*.
 4. **Melee** on bd22q from `docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md`: pistol whip, rifle/shotgun butt
    strikes, the spike, switch-punching with either hand. **None of it is built.** It is flagship work,
    not a later pass (owner, 04:24).
-5. README for the pack release; this handoff updated; owner headset pass.
+5. Per-gun ballistics profiles from REMA's WMSHEET behind the Ballistics switch -- pending the owner's yes.
+6. Reload SOUNDS for the drum / canister / skull (the gen_rsr snd fields are empty: assign BD22's own from
+   SNDINFO.BD); README for the pack release; this handoff updated; owner headset pass.
+
+Open questions for the owner: counter model vs REMA's fire-from-magazine for the three reloads; the
+revolver primary/alt swap asked at 03:41 (parked when Revolver2-with-option was asked at 03:56).
 Then the plan's next sets (PLAN.md): BW_Quest, Aliens, Meatgrinder, Modern wiring, Plus passes per set.
 
 ## Owner's rules (violating these ended the last session's trust)

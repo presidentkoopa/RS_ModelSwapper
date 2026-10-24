@@ -13,15 +13,16 @@ per-gun checklist below, in a headset, signed by the owner.
 - F3  Options page onto the shared RSQ_Options standard (owner's headset turn for layout).
 - F4  Melee on bd22q from docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md: pistol whip, rifle/shotgun butt strikes, the spike,
       switch-punching with either hand. Nothing of it exists yet.
-- F5  Pack README + HANDOFF update. Owner headset pass on: drum / canister / skull reloads, Machinegun launcher, melee.
+- F5  Per-gun ballistics / CombatFX profiles (REMA WMSHEET round/flash/recoil) on bd22q, behind the existing
+      Ballistics switch (off = stock BD22). PENDING the owner's yes (added 04:25).
+- F6  Reload sounds for the drum / canister / skull (empty today); pack README; HANDOFF update; owner headset pass.
 
 ## Then, in this order
-- S1  BW_Quest (Brutal Wolfenstein; E:\DOOMWork\BW_Quest; parent mod from the owner).
-- S2  Vanilla / V+ roster + menu (V+ = toggles inside Vanilla per the owner's checklist).
-- S3  Modern: player class, every Doom drop/pickup → a modern gun, start Glock.
+- S1  Vanilla / V+ roster + menu (V+ = toggles inside Vanilla per the owner's checklist).  (owner's order, 03:21)
+- S2  Modern: player class, every Doom drop/pickup → a modern gun, start Glock.
+- S3  BW_Quest (Brutal Wolfenstein; E:\DOOMWork\BW_Quest; parent mod from the owner).
 - S4  Aliens, Meatgrinder, survivors of the discarded sets whose parent the owner keeps (re-measure or ditch).
 - P   Plus pass per set (menu-row extras), only after that set stands.
-- B   Ballistics / CombatFX per-gun profiles (REMA WMSHEET) as a shared layer, after two sets stand.
 
 ## Per set
 1 inventory the parent mod · 2 measure every mesh fresh, carve/bake parts, sheets, owner signs placement ·
