@@ -4,7 +4,7 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F1**
+Current step: **F4**
 
 ## Principle
 Every shipped gun is built from two sources only: its MESH (tool-measured) and its PARENT MOD (behaviour
@@ -14,6 +14,9 @@ per-gun checklist below, in a headset, signed by the owner.
 ## Flagship: bd22q (sets/bd22q_1.97, base runtime/ = 1.96b) -- the COMPLETE BD22 VR experience; nothing of it is deferred
 - F1  Gate 1.97 on the owner's load order (doom2 → brutal22test6 → BD_VoxelPack → pack); fix; deliver pk3.
 - F2  Slug revolver (BD21 Revolver2): roster + RSB break entry (Clip2) + "replaces Shotvolver" row.
+      Plus a menu row **"Shot/Revolver Reload: Speedloader / PerRound"** covering BOTH revolvers
+      (owner, 2026-10-24): the 2026-10-13 hand patch put BD22's Revolver on a speedloader and left its
+      per-chamber rows unused; this makes that a choice instead of a fixed decision, for both guns.
 - F3  Options page onto the shared RSQ_Options standard (owner's headset turn for layout).
 - F4  Melee on bd22q from docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md: pistol whip, rifle/shotgun butt strikes, the spike,
       switch-punching with either hand. Nothing of it exists yet.
