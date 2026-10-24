@@ -19,48 +19,43 @@ from md3read import read_md3
 from md3label import kabsch
 
 
-def stroke(meshpath, surf='mag'):
-    """How far the magazine actually travels when it is INSERTED.
+def stroke(meshpath, frames, surf='mag'):
+    """How far the magazine travels while it is being INSERTED.
 
-    `travel_clear` is the total distance the part covers across the whole
-    animation, and where an author parks the magazine somewhere odd at rest that
-    is not the insertion at all: the Kar98's clip waits inside the buttstock, so
-    its total is 43.36 units -- a metre and a third once scaled, for a stripper
-    clip. The stroke is the last unbroken run of movement, presented to seated,
-    which for that gun is 7.00 units straight down.
+    Three measures were tried and each broke on a different gun. `travel_clear`
+    is the part's whole journey, and the Kar98's clip starts parked inside the
+    buttstock, so that read 43 units -- a metre and a third once scaled, for a
+    stripper clip. The last unbroken run of movement breaks on the assault
+    shotgun, whose magazine goes out AND back inside the animation (net
+    displacement 0.01). Furthest-from-seated breaks on the BrutalDoom guns,
+    which throw the spent magazine clear off screen: 60 to 80 units of throw.
+
+    What is actually authoritative is md3label's own phase detection. It labels
+    the insertion `mag_in a..b`, and the stroke is where the part is at a versus
+    where it is at b. A gun whose card has no mag_in has no insertion to measure
+    and is not converted.
     """
+    lo, hi = frames
     m = read_md3(meshpath)
     S = m['surfs']
     names = [x['name'] for x in S]
-    if surf not in names or m['nframes'] < 2:
+    if surf not in names or hi >= m['nframes']:
         return None, None
     i = names.index(surf)
-    B = S[0]['xyz']
-    pos = []
-    for f in range(m['nframes']):
+    body = names.index('body') if 'body' in names else 0
+    B = S[body]['xyz']
+
+    def at(f):
         R, t = kabsch(B[f], B[0])
-        pos.append((S[i]['xyz'][f] @ R.T + t).mean(0))
-    # Walk back from the end over frames that are still moving. That run can
-    # contain a CUT as well as the insertion: where the part is parked away from
-    # the gun, the author snaps it into place in a single frame and then eases it
-    # home over several. The snap is one frame carrying many times the step of its
-    # neighbours, so the stroke starts just after the largest such jump.
-    end = len(pos) - 1
-    while end > 0 and np.linalg.norm(pos[end] - pos[end - 1]) < 0.01:
-        end -= 1
-    start = end
-    while start > 0 and np.linalg.norm(pos[start] - pos[start - 1]) > 0.01:
-        start -= 1
-    steps = [float(np.linalg.norm(pos[f] - pos[f - 1])) for f in range(start + 1, end + 1)]
-    if len(steps) > 2:
-        med = float(np.median(steps))
-        big = [k for k, v in enumerate(steps) if med > 0 and v > 4 * med]
-        if big:
-            start = start + 1 + big[-1]
-    d = float(np.linalg.norm(pos[end] - pos[start]))
+        return (S[i]['xyz'][f] @ R.T + t).mean(0)
+
+    a_, b_ = at(lo), at(hi)
+    d = float(np.linalg.norm(a_ - b_))
     if d < 1e-6:
         return None, None
-    return d, (pos[start] - pos[end]) / d
+    return d, (a_ - b_) / d
+
+
 
 SRC = 'cards_packs'
 MESH = {                       # card -> (model dir, mesh file, skin file, type, capacity)
@@ -70,6 +65,15 @@ MESH = {                       # card -> (model dir, mesh file, skin file, type,
     'MS_wolf_PP41':   ('models/wolf/PP41',   'PP41.md3',   'PP41.png',   'smg', 35),
     'MS_wolf_BAR':    ('models/wolf/BAR',    'BAR.md3',    'BAR.png',    'rifle', 20),
     'MS_wolf_Garand': ('models/wolf/Garand', 'Garand.md3', 'Garand.png', 'rifle', 8),
+    # BrutalDoom's, measured the same way. The card file is named for the package
+    # it was surveyed in; the OUTPUT class is named for the model, because that is
+    # what the runtime looks a gun up by.
+    'MS_bd_AssaultShotgun': ('models/bd/AssaultShotgun', 'AssaultShotgun.md3',
+                             'AssaultShotgun.png', 'shotgun', 8, 'MS_brt_AssaultShotgun'),
+    'MS_bd_Plasma':         ('models/bd/PlasmaGun', 'Plasma.md3', 'Plasma.png',
+                             'plasma', 100, 'MS_brt_PlasmaGun'),
+    'MS_bd_RailGun':        ('models/bd/RailGun', 'RailGun.md3', 'RailGun.png',
+                             'railgun', 10, 'MS_brt_RailGun'),
 }
 
 V3 = r'\[\s*(-?[\d.]+),\s*(-?[\d.]+),\s*(-?[\d.]+)\s*\]'
@@ -81,8 +85,10 @@ def vec(m):
 
 out = []
 made = []
-for cls, (d, mesh, skin, typ, cap) in MESH.items():
-    p = os.path.join(SRC, cls + '.card')
+for key, spec in MESH.items():
+    d, mesh, skin, typ, cap = spec[:5]
+    cls = spec[5] if len(spec) > 5 else key
+    p = os.path.join(SRC, key + '.card')
     if not os.path.exists(p):
         print(f'  {cls}: no card'); continue
     t = open(p, encoding='utf-8', errors='replace').read()
@@ -136,7 +142,11 @@ for cls, (d, mesh, skin, typ, cap) in MESH.items():
         b.append('end')
         b.append('')
     g = list(well.groups())
-    st, ax = stroke(os.path.join(d, mesh))
+    mi = re.search(r'mag_in\s+(\d+)\.\.(\d+)', t)
+    if not mi:
+        print(f'  {cls}: card has no mag_in phase -- no insertion to measure, skipped')
+        continue
+    st, ax = stroke(os.path.join(d, mesh), (int(mi.group(1)), int(mi.group(2))))
     note = ''
     if st is not None and abs(st - float(g[9])) > 0.5:
         note = ("  # stroke taken from the insertion frames; travel_clear said %s,"
