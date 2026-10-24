@@ -1,0 +1,268 @@
+// RS VR hands for DUAL WIELD (2026-10-16, owner): a gun in the off hand, or both hands holding
+// guns, is held by a posed hand on each. The off-hand gun owns its hand layer (only the off-hand
+// weapon may draw on the off controller), so the hand is a model of the GUN's class: hand.md3 at
+// the gun's own hook from handtable.zs, baked into Offset (no hook rotation on these guns).
+// Drawn by RSQ_DualHands (zscript/rsq/dualhands.zs). Generated from handtable.zs + MODELDEF.rsq.
+
+Model AssaultShotgun
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.490 -21.190 -11.840
+	FrameIndex RQGT A 0 10
+	FrameIndex RQGU A 0 11
+}
+
+Model BFG10k
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.080 -20.150 -16.140
+	FrameIndex RQGT B 0 12
+	FrameIndex RQGU B 0 13
+}
+
+Model BIG_FUCKING_GUN
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.080 -20.150 -16.140
+	FrameIndex RQGT B 0 12
+	FrameIndex RQGU B 0 13
+}
+
+Model BrutalPistol
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.000 -20.820 -15.020
+	FrameIndex RQGT C 0 14
+	FrameIndex RQGU C 0 15
+}
+
+Model BrutalSMG
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.180 -24.260 -14.010
+	FrameIndex RQGT D 0 16
+	FrameIndex RQGU D 0 17
+}
+
+Model Devastator
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.150 -25.110 -13.740
+	FrameIndex RQGT E 0 18
+	FrameIndex RQGU E 0 19
+}
+
+Model Flamethrower2
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.220 -25.640 -12.160
+	FrameIndex RQGT E 0 18
+	FrameIndex RQGU E 0 19
+}
+
+Model GrenadeLauncher
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.110 -24.670 -14.480
+	FrameIndex RQGT F 0 20
+	FrameIndex RQGU F 0 21
+}
+
+Model HellishMissileLauncher
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -3.590 -20.400 -18.080
+	FrameIndex RQGT G 0 22
+	FrameIndex RQGU G 0 23
+}
+
+Model IncendiaryLauncher
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.050 -21.460 -10.420
+	FrameIndex RQGT H 0 24
+	FrameIndex RQGU H 0 25
+}
+
+Model MG42
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.070 -23.490 -13.690
+	FrameIndex RQGT I 0 26
+	FrameIndex RQGU I 0 27
+}
+
+Model MP40
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.300 -22.670 -13.950
+	FrameIndex RQGT J 0 28
+	FrameIndex RQGU J 0 29
+}
+
+Model Minigun
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.250 -24.310 -13.370
+	FrameIndex RQGT E 0 18
+	FrameIndex RQGU E 0 19
+}
+
+Model NukeLauncher
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.510 -19.840 -14.850
+	FrameIndex RQGT K 0 30
+	FrameIndex RQGU K 0 31
+}
+
+Model Plasma_Gun
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.140 -23.210 -15.040
+	FrameIndex RQGT L 0 32
+	FrameIndex RQGU L 0 33
+}
+
+Model RailGun
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.210 -22.200 -14.730
+	FrameIndex RQGT M 0 34
+	FrameIndex RQGU M 0 35
+}
+
+Model Revolver
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.070 -24.070 -14.850
+	FrameIndex RQGT N 0 36
+	FrameIndex RQGU N 0 37
+}
+
+Model Rifle
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.760 -21.270 -14.960
+	FrameIndex RQGT O 0 38
+	FrameIndex RQGU O 0 39
+}
+
+Model Rocket_Launcher
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.380 -23.240 -17.240
+	FrameIndex RQGT G 0 22
+	FrameIndex RQGU G 0 23
+}
+
+Model SSG
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.050 -22.340 -15.970
+	FrameIndex RQGT P 0 40
+	FrameIndex RQGU P 0 41
+}
+
+Model Shot_Gun
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.100 -24.470 -15.580
+	FrameIndex RQGT Q 0 42
+	FrameIndex RQGU Q 0 43
+}
+
+Model Unmaker
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset -0.140 -24.390 -16.020
+	FrameIndex RQGT E 0 18
+	FrameIndex RQGU E 0 19
+}
+
+// 1.4: the fists and the VR grenade, Ermac's own placement (as RSQ_GunSide's RQGF / RQGN)
+Model Melee_Attacks
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQGF A 0 1
+}
+
+Model HandGrenades
+{
+	Path "models/rsq"
+	Model 0 "ammo_hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQGN A 0 3
+}

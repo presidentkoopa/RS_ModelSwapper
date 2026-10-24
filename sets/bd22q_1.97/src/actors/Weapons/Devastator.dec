@@ -1,0 +1,182 @@
+ACTOR Devastator : BrutalWeapon// 7458
+{
+	//$category "Weapons"
+	Scale 0.7
+	Weapon.AmmoUse 1
+	Weapon.AmmoType "DevastatorAmmo"
+	Weapon.SelectionOrder 2400
+	+WEAPON.BFG
+	-WEAPON.NOAUTOFIRE
+	+WEAPON.NOALERT
+	+WEAPON.ALT_USES_BOTH
+	-WEAPON.AMMO_CHECKBOTH
+	-INVENTORY.UNDROPPABLE
+	Tag "$TAGBD_DEVASTATOR"
+	Inventory.PickupSound "Devastator/select"
+	Inventory.PickupMessage "$GOTDEVASTATOR"
+	Obituary "$OBBD_DEVASTATOR"
+	States
+	{
+	KickFlash:
+		DEVA RSTU 1
+		DEVA V 10
+		DEVA UTSR 1
+		Stop
+	SlideFlash:
+		DEVA RSTU 1
+		DEVA V 36
+		Stop
+	SlideFlashEnd:
+		DEVA V 5
+		DEVA UTSR 1
+		Stop
+	SlideFlashEndEarly:
+		DEVA V 2
+		DEVA UTSR 1
+		Stop
+
+	Select:
+		TNT1 A 0 A_Giveinventory("GoSpecial",1)
+		TNT1 A 0 A_GiveInventory("TokenCleaner")
+		TNT1 A 0 A_SetCrosshair(CallACS("GetCrosshair", 23))
+		TNT1 A 0 A_GunFlash
+		TNT1 A 1
+		TNT1 A 0 A_PlaySound("Devastator/select",5)
+        DEVA A 0 A_JumpIfInventory("IsPlayingAsPurist", 1, "SelectPurist")
+	SelectAnimation:
+		DEVA ZYXW 1 A_WeaponReady(WRF_NOFIRE)
+	Ready:
+	Ready3:
+		TNT1 A 0 A_SetCrosshair(CallACS("GetCrosshair", 23))	
+		TNT1 A 0 A_JumpIfInventory("ExecuteDownedEnemy", 1, "DoExecution")
+		DEVA A 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		DEVA A 0 A_JumpIfInventory("Taunting",1,"Taunt")
+		DEVA A 0 A_JumpIfInventory("Salute1", 1, "Salute")
+		DEVA A 0 A_JumpIfInventory("Salute2", 1, "Salute")
+		DEVA A 0 A_JumpIfInventory("TossGrenade",1,"TossGrenade")
+		DEVA A 0 A_JumpIfInventory("IsRunning",1,"StartSprint")	
+		DEVA A 1 A_WeaponReady
+		Goto Ready3
+	
+	/*SelectPurist:
+        "####" "#" 0 A_JumpIfInventory("PuristDevastator", 1,3)    
+        "####" "#" 0 A_Giveinventory("PuristDevastator",1)
+        "####" "#" 0 A_SelectWeapon("PuristDevastator")
+        "####" "####" 0 A_Raise
+        "####" "#" 1 A_Raise
+        "####" "#" 0 A_Takeinventory("Devastator",1)
+        Goto SelectPurist+1*/
+
+	StartSprint:
+		TNT1 A 0 A_JumpIfInventory("UsedStamina", 40, "StopSprintTired")
+		DEVA RST 1 A_WeaponReady(WRF_NOFIRE)
+		TNT1 A 0 A_ZoomFactor(1.0)
+	Sprinting:
+		TNT1 A 0 offset(-9,32)
+		TNT1 A 0 offset(-9,32) A_JumpIfInventory("IsStandingStill", 1, "Ready3")
+		TNT1 A 0 offset(-9,32) A_JumpIfInventory("UsedStamina", 0, "StopSprint")
+		TNT1 A 0 offset(-9,32) ACS_ExecuteAlways(852, 0, 0, 0, 0)//Makes player faster.
+		TNT1 O 0 offset(-9,32) A_JumpIfInventory("PowerStrength", 1, 2)
+		TNT1 O 0 offset(-9,32) A_GiveInventory("UsedStamina", 15)
+		TNT1 O 0 offset(-9,32)
+		DEVA U 1 offset(-9,34) A_SetPitch(pitch -0.5)
+		DEVA U 1 offset(-6,36) A_SetPitch(pitch -0.5)
+		DEVA U 1 offset(-3,38) A_SetPitch(pitch -0.5)
+		DEVA U 1 offset(0,38) A_SetPitch(pitch -0.5)
+		DEVA U 1 offset(3,36) A_SetPitch(pitch -0.5)
+		DEVA U 1 offset(6,34) A_SetPitch(pitch -0.5)
+		DEVA U 1 offset(9,32) A_SetPitch(pitch -0.5)
+		TNT1 A 0 offset(9,32) A_WeaponReady(WRF_NOBOB)
+		TNT1 A 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		TNT1 A 0 A_JumpIfInventory("Taunting",1,"Taunt")
+		TNT1 A 0 offset(-9,32) A_GiveInventory("UsedStamina", 8)
+		TNT1 A 0 offset(9,33) A_SpawnItemEx("FootStep", 0, 0, 2, 0, 0, -4)
+		DEVA U 1 offset(9,34) A_SetPitch(pitch +0.5)
+		DEVA U 1 offset(6,36) A_SetPitch(pitch +0.5)
+		DEVA U 1 offset(3,38) A_SetPitch(pitch +0.5)
+		DEVA U 1 offset(0,38) A_SetPitch(pitch +0.5)
+		DEVA U 1 offset(-3,36) A_SetPitch(pitch +0.5)
+		DEVA U 1 offset(-6,34) A_SetPitch(pitch +0.5)
+		DEVA U 1 offset(-9,32) A_SetPitch(pitch +0.5)
+		TNT1 A 0 offset(-9,32) A_WeaponReady(WRF_NOBOB)
+		TNT1 A 0 offset(-9,32) A_JumpIfInventory("IsRunning", 1, "Sprinting")
+		Goto StopSprint
+
+	StopSprint:
+		DEVA TSR 1
+		TNT1 A 0 A_JumpIfInventory("UsedStamina", 60, "StopSprintTired")
+		TNT1 A 0 ACS_ExecuteAlways(853, 0, 0, 0, 0)//Makes player slower.
+		Goto Ready
+
+	Deselect:
+		DEVA A 0
+		TNT1 A 0 A_SetCrosshair(CallACS("GetCrosshair", 23))
+		TNT1 A 0 A_StopSound(CHAN_WEAPON)
+		TNT1 A 0 A_TakeInventory("TossGrenade", 1)
+		DEVA WXYZ 1
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		Wait
+
+	Spawn:
+		DEVA Z 1
+		Loop
+
+	NoAmmo:
+		"####" A 5
+		Goto Ready3
+
+
+	AltFire:
+	Fire:
+		DEVA A 0 A_JumpIfNoAmmo("NoAmmo")
+		DEVA A 0 A_PlaySOund("Devastator/fire", 1)
+		DEVA A 0 A_ZoomFactor(0.99)
+		DEVA A 0 A_JumpIfInventory("RevenantRocketFire1823", 1, "OpenFire2")
+		DEVA A 0 A_GiveInventory("RevenantRocketFire1823", 1)
+		DEVA A 0 A_SetAngle(Angle-0.9)
+		DEVA A 0 A_SetPitch(Pitch+0.4)
+		DEVA B 1 BRIGHT A_FireCustomMissile("DEvastatorMissile", 1.5, -1, 15, -4)
+		DEVA C 1 BRIGHT A_FireCustomMissile("DEvastatorMissile", frandom(1.1,1.9), -1, 15, random(-5,-3))
+		DEVA A 0 A_ZoomFactor(1.0)
+		DEVA A 0 A_SetPitch(Pitch-0.4)
+		DEVA DEE 1 A_SetAngle(Angle+0.3)
+		DEVA FGHI 1
+		Goto Ready+6
+
+	OpenFire2:
+		DEVA A 0 A_TakeInventory("RevenantRocketFire1823", 1)
+		DEVA A 0 A_SetAngle(Angle+0.9)
+		DEVA A 0 A_SetPitch(Pitch+0.4)
+		DEVA J 1 BRIGHT A_FireCustomMissile("DEvastatorMissile", -1.5, -1, -15, -4)
+		DEVA K 1 BRIGHT A_FireCustomMissile("DEvastatorMissile", frandom(-1.1,-1.9), -1, -15, random(-5,-3))
+		DEVA A 0 A_ZoomFactor(1.0)
+		DEVA A 0 A_SetPitch(pitch-0.4)
+		DEVA LMM 1 A_SetAngle(Angle-0.3)
+		DEVA NOPQ 1
+		Goto Ready+6
+	}
+}
+
+ACTOR PuristDevastator : Devastator { -WEAPON.NOAUTOAIM +WEAPON.CHEATNOTWEAPON }
+
+ACTOR DEvastatorMissile: revenantseekermissiles
+{
+	DeathSound "Devastator/explode"
+	SeeSound "dsempty"
+	+EXTREMEDEATH
+	Speed 60
+	Damage 20
+	States
+	{
+	Spawn:
+		RCKT A 1 BRIGHT
+		TNT1 A 0 A_CustomMissile ("ImpFireBallTrail1", 0, 0, random (175, 185), 2, random (-5, 5))
+		TNT1 A 0 A_CustomMissile ("ImpFireBallTrail2", 0, 0, random (175, 185), 2, random (-5, 5))
+		RCKT B 1 BRIGHT
+		TNT1 A 0 A_CustomMissile ("ImpFireBallTrail1", 0, 0, random (175, 185), 2, random (-5, 5))
+		TNT1 A 0 A_CustomMissile ("ImpFireBallTrail2", 0, 0, random (175, 185), 2, random (-5, 5))
+		TNT1 A 0 A_SpawnItem("RocketSmokeTrail52")
+		Loop
+	}
+}

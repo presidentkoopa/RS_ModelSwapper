@@ -1,0 +1,2 @@
+// 1.24: replaces the BD voxel pack's own Voxeldef.cruel.txt (sprite-wide and always on). Our pack
+// shows its voxels per category instead (Voxel Options; MODELDEF.rsqvox).

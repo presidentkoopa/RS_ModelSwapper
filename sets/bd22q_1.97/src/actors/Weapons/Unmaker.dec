@@ -1,0 +1,326 @@
+// posefix: BD22 brutal22test6 file. Lines marked "posefix" are the only changes ("rsr": real VR reload).
+ACTOR Unmaker : BrutalWeapon
+{
+	Weapon.AmmoUse 2
+	Weapon.AmmoType "SoulAmmo"
+	Weapon.SelectionOrder 3100
+	-WEAPON.NOALERT
+	+WEAPON.BFG
+	-WEAPON.NOAUTOFIRE
+	-WEAPON.AMMO_CHECKBOTH
+	-INVENTORY.UNDROPPABLE
+	Inventory.PickupSound "BFG/Draw"
+	Inventory.PickupMessage "$GOTUNMAKER"
+	Tag "$TAGBD_UNMAKER"
+	Obituary "$OBBD_UNMAKER"
+	States
+	{
+	// posefix rsr (1.97): real VR reload (zscript/rsr/vreload.zs) on a gun Brutal Doom never reloads.
+	// The skull is a COUNTER over BD22's own ammo (zscript/rsq/counters.zs, capacity 60 -- the owner's
+	// REMA number; BD22 has none): firing and the reserve are BD22's, untouched. With VR reloading
+	// off (rsr_reload 0, or not in VR) the counter is idle and nothing below changes the gun.
+	Reload:
+		"####" "#" 0 A_TakeInventory("Reloading", 1)
+		"####" "#" 0 A_JumpIfInventory("RSQ_Mag_Unmaker", 0, "Ready")	// full
+		"####" "#" 0 A_JumpIfInventory("SoulAmmo", 1, "RSR_Start")
+		Goto Ready	// nothing in the reserve
+	RSR_Start:
+		"####" "#" 0 A_TakeInventory("RSR_Go", 1)
+		"####" "#" 0 A_GiveInventory("RSR_Start", 1)
+		"####" "#" 0 A_JumpIfInventory("RSR_Go", 1, "RSR_Out")
+		Goto Ready	// RSR_Stock: BD22 has no reload for this gun
+	RSR_Out:
+		"####" "#" 0 A_TakeInventory("RSR_Go", 1)
+		"####" "#" 0 A_JumpIfInventory("RSQ_NoMag_Unmaker", 1, "RSR_Wait")	// already out
+		"####" "#" 0 A_GiveInventory("RSR_MagOut", 1)	// the skull comes off (its own sound)
+		"####" "#" 0 A_TakeInventory("RSQ_Mag_Unmaker", 0)	// its rounds go with it; the reserve is BD22's pool and loses none
+		"####" "#" 0 A_GiveInventory("RSQ_NoMag_Unmaker", 1)
+	RSR_Wait:		// the gun as the script shows it ("####" "#"); the script runs every tic
+		"####" "#" 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+		"####" "#" 0 A_GiveInventory("RSR_Tick", 1)
+		"####" "#" 0 A_JumpIfInventory("RSR_Seated", 1, "RSR_Fill")
+		"####" "#" 0 A_JumpIfInventory("RSR_Done", 1, "RSR_Done")
+		Goto RSR_Wait
+	RSR_Fill:		// seated: the counter takes the reserve's count, up to its capacity (counters.zs)
+		"####" "#" 0 A_TakeInventory("RSR_Seated", 1)
+		"####" "#" 0 A_TakeInventory("RSQ_NoMag_Unmaker", 1)
+		"####" "#" 0 A_GiveInventory("RSQ_Fill_Unmaker", 1)
+		"####" "#" 0 A_GiveInventory("RSR_Filled", 1)
+		Goto RSR_Wait
+	RSR_Done:
+		"####" "#" 0 A_TakeInventory("RSR_Done", 1)
+		"####" "#" 0 A_TakeInventory("Reloading", 1)
+		"####" "#" 0 A_ReFire
+		Goto Ready
+	KickFlash: 
+		2NHG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristKickFlash")
+		UNHG EFGH 1
+		UNHG I 10
+		UNHG HGFE 1
+		stop
+	SlideFlash: 
+		2NHG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristSlideFlash")
+		UNHG EFGH 1
+		UNHG I 36
+		stop
+	SlideFlashEnd: 
+		2NHG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristSlideFlashEnd")
+		UNHG I 5
+		UNHG HGFE 1
+		stop
+	SlideFlashEndEarly: 
+		2NHG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristSlideFlashEndEarly")
+		UNHG I 2
+		UNHG HGFE 1
+		stop
+
+	Ready:
+	Ready3:
+		2NHG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,2)
+		UNHG A 0
+		"####" ABCDD 2 A_WeaponReady
+		"####" "#" 0 A_JumpIfInventory("Reloading", 1, "Reload")	// posefix rsr: the reload key
+		"####" A 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		"####" A 0 A_JumpIfInventory("Taunting",1,"Taunt")
+		"####" A 0 A_JumpIfInventory("Salute1", 1, "Salute")
+		"####" A 0 A_JumpIfInventory("Salute2", 1, "Salute")
+		"####" A 0 A_JumpIfInventory("TossGrenade",1,"TossGrenade")
+		"####" A 0 A_JumpIfInventory("IsRunning",1,"StartSprint")
+		"####" DCBA 2 A_WeaponReady
+		"####" A 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		"####" A 0 A_JumpIfInventory("Taunting",1,"Taunt")
+		"####" A 0 A_JumpIfInventory("Salute1", 1, "Salute")
+		"####" A 0 A_JumpIfInventory("Salute2", 1, "Salute")
+		"####" A 0 A_JumpIfInventory("TossGrenade",1,"TossGrenade")
+		"####" A 0 A_JumpIfInventory("IsRunning",1,"StartSprint")
+		"####" AAAA 2 A_WeaponReady
+		"####" A 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		"####" A 0 A_JumpIfInventory("Taunting",1,"Taunt")
+		"####" A 0 A_JumpIfInventory("Salute1", 1, "Salute")
+		"####" A 0 A_JumpIfInventory("Salute2", 1, "Salute")
+		"####" A 0 A_JumpIfInventory("TossGrenade",1,"TossGrenade")
+		"####" A 0 A_JumpIfInventory("IsRunning",1,"StartSprint")
+		Goto Ready3
+
+
+	StartSprint:
+		UNHG A 0 A_JumpIfInventory("UsedStamina", 40, "StopSprintTired")
+		UNHG EFG 1 A_WeaponReady(WRF_NOFIRE)
+	Sprinting:
+		UNHG H 0 offset(-9,32)
+		//UNHG A 0 offset(-9,32) A_JumpIfInventory("IsStandingStill", 1, "Ready3")
+		UNHG H 0 offset(-9,32) A_JumpIfInventory("UsedStamina", 0, "StopSprint")
+		PLAY A 0 offset(-9,32) ACS_ExecuteAlways(852, 0, 0, 0, 0)//Makes player faster.
+		UNHG H 0 offset(-9,32) A_JumpIfInventory("PowerStrength", 1, 2)
+		UNHG H 0 offset(-9,32) A_GiveInventory("UsedStamina", 12)
+		UNHG H 0 offset(-9,32)
+		UNHG H 1 offset(-9,34) A_SetPitch(pitch -0.5)
+		UNHG H 1 offset(-6,36) A_SetPitch(pitch -0.5)
+		UNHG H 1 offset(-3,38) A_SetPitch(pitch -0.5)
+		UNHG H 1 offset(0,38) A_SetPitch(pitch -0.5)
+		UNHG H 1 offset(3,36) A_SetPitch(pitch -0.5)
+		UNHG H 1 offset(6,34) A_SetPitch(pitch -0.5)
+		UNHG H 1 offset(9,32) A_SetPitch(pitch -0.5)
+		UNHG H 0 offset(9,32) A_WeaponReady(WRF_NOBOB)
+		UNHG H 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		UNHG H 0 A_JumpIfInventory("Taunting",1,"Taunt")
+		UNHG H 0 offset(-9,32) A_GiveInventory("UsedStamina", 12)
+		UNHG H 0 offset(9,33) A_SpawnItemEx("FootStep", 0, 0, 2, 0, 0, -4)
+		UNHG H 1 offset(9,34) A_SetPitch(pitch +0.5)
+		UNHG H 1 offset(6,36) A_SetPitch(pitch +0.5)
+		UNHG H 1 offset(3,38) A_SetPitch(pitch +0.5)
+		UNHG H 1 offset(0,38) A_SetPitch(pitch +0.5)
+		UNHG H 1 offset(-3,36) A_SetPitch(pitch +0.5)
+		UNHG H 1 offset(-6,34) A_SetPitch(pitch +0.5)
+		UNHG H 1 offset(-9,32) A_SetPitch(pitch +0.5)
+		UNHG A 0 offset(-9,32) A_WeaponReady(WRF_NOBOB)
+		UNHG A 0 offset(-9,32) A_JumpIfInventory("IsRunning", 1, "Sprinting")
+		Goto StopSprint
+
+	StopSprint:
+		UNHG GFE 1
+		UNHG A 0 A_JumpIfInventory("UsedStamina", 60, "StopSprintTired")
+		PLAY A 0 ACS_ExecuteAlways(853, 0, 0, 0, 0)//Makes player slower.
+		Goto Ready
+
+	Deselect:
+		2NHG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"DeselectPurist")
+		UNHS EFGH 1
+		UNHG A 0 A_StopSOund(1)
+		UNHG A 0 A_StopSOund(6)
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		PIST F 0 A_TakeInventory("TossGrenade", 1)
+		TNT1 A 1 A_Lower
+		Wait
+
+	Select:
+		TNT1 A 0 A_Giveinventory("GoSpecial",1)
+		TNT1 A 0 A_GiveInventory("TokenCleaner")
+		//UNHG A 0 A_Giveinventory("RevenantLauncherSelected",1) //please, don't do this.
+		TNT1 A 0 A_SetCrosshair( CallACS("GetCrosshair", 14) )
+		TNT1 A 1 A_GunFlash
+		UNHG A 0 A_PlaySound("BFG/Draw", 5)
+		2NHG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"SelectPurist")
+		Goto SelectAnimation
+
+	SelectAnimation:
+		UNHS ABCD 1 A_WeaponReady(WRF_NOFIRE)
+		GOto Ready
+
+	Spawn:
+		UNHW A 1
+		Loop
+
+	NoAmmo:
+		TNT1 A 0
+		UNHG A 0 A_ZoomFactor(1.0)
+		UNHG A 0 A_StopSOund(1)
+		UNHG A 0 A_StopSOund(6)
+		TNT1 A 0 A_PlaySound("Weapon/Empty", 4)
+		2NHG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,2)
+		UNHG A 0
+		"####" C 1 offset(0,33)
+		"####" DDCBA 1 offset(0,32)
+		Goto Ready3
+
+	Fire:
+		2NHF A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,2)
+		UNHF A 0
+		"####" E 0 A_JumpIfNoAmmo("NoAmmo")
+		"####" "#" 0 A_JumpIfInventory("RSQ_Empty_Unmaker", 1, "Reload")	// posefix rsr: the skull is empty
+		"####" A 0 A_AlertMonsters
+		"####" A 0 A_PlaySOund("Unmaker/Start", 1)
+		"####" ABCD 1
+		"####" A 0 A_ZoomFactor(0.95)
+	Hold:
+		"####" "#" 0 A_JumpIfNoAmmo("NoAmmo")
+		"####" "#" 0 A_JumpIfInventory("RSQ_Empty_Unmaker", 1, "Reload")	// posefix rsr: the skull is empty
+		"####" E 1 BRIGHT
+		"####" A 0 A_PlaySOund("Unmaker/Loop", 6, 1, 1)
+		"####" "#" 0 A_JumpIfInventory("RSQ_Empty_Unmaker", 1, "Reload")	// posefix rsr: the skull is empty
+		"####" A 0 BRIGHT A_FireCustomMissile("UnmakerLaser", 0, 1, 0, 0, 0, 0)
+		"####" A 0 A_RailAttack(1, 0, 0, "none", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "hitpuff", 0, 0, 9999, 1)
+		"####" A 0 A_SetAngle(random(1, -1) + angle)
+		"####" A 0 A_SetPitch(-0.5 + pitch)
+		"####" "#" 0 A_JumpIfNoAmmo("NoAmmo")
+		"####" "#" 0 A_JumpIfInventory("RSQ_Empty_Unmaker", 1, "Reload")	// posefix rsr: the skull is empty
+		"####" F 1 BRIGHT
+		"####" "#" 0 A_JumpIfInventory("RSQ_Empty_Unmaker", 1, "Reload")	// posefix rsr: the skull is empty
+		"####" A 0 BRIGHT A_FireCustomMissile("UnmakerLaser2", 0, 1, 0, 0, 0, 0)
+		"####" A 0 A_RailAttack(1, 0, 0, "none", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "hitpuff", 0, 0, 9999, 1)
+		"####" A 0 A_SetAngle(random(1, -1) + angle)
+		"####" A 0 A_SetPitch(-0.5 + pitch)
+		"####" "#" 0 A_JumpIfNoAmmo("NoAmmo")
+		"####" "#" 0 A_JumpIfInventory("RSQ_Empty_Unmaker", 1, "Reload")	// posefix rsr: the skull is empty
+		"####" G 1 BRIGHT
+		"####" "#" 0 A_JumpIfInventory("RSQ_Empty_Unmaker", 1, "Reload")	// posefix rsr: the skull is empty
+		"####" A 0 BRIGHT A_FireCustomMissile("UnmakerLaser", 0, 1, 0, 0, 0, 0)
+		"####" A 0 A_RailAttack(1, 0, 0, "none", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "hitpuff", 0, 0, 9999, 1)
+		"####" A 0 A_SetAngle(random(1, -1) + angle)
+		"####" A 0 A_SetPitch(-0.5 + pitch)
+		"####" "#" 0 A_JumpIfNoAmmo("NoAmmo")
+		"####" "#" 0 A_JumpIfInventory("RSQ_Empty_Unmaker", 1, "Reload")	// posefix rsr: the skull is empty
+		"####" H 1 BRIGHT
+		"####" "#" 0 A_JumpIfInventory("RSQ_Empty_Unmaker", 1, "Reload")	// posefix rsr: the skull is empty
+		"####" A 0 BRIGHT A_FireCustomMissile("UnmakerLaser2", 0, 1, 0, 0, 0, 0)
+		"####" A 0 A_RailAttack(1, 0, 0, "none", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "hitpuff", 0, 0, 9999, 1)
+		"####" A 0 A_SetAngle(random(1, -1) + angle)
+		"####" A 0 A_SetPitch(-0.5 + pitch)
+		"####" A 0 A_Refire
+		"####" A 0 A_ZoomFactor(1.0)
+		"####" A 0 A_StopSOund(1)
+		"####" A 0 A_StopSOund(6)
+		"####" A 0 A_PlaySOund("Unmaker/Stop", 1)
+		"####" DCBA 1
+		Goto Ready3
+	}
+}
+
+ACTOR PuristUnmaker : Unmaker { -WEAPON.NOAUTOAIM +WEAPON.CHEATNOTWEAPON }
+
+
+Actor UnmakerLaser: FastProjectile
+{
+	+RANDOMIZE
+	+FORCEXYBILLBOARD
+	+DONTSPLASH
+	-BLOODSPLATTER
+	damage (random(50, 50))
+	radius 1
+	height 1
+	speed 500
+	RenderStyle "Add"
+	alpha 0.9
+	scale .15
+	decal "scorch"
+	damagetype "desintegrate"
+	missiletype "UnmakerLaserTrail"
+	states
+	{
+	Spawn:
+		LEYS R 1 BRIGHT
+		Loop
+
+	Death:
+	XDeath:
+		UNHG A 0
+		UNHG A 0 A_SpawnItemEx ("ExplosionFlareSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		EXPL A 0 A_SpawnItem("ExplosionParticleSpawner")
+		EXPL A 0 A_CustomMissile ("FlamethrowerFireParticles", 6, 0, random (0, 360), 2, random (0, 90))
+		//FRFX ZZZ 0 BRIGHT A_CustomMissile ("BigBlackSmoke", 2, 0, random (0, 360), 2, random (0, 30))
+		//TNT1 A 2 A_SpawnItem("BurningGroundLowDamage")
+		UNHG A 0 A_CustomMissile("FlamethrowerBurningStuff", random (-32, 0), random (-32, 32), random (-32, 32), 2, random (-32, 32))
+		UNHG A 0 A_SpawnItemEx ("DetectFloorCraterSmall",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		UNHG A 0 A_SpawnItemEx ("DetectCeilCraterSmall",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		UNHG A 0 A_explode(20, 100)
+		TNT1 A 20 A_CustomMissile ("BigBlackSmoke", 0, 0, random (0, 360), 2, random (40, 160))
+		Stop
+	}
+}
+
+
+Actor UnmakerLaser2: UnmakerLaser
+{
+	decal "none"
+	states
+	{
+	Spawn:
+		LEYS R 1 BRIGHT
+		Loop
+	Death:
+	XDeath:
+		UNHG A 0
+		UNHG A 0 A_SpawnItemEx ("ExplosionFlareSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		EXPL A 0 A_SpawnItem("ExplosionParticleSpawner")
+		EXPL A 0 A_CustomMissile ("FlamethrowerFireParticles", 6, 0, random (0, 360), 2, random (0, 90))
+		//UNHG A 0 A_CustomMissile("FlamethrowerBurningStuff", random (-32, 0), random (-32, 32), random (-32, 32), 2, random (-32, 32))
+		//UNHG A 0 A_SpawnItemEx ("DetectFloorCraterSmall",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		//UNHG A 0 A_SpawnItemEx ("DetectCeilCraterSmall",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		UNHG A 0 A_explode(20, 100)
+		//TNT1 A 20 A_CustomMissile ("BigBlackSmoke", 0, 0, random (0, 360), 2, random (40, 160))
+		Stop
+	}
+}
+
+
+Actor UnmakerLaserTrail
+{
+	+FORCEXYBILLBOARD
+	+CLIENTSIDEONLY
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+SHADOW
+	+NOTELEPORT
+	+CANNOTPUSH
+	+NODAMAGETHRUST
+	RenderStyle "Add"
+	alpha 0.9
+	scale .15
+	states
+	{
+	Spawn:
+		LEYS R 0
+		LEYS R 1 BRIGHT
+		Stop
+	}
+}

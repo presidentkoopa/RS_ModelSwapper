@@ -1,0 +1,336 @@
+{
+ "rows": [
+  {
+   "cls": "WM_BreachGlock",
+   "one": "A",
+   "two": "B",
+   "sup": "A",
+   "trig": "C",
+   "hook": [
+    -0.505,
+    -3.534,
+    4.308
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    -0.505,
+    -3.534,
+    4.308
+   ],
+   "spoint": [
+    -0.055,
+    0.0,
+    -0.085
+   ]
+  },
+  {
+   "cls": "WM_BreachGlockS",
+   "one": "A",
+   "two": "B",
+   "sup": "A",
+   "trig": "C",
+   "hook": [
+    -0.542,
+    -3.567,
+    4.328
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    -0.542,
+    -3.567,
+    4.328
+   ],
+   "spoint": [
+    -0.055,
+    0.0,
+    -0.085
+   ]
+  },
+  {
+   "cls": "WM_BreachKimber",
+   "one": "A",
+   "two": "B",
+   "sup": "A",
+   "trig": "C",
+   "hook": [
+    -0.489,
+    -3.597,
+    4.863
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    -0.489,
+    -3.597,
+    4.863
+   ],
+   "spoint": [
+    -0.055,
+    -0.0,
+    -0.085
+   ]
+  },
+  {
+   "cls": "WM_BreachMK18",
+   "one": "F",
+   "two": "F",
+   "sup": "B",
+   "trig": "O",
+   "hook": [
+    1.302,
+    -1.169,
+    3.724
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    -0.126,
+    -1.653,
+    13.256
+   ],
+   "spoint": [
+    0.26,
+    0.004,
+    -0.047
+   ]
+  },
+  {
+   "cls": "WM_BreachMK18S",
+   "one": "F",
+   "two": "F",
+   "sup": "B",
+   "trig": "O",
+   "hook": [
+    1.302,
+    -1.169,
+    3.724
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    -0.126,
+    -1.653,
+    13.258
+   ],
+   "spoint": [
+    0.26,
+    0.004,
+    -0.047
+   ]
+  },
+  {
+   "cls": "WM_BreachHK416S",
+   "one": "F",
+   "two": "F",
+   "sup": "B",
+   "trig": "O",
+   "hook": [
+    1.514,
+    -1.343,
+    3.767
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    0.233,
+    -1.522,
+    17.769
+   ],
+   "spoint": [
+    0.219,
+    0.001,
+    -0.051
+   ]
+  },
+  {
+   "cls": "WM_BreachMCX",
+   "one": "F",
+   "two": "F",
+   "sup": "B",
+   "trig": "O",
+   "hook": [
+    1.343,
+    -0.764,
+    3.515
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    0.074,
+    -2.127,
+    17.687
+   ],
+   "spoint": [
+    0.214,
+    0.003,
+    -0.055
+   ]
+  },
+  {
+   "cls": "WM_BreachG36C",
+   "one": "F",
+   "two": "F",
+   "sup": "B",
+   "trig": "O",
+   "hook": [
+    1.34,
+    -1.511,
+    3.689
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    0.167,
+    -3.596,
+    16.54
+   ],
+   "spoint": [
+    0.23,
+    0.001,
+    -0.07
+   ]
+  },
+  {
+   "cls": "WM_BreachMP5",
+   "one": "F",
+   "two": "F",
+   "sup": "B",
+   "trig": "O",
+   "hook": [
+    1.258,
+    -2.878,
+    3.806
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    -0.221,
+    1.254,
+    18.761
+   ],
+   "spoint": [
+    0.202,
+    -0.001,
+    0.016
+   ]
+  },
+  {
+   "cls": "WM_BreachBenelli",
+   "one": "C",
+   "two": "C",
+   "sup": "B",
+   "trig": "Q",
+   "hook": [
+    -0.012,
+    -7.684,
+    -0.843
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "srot": [
+    0,
+    0,
+    0
+   ],
+   "shook": [
+    1.708,
+    -2.206,
+    8.339
+   ],
+   "spoint": [
+    0.308,
+    0.019,
+    -0.021
+   ]
+  }
+ ],
+ "notes": {
+  "WM_BreachGlock": "gun hand hand:19 shift F-4.3 L-0.5 U-3.5 (contact face 0.37 cm from the gun); support cups the gun hand",
+  "WM_BreachGlockS": "gun hand hand:19 shift F-4.3 L-0.5 U-3.6 (contact face 0.38 cm from the gun); support cups the gun hand",
+  "WM_BreachKimber": "gun hand hand:19 shift F-4.9 L-0.5 U-3.6 (contact face 0.46 cm from the gun); support cups the gun hand",
+  "WM_BreachMK18": "gun hand hand:106 shift F-3.7 L+1.3 U-1.2 (contact face 1.05 cm from the gun); support hand2:15 at F 26.0 (cylinder 1.16 cm from the gun)",
+  "WM_BreachMK18S": "gun hand hand:106 shift F-3.7 L+1.3 U-1.2 (contact face 1.05 cm from the gun); support hand2:15 at F 26.0 (cylinder 1.16 cm from the gun)",
+  "WM_BreachHK416S": "gun hand hand:106 shift F-3.8 L+1.5 U-1.3 (contact face 1.16 cm from the gun); support hand2:15 at F 21.9 (cylinder 1.38 cm from the gun)",
+  "WM_BreachMCX": "gun hand hand:106 shift F-3.5 L+1.3 U-0.8 (contact face 1.00 cm from the gun); support hand2:15 at F 21.4 (cylinder 1.18 cm from the gun)",
+  "WM_BreachG36C": "gun hand hand:106 shift F-3.7 L+1.3 U-1.5 (contact face 1.26 cm from the gun); support hand2:15 at F 23.0 (cylinder 1.57 cm from the gun)",
+  "WM_BreachMP5": "gun hand hand:106 shift F-3.8 L+1.3 U-2.9 (contact face 1.08 cm from the gun); support hand2:15 at F 20.2 (cylinder 1.05 cm from the gun)",
+  "WM_BreachBenelli": "gun hand hand:30 shift F+0.8 L-0.0 U-7.7 (contact face 0.52 cm from the gun); support hand2:15 at F 30.8 (cylinder 1.45 cm from the gun)"
+ }
+}

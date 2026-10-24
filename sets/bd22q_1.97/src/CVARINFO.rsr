@@ -1,0 +1,36 @@
+// RS real VR reload (zscript/rsr/vreload.zs). rsr_reload 1 (CVARINFO.rsq) turns it on for the guns that have it.
+user string rsr_grip_keys = "443 436";	// key codes that are the off-hand grip (it grabs only 50 cm or more from the gun hand, or with vr_two_handed_weapons 0): 443 KEY_PAD_RTHUMB, 436 KEY_PAD_DPAD_UP (with the main grip held as a shift)
+user int rsr_grab_buttons = 67108864;	// usercmd buttons that grab anywhere: BT_OFFHANDATTACK (off-hand trigger); 0 = none
+user int rsr_magrelease = 268435456;	// usercmd buttons that drop the magazine: BT_OFFHANDRELOAD; the gun's own reload always does
+user int rsr_pouch = 0;				// where a new magazine is taken: 0 anywhere 20 cm from the gun, 1 low (40 cm below the eyes)
+user bool rsr_eat_grip = true;		// while a reload has the off hand, its grip key does nothing else (rthumb is +speed in some layouts)
+user bool rsr_debug = false;		// print every key code pressed, and each reload step
+
+// 1.93: take the charging handle / slide with no reload running, so the action can be cracked
+// open on a loaded gun and let go again (a press check). A look, not a rack: no ammo moves and
+// nothing chambers. Needs "Grab ammo with" set to the trigger or the grip, because the Use key
+// is only taken over while a reload has the off hand.
+user bool rsr_freecharge = false;
+
+// Reload assist (zscript/rsr/rsr_assist.zs): one number scales every capture radius and
+// tolerance of the real VR reload at once, and how little of a push or a stroke counts as
+// done. 1.0 is the shipped feel; 0.5 asks for the old precision; 3.0 is very forgiving.
+user float rsr_assist = 1.0;
+// Draw the capture zones as rings. A tuning aid, not a play feature -- but it IS in the menu
+// (Reload: tuning and debug), because a console command is no use with a headset on. With it
+// off not one particle is spawned, and these are particles, never actors, so nothing becomes
+// a marker in the world.
+user bool rsr_assist_debug = false;
+
+// Pump shotguns: how many shells one pushed home counts as, 1 to 4. The reserve pays for every
+// one of them; this only saves you inserting eight times to fill a tube.
+user int rsr_shell_credit = 1;
+
+// 1.30 the rifle's M203 (zscript/rsr/rsr_m203.zs): what a hand-loaded round costs. 0 a rocket (as
+// BD22's own launcher reload), 1 a hand grenade. A server setting: it changes what you have.
+server int rsm_ammo = 0;
+
+// 1.37 secondary fire on the zoom buttons (zscript/rsq/alts.zs): off = BD22 as it was
+server bool rsa_pistol_semi = false;	// pistol: one shot per trigger pull
+server bool rsa_rev_magnum = false;	// revolver: secondary fires a slug
+server bool rsa_sg_slug = false;		// pump shotgun: secondary fires a slug

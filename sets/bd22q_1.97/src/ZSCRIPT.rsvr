@@ -1,0 +1,45 @@
+version "4.10"
+
+// RS VR melee (posefix): real axe / Dragonslayer swings and axe throwing in VR
+#include "zscript/rsvr/vrhand.zs"
+#include "zscript/rsvr/melee.zs"
+
+// RS VR hands and ballistics (zscript/rsq): options in RSQ_Options (MENUDEF.rsq)
+#include "zscript/rsq/handler.zs"
+#include "zscript/rsq/handtable.zs"
+#include "zscript/rsq/gunmoves.zs"
+#include "zscript/rsq/hands.zs"
+#include "zscript/rsq/ballistics.zs"
+#include "zscript/rsq/fists.zs"
+#include "zscript/rsq/fistmoves.zs"
+#include "zscript/rsq/dualhands.zs"
+#include "zscript/rsq/flick.zs"
+// RS VR scopes: the per-gun table and the collimated DOT (scope.zs, shared), then the
+// magnified see-through REAL mode that renders into the glass (scope_real.zs). scope.zs
+// must come first -- scope_real.zs reads RSQ_ScopeTable. If another lane also lists
+// scope.zs the duplicate is harmless: the parser keeps one entry per include path
+// (zcc_parser.cpp AddInclude).
+#include "zscript/rsq/scope.zs"
+#include "zscript/rsq/scope_real.zs"
+#include "zscript/rsq/alts.zs"
+#include "zscript/rsq/casings.zs"
+#include "zscript/rsq/dualtable.zs"
+#include "zscript/rsq/dual.zs"
+#include "zscript/rsq/voxtable.zs"
+#include "zscript/rsq/voxels.zs"
+
+// RS real VR reload (zscript/rsr, from the reload release)
+#include "zscript/rsr/rsr_assist.zs"
+#include "zscript/rsr/vreload.zs"
+#include "zscript/rsr/rsb_guns.zs"
+#include "zscript/rsr/rsr_break.zs"
+#include "zscript/rsr/rsr_guns.bd.zs"
+#include "zscript/rsq/counters.zs"
+#include "zscript/rsq/roster.zs"
+#include "zscript/rsr/rsr_pump.zs"
+#include "zscript/rsr/rsr_pump_guns.zs"
+#include "zscript/rsr/rsr_m203_geo.zs"
+#include "zscript/rsr/rsr_m203.zs"
+
+// RS VR grenade: pin, spoon, cook, throw by swing
+#include "zscript/rsg/grenade.zs"

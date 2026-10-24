@@ -1,0 +1,2 @@
+// 1.97: the BD21 Machinegun (c2q/bd22_mg.py)
+#include "actors/Weapons/Machinegun.dec"

@@ -1,0 +1,456 @@
+// posefix: BD22 brutal22test6 file. Lines marked "posefix" are the only changes (gun kept on screen where BD22 blanked it; first-pickup animation skipped; Axe.dec: VR axe throw on alt-fire; "RSR-BREAK": real VR reload (rsr_break.zs; no gates on this gun)).
+ACTOR GrenadeLauncher : BrutalWeapon
+{
+	Weapon.AmmoType1 "AmmoRocket"
+	Weapon.AmmoType2 "GLAmmo"
+	Weapon.SelectionOrder 2600
+	+WEAPON.EXPLOSIVE
+	-WEAPON.NOAUTOFIRE
+	-INVENTORY.UNDROPPABLE
+	Inventory.PickupSound "ROCKPKUP"
+	Inventory.PickupMessage "$GOTGRENADELAUNCHER"
+	Tag "$TAGBD_GL"
+	Obituary "$OBBD_GRENADELAUNCHER"
+	States
+	{
+	// RSR-BREAK: real VR reload, break-open / revolver (zscript/rsr/rsr_break.zs, team/reload_break/tools/rsb_patch.py).
+	// Not in VR, or with Real reload off, RSB_Start goes straight on into the set's own reload.
+	RSB_Start:
+		"####" "#" 0 A_TakeInventory("RSB_Go", 1)
+		"####" "#" 0 A_GiveInventory("RSB_Start", 1)
+		"####" "#" 0 A_JumpIfInventory("RSB_Go", 1, "RSB_Open")
+		Goto RSB_Stock
+	RSB_Start2:
+		"####" "#" 0 A_TakeInventory("RSB_Go", 1)
+		"####" "#" 0 A_GiveInventory("RSB_Start", 1)
+		"####" "#" 0 A_JumpIfInventory("RSB_Go", 1, "RSB_Open")
+		Goto RSB_Stock2
+	RSB_Open:
+		"####" "#" 0 A_TakeInventory("RSB_Go", 1)
+		"####" "#" 0 A_TakeInventory("Reloading", 1)
+	RSB_Wait:		// the gun as the script shows it ("####" "#"); the script runs every tic
+		"####" "#" 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+		"####" "#" 0 A_GiveInventory("RSB_Tick", 1)
+		"####" "#" 0 A_JumpIfInventory("RSB_EjectT", 1, "RSB_Eject")
+		"####" "#" 0 A_JumpIfInventory("RSB_LoadT", 1, "RSB_Load")
+		"####" "#" 0 A_JumpIfInventory("RSB_Done", 1, "RSB_Done")
+		Goto RSB_Wait
+	RSB_Eject:		// BD22's own: the empty and its smoke (its RaiseReloading), once
+		"####" "#" 0 A_TakeInventory("RSB_EjectT", 1)
+		"####" "#" 0 A_JumpIfInventory("GLReloadToken",1,3)
+		"####" "#" 0 A_FireCustomMissile("GrenadeCasingSpawner",0,0,8, -14)
+		"####" "#" 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
+		"####" "#" 0 A_GiveInventory("GLReloadToken", 1)
+		Goto RSB_Wait
+	RSB_Load:		// the grenade pushed home: BD22's own step (its RaiseReloading)
+		"####" "#" 0 A_TakeInventory("RSB_LoadT", 1)
+		"####" "#" 0 A_GiveInventory("GLAmmo", 1)
+		"####" "#" 0 A_GiveInventory("GLLoaded",1)
+		"####" "#" 0 A_JumpIfInventory("NoReloading",1,2)
+		"####" "#" 0 A_TakeInventory("AmmoRocket", 1,TIF_NOTAKEINFINITE)
+		"####" "#" 0 A_TakeInventory("GLReloadToken", 1)
+		Goto RSB_Wait
+	RSB_Done:		// shut (GrenadeLauncher/Close): BD22's own end of a reload
+		GRLN A 0 A_TakeInventory("RSB_Done", 1)
+		Goto Ready
+	Inspect:
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"Ready")
+		SHTN A 0 A_JumpIfInventory("DoInspect",1,"ContinueInspect")
+		SHTN A 0 A_JumpIf((OverlayID() != 1000000 && CountInv("FiredSecondary") > 0) || (OverlayID() == 1000000 && (GetPlayerInput(INPUT_BUTTONS) & 134217728) != 0), "ContinueInspect")
+		GRLN A 0 A_JumpIfInventory("ExecuteDownedEnemy", 1, "DoExecution")
+		GRLN A 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		GRLN A 0 A_JumpIfInventory("Salute1", 1, "Salute")
+		GRLN A 0 A_JumpIfInventory("Salute2", 1, "Salute")
+		GRLN A 0 A_JumpIfInventory("Taunting",1,"Taunt")
+		GRLN A 0 A_JumpIfInventory("TossGrenade",1,"TossGrenade")
+		GRLN A 0 A_JumpIfInventory("IsRunning", 1, "StartSprint")
+		GRLN A 6 A_WeaponReady(WRF_ALLOWZOOM)
+		GRLN A 0 A_JumpIfInventory("Unloading", 1, "Unload")
+		GRLN A 0 A_JumpIf(OverlayID() != 1000000 && CountInv("Reloading") > 0, "Reload")
+		GRLN A 0 A_GiveInventory("DoInspect",1)
+		GRLN A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWZOOM)
+		GRLN A 0 A_TakeInventory("DoInspect",1)
+		Goto Ready3
+
+	ContinueInspect:
+		TNT1 AA 0
+		GRLN A 0 A_TakeInventory("DoInspect",1)
+		TNT1 A 0
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"Ready")
+		TNT1 A 0 A_TakeInventory("RELOADING",1)
+		GRLN FGHII 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRLN J 1 A_PlaySound("GrenadeLauncher/Open", 5)
+		GRLN K 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRL3 AABCDD 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		TNT1 A 0 A_GiveInventory("HoldInspect", 1)
+	Inspect2:
+		GRL3 D 4 A_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD)	
+		GRL3 D 1 Offset(1,34) A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRL3 D 1 Offset(10,45) A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRL3 D 1 Offset(25,60) A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRL3 D 1 Offset(35,70) A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRL3 D 4 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)	// posefix: was TNT1 A 4 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRLN Z 1 Offset(1,33) A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		tnt1 a 0 A_PlaySound("GrenadeLauncher/Close", 5)
+		TNT1 A 0 A_TakeInventory("HoldInspect", 1)
+		GRLN "[" 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRLN "\]" 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRL2 ABCC 1 A_WEAPONREADY(WRF_NOBOB|WRF_ALLOWZOOM)
+		GRL2 DDEFGHIJKL 1 A_WEAPONREADY(WRF_NOBOB|WRF_ALLOWZOOM)
+		TNT1 A 0 A_TakeInventory("RELOADING",1)
+		Goto Ready
+
+	KickFlash: 
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristKickFlash")
+		GRL2 XYZ 1
+		GRL2 "[" 1
+		GRL2 "]" 10
+		GRL2 "[" 1
+		GRL2 ZYX 1
+		stop
+	SlideFlash: 
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristSlideFlash")
+		GRL2 XYZ 1
+		GRL2 "[" 1
+		GRL2 "]" 35
+		stop
+	SlideFlashEnd: 
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristSlideFlashEnd")
+		GRL2 "]" 5
+		GRL2 "[" 1
+		GRL2 ZYX 1
+		stop
+	SlideFlashEndEarly: 
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristSlideFlashEndEarly")
+		GRL2 "]" 2
+		GRL2 "[" 1
+		GRL2 ZYX 1
+		stop
+
+	Select:
+		TNT1 A 0 A_Giveinventory("GoSpecial",1)
+		TNT1 A 0 A_GiveInventory("TokenCleaner")
+		TNT1 A 0 A_SetCrosshair( CallACS("GetCrosshair", 9) )
+		TNT1 A 0 A_GunFlash
+		TNT1 A 1
+		TNT1 A 0 A_Giveinventory("GrenadeLauncherSelected",1)
+		TNT1 A 0 A_JumpIfInventory("IsRunning", 1, "StartSprint")
+		TNT1 A 0 A_JumpIfInventory("NoAutoReload", 1, 5)
+		TNT1 A 0 A_JumpIfInventory("GLAmmo", 1, 4)
+		TNT1 A 0 A_JumpIfInventory("GLLoaded", 1, 3)
+		TNT1 AA 0 A_WeaponReady(WRF_NOFIRE)
+		Goto RaiseReloading
+		TNT1 AA 0
+	ResumeNormalRaise:
+		TNT1 A 0 A_TakeInventory("NeverSelectedGL", 1)	// posefix: was TNT1 A 0 A_JumpIfInventory("NeverSelectedGL",1,"FirstSelectAnim")
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"RaiseNoAmmo")
+		TNT1 A 0 A_JumpIfInventory("AmmoRocket",1,1)
+		Goto RaiseNoAmmo
+		GRLN K 1 Offset(30, 50)
+		GRLN J 1 Offset (1,33) A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		TNT1 A 0 A_PlaySound("GrenadeLauncher/Close", 5)
+		GRLN I 1 A_WEAPONREADY(WRF_NOBOB|WRF_ALLOWZOOM)
+		GRL2 HIJKL 1 A_WEAPONREADY(WRF_NOBOB|WRF_ALLOWZOOM)
+		Goto Ready
+
+	RaiseNoAmmo:
+		GRLN A 0 A_PlaySound("Rocket/Draw", 5)
+		GRLN A 0 A_GunFlash
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"SelectPurist")
+		TNT1 AA 0
+		GRL2 MNOP 1 A_WeaponReady(WRF_NOFIRE)
+		TNT1 A 0 A_TakeInventory("RELOADING",1)
+		Goto Ready
+	
+	/*SelectPurist:
+        "####" "#" 0 A_JumpIfInventory("PuristGrenadeLauncher", 1,3)    
+        "####" "#" 0 A_Giveinventory("PuristGrenadeLauncher",1)
+        "####" "#" 0 A_SelectWeapon("PuristGrenadeLauncher")
+        "####" "####" 0 A_Raise
+        "####" "#" 1 A_Raise
+        "####" "#" 0 A_Takeinventory("GrenadeLauncher",1)
+        Goto SelectPurist+1*/
+
+	FirstSelectAnim:
+		TNT1 A 0 A_TakeInventory("NeverSelectedGL",1)
+		GRLN A 0 A_JumpIfInventory("IsRunning", 1, "StartSprint")
+		GRL2 VU 1 A_WeaponReady(WRF_ALLOWZOOM)
+		GRLN LLMNOOP 1 A_WeaponReady(WRF_ALLOWZOOM)
+		GRLN QRTTUU 1 A_WeaponReady(WRF_ALLOWZOOM)
+		TNT1 A 0 A_PlaySound("GrenadeLauncher/Load", 5)
+		GRLN UVWXY 1 A_WeaponReady(WRF_ALLOWZOOM)
+		GRLN YYYY 1 A_WeaponReady(WRF_ALLOWZOOM)	// posefix: was TNT1 AAAA 1 A_WeaponReady(WRF_ALLOWZOOM)
+		GRLN Z 1 A_WeaponReady(WRF_ALLOWZOOM)
+		TNT1 A 0 A_PlaySound("GrenadeLauncher/Close", 5)
+		GRLN "[" 1 A_WeaponReady(WRF_ALLOWZOOM)
+		GRLN "\]" 1 A_WeaponReady(WRF_ALLOWZOOM)
+		GRL2 ABCC 1 A_WeaponReady(WRF_ALLOWZOOM)
+		GRL2 DDEFGHIJKL 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Goto Ready
+
+	SelectAnimation:
+	Ready:
+	Ready3:
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,2)
+		GRLN A 0
+		"####" A 0 A_JumpIfInventory("ExecuteDownedEnemy", 1, "DoExecution")
+		"####" A 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		"####" A 0 A_JumpIfInventory("Salute1", 1, "Salute")
+		"####" A 0 A_JumpIfInventory("Salute2", 1, "Salute")
+		"####" A 0 A_JumpIfInventory("Taunting",1,"Taunt")
+		"####" A 0 A_JumpIfInventory("TossGrenade",1,"TossGrenade")
+		"####" A 0 A_JumpIfInventory("IsRunning", 1, "StartSprint")
+		"####" A 1 A_WeaponReady//(WRF_ALLOWRELOAD)
+		"####" A 0 A_JumpIfInventory("Unloading", 1, "Unload")
+		"####" A 0 A_JumpIf(OverlayID() != 1000000 && CountInv("Reloading") > 0, "Reload")
+		Goto Ready
+
+	Deselect:
+		GRLN A 0 A_Lower
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("HoldInspect",1)
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"DeselectPurist")
+		GRL2 QRST 1
+		TNT1 AAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		Wait
+
+	Fire:
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,2)
+		GRLN A 0
+		"####" "#" 0 
+		"####" "#" 0 A_TakeInventory("Reloading",1)
+		"####" "#" 0 A_TakeInventory("HoldInspect",1)
+		"####" "#" 0 A_JumpIfInventory("GLAmmo", 1, 1)
+		Goto NoAmmo
+		"####" "#" 0 A_TakeInventory("GLAmmo", 1)
+		"####" "#" 0 A_JumpIfInventory("NoReloading",1,"NoReload")
+		"####" "#" 0 A_JumpIf((OverlayID() != 1000000 && CountInv("FiredSecondary") > 0) || (OverlayID() == 1000000 && (GetPlayerInput(INPUT_BUTTONS) & 134217728) != 0), "ResumeAltFireFrame")
+		Goto ResumeFireFrame
+
+	NoReload:
+		"####" "#" 0 A_JumpIfInventory("AmmoRocket", 1, 1)
+		Goto NoAmmo
+		"####" "#" 0 A_TakeInventory("AmmoRocket", 1,TIF_NOTAKEINFINITE)
+		"####" "#" 0 A_JumpIf((OverlayID() != 1000000 && CountInv("FiredSecondary") > 0) || (OverlayID() == 1000000 && (GetPlayerInput(INPUT_BUTTONS) & 134217728) != 0), "ResumeAltFireFrame")
+	ResumeFireFrame:
+		"####" A 0
+		"####" A 0 A_FireCustomMissile("ShortGrenade2", 0, 1, 0, 0)
+		Goto FinishFire
+	ResumeAltFireFrame:
+		"####" "#" 0
+		"####" "#" 0 A_FireCustomMissile("GrenadeMissile", 0, 1, 0, 0)		
+		"####" "#" 0 A_TakeInventory("FiredSecondary",1)
+	FinishFire:
+		"####" A 0 A_AlertMonsters
+		"####" A 0 A_FireCustomMissile("RedFlareSpawn",-5,0,0,0)
+		"####" AAAAAA 0 BRIGHT A_FireCustomMissile("ShotgunParticles", random(-16,16), 0, -1, random(-9,9))
+		"####" A 0 A_PlaySound("GrenadeLauncher/Fire", 1)
+		"####" A 0 A_FireCustomMissile("GrenadeMissileBreaksGlass", 0, 0, 0, 0)
+		"####" A 0 A_ZoomFactor(0.96)
+		"####" A 0 A_Recoil(1)
+		"####" "#" 0 A_Quake(2,4,0,4,"")
+		"####" A 0 A_TakeInventory("GLLoaded",1)
+		"####" B 1 A_SetPitch(pitch - 1)
+		"####" A 0 A_ZoomFactor(1.0)
+		"####" C 1 A_SetPitch(pitch - 2)
+		"####" DE 1 A_SetPitch(pitch + 1)
+		"####" EA 1 A_SetPitch(pitch + 0.5)
+		"####" AA 1
+		"####" A 0 A_JumpIfInventory("IsPlayingAsPurist", 1, 2)
+		"####" A 0 A_JumpIfInventory("NoAutoReload", 1, "Ready")
+		"####" AA 0
+		"####" A 0 A_JumpIfInventory("AmmoRocket",1,"Reload")
+		Goto Ready
+
+	AltFire:
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,2)
+		GRLN A 0
+		"####" "#" 0 A_GiveInventory("FiredSecondary",1)
+		Goto Fire
+
+	Reload:
+		"####" A 0 A_TakeInventory("Reloading",1)
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,3)
+		GRLN A 0 A_JumpIfInventory("HoldInspect",1,"Inspect2")
+		GRLN A 0 A_JumpIfInventory("GLAmmo", 1, "Inspect")
+		"####" A 0 A_JumpIfInventory("GLLoaded", 1, "Ready")
+		"####" A 0 A_JumpIfInventory("AmmoRocket", 1, 1)//Check if has any ammo left to reload
+		Goto Ready
+		"####" A 0 A_Jump(256, "RSB_Start")	// RSR-BREAK: real VR reload (zscript/rsr/rsr_break.zs)
+	RSB_Stock:
+		"####" FGHII 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+	RaiseReloading:
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,2)
+		GRLN A 0
+		"####" A 0 A_JumpIfInventory("AmmoRocket", 1, 1)//Check if has any ammo left to reload
+		Goto ResumeNormalRaise
+		"####" A 0 A_Jump(256, "RSB_Start2")	// RSR-BREAK
+	RSB_Stock2:
+		"####" J 1 A_PlaySound("GrenadeLauncher/Open", 5)
+		"####" K 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		"####" A 0 A_JumpIfInventory("GLReloadToken",1,3)
+		"####" A 0  A_FireCustomMissile("GrenadeCasingSpawner",0,0,8, -14)
+		"####" A 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
+		"####" AA 0 
+		"####" A 0 A_GiveInventory("GLReloadToken", 1)
+		"####" LLMNOOP 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		"####" QRTTUU 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		"####" A 0 A_GiveInventory("GLAmmo", 1)
+		"####" A 0 A_GiveInventory("GLLoaded",1)
+		//"####" A 0 A_JumpIfInventory("IsPlayingAsPurist",1,3)
+		"####" A 0 A_JumpIfInventory("NoReloading",1,2)
+		"####" A 0 A_TakeInventory("AmmoRocket", 1,TIF_NOTAKEINFINITE)
+		"####" A 0 A_TakeInventory("GLReloadToken", 1)
+		"####" A 0 A_PlaySound("GrenadeLauncher/Load", 5)
+		"####" UVWXY 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		"####" "#" 4 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)	// posefix: was TNT1 A 4 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		2RLN A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,2)
+		GRLN A 0
+		"####" Z 1 Offset (1,33) A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		"####" a 0 A_PlaySound("GrenadeLauncher/Close", 5)
+		"####" "[" 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		"####" "\]" 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		2RL2 A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,2)
+		GRL2 A 0
+		"####" ABCC 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		"####" DDEFGHIJKL 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		"####" A 0 A_TakeInventory("Reloading", 1)
+		Goto Ready
+
+	User2:
+	Unload:
+		GRLN A 0
+		TNT1 A 0 A_TakeInventory("Unloading", 1)
+		TNT1 A 0 A_TakeInventory("Reloading", 1)
+		"####" A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristWarning")
+		TNT1 A 0 A_JumpIfInventory("NoReloading",1,"Ready3")
+		TNT1 A 0 A_JumpIfInventory("GLAmmo", 1, 2)
+		Goto Ready
+		TNT1 AA 0
+		GRLN FGHII 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRLN J 1 A_PlaySound("GrenadeLauncher/Open", 5)
+		GRLN K 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		TNT1 A 0 A_GiveInventory("AmmoRocket", 1)
+		TNT1 A 0 A_TakeInventory("GLAmmo", 1)
+		TNT1 A 0 A_TakeInventory("GLLoaded",1)
+		GRLN K 12 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)	// posefix: was TNT1 A 12 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRLN Z 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		TNT1 A 0 A_PlaySound("GrenadeLauncher/Close", 5)
+		GRLN "[" 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRLN "\]" 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRL2 ABCC 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		GRL2 DDEFGHIJKL 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		TNT1 A 0 A_TakeInventory("Unloading", 1)
+		TNT1 A 0 A_TakeInventory("Reloading", 1)
+		Goto Ready
+
+	StartSprint:
+		TNT1 A 0 A_TakeInventory("NeverSelectedGL",1)
+		GRLN A 0 A_JumpIfInventory("UsedStamina", 40, "StopSprintTired")
+		GRL2 XYZ 1 A_WeaponReady(WRF_NOFIRE)
+	Sprinting:
+		GRL2 "[" 1
+		GRL2 "[" 0 offset(-9,32)
+		//GRL2 "[" 0 offset(-9,32) A_JumpIfInventory("IsStandingStill", 1, "Ready3")
+		GRL2 "[" 0 offset(-9,32) A_JumpIfInventory("UsedStamina", 0, "StopSprint")
+		PLAY A 0 offset(-9,32) ACS_ExecuteAlways(852, 0, 0, 0, 0)//Makes player faster.
+		GRL2 "[" 0 offset(-9,32) A_JumpIfInventory("PowerStrength", 1, 2)
+		GRL2 "[" 0 offset(-9,32) A_GiveInventory("UsedStamina", 5)
+		GRL2 "[" 0 offset(-9,32)
+		GRL2 "[" 1 offset(-9,34) A_SetPitch(pitch -0.5)
+		GRL2 "[" 1 offset(-6,36) A_SetPitch(pitch -0.5)
+		GRL2 "[" 1 offset(-3,38) A_SetPitch(pitch -0.5)
+		GRL2 "[" 1 offset(0,38) A_SetPitch(pitch -0.5)
+		GRL2 "[" 1 offset(3,36) A_SetPitch(pitch -0.5)
+		GRL2 "[" 1 offset(6,34) A_SetPitch(pitch -0.5)
+		GRL2 "[" 1 offset(9,32) A_SetPitch(pitch -0.5)
+		GRL2 "[" 0 offset(9,32) A_WeaponReady(WRF_NOBOB)
+		GRLN A 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		GRLN A 0 A_JumpIfInventory("Taunting",1,"Taunt")
+		GRLN A 0 A_JumpIf(OverlayID() != 1000000 && CountInv("Reloading") > 0, "Reload")
+		GRL2 "[" 0 offset(-9,32) A_GiveInventory("UsedStamina", 5)
+		GRL2 "[" 0 offset(9,33) A_SpawnItemEx("FootStep", 0, 0, 2, 0, 0, -4)
+		GRL2 "[" 1 offset(9,34) A_SetPitch(pitch +0.5)
+		GRL2 "[" 1 offset(6,36) A_SetPitch(pitch +0.5)
+		GRL2 "[" 1 offset(3,38) A_SetPitch(pitch +0.5)
+		GRL2 "[" 1 offset(0,38) A_SetPitch(pitch +0.5)
+		GRL2 "[" 1 offset(-3,36) A_SetPitch(pitch +0.5)
+		GRL2 "[" 1 offset(-6,34) A_SetPitch(pitch +0.5)
+		GRL2 "[" 1 offset(-9,32) A_SetPitch(pitch +0.5)
+		GRL2 "[" 0 offset(-9,32) A_WeaponReady(WRF_NOBOB)
+		GRL2 "[" 0 offset(-9,32) A_JumpIfInventory("IsRunning", 1, "Sprinting")
+		Goto StopSprint
+
+	StopSprint:
+		GRL2 ZYX 1
+		GRLN A 0 A_JumpIfInventory("UsedStamina", 60, "StopSprintTired")
+		PLAY A 0 ACS_ExecuteAlways(853, 0, 0, 0, 0)//Makes player slower.
+		Goto Ready
+
+	Spawn:
+		GLAP A -1
+		Stop
+	}
+}
+
+ACTOR PuristGrenadeLauncher : GrenadeLauncher { -WEAPON.NOAUTOAIM +WEAPON.CHEATNOTWEAPON }
+
+Actor GrenadeCasingSpawner : ShotcaseSpawn
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 Thing_ChangeTID(0,390)
+		TNT1 A 0 A_CustomMissile("GrenadeCasing",0,0,random(80,100),2,random(50,70))
+		Stop
+	}
+}
+ACTOR GrenadeCasing
+{
+	Height 2
+	Radius 2
+	Speed 8
+	Scale 0.7
+	+DOOMBOUNCE
+	-CANBOUNCEWATER
+	- NOGRAVITY
+	+WINDTHRUST
+	+CLIENTSIDEONLY
+	+MOVEWITHSECTOR
+	+MISSILE
+	+NOBLOCKMAP
+	-DROPOFF
+	+NOTELEPORT
+	+FORCEXYBILLBOARD
+	+NOTDMATCH
+	+GHOST
+	//+CANBOUNCEWATER
+	//+DONTSPLASH
+	Mass 2
+	BounceFactor 0.4
+	DeathSound "GrenadeLauncher/Casing"
+	BounceSound "GrenadeLauncher/Casing"
+	SeeSound "GrenadeLauncher/Casing"
+	States
+	{
+	Spawn:
+		GBPJ NNNOOOPPPIIIJJJKKKLLLMMM 1 A_CustomMissile("CasingSmoke", 0, 0, random(0, 360), 2, random(85, 90))
+		Loop
+
+	Death:
+		"####" "#" 0
+		"####" "#" 0 ACS_NamedExecuteAlways("BDCheckJanitor")//Check Effects
+		"####" "#" 0 ACS_NamedExecuteAlways("BDCheckJanitor2")//Check Effects
+		"####" "#" 0 A_SpawnItem("MicroSmokeColumn")
+	RestLoop:
+		"####" "#" 200
+		"####" "#" 0 A_JumpIfInventory("LowGraphicsMode", 1, "Stoping")
+		Loop
+
+	Stoping:
+		TNT1 A 0
+		Stop
+	}
+}

@@ -1,0 +1,1 @@
+RS_Brutal22WeaponsQ 1.96b, commit 27bef2b, src/ as of 2026-10-24. assemble.py copies from here.

@@ -1,0 +1,15 @@
+OptionMenu "RSQ_DualOptions"
+{
+	Title "DUAL OPTIONS"
+	Option "Pistol Start: Start with Dual Pistols", "rsq_dual_start", "OnOff"
+	Option "Pistol", "rsq_dual_pistol", "OnOff"
+	Option "Revolver", "rsq_dual_revolver", "OnOff"
+	Option "SMG", "rsq_dual_smg", "OnOff"
+	Option "MP40", "rsq_dual_mp40", "OnOff"
+	Option "Rifle", "rsq_dual_rifle", "OnOff"
+	Option "Plasma rifle", "rsq_dual_plasma", "OnOff"
+	Option "Shotgun", "rsq_dual_shotgun", "OnOff"
+	Option "Super shotgun", "rsq_dual_ssg", "OnOff"
+	Option "Assault shotgun", "rsq_dual_asg", "OnOff"
+	Option "Railgun", "rsq_dual_railgun", "OnOff"
+}

@@ -1,0 +1,99 @@
+// RS VR hands / reload / ballistics (zscript/rsq, zscript/rsr). v9.
+// Nothing here changes the engine's two-hand steadying.
+//
+// NO StaticText help in here, deliberately and by owner's instruction (asked twice). An
+// options menu is a list of options. How the reload works is documented in the repo:
+// LOAD_ORDER.md and docs/RELOAD_ON_QUEST.md in presidentkoopa/RS_Quest.
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "BD22 VR Weapons", "RSQ_Options"
+}
+
+AddOptionMenu "BrutalMenu"
+{
+	StaticText " "
+	Submenu "BD22 VR Weapons", "RSQ_Options"
+}
+
+OptionValue "RSR_ReloadMode"
+{
+	1, "VR"
+	0, "Stock (BD22)"
+}
+
+OptionValue "RSR_GrabWith"
+{
+	0, "Off-hand trigger"
+	1, "Off-hand grip"
+	2, "Use key"
+}
+
+OptionValue "RSQ_Ballistics"
+{
+	0, "Stock (BD22)"
+	1, "Enhanced"
+}
+
+OptionValue "RSR_Pouch"
+{
+	0, "Anywhere, 20 cm from the gun"
+	1, "Low, 40 cm below the eyes"
+}
+
+// 2026-10-23: the VR scopes (zscript/rsq/scope.zs), per gun
+OptionValue "RSQ_ScopeMode"
+{
+	0, "Dot"
+	1, "Real"
+}
+
+OptionValue "RSR_ShellCredit"
+{
+	1, "1"
+	2, "2"
+	3, "3"
+	4, "4"
+}
+
+OptionMenu "RSQ_Options"
+{
+	Title "BD22 VR WEAPONS"
+	Option "VR Hands", "rsq_hands", "OnOff"
+	Option "Reloading", "rsr_reload", "RSR_ReloadMode"
+	Option "Grab ammo with", "rsr_grab_with", "RSR_GrabWith"
+	Option "Check the Chamber by Hand", "rsr_freecharge", "OnOff"
+	Option "Shotgun Shells Per Insert", "rsr_shell_credit", "RSR_ShellCredit"
+	Option "Pistol Semi Auto", "rsa_pistol_semi", "OnOff"
+	Option "Shotgun Slugshot Alt Fire", "rsa_sg_slug", "OnOff"
+	Option "Shotvolver Slugshot Alt Fire", "rsa_rev_magnum", "OnOff"
+	Option "Rifle Underbarrel Ammo", "rsm_ammo", "RSM_Ammo"
+	Option "Machinegun replaces MG42", "rsq_mg_replaces_mg42", "OnOff"
+	Option "Sniper Scope", "rsq_scope_sniper", "RSQ_ScopeMode"
+	Option "Railgun Scope", "rsq_scope_railgun", "RSQ_ScopeMode"
+	Option "Ballistics", "rsq_ballistics", "RSQ_Ballistics"
+	StaticText " "
+	Submenu "Voxel Options", "RSQ_VoxelOptions"
+	StaticText " "
+	Submenu "Dual Options", "RSQ_DualOptions"
+	Option "Dual Flick to Reload", "rsq_flick", "OnOff"
+	StaticText " "
+	Option "VR Throwing", "rsg_vr", "OnOff"
+	Option "VR Punching", "rsq_punch", "OnOff"
+	Option "Punch Switches Open", "rsq_punch_use", "OnOff"
+	StaticText " "
+	Option "Extra weapons with cheats", "rsq_extra_weapons", "OnOff"
+}
+
+OptionMenu "RSR_Debug"
+{
+	Title "RELOAD: TUNING AND DEBUG"
+	Option "Show the capture zones", "rsr_assist_debug", "OnOff"
+	Option "Print each reload step", "rsr_debug", "OnOff"
+}
+
+// 1.30 the rifle's M203: what a hand-loaded round costs
+OptionValue "RSM_Ammo"
+{
+	0, "Rockets"
+	1, "Hand grenades"
+}

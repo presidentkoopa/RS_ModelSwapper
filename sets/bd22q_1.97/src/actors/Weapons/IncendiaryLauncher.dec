@@ -1,0 +1,298 @@
+// posefix: BD22 brutal22test6 file. Lines marked "posefix" are the only changes (gun kept on screen where BD22 blanked it; first-pickup animation skipped; Axe.dec: VR axe throw on alt-fire).
+ACTOR IncendiaryLauncher : BrutalWeapon
+{
+	Weapon.AmmoType "AmmoM202"
+	Weapon.AmmoUse 1
+	Weapon.SelectionOrder 2700
+	+WEAPON.NOAUTOFIRE
+	-WEAPON.AMMO_CHECKBOTH
+	-INVENTORY.UNDROPPABLE
+	Inventory.Pickupmessage "$GOTM202"
+	Obituary "$OBBD_M202"
+	Tag "$TAGBD_M202"
+	States
+	{
+	// kick / slide: keep the weapon on screen (posefix weapon_patch.py)
+	KickFlash:
+		M202 AAAA 1
+		M202 A 10
+		M202 AAAA 1
+		stop
+	SlideFlash:
+		M202 AAAA 1
+		M202 A 35
+		stop
+	SlideFlashEnd:
+		M202 A 5
+		M202 AAAA 1
+		stop
+	SlideFlashEndEarly:
+		M202 A 2
+		M202 AAAA 1
+		stop
+	Spawn:
+		LAUN A 1
+		LAUN A -1
+		Stop
+
+	Ready:
+	Ready3:
+		M202 A 1 A_WeaponReady//(WRF_ALLOWRELOAD)
+		M202 A 0 A_JumpIfInventory("TossGrenade",1,"TossGrenade")
+		M202 A 0 A_JumpIfInventory("Kicking",1,"DoKick")
+		Loop
+
+	Deselect:
+		M202 A 0
+		M202 A 0 A_TakeInventory("TossGrenade", 1)
+		M202 A 0 A_ZoomFactor(1.0)
+		M202 AAA 1 A_Lower
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		Wait
+
+	Select:
+		M202 A 0
+		TNT1 A 0 A_SetCrosshair( CallACS("GetCrosshair", 22) )
+		M202 A 0 A_JumpIfInventory("IsPlayingAsPurist", 1, "SelectPurist")
+		M202 AAA 3 A_Lower
+		TNT1 AAAAAAAAA 0 A_Raise
+		Goto Ready3
+
+	// 1.8 (owner: "could not switch off it"). Empty, BD22's shared NoAmmo jumps to "Reload", which
+	// this launcher never had, so it sat on that line forever with no A_WeaponReady and the
+	// weapon could not be changed. It has no reload (four tubes, refilled by pickups): an empty
+	// trigger just clicks and the gun stays ready, free to switch.
+	NoAmmo:
+		M202 A 0 A_PlaySound("Weapon/Empty", 5)
+		M202 A 1 offset(0,34)
+		M202 A 1 offset(0,33)
+		Goto Ready3
+	Reload:
+		M202 A 0
+		Goto Ready3
+	Fire:
+		M202 A 0 A_JumpIfNoAmmo("NoAmmo")
+		TNT1 AA 0
+		M202 A 0 A_AlertMonsters
+		TNT1 A 0 A_PlaySound("Incendiary/Fire", 1)
+		RIFF A 0 A_FireCustomMissile("IncendiaryRocket", 0, 0, 0, -5, 0, 0)
+		TNT1 A 0 A_TakeInventory("AmmoM202", 1,TIF_NOTAKEINFINITE)
+		M202 A 0 A_SetPitch(pitch-1.6)
+		M202 A 0 A_SetANgle(angle-0.8)
+		M202 A 0 A_ZoomFactor(0.9)
+		M202 B 1 Offset(-6, 38)
+		M202 B 1 Offset(-3, 35)
+		M202 A 0 A_ZoomFactor(1.0)
+		M202 B 1 Offset(-1, 33)
+		M202 A 1 Offset(0, 32)
+		Goto Ready3
+	}
+}
+
+ACTOR PuristIncendiaryLauncher : IncendiaryLauncher { -WEAPON.NOAUTOAIM +WEAPON.CHEATNOTWEAPON }
+
+ACTOR AmmoM202 : Ammo
+{
+	Inventory.PickupMessage "$GOTROCKET"
+	Inventory.Amount 1
+	Inventory.MaxAmount 4
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 4
+	Inventory.Icon "ROCKA0"
+	Inventory.Pickupsound "RCKCLIP"
+	Scale 0.9
+	States
+	{
+	Spawn:
+		ROCK A 1
+		ROCK A -1
+		Stop
+	}
+}
+
+ACTOR IncendiaryRocket: Rocket2
+{
+	Speed 80
+	Damage (random (200, 200))
+	DamageType Flames
+	Species "Marines"
+	Gravity 0.6
+	+NODAMAGETHRUST
+	States
+	{
+	Death:
+		TNT1 A 0 A_SpawnItemEx ("ExplosionFlareSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_CustomMissile ("WIllyPeteParticle", 0, 0, 0, 2, random (40, 80))
+		TNT1 A 0 A_CustomMissile ("WIllyPeteParticle", 0, 0, 45, 2, random (40, 80))
+		TNT1 A 0 A_CustomMissile ("WIllyPeteParticle", 0, 0, 90, 2, random (40, 80))
+		TNT1 A 0 A_CustomMissile ("WIllyPeteParticle", 0, 0, 135, 2, random (40, 80))
+		TNT1 A 0 A_CustomMissile ("WIllyPeteParticle", 0, 0, 180, 2, random (40, 80))
+		TNT1 A 0 A_CustomMissile ("WIllyPeteParticle", 0, 0, 225, 2, random (40, 80))
+		TNT1 A 0 A_CustomMissile ("WIllyPeteParticle", 0, 0, 270, 2, random (40, 80))
+		TNT1 A 0 A_CustomMissile ("WIllyPeteParticle", 0, 0, 315, 2, random (40, 80))
+		TNT1 AAA 0 A_CustomMissile ("FlamethrowerFireParticles", 0, 0, random (0, 360), 2, random (30, 80))
+		TNT1 A 0 A_PlaySound("Explode3", 1)
+		TNT1 A 0 A_EXplode(400, 128)
+		TNT1 AAA 0 A_CustomMissile("FlamethrowerBurningStuff", random (-32, 0), random (-32, 32), random (-32, 32), 2, random (-32, 32))
+		TNT1 AA 0 A_CustomMissile ("IncendiaryRocketSmokeExps", 0, 0, random (0, 360), 2, random (30, 80))
+		TNT1 AAAA 0 A_CustomMissile ("IncendiaryRocketSmoke2", 0, 0, random (0, 360), 2, random (10, 90))
+		TNT1 A 4
+		TNT1 A 3 A_CustomMissile ("IncendiaryRocketSmoke", 0, 0, random (0, 360), 2, random (10, 90))
+		Stop
+	}
+}
+
+
+Actor WillyPeteParticle
+{
+	Height 1
+	Radius 1
+	Mass 0
+	+Missile
+	+DontSplash
+	+FORCEXYBILLBOARD
+	 +GHOST
+	-NOGRAVITY
+	+THRUGHOST
+	+NOTELEPORT
+	+DOOMBOUNCE
+	+THRUACTORS
+	+NODAMAGETHRUST
+	+USEBOUNCESTATE
+	RenderStyle "Add"
+	Scale 0.8
+	Speed 16
+	Gravity 0.7
+	Damagetype "Flames"
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		SPKS J 2 BRIGHT
+		TNT1 A 0 A_ChangeFlag("DOOMBOUNCE", 0)
+		SPKS J 3 BRIGHT
+		SPKS OOOOOOOOOOOOOOOOOOOOOOOOOO 1 BRIGHT A_CustomMissile ("WillyPeteParticleSmoke8", 0, 0, 0, 2, 90)
+		Fly:
+		SPKS O 1
+		Loop
+
+	Bounce.Ceiling:
+		TNT1 A 0
+		TNT1 A 0 A_Recoil(-40)
+		Goto Spawn
+
+	Death:
+		TNT1 A 0
+		TNT1 A 0 A_CustomMissile("FlamethrowerBurningStuff", random (-32, 0), random (-32, 32), random (-32, 32), 2, random (-32, 32))
+		//TNT1 A 0 A_CustomMissile ("RocketSmokeTrail1", 2, 0, random (160, 210), 2, random (70, 90))
+		EXPL AAA 0 A_CustomMissile ("ImpFireBallFlames1", 1, 0, random (0, 360), 2, random (0, 90))
+		EXPL A 0 A_CustomMissile ("ImpFireBallFlames2", 1, 0, random (0, 360), 2, random (0, 90))
+		TNT1 A 0 A_Explode(320, 192)
+		Stop
+	}
+}
+
+Actor WillyPeteParticleSmoke
+{
+	Height 1
+	Radius 1
+	Mass 0
+	+Missile
+	+DontSplash
+	+CLIENTSIDEONLY
+	+THRUACTORS
+	+NOGRAVITY
+	+FORCEXYBILLBOARD
+	RenderStyle "Translucent"
+	Scale 0.1
+	Alpha 0.5
+	Speed 0
+	States
+	{
+	Spawn:
+		SMWP A 1
+		TNT1 A 0 ThrustThingZ(0, 1, 0, 1)
+		SMWP A 5
+		SMWP AAAAAAAAA 5 BRIGHT A_FadeOut(0.1)
+		Stop
+	}
+}
+
+Actor WillyPeteParticleSmoke2: WillyPeteParticleSmoke {	Scale 0.2 }
+Actor WillyPeteParticleSmoke3: WillyPeteParticleSmoke {	Scale 0.3 }
+Actor WillyPeteParticleSmoke4: WillyPeteParticleSmoke {	Scale 0.4 }
+Actor WillyPeteParticleSmoke5: WillyPeteParticleSmoke {	Scale 0.5 }
+Actor WillyPeteParticleSmoke6: WillyPeteParticleSmoke {	Scale 0.6 }
+Actor WillyPeteParticleSmoke7: WillyPeteParticleSmoke {	Scale 0.7 }
+Actor WillyPeteParticleSmoke8: WillyPeteParticleSmoke {	Scale 0.8 }
+
+
+Actor IncendiaryRocketSmoke
+{
+	Height 1
+	Radius 1
+	Mass 0
+	+Missile
+	+DontSplash
+	+CLIENTSIDEONLY
+	+THRUACTORS
+	+NOGRAVITY
+	+FORCEXYBILLBOARD
+	+DOOMBOUNCE
+	Scale 4.0
+	Speed 1
+	renderstyle "Normal"
+	Alpha 1.0
+	States
+	{
+	Spawn:
+		SM1K A 1
+		TNT1 A 0 ThrustThingZ(0, 1, 0, 1)
+		SM1K AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ 3 A_SetScale(scalex+0.01, scaley+0.01)
+		Stop
+	}
+}
+
+Actor IncendiaryRocketSmoke2: IncendiaryRocketSmoke
+{
+	Scale 2.0
+	States
+	{
+	Spawn:
+		SM1K A 1
+		TNT1 A 0 ThrustThingZ(0, 1, 0, 1)
+		SM1K AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ 3 A_SetScale(scalex+0.01, scaley+0.01)
+		Stop
+	}
+}
+
+Actor IncendiaryRocketSmokeExps: IncendiaryRocketSmoke
+{
+	Height 1
+	Radius 1
+	Mass 0
+	+Missile
+	+DontSplash
+	+CLIENTSIDEONLY
+	+THRUACTORS
+	-NOGRAVITY
+	+FORCEXYBILLBOARD
+	Scale 1.0
+	Alpha 0.92
+	Speed 1
+	Gravity 0.2
+	+DOOMBOUNCE
+	States
+	{
+	Spawn:
+		M202 W 1
+		TNT1 A 0 ThrustThingZ(0, 15, 0, 1)
+		Goto Fly
+
+	Fly:
+		M202 W 1 A_SetScale(scalex+0.05, scaley+0.05)
+		M202 W 0 A_FadeOut(0.02)
+		Loop
+	}
+}

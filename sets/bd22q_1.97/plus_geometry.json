@@ -1,0 +1,247 @@
+{
+ "MG42": {
+  "cls": "MG42",
+  "card": "BD_Buzzsaw",
+  "carved": "/home/claude/c2q/build/bd22/models/HitlersBuzzsaw_rsr.md3",
+  "surfaces": [
+   [
+    "body",
+    15974
+   ],
+   [
+    "magazine",
+    3164
+   ],
+   [
+    "trigger",
+    60
+   ]
+  ],
+  "frames": 3,
+  "unlabelled": 0,
+  "rigid": {
+   "mean_cm": 0.0,
+   "max_cm": 0.0,
+   "rot_deg": 1.7075472925031877e-06
+  },
+  "capacity": 200,
+  "ammouse": 1,
+  "survey": {
+   "parts": {
+    "magazine": {
+     "well_point": [
+      13.926,
+      3.115,
+      11.593
+     ],
+     "insert_dir": [
+      -0.0,
+      -1.0,
+      -0.0
+     ],
+     "insert_depth_cm": 6.03,
+     "base_point": [
+      13.706,
+      15.361,
+      9.349
+     ],
+     "half_width_cm": 6.1,
+     "card_travel_cm": 11.438,
+     "card_grab": [
+      13.647,
+      15.036,
+      9.463
+     ],
+     "card_magcenter": [
+      14.193,
+      7.496,
+      10.396
+     ]
+    }
+   }
+  },
+  "palm": [
+   -1.938,
+   -0.201,
+   -2.489
+  ],
+  "supportat": [
+   46.534,
+   -2.233,
+   4.494
+  ],
+  "mag_idx": [
+   1
+  ],
+  "names": [
+   "body",
+   "magazine",
+   "trigger"
+  ]
+ },
+ "Flamethrower2": {
+  "cls": "Flamethrower2",
+  "card": "BD_Flamethrower",
+  "carved": "/home/claude/c2q/build/bd22/models/Flamethrower2_rsr.md3",
+  "surfaces": [
+   [
+    "body",
+    4660
+   ],
+   [
+    "fixed",
+    109
+   ],
+   [
+    "magazine",
+    1306
+   ],
+   [
+    "trigger",
+    80
+   ]
+  ],
+  "frames": 5,
+  "unlabelled": 0,
+  "rigid": {
+   "mean_cm": 0.0,
+   "max_cm": 0.0,
+   "rot_deg": 0.0
+  },
+  "capacity": 200,
+  "ammouse": 1,
+  "survey": {
+   "parts": {
+    "magazine": {
+     "well_point": [
+      28.489,
+      0.01,
+      0.46
+     ],
+     "insert_dir": [
+      -0.0,
+      0.0,
+      1.0
+     ],
+     "insert_depth_cm": 14.89,
+     "base_point": [
+      28.489,
+      0.01,
+      -11.651
+     ],
+     "half_width_cm": 14.28,
+     "card_travel_cm": 13.406,
+     "card_grab": [
+      28.504,
+      0.011,
+      -11.378
+     ],
+     "card_magcenter": [
+      27.703,
+      0.013,
+      -5.374
+     ]
+    }
+   }
+  },
+  "palm": [
+   -2.618,
+   -0.015,
+   2.426
+  ],
+  "supportat": [
+   28.659,
+   0.016,
+   -10.126
+  ],
+  "mag_idx": [
+   2
+  ],
+  "names": [
+   "body",
+   "fixed",
+   "magazine",
+   "trigger"
+  ]
+ },
+ "Unmaker": {
+  "cls": "Unmaker",
+  "card": "BD_Unmaker",
+  "carved": "/home/claude/c2q/build/bd22/models/Unmaker_rsr.md3",
+  "surfaces": [
+   [
+    "body",
+    10931
+   ],
+   [
+    "magazine",
+    361
+   ],
+   [
+    "magazine#2",
+    249
+   ]
+  ],
+  "frames": 16,
+  "unlabelled": 0,
+  "rigid": {
+   "mean_cm": 0.0,
+   "max_cm": 0.0,
+   "rot_deg": 0.0
+  },
+  "capacity": 60,
+  "ammouse": 2,
+  "survey": {
+   "parts": {
+    "magazine": {
+     "well_point": [
+      11.814,
+      1.253,
+      12.28
+     ],
+     "insert_dir": [
+      -0.0,
+      0.0,
+      -1.0
+     ],
+     "insert_depth_cm": 4.66,
+     "base_point": [
+      13.35,
+      -0.089,
+      16.921
+     ],
+     "half_width_cm": 5.72,
+     "card_travel_cm": 5.906,
+     "card_grab": [
+      11.174,
+      -0.089,
+      15.629
+     ],
+     "card_magcenter": [
+      10.481,
+      -0.144,
+      14.344
+     ]
+    }
+   }
+  },
+  "palm": [
+   -1.483,
+   -0.025,
+   -2.466
+  ],
+  "supportat": [
+   34.744,
+   -0.01,
+   0.293
+  ],
+  "mag_idx": [
+   1
+  ],
+  "names": [
+   "body",
+   "magazine",
+   "magazine#2"
+  ]
+ }
+}

@@ -1,0 +1,3 @@
+#!/bin/sh
+# every commit names its plan step: "[step F1] ..." or "[plan] ..."
+head -1 "$1" | grep -Eq '^\[(step [A-Z][0-9]*|plan)\]' || { echo 'commit message must start with "[step <id>]" (an id from PLAN.md) or "[plan]"'; exit 1; }

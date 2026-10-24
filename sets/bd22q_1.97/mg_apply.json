@@ -1,0 +1,94 @@
+{
+ "geometry": {
+  "rigid_mean": 2.963914124768292e-15,
+  "rigid_max": 1.449255726278473e-14,
+  "t": [
+   52.875,
+   0.203,
+   0.781
+  ],
+  "axis_l": -0.068,
+  "axis_u": -1.517,
+  "frame_front": 29.272,
+  "tube_rear": 29.272,
+  "tube_front": 63.856,
+  "travel": 9.694,
+  "travel_card": 9.504,
+  "palm": [
+   -2.061,
+   -0.065,
+   -3.667
+  ],
+  "supportat": [
+   38.809,
+   -0.064,
+   -1.52
+  ],
+  "latch": [
+   24.81,
+   -0.121,
+   -3.665
+  ],
+  "loadat": [
+   29.277,
+   -0.068,
+   -1.517
+  ],
+  "surfaces": [
+   "alt-trig-reload",
+   "alt-frame",
+   "alt-trig",
+   "alt-pipe",
+   "Trigger",
+   "M249_lowpoly"
+  ],
+  "fwd_hook": [
+   0.0,
+   0.0,
+   -1.0
+  ]
+ },
+ "modeldef": {
+  "gun_frames": 37,
+  "shared_blocks": 4
+ },
+ "decorate": "actors/Weapons/Machinegun.dec, DECORATE.rsqmg, KEYCONF.rsq addslot 4",
+ "module": {
+  "geo_refs": 36,
+  "twins": {
+   "MGN1": "QU00",
+   "MGN2": "QU01",
+   "MGS1": "QU02"
+  }
+ },
+ "modeldef_rsm": {
+  "dF": 0.83,
+  "dL": -0.59,
+  "dU": 3.48
+ },
+ "hands": {
+  "one": "F",
+  "two": "F",
+  "sup": "B",
+  "trig": "I",
+  "hook": [
+   1.338,
+   1.929,
+   1.445
+  ],
+  "shook": [
+   0.109,
+   -2.324,
+   -0.081
+  ],
+  "spoint": [
+   0.388,
+   -0.001,
+   -0.015
+  ],
+  "err_gun": 1.29,
+  "err_sup": 1.16
+ },
+ "roster": "rsq_mg_replaces_mg42 (server), menu row after Rifle Underbarrel Ammo (its ammo option covers the Machinegun too)",
+ "dummy_sprites": 38
+}

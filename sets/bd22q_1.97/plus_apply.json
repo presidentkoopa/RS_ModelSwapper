@@ -1,0 +1,57 @@
+{
+ "tables": {
+  "added": {
+   "ReloadToken": 3,
+   "ChargeToken": 3,
+   "NoMag": 3,
+   "MagAmmo": 3,
+   "Reserve": 3,
+   "SndLand": 3,
+   "SndFwd": 3,
+   "SndBack": 3,
+   "SndIn": 3,
+   "SndOut": 3,
+   "ReadySprites": 3,
+   "SprWorld": 3,
+   "SprPart": 3,
+   "SprGun": 3,
+   "Offset": 3,
+   "Scale": 3,
+   "Channel": 3,
+   "BackAt": 3,
+   "ChargeRule": 3,
+   "HandleLayers": 3,
+   "BoltRatio": 3,
+   "HandleHook": 3,
+   "Travel": 3,
+   "Pull": 3,
+   "Grab": 3,
+   "HasHandle": 3,
+   "WellHook": 3,
+   "HandHook": 3,
+   "TopInHand": 3,
+   "MagCentre": 3,
+   "MagLen": 3,
+   "Mouth": 3,
+   "Axis": 3,
+   "Well": 3
+  },
+  "functions_new_only": []
+ },
+ "MG42": {
+  "guards_after_check": 1,
+  "guards_before_shot": 4
+ },
+ "copied_from_bd22": [
+  "Flamethrower.dec",
+  "Unmaker.dec"
+ ],
+ "Flamethrower2": {
+  "guards_after_check": 3,
+  "guards_before_shot": 12
+ },
+ "Unmaker": {
+  "guards_after_check": 5,
+  "guards_before_shot": 4
+ }
+}

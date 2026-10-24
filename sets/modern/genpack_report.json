@@ -1,0 +1,455 @@
+{
+ "set": "modern",
+ "guns": [
+  "WM_BreachGlock",
+  "WM_BreachGlockS",
+  "WM_BreachKimber",
+  "WM_BreachMK18",
+  "WM_BreachMK18S",
+  "WM_BreachHK416S",
+  "WM_BreachMCX",
+  "WM_BreachG36C",
+  "WM_BreachMP5"
+ ],
+ "report": [
+  [
+   "WM_BreachGlock",
+   "VR reload: magazine + handle, slide lock True [default rule (part slide)]; baked glockrerig.iqm frame 0 -> glockrerig_q.md3: body 5524 verts, magazine 897 verts, slide 1508 verts, trigger 97 verts; fire as pistol [card], slot 2; replaces Pistol; scale x +1.145 (REMA sign); eject port RIGHT (L -1.4)"
+  ],
+  [
+   "WM_BreachGlockS",
+   "VR reload: magazine + handle, slide lock True [default rule (part slide)]; baked glocksil.iqm frame 0 -> glocksil_q.md3: body 5609 verts, magazine 897 verts, slide 2489 verts, trigger 97 verts; fire as pistol [card], slot 2; scale x +1.145 (REMA sign); eject port RIGHT (L -1.5)"
+  ],
+  [
+   "WM_BreachKimber",
+   "VR reload: magazine + handle, slide lock True [default rule (part slide)]; baked kimber.iqm frame 0 -> kimber_q.md3: body 2563 verts, magazine 256 verts, slide 2701 verts; fire as pistol [card], slot 2; scale x +1.145 (REMA sign); eject port RIGHT (L -1.3)"
+  ],
+  [
+   "WM_BreachMK18",
+   "VR reload: magazine + handle, slide lock False [card]; baked mk18nosil.iqm frame 25 -> mk18nosil_25_q.md3: body 29494 verts, charginghandle 3359 verts, magazine 3430 verts; dropped 2986 tris of ['j_mag2']; fire as rifle [card], slot 4; replaces Chaingun; scale x +1.145 (REMA sign); eject port RIGHT (L -2.0)"
+  ],
+  [
+   "WM_BreachMK18S",
+   "VR reload: magazine + handle, slide lock False [card]; baked mk18nosil.iqm frame 25 + mk18newsilencer.iqm, mk18laser.iqm -> mk18nosil_25_x2_q.md3: body 33418 verts, charginghandle 3359 verts, magazine 3430 verts; dropped 2986 tris of ['j_mag2']; fire as rifle [card], slot 4; scale x +1.145 (REMA sign); eject port RIGHT (L -2.0)"
+  ],
+  [
+   "WM_BreachHK416S",
+   "VR reload: magazine + handle, slide lock False [card]; baked hk416.iqm frame 25 -> hk416_25_q.md3: body 13968 verts, charginghandle 366 verts, magazine 1011 verts; dropped 812 tris of ['j_mag2']; fire as rifle [card], slot 4; scale x +1.145 (REMA sign); eject port RIGHT (L -1.7)"
+  ],
+  [
+   "WM_BreachMCX",
+   "VR reload: magazine + handle, slide lock False [card]; baked mcxrig.iqm frame 25 -> mcxrig_25_q.md3: body 9872 verts, charginghandle 411 verts, magazine 1129 verts; dropped 1952 tris of ['j_mag2']; fire as rifle [card], slot 4; scale x +1.145 (REMA sign); eject port RIGHT (L -1.8)"
+  ],
+  [
+   "WM_BreachG36C",
+   "VR reload: magazine; baked g36rerig.iqm frame 25 -> g36rerig_25_q.md3: body 8316 verts, magazine 880 verts; dropped 1014 tris of ['j_mag2']; part charginghandle: joint j_charginghandle owns no vertices (empty); fire as rifle [card], slot 4; scale x +1.145 (REMA sign); eject port RIGHT (L -2.8)"
+  ],
+  [
+   "WM_BreachMP5",
+   "VR reload: magazine + handle, slide lock False [card]; baked mp5.iqm frame 109 -> mp5_109_q.md3: body 5857 verts, charginghandle 118 verts, magazine 301 verts; dropped 284 tris of ['j_mag2']; fire as smg [card], slot 4; scale x +2.290 (REMA sign); eject port RIGHT (L -1.7)"
+  ],
+  [
+   "WM_BreachBenelli",
+   "stock reload (no feed part); fire as shotgun [card], slot 3; replaces Shotgun; scale x +2.620 (REMA sign); eject port RIGHT (L -1.9)"
+  ],
+  [
+   "(sprites)",
+   "63 placeholder lumps"
+  ],
+  [
+   "(sounds)",
+   "15 resolved"
+  ]
+ ],
+ "sounds": {
+  "ok": [
+   "rsm/breach/boltback",
+   "rsm/breach/boltclose",
+   "rsm/breach/clipin",
+   "rsm/breach/clipout",
+   "rsm/breach/cmagin",
+   "rsm/breach/cmagout",
+   "rsm/breachglock/magin",
+   "rsm/breachglock/magout",
+   "rsm/breachglock/slideback",
+   "rsm/breachglock/slidefwd",
+   "wm/dry",
+   "wm/magdrop",
+   "wm/magdrop1",
+   "wm/magdrop2",
+   "wm/magdrop3"
+  ],
+  "unresolved": []
+ },
+ "geometry": {
+  "WM_BreachGlock": {
+   "scale": [
+    1.145,
+    1.145,
+    1.145
+   ],
+   "off": [
+    -6.7832,
+    16.0565,
+    -1.2125
+   ],
+   "ready_frame": 0,
+   "grip": [
+    -10.18831423294912,
+    -0.02346718750000029,
+    -17.390738320260787
+   ],
+   "well": [
+    -3.288,
+    0.06,
+    -2.211
+   ],
+   "axis": [
+    0.3389318815370287,
+    -0.0,
+    0.9408109160069144
+   ],
+   "mouth": 13.62,
+   "mag_len": 13.386729537727204,
+   "grab": [
+    -7.698,
+    -0.006,
+    0.552
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 5.256
+  },
+  "WM_BreachGlockS": {
+   "scale": [
+    1.145,
+    1.145,
+    1.145
+   ],
+   "off": [
+    -6.6956,
+    16.0752,
+    -1.2441
+   ],
+   "ready_frame": 0,
+   "grip": [
+    -10.20176790596529,
+    -0.05004897460937541,
+    -17.414107284181604
+   ],
+   "well": [
+    -3.307,
+    0.013,
+    -2.243
+   ],
+   "axis": [
+    0.3389318815370287,
+    -0.0,
+    0.9408109160069144
+   ],
+   "mouth": 13.61,
+   "mag_len": 13.385712742082593,
+   "grab": [
+    -7.717,
+    -0.093,
+    0.521
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 5.256
+  },
+  "WM_BreachKimber": {
+   "scale": [
+    1.145,
+    1.145,
+    1.145
+   ],
+   "off": [
+    -6.6722,
+    15.0708,
+    -0.8119
+   ],
+   "ready_frame": 0,
+   "grip": [
+    -6.353338169807467,
+    -0.024976562500000132,
+    -16.70421325033805
+   ],
+   "well": [
+    -2.854,
+    -0.03,
+    -1.969
+   ],
+   "axis": [
+    0.20590972837182595,
+    -0.0,
+    0.9785709906602796
+   ],
+   "mouth": 12.14,
+   "mag_len": 12.059369125531651,
+   "grab": [
+    -5.217,
+    -0.016,
+    0.506
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 5.256
+  },
+  "WM_BreachMK18": {
+   "scale": [
+    1.145,
+    1.145,
+    1.145
+   ],
+   "off": [
+    -5.829,
+    -7.5363,
+    3.0141
+   ],
+   "ready_frame": 0,
+   "grip": [
+    8.455987300567632,
+    0.028037907008829265,
+    -12.511159335460082
+   ],
+   "well": [
+    7.271,
+    0.069,
+    -0.88
+   ],
+   "axis": [
+    -0.11800159303225896,
+    -0.0,
+    0.9930134057714675
+   ],
+   "mouth": 6.5,
+   "mag_len": 15.953964379972954,
+   "grab": [
+    -6.299,
+    -0.039,
+    3.361
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 6.482
+  },
+  "WM_BreachMK18S": {
+   "scale": [
+    1.145,
+    1.145,
+    1.145
+   ],
+   "off": [
+    -5.829,
+    -7.5363,
+    3.0141
+   ],
+   "ready_frame": 0,
+   "grip": [
+    8.455987300567632,
+    0.028037907008829265,
+    -12.511159335460082
+   ],
+   "well": [
+    7.271,
+    0.069,
+    -0.88
+   ],
+   "axis": [
+    -0.11800159303225896,
+    -0.0,
+    0.9930134057714675
+   ],
+   "mouth": 6.5,
+   "mag_len": 15.953964379972954,
+   "grab": [
+    -6.299,
+    -0.039,
+    3.361
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 6.482
+  },
+  "WM_BreachHK416S": {
+   "scale": [
+    1.145,
+    1.145,
+    1.145
+   ],
+   "off": [
+    -6.0042,
+    -5.2834,
+    3.1671
+   ],
+   "ready_frame": 0,
+   "grip": [
+    7.907085963044472,
+    0.04315002729958872,
+    -12.611718236260803
+   ],
+   "well": [
+    7.278,
+    -0.031,
+    -2.628
+   ],
+   "axis": [
+    -0.07501372876866196,
+    -0.0,
+    0.9971825010980796
+   ],
+   "mouth": 4.4,
+   "mag_len": 14.860632744671685,
+   "grab": [
+    -5.839,
+    0.83,
+    3.463
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 6.482
+  },
+  "WM_BreachMCX": {
+   "scale": [
+    1.145,
+    1.145,
+    1.145
+   ],
+   "off": [
+    -6.0497,
+    -4.7578,
+    2.8448
+   ],
+   "ready_frame": 0,
+   "grip": [
+    7.248880899815974,
+    -0.1744967905405411,
+    -11.84866876970569
+   ],
+   "well": [
+    4.907,
+    -0.052,
+    -2.169
+   ],
+   "axis": [
+    -0.21989271852365672,
+    -0.0,
+    0.9755240603594952
+   ],
+   "mouth": 4.7,
+   "mag_len": 14.838540558200602,
+   "grab": [
+    -5.739,
+    -0.075,
+    3.453
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 6.482
+  },
+  "WM_BreachG36C": {
+   "scale": [
+    1.145,
+    1.145,
+    1.145
+   ],
+   "off": [
+    -6.3207,
+    -6.067,
+    2.6147
+   ],
+   "ready_frame": 0,
+   "grip": [
+    9.890959683627582,
+    -0.08450156249999974,
+    -11.664669038455544
+   ],
+   "well": [
+    8.422,
+    0.534,
+    -0.737
+   ],
+   "axis": [
+    -0.1330152976388933,
+    -0.0,
+    0.9911139846627313
+   ],
+   "mouth": 5.33,
+   "mag_len": 16.020269436931464,
+   "grab": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.0
+  },
+  "WM_BreachMP5": {
+   "scale": [
+    2.29,
+    2.29,
+    2.29
+   ],
+   "off": [
+    -8.0095,
+    -2.5271,
+    5.2752
+   ],
+   "ready_frame": 0,
+   "grip": [
+    11.949604093523591,
+    -0.05881406250000171,
+    -10.763963064125063
+   ],
+   "well": [
+    8.087,
+    -0.043,
+    0.883
+   ],
+   "axis": [
+    -0.32999406016037525,
+    -0.0,
+    0.9439830084587704
+   ],
+   "mouth": 4.36,
+   "mag_len": 19.612258982515446,
+   "grab": [
+    20.93,
+    2.387,
+    4.954
+   ],
+   "pull": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 3.013
+  }
+ }
+}
