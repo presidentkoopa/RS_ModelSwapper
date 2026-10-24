@@ -21,5 +21,11 @@
    71.57
   ]
  },
- "option": "rsb_revolver_feed (server, 0 = speedloader); menu row after the Shotvolver alt fire"
+ "option": "rsb_revolver_feed (server, 0 = speedloader); menu row after the Shotvolver alt fire",
+ "slug": {
+  "sounds": 6,
+  "dropped": "PuristGun (ClassicShotgun: not a BD22 class, state unreachable)",
+  "decorate": "actors/Weapons/Revolver2.dec, DECORATE.rsqrev",
+  "roster": "rsq_slug_replaces_shotvolver (server, off); slot 2; RSB indices 8 (speedloader) / 9 (per round)"
+ }
 }

@@ -18,3 +18,6 @@ user int rsq_scope_railgun = 0;
 
 // 1.97: roster
 server bool rsq_mg_replaces_mg42 = false;	// every MG42 spawn is the BD21 Machinegun
+
+// 1.97: roster
+server bool rsq_slug_replaces_shotvolver = false;	// every Shotvolver spawn is the slug revolver

@@ -449,6 +449,82 @@ REV_FEED = '''
 '''
 
 
+# BD21 -> BD22 sound names for the slug revolver. Each right-hand side was found in brutal22test6's
+# own SNDINFO; each left-hand side was not. RELO1/RELO2 are in BD22 already and stay. "Tired" is NOT
+# in BD22's SNDINFO either, but BD22's own AssaultShotgun/Axe/Grenades play it at StopSprintTired, so
+# the parent's line is left exactly as BD22 itself writes it.
+REV2_SND = {'"REVOFIR"': '"Revolver/Fire"', '"REVOHAM"': '"Revolver/Hammer"',
+            '"REVOFIRpump"': '"Revolver/Hammer"',          # BD22's own Revolver PickupSound
+            '"insertshell"': '"Revolver/Reload"', '"weapons/empty"': '"Weapon/Empty"',
+            '"KICK"': '"Kick/Swing"'}
+# BD21 -> BD22 class names (parsed: every `actor <name>` in brutal22test6)
+REV2_CLS = {'"SubMachineGunSelected"': '"SMGSelected"'}
+
+# The RSB contract, as rsr_break.zs states it and 1.96b's own patched Revolver.dec shows it. Reserve
+# is Clip2 (BD21's Weapon.AmmoType1), the cylinder is RevolverAmmo, cap 6. The casing is BD22's
+# SSGCaseSpawner -- 1.96b's choice for this very cylinder; BD21 fires RifleCAseSpawn inside its own
+# insert loop, which is its quirk of ejecting as it loads, not an eject step.
+REV2_RSB = '''	// RSR-BREAK: real VR reload, break-open / revolver (zscript/rsr/rsr_break.zs).
+	// Not in VR, or with Real reload off, RSB_Start goes straight on into the gun's own reload.
+	RSB_Start:
+		"####" "#" 0 A_TakeInventory("RSB_Go", 1)
+		"####" "#" 0 A_GiveInventory("RSB_Start", 1)
+		"####" "#" 0 A_JumpIfInventory("RSB_Go", 1, "RSB_Open")
+		Goto RSB_Stock
+	RSB_Open:
+		"####" "#" 0 A_TakeInventory("RSB_Go", 1)
+		"####" "#" 0 A_TakeInventory("Reloading", 1)
+		"####" "#" 0 A_GiveInventory("Pumping", 1)		// as BD21's own reload does
+	RSB_Wait:		// the gun as the script shows it ("####" "#"); the script runs every tic
+		"####" "#" 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+		"####" "#" 0 A_GiveInventory("RSB_Tick", 1)
+		"####" "#" 0 A_JumpIfInventory("RSB_EjectT", 1, "RSB_Eject")
+		"####" "#" 0 A_JumpIfInventory("RSB_LoadT", 1, "RSB_Load")
+		"####" "#" 0 A_JumpIfInventory("RSB_TopUpT", 1, "RSB_TopUp")
+		"####" "#" 0 A_JumpIfInventory("RSB_Done", 1, "RSB_Done")
+		Goto RSB_Wait
+	RSB_Eject:		// one casing per spent round, as 1.96b ejects this cylinder
+		"####" "#" 0 A_TakeInventory("RSB_EjectT", 1)
+		"####" "#" 0 A_FireCustomMissile("SSGCaseSpawner",0,0,-10, -20)
+		"####" "#" 0 A_JumpIfInventory("RSB_EjectT", 1, "RSB_Eject")
+		Goto RSB_Wait
+	RSB_Load:		// one shell into one chamber: BD21's own step of its InsertingShells loop
+		"####" "#" 0 A_TakeInventory("RSB_LoadT", 1)
+		"####" "#" 0 A_JumpIfInventory("RevolverAmmo", 6, "RSB_Wait")
+		"####" "#" 0 A_JumpIfInventory("Clip2", 1, 1)
+		Goto RSB_Wait
+		"####" "#" 0 A_Giveinventory("RevolverAmmo", 1)
+		"####" "#" 0 A_Takeinventory("Clip2", 1, TIF_NOTAKEINFINITE)
+		Goto RSB_Wait
+	RSB_TopUp:		// the speedloader: BD21's own loop to its cap of 6
+		"####" "#" 0 A_TakeInventory("RSB_TopUpT", 1)
+	RSB_TopUp1:
+		"####" "#" 0 A_JumpIfInventory("RevolverAmmo", 6, "RSB_Wait")
+		"####" "#" 0 A_JumpIfInventory("Clip2", 1, 1)
+		Goto RSB_Wait
+		"####" "#" 0 A_Giveinventory("RevolverAmmo", 1)
+		"####" "#" 0 A_Takeinventory("Clip2", 1, TIF_NOTAKEINFINITE)
+		Goto RSB_TopUp1
+	RSB_Done:		// the player shut it by hand, so no close animation -- BD21 has no NeedToHammer
+		REVO A 0 A_TakeInventory("RSB_Done", 1)
+		Goto Ready
+'''
+
+REV2_ROSTER = '''
+	// 1.97: the slug revolver (BD21 Revolver2) in place of BD22's Shotvolver, when the option is on
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		if (!e.Replacee) return;
+		let mg = CVar.FindCVar('rsq_mg_replaces_mg42');
+		if (mg && mg.GetInt() != 0 && e.Replacee.GetClassName() == 'MG42')
+			e.Replacement = 'Machinegun';
+		let sv = CVar.FindCVar('rsq_slug_replaces_shotvolver');
+		if (sv && sv.GetInt() != 0 && e.Replacee.GetClassName() == 'Revolver')
+			e.Replacement = 'Revolver2';
+	}
+'''
+
+
 def rsb_rows(text, fname):
     """{case number: return expression} for one RSB_Guns switch"""
     m = re.search(r'\tclearscope static [\w<>]+ %s\(int i(?:, int k)?\)\n\t\{\n\t\tswitch \([^)]*\)\n\t\t\{\n(.*?)\n\t\t\}' % fname, text, re.S)
@@ -477,6 +553,63 @@ def rsb_fifth(text, fname):
                        gaps_deg=[round(float(g), 2) for g in gaps])
 
 
+def slug_revolver():
+    """BD21's Revolver2 into the pack: its own file verbatim bar the renames below, the RSB states,
+    the slot, and the menu row that makes it replace BD22's Shotvolver. It shares BD22's Revolver
+    sprites (REVO/REVP/REVR), so it needs no sprite lumps and no MODELDEF of its own."""
+    st = {}
+    t = open(REPO.replace('\\', '/') + '/docs/BD21_Revolver2.txt', 'rb').read().decode('latin-1').replace('\r\n', '\n')
+    for a, b in REV2_SND.items():
+        t = t.replace(a, b)
+    st['sounds'] = len(REV2_SND)
+    for a, b in REV2_CLS.items():
+        t = t.replace(a, b)
+    # PuristGun: BD21's purist machinery -- nothing in the file jumps to it and BD22 has no
+    # ClassicShotgun, so the dead state goes rather than warn at load.
+    dead = re.search(r'\n *PuristGun:\n(?:.*\n)*?\t\tGoto Ready3\n', t)
+    if not dead or t.count('PuristGun') != 1:
+        raise SystemExit('BD21_Revolver2.txt: the dead PuristGun state is not there exactly once')
+    t = t[:dead.start()] + '\n' + t[dead.end():]
+    st['dropped'] = 'PuristGun (ClassicShotgun: not a BD22 class, state unreachable)'
+    # its own reload, after its own checks, goes to RSB_Start; the rest of it becomes RSB_Stock
+    anchor = ('\t\tREVO A 0 A_JumpIfInventory("TurboReload", 1, "TurboReload")//Check if reloads are disabled.\n'
+              '\t\tREVR B 0 A_GiveInventory ("Pumping", 1)\n')
+    if t.count(anchor) != 1:
+        raise SystemExit('BD21_Revolver2.txt: the ReloadNormally anchor is not there exactly once')
+    t = t.replace(anchor, anchor.split('\n')[0] + '\n\t\tGoto RSB_Start\n\tRSB_Stock:\n'
+                  + '\t\tREVR B 0 A_GiveInventory ("Pumping", 1)\n')
+    # the RSB states, right after the States opening brace
+    sb = re.search(r'(ACTOR Revolver2 : BrutalWeapon\n(?:.*\n)*?\tStates\n\t\{\n)', t)
+    if not sb:
+        raise SystemExit('BD21_Revolver2.txt: no States block')
+    t = t[:sb.end(1)] + REV2_RSB + t[sb.end(1):]
+    open(OUT_SRC + 'actors/Weapons/Revolver2.dec', 'wb').write(t.encode('latin-1'))
+    open(OUT_SRC + 'DECORATE.rsqrev', 'w').write(
+        '// 1.97: the BD21 slug revolver (tools/bd22_plus.py revolver)\n#include "actors/Weapons/Revolver2.dec"\n')
+    st['decorate'] = 'actors/Weapons/Revolver2.dec, DECORATE.rsqrev'
+    # slot 2, with BD22's Revolver (its KEYCONF: setslot 2 ... Revolver ...)
+    with open(OUT_SRC + 'KEYCONF.rsq', 'a') as f:
+        f.write('\n// 1.97: the slug revolver on slot 2 with the Shotvolver (BD22 KEYCONF setslot 2 ... Revolver)\n'
+                'addslotdefault 2 Revolver2\n')
+    # the roster handler bd22_mg.py wrote: a second replacement beside the Machinegun's
+    rp = OUT_SRC + 'zscript/rsq/roster.zs'
+    rt = open(rp).read()
+    old = re.search(r'\toverride void CheckReplacement\(ReplaceEvent e\)\n\t\{\n(?:.*\n)*?\t\}\n', rt)
+    if not old:
+        raise SystemExit('roster.zs: no CheckReplacement (bd22_mg.py must run first)')
+    open(rp, 'w').write(rt[:old.start()] + REV2_ROSTER.lstrip('\n') + rt[old.end():])
+    with open(OUT_SRC + 'CVARINFO.rsq', 'a') as f:
+        f.write('\n// 1.97: roster\nserver bool rsq_slug_replaces_shotvolver = false;\t// every Shotvolver spawn is the slug revolver\n')
+    mp = OUT_SRC + 'MENUDEF.rsq'
+    mt = open(mp).read()
+    a2 = '\tOption "Machinegun replaces MG42", "rsq_mg_replaces_mg42", "OnOff"\n'
+    if mt.count(a2) != 1:
+        raise SystemExit('MENUDEF.rsq: the Machinegun roster row is not there once')
+    open(mp, 'w').write(mt.replace(a2, a2 + '\tOption "Slug revolver replaces Shotvolver", "rsq_slug_replaces_shotvolver", "OnOff"\n'))
+    st['roster'] = 'rsq_slug_replaces_shotvolver (server, off); slot 2; RSB indices 8 (speedloader) / 9 (per round)'
+    return st
+
+
 def revolver():
     p = OUT_SRC + 'zscript/rsr/rsb_guns.zs'
     t = open(p).read()
@@ -486,37 +619,46 @@ def revolver():
     seats = {}
     for fname in ('Base', 'Tip'):
         seats[fname], log[fname] = rsb_fifth(t, fname)
-    # per-gun switches: index 7 is index 3, bar the two fields the speedloader owns
-    OVER = {'Chambers': ('5', 'a round at a time: the cylinder\'s own five chambers'),
-            'Loader': ('false', 'not the speedloader')}
+    # Three new indices, all of them index 3's rows with named fields replaced:
+    #   7  BD22's Revolver, a round at a time      8  the slug revolver, speedloader
+    #   9  the slug revolver, a round at a time
+    PERROUND = {'Chambers': ('5', "a round at a time: the cylinder's own five chambers"),
+                'Loader': ('false', 'not the speedloader')}
+    SLUG = {'Reserve': ('"Clip2"', "BD21 Revolver2's own Weapon.AmmoType1"),
+            'Cls': ("'Revolver2'", '')}
+    NEW = {7: dict(PERROUND), 8: dict(SLUG), 9: dict(PERROUND, **SLUG)}
     for fname in re.findall(r'\tclearscope static [\w<>]+ (\w+)\(int i\)\n', t):
-        if fname in ('Index',):
+        if fname == 'Index':
             continue
         m, rows = rsb_rows(t, fname)
         if 3 not in rows:
             continue                      # e.g. LoaderEmptyInHand: no case 3, the default stands
-        val, why = OVER.get(fname, (rows[3].strip(), ''))
-        line = '\n\t\tcase 7:\treturn %s;%s' % (val, ('\t\t// %s' % why) if why else '')
-        t = t[:m.end(1)] + line + t[m.end(1):]
-    # per-chamber switches: 24..28 become 56..60, with k=0 the recovered seat
+        out = ''
+        for i, over in NEW.items():
+            val, why = over.get(fname, (rows[3].strip(), ''))
+            out += '\n\t\tcase %d:\treturn %s;%s' % (i, val, ('\t\t// %s' % why) if why else '')
+        t = t[:m.end(1)] + out + t[m.end(1):]
+    # per-chamber switches: the per-round indices get all five seats, the speedloader one just k=0
     for fname in re.findall(r'\tclearscope static [\w<>]+ (\w+)\(int i, int k\)\n', t):
         m, rows = rsb_rows(t, fname)
         if 24 not in rows:
             continue
-        out = []
-        for k in range(5):
-            if fname in seats and k == 0:
-                v = '(%.4f, %.4f, %.4f)' % tuple(seats[fname])
-                why = '\t\t// recovered: 5*the patched mean - the four rows the patch left'
-            else:
-                v, why = rows[24 + k].strip(), ''
-            out.append('\n\t\tcase %d:\treturn %s;%s' % (7 * 8 + k, v, why))
-        t = t[:m.end(1)] + ''.join(out) + t[m.end(1):]
-    # Index(): the same gun, picked by the option
+        out = ''
+        for i in NEW:
+            for k in range(5 if i in (7, 9) else 1):
+                if fname in seats and k == 0 and i in (7, 9):
+                    v = '(%.4f, %.4f, %.4f)' % tuple(seats[fname])
+                    why = '\t\t// recovered: 5*the patched mean - the four rows the patch left'
+                else:
+                    v, why = rows[24 + k].strip(), ''
+                out += '\n\t\tcase %d:\treturn %s;%s' % (i * 8 + k, v, why)
+        t = t[:m.end(1)] + out + t[m.end(1):]
+    # Index(): each gun, picked by the option
     old = "\t\tif (n == 'Revolver')\treturn 3;"
     if t.count(old) != 1:
         raise SystemExit('rsb_guns.zs: Index() Revolver line not found once')
-    t = t.replace(old, "\t\tif (n == 'Revolver')\treturn PerRound() ? 7 : 3;")
+    t = t.replace(old, "\t\tif (n == 'Revolver')\treturn PerRound() ? 7 : 3;\n"
+                       "\t\tif (n == 'Revolver2')\treturn PerRound() ? 9 : 8;\t// 1.97: the slug revolver")
     t = t.replace('\tclearscope static int Index(Weapon w)', REV_FEED.lstrip('\n') + '\tclearscope static int Index(Weapon w)', 1)
     open(p, 'w').write(t)
     # the option
@@ -534,6 +676,7 @@ def revolver():
     mt = mt.rstrip('\n') + '\n\nOptionValue "RSB_RevFeed"\n{\n\t0, "Speedloader"\n\t1, "Per Round"\n}\n'
     open(mp, 'w').write(mt)
     log['option'] = 'rsb_revolver_feed (server, 0 = speedloader); menu row after the Shotvolver alt fire'
+    log['slug'] = slug_revolver()
     json.dump(log, open(OUT + 'rev_apply.json', 'w'), indent=1)
     with open(OUT + '.generated', 'a') as f:          # bd22_mg.py opened it; this stage runs last
         f.write('then tools/bd22_plus.py revolver\n')
