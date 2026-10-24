@@ -66,6 +66,7 @@ OptionMenu "RSQ_Options"
 	Option "Pistol Semi Auto", "rsa_pistol_semi", "OnOff"
 	Option "Shotgun Slugshot Alt Fire", "rsa_sg_slug", "OnOff"
 	Option "Shotvolver Slugshot Alt Fire", "rsa_rev_magnum", "OnOff"
+	Option "Shot/Revolver Reload", "rsb_revolver_feed", "RSB_RevFeed"
 	Option "Rifle Underbarrel Ammo", "rsm_ammo", "RSM_Ammo"
 	Option "Machinegun replaces MG42", "rsq_mg_replaces_mg42", "OnOff"
 	Option "Sniper Scope", "rsq_scope_sniper", "RSQ_ScopeMode"
@@ -96,4 +97,10 @@ OptionValue "RSM_Ammo"
 {
 	0, "Rockets"
 	1, "Hand grenades"
+}
+
+OptionValue "RSB_RevFeed"
+{
+	0, "Speedloader"
+	1, "Per Round"
 }

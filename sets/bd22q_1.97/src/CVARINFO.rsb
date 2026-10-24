@@ -10,3 +10,6 @@ user int rsr_sideport = 1;
 
 // 2026-10-16: the VR grenade (pin, spoon, cook, throw by swing); 0: BD22's own throw
 user int rsg_vr = 1;
+
+// 1.97: Shot/Revolver Reload -- 0 the speedloader (as 1.96b shipped), 1 a round at a time
+server int rsb_revolver_feed = 0;

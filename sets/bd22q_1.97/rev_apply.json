@@ -1,0 +1,25 @@
+{
+ "Base": {
+  "radius_cm": 1.671,
+  "radius_spread_cm": 0.042,
+  "gaps_deg": [
+   71.55,
+   71.99,
+   72.21,
+   72.44,
+   71.81
+  ]
+ },
+ "Tip": {
+  "radius_cm": 1.676,
+  "radius_spread_cm": 0.064,
+  "gaps_deg": [
+   71.38,
+   72.52,
+   72.05,
+   72.48,
+   71.57
+  ]
+ },
+ "option": "rsb_revolver_feed (server, 0 = speedloader); menu row after the Shotvolver alt fire"
+}
