@@ -1,0 +1,34 @@
+weapon MS_wolf_Kar98
+  archetype   pistol_mag        # owner-confirmed
+  model       Kar98.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    round    surf 1  rest [3.13, 0.01, -9.62]  axis [0.9, -0.0, 0.435]  travel 43.39  frames 12..25
+    part     surf 2  rest [30.22, 0.02, 2.27]  axis [-1.0, 0.0, 0.0]  travel 11.79  frames 2..25
+    part2    surf 3  rest [32.57, 0.31, 3.16]  axis [-1.0, 0.0, 0.0]  travel 11.79  frames 10..25
+    bolt     surf 4  rest [39.26, -1.56, 1.52]  axis [-0.977, 0.047, 0.208]  travel 12.07  frames 8..25  rot 89deg axis [-1.0, 0.0, 0.0]
+    trigger  surf 5  rest [33.07, 0.02, -3.85]  axis [-0.987, -0.0, 0.164]  travel 0.74  frames 1..3  rot 10deg axis [-0.0, 1.0, 0.0]
+    mag      surf 6  rest [-0.25, 0.0, -6.99]  axis [0.899, -0.0, 0.438]  travel 43.36  frames 17..25
+    round2   surf 7  rest [3.13, 0.01, -8.32]  axis [0.899, -0.0, 0.438]  travel 43.37  frames 17..25
+    round3   surf 8  rest [3.13, 0.01, -7.01]  axis [0.899, -0.0, 0.438]  travel 43.37  frames 17..25
+    round4   surf 9  rest [3.13, 0.01, -5.71]  axis [0.899, -0.0, 0.438]  travel 43.37  frames 17..25
+    round5   surf 10  rest [3.13, 0.01, -4.41]  axis [0.899, -0.0, 0.438]  travel 43.37  frames 17..25
+  ports
+    chamber   [42.29, 0.01, 2.43]  frame 16
+    eject     [42.29, 2.83, 2.43]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    mag_well  [38.73, -0.0, 4.99]  mouth [38.53, -0.69, 8.3]  axis [0.899, -0.0, 0.438]  travel_clear 43.36
+    muzzle    [116.06, 0.55, 1.89]
+  grip        line [28.91, 0.67, -2.89] [21.42, 0.0, -7.75]  trigger [33.07, 0.02, -3.85]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [65.29, 0.03, 1.13]   # one-handed gun; placeholder
+  carve       mag round
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..16
+    mag_out      17..17
+    mag_in       18..25
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 9448
+  carved      mag  seat_origin [38.73, -0.0, 4.99]  from_frame 21  file Kar98_mag.md3
+  carved      round  seat_origin [42.13, 0.01, 2.36]  from_frame 21  file Kar98_round.md3

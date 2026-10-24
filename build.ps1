@@ -74,6 +74,12 @@ $files = $files | Where-Object { $_.FullName -notmatch '\\quest\\' }
 # the ones that came in beside the blend-file meshes were 26MB of dead weight.
 # Keep them on disk next to the mesh they belong to; just never pack them.
 $files = $files | Where-Object { $_.Extension -ne '.pdn' }
+# models/blend/ is the blend re-export experiment: meshes rebuilt from the .blend
+# sources, untextured, and referenced by no MODELDEF. The finished packages under
+# models/wolf, models/hacx, models/meat and models/bd replaced them -- those arrived
+# with their textures and their authors' MODELDEFs. Packing blend/ put 577MB of
+# unreferenced geometry in the pk3 and took it from 30MB to 567MB.
+$files = $files | Where-Object { $_.FullName -notmatch '\\models\\blend\\' }
 
 $fs  = [System.IO.File]::Open($out, 'Create')
 $zip = New-Object System.IO.Compression.ZipArchive($fs, [System.IO.Compression.ZipArchiveMode]::Create)

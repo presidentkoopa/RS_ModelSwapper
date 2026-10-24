@@ -923,3 +923,733 @@ Model MS_PU_BD_Rifle
 	RollOffset 0
 	FrameIndex SHOT A 0 3
 }
+
+// ---------------------------------------------------------------------
+// Imported whole from the finished VR weapon packages in VR_WeaponSetRebuild:
+// BrutalWolf, HacX, BR_VR_MeatGrinder and br_vr/PK3_pbr. The meshes are
+// animated and textured, and the packages' own MODELDEFs supplied the Scale,
+// Offset and ZOffset -- those are the authors' measurements, copied, never
+// recomputed. Their per-sprite FrameIndex tables are replaced by the single
+// anchor row this mod uses: the host weapon's sprite is not theirs, and the
+// animation is driven by ModelFrame at runtime. The model frame each table
+// gave for its idle sprite becomes the held frame in the shelf row.
+// ---------------------------------------------------------------------
+
+Model MS_brt_AssaultShotgun
+{
+	Path "models/bd/AssaultShotgun"
+	Model 0 "AssaultShotgun.md3"
+	Skin 0 "AssaultShotgun.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex SHTG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Grenade
+{
+	Path "models/bd/Grenade"
+	Model 0 "nade.md3"
+	Skin 0 "nade.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex MISG A 0 3
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Boot
+{
+	Path "models/bd/Boot"
+	Model 0 "Boot.md3"
+	Skin 0 "Boot.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PUNG A 0 5
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_FIST
+{
+	Path "models/bd/FIST"
+	Model 0 "fistclosed.md3"
+	Skin 0 "fist.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PUNG A 0 61
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_BFG
+{
+	Path "models/bd/BFG"
+	Model 0 "BFG.md3"
+	Skin 0 "BFG.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex BFGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_BrutalAxe
+{
+	Path "models/bd/BrutalAxe"
+	Model 0 "BrutalAxe.md3"
+	Skin 0 "BrutalAxe.png"
+	Scale -1.5 1.5 1.5
+	Offset 0.0 10.0 0.0
+	ZOffset 5
+	FrameIndex PUNG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Chainsaw
+{
+	Path "models/bd/Chainsaw"
+	Model 0 "Chain_saw.md3"
+	Skin 0 "Chain_saw.png"
+	Scale -1.5 1.5 1.5
+	Offset 0.0 10.0 0.0
+	ZOffset -5
+	FrameIndex SAWG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Minigun
+{
+	Path "models/bd/Minigun"
+	Model 0 "Minigun.md3"
+	Skin 0 "Minigun.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 4
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_BrutalPistol
+{
+	Path "models/bd/BrutalPistol"
+	Model 0 "BrutalPistol.md3"
+	Skin 0 "BrutalPistol.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PISG A 0 2
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_PlasmaGun
+{
+	Path "models/bd/PlasmaGun"
+	Model 0 "Plasma.md3"
+	Skin 0 "Plasma.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PLSG A 0 4
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_RPG
+{
+	Path "models/bd/RPG"
+	Model 0 "RPG.md3"
+	Skin 0 "RPG.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex MISG A 0 5
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_BrutalSMG
+{
+	Path "models/bd/BrutalSMG"
+	Model 0 "BrutalSMG.md3"
+	Skin 0 "BrutalSMG.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 3
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_SSG
+{
+	Path "models/bd/SSG"
+	Model 0 "SSG.md3"
+	Skin 0 "SSG.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex SHT2 A 0 1
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Shotgun
+{
+	Path "models/bd/Shotgun"
+	Model 0 "Shotgun.md3"
+	Skin 0 "Shotgun.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex SHTG A 0 4
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_DSweap
+{
+	Path "models/bd/DSweap"
+	Model 0 "DSweap.md3"
+	Skin 0 "DSweap.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PUNG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_FlameCannon
+{
+	Path "models/bd/FlameCannon"
+	Model 0 "FlameCannon.md3"
+	Skin 0 "FlameCannon.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PLSG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Flamethrower2
+{
+	Path "models/bd/Flamethrower2"
+	Model 0 "Flamethrower2.md3"
+	Skin 0 "Flamethrower2.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PLSG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_HellishMissile
+{
+	Path "models/bd/HellishMissile"
+	Model 0 "HellishMissile.md3"
+	Skin 0 "HellishMissile.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex MISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_HitlersBuzzsaw
+{
+	Path "models/bd/HitlersBuzzsaw"
+	Model 0 "HitlersBuzzsaw.md3"
+	Skin 0 "HitlersBuzzsaw.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex SAWG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_M79
+{
+	Path "models/bd/M79"
+	Model 0 "M79.md3"
+	Skin 0 "M79.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex MISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_MP40
+{
+	Path "models/bd/MP40"
+	Model 0 "MP40.md3"
+	Skin 0 "MP40.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Machinegun
+{
+	Path "models/bd/Machinegun"
+	Model 0 "Machinegun.md3"
+	Skin 0 "Machinegun.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_RailGun
+{
+	Path "models/bd/RailGun"
+	Model 0 "RailGun.md3"
+	Skin 0 "RailGun.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PLSG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Revolver
+{
+	Path "models/bd/Revolver"
+	Model 0 "Revolver.md3"
+	Skin 0 "Revolver.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Rifle
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	Skin 0 "Rifle.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_brt_Unmaker
+{
+	Path "models/bd/Unmaker"
+	Model 0 "Unmaker.md3"
+	Skin 0 "Unmaker.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex BFGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hacx_Cryogun
+{
+	Path "models/hacx/Cryogun"
+	Model 0 "Cryogun.md3"
+	Skin 0 "Cryogun.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PLSG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hacx_Melee
+{
+	Path "models/hacx/Melee"
+	Model 0 "Melee.md3"
+	Skin 0 "Melee.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PUNG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hacx_Nuker
+{
+	Path "models/hacx/Nuker"
+	Model 0 "Nuker.md3"
+	Skin 0 "Nuker.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex BFGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hacx_Pistol
+{
+	Path "models/hacx/Pistol"
+	Model 0 "Pistol.md3"
+	Skin 0 "Pistol.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hacx_Reznator
+{
+	Path "models/hacx/Reznator"
+	Model 0 "Reznator.md3"
+	Skin 0 "Reznator.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PLSG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hacx_Stick
+{
+	Path "models/hacx/Stick"
+	Model 0 "Stick.md3"
+	Skin 0 "Stick.png"
+	Scale -1.9 1.9 1.9
+	Offset 0.0 25.0 0.0
+	ZOffset -5
+	FrameIndex MISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hacx_tazer
+{
+	Path "models/hacx/tazer"
+	Model 0 "tazer.md3"
+	Skin 0 "tazer.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PLSG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hacx_UZI
+{
+	Path "models/hacx/UZI"
+	Model 0 "UZI.md3"
+	Skin 0 "UZI.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_hacx_Zooka
+{
+	Path "models/hacx/Zooka"
+	Model 0 "Zooka.md3"
+	Skin 0 "Zooka.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex MISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_meat_BFG
+{
+	Path "models/meat/BFG"
+	Model 0 "BFG.md3"
+	Skin 0 "BFG_9k.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -6
+	FrameIndex BFGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_meat_Bolter
+{
+	Path "models/meat/Bolter"
+	Model 0 "Bolter.md3"
+	Skin 0 "Bolter.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -6
+	FrameIndex PLSG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_meat_ChainGun
+{
+	Path "models/meat/ChainGun"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -6
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_meat_Knife
+{
+	Path "models/meat/Knife"
+	Model 0 "Knife.md3"
+	Skin 0 "Knife.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -6
+	FrameIndex PUNG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_meat_RPG
+{
+	Path "models/meat/RPG"
+	Model 0 "RPG.md3"
+	Skin 0 "RPG.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -6
+	FrameIndex MISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_meat_SSG
+{
+	Path "models/meat/SSG"
+	Model 0 "SSG.md3"
+	Skin 0 "SSG.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -6
+	FrameIndex SHT2 A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_meat_Saw
+{
+	Path "models/meat/Saw"
+	Model 0 "Saw.md3"
+	Skin 0 "Saw.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex SAWG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_meat_Shotgun
+{
+	Path "models/meat/Shotgun"
+	Model 0 "Shotgun.md3"
+	Skin 0 "Shotgun.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -6
+	FrameIndex SHTG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_meat_TEC9
+{
+	Path "models/meat/TEC9"
+	Model 0 "TEC9.md3"
+	Skin 0 "TEC9.png"
+	Scale -1.1 1.1 1.1
+	Offset 0.0 0.0 0.0
+	ZOffset -6
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_1911
+{
+	Path "models/wolf/1911"
+	Model 0 "1911.md3"
+	Skin 0 "1911.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_Knife
+{
+	Path "models/wolf/Knife"
+	Model 0 "Knife.md3"
+	Skin 0 "Knife.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PUNG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_Axe
+{
+	Path "models/wolf/Axe"
+	Model 0 "Axe.md3"
+	Skin 0 "Axe.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PUNG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_Grenade
+{
+	Path "models/wolf/Grenade"
+	Model 0 "Grenade.md3"
+	Skin 0 "Grenade.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset 0
+	FrameIndex MISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_BAR
+{
+	Path "models/wolf/BAR"
+	Model 0 "BAR.md3"
+	Skin 0 "BAR.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_Chaingun
+{
+	Path "models/wolf/Chaingun"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_Flame
+{
+	Path "models/wolf/Flame"
+	Model 0 "Flame.md3"
+	Skin 0 "Flame.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PLSG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_Garand
+{
+	Path "models/wolf/Garand"
+	Model 0 "Garand.md3"
+	Skin 0 "Garand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_KAR98
+{
+	Path "models/wolf/KAR98"
+	Model 0 "KAR98.md3"
+	Skin 0 "KAR98.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_Luger
+{
+	Path "models/wolf/Luger"
+	Model 0 "Luger.md3"
+	Skin 0 "Luger.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_MG42
+{
+	Path "models/wolf/MG42"
+	Model 0 "MG42.md3"
+	Skin 0 "MG42.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_MP40
+{
+	Path "models/wolf/MP40"
+	Model 0 "MP40.md3"
+	Skin 0 "MP40.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_PP41
+{
+	Path "models/wolf/PP41"
+	Model 0 "PP41.md3"
+	Skin 0 "PP41.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_STG44
+{
+	Path "models/wolf/STG44"
+	Model 0 "STG44.md3"
+	Skin 0 "STG44.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_Shotgun
+{
+	Path "models/wolf/Shotgun"
+	Model 0 "Shotgun.md3"
+	Skin 0 "Shotgun.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex SHTG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_wolf_Tommy
+{
+	Path "models/wolf/Tommy"
+	Model 0 "Tommy.md3"
+	Skin 0 "Tommy.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}

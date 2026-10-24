@@ -109,3 +109,67 @@ class MS_PU_VR_BFG9000 : MS_PickupModel {}
 #include "zscript/RS_ForeignWorldModels.zs"
 #include "zscript/RS_ForeignEffects.zs"
 #include "zscript/RS_ForeignDebug.zs"
+
+// Stubs for the imported VR weapon packages. The engine binds a model to a
+// CLASS, so every Model block in modeldef needs one of these or the donor is
+// silently dropped -- which looks like it worked.
+class MS_brt_AssaultShotgun : Actor {}
+class MS_brt_Grenade : Actor {}
+class MS_brt_Boot : Actor {}
+class MS_brt_FIST : Actor {}
+class MS_brt_BFG : Actor {}
+class MS_brt_BrutalAxe : Actor {}
+class MS_brt_Chainsaw : Actor {}
+class MS_brt_Minigun : Actor {}
+class MS_brt_BrutalPistol : Actor {}
+class MS_brt_PlasmaGun : Actor {}
+class MS_brt_RPG : Actor {}
+class MS_brt_BrutalSMG : Actor {}
+class MS_brt_SSG : Actor {}
+class MS_brt_Shotgun : Actor {}
+class MS_brt_DSweap : Actor {}
+class MS_brt_FlameCannon : Actor {}
+class MS_brt_Flamethrower2 : Actor {}
+class MS_brt_HellishMissile : Actor {}
+class MS_brt_HitlersBuzzsaw : Actor {}
+class MS_brt_M79 : Actor {}
+class MS_brt_MP40 : Actor {}
+class MS_brt_Machinegun : Actor {}
+class MS_brt_RailGun : Actor {}
+class MS_brt_Revolver : Actor {}
+class MS_brt_Rifle : Actor {}
+class MS_brt_Unmaker : Actor {}
+class MS_hacx_Cryogun : Actor {}
+class MS_hacx_Melee : Actor {}
+class MS_hacx_Nuker : Actor {}
+class MS_hacx_Pistol : Actor {}
+class MS_hacx_Reznator : Actor {}
+class MS_hacx_Stick : Actor {}
+class MS_hacx_tazer : Actor {}
+class MS_hacx_UZI : Actor {}
+class MS_hacx_Zooka : Actor {}
+class MS_meat_BFG : Actor {}
+class MS_meat_Bolter : Actor {}
+class MS_meat_ChainGun : Actor {}
+class MS_meat_Knife : Actor {}
+class MS_meat_RPG : Actor {}
+class MS_meat_SSG : Actor {}
+class MS_meat_Saw : Actor {}
+class MS_meat_Shotgun : Actor {}
+class MS_meat_TEC9 : Actor {}
+class MS_wolf_1911 : Actor {}
+class MS_wolf_Knife : Actor {}
+class MS_wolf_Axe : Actor {}
+class MS_wolf_Grenade : Actor {}
+class MS_wolf_BAR : Actor {}
+class MS_wolf_Chaingun : Actor {}
+class MS_wolf_Flame : Actor {}
+class MS_wolf_Garand : Actor {}
+class MS_wolf_KAR98 : Actor {}
+class MS_wolf_Luger : Actor {}
+class MS_wolf_MG42 : Actor {}
+class MS_wolf_MP40 : Actor {}
+class MS_wolf_PP41 : Actor {}
+class MS_wolf_STG44 : Actor {}
+class MS_wolf_Shotgun : Actor {}
+class MS_wolf_Tommy : Actor {}

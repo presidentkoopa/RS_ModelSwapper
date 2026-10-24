@@ -1,0 +1,705 @@
+Model MS_hocus_blaster
+{
+   Path "models/hocus/blaster"
+   Model 0 "blaster.md3"
+   SurfaceSkin 0 0 "blastergun.png"
+   SurfaceSkin 0 1 "BlasterPlasma.png"
+   Scale -0.95 0.95 0.95
+   Offset 0.0 -28.0 -10.0
+   
+   //Ready
+   FrameIndex JZWP A 0 0
+   
+   //Fire
+   SurfaceSkin 0 1 "BlasterPlasma_fire.png"
+   
+   FrameIndex JZWP B 0 2
+   FrameIndex JZWP C 0 1
+   FrameIndex JZWP D 0 5
+   FrameIndex JZWP E 0 4
+}
+Model MS_hocus_blaster
+{
+   Path "models/hocus/blaster"
+   Model 0 "blaster_mf.md3"
+   SurfaceSkin 0 0 "blaster_mf.png"
+   Scale -0.95 0.95 0.95
+   Offset 0.0 -28.0 -10.0
+   
+   FrameIndex JWMF A 0 2
+   FrameIndex JWMF B 0 1
+   FrameIndex JWMF C 0 5
+   FrameIndex JWMF D 0 4
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   Skin 0 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -15.0
+   
+   FrameIndex TOSS A 0 0
+   FrameIndex TOSS B 0 1
+   FrameIndex TOSS C 0 2
+   FrameIndex TOSS D 0 3
+   FrameIndex TOSS E 0 4
+   FrameIndex TOSS F 0 5
+   FrameIndex TOSS G 0 6
+   FrameIndex TOSS H 0 7
+   FrameIndex TOSS I 0 8
+   FrameIndex TOSS J 0 9
+   FrameIndex TOSS K 0 10
+   FrameIndex TOSS L 0 11
+   FrameIndex TOSS M 0 12
+   FrameIndex TOSS N 0 13
+   FrameIndex TOSS O 0 14
+   FrameIndex TOSS P 0 15
+   FrameIndex TOSS Q 0 16
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   SurfaceSkin 0 0 "no_hand.png"
+   SurfaceSkin 0 1 "hands.png"
+   SurfaceSkin 0 2 "no_hand.png"
+   SurfaceSkin 0 3 "hands.png"
+   SurfaceSkin 0 4 "no_hand.png"
+   SurfaceSkin 0 5 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -15.0
+   
+   FrameIndex TOSB A 0 0
+   FrameIndex TOSB B 0 1
+   FrameIndex TOSB C 0 2
+   FrameIndex TOSB D 0 3
+   FrameIndex TOSB E 0 4
+   FrameIndex TOSB F 0 5
+   FrameIndex TOSB G 0 6
+   FrameIndex TOSB H 0 7
+   FrameIndex TOSB I 0 8
+   FrameIndex TOSB J 0 9
+   FrameIndex TOSB K 0 10
+   FrameIndex TOSB L 0 11
+   FrameIndex TOSB M 0 12
+   FrameIndex TOSB N 0 13
+   FrameIndex TOSB O 0 14
+   FrameIndex TOSB P 0 15
+   FrameIndex TOSB Q 0 16
+}
+Model MS_hocus_cannon
+{
+   Path "models/hocus/cannon"
+   Model 0 "cannon.md3"
+   Skin 0 "cannon.png"
+   Scale -0.72 0.72 0.72
+   Offset 0.0 -24.0 -15.0
+   
+   //Ready
+   FrameIndex MISG A 0 0
+   
+   //Fire
+   FrameIndex MISG B 0 1
+   FrameIndex MISG C 0 2
+   FrameIndex MISG D 0 3
+   FrameIndex MISG E 0 4
+   FrameIndex MISG F 0 5
+}
+Model MS_hocus_cannon
+{
+   Path "models/hocus/cannon"
+   Model 0 "cannon_mf.md3"
+   Skin 0 "cannon_mf.png"
+   Scale -0.72 0.72 0.72
+   Offset 0.0 -27.0 -15.0
+   
+   FrameIndex MISG O 0 1
+   Skin 0 "cannon_mf2.png"
+   FrameIndex MISG P 0 2
+   Skin 0 "cannon_mf3.png"
+   FrameIndex MISG Q 0 3
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   Skin 0 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -15.0
+   
+   FrameIndex TOSS A 0 0
+   FrameIndex TOSS B 0 1
+   FrameIndex TOSS C 0 2
+   FrameIndex TOSS D 0 3
+   FrameIndex TOSS E 0 4
+   FrameIndex TOSS F 0 5
+   FrameIndex TOSS G 0 6
+   FrameIndex TOSS H 0 7
+   FrameIndex TOSS I 0 8
+   FrameIndex TOSS J 0 9
+   FrameIndex TOSS K 0 10
+   FrameIndex TOSS L 0 11
+   FrameIndex TOSS M 0 12
+   FrameIndex TOSS N 0 13
+   FrameIndex TOSS O 0 14
+   FrameIndex TOSS P 0 15
+   FrameIndex TOSS Q 0 16
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   SurfaceSkin 0 0 "no_hand.png"
+   SurfaceSkin 0 1 "hands.png"
+   SurfaceSkin 0 2 "no_hand.png"
+   SurfaceSkin 0 3 "hands.png"
+   SurfaceSkin 0 4 "no_hand.png"
+   SurfaceSkin 0 5 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -15.0
+   
+   FrameIndex TOSB A 0 0
+   FrameIndex TOSB B 0 1
+   FrameIndex TOSB C 0 2
+   FrameIndex TOSB D 0 3
+   FrameIndex TOSB E 0 4
+   FrameIndex TOSB F 0 5
+   FrameIndex TOSB G 0 6
+   FrameIndex TOSB H 0 7
+   FrameIndex TOSB I 0 8
+   FrameIndex TOSB J 0 9
+   FrameIndex TOSB K 0 10
+   FrameIndex TOSB L 0 11
+   FrameIndex TOSB M 0 12
+   FrameIndex TOSB N 0 13
+   FrameIndex TOSB O 0 14
+   FrameIndex TOSB P 0 15
+   FrameIndex TOSB Q 0 16
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocus.md3"
+   Skin 0 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   //Ready
+   FrameIndex LITE A 0 0
+   FrameIndex LITE Y 0 0
+   
+   //Firing end
+   FrameIndex LITE F 0 3
+   
+   NOINTERPOLATION
+   
+   FrameIndex LITE G 0 2
+   FrameIndex LITE H 0 1
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocus.md3"
+   SurfaceSkin 0 0 "hands_fire.png"
+   SurfaceSkin 0 1 "hands.png"
+   SurfaceSkin 0 2 "hands_fire.png"
+   SurfaceSkin 0 3 "hands.png"
+   SurfaceSkin 0 4 "hands_fire.png"
+   SurfaceSkin 0 5 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex LITE C 0 4
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocus.md3"
+   SurfaceSkin 0 0 "hands_fire2.png"
+   SurfaceSkin 0 1 "hands.png"
+   SurfaceSkin 0 2 "hands_fire2.png"
+   SurfaceSkin 0 3 "hands.png"
+   SurfaceSkin 0 4 "hands_fire2.png"
+   SurfaceSkin 0 5 "hands.png"
+   Model 1 "hocus_fire.md3"
+   Skin 1 "hand_flames.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   //Fire
+   FrameIndex LITE B 0 4	FrameIndex LITE B 1 4
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocuspocus.md3"
+   Skin 0 "hands_fire.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   //Firing
+   FrameIndex LITE E 0 4
+   
+   //Firing end
+   Skin 0 "hands.png"
+   
+   FrameIndex LITE J 0 2
+   FrameIndex LITE K 0 1
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocuspocus.md3"
+   Skin 0 "hands_fire2.png"
+   Model 1 "hocuspocus_fire.md3"
+   Skin 1 "hand_flames.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   //Fire
+   FrameIndex LITE D 0 4	FrameIndex LITE D 1 4
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   Skin 0 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   FrameIndex TOSS A 0 0
+   FrameIndex TOSS B 0 1
+   FrameIndex TOSS C 0 2
+   FrameIndex TOSS D 0 3
+   FrameIndex TOSS E 0 4
+   FrameIndex TOSS F 0 5
+   FrameIndex TOSS G 0 6
+   FrameIndex TOSS H 0 7
+   FrameIndex TOSS I 0 8
+   FrameIndex TOSS J 0 9
+   FrameIndex TOSS K 0 10
+   FrameIndex TOSS L 0 11
+   FrameIndex TOSS M 0 12
+   FrameIndex TOSS N 0 13
+   FrameIndex TOSS O 0 14
+   FrameIndex TOSS P 0 15
+   FrameIndex TOSS Q 0 16
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "throw.md3"
+   Skin 0 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex JTHR A 0 0
+   FrameIndex JTHR B 0 1
+   FrameIndex JTHR C 0 2
+   FrameIndex JTHR D 0 3
+   FrameIndex JTHR E 0 4
+   FrameIndex JTHR F 0 5
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocus.md3"
+   SurfaceSkin 0 0 "hands.png"
+   SurfaceSkin 0 1 "no_hand.png"
+   SurfaceSkin 0 2 "hands.png"
+   SurfaceSkin 0 3 "no_hand.png"
+   SurfaceSkin 0 4 "hands.png"
+   SurfaceSkin 0 5 "no_hand.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   //Ready
+   FrameIndex LITB A 0 0
+   FrameIndex LITB Y 0 0
+   
+   //Firing end
+   FrameIndex LITB F 0 3
+   
+   NOINTERPOLATION
+   
+   FrameIndex LITB G 0 2
+   FrameIndex LITB H 0 1
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocus.md3"
+   SurfaceSkin 0 0 "hands_fire.png"
+   SurfaceSkin 0 1 "no_hand.png"
+   SurfaceSkin 0 2 "hands_fire.png"
+   SurfaceSkin 0 3 "no_hand.png"
+   SurfaceSkin 0 4 "hands_fire.png"
+   SurfaceSkin 0 5 "no_hand.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex LITB C 0 4
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocus.md3"
+   SurfaceSkin 0 0 "hands_fire2.png"
+   SurfaceSkin 0 1 "no_hand.png"
+   SurfaceSkin 0 2 "hands_fire2.png"
+   SurfaceSkin 0 3 "no_hand.png"
+   SurfaceSkin 0 4 "hands_fire2.png"
+   SurfaceSkin 0 5 "no_hand.png"
+   Model 1 "hocus_fire.md3"
+   SurfaceSkin 1 0 "hand_flames.png"
+   SurfaceSkin 1 1 "no_hand.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   //Fire
+   FrameIndex LITB B 0 4	FrameIndex LITB B 1 4
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocus.md3"
+   SurfaceSkin 0 0 "hands_fire.png"
+   SurfaceSkin 0 1 "no_hand.png"
+   SurfaceSkin 0 2 "hands_fire.png"
+   SurfaceSkin 0 3 "no_hand.png"
+   SurfaceSkin 0 4 "hands_fire.png"
+   SurfaceSkin 0 5 "no_hand.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   //Firing
+   FrameIndex LITB E 0 4
+   
+   //Firing end
+   SurfaceSkin 0 0 "hands.png"
+   SurfaceSkin 0 2 "hands.png"
+   SurfaceSkin 0 4 "hands.png"
+   
+   FrameIndex LITB J 0 2
+   FrameIndex LITB K 0 1
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "hocus.md3"
+   SurfaceSkin 0 0 "hands_fire2.png"
+   SurfaceSkin 0 1 "no_hand.png"
+   SurfaceSkin 0 2 "hands_fire2.png"
+   SurfaceSkin 0 3 "no_hand.png"
+   SurfaceSkin 0 4 "hands_fire2.png"
+   SurfaceSkin 0 5 "no_hand.png"
+   Model 1 "hocus_fire.md3"
+   SurfaceSkin 1 0 "hand_flames.png"
+   SurfaceSkin 1 1 "no_hand.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   //Fire
+   FrameIndex LITB D 0 4	FrameIndex LITB D 1 4
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   SurfaceSkin 0 0 "no_hand.png"
+   SurfaceSkin 0 1 "hands.png"
+   SurfaceSkin 0 2 "no_hand.png"
+   SurfaceSkin 0 3 "hands.png"
+   SurfaceSkin 0 4 "no_hand.png"
+   SurfaceSkin 0 5 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   FrameIndex TOSB A 0 0
+   FrameIndex TOSB B 0 1
+   FrameIndex TOSB C 0 2
+   FrameIndex TOSB D 0 3
+   FrameIndex TOSB E 0 4
+   FrameIndex TOSB F 0 5
+   FrameIndex TOSB G 0 6
+   FrameIndex TOSB H 0 7
+   FrameIndex TOSB I 0 8
+   FrameIndex TOSB J 0 9
+   FrameIndex TOSB K 0 10
+   FrameIndex TOSB L 0 11
+   FrameIndex TOSB M 0 12
+   FrameIndex TOSB N 0 13
+   FrameIndex TOSB O 0 14
+   FrameIndex TOSB P 0 15
+   FrameIndex TOSB Q 0 16
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "throw.md3"
+   SurfaceSkin 0 0 "no_hand.png"
+   SurfaceSkin 0 1 "hands.png"
+   SurfaceSkin 0 2 "no_hand.png"
+   SurfaceSkin 0 3 "hands.png"
+   SurfaceSkin 0 4 "no_hand.png"
+   SurfaceSkin 0 5 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset -3.0 -24.0 -15.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex JTHB A 0 0
+   FrameIndex JTHB B 0 1
+   FrameIndex JTHB C 0 2
+   FrameIndex JTHB D 0 3
+   FrameIndex JTHB E 0 4
+   FrameIndex JTHB F 0 5
+}
+Model MS_hocus_rifle
+{
+   Path "models/hocus/rifle"
+   Model 0 "rifle.md3"
+   Skin 0 "rifle.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -9.0
+   
+   //Ready
+   FrameIndex ELEC A 0 0
+   FrameIndex ELEC B 0 1
+   FrameIndex ELEC C 0 2
+   FrameIndex ELEC D 0 3
+}
+Model MS_hocus_rifle
+{
+   Path "models/hocus/rifle"
+   Model 0 "rifle_mf.md3"
+   Skin 0 "rifle_mf.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -9.0
+   
+   FrameIndex ELMF A 0 1
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   Skin 0 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -15.0
+   
+   FrameIndex TOSS A 0 0
+   FrameIndex TOSS B 0 1
+   FrameIndex TOSS C 0 2
+   FrameIndex TOSS D 0 3
+   FrameIndex TOSS E 0 4
+   FrameIndex TOSS F 0 5
+   FrameIndex TOSS G 0 6
+   FrameIndex TOSS H 0 7
+   FrameIndex TOSS I 0 8
+   FrameIndex TOSS J 0 9
+   FrameIndex TOSS K 0 10
+   FrameIndex TOSS L 0 11
+   FrameIndex TOSS M 0 12
+   FrameIndex TOSS N 0 13
+   FrameIndex TOSS O 0 14
+   FrameIndex TOSS P 0 15
+   FrameIndex TOSS Q 0 16
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   SurfaceSkin 0 0 "no_hand.png"
+   SurfaceSkin 0 1 "hands.png"
+   SurfaceSkin 0 2 "no_hand.png"
+   SurfaceSkin 0 3 "hands.png"
+   SurfaceSkin 0 4 "no_hand.png"
+   SurfaceSkin 0 5 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -15.0
+   
+   FrameIndex TOSB A 0 0
+   FrameIndex TOSB B 0 1
+   FrameIndex TOSB C 0 2
+   FrameIndex TOSB D 0 3
+   FrameIndex TOSB E 0 4
+   FrameIndex TOSB F 0 5
+   FrameIndex TOSB G 0 6
+   FrameIndex TOSB H 0 7
+   FrameIndex TOSB I 0 8
+   FrameIndex TOSB J 0 9
+   FrameIndex TOSB K 0 10
+   FrameIndex TOSB L 0 11
+   FrameIndex TOSB M 0 12
+   FrameIndex TOSB N 0 13
+   FrameIndex TOSB O 0 14
+   FrameIndex TOSB P 0 15
+   FrameIndex TOSB Q 0 16
+}
+Model MS_hocus_wand
+{
+   Path "models/hocus/wand"
+   Model 0 "wand.md3"
+   Skin 0 "magicwand.png"
+   Model 1 "wand_crystal_big.md3"
+   Skin 1 "magicwand.png"
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -24.0 -10.0
+   
+   //Ready
+   FrameIndex WANX A 0 0	FrameIndex WANX A 0 0
+}
+Model MS_hocus_wand
+{
+   Path "models/hocus/wand"
+   Model 0 "wand.md3"
+   Skin 0 "magicwand.png"
+   Model 1 "wand_crystal_big.md3"
+   Skin 1 "magicwand.png"
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -24.0 -10.0
+   
+   /*
+   //Fire
+   FrameIndex WANX H 0 1	FrameIndex WANX H 1 13
+   FrameIndex WANX L 0 5	FrameIndex WANX L 1 17
+   FrameIndex WANX M 0 0	FrameIndex WANX M 1 0
+   
+   Skin 0 "wand_fire.png"
+   Skin 1 "wand_fire.png"
+   FrameIndex WANX I 0 2	FrameIndex WANX I 1 14
+   FrameIndex WANX J 0 3	FrameIndex WANX J 1 15
+   FrameIndex WANX K 0 4	FrameIndex WANX K 1 16
+   */
+   
+   //Fire
+   FrameIndex WANX H 0 0	FrameIndex WANX H 1 0
+   FrameIndex WANX L 0 0	FrameIndex WANX L 1 0
+   FrameIndex WANX M 0 0	FrameIndex WANX M 1 0
+   
+   Skin 0 "wand_fire.png"
+   Skin 1 "wand_fire.png"
+   FrameIndex WANX I 0 0	FrameIndex WANX I 1 0
+   FrameIndex WANX J 0 0	FrameIndex WANX J 1 0
+   FrameIndex WANX K 0 0	FrameIndex WANX K 1 0
+}
+Model MS_hocus_wand
+{
+   Path "models/hocus/wand"
+   Model 0 "wand.md3"
+   Skin 0 "wand_fire.png"
+   Model 1 "wand_crystal_big.md3"
+   Skin 1 "wand_fire.png"
+   //Model 2 "phoenix.md3"
+   //SurfaceSkin 2 0 "phoenix_tex1.png"
+   //SurfaceSkin 2 1 "phoenix_tex2.png"
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -24.0 -10.0
+   
+   //NOINTERPOLATION
+   
+   /*
+   //Fire
+   FrameIndex WANX B 0 6	FrameIndex WANX B 1 18		FrameIndex WANX B 2 0
+   FrameIndex WANX C 0 7	FrameIndex WANX C 1 19		FrameIndex WANX C 2 1
+   FrameIndex WANX D 0 8	FrameIndex WANX D 1 20		FrameIndex WANX D 2 2
+   FrameIndex WANX E 0 9	FrameIndex WANX E 1 21		FrameIndex WANX E 2 3
+   FrameIndex WANX F 0 10	FrameIndex WANX F 1 22		FrameIndex WANX F 2 4
+   FrameIndex WANX G 0 11	FrameIndex WANX G 1 23		FrameIndex WANX G 2 5
+   */
+   
+   //Fire
+   FrameIndex WANX B 0 0	FrameIndex WANX B 1 0
+   FrameIndex WANX C 0 0	FrameIndex WANX C 1 0
+   FrameIndex WANX D 0 0	FrameIndex WANX D 1 0
+   FrameIndex WANX E 0 0	FrameIndex WANX E 1 0
+   FrameIndex WANX F 0 0	FrameIndex WANX F 1 0
+   FrameIndex WANX G 0 0	FrameIndex WANX G 1 0
+}
+Model MS_hocus_wand
+{
+   Path "models/hocus/wand"
+   Model 0 "wand_mf2.md3"
+   Skin 0 "wand_mf.png"
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -26.0 -10.0
+   
+   //Ready
+   FrameIndex WANX N 0 0
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   Skin 0 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -15.0
+   
+   FrameIndex TOSS A 0 0
+   FrameIndex TOSS B 0 1
+   FrameIndex TOSS C 0 2
+   FrameIndex TOSS D 0 3
+   FrameIndex TOSS E 0 4
+   FrameIndex TOSS F 0 5
+   FrameIndex TOSS G 0 6
+   FrameIndex TOSS H 0 7
+   FrameIndex TOSS I 0 8
+   FrameIndex TOSS J 0 9
+   FrameIndex TOSS K 0 10
+   FrameIndex TOSS L 0 11
+   FrameIndex TOSS M 0 12
+   FrameIndex TOSS N 0 13
+   FrameIndex TOSS O 0 14
+   FrameIndex TOSS P 0 15
+   FrameIndex TOSS Q 0 16
+}
+Model MS_hocus_hocus
+{
+   Path "models/hocus/hocus"
+   Model 0 "toss.md3"
+   SurfaceSkin 0 0 "no_hand.png"
+   SurfaceSkin 0 1 "hands.png"
+   SurfaceSkin 0 2 "no_hand.png"
+   SurfaceSkin 0 3 "hands.png"
+   SurfaceSkin 0 4 "no_hand.png"
+   SurfaceSkin 0 5 "hands.png"
+   Scale -0.88 0.88 0.88
+   Offset 0.0 -24.0 -15.0
+   
+   FrameIndex TOSB A 0 0
+   FrameIndex TOSB B 0 1
+   FrameIndex TOSB C 0 2
+   FrameIndex TOSB D 0 3
+   FrameIndex TOSB E 0 4
+   FrameIndex TOSB F 0 5
+   FrameIndex TOSB G 0 6
+   FrameIndex TOSB H 0 7
+   FrameIndex TOSB I 0 8
+   FrameIndex TOSB J 0 9
+   FrameIndex TOSB K 0 10
+   FrameIndex TOSB L 0 11
+   FrameIndex TOSB M 0 12
+   FrameIndex TOSB N 0 13
+   FrameIndex TOSB O 0 14
+   FrameIndex TOSB P 0 15
+   FrameIndex TOSB Q 0 16
+}

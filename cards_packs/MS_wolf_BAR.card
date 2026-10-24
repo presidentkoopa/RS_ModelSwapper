@@ -1,0 +1,21 @@
+weapon MS_wolf_BAR
+  archetype   pistol_mag        # owner-confirmed
+  model       BAR.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 1  rest [45.12, 0.11, -2.07]  axis [0.0, 0.0, -1.0]  travel 16.99  frames 5..9
+    trigger  surf 2  rest [30.47, 0.01, -4.69]  axis [-0.968, -0.0, 0.25]  travel 0.26  frames -..-  rot 10deg axis [0.0, 1.0, -0.0]
+    part     surf 3  rest [37.48, 2.9, -0.14]  axis [-1.0, 0.0, -0.0]  travel 13.00  frames 5..9
+    part2    surf 4  rest [46.94, -0.17, 3.41]  axis [-1.0, 0.0, 0.0]  travel 4.00  frames 1..9
+    bolt     surf 5  rest [41.51, -0.07, 3.6]  axis [-0.983, 0.0, -0.181]  travel 4.02  frames 1..9  rot 10deg axis [0.0, -1.0, 0.0]
+    mag_well  [45.12, 0.11, -2.07]  mouth [45.42, -0.81, 1.23]  axis [0.0, 0.0, -1.0]  travel_clear 16.99
+    muzzle    [139.88, -0.52, 2.8]
+  grip        line [22.52, -2.06, -3.78] [20.89, 0.0, -7.39]  trigger [30.47, 0.01, -4.69]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [73.6, -0.44, 1.0]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..4
+    mag_out      5..5
+    mag_in       6..9
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6002
+  carved      mag  seat_origin [45.12, 0.11, -2.07]  file BAR_mag.md3

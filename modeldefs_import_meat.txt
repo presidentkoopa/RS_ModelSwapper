@@ -1,0 +1,202 @@
+Model MS_meat_BFG	
+{ 
+   Path "models/meat/BFG"
+   Model 0 "BFG.md3"
+   Skin 0 "BFG_9k.png"
+   Scale -1.1 1.1 1.1
+   Offset 0.0 0.0 0.0
+   ZOffset -6
+
+FrameIndex	BFGN	A	0	0
+
+FrameIndex	BFGA	F	0	10
+
+}
+Model MS_meat_BFG	
+{ 
+   Path "models/meat/BFG"
+   Model 0 "BFG.md3"
+   Skin 0 "BFG_9k2.png"
+   Scale -1.1 1.1 1.1
+   Offset 0.0 0.0 0.0
+   ZOffset -6
+
+
+FrameIndex	BFGC	A	0	1
+FrameIndex	BFGC	B	0	2
+FrameIndex	BFGC	C	0	3
+FrameIndex	BFGC	D	0	4
+
+FrameIndex	BFGA	A	0	5
+FrameIndex	BFGA	B	0	6
+FrameIndex	BFGA	C	0	7
+FrameIndex	BFGA	D	0	8
+FrameIndex	BFGA	E	0	9
+FrameIndex	BFGA	F	0	10
+
+}
+Model MS_meat_Bolter	
+{ 
+   Path "models/meat/Bolter"
+   Model 0 "Bolter.md3"
+   Skin 0 "Bolter.png"
+   Scale -1.1 1.1 1.1
+   Offset 0.0 0.0 0.0
+   ZOffset -6
+
+FrameIndex	PLSC	A	0	0
+
+FrameIndex	PLSF	A	0	1
+FrameIndex	PLSF	B	0	2
+
+
+FrameIndex	PLSC	B	0	3
+FrameIndex	PLSC	C	0	4
+FrameIndex	PLSC	D	0	5
+
+
+}
+Model MS_meat_ChainGun	
+{ 
+   Path "models/meat/ChainGun"
+   Model 0 "Chaingun.md3"
+   Skin 0 "Chaingun.png"
+   Scale -1.1 1.1 1.1
+   Offset 0.0 0.0 0.0
+   ZOffset -6
+
+FrameIndex	MGUG	A	0	0
+FrameIndex	MGUG	B	0	1
+FrameIndex	MGUG	C	0	2
+FrameIndex	MGUG	D	0	3
+
+FrameIndex	MGUF	A	0	4
+FrameIndex	MGUF	B	0	5
+
+}
+Model MS_meat_Knife	
+{ 
+   Path "models/meat/Knife"
+   Model 0 "Knife.md3"
+   Skin 0 "Knife.png"
+   Scale -1.0 1.0 1.0
+   Offset 0.0 0.0 0.0
+   ZOffset -6
+
+
+FrameIndex	FSTZ	A	0	0
+FrameIndex	FSTZ	B	0	1
+FrameIndex	FSTZ	C	0	2
+FrameIndex	FSTZ	D	0	3
+FrameIndex	FSTZ	E	0	4
+FrameIndex	FSTZ	F	0	5
+FrameIndex	FSTZ	G	0	6
+FrameIndex	FSTZ	H	0	7
+FrameIndex	FSTZ	I	0	8
+
+
+
+}
+Model MS_meat_RPG	
+{ 
+   Path "models/meat/RPG"
+   Model 0 "RPG.md3"
+   Skin 0 "RPG.png"
+   Scale -1.1 1.1 1.1
+   Offset 0.0 0.0 0.0
+   ZOffset -6
+   
+FrameIndex	RLNC	A	0	0
+FrameIndex	RLNC	B	0	1
+FrameIndex	RLNC	C	0	2
+FrameIndex	RLNC	D	0	3
+
+FrameIndex	RLNF	A	0	4
+FrameIndex	RLNF	B	0	5
+FrameIndex	RLNF	C	0	6
+
+}
+Model MS_meat_SSG	
+{ 
+   Path "models/meat/SSG"
+   Model 0 "SSG.md3"
+   Skin 0 "SSG.png"
+   Scale -1.1 1.1 1.1
+   Offset 0.0 0.0 0.0
+   ZOffset -6
+
+FrameIndex	SSGG	A	0	0
+
+FrameIndex	SSGF	A	0	1
+FrameIndex	SSGF	B	0	2
+FrameIndex	SSGF	C	0	3
+FrameIndex	SSGF	D	0	4
+FrameIndex	SSGF	E	0	5
+
+FrameIndex	SSGG	B	0	6
+FrameIndex	SSGG	C	0	7
+FrameIndex	SSGG	D	0	8
+FrameIndex	SSGG	E	0	9
+FrameIndex	SSGG	F	0	10
+FrameIndex	SSGG	G	0	11
+
+FrameIndex	SSGA	A	0	6
+FrameIndex	SSGA	B	0	6
+
+}
+Model MS_meat_Saw	
+{ 
+   Path "models/meat/Saw"
+   Model 0 "Saw.md3"
+   Skin 0 "Saw.png"
+   Scale -1.0 1.0 1.0
+   Offset 0.0 0.0 0.0
+   ZOffset -5
+
+
+FrameIndex	SAWG	C	0	0
+FrameIndex	SAWG	D	0	1
+
+
+FrameIndex	SAWF	A	0	2
+FrameIndex	SAWF	B	0	3
+FrameIndex	SAWF	C	0	4
+FrameIndex	SAWF	D	0	5
+
+}
+Model MS_meat_Shotgun	
+{ 
+   Path "models/meat/Shotgun"
+   Model 0 "Shotgun.md3"
+   Skin 0 "Shotgun.png"
+   Scale -1.1 1.1 1.1
+   Offset 0.0 0.0 0.0
+   ZOffset -6
+
+FrameIndex	SHTG	A	0	0
+FrameIndex	SHTG	B	0	1
+FrameIndex	SHTG	C	0	2
+FrameIndex	SHTG	D	0	3
+
+}
+Model MS_meat_TEC9	
+{ 
+   Path "models/meat/TEC9"
+   Model 0 "TEC9.md3"
+   Skin 0 "TEC9.png"
+   Scale -1.1 1.1 1.1
+   Offset 0.0 0.0 0.0
+   ZOffset -6
+
+FrameIndex	MGNG	A	0	0
+
+FrameIndex	MGNF	A	0	1
+FrameIndex	MGNF	B	0	2
+
+
+FrameIndex	MGNG	B	0	3
+FrameIndex	MGNG	C	0	4
+FrameIndex	MGNG	D	0	5
+
+
+}

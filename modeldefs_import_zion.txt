@@ -1,0 +1,446 @@
+Model MS_zion_Player
+{ 
+   Path "models/zion/Player" 
+   SKIN 0 "Doomslayer_rev.jpg"
+   MODEL 0 "Doomslayer.md3"
+   Scale 0.85 0.85 0.85
+   INTERPOLATEDOUBLEDFRAMES
+   IGNORETRANSLATION
+   
+   FrameIndex PLAY Z 0 0
+   
+   FrameIndex PLAY A 0 1
+   FrameIndex PLAY B 0 2
+   FrameIndex PLAY C 0 3
+   FrameIndex PLAY D 0 4
+   FrameIndex PLAY E 0 5
+   FrameIndex PLAY F 0 6
+   FrameIndex PLAY G 0 7
+   FrameIndex PLAY H 0 8
+   FrameIndex PLAY I 0 9
+   FrameIndex PLAY J 0 10
+   FrameIndex PLAY K 0 11
+   FrameIndex PLAY L 0 12
+   
+   FrameIndex PLAY M 0 14
+   FrameIndex PLAY N 0 15
+   FrameIndex PLAY O 0 16
+   FrameIndex PLAY P 0 17
+   FrameIndex PLAY Q 0 18
+   FrameIndex PLAY R 0 19
+   FrameIndex PLAY S 0 20
+   FrameIndex PLAY T 0 22
+   FrameIndex PLAY U 0 23
+   FrameIndex PLAY V 0 24
+   FrameIndex PLAY W 0 25
+   
+   FrameIndex PLAW A 0 28
+   FrameIndex PLAW B 0 29
+   FrameIndex PLAW C 0 30
+   FrameIndex PLAW D 0 31
+   FrameIndex PLAW E 0 32
+   FrameIndex PLAW F 0 33
+   FrameIndex PLAW G 0 34
+   FrameIndex PLAW H 0 35
+   FrameIndex PLAW I 0 36
+   FrameIndex PLAW J 0 37
+   FrameIndex PLAW K 0 38
+   FrameIndex PLAW L 0 39
+
+   FrameIndex PLYJ A 0 55
+   FrameIndex PLYJ B 0 56
+   FrameIndex PLYJ C 0 57
+   FrameIndex PLYJ D 0 58
+   FrameIndex PLYJ E 0 59
+   FrameIndex PLYJ F 0 60
+   FrameIndex PLYJ G 0 61
+   FrameIndex PLYJ H 0 62
+   FrameIndex PLYJ I 0 63
+   FrameIndex PLYJ J 0 64
+   FrameIndex PLYJ K 0 65
+   FrameIndex PLYJ L 0 66
+   FrameIndex PLYJ M 0 67
+   
+   FrameIndex PYJ2 A 0 41
+   FrameIndex PYJ2 B 0 42
+   FrameIndex PYJ2 C 0 43
+   FrameIndex PYJ2 D 0 44
+   FrameIndex PYJ2 E 0 45
+   FrameIndex PYJ2 F 0 46
+   FrameIndex PYJ2 G 0 47
+   FrameIndex PYJ2 H 0 48
+   FrameIndex PYJ2 I 0 49
+   FrameIndex PYJ2 J 0 50
+   FrameIndex PYJ2 K 0 51
+   FrameIndex PYJ2 L 0 52
+   FrameIndex PYJ2 M 0 53
+   
+   FrameIndex PLYJ N 0 68
+   FrameIndex PLYJ O 0 69
+   FrameIndex PLYJ P 0 70
+   FrameIndex PLYJ Q 0 71
+   FrameIndex PLYJ R 0 72
+   FrameIndex PLYJ S 0 73
+   FrameIndex PLYJ T 0 74
+   
+   FrameIndex PLYS A 0 75
+   FrameIndex PLYS B 0 76
+   FrameIndex PLYS C 0 77
+   FrameIndex PLYS D 0 78
+   FrameIndex PLYS E 0 79
+   FrameIndex PLYS F 0 80
+   FrameIndex PLYS G 0 81
+   FrameIndex PLYS H 0 82
+   FrameIndex PLYS I 0 83
+   
+   FrameIndex NADE A 0 85
+   FrameIndex NADE B 0 86
+   FrameIndex NADE C 0 87
+   FrameIndex NADE D 0 88
+   FrameIndex NADE E 0 89
+   FrameIndex NADE F 0 90
+   FrameIndex NADE G 0 91
+   FrameIndex NADE H 0 92
+   FrameIndex NADE I 0 93
+   FrameIndex NADE J 0 94
+   FrameIndex NADE K 0 95
+   FrameIndex NADE L 0 96
+   FrameIndex NADE M 0 97
+   FrameIndex NADE N 0 98
+   FrameIndex NADE O 0 99
+   FrameIndex NADE P 0 100
+   FrameIndex NADE Q 0 101
+   FrameIndex NADE R 0 102
+   FrameIndex NADE S 0 103
+   FrameIndex NADE T 0 104
+   FrameIndex NADE U 0 105
+   
+   FrameIndex PLYC A 0 27
+   FrameIndex PLYC B 0 27
+   FrameIndex PLYC C 0 27
+   FrameIndex PLYC D 0 27
+   FrameIndex PLYC E 0 27
+   FrameIndex PLYC F 0 27
+   FrameIndex PLYC G 0 27
+   FrameIndex PLYC H 0 27
+   FrameIndex PLYC I 0 27
+   FrameIndex PLYC J 0 27
+   FrameIndex PLYC K 0 27
+   FrameIndex PLYC L 0 27
+   FrameIndex PLYC M 0 27
+   FrameIndex PLYC N 0 27
+   FrameIndex PLYC O 0 27
+   FrameIndex PLYC P 0 27
+   FrameIndex PLYC Q 0 27
+   FrameIndex PLYC R 0 27
+   FrameIndex PLYC S 0 27
+   FrameIndex PLYC T 0 27
+   FrameIndex PLYC U 0 27
+   FrameIndex PLYC V 0 27
+   FrameIndex PLYC W 0 27
+   FrameIndex PLYC X 0 27
+   FrameIndex PLYC Y 0 27
+   FrameIndex PLYC Z 0 27
+   FrameIndex PLYC [ 0 27
+}
+Model MS_zion_Projectiles
+{
+	Path "models/zion/Projectiles"
+	Model 0 "tracer.md3"
+	Path "models/zion/Projectiles"
+	Skin 0 "hl2spark.png"
+	PITCHFROMMOMENTUM
+	Scale 0.25 2 2
+	FrameIndex NULL A 0 0
+}
+Model MS_zion_Projectiles
+{
+	Path "models/zion/Projectiles"
+	Model 0 "tracer.md3"
+	Path "models/zion/Projectiles"
+	Skin 0 "hl2spark.png"
+	PITCHFROMMOMENTUM
+	Scale 0.5 4 4
+	FrameIndex NULL A 0 0
+}
+Model MS_zion_Projectiles
+{
+	Path "models/zion/Projectiles"
+	Model 0 "tracer.md3"
+	PITCHFROMMOMENTUM
+	Scale 2 12 12
+	FrameIndex NULL A 0 0
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   Model 0 "Tracer.md3"
+   Scale 1.9 10 10
+   //USEACTORPITCH
+   PITCHFROMMOMENTUM
+
+   Path "models/zion/Projectiles"
+   Skin 0 "BEAMY1"
+   FrameIndex TFOG F 0 0
+   Skin 0 "BEAMY2"
+   FrameIndex TFOG G 0 0
+   Skin 0 "BEAMY3"
+   FrameIndex TFOG H 0 0
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   Model 0 "Tracer.md3"
+   Scale 1.9 6 6
+   //USEACTORPITCH
+   PITCHFROMMOMENTUM
+
+   Path "models/zion/Projectiles"
+   Skin 0 "BEAMY1"
+   FrameIndex TFOG F 0 0
+   Skin 0 "BEAMY2"
+   FrameIndex TFOG G 0 0
+   Skin 0 "BEAMY3"
+   FrameIndex TFOG H 0 0
+}
+Model MS_zion_Models
+{
+	AngleOffset 90
+	Offset 56 -53 0
+	Path "models/zion/Models"
+	Model 0 "Plane.md3"
+	Skin 0 "Boltblue.png"
+	Scale 75 75 75
+	INHERITACTORPITCH
+	INHERITACTORROLL
+	FrameIndex NULL A 0 0
+}
+Model MS_zion_Models
+{
+	AngleOffset 90
+	Offset 56 -53 0
+	Path "models/zion/Models"
+	Model 0 "Plane.md3"
+	Skin 0 "Boltblue.png"
+	Scale 75 75 75
+	INHERITACTORPITCH
+	INHERITACTORROLL
+	FrameIndex NULL A 0 0
+}
+Model MS_zion_Models
+{
+	Path "models/zion/Models"
+	SKIN 0 "hl2spark.png"
+	Path "models/zion/Models"
+	MODEL 0 "Tracer.md3"
+	Scale 0.75 5.2 5.2
+	PITCHFROMMOMENTUM
+
+	FrameIndex SPK1 A 0 0
+}
+Model MS_zion_Models
+{
+	Path "models/zion/Models"
+	SKIN 0 "hl2spark.png"
+	Path "models/zion/Models"
+	MODEL 0 "Tracer.md3"
+	Scale 0.75 5.2 5.2
+	PITCHFROMMOMENTUM
+
+	FrameIndex SPK1 A 0 0
+}
+Model MS_zion_Projectiles
+{
+	Path "models/zion/Projectiles"
+	Model 0 "tracer.md3"
+	Skin 0 "PlasmaTail4.png"
+	PITCHFROMMOMENTUM
+	Offset -18 0 0
+	Scale 0.33 1 1
+	FrameIndex NULL A 0 0
+	Skin 0 "PlasmaTail2.png"
+	Scale 0.33 2 2
+	FrameIndex NULL B 0 0
+}
+Model MS_zion_Models
+{
+	Path "models/zion/Models"
+	Model 0 "Plane.md3"
+	Skin 0 "HeatBlast.png"
+	Scale 50 18 1
+	PITCHFROMMOMENTUM
+	FrameIndex NULL A 0 0
+}
+Model MS_zion_Models
+{
+	Path "models/zion/Models"
+	Skin 0 "exp_tendrill.png"
+	Path "models/zion/Models"
+	Model 0 "tracer.md3"
+	Scale 0.25 1.5 1.5
+	PITCHFROMMOMENTUM
+	FrameIndex NULL A 0 0
+}
+Model MS_zion_Models
+{
+	Path "models/zion/Models"
+	Skin 0 "exp_tendrill.png"
+	Path "models/zion/Models"
+	Model 0 "tracer.md3"
+	Scale 0.25 1.5 1.5
+	PITCHFROMMOMENTUM
+	FrameIndex NULL A 0 0
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   SKIN 0 "tracer3.png"
+   MODEL 0 "Tracer.md3"
+   Scale 4.5 4.5 1.5
+   PITCHFROMMOMENTUM
+
+   FrameIndex TRAC A 0 0
+   Skin 0 "tracer2.png"
+   Scale 4.5 6 6
+   FrameIndex TRAC B 0 0
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   SKIN 0 "tracer3.png"
+   MODEL 0 "Tracer.md3"
+   Scale 4.5 4.5 1.5
+   PITCHFROMMOMENTUM
+
+   FrameIndex TRAC A 0 0
+   Skin 0 "tracer2.png"
+   Scale 4.5 6 6
+   FrameIndex TRAC B 0 0
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   SKIN 0 "tracer1.png"
+   MODEL 0 "Tracer.md3"
+   Scale 2 3 3
+   PITCHFROMMOMENTUM
+
+   FrameIndex TRAC A 0 0
+   Skin 0 "tracer2.png"
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   SKIN 0 "tracer1.png"
+   MODEL 0 "Tracer.md3"
+   Scale 2 3 3
+   PITCHFROMMOMENTUM
+
+   FrameIndex TRAC A 0 0
+   Skin 0 "tracer2.png"
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   SKIN 0 "tracer1.png"
+   MODEL 0 "Tracer.md3"
+   Scale 2 3 3
+   PITCHFROMMOMENTUM
+
+   FrameIndex TRAC A 0 0
+   Skin 0 "tracer2.png"
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   SKIN 0 "tracer3.png"
+   MODEL 0 "Tracer.md3"
+   Scale 4.5 4.5 1.5
+   PITCHFROMMOMENTUM
+
+   FrameIndex TRAC A 0 0
+   Skin 0 "tracer2.png"
+   Scale 4.5 6 6
+   FrameIndex TRAC B 0 0
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   SKIN 0 "tracer3.png"
+   MODEL 0 "Tracer.md3"
+   Scale 4.5 4.5 1.5
+   PITCHFROMMOMENTUM
+
+   FrameIndex TRAC A 0 0
+   Skin 0 "tracer2.png"
+   Scale 4.5 6 6
+   FrameIndex TRAC B 0 0
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   SKIN 0 "tracer3.png"
+   MODEL 0 "Tracer.md3"
+   Scale 4.5 4.5 1.5
+   PITCHFROMMOMENTUM
+
+   FrameIndex TRAC A 0 0
+   Skin 0 "tracer2.png"
+   Scale 4.5 6 6
+   FrameIndex TRAC B 0 0
+}
+Model MS_zion_Projectiles
+{
+   Path "models/zion/Projectiles"
+   SKIN 0 "tracer3.png"
+   MODEL 0 "Tracer.md3"
+   Scale 4.5 4.5 1.5
+   PITCHFROMMOMENTUM
+
+   FrameIndex TRAC A 0 0
+   Skin 0 "tracer2.png"
+   Scale 4.5 6 6
+   FrameIndex TRAC B 0 0
+}
+Model MS_zion_Models
+{
+	Path "models/zion/Models"
+	Model 0 "Plane.md3"
+	Path "models/zion/Models"
+	Scale 25 25 25
+	INHERITACTORPITCH
+	Skin 0 "HOLOA0" FrameIndex HOLO A 0 0
+	Skin 0 "HOLOB0" FrameIndex HOLO B 0 0
+	Skin 0 "HOLOC0" FrameIndex HOLO C 0 0
+	Skin 0 "HOLOD0" FrameIndex HOLO D 0 0
+	Skin 0 "HOLOE0" FrameIndex HOLO E 0 0
+	Skin 0 "HOLOF0" FrameIndex HOLO F 0 0
+	Skin 0 "HOLOG0" FrameIndex HOLO G 0 0
+	Skin 0 "HOLOH0" FrameIndex HOLO H 0 0
+}
+Model MS_zion_Infrared
+{
+   Path "models/zion/Infrared"
+   Model 0 "LAV.md3"
+   Model 1 "LAV_Rubber.md3"
+   Model 2 "LAV_Visor.md3"
+   Skin 0 "LAVisor.png"
+   Scale 0.46 0.46 0.6
+
+   zoffset 1
+
+   FrameIndex PVIS A 0 0
+   FrameIndex PVIS B 0 0
+}
+Model MS_zion_RadSuit
+{
+   Path "models/zion/RadSuit"
+   Model 0 "RadiationSuit.md3"
+   Model 1 "RadiationSuit_Boots.md3"
+   Skin 0 "RadiationSuit.png"
+   Scale 1.2 1.2 1.46
+
+   zoffset 2
+
+   FrameIndex SUIT A 0 0
+}

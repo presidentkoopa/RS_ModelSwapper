@@ -1,0 +1,1143 @@
+Model MS_voxel_Pistol
+{ 
+   Path "models/voxel/Pistol"
+   Model 0 "Pistol.md3"
+   Skin 0 "Pistol.png"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 4.0 2.0
+
+   FrameIndex PISG A 0 0   FrameIndex PISG A 1 0
+}
+Model MS_voxel_Pistol
+{ 
+   Path "models/voxel/Pistol"
+   Model 0 "Pistol.md3"
+   Skin 0 "Pistol.png"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 7.0 2.0
+
+   FrameIndex PISG B 0 1   FrameIndex PISG B 1 1
+   FrameIndex PISG C 0 2   FrameIndex PISG C 1 2
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-00.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -32.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG A 0 0
+
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-01.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -32.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG B 0 0
+
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-slideback.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -32.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG C 0 0
+
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-02.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -32.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG D 0 0
+
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-03.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -32.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG E 0 0
+
+}
+Model MS_voxel_Pistol
+{ 
+   Path "models/voxel/Pistol"
+   Model 0 "Pistol-MF.MD3"
+   Skin 0 "MF2.png"
+   Scale 1.0 1.0 1.0
+
+   zoffset -2
+
+   FrameIndex PISF A 0 2
+
+}
+Model MS_voxel_sigil
+{
+   Path "models/voxel/sigil"
+   Model 0 "sigil_handle.md3"
+   Skin 0 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  A 0 0
+}
+Model MS_voxel_sigil
+{
+   Path "models/voxel/sigil"
+   Model 0 "sigil_handle.md3"
+   Model 1 "sigil_base.md3"
+   Skin 0 "sigil.png"
+   Skin 1 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  B 0 0	FrameIndex SIGH  B 1 0
+}
+Model MS_voxel_sigil
+{
+   Path "models/voxel/sigil"
+   Model 0 "sigil_handle.md3"
+   Model 1 "sigil_base.md3"
+   Model 2 "sigil_spike_right.md3"
+   Skin 0 "sigil.png"
+   Skin 1 "sigil.png"
+   Skin 2 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  C 0 0	FrameIndex SIGH  C 1 0	FrameIndex SIGH  C 2 0
+}
+Model MS_voxel_sigil
+{
+   Path "models/voxel/sigil"
+   Model 0 "sigil_handle.md3"
+   Model 1 "sigil_base.md3"
+   Model 2 "sigil_spike_right.md3"
+   Model 3 "sigil_spike_left.md3"
+   Skin 0 "sigil.png"
+   Skin 1 "sigil.png"
+   Skin 2 "sigil.png"
+   Skin 3 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  D 0 0	FrameIndex SIGH D 1 0	FrameIndex SIGH  D 2 0	FrameIndex SIGH  D 3 0
+}
+Model MS_voxel_sigil
+{
+   Path "models/voxel/sigil"
+   Model 0 "sigil.md3"
+   Skin 0 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  E 0 0
+}
+Model MS_voxel_sigil
+{
+   Path "models/voxel/sigil"
+   Model 0 "sigil_mf.md3"
+   Skin 0 "sigil_flash1.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   ZOffset -21
+   
+   //Ready
+   FrameIndex SIGF  A 0 0
+   Skin 0 "sigil_flash2.png"
+   ZOffset -18
+   FrameIndex SIGF  B 0 0
+   Skin 0 "sigil_flash3.png"
+   ZOffset -15
+   FrameIndex SIGF  C 0 0
+}
+Model MS_voxel_BFG9000
+{
+   Path "models/voxel/BFG9000"
+   Model 0 "BFG.md3"
+   Skin 0 "BFG.png"
+   Scale 1.1 1.1 1.1
+   Offset 0.0 -7.0 10.0
+
+   NOINTERPOLATION
+
+   FrameIndex BFGG A 0 0
+   
+   Skin 0 "BFG2.png"
+
+   FrameIndex BFGG B 0 0
+   FrameIndex BFGG C 0 0
+}
+Model MS_voxel_BFG9000alt
+{
+   Path "models/voxel/BFG9000alt"
+   Model 0 "doomfuckgun-00.md3"
+   Skin 0 "doomfuckgun-00.png"
+   Scale -2.0 2.0 2.0
+   Offset 0.0 -37.0 -19.0
+
+   NOINTERPOLATION
+
+   FrameIndex BFGA A 0 0
+   
+   Model 0 "doomfuckgun-01.md3"
+   Skin 0 "doomfuckgun-01.png"
+
+   NOINTERPOLATION
+
+   FrameIndex BFGA B 0 0
+   FrameIndex BFGA C 0 0
+}
+Model MS_voxel_BFG9000D4
+{
+   Path "models/voxel/BFG9000D4"
+   Model 0 "sbfg.md3"
+   Skin 0 "sbfg.png"
+   Scale -1.7 1.7 1.7
+   Offset 0.0 -26.0 -2.0
+
+   NOINTERPOLATION
+
+   FrameIndex BFD4 A 0 0
+   
+   Skin 0 "sbfg2.png"
+   FrameIndex BFD4 B 0 0
+}
+Model MS_voxel_BFG9000
+{
+   Path "models/voxel/BFG9000"
+   Model 0 "bfgexpo.md2"
+   Skin 0 "energy_flash0.png"
+   Scale -3.0 1.0 3.0
+   Offset 0.0 -40.0 35.0
+   
+   NOINTERPOLATION
+
+   FrameIndex BFGF A 0 0
+   
+   Skin 0 "energy_flash1.png"
+   FrameIndex BFGF B 0 0
+}
+MODEL MS_voxel_Chaingun
+{
+   Path "models/voxel/Chaingun"
+   Model 0 "Chaingun.md3"
+   Skin 0 "Chaingun.png"
+
+   Scale 0.85 0.85 0.85
+   Offset 0.0 -10.0 4.0
+
+   NOINTERPOLATION
+
+   FrameIndex CHGG A 0 0
+}
+MODEL MS_voxel_Chaingun
+{
+   Path "models/voxel/Chaingun"
+   Model 0 "Chaingun2.md3"
+   Skin 0 "Chaingun.png"
+
+   Scale 0.85 0.85 0.85
+   Offset 0.0 -10.0 4.0
+
+   NOINTERPOLATION
+
+   FrameIndex CHGG B 0 0
+}
+MODEL MS_voxel_Chaingunalt
+{
+   Path "models/voxel/Chaingunalt"
+   Model 0 "doomchaingun-00.md3"
+   Skin 0 "doomchaingun-00.png"
+   Scale -1.5 1.5 1.5
+   Offset 0.0 -63.0 -18.0
+
+   NOINTERPOLATION
+   
+   FrameIndex CHGA A 0 0
+}
+MODEL MS_voxel_Chaingunalt
+{
+   Path "models/voxel/Chaingunalt"
+   Model 0 "doomchaingun-01.md3"
+   Skin 0 "doomchaingun-00.png"
+   Scale -1.5 1.5 1.5
+   Offset 0.0 -63.0 -18.0
+
+   NOINTERPOLATION
+
+   FrameIndex CHGA B 0 0
+}
+MODEL MS_voxel_ChaingunD4
+{
+   Path "models/voxel/ChaingunD4"
+   Model 0 "schaingun.md3"
+   Skin 0 "schaingun.png"
+   Scale -1.7 1.7 1.8
+   Offset 0.0 -13.0 -4.0
+   
+   FrameIndex CGD4 A 0 0
+   FrameIndex CGD4 B 0 1
+}
+MODEL MS_voxel_Chaingun
+{
+   Path "models/voxel/Chaingun"
+   Model 0 "CG_MF1.md3"
+   Skin 0 "MF0.png"
+   Model 1 "CG_MF2.md3"
+   Skin 1 "MF2.png"
+   Scale -4.0 4.0 4.0
+   Offset 0.0 -22.0 32.0
+
+   NOINTERPOLATION
+
+   FrameIndex CHGF A 0 0
+}
+MODEL MS_voxel_Chaingun
+{
+   Path "models/voxel/Chaingun"
+   Model 0 "CG_MF1.md3"
+   Skin 0 "MF1.png"
+   Model 1 "CG_MF2.md3"
+   Skin 1 "MF3.png"
+   Scale -4.0 4.0 4.0
+   Offset 0.0 -22.0 32.0
+
+   NOINTERPOLATION
+
+   FrameIndex CHGF B 0 0
+}
+Model MS_voxel_Chainsaw
+{
+   Path "models/voxel/Chainsaw"
+   Model 0 "Chainsaw.md3"
+   Skin 0 "Chainsaw.png"
+   Scale 0.8 0.8 0.8
+   Offset 0.0 5.0 2.0
+
+   FrameIndex SAWG A 0 0
+}
+Model MS_voxel_Chainsaw
+{
+   Path "models/voxel/Chainsaw"
+   Model 0 "Chainsaw2.md3"
+   Skin 0 "Chainsaw.png"
+   Scale 0.8 0.8 0.8
+   Offset 0.0 5.0 2.0
+
+   FrameIndex SAWG B 0 0
+}
+Model MS_voxel_Chainsaw
+{
+   Path "models/voxel/Chainsaw"
+   Model 0 "Chainsaw.md3"
+   Skin 0 "Chainsaw.png"
+   Scale 0.8 0.8 0.8
+   Offset 0.0 8.0 -6.0
+   PitchOffset 15
+
+   FrameIndex SAWG C 0 2
+   FrameIndex SAWG D 0 1
+}
+Model MS_voxel_Chainsawalt
+{
+   Path "models/voxel/Chainsawalt"
+   Model 0 "doomchainsaw-00.md3"
+   Skin 0 "doomchainsaw-00.png"
+   Scale -2.2 2.2 2.2
+   Offset -1.0 -62.0 -22.0
+
+   NOINTERPOLATION
+
+   FrameIndex SAWA A 0 0
+}
+Model MS_voxel_Chainsawalt
+{
+   Path "models/voxel/Chainsawalt"
+   Model 0 "doomchainsaw-01.md3"
+   Skin 0 "doomchainsaw-00.png"
+   Scale -2.2 2.2 2.2
+   Offset -1.0 -62.0 -22.0
+
+   NOINTERPOLATION
+
+   FrameIndex SAWA B 0 0
+}
+Model MS_voxel_Chainsawalt
+{
+   Path "models/voxel/Chainsawalt"
+   Model 0 "doomchainsaw-idle1.md3"
+   Skin 0 "doomchainsaw-00.png"
+   Scale -2.2 2.2 2.2
+   Offset -1.0 -60.0 -3.0
+
+   NOINTERPOLATION
+
+   FrameIndex SAWA C 0 0
+}
+Model MS_voxel_Chainsawalt
+{
+   Path "models/voxel/Chainsawalt"
+   //Model 0 "doomchainsaw-idle2.md3"
+   Model 0 "doomchainsaw-idle1.md3"
+   Skin 0 "doomchainsaw-00.png"
+   Scale -2.2 2.2 2.2
+   Offset -1.0 -60.0 -4.0
+
+   NOINTERPOLATION
+
+   FrameIndex SAWA D 0 0
+}
+Model MS_voxel_ChainsawD4
+{
+   Path "models/voxel/ChainsawD4"
+   Model 0 "ssaw.md3"
+   Skin 0 "ssaw.png"
+   Scale -1.45 1.45 1.45
+   Offset 0.0 -32.0 -12.0
+
+   NOINTERPOLATION
+
+   FrameIndex SWD4 A 0 0
+   FrameIndex SWD4 B 0 1
+}
+Model MS_voxel_ChainsawD4
+{
+   Path "models/voxel/ChainsawD4"
+   Model 0 "ssaw.md3"
+   Skin 0 "ssaw.png"
+   Scale -1.45 1.45 1.45
+   Offset 0.0 -29.0 -12.0
+   PitchOffset 15
+   
+   FrameIndex SWD4 C 0 0
+   FrameIndex SWD4 D 0 0
+}
+Model MS_voxel_Fist
+{
+   Path "models/voxel/Fist"
+   Model 0 "Fist.md3"
+   Skin 0 "Fist.png"
+   Scale 1.2 1.2 1.2
+   Offset 0.0 4.0 5.0
+
+   NOINTERPOLATION
+
+   FrameIndex PUNG A 0 16
+   FrameIndex PUNG B 0 12
+}
+Model MS_voxel_Fist
+{
+   Path "models/voxel/Fist"
+   Model 0 "Fist.md3"
+   Skin 0 "Fist.png"
+   Scale 1.2 1.2 1.2
+   Offset 0.0 -13.0 5.0
+
+   NOINTERPOLATION
+
+   FrameIndex PUNG C 0 8
+}
+Model MS_voxel_Fist
+{
+   Path "models/voxel/Fist"
+   Model 0 "Fist.md3"
+   Skin 0 "Fist.png"
+   Scale 1.2 1.2 1.2
+   Offset 0.0 -34.0 5.0
+
+   NOINTERPOLATION
+
+   FrameIndex PUNG D 0 1
+}
+Model MS_voxel_Fistalt
+{
+   Path "models/voxel/Fistalt"
+   Model 0 "doomknuckles.md3"
+   Skin 0 "doomknuckles.png"
+   Scale 1.0 -1.0 1.0
+   Offset 0.0 -27.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PUNA A 0 0
+}
+Model MS_voxel_Fistalt
+{
+   Path "models/voxel/Fistalt"
+   Model 0 "doomknuckles.md3"
+   Skin 0 "doomknuckles.png"
+   Scale 1.0 -1.0 1.0
+   Offset 0.0 -37.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PUNA B 0 0
+}
+Model MS_voxel_Fistalt
+{
+   Path "models/voxel/Fistalt"
+   Model 0 "doomknuckles.md3"
+   Skin 0 "doomknuckles.png"
+   Scale 1.0 -1.0 1.0
+   Offset 0.0 -47.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PUNA C 0 0
+}
+Model MS_voxel_Fistalt
+{
+   Path "models/voxel/Fistalt"
+   Model 0 "doomknuckles.md3"
+   Skin 0 "doomknuckles.png"
+   Scale 1.0 -1.0 1.0
+   Offset 0.0 -59.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PUNA D 0 0
+}
+Model MS_voxel_FistD4
+{
+   Path "models/voxel/FistD4"
+   Model 0 "dfist.md3"
+   Skin 0 "dfist.png"
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -28.0 -7.0
+
+   NOINTERPOLATION
+
+   FrameIndex PND4 A 0 0
+}
+Model MS_voxel_FistD4
+{
+   Path "models/voxel/FistD4"
+   Model 0 "dfist.md3"
+   Skin 0 "dfist.png"
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -39.0 -7.0
+
+   NOINTERPOLATION
+
+   FrameIndex PND4 B 0 0
+}
+Model MS_voxel_FistD4
+{
+   Path "models/voxel/FistD4"
+   Model 0 "dfist.md3"
+   Skin 0 "dfist.png"
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -52.0 -7.0
+
+   NOINTERPOLATION
+
+   FrameIndex PND4 C 0 0
+}
+Model MS_voxel_FistD4
+{
+   Path "models/voxel/FistD4"
+   Model 0 "dfist.md3"
+   Skin 0 "dfist.png"
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -65.0 -9.0
+
+   NOINTERPOLATION
+
+   FrameIndex PND4 D 0 0
+}
+Model MS_voxel_Pistol
+{ 
+   Path "models/voxel/Pistol"
+   Model 0 "Pistol.md3"
+   Skin 0 "Pistol.png"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 -1.0 2.0
+
+   FrameIndex PISG A 0 0   FrameIndex PISG A 1 0
+}
+Model MS_voxel_Pistol
+{ 
+   Path "models/voxel/Pistol"
+   Model 0 "Pistol.md3"
+   Skin 0 "Pistol.png"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 2.0 2.0
+
+   FrameIndex PISG B 0 1   FrameIndex PISG B 1 1
+   FrameIndex PISG C 0 2   FrameIndex PISG C 1 2
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-00.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -37.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG A 0 0
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-01.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -37.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG B 0 0
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-slideback.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -37.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG C 0 0
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-02.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -37.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG D 0 0
+}
+Model MS_voxel_Pistolalt
+{ 
+   Path "models/voxel/Pistolalt"
+   Model 0 "doompistol-03.md3"
+   Skin 0 "doompistol.png"
+   Scale 0.6 -0.6 0.6
+   Offset 0.0 -37.0 -16.0
+
+   NOINTERPOLATION
+
+   FrameIndex PIAG E 0 0
+}
+Model MS_voxel_PistolD4
+{ 
+   Path "models/voxel/PistolD4"
+   Model 0 "spistol.md3"
+   Skin 0 "spistol.png"
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -30.0 -5.0
+
+   FrameIndex PSD4 A 0 0
+   FrameIndex PSD4 B 0 1
+   FrameIndex PSD4 C 0 1
+}
+Model MS_voxel_Pistol
+{ 
+   Path "models/voxel/Pistol"
+   Model 0 "Pistol-MF.MD3"
+   Skin 0 "MF1.png"
+   Scale 1.5 1.2 1.5
+   Offset 0.0 -8.0 0.0
+   
+   FrameIndex PISF A 0 2
+}
+Model MS_voxel_PlasmaRifle
+{ 
+   Path "models/voxel/PlasmaRifle"
+   Model 0 "PlasmaRifle.md3"
+   Skin 0 "PlasmaRifle.png"
+   Scale 1.1 1.1 1.1
+   Offset 0.0 23.0 8.0
+	
+   NOINTERPOLATION
+
+   FrameIndex PLSG A 0 0
+   
+   Offset 0.0 28.0 0.0
+   PitchOffset 15
+
+   FrameIndex PLSG B 0 0
+}
+Model MS_voxel_PlasmaRiflealt
+{ 
+   Path "models/voxel/PlasmaRiflealt"
+   Model 0 "doomplasma-00.md3"
+   Skin 0 "doomplasma-00.png"
+   Scale -1.2 1.4 1.1
+   Offset 0.0 -50.0 -11.0
+	
+   NOINTERPOLATION
+
+   FrameIndex PLSA A 0 0
+   
+   Model 0 "doomplasma-03.md3"
+   
+   FrameIndex PLSA B 0 0
+}
+Model MS_voxel_PlasmaRifleD4
+{ 
+   Path "models/voxel/PlasmaRifleD4"
+   Model 0 "splasmaun.md3"
+   Skin 0 "splasmaun.png"
+   Scale 1.5 1.5 1.5
+   Offset 0.0 -28.0 -8.0
+
+   FrameIndex PLD4 A 0 0
+   FrameIndex PLD4 B 0 1
+}
+Model MS_voxel_PlasmaRifle
+{ 
+   Path "models/voxel/PlasmaRifle"
+   Model 0 "PlasmaRifle-FL.MD2"
+   Skin 0 "PlasmaRifle-FL.png"
+   Scale -2.0 1.0 2.0
+   Offset 3.0 -33.0 22.0
+
+   FrameIndex PLSF A 0 5
+   
+   Skin 0 "PlasmaRifle-FL1.png"
+   FrameIndex PLSF B 0 7
+}
+Model MS_voxel_RocketLauncher
+{ 
+   Path "models/voxel/RocketLauncher"
+   Model 0 "Launcher.md3"
+   Skin 0 "Launcher.png"
+   Scale 1.15 1.15 1.15
+   Offset 0.0 25.0 7.0
+   
+   FrameIndex MISG A 0 0
+
+   Offset 0.0 35.0 7.0
+   FrameIndex MISG B 0 1
+}
+Model MS_voxel_RocketLauncheralt
+{ 
+   Path "models/voxel/RocketLauncheralt"
+   Model 0 "doomrocket.md3"
+   Skin 0 "doomrocket.png"
+   Scale -1.7 1.7 1.7
+   Offset 0.0 -50.0 -12.0
+
+   NOINTERPOLATION
+
+   FrameIndex MISA A 0 0
+   
+   Offset 0.0 -35.0 -12.0
+   FrameIndex MISA B 0 0
+}
+Model MS_voxel_RocketLauncherD4
+{ 
+   Path "models/voxel/RocketLauncherD4"
+   Model 0 "srpg.md3"
+   Skin 0 "srpg.png"
+   Scale -1.85 1.6 1.85
+   Offset 0.0 -17.0 1.0
+   
+   FrameIndex RLD4 A 0 0
+   
+   Offset 0.0 -10.0 1.0
+   FrameIndex RLD4 B 0 0
+}
+Model MS_voxel_RocketLauncher
+{ 
+   Path "models/voxel/RocketLauncher"
+   Model 0 "RocketLauncher-MF.MD2"
+   Skin 0 "Hud_RL_MF0.PNG"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 -20.0 34.0
+
+   FrameIndex MISF A 0 0
+   
+   Skin 0 "Hud_RL_MF1.PNG"
+   FrameIndex MISF B 0 0
+   
+   Skin 0 "Hud_RL_MF2.PNG"
+   FrameIndex MISF C 0 0
+   
+   Skin 0 "Hud_RL_MF3.PNG"
+   FrameIndex MISF D 0 0
+}
+Model MS_voxel_SHOTGUN
+{ 
+   Path "models/voxel/SHOTGUN"
+   Model 0 "Shotgun.md3"
+   Skin 0 "Shotgun.png"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 2.0 0.0
+   ZOffset 4.0
+   
+   FrameIndex SHTG A 0 0   FrameIndex SHTG A 1 0
+   FrameIndex SHTG B 0 1   FrameIndex SHTG B 1 1
+}
+Model MS_voxel_SHOTGUN
+{ 
+   Path "models/voxel/SHOTGUN"
+   Model 0 "Shotgun2.md3"
+   Skin 0 "Shotgun.png"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 2.0 0.0
+   ZOffset 4.0
+   
+   FrameIndex SHTG C 0 3   FrameIndex SHTG C 1 3
+   FrameIndex SHTG D 0 4   FrameIndex SHTG D 1 4
+
+}
+Model MS_voxel_Shotgunalt
+{ 
+   Path "models/voxel/Shotgunalt"
+   Model 0 "doomsg-00.md3"
+   Skin 0 "doomsg-00.png"
+   Scale 1.3 -1.3 1.3
+   Offset 0.0 -48.0 -14.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHTA A 0 0
+
+}
+Model MS_voxel_Shotgunalt
+{ 
+   Path "models/voxel/Shotgunalt"
+   Model 0 "doomsg-pump1.md3"
+   Skin 0 "doomsg-00.png"
+   Scale 1.2 -1.2 1.2
+   Offset 0.0 -48.0 -14.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHTA B 0 0
+
+}
+Model MS_voxel_Shotgunalt
+{ 
+   Path "models/voxel/Shotgunalt"
+   Model 0 "doomsg-pump2.md3"
+   Skin 0 "doomsg-00.png"
+   Scale 1.2 -1.2 1.2
+   Offset 0.0 -48.0 -14.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHTA C 0 0
+
+}
+Model MS_voxel_Shotgunalt
+{ 
+   Path "models/voxel/Shotgunalt"
+   Model 0 "doomsg-pump3.md3"
+   Skin 0 "doomsg-00.png"
+   Scale 1.2 -1.2 1.2
+   Offset 0.0 -48.0 -14.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHTA D 0 0
+
+}
+Model MS_voxel_ShotgunD4
+{ 
+   Path "models/voxel/ShotgunD4"
+   Model 0 "sshot.md3"
+   Skin 0 "sshot.png"
+   Scale -1.05 1.05 1.05
+   Offset 0.0 -29.0 -6.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHD4 A 0 0
+   FrameIndex SHD4 B 0 1
+   FrameIndex SHD4 C 0 2
+   FrameIndex SHD4 D 0 3
+}
+Model MS_voxel_Shotgun
+{ 
+   Path "models/voxel/Shotgun"
+   MODEL 0 "Shotgun_MF1.md3"
+   SKIN 0 "MF1.png"
+   MODEL 1 "Shotgun_MF2.md3"
+   SKIN 1 "MF2.png"
+   
+   Scale 1.0 1.0 1.0
+   Offset 0.0 -29.0 13.0
+   
+   NOINTERPOLATION
+	
+   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+}
+Model MS_voxel_SSG
+{ 
+   Path "models/voxel/SSG"
+   Model 0 "DoubleSG.md3"
+   Skin 0 "DoubleSG.png"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 -1.0 3.0
+   
+   INTERPOLATEDOUBLEDFRAMES
+
+   FrameIndex SHT2 A 0 0
+   FrameIndex SHT2 B 0 0
+   FrameIndex SHT2 C 0 0
+   FrameIndex SHT2 D 0 0
+}
+Model MS_voxel_SSG
+{ 
+   Path "models/voxel/SSG"
+   Model 0 "DoubleSG2.md3"
+   Skin 0 "DoubleSG.png"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 -1.0 3.0
+   
+   INTERPOLATEDOUBLEDFRAMES
+
+   FrameIndex SHT2 E 0 0
+   FrameIndex SHT2 F 0 0
+   FrameIndex SHT2 H 0 0
+}
+Model MS_voxel_SSG
+{ 
+   Path "models/voxel/SSG"
+   Model 0 "DoubleSG2.md3"
+   Skin 0 "DoubleSG.png"
+   Scale 1.0 1.0 1.0
+   Offset 0.0 -1.0 3.0
+
+   INTERPOLATEDOUBLEDFRAMES
+
+   FrameIndex SHT2 G 0 0
+}
+Model MS_voxel_SSGalt
+{ 
+   Path "models/voxel/SSGalt"
+   Model 0 "doomssg-00.md3"
+   Skin 0 "doomssg-00.png"
+   Scale -1.3 1.3 1.3
+   Offset 0.0 -38.0 -30.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHT3 A 0 0
+}
+Model MS_voxel_SSGalt
+{ 
+   Path "models/voxel/SSGalt"
+   Model 0 "doomssg-reloadend.md3"
+   Skin 0 "doomssg-00.png"
+   Scale -1.3 1.3 1.3
+   Offset 0.0 -38.0 -30.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHT3 B 0 0 
+}
+Model MS_voxel_SSGalt
+{ 
+   Path "models/voxel/SSGalt"
+   Model 0 "doomssg-maximum.md3"
+   Skin 0 "doomssg-00.png"
+   Scale -1.3 1.3 1.3
+   Offset 0.0 -38.0 -30.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHT3 C 0 0
+}
+Model MS_voxel_SSGalt
+{ 
+   Path "models/voxel/SSGalt"
+   Model 0 "doomssg-01.md3"
+   Skin 0 "doomssg-00.png"
+   Scale -1.3 1.3 1.3
+   Offset 0.0 -38.0 -30.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHT3 D 0 0 
+   FrameIndex SHT3 G 0 0
+}
+Model MS_voxel_SSGalt
+{ 
+   Path "models/voxel/SSGalt"
+   Model 0 "doomssg-03.md3"
+   Skin 0 "doomssg-03.png"
+   Scale -1.3 1.3 1.3
+   Offset 0.0 -38.0 -30.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHT3 E 0 0 
+}
+Model MS_voxel_SSGalt
+{ 
+   Path "models/voxel/SSGalt"
+   Model 0 "doomssg-04.md3"
+   Skin 0 "doomssg-03.png"
+   Scale -1.3 1.3 1.3
+   Offset 0.0 -38.0 -30.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHT3 F 0 0 
+}
+Model MS_voxel_SSGalt
+{ 
+   Path "models/voxel/SSGalt"
+   Model 0 "doomssg-reloadend.md3"
+   Skin 0 "doomssg-00.png"
+   Scale -1.3 1.3 1.3
+   Offset 0.0 -38.0 -30.0
+
+   NOINTERPOLATION
+
+   FrameIndex SHT3 H 0 0 
+}
+Model MS_voxel_SSGD4
+{ 
+   Path "models/voxel/SSGD4"
+   Model 0 "sssg.md3"
+   Skin 0 "sssg.png"
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -4.0
+   
+   INTERPOLATEDOUBLEDFRAMES
+
+   FrameIndex SGD4 A 0 0
+   FrameIndex SGD4 B 0 1
+   FrameIndex SGD4 C 0 2
+   FrameIndex SGD4 D 0 3
+   FrameIndex SGD4 H 0 7
+}
+Model MS_voxel_SSGD4
+{ 
+   Path "models/voxel/SSGD4"
+   Model 0 "sssg.md3"
+   Skin 0 "sssg.png"
+   Model 1 "sssg_shell.md3"
+   Skin 1 "sshell.png"
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -4.0
+   
+   INTERPOLATEDOUBLEDFRAMES
+
+   FrameIndex SGD4 E 0 4	FrameIndex SGD4 E 1 4
+   FrameIndex SGD4 F 0 5	FrameIndex SGD4 F 1 5
+   FrameIndex SGD4 G 0 6	FrameIndex SGD4 G 1 6
+}
+Model MS_voxel_SSG
+{ 
+   Path "models/voxel/SSG"
+   Model 0 "hud_ssg_mf1.md3"
+   SKIN 0 "MF1.png"
+   Model 1 "hud_ssg_mf2.md3"
+   SKIN 1 "MF2.png"
+   Scale 1.5 1.5 1.5
+   Offset 0.0 -23.0 11.0
+   
+   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+}
+Model MS_voxel_SSG
+{ 
+   Path "models/voxel/SSG"
+   Model 0 "Hud_ssg_MF1.md3"
+   SKIN 0 "MF1.png"
+   Model 1 "Hud_ssg_MF2.md3"
+   SKIN 1 "MF2.png"
+   Scale 1.5 1.5 1.5
+   Offset 0.0 -23.0 11.0
+
+   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+}
+Model MS_voxel_Shotgun
+{ 
+   Path "models/voxel/Shotgun"
+   MODEL 0 "Shotgun_MF1.md3"
+   SKIN 0 "MF1.png"
+   MODEL 1 "Shotgun_MF2.md3"
+   SKIN 1 "MF2.png"  
+   Scale 1.0 1.0 1.0
+   Offset 0.0 -23.0 11.0
+   
+   NOINTERPOLATION
+	
+   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+}
+Model MS_voxel_Shotgun
+{ 
+   Path "models/voxel/Shotgun"
+   MODEL 0 "Shotgun_MF1.md3"
+   SKIN 0 "MF1.png"
+   MODEL 1 "Shotgun_MF2.md3"
+   SKIN 1 "MF2.png"
+   Scale 1.0 1.0 1.0
+   Offset 2.0 -23.0 11.0
+   
+   NOINTERPOLATION
+
+   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+}
+Model MS_voxel_MODELS
+{
+	Path "models/voxel/MODELS"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer1.png"
+	Scale 1.0 1.0 1.0
+	Offset 35.0 0.0 1.0
+	PITCHFROMMOMENTUM
+	
+	FrameIndex PUFF A 0 0
+}
+Model MS_voxel_MODELS
+{
+	Path "models/voxel/MODELS"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer1.png"
+	Scale 0.9 0.9 0.9
+	PITCHFROMMOMENTUM
+	
+	FrameIndex PUFF A 0 0
+}

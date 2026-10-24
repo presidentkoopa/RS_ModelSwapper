@@ -1,0 +1,4392 @@
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+	Scale 1.2 0.7 1.0
+	Offset 35.0 0.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex TRAC B 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+   Scale 0.7 0.7 1.0
+   Offset 35.0 0.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex TRAC B 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+	Scale 1.2 0.7 1.0
+	Offset 35.0 0.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex TRAC C 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+	Scale 1.2 0.7 1.0
+	Offset 35.0 10.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex TRAC C 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+   Scale 0.7 0.7 1.0
+   Offset 35.0 0.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex TRAC C 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+   Scale 0.7 0.7 1.0
+   Offset 35.0 12.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex TRAC C 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+	Scale 1.2 0.7 1.0
+	Offset 35.0 0.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex TRAC C 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+	Scale 1.2 0.7 1.0
+	Offset 35.0 0.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex PUFF A 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+   Scale 0.7 0.7 1.0
+   Offset 35.0 0.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex PUFF A 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+	Scale 1.2 0.7 1.0
+	Offset 35.0 16.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex PUFF A 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "tracer.md3"
+   Skin 0 "tracer.png"
+   
+   Scale 0.7 0.7 1.0
+   Offset 35.0 16.0 5.0
+   
+   PITCHFROMMOMENTUM
+   
+   //Ready
+   FrameIndex PUFF A 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_Models
+{
+   Path "models/cola/Models"
+   Model 0 "puff.md3"
+   Skin 0 "puff_tex.png"
+   
+   Scale 3.0 3.0 3.0
+   Offset 0.0 0.0 5.0
+   
+   //Ready
+   FrameIndex SLSS A 0 0
+   FrameIndex SLSS B 0 0
+   FrameIndex SLSS C 0 0
+   FrameIndex SLSS D 0 0
+   FrameIndex SLSS E 0 0
+   FrameIndex SLSS F 0 0
+}
+Model MS_cola_cards
+{
+   Path "models/cola/cards"
+   Model 0 "card_deck.md3"
+   SurfaceSkin 0 0 "card_deck.png"
+   SurfaceSkin 0 1 "card_deck.png"
+   SurfaceSkin 0 2 "card_deck.png"
+   SurfaceSkin 0 3 "arms.png"
+   
+   Scale -0.75 0.75 0.75
+   Offset -6.0 -22.0 -12.0
+   
+   FrameIndex VDCK A 0 0
+   FrameIndex VDCK B 0 1
+   FrameIndex VDCK C 0 2
+   FrameIndex VDCK D 0 3
+   FrameIndex VDCK E 0 4
+   
+   //Empty hand
+   FrameIndex VDCE A 0 8
+   FrameIndex VDCE B 0 9
+   FrameIndex VDCE C 0 10
+}
+Model MS_cola_cards
+{
+   Path "models/cola/cards"
+   Model 0 "card_deck.md3"
+   SurfaceSkin 0 0 "card_deck.png"
+   SurfaceSkin 0 1 "card_deck.png"
+   SurfaceSkin 0 2 "card_deck.png"
+   SurfaceSkin 0 3 "arms.png"
+   
+   Scale -0.75 0.75 0.75
+   Offset -6.0 -22.0 -12.0
+   
+   FrameIndex VDCK A 0 0
+   FrameIndex VDCK B 0 1
+   FrameIndex VDCK C 0 2
+   FrameIndex VDCK D 0 3
+   FrameIndex VDCK E 0 4
+   FrameIndex VDCK F 0 5
+   FrameIndex VDCX A 0 6
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_cards
+{
+   Path "models/cola/cards"
+   Model 0 "card_deck.md3"
+   Skin 0 "no_arms.png"
+   
+   Offset 0.0 0.0 0.0
+   
+   FrameIndex WDWN A 0 0
+   FrameIndex WDWN B 0 0
+   FrameIndex WDWN C 0 0
+   FrameIndex WDWN D 0 0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_cards
+{
+   Path "models/cola/cards"
+   Model 0 "card_deck.md3"
+   Skin 0 "no_arms.png"
+   
+   Offset 0.0 0.0 0.0
+   
+   FrameIndex WDWN A 0 0
+   FrameIndex WDWN B 0 0
+   FrameIndex WDWN C 0 0
+   FrameIndex WDWN D 0 0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -3.0 -6.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 0.0 -9.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 3.0 -12.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 6.0 -15.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 9.0 -18.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "cylinder.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -11.0
+   
+   //Ready
+   FrameIndex WDWN A 0 0	FrameIndex WDWN A 1 0
+   Offset 6.0 -20.0 -14.0
+   FrameIndex WDWN B 0 0	FrameIndex WDWN B 1 0
+   Offset 9.0 -16.0 -17.0
+   FrameIndex WDWN C 0 0	FrameIndex WDWN C 1 0
+   Offset 12.0 -12.0 -20.0
+   FrameIndex WDWN D 0 0	FrameIndex WDWN D 1 0
+   Offset 15.0 -8.0 -23.0
+   FrameIndex WDWN E 0 0	FrameIndex WDWN E 1 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "cylinder.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -11.0
+   
+   //Ready
+   FrameIndex WDWN A 0 0	FrameIndex WDWN A 1 0
+   Offset 6.0 -20.0 -14.0
+   FrameIndex WDWN B 0 0	FrameIndex WDWN B 1 0
+   Offset 9.0 -16.0 -17.0
+   FrameIndex WDWN C 0 0	FrameIndex WDWN C 1 0
+   Offset 12.0 -12.0 -20.0
+   FrameIndex WDWN D 0 0	FrameIndex WDWN D 1 0
+   Offset 15.0 -8.0 -23.0
+   FrameIndex WDWN E 0 0	FrameIndex WDWN E 1 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_toothpastelaser
+{
+   Path "models/cola/toothpastelaser"
+   Model 0 "particlegun.md3"
+   SurfaceSkin 0 0 "particlegun_ammo.png"
+   SurfaceSkin 0 1 "particlegun.jpg"
+   SurfaceSkin 0 2 "particlegun.jpg"
+   SurfaceSkin 0 3 "particlegun.jpg"
+   Model 1 "particlegun_display.md3"
+   Skin 1 "particlegun_display1.png"
+   
+   Scale -1.2 1.2 1.2
+   Offset 3.0 -25.0 -8.0
+   
+   //Ready
+   FrameIndex WDWN A 0 0	FrameIndex WDWN A 1 0
+   Offset 6.0 -20.0 -11.0
+   FrameIndex WDWN B 0 0	FrameIndex WDWN B 1 0
+   Offset 9.0 -15.0 -14.0
+   FrameIndex WDWN C 0 0	FrameIndex WDWN C 1 0
+   Offset 12.0 -10.0 -17.0
+   FrameIndex WDWN D 0 0	FrameIndex WDWN D 1 0
+   Offset 15.0 -5.0 -20.0
+   FrameIndex WDWN E 0 0	FrameIndex WDWN E 1 0
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   //Ready
+   FrameIndex SWRL A 0 0	FrameIndex SWRL A 1 0
+   FrameIndex SWRL B 0 0	FrameIndex SWRL B 1 4
+   FrameIndex SWRL C 0 0	FrameIndex SWRL C 1 9
+   FrameIndex SWRL D 0 0	FrameIndex SWRL D 1 14
+   FrameIndex SWRL E 0 0	FrameIndex SWRL E 1 19
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   //Ready
+   FrameIndex RCKL A 0 0
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   FrameIndex SWF1 A 0 1	FrameIndex SWF1 A 1 1
+   FrameIndex SWF1 B 0 2	FrameIndex SWF1 B 1 2
+   FrameIndex SWF1 C 0 3	FrameIndex SWF1 C 1 3
+   FrameIndex SWF1 D 0 4	FrameIndex SWF1 D 1 4
+   FrameIndex SWF1 E 0 5	FrameIndex SWF1 E 1 5
+   FrameIndex SWF1 F 0 6	FrameIndex SWF1 F 1 6
+   FrameIndex SWF1 G 0 7	FrameIndex SWF1 G 1 7
+   FrameIndex SWF1 H 0 8	FrameIndex SWF1 H 1 8
+   FrameIndex SWF1 I 0 9	FrameIndex SWF1 I 1 9
+   FrameIndex SWF1 J 0 10	FrameIndex SWF1 J 1 10
+   FrameIndex SWF1 K 0 11	FrameIndex SWF1 K 1 11
+   FrameIndex SWF1 L 0 12	FrameIndex SWF1 L 1 12
+   FrameIndex SWF1 M 0 13	FrameIndex SWF1 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire2.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   FrameIndex SWF2 A 0 1	FrameIndex SWF2 A 1 1
+   FrameIndex SWF2 B 0 2	FrameIndex SWF2 B 1 2
+   FrameIndex SWF2 C 0 3	FrameIndex SWF2 C 1 3
+   FrameIndex SWF2 D 0 4	FrameIndex SWF2 D 1 4
+   FrameIndex SWF2 E 0 5	FrameIndex SWF2 E 1 5
+   FrameIndex SWF2 F 0 6	FrameIndex SWF2 F 1 6
+   FrameIndex SWF2 G 0 7	FrameIndex SWF2 G 1 7
+   FrameIndex SWF2 H 0 8	FrameIndex SWF2 H 1 8
+   FrameIndex SWF2 I 0 9	FrameIndex SWF2 I 1 9
+   FrameIndex SWF2 J 0 10	FrameIndex SWF2 J 1 10
+   FrameIndex SWF2 K 0 11	FrameIndex SWF2 K 1 11
+   FrameIndex SWF2 L 0 12	FrameIndex SWF2 L 1 12
+   FrameIndex SWF2 M 0 13	FrameIndex SWF2 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire3.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   FrameIndex SWF3 A 0 1	FrameIndex SWF3 A 1 1
+   FrameIndex SWF3 B 0 2	FrameIndex SWF3 B 1 2
+   FrameIndex SWF3 C 0 3	FrameIndex SWF3 C 1 3
+   FrameIndex SWF3 D 0 4	FrameIndex SWF3 D 1 4
+   FrameIndex SWF3 E 0 5	FrameIndex SWF3 E 1 5
+   FrameIndex SWF3 F 0 6	FrameIndex SWF3 F 1 6
+   FrameIndex SWF3 G 0 7	FrameIndex SWF3 G 1 7
+   FrameIndex SWF3 H 0 8	FrameIndex SWF3 H 1 8
+   FrameIndex SWF3 I 0 9	FrameIndex SWF3 I 1 9
+   FrameIndex SWF3 J 0 10	FrameIndex SWF3 J 1 10
+   FrameIndex SWF3 K 0 11	FrameIndex SWF3 K 1 11
+   FrameIndex SWF3 L 0 12	FrameIndex SWF3 L 1 12
+   FrameIndex SWF3 M 0 13	FrameIndex SWF3 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire4.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   FrameIndex SWF4 A 0 1	FrameIndex SWF4 A 1 1
+   FrameIndex SWF4 B 0 2	FrameIndex SWF4 B 1 2
+   FrameIndex SWF4 C 0 3	FrameIndex SWF4 C 1 3
+   FrameIndex SWF4 D 0 4	FrameIndex SWF4 D 1 4
+   FrameIndex SWF4 E 0 5	FrameIndex SWF4 E 1 5
+   FrameIndex SWF4 F 0 6	FrameIndex SWF4 F 1 6
+   FrameIndex SWF4 G 0 7	FrameIndex SWF4 G 1 7
+   FrameIndex SWF4 H 0 8	FrameIndex SWF4 H 1 8
+   FrameIndex SWF4 I 0 9	FrameIndex SWF4 I 1 9
+   FrameIndex SWF4 J 0 10	FrameIndex SWF4 J 1 10
+   FrameIndex SWF4 K 0 11	FrameIndex SWF4 K 1 11
+   FrameIndex SWF4 L 0 12	FrameIndex SWF4 L 1 12
+   FrameIndex SWF4 M 0 13	FrameIndex SWF4 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire5.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   FrameIndex SWF5 A 0 1	FrameIndex SWF5 A 1 1
+   FrameIndex SWF5 B 0 2	FrameIndex SWF5 B 1 2
+   FrameIndex SWF5 C 0 3	FrameIndex SWF5 C 1 3
+   FrameIndex SWF5 D 0 4	FrameIndex SWF5 D 1 4
+   FrameIndex SWF5 E 0 5	FrameIndex SWF5 E 1 5
+   FrameIndex SWF5 F 0 6	FrameIndex SWF5 F 1 6
+   FrameIndex SWF5 G 0 7	FrameIndex SWF5 G 1 7
+   FrameIndex SWF5 H 0 8	FrameIndex SWF5 H 1 8
+   FrameIndex SWF5 I 0 9	FrameIndex SWF5 I 1 9
+   FrameIndex SWF5 J 0 10	FrameIndex SWF5 J 1 10
+   FrameIndex SWF5 K 0 11	FrameIndex SWF5 K 1 11
+   FrameIndex SWF5 L 0 12	FrameIndex SWF5 L 1 12
+   FrameIndex SWF5 M 0 13	FrameIndex SWF5 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   FrameIndex RCKL B 0 14	FrameIndex RCKL B 1 0
+   FrameIndex RCKL C 0 15	FrameIndex RCKL C 1 1
+   FrameIndex RCKL D 0 16	FrameIndex RCKL D 1 2
+   FrameIndex RCKL E 0 17	FrameIndex RCKL E 1 3
+   FrameIndex RCKL F 0 18	FrameIndex RCKL F 1 4
+   FrameIndex RCKL G 0 19	FrameIndex RCKL G 1 5
+   FrameIndex RCKL H 0 20	FrameIndex RCKL H 1 6
+   FrameIndex RCKL I 0 21	FrameIndex RCKL I 1 7
+   FrameIndex RCKL J 0 22	FrameIndex RCKL J 1 8
+   FrameIndex RCKL K 0 23	FrameIndex RCKL K 1 9
+   FrameIndex RCKL L 0 24	FrameIndex RCKL L 1 10
+   FrameIndex RCKL M 0 25	FrameIndex RCKL M 1 11
+   FrameIndex RCKL N 0 26	FrameIndex RCKL N 1 12
+   FrameIndex RCKL O 0 27	FrameIndex RCKL O 1 13
+   FrameIndex RCKL P 0 28	FrameIndex RCKL P 1 14
+   FrameIndex RCKL Q 0 28	FrameIndex RCKL Q 1 15
+   FrameIndex RCKL R 0 28	FrameIndex RCKL R 1 16
+   FrameIndex RCKL S 0 28	FrameIndex RCKL S 1 17
+   FrameIndex RCKL T 0 28	FrameIndex RCKL T 1 18
+   FrameIndex RCKL U 0 28	FrameIndex RCKL U 1 19
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_full_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   FrameIndex SWRR A 0 39	FrameIndex SWRR A 1 0
+   FrameIndex SWRR B 0 40	FrameIndex SWRR B 1 1
+   FrameIndex SWRR C 0 41	FrameIndex SWRR C 1 2
+   FrameIndex SWRR D 0 42	FrameIndex SWRR D 1 3
+   FrameIndex SWRR E 0 43	FrameIndex SWRR E 1 4
+   FrameIndex SWRR F 0 44	FrameIndex SWRR F 1 5
+   
+   FrameIndex SWRR G 0 30	FrameIndex SWRR G 1 5
+   FrameIndex SWRR H 0 31	FrameIndex SWRR H 1 5
+   FrameIndex SWRR I 0 32	FrameIndex SWRR I 1 5
+   FrameIndex SWRR J 0 33	FrameIndex SWRR J 1 5
+   FrameIndex SWRR K 0 34	FrameIndex SWRR K 1 5
+   FrameIndex SWRR L 0 35	FrameIndex SWRR L 1 5
+   FrameIndex SWRR M 0 36	FrameIndex SWRR M 1 5
+   FrameIndex SWRR N 0 37	FrameIndex SWRR N 1 5
+   FrameIndex SWRR O 0 38	FrameIndex SWRR O 1 5
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   //Full ammo reload
+   FrameIndex SWR1 A 0 30	FrameIndex SWR1 A 1 4
+   FrameIndex SWR1 B 0 31	FrameIndex SWR1 B 1 4
+   FrameIndex SWR1 C 0 32	FrameIndex SWR1 C 1 4
+   FrameIndex SWR1 D 0 33	FrameIndex SWR1 D 1 4
+   FrameIndex SWR1 E 0 34	FrameIndex SWR1 E 1 4
+   FrameIndex SWR1 F 0 35	FrameIndex SWR1 F 1 4
+   FrameIndex SWR1 G 0 36	FrameIndex SWR1 G 1 4
+   FrameIndex SWR1 H 0 37	FrameIndex SWR1 H 1 4
+   FrameIndex SWR1 I 0 38	FrameIndex SWR1 I 1 4
+   
+   //4 ammo reload
+   FrameIndex SWR2 A 0 30	FrameIndex SWR2 A 1 9
+   FrameIndex SWR2 B 0 31	FrameIndex SWR2 B 1 9
+   FrameIndex SWR2 C 0 32	FrameIndex SWR2 C 1 9
+   FrameIndex SWR2 D 0 33	FrameIndex SWR2 D 1 9
+   FrameIndex SWR2 E 0 34	FrameIndex SWR2 E 1 9
+   FrameIndex SWR2 F 0 35	FrameIndex SWR2 F 1 9
+   FrameIndex SWR2 G 0 36	FrameIndex SWR2 G 1 9
+   FrameIndex SWR2 H 0 37	FrameIndex SWR2 H 1 9
+   FrameIndex SWR2 I 0 38	FrameIndex SWR2 I 1 9
+   
+   //3 ammo reload
+   FrameIndex SWR3 A 0 30	FrameIndex SWR3 A 1 14
+   FrameIndex SWR3 B 0 31	FrameIndex SWR3 B 1 14
+   FrameIndex SWR3 C 0 32	FrameIndex SWR3 C 1 14
+   FrameIndex SWR3 D 0 33	FrameIndex SWR3 D 1 14
+   FrameIndex SWR3 E 0 34	FrameIndex SWR3 E 1 14
+   FrameIndex SWR3 F 0 35	FrameIndex SWR3 F 1 14
+   FrameIndex SWR3 G 0 36	FrameIndex SWR3 G 1 14
+   FrameIndex SWR3 H 0 37	FrameIndex SWR3 H 1 14
+   FrameIndex SWR3 I 0 38	FrameIndex SWR3 I 1 14
+   
+   //2 ammo reload
+   FrameIndex SWR4 A 0 30	FrameIndex SWR4 A 1 19
+   FrameIndex SWR4 B 0 31	FrameIndex SWR4 B 1 19
+   FrameIndex SWR4 C 0 32	FrameIndex SWR4 C 1 19
+   FrameIndex SWR4 D 0 33	FrameIndex SWR4 D 1 19
+   FrameIndex SWR4 E 0 34	FrameIndex SWR4 E 1 19
+   FrameIndex SWR4 F 0 35	FrameIndex SWR4 F 1 19
+   FrameIndex SWR4 G 0 36	FrameIndex SWR4 G 1 19
+   FrameIndex SWR4 H 0 37	FrameIndex SWR4 H 1 19
+   FrameIndex SWR4 I 0 38	FrameIndex SWR4 I 1 19
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sw_mf.md3"
+   Skin 0 "rocket_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -6.0 -3.0
+   
+   FrameIndex SWMF A 0 0
+   Skin 0 "rocket_mf2.png"
+   FrameIndex SWMF B 0 1
+   Skin 0 "rocket_mf3.png"
+   FrameIndex SWMF C 0 2
+   Skin 0 "rocket_mf4.png"
+   FrameIndex SWMF D 0 3
+   Skin 0 "rocket_mf5.png"
+   FrameIndex SWMF E 0 4
+   Skin 0 "rocket_mf6.png"
+   FrameIndex SWMF F 0 5
+   Skin 0 "rocket_mf7.png"
+   FrameIndex SWMF G 0 6
+   Skin 0 "rocket_mf8.png"
+   FrameIndex SWMF H 0 7
+   Skin 0 "rocket_mf9.png"
+   FrameIndex SWMF I 0 8
+   Skin 0 "rocket_mf10.png"
+   FrameIndex SWMF J 0 9
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -8.0
+   
+   //Ready
+   FrameIndex PDRV A 0 0	FrameIndex PDRV A 1 0
+   
+   //Reload
+   FrameIndex PDRV B 0 1	FrameIndex PDRV B 1 1
+   FrameIndex PDRV C 0 2	FrameIndex PDRV C 1 2
+   FrameIndex PDRV D 0 3	FrameIndex PDRV D 1 3
+   FrameIndex PDRV E 0 4	FrameIndex PDRV E 1 4
+   FrameIndex PDRV F 0 5	FrameIndex PDRV F 1 5
+   FrameIndex PDRV L 0 11	FrameIndex PDRV L 1 11
+   FrameIndex PDRV M 0 12	FrameIndex PDRV M 1 12
+   FrameIndex PDRV N 0 13	FrameIndex PDRV N 1 13
+   FrameIndex PDRV O 0 14	FrameIndex PDRV O 1 14
+   FrameIndex PDRV P 0 15	FrameIndex PDRV P 1 15
+   FrameIndex PDRV Q 0 16	FrameIndex PDRV Q 1 16
+   FrameIndex PDRV R 0 17	FrameIndex PDRV R 1 17
+   FrameIndex PDRV S 0 18	FrameIndex PDRV S 1 18
+   FrameIndex PDRV T 0 19	FrameIndex PDRV T 1 19
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -8.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex PDRV F 0 5	FrameIndex PDRV F 1 5
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -5.0
+   
+   //Reload
+   FrameIndex PDRV G 0 6
+   FrameIndex PDRV H 0 7
+   FrameIndex PDRV I 0 8
+   FrameIndex PDRV J 0 9
+   FrameIndex PDRV K 0 10
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -5.0
+   
+   //Ready
+   FrameIndex PDRV A 0 0	FrameIndex PDRV A 1 0
+   
+   //Reload
+   FrameIndex PDRV B 0 1	FrameIndex PDRV B 1 1
+   FrameIndex PDRV C 0 2	FrameIndex PDRV C 1 2
+   FrameIndex PDRV D 0 3	FrameIndex PDRV D 1 3
+   FrameIndex PDRV E 0 4	FrameIndex PDRV E 1 4
+   FrameIndex PDRV L 0 11	FrameIndex PDRV L 1 11
+   FrameIndex PDRV M 0 12	FrameIndex PDRV M 1 12
+   FrameIndex PDRV N 0 13	FrameIndex PDRV N 1 13
+   FrameIndex PDRV O 0 14	FrameIndex PDRV O 1 14
+   FrameIndex PDRV P 0 15	FrameIndex PDRV P 1 15
+   FrameIndex PDRV Q 0 16	FrameIndex PDRV Q 1 16
+   FrameIndex PDRV R 0 17	FrameIndex PDRV R 1 17
+   FrameIndex PDRV S 0 18	FrameIndex PDRV S 1 18
+   FrameIndex PDRV T 0 19	FrameIndex PDRV T 1 19
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -8.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex PDRV F 0 5	FrameIndex PDRV F 1 5
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -5.0
+   
+   //Reload
+   FrameIndex PDRV G 0 6
+   FrameIndex PDRV H 0 7
+   FrameIndex PDRV I 0 8
+   FrameIndex PDRV J 0 9
+   FrameIndex PDRV K 0 10
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat1.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 0.0 -28.0 -7.0
+   
+   //Orange laser
+   FrameIndex ZPL0 A 0 0
+   FrameIndex ZPL0 B 0 1
+   
+   //Purple laser
+   SurfaceSkin 0 2 "heat2.png"
+   FrameIndex ZPL1 A 0 0
+   FrameIndex ZPL1 B 0 1
+   
+   //Blue laser
+   SurfaceSkin 0 2 "heat3.png"
+   FrameIndex ZPL2 A 0 0
+   FrameIndex ZPL2 B 0 1
+   
+   //Green laser
+   SurfaceSkin 0 2 "heat4.png"
+   FrameIndex ZPL3 A 0 0
+   FrameIndex ZPL3 B 0 1
+   
+   //display off
+   SurfaceSkin 0 2 "heat.png"
+   FrameIndex ZPLV A 0 0
+   
+   //Red display warning
+   SurfaceSkin 0 2 "heat5.png"
+   FrameIndex ZPLV B 0 0
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasma_mf.md3"
+   SurfaceSkin 0 0 "plasma_mf.png"
+   SurfaceSkin 0 1 "plasma2_mf.png"
+   
+   Scale -2.0 2.0 2.0
+   Offset 0.0 -15.0 -12.0
+   
+   //Orange laser
+   FrameIndex PMF1 A 0 1
+   
+   //Purple laser
+   SurfaceSkin 0 0 "plasma_mf2.png"
+   SurfaceSkin 0 1 "plasma2_mf2.png"
+   FrameIndex PMF2 A 0 1
+   
+   //Blue laser
+   SurfaceSkin 0 0 "plasma_mf3.png"
+   SurfaceSkin 0 1 "plasma2_mf3.png"
+   FrameIndex PMF3 A 0 1
+   
+   //Green laser
+   SurfaceSkin 0 0 "plasma_mf4.png"
+   SurfaceSkin 0 1 "plasma2_mf4.png"
+   FrameIndex PMF4 A 0 1
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat1.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 0.0 -28.0 -7.0
+   
+   //Red laser
+   SurfaceSkin 0 2 "heat5.png"
+   FrameIndex ZPLF A 0 0
+   FrameIndex ZPLF B 0 0
+   
+   //display off
+   SurfaceSkin 0 2 "heat.png"
+   FrameIndex ZPLV A 0 0
+   
+   //Red display warning
+   SurfaceSkin 0 2 "heat5.png"
+   FrameIndex ZPLV B 0 0
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasma_mf.md3"
+   SurfaceSkin 0 0 "plasma_mf5.png"
+   SurfaceSkin 0 1 "plasma2_mf5.png"
+   
+   Scale -2.0 2.0 2.0
+   Offset 0.0 -15.0 -12.0
+   
+   FrameIndex ZPMF A 0 0
+}
+Model MS_cola_cards
+{
+   Path "models/cola/cards"
+   Model 0 "card_deck.md3"
+   SurfaceSkin 0 0 "card_deck.png"
+   SurfaceSkin 0 1 "card_deck.png"
+   SurfaceSkin 0 2 "card_deck.png"
+   SurfaceSkin 0 3 "arms.png"
+   
+   Scale -0.75 0.75 0.75
+   Offset -6.0 -27.0 -9.0
+   
+   FrameIndex VDCK A 0 0
+   FrameIndex VDCK B 0 1
+   FrameIndex VDCK C 0 2
+   FrameIndex VDCK D 0 3
+   FrameIndex VDCK E 0 4
+   
+   //Empty hand
+   FrameIndex VDCE A 0 8
+   FrameIndex VDCE B 0 9
+   FrameIndex VDCE C 0 10
+}
+Model MS_cola_cards
+{
+   Path "models/cola/cards"
+   Model 0 "card_deck.md3"
+   SurfaceSkin 0 0 "card_deck.png"
+   SurfaceSkin 0 1 "card_deck.png"
+   SurfaceSkin 0 2 "card_deck.png"
+   SurfaceSkin 0 3 "arms.png"
+   
+   Scale -0.75 0.75 0.75
+   Offset -6.0 -27.0 -9.0
+   
+   FrameIndex VDCK A 0 0
+   FrameIndex VDCK B 0 1
+   FrameIndex VDCK C 0 2
+   FrameIndex VDCK D 0 3
+   FrameIndex VDCK E 0 4
+   FrameIndex VDCK F 0 5
+   FrameIndex VDCX A 0 6
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 3.0 -29.0 -7.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 3.0 -29.0 -7.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -29.0 -7.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -29.0 -7.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -29.0 -7.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -29.0 -7.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_cards
+{
+   Path "models/cola/cards"
+   Model 0 "card_deck.md3"
+   Skin 0 "no_arms.png"
+   
+   Offset 0.0 0.0 0.0
+   
+   FrameIndex WDWN A 0 0
+   FrameIndex WDWN B 0 0
+   FrameIndex WDWN C 0 0
+   FrameIndex WDWN D 0 0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_cards
+{
+   Path "models/cola/cards"
+   Model 0 "card_deck.md3"
+   Skin 0 "no_arms.png"
+   
+   Offset 0.0 0.0 0.0
+   
+   FrameIndex WDWN A 0 0
+   FrameIndex WDWN B 0 0
+   FrameIndex WDWN C 0 0
+   FrameIndex WDWN D 0 0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 3.0 -29.0 -7.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 3.0 -29.0 -7.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -3.0 -6.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 0.0 -9.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 3.0 -12.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 6.0 -15.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 9.0 -18.0
+   FrameIndex WDWN E 0 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "cylinder.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -11.0
+   
+   //Ready
+   FrameIndex WDWN A 0 0	FrameIndex WDWN A 1 0
+   Offset 6.0 -20.0 -14.0
+   FrameIndex WDWN B 0 0	FrameIndex WDWN B 1 0
+   Offset 9.0 -16.0 -17.0
+   FrameIndex WDWN C 0 0	FrameIndex WDWN C 1 0
+   Offset 12.0 -12.0 -20.0
+   FrameIndex WDWN D 0 0	FrameIndex WDWN D 1 0
+   Offset 15.0 -8.0 -23.0
+   FrameIndex WDWN E 0 0	FrameIndex WDWN E 1 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "cylinder.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -11.0
+   
+   //Ready
+   FrameIndex WDWN A 0 0	FrameIndex WDWN A 1 0
+   Offset 6.0 -20.0 -14.0
+   FrameIndex WDWN B 0 0	FrameIndex WDWN B 1 0
+   Offset 9.0 -16.0 -17.0
+   FrameIndex WDWN C 0 0	FrameIndex WDWN C 1 0
+   Offset 12.0 -12.0 -20.0
+   FrameIndex WDWN D 0 0	FrameIndex WDWN D 1 0
+   Offset 15.0 -8.0 -23.0
+   FrameIndex WDWN E 0 0	FrameIndex WDWN E 1 0
+}
+Model MS_cola_frypan
+{
+   Path "models/cola/frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -27.0 -9.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+Model MS_cola_toothpastelaser
+{
+   Path "models/cola/toothpastelaser"
+   Model 0 "particlegun.md3"
+   SurfaceSkin 0 0 "particlegun_ammo.png"
+   SurfaceSkin 0 1 "particlegun.jpg"
+   SurfaceSkin 0 2 "particlegun.jpg"
+   SurfaceSkin 0 3 "particlegun.jpg"
+   Model 1 "particlegun_display.md3"
+   Skin 1 "particlegun_display1.png"
+   
+   Scale -1.2 1.2 1.2
+   Offset 3.0 -25.0 -8.0
+   
+   //Ready
+   FrameIndex WDWN A 0 0	FrameIndex WDWN A 1 0
+   Offset 6.0 -20.0 -11.0
+   FrameIndex WDWN B 0 0	FrameIndex WDWN B 1 0
+   Offset 9.0 -15.0 -14.0
+   FrameIndex WDWN C 0 0	FrameIndex WDWN C 1 0
+   Offset 12.0 -10.0 -17.0
+   FrameIndex WDWN D 0 0	FrameIndex WDWN D 1 0
+   Offset 15.0 -5.0 -20.0
+   FrameIndex WDWN E 0 0	FrameIndex WDWN E 1 0
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   //Ready
+   FrameIndex SWRL A 0 0	FrameIndex SWRL A 1 0
+   FrameIndex SWRL B 0 0	FrameIndex SWRL B 1 4
+   FrameIndex SWRL C 0 0	FrameIndex SWRL C 1 9
+   FrameIndex SWRL D 0 0	FrameIndex SWRL D 1 14
+   FrameIndex SWRL E 0 0	FrameIndex SWRL E 1 19
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   //Ready
+   FrameIndex RCKL A 0 0
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF1 A 0 1	FrameIndex SWF1 A 1 1
+   FrameIndex SWF1 B 0 2	FrameIndex SWF1 B 1 2
+   FrameIndex SWF1 C 0 3	FrameIndex SWF1 C 1 3
+   FrameIndex SWF1 D 0 4	FrameIndex SWF1 D 1 4
+   FrameIndex SWF1 E 0 5	FrameIndex SWF1 E 1 5
+   FrameIndex SWF1 F 0 6	FrameIndex SWF1 F 1 6
+   FrameIndex SWF1 G 0 7	FrameIndex SWF1 G 1 7
+   FrameIndex SWF1 H 0 8	FrameIndex SWF1 H 1 8
+   FrameIndex SWF1 I 0 9	FrameIndex SWF1 I 1 9
+   FrameIndex SWF1 J 0 10	FrameIndex SWF1 J 1 10
+   FrameIndex SWF1 K 0 11	FrameIndex SWF1 K 1 11
+   FrameIndex SWF1 L 0 12	FrameIndex SWF1 L 1 12
+   FrameIndex SWF1 M 0 13	FrameIndex SWF1 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire2.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF2 A 0 1	FrameIndex SWF2 A 1 1
+   FrameIndex SWF2 B 0 2	FrameIndex SWF2 B 1 2
+   FrameIndex SWF2 C 0 3	FrameIndex SWF2 C 1 3
+   FrameIndex SWF2 D 0 4	FrameIndex SWF2 D 1 4
+   FrameIndex SWF2 E 0 5	FrameIndex SWF2 E 1 5
+   FrameIndex SWF2 F 0 6	FrameIndex SWF2 F 1 6
+   FrameIndex SWF2 G 0 7	FrameIndex SWF2 G 1 7
+   FrameIndex SWF2 H 0 8	FrameIndex SWF2 H 1 8
+   FrameIndex SWF2 I 0 9	FrameIndex SWF2 I 1 9
+   FrameIndex SWF2 J 0 10	FrameIndex SWF2 J 1 10
+   FrameIndex SWF2 K 0 11	FrameIndex SWF2 K 1 11
+   FrameIndex SWF2 L 0 12	FrameIndex SWF2 L 1 12
+   FrameIndex SWF2 M 0 13	FrameIndex SWF2 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire3.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF3 A 0 1	FrameIndex SWF3 A 1 1
+   FrameIndex SWF3 B 0 2	FrameIndex SWF3 B 1 2
+   FrameIndex SWF3 C 0 3	FrameIndex SWF3 C 1 3
+   FrameIndex SWF3 D 0 4	FrameIndex SWF3 D 1 4
+   FrameIndex SWF3 E 0 5	FrameIndex SWF3 E 1 5
+   FrameIndex SWF3 F 0 6	FrameIndex SWF3 F 1 6
+   FrameIndex SWF3 G 0 7	FrameIndex SWF3 G 1 7
+   FrameIndex SWF3 H 0 8	FrameIndex SWF3 H 1 8
+   FrameIndex SWF3 I 0 9	FrameIndex SWF3 I 1 9
+   FrameIndex SWF3 J 0 10	FrameIndex SWF3 J 1 10
+   FrameIndex SWF3 K 0 11	FrameIndex SWF3 K 1 11
+   FrameIndex SWF3 L 0 12	FrameIndex SWF3 L 1 12
+   FrameIndex SWF3 M 0 13	FrameIndex SWF3 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire4.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF4 A 0 1	FrameIndex SWF4 A 1 1
+   FrameIndex SWF4 B 0 2	FrameIndex SWF4 B 1 2
+   FrameIndex SWF4 C 0 3	FrameIndex SWF4 C 1 3
+   FrameIndex SWF4 D 0 4	FrameIndex SWF4 D 1 4
+   FrameIndex SWF4 E 0 5	FrameIndex SWF4 E 1 5
+   FrameIndex SWF4 F 0 6	FrameIndex SWF4 F 1 6
+   FrameIndex SWF4 G 0 7	FrameIndex SWF4 G 1 7
+   FrameIndex SWF4 H 0 8	FrameIndex SWF4 H 1 8
+   FrameIndex SWF4 I 0 9	FrameIndex SWF4 I 1 9
+   FrameIndex SWF4 J 0 10	FrameIndex SWF4 J 1 10
+   FrameIndex SWF4 K 0 11	FrameIndex SWF4 K 1 11
+   FrameIndex SWF4 L 0 12	FrameIndex SWF4 L 1 12
+   FrameIndex SWF4 M 0 13	FrameIndex SWF4 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire5.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF5 A 0 1	FrameIndex SWF5 A 1 1
+   FrameIndex SWF5 B 0 2	FrameIndex SWF5 B 1 2
+   FrameIndex SWF5 C 0 3	FrameIndex SWF5 C 1 3
+   FrameIndex SWF5 D 0 4	FrameIndex SWF5 D 1 4
+   FrameIndex SWF5 E 0 5	FrameIndex SWF5 E 1 5
+   FrameIndex SWF5 F 0 6	FrameIndex SWF5 F 1 6
+   FrameIndex SWF5 G 0 7	FrameIndex SWF5 G 1 7
+   FrameIndex SWF5 H 0 8	FrameIndex SWF5 H 1 8
+   FrameIndex SWF5 I 0 9	FrameIndex SWF5 I 1 9
+   FrameIndex SWF5 J 0 10	FrameIndex SWF5 J 1 10
+   FrameIndex SWF5 K 0 11	FrameIndex SWF5 K 1 11
+   FrameIndex SWF5 L 0 12	FrameIndex SWF5 L 1 12
+   FrameIndex SWF5 M 0 13	FrameIndex SWF5 M 1 13
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex RCKL B 0 14	FrameIndex RCKL B 1 0
+   FrameIndex RCKL C 0 15	FrameIndex RCKL C 1 1
+   FrameIndex RCKL D 0 16	FrameIndex RCKL D 1 2
+   FrameIndex RCKL E 0 17	FrameIndex RCKL E 1 3
+   FrameIndex RCKL F 0 18	FrameIndex RCKL F 1 4
+   FrameIndex RCKL G 0 19	FrameIndex RCKL G 1 5
+   FrameIndex RCKL H 0 20	FrameIndex RCKL H 1 6
+   FrameIndex RCKL I 0 21	FrameIndex RCKL I 1 7
+   FrameIndex RCKL J 0 22	FrameIndex RCKL J 1 8
+   FrameIndex RCKL K 0 23	FrameIndex RCKL K 1 9
+   FrameIndex RCKL L 0 24	FrameIndex RCKL L 1 10
+   FrameIndex RCKL M 0 25	FrameIndex RCKL M 1 11
+   FrameIndex RCKL N 0 26	FrameIndex RCKL N 1 12
+   FrameIndex RCKL O 0 27	FrameIndex RCKL O 1 13
+   FrameIndex RCKL P 0 28	FrameIndex RCKL P 1 14
+   FrameIndex RCKL Q 0 28	FrameIndex RCKL Q 1 15
+   FrameIndex RCKL R 0 28	FrameIndex RCKL R 1 16
+   FrameIndex RCKL S 0 28	FrameIndex RCKL S 1 17
+   FrameIndex RCKL T 0 28	FrameIndex RCKL T 1 18
+   FrameIndex RCKL U 0 28	FrameIndex RCKL U 1 19
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_full_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWRR A 0 39	FrameIndex SWRR A 1 0
+   FrameIndex SWRR B 0 40	FrameIndex SWRR B 1 1
+   FrameIndex SWRR C 0 41	FrameIndex SWRR C 1 2
+   FrameIndex SWRR D 0 42	FrameIndex SWRR D 1 3
+   FrameIndex SWRR E 0 43	FrameIndex SWRR E 1 4
+   FrameIndex SWRR F 0 44	FrameIndex SWRR F 1 5
+   
+   FrameIndex SWRR G 0 30	FrameIndex SWRR G 1 5
+   FrameIndex SWRR H 0 31	FrameIndex SWRR H 1 5
+   FrameIndex SWRR I 0 32	FrameIndex SWRR I 1 5
+   FrameIndex SWRR J 0 33	FrameIndex SWRR J 1 5
+   FrameIndex SWRR K 0 34	FrameIndex SWRR K 1 5
+   FrameIndex SWRR L 0 35	FrameIndex SWRR L 1 5
+   FrameIndex SWRR M 0 36	FrameIndex SWRR M 1 5
+   FrameIndex SWRR N 0 37	FrameIndex SWRR N 1 5
+   FrameIndex SWRR O 0 38	FrameIndex SWRR O 1 5
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   //Full ammo reload
+   FrameIndex SWR1 A 0 30	FrameIndex SWR1 A 1 4
+   FrameIndex SWR1 B 0 31	FrameIndex SWR1 B 1 4
+   FrameIndex SWR1 C 0 32	FrameIndex SWR1 C 1 4
+   FrameIndex SWR1 D 0 33	FrameIndex SWR1 D 1 4
+   FrameIndex SWR1 E 0 34	FrameIndex SWR1 E 1 4
+   FrameIndex SWR1 F 0 35	FrameIndex SWR1 F 1 4
+   FrameIndex SWR1 G 0 36	FrameIndex SWR1 G 1 4
+   FrameIndex SWR1 H 0 37	FrameIndex SWR1 H 1 4
+   FrameIndex SWR1 I 0 38	FrameIndex SWR1 I 1 4
+   
+   //4 ammo reload
+   FrameIndex SWR2 A 0 30	FrameIndex SWR2 A 1 9
+   FrameIndex SWR2 B 0 31	FrameIndex SWR2 B 1 9
+   FrameIndex SWR2 C 0 32	FrameIndex SWR2 C 1 9
+   FrameIndex SWR2 D 0 33	FrameIndex SWR2 D 1 9
+   FrameIndex SWR2 E 0 34	FrameIndex SWR2 E 1 9
+   FrameIndex SWR2 F 0 35	FrameIndex SWR2 F 1 9
+   FrameIndex SWR2 G 0 36	FrameIndex SWR2 G 1 9
+   FrameIndex SWR2 H 0 37	FrameIndex SWR2 H 1 9
+   FrameIndex SWR2 I 0 38	FrameIndex SWR2 I 1 9
+   
+   //3 ammo reload
+   FrameIndex SWR3 A 0 30	FrameIndex SWR3 A 1 14
+   FrameIndex SWR3 B 0 31	FrameIndex SWR3 B 1 14
+   FrameIndex SWR3 C 0 32	FrameIndex SWR3 C 1 14
+   FrameIndex SWR3 D 0 33	FrameIndex SWR3 D 1 14
+   FrameIndex SWR3 E 0 34	FrameIndex SWR3 E 1 14
+   FrameIndex SWR3 F 0 35	FrameIndex SWR3 F 1 14
+   FrameIndex SWR3 G 0 36	FrameIndex SWR3 G 1 14
+   FrameIndex SWR3 H 0 37	FrameIndex SWR3 H 1 14
+   FrameIndex SWR3 I 0 38	FrameIndex SWR3 I 1 14
+   
+   //2 ammo reload
+   FrameIndex SWR4 A 0 30	FrameIndex SWR4 A 1 19
+   FrameIndex SWR4 B 0 31	FrameIndex SWR4 B 1 19
+   FrameIndex SWR4 C 0 32	FrameIndex SWR4 C 1 19
+   FrameIndex SWR4 D 0 33	FrameIndex SWR4 D 1 19
+   FrameIndex SWR4 E 0 34	FrameIndex SWR4 E 1 19
+   FrameIndex SWR4 F 0 35	FrameIndex SWR4 F 1 19
+   FrameIndex SWR4 G 0 36	FrameIndex SWR4 G 1 19
+   FrameIndex SWR4 H 0 37	FrameIndex SWR4 H 1 19
+   FrameIndex SWR4 I 0 38	FrameIndex SWR4 I 1 19
+}
+Model MS_cola_sidewinder
+{
+   Path "models/cola/sidewinder"
+   Model 0 "sw_mf.md3"
+   Skin 0 "rocket_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWMF A 0 0
+   Skin 0 "rocket_mf2.png"
+   FrameIndex SWMF B 0 1
+   Skin 0 "rocket_mf3.png"
+   FrameIndex SWMF C 0 2
+   Skin 0 "rocket_mf4.png"
+   FrameIndex SWMF D 0 3
+   Skin 0 "rocket_mf5.png"
+   FrameIndex SWMF E 0 4
+   Skin 0 "rocket_mf6.png"
+   FrameIndex SWMF F 0 5
+   Skin 0 "rocket_mf7.png"
+   FrameIndex SWMF G 0 6
+   Skin 0 "rocket_mf8.png"
+   FrameIndex SWMF H 0 7
+   Skin 0 "rocket_mf9.png"
+   FrameIndex SWMF I 0 8
+   Skin 0 "rocket_mf10.png"
+   FrameIndex SWMF J 0 9
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -5.0
+   
+   //Ready
+   FrameIndex PDRV A 0 0	FrameIndex PDRV A 1 0
+   
+   //Reload
+   FrameIndex PDRV B 0 1	FrameIndex PDRV B 1 1
+   FrameIndex PDRV C 0 2	FrameIndex PDRV C 1 2
+   FrameIndex PDRV D 0 3	FrameIndex PDRV D 1 3
+   FrameIndex PDRV E 0 4	FrameIndex PDRV E 1 4
+   FrameIndex PDRV F 0 5	FrameIndex PDRV F 1 5
+   FrameIndex PDRV L 0 11	FrameIndex PDRV L 1 11
+   FrameIndex PDRV M 0 12	FrameIndex PDRV M 1 12
+   FrameIndex PDRV N 0 13	FrameIndex PDRV N 1 13
+   FrameIndex PDRV O 0 14	FrameIndex PDRV O 1 14
+   FrameIndex PDRV P 0 15	FrameIndex PDRV P 1 15
+   FrameIndex PDRV Q 0 16	FrameIndex PDRV Q 1 16
+   FrameIndex PDRV R 0 17	FrameIndex PDRV R 1 17
+   FrameIndex PDRV S 0 18	FrameIndex PDRV S 1 18
+   FrameIndex PDRV T 0 19	FrameIndex PDRV T 1 19
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -5.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex PDRV F 0 5	FrameIndex PDRV F 1 5
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -2.0
+   
+   //Reload
+   FrameIndex PDRV G 0 6
+   FrameIndex PDRV H 0 7
+   FrameIndex PDRV I 0 8
+   FrameIndex PDRV J 0 9
+   FrameIndex PDRV K 0 10
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -2.0
+   
+   //Ready
+   FrameIndex PDRV A 0 0	FrameIndex PDRV A 1 0
+   
+   //Reload
+   FrameIndex PDRV B 0 1	FrameIndex PDRV B 1 1
+   FrameIndex PDRV C 0 2	FrameIndex PDRV C 1 2
+   FrameIndex PDRV D 0 3	FrameIndex PDRV D 1 3
+   FrameIndex PDRV E 0 4	FrameIndex PDRV E 1 4
+   FrameIndex PDRV L 0 11	FrameIndex PDRV L 1 11
+   FrameIndex PDRV M 0 12	FrameIndex PDRV M 1 12
+   FrameIndex PDRV N 0 13	FrameIndex PDRV N 1 13
+   FrameIndex PDRV O 0 14	FrameIndex PDRV O 1 14
+   FrameIndex PDRV P 0 15	FrameIndex PDRV P 1 15
+   FrameIndex PDRV Q 0 16	FrameIndex PDRV Q 1 16
+   FrameIndex PDRV R 0 17	FrameIndex PDRV R 1 17
+   FrameIndex PDRV S 0 18	FrameIndex PDRV S 1 18
+   FrameIndex PDRV T 0 19	FrameIndex PDRV T 1 19
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -5.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex PDRV F 0 5	FrameIndex PDRV F 1 5
+}
+Model MS_cola_piledriver
+{
+   Path "models/cola/piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -2.0
+   
+   //Reload
+   FrameIndex PDRV G 0 6
+   FrameIndex PDRV H 0 7
+   FrameIndex PDRV I 0 8
+   FrameIndex PDRV J 0 9
+   FrameIndex PDRV K 0 10
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat1.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 0.0 -35.0 -5.0
+   
+   //Orange laser
+   FrameIndex ZPL0 A 0 0
+   FrameIndex ZPL0 B 0 1
+   
+   //Purple laser
+   SurfaceSkin 0 2 "heat2.png"
+   FrameIndex ZPL1 A 0 0
+   FrameIndex ZPL1 B 0 1
+   
+   //Blue laser
+   SurfaceSkin 0 2 "heat3.png"
+   FrameIndex ZPL2 A 0 0
+   FrameIndex ZPL2 B 0 1
+   
+   //Green laser
+   SurfaceSkin 0 2 "heat4.png"
+   FrameIndex ZPL3 A 0 0
+   FrameIndex ZPL3 B 0 1
+   
+   //display off
+   SurfaceSkin 0 2 "heat.png"
+   FrameIndex ZPLV A 0 0
+   
+   //Red display warning
+   SurfaceSkin 0 2 "heat5.png"
+   FrameIndex ZPLV B 0 0
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasma_mf.md3"
+   SurfaceSkin 0 0 "plasma_mf.png"
+   SurfaceSkin 0 1 "plasma2_mf.png"
+   
+   Scale -2.0 2.0 2.0
+   Offset 0.0 -22.0 -10.0
+   
+   //Orange laser
+   FrameIndex PMF1 A 0 1
+   
+   //Purple laser
+   SurfaceSkin 0 0 "plasma_mf2.png"
+   SurfaceSkin 0 1 "plasma2_mf2.png"
+   FrameIndex PMF2 A 0 1
+   
+   //Blue laser
+   SurfaceSkin 0 0 "plasma_mf3.png"
+   SurfaceSkin 0 1 "plasma2_mf3.png"
+   FrameIndex PMF3 A 0 1
+   
+   //Green laser
+   SurfaceSkin 0 0 "plasma_mf4.png"
+   SurfaceSkin 0 1 "plasma2_mf4.png"
+   FrameIndex PMF4 A 0 1
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat1.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 0.0 -35.0 -5.0
+   
+   //Red laser
+   SurfaceSkin 0 2 "heat5.png"
+   FrameIndex ZPLF A 0 0
+   FrameIndex ZPLF B 0 0
+   
+   //display off
+   SurfaceSkin 0 2 "heat.png"
+   FrameIndex ZPLV A 0 0
+   
+   //Red display warning
+   SurfaceSkin 0 2 "heat5.png"
+   FrameIndex ZPLV B 0 0
+}
+Model MS_cola_plasmagun
+{
+   Path "models/cola/plasmagun"
+   Model 0 "plasma_mf.md3"
+   SurfaceSkin 0 0 "plasma_mf5.png"
+   SurfaceSkin 0 1 "plasma2_mf5.png"
+   
+   Scale -2.0 2.0 2.0
+   Offset 0.0 -22.0 -10.0
+   
+   FrameIndex ZPMF A 0 0
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -34.0 -5.0
+   
+   //Ready
+   FrameIndex RPIS A 0 0
+   
+   //Fire 1
+   FrameIndex RPIS B 0 1
+   FrameIndex RPIS C 0 2
+   FrameIndex RPIS D 0 3
+   FrameIndex RPIS E 0 4
+   FrameIndex RPIS F 0 5
+   
+   //Fire 2
+   FrameIndex RPIS G 0 6
+   FrameIndex RPIS H 0 7
+   FrameIndex RPIS I 0 8
+   FrameIndex RPIS J 0 9
+   FrameIndex RPIS K 0 10
+   
+   //Fire 3
+   FrameIndex RPIS L 0 11
+   FrameIndex RPIS M 0 12
+   FrameIndex RPIS N 0 13
+   FrameIndex RPIS O 0 14
+   FrameIndex RPIS P 0 15
+   
+   //Fire 4
+   FrameIndex RPIS Q 0 16
+   FrameIndex RPIS R 0 17
+   FrameIndex RPIS S 0 18
+   FrameIndex RPIS T 0 19
+   FrameIndex RPIS U 0 20
+   
+   //Fire 5
+   FrameIndex RPIS V 0 21
+   FrameIndex RPIS W 0 22
+   FrameIndex RPIS X 0 23
+   FrameIndex RPIS Y 0 24
+   FrameIndex RPIS Z 0 25
+   
+   //Fire 6
+   FrameIndex RPI2 A 0 26
+   FrameIndex RPI2 B 0 27
+   FrameIndex RPI2 C 0 28
+   FrameIndex RPI2 D 0 29
+   FrameIndex RPI2 E 0 30
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -34.0 -5.0
+   
+   //Ejecting bullets
+   FrameIndex RPIR A 0 31
+   FrameIndex RPIR B 0 32
+   FrameIndex RPIR C 0 33
+   
+   //Insert bullets
+   FrameIndex RPIR H 0 38
+   FrameIndex RPIR I 0 39
+   FrameIndex RPIR J 0 40
+   FrameIndex RPIR K 0 41
+   
+   //Close magazine
+   FrameIndex RPIR L 0 42
+   FrameIndex RPIR M 0 43
+   FrameIndex RPIR N 0 44
+   
+   //Spin up
+   FrameIndex RPIR O 0 45
+   FrameIndex RPIR P 0 46
+   FrameIndex RPIR Q 0 47
+   FrameIndex RPIR R 0 48
+   FrameIndex RPIR S 0 49
+   FrameIndex RPIR T 0 50
+   FrameIndex RPIR U 0 51
+   FrameIndex RPIR V 0 52
+   FrameIndex RPIR W 0 53
+   FrameIndex RPIR X 0 54
+   
+   //Drop bullets   
+   Skin 0 "revolver_no_bullet.png"
+   FrameIndex RPIR D 0 34
+   FrameIndex RPIR E 0 35
+   FrameIndex RPIR F 0 36
+   FrameIndex RPIR G 0 37
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "pistol_mf.md3"
+   Skin 0 "pistol_mf.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -34.0 -4.0
+   
+   //Ready
+   FrameIndex RPMF A 0 1
+   Skin 0 "pistol_mf2.png"
+   FrameIndex RPMF B 0 2
+   Skin 0 "pistol_mf3.png"
+   FrameIndex RPMF C 0 3
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -34.0 -5.0
+   
+   //Ready
+   FrameIndex RPIS A 0 0
+   
+   //Fire 1
+   FrameIndex RPIS B 0 1
+   FrameIndex RPIS C 0 2
+   FrameIndex RPIS D 0 3
+   FrameIndex RPIS E 0 4
+   FrameIndex RPIS F 0 5
+   
+   //Fire 2
+   FrameIndex RPIS G 0 6
+   FrameIndex RPIS H 0 7
+   FrameIndex RPIS I 0 8
+   FrameIndex RPIS J 0 9
+   FrameIndex RPIS K 0 10
+   
+   //Fire 3
+   FrameIndex RPIS L 0 11
+   FrameIndex RPIS M 0 12
+   FrameIndex RPIS N 0 13
+   FrameIndex RPIS O 0 14
+   FrameIndex RPIS P 0 15
+   
+   //Fire 4
+   FrameIndex RPIS Q 0 16
+   FrameIndex RPIS R 0 17
+   FrameIndex RPIS S 0 18
+   FrameIndex RPIS T 0 19
+   FrameIndex RPIS U 0 20
+   
+   //Fire 5
+   FrameIndex RPIS V 0 21
+   FrameIndex RPIS W 0 22
+   FrameIndex RPIS X 0 23
+   FrameIndex RPIS Y 0 24
+   FrameIndex RPIS Z 0 25
+   
+   //Fire 6
+   FrameIndex RPI2 A 0 26
+   FrameIndex RPI2 B 0 27
+   FrameIndex RPI2 C 0 28
+   FrameIndex RPI2 D 0 29
+   FrameIndex RPI2 E 0 30
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -34.0 -5.0
+   
+   //Ejecting bullets
+   FrameIndex RPIR A 0 31
+   FrameIndex RPIR B 0 32
+   FrameIndex RPIR C 0 33
+   
+   //Insert bullets
+   FrameIndex RPIR H 0 38
+   FrameIndex RPIR I 0 39
+   FrameIndex RPIR J 0 40
+   FrameIndex RPIR K 0 41
+   
+   //Close magazine
+   FrameIndex RPIR L 0 42
+   FrameIndex RPIR M 0 43
+   FrameIndex RPIR N 0 44
+   
+   //Spin up
+   FrameIndex RPIR O 0 45
+   FrameIndex RPIR P 0 46
+   FrameIndex RPIR Q 0 47
+   FrameIndex RPIR R 0 48
+   FrameIndex RPIR S 0 49
+   FrameIndex RPIR T 0 50
+   FrameIndex RPIR U 0 51
+   FrameIndex RPIR V 0 52
+   FrameIndex RPIR W 0 53
+   FrameIndex RPIR X 0 54
+   
+   //Drop bullets   
+   Skin 0 "revolver_no_bullet.png"
+   FrameIndex RPIR D 0 34
+   FrameIndex RPIR E 0 35
+   FrameIndex RPIR F 0 36
+   FrameIndex RPIR G 0 37
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "pistol_mf.md3"
+   Skin 0 "pistol_mf.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -34.0 -4.0
+   
+   //Ready
+   FrameIndex RPMF A 0 1
+   Skin 0 "pistol_mf2.png"
+   FrameIndex RPMF B 0 2
+   Skin 0 "pistol_mf3.png"
+   FrameIndex RPMF C 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex PSHT A 0 0
+   
+   //Fire
+   FrameIndex PSHT B 0 1
+   FrameIndex PSHT C 0 2
+   FrameIndex PSHT D 0 3
+   FrameIndex PSHT E 0 4
+   FrameIndex PSHT F 0 5
+   
+   //Pump
+   FrameIndex PSHT J 0 8
+   FrameIndex PSHT K 0 9
+   FrameIndex PSHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex PSHT G 0 6
+   FrameIndex PSHT H 0 7
+   FrameIndex PSHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Prep reload
+   FrameIndex PSHR A 0 11
+   FrameIndex PSHR B 0 12
+   
+   //End reload
+   FrameIndex PSHR H 0 18
+   FrameIndex PSHR I 0 19
+   FrameIndex PSHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex PSHR C 0 13
+   FrameIndex PSHR D 0 14
+   FrameIndex PSHR E 0 15
+   FrameIndex PSHR F 0 16
+   FrameIndex PSHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex PSHT A 0 0
+   
+   //Fire
+   FrameIndex PSHT B 0 1
+   FrameIndex PSHT C 0 2
+   FrameIndex PSHT D 0 3
+   FrameIndex PSHT E 0 4
+   FrameIndex PSHT F 0 5
+   
+   //Pump
+   FrameIndex PSHT J 0 8
+   FrameIndex PSHT K 0 9
+   FrameIndex PSHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex PSHT G 0 6
+   FrameIndex PSHT H 0 7
+   FrameIndex PSHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Prep reload
+   FrameIndex PSHR A 0 11
+   FrameIndex PSHR B 0 12
+   FrameIndex PSHR C 0 13
+   
+   //Insert shell
+   FrameIndex PSHR D 0 14
+   FrameIndex PSHR E 0 15
+   FrameIndex PSHR F 0 16
+   FrameIndex PSHR G 0 17
+   
+   //End reload
+   FrameIndex PSHR H 0 18
+   FrameIndex PSHR I 0 19
+   FrameIndex PSHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 2SHT Z 0 0	FrameIndex 2SHT Z 0 0
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 2SHT A 0 0
+   
+   //Fire
+   FrameIndex 2SHT B 0 1
+   FrameIndex 2SHT C 0 2
+   
+   //Pump
+   FrameIndex 2SHT D 0 3
+   FrameIndex 2SHT E 0 4
+   FrameIndex 2SHT F 0 5
+   FrameIndex 2SHT J 0 8
+   FrameIndex 2SHT K 0 9
+   FrameIndex 2SHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex 2SHT G 0 6
+   FrameIndex 2SHT H 0 7
+   FrameIndex 2SHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Prep reload
+   FrameIndex 2SHR A 0 11
+   FrameIndex 2SHR B 0 12
+   
+   //End reload
+   FrameIndex 2SHR H 0 18
+   FrameIndex 2SHR I 0 19
+   FrameIndex 2SHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 2SHR C 0 13
+   FrameIndex 2SHR D 0 14
+   FrameIndex 2SHR E 0 15
+   FrameIndex 2SHR F 0 16
+   FrameIndex 2SHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 3SHT A 0 0
+   
+   //Fire
+   FrameIndex 3SHT B 0 1
+   FrameIndex 3SHT C 0 2
+   
+   //Pump
+   FrameIndex 3SHT D 0 3
+   FrameIndex 3SHT E 0 4
+   FrameIndex 3SHT F 0 5
+   FrameIndex 3SHT J 0 8
+   FrameIndex 3SHT K 0 9
+   FrameIndex 3SHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex 3SHT G 0 6
+   FrameIndex 3SHT H 0 7
+   FrameIndex 3SHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Prep reload
+   FrameIndex 3SHR A 0 11
+   FrameIndex 3SHR B 0 12
+   
+   //End reload
+   FrameIndex 3SHR H 0 18
+   FrameIndex 3SHR I 0 19
+   FrameIndex 3SHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 3SHR C 0 13
+   FrameIndex 3SHR D 0 14
+   FrameIndex 3SHR E 0 15
+   FrameIndex 3SHR F 0 16
+   FrameIndex 3SHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PLMF A 0 1
+   FrameIndex PLMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PLMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PLMF D 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 2SHT Z 0 0	FrameIndex 2SHT Z 0 0
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 2SHT A 0 0
+   
+   //Fire
+   FrameIndex 2SHT B 0 1
+   FrameIndex 2SHT C 0 2
+   
+   //Pump
+   FrameIndex 2SHT D 0 3
+   FrameIndex 2SHT E 0 4
+   FrameIndex 2SHT F 0 5
+   FrameIndex 2SHT J 0 8
+   FrameIndex 2SHT K 0 9
+   FrameIndex 2SHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex 2SHT G 0 6
+   FrameIndex 2SHT H 0 7
+   FrameIndex 2SHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //insert shells
+   
+   //Prep reload
+   FrameIndex 2SHR A 0 11
+   FrameIndex 2SHR B 0 12
+   
+   //End reload
+   FrameIndex 2SHR H 0 18
+   FrameIndex 2SHR I 0 19
+   FrameIndex 2SHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 2SHR C 0 13
+   FrameIndex 2SHR D 0 14
+   FrameIndex 2SHR E 0 15
+   FrameIndex 2SHR F 0 16
+   FrameIndex 2SHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 2
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 3SHT A 0 0
+   
+   //Fire
+   FrameIndex 3SHT B 0 1
+   FrameIndex 3SHT C 0 2
+   
+   //Pump
+   FrameIndex 3SHT D 0 3
+   FrameIndex 3SHT E 0 4
+   FrameIndex 3SHT F 0 5
+   FrameIndex 3SHT J 0 8
+   FrameIndex 3SHT K 0 9
+   FrameIndex 3SHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex 3SHT G 0 6
+   FrameIndex 3SHT H 0 7
+   FrameIndex 3SHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Prep reload
+   FrameIndex 3SHR A 0 11
+   FrameIndex 3SHR B 0 12
+   
+   //End reload
+   FrameIndex 3SHR H 0 18
+   FrameIndex 3SHR I 0 19
+   FrameIndex 3SHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 3SHR C 0 13
+   FrameIndex 3SHR D 0 14
+   FrameIndex 3SHR E 0 15
+   FrameIndex 3SHR F 0 16
+   FrameIndex 3SHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PLMF A 0 1
+   FrameIndex PLMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PLMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PLMF D 0 2
+}
+Model MS_cola_toothpastelaser
+{
+   Path "models/cola/toothpastelaser"
+   Model 0 "particlegun.md3"
+   SurfaceSkin 0 0 "particlegun_ammo.png"
+   SurfaceSkin 0 1 "particlegun.jpg"
+   SurfaceSkin 0 2 "particlegun.jpg"
+   SurfaceSkin 0 3 "particlegun.jpg"
+   Model 1 "particlegun_display.md3"
+   Skin 1 "particlegun_display1.png"
+   
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -34.0 -5.0
+   
+   //Ready
+   FrameIndex TPLG A 0 0	FrameIndex TPLG A 1 0
+   FrameIndex TPLG B 0 1	FrameIndex TPLG B 1 0
+   
+   //Fire
+   Skin 1 "particlegun_display5.png"
+   FrameIndex TPLG E 0 1	FrameIndex TPLG E 1 0
+}
+Model MS_cola_toothpastelaser
+{
+   Path "models/cola/toothpastelaser"
+   Model 0 "particlegun.md3"
+   SurfaceSkin 0 0 "particlegun_ammo.png"
+   SurfaceSkin 0 1 "particlegun.jpg"
+   SurfaceSkin 0 2 "particlegun.jpg"
+   SurfaceSkin 0 3 "particlegun.jpg"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -34.0 -5.0
+   
+   //Firing
+   FrameIndex TPLG C 0 0
+}
+Model MS_cola_toothpastelaser
+{
+   Path "models/cola/toothpastelaser"
+   Model 0 "particlegun_display.md3"
+   
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -34.0 -5.0
+   
+   //Firing
+   Skin 0 "particlegun_display2.png"
+   FrameIndex TPLD A 0 0
+   Skin 0 "particlegun_display3.png"
+   FrameIndex TPLD B 0 0
+   Skin 0 "particlegun_display4.png"
+   FrameIndex TPLD C 0 0
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex RPIS A 0 0
+   
+   //Fire 1
+   FrameIndex RPIS B 0 1
+   FrameIndex RPIS C 0 2
+   FrameIndex RPIS D 0 3
+   FrameIndex RPIS E 0 4
+   FrameIndex RPIS F 0 5
+   
+   //Fire 2
+   FrameIndex RPIS G 0 6
+   FrameIndex RPIS H 0 7
+   FrameIndex RPIS I 0 8
+   FrameIndex RPIS J 0 9
+   FrameIndex RPIS K 0 10
+   
+   //Fire 3
+   FrameIndex RPIS L 0 11
+   FrameIndex RPIS M 0 12
+   FrameIndex RPIS N 0 13
+   FrameIndex RPIS O 0 14
+   FrameIndex RPIS P 0 15
+   
+   //Fire 4
+   FrameIndex RPIS Q 0 16
+   FrameIndex RPIS R 0 17
+   FrameIndex RPIS S 0 18
+   FrameIndex RPIS T 0 19
+   FrameIndex RPIS U 0 20
+   
+   //Fire 5
+   FrameIndex RPIS V 0 21
+   FrameIndex RPIS W 0 22
+   FrameIndex RPIS X 0 23
+   FrameIndex RPIS Y 0 24
+   FrameIndex RPIS Z 0 25
+   
+   //Fire 6
+   FrameIndex RPI2 A 0 26
+   FrameIndex RPI2 B 0 27
+   FrameIndex RPI2 C 0 28
+   FrameIndex RPI2 D 0 29
+   FrameIndex RPI2 E 0 30
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -28.0 -7.0
+   
+   //Ejecting bullets
+   FrameIndex RPIR A 0 31
+   FrameIndex RPIR B 0 32
+   FrameIndex RPIR C 0 33
+   
+   //Insert bullets
+   FrameIndex RPIR H 0 38
+   FrameIndex RPIR I 0 39
+   FrameIndex RPIR J 0 40
+   FrameIndex RPIR K 0 41
+   
+   //Close magazine
+   FrameIndex RPIR L 0 42
+   FrameIndex RPIR M 0 43
+   FrameIndex RPIR N 0 44
+   
+   //Spin up
+   FrameIndex RPIR O 0 45
+   FrameIndex RPIR P 0 46
+   FrameIndex RPIR Q 0 47
+   FrameIndex RPIR R 0 48
+   FrameIndex RPIR S 0 49
+   FrameIndex RPIR T 0 50
+   FrameIndex RPIR U 0 51
+   FrameIndex RPIR V 0 52
+   FrameIndex RPIR W 0 53
+   FrameIndex RPIR X 0 54
+   
+   //Drop bullets   
+   Skin 0 "revolver_no_bullet.png"
+   FrameIndex RPIR D 0 34
+   FrameIndex RPIR E 0 35
+   FrameIndex RPIR F 0 36
+   FrameIndex RPIR G 0 37
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "pistol_mf.md3"
+   Skin 0 "pistol_mf.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -28.0 -9.0
+   
+   //Ready
+   FrameIndex RPMF A 0 1
+   Skin 0 "pistol_mf2.png"
+   FrameIndex RPMF B 0 2
+   Skin 0 "pistol_mf3.png"
+   FrameIndex RPMF C 0 3
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex RPIS A 0 0
+   
+   //Fire 1
+   FrameIndex RPIS B 0 1
+   FrameIndex RPIS C 0 2
+   FrameIndex RPIS D 0 3
+   FrameIndex RPIS E 0 4
+   FrameIndex RPIS F 0 5
+   
+   //Fire 2
+   FrameIndex RPIS G 0 6
+   FrameIndex RPIS H 0 7
+   FrameIndex RPIS I 0 8
+   FrameIndex RPIS J 0 9
+   FrameIndex RPIS K 0 10
+   
+   //Fire 3
+   FrameIndex RPIS L 0 11
+   FrameIndex RPIS M 0 12
+   FrameIndex RPIS N 0 13
+   FrameIndex RPIS O 0 14
+   FrameIndex RPIS P 0 15
+   
+   //Fire 4
+   FrameIndex RPIS Q 0 16
+   FrameIndex RPIS R 0 17
+   FrameIndex RPIS S 0 18
+   FrameIndex RPIS T 0 19
+   FrameIndex RPIS U 0 20
+   
+   //Fire 5
+   FrameIndex RPIS V 0 21
+   FrameIndex RPIS W 0 22
+   FrameIndex RPIS X 0 23
+   FrameIndex RPIS Y 0 24
+   FrameIndex RPIS Z 0 25
+   
+   //Fire 6
+   FrameIndex RPI2 A 0 26
+   FrameIndex RPI2 B 0 27
+   FrameIndex RPI2 C 0 28
+   FrameIndex RPI2 D 0 29
+   FrameIndex RPI2 E 0 30
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -28.0 -7.0
+   
+   //Ejecting bullets
+   FrameIndex RPIR A 0 31
+   FrameIndex RPIR B 0 32
+   FrameIndex RPIR C 0 33
+   
+   //Insert bullets
+   FrameIndex RPIR H 0 38
+   FrameIndex RPIR I 0 39
+   FrameIndex RPIR J 0 40
+   FrameIndex RPIR K 0 41
+   
+   //Close magazine
+   FrameIndex RPIR L 0 42
+   FrameIndex RPIR M 0 43
+   FrameIndex RPIR N 0 44
+   
+   //Spin up
+   FrameIndex RPIR O 0 45
+   FrameIndex RPIR P 0 46
+   FrameIndex RPIR Q 0 47
+   FrameIndex RPIR R 0 48
+   FrameIndex RPIR S 0 49
+   FrameIndex RPIR T 0 50
+   FrameIndex RPIR U 0 51
+   FrameIndex RPIR V 0 52
+   FrameIndex RPIR W 0 53
+   FrameIndex RPIR X 0 54
+   
+   //Drop bullets   
+   Skin 0 "revolver_no_bullet.png"
+   FrameIndex RPIR D 0 34
+   FrameIndex RPIR E 0 35
+   FrameIndex RPIR F 0 36
+   FrameIndex RPIR G 0 37
+}
+Model MS_cola_pistol
+{
+   Path "models/cola/pistol"
+   Model 0 "pistol_mf.md3"
+   Skin 0 "pistol_mf.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 0.0 -28.0 -9.0
+   
+   //Ready
+   FrameIndex RPMF A 0 1
+   Skin 0 "pistol_mf2.png"
+   FrameIndex RPMF B 0 2
+   Skin 0 "pistol_mf3.png"
+   FrameIndex RPMF C 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex PSHT A 0 0
+   
+   //Fire
+   FrameIndex PSHT B 0 1
+   FrameIndex PSHT C 0 2
+   FrameIndex PSHT D 0 3
+   FrameIndex PSHT E 0 4
+   FrameIndex PSHT F 0 5
+   
+   //Pump
+   FrameIndex PSHT J 0 8
+   FrameIndex PSHT K 0 9
+   FrameIndex PSHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   FrameIndex PSHT G 0 6
+   FrameIndex PSHT H 0 7
+   FrameIndex PSHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Prep reload
+   FrameIndex PSHR A 0 11
+   FrameIndex PSHR B 0 12
+   
+   //End reload
+   FrameIndex PSHR H 0 18
+   FrameIndex PSHR I 0 19
+   FrameIndex PSHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex PSHR C 0 13
+   FrameIndex PSHR D 0 14
+   FrameIndex PSHR E 0 15
+   FrameIndex PSHR F 0 16
+   FrameIndex PSHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -32.0 -9.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex PSHT A 0 0
+   
+   //Fire
+   FrameIndex PSHT B 0 1
+   FrameIndex PSHT C 0 2
+   FrameIndex PSHT D 0 3
+   FrameIndex PSHT E 0 4
+   FrameIndex PSHT F 0 5
+   
+   //Pump
+   FrameIndex PSHT J 0 8
+   FrameIndex PSHT K 0 9
+   FrameIndex PSHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   FrameIndex PSHT G 0 6
+   FrameIndex PSHT H 0 7
+   FrameIndex PSHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   NOINTERPOLATION
+   
+   //Prep reload
+   FrameIndex PSHR A 0 11
+   FrameIndex PSHR B 0 12
+   FrameIndex PSHR C 0 13
+   
+   //Insert shell
+   FrameIndex PSHR D 0 14
+   FrameIndex PSHR E 0 15
+   FrameIndex PSHR F 0 16
+   FrameIndex PSHR G 0 17
+   
+   //End reload
+   FrameIndex PSHR H 0 18
+   FrameIndex PSHR I 0 19
+   FrameIndex PSHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -32.0 -9.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex 2SHT Z 0 0	FrameIndex 2SHT Z 0 0
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex 2SHT A 0 0
+   
+   //Fire
+   FrameIndex 2SHT B 0 1
+   FrameIndex 2SHT C 0 2
+   
+   //Pump
+   FrameIndex 2SHT D 0 3
+   FrameIndex 2SHT E 0 4
+   FrameIndex 2SHT F 0 5
+   FrameIndex 2SHT J 0 8
+   FrameIndex 2SHT K 0 9
+   FrameIndex 2SHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   FrameIndex 2SHT G 0 6
+   FrameIndex 2SHT H 0 7
+   FrameIndex 2SHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Prep reload
+   FrameIndex 2SHR A 0 11
+   FrameIndex 2SHR B 0 12
+   
+   //End reload
+   FrameIndex 2SHR H 0 18
+   FrameIndex 2SHR I 0 19
+   FrameIndex 2SHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 2SHR C 0 13
+   FrameIndex 2SHR D 0 14
+   FrameIndex 2SHR E 0 15
+   FrameIndex 2SHR F 0 16
+   FrameIndex 2SHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -32.0 -9.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex 3SHT A 0 0
+   
+   //Fire
+   FrameIndex 3SHT B 0 1
+   FrameIndex 3SHT C 0 2
+   
+   //Pump
+   FrameIndex 3SHT D 0 3
+   FrameIndex 3SHT E 0 4
+   FrameIndex 3SHT F 0 5
+   FrameIndex 3SHT J 0 8
+   FrameIndex 3SHT K 0 9
+   FrameIndex 3SHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   FrameIndex 3SHT G 0 6
+   FrameIndex 3SHT H 0 7
+   FrameIndex 3SHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Prep reload
+   FrameIndex 3SHR A 0 11
+   FrameIndex 3SHR B 0 12
+   
+   //End reload
+   FrameIndex 3SHR H 0 18
+   FrameIndex 3SHR I 0 19
+   FrameIndex 3SHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 3SHR C 0 13
+   FrameIndex 3SHR D 0 14
+   FrameIndex 3SHR E 0 15
+   FrameIndex 3SHR F 0 16
+   FrameIndex 3SHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -32.0 -9.0
+   
+   //Ready
+   FrameIndex PLMF A 0 1
+   FrameIndex PLMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PLMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PLMF D 0 3
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex 2SHT Z 0 0	FrameIndex 2SHT Z 0 0
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex 2SHT A 0 0
+   
+   //Fire
+   FrameIndex 2SHT B 0 1
+   FrameIndex 2SHT C 0 2
+   
+   //Pump
+   FrameIndex 2SHT D 0 3
+   FrameIndex 2SHT E 0 4
+   FrameIndex 2SHT F 0 5
+   FrameIndex 2SHT J 0 8
+   FrameIndex 2SHT K 0 9
+   FrameIndex 2SHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   FrameIndex 2SHT G 0 6
+   FrameIndex 2SHT H 0 7
+   FrameIndex 2SHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //insert shells
+   
+   //Prep reload
+   FrameIndex 2SHR A 0 11
+   FrameIndex 2SHR B 0 12
+   
+   //End reload
+   FrameIndex 2SHR H 0 18
+   FrameIndex 2SHR I 0 19
+   FrameIndex 2SHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 2SHR C 0 13
+   FrameIndex 2SHR D 0 14
+   FrameIndex 2SHR E 0 15
+   FrameIndex 2SHR F 0 16
+   FrameIndex 2SHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_right_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -32.0 -9.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 2
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Ready
+   FrameIndex 3SHT A 0 0
+   
+   //Fire
+   FrameIndex 3SHT B 0 1
+   FrameIndex 3SHT C 0 2
+   
+   //Pump
+   FrameIndex 3SHT D 0 3
+   FrameIndex 3SHT E 0 4
+   FrameIndex 3SHT F 0 5
+   FrameIndex 3SHT J 0 8
+   FrameIndex 3SHT K 0 9
+   FrameIndex 3SHT L 0 10
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   FrameIndex 3SHT G 0 6
+   FrameIndex 3SHT H 0 7
+   FrameIndex 3SHT I 0 8
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   //Prep reload
+   FrameIndex 3SHR A 0 11
+   FrameIndex 3SHR B 0 12
+   
+   //End reload
+   FrameIndex 3SHR H 0 18
+   FrameIndex 3SHR I 0 19
+   FrameIndex 3SHR J 0 20
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -7.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 3SHR C 0 13
+   FrameIndex 3SHR D 0 14
+   FrameIndex 3SHR E 0 15
+   FrameIndex 3SHR F 0 16
+   FrameIndex 3SHR G 0 17
+}
+Model MS_cola_shotgun
+{
+   Path "models/cola/shotgun"
+   Model 0 "shotgun_left_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -32.0 -9.0
+   
+   //Ready
+   FrameIndex PLMF A 0 1
+   FrameIndex PLMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PLMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PLMF D 0 2
+}
+Model MS_cola_toothpastelaser
+{
+   Path "models/cola/toothpastelaser"
+   Model 0 "particlegun.md3"
+   SurfaceSkin 0 0 "particlegun_ammo.png"
+   SurfaceSkin 0 1 "particlegun.jpg"
+   SurfaceSkin 0 2 "particlegun.jpg"
+   SurfaceSkin 0 3 "particlegun.jpg"
+   Model 1 "particlegun_display.md3"
+   Skin 1 "particlegun_display1.png"
+   
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -28.0 -5.0
+   
+   //Ready
+   FrameIndex TPLG A 0 0	FrameIndex TPLG A 1 0
+   FrameIndex TPLG B 0 1	FrameIndex TPLG B 1 0
+   
+   //Fire
+   Skin 1 "particlegun_display5.png"
+   FrameIndex TPLG E 0 1	FrameIndex TPLG E 1 0
+}
+Model MS_cola_toothpastelaser
+{
+   Path "models/cola/toothpastelaser"
+   Model 0 "particlegun.md3"
+   SurfaceSkin 0 0 "particlegun_ammo.png"
+   SurfaceSkin 0 1 "particlegun.jpg"
+   SurfaceSkin 0 2 "particlegun.jpg"
+   SurfaceSkin 0 3 "particlegun.jpg"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -28.0 -5.0
+   
+   //Firing
+   FrameIndex TPLG C 0 0
+}
+Model MS_cola_toothpastelaser
+{
+   Path "models/cola/toothpastelaser"
+   Model 0 "particlegun_display.md3"
+   
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -28.0 -5.0
+   
+   //Firing
+   Skin 0 "particlegun_display2.png"
+   FrameIndex TPLD A 0 0
+   Skin 0 "particlegun_display3.png"
+   FrameIndex TPLD B 0 0
+   Skin 0 "particlegun_display4.png"
+   FrameIndex TPLD C 0 0
+}

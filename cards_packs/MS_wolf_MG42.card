@@ -1,0 +1,22 @@
+weapon MS_wolf_MG42
+  archetype   pistol_mag        # owner-confirmed
+  model       MG42.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 0  rest [31.28, -0.16, -3.94]  axis [-0.997, 0.0, -0.076]  travel 0.50  frames -..-  rot 15deg axis [0.0, 1.0, -0.0]
+    mag      surf 2  rest [40.31, 7.05, 6.38]  axis [0.0, 0.478, -0.879]  travel 15.54  frames 10..14  rot 40deg axis [-1.0, 0.0, -0.0]
+    part     surf 3  rest [32.68, -6.27, 1.41]  axis [-0.991, -0.135, 0.0]  travel 15.86  frames 5..14  rot 90deg axis [0.0, -0.0, -1.0]
+    part2    surf 4  rest [27.18, -4.28, 1.01]  axis [-1.0, 0.0, 0.0]  travel 10.00  frames 6..14
+    mag_well  [40.31, 7.05, 6.38]  mouth [38.23, 9.59, 11.25]  axis [0.0, 0.478, -0.879]  travel_clear 15.54
+    muzzle    [124.94, -0.14, 5.27]
+  grip        line [23.3, -1.69, -3.06] [23.8, 0.89, -13.62]  trigger [31.28, -0.16, -3.94]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [50.38, -0.12, 4.31]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..9
+    mag_out      10..10
+    mag_in       11..14
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 18972
+  carved      mag  seat_origin [40.31, 7.05, 6.38]  file MG42_mag.md3

@@ -1,0 +1,3663 @@
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+Model MS_univ_sigil
+{
+   Path "models/univ/sigil"
+   Model 0 "sigil_handle.md3"
+   Skin 0 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  A 0 0
+}
+Model MS_univ_sigil
+{
+   Path "models/univ/sigil"
+   Model 0 "sigil_handle.md3"
+   Model 1 "sigil_base.md3"
+   Skin 0 "sigil.png"
+   Skin 1 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  B 0 0	FrameIndex SIGH  B 1 0
+}
+Model MS_univ_sigil
+{
+   Path "models/univ/sigil"
+   Model 0 "sigil_handle.md3"
+   Model 1 "sigil_base.md3"
+   Model 2 "sigil_spike_right.md3"
+   Skin 0 "sigil.png"
+   Skin 1 "sigil.png"
+   Skin 2 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  C 0 0	FrameIndex SIGH  C 1 0	FrameIndex SIGH  C 2 0
+}
+Model MS_univ_sigil
+{
+   Path "models/univ/sigil"
+   Model 0 "sigil_handle.md3"
+   Model 1 "sigil_base.md3"
+   Model 2 "sigil_spike_right.md3"
+   Model 3 "sigil_spike_left.md3"
+   Skin 0 "sigil.png"
+   Skin 1 "sigil.png"
+   Skin 2 "sigil.png"
+   Skin 3 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  D 0 0	FrameIndex SIGH D 1 0	FrameIndex SIGH  D 2 0	FrameIndex SIGH  D 3 0
+}
+Model MS_univ_sigil
+{
+   Path "models/univ/sigil"
+   Model 0 "sigil.md3"
+   Skin 0 "sigil.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   
+   //Ready
+   FrameIndex SIGH  E 0 0
+}
+Model MS_univ_sigil
+{
+   Path "models/univ/sigil"
+   Model 0 "sigil_mf.md3"
+   Skin 0 "sigil_flash1.png"
+
+   Scale -1.6 1.6 1.6
+   Offset 0.0 -28.0 -15.0
+   ZOffset -21
+   
+   //Ready
+   FrameIndex SIGF  A 0 0
+   Skin 0 "sigil_flash2.png"
+   ZOffset -18
+   FrameIndex SIGF  B 0 0
+   Skin 0 "sigil_flash3.png"
+   ZOffset -15
+   FrameIndex SIGF  C 0 0
+}
+	Model MS_univ_Chainsaw
+	{
+	   Path "models/univ/Chainsaw"
+	   Model 0 "Chainsaw.md3"
+		Skin 0 "Chainsaw.png"
+
+		Offset 0.0 14.0 0.0
+		Scale -1.5 1.5 1.5
+
+
+	FrameIndex SAWG C 0 5 
+	FrameIndex SAWG D 0 7	  
+	NOINTERPOLATION
+	FrameIndex SAWG A 0 0	   
+	NOINTERPOLATION
+	FrameIndex SAWG B 0 3	
+	}
+	Model MS_univ_SHOTGUN
+	{ 
+	   Path "models/univ/SHOTGUN"
+	   Model 0 "Shotgun.md3"
+	   Skin 0 "Shotgun.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+	//   NOINTERPOLATION
+	   
+	   FrameIndex SHTG A 0 4   FrameIndex SHTG A 1 0
+	   FrameIndex SHTG B 0 6   FrameIndex SHTG B 1 1
+	   FrameIndex SHTG C 0 14   FrameIndex SHTG C 1 3
+	   FrameIndex SHTG D 0 18   FrameIndex SHTG D 1 4
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -34.0 13.0
+		NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "ssg.md3"
+	   Skin 0 "ssg.png"
+
+		Offset 0.0 0.0 0.0
+	   Scale -1.1 1.0 1.0
+
+
+	   FrameIndex SHT2 A 0 1   
+	   FrameIndex SHT2 B 0 3  
+	   FrameIndex SHT2 C 0 6  
+	   FrameIndex SHT2 D 0 18   
+	   FrameIndex SHT2 E 0 23 
+	   FrameIndex SHT2 F 0 26	   
+	   FrameIndex SHT2 G 0 29
+	   FrameIndex SHT2 H 0 45	 
+	   
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "hud_ssg_mf1.md3"
+	   SKIN 0 "MF1.png"
+	   Model 1 "hud_ssg_mf2.md3"
+	   SKIN 1 "MF2.png"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+	   
+	   FrameIndex SHT2 I 0 0   FrameIndex SHT2 I 1 0
+	}
+	Model MS_univ_SSG
+	{ 
+	   Path "models/univ/SSG"
+	   Model 0 "Hud_ssg_MF1.md3"
+	   Model 1 "Hud_ssg_MF2.md3"
+	   Scale 1.5 1.5 1.5
+	   Offset 0.0 -4.0 12.0
+
+	   FrameIndex SHT2 J 0 1   FrameIndex SHT2 J 1 1
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   SKIN 0 "MF1.png"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 1 "MF2.png"  
+	   Scale 1.0 1.0 1.0
+	   Offset -2.0 -8.0 14.0
+	   NOINTERPOLATION
+		
+	   FrameIndex SHTF A 0 0   FrameIndex SHTF A 1 0
+	}
+	Model MS_univ_Shotgun
+	{ 
+	   Path "models/univ/Shotgun"
+	   MODEL 0 "Shotgun_MF1.md3"
+	   MODEL 1 "Shotgun_MF2.md3"
+	   SKIN 0 "MF1.png"
+	   SKIN 1 "MF2.png"
+	   Scale 1.0 1.0 1.0
+	   Offset 2.0 -8.0 14.0
+	   NOINTERPOLATION
+
+	   FrameIndex SHTF B 0 0   FrameIndex SHTF B 1 0
+	}
+	MODEL MS_univ_CHAINGUN
+	{
+	Path "models/univ/CHAINGUN"
+	Model 0 "Chaingun.md3"
+	Skin 0 "Chaingun.png"
+
+	Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGG A 0 4
+	FrameIndex CHGG B 0 10
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF0.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF2.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF A 0 0
+	}
+	MODEL MS_univ_Chaingun
+	{
+
+	Path "models/univ/Chaingun"
+	Model 0 "CG_MF1.md3"
+	Skin 0 "MF1.png"
+	Model 1 "CG_MF2.md3"
+	Skin 1 "MF3.png"
+	Scale -4.0 4.0 4.0
+	   Offset 0.0 -33.0 32.0
+
+	NOINTERPOLATION
+
+	FrameIndex CHGF B 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RPG.md3"
+	   Skin 0 "RPG.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+
+	INTERPOLATEDOUBLEDFRAMES
+
+	   FrameIndex MISG A 0 5
+	   FrameIndex MISG B 0 10
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF0.PNG"
+	   
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+
+
+	   FrameIndex MISF A 0 0
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF1.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF B 0 0	//   FrameIndex MISF B 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF2.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+
+	   FrameIndex MISF C 0 0	 //  FrameIndex MISF C 1 1
+	}
+	Model MS_univ_RPG
+	{ 
+	   Path "models/univ/RPG"
+	   Model 0 "RocketLauncher-MF.MD2"
+	   Skin 0 "Hud_RL_MF3.PNG"
+	   Scale 1.0 1.0 1.0
+	   Offset 0.0 -16.0 38.0
+	   
+
+	   FrameIndex MISF D 0 0
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle.md3"
+	   Skin 0 "PlasmaRifle.png"
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	   FrameIndex PLSG A 0 4
+	   FrameIndex PLSG B 0 12
+	   
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	  
+
+	   FrameIndex PLSF A 0 5
+	}
+	Model MS_univ_PlasmaRifle
+	{ 
+	   Path "models/univ/PlasmaRifle"
+	   Model 0 "PlasmaRifle-FL.MD2"
+	   Skin 0 "PlasmaRifle-FL1.tga"
+	   Scale -2.0 1.0 2.0
+	   Offset 1.0 -50.0 27.0
+	   
+
+	   FrameIndex PLSF B 0 7
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 0.0 0.0
+
+	 //  NOINTERPOLATION
+	 //INTERPOLATEDOUBLEDFRAMES
+	 
+	   FrameIndex BFGG A 0 6
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "BFG.md3"
+	   Skin 0 "bfg2.png"
+	  
+
+	   Scale -1.0 1.0 1.0
+	   Offset 0.0 10.0 0.0
+	//NOINTERPOLATION
+	//INTERPOLATEDOUBLEDFRAMES	
+	
+	   FrameIndex BFGG B 0 7
+	   FrameIndex BFGG C 0 14
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash0.png"
+
+	   Scale -4.0 1.0 4.0
+	   Offset 0.0 -50.0 50.0
+	NOINTERPOLATION
+	
+	   FrameIndex BFGF A 0 0
+	}
+	Model MS_univ_BFG9000
+	{
+	   Path "models/univ/BFG9000"
+	   Model 0 "bfgexpo.md2"
+	   Skin 0 "energy_flash1.png"
+	   Offset 0.0 -50.0 50.0
+	   Scale -4.0 1.0 4.0
+	NOINTERPOLATION
+
+	   FrameIndex BFGF B 0 0
+	}
+Model MS_univ_MODELS
+{
+	Path "models/univ/MODELS"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer1.png"
+	//Scale 1.0 1.0 1.0
+	Scale 0.7 0.8 1.0
+	PITCHFROMMOMENTUM
+	Offset 35.0 0.0 1.0
+	
+	FrameIndex PUFF A 0 0
+}
+Model MS_univ_MODELS
+{
+	Path "models/univ/MODELS"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer1.png"
+	Scale 0.3 0.9 0.9
+	PITCHFROMMOMENTUM
+	
+	FrameIndex PUFF A 0 0
+}
+Model MS_univ_BFG9000
+{
+   Path "models/univ/BFG9000"
+   Model 0 "W-BFG.md3"
+   Skin 0 "Gbfg.pcx"
+   Scale 1.0 1.0 1.2
+
+   Rotating
+
+   FrameIndex MBFG A 0 0
+}
+Model MS_univ_Chaingun
+{
+   Path "models/univ/Chaingun"
+   Model 0 "W-Chaingun.md3"
+   Skin 0 "Gchain.pcx"
+   Scale 1.0 1.0 1.0
+
+   zoffset -5.5
+   Rotating
+
+   FrameIndex MMGN A 0 0
+}
+Model MS_univ_Chainsaw
+{
+   Path "models/univ/Chainsaw"
+   Model 0 "W-Chainsaw.md3"
+   Skin 0 "Gsaw.pcx"
+   Scale 1.0 1.2 1.27
+
+   zoffset -7
+   Rotating
+
+   FrameIndex MSAW A 0 0
+}
+Model MS_univ_PlasmaRifle
+{
+   Path "models/univ/PlasmaRifle"
+   Model 0 "W-PlasmaRifle.md3"
+   Skin 0 "Gplasma.pcx"
+   Scale 0.99 1.3 1.25
+
+   zoffset -7
+   Rotating
+
+   FrameIndex MPLS A 0 0
+}
+Model MS_univ_RPG
+{
+   Path "models/univ/RPG"
+   Model 0 "W-RocketLauncher.md3"
+   Skin 0 "Grocketlnchr.pcx"
+   Scale 1.03 1.2 1.2
+
+   zoffset -7.3
+   Rotating
+
+   FrameIndex MRPG A 0 0
+}
+Model MS_univ_Shotgun
+{
+   Path "models/univ/Shotgun"
+   Model 0 "WShotgun_Metal.md3"
+   Model 1 "WShotgun_Wood.md3"
+   Skin 0 "WShotgun.png"
+   Skin 1 "WShotgun.png"
+   Scale 0.2 0.25 0.3
+  
+   AngleOffset 180
+   zoffset 4
+   Rotating
+
+   FrameIndex MSHT A 0 0	FrameIndex MSHT A 1 0
+}
+Model MS_univ_SSG
+{
+   Path "models/univ/SSG"
+   Model 0 "W-SuperShotgun.md3"
+   Skin 0 "shoyt.pcx"
+   Scale 0.092 0.1 0.1
+
+   Rotating
+
+   FrameIndex MSSG A 0 0
+}

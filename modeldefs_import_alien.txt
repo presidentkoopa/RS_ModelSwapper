@@ -1,0 +1,3317 @@
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b.md3"
+	Skin 0 "m260b.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex FLBF A 0 0
+	FrameIndex FLMT A 0 0
+
+	//Fire
+	FrameIndex FLMT B 0 1
+	FrameIndex FLMT C 0 2
+	FrameIndex FLMT D 0 3
+
+	//Reloading - drop canister
+	FrameIndex FLMT E 0 5
+	FrameIndex FLMT F 0 6
+	FrameIndex FLMT G 0 7
+	FrameIndex FLMT H 0 8
+	FrameIndex FLMT I 0 9
+
+	//Reloading - add new canister
+	FrameIndex FLMT L 0 11
+	FrameIndex FLMT M 0 12
+	FrameIndex FLMT N 0 13
+	FrameIndex FLMT O 0 14
+	FrameIndex FLMT P 0 15
+	FrameIndex FLMT Q 0 16
+	FrameIndex FLMT R 0 17
+	FrameIndex FLMT S 0 18
+	FrameIndex FLMT T 0 19
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b.md3"
+	SurfaceSkin 0 0 "m260b.png"
+	SurfaceSkin 0 1 "empty.png"
+	SurfaceSkin 0 2 "m260b.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex FLMT J 0 10
+	FrameIndex FLMT K 0 11
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b_pickup.md3"
+	Skin 0 "m260b.png"
+
+	Scale 2.5 2.5 2.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex WFLM P 0 0
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b.md3"
+	Skin 0 "m260b.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex YLAM A 0 0
+	FrameIndex YLAM E 0 0
+
+	//Fire
+	FrameIndex YLAM F 0 1
+	FrameIndex YLAM G 0 2
+	FrameIndex YLAM H 0 3
+
+	//Reloading - drop canister
+	FrameIndex FLMT E 0 5
+	FrameIndex FLMT F 0 6
+	FrameIndex FLMT G 0 7
+	FrameIndex FLMT H 0 8
+	FrameIndex FLMT I 0 9
+
+	//Reloading - add new canister
+	FrameIndex FLMT L 0 11
+	FrameIndex FLMT M 0 12
+	FrameIndex FLMT N 0 13
+	FrameIndex FLMT O 0 14
+	FrameIndex FLMT P 0 15
+	FrameIndex FLMT Q 0 16
+	FrameIndex FLMT R 0 17
+	FrameIndex FLMT S 0 18
+	FrameIndex FLMT T 0 19
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b.md3"
+	SurfaceSkin 0 0 "m260b.png"
+	SurfaceSkin 0 1 "empty.png"
+	SurfaceSkin 0 2 "m260b.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex FLMT J 0 10
+	FrameIndex FLMT K 0 11
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b_pickup.md3"
+	Skin 0 "m260b.png"
+
+	Scale 2.5 2.5 2.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex WFLM P 0 0
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b_pickup.md3"
+	Skin 0 "m260b.png"
+
+	Scale 2.5 2.5 2.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex WFLM P 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale -1.7 1.7 1.7
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex STCF A 0 0
+	FrameIndex STCF B 0 0
+	FrameIndex STCG A 0 0
+
+	//Ready
+	FrameIndex STCG B 0 1
+	FrameIndex STCG C 0 2
+	FrameIndex STCG D 0 3
+	FrameIndex STCG E 0 4
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale 9.0 9.0 9.0
+	Offset 0.0 0.0 80.0
+	
+	ROTATING
+	ROTATION-SPEED 0.2
+
+	//Ready
+	FrameIndex STCP P 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale -1.7 1.7 1.7
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex STCF A 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale -1.7 1.7 1.7
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex YTCF A 0 0
+	FrameIndex YTCG A 0 0
+
+	//Ready
+	FrameIndex YTCG B 0 1
+	FrameIndex YTCG C 0 2
+	FrameIndex YTCG D 0 3
+	FrameIndex YTCG E 0 4
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale 9.0 9.0 9.0
+	Offset 0.0 0.0 80.0
+	
+	ROTATING
+	ROTATION-SPEED 0.2
+
+	//Ready
+	FrameIndex STCP P 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale 6.0 6.0 6.0
+	Offset 0.0 0.0 40.0
+	
+	ROTATING
+	ROTATION-SPEED 0.2
+
+	//Ready
+	FrameIndex STCG P 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale 1.0 1.0 1.0
+	Offset 0.0 0.0 7.0
+	
+	ROTATING
+	ROTATION-SPEED 0.2
+
+	//Ready
+	FrameIndex STCP P 0 0
+}
+Model MS_alien_knife
+{
+	Path "models/alien/knife"
+	Model 0 "knife.md3"
+	Skin 0 "knife.png"
+
+	Scale -0.65 0.65 0.65
+	Offset 0.0 -16.0 -12.0
+	
+	NOINTERPOLATION
+
+	//Ready
+	FrameIndex ATKN A 0 0
+
+	//Slash
+	FrameIndex ATKN B 0 1
+	FrameIndex ATKN C 0 2
+	FrameIndex ATKN D 0 3
+	FrameIndex ATKN E 0 4
+	FrameIndex ATKN F 0 5
+	FrameIndex ATKN G 0 6
+	FrameIndex ATKN H 0 7
+	FrameIndex ATKN I 0 8
+	FrameIndex ATKN J 0 9
+	FrameIndex ATKN K 0 10
+	FrameIndex ATKN L 0 11
+	FrameIndex ATKN M 0 12
+	FrameIndex ATKN N 0 13
+	FrameIndex ATKN O 0 14
+	FrameIndex ATKN P 0 15
+	FrameIndex ATKN Q 0 16
+	FrameIndex ATKN R 0 17
+	FrameIndex ATKN S 0 18
+}
+Model MS_alien_knife
+{
+	Path "models/alien/knife"
+	Model 0 "knife.md3"
+	Skin 0 "knife.png"
+
+	Scale -0.65 0.65 0.65
+	Offset 0.0 -16.0 -12.0
+	
+	NOINTERPOLATION
+
+	//Ready
+	FrameIndex YTKN A 0 0
+
+	//Slash
+	FrameIndex YTKN B 0 1
+	FrameIndex YTKN C 0 2
+	FrameIndex YTKN D 0 3
+	FrameIndex YTKN E 0 4
+	FrameIndex YTKN F 0 5
+	FrameIndex YTKN G 0 6
+	FrameIndex YTKN H 0 7
+	FrameIndex YTKN I 0 8
+	FrameIndex YTKN J 0 9
+	FrameIndex YTKN K 0 10
+	FrameIndex YTKN L 0 11
+	FrameIndex YTKN M 0 12
+	FrameIndex YTKN N 0 13
+	FrameIndex YTKN O 0 14
+	FrameIndex YTKN P 0 15
+	FrameIndex YTKN Q 0 16
+	FrameIndex YTKN R 0 17
+	FrameIndex YTKN S 0 18
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "mechloader.md3"
+	SurfaceSkin 0 0 "loader_upper.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+
+	Scale -1.0 1.0 1.0
+	Offset -10.0 40.0 -10.0
+
+	//Ready
+	FrameIndex SAWG A 0 0
+
+	//Attack
+	FrameIndex SAWG B 0 1
+	FrameIndex SAWG C 0 2
+	FrameIndex SAWG D 0 3
+	FrameIndex SAWG E 0 4
+	FrameIndex SAWG F 0 5
+	FrameIndex SAWG G 0 6
+	FrameIndex SAWG H 0 7
+	FrameIndex SAWG I 0 8
+	FrameIndex SAWG J 0 9
+	FrameIndex SAWG K 0 10
+	FrameIndex SAWG L 0 11
+	FrameIndex SAWG M 0 12
+	FrameIndex SAWG N 0 13
+	FrameIndex SAWG O 0 14
+	
+	//Alt fire
+	FrameIndex SAWG P 0 15
+	FrameIndex SAWG Q 0 16
+	FrameIndex SAWG R 0 17
+	FrameIndex SAWG S 0 18
+	FrameIndex SAWG T 0 19
+	FrameIndex SAWG U 0 20
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "mechaloader_spark.md3"
+	//SurfaceSkin 0 0 "loader_spark_ball.png"
+	SurfaceSkin 0 0 "empty.png"
+	SurfaceSkin 0 1 "loader_spark_ball2.png"
+	SurfaceSkin 0 2 "loader_spark.png"
+
+	Scale -1.0 1.0 1.0
+	Offset -10.0 40.0 -10.0
+
+	//Ready
+	FrameIndex SAWS A 0 0
+	FrameIndex SAWS B 0 1
+	FrameIndex SAWS C 0 2
+	FrameIndex SAWS D 0 3
+	FrameIndex SAWS E 0 4
+	FrameIndex SAWS F 0 5
+	FrameIndex SAWS G 0 6
+	FrameIndex SAWS H 0 7
+	FrameIndex SAWS I 0 8
+	FrameIndex SAWS J 0 9
+	FrameIndex SAWS K 0 10
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "loader_pickup.md3"
+	SurfaceSkin 0 0 "loader_lower.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+	Model 1 "loader_lamp.md3"
+	Skin 1 "loader_lamp.jpg"
+
+	Scale 0.4 0.4 0.4
+	Offset 0.0 0.0 -4.0
+
+	//Ready
+	FrameIndex CSAW P 0 0
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "mechloader.md3"
+	SurfaceSkin 0 0 "loader_upper.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+
+	Scale -1.0 1.0 1.0
+	Offset -10.0 40.0 -10.0
+
+	//Ready
+	FrameIndex SAWG A 0 0
+
+	//Attack
+	FrameIndex SAWG B 0 1
+	FrameIndex SAWG C 0 2
+	FrameIndex SAWG D 0 3
+	FrameIndex SAWG E 0 4
+	FrameIndex SAWG F 0 5
+	FrameIndex SAWG G 0 6
+	FrameIndex SAWG H 0 7
+	FrameIndex SAWG I 0 8
+	FrameIndex SAWG J 0 9
+	FrameIndex SAWG K 0 10
+	FrameIndex SAWG L 0 11
+	FrameIndex SAWG M 0 12
+	FrameIndex SAWG N 0 13
+	FrameIndex SAWG O 0 14
+	
+	//Alt fire
+	FrameIndex SAWG P 0 15
+	FrameIndex SAWG Q 0 16
+	FrameIndex SAWG R 0 17
+	FrameIndex SAWG S 0 18
+	FrameIndex SAWG T 0 19
+	FrameIndex SAWG U 0 20
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "mechaloader_spark.md3"
+	//SurfaceSkin 0 0 "loader_spark_ball.png"
+	SurfaceSkin 0 0 "empty.png"
+	SurfaceSkin 0 1 "loader_spark_ball2.png"
+	SurfaceSkin 0 2 "loader_spark.png"
+
+	Scale -1.0 1.0 1.0
+	Offset -10.0 40.0 -10.0
+
+	//Ready
+	FrameIndex SAWS A 0 0
+	FrameIndex SAWS B 0 1
+	FrameIndex SAWS C 0 2
+	FrameIndex SAWS D 0 3
+	FrameIndex SAWS E 0 4
+	FrameIndex SAWS F 0 5
+	FrameIndex SAWS G 0 6
+	FrameIndex SAWS H 0 7
+	FrameIndex SAWS I 0 8
+	FrameIndex SAWS J 0 9
+	FrameIndex SAWS K 0 10
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "loader_pickup.md3"
+	SurfaceSkin 0 0 "loader_lower.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+	Model 1 "loader_lamp.md3"
+	Skin 1 "loader_lamp.jpg"
+
+	Scale 0.4 0.4 0.4
+	Offset 0.0 0.0 -4.0
+
+	//Ready
+	FrameIndex CSAW P 0 0
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "loader_pickup.md3"
+	SurfaceSkin 0 0 "loader_lower.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+	Model 1 "loader_lamp.md3"
+	Skin 1 "loader_lamp.jpg"
+
+	Scale 0.4 0.4 0.4
+	Offset 0.0 0.0 -4.0
+
+	//Ready
+	FrameIndex CSAW P 0 0
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "loader_pickup.md3"
+	SurfaceSkin 0 0 "loader_lower.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+	Model 1 "loader_lamp.md3"
+	Skin 1 "loader_lamp.jpg"
+
+	Scale 0.4 0.4 0.4
+	Offset 0.0 0.0 -4.0
+	
+	//Ready
+	FrameIndex CSAW P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	Skin 0 "m4a3.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+
+	//Ready
+	FrameIndex MM91 A 0 0
+	
+	//Fire
+	FrameIndex MM91 B 0 1
+	FrameIndex MM91 C 0 2
+	FrameIndex MM91 D 0 3
+	FrameIndex MM91 E 0 4
+	FrameIndex MM91 F 0 5
+	
+	//Reload
+	FrameIndex MM91 G 0 6
+	FrameIndex MM91 H 0 7
+	
+	
+	//Insert new clip
+	FrameIndex MM91 M 0 11
+	FrameIndex MM91 N 0 12
+	FrameIndex MM91 O 0 13
+	FrameIndex MM91 P 0 14
+	FrameIndex MM91 Q 0 15
+	FrameIndex MM91 R 0 16
+	FrameIndex MM91 S 0 17
+	FrameIndex MM91 T 0 18
+	FrameIndex MM91 U 0 19
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	SurfaceSkin 0 0 "m4a3.png"
+	SurfaceSkin 0 1 "m4a3.png"
+	SurfaceSkin 0 2 "m4a3.png"
+	SurfaceSkin 0 3 "m4a3.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+	
+	NOINTERPOLATION
+
+	//Drop clip
+	FrameIndex MM91 I 0 8
+	FrameIndex MM91 J 0 9
+	FrameIndex MM91 K 0 10
+	FrameIndex MM91 L 0 10
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "pistol_mf.md3"
+	Skin 0 "pistol_mf.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+
+	FrameIndex PSMF A 0 1
+	FrameIndex PSMF B 0 2
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	Skin 0 "m4a3.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+
+	//Ready
+	FrameIndex YM91 A 0 0
+	
+	//Fire
+	FrameIndex YM91 B 0 1
+	FrameIndex YM91 C 0 2
+	FrameIndex YM91 D 0 3
+	FrameIndex YM91 E 0 4
+	FrameIndex YM91 F 0 5
+	
+	//Reload
+	FrameIndex YM91 G 0 6
+	FrameIndex YM91 H 0 7
+	
+	//Drop clip
+	FrameIndex YM91 J 0 9
+	FrameIndex YM91 K 0 10
+	
+	//Insert new clip
+	FrameIndex YM91 M 0 11
+	FrameIndex YM91 N 0 12
+	FrameIndex YM91 O 0 13
+	FrameIndex YM91 P 0 14
+	FrameIndex YM91 Q 0 15
+	FrameIndex YM91 R 0 16
+	FrameIndex YM91 S 0 17
+	FrameIndex YM91 T 0 18
+	FrameIndex YM91 U 0 19
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	SurfaceSkin 0 0 "m4a3.png"
+	SurfaceSkin 0 1 "m4a3.png"
+	SurfaceSkin 0 2 "m4a3.png"
+	SurfaceSkin 0 3 "m4a3.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+	
+	NOINTERPOLATION
+	
+	//Drop clip
+	FrameIndex YM91 I 0 8
+	FrameIndex YM91 J 0 9
+	FrameIndex YM91 K 0 10
+	FrameIndex YM91 L 0 10
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "pistol_mf.md3"
+	Skin 0 "pistol_mf.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+
+	FrameIndex PSMF A 0 1
+	FrameIndex PSMF B 0 2
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	Skin 0 "m4a3.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+
+	//Ready
+	FrameIndex MM91 A 0 0
+	
+	//Fire
+	FrameIndex MM91 B 0 1
+	FrameIndex MM91 C 0 2
+	FrameIndex MM91 D 0 3
+	FrameIndex MM91 E 0 4
+	FrameIndex MM91 F 0 5
+	
+	//Reload
+	FrameIndex MM91 G 0 6
+	FrameIndex MM91 H 0 7
+	
+	//Insert new clip
+	FrameIndex MM91 M 0 11
+	FrameIndex MM91 N 0 12
+	FrameIndex MM91 O 0 13
+	FrameIndex MM91 P 0 14
+	FrameIndex MM91 Q 0 15
+	FrameIndex MM91 R 0 16
+	FrameIndex MM91 S 0 17
+	FrameIndex MM91 T 0 18
+	FrameIndex MM91 U 0 19
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	SurfaceSkin 0 0 "m4a3.png"
+	SurfaceSkin 0 1 "m4a3.png"
+	SurfaceSkin 0 2 "m4a3.png"
+	SurfaceSkin 0 3 "m4a3.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+	
+	NOINTERPOLATION
+	
+	//Drop clip
+	FrameIndex MM91 I 0 8
+	FrameIndex MM91 J 0 9
+	FrameIndex MM91 K 0 10
+	FrameIndex MM91 L 0 10
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "pistol_mf.md3"
+	Skin 0 "pistol_mf.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+
+	FrameIndex PSMF A 0 1
+	FrameIndex PSMF B 0 2
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	Skin 0 "m4a3.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+
+	//Ready
+	FrameIndex MM91 A 0 0
+	
+	//Fire
+	FrameIndex MM91 B 0 1
+	FrameIndex MM91 C 0 2
+	FrameIndex MM91 D 0 3
+	FrameIndex MM91 E 0 4
+	FrameIndex MM91 F 0 5
+	
+	//Reload
+	FrameIndex MM91 G 0 6
+	FrameIndex MM91 H 0 7
+	
+	//Insert new clip
+	FrameIndex MM91 M 0 11
+	FrameIndex MM91 N 0 12
+	FrameIndex MM91 O 0 13
+	FrameIndex MM91 P 0 14
+	FrameIndex MM91 Q 0 15
+	FrameIndex MM91 R 0 16
+	FrameIndex MM91 S 0 17
+	FrameIndex MM91 T 0 18
+	FrameIndex MM91 U 0 19
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	SurfaceSkin 0 0 "m4a3.png"
+	SurfaceSkin 0 1 "m4a3.png"
+	SurfaceSkin 0 2 "m4a3.png"
+	SurfaceSkin 0 3 "m4a3.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+	
+	NOINTERPOLATION
+	
+	//Drop clip
+	FrameIndex MM91 I 0 8
+	FrameIndex MM91 J 0 9
+	FrameIndex MM91 K 0 10
+	FrameIndex MM91 L 0 10
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "pistol_mf.md3"
+	Skin 0 "pistol_mf.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -29.0 -8.0
+
+	FrameIndex PSMF A 0 1
+	FrameIndex PSMF B 0 2
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b.md3"
+	Skin 0 "m260b.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex FLBF A 0 0
+	FrameIndex FLMT A 0 0
+
+	//Fire
+	FrameIndex FLMT B 0 1
+	FrameIndex FLMT C 0 2
+	FrameIndex FLMT D 0 3
+
+	//Reloading - drop canister
+	FrameIndex FLMT E 0 5
+	FrameIndex FLMT F 0 6
+	FrameIndex FLMT G 0 7
+	FrameIndex FLMT H 0 8
+	FrameIndex FLMT I 0 9
+
+	//Reloading - add new canister
+	FrameIndex FLMT L 0 11
+	FrameIndex FLMT M 0 12
+	FrameIndex FLMT N 0 13
+	FrameIndex FLMT O 0 14
+	FrameIndex FLMT P 0 15
+	FrameIndex FLMT Q 0 16
+	FrameIndex FLMT R 0 17
+	FrameIndex FLMT S 0 18
+	FrameIndex FLMT T 0 19
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b.md3"
+	SurfaceSkin 0 0 "m260b.png"
+	SurfaceSkin 0 1 "empty.png"
+	SurfaceSkin 0 2 "m260b.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex FLMT J 0 10
+	FrameIndex FLMT K 0 11
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b_pickup.md3"
+	Skin 0 "m260b.png"
+
+	Scale 2.5 2.5 2.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex WFLM P 0 0
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b.md3"
+	Skin 0 "m260b.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex YLAM A 0 0
+	FrameIndex YLAM E 0 0
+
+	//Fire
+	FrameIndex YLAM F 0 1
+	FrameIndex YLAM G 0 2
+	FrameIndex YLAM H 0 3
+
+	//Reloading - drop canister
+	FrameIndex FLMT E 0 5
+	FrameIndex FLMT F 0 6
+	FrameIndex FLMT G 0 7
+	FrameIndex FLMT H 0 8
+	FrameIndex FLMT I 0 9
+
+	//Reloading - add new canister
+	FrameIndex FLMT L 0 11
+	FrameIndex FLMT M 0 12
+	FrameIndex FLMT N 0 13
+	FrameIndex FLMT O 0 14
+	FrameIndex FLMT P 0 15
+	FrameIndex FLMT Q 0 16
+	FrameIndex FLMT R 0 17
+	FrameIndex FLMT S 0 18
+	FrameIndex FLMT T 0 19
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b.md3"
+	SurfaceSkin 0 0 "m260b.png"
+	SurfaceSkin 0 1 "empty.png"
+	SurfaceSkin 0 2 "m260b.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex FLMT J 0 10
+	FrameIndex FLMT K 0 11
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b_pickup.md3"
+	Skin 0 "m260b.png"
+
+	Scale 2.5 2.5 2.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex WFLM P 0 0
+}
+Model MS_alien_flamer
+{
+	Path "models/alien/flamer"
+	Model 0 "m260b_pickup.md3"
+	Skin 0 "m260b.png"
+
+	Scale 2.5 2.5 2.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex WFLM P 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale -1.7 1.7 1.7
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex STCF A 0 0
+	FrameIndex STCF B 0 0
+	FrameIndex STCG A 0 0
+
+	//Ready
+	FrameIndex STCG B 0 1
+	FrameIndex STCG C 0 2
+	FrameIndex STCG D 0 3
+	FrameIndex STCG E 0 4
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale 9.0 9.0 9.0
+	Offset 0.0 0.0 80.0
+	
+	ROTATING
+	ROTATION-SPEED 0.2
+
+	//Ready
+	FrameIndex STCP P 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale -1.7 1.7 1.7
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex STCF A 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale -1.7 1.7 1.7
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex YTCF A 0 0
+	FrameIndex YTCG A 0 0
+
+	//Ready
+	FrameIndex YTCG B 0 1
+	FrameIndex YTCG C 0 2
+	FrameIndex YTCG D 0 3
+	FrameIndex YTCG E 0 4
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale 9.0 9.0 9.0
+	Offset 0.0 0.0 80.0
+	
+	ROTATING
+	ROTATION-SPEED 0.2
+
+	//Ready
+	FrameIndex STCP P 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale 6.0 6.0 6.0
+	Offset 0.0 0.0 40.0
+	
+	ROTATING
+	ROTATION-SPEED 0.2
+
+	//Ready
+	FrameIndex STCG P 0 0
+}
+Model MS_alien_grenade
+{
+	Path "models/alien/grenade"
+	Model 0 "satchel_charge.md3"
+	SurfaceSkin 0 0 "satchel_cover.png"
+	SurfaceSkin 0 1 "satchel_pocket.png"
+	SurfaceSkin 0 2 "satchel.png"
+	SurfaceSkin 0 3 "satchel_charge.png"
+
+	Scale 1.0 1.0 1.0
+	Offset 0.0 0.0 7.0
+	
+	ROTATING
+	ROTATION-SPEED 0.2
+
+	//Ready
+	FrameIndex STCP P 0 0
+}
+Model MS_alien_knife
+{
+	Path "models/alien/knife"
+	Model 0 "knife.md3"
+	Skin 0 "knife.png"
+
+	Scale -0.65 0.65 0.65
+	Offset 0.0 -17.0 -7.0
+	
+	NOINTERPOLATION
+
+	//Ready
+	FrameIndex ATKN A 0 0
+
+	//Slash
+	FrameIndex ATKN B 0 1
+	FrameIndex ATKN C 0 2
+	FrameIndex ATKN D 0 3
+	FrameIndex ATKN E 0 4
+	FrameIndex ATKN F 0 5
+	FrameIndex ATKN G 0 6
+	FrameIndex ATKN H 0 7
+	FrameIndex ATKN I 0 8
+	FrameIndex ATKN J 0 9
+	FrameIndex ATKN K 0 10
+	FrameIndex ATKN L 0 11
+	FrameIndex ATKN M 0 12
+	FrameIndex ATKN N 0 13
+	FrameIndex ATKN O 0 14
+	FrameIndex ATKN P 0 15
+	FrameIndex ATKN Q 0 16
+	FrameIndex ATKN R 0 17
+	FrameIndex ATKN S 0 18
+}
+Model MS_alien_knife
+{
+	Path "models/alien/knife"
+	Model 0 "knife.md3"
+	Skin 0 "knife.png"
+
+	Scale -0.65 0.65 0.65
+	Offset 0.0 -17.0 -7.0
+	
+	NOINTERPOLATION
+
+	//Ready
+	FrameIndex YTKN A 0 0
+
+	//Slash
+	FrameIndex YTKN B 0 1
+	FrameIndex YTKN C 0 2
+	FrameIndex YTKN D 0 3
+	FrameIndex YTKN E 0 4
+	FrameIndex YTKN F 0 5
+	FrameIndex YTKN G 0 6
+	FrameIndex YTKN H 0 7
+	FrameIndex YTKN I 0 8
+	FrameIndex YTKN J 0 9
+	FrameIndex YTKN K 0 10
+	FrameIndex YTKN L 0 11
+	FrameIndex YTKN M 0 12
+	FrameIndex YTKN N 0 13
+	FrameIndex YTKN O 0 14
+	FrameIndex YTKN P 0 15
+	FrameIndex YTKN Q 0 16
+	FrameIndex YTKN R 0 17
+	FrameIndex YTKN S 0 18
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "mechloader.md3"
+	SurfaceSkin 0 0 "loader_grate.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_upper.png"
+
+	Scale -1.0 1.0 1.0
+	Offset -10.0 40.0 -10.0
+
+	//Ready
+	FrameIndex SAWG A 0 0
+
+	//Attack
+	FrameIndex SAWG B 0 1
+	FrameIndex SAWG C 0 2
+	FrameIndex SAWG D 0 3
+	FrameIndex SAWG E 0 4
+	FrameIndex SAWG F 0 5
+	FrameIndex SAWG G 0 6
+	FrameIndex SAWG H 0 7
+	FrameIndex SAWG I 0 8
+	FrameIndex SAWG J 0 9
+	FrameIndex SAWG K 0 10
+	FrameIndex SAWG L 0 11
+	FrameIndex SAWG M 0 12
+	FrameIndex SAWG N 0 13
+	FrameIndex SAWG O 0 14
+	
+	//Alt fire
+	FrameIndex SAWG P 0 15
+	FrameIndex SAWG Q 0 16
+	FrameIndex SAWG R 0 17
+	FrameIndex SAWG S 0 18
+	FrameIndex SAWG T 0 19
+	FrameIndex SAWG U 0 20
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "mechaloader_spark.md3"
+	//SurfaceSkin 0 0 "loader_spark_ball.png"
+	SurfaceSkin 0 0 "empty.png"
+	SurfaceSkin 0 1 "loader_spark_ball2.png"
+	SurfaceSkin 0 2 "loader_spark.png"
+
+	Scale -1.0 1.0 1.0
+	Offset -10.0 40.0 -10.0
+
+	//Ready
+	FrameIndex SAWS A 0 0
+	FrameIndex SAWS B 0 1
+	FrameIndex SAWS C 0 2
+	FrameIndex SAWS D 0 3
+	FrameIndex SAWS E 0 4
+	FrameIndex SAWS F 0 5
+	FrameIndex SAWS G 0 6
+	FrameIndex SAWS H 0 7
+	FrameIndex SAWS I 0 8
+	FrameIndex SAWS J 0 9
+	FrameIndex SAWS K 0 10
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "loader_pickup.md3"
+	SurfaceSkin 0 0 "loader_lower.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+	Model 1 "loader_lamp.md3"
+	Skin 1 "loader_lamp.jpg"
+
+	Scale 0.4 0.4 0.4
+	Offset 0.0 0.0 -4.0
+
+	//Ready
+	FrameIndex CSAW P 0 0
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "mechloader.md3"
+	SurfaceSkin 0 0 "loader_grate.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_upper.png"
+
+	Scale -1.0 1.0 1.0
+	Offset -10.0 40.0 -10.0
+
+	//Ready
+	FrameIndex SAWG A 0 0
+
+	//Attack
+	FrameIndex SAWG B 0 1
+	FrameIndex SAWG C 0 2
+	FrameIndex SAWG D 0 3
+	FrameIndex SAWG E 0 4
+	FrameIndex SAWG F 0 5
+	FrameIndex SAWG G 0 6
+	FrameIndex SAWG H 0 7
+	FrameIndex SAWG I 0 8
+	FrameIndex SAWG J 0 9
+	FrameIndex SAWG K 0 10
+	FrameIndex SAWG L 0 11
+	FrameIndex SAWG M 0 12
+	FrameIndex SAWG N 0 13
+	FrameIndex SAWG O 0 14
+	
+	//Alt fire
+	FrameIndex SAWG P 0 15
+	FrameIndex SAWG Q 0 16
+	FrameIndex SAWG R 0 17
+	FrameIndex SAWG S 0 18
+	FrameIndex SAWG T 0 19
+	FrameIndex SAWG U 0 20
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "mechaloader_spark.md3"
+	//SurfaceSkin 0 0 "loader_spark_ball.png"
+	SurfaceSkin 0 0 "empty.png"
+	SurfaceSkin 0 1 "loader_spark_ball2.png"
+	SurfaceSkin 0 2 "loader_spark.png"
+
+	Scale -1.0 1.0 1.0
+	Offset -10.0 40.0 -10.0
+
+	//Ready
+	FrameIndex SAWS A 0 0
+	FrameIndex SAWS B 0 1
+	FrameIndex SAWS C 0 2
+	FrameIndex SAWS D 0 3
+	FrameIndex SAWS E 0 4
+	FrameIndex SAWS F 0 5
+	FrameIndex SAWS G 0 6
+	FrameIndex SAWS H 0 7
+	FrameIndex SAWS I 0 8
+	FrameIndex SAWS J 0 9
+	FrameIndex SAWS K 0 10
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "loader_pickup.md3"
+	SurfaceSkin 0 0 "loader_lower.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+	Model 1 "loader_lamp.md3"
+	Skin 1 "loader_lamp.jpg"
+
+	Scale 0.4 0.4 0.4
+	Offset 0.0 0.0 -4.0
+
+	//Ready
+	FrameIndex CSAW P 0 0
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "loader_pickup.md3"
+	SurfaceSkin 0 0 "loader_lower.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+	Model 1 "loader_lamp.md3"
+	Skin 1 "loader_lamp.jpg"
+
+	Scale 0.4 0.4 0.4
+	Offset 0.0 0.0 -4.0
+
+	//Ready
+	FrameIndex CSAW P 0 0
+}
+Model MS_alien_mech
+{
+	Path "models/alien/mech"
+	Model 0 "loader_pickup.md3"
+	SurfaceSkin 0 0 "loader_lower.png"
+	SurfaceSkin 0 1 "loader_upper.png"
+	SurfaceSkin 0 2 "loader_grate.png"
+	Model 1 "loader_lamp.md3"
+	Skin 1 "loader_lamp.jpg"
+
+	Scale 0.4 0.4 0.4
+	Offset 0.0 0.0 -4.0
+	
+	//Ready
+	FrameIndex CSAW P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	Skin 0 "m4a3.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+
+	//Ready
+	FrameIndex MM91 A 0 0
+	
+	//Fire
+	FrameIndex MM91 B 0 1
+	FrameIndex MM91 C 0 2
+	FrameIndex MM91 D 0 3
+	FrameIndex MM91 E 0 4
+	FrameIndex MM91 F 0 5
+	
+	//Reload
+	FrameIndex MM91 G 0 6
+	FrameIndex MM91 H 0 7
+	
+	
+	//Insert new clip
+	FrameIndex MM91 M 0 11
+	FrameIndex MM91 N 0 12
+	FrameIndex MM91 O 0 13
+	FrameIndex MM91 P 0 14
+	FrameIndex MM91 Q 0 15
+	FrameIndex MM91 R 0 16
+	FrameIndex MM91 S 0 17
+	FrameIndex MM91 T 0 18
+	FrameIndex MM91 U 0 19
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	SurfaceSkin 0 0 "m4a3.png"
+	SurfaceSkin 0 1 "m4a3.png"
+	SurfaceSkin 0 2 "m4a3.png"
+	SurfaceSkin 0 3 "m4a3.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+	
+	NOINTERPOLATION
+
+	//Drop clip
+	FrameIndex MM91 I 0 8
+	FrameIndex MM91 J 0 9
+	FrameIndex MM91 K 0 10
+	FrameIndex MM91 L 0 10
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "pistol_mf.md3"
+	Skin 0 "pistol_mf.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+
+	FrameIndex PSMF A 0 1
+	FrameIndex PSMF B 0 2
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	Skin 0 "m4a3.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+
+	//Ready
+	FrameIndex YM91 A 0 0
+	
+	//Fire
+	FrameIndex YM91 B 0 1
+	FrameIndex YM91 C 0 2
+	FrameIndex YM91 D 0 3
+	FrameIndex YM91 E 0 4
+	FrameIndex YM91 F 0 5
+	
+	//Reload
+	FrameIndex YM91 G 0 6
+	FrameIndex YM91 H 0 7
+	
+	//Drop clip
+	FrameIndex YM91 J 0 9
+	FrameIndex YM91 K 0 10
+	
+	//Insert new clip
+	FrameIndex YM91 M 0 11
+	FrameIndex YM91 N 0 12
+	FrameIndex YM91 O 0 13
+	FrameIndex YM91 P 0 14
+	FrameIndex YM91 Q 0 15
+	FrameIndex YM91 R 0 16
+	FrameIndex YM91 S 0 17
+	FrameIndex YM91 T 0 18
+	FrameIndex YM91 U 0 19
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	SurfaceSkin 0 0 "m4a3.png"
+	SurfaceSkin 0 1 "m4a3.png"
+	SurfaceSkin 0 2 "m4a3.png"
+	SurfaceSkin 0 3 "m4a3.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+	
+	NOINTERPOLATION
+	
+	//Drop clip
+	FrameIndex YM91 I 0 8
+	FrameIndex YM91 J 0 9
+	FrameIndex YM91 K 0 10
+	FrameIndex YM91 L 0 10
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "pistol_mf.md3"
+	Skin 0 "pistol_mf.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+
+	FrameIndex PSMF A 0 1
+	FrameIndex PSMF B 0 2
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	Skin 0 "m4a3.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+
+	//Ready
+	FrameIndex MM91 A 0 0
+	
+	//Fire
+	FrameIndex MM91 B 0 1
+	FrameIndex MM91 C 0 2
+	FrameIndex MM91 D 0 3
+	FrameIndex MM91 E 0 4
+	FrameIndex MM91 F 0 5
+	
+	//Reload
+	FrameIndex MM91 G 0 6
+	FrameIndex MM91 H 0 7
+	
+	//Insert new clip
+	FrameIndex MM91 M 0 11
+	FrameIndex MM91 N 0 12
+	FrameIndex MM91 O 0 13
+	FrameIndex MM91 P 0 14
+	FrameIndex MM91 Q 0 15
+	FrameIndex MM91 R 0 16
+	FrameIndex MM91 S 0 17
+	FrameIndex MM91 T 0 18
+	FrameIndex MM91 U 0 19
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	SurfaceSkin 0 0 "m4a3.png"
+	SurfaceSkin 0 1 "m4a3.png"
+	SurfaceSkin 0 2 "m4a3.png"
+	SurfaceSkin 0 3 "m4a3.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+	
+	NOINTERPOLATION
+	
+	//Drop clip
+	FrameIndex MM91 I 0 8
+	FrameIndex MM91 J 0 9
+	FrameIndex MM91 K 0 10
+	FrameIndex MM91 L 0 10
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "pistol_mf.md3"
+	Skin 0 "pistol_mf.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+
+	FrameIndex PSMF A 0 1
+	FrameIndex PSMF B 0 2
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	Skin 0 "m4a3.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+
+	//Ready
+	FrameIndex MM91 A 0 0
+	
+	//Fire
+	FrameIndex MM91 B 0 1
+	FrameIndex MM91 C 0 2
+	FrameIndex MM91 D 0 3
+	FrameIndex MM91 E 0 4
+	FrameIndex MM91 F 0 5
+	
+	//Reload
+	FrameIndex MM91 G 0 6
+	FrameIndex MM91 H 0 7
+	
+	//Insert new clip
+	FrameIndex MM91 M 0 11
+	FrameIndex MM91 N 0 12
+	FrameIndex MM91 O 0 13
+	FrameIndex MM91 P 0 14
+	FrameIndex MM91 Q 0 15
+	FrameIndex MM91 R 0 16
+	FrameIndex MM91 S 0 17
+	FrameIndex MM91 T 0 18
+	FrameIndex MM91 U 0 19
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3.md3"
+	SurfaceSkin 0 0 "m4a3.png"
+	SurfaceSkin 0 1 "m4a3.png"
+	SurfaceSkin 0 2 "m4a3.png"
+	SurfaceSkin 0 3 "m4a3.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+	
+	NOINTERPOLATION
+	
+	//Drop clip
+	FrameIndex MM91 I 0 8
+	FrameIndex MM91 J 0 9
+	FrameIndex MM91 K 0 10
+	FrameIndex MM91 L 0 10
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "pistol_mf.md3"
+	Skin 0 "pistol_mf.png"
+
+	Scale -0.82 0.82 0.82
+	Offset 0.0 -33.0 -4.0
+
+	FrameIndex PSMF A 0 1
+	FrameIndex PSMF B 0 2
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_pistol
+{
+	Path "models/alien/pistol"
+	Model 0 "m4a3_pickup.md3"
+	Skin 0 "m4a3.png"
+
+	Scale 3.5 3.5 3.5
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+	
+	FrameIndex M4A3 P 0 0
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	Skin 0 "m41a.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex PULS A 0 0
+
+	//Fire
+	FrameIndex PULS B 0 1
+	FrameIndex PULS C 0 2
+	FrameIndex PULS D 0 3
+
+	//Fire grenade
+	FrameIndex PULS E 0 4
+	FrameIndex PULS F 0 5
+	FrameIndex PULS G 0 6
+	FrameIndex PULS H 0 7
+	FrameIndex PULS I 0 8
+	
+	//Pump
+	FrameIndex PULS J 0 9
+	FrameIndex PULS K 0 10
+	FrameIndex PULS L 0 11
+	FrameIndex PULS M 0 12
+	FrameIndex PULS N 0 13
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	Skin 0 "m41a.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	FrameIndex PLSR A 0 14
+	FrameIndex PLSR B 0 15
+	
+	//Insert new mag
+	FrameIndex PLSR J 0 22
+	FrameIndex PLSR K 0 23
+	FrameIndex PLSR L 0 24
+	FrameIndex PLSR M 0 25
+	FrameIndex PLSR N 0 26
+	FrameIndex PLSR O 0 27
+	
+	//End reloading
+	FrameIndex PLSR P 0 28
+	FrameIndex PLSR Q 0 29
+	FrameIndex PLSR R 0 30
+	FrameIndex PLSR S 0 31
+	FrameIndex PLSR T 0 32
+	FrameIndex PLSR U 0 33
+	FrameIndex PLSR V 0 34
+	FrameIndex PLSR W 0 35
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	SurfaceSkin 0 0 "m41a.png"
+	SurfaceSkin 0 1 "m41a.png"
+	SurfaceSkin 0 2 "m41a.png"
+	SurfaceSkin 0 3 "m41a.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+	
+	NOINTERPOLATION
+	
+	//Drop mag
+	FrameIndex PLSR C 0 16
+	FrameIndex PLSR D 0 17
+	FrameIndex PLSR E 0 18
+	FrameIndex PLSR F 0 19
+	FrameIndex PLSR G 0 20
+	FrameIndex PLSR H 0 21
+	FrameIndex PLSR I 0 22
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "pulse_mf.md3"
+	Skin 0 "pulse_mf.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	//bullets
+	FrameIndex PLMF A 0 1
+	Skin 0 "pulse_mf2.png"
+	FrameIndex PLMF B 0 2
+	Skin 0 "pulse_mf3.png"
+	FrameIndex PLMF C 0 3
+	
+	//grenade
+	Skin 0 "pulse_mf2.png"
+	FrameIndex PLMF D 0 4
+	Skin 0 "pulse_mf3.png"
+	FrameIndex PLMF E 0 5
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a_pickup.md3"
+	Skin 0 "m41a.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex PLSP P 0 0
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	Skin 0 "m41a.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex YULS A 0 0
+
+	//Fire
+	FrameIndex YULS B 0 1
+	FrameIndex YULS C 0 2
+	FrameIndex YULS D 0 3
+
+	//Fire grenade
+	FrameIndex YULS E 0 4
+	FrameIndex YULS F 0 5
+	FrameIndex YULS G 0 6
+	FrameIndex YULS H 0 7
+	FrameIndex YULS I 0 8
+	
+	//Pump
+	FrameIndex YULS J 0 9
+	FrameIndex YULS K 0 10
+	FrameIndex YULS L 0 11
+	FrameIndex YULS M 0 12
+	FrameIndex YULS N 0 13
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	Skin 0 "m41a.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	FrameIndex PLSR A 0 14
+	FrameIndex PLSR B 0 15
+	
+	//Insert new mag
+	FrameIndex PLSR J 0 22
+	FrameIndex PLSR K 0 23
+	FrameIndex PLSR L 0 24
+	FrameIndex PLSR M 0 25
+	FrameIndex PLSR N 0 26
+	FrameIndex PLSR O 0 27
+	
+	//End reloading
+	FrameIndex PLSR P 0 28
+	FrameIndex PLSR Q 0 29
+	FrameIndex PLSR R 0 30
+	FrameIndex PLSR S 0 31
+	FrameIndex PLSR T 0 32
+	FrameIndex PLSR U 0 33
+	FrameIndex PLSR V 0 34
+	FrameIndex PLSR W 0 35
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	SurfaceSkin 0 0 "m41a.png"
+	SurfaceSkin 0 1 "m41a.png"
+	SurfaceSkin 0 2 "m41a.png"
+	SurfaceSkin 0 3 "m41a.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+	
+	NOINTERPOLATION
+	
+	//Drop mag
+	FrameIndex PLSR C 0 16
+	FrameIndex PLSR D 0 17
+	FrameIndex PLSR E 0 18
+	FrameIndex PLSR F 0 19
+	FrameIndex PLSR G 0 20
+	FrameIndex PLSR H 0 21
+	FrameIndex PLSR I 0 22
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "pulse_mf.md3"
+	Skin 0 "pulse_mf.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -33.0 -5.0
+
+	//bullets
+	FrameIndex PLMF A 0 1
+	Skin 0 "pulse_mf2.png"
+	FrameIndex PLMF B 0 2
+	Skin 0 "pulse_mf3.png"
+	FrameIndex PLMF C 0 3
+	
+	//grenade
+	Skin 0 "pulse_mf2.png"
+	FrameIndex PLMF D 0 4
+	Skin 0 "pulse_mf3.png"
+	FrameIndex PLMF E 0 5
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a_pickup.md3"
+	Skin 0 "m41a.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex PLSP P 0 0
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a_pickup.md3"
+	Skin 0 "m41a.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex PLSP P 0 0
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2.md3"
+	Skin 0 "m37a2.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -34.0 -4.0
+
+	//Ready
+	FrameIndex ATSG A 0 0
+
+	//Fire
+	FrameIndex ATSG B 0 1
+	FrameIndex ATSG C 0 2
+	FrameIndex ATSG D 0 3
+
+	//Pump
+	FrameIndex ATSG E 0 4
+	FrameIndex ATSG F 0 5
+	FrameIndex ATSG G 0 6
+	FrameIndex ATSG H 0 7
+	FrameIndex ATSG I 0 8
+	FrameIndex ATSG J 0 9
+	FrameIndex ATSG K 0 10
+	FrameIndex ATSG L 0 11
+	FrameIndex ATSG M 0 12
+	FrameIndex ATSG N 0 13
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2.md3"
+	SurfaceSkin 0 0 "m37a2.png"
+	SurfaceSkin 0 1 "m37a2.png"
+	SurfaceSkin 0 2 "m37a2.png"
+	SurfaceSkin 0 3 "shotgun_shell.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -34.0 -4.0
+
+	//Ready
+	FrameIndex ATSR A 0 14
+	FrameIndex ATSR B 0 15
+	FrameIndex ATSR C 0 16
+	FrameIndex ATSR D 0 17
+	FrameIndex ATSR E 0 18
+	FrameIndex ATSR F 0 19
+	FrameIndex ATSR G 0 20
+	FrameIndex ATSR H 0 21
+	FrameIndex ATSR I 0 22
+	FrameIndex ATSR J 0 23
+	FrameIndex ATSR K 0 24
+	FrameIndex ATSR L 0 25
+	FrameIndex ATSR M 0 26
+	FrameIndex ATSR N 0 27
+	FrameIndex ATSR O 0 28
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "shotgun_mf.md3"
+	Skin 0 "shotgun_mf.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -34.0 -4.0
+
+	//Ready
+	FrameIndex SGMF A 0 1
+	FrameIndex SGMF B 0 2
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2_pickup.md3"
+	Skin 0 "m37a2.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SHOT P 0 0
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2.md3"
+	Skin 0 "m37a2.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -34.0 -4.0
+
+	//Ready
+	FrameIndex YTSG A 0 0
+
+	//Fire
+	FrameIndex YTSG B 0 1
+	FrameIndex YTSG C 0 2
+	FrameIndex YTSG D 0 3
+
+	//Pump
+	FrameIndex YTSG E 0 4
+	FrameIndex YTSG F 0 5
+	FrameIndex YTSG G 0 6
+	FrameIndex YTSG H 0 7
+	FrameIndex YTSG I 0 8
+	FrameIndex YTSG J 0 9
+	FrameIndex YTSG K 0 10
+	FrameIndex YTSG L 0 11
+	FrameIndex YTSG M 0 12
+	FrameIndex YTSG N 0 13
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2.md3"
+	SurfaceSkin 0 0 "m37a2.png"
+	SurfaceSkin 0 1 "m37a2.png"
+	SurfaceSkin 0 2 "m37a2.png"
+	SurfaceSkin 0 3 "shotgun_shell.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -34.0 -4.0
+
+	//Ready
+	FrameIndex YTSR A 0 14
+	FrameIndex YTSR B 0 15
+	FrameIndex YTSR C 0 16
+	FrameIndex YTSR D 0 17
+	FrameIndex YTSR E 0 18
+	FrameIndex YTSR F 0 19
+	FrameIndex YTSR G 0 20
+	FrameIndex YTSR H 0 21
+	FrameIndex YTSR I 0 22
+	FrameIndex YTSR J 0 23
+	FrameIndex YTSR K 0 24
+	FrameIndex YTSR L 0 25
+	FrameIndex YTSR M 0 26
+	FrameIndex YTSR N 0 27
+	FrameIndex YTSR O 0 28
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "shotgun_mf.md3"
+	Skin 0 "shotgun_mf.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -34.0 -4.0
+
+	//Ready
+	FrameIndex SGMF A 0 1
+	FrameIndex SGMF B 0 2
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2_pickup.md3"
+	Skin 0 "m37a2.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SHOT P 0 0
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2_pickup.md3"
+	Skin 0 "m37a2.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SHOT P 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex SMRT A 0 0
+
+	//Fire
+	FrameIndex SMRT B 0 0
+	FrameIndex SMRT C 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56_green.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+
+	//Ready - auto mode
+	FrameIndex SMRT G 0 0
+
+	//Fire - auto mode
+	FrameIndex SMRT H 0 0
+	FrameIndex SMRT I 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56_red.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+
+	//Ready - auto mode
+	FrameIndex SMRT J 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+	
+	//Reloading
+	FrameIndex SMRR A 0 4
+	FrameIndex SMRR B 0 5
+	FrameIndex SMRR C 0 6
+	FrameIndex SMRR D 0 7
+	FrameIndex SMRR E 0 8
+	FrameIndex SMRR F 0 9
+	FrameIndex SMRR G 0 10
+	FrameIndex SMRR H 0 11
+	FrameIndex SMRR I 0 12
+	FrameIndex SMRR J 0 13
+	FrameIndex SMRR K 0 14
+	FrameIndex SMRR L 0 15
+	FrameIndex SMRR M 0 16
+	FrameIndex SMRR N 0 17
+	
+	//Insert new mag
+	FrameIndex SMRR P 0 18
+	FrameIndex SMRR Q 0 19
+	FrameIndex SMRR R 0 20
+	FrameIndex SMRR S 0 21
+	FrameIndex SMRR T 0 22
+	FrameIndex SMRR U 0 23
+	FrameIndex SMRR V 0 24
+	FrameIndex SMRR W 0 25
+	FrameIndex SMRR X 0 26
+	FrameIndex SMRR Y 0 27
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	SurfaceSkin 0 0 "m56.png"
+	SurfaceSkin 0 1 "m56.png"
+	SurfaceSkin 0 2 "m56.png"
+	SurfaceSkin 0 3 "empty.png"
+	SurfaceSkin 0 4 "empty.png"
+	SurfaceSkin 0 5 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+	
+	FrameIndex SMRR O 0 17
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "smart_hud.md3"
+	Skin 0 "smart_mode1.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+	
+	NOINTERPOLATION
+	
+	FrameIndex SMHD A 0 0
+	Skin 0 "smart_mode2.png"
+	FrameIndex SMHD B 0 1
+	Offset 0.0 -60.0 -5.0
+	FrameIndex SMHD C 0 1
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "smart_mf.md3"
+	Skin 0 "smart_mf.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+	
+	FrameIndex SMMF A 0 0
+	Skin 0 "smart_mf2.png"
+	FrameIndex SMMF B 0 0
+	Skin 0 "smart_mf3.png"
+	FrameIndex SMMF C 0 0
+	Skin 0 "smart_mf4.png"
+	FrameIndex SMMF D 0 0
+	Skin 0 "smart_mf5.png"
+	FrameIndex SMMF E 0 0
+	Skin 0 "smart_mf6.png"
+	FrameIndex SMMF F 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56_pickup.md3"
+	Skin 0 "m56.png"
+
+	Scale 1.8 1.8 1.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SMTG P 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+
+	//Ready
+	FrameIndex YMRT A 0 0
+
+	//Fire
+	FrameIndex YMRT B 0 0
+	FrameIndex YMRT C 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56_green.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+
+	//Ready - auto mode
+	FrameIndex YMRT G 0 0
+
+	//Fire - auto mode
+	FrameIndex YMRT H 0 0
+	FrameIndex YMRT I 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56_red.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+
+	//Ready - auto mode
+	FrameIndex YMRT J 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+	
+	//Reloading
+	FrameIndex SMRR A 0 4
+	FrameIndex SMRR B 0 5
+	FrameIndex SMRR C 0 6
+	FrameIndex SMRR D 0 7
+	FrameIndex SMRR E 0 8
+	FrameIndex SMRR F 0 9
+	FrameIndex SMRR G 0 10
+	FrameIndex SMRR H 0 11
+	FrameIndex SMRR I 0 12
+	FrameIndex SMRR J 0 13
+	FrameIndex SMRR K 0 14
+	FrameIndex SMRR L 0 15
+	FrameIndex SMRR M 0 16
+	FrameIndex SMRR N 0 17
+	
+	//Insert new mag
+	FrameIndex SMRR P 0 18
+	FrameIndex SMRR Q 0 19
+	FrameIndex SMRR R 0 20
+	FrameIndex SMRR S 0 21
+	FrameIndex SMRR T 0 22
+	FrameIndex SMRR U 0 23
+	FrameIndex SMRR V 0 24
+	FrameIndex SMRR W 0 25
+	FrameIndex SMRR X 0 26
+	FrameIndex SMRR Y 0 27
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	SurfaceSkin 0 0 "m56.png"
+	SurfaceSkin 0 1 "m56.png"
+	SurfaceSkin 0 2 "m56.png"
+	SurfaceSkin 0 3 "empty.png"
+	SurfaceSkin 0 4 "empty.png"
+	SurfaceSkin 0 5 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+	
+	FrameIndex SMRR O 0 17
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "smart_hud.md3"
+	Skin 0 "smart_mode1.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+	
+	NOINTERPOLATION
+	
+	FrameIndex SMHD A 0 0
+	Skin 0 "smart_mode2.png"
+	FrameIndex SMHD B 0 1
+	Offset 0.0 -60.0 -5.0
+	FrameIndex SMHD C 0 1
+	Skin 0 "empty.png"
+	FrameIndex SMHD D 0 1
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "smart_mf.md3"
+	Skin 0 "smart_mf.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -33.0 -5.0
+	
+	//Reloading
+	FrameIndex SMMF A 0 0
+	Skin 0 "smart_mf2.png"
+	FrameIndex SMMF B 0 0
+	Skin 0 "smart_mf3.png"
+	FrameIndex SMMF C 0 0
+	Skin 0 "smart_mf4.png"
+	FrameIndex SMMF D 0 0
+	Skin 0 "smart_mf5.png"
+	FrameIndex SMMF E 0 0
+	Skin 0 "smart_mf6.png"
+	FrameIndex SMMF F 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56_pickup.md3"
+	Skin 0 "m56.png"
+
+	Scale 1.8 1.8 1.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SMTG P 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56_pickup.md3"
+	Skin 0 "m56.png"
+
+	Scale 1.8 1.8 1.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SMTG P 0 0
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	Skin 0 "m41a.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -9.0
+
+	//Ready
+	FrameIndex PULS A 0 0
+
+	//Fire
+	FrameIndex PULS B 0 1
+	FrameIndex PULS C 0 2
+	FrameIndex PULS D 0 3
+
+	//Fire grenade
+	FrameIndex PULS E 0 4
+	FrameIndex PULS F 0 5
+	FrameIndex PULS G 0 6
+	FrameIndex PULS H 0 7
+	FrameIndex PULS I 0 8
+	
+	//Pump
+	FrameIndex PULS J 0 9
+	FrameIndex PULS K 0 10
+	FrameIndex PULS L 0 11
+	FrameIndex PULS M 0 12
+	FrameIndex PULS N 0 13
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	Skin 0 "m41a.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -9.0
+
+	FrameIndex PLSR A 0 14
+	FrameIndex PLSR B 0 15
+	
+	//Insert new mag
+	FrameIndex PLSR J 0 22
+	FrameIndex PLSR K 0 23
+	FrameIndex PLSR L 0 24
+	FrameIndex PLSR M 0 25
+	FrameIndex PLSR N 0 26
+	FrameIndex PLSR O 0 27
+	
+	//End reloading
+	FrameIndex PLSR P 0 28
+	FrameIndex PLSR Q 0 29
+	FrameIndex PLSR R 0 30
+	FrameIndex PLSR S 0 31
+	FrameIndex PLSR T 0 32
+	FrameIndex PLSR U 0 33
+	FrameIndex PLSR V 0 34
+	FrameIndex PLSR W 0 35
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	SurfaceSkin 0 0 "m41a.png"
+	SurfaceSkin 0 1 "m41a.png"
+	SurfaceSkin 0 2 "m41a.png"
+	SurfaceSkin 0 3 "m41a.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -9.0
+	
+	NOINTERPOLATION
+	
+	//Drop mag
+	FrameIndex PLSR C 0 16
+	FrameIndex PLSR D 0 17
+	FrameIndex PLSR E 0 18
+	FrameIndex PLSR F 0 19
+	FrameIndex PLSR G 0 20
+	FrameIndex PLSR H 0 21
+	FrameIndex PLSR I 0 22
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "pulse_mf.md3"
+	Skin 0 "pulse_mf.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -9.0
+
+	//bullets
+	FrameIndex PLMF A 0 1
+	Skin 0 "pulse_mf2.png"
+	FrameIndex PLMF B 0 2
+	Skin 0 "pulse_mf3.png"
+	FrameIndex PLMF C 0 3
+	
+	//grenade
+	Skin 0 "pulse_mf2.png"
+	FrameIndex PLMF D 0 4
+	Skin 0 "pulse_mf3.png"
+	FrameIndex PLMF E 0 5
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a_pickup.md3"
+	Skin 0 "m41a.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex PLSP P 0 0
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	Skin 0 "m41a.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -9.0
+
+	//Ready
+	FrameIndex YULS A 0 0
+
+	//Fire
+	FrameIndex YULS B 0 1
+	FrameIndex YULS C 0 2
+	FrameIndex YULS D 0 3
+
+	//Fire grenade
+	FrameIndex YULS E 0 4
+	FrameIndex YULS F 0 5
+	FrameIndex YULS G 0 6
+	FrameIndex YULS H 0 7
+	FrameIndex YULS I 0 8
+	
+	//Pump
+	FrameIndex YULS J 0 9
+	FrameIndex YULS K 0 10
+	FrameIndex YULS L 0 11
+	FrameIndex YULS M 0 12
+	FrameIndex YULS N 0 13
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	Skin 0 "m41a.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -9.0
+
+	FrameIndex PLSR A 0 14
+	FrameIndex PLSR B 0 15
+	
+	//Insert new mag
+	FrameIndex PLSR J 0 22
+	FrameIndex PLSR K 0 23
+	FrameIndex PLSR L 0 24
+	FrameIndex PLSR M 0 25
+	FrameIndex PLSR N 0 26
+	FrameIndex PLSR O 0 27
+	
+	//End reloading
+	FrameIndex PLSR P 0 28
+	FrameIndex PLSR Q 0 29
+	FrameIndex PLSR R 0 30
+	FrameIndex PLSR S 0 31
+	FrameIndex PLSR T 0 32
+	FrameIndex PLSR U 0 33
+	FrameIndex PLSR V 0 34
+	FrameIndex PLSR W 0 35
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a.md3"
+	SurfaceSkin 0 0 "m41a.png"
+	SurfaceSkin 0 1 "m41a.png"
+	SurfaceSkin 0 2 "m41a.png"
+	SurfaceSkin 0 3 "m41a.png"
+	SurfaceSkin 0 4 "empty.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -9.0
+	
+	NOINTERPOLATION
+	
+	//Drop mag
+	FrameIndex PLSR C 0 16
+	FrameIndex PLSR D 0 17
+	FrameIndex PLSR E 0 18
+	FrameIndex PLSR F 0 19
+	FrameIndex PLSR G 0 20
+	FrameIndex PLSR H 0 21
+	FrameIndex PLSR I 0 22
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "pulse_mf.md3"
+	Skin 0 "pulse_mf.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -9.0
+
+	//bullets
+	FrameIndex PLMF A 0 1
+	Skin 0 "pulse_mf2.png"
+	FrameIndex PLMF B 0 2
+	Skin 0 "pulse_mf3.png"
+	FrameIndex PLMF C 0 3
+	
+	//grenade
+	Skin 0 "pulse_mf2.png"
+	FrameIndex PLMF D 0 4
+	Skin 0 "pulse_mf3.png"
+	FrameIndex PLMF E 0 5
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a_pickup.md3"
+	Skin 0 "m41a.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex PLSP P 0 0
+}
+Model MS_alien_rifle
+{
+	Path "models/alien/rifle"
+	Model 0 "m41a_pickup.md3"
+	Skin 0 "m41a.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex PLSP P 0 0
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2.md3"
+	Skin 0 "m37a2.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex ATSG A 0 0
+
+	//Fire
+	FrameIndex ATSG B 0 1
+	FrameIndex ATSG C 0 2
+	FrameIndex ATSG D 0 3
+
+	//Pump
+	FrameIndex ATSG E 0 4
+	FrameIndex ATSG F 0 5
+	FrameIndex ATSG G 0 6
+	FrameIndex ATSG H 0 7
+	FrameIndex ATSG I 0 8
+	FrameIndex ATSG J 0 9
+	FrameIndex ATSG K 0 10
+	FrameIndex ATSG L 0 11
+	FrameIndex ATSG M 0 12
+	FrameIndex ATSG N 0 13
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2.md3"
+	SurfaceSkin 0 0 "m37a2.png"
+	SurfaceSkin 0 1 "m37a2.png"
+	SurfaceSkin 0 2 "m37a2.png"
+	SurfaceSkin 0 3 "shotgun_shell.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex ATSR A 0 14
+	FrameIndex ATSR B 0 15
+	FrameIndex ATSR C 0 16
+	FrameIndex ATSR D 0 17
+	FrameIndex ATSR E 0 18
+	FrameIndex ATSR F 0 19
+	FrameIndex ATSR G 0 20
+	FrameIndex ATSR H 0 21
+	FrameIndex ATSR I 0 22
+	FrameIndex ATSR J 0 23
+	FrameIndex ATSR K 0 24
+	FrameIndex ATSR L 0 25
+	FrameIndex ATSR M 0 26
+	FrameIndex ATSR N 0 27
+	FrameIndex ATSR O 0 28
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "shotgun_mf.md3"
+	Skin 0 "shotgun_mf.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex SGMF A 0 1
+	FrameIndex SGMF B 0 2
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2_pickup.md3"
+	Skin 0 "m37a2.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SHOT P 0 0
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2.md3"
+	Skin 0 "m37a2.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex YTSG A 0 0
+
+	//Fire
+	FrameIndex YTSG B 0 1
+	FrameIndex YTSG C 0 2
+	FrameIndex YTSG D 0 3
+
+	//Pump
+	FrameIndex YTSG E 0 4
+	FrameIndex YTSG F 0 5
+	FrameIndex YTSG G 0 6
+	FrameIndex YTSG H 0 7
+	FrameIndex YTSG I 0 8
+	FrameIndex YTSG J 0 9
+	FrameIndex YTSG K 0 10
+	FrameIndex YTSG L 0 11
+	FrameIndex YTSG M 0 12
+	FrameIndex YTSG N 0 13
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2.md3"
+	SurfaceSkin 0 0 "m37a2.png"
+	SurfaceSkin 0 1 "m37a2.png"
+	SurfaceSkin 0 2 "m37a2.png"
+	SurfaceSkin 0 3 "shotgun_shell.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex YTSR A 0 14
+	FrameIndex YTSR B 0 15
+	FrameIndex YTSR C 0 16
+	FrameIndex YTSR D 0 17
+	FrameIndex YTSR E 0 18
+	FrameIndex YTSR F 0 19
+	FrameIndex YTSR G 0 20
+	FrameIndex YTSR H 0 21
+	FrameIndex YTSR I 0 22
+	FrameIndex YTSR J 0 23
+	FrameIndex YTSR K 0 24
+	FrameIndex YTSR L 0 25
+	FrameIndex YTSR M 0 26
+	FrameIndex YTSR N 0 27
+	FrameIndex YTSR O 0 28
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "shotgun_mf.md3"
+	Skin 0 "shotgun_mf.png"
+
+	Scale -1.1 1.1 1.1
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex SGMF A 0 1
+	FrameIndex SGMF B 0 2
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2_pickup.md3"
+	Skin 0 "m37a2.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SHOT P 0 0
+}
+Model MS_alien_shotgun
+{
+	Path "models/alien/shotgun"
+	Model 0 "m37a2_pickup.md3"
+	Skin 0 "m37a2.png"
+
+	Scale 2.8 2.8 2.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SHOT P 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex SMRT A 0 0
+
+	//Fire
+	FrameIndex SMRT B 0 0
+	FrameIndex SMRT C 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56_green.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+
+	//Ready - auto mode
+	FrameIndex SMRT G 0 0
+
+	//Fire - auto mode
+	FrameIndex SMRT H 0 0
+	FrameIndex SMRT I 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56_red.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+
+	//Ready - auto mode
+	FrameIndex SMRT J 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+	
+	//Reloading
+	FrameIndex SMRR A 0 4
+	FrameIndex SMRR B 0 5
+	FrameIndex SMRR C 0 6
+	FrameIndex SMRR D 0 7
+	FrameIndex SMRR E 0 8
+	FrameIndex SMRR F 0 9
+	FrameIndex SMRR G 0 10
+	FrameIndex SMRR H 0 11
+	FrameIndex SMRR I 0 12
+	FrameIndex SMRR J 0 13
+	FrameIndex SMRR K 0 14
+	FrameIndex SMRR L 0 15
+	FrameIndex SMRR M 0 16
+	FrameIndex SMRR N 0 17
+	
+	//Insert new mag
+	FrameIndex SMRR P 0 18
+	FrameIndex SMRR Q 0 19
+	FrameIndex SMRR R 0 20
+	FrameIndex SMRR S 0 21
+	FrameIndex SMRR T 0 22
+	FrameIndex SMRR U 0 23
+	FrameIndex SMRR V 0 24
+	FrameIndex SMRR W 0 25
+	FrameIndex SMRR X 0 26
+	FrameIndex SMRR Y 0 27
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	SurfaceSkin 0 0 "m56.png"
+	SurfaceSkin 0 1 "m56.png"
+	SurfaceSkin 0 2 "m56.png"
+	SurfaceSkin 0 3 "empty.png"
+	SurfaceSkin 0 4 "empty.png"
+	SurfaceSkin 0 5 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+	
+	FrameIndex SMRR O 0 17
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "smart_hud.md3"
+	Skin 0 "smart_mode1.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+	
+	FrameIndex SMHD A 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "smart_hud.md3"
+	Skin 0 "smart_mode2.png"
+	Model 1 "smart_hud.md3"
+	Skin 1 "smart_mode2.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+	
+	FrameIndex SMHD B 0 2	FrameIndex SMHD B 1 3
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "smart_mf.md3"
+	Skin 0 "smart_mf.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+	
+	FrameIndex SMMF A 0 0
+	Skin 0 "smart_mf2.png"
+	FrameIndex SMMF B 0 0
+	Skin 0 "smart_mf3.png"
+	FrameIndex SMMF C 0 0
+	Skin 0 "smart_mf4.png"
+	FrameIndex SMMF D 0 0
+	Skin 0 "smart_mf5.png"
+	FrameIndex SMMF E 0 0
+	Skin 0 "smart_mf6.png"
+	FrameIndex SMMF F 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56_pickup.md3"
+	Skin 0 "m56.png"
+
+	Scale 1.8 1.8 1.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SMTG P 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+
+	//Ready
+	FrameIndex YMRT A 0 0
+
+	//Fire
+	FrameIndex YMRT B 0 0
+	FrameIndex YMRT C 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56_green.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+
+	//Ready - auto mode
+	FrameIndex YMRT G 0 0
+
+	//Fire - auto mode
+	FrameIndex YMRT H 0 0
+	FrameIndex YMRT I 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56_red.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+
+	//Ready - auto mode
+	FrameIndex YMRT J 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	Skin 0 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+	
+	//Reloading
+	FrameIndex SMRR A 0 4
+	FrameIndex SMRR B 0 5
+	FrameIndex SMRR C 0 6
+	FrameIndex SMRR D 0 7
+	FrameIndex SMRR E 0 8
+	FrameIndex SMRR F 0 9
+	FrameIndex SMRR G 0 10
+	FrameIndex SMRR H 0 11
+	FrameIndex SMRR I 0 12
+	FrameIndex SMRR J 0 13
+	FrameIndex SMRR K 0 14
+	FrameIndex SMRR L 0 15
+	FrameIndex SMRR M 0 16
+	FrameIndex SMRR N 0 17
+	
+	//Insert new mag
+	FrameIndex SMRR P 0 18
+	FrameIndex SMRR Q 0 19
+	FrameIndex SMRR R 0 20
+	FrameIndex SMRR S 0 21
+	FrameIndex SMRR T 0 22
+	FrameIndex SMRR U 0 23
+	FrameIndex SMRR V 0 24
+	FrameIndex SMRR W 0 25
+	FrameIndex SMRR X 0 26
+	FrameIndex SMRR Y 0 27
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56.md3"
+	SurfaceSkin 0 0 "m56.png"
+	SurfaceSkin 0 1 "m56.png"
+	SurfaceSkin 0 2 "m56.png"
+	SurfaceSkin 0 3 "empty.png"
+	SurfaceSkin 0 4 "empty.png"
+	SurfaceSkin 0 5 "m56.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+	
+	FrameIndex SMRR O 0 17
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "smart_hud.md3"
+	Skin 0 "smart_mode1.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+	
+	NOINTERPOLATION
+	
+	FrameIndex SMHD A 0 0
+	Skin 0 "smart_mode2.png"
+	FrameIndex SMHD B 0 1
+	Offset 0.0 -60.0 -7.0
+	FrameIndex SMHD C 0 1
+	Skin 0 "empty.png"
+	FrameIndex SMHD D 0 1
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "smart_mf.md3"
+	Skin 0 "smart_mf.png"
+
+	Scale -0.9 0.9 0.9
+	Offset 0.0 -30.0 -7.0
+	
+	//Reloading
+	FrameIndex SMMF A 0 0
+	Skin 0 "smart_mf2.png"
+	FrameIndex SMMF B 0 0
+	Skin 0 "smart_mf3.png"
+	FrameIndex SMMF C 0 0
+	Skin 0 "smart_mf4.png"
+	FrameIndex SMMF D 0 0
+	Skin 0 "smart_mf5.png"
+	FrameIndex SMMF E 0 0
+	Skin 0 "smart_mf6.png"
+	FrameIndex SMMF F 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56_pickup.md3"
+	Skin 0 "m56.png"
+
+	Scale 1.8 1.8 1.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SMTG P 0 0
+}
+Model MS_alien_smartgun
+{
+	Path "models/alien/smartgun"
+	Model 0 "m56_pickup.md3"
+	Skin 0 "m56.png"
+
+	Scale 1.8 1.8 1.8
+	Offset 0.0 0.0 5.0
+	
+	ROTATING
+	rotation-speed 0.2
+
+	//Ready
+	FrameIndex SMTG P 0 0
+}
+Model MS_alien_MODELS
+{
+	Path "models/alien/MODELS"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer1.png"
+	//Scale 1.0 1.0 1.0
+	Scale 1.2 0.7 1.0
+	Offset 35.0 0.0 1.0
+	PITCHFROMMOMENTUM
+	
+	FrameIndex PUFF A 0 0
+}
+Model MS_alien_MODELS
+{
+	Path "models/alien/MODELS"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer1.png"
+	Scale 0.3 0.7 0.9
+	PITCHFROMMOMENTUM
+	
+	FrameIndex PUFF A 0 0
+}

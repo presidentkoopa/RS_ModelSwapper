@@ -1,0 +1,688 @@
+Model MS_ziono_DeadMarine
+{
+   Path "models/ziono/DeadMarine"
+   Model 0 "Player_dead.md3"
+   Model 1 "Player_visor.md3"
+   Model 2 "Player_blood.md3"
+   Skin 0 "Player_dead.jpg"
+   Skin 1 "Player_visor.jpg"
+   Skin 2 "Player_blood.png"
+   Scale 0.87 0.87 0.87
+
+//   AngleOffset 90
+
+   FrameIndex PLAY N 0 0
+}
+Model MS_ziono_GibbedMarine
+{
+   Path "models/ziono/GibbedMarine"
+   Model 0 "Marine_squished.md3"
+   Skin 0 "Marine_squished.png"
+   Scale 1.25 1.25 1.25
+
+   FrameIndex PLAY W 0 011
+}
+Model MS_ziono_GibbedMarine
+{
+   Path "models/ziono/GibbedMarine"
+   Model 0 "Marine_squished.md3"
+   Skin 0 "Marine_squished.png"
+   Scale 1.25 1.25 1.25
+
+   FrameIndex PLAY W 0 011
+}
+Model MS_ziono_MEAT
+{
+   Path "models/ziono/MEAT"
+   model 0 "impaled.md2"
+   model 1 "pole.md2"
+   skin 0 "impaled2.png"
+   skin 1 "impaled1.png"
+   scale 1.0 1.0 1.0
+
+   FrameIndex POL1 A 0 0
+}
+Model MS_ziono_MEAT
+{
+   Path "models/ziono/MEAT"
+   model 0 "impaled.md2"
+   model 1 "pole.md2"
+   skin 0 "impaled1.png"
+   skin 1 "impaled1.png"
+   scale 1.0 1.0 1.0
+
+   FrameIndex POL6 A 0 0
+   FrameIndex POL6 B 0 1
+}
+Model MS_ziono_BloodyTwitch
+{
+   Path "models/ziono/BloodyTwitch"
+   Model 0 "gore1.md3"
+   Skin 0 "gore1.png"
+   Scale 0.85 0.85 0.85
+
+   Zoffset 12
+
+   FrameIndex GOR1 A 0 0
+   FrameIndex GOR1 B 0 4
+   FrameIndex GOR1 C 0 6
+   FrameIndex GOR1 B 0 4
+}
+Model MS_ziono_BrainStem
+{
+   Path "models/ziono/BrainStem"
+   Model 0 "Spinal.md3"
+   Model 1 "Spinal_Ridges.md3"
+   Skin 0 "Spinal.png"
+   Scale 0.31 0.24 0.31
+
+   AngleOffset 150
+
+   FrameIndex BRS1 A 0 0
+}
+Model MS_ziono_ColonGibs
+{
+   Path "models/ziono/ColonGibs"
+   Model 0 "ColonGibs.md3"
+   Skin 0 "ColonGibs.png"
+   Scale 1.35 1.35 1.35
+
+   FrameIndex POB1 A 0 0
+}
+Model MS_ziono_Gibs
+{
+   Path "models/ziono/Gibs"
+   Model 0 "Bludpool.md3"
+   Model 1 "Gibbs.md3"
+   Skin 0 "Bludpool.png"
+   Skin 1 "Gibbs.png"
+   Scale 1.7 1.7 1.7
+
+   FrameIndex POL5 A 0 0
+}
+Model MS_ziono_HangBNoBrain
+{
+   Path "models/ziono/HangBNoBrain"
+   Model 0 "hang2.md3"
+   Skin 0 "hang2.png"
+   Scale 1.0 1.0 1.0
+
+   AngleOffset 90
+   ZOffset 5
+
+   FrameIndex HDB2 A 0 0
+}
+Model MS_ziono_HangNoGuts
+{
+   Path "models/ziono/HangNoGuts"
+   Model 0 "hang1.md3"
+   Skin 0 "hang1.png"
+   Scale 1.0 1.0 1.0
+
+   AngleOffset 90
+   ZOffset 4
+
+   FrameIndex HDB1 A 0 0
+}
+Model MS_ziono_HangTLookingDown
+{
+   Path "models/ziono/HangTLookingDown"
+   Model 0 "hang3.md3"
+   Skin 0 "hang3.png"
+   Scale 1.2 1.2 1.2
+
+   AngleOffset 90
+   ZOffset -5
+
+   FrameIndex HDB3 A 0 0
+}
+Model MS_ziono_HangTLookingUp
+{
+   Path "models/ziono/HangTLookingUp"
+   Model 0 "hang5.md3"
+   Skin 0 "hang5.png"
+   Scale 1.15 1.15 1.15
+
+   AngleOffset 90
+   ZOffset 7
+
+   FrameIndex HDB5 A 0 0
+}
+Model MS_ziono_HangTNoBrain
+{
+   Path "models/ziono/HangTNoBrain"
+   Model 0 "hang6.md3"
+   Skin 0 "hang6.png"
+   Scale 1.2 1.2 1.2
+
+   FrameIndex HDB6 A 0 0
+}
+Model MS_ziono_HangTSkull
+{
+   Path "models/ziono/HangTSkull"
+   Model 0 "hang4.md3"
+   Skin 0 "hang4.png"
+   Scale 1.2 1.2 1.2
+
+   AngleOffset 180
+
+   FrameIndex HDB4 A 0 0
+}
+Model MS_ziono_Meat2
+{
+   Path "models/ziono/Meat2"
+   Model 0 "gore2.md3"
+   Skin 0 "gore2.png"
+   Scale 1.75 1.75 1.75
+
+   FrameIndex GOR2 A 0 0
+}
+Model MS_ziono_Meat3
+{
+   Path "models/ziono/Meat3"
+   Model 0 "gore3.md3"
+   Skin 0 "gore3.png"
+   Scale 1.75 1.75 1.75
+
+   FrameIndex GOR3 A 0 0
+}
+Model MS_ziono_Meat4
+{
+   Path "models/ziono/Meat4"
+   Model 0 "gore4.md3"
+   Skin 0 "gore4.png"
+   Scale 1.25 1.25 1.25
+   
+   Zoffset 14   
+
+   FrameIndex GOR4 A 0 0
+}
+Model MS_ziono_Meat5
+{
+   Path "models/ziono/Meat5"
+   Model 0 "gore5.md3"
+   Skin 0 "gore5.png"
+   Scale 1.1 1.1 1.1
+   
+   Zoffset 6   
+
+   FrameIndex GOR5 A 0 0
+}
+Model MS_ziono_Meat2
+{
+   Path "models/ziono/Meat2"
+   model 0 "gore2.md3"
+   skin 0 "gore2.png"
+   scale 1.75 1.75 1.75
+
+   FrameIndex GOR2 A 0 0
+}
+Model MS_ziono_Meat3
+{
+   Path "models/ziono/Meat3"
+   model 0 "gore3.md3"
+   skin 0 "gore3.png"
+   scale 1.75 1.75 1.75
+
+   FrameIndex GOR3 A 0 0
+}
+Model MS_ziono_Meat4
+{
+   Path "models/ziono/Meat4"
+   model 0 "gore4.md3"
+   skin 0 "gore4.png"
+   scale 1.25 1.25 1.25
+   
+   Zoffset 14   
+
+   FrameIndex GOR4 A 0 0
+}
+Model MS_ziono_Meat5
+{
+   Path "models/ziono/Meat5"
+   model 0 "gore5.md3"
+   skin 0 "gore5.png"
+   scale 1.1 1.1 1.1
+   
+    Zoffset 6  
+
+   FrameIndex GOR5 A 0 0
+}
+Model MS_ziono_BloodyTwitch
+{
+   Path "models/ziono/BloodyTwitch"
+   Model 0 "gore1.md3"
+   Skin 0 "gore1.png"
+   Scale 0.85 0.85 0.85
+
+   Zoffset 12
+
+   FrameIndex GOR1 A 0 0
+   FrameIndex GOR1 B 0 4
+   FrameIndex GOR1 C 0 6
+   FrameIndex GOR1 B 0 4
+}
+Model MS_ziono_SmallBloodPool
+{
+   Path "models/ziono/SmallBloodPool"
+   Model 0 "Blood.md3"
+   Skin 0 "Blood.png"
+   Scale 1.0 1.0 1.0
+
+   FrameIndex POB2 A 0 0
+}
+Model MS_ziono_BigTree
+{
+   Path "models/ziono/BigTree"
+   Model 0 "Bigtree.md3"
+   Skin 0 "Bigtree.png"
+   Scale 1.0 1.0 1.7
+
+   FrameIndex TRE2 A 0 0
+}
+Model MS_ziono_Candelabra
+{
+   Path "models/ziono/Candelabra"
+   Model 0 "Candelabra.md3"
+   Skin 0 "Candelabra.pcx"
+   Scale 1.15 1.15 1.4
+   AngleOffset -90
+   
+   FrameIndex CBRA A 0 0
+}
+Model MS_ziono_EvilEye
+{
+   Path "models/ziono/EvilEye"
+   Model 0 "EvilEye.md3"
+   Model 1 "EvilEye_Circle.md3"
+   Model 2 "Candlestick.md3"
+   Skin 0 "EvilEye.png"
+   Skin 1 "EvilEye_Circle1.png"
+   Skin 2 "candlestik.png"
+   Scale 0.4 0.4 0.48
+
+   FrameIndex CEYE A 0 0	
+   FrameIndex CEYE A 1 10	
+}
+Model MS_ziono_EvilEye
+{
+   Path "models/ziono/EvilEye"
+   Model 0 "EvilEye.md3"
+   Model 1 "EvilEye_Circle.md3"
+   Model 2 "Candlestick.md3"
+   Skin 0 "EvilEye.png"
+   Skin 1 "EvilEye_Circle2.png"
+   Skin 2 "candlestik.png"
+   Scale 0.4 0.4 0.48
+
+   FrameIndex CEYE B 0 8	
+   FrameIndex CEYE B 1 10	 
+}
+Model MS_ziono_EvilEye
+{
+   Path "models/ziono/EvilEye"
+   Model 0 "EvilEye.md3"
+   Model 1 "EvilEye_Circle.md3"
+   Model 2 "Candlestick.md3"
+   Skin 0 "EvilEye.png"
+   Skin 1 "EvilEye_Circle3.png"
+   Skin 2 "candlestik.png"
+   Scale 0.4 0.4 0.48
+
+   FrameIndex CEYE C 0 0	
+   FrameIndex CEYE C 1 10	
+}
+Model MS_ziono_FloatingSkull
+{
+   Path "models/ziono/FloatingSkull"
+   Model 0 "FloatSkull.md3"
+   Skin 0 "FloatSkull.png"
+   Scale 1.13 1.13 1.35
+
+   zoffset 2
+   Rotating
+
+   FrameIndex FSKU ABC 0 0
+}
+Model MS_ziono_HeadCandles
+{
+   Path "models/ziono/HeadCandles"
+   Model 0 "Skullpile1.md3"
+   Model 2 "Skullpile3.md3"
+   Skin 0 "skullpile.png"
+   Skin 2 "candlestik.png"
+   Scale 0.8 0.8 0.8
+
+   FrameIndex POL3 A 0 0
+   FrameIndex POL3 A 1 0
+   FrameIndex POL3 B 0 0
+   FrameIndex POL3 B 1 0
+}
+Model MS_ziono_HeadOnAStick
+{
+   Path "models/ziono/HeadOnAStick"
+   Model 0 "headpole.md3"
+   Model 1 "Bottom_Gibs1.md3"
+   Skin 0 "headpole.png"
+   Skin 1 "Bottom_Gibs1.png"
+   Scale 0.9 0.9 0.9
+
+   FrameIndex POL4 A 0 0
+}
+Model MS_ziono_HeadsOnAStick
+{
+   Path "models/ziono/HeadsOnAStick"
+   Model 0 "headsonpole.md3"
+   Model 1 "Bottom_Gibs2.md3"
+   Skin 0 "headsonpole.png"
+   Skin 1 "Bottom_Gibs2.png"
+   Scale 0.7 0.7 0.7
+
+   FrameIndex POL2 A 0 0
+}
+Model MS_ziono_HeartColumn
+{
+   Path "models/ziono/HeartColumn"
+   Model 0 "StonePillar.md3"
+   Model 1 "Heart.md3"
+   Skin 0 "HeartPillar.png"
+   Skin 1 "heart.png"
+   Scale 1.08 1.08 1.27
+
+   FrameIndex COL5 A 0 0
+   FrameIndex COL5 A 1 0
+   FrameIndex COL5 B 0 0
+   FrameIndex COL5 B 1 1
+}
+Model MS_ziono_ShortRGColumn
+{
+   Path "models/ziono/ShortRGColumn"
+   Model 0 "StonePillar.md3"
+   Model 1 "StonePillar_Base.md3"
+   Model 2 "StonePillar_Center.md3"
+   Model 3 "StonePillar_Top.md3"
+   Skin 0 "StonePillarGreen.png"
+   Skin 1 "StonePillarGreen.png"
+   Skin 2 "StonePillarGreen.png"
+   Skin 3 "StonePillarGreen.png"
+   Scale 1.08 1.08 1.27
+
+   FrameIndex COL2 A 0 0
+}
+Model MS_ziono_ShortRGColumn
+{
+   Path "models/ziono/ShortRGColumn"
+   Model 0 "StonePillar.md3"
+   Model 1 "StonePillar_Base.md3"
+   Model 2 "StonePillar_Center.md3"
+   Model 3 "StonePillar_Top.md3"
+   Skin 0 "StonePillarRed.png"
+   Skin 1 "StonePillarRed.png"
+   Skin 2 "StonePillarRed.png"
+   Skin 3 "StonePillarRed.png"
+   Scale 1.08 1.08 1.27
+
+   FrameIndex COL4 A 0 0
+}
+Model MS_ziono_Stalagmite
+{
+   Path "models/ziono/Stalagmite"
+   Model 0 "Stalag.md3"
+   Skin 0 "Stalagmite.pcx"
+   Scale 1.0 1.0 1.0
+
+   FrameIndex SMT2 A 0 0
+}
+Model MS_ziono_Stalagtite
+{
+   Path "models/ziono/Stalagtite"
+   Model 0 "Stalagtite.md3"
+   Skin 0 "Stalagtite.png"
+   Scale 1.6 1.6 2.0
+
+   FrameIndex SMIT A 0 0
+}
+Model MS_ziono_SkullColumn
+{
+   Path "models/ziono/SkullColumn"
+   Model 0 "StonePillar.md3"
+   Model 1 "Skull.md3"
+   Skin 0 "RedStonePillar.png"
+   Skin 1 "Skull.png"
+   Scale 1.07 1.07 1.27
+
+   FrameIndex COL6 A 0 0
+}
+Model MS_ziono_TallRGColumn
+{
+   Path "models/ziono/TallRGColumn"
+   Model 0 "Tallpillar.md3"
+   Skin 0 "Tallpillar_G.png"
+   Scale 1.08 1.08 1.23
+
+   FrameIndex COL1 A 0 0
+}
+Model MS_ziono_TallRGColumn
+{
+   Path "models/ziono/TallRGColumn"
+   Model 0 "Tallpillar.md3"
+   Skin 0 "Tallpillar_R.png"
+   Scale 1.08 1.08 1.23
+
+   FrameIndex COL3 A 0 0
+}
+Model MS_ziono_TorchTree
+{
+   Path "models/ziono/TorchTree"
+   Model 0 "Tree.md3"
+   Skin 0 "Tree.png"
+   Scale 0.54 0.54 0.61
+
+   FrameIndex TRE1 A 0 0
+}
+Model MS_ziono_KeyCards
+{
+   Path "models/ziono/KeyCards"
+   Model 0 "KeyCard.md3"
+   Skin 0 "KeyCard-Blue.png"
+   Scale 1.0 0.97 1.23
+   
+   Zoffset 4.6
+   Rotating
+   
+   FrameIndex BKEY A 0 0
+   FrameIndex BKEY B 0 0
+}
+Model MS_ziono_KeySkulls
+{
+   Path "models/ziono/KeySkulls"
+   Model 0 "SkullKey.md3"
+   Skin 0 "SkullKey_Blue.png"
+   Scale 0.9 0.9 0.9
+
+   Zoffset 3
+   Rotating
+
+   FrameIndex BSKU A 0 0
+   FrameIndex BSKU B 0 0
+}
+Model MS_ziono_KeyCards
+{
+   Path "models/ziono/KeyCards"
+   Model 0 "KeyCard.md3"
+   Skin 0 "KeyCard-Red.png"
+   Scale 1.0 0.97 1.23
+
+   Zoffset 4.6
+   Rotating
+   
+   FrameIndex RKEY A 0 0
+   FrameIndex RKEY B 0 0
+}
+Model MS_ziono_KeySkulls
+{
+   Path "models/ziono/KeySkulls"
+   Model 0 "SkullKey.md3"
+   Skin 0 "SkullKey_Red.png"
+   Scale 0.9 0.9 0.9
+
+   Zoffset 3
+   Rotating
+
+   FrameIndex RSKU A 0 0
+   FrameIndex RSKU B 0 0
+}
+Model MS_ziono_KeyCards
+{
+   Path "models/ziono/KeyCards"
+   Model 0 "KeyCard.md3"
+   Skin 0 "KeyCard-Yellow.png"
+   Scale 1.0 0.97 1.23
+
+   Zoffset 4.6
+   Rotating
+   
+   FrameIndex YKEY A 0 0
+   FrameIndex YKEY B 0 0
+}
+Model MS_ziono_KeySkulls
+{
+   Path "models/ziono/KeySkulls"
+   Model 0 "SkullKey.md3"
+   Skin 0 "SkullKey_Yellow.png"
+   Scale 0.9 0.9 0.9
+
+   Zoffset 3
+   Rotating
+
+   FrameIndex YSKU A 0 0
+   FrameIndex YSKU B 0 0
+}
+Model MS_ziono_Column
+{
+   Path "models/ziono/Column"
+   Model 0 "SmallLamp_Case.md3"
+   Model 1 "SmallLamp_Glass.md3"
+   Model 2 "SmallLamp_Ring.md3"
+   Model 3 "SmallLamp_Rings.md3"
+   Skin 0 "SmallLamp.png"
+   Scale 1.0 1.0 1.14
+
+   FrameIndex COLU A 0 0
+}
+Model MS_ziono_TechLamp
+{
+   Path "models/ziono/TechLamp"
+   Model 0 "BigLamp.md3"
+   Model 1 "BigLamp_Base.md3"
+   Model 2 "BigLamp_Glass.md3"
+   Model 3 "BigLamp_Ring.md3"
+   Skin 0 "BigLamp.png"
+   Scale 1.0 1.0 1.0
+
+   FrameIndex TLMP ABCD 0 0
+}
+Model MS_ziono_TechLamp2
+{
+   Path "models/ziono/TechLamp2"
+   Model 0 "MediumLamp.md3"
+   Model 1 "MediumLamp_Disc.md3"
+   Model 2 "Mediumlamp_Glass.md3"
+   Skin 0 "MediumLamp.png"
+   Skin 1 "MediumLamp_Disc.tga"
+   Scale 0.175 0.175 0.2
+
+   FrameIndex TLP2 ABCD 0 0
+}
+Model MS_ziono_TechPillar
+{
+   Path "models/ziono/TechPillar"
+   Model 0 "TechPillar.md3"
+   Skin 0 "TechPillar.png"
+   Scale 0.44 0.44 0.49
+
+   FrameIndex ELEC A 0 0
+}
+Model MS_ziono_Candlestick
+{
+   Path "models/ziono/Candlestick"
+   Model 0 "Candle.md3"
+//   Model 1 "Candle_Plate.md3"
+//   Model 2 "Candle_Wick.md3"
+   Skin 0 "Candle.png"
+//   Skin 1 "Candle_Plate.png"
+//   Skin 2 "Candle.png"
+   Scale 0.56 0.56 1.2
+
+//   FrameIndex TTRB A 0 0
+   FrameIndex CAND B 1 0
+   FrameIndex CAND C 2 0
+}
+Model MS_ziono_BurningBarrel
+{
+   Path "models/ziono/BurningBarrel"
+   Model 0 "FireCan.md3"
+   Skin 0 "FireCan.png"
+   Scale 1.25 1.25 1.1
+ 
+   FrameIndex FCAN A 0 0
+   FrameIndex FCAN B 0 0
+   FrameIndex FCAN C 0 0
+}
+Model MS_ziono_RGBTorch
+{
+   Path "models/ziono/RGBTorch"
+   Model 1 "TallTorch.md3"
+   Skin 1 "TallTorch_Blue.png"
+   scale 1.20 1.20 1.20
+
+FrameIndex TTRB A 0 0
+//FrameIndex TTRB A 1 0  
+}
+Model MS_ziono_RGBTorch
+{
+   Path "models/ziono/RGBTorch"
+   Model 1 "TallTorch.md3"
+   Skin 1 "TallTorch_Green.png"
+   scale 1.20 1.20 1.20
+
+FrameIndex TTRB A 0 0
+//FrameIndex TTRB A 1 0  
+}
+Model MS_ziono_RGBTorch
+{
+   Path "models/ziono/RGBTorch"
+   model 1 "TallTorch.md3"
+   skin 1 "TallTorch_Red.png"
+   scale 1.20 1.20 1.20
+
+   FrameIndex TTRB A 0 0
+//FrameIndex TTRB A 1 0  
+}
+Model MS_ziono_ShortRGBTorch
+{
+   Path "models/ziono/ShortRGBTorch"
+   Model 1 "FireStick.md3"
+   skin 1 "FireStick.png"
+   scale 1.0 1.0 1.0
+
+   FrameIndex STRB A 0 0   //FrameIndex STRB A 1 0
+}
+Model MS_ziono_ShortRGBTorch
+{
+   Path "models/ziono/ShortRGBTorch"
+   Model 1 "FireStick.md3"
+   skin 1 "FireStick.png"
+   scale 1.0 1.0 1.0
+
+   FrameIndex STRB A 0 0   //FrameIndex STRB A 1 0
+}
+Model MS_ziono_ShortRGBTorch
+{
+   Path "models/ziono/ShortRGBTorch"
+   Model 1 "FireStick.md3"
+   skin 1 "FireStick.png"
+   scale 1.0 1.0 1.0
+
+   FrameIndex STRB A 0 0   //FrameIndex STRB A 1 0
+}
