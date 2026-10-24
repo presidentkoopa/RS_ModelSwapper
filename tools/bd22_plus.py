@@ -18,13 +18,17 @@ Stage 1 (this file, `geometry`): survey records + gen_rsr GUNS entries + the car
 import os, sys, json
 import numpy as np
 from scipy.spatial import cKDTree
-sys.path.insert(0, '/home/claude/c2q')
-sys.path.insert(0, '/mnt/user-data/uploads/Quest_Weapons_Kit/kit/kit/team/reload_merged/tools')
+TOOLS = os.path.dirname(os.path.abspath(__file__))                 # this repo's tools/
+KIT = os.path.join(TOOLS, 'kit')                                   # gen_rsr.py, rgeo.py
+sys.path.insert(0, TOOLS)
+sys.path.insert(0, KIT)
 import genpack, carve_by_ref, rgeo
 
-SRC = '/home/claude/presidentkoopa/rs_brutal22weaponsq/src/'
-REMA = '/home/claude/presidentkoopa/rs_vr_weapons/bd22/'
-OUT = '/home/claude/c2q/build/bd22/'
+REPO = os.path.dirname(TOOLS)
+SRC = REPO.replace('\\', '/') + '/runtime/'                        # frozen 1.96b src snapshot
+REMA = 'E:/DOOMWork/RS_VR_Weapons/bd22/'                           # RS_VR_Weapons checkout, bd22/
+OUT = 'E:/DOOMWork/_buildtemp/rsq_bd22/'                           # build dir (outside the repo)
+BD22SRC = 'E:/DOOMWork/_buildtemp/bd22src/'                        # brutal22test6.pk3 extracted (actors/Weapons/*.dec)
 SCALE, OFF = (-1.0, 1.0, 1.0), (0.0, 0.0, 0.0)        # MODELDEF.bd.txt: all three guns
 
 # the three toggles: 1.96b class -> sources
@@ -336,7 +340,7 @@ def apply():
         shutil.rmtree(OUT_SRC)
     shutil.copytree(SRC, OUT_SRC)
     log = {}
-    sys.path.insert(0, '/mnt/user-data/uploads/Quest_Weapons_Kit/kit/kit/team/reload_merged/tools')
+    sys.path.insert(0, KIT)
     import gen_rsr
     guns = []
     for cls, p in PLUS.items():
@@ -372,7 +376,7 @@ def apply():
         fn = {'MG42': 'MG42.dec', 'Flamethrower2': 'Flamethrower.dec', 'Unmaker': 'Unmaker.dec'}[cls]
         src = OUT_SRC + 'actors/Weapons/' + fn
         if not os.path.exists(src):
-            shutil.copy('/home/claude/bd22src/actors/Weapons/' + fn, src)       # BD22's own file, untouched by 1.96b
+            shutil.copy(BD22SRC + 'actors/Weapons/' + fn, src)       # BD22's own file, untouched by 1.96b
             log.setdefault('copied_from_bd22', []).append(fn)
         text = open(src, 'rb').read().decode('latin-1')
         new, st = patch_dec(cls, p, text, geo[cls]['capacity'])

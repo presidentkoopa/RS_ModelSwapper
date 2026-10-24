@@ -17,7 +17,7 @@ import numpy as np
 from scipy.spatial import cKDTree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KIT = '/mnt/user-data/uploads/Quest_Weapons_Kit/kit/kit/tool/hands'
+KIT = os.path.join(HERE, 'kit')                                   # gunview, hudrender, gripregions.json
 sys.path.insert(0, HERE)
 sys.path.insert(0, KIT)
 import gunview, hudrender                      # kit, unmodified

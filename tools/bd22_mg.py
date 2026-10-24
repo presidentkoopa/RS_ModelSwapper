@@ -19,15 +19,18 @@ the Machinegun (CheckReplacement); off, both exist (slot 4, cheats / spawners / 
 """
 import os, re, sys, json, shutil
 import numpy as np
-sys.path.insert(0, '/home/claude/c2q')
-sys.path.insert(0, '/mnt/user-data/uploads/Quest_Weapons_Kit/kit/kit/team/reload_merged/tools')
+TOOLS = os.path.dirname(os.path.abspath(__file__))                 # this repo's tools/
+KIT = os.path.join(TOOLS, 'kit')                                   # gen_rsr.py, rgeo.py
+sys.path.insert(0, TOOLS)
+sys.path.insert(0, KIT)
 import genpack, rgeo, carve_by_ref, wmcard, handfit_cards
 
-OUT = '/home/claude/c2q/build/bd22/'
+REPO = os.path.dirname(TOOLS).replace('\\', '/')
+OUT = 'E:/DOOMWork/_buildtemp/rsq_bd22/'                           # same build dir as bd22_plus.py
 S = OUT + 'src/'
-BR = '/mnt/user-data/uploads/VR_WeaponSetRebuild/br_vr/PK3_pbr/'
-BD21 = '/mnt/user-data/attachments/c9d0fd42-99b1-5808-a0b8-8328fb4227ef/dc8c5c60-Machinegun.txt'
-REMA = '/home/claude/presidentkoopa/rs_vr_weapons/bd22/'
+BR = 'E:/DOOMWork/VR_WeaponSetRebuild/br_vr/PK3_pbr/'              # BD21's own mesh (br_vr)
+BD21 = REPO + '/docs/BD21_Machinegun.txt'                          # the parent file, owner-supplied
+REMA = 'E:/DOOMWork/RS_VR_Weapons/bd22/'                           # RS_VR_Weapons checkout, bd22/
 SCALE, OFF, ZOFF = (-1.0, 1.0, 1.0), (0.0, 0.0), -5.0
 READY_FRAME = 4            # MGN1 A
 

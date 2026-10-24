@@ -1,10 +1,10 @@
 #!/bin/bash
 # F1: run the bd22q pack on the owner's load order, headless, one launch. Edit the four paths.
 # Pass = exit 0, no "Script error", no "Execution could not continue", GATE_DONE in the log.
-QZD=/path/to/qzdoom-17.3/build          # stock qzd17.3 built -DNO_GTK=ON -DHAVE_VULKAN=OFF -DHAVE_GLES2=ON
-IWAD=/path/to/doom2.wad                 # NOT Freedoom: BD_VoxelPack's voxeldef names Doom 2 sprites
-BD22=/path/to/brutal22test6.pk3
-VOX=/path/to/BD_VoxelPack.pk3
+QZD=/e/DOOMWork/QZD17-engine/build/Release                          # owner's PC: the qzd17.3 build
+IWAD=/e/DOOMWork/QZD17-engine/build/Release/doom2.wad               # NOT Freedoom: BD_VoxelPack's voxeldef names Doom 2 sprites
+BD22=/e/DOOMWork/brutal22test6.pk3
+VOX="/d/SteamLibrary/steamapps/Common/DooM VR/__Games/BrutalDoom/BD_VoxelPack.pk3"
 PK3=${1:-dist/BD22Q_197pre.pk3}         # python3 tools/bd22_plus.py pk3 dist/BD22Q_197pre.pk3
 LOG=gate/bd22_197.log
 cmd="wait 40; echo GATE_START; give MG42; give Flamethrower2; give Unmaker; give Machinegun; give Clip2 200; give Gas 200; give SoulAmmo 60; give AmmoRocket 5; wait 5; use Machinegun; wait 10; echo GATE_FIRE; +attack; wait 15; -attack; wait 5; +altattack; wait 3; -altattack; wait 10; +reload; wait 3; -reload; wait 40; use MG42; wait 10; +attack; wait 15; -attack; wait 5; +reload; wait 3; -reload; wait 20; use Flamethrower2; wait 10; +attack; wait 15; -attack; wait 5; +reload; wait 3; -reload; wait 20; use Unmaker; wait 10; +attack; wait 15; -attack; wait 5; +reload; wait 3; -reload; wait 20; echo GATE_DONE; quit"
