@@ -50,33 +50,58 @@ Added tonight (all generated, all exact-match edits, logs in `sets/bd22q_1.97/*.
    Launcher on the pack's own M203 module, made per-gun (`RSM.GunOf`: 1 rifle, 2 machinegun;
    `RSM_Geo.*(gun)`; `RSM_NoTube.NamesMG`; layers `RQ3P`). Tube F 29.27→63.86, travel 9.69 (card 9.50),
    bore L −0.07 U −1.52. Ammo follows "Rifle Underbarrel Ammo". Hands: MG42's letters (F/F/B/I), ICP
-   on the card's palm/supportat (1.29 / 1.16 cm). Slot 4 (`KEYCONF.rsq addslot`). Dummy sprite lumps
+   on the card's palm/supportat (1.29 / 1.16 cm). Slot 4 (`KEYCONF.rsq addslotdefault`). Dummy sprite lumps
    for MGN1/MGN2/MGS1 (HUD is the MD3); floor pickup = gun mesh block (no MGN1 Z sprite in BD22).
    Menu row **"Machinegun replaces MG42"** (`rsq_mg_replaces_mg42`, server, off) via `zscript/rsq/roster.zs`
-   CheckReplacement. **Not yet run in the engine** — the gate run was interrupted. Run it first.
+   CheckReplacement. **Runs in the engine as of 2026-10-24** (see "F1 IS DONE"); not yet in a headset.
 3. Vanilla set rebuilt as Doom's eight with `RSQ_Player` (start pistol, pickups measured). Gate 5/5.
 
-## BLOCKERS (2026-10-24, local lane on the owner's PC — F1 stopped here)
-1. **`runtime/` is not the 1.96b src; the flagship cannot be regenerated.** Measured: `runtime/` holds
-   34 files / 1.1 MB, and 33 of them are a strict subset of `sets/bd22q_1.97/src` (459 files / 85 MB);
-   only `PROVENANCE.txt` is its own. Absent from it: all of `models/bd/` (every gun mesh), all of
-   `actors/`, `zscript/rsr/rsr_guns.bd.zs`, `ZSCRIPT.rsvr`, `MAPINFO.rsvr` — i.e. every file the
-   generators read or patch. `python tools/bd22_plus.py geometry` stops on the first one it opens
-   (`runtime/models/bd/HitlersBuzzsaw/HitlersBuzzsaw.md3`, FileNotFoundError). Searched `E:\DOOMWork`
-   and `D:\SteamLibrary\steamapps\Common`: no RS_Brutal22WeaponsQ checkout, no second copy of
-   `rsr_guns.bd.zs`. **Needs from the owner: RS_Brutal22WeaponsQ 1.96b `src/` at commit 27bef2b**
-   (a path on this PC, or the repo to clone). Until then the regenerate-and-diff drift check on the
-   generators cannot run, and nothing under `sets/bd22q_1.97/src` can be rebuilt.
-2. **`gate/bd22_gate.sh` cannot run on Windows.** Its four paths are now set (below), but the run line
-   is `xvfb-run` + `LIBGL_ALWAYS_SOFTWARE` — Linux only; `xvfb-run` is not on this machine. On the
-   owner's PC the gate means launching `QZD17-engine/build/Release/qzdoom.exe` with that `-file` order
-   in a window on his desktop, and the owner does all launching (CLAUDE.md 5: the gate is optional
-   tooling, the headset pass is the test). **Needs from the owner: his own run of that load order and
-   the log** — or an explicit "launch it" for one desktop run here.
-3. Minor, downstream: `handfit_cards.ERMAC` (Ermac's 211/196-frame original hand md3s) is not on this
-   PC. Only `bd22_mg.py`'s hand-fit sheet (`_hands/Machinegun.png`) reads it; the pack build does not.
-4. Minor: the pre-commit hook's shebang is `#!/usr/bin/env python3`; this PC has `python` / `py` only,
-   so commits need a `python3` on PATH. Owner's call whether to shim it or make the hook portable.
+## F1 IS DONE (2026-10-24, the owner's PC) — the pack runs on his load order
+`dist/BD22Q_197pre.pk3`, 45 MB, 459 lumps. One launch on doom2.wad → brutal22test6 → BD_VoxelPack →
+the pk3: **exit 0, GATE_START / GATE_FIRE / GATE_DONE, `script parsing took 3669 ms`, and not one
+Script error or warning from `BD22Q_197pre`.** The nine warnings and four `voxeldef.txt` errors left in
+the log belong to the parent load order (BD_VoxelPack's voxeldef lines 66/72/77/892 are malformed
+entries in that file; BD22's own `23Player.dec` still calls `SubMachineGunSelected`).
+
+Four faults stood between the committed set and a load. None of them could ever have loaded, which
+matches "the gate run was interrupted" above. Each was fixed in the generator, never in `sets/`:
+1. `rsr_m203_geo.zs`: `const TRAVEL` beside the generated `Travel(int gun)` — ZScript identifiers are
+   case-insensitive, so "Attempt to redefine 'travel'". The accessor is `TravelOf` now; the other
+   seven constants have an underscore and do not collide.
+2. `rsr_m203.zs`: `RSM_Geo.X(gun)` inside `RSK_M203Handler.Place` — "Unknown identifier 'Gun'". `gun`
+   is a field of `RSM_State` alone; elsewhere the state is a local `s`. The rewrite was a line-local
+   lookahead for `s.` on the same line and missed Place's three `return` lines. Class-span aware now,
+   and it refuses to finish if a bare `(gun)` is left outside `RSM_State`.
+3. `rsr_guns.bd.zs`: `merge_tables` merged the switches but not `RSR_GunSprites`. The pack ships no
+   `RQ**` lumps — a sprite name is known to the engine only if some actor's states use it — so
+   MODELDEF died on "Unknown sprite RQXM in model definition for MG42". gen_rsr already writes that
+   list; the merge appends its nine lines.
+4. `KEYCONF.rsq`: `addslot 4 Machinegun` — no such KEYCONF command. `addslotdefault`, which the pack's
+   own slot-1 line already uses, appends to BD22's `setslot 4 … MG42` instead of replacing it.
+
+Two more, while there: `SubMachineGunSelected` → `SMGSelected` (BD21's name; brutal22test6 defines the
+short one and never the long — parsed from every `actor <name>` in the pk3), and `bd22_mg.py` now
+writes the `.generated` stamp `check_plan.py` looks for, which no tool wrote before.
+
+**`runtime/` is NOT the 1.96b snapshot it claims to be** — 34 files / 1.1 MB, 33 of them a strict
+subset of `sets/bd22q_1.97/src` (459 files / 85 MB), missing every mesh and every file the generators
+read. `SRC` therefore points at a clone of **presidentkoopa/RS_Brutal22WeaponsQ @ 27bef2b** in
+`E:/DOOMWork/_buildtemp/rs_brutal22weaponsq/src/` (406 files). Either fill `runtime/` from that commit
+or keep `SRC` where it is — but do not trust `runtime/` as the snapshot.
+
+**One number to check in the headset.** The tools measure the Unmaker's skull well at
+`11.788 0.614 12.329`, insert depth `4.61`, off the shipped mesh. The committed `plus_geometry.json`
+recorded `11.814 1.253 12.280` / `4.66`, and nothing in the repo reproduces it: all three copies of
+`Unmaker_rsr.md3` are byte-identical and all give the new numbers. 0.64 cm in where the skull seats.
+The regenerated numbers are what ship. Everything else in the set regenerates identical, bar line
+endings on three `.dec` files (the generators run on Windows now).
+
+Still open, for the owner, not the tools: the gate is a desktop run, not a headset pass — the four
+things to try are the MG42 drum, the Flamethrower canister and the Unmaker skull reloads, and the
+Machinegun launcher (open, load, close, fire). Also: `RSQ_Scope.EyeInHandFrame: Unexpected JIT error:
+Unknown REGT value passed to EmitPARAM` is in 1.96b's own scope code, untouched by this work.
+Minor: the pre-commit hook's shebang is `#!/usr/bin/env python3` and this PC has `python` / `py` only,
+so commits here need a `python3` on PATH.
 
 ## Paths, now set for this PC (committed, `[step F1]`)
 `bd22_plus.py` / `bd22_mg.py`: `TOOLS`/`KIT` from `__file__` (`tools/`, `tools/kit`); `SRC` → `runtime/`;
@@ -89,8 +114,8 @@ the hook sees no new top-level directory); new `BD22SRC` → `E:/DOOMWork/_build
 the owner's `BD_VoxelPack.pk3`. Both tools import clean and every path they hold resolves.
 
 ## What is NOT done (the plan's remaining flagship items, in order)
-1. Gate `sets/bd22q_1.97` on the owner's exact load order (Doom 2 → brutal22test6 → BD_VoxelPack →
-   pack). Fix what it finds. Only then hand the owner a pk3.
+1. ~~Gate `sets/bd22q_1.97` on the owner's exact load order.~~ **Done 2026-10-24** (see "F1 IS DONE"):
+   runs clean, pk3 handed over. What is left of F1 is the owner's headset pass, which is his to do.
 2. **Slug revolver** (BD21 `Revolver2`, `docs/BD21_Revolver2.txt`): add to roster, break reload entry
    (RSB) with Clip2 reserve, menu row "Slug revolver replaces Shotvolver". Same pattern as the Machinegun.
 3. Options page: move 1.96b's page onto the shared `RSQ_Options` standard (`tools/README.md`). The
