@@ -49,3 +49,45 @@ Shotgun, Zooka, RPG, minigun.
 | bd/FlameCannon | 8f | a single surface; nothing separable |
 
 Melee, effects and pickups are excluded: nothing to reload.
+
+## Zion (Doom 2016) -- surveyed, NOT imported
+
+Zion is a complete Doom 2016 arsenal and it does not fit the import the other
+packages took. Backed out rather than shipped half-right.
+
+Its ten weapons, and how heavily they animate:
+
+| class | modeldef | meshes | frames |
+|---|---|---|---|
+| D4Pistol | EMG | Pistol | 149 |
+| D4SHOTGUN | CSG | CombatShotGunBase + Base2 | 113 |
+| D4SUPERSHOTGUN | SSG | SuperShotgun + Shells | 151 |
+| D4CHAINGUN | CG | CGBase + CGBarell | 63 / 65 |
+| D4MACHINEGUN | HAR | HARBase | 64 |
+| D4PLASMARIFLE | PLRF | PLRFBase + Base1 + Base2 | 109 |
+| D4ROCKETLAUNCHER | RL | RLBase | 92 |
+| D4BFGGUN | BFG9000 | BFGBaseBurn + BFGElOrbSin | 201 |
+| Dumb4gausscannon | GC | GCBase + GCBarrel | 85 |
+| D4CHAINSAW | CSAW | CSAW | 22 |
+
+Three things make it a different job:
+
+1. **Each weapon is a composite.** A block pulls in two to four meshes at
+   different MODEL indices, with SurfaceSkin per model per surface.
+2. **Each class has 7 to 15 Model blocks**, not one -- the base gun, its
+   Doom 2016 weapon mods (CGMod1, CGMod2 ...), the glory-kill set (melee left
+   and right, kick left and right), and the ledge grab. GZDoom treats them
+   additively: they all coexist and bind different sprite frames. Collapsing
+   them to one model, which is what the importer does for every other package,
+   picked the LEDGE GRAB mesh as the super shotgun.
+3. **Almost every mesh is a single surface.** The guns animate by vertex
+   animation across 22 to 201 frames rather than by moving parts, so there is
+   no magazine surface to find and md3label has nothing to classify. Its
+   reloads are baked into the frames.
+
+So Zion needs a decision before any of it lands: which of a class's dozen
+blocks is "the gun" for swapping purposes, and whether the weapon mods ship as
+separate selectable models or not at all.
+
+The importer now handles blocks that carry no Path line and spell the mesh
+path out in the MODEL lines, which is what Zion does; that part is kept.

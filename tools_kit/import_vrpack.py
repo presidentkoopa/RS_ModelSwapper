@@ -54,6 +54,31 @@ def main():
         for b in BLOCK.findall(text):
             mp = PATH.search(b)
             if not mp:
+                # Zion declares no Path: every MODEL and SurfaceSkin line carries
+                # the full path from the package root instead, and one block
+                # composites two to four meshes (the gun, its moving barrel or its
+                # shells, and a hands mesh that is already commented out). Take the
+                # directory those meshes share as the Path, and the block's own
+                # class name -- D4SUPERSHOTGUN, D4CHAINGUN -- as the identity,
+                # because the folder is just "Weapons" for all ten of them.
+                files = [m.replace('\\', '/') for m in MODELFILE.findall(b)]
+                if not files:
+                    continue
+                rel = os.path.dirname(files[0])
+                cls = re.search(r'^[ \t]*Model\s+(\S+)', b, re.M | re.I).group(1)
+                key = re.sub(r'[^A-Za-z0-9]', '', cls)
+                msname = f'MS_{prefix}_{key}'
+                src_dir = os.path.join(root, *rel.split('/'))
+                if not os.path.isdir(src_dir):
+                    missing.append((os.path.basename(d), rel))
+                    continue
+                newpath = f'{out_root}/{key}'.replace('\\', '/')
+                nb = re.sub(r'(?mi)^([ \t]*(?:MODEL|SurfaceSkin)\s+[0-9]+(?:\s+[0-9]+)?\s+")[^"]*/([^"/]+)(")',
+                            lambda m: m.group(1) + m.group(2) + m.group(3), b)
+                nb = re.sub(r'(?mi)^([ \t]*Model\s+)\S+', lambda m: m.group(1) + msname, nb, count=1)
+                nb = nb.replace('{', '{\n   Path "%s"' % newpath, 1)
+                blocks.append((msname, nb))
+                seen.setdefault(msname, src_dir)
                 continue
             rel = mp.group(2).strip().replace('\\', '/').strip('/')
             key = ident(rel)
