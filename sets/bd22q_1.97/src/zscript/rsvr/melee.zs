@@ -205,8 +205,7 @@ class RSVR_Hand play
 	Vector3 prevPos;
 	Vector3 prevRel;		// 1.11: the blade tip in the BODY's frame last tic (forward, left, up)
 	Vector3 prevRelIn;		// 1.97: and the inner end, so a butt strike can be asked to lead
-	double lastAngle;
-	int settle;
+	int prevStamp;		// 1.97 F7: the stamp of the sample prevRel was taken from
 	Actor lockTarget;	// the monster painted while a throw is readied
 	Actor lockRing;
 	int poseFrame;		// 0 = one hand, 1 = the two-handed placement
@@ -219,6 +218,9 @@ class RSVR_Hand play
 
 	// this tic's hand frame and view settings
 	transient Vector3 fH;
+	transient Vector3 pBod;		// 1.97 F7: the body pose recorded WITH this hand sample
+	transient double pByaw;
+	transient int pStamp;
 	transient Vector3 fF;
 	transient Vector3 fR;
 	transient Vector3 fU;
@@ -445,17 +447,33 @@ class RSVR_Hand play
 		return cv ? cv.GetFloat() : def;
 	}
 
+	// 1.97 F7: THE HAND COMES OUT OF THE POSE HISTORY, not out of the engine fields.
+	// RSVR_VRHand.HandPos reads AttackPos, which stock QuestZDoom writes on the CONSOLE
+	// PLAYER'S PAWN ONLY and never sends: for every other player it is zero, so a second
+	// player's melee resolved from nothing. RSQ_PoseHandler fills a stamped history on every
+	// machine from one netevent a tic, and this reads that -- on the sender's machine too, so
+	// there is one code path and no special case for the player holding the controller.
+	//
+	// `bod` and `byaw` are the body pose recorded WITH this hand sample. That is the whole
+	// reason the snap-turn patch could be deleted: the controller pose is written by the
+	// renderer at the end of a frame and the pawn's angle changes in the tic after, so
+	// converting an old hand reading with a new body angle invented a swing out of a turn.
+	// Matching each sample to its own body pose removes that at the source.
 	bool Frame(PlayerPawn mo)
 	{
-		if (!RSVR_VRHand.InVR(mo))
+		let ph = RSQ_PoseHandler.Of(mo, RSQ_Pose.MAIN);
+		if (!ph || !ph.Fresh(mo.Level.maptime))
 			return false;
 		ps = mo.Level.pixelstretch;
 		if (ps <= 0)
 			ps = 1.2;
-		fH = RSVR_VRHand.HandPos(mo);
-		fF = RSVR_VRHand.HandDir(mo, 0, 0, ps);
-		fR = -RSVR_VRHand.HandDir(mo, 90, 0, ps);
-		fU = RSVR_VRHand.HandDir(mo, 0, 90, ps);
+		fH = ph.pos[0];
+		fF = ph.F;
+		fR = -ph.L;
+		fU = ph.U;
+		pBod = ph.bod[0];
+		pByaw = ph.byaw[0];
+		pStamp = ph.stamp[0];
 		vu = CVarF('vr_vunits_per_meter', 34);
 		ws = CVarF('vr_weaponScale', 1.02);
 		ox = CVarF('vr_3dweaponOffsetX', 0);
@@ -499,6 +517,7 @@ class RSVR_Hand play
 	{
 		count = 0;
 		havePrev = false;
+		prevStamp = 0;
 		swingTics = 0;
 		calmTics = 0;
 		inWall = false;
@@ -526,15 +545,13 @@ class RSVR_Hand play
 			return;
 		}
 
-		// a snap turn or a teleport moves the hand without a swing
-		if (havePrev && (abs(Actor.deltaangle(lastAngle, mo.angle)) > 12 || (mo.pos - prevPos).Length() > 64))
-			settle = 2;
-		lastAngle = mo.angle;
-		if (settle > 0)
-		{
-			settle--;
-			Reset();
-		}
+		// 1.97 F7: THE SNAP-TURN AND TELEPORT PATCH IS GONE, not retuned. It threw away two
+		// tics whenever the pawn turned more than 12 degrees or moved more than 64 units, which
+		// is the shape of fix the melee document records failing in the saber: above about
+		// 280 deg/s a smooth-turn player trips it EVERY tic and loses every swing, and below the
+		// threshold the turn is not subtracted at all. BodyFrame now converts each sample with
+		// the body pose recorded beside it, so a turn cancels arithmetically and there is
+		// nothing left to throw away.
 
 		Vector3 bin = Place(BladeIn(k));
 		Vector3 bout = Place(BladeOut(k));
@@ -546,6 +563,7 @@ class RSVR_Hand play
 			prevPos = mo.pos;
 			prevRel = BodyFrame(mo, bout);
 			prevRelIn = BodyFrame(mo, bin);
+			prevStamp = pStamp;
 			havePrev = true;
 			return;
 		}
@@ -559,12 +577,17 @@ class RSVR_Hand play
 		// strafing and turning move nothing; only the arm swinging the blade counts. (World
 		// motion minus the pawn's motion was fooled by turns and by the controller and the pawn
 		// landing a tic apart.)
+		// 1.97 F7: per TIC, over the gap the stamps actually record. This used to be a bare
+		// difference, which is a velocity only while no tic is ever missed; a dropped tic read as
+		// a swing twice as fast as it was. A gap of 0 would divide by zero, so it is floored at 1.
+		int gap = max(1, pStamp - prevStamp);
 		Vector3 rel = BodyFrame(mo, bout);
-		Vector3 vel = rel - prevRel;
+		Vector3 vel = (rel - prevRel) / gap;
 		prevRel = rel;
 		Vector3 relIn = BodyFrame(mo, bin);
-		Vector3 velIn = relIn - prevRelIn;
+		Vector3 velIn = (relIn - prevRelIn) / gap;
 		prevRelIn = relIn;
+		prevStamp = pStamp;
 		double speed = vel.Length();
 		double power = speed / thr;
 
@@ -867,10 +890,14 @@ class RSVR_Hand play
 	}
 
 	// a world point in the body's own frame: forward, left, up (map units)
-	static Vector3 BodyFrame(PlayerPawn mo, Vector3 p)
+	// 1.97 F7: against the body pose that came WITH the sample (pBod / pByaw), not against
+	// the pawn's live position and angle. Those two are a tic apart -- the hand is written by
+	// the renderer at the end of a frame, the pawn turns in the tic after -- and that gap is
+	// what used to turn a snap turn into a swing.
+	Vector3 BodyFrame(PlayerPawn mo, Vector3 p)
 	{
-		Vector3 d = p - mo.pos;
-		double c = cos(mo.angle), s = sin(mo.angle);
+		Vector3 d = p - pBod;
+		double c = cos(pByaw), s = sin(pByaw);
 		return (d.x * c + d.y * s, -d.x * s + d.y * c, d.z);
 	}
 

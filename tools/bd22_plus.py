@@ -3408,6 +3408,160 @@ def pose():
     print(json.dumps(st, indent=1))
 
 
+def spine():
+    """F7: melee.zs onto the pose spine. Must run AFTER butt/whip (they edit the same file) and
+    after pose (it writes the class this reads)."""
+    p = OUT_SRC + 'zscript/rsvr/melee.zs'
+    t = open(p).read()
+    st = {}
+
+    def once(old, new, what):
+        nonlocal t
+        if t.count(old) != 1:
+            raise SystemExit('melee.zs: %s is not there exactly once' % what)
+        t = t.replace(old, new)
+
+    # ---- 1 & 2: the hand, and the body frame that goes with it
+    once("""\tbool Frame(PlayerPawn mo)
+\t{
+\t\tif (!RSVR_VRHand.InVR(mo))
+\t\t\treturn false;
+\t\tps = mo.Level.pixelstretch;
+\t\tif (ps <= 0)
+\t\t\tps = 1.2;
+\t\tfH = RSVR_VRHand.HandPos(mo);
+\t\tfF = RSVR_VRHand.HandDir(mo, 0, 0, ps);
+\t\tfR = -RSVR_VRHand.HandDir(mo, 90, 0, ps);
+\t\tfU = RSVR_VRHand.HandDir(mo, 0, 90, ps);
+""",
+         """\t// 1.97 F7: THE HAND COMES OUT OF THE POSE HISTORY, not out of the engine fields.
+\t// RSVR_VRHand.HandPos reads AttackPos, which stock QuestZDoom writes on the CONSOLE
+\t// PLAYER'S PAWN ONLY and never sends: for every other player it is zero, so a second
+\t// player's melee resolved from nothing. RSQ_PoseHandler fills a stamped history on every
+\t// machine from one netevent a tic, and this reads that -- on the sender's machine too, so
+\t// there is one code path and no special case for the player holding the controller.
+\t//
+\t// `bod` and `byaw` are the body pose recorded WITH this hand sample. That is the whole
+\t// reason the snap-turn patch could be deleted: the controller pose is written by the
+\t// renderer at the end of a frame and the pawn's angle changes in the tic after, so
+\t// converting an old hand reading with a new body angle invented a swing out of a turn.
+\t// Matching each sample to its own body pose removes that at the source.
+\tbool Frame(PlayerPawn mo)
+\t{
+\t\tlet ph = RSQ_PoseHandler.Of(mo, RSQ_Pose.MAIN);
+\t\tif (!ph || !ph.Fresh(mo.Level.maptime))
+\t\t\treturn false;
+\t\tps = mo.Level.pixelstretch;
+\t\tif (ps <= 0)
+\t\t\tps = 1.2;
+\t\tfH = ph.pos[0];
+\t\tfF = ph.F;
+\t\tfR = -ph.L;
+\t\tfU = ph.U;
+\t\tpBod = ph.bod[0];
+\t\tpByaw = ph.byaw[0];
+\t\tpStamp = ph.stamp[0];
+""", 'the Frame() body')
+
+    # the fields the new Frame() writes
+    once("\ttransient Vector3 fH;\n",
+         "\ttransient Vector3 fH;\n"
+         "\ttransient Vector3 pBod;\t\t// 1.97 F7: the body pose recorded WITH this hand sample\n"
+         "\ttransient double pByaw;\n"
+         "\ttransient int pStamp;\n", 'the fH field')
+
+    # BodyFrame uses the sample's own body pose, not the pawn's live one
+    once("""\tstatic Vector3 BodyFrame(PlayerPawn mo, Vector3 p)
+\t{
+\t\tVector3 d = p - mo.pos;
+\t\tdouble c = cos(mo.angle), s = sin(mo.angle);
+\t\treturn (d.x * c + d.y * s, -d.x * s + d.y * c, d.z);
+\t}""",
+         """\t// 1.97 F7: against the body pose that came WITH the sample (pBod / pByaw), not against
+\t// the pawn's live position and angle. Those two are a tic apart -- the hand is written by
+\t// the renderer at the end of a frame, the pawn turns in the tic after -- and that gap is
+\t// what used to turn a snap turn into a swing.
+\tVector3 BodyFrame(PlayerPawn mo, Vector3 p)
+\t{
+\t\tVector3 d = p - pBod;
+\t\tdouble c = cos(pByaw), s = sin(pByaw);
+\t\treturn (d.x * c + d.y * s, -d.x * s + d.y * c, d.z);
+\t}""", 'BodyFrame')
+
+    # ---- 3: the patch goes
+    once("""\t\t// a snap turn or a teleport moves the hand without a swing
+\t\tif (havePrev && (abs(Actor.deltaangle(lastAngle, mo.angle)) > 12 || (mo.pos - prevPos).Length() > 64))
+\t\t\tsettle = 2;
+\t\tlastAngle = mo.angle;
+\t\tif (settle > 0)
+\t\t{
+\t\t\tsettle--;
+\t\t\tReset();
+\t\t}
+
+""",
+         """\t\t// 1.97 F7: THE SNAP-TURN AND TELEPORT PATCH IS GONE, not retuned. It threw away two
+\t\t// tics whenever the pawn turned more than 12 degrees or moved more than 64 units, which
+\t\t// is the shape of fix the melee document records failing in the saber: above about
+\t\t// 280 deg/s a smooth-turn player trips it EVERY tic and loses every swing, and below the
+\t\t// threshold the turn is not subtracted at all. BodyFrame now converts each sample with
+\t\t// the body pose recorded beside it, so a turn cancels arithmetically and there is
+\t\t// nothing left to throw away.
+
+""", 'the snap-turn patch')
+
+    # ---- 4: divide by the gap the stamps record
+    once("""\t\t\tprevRel = BodyFrame(mo, bout);
+\t\t\tprevRelIn = BodyFrame(mo, bin);
+\t\t\thavePrev = true;""",
+         """\t\t\tprevRel = BodyFrame(mo, bout);
+\t\t\tprevRelIn = BodyFrame(mo, bin);
+\t\t\tprevStamp = pStamp;
+\t\t\thavePrev = true;""", 'the first-sample init')
+
+    once("""\t\tVector3 rel = BodyFrame(mo, bout);
+\t\tVector3 vel = rel - prevRel;
+\t\tprevRel = rel;
+\t\tVector3 relIn = BodyFrame(mo, bin);
+\t\tVector3 velIn = relIn - prevRelIn;
+\t\tprevRelIn = relIn;
+\t\tdouble speed = vel.Length();""",
+         """\t\t// 1.97 F7: per TIC, over the gap the stamps actually record. This used to be a bare
+\t\t// difference, which is a velocity only while no tic is ever missed; a dropped tic read as
+\t\t// a swing twice as fast as it was. A gap of 0 would divide by zero, so it is floored at 1.
+\t\tint gap = max(1, pStamp - prevStamp);
+\t\tVector3 rel = BodyFrame(mo, bout);
+\t\tVector3 vel = (rel - prevRel) / gap;
+\t\tprevRel = rel;
+\t\tVector3 relIn = BodyFrame(mo, bin);
+\t\tVector3 velIn = (relIn - prevRelIn) / gap;
+\t\tprevRelIn = relIn;
+\t\tprevStamp = pStamp;
+\t\tdouble speed = vel.Length();""", 'the per-tic step')
+
+    once("\tdouble lastAngle;\n\tint settle;\n",
+         "\tint prevStamp;\t\t// 1.97 F7: the stamp of the sample prevRel was taken from\n",
+         'the settle fields')
+
+    # Reset() must forget the stamp too, or the first swing after a reset divides by a stale gap
+    once("\t\tcount = 0;\n\t\thavePrev = false;\n",
+         "\t\tcount = 0;\n\t\thavePrev = false;\n\t\tprevStamp = 0;\n", 'Reset')
+
+    if 'settle' in t or 'lastAngle' in t:
+        raise SystemExit('melee.zs: settle / lastAngle still referenced after the migration')
+    open(p, 'w').write(t)
+    st['reads'] = 'RSQ_PoseHandler.Of(mo, RSQ_Pose.MAIN), newest sample'
+    st['deleted'] = 'the snap-turn / teleport settle patch, and lastAngle'
+    st['body_frame'] = 'pBod / pByaw, the body pose recorded with the sample'
+    st['dt'] = 'velocity divided by the stamp gap, floored at 1'
+    st['unchanged'] = ("rise = vel.z/speed and fwd = vel.x/speed stay BODY-frame reads, so the "
+                       "spine's Turn() is deliberately NOT applied")
+    json.dump(st, open(OUT + 'spine_apply.json', 'w'), indent=1)
+    with open(OUT + '.generated', 'a') as f:
+        f.write('then tools/bd22_plus.py spine\n')
+    print(json.dumps(st, indent=1))
+
+
 if __name__ == '__main__':
     if sys.argv[1:2] == ['apply']:
         apply()
@@ -3437,5 +3591,7 @@ if __name__ == '__main__':
         hits()
     if sys.argv[1:2] == ['pose']:
         pose()
+    if sys.argv[1:2] == ['spine']:
+        spine()
     if sys.argv[1:2] == ['pk3']:
         pk3(sys.argv[2])
