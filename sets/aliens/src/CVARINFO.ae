@@ -1,0 +1,215 @@
+user bool ae_hands = true;      // VR hands on the Aliens weapons
+
+// The M56's own lock-on. The set shipped it bypassed by an unconditional
+// A_Jump(256, "LockedOn"), which made its A_JumpIfTargetInLOS check dead code:
+// the gun always fired as though locked. 1 runs the check the labels were
+// written for; 0 is the shipped behaviour.
+server bool ae_smartlock = true;
+// The physical fire-mode selector: flick the switch on the receiver with the
+// off hand instead of pressing alt-fire. Only guns whose mesh HAS a selector
+// surface get one -- on this set, the two smartguns.
+server bool ae_handswitch = true;
+
+// The M56's harness gimbal: the gun swings to follow a locked target while
+// your hands stay where they are. The engine turns a psprite's x/y into a HUD
+// model's yaw/pitch, so tilting the weapon layer swings the gun and the hand
+// layers (which carry their own zero tilt) do not follow.
+server bool  ae_gimbal = true;
+// The engine mirrors the left controller, and the sign of the yaw term cannot
+// be confirmed without a headset. If the gun leans AWAY from targets, set this.
+server bool  ae_gimbal_flip = false;
+// REMOVED. This used to cap a hand-rolled steer applied to each round, written
+// on the assumption that SmartgunTracer was an ordinary projectile. It is not:
+// the base TC declares it +SEEKERMISSILE +SCREENSEEKER and runs
+// A_SeekerMissile(179, 180, SMF_LOOK|SMF_PRECISE, 256, 10) itself. Two things
+// steering one round fight each other, so the steer is gone and the gun's own
+// tracking does the work. Tune that in the TC, not here.
+
+// Body holsters: seven weapon slots, seven places on the body you reach for.
+server bool ae_holsters = false;	// PATCHED BY HAND 2026-10-22: off by default (owner)
+
+// Flick the gun hand sharply downward to reload. A velocity test, not a
+// position test: a flick is fast movement that then stops, so walking with
+// your arms down never triggers it.
+server bool ae_flick_reload = true;
+// Left-handed: the gun rides the OFF controller and the free hand the main
+// one. Which actor owns a layer decides which controller draws it, so this
+// swaps the owners and changes nothing about the fits.
+server bool ae_lefthanded = false;
+// What the shotgun's alt-fire toggle gives you: a burst (off) or a slug (on).
+// A slug is the gun's own seven rounds fired on one line instead of scattered
+// -- same projectile, same total damage, concentrated.
+server bool ae_shotgun_slug = false;
+
+// Dual wield: a real gun in the off hand (p.OffhandWeapon), per family.
+// While dual there is no free hand, so the hands-on magazine reload switches
+// itself off and each gun uses the set's own -- flick down to reload.
+// Both hands share one ammo pool.
+server bool ae_dual_pistol = false;
+server bool ae_dual_shotgun = false;
+server bool ae_dual_rifle = false;
+server bool ae_dual_flamer = false;
+
+// Start already holding two: 0 none, 1 dual pistols.
+server int ae_start_dual = 0;
+
+// Enhanced ballistics: surface-matched impact debris and projectile trails.
+// Server, not user: the effects draw playsim random numbers, so every machine
+// has to make the same choice. Off by default -- on is a change to how the
+// set looks, and that should be asked for.
+// 2026-10-23 ON by default (owner: "get the ballistics for the guns done this pass too,
+// something lovely for quest"). It was off because turning it on changes how the set
+// looks and that is the owner's call to make -- they have now made it. Options >
+// Aliens VR > Ballistics still puts it back to Stock.
+server bool rsq_ballistics = true;
+
+// 2026-10-23 spent casings. ON, as our effect switches are; the meshes are RS_Ballistics'.
+server bool ae_casings = true;
+
+// 2026-10-23 move a round to its gun's measured bore. The engine discards every gun's
+// spawnheight in VR (use_action_spawn_yzoffset defaults false), so without this the pulse
+// rifle's 10 mm leaves 4.3 cm above its barrel and the shotgun 3.4 cm below its own.
+server bool ae_muzzle_bore = true;
+
+// 2026-10-22 rest-pose tuning for the gun hand, centimetres (Options > Aliens VR). Bake into
+// RSQ_HandTable.GunHook when settled: fwd subtracts from z, up adds to y, side adds to x.
+user float ae_pistolhand_fwd = 0.0;
+user float ae_pistolhand_up = 0.0;
+user float ae_pistolhand_side = 0.0;
+user float ae_gunhand_fwd = 0.0;
+user float ae_gunhand_up = 0.0;
+user float ae_gunhand_side = 0.0;
+
+// 2026-10-23 the knife is a THIRD hand-seat family. It used to fall through to the long-gun
+// sliders above, which are fitted to a rifle braced in two hands -- so the one weapon you
+// cannot steady had the tuning of the one you can, and no slider of its own to undo it.
+user float ae_knifehand_fwd = 0.0;
+user float ae_knifehand_up = 0.0;
+user float ae_knifehand_side = 0.0;
+
+// 2026-10-23 the smartgun and the satchel are their own families too -- they were on the
+// long-gun sliders, so every rifle tweak dragged them along.
+user float ae_smarthand_fwd = 0.0;
+user float ae_smarthand_up = 0.0;
+user float ae_smarthand_side = 0.0;
+user float ae_satchelhand_fwd = 0.0;
+user float ae_satchelhand_up = 0.0;
+user float ae_satchelhand_side = 0.0;
+
+// 2026-10-22 VR melee by motion (zscript/rsq/melee.zs)
+server bool ae_stab = true;			// a fast thrust with the knife, or a fast punch with the free fist, lands a blow
+// 2026-10-23 the knife's trigger swing animation. Off by default: in VR the blade is in
+// your hand and the 19-tic canned slash fights the motion you are making with it. Server
+// scope so a co-op game agrees on what the knife does -- see actors/weapons/knife.txt.
+server bool ae_knife_swing = false;
+
+server float ae_stab_speed = 2.0;	// m/s the hand has to move
+// MEASURED 2026-10-23: models/weapons/knife/knife.md3 is one surface, 518 verts, 53.508 md3
+// units end to end along its principal axis (0.3001, 0.0000, 0.9539). x Scale 0.65 x 1.02 =
+// 35.48 cm -- the knife's own length, fist to tip. This was 70.0, twice the whole weapon, so
+// the blow landed on bodies the blade was nowhere near. The slider stays for taste.
+server float ae_stab_reach = 35.5;	// cm the blow reaches past the hand (= the knife's length)
+
+// 2026-10-22 more rest-pose tuning (owner): the support hand, the satchel hand's turn, the held shell
+user float ae_support_gun_fwd = 0.0;
+user float ae_support_gun_up = 0.0;
+user float ae_support_gun_side = 0.0;
+
+// 2026-10-23 the support hand is per family as well (owner: "all the support poses are
+// shared?"). The rifle's forward grip, the pistol's cupped hand and the smartgun's
+// handlebar fist were all moved by one set of sliders. Knives and satchels have no
+// support pose, so they need none. These start at 0 = the solver's fit: the old global
+// ae_support_* is gone rather than carried into one family, because whatever was in it
+// was aimed at one gun and wrong on the other seven.
+user float ae_support_pistol_fwd = 0.0;
+user float ae_support_pistol_up = 0.0;
+user float ae_support_pistol_side = 0.0;
+user float ae_support_smart_fwd = 0.0;
+user float ae_support_smart_up = 0.0;
+user float ae_support_smart_side = 0.0;
+user float ae_satchel_yaw = 0.0;
+user float ae_satchel_pitch = 0.0;
+user float ae_satchel_roll = 0.0;
+user float ae_shell_yaw = 0.0;
+user float ae_shell_pitch = 0.0;
+user float ae_shell_roll = 0.0;
+
+// 2026-10-22 pulse rifle: pump to load the launcher (zscript/rsq/pumpgl.zs)
+server int ae_glpump_cost = 20;		// rounds one grenade costs
+server float ae_glpump_grab = 14.0;	// cm: the off hand this close to the pump takes it (trigger)
+// MEASURED 2026-10-23: the launcher pump's own stroke in models/weapons/rifle/m41a.md3 is
+// 14.201 md3 units (surface [1] m41a_pump against [2] m41a_body, frame 8 -> 10, purely along
+// -x, 0.000 on y and z). x Scale 1.1 x vr_weaponScale 1.02 = 15.93 cm. This was 6.0, so the
+// part reached the end of its travel after about a third of the hand's stroke and then sat
+// there. Memory rule: measure it, never pick a round number and call it a slider default.
+server float ae_glpump_travel = 15.9;	// cm the pump must come back (= the mesh's own stroke)
+
+// THE POWER LOADER (2026-10-23, docs/DESIGN_2026-10-23_power_loader.md step 1).
+// ae_loader_speed is SERVER, not user, on purpose: GetSpeedFactor runs inside MovePlayer for
+// every player on every machine, so a per-machine value would make players move differently on
+// different machines. Movement is playsim. The rest are presentation and so are user.
+server float ae_loader_speed = 0.35;		// 1.0 = normal walking speed
+user float ae_loader_quake = 1.0;			// floor shake per footstep, 0 = off
+user float ae_loader_stride = 42.0;			// map units travelled per footstep
+user float ae_loader_hum = 0.0;				// hydraulic hum volume. 0 until the pack HAS a hum loop
+user float ae_loader_hum_ref = 90.0;		// arm speed that reaches full hum pitch
+user float ae_loader_clunk = 18.0;			// arm speed above which a hard stop clunks, 0 = off
+user float ae_loader_haptic = 1.0;			// kick that controller on a hard stop, 0 = off
+user float ae_loader_beacon = 1.0;			// the rotating orange beacon, 0 = off
+user float ae_loader_beacon_rpm = 90.0;		// how fast it sweeps
+// 2026-10-23 the cab cage over the operator's head, and the share of a hit it eats. SERVER,
+// because the absorb changes how much damage lands and every machine must agree. The code
+// caps it at 0.9 so a blow is never reduced to nothing.
+// 2026-10-23 THE RAM: the arms' alt fire, a straight hydraulic shove. SERVER, because it
+// deals damage and moves bodies, so every machine must agree.
+server float ae_loader_ram = 1.0;			// 0 = off
+server float ae_loader_ram_gap = 20.0;		// tics before that arm can ram again
+server float ae_loader_ram_radius = 56.0;	// cm around the claw it catches
+server float ae_loader_ram_damage = 60.0;
+server float ae_loader_ram_push = 26.0;		// how hard it throws what it catches
+
+server float ae_loader_cage = 1.0;			// the cage over your head, 0 = off
+server float ae_loader_cage_absorb = 0.35;	// fraction of a hit the cage takes
+user float ae_loader_beacon_radius = 96.0;	// its light radius, 0 = no light
+user float ae_loader_debug = 0.0;			// print what the loader handler sees, once a second
+user float ae_loader_arms = 1.0;			// an arm on each controller, 0 = the old single model
+user float ae_loader_lag = 0.0;				// tics the arms swing behind your hands. 0 = rigid
+user float ae_loader_overshoot = 0.0;		// how far past the stop they carry
+user float ae_loader_claw_tics = 7.0;		// tics for the claw to close fully
+user float ae_loader_swing = 14.0;			// claw speed that counts as a swing, 0 = off
+user float ae_loader_swing_gap = 12.0;		// tics between swings
+server float ae_loader_reach = 72.0;		// how far the claw is from your hand, map units
+server float ae_loader_claw_radius = 40.0;	// how wide a swing reaches
+server float ae_loader_damage = 180.0;		// damage a swing does
+server float ae_loader_grab_radius = 48.0;	// how close the claw must be to take something
+server float ae_loader_carry = 0.35;		// how hard the claw pulls what it holds
+server float ae_loader_throw = 1.6;			// throw speed multiplier
+server float ae_loader_throw_dmg = 6.0;		// damage per unit of impact speed
+server float ae_loader_crush_tics = 12.0;	// how long a full squeeze takes to crush
+
+// THE TWO ARMS, 2026-10-23. The main boom grabs, crushes and throws; the off boom carries the
+// welding gear -- trigger is the arc, alt fire is the torch. Both still swing on arm speed.
+server float ae_loader_fling = 42.0;		// throw speed on the main arm's alt fire
+server float ae_loader_fling_lift = 0.22;	// how much of that goes upward
+server float ae_loader_arc = 1.0;			// the off arm's welding arc, 0 = off
+server float ae_loader_arc_gap = 7.0;		// tics between strikes while held
+server float ae_loader_arc_radius = 44.0;	// how far from the claw the first body is found
+server float ae_loader_arc_damage = 26.0;	// per strike, per body
+server float ae_loader_arc_chain = 3.0;		// how many bodies one strike walks through
+server float ae_loader_arc_jump = 72.0;		// how far it jumps from one body to the next
+server float ae_loader_flame = 1.0;			// the off arm's cutting torch, 0 = off
+server float ae_loader_flame_rate = 3.0;	// tics between flame puffs while held
+
+// THE SWING GATES, 2026-10-24, from VR_MELEE_ON_QUESTZDOOM_2026-10-24.md section 1.4. Speed
+// alone was the whole test and that is the documented oversensitivity: raising the boom was a
+// hit. Direction rejects a wind-up; displacement rejects a twitch or one noisy tracker sample.
+server float ae_loader_swing_down = 0.0;	// 0 = level or down cuts; BD22 ended at 0.25 (15 deg down) for an axe
+server float ae_loader_swing_len = 24.0;	// cm the boom must have travelled in 3 tics, not just moved fast once
+
+// THE KNIFE: STAB OR SLASH, 2026-10-24. It only ever had the stab -- the test demanded the
+// hand move ALONG the blade, so a cut drawn across the target did nothing at all.
+server float ae_stab_along = 0.3;		// how much of the motion must be down the blade for a THRUST
+server float ae_stab_across = 0.6;		// how much must be across it for a SLASH
+server float ae_slash_speed_mul = 1.35;	// a slash wants more speed than a stab: a stab is short by nature
+server float ae_stab_travel = 9.0;		// cm the hand must actually have travelled, not just twitched fast
+server float ae_stab_push = 3.0;		// how hard a cut shoves what it cuts, scaled by the body's mass
