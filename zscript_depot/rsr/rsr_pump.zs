@@ -27,6 +27,35 @@
 
 class RSP abstract
 {
+	// The reserve and the tube. A table that names them (a pack that owns its guns) is used as
+	// is; ModelSwapper's rows name neither, because the shotgun is the loaded mod's and so is its
+	// ammo: then they are the weapon's own two stores (RSR.WeaponStore -- the larger the reserve,
+	// the smaller the tube, its MaxAmount the tube's capacity).
+	play static bool NoReserve(PlayerPawn mo, int i)
+	{
+		String r = RSP_Guns.Reserve(i);
+		if (r != "")
+		{
+			class<Inventory> rc = r;
+			return rc && mo.CountInv(rc) <= 0;
+		}
+		let a = RSR.WeaponStore(mo, true);
+		return a && a.Amount <= 0;
+	}
+
+	play static bool TubeFull(PlayerPawn mo, int i)
+	{
+		String l = RSP_Guns.Loaded(i);
+		if (l != "")
+		{
+			class<Inventory> lc = l;
+			int cap = RSP_Guns.Cap(i);
+			return lc && cap > 0 && mo.CountInv(lc) >= cap;
+		}
+		let a = RSR.WeaponStore(mo, false);
+		return a && a.Amount >= a.MaxAmount;
+	}
+
 	// layers (rsq/hands.zs owns 2100, 2101, 2200; rsr/vreload.zs 2102-2104, 2201; the break-open
 	// reload (team/reload_break) 2105-2111, 2202)
 	const PUMP = 2120;			// RSR_GunParts (main controller): the pump, where the hand has it
@@ -363,12 +392,9 @@ class RSP_State play
 		relPrev = down;
 		if (!edge || mode == RSP.LOAD)
 			return;
-		class<Inventory> rc = RSP_Guns.Reserve(i);
-		if (rc && mo.CountInv(rc) <= 0)
+		if (RSP.NoReserve(mo, i))
 			return;								// nothing in reserve to insert
-		class<Inventory> lc = RSP_Guns.Loaded(i);
-		int cap = RSP_Guns.Cap(i);
-		if (lc && cap > 0 && mo.CountInv(lc) >= cap)
+		if (RSP.TubeFull(mo, i))
 			return;								// the tube is full
 		mo.GiveInventory('RSP_Insert', 1);
 		Log(mo, "reload pressed: the hand insert takes it");
@@ -566,8 +592,7 @@ class RSP_State play
 
 	bool CanTakeShell(PlayerPawn mo, bool quiet = false)
 	{
-		class<Inventory> rc = RSP_Guns.Reserve(gun);
-		if (rc && mo.CountInv(rc) <= 0)
+		if (RSP.NoReserve(mo, gun))
 		{
 			if (!quiet)
 				Log(mo, "no shells left to take");
@@ -903,6 +928,8 @@ class RSP_State play
 	{
 		if (!psp.CurState)
 			return false;
+		if (RSR.InHold(psp, w))
+			return true;		// ModelSwapper: a foreign shotgun parked by MS_ReloadJoin
 		Array<String> list;
 		RSP_Guns.WaitLabels(i).Split(list, " ", TOK_SKIPEMPTY);
 		for (int k = 0; k < list.Size(); k++)
@@ -1236,11 +1263,9 @@ class RSP_Handler : EventHandler
 				s.FreeFeed(mo, i);	// a shell straight into the port, no reload button, any time
 				// 1.43 (owner: "with use it just appears in offhand"): where a trigger grab would take a
 				// shell now, the Use key grabs too (the tube has room, the hand is free and away from the port)
-				class<Inventory> lc = RSP_Guns.Loaded(i);
-				int cap = RSP_Guns.Cap(i);
 				s.feedOK = s.hand == RSP.EMPTY && s.geo
 					&& !(s.mode == RSP.LOAD || s.mode == RSP.PUMPING && (s.held || s.pull > 0 || s.backDone))
-					&& !(lc && cap > 0 && mo.CountInv(lc) >= cap) && s.CanTakeShell(mo, true);
+					&& !RSP.TubeFull(mo, i) && s.CanTakeShell(mo, true);
 			}
 			else if (s.mode == RSP.NONE && s.hand != RSP.EMPTY)
 			{

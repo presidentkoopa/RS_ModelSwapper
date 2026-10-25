@@ -53,6 +53,8 @@ if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsrpump'))) { $in
 # its own lump for the same reason as MODELDEF.rsb. SNDINFO.ms and sounds/ are the reload
 # foley -- before them the pack shipped no sound at all and every reload was silent.
 if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.bd22'))) { $include += 'MODELDEF.bd22' }
+# MODELDEF.rsq: Ermac's VR hands (models/rsq). The hand tables always shipped; the hands did not.
+if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsq'))) { $include += 'MODELDEF.rsq' }
 if ($Static) { $include += 'SNDINFO.ms'; $dirs += @('sounds') }
 # SYNTAX CHECK BEFORE PACKING.
 #
@@ -104,7 +106,11 @@ $files = $files | Where-Object { $_.FullName -notmatch '\\models\\blend\\' }
 # been wired to yet is 177MB of geometry the engine will never ask for. This is
 # derived, not a list, so a folder starts shipping the moment a Model block points
 # at it. The asset-ref check below is what catches an over-exclusion.
-$mdRefs = [regex]::Matches((Get-Content (Join-Path $root 'modeldef') -Raw), '(?i)Path\s+"models/([^/"]+)') |
+# Every MODELDEF lump that ships counts, not only `modeldef`: the reload layers and the hands
+# (MODELDEF.bd22, MODELDEF.rsq, ...) name folders no donor block does -- models/rsq above all.
+$mdText = ($include | Where-Object { $_ -match '(?i)^modeldef' } | ForEach-Object {
+    $p = Join-Path $root $_; if (Test-Path $p) { Get-Content $p -Raw } }) -join "`n"
+$mdRefs = [regex]::Matches($mdText, '(?i)Path\s+"models/([^/"]+)') |
           ForEach-Object { $_.Groups[1].Value.ToLower() } | Sort-Object -Unique
 # modeldef is not the only thing that names a mesh. The reload cards name the
 # LOOSE MAGAZINE the player holds -- magmodel -- plus loose rounds, belts and the

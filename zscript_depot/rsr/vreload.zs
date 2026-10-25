@@ -201,13 +201,24 @@ class RSR abstract
 			class<Inventory> rc = res;
 			return rc ? mo.FindInventory(rc) : null;
 		}
-		let w = mo.player ? mo.player.ReadyWeapon : null;
+		return WeaponStore(mo, true);
+	}
+
+	// One of the held weapon's own two ammo stores: the reserve (the larger) or what is loaded
+	// in the gun (the smaller -- a magazine, a shotgun's tube). A weapon with one store has it
+	// as its reserve and nothing loaded. ModelSwapper reads a foreign gun's ammo through this.
+	play static Inventory WeaponStore(PlayerPawn mo, bool reserve)
+	{
+		let w = mo && mo.player ? mo.player.ReadyWeapon : null;
 		if (!w)
 			return null;
 		Inventory a1 = w.Ammo1, a2 = w.Ammo2;
-		if (a1 && a2 && a1 != a2)
-			return a2.MaxAmount > a1.MaxAmount ? a2 : a1;
-		return a1 ? a1 : a2;
+		if (!a1 || !a2 || a1 == a2)
+			return reserve ? (a1 ? a1 : a2) : null;
+		bool twoBig = a2.MaxAmount > a1.MaxAmount;
+		if (reserve)
+			return twoBig ? a2 : a1;
+		return twoBig ? a1 : a2;
 	}
 }
 

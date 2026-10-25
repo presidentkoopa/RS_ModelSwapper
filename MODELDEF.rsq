@@ -1,0 +1,153 @@
+// GENERATED from RS_Brutal22WeaponsQ MODELDEF.rsq -- do not edit by hand.
+// Ermac's VR hands (models/rsq, RustedLegacy MIT): the gun hand, the support hand and the free
+// hand, keyed to the pack's own hand actors (RSQ_GunSide, RSQ_Hands, RSQ_Debris) -- so they draw
+// on ANY mod's gun. rsq/hands.zs and rsq/handtable.zs place them per worn model. Until this
+// shipped, ModelSwapper's Quest build carried the hand tables and no hand meshes: no hands at all.
+// Left out: BD22's own grenade (HandGrenades, RQNP) and scope (RQSC) blocks -- neither class nor
+// sprite exists here, and a MODELDEF naming an unregistered sprite stops the pk3 loading -- and its
+// twelve RSQ_Debris blocks (the gun bash's impact chips, which ModelSwapper does not carry): with
+// them the engine hangs after P_Init and never reaches the map (gated 2026-10-25).
+
+// the gun hand (main controller) and the support hand (main controller, on the gun)
+Model RSQ_GunSide
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQGS A 0 2	// Ermac hand.md3 frame 6
+	FrameIndex RQGS B 0 3	// Ermac hand.md3 frame 19
+	FrameIndex RQGS C 0 5	// Ermac hand.md3 frame 30
+	FrameIndex RQGS D 0 6	// Ermac hand.md3 frame 47
+	FrameIndex RQGS E 0 7	// Ermac hand.md3 frame 95
+	FrameIndex RQGS F 0 8	// Ermac hand.md3 frame 106
+	FrameIndex RQGS G 0 9	// Ermac hand.md3 frame 113
+	FrameIndex RQGS H 0 4	// Ermac hand.md3 frame 29
+	FrameIndex RQGT A 0 10	// index finger on the trigger
+	FrameIndex RQGU A 0 11	// trigger squeezed
+	FrameIndex RQGT B 0 12	// index finger on the trigger
+	FrameIndex RQGU B 0 13	// trigger squeezed
+	FrameIndex RQGT C 0 14	// index finger on the trigger
+	FrameIndex RQGU C 0 15	// trigger squeezed
+	FrameIndex RQGT D 0 16	// index finger on the trigger
+	FrameIndex RQGU D 0 17	// trigger squeezed
+	FrameIndex RQGT E 0 18	// index finger on the trigger
+	FrameIndex RQGU E 0 19	// trigger squeezed
+	FrameIndex RQGT F 0 20	// index finger on the trigger
+	FrameIndex RQGU F 0 21	// trigger squeezed
+	FrameIndex RQGT G 0 22	// index finger on the trigger
+	FrameIndex RQGU G 0 23	// trigger squeezed
+	FrameIndex RQGT H 0 24	// index finger on the trigger
+	FrameIndex RQGU H 0 25	// trigger squeezed
+	FrameIndex RQGT I 0 26	// index finger on the trigger
+	FrameIndex RQGU I 0 27	// trigger squeezed
+	FrameIndex RQGT J 0 28	// index finger on the trigger
+	FrameIndex RQGU J 0 29	// trigger squeezed
+	FrameIndex RQGT K 0 30	// index finger on the trigger
+	FrameIndex RQGU K 0 31	// trigger squeezed
+	FrameIndex RQGT L 0 32	// index finger on the trigger
+	FrameIndex RQGU L 0 33	// trigger squeezed
+	FrameIndex RQGT M 0 34	// index finger on the trigger
+	FrameIndex RQGU M 0 35	// trigger squeezed
+	FrameIndex RQGT N 0 36	// index finger on the trigger
+	FrameIndex RQGU N 0 37	// trigger squeezed
+	FrameIndex RQGT O 0 38	// index finger on the trigger
+	FrameIndex RQGU O 0 39	// trigger squeezed
+	FrameIndex RQGT P 0 40	// index finger on the trigger
+	FrameIndex RQGU P 0 41	// trigger squeezed
+	FrameIndex RQGT Q 0 42	// index finger on the trigger
+	FrameIndex RQGU Q 0 43	// trigger squeezed
+	FrameIndex RQGT R 0 44	// index finger on the trigger
+	FrameIndex RQGU R 0 45	// trigger squeezed
+}
+Model RSQ_GunSide
+{
+	Path "models/rsq"
+	Model 0 "hand2.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQSP A 0 0	// Ermac hand2.md3 frame 4
+	FrameIndex RQSP B 0 1	// Ermac hand2.md3 frame 15
+	FrameIndex RQSP C 0 2	// Ermac hand2.md3 frame 33
+	FrameIndex RQSP D 0 3	// Ermac hand2.md3 frame 80
+	FrameIndex RQSP E 0 4	// Ermac hand2.md3 frame 91
+}
+// 2026-10-16 (owner): the gun hand's own fist and grenade hold, Ermac's meshes at his own
+// placement (no hook): his fist (hand.md3 frame 1, the free hand's fist too), and his
+// ammo hand round a chaingun box (ammo_hand.md3 frame 3) round BD22's grenade (below)
+Model RSQ_GunSide
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQGF A 0 1
+}
+Model RSQ_GunSide
+{
+	Path "models/rsq"
+	Model 0 "ammo_hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQGN A 0 3
+}
+// the free hand (off controller): open, or a fist
+Model RSQ_Hands
+{
+	Path "models/rsq"
+	Model 0 "hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQHN A 0 0
+	FrameIndex RQHN H 0 1
+}
+// the VR grenade's ring in the free hand's fingers: Ermac's one-shell pinch (ammo_hand 1)
+// and BD22's ring baked into the hand's own frame (rsq_ring.md3), ONE block: two blocks on
+// the same frame draw only one of them (that hid the hand, 1.1)
+Model RSQ_Hands
+{
+	Path "models/rsq"
+	Model 0 "ammo_hand.md3"
+	Skin 0 "hand.png"
+	Model 1 "rsq_ring.md3"
+	Skin 1 "models/bd/Grenade/nade.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQHR A 0 1
+	FrameIndex RQHR A 1 0
+}
+// The VR scope's collimated reticle (zscript/rsq/scope.zs, layer RSQ_ScopeLayers.DOT).
+//
+// It is a MODEL and not a sprite on purpose. A psprite layer only reaches
+// Weapon.ModifyBobLayer3D -- the hook that places a layer in the controller's 3D frame -- when
+// it resolves to a model: hw_weapon.cpp:927 does "if (!smf) continue;" in the 3D pass and
+// :842 does "if (smf) continue;" in the 2D one. A sprite layer would get only the 2D
+// screen-space bob, i.e. a crosshair painted on the screen, which is the parallax-locked thing
+// a collimated sight exists to avoid.
+//
+// Offset 0.0 -30.0 -5.0 cancels RenderHUDModel's fixed translate(0, 5, 30) at Scale -1 1 1, so
+// the quad's origin sits exactly ON the weapon controller -- the frame RSQ_ScopeTable.Lens is
+// measured in. Check: model origin (0,0,0) -> p = (0,-5,-30) -> 0.01*((0,-5,-30)+(0,5,30)) = 0.
+Model RSQ_GunSide
+{
+	Path "models/rsq"
+	Model 0 "rsq_dot.md3"
+	Skin 0 "RQRTA0.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -30.0 -5.0
+	FrameIndex RQRT A 0 0
+}
+Model RSQ_GunSide
+{
+	Path "models/rsq"
+	Model 0 "rsq_dot.md3"
+	Skin 0 "RQRTB0.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -30.0 -5.0
+	FrameIndex RQRT B 0 0
+}

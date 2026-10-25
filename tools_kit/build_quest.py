@@ -19,7 +19,7 @@ def main(out):
     include = ['zscript.txt', 'modeldef', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF']
     dirs = ['zscript', 'models', 'zscript_depot']
     include += sorted(os.path.basename(p) for p in glob.glob(os.path.join(ROOT, 'WMCARD.*')) if os.path.isfile(p))
-    for lump in ('MODELDEF.rsb', 'MODELDEF.rsrpump', 'MODELDEF.bd22'):
+    for lump in ('MODELDEF.rsb', 'MODELDEF.rsrpump', 'MODELDEF.bd22', 'MODELDEF.rsq'):
         if os.path.exists(os.path.join(ROOT, lump)):
             include.append(lump)
     include.append('SNDINFO.ms'); dirs.append('sounds')
@@ -38,7 +38,8 @@ def main(out):
     files = [p for p in files if not re.search(r'(?i)\.(before_\w+|bak|orig|tmp)$', p)]
     files = [p for p in files if '/models/blend/' not in p.replace('\\', '/')]
     md = open(os.path.join(ROOT, 'modeldef'), encoding='latin-1').read()
-    md_refs = {m.lower() for m in re.findall(r'(?i)Path\s+"models/([^/"]+)', md)}
+    md_all = '\n'.join(open(os.path.join(ROOT, f), encoding='latin-1').read() for f in include if f.lower().startswith('modeldef'))
+    md_refs = {m.lower() for m in re.findall(r'(?i)Path\s+"models/([^/"]+)', md_all)}
     card_refs = set()
     for c in glob.glob(os.path.join(ROOT, 'WMCARD.*')):
         t = open(c, encoding='latin-1').read()
@@ -73,14 +74,15 @@ def main(out):
         if m:
             refs += 1
             if (path + '/' + m.group(1)).lower() not in names: print('unresolved asset:', path + '/' + m.group(1)); miss += 1
-    for lump in ('MODELDEF.bd22',):
+    for lump in ('MODELDEF.bd22', 'MODELDEF.rsq'):
         if lump.lower() in names:
             t = z.read(lump).decode('latin-1'); path = ''
             for line in t.split('\n'):
                 m = re.match(r'^\s*Path\s+"([^"]+)"', line)
                 if m: path = m.group(1).rstrip('/'); continue
                 m = re.match(r'^\s*(?:Model\s+\d+|Skin\s+\d+|SurfaceSkin\s+\d+\s+\d+)\s+"([^"]+)"', line)
-                if m and (path + '/' + m.group(1)).lower() not in names:
+                full = m.group(1) if m and '/' in m.group(1) else (path + '/' + m.group(1) if m else '')
+                if m and full.lower() not in names:
                     print('unresolved asset (%s): %s/%s' % (lump, path, m.group(1))); miss += 1
     donors = re.findall(r'(?m)^Model\s+(\S+)', txt)
     dupes = sorted({d for d in donors if donors.count(d) > 1})
