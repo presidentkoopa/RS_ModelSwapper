@@ -182,6 +182,15 @@ per-gun checklist below, in a headset, signed by the owner.
       rise. There is no open/eject animation in this mesh, so the motion is ours to drive -- which
       is how every other gun in the pack does it.
 
+- F11 **FIXES AND POLISH ON bd22q** (owner, 2026-10-25: "I wanted bugfixes and polish"). Runs
+      beside F10. Every item is a bug confirmed in sets/bd22q_1.97/src by the 2026-10-25 audit, fixed
+      in the generators, never by hand. First item, owner's yes 2026-10-25 18:25:
+        * **pk3 compression.** `bd22_plus.py pk3` writes every lump ZIP_DEFLATED, so the pack is
+          about 50 MB. 1.96b's own release compressed its .md3 files with LZMA (zip method 14) and
+          was 24 MB. LZMA on .md3 alone gives about 30 MB from the same files. QZD 17.3 reads
+          method 14 (`file_zip.cpp:247`, `files_decompress.cpp:889`).
+      The rest of the list is added here once the audit of bd22q's own additions is checked.
+
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
 - S1  Vanilla / V+ roster + menu (V+ = toggles inside Vanilla per the owner's checklist).  (owner's order, 03:21)
