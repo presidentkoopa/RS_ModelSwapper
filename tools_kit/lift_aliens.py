@@ -357,7 +357,7 @@ def main(src, dry):
     rsr = re.sub(r'\n// Aliens set guns \(tools_kit/lift_aliens\.py\).*', '', rsr, flags=re.S).rstrip('\n') + '\n'
     # a NoMag token class for every slot whose class is not declared elsewhere in the file
     rsr += '\n// Aliens set guns (tools_kit/lift_aliens.py)\n' + ''.join(
-        'class %s : RSVR_Token {}\n' % n for n in sorted(set(tokens)) if not re.search(r'^class %s\b' % n, rsr, re.M))
+        'class %s : RSVR_Token {}\n' % n for n in sorted(set(tokens)) if not re.search(r'^class %s\b' % n, rsr, re.M | re.I))
     rsr += reg('RSR_Sprites_Aliens', spr_rsr, 'the Aliens set\'s reload layer sprites (MODELDEF.aliens), so the engine knows them; never spawned')
     pump = re.sub(r'\n// the Aliens set\'s pump layer sprites.*', '', pump, flags=re.S).rstrip('\n') + '\n'
     pump += reg('RSP_Sprites_Aliens', spr_pump, 'the Aliens set\'s pump layer sprites (MODELDEF.aliens), so the engine knows them; never spawned')

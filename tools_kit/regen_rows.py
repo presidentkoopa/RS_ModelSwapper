@@ -52,7 +52,9 @@ def donor_slots(rsr):
 
 def candidates(only=None):
     rsr = open(os.path.join(ROOT, 'zscript_depot/rsr/rsr_guns.ms.zs')).read()
-    cards = {w['cls']: w for w in C.load_cards(ROOT)}
+    # class names are case-insensitive in the engine; the cards were not always written with the
+    # donor's spelling (WMCARD.ww2 "MS_wolf_Kar98" is the donor MS_wolf_KAR98)
+    cards = {w['cls'].lower(): w for w in C.load_cards(ROOT)}
     blocks = PA.donor_blocks(); rest = PA.shelf_rest()
     out, notes = [], []
     for d, s in sorted(donor_slots(rsr).items(), key=lambda kv: kv[1]):
@@ -60,7 +62,7 @@ def candidates(only=None):
             continue
         if s in SKIP_SLOTS or d.startswith('MS_PU_') or d.startswith('MS_BD22_') or d.startswith('MS_alien_') or d not in blocks:
             continue
-        w = cards.get(d)
+        w = cards.get(d.lower())
         if not w:
             notes.append((d, 'no card')); continue
         cm = PA.resolve(C.model_path(ROOT, w) or '')
@@ -164,7 +166,7 @@ def main(dry, only):
     # sprite registration + NoMag tokens (a MODELDEF naming an unknown sprite stops the pk3 loading)
     rsr = re.sub(r'\n// Card-regenerated guns \(tools_kit/regen_rows\.py\).*', '', rsr, flags=re.S).rstrip('\n') + '\n'
     rsr += '\n// Card-regenerated guns (tools_kit/regen_rows.py)\n'
-    rsr += ''.join('class %s : RSVR_Token {}\n' % n for n in sorted(set(tokens)) if not re.search(r'^class %s\b' % n, rsr, re.M))
+    rsr += ''.join('class %s : RSVR_Token {}\n' % n for n in sorted(set(tokens)) if not re.search(r'^class %s\b' % n, rsr, re.M | re.I))
     rsr += ('class RSR_Sprites_Cards : Actor\n{\n\tStates\n\t{\n\tSpawn:\n%s\n\t\tStop;\n\t}\n}\n'
             % '\n'.join('\t\t%s %s 0;' % (s, ''.join(sorted(l))) for s, l in sorted(sprites.items())))
     open(p_rsr, 'w', newline='\n').write(rsr)

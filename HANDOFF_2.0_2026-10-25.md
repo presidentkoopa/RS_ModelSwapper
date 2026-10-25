@@ -53,13 +53,14 @@ reverted; `rebase_donors.py` stays only as the record of that check -- do not ru
 `tools_kit/regen_rows.py` runs the kit's own chain (card2quest.geometry -> genpack.build_gun ->
 gen_rsr) at each donor's own placement and rest frame. Validated: at the card's placement it gives
 back the shipped MS_Pistol row to 0.001 cm. 31 donors whose own card is on their real mesh now have
-their OWN row (slots 41-72) and layers (MODELDEF.cards, from their own folder and skin); foley by
+their OWN row (slots 41-73) and layers (MODELDEF.cards, from their own folder and skin); foley by
 gun type. All 31 gated PASS, gun drawn through the reload.
 
 Left on the old rows: donors whose card is a `_wm` rebuild (BD_AssaultShotgun, BD_Flamethrower2,
 BD_RailGun, BD_Rifle, BD_Unmaker, MG_Bolter, MG_Tec9, PlasmaRifle, Rifle, RocketLauncher), donors
-with no card (brt_ AssaultShotgun / Flamethrower2 / Unmaker / HitlersBuzzsaw, meat_ Bolter / TEC9,
-wolf_KAR98). brt_Rifle was refused at first ("evidence disagrees"): ModelSwapper drew it on frame 0,
+with no card (brt_ AssaultShotgun / Flamethrower2 / Unmaker / HitlersBuzzsaw, meat_ Bolter / TEC9).
+wolf_KAR98 had a card all along (WMCARD.ww2 spells it MS_wolf_Kar98; lookups are now case-insensitive,
+as the engine's are): own row, slot 73, gated -- but it has NO hand row yet (no hands drawn on it). brt_Rifle was refused at first ("evidence disagrees"): ModelSwapper drew it on frame 0,
 mid-raise; measured, its rest is frame 3 (card magcenter on the magazine surface, the hand row's fit,
 the raise test, BD22Q's own) -- `tools_kit/rest_frames.py` sets it, and it has its own row now (slot 72).
 Those need real-mesh cards -- the card standard's job.

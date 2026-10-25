@@ -276,3 +276,8 @@ $alias ms/card/brt_rifle/magin ms/bd22/rifle/magin
 $alias ms/card/brt_rifle/slideback ms/bd22/rifle/slideback
 $alias ms/card/brt_rifle/slidefwd ms/bd22/rifle/slidefwd
 $alias ms/card/brt_rifle/magdrop ms/magdrop
+$alias ms/card/wolf_kar98/magout ms/bd22/rifle/magout
+$alias ms/card/wolf_kar98/magin ms/bd22/rifle/magin
+$alias ms/card/wolf_kar98/slideback ms/bd22/rifle/slideback
+$alias ms/card/wolf_kar98/slidefwd ms/bd22/rifle/slidefwd
+$alias ms/card/wolf_kar98/magdrop ms/magdrop

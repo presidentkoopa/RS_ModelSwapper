@@ -140,7 +140,7 @@ def run(pk3, donor, engine, shots, yaw=90):
         time.sleep(2)
         rc = p.poll()
         lg = open(log, encoding='latin-1').read() if os.path.exists(log) else ''
-        if rc is None and (re.search(r'Script error|Execution could not continue', lg) or time.time() - t0 > 600):
+        if rc is None and (re.search(r'Script error|Execution could not continue|^\S+, line \d+: (?!.*[Ww]arning)', lg, re.M) or time.time() - t0 > 600):
             import signal
             os.killpg(p.pid, signal.SIGKILL)
             rc = 'KILLED (script error)' if 'rror' in lg else 'TIMEOUT'
@@ -151,7 +151,7 @@ def run(pk3, donor, engine, shots, yaw=90):
         checks = [
             ('pack loaded', os.path.basename(pk3) in text),
             ('scripts parsed', 'script parsing took' in text),
-            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted', text)),
+            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
             ('join took it', 'took TMSSG (break slot %d)' % break_slot(donor) in text),
             ('it opened', re.search(r'RSBT t\d+ phase 2', text) is not None),
             ('chambers seated', len(re.findall(r'RSBT t\d+ seated chamber', text)) >= 1),
@@ -176,7 +176,7 @@ def run(pk3, donor, engine, shots, yaw=90):
         checks = [
             ('pack loaded', os.path.basename(pk3) in text),
             ('scripts parsed', 'script parsing took' in text),
-            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted', text)),
+            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
             ('join took it', 'TMShotgun pump: took it at its reload' in text),
             ('hand fed shells', 'a shell pushed home' in text),
             ('their loop ran', shells >= 2),
@@ -196,7 +196,7 @@ def run(pk3, donor, engine, shots, yaw=90):
     checks = [
         ('pack loaded', os.path.basename(pk3) in text),
         ('scripts parsed', 'script parsing took' in text),
-        ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted', text)),
+        ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
         ('join took it', 'took TMPistol' in text),
         ('as this model', 'took TMPistol (slot %d)' % slot_of(donor) in text),
         ('magazine out', re.search(r'gun \d+: \w+ -> EMPTY', text) is not None),

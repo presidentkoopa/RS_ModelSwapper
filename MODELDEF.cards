@@ -2686,3 +2686,145 @@ Model RSR_DroppedMag
 	USEACTORROLL
 	FrameIndex QVVW A 0 3
 }
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): MS_wolf_KAR98.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model MS_wolf_KAR98
+{
+	Path "models/wolf/KAR98"
+	Model 0 "KAR98.md3"
+	SurfaceSkin 0 0 "KAR98.png"
+	SurfaceSkin 0 1 "KAR98.png"
+	SurfaceSkin 0 2 "KAR98.png"
+	SurfaceSkin 0 3 "KAR98.png"
+	SurfaceSkin 0 4 "KAR98.png"
+	SurfaceSkin 0 5 "KAR98.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "KAR98.png"
+	SurfaceSkin 0 8 "KAR98.png"
+	SurfaceSkin 0 9 "KAR98.png"
+	SurfaceSkin 0 10 "KAR98.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QVWM A 0 0
+}
+
+// the gun without its handle / slide (and what moves with it): they are on their own layers while pulled
+Model MS_wolf_KAR98
+{
+	Path "models/wolf/KAR98"
+	Model 0 "KAR98.md3"
+	SurfaceSkin 0 0 "KAR98.png"
+	SurfaceSkin 0 1 "KAR98.png"
+	SurfaceSkin 0 2 "KAR98.png"
+	SurfaceSkin 0 3 "KAR98.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "KAR98.png"
+	SurfaceSkin 0 6 "KAR98.png"
+	SurfaceSkin 0 7 "KAR98.png"
+	SurfaceSkin 0 8 "KAR98.png"
+	SurfaceSkin 0 9 "KAR98.png"
+	SurfaceSkin 0 10 "KAR98.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QVWM B 0 0
+}
+
+// the handle / slide alone
+Model RSR_GunParts
+{
+	Path "models/wolf/KAR98"
+	Model 0 "KAR98.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "KAR98.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QVWP B 0 0
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/wolf/KAR98"
+	Model 0 "KAR98.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "KAR98.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QVWP A 0 0
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/wolf/KAR98"
+	Model 0 "KAR98.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "KAR98.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QVWP A 0 0
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/wolf/KAR98"
+	Model 0 "KAR98.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "KAR98.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset 0.0867 -0.0000 0.0
+	ZOffset 2.0207
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex QVWW A 0 0
+}
