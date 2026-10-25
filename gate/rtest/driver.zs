@@ -1,0 +1,96 @@
+// TEST ONLY: picks the gun under test and empties it, so a run can step through every gun
+// without a headset or a keyboard.
+//
+// The kit's own driver.zs does this with a v9t_* cvar block written for BD22's class names and
+// its ten-gun table. This is the same idea against this set's names, and small enough to read
+// in one go. It is NOT in the shipped pk3: tools/ is in mkpk3.py's SKIP_DIRS.
+class RSQT_Driver : EventHandler
+{
+	String was;
+	int settle;
+
+	static String S(Name n)
+	{
+		let c = CVar.FindCVar(n);
+		return c ? c.GetString() : "";
+	}
+
+	static double F(Name n, double def)
+	{
+		let c = CVar.FindCVar(n);
+		return c ? c.GetFloat() : def;
+	}
+
+	override void WorldTick()
+	{
+		if (!playeringame[0] || !players[0].mo)
+			return;
+		let mo = PlayerPawn(players[0].mo);
+		if (!mo || !mo.player)
+			return;
+
+		// WHY DOES EMPTY NOT BECOME CARRY. vreload.zs:426 needs `press && CanTakeMag`, and
+		// press (:410) is `(g && !gripPrev) || netPresses != usedPresses`. Every field is public
+		// on RSR_State, so print them beside the mask test rather than guess again.
+		if (F('rsqt_dbg', 0) > 0 && (Level.maptime % 7) == 0)
+		{
+			let s = RSR_ReloadHandler.StateOf(mo);
+			if (s)
+			{
+				int mask = RSR.GrabMask(mo.player);
+				int btn = RSVR_VRHand.Buttons(mo);
+				Console.Printf("DBG t%d phase %s mask %d btn&mask %d gripPrev %d net %d used %d gripFree %d",
+					Level.maptime, RSR.PhaseName(s.phase), mask, btn & mask,
+					s.gripPrev ? 1 : 0, s.netPresses, s.usedPresses, s.gripFree ? 1 : 0);
+			}
+		}
+
+		String want = S('rsqt_gun');
+		if (want == "" || want == was)
+			return;
+
+		Class<Weapon> wc = (Class<Weapon>)((Name)(want));
+		if (!wc)
+		{
+			Console.Printf("RSQT want=%s UNKNOWN CLASS", want);
+			was = want;
+			return;
+		}
+
+		mo.GiveInventory(wc, 1);
+		let w = Weapon(mo.FindInventory(wc));
+		if (!w)
+		{
+			Console.Printf("RSQT want=%s GIVE FAILED -- TryPickup refused it", want);
+			was = want;
+			return;
+		}
+		mo.player.PendingWeapon = w;
+
+		// empty the magazine the gun itself names, which is the same thing the slide-lock path
+		// reads -- so "empty" here means exactly what the gun means by it
+		if (F('rsqt_empty', 0) > 0 && w.AmmoType1)
+		{
+			let a = mo.FindInventory(w.AmmoType1);
+			if (a)
+				a.Amount = 0;
+		}
+		// and top up the reserve, or there is nothing to reload FROM
+		if (w.AmmoType2)
+		{
+			let r = mo.FindInventory(w.AmmoType2);
+			if (!r)
+				mo.GiveInventory(w.AmmoType2, 1);
+			r = mo.FindInventory(w.AmmoType2);
+			if (r)
+				r.Amount = r.MaxAmount;
+		}
+
+		Console.Printf("RSQT gun=%s mag=%s(%d) reserve=%s(%d)", want,
+			w.AmmoType1 ? w.AmmoType1.GetClassName() : 'none',
+			w.AmmoType1 && mo.FindInventory(w.AmmoType1) ? mo.FindInventory(w.AmmoType1).Amount : -1,
+			w.AmmoType2 ? w.AmmoType2.GetClassName() : 'none',
+			w.AmmoType2 && mo.FindInventory(w.AmmoType2) ? mo.FindInventory(w.AmmoType2).Amount : -1);
+		was = want;
+	}
+}

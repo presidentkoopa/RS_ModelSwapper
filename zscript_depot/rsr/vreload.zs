@@ -170,6 +170,45 @@ class RSR abstract
 		}
 		return false;
 	}
+
+	// The weapon layer is waiting on the hands. In a pack that owns its guns that is the
+	// gun's own RSR_Wait state. In ModelSwapper the gun is somebody else's and has no such
+	// state, so MS_ReloadJoin parks it on MS_ReloadStates.MS_Hold instead -- and until this
+	// accepted that, Draw never swapped a ModelSwapper gun to its gun-without-magazine frame:
+	// the magazine stayed in the gun while a second one was in your hand.
+	play static bool InHold(PSprite psp, Weapon w)
+	{
+		if (!psp || !w)
+			return false;
+		if (psp.CurState == w.FindState("RSR_Wait"))
+			return true;
+		let hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+		return hold && psp.CurState == hold;
+	}
+
+	// The reserve a fresh magazine is taken from. A table that names one (a pack that owns
+	// its guns) is used as is. ModelSwapper's rows name none, because the gun belongs to the
+	// loaded mod and so does its ammo: the reserve is that weapon's own. A magazine weapon
+	// usually carries two ammo types, the rounds in the gun and the reserve; the reserve is
+	// the larger store. An empty answer means "no reserve to check" -- the mod's own reload
+	// still decides what a reload is worth, this only stops a hand pulling a magazine out of
+	// nothing.
+	play static Inventory ReserveOf(PlayerPawn mo, int gun)
+	{
+		String res = RSR_Guns.Reserve(gun);
+		if (res != "")
+		{
+			class<Inventory> rc = res;
+			return rc ? mo.FindInventory(rc) : null;
+		}
+		let w = mo.player ? mo.player.ReadyWeapon : null;
+		if (!w)
+			return null;
+		Inventory a1 = w.Ammo1, a2 = w.Ammo2;
+		if (a1 && a2 && a1 != a2)
+			return a2.MaxAmount > a1.MaxAmount ? a2 : a1;
+		return a1 ? a1 : a2;
+	}
 }
 
 // one player's reload
@@ -314,12 +353,17 @@ class RSR_State play
 	{
 		int i = gun;
 		String res = RSR_Guns.Reserve(i);
-		class<Inventory> rc = res;
-		if (rc && mo.CountInv(rc) <= 0)
+		let rinv = RSR.ReserveOf(mo, i);
+		bool named = res != "";
+		if (named && (!rinv || rinv.Amount <= 0) || !named && rinv && rinv.Amount <= 0)
 		{
 			if (RSR.Debug(mo.player))
+			{
+				String rn = res;
+				if (rinv) rn = rinv.GetClassName();
 				Console.Printf("rsr t%d gun %d: no magazine to take, reserve %s is empty",
-					mo.Level.maptime, i, res);
+					mo.Level.maptime, i, rn);
+			}
 			return false;
 		}
 		Vector3 hand = OffPoint(RSR.PalmGrab());
@@ -760,7 +804,7 @@ class RSR_State play
 		if (psp && i > 0)
 		{
 			Name gs = RSR_Guns.SprGun(i);
-			if (active && psp.CurState == w.FindState("RSR_Wait"))
+			if (active && RSR.InHold(psp, w))
 			{
 				if (phase >= RSR.DROP && phase <= RSR.INSERT)
 				{

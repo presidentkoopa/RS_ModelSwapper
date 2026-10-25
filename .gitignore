@@ -54,3 +54,4 @@ ModelSwapper-PB-*.pk3
 # Paint.NET layered skin sources that came in beside the blend-file meshes.
 # The engine cannot read them; build.ps1 skips them too.
 *.pdn
+gate/out/

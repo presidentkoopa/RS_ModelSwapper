@@ -270,8 +270,14 @@ def main(src, which):
 
 
 def insert_after_array_head(t, head, rows):
-    at = t.index(head) + len(head)
-    return t[:at] + '\n\t\t\t// BD22Q guns (tools_kit/lift_bd22.py)\n' + '\n'.join('\t\t\t' + r for r in rows) + t[at:]
+    """APPEND at the array's end. A saved pick is an index into its archetype's rows, in
+    array order, so a row inserted ahead of existing ones would move every player's pick."""
+    start = t.index(head) + len(head)
+    close = t.index('};', start)
+    body = t[start:close].rstrip()
+    if not body.endswith(','):
+        body += ','
+    return t[:start] + body + '\n\t\t\t// BD22Q guns (tools_kit/lift_bd22.py)\n' + '\n'.join('\t\t\t' + r for r in rows).rstrip(',') + '\n\t\t' + t[close:]
 
 
 def shelf_anchor(arch):

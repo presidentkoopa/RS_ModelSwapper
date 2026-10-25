@@ -3128,3 +3128,20 @@ Model MS_zion_HAR_Micro
 	FrameIndex CHGG A 0 26
 	FrameIndex MSBL A 0 9999
 }
+
+// ---- BD22Q guns, lifted whole from RS_Brutal22WeaponsQ (tools_kit/lift_bd22.py)
+
+Model MS_BD22_Pistol
+{
+	// BD22Q's own BrutalPistol: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 3
+	Path "models/depot_bd/bd/BrutalPistol"
+	Model 0 "BrutalPistol.md3"
+	Skin 0 "BrutalPistol.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	Nointerpolation
+	FrameIndex PISG A 0 3
+	FrameIndex MSBL A 0 9999
+}

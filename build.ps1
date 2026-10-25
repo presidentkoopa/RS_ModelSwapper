@@ -49,6 +49,11 @@ if ($Static) { $include += (Get-ChildItem $PSScriptRoot -Filter 'WMCARD.*' -File
 # fault -- a donor shipped twice as a ZScript stub, which will not compile.
 if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsb'))) { $include += 'MODELDEF.rsb' }
 if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsrpump'))) { $include += 'MODELDEF.rsrpump' }
+# MODELDEF.bd22: BD22Q's reload layers for the BD22 guns on the shelf (tools_kit/lift_bd22.py),
+# its own lump for the same reason as MODELDEF.rsb. SNDINFO.ms and sounds/ are the reload
+# foley -- before them the pack shipped no sound at all and every reload was silent.
+if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.bd22'))) { $include += 'MODELDEF.bd22' }
+if ($Static) { $include += 'SNDINFO.ms'; $dirs += @('sounds') }
 # SYNTAX CHECK BEFORE PACKING.
 #
 # build.ps1 only zips -- it never read the ZScript, and compile-testing

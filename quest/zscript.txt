@@ -307,6 +307,7 @@ class MS_zion_RL_Det : Actor {}
 class MS_zion_RL_Lock : Actor {}
 class MS_zion_GC_Siege : Actor {}
 class MS_zion_HAR_Micro : Actor {}
+class MS_BD22_Pistol : Actor {}
 
 // ============================================================================
 // ModelSwapper -- donor stubs. A MODELDEF block is inert unless a real Actor

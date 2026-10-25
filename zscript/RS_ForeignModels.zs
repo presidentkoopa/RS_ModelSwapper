@@ -328,7 +328,9 @@ class RS_ForeignShelf
 			"rocket|MS_zion_RL_Det|MISG|0|27|92",
 			"rocket|MS_zion_RL_Lock|MISG|0|27|92",
 			"railgun|MS_zion_GC_Siege|PLSG|0|21|85",
-			"smg|MS_zion_HAR_Micro|CHGG|0|26|67"
+			"smg|MS_zion_HAR_Micro|CHGG|0|26|67",
+			// BD22Q guns (tools_kit/lift_bd22.py)
+			"pistol|MS_BD22_Pistol|PISG|0|3|24"
 		};
 		mRows.Clear();
 		// Addon rows come first, so loading an addon makes its models the
@@ -464,7 +466,9 @@ class RS_ForeignShelf
 			"MS_Fist|Fist",
 			"MS_BD_BrutalAxe|Axe",
 			"MS_BD_DSweap|Sword",
-			"MS_BD_Boot|Boot"
+			"MS_BD_Boot|Boot",
+			// BD22Q guns (tools_kit/lift_bd22.py)
+			"MS_BD22_Pistol|BD22 Pistol"
 		};
 		string key = cls .. "|";
 		for (int i = 0; i < NAMES.Size(); ++i)

@@ -1,0 +1,59 @@
+version "4.13"
+// THE STAND-IN FOR "THEIR CODE". A pistol written the way a mod writes one, owing nothing to
+// ModelSwapper: its own Reload state, its own ammo names (TMMag in the gun, Clip in reserve),
+// and its own rule for what a reload does. ModelSwapper must find its reload, hand it to the
+// player's hands, and give it back so THIS code decides the ammo. Test only; never shipped.
+class TMMag : Ammo
+{
+	Default { Inventory.MaxAmount 12; Ammo.BackpackMaxAmount 12; +INVENTORY.IGNORESKILL; }
+}
+
+class TMPistol : Weapon replaces Pistol
+{
+	Default
+	{
+		Weapon.SlotNumber 2;
+		Weapon.AmmoType1 "TMMag";
+		Weapon.AmmoUse1 1;
+		Weapon.AmmoGive1 12;
+		Weapon.AmmoType2 "Clip";
+		Weapon.AmmoGive2 50;
+		Weapon.SelectionOrder 1900;
+		+WEAPON.AMMO_OPTIONAL
+		Tag "Test Pistol";
+	}
+	States
+	{
+	Ready:
+		PISG A 1 A_WeaponReady(WRF_ALLOWRELOAD);
+		Loop;
+	Deselect:
+		PISG A 1 A_Lower;
+		Loop;
+	Select:
+		PISG A 1 A_Raise;
+		Loop;
+	Fire:
+		PISG A 0 A_JumpIfNoAmmo("Reload");
+		PISG B 6 A_FirePistol;
+		PISG C 4;
+		PISG B 5 A_ReFire;
+		Goto Ready;
+	Reload:
+		PISG A 0 A_JumpIf(CountInv("TMMag") >= 12 || CountInv("Clip") <= 0, "Ready");
+		PISG B 8 A_Log("TM reload: the mod's own reload runs");
+		PISG C 8;
+		PISG A 0
+		{
+			int need = 12 - CountInv("TMMag");
+			int have = min(need, CountInv("Clip"));
+			A_TakeInventory("Clip", have);
+			A_GiveInventory("TMMag", have);
+			A_Log(String.Format("TM reload: mag %d, reserve %d", CountInv("TMMag"), CountInv("Clip")));
+		}
+		Goto Ready;
+	Spawn:
+		PIST A -1;
+		Stop;
+	}
+}
