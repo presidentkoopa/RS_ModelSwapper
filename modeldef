@@ -1225,13 +1225,14 @@ Model MS_brt_Revolver
 
 Model MS_brt_Rifle
 {
+	// rest frame 3, measured (tools_kit/rest_frames.py; was 0)
 	Path "models/bd/Rifle"
 	Model 0 "Rifle.md3"
 	Skin 0 "Rifle.png"
 	Scale -1.0 1.0 1.0
 	Offset 0.0 0.0 0.0
 	ZOffset -5
-	FrameIndex CHGG A 0 0
+	FrameIndex CHGG A 0 3
 	FrameIndex MSBL A 0 9999
 }
 

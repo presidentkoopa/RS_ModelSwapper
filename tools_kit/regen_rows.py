@@ -99,7 +99,9 @@ def build(c, codes_used):
 
 def main(dry, only):
     p_rsr = os.path.join(ROOT, 'zscript_depot/rsr/rsr_guns.ms.zs'); rsr = open(p_rsr).read()
-    cands, notes = candidates(only)
+    # MODELDEF.cards, the sprite list and the foley section are written WHOLE: every donor is always
+    # built, and --only only narrows the report (a filtered build once wrote one gun and dropped 31)
+    cands, notes = candidates(None)
     shelf = open(os.path.join(ROOT, 'zscript/RS_ForeignModels.zs')).read()
     used = set(re.findall(r"'Q([VW][0-9A-Z])M'", rsr))
     md, sprites, tokens, snd = [], {}, [], []
@@ -156,7 +158,7 @@ def main(dry, only):
                          np.linalg.norm(np.array(comp['well']) - C.GRIP_REF)))
     for d, why in notes:
         report.append('%-26s left: %s' % (d, why))
-    print('\n'.join(report))
+    print('\n'.join(r for r in report if not only or r.split()[0] in only))
     if dry:
         return
     # sprite registration + NoMag tokens (a MODELDEF naming an unknown sprite stops the pk3 loading)

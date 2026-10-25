@@ -162,7 +162,7 @@ class RS_ForeignShelf
 			"machinegun|MS_brt_Machinegun|CHGG|0|0|36",
 			"railgun|MS_brt_RailGun|PLSG|0|0|37",
 			"revolver|MS_brt_Revolver|PISG|0|0|33",
-			"rifle|MS_brt_Rifle|CHGG|0|0|32",
+			"rifle|MS_brt_Rifle|CHGG|0|3|32",
 			"unmaker|MS_brt_Unmaker|BFGG|0|0|16",
 			"plasma|MS_hacx_Cryogun|PLSG|0|0|11",
 			"melee|MS_hacx_Melee|PUNG|0|0|6",

@@ -2610,3 +2610,79 @@ Model RSR_DroppedMag
 	USEACTORROLL
 	FrameIndex QVUW A 0 0
 }
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): MS_brt_Rifle.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model MS_brt_Rifle
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "Rifle.png"
+	SurfaceSkin 0 1 "Rifle.png"
+	SurfaceSkin 0 2 "Rifle.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "Rifle.png"
+	SurfaceSkin 0 5 "Rifle.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QVVM A 0 3
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "Rifle.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QVVP A 0 3
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "Rifle.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QVVP A 0 3
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/Rifle"
+	Model 0 "Rifle.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "Rifle.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -14.1698 -0.1433 0.0
+	ZOffset 1.6769
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex QVVW A 0 3
+}
