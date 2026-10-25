@@ -82,19 +82,37 @@ SLOTS_JSON = os.path.join(ROOT, 'reload_slots.json')
 
 
 def scale_table(paths):
-    """mesh filename -> MODELDEF Scale, first source that names it winning"""
+    """mesh -> MODELDEF Scale, under BOTH its full path and its bare filename.
+
+    A BASENAME IS NOT A MESH IDENTITY. `Pistol.md3` is shipped by hdvr, vplus, d64 and
+    others, and `shotgun.md3` by as many again; keyed on the filename alone they all
+    collect whichever block the reader happened to see first, and four guns ended up
+    measured at another mod's scale. The full path -- which every Model block gives, as
+    `Path` plus `Model 0` -- is unique, so it is the key that is tried first. The bare
+    name stays as the fallback, for a card naming a mesh no block on the shelf does.
+    """
     out = {}
     for p in paths:
         if not os.path.exists(p):
             continue
         t = open(p, encoding='latin-1').read()
         for _cls, b in re.findall(r'Model\s+(\S+)\s*\{(.*?)\n\}', t, re.S):
+            pth = re.search(r'Path\s+"([^"]+)"', b)
             mdl = re.search(r'Model\s+0\s+"([^"]+)"', b)
             sc = re.search(r'^\s*Scale\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)', b, re.M)
-            if mdl and sc:
-                out.setdefault(os.path.basename(mdl.group(1)).lower(),
-                               tuple(float(x) for x in sc.groups()))
+            if not (mdl and sc):
+                continue
+            v = tuple(float(x) for x in sc.groups())
+            if pth:
+                out.setdefault(mesh_key(pth.group(1), mdl.group(1)), v)
+            out.setdefault(os.path.basename(mdl.group(1)).lower(), v)
     return out
+
+
+def mesh_key(d, f):
+    """the lookup key for a mesh: its path, normalised -- `models/wolf/MP40/MP40.md3`"""
+    return (str(d or '').replace('\\', '/').strip('/') + '/' +
+            str(f).replace('\\', '/')).lower().lstrip('/')
 
 
 def cards_by_lump():
@@ -109,8 +127,24 @@ def cards_by_lump():
 
 def scales(_root=None):
     """the per-mesh scale table, each mesh taking the scale of the modeldef the card
-    that names it was measured against (see the comment on REMA_SCALES)."""
+    that names it was measured against (see the comment on REMA_SCALES).
+
+    AND IN THE CONVENTION THE CALLER EXPECTS. gen_modelswapper divides every scale by
+    c2q.WORLD_PER_HUD, because REMA's MODELDEF carries the WORLD scale and the card's
+    numbers are in the HUD scale, which is 1/0.34 of it. Our own `modeldef` does not
+    work that way: its blocks ARE the HUD models the player holds, so its Scale is
+    already the HUD scale -- which is why handfit_cards hands the same number straight
+    to c2q.geometry without touching it.
+
+    Dividing it again made every gun our modeldef owns 2.94x too big: the MP40 came out
+    193 cm instead of 66, the Garand 360 instead of 122, the RPG 301 instead of 102.
+    That is the whole reason nine shipped slots had wells a metre from the grip -- not
+    their cards, which measure their own meshes correctly, and not the rest frame.
+    So our scales are converted INTO the world convention here, and the generator's
+    division gives back exactly the HUD scale they already were.
+    """
     rema, ours = scale_table(REMA_SCALES), scale_table(OUR_SCALES)
+    ours = {k: tuple(v * c2q.WORLD_PER_HUD for v in sc) for k, sc in ours.items()}
     bylump = cards_by_lump()
     oursonly = set().union(*[bylump.get(l, set()) for l in OUR_LUMPS]) if OUR_LUMPS else set()
     remacarded = set().union(*[v for l, v in bylump.items() if l not in OUR_LUMPS]) or set()
@@ -121,13 +155,22 @@ def scales(_root=None):
             if w['cls'] in classes:
                 m = w['keys'].get('model')
                 if isinstance(m, list) and len(m) > 1:
-                    got.add(os.path.basename(m[1]).lower())
+                    got.add(mesh_key(m[0], m[1]))
         return got
-    only_ours = meshes(oursonly) - meshes(remacarded)
+    # OUR MODELDEF WINS WHEREVER WE HAVE ONE, because it is the one the engine draws
+    # with. A reload geometry computed at a scale the game does not use would put the
+    # well somewhere the gun is not. REMA's is the fallback, for the measurement meshes
+    # our own modeldef never names.
+    #
+    # This used to be the other way round, and had to be: before our scales were
+    # converted into the world convention above, taking ours first divided a HUD scale
+    # by 0.34 and moved MS_Pistol's well 15 cm. With that fixed the two agree on all but
+    # four meshes, and on those four the hand fit -- which reads our modeldef directly,
+    # as handfit_cards always has -- was already using ours. Now the reload does too,
+    # so hands and reload can no longer disagree about how big a gun is.
+    _ = meshes(oursonly), meshes(remacarded)      # provenance, kept for the report
     out = dict(rema)
-    for k, v in ours.items():
-        if k in only_ours or k not in out:
-            out[k] = v
+    out.update(ours)
     return out
 
 

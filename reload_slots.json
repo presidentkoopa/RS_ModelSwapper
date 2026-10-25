@@ -14,49 +14,54 @@
   "MS_brt_AssaultShotgun"
  ],
  "4": [
+  "MS_BD_BrutalSMG",
+  "MS_PU_BD_BrutalSMG",
+  "MS_brt_BrutalSMG"
+ ],
+ "5": [
   "MS_BD_Flamethrower2",
   "MS_PU_BD_Flamethrower2",
   "MS_brt_Flamethrower2"
  ],
- "5": [
+ "6": [
   "MS_BD_RailGun",
   "MS_PU_BD_RailGun",
   "MS_brt_RailGun"
  ],
- "6": [
+ "7": [
   "MS_BD_Rifle",
   "MS_PU_BD_Rifle",
   "MS_brt_Rifle"
  ],
- "7": [
+ "8": [
   "MS_BD_Unmaker",
   "MS_PU_BD_Unmaker",
   "MS_brt_Unmaker"
  ],
- "8": [
+ "9": [
   "MS_brt_HitlersBuzzsaw",
   "MS_wolf_MG42"
  ],
- "9": [
+ "10": [
   "MS_MG_Bolter",
   "MS_PU_MG_Bolter",
   "MS_meat_Bolter"
  ],
- "10": [
+ "11": [
   "MS_MG_Tec9",
   "MS_PU_MG_Tec9",
   "MS_meat_TEC9"
  ],
- "11": [
+ "12": [
   "MS_brt_MP40"
  ],
- "12": [
+ "13": [
   "MS_PU_Pistol",
   "MS_PU_Pistol2",
   "MS_Pistol",
   "MS_Pistol2"
  ],
- "13": [
+ "14": [
   "MS_PU_PlasmaRifle",
   "MS_PlasmaRifle",
   "MS_brt_PlasmaGun",
@@ -64,16 +69,11 @@
   "MS_hdvr_PlasmaRifle",
   "MS_vplus_PlasmaRifle"
  ],
- "15": [
+ "16": [
   "MS_PU_Rifle",
   "MS_Rifle",
   "MS_qvplus_guns",
   "MS_vplus_guns"
- ],
- "16": [
-  "MS_BD_BrutalSMG",
-  "MS_PU_BD_BrutalSMG",
-  "MS_brt_BrutalSMG"
  ],
  "17": [
   "MS_alien_rifle"
@@ -85,21 +85,44 @@
   "MS_vplus_Pistol"
  ],
  "19": [
-  "MS_chex_largezorcher"
+  "MS_PU_RocketLauncher",
+  "MS_RocketLauncher",
+  "MS_brt_RPG",
+  "MS_d64_RPG",
+  "MS_hdvr_RPG",
+  "MS_vplus_RPG"
  ],
  "20": [
-  "MS_chex_superlargezorcher"
+  "MS_chex_largezorcher"
  ],
  "21": [
-  "MS_wolf_Luger"
+  "MS_chex_superlargezorcher"
  ],
  "22": [
-  "MS_wolf_Shotgun"
+  "MS_wolf_BAR"
  ],
  "23": [
-  "MS_wolf_Tommy"
+  "MS_wolf_Garand"
  ],
  "24": [
+  "MS_wolf_KAR98"
+ ],
+ "25": [
+  "MS_wolf_Luger"
+ ],
+ "26": [
+  "MS_wolf_MP40"
+ ],
+ "27": [
+  "MS_wolf_PP41"
+ ],
+ "28": [
+  "MS_wolf_Shotgun"
+ ],
+ "29": [
+  "MS_wolf_Tommy"
+ ],
+ "30": [
   "MS_zblood_shotgun"
  ]
 }

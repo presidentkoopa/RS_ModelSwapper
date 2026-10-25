@@ -33,8 +33,13 @@ def main(root, out, classes):
         mp = gp.find_mesh(root, model[0], model[1])
         if not os.path.exists(mp):
             report.append((cls, 'mesh not found: %s' % mp)); continue
-        # modeldef_scales keys on the MESH FILENAME, not the class
-        ws_ = scales.get(os.path.basename(model[1]).lower())
+        # modeldef_scales keys on the MESH, not the class -- by its full PATH first,
+        # because a bare filename is not unique on a shelf this size (`Pistol.md3` is
+        # shipped by hdvr, vplus and d64 alike) and the bare name handed four guns
+        # another mod's scale.
+        key = (str(model[0] or '').replace(os.sep, '/').strip('/') + '/' +
+               str(model[1]).replace(os.sep, '/')).lower().lstrip('/')
+        ws_ = scales.get(key) or scales.get(os.path.basename(model[1]).lower())
         if not ws_:
             report.append((cls, 'no MODELDEF scale')); continue
         hud = tuple(round(s / c2q.WORLD_PER_HUD, 4) for s in ws_)
