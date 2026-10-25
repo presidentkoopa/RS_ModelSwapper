@@ -741,7 +741,7 @@ class RSR_State play
 		// shotgun. MP40 is open-bolt and hidden. A gun fired dry locks back, and it stays back
 		// through the magazine change until the hand racks it (taking the slide frees it; the
 		// rack then springs it home as before). Out of VR reloading, a refilled gun frees it.
-		if ((i == 1 || i == 2 || i == 3 || i == 5) && psp)
+		if (RSR_Guns.SlideLock(i) && psp)
 		{
 			class<Inventory> ma = RSR_Guns.MagAmmo(i);
 			int loaded = ma ? mo.CountInv(ma) : 1;
@@ -1030,10 +1030,6 @@ class RSR_ReloadHandler : EventHandler
 	static bool Wanted(PlayerPawn mo)
 	{
 		if (!mo || !mo.player || RSR.PlayerInt(mo.player, 'rsr_reload', 0) != 1 || !RSVR_VRHand.InVR(mo))
-			return false;
-		// 1.10 (owner): BD22's purist mode has no reloading by design; ours stays out of it too.
-		// One gate for all three (magazine, pump, break-open: they all ask here).
-		if (mo.CountInv('IsPlayingAsPurist') > 0)
 			return false;
 		return mo.player.OffhandWeapon is 'RSQ_Hands';
 	}

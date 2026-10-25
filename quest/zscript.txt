@@ -404,6 +404,9 @@ class MS_zion_HAR_Micro : Actor {}
 #include "zscript_depot/rsvr/vrhand.zs"
 #include "zscript_depot/rsvr/melee.zs"
 #include "zscript_depot/rsq/handler.zs"
+// the BD22 modules this pack does not carry (M203, grenade ring, RSM layers):
+// present and idle, generated from the 1.96b signatures by tools_kit/run_assemble.py
+#include "zscript_depot/rsq/stubs.zs"
 #include "zscript_depot/rsq/handtable.zs"
 #include "zscript_depot/rsq/gunmoves.zs"
 #include "zscript_depot/rsq/hands.zs"
@@ -417,6 +420,5 @@ class MS_zion_HAR_Micro : Actor {}
 #include "zscript_depot/rsr/rsr_break.zs"
 #include "zscript_depot/rsr/rsr_guns.ms.zs"
 #include "zscript_depot/rsq/counters.zs"
-#include "zscript_depot/rsq/roster.zs"
 #include "zscript_depot/rsr/rsr_pump.zs"
 #include "zscript_depot/rsr/rsr_pump_guns.zs"

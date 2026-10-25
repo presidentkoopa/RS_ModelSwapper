@@ -16,6 +16,12 @@ Rotations: right-handed about the axis; the hinge axis points so that opening is
 usage: gen_rsb.py <src dir>      (writes into <src dir>)
        gen_rsb.py --check <out dir>   (also renders check views of the fitted hinge)
 """
+
+# Emit ModelSwapper's Index() -- the slot from the DONOR MODEL in hand -- instead of a
+# standalone pack's, where the slot comes from the weapon's own class. Default off: the
+# vanilla / plus / modern Quest packs are untouched. The ModelSwapper runner sets it.
+MODELSWAPPER = False
+
 import sys, os, json, math, struct
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -460,10 +466,45 @@ def zs(guns):
          '// Real VR reload, break-open guns and revolvers: per gun. Positions cm in the weapon',
          '// controller\'s frame (F, L, U); turns right-handed about the axis, opening positive.',
          '', 'class RSB_Guns abstract', '{']
-    L += ['\tclearscope static int Index(Weapon w)', '\t{', '\t\tif (!w)', '\t\t\treturn 0;', '\t\tName n = w.GetClassName();']
-    for i, g in enumerate(guns, 1):
-        L.append("\t\tif (n == '%s')\treturn %d;" % (g['cls'], i))
-    L += ['\t\treturn 0;', '\t}', '']
+    # WHICH GUN IS IN YOUR HANDS, and how that question is answered.
+    #
+    # A standalone pack's weapon IS the gun, so the slot comes from the weapon's own
+    # class. ModelSwapper's does not: the weapon belongs to whatever mod is loaded and
+    # only its MODEL is ours, so the slot comes from the DONOR MODEL WORN BY THAT HAND.
+    # That is the whole reason its reload works on a mod nobody has written yet.
+    #
+    # MODELSWAPPER is default-off, so every standalone set emits what it always did.
+    if MODELSWAPPER:
+        L += ['\tclearscope static int Index(Weapon w)', '\t{', '\t\tif (!w)', '\t\t\treturn 0;',
+              '\t\treturn SlotForDonor(DonorInHand(HandOf(w)));', '\t}', '',
+              '\tclearscope static int HandOf(Weapon w)', '\t{',
+              '\t\treturn 0;\t\t// the gun hand; the off hand is 1 when dual wielding lands',
+              '\t}', '',
+              '\t// The donor model worn by this hand, as RS_ForeignModelHandler published it.',
+              '\t//',
+              '\t// NOT ServiceIterator. Service.GetString is `play`; this function is `clearscope`,',
+              '\t// because the pump module calls Index() from Places() / Place(), which the engine',
+              '\t// reaches through Weapon.ModifyBobLayer3D -- declared `virtual ui`; and the facts',
+              '\t// themselves live on a StaticEventHandler, which is `native play`. Three scopes,',
+              '\t// none able to reach the others, and no Service variant bridges them.',
+              '\t//',
+              '\t// `struct CVar native` carries no scope qualifier at all, so FindCVar / GetString',
+              '\t// are callable from every one of the three. Empty when no model is worn, which',
+              '\t// SlotForDonor answers with 0 -- the stock reload -- so this is inert on a weapon',
+              '\t// that has none of our models on it.',
+              '\tclearscope static string DonorInHand(int hand)', '\t{',
+              "\t\tlet cv = CVar.FindCVar(hand == 1 ? 'ms_donor_off' : 'ms_donor_main');",
+              '\t\treturn cv ? cv.GetString() : "";', '\t}', '',
+              '\tclearscope static int SlotForDonor(string donor)', '\t{',
+              '\t\tif (donor.Length() == 0)', '\t\t\treturn 0;']
+        for i, g in enumerate(guns, 1):
+            L.append('\t\tif (donor == "%s")\treturn %d;' % (g['cls'], i))
+        L += ['\t\treturn 0;', '\t}', '']
+    else:
+        L += ['\tclearscope static int Index(Weapon w)', '\t{', '\t\tif (!w)', '\t\t\treturn 0;', '\t\tName n = w.GetClassName();']
+        for i, g in enumerate(guns, 1):
+            L.append("\t\tif (n == '%s')\treturn %d;" % (g['cls'], i))
+        L += ['\t\treturn 0;', '\t}', '']
 
     def table(name, typ, vals, fmt, comment=''):
         if comment:
@@ -506,6 +547,16 @@ def zs(guns):
     table('OpenDeg', 'double', [g['open_deg'] for g in guns], fl, 'how far it opens (the set\'s own open frame)')
     table('Chambers', 'int', [len(g['ch']) for g in guns], it, 'chambers (one: a speedloader fills the cylinder)')
     table('Loader', 'bool', [bool(g.get('loader')) for g in guns], lambda x: 'true' if x else 'false')
+    # Does the EMPTIED speedloader stay in the hand? rsr_break.zs asks at the moment the last
+    # chamber is filled:
+    #     SetHand(mo, RSB_Guns.Loader(i) && RSB_Guns.LoaderEmptyInHand(i) ? RSB.EMPTYLOADER : RSB.FREE)
+    # This generator never emitted it, so the pack it built could not compile against the
+    # runtime it ships beside (rsr_break.zs:861 Unknown function LoaderEmptyInHand).
+    # Default FALSE: the hand goes free, which is what every gun here did before this table
+    # existed, so a gun that does not set it behaves exactly as it does today. Only a gun with
+    # a speedloader is ever asked -- Loader(i) gates it.
+    table('LoaderEmptyInHand', 'bool', [bool(g.get('loader_empty_in_hand')) for g in guns],
+          lambda x: 'true' if x else 'false')
     table2('Base', 'Vector3', [[c['base'] for c in g['ch']] for g in guns], v3, 'a seated round\'s base (rim), closed gun')
     table2('Tip', 'Vector3', [[c['tip'] for c in g['ch']] for g in guns], v3, 'a seated round\'s tip, closed gun')
     table2('Bore', 'Vector3', [[c['bore'] for c in g['ch']] for g in guns], v3, 'into the chamber, closed gun')

@@ -4,34 +4,40 @@
 
 class RSP_Guns abstract
 {
-	// ModelSwapper's Index(), hand-written -- the generator matches on the weapon's
-	// own class, which is right for a standalone pack. Here the weapon belongs to
-	// whatever mod is loaded and only its MODEL is ours, so the slot comes from the
-	// model in hand, and every model that is the same mesh claims it.
 	clearscope static int Index(Weapon w)
 	{
-		if (!w) return 0;
+		if (!w)
+			return 0;
 		return SlotForDonor(DonorInHand(HandOf(w)));
 	}
 
 	clearscope static int HandOf(Weapon w)
 	{
-		return 0;
+		return 0;		// the gun hand; the off hand is 1 when dual wielding lands
 	}
 
+	// The donor model worn by this hand, as RS_ForeignModelHandler published it.
+	//
+	// NOT ServiceIterator. Service.GetString is `play`; this function is `clearscope`,
+	// because the pump module calls Index() from Places() / Place(), which the engine
+	// reaches through Weapon.ModifyBobLayer3D -- declared `virtual ui`; and the facts
+	// themselves live on a StaticEventHandler, which is `native play`. Three scopes,
+	// none able to reach the others, and no Service variant bridges them.
+	//
+	// `struct CVar native` carries no scope qualifier at all, so FindCVar / GetString
+	// are callable from every one of the three. Empty when no model is worn, which
+	// SlotForDonor answers with 0 -- the stock reload -- so this is inert on a weapon
+	// that has none of our models on it.
 	clearscope static string DonorInHand(int hand)
 	{
-		let it = ServiceIterator.Find("RS_WeaponArchetypeService");
-		if (!it) return "";
-		let s = it.Next();
-		if (!s) return "";
-		return s.GetString("weapon.donor", "", hand);
+		let cv = CVar.FindCVar(hand == 1 ? 'ms_donor_off' : 'ms_donor_main');
+		return cv ? cv.GetString() : "";
 	}
 
 	clearscope static int SlotForDonor(string donor)
 	{
-		if (donor.Length() == 0) return 0;
-		if (donor == "MS_PU_Shotgun")	return 1;
+		if (donor.Length() == 0)
+			return 0;
 		if (donor == "MS_Shotgun")	return 1;
 		return 0;
 	}
@@ -297,13 +303,22 @@ class RSP_Guns abstract
 		return "";
 	}
 
-	clearscope static String MagAmmo(int i)
+	clearscope static String Loaded(int i)
 	{
 		switch (i)
 		{
 		case 1:	return "MSShotLoaded";
 		}
 		return "";
+	}
+
+	clearscope static int Cap(int i)
+	{
+		switch (i)
+		{
+		case 1:	return 8;
+		}
+		return 0;
 	}
 
 	clearscope static int EjectFrames(int i)

@@ -90,3 +90,11 @@ server bool rs_foreignmodels_carried = false;
 // that had them would not need this one. So offering is the right default.
 // Turn this off to leave any modelled weapon alone.
 server bool rs_foreignmodels_replaceown = true;
+
+// THE DONOR IN EACH HAND, published by RS_ForeignModelHandler.PublishHandFacts.
+// The reload tables (RSR_Guns / RSB_Guns / RSP_Guns) read these instead of asking
+// RS_WeaponArchetypeService, because those tables are clearscope and every Service
+// variant is play, ui or unable to reach a play handler's fields. A CVar is the one
+// store all three scopes can read. Empty = no model worn = stock reload.
+nosave user string ms_donor_main = "";
+nosave user string ms_donor_off = "";

@@ -10,7 +10,11 @@ usage: python3 assemble.py <build dir> <set name>
 """
 import os, re, sys, shutil, json
 
-SRC = '/home/claude/presidentkoopa/rs_brutal22weaponsq/src'      # RS_Brutal22WeaponsQ 1.96b (commit 27bef2b)
+# OUR COPY. The Depot's assemble.py is read-only and its SRC is the Linux path the
+# original ran from. The same 1.96b tree is on this machine, and our zscript_depot/
+# copies of hands.zs, vreload.zs, rsr_assist.zs and fists.zs are BYTE-IDENTICAL to it,
+# so every exact-match edit below was written against exactly this text and applies.
+SRC = 'E:/DOOMWork/_buildtemp/rs_brutal22weaponsq/src'           # RS_Brutal22WeaponsQ 1.96b
 ZS = SRC + '/zscript'
 TOOLDIR = os.path.dirname(os.path.abspath(__file__))
 

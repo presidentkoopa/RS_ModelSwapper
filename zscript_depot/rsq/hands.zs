@@ -212,9 +212,7 @@ class RSQ_Hands : Weapon
 		// slot is neither empty nor RSQ_Hands and reloading dies silently for EVERY gun.
 		// A copy that matches the ready weapon is a real dual wield and is left alone.
 		let off = p.OffhandWeapon;
-		bool stale = off && !(off is 'RSQ_Hands')
-			&& RSQ_Dual.CopyIndex(off) != RSQ_Dual.GunIndex(p.ReadyWeapon);
-		if (h && (!off || stale) && p.PendingWeapon == WP_NOCHANGE)
+		if (h && !off && p.PendingWeapon == WP_NOCHANGE)
 			p.PendingWeapon = h;
 	}
 
@@ -235,8 +233,6 @@ class RSQ_Hands : Weapon
 			rsr = RSB_Handler.FreeHand(mo);	// RSR-BREAK
 		if (rsr == "")
 			rsr = RSK_M203Handler.FreeHand(mo);	// 1.30 RSR-M203: the rifle's launcher (rsr/rsr_m203.zs)
-		if (rsr == "" && mo.CountInv('RSG_RingHand') > 0)
-			rsr = "RsgRing";				// the VR grenade's ring, pinched (rsg/grenade.zs)
 		int i = on ? RSQ_HandTable.Index(p.ReadyWeapon) : 0;
 		// 2026-10-16 (owner): fists are Ermac's, both hands, and the VR grenade sits in his hand
 		String own = on ? invoker.OwnHand(p) : "";
@@ -294,9 +290,7 @@ class RSQ_Hands : Weapon
 		String gl = tf != "" ? ((p.cmd.buttons & BT_ATTACK) ? "Sqz" .. tf : "Trg" .. tf) : "Gun" .. g;
 		invoker.SetLayer(p, RSQ_Layers.GUNHAND, gs, own != "" ? own : i > 0 && g != "" ? gl : "Hidden");
 		String sp = RSQ_HandTable.Support(i);
-		if (i == 18 && p.ReadyWeapon is 'PuristRifle')
-			sp = "B";		// 1.30: purist's rifle has no launcher: its handguard grip as before
-		else if (i == 18 && RSK_M203Handler.TriggerGrip(mo))
+		if (i == 18 && RSK_M203Handler.TriggerGrip(mo))
 			sp = (p.cmd.buttons & BT_OFFHANDATTACK) ? "M2" : "M1";	// 1.31: finger on the M203's trigger (squeezed)
 		invoker.SetLayer(p, RSQ_Layers.SUPPORT, gs, hold && sp != "" ? "Sup" .. sp : "Hidden");
 
@@ -411,7 +405,7 @@ class RSQ_Hands : Weapon
 			if (ps <= 0)
 				ps = 1.2;
 			Vector3 dir = RSVR_VRHand.OffDir(mo, 0, 0, ps);
-			Name sn = mo.CountInv('PowerStrength') > 0 ? 'MeleeStrike1Berserked' : 'MeleeStrikeNormal';
+			Name sn = mo.CountInv('PowerStrength') > 0 ? 'WMQ_PunchBerserk' : 'WMQ_Punch';
 			class<Actor> sc = RSQ_Fists.Cls(sn);
 			let a = sc ? Actor.Spawn(sc, RSVR_VRHand.OffPos(mo), ALLOW_REPLACE) : null;
 			if (a)
@@ -598,14 +592,9 @@ class RSQ_Hands : Weapon
 			: RSQ_HandTable.SupportHook(i);
 		Vector3 hookTurn = gunHand ? (two ? RSQ_HandTable.GunRotTwo(i) : RSQ_HandTable.GunRot(i))
 			: RSQ_HandTable.SupportRot(i);
-		if (!gunHand && i == 18 && !(o.ReadyWeapon is 'PuristRifle') && RSK_M203Handler.TriggerGrip(Owner))
+		if (!gunHand && i == 18 && RSK_M203Handler.TriggerGrip(Owner))
 		{
 			hook = (0, 0, 0);		// 1.31: the trigger grip is baked in place (MODELDEF.rsm RQ2S)
-			hookTurn = (0, 0, 0);
-		}
-		if (!gunHand && i == 18 && o.ReadyWeapon is 'PuristRifle')
-		{
-			hook = (-0.090, -1.390, 11.380);	// 1.30: purist's rifle (no launcher): the handguard grip as before
 			hookTurn = (0, 0, 0);
 		}
 

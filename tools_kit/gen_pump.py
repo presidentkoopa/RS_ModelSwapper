@@ -11,6 +11,12 @@ No new mesh data: every block is the gun's own md3 (or Ermac's ammo_hand, alread
 
 usage: gen_pump.py <out dir>
 """
+
+# Emit ModelSwapper's Index() -- the slot from the DONOR MODEL in hand -- instead of a
+# standalone pack's, where the slot comes from the weapon's own class. Default off: the
+# vanilla / plus / modern Quest packs are untouched. The ModelSwapper runner sets it.
+MODELSWAPPER = False
+
 import sys, os, json
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -230,10 +236,45 @@ def zs(guns):
          '// Hand-loaded shells and a hand-worked pump: per gun. Positions cm in the weapon controller\'s',
          '// frame (F, L, U); hooks are ModifyBobLayer3D translations for the gun\'s own MODELDEF placement.',
          '', 'class RSP_Guns abstract', '{']
-    L += ['\tclearscope static int Index(Weapon w)', '\t{', '\t\tif (!w)', '\t\t\treturn 0;', '\t\tName n = w.GetClassName();']
-    for i, g in enumerate(guns, 1):
-        L.append("\t\tif (n == '%s')\treturn %d;" % (g['cls'], i))
-    L += ['\t\treturn 0;', '\t}', '']
+    # WHICH GUN IS IN YOUR HANDS, and how that question is answered.
+    #
+    # A standalone pack's weapon IS the gun, so the slot comes from the weapon's own
+    # class. ModelSwapper's does not: the weapon belongs to whatever mod is loaded and
+    # only its MODEL is ours, so the slot comes from the DONOR MODEL WORN BY THAT HAND.
+    # That is the whole reason its reload works on a mod nobody has written yet.
+    #
+    # MODELSWAPPER is default-off, so every standalone set emits what it always did.
+    if MODELSWAPPER:
+        L += ['\tclearscope static int Index(Weapon w)', '\t{', '\t\tif (!w)', '\t\t\treturn 0;',
+              '\t\treturn SlotForDonor(DonorInHand(HandOf(w)));', '\t}', '',
+              '\tclearscope static int HandOf(Weapon w)', '\t{',
+              '\t\treturn 0;\t\t// the gun hand; the off hand is 1 when dual wielding lands',
+              '\t}', '',
+              '\t// The donor model worn by this hand, as RS_ForeignModelHandler published it.',
+              '\t//',
+              '\t// NOT ServiceIterator. Service.GetString is `play`; this function is `clearscope`,',
+              '\t// because the pump module calls Index() from Places() / Place(), which the engine',
+              '\t// reaches through Weapon.ModifyBobLayer3D -- declared `virtual ui`; and the facts',
+              '\t// themselves live on a StaticEventHandler, which is `native play`. Three scopes,',
+              '\t// none able to reach the others, and no Service variant bridges them.',
+              '\t//',
+              '\t// `struct CVar native` carries no scope qualifier at all, so FindCVar / GetString',
+              '\t// are callable from every one of the three. Empty when no model is worn, which',
+              '\t// SlotForDonor answers with 0 -- the stock reload -- so this is inert on a weapon',
+              '\t// that has none of our models on it.',
+              '\tclearscope static string DonorInHand(int hand)', '\t{',
+              "\t\tlet cv = CVar.FindCVar(hand == 1 ? 'ms_donor_off' : 'ms_donor_main');",
+              '\t\treturn cv ? cv.GetString() : "";', '\t}', '',
+              '\tclearscope static int SlotForDonor(string donor)', '\t{',
+              '\t\tif (donor.Length() == 0)', '\t\t\treturn 0;']
+        for i, g in enumerate(guns, 1):
+            L.append('\t\tif (donor == "%s")\treturn %d;' % (g['cls'], i))
+        L += ['\t\treturn 0;', '\t}', '']
+    else:
+        L += ['\tclearscope static int Index(Weapon w)', '\t{', '\t\tif (!w)', '\t\t\treturn 0;', '\t\tName n = w.GetClassName();']
+        for i, g in enumerate(guns, 1):
+            L.append("\t\tif (n == '%s')\treturn %d;" % (g['cls'], i))
+        L += ['\t\treturn 0;', '\t}', '']
 
     def table(name, typ, vals, fmt, args='int i', key='i'):
         L.append('\tclearscope static %s %s(%s)' % (typ, name, args))
@@ -279,7 +320,17 @@ def zs(guns):
     table('ChanFwd', 'int', [g['snd']['fwd'][1] for g in guns], lambda x: '%d' % x)
     table('SndLand', 'String', [g['snd']['land'] for g in guns], st)
     table('Reserve', 'String', [g['reserve'] for g in guns], st)
-    table('MagAmmo', 'String', [g['magammo'] for g in guns], st)
+    # THE NAMES THE MODULE ACTUALLY CALLS. rsr_pump.zs (1.96b) asks for RSP_Guns.Loaded(i)
+    # and RSP_Guns.Cap(i) -- it calls MagAmmo zero times. This generator was written against
+    # an older rsr_pump.zs that used MagAmmo and had no tube capacity, so the pack it built
+    # could never compile against the runtime it ships beside:
+    #     rsr_pump.zs:369  Unknown function loaded
+    #     rsr_pump.zs:370  Unknown function cap
+    # and both results are assigned to locals, so two missing functions cascaded into
+    # twelve errors. Loaded is the same string MagAmmo carried; Cap is the tube's capacity,
+    # which the gun's own card already states.
+    table('Loaded', 'String', [g['magammo'] for g in guns], st)
+    table('Cap', 'int', [int(g.get('cap', 0)) for g in guns], lambda x: '%d' % x)
     table('EjectFrames', 'int', [len(g['eject_frames']) for g in guns], lambda x: '%d' % x)
     L.append('\t// the set\'s own ejected shell, frame k (V+): its place on the gun in the ready pose')
     L.append('\tclearscope static Vector3 EjectHook(int i, int k)')

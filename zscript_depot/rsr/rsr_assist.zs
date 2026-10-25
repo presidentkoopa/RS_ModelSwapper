@@ -99,23 +99,18 @@ class RSR_Assist abstract
 	clearscope static double MagCapture(PlayerInfo p, int i)
 	{
 		double b = CAPTURE;
-		switch (i)
-		{
-		// BD22 Rocket_Launcher: a 22 cm rocket held near its tail, its nose 18.9 cm from
-		// the hand (RSR_Guns.TopInHand 9). The lever arm turns a radius into a wrist angle,
-		// so this one needs more of it than a magazine held in the middle of the fist.
-		case 9:	b = 12.0; break;
-		}
+		// a long part held near its tail (a rocket: its top 12+ cm from the hand): the lever arm
+		// turns a radius into a wrist angle, so it needs more of it than a magazine in the fist
+		if (RSR_Guns.TopInHand(i).Length() > 12.0)
+			b = 12.0;
 		return R(p, b);
 	}
 
 	clearscope static double MagTilt(PlayerInfo p, int i)
 	{
 		double b = TILT;
-		switch (i)
-		{
-		case 9:	b = 70.0; break;		// BD22 Rocket_Launcher: it goes in across the gun, an awkward wrist
-		}
+		if (RSR_Guns.TopInHand(i).Length() > 12.0)
+			b = 70.0;		// a long part goes in across the gun: an awkward wrist
 		return A(p, b);
 	}
 

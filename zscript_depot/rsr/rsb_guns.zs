@@ -4,47 +4,43 @@
 
 class RSB_Guns abstract
 {
-	// ModelSwapper's Index(), hand-written -- the generator writes one that matches
-	// on the weapon's own class, which is right for a standalone pack where the
-	// weapon IS the gun. Here the weapon belongs to whatever mod is loaded and
-	// only its MODEL is ours, so the slot comes from the model in hand.
-	//
-	// Every model that is the same mesh claims the same slot, so the break-open
-	// reload works whichever copy the player picks off the shelf.
 	clearscope static int Index(Weapon w)
 	{
-		if (!w) return 0;
+		if (!w)
+			return 0;
 		return SlotForDonor(DonorInHand(HandOf(w)));
 	}
 
 	clearscope static int HandOf(Weapon w)
 	{
-		return 0;
+		return 0;		// the gun hand; the off hand is 1 when dual wielding lands
 	}
 
+	// The donor model worn by this hand, as RS_ForeignModelHandler published it.
+	//
+	// NOT ServiceIterator. Service.GetString is `play`; this function is `clearscope`,
+	// because the pump module calls Index() from Places() / Place(), which the engine
+	// reaches through Weapon.ModifyBobLayer3D -- declared `virtual ui`; and the facts
+	// themselves live on a StaticEventHandler, which is `native play`. Three scopes,
+	// none able to reach the others, and no Service variant bridges them.
+	//
+	// `struct CVar native` carries no scope qualifier at all, so FindCVar / GetString
+	// are callable from every one of the three. Empty when no model is worn, which
+	// SlotForDonor answers with 0 -- the stock reload -- so this is inert on a weapon
+	// that has none of our models on it.
 	clearscope static string DonorInHand(int hand)
 	{
-		let it = ServiceIterator.Find("RS_WeaponArchetypeService");
-		if (!it) return "";
-		let s = it.Next();
-		if (!s) return "";
-		return s.GetString("weapon.donor", "", hand);
+		let cv = CVar.FindCVar(hand == 1 ? 'ms_donor_off' : 'ms_donor_main');
+		return cv ? cv.GetString() : "";
 	}
 
 	clearscope static int SlotForDonor(string donor)
 	{
-		if (donor.Length() == 0) return 0;
-		if (donor == "MS_PU_SuperShotgun")	return 1;
+		if (donor.Length() == 0)
+			return 0;
 		if (donor == "MS_SuperShotgun")	return 1;
-		if (donor == "MS_BD_M79")	return 2;
-		if (donor == "MS_PU_BD_M79")	return 2;
 		if (donor == "MS_brt_M79")	return 2;
-		if (donor == "MS_PU_Revolver")	return 3;
-		if (donor == "MS_PU_Revolver2")	return 3;
 		if (donor == "MS_Revolver")	return 3;
-		if (donor == "MS_Revolver2")	return 3;
-		if (donor == "MS_qvplus_gats")	return 3;
-		if (donor == "MS_vplus_gats")	return 3;
 		return 0;
 	}
 
@@ -103,6 +99,17 @@ class RSB_Guns abstract
 		case 1:	return false;
 		case 2:	return false;
 		case 3:	return true;
+		}
+		return false;
+	}
+
+	clearscope static bool LoaderEmptyInHand(int i)
+	{
+		switch (i)
+		{
+		case 1:	return false;
+		case 2:	return false;
+		case 3:	return false;
 		}
 		return false;
 	}

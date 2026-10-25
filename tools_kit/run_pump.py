@@ -35,7 +35,10 @@ OURS = [
          waits='RSP_LoadWait RSP_PWait',
          snd=dict(shell=('Shotgun/Reload', CHAN_AUTO), back=('shotpump', CHAN_WEAPON),
                   fwd=('', 0), land=''),
-         reserve='Shell', magammo='MSShotLoaded', eject_frames=[]),
+         reserve='Shell', magammo='MSShotLoaded', eject_frames=[],
+         # the tube's capacity, which rsr_pump.zs reads as RSP_Guns.Cap(i) to know when
+         # it is full. 8, from this gun's own card (WMCARD.02_pump, MS_Shotgun).
+         cap=8),
 ]
 
 if __name__ == '__main__':
@@ -43,5 +46,8 @@ if __name__ == '__main__':
     for attr in ('RSQ', 'ERMAC_DIR', 'HANDS'):
         if isinstance(getattr(gen_pump, attr, None), str):
             setattr(gen_pump, attr, os.path.abspath('models/ammo_hand') + os.sep)
+    # ModelSwapper's weapon belongs to whatever mod is loaded and only its MODEL is
+    # ours, so the reload slot comes from the DONOR IN HAND, not the weapon's class.
+    gen_pump.MODELSWAPPER = True
     gen_pump.PUMPS = OURS
     gen_pump.main(sys.argv[1])

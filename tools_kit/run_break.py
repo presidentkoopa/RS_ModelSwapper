@@ -71,5 +71,8 @@ if __name__ == '__main__':
     # the pack under models/ammo_hand/, so point it there rather than extract
     # a second copy of the same files
     gen_rsb.RSQ = os.path.abspath('models/ammo_hand') + os.sep
+    # ModelSwapper's weapon belongs to whatever mod is loaded and only its MODEL is
+    # ours, so the reload slot comes from the DONOR IN HAND, not the weapon's class.
+    gen_rsb.MODELSWAPPER = True
     gen_rsb.GUNS = OURS
     gen_rsb.main(sys.argv[1])

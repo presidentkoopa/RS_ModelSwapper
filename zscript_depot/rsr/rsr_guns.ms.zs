@@ -31,13 +31,21 @@ class RSR_Guns abstract
 		return 0;
 	}
 
+	// The donor model worn by this hand, as RS_ForeignModelHandler published it.
+	//
+	// NOT ServiceIterator: Service.GetString is `play`, this function is `clearscope`
+	// (rsr_pump.zs calls Index() from Places() / Place(), which the engine reaches
+	// through Weapon.ModifyBobLayer3D -- `virtual ui`), and the facts live on a
+	// StaticEventHandler, which is `native play`. Three scopes, none able to reach
+	// the others. `struct CVar native` has no scope qualifier, so it is readable from
+	// all three; rsr_pump.zs's own clearscope Places() already reads one.
+	//
+	// Empty when no model is worn -- SlotForDonor answers 0 for that, which is the
+	// stock reload, so nothing here changes a weapon that has no model of ours on it.
 	clearscope static string DonorInHand(int hand)
 	{
-		let it = ServiceIterator.Find("RS_WeaponArchetypeService");
-		if (!it) return "";
-		let s = it.Next();
-		if (!s) return "";
-		return s.GetString("weapon.donor", "", hand);
+		let cv = CVar.FindCVar(hand == 1 ? 'ms_donor_off' : 'ms_donor_main');
+		return cv ? cv.GetString() : "";
 	}
 
 	clearscope static int SlotForDonor(string donor)

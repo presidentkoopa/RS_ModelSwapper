@@ -152,7 +152,7 @@ class RSQ_FistHand play
 		peak = lf;
 		Vector3 dir = (v.x * c - v.y * s, v.x * s + v.y * c, v.z) / speed;	// back to the world
 
-		Name sn = mo.CountInv('PowerStrength') > 0 ? 'MeleeStrike1Berserked' : 'MeleeStrikeNormal';
+		Name sn = mo.CountInv('PowerStrength') > 0 ? 'WMQ_PunchBerserk' : 'WMQ_Punch';
 		class<Actor> sc = RSQ_Fists.Cls(sn);
 		if (!sc)
 			return;

@@ -2831,6 +2831,38 @@ class RS_ForeignModelHandler : StaticEventHandler
 		mBridgeArcheOff  = mBridgeHasOff ? mEntries[oi].archetype : "";
 		mBridgeDonorOff  = (mBridgeHasOff && mShelf && mShelf.Get(mBridgeArcheOff,
 		                    mEntries[oi].modelPick2, dcls, anc, hf, rf, fc)) ? dcls : "";
+
+		// THE DONOR, WHERE ANY SCOPE CAN READ IT.
+		//
+		// The reload asks "which of our models is in this hand" and keys everything on
+		// the answer -- that is what makes it work on any mod's weapon rather than on a
+		// list of weapon classes. But the three places that ask sit in three scopes that
+		// cannot reach each other:
+		//
+		//   the reload's own tick   play    (vreload.zs WorldTick)
+		//   the layer placement     ui      (Weapon.ModifyBobLayer3D is `virtual ui`)
+		//   the reload tables       clearscope
+		//
+		// and the facts above live on a StaticEventHandler, which is `native play`. So a
+		// clearscope table can reach them through no Service variant: GetString is play,
+		// GetStringUI is ui, and GetStringData cannot read a play handler's fields.
+		//
+		// `struct CVar native` carries no scope qualifier, so FindCVar / GetString /
+		// SetString are callable from all three. The donor is published here once per
+		// change and read from there. Empty string when no model is worn, which every
+		// reader already treats as "slot 0 -- stock reload", so this is inert until a
+		// model is actually on a weapon.
+		PublishDonorCVar('ms_donor_main', mBridgeHasMain ? mBridgeDonorMain : "");
+		PublishDonorCVar('ms_donor_off',  mBridgeHasOff  ? mBridgeDonorOff  : "");
+	}
+
+	// Written only when it changes: SetString on an unchanged cvar still marks the
+	// config dirty, and this runs every time the worn models are republished.
+	private static void PublishDonorCVar(Name which, string donor)
+	{
+		let cv = CVar.FindCVar(which);
+		if (cv && cv.GetString() != donor)
+			cv.SetString(donor);
 	}
 
 	// One-button "give everything a one-handed model" -- pistol, revolver or
