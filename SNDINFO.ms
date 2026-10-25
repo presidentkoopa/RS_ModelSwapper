@@ -88,3 +88,29 @@ ms/bd22/m79/open                     sounds/ms/DSGROPEN.ogg
 ms/bd22/m79/load                     sounds/ms/DSGRLOAD.ogg
 ms/bd22/m79/close                    sounds/ms/DSGRCLOS.ogg
 $alias ms/bd22/m79/rounddrop ms/magdrop
+
+// ---- Aliens set (tools_kit/lift_aliens.py)
+// Aliens M4A3Pistol_3D (tools_kit/lift_aliens.py)
+$alias ms/aliens/pistol/magout ms/bd22/pistol/magout
+$alias ms/aliens/pistol/magin ms/bd22/pistol/magin
+$alias ms/aliens/pistol/slideback ms/bd22/pistol/slideback
+$alias ms/aliens/pistol/slidefwd ms/bd22/pistol/slidefwd
+$alias ms/aliens/pistol/magdrop ms/magdrop
+// Aliens PulseRifle_3D (tools_kit/lift_aliens.py)
+$alias ms/aliens/rifle/magout ms/bd22/rifle/magout
+$alias ms/aliens/rifle/magin ms/bd22/rifle/magin
+ms/aliens/rifle/slideback            sounds/ms/rsrboltbk.ogg
+ms/aliens/rifle/slidefwd             sounds/ms/rsrboltfw.ogg
+$alias ms/aliens/rifle/magdrop ms/magdrop
+// Aliens Smartgun_3D (tools_kit/lift_aliens.py)
+$alias ms/aliens/smartgun/magout ms/bd22/rifle/magout
+$alias ms/aliens/smartgun/magin ms/bd22/rifle/magin
+$alias ms/aliens/smartgun/magdrop ms/magdrop
+// Aliens M240Flamethrower_3D (tools_kit/lift_aliens.py)
+$alias ms/aliens/flamer/magout ms/bd22/rocketlauncher/magout
+$alias ms/aliens/flamer/magin ms/bd22/rocketlauncher/magin
+$alias ms/aliens/flamer/magdrop ms/magdrop
+// Aliens NewShotgun_3D (tools_kit/lift_aliens.py)
+$alias ms/aliens/shotgun/shellin ms/bd22/shotgun/shellin
+$alias ms/aliens/shotgun/pumpback ms/bd22/shotgun/pumpback
+$alias ms/aliens/shotgun/shelldrop ms/magdrop

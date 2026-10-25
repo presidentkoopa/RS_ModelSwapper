@@ -170,7 +170,9 @@ def run(pk3, donor, engine, shots, yaw=90):
         print('PASS' if ok else 'FAIL', '-- log', log)
         return 0 if ok else 1
     if pump:
-        shells = len(re.findall(r'TM shotgun: a shell in', text))
+        # the engine echoes its log to stdout too: count the log alone, or every shell counts twice
+        logtext = open(log, encoding='latin-1').read() if os.path.exists(log) else stdout
+        shells = len(re.findall(r'TM shotgun: a shell in', logtext))
         checks = [
             ('pack loaded', os.path.basename(pk3) in text),
             ('scripts parsed', 'script parsing took' in text),

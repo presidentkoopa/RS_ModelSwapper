@@ -47,14 +47,14 @@ if ($Static) { $include += (Get-ChildItem $PSScriptRoot -Filter 'WMCARD.*' -File
 # what the reload needs (the gun again with its hinged part hidden). Merging it
 # would trip the duplicate-donor check below, which exists to catch a different
 # fault -- a donor shipped twice as a ZScript stub, which will not compile.
-if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsb'))) { $include += 'MODELDEF.rsb' }
-if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsrpump'))) { $include += 'MODELDEF.rsrpump' }
-# MODELDEF.bd22: BD22Q's reload layers for the BD22 guns on the shelf (tools_kit/lift_bd22.py),
-# its own lump for the same reason as MODELDEF.rsb. SNDINFO.ms and sounds/ are the reload
-# foley -- before them the pack shipped no sound at all and every reload was silent.
-if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.bd22'))) { $include += 'MODELDEF.bd22' }
-# MODELDEF.rsq: Ermac's VR hands (models/rsq). The hand tables always shipped; the hands did not.
-if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsq'))) { $include += 'MODELDEF.rsq' }
+# Every MODELDEF.<x> at the root ships when -Static: MODELDEF.rsb / .rsrpump (break-open and pump
+# layers), MODELDEF.bd22 and MODELDEF.aliens (the lifted sets' reload layers, tools_kit/lift_*.py),
+# MODELDEF.rsq (Ermac's VR hands, models/rsq -- the hand tables always shipped; the hands did not).
+# A hand-kept list here once dropped MODELDEF.aliens and drew no gun mid-reload.
+if ($Static) {
+    Get-ChildItem -Path $PSScriptRoot -File -Filter 'MODELDEF.*' | Sort-Object Name | ForEach-Object { $include += $_.Name }
+}
+# SNDINFO.ms and sounds/ are the reload foley -- before them the pack shipped no sound at all.
 if ($Static) { $include += 'SNDINFO.ms'; $dirs += @('sounds') }
 # SYNTAX CHECK BEFORE PACKING.
 #

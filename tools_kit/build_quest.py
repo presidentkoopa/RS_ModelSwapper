@@ -14,14 +14,18 @@ import os, re, sys, zipfile, glob
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def SHIPPED_MODELDEFS():
+    return sorted(os.path.basename(p) for p in glob.glob(os.path.join(ROOT, 'MODELDEF.*')) if os.path.isfile(p))
+
+
 def main(out):
     out = out or os.path.join(ROOT, 'ModelSwapper-QUEST.pk3')
     include = ['zscript.txt', 'modeldef', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF']
     dirs = ['zscript', 'models', 'zscript_depot']
     include += sorted(os.path.basename(p) for p in glob.glob(os.path.join(ROOT, 'WMCARD.*')) if os.path.isfile(p))
-    for lump in ('MODELDEF.rsb', 'MODELDEF.rsrpump', 'MODELDEF.bd22', 'MODELDEF.rsq'):
-        if os.path.exists(os.path.join(ROOT, lump)):
-            include.append(lump)
+    # every MODELDEF.<x> lump at the root ships (the reload layers of each lifted set, the hands):
+    # a hand-kept list here dropped MODELDEF.aliens once and drew no gun mid-reload
+    include += SHIPPED_MODELDEFS()
     include.append('SNDINFO.ms'); dirs.append('sounds')
 
     files = []
@@ -74,7 +78,7 @@ def main(out):
         if m:
             refs += 1
             if (path + '/' + m.group(1)).lower() not in names: print('unresolved asset:', path + '/' + m.group(1)); miss += 1
-    for lump in ('MODELDEF.bd22', 'MODELDEF.rsq'):
+    for lump in SHIPPED_MODELDEFS():
         if lump.lower() in names:
             t = z.read(lump).decode('latin-1'); path = ''
             for line in t.split('\n'):

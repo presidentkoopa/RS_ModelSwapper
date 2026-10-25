@@ -116,6 +116,18 @@ class RSQ_GunSide : Inventory
 	SupD: RQSP D -1; Stop;
 	SupE: RQSP E -1; Stop;
 	SupF: RQSP F -1; Stop;
+	GunI: RQGS I -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	GunJ: RQGS J -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	TrgS: RQGT S -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	SqzS: RQGU S -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	TrgT: RQGT T -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	SqzT: RQGU T -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	TrgU: RQGT U -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	SqzU: RQGU U -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	TrgV: RQGT V -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	SqzV: RQGU V -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	TrgW: RQGT W -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
+	SqzW: RQGU W -1; Stop;	// Aliens set (tools_kit/lift_aliens.py)
 	Fist: RQGF A -1; Stop;	// Ermac's fist (the free hand's fist): fists, punches
 	Nade: RQGN A -1; Stop;	// Ermac's ammo hand round the VR grenade
 	// 2026-10-23: the VR scope's collimated reticle (rsq/scope.zs, layer RSQ_ScopeLayers.RETICLE).

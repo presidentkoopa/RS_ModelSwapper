@@ -1718,33 +1718,36 @@ Model MS_alien_pistol
 
 Model MS_alien_rifle
 {
+	// placement: the Aliens set's own (modeldef.rifle.txt), which its reload rows and hands are fitted to
 	Path "models/alien/rifle"
 	Model 0 "m41a.md3"
 	Skin 0 "m41a.png"
 	Scale -1.1 1.1 1.1
-	Offset 0.0 -33.0 -5.0
+	Offset 0.0 -30.0 -9.0
 	FrameIndex CHGG A 0 0
 	FrameIndex MSBL A 0 9999
 }
 
 Model MS_alien_shotgun
 {
+	// placement: the Aliens set's own (modeldef.shotgun.txt), which its reload rows and hands are fitted to
 	Path "models/alien/shotgun"
 	Model 0 "m37a2.md3"
 	Skin 0 "m37a2.png"
 	Scale -1.1 1.1 1.1
-	Offset 0.0 -34.0 -4.0
+	Offset 0.0 -30.0 -7.0
 	FrameIndex SHTG A 0 0
 	FrameIndex MSBL A 0 9999
 }
 
 Model MS_alien_smartgun
 {
+	// placement: the Aliens set's own (modeldef.smartgun.txt), which its reload rows and hands are fitted to
 	Path "models/alien/smartgun"
 	Model 0 "m56.md3"
 	Skin 0 "m56.png"
 	Scale -0.9 0.9 0.9
-	Offset 0.0 -33.0 -5.0
+	Offset 0.0 -30.0 -7.0
 	FrameIndex CHGG A 0 0
 	FrameIndex MSBL A 0 9999
 }

@@ -60,6 +60,18 @@ Model RSQ_GunSide
 	FrameIndex RQGU Q 0 43	// trigger squeezed
 	FrameIndex RQGT R 0 44	// index finger on the trigger
 	FrameIndex RQGU R 0 45	// trigger squeezed
+	FrameIndex RQGS I 0 0	// Ermac hand frame frame0 (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGS J 0 1	// Ermac hand frame frame1 (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGT S 0 46	// Ermac hand frame trg5_M240Fl (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGU S 0 47	// Ermac hand frame sqz5_M240Fl (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGT T 0 48	// Ermac hand frame trg2_M4A3Pi (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGU T 0 49	// Ermac hand frame sqz2_M4A3Pi (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGT U 0 50	// Ermac hand frame trg4_NewSho (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGU U 0 51	// Ermac hand frame sqz4_NewSho (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGT V 0 52	// Ermac hand frame trg5_PulseR (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGU V 0 53	// Ermac hand frame sqz5_PulseR (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGT W 0 54	// Ermac hand frame trg3_Smartg (Aliens set, tools_kit/lift_aliens.py)
+	FrameIndex RQGU W 0 55	// Ermac hand frame sqz3_Smartg (Aliens set, tools_kit/lift_aliens.py)
 }
 Model RSQ_GunSide
 {

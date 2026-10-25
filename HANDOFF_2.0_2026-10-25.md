@@ -21,6 +21,40 @@ and a double barrel written like any mod's: their own Reload states, their own a
 
 The Ruger is logic-verified only (the flat test camera does not frame it at its scale).
 
+### Aliens set (second lift, `tools_kit/lift_aliens.py`)
+
+| reload | models | source |
+|---|---|---|
+| magazine | MS_alien_ pistol, rifle, smartgun, flamer; MS_AE_ Pistol, Flamer (re-centred copies) | Aliens Quest set rows, layers (MODELDEF.aliens), hands |
+| pump | MS_alien_shotgun, MS_AE_Shotgun | same; 8 pushes, 8 shells by the mod's loop |
+
+* The meshes were already the Aliens set's, byte for byte. The Aliens rows ModelSwapper had came
+  from the _wm pipeline (other numbers, and no MODELDEF for their layers at all); they are
+  REPLACED IN PLACE (slots 1, 2, 17 keep their numbers). Smartgun is new rsr slot 40, the shotgun
+  pump slot 3. Shelf rows untouched.
+* Placement: MS_alien_rifle / smartgun / shotgun now draw at the Aliens set's placement (their
+  rows and hands are fitted to it). The MS_AE_ copies already did (checked by mesh shift).
+* Hands: models/rsq/hand.md3 gained the Aliens set's 10 trigger/squeeze frames, appended
+  (`tools_kit/md3_frames.py`: the 46 BD22 frames keep their indices, byte-exact rebuild checked).
+  Aliens hand rows re-keyed BY FRAME onto ModelSwapper's letters (RQGS I/J, RQGT/RQGU S..W new).
+* Foley: aliases onto the BD22 foley already shipped + the set's own bolt sounds. The TC's own
+  sound names are lumps of the TC and are not in any repo.
+
+## Fixed along the way (each also wrong on `main`)
+
+8. **RSQ_GunMoves was BD22Q's table read by ModelSwapper's slot number.** Pivot (where the hands
+   turn with the gun) came from whichever BD22 gun had the same index; slots past 26 got nothing.
+   Seen in the gate: MS_AE_Pistol's hand beside the gun, and the BD22 pistol's hand off its grip
+   in last session's own screenshots. `tools_kit/gunmoves_sync.py` gives every lifted slot its
+   source set's row. **Slots 1-58 that no lift owns still carry BD22's rows by number** -- their
+   source sets' gunmoves are needed before they can be right.
+9. **89 skins the shipped break/pump MODELDEFs named were not in the pk3** (rsr_clear.png beside
+   the MS_Shotgun / SuperShotgun / Revolver / brt_M79 meshes, and `rev.png` where MS_Revolver uses
+   WPN-REV.png). The asset check only read modeldef/.bd22/.rsq. Both builds now ship and check
+   EVERY root `MODELDEF.*` (a hand-kept list also dropped MODELDEF.aliens once: no gun mid-reload).
+   `tools_kit/fix_layer_skins.py` -- re-run after gen_rsb.py / gen_pump.py on the PC.
+10. The gate counted pump shells twice (engine log echoed to stdout).
+
 ## How it fits together
 
 * **Meshes and measurements: BD22Q's, lifted, not measured.** `models/depot_bd/bd` holds BD22Q's
@@ -74,6 +108,14 @@ The Ruger is logic-verified only (the flat test camera does not frame it at its 
 * The pump after a shot is still the mod's own animation (working the forend by hand between shots
   is the next layer).
 * BD22's RSQ_Debris blocks are left out: with them the engine hangs after P_Init.
+* `tools_kit/lift_aliens.py` is a second hand-written lift beside `lift_bd22.py`. The next set
+  (Vanilla / V+ / Modern) should make the shared part one tool -- read row, set row, re-key layers,
+  hand letters by frame, gunmoves -- with a small per-set config, rather than a third copy.
 * The other ~200 shelf models are not reloadable yet. Their route: CARD_STANDARD (one WMCARD per
   shipped mesh, with meshid / restframe / surfindex) and `handfit_cards.py` for the hand poses.
+* Every gate log shows `RSQ_Scope.EyeInHandFrame: Unexpected JIT error` (x86 JIT on this Linux
+  build; the engine falls back to the interpreter and the run continues). Present on the branch
+  before the Aliens work; Quest is arm64 and has no JIT. Not chased.
+* The smartgun's hands follow the Aliens set's refit (rear handlebar / brake grip); the flat
+  camera cannot show whether that reads right -- headset.
 * Desktop (UZDXREMA) build: no reload — parked by the owner; RS_VR_Reload is its counterpart.

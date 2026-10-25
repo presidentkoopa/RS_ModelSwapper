@@ -208,16 +208,16 @@ Model MS_Revolver
 {
 	Path "models/hud/Revolver"
 	Model 0 "rev.md3"
-	SurfaceSkin 0 0 "rev.png"
+	SurfaceSkin 0 0 "WPN-REV.png"
 	SurfaceSkin 0 1 "rsr_clear.png"
-	SurfaceSkin 0 2 "rev.png"
+	SurfaceSkin 0 2 "WPN-REV.png"
 	SurfaceSkin 0 3 "rsr_clear.png"
-	SurfaceSkin 0 4 "rev.png"
-	SurfaceSkin 0 5 "rev.png"
-	SurfaceSkin 0 6 "rev.png"
-	SurfaceSkin 0 7 "rev.png"
-	SurfaceSkin 0 8 "rev.png"
-	SurfaceSkin 0 9 "rev.png"
+	SurfaceSkin 0 4 "WPN-REV.png"
+	SurfaceSkin 0 5 "WPN-REV.png"
+	SurfaceSkin 0 6 "WPN-REV.png"
+	SurfaceSkin 0 7 "WPN-REV.png"
+	SurfaceSkin 0 8 "WPN-REV.png"
+	SurfaceSkin 0 9 "WPN-REV.png"
 	SurfaceSkin 0 10 "rsr_clear.png"
 	Scale -1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
@@ -232,9 +232,9 @@ Model RSB_GunParts
 	Path "models/hud/Revolver"
 	Model 0 "rev.md3"
 	SurfaceSkin 0 0 "rsr_clear.png"
-	SurfaceSkin 0 1 "rev.png"
+	SurfaceSkin 0 1 "WPN-REV.png"
 	SurfaceSkin 0 2 "rsr_clear.png"
-	SurfaceSkin 0 3 "rev.png"
+	SurfaceSkin 0 3 "WPN-REV.png"
 	SurfaceSkin 0 4 "rsr_clear.png"
 	SurfaceSkin 0 5 "rsr_clear.png"
 	SurfaceSkin 0 6 "rsr_clear.png"
@@ -255,7 +255,7 @@ Model RSB_GunParts
 	Path "models/hud/Revolver"
 	Model 0 "rsb_vrev_loader.md3"
 	SurfaceSkin 0 0 "rsr_clear.png"
-	SurfaceSkin 0 1 "rev.png"
+	SurfaceSkin 0 1 "WPN-REV.png"
 	Scale -1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset -5.0000
@@ -268,8 +268,8 @@ Model RSB_GunParts
 {
 	Path "models/hud/Revolver"
 	Model 0 "rsb_vrev_loader.md3"
-	SurfaceSkin 0 0 "rev.png"
-	SurfaceSkin 0 1 "rev.png"
+	SurfaceSkin 0 0 "WPN-REV.png"
+	SurfaceSkin 0 1 "WPN-REV.png"
 	Scale -1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset -5.0000
@@ -282,8 +282,8 @@ Model RSQ_Hands
 {
 	Path "models/hud/Revolver"
 	Model 0 "rsb_vrev_loader.md3"
-	SurfaceSkin 0 0 "rev.png"
-	SurfaceSkin 0 1 "rev.png"
+	SurfaceSkin 0 0 "WPN-REV.png"
+	SurfaceSkin 0 1 "WPN-REV.png"
 	Scale -1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset -5.0000
@@ -296,7 +296,7 @@ Model RSQ_Hands
 {
 	Path "models/hud/Revolver"
 	Model 0 "rsb_vrev_loader.md3"
-	SurfaceSkin 0 0 "rev.png"
+	SurfaceSkin 0 0 "WPN-REV.png"
 	SurfaceSkin 0 1 "rsr_clear.png"
 	Scale -1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
@@ -310,7 +310,7 @@ Model RSB_Round
 {
 	Path "models/hud/Revolver"
 	Model 0 "rsb_vrev_loader.md3"
-	SurfaceSkin 0 0 "rev.png"
+	SurfaceSkin 0 0 "WPN-REV.png"
 	SurfaceSkin 0 1 "rsr_clear.png"
 	Scale 0.4682 0.4682 0.4682
 	Offset -4.8551 -0.0389 0.0
@@ -325,8 +325,8 @@ Model RSB_Round
 {
 	Path "models/hud/Revolver"
 	Model 0 "rsb_vrev_loader.md3"
-	SurfaceSkin 0 0 "rev.png"
-	SurfaceSkin 0 1 "rev.png"
+	SurfaceSkin 0 0 "WPN-REV.png"
+	SurfaceSkin 0 1 "WPN-REV.png"
 	Scale 0.4682 0.4682 0.4682
 	Offset -4.8551 -0.0389 0.0
 	ZOffset 0.1567
