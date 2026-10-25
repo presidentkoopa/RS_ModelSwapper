@@ -59,8 +59,14 @@ instead of quietly scaling something and calling it correct.
 Everyone here found it through them.
 
 **Emawind's QuestZDoom** is the engine these sets target — the one that put GZDoom on a
-standalone headset. **Ermac's DoomXR** is the other half of the lineage, and the hands you wear
-are his.
+standalone headset.
+
+**Ermac is the genesis of this whole line of work.** His **Force Unleashed** pack is what made
+hands in Doom VR possible at all — before it, there was no proof the thing could be done, and
+everything since is downstream of that pack. **DoomXR** is his. And the hands you are wearing are
+his twice over: he **modelled** them and he **posed** them, every pose, by hand. That is not a
+weekend's work, and nobody should read this page and think it came for free. It did not. It came
+from him.
 
 **REMA**, our own GZDoom fork, is named for the two of them — e**R**mac and **EMA**wind. REMA is
 where VR reloading was worked out: real magazines, measured wells, a hand that takes hold of a
@@ -163,9 +169,11 @@ twelve-line config.
 Brutal Doom v22 is **Sergeant_Mark_IV's**. It is the mod that reinvented Doom and brought a
 generation back to it. Everything here is an addon to it and ships none of its guns.
 
+**Ermac** — **he started this.** The Force Unleashed pack that made hands in Doom VR possible,
+DoomXR, and the hands in this pack end to end: modelled by him, and posed by him, every pose
+(Rusted Legacy, MIT). None of this exists without that work.
 **TeamBeef** — Doom in VR, and the community that grew around it.
 **Emawind** — QuestZDoom, the engine all of this runs on.
-**Ermac** — DoomXR, and the hands you are wearing (Rusted Legacy, MIT).
 
 The BD21 Machinegun and slug revolver are Brutal Doom 21's, brought forward. Reload foley, impact
 and tail sounds that the mod itself has none of come from RS_Ballistics and RS_VR_Weapons.
