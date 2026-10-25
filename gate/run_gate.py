@@ -123,7 +123,8 @@ def run(pk3, donor, engine, shots, yaw=90):
         cmds.append(c)
     cmds += ['wait 5', 'quit']
     log = os.path.join(out, 'engine.log')
-    argv = [exe, '-iwad', IWAD, '-file', os.path.abspath(pk3), tm, ov,
+    # a build split across files (e.g. a 1of2 / 2of2-models pair) is given comma-separated, loaded in order
+    argv = [exe, '-iwad', IWAD, '-file'] + [os.path.abspath(x) for x in pk3.split(',')] + [tm, ov,
             '-config', os.path.join(out, 'gate.ini'), '-nosound', '-nomusic', '-width', '640', '-height', '480',
             '+vid_fullscreen', '0', '+vr_mode', '0', '+vid_preferbackend', '0',
             '+set', 'rs_fm_picks', '%s:%s:%d:%d' % (gun, arch, idx, idx),
@@ -149,7 +150,7 @@ def run(pk3, donor, engine, shots, yaw=90):
     text = (open(log, encoding='latin-1').read() if os.path.exists(log) else '') + stdout
     if brk:
         checks = [
-            ('pack loaded', os.path.basename(pk3) in text),
+            ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
             ('scripts parsed', 'script parsing took' in text),
             ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
             ('join took it', 'took TMSSG (break slot %d)' % break_slot(donor) in text),
@@ -174,7 +175,7 @@ def run(pk3, donor, engine, shots, yaw=90):
         logtext = open(log, encoding='latin-1').read() if os.path.exists(log) else stdout
         shells = len(re.findall(r'TM shotgun: a shell in', logtext))
         checks = [
-            ('pack loaded', os.path.basename(pk3) in text),
+            ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
             ('scripts parsed', 'script parsing took' in text),
             ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
             ('join took it', 'TMShotgun pump: took it at its reload' in text),
@@ -194,7 +195,7 @@ def run(pk3, donor, engine, shots, yaw=90):
         print('PASS' if ok else 'FAIL', '-- log', log)
         return 0 if ok else 1
     checks = [
-        ('pack loaded', os.path.basename(pk3) in text),
+        ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
         ('scripts parsed', 'script parsing took' in text),
         ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
         ('join took it', 'took TMPistol' in text),
