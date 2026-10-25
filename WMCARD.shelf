@@ -1,10 +1,41 @@
 # ============================================================================
-# WMCARD.shelf -- written from our OWN measurements.
+# WMCARD.shelf.raw2 -- written from our OWN measurements.
 #
 # Every number here came out of the gun's own reload animation, measured by
 # md3label on the ANIMATED mesh this mod ships. No static _wm world model was
 # read at any point, and nothing was carried over from another gun's card.
 # ============================================================================
+
+weapon "MS_Pistol2"
+  type      = pistol
+  model     = "models/hud/Pistol" "pistolet.md3"
+  skin      = "models/hud/Pistol" "WPN-9mm2.png"
+  capacity  = 12
+  muzzle    = 12.19, 0.67, 4.06
+  barrel    = 1, 0, 0
+  ejectport = 1.66, 1.77, -0.65
+  ejectdir  = 0.0, 1.0, 0.0
+end
+
+grip
+  palm = -9.22, 1.16, 0.47
+  seat = -5.81, -0.11, 3.92
+  supportat = 2.31, -0.09, 2.94
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 16.82, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = -3.27, -0.11, -5.65
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -1.000, -0.000, 0.001
+    distance = 3.86
+  end
+end
 
 weapon "MS_BD_BrutalSMG"
   type      = smg
@@ -23,7 +54,7 @@ grip
   rake = 0
 end
 
-# the magazine, measured from the gun's own reload animation
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 16.76, which is the part's whole journey from wherever it is parked
 part magazine
   role    = feed
   surface = mag
@@ -31,8 +62,98 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = -0.298, 0.0, -0.954
-    distance = 16.76
+    axis     = -0.886, -0.000, -0.464
+    distance = 14.77
+  end
+end
+
+weapon "MS_brt_Minigun"
+  type      = machinegun
+  model     = "models/bd/Minigun" "Minigun.md3"
+  skin      = "models/bd/Minigun" "Minigun.png"
+  capacity  = 12
+  muzzle    = 94.59, -1.06, -50.34
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 75.55, -3.63, -63.53
+  seat = 65.8, 0.33, -55.86
+  supportat = 80.58, 0.27, -53.24
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 39.89, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 52.23, 24.86, -33.7
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.067, 0.991, 0.116
+    distance = 11.07
+  end
+end
+
+weapon "MS_brt_BrutalPistol"
+  type      = pistol
+  model     = "models/bd/BrutalPistol" "BrutalPistol.md3"
+  skin      = "models/bd/BrutalPistol" "BrutalPistol.png"
+  capacity  = 12
+  muzzle    = 44.33, -0.14, -0.64
+  barrel    = 1, 0, 0
+  ejectport = 31.9, 1.63, 0.12
+  ejectdir  = 0.0, 1.0, 0.0
+end
+
+grip
+  triggerat = 30.95, -0.01, -5.0
+  palm = 21.03, -0.11, -14.03
+  seat = 23.06, -1.38, -4.03
+  supportat = 32.72, 0.05, -4.77
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 30.00, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 25.2, -0.04, -8.43
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.830, 0.000, -0.557
+    distance = 11.97
+  end
+end
+
+weapon "MS_brt_RPG"
+  type      = launcher
+  model     = "models/bd/RPG" "RPG.md3"
+  skin      = "models/bd/RPG" "RPG.png"
+  capacity  = 1
+  muzzle    = 80.05, 3.86, 10.31
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 1.41, -2.31, -1.08
+  seat = 6.19, -4.36, 7.27
+  supportat = 14.4, 2.31, 6.45
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 53.56, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 17.51, -16.49, 10.73
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.350, -0.557, -0.753
+    distance = 1.64
   end
 end
 
@@ -53,7 +174,7 @@ grip
   rake = 0
 end
 
-# the magazine, measured from the gun's own reload animation
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 16.76, which is the part's whole journey from wherever it is parked
 part magazine
   role    = feed
   surface = mag
@@ -61,8 +182,8 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = -0.298, 0.0, -0.954
-    distance = 16.76
+    axis     = -0.886, -0.000, -0.464
+    distance = 14.77
   end
 end
 
@@ -83,7 +204,7 @@ grip
   rake = 0
 end
 
-# the magazine, measured from the gun's own reload animation
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 24.99, which is the part's whole journey from wherever it is parked
 part magazine
   role    = feed
   surface = mag
@@ -91,8 +212,37 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = -0.0, 0.0, -1.0
-    distance = 24.99
+    axis     = 0.643, -0.000, 0.766
+    distance = 19.39
+  end
+end
+
+weapon "MS_brt_Rifle"
+  type      = rifle
+  model     = "models/bd/Rifle" "Rifle.md3"
+  skin      = "models/bd/Rifle" "Rifle.png"
+  capacity  = 20
+  muzzle    = 74.45, -0.14, 9.3
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 36.33, 0.47, -7.59
+  seat = 35.61, 0.02, 3.72
+  supportat = 49.28, 0.31, 2.73
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 36.21, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 40.86, 0.41, -5.8
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.866, 0.081, -0.493
+    distance = 16.29
   end
 end
 
@@ -113,7 +263,7 @@ grip
   rake = 0
 end
 
-# the magazine, measured from the gun's own reload animation
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 17.20, which is the part's whole journey from wherever it is parked
 part magazine
   role    = feed
   surface = mag
@@ -121,8 +271,38 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = -0.581, -0.0, -0.814
-    distance = 17.20
+    axis     = 0.581, 0.000, 0.814
+    distance = 11.15
+  end
+end
+
+weapon "MS_wolf_Shotgun"
+  type      = shotgun
+  model     = "models/wolf/Shotgun" "Shotgun.md3"
+  skin      = "models/wolf/Shotgun" "Shotgun.png"
+  capacity  = 8
+  muzzle    = 97.8, -0.11, 3.48
+  barrel    = 1, 0, 0
+end
+
+grip
+  triggerat = 31.83, 0.01, -3.57
+  palm = 22.05, 0.05, -7.92
+  seat = 28.78, -1.84, -2.58
+  supportat = 62.34, -0.03, -0.17
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 18.79, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 46.63, 0.03, 2.19
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 1.000, -0.000, -0.000
+    distance = 4.52
   end
 end
 
@@ -142,7 +322,7 @@ grip
   rake = 0
 end
 
-# the magazine, measured from the gun's own reload animation
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 13.99, which is the part's whole journey from wherever it is parked
 part magazine
   role    = feed
   surface = mag
@@ -150,37 +330,368 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = 0.0, -0.0, -1.0
-    distance = 13.99
+    axis     = 0.000, 0.000, 1.000
+    distance = 7.00
   end
 end
 
-weapon "MS_voxel_SSGD4"
-  type      = supershotgun
-  model     = "models/voxel/SSGD4" "sssg.md3"
-  skin      = "models/voxel/SSGD4" "sssg.png"
+weapon "MS_d64_Minigun"
+  type      = machinegun
+  model     = "models/d64/Minigun" "Minigun.md3"
+  skin      = "models/d64/Minigun" "Minigun.png"
   capacity  = 12
-  muzzle    = 8.55, -1.98, 1.0
+  muzzle    = 94.59, -1.06, -50.34
   barrel    = 1, 0, 0
 end
 
 grip
-  palm = -7.5, -1.98, -8.97
-  seat = -0.5, 3.0, 1.02
-  supportat = 5.32, 0.01, 0.74
+  palm = 75.55, -3.63, -63.53
+  seat = 65.8, 0.33, -55.86
+  supportat = 80.58, 0.27, -53.24
   rake = 0
 end
 
-# the magazine, measured from the gun's own reload animation
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 39.89, which is the part's whole journey from wherever it is parked
 part magazine
   role    = feed
   surface = mag
-  grab       = 29.08, -0.04, -6.17
+  grab       = 52.23, 24.86, -33.7
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = 0.023, -0.0, 1.0
-    distance = 9.54
+    axis     = 0.067, 0.991, 0.116
+    distance = 11.07
+  end
+end
+
+weapon "MS_d64_BrutalPistol"
+  type      = pistol
+  model     = "models/d64/BrutalPistol" "BrutalPistol.md3"
+  skin      = "models/d64/BrutalPistol" "BrutalPistol.png"
+  capacity  = 12
+  muzzle    = 44.33, -0.14, -0.64
+  barrel    = 1, 0, 0
+  ejectport = 31.9, 1.63, 0.12
+  ejectdir  = 0.0, 1.0, 0.0
+end
+
+grip
+  triggerat = 30.95, -0.01, -5.0
+  palm = 21.03, -0.11, -14.03
+  seat = 23.06, -1.38, -4.03
+  supportat = 32.72, 0.05, -4.77
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 30.00, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 25.2, -0.04, -8.43
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.830, 0.000, -0.557
+    distance = 11.97
+  end
+end
+
+weapon "MS_d64_PlasmaGun"
+  type      = plasma
+  model     = "models/d64/PlasmaGun" "Plasma.md3"
+  skin      = "models/d64/PlasmaGun" "Plasma.png"
+  capacity  = 100
+  muzzle    = 100.09, -1.77, -1.13
+  barrel    = 1, 0, 0
+end
+
+grip
+  triggerat = 33.03, -0.07, -5.41
+  palm = 25.25, 2.05, -15.67
+  seat = 27.23, 2.05, -4.72
+  supportat = 65.09, -0.47, -1.15
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 41.01, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 47.99, -0.0, -14.5
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.556, -0.025, -0.831
+    distance = 13.02
+  end
+end
+
+weapon "MS_d64_RPG"
+  type      = launcher
+  model     = "models/d64/RPG" "RPG.md3"
+  skin      = "models/d64/RPG" "RPG.png"
+  capacity  = 1
+  muzzle    = 80.05, 3.86, 10.31
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 1.41, -2.31, -1.08
+  seat = 6.19, -4.36, 7.27
+  supportat = 14.4, 2.31, 6.45
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 53.56, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 17.51, -16.49, 10.73
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.350, -0.557, -0.753
+    distance = 1.64
+  end
+end
+
+weapon "MS_hdvr_Pistol"
+  type      = pistol
+  model     = "models/hdvr/Pistol" "Pistol.md3"
+  skin      = "models/hdvr/Pistol" "Pistol.png"
+  capacity  = 12
+  muzzle    = 44.33, -0.14, -0.64
+  barrel    = 1, 0, 0
+  ejectport = 31.9, 1.63, 0.12
+  ejectdir  = 0.0, 1.0, 0.0
+end
+
+grip
+  triggerat = 30.95, -0.01, -5.0
+  palm = 21.03, -0.11, -14.03
+  seat = 23.06, -1.38, -4.03
+  supportat = 32.72, 0.05, -4.77
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 30.00, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 25.2, -0.04, -8.43
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.830, 0.000, -0.557
+    distance = 11.97
+  end
+end
+
+weapon "MS_hdvr_CHAINGUN"
+  type      = machinegun
+  model     = "models/hdvr/CHAINGUN" "Chaingun.md3"
+  skin      = "models/hdvr/CHAINGUN" "Chaingun.png"
+  capacity  = 12
+  muzzle    = 94.59, -1.06, -50.34
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 75.55, -3.63, -63.53
+  seat = 65.8, 0.33, -55.86
+  supportat = 80.58, 0.27, -53.24
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 39.89, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 52.23, 24.86, -33.7
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.067, 0.991, 0.116
+    distance = 11.07
+  end
+end
+
+weapon "MS_hdvr_RPG"
+  type      = launcher
+  model     = "models/hdvr/RPG" "RPG.md3"
+  skin      = "models/hdvr/RPG" "RPG.png"
+  capacity  = 1
+  muzzle    = 80.05, 3.86, 10.31
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 1.41, -2.31, -1.08
+  seat = 6.19, -4.36, 7.27
+  supportat = 14.4, 2.31, 6.45
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 53.56, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 17.51, -16.49, 10.73
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.350, -0.557, -0.753
+    distance = 1.64
+  end
+end
+
+weapon "MS_hdvr_PlasmaRifle"
+  type      = rifle
+  model     = "models/hdvr/PlasmaRifle" "PlasmaRifle.md3"
+  skin      = "models/hdvr/PlasmaRifle" "PlasmaRifle.png"
+  capacity  = 20
+  muzzle    = 100.09, -1.77, -1.13
+  barrel    = 1, 0, 0
+end
+
+grip
+  triggerat = 33.03, -0.07, -5.41
+  palm = 25.25, 2.05, -15.67
+  seat = 27.23, 2.05, -4.72
+  supportat = 65.09, -0.47, -1.15
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 41.01, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 47.99, -0.0, -14.5
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.556, -0.025, -0.831
+    distance = 13.02
+  end
+end
+
+weapon "MS_vplus_Pistol"
+  type      = pistol
+  model     = "models/vplus/Pistol" "Pistol.md3"
+  skin      = "models/vplus/Pistol" "Pistol.png"
+  capacity  = 12
+  muzzle    = 44.33, -0.14, -0.64
+  barrel    = 1, 0, 0
+  ejectport = 31.9, 1.63, 0.12
+  ejectdir  = 0.0, 1.0, 0.0
+end
+
+grip
+  triggerat = 30.95, -0.01, -5.0
+  palm = 21.03, -0.11, -14.03
+  seat = 23.06, -1.38, -4.03
+  supportat = 32.72, 0.05, -4.77
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 30.00, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 25.2, -0.04, -8.43
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.830, 0.000, -0.557
+    distance = 11.97
+  end
+end
+
+weapon "MS_vplus_CHAINGUN"
+  type      = machinegun
+  model     = "models/vplus/CHAINGUN" "Chaingun.md3"
+  skin      = "models/vplus/CHAINGUN" "Chaingun.png"
+  capacity  = 12
+  muzzle    = 94.59, -1.06, -50.34
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 75.55, -3.63, -63.53
+  seat = 65.8, 0.33, -55.86
+  supportat = 80.58, 0.27, -53.24
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 39.89, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 52.23, 24.86, -33.7
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.067, 0.991, 0.116
+    distance = 11.07
+  end
+end
+
+weapon "MS_vplus_RPG"
+  type      = launcher
+  model     = "models/vplus/RPG" "RPG.md3"
+  skin      = "models/vplus/RPG" "RPG.png"
+  capacity  = 1
+  muzzle    = 80.05, 3.86, 10.31
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 1.41, -2.31, -1.08
+  seat = 6.19, -4.36, 7.27
+  supportat = 14.4, 2.31, 6.45
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 53.56, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 17.51, -16.49, 10.73
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.350, -0.557, -0.753
+    distance = 1.64
+  end
+end
+
+weapon "MS_vplus_PlasmaRifle"
+  type      = rifle
+  model     = "models/vplus/PlasmaRifle" "PlasmaRifle.md3"
+  skin      = "models/vplus/PlasmaRifle" "PlasmaRifle.png"
+  capacity  = 20
+  muzzle    = 100.09, -1.77, -1.13
+  barrel    = 1, 0, 0
+end
+
+grip
+  triggerat = 33.03, -0.07, -5.41
+  palm = 25.25, 2.05, -15.67
+  seat = 27.23, 2.05, -4.72
+  supportat = 65.09, -0.47, -1.15
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 41.01, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 47.99, -0.0, -14.5
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.556, -0.025, -0.831
+    distance = 13.02
   end
 end
 
@@ -202,7 +713,7 @@ grip
   rake = 0
 end
 
-# the magazine, measured from the gun's own reload animation
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 8.00, which is the part's whole journey from wherever it is parked
 part magazine
   role    = feed
   surface = mag
@@ -210,7 +721,7 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = 0.007, -0.0, -1.0
-    distance = 8.00
+    axis     = -0.525, 0.000, 0.851
+    distance = 2.30
   end
 end

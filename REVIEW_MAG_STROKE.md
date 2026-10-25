@@ -10,29 +10,26 @@ length along the insertion axis -- past that the magazine has left the gun.
 
 gun                              stroke    well     mag  ceiling  reason
 ------------------------------------------------------------------------------------------------
-MS_AE_Flamer                     185.80   10.82   28.27    39.09  stroke exceeds well depth + magazine length
-MS_alien_flamer                  185.80   10.81   28.27    39.07  stroke exceeds well depth + magazine length
-MS_alien_rifle                    76.69    8.43   13.10    21.53  stroke exceeds well depth + magazine length
-MS_alien_pistol                   65.01   10.69   16.68    27.37  stroke exceeds well depth + magazine length
-MS_brt_RPG                        53.56    5.17    5.44    10.61  stroke exceeds well depth + magazine length
-MS_d64_RPG                        53.56    5.17    5.44    10.61  stroke exceeds well depth + magazine length
-MS_hdvr_RPG                       53.56    5.17    5.44    10.61  stroke exceeds well depth + magazine length
-MS_vplus_RPG                      53.56    5.17    5.44    10.61  stroke exceeds well depth + magazine length
-MS_d64_PlasmaGun                  41.01    8.00   16.13    24.13  stroke exceeds well depth + magazine length
-MS_hdvr_PlasmaRifle               41.01    8.00   16.13    24.13  stroke exceeds well depth + magazine length
-MS_vplus_PlasmaRifle              41.01    8.00   16.13    24.13  stroke exceeds well depth + magazine length
-MS_brt_Minigun                    39.89    2.53   13.54    16.07  stroke exceeds well depth + magazine length
-MS_d64_Minigun                    39.89    2.53   13.54    16.07  stroke exceeds well depth + magazine length
-MS_hdvr_CHAINGUN                  39.89    2.53   13.54    16.07  stroke exceeds well depth + magazine length
-MS_vplus_CHAINGUN                 39.89    2.53   13.54    16.07  stroke exceeds well depth + magazine length
-MS_chex_largezorcher              38.85    3.23    4.40     7.64  stroke exceeds well depth + magazine length
-MS_chex_superlargezorcher         38.85    3.23    4.40     7.64  stroke exceeds well depth + magazine length
-MS_brt_Rifle                      36.21    8.56   20.28    28.84  stroke exceeds well depth + magazine length
-MS_brt_BrutalPistol               30.00    7.10   10.30    17.40  stroke exceeds well depth + magazine length
-MS_d64_BrutalPistol               30.00    7.10   10.30    17.40  stroke exceeds well depth + magazine length
-MS_hdvr_Pistol                    30.00    7.10   10.30    17.40  stroke exceeds well depth + magazine length
-MS_vplus_Pistol                   30.00    7.10   10.30    17.40  stroke exceeds well depth + magazine length
-MS_qvplus_guns                    23.39    5.47   11.83    17.30  stroke exceeds well depth + magazine length
-MS_vplus_guns                     23.39    5.47   11.83    17.30  stroke exceeds well depth + magazine length
-MS_wolf_Shotgun                   18.79    2.12    5.94     8.06  stroke exceeds well depth + magazine length
-MS_Pistol2                         0.00    6.47    8.92    15.39  stroke is zero
+MS_AE_Flamer                     182.51   10.82   28.27    39.09  stroke exceeds well depth + magazine length
+MS_alien_flamer                  182.51   10.81   28.27    39.07  stroke exceeds well depth + magazine length
+MS_alien_rifle                    72.08    8.43   13.10    21.53  stroke exceeds well depth + magazine length
+MS_alien_pistol                   56.73   10.69   16.68    27.37  stroke exceeds well depth + magazine length
+MS_chex_largezorcher              38.32    3.23    4.40     7.64  stroke exceeds well depth + magazine length
+MS_chex_superlargezorcher         38.32    3.23    4.40     7.64  stroke exceeds well depth + magazine length
+MS_qvplus_guns                    21.22    5.47   11.83    17.30  stroke exceeds well depth + magazine length
+MS_vplus_guns                     21.22    5.47   11.83    17.30  stroke exceeds well depth + magazine length
+
+
+## Two numbers worth your eye, both inside the ceiling
+
+MS_brt_RPG / MS_d64_RPG / MS_hdvr_RPG / MS_vplus_RPG    stroke 1.64
+    The shortest stroke on the shelf. The round seats shallow on this launcher
+    and the ceiling is 10.61, so the mesh does support it, but 1.64 units is
+    about 7cm of hand travel once scaled -- a push, not a load.
+
+MS_brt_RailGun                                          not regenerated
+    WMCARD.ww2 ships this gun at 8.82, measured by the old surface-name path.
+    The new measure reads 28.64 over frames 16..28, which is OVER its 25.76
+    ceiling. The two disagree, so WMCARD.ww2 was left exactly as it was committed
+    rather than regenerated -- the shipping number is still 8.82. One of the two
+    is wrong and the mesh has not told us which.

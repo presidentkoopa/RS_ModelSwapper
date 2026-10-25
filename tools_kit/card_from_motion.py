@@ -17,6 +17,7 @@ import numpy as np
 sys.path.insert(0, 'tools_kit')
 from md3read import read_md3
 from md3label import kabsch
+import mag_insertion
 
 
 def stroke(meshpath, frames, surf='mag'):
@@ -147,9 +148,18 @@ def main(outpath):
         if not mi:
             print(f'  {cls}: card has no mag_in phase -- no insertion to measure, skipped')
             continue
-        st, ax = stroke(os.path.join(d, mesh), (int(mi.group(1)), int(mi.group(2))))
+        # The insertion stroke comes from mag_insertion, which anchors on the end
+        # of the mag_in window and walks back only while the magazine is still
+        # approaching. The local stroke() above resolved the magazine by SURFACE
+        # NAME, which only exists in meshes md3label itself rewrote (the WW2 set);
+        # for every other package it returned None and the entry silently kept
+        # travel_clear -- the part's whole journey, 30 to 185 units.
+        st, ax, _fr = mag_insertion.from_card(p, d, mesh) or (None, None, None)
+        if st is None or ax is None:
+            print(f'  {cls}: no insertion inside the mag_in window -- skipped')
+            continue
         note = ''
-        if st is not None and abs(st - float(g[9])) > 0.5:
+        if abs(st - float(g[9])) > 0.5:
             note = ("  # stroke taken from the insertion frames; travel_clear said %s,"
                     " which is the part's whole journey from wherever it is parked" % g[9])
             g[9] = '%.2f' % st
