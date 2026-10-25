@@ -4,13 +4,35 @@
 
 class RSP_Guns abstract
 {
+	// ModelSwapper's Index(), hand-written -- the generator matches on the weapon's
+	// own class, which is right for a standalone pack. Here the weapon belongs to
+	// whatever mod is loaded and only its MODEL is ours, so the slot comes from the
+	// model in hand, and every model that is the same mesh claims it.
 	clearscope static int Index(Weapon w)
 	{
-		if (!w)
-			return 0;
-		Name n = w.GetClassName();
-		if (n == 'Shot_Gun')	return 1;
-		if (n == 'VR_Shotgun')	return 2;
+		if (!w) return 0;
+		return SlotForDonor(DonorInHand(HandOf(w)));
+	}
+
+	clearscope static int HandOf(Weapon w)
+	{
+		return 0;
+	}
+
+	clearscope static string DonorInHand(int hand)
+	{
+		let it = ServiceIterator.Find("RS_WeaponArchetypeService");
+		if (!it) return "";
+		let s = it.Next();
+		if (!s) return "";
+		return s.GetString("weapon.donor", "", hand);
+	}
+
+	clearscope static int SlotForDonor(string donor)
+	{
+		if (donor.Length() == 0) return 0;
+		if (donor == "MS_PU_Shotgun")	return 1;
+		if (donor == "MS_Shotgun")	return 1;
 		return 0;
 	}
 
@@ -18,8 +40,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (40.100, 0.000, -2.800);
-		case 2:	return (34.500, -0.000, 1.300);
+		case 1:	return (34.500, -0.000, 1.300);
 		}
 		return (0, 0, 0);
 	}
@@ -28,8 +49,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (-1.000, 0.000, -0.002);
-		case 2:	return (-1.000, -0.000, 0.002);
+		case 1:	return (-1.000, -0.000, 0.002);
 		}
 		return (0, 0, 0);
 	}
@@ -38,8 +58,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return 6.400;
-		case 2:	return 10.200;
+		case 1:	return 10.200;
 		}
 		return 0;
 	}
@@ -48,8 +67,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (0.000, -0.002, 1.000);
-		case 2:	return (0.000, 0.001, 0.741);
+		case 1:	return (0.000, 0.001, 0.741);
 		}
 		return (0, 0, 0);
 	}
@@ -58,8 +76,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return 1.000;
-		case 2:	return 0.000;
+		case 1:	return 0.000;
 		}
 		return 0;
 	}
@@ -68,8 +85,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (0.000, -0.002, 1.000);
-		case 2:	return (-0.000, 0.002, 1.000);
+		case 1:	return (-0.000, 0.002, 1.000);
 		}
 		return (0, 0, 0);
 	}
@@ -78,8 +94,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (19.000, 0.000, -2.800);
-		case 2:	return (12.500, -0.500, 3.300);
+		case 1:	return (12.500, -0.500, 3.300);
 		}
 		return (0, 0, 0);
 	}
@@ -88,8 +103,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (1.000, 0.000, 0.000);
-		case 2:	return (0.892, 0.429, -0.140);
+		case 1:	return (0.892, 0.429, -0.140);
 		}
 		return (0, 0, 0);
 	}
@@ -98,8 +112,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return 6.000;
-		case 2:	return 1.500;
+		case 1:	return 1.500;
 		}
 		return 0;
 	}
@@ -108,8 +121,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (-0.024, -2.986, -1.130);
-		case 2:	return (0.006, 0.647, 1.100);
+		case 1:	return (0.038, -2.397, -30.440);
 		}
 		return (0, 0, 0);
 	}
@@ -118,8 +130,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (1.489, 2.834, -2.439);
-		case 2:	return (2.165, 2.823, -1.376);
+		case 1:	return (2.165, 2.823, -1.376);
 		}
 		return (0, 0, 0);
 	}
@@ -129,7 +140,6 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (0.537, -0.009, 0.844);
-		case 2:	return (0.537, -0.009, 0.844);
 		}
 		return (0, 0, 0);
 	}
@@ -138,8 +148,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (3.087, -28.047, 33.050);
-		case 2:	return (-0.836, -22.370, 30.390);
+		case 1:	return (-0.804, -25.414, -1.151);
 		}
 		return (0, 0, 0);
 	}
@@ -148,8 +157,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (0.976, 57.529, 0.536);
-		case 2:	return (-41.862, 66.487, -44.858);
+		case 1:	return (-41.862, 66.487, -44.858);
 		}
 		return (0, 0, 0);
 	}
@@ -158,8 +166,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (-1.000, 1.000, 1.000);
-		case 2:	return (1.350, 1.350, 1.350);
+		case 1:	return (1.350, 1.350, 1.350);
 		}
 		return (0, 0, 0);
 	}
@@ -168,8 +175,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return (0.000, 0.000, -5.000);
-		case 2:	return (0.000, 0.000, 0.000);
+		case 1:	return (0.000, 0.000, 0.000);
 		}
 		return (0, 0, 0);
 	}
@@ -178,8 +184,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return 'RQUG';
-		case 2:	return 'RQUH';
+		case 1:	return 'RQUH';
 		}
 		return 'None';
 	}
@@ -188,8 +193,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return 'RQUP';
-		case 2:	return 'RQUQ';
+		case 1:	return 'RQUQ';
 		}
 		return 'None';
 	}
@@ -198,8 +202,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return 'RQUW';
-		case 2:	return 'RQUX';
+		case 1:	return 'RQUX';
 		}
 		return 'None';
 	}
@@ -208,8 +211,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return "SHTN A";
-		case 2:	return "SHTG A";
+		case 1:	return "SHTG A";
 		}
 		return "";
 	}
@@ -218,8 +220,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return "RSP_LoadWait RSP_P1Wait RSP_P2Wait RSP_P3Wait RSP_Kick";
-		case 2:	return "RSP_LoadWait RSP_PWait";
+		case 1:	return "RSP_LoadWait RSP_PWait";
 		}
 		return "";
 	}
@@ -229,7 +230,6 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return "Shotgun/Reload";
-		case 2:	return "Shotgun/Reload";
 		}
 		return "";
 	}
@@ -238,8 +238,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return 5;
-		case 2:	return 0;
+		case 1:	return 0;
 		}
 		return 0;
 	}
@@ -248,8 +247,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return "Shotgun/Pump1";
-		case 2:	return "shotpump";
+		case 1:	return "shotpump";
 		}
 		return "";
 	}
@@ -258,8 +256,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return 5;
-		case 2:	return 1;
+		case 1:	return 1;
 		}
 		return 0;
 	}
@@ -268,8 +265,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return "Shotgun/Pump2";
-		case 2:	return "";
+		case 1:	return "";
 		}
 		return "";
 	}
@@ -278,8 +274,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return 5;
-		case 2:	return 0;
+		case 1:	return 0;
 		}
 		return 0;
 	}
@@ -288,41 +283,16 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return "weapons/shell";
-		case 2:	return "";
+		case 1:	return "";
 		}
 		return "";
-	}
-
-	// what the tube holds, and its cap. The VR insert needs both so it can refuse before it
-	// sends the weapon anywhere: 1 BD22 Shot_Gun (8 in the tube plus one chambered), 2 the
-	// Vanilla VR Plus VR_Shotgun.
-	clearscope static String Loaded(int i)
-	{
-		switch (i)
-		{
-		case 1:	return "ShotgunAmmo";
-		case 2:	return "VR_ShotLoaded";
-		}
-		return "";
-	}
-
-	clearscope static int Cap(int i)
-	{
-		switch (i)
-		{
-		case 1:	return 9;
-		case 2:	return 8;
-		}
-		return 0;
 	}
 
 	clearscope static String Reserve(int i)
 	{
 		switch (i)
 		{
-		case 1:	return "AmmoShell";
-		case 2:	return "VR_Shell";
+		case 1:	return "Shell";
 		}
 		return "";
 	}
@@ -331,8 +301,7 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return "ShotgunAmmo";
-		case 2:	return "VR_ShotLoaded";
+		case 1:	return "MSShotLoaded";
 		}
 		return "";
 	}
@@ -342,7 +311,6 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 0;
-		case 2:	return 6;
 		}
 		return 0;
 	}
@@ -350,12 +318,6 @@ class RSP_Guns abstract
 	// the set's own ejected shell, frame k (V+): its place on the gun in the ready pose
 	clearscope static Vector3 EjectHook(int i, int k)
 	{
-		if (i == 2 && k == 0)	return (0.000, 0.638, 1.098);
-		if (i == 2 && k == 1)	return (0.000, 0.571, 1.058);
-		if (i == 2 && k == 2)	return (0.000, 0.489, 0.985);
-		if (i == 2 && k == 3)	return (0.000, 0.413, 0.889);
-		if (i == 2 && k == 4)	return (-0.000, 0.344, 0.765);
-		if (i == 2 && k == 5)	return (-0.000, 0.282, 0.623);
 		return (0, 0, 0);
 	}
 }

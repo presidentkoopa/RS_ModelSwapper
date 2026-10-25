@@ -48,6 +48,7 @@ if ($Static) { $include += (Get-ChildItem $PSScriptRoot -Filter 'WMCARD.*' -File
 # would trip the duplicate-donor check below, which exists to catch a different
 # fault -- a donor shipped twice as a ZScript stub, which will not compile.
 if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsb'))) { $include += 'MODELDEF.rsb' }
+if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsrpump'))) { $include += 'MODELDEF.rsrpump' }
 # SYNTAX CHECK BEFORE PACKING.
 #
 # build.ps1 only zips -- it never read the ZScript, and compile-testing
