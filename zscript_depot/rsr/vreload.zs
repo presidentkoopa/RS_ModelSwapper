@@ -176,6 +176,16 @@ class RSR abstract
 	// state, so MS_ReloadJoin parks it on MS_ReloadStates.MS_Hold instead -- and until this
 	// accepted that, Draw never swapped a ModelSwapper gun to its gun-without-magazine frame:
 	// the magazine stayed in the gun while a second one was in your hand.
+	// ModelSwapper's own reload foley is named ms/... (SNDINFO.ms). The player can turn it off
+	// (ms_reload_sounds 0) and hear only the loaded mod: its own reload still plays its own sounds
+	// when the hands hand the gun back. A pack's own names are never touched.
+	play static bool Muted(PlayerPawn mo, String snd)
+	{
+		if (snd.Left(3) != "ms/")
+			return false;
+		return PlayerInt(mo.player, 'ms_reload_sounds', 1) == 0;
+	}
+
 	play static bool InHold(PSprite psp, Weapon w)
 	{
 		if (!psp || !w)
@@ -392,7 +402,7 @@ class RSR_State play
 
 	void PlaySnd(PlayerPawn mo, String snd)
 	{
-		if (snd == "")
+		if (snd == "" || RSR.Muted(mo, snd))
 			return;
 		mo.A_StartSound(snd, RSR_Guns.Channel(gun));
 		if (RSR.Debug(mo.player))
@@ -411,7 +421,7 @@ class RSR_State play
 		m.angle = atan2(F.y, F.x);
 		m.pitch = -asin(clamp(F.z, -1, 1));
 		m.vel = mo.vel + (0, 0, -1.5);
-		m.BounceSound = RSR_Guns.SndLand(gun);
+		m.BounceSound = RSR.Muted(mo, RSR_Guns.SndLand(gun)) ? "" : RSR_Guns.SndLand(gun);
 		m.target = mo;
 	}
 

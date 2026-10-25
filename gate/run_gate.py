@@ -29,6 +29,7 @@ IWAD = '/usr/share/games/doom/freedoom2.wad'
 # every layer alike (r_data/models.cpp, RenderHUDModel), so it moves the camera back without
 # moving any layer relative to another -- which is the thing under test.
 VIEW = 'vr_3dweaponOffsetX 10; vr_3dweaponOffsetY -4; vr_3dweaponOffsetZ -45'
+EXTRA = ''
 CVARS = '''user int rsrtest_script = 0;
 user bool rsr_test_offdraw = true;
 user float rsr_test_yaw = 0;
@@ -87,7 +88,7 @@ def run(pk3, donor, engine, shots, yaw=90):
     arch, idx = shelf_pick(donor)
     home = os.path.join(out, 'home'); os.makedirs(home)
     exe = os.path.join(engine, 'qzdoom') if os.path.exists(os.path.join(engine, 'qzdoom')) else os.path.join(engine, 'gzdoom')
-    t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s' % (yaw, VIEW)),
+    t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s%s' % (yaw, VIEW, ('; ' + EXTRA) if EXTRA else '')),
          (25, 'netevent rs-fm-rescan'),
          (40, 'rsqt_gun TMPistol; rsqt_empty 1'),
          (110, 'rsrtest_script 1'),
@@ -147,5 +148,6 @@ if __name__ == '__main__':
     a = [x for x in a if x != eng]
     opt = lambda k, d: next((sys.argv[i + 1] for i, x in enumerate(sys.argv) if x == k), d)
     VIEW = opt('--view', VIEW)
-    a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None))]
+    EXTRA = opt('--extra', '')
+    a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None), opt('--extra', None))]
     sys.exit(run(a[0], a[1], eng, '--shots' in sys.argv, int(opt('--yaw', 60))))

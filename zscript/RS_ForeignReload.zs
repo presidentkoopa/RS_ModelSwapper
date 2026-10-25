@@ -324,6 +324,15 @@ class MS_ReloadJoin : EventHandler
 		// RSR_Start is what vreload watches for; it answers with RSR_Go when it is
 		// willing to take the reload, and the hands take over from there.
 		mo.GiveInventory('RSR_Start', 1);
+		// AND THE MAGAZINE COMES OUT. A pack that owns its guns sends RSR_MagOut from the
+		// weapon's own reload, right after RSR_Start (BD22 Pistol.dec RSR_Out) -- unless its
+		// gun already has no magazine in. That is what plays the magazine-out sound, drops the
+		// old magazine and shows the empty well (the DROP phase). Nothing sent it here, so a
+		// ModelSwapper reload went from IDLE straight to EMPTY: no drop, no sound. The join
+		// plays the weapon's part. NoMag is the reload's own "no magazine in" flag.
+		class<Inventory> nm = RSR_Guns.NoMag(RSR_Guns.Index(w));
+		if (!nm || mo.CountInv(nm) <= 0)
+			mo.GiveInventory('RSR_MagOut', 1);
 		p.SetPsprite(PSP_WEAPON, hold, false, w);
 		if (RS_ForeignRemap.DebugOn())
 			Console.Printf("[MSJOIN] took %s (slot %d) at its reload", w.GetClassName(), RSR_Guns.Index(w));

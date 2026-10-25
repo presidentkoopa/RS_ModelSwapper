@@ -190,7 +190,7 @@ class RSP_State play
 
 	void PlaySnd(PlayerPawn mo, String snd, int chan)
 	{
-		if (snd == "")
+		if (snd == "" || RSR.Muted(mo, snd))
 			return;
 		mo.A_StartSound(snd, chan);
 		if (RSR.Debug(mo.player))
@@ -624,7 +624,7 @@ class RSP_State play
 		d.angle = atan2(geo.F.y, geo.F.x);
 		d.pitch = -asin(clamp(geo.F.z, -1, 1));
 		d.vel = mo.vel + (0, 0, -1.0);
-		d.BounceSound = RSP_Guns.SndLand(gun);
+		d.BounceSound = RSR.Muted(mo, RSP_Guns.SndLand(gun)) ? "" : RSP_Guns.SndLand(gun);
 		d.target = mo;
 	}
 

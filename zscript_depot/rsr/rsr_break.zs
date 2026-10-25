@@ -351,7 +351,7 @@ class RSB_State play
 	// the gun's own sound on its own slot, when the hand does the thing
 	void PlaySnd(PlayerPawn mo, String snd)
 	{
-		if (snd == "")
+		if (snd == "" || RSR.Muted(mo, snd))
 			return;
 		mo.A_StartSound(snd, RSB_Guns.Channel(gun));
 		if (RSB.Debug(mo.player))

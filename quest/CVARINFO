@@ -158,6 +158,7 @@ user int rsr_grab_buttons = 67108864;	// usercmd buttons that grab anywhere: BT_
 user int rsr_magrelease = 268435456;	// usercmd buttons that drop the magazine: BT_OFFHANDRELOAD; the gun's own reload always does
 user int rsr_pouch = 0;				// where a new magazine is taken: 0 anywhere 20 cm from the gun, 1 low (40 cm below the eyes)
 user bool rsr_eat_grip = true;		// while a reload has the off hand, its grip key does nothing else (rthumb is +speed in some layouts)
+user int ms_reload_sounds = 1;	// 1 ModelSwapper's reload foley while the hands work, 0 the loaded mod's sounds only
 user bool rsr_debug = false;		// print every key code pressed, and each reload step
 
 // 1.93: take the charging handle / slide with no reload running, so the action can be cracked
