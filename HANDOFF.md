@@ -15,6 +15,13 @@ root is the ten rules; this file is the state. Both are binding.
 `tools/check_plan.py` is run before every commit (pre-commit hook, see "No drift") and refuses work
 that is not on the plan.**
 
+## F11 started (2026-10-25): fixes and polish
+- DONE: `bd22_plus.py pk3` puts `.md3` lumps in as LZMA (zip method 14), the rest deflated. Same
+  689 lumps from `sets/bd22q_1.97/src`, byte-identical on read-back: **30 MB, was about 50**.
+  1.96b's release did the same and ran on QZD 17.3. Not yet gated on the owner's load order.
+- NEXT: the confirmed bug list from the 2026-10-25 audit goes into PLAN.md F11, then each fix
+  through the generators.
+
 ## What this repo is
 Everything for QuestZDoom 17.3 VR reloadable weapon sets: the owner's BD22 Quest pack as the runtime
 base, the card→Quest pipeline, every set built so far, the engine gate, the source docs. One repo.

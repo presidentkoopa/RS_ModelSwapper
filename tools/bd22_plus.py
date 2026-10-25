@@ -553,6 +553,13 @@ def apply():
     print(json.dumps(log, indent=1))
 
 
+# F11: .md3 lumps go in as LZMA (zip method 14), everything else deflated. 1.96b's own release
+# did this and was 24 MB; all-deflate made the same pack about 50 MB. The meshes are most of the
+# bytes and LZMA takes them ~7x where deflate takes them ~2x (Chain_saw.md3 14 MB -> 1.9 MB).
+# PNG and OGG are already compressed and gain nothing. QZD 17.3 reads method 14:
+# file_zip.cpp:247, files_decompress.cpp:889.
+LZMA_EXT = ('.md3',)
+
 def pk3(path, drop=()):
     with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as z:
         for root, _, files in os.walk(OUT_SRC):
@@ -560,7 +567,8 @@ def pk3(path, drop=()):
                 rel = os.path.relpath(os.path.join(root, f), OUT_SRC).replace(os.sep, '/')
                 if any(rel.lower().startswith(d.lower()) for d in drop):
                     continue
-                z.write(os.path.join(root, f), rel)
+                kind = zipfile.ZIP_LZMA if f.lower().endswith(LZMA_EXT) else zipfile.ZIP_DEFLATED
+                z.write(os.path.join(root, f), rel, compress_type=kind)
     print(path, os.path.getsize(path) >> 20, 'MB')
 
 
