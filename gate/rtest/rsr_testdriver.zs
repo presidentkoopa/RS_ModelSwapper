@@ -59,6 +59,33 @@ class RSR_TestDriver : EventHandler
 		return false;
 	}
 
+	// VR GATE (2026-10-25): on the Quest-faithful rig (Desktop/Quest_Weapons_Kit quest_test_rig, the
+	// real OpenXR input path) the off hand is not faked. Each tic the scripted offset (off: cm in
+	// the gun hand's frame, F L U) becomes the left controller's stage pose, and the grip and
+	// trigger become its grip and trigger -- which the engine turns into key 443 and the off
+	// trigger key exactly as a headset does. Stage -> world was measured on the rig: 34 map units
+	// per metre, z (back) = -F, x (right) = -L, y (up) = U * pixelstretch; the hand pitch 30 is level.
+	static bool VRT()
+	{
+		let c = CVar.FindCVar('rsrtest_vr');
+		return c && c.GetInt() != 0;
+	}
+
+	void Drive(PlayerPawn mo)
+	{
+		double ps = mo.Level.pixelstretch;
+		if (ps <= 0)
+			ps = 1.2;
+		double a = mo.angle;
+		Vector3 g = mo.AttackPos - mo.pos;		// the gun controller, player frame
+		double gf = g.x * cos(a) + g.y * sin(a), gl = -g.x * sin(a) + g.y * cos(a);
+		double f = gf + off.x * 0.34, l = gl + off.y * 0.34, u = g.z + off.z * 0.34 / ps;
+		String pose = String.Format("%.4f %.4f %.4f %.2f 0 0", -l / 34.0, u * ps / 34.0, -f / 34.0, 30.0 + offPitch);
+		CVar.FindCVar('qzt_lhand').SetString(pose);
+		CVar.FindCVar('qzt_lgrip').SetFloat(grip ? 1 : 0);
+		CVar.FindCVar('qzt_ltrigger').SetFloat(trig ? 1 : 0);
+	}
+
 	override void WorldTick()
 	{
 		let mo = players[0].mo;
@@ -70,7 +97,10 @@ class RSR_TestDriver : EventHandler
 		int now = Level.maptime;
 		if (s && script > 0)
 			Script(mo, s, now, script);
-		if (grip != sentGrip)
+		bool vr = VRT();
+		if (vr)
+			Drive(mo);		// the rig's real controllers: pose, grip, trigger (see Drive)
+		else if (grip != sentGrip)
 		{
 			EventHandler.SendNetworkEvent("rsr_grip", grip ? 1 : 0, 443);
 			sentGrip = grip;
@@ -79,7 +109,7 @@ class RSR_TestDriver : EventHandler
 		// every layer of the gun and the hands by the same yaw (a psprite's x is yaw * 4 in
 		// hw_weapon.cpp) to see them from the side
 		let yv = CVar.FindCVar('rsr_test_yaw');
-		double yaw = hideGun ? 180 : yv ? yv.GetFloat() : 0;
+		double yaw = vr ? 0 : hideGun ? 180 : yv ? yv.GetFloat() : 0;
 		bool turned = yawSet;
 		yawSet = yaw != 0;
 		if (yaw != 0 || turned)
@@ -99,7 +129,7 @@ class RSR_TestDriver : EventHandler
 		// pivot: hw_weapon.cpp (my - WEAPONTOP) / -4); in this desktop view that pivot is
 		// 40 cm away, so it is taken out here to show them as they sit in the headset
 		static const int hl[] = { 2200 };
-		for (int k = 0; k < hl.Size(); k++)
+		for (int k = 0; k < (vr ? 0 : hl.Size()); k++)
 		{
 			let q = mo.player.FindPSprite(hl[k]);
 			if (q)

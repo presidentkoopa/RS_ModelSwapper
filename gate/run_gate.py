@@ -30,6 +30,14 @@ IWAD = '/usr/share/games/doom/freedoom2.wad'
 # moving any layer relative to another -- which is the thing under test.
 VIEW = 'vr_3dweaponOffsetX 10; vr_3dweaponOffsetY -4; vr_3dweaponOffsetZ -45'
 EXTRA = ''
+VR_CVARS = '''
+user int rsrtest_vr = 1;
+user string qzt_lhand = "";
+user float qzt_lgrip = -1;
+user float qzt_ltrigger = -1;
+'''
+RIG = os.environ.get('QZ_RIG', '/home/claude/qzlinux17')   # Desktop/Quest_Weapons_Kit quest_test_rig, built
+
 CVARS = '''user int rsrtest_script = 0;
 user bool rsr_test_offdraw = true;
 user float rsr_test_yaw = 0;
@@ -78,13 +86,16 @@ def slot_of(donor):
     return int(m.group(1)) if m else -1
 
 
-def build_aux(out):
+def build_aux(out, vr=False):
     os.makedirs(out, exist_ok=True)
     ov = os.path.join(out, 'rtest_overlay.pk3')
-    body = '\n'.join(open(os.path.join(H, 'rtest', f)).read() for f in ('fakehands.zs', 'rsr_testdriver.zs', 'driver.zs', 'pump_test.zs', 'break_test.zs'))
+    # --vr: the pack's OWN vrhand.zs (the engine's AttackPos / OffhandPos, real buttons), driven by
+    # the rig's controllers; without it, the fake hands stand in for a headset
+    hand = open(os.path.join(ROOT, 'zscript_depot/rsvr/vrhand.zs')).read() if vr else open(os.path.join(H, 'rtest', 'fakehands.zs')).read()
+    body = '\n'.join([hand] + [open(os.path.join(H, 'rtest', f)).read() for f in ('rsr_testdriver.zs', 'driver.zs', 'pump_test.zs', 'break_test.zs')])
     with zipfile.ZipFile(ov, 'w', zipfile.ZIP_DEFLATED) as z:
         z.writestr('zscript_depot/rsvr/vrhand.zs', body)
-        z.writestr('CVARINFO.rtest', CVARS)
+        z.writestr('CVARINFO.rtest', CVARS + (VR_CVARS if vr else ''))
         z.writestr('MAPINFO.rtest', 'gameinfo { AddEventHandlers = "RSR_TestDriver", "RSQT_Driver", "RSP_TestDriver", "RSB_TestDriver" }\n')
     tm = os.path.join(out, 'testmod.pk3')
     with zipfile.ZipFile(tm, 'w', zipfile.ZIP_DEFLATED) as z:
@@ -92,18 +103,19 @@ def build_aux(out):
     return ov, tm
 
 
-def run(pk3, donor, engine, shots, yaw=90):
+def run(pk3, donor, engine, shots, yaw=90, vr=False):
     out = os.path.join(H, 'out', donor)
     if os.path.isdir(out):
         shutil.rmtree(out)
-    ov, tm = build_aux(out)
+    ov, tm = build_aux(out, vr)
     arch, idx = shelf_pick(donor)
     home = os.path.join(out, 'home'); os.makedirs(home)
     exe = os.path.join(engine, 'qzdoom') if os.path.exists(os.path.join(engine, 'qzdoom')) else os.path.join(engine, 'gzdoom')
     pump = pump_slot(donor) > 0
     brk = not pump and break_slot(donor) > 0
     gun = 'TMShotgun' if pump else 'TMSSG' if brk else 'TMPistol'
-    t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s%s' % (yaw, VIEW, ('; ' + EXTRA) if EXTRA else '')),
+    view = '' if vr else VIEW         # the flat-camera offset: off on the rig, which draws the real VR placement
+    t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s%s' % (0 if vr else yaw, view, ('; ' + EXTRA) if EXTRA else '')),
          (25, 'netevent rs-fm-rescan'),
          (40, 'rsqt_gun %s; rsqt_empty 1' % gun)]
     if brk:
@@ -130,11 +142,29 @@ def run(pk3, donor, engine, shots, yaw=90):
             '+set', 'rs_fm_picks', '%s:%s:%d:%d' % (gun, arch, idx, idx),
             '+screenshot_dir', out, '+logfile', log, '-warp', '1', '+' + '; '.join(cmds)]
     env = dict(os.environ, HOME=home, LIBGL_ALWAYS_SOFTWARE='1', GALLIUM_DRIVER='llvmpipe')
+    launch = ['xvfb-run', '-a', '-s', '-screen 0 640x480x24 +extension GLX'] + argv
+    if vr:
+        # the Quest-faithful rig: its own ini (vr_mode 15, OpenXR device), without the BD22-only player
+        # class; no desktop vid / vr_mode overrides; EGL surfaceless, so no X server
+        ini = open(os.path.join(RIG, 'config', 'qzdoom.ini'), encoding='latin-1').read()
+        ini = re.sub(r'^playerclass=.*$', 'playerclass=', ini, flags=re.M)
+        open(os.path.join(out, 'gate.ini'), 'w', encoding='latin-1').write(ini)
+        drop = {'+vid_fullscreen', '+vr_mode', '+vid_preferbackend'}
+        a2, skip = [], 0
+        for x in argv[1:]:
+            if skip:
+                skip -= 1; continue
+            if x in drop:
+                skip = 1; continue
+            a2.append(x)
+        if shots:
+            a2 = ['+qz_hmd', os.environ.get('QZ_SHOT_HMD', '0 1.6 0 -40 0 0')] + a2   # head down at the hands, as a player looks
+        launch = [os.path.join(RIG, 'qz')] + a2
     # A script error leaves the engine on its error screen until the timeout. Watch the log
     # and stop at the first one -- a failed compile is a FAIL in seconds, not ten minutes.
     import time
     so = open(os.path.join(out, 'stdout.txt'), 'w')
-    p = subprocess.Popen(['xvfb-run', '-a', '-s', '-screen 0 640x480x24 +extension GLX'] + argv, cwd=engine, env=env,
+    p = subprocess.Popen(launch, cwd=RIG if vr else engine, env=env,
                          stdout=so, stderr=subprocess.STDOUT, start_new_session=True)
     t0 = time.time(); rc = None
     while rc is None:
@@ -227,4 +257,4 @@ if __name__ == '__main__':
     VIEW = opt('--view', VIEW)
     EXTRA = opt('--extra', '')
     a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None), opt('--extra', None))]
-    sys.exit(run(a[0], a[1], eng, '--shots' in sys.argv, int(opt('--yaw', 60))))
+    sys.exit(run(a[0], a[1], eng, '--shots' in sys.argv, int(opt('--yaw', 60)), vr='--vr' in sys.argv))
