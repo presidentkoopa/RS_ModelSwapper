@@ -92,29 +92,95 @@ per-gun checklist below, in a headset, signed by the owner.
       `C:\Users\Command\.claude\skills\gate-a-doom-mod\`, and sent to the RS ModelSwapper lane on
       the owner's instruction, 2026-10-25.
 
-- F10 The rest of the roster. 28 guns carry hands; 3 are melee (BrutalAxe, Chain_saw, DSweap) and
-      17 of the other 25 reload by hand. The owner's objective is that every non-melee gun reloads,
-      and no F item covered the remaining eight. He ruled on them 2026-10-25:
+- F10 **EVERY NON-MELEE GUN RELOADS.** The owner's objective, stated plainly on 2026-10-25:
+      "we want reloading for all weapons that are not melee / if bd22 does not allow it then we
+      already ship our own weapon code anyway so why not". That settles it. 28 guns carry hands,
+      3 are melee (BrutalAxe, Chain_saw, DSweap), and the other 25 all reload when this step ends.
+      17 do today. These 8 do not.
+
+      I TWICE TRIED TO CLOSE GUNS IN THIS STEP AND WAS WRONG BOTH TIMES. Once by reading a card's
+      design note as if it were a law -- a card is REMA's decision, not the owner's, and he owns
+      this pack. Once by declaring a part "absent" from SURFACE NAMES without looking at the
+      geometry, when a welded surface can hold many separate bodies (M249_lowpoly holds 124).
+      Neither is evidence that a gun cannot reload. Do not close a gun in this step without the
+      owner saying so.
+
+      SOURCE RULE (owner, 2026-10-25): **no `_wm` meshes. Cards only, against our own animating
+      copies.** THE CARD MEASURES; OUR MESH ANIMATES. The reason is in the frame counts:
+      REMA's `machinegun_wm.md3` has ONE frame -- it is a static reference pose with the surfaces
+      already split -- while our `Machinegun.md3` has 36, our `SSG.md3` 46, `M79.md3` 26,
+      `Minigun.md3` 12, `m32.md3` 2. Ship a `_wm` and the gun goes stiff. (The existing carves
+      used a `_wm` for vertex CORRESPONDENCE only and kept all our frames, which is why MG42,
+      Flamethrower and Unmaker still animate -- but the owner has ruled that route out, and the
+      card does not need it.)
+      A card's numbers are in the CONTROLLER's frame, which is mesh-independent: where the part
+      is, which way it comes out, how far it travels. That transfers to our animated mesh without
+      touching theirs. The join to make: the cards name REMA's surfaces (`canister`, `barrels`,
+      `forend`) and ours are named differently (`Runko`, `Pipe`, `magazine`) -- so locate the part
+      in OUR mesh by the card's position, not by its surface name.
+
+      WHAT MAKES A GUN RELOADABLE, from the one that works (BD_Flamethrower):
+          firesfrom = magazine       capacity = 200       magfamily = "bd_fuel"
+          part canister -> role = feed, surface = canister, dof kind = slide
+      A capacity and a `part` with `role = feed`. Capacity is NOT a blocker and never was: the
+      owner's point is that we invent it. MG42 200, Flamethrower 200, Unmaker 60 are all numbers
+      chosen off his REMA sheet because BD22 has none.
+
+      FIVE OF THE EIGHT ALREADY CARRY A CAPACITY AND AN AMMO FAMILY. They are `firesfrom = reserve`
+      with no feed part, and that is the ONLY thing missing:
+          BD_Machinegun  100  bd_40mm       BD_Minigun  200  bd_762
+          BD_BFG          40  bd_cell       BD_BFG10k    99  bd_cell
+          BD_Hellish       6  bd_hell
+      Someone already decided a Minigun holds 200 of 7.62 and a BFG holds 40 cells. Adding a feed
+      part to a card is an edit to a card, not a new system.
+
+      THREE HAVE NO CARD AT ALL -- IncendiaryLauncher (M32), NukeLauncher (Nuker), Devastator
+      (Sidewinder). Those need one made, the way every other card in this pack was.
+
+      Per gun:
         * **IncendiaryLauncher = M32**, a Milkor MGL: a six-shot revolving cylinder. DO THIS ONE
           FIRST -- it is the easiest gun left, not the hardest. `models/bd/M32/m32.md3` ships the
           magazine ALREADY NAMED as its own surface (`magazine`, 484 v / 488 t) with
           `magazine_back`, `magazine_bracket` and `magazine_bracket_front` beside it, so there is
           nothing to carve. A revolving cylinder is the Revolver's reload shape, and the pack has
           that system twice over (speedloader and per-round, both on a menu row).
-        * **GrenadeLauncher = M79**, break action -- the owner's call, and the mesh agrees: a
-          surface named `Shell` (828 v) and 26 frames on a 5-surface model, which is an open/close
-          animation already in there. Break-open is a system the pack runs six times.
-        * **Minigun: NOT in this step.** `models/bd/Minigun/Minigun.md3` is Runko / Runko / Pipe /
-          Runko / Trigger / Grip -- no belt, no drum, no magazine, no ammo surface. Nothing to
-          grab. This is the SECOND time this gun has come back empty, after F8's ejection port, and
-          for the same reason: the part is not modelled. Only an imported mesh could change that
-          (Ermac's `mag_chaingun.md3` and `cg_ammo1..10` exist but are a different gun, so they
-          would be a stand-in, not a measurement). Do not re-derive this; the answer is in the mesh.
-        * **Devastator, BFG10k, BIG_FUCKING_GUN: not wanted.** "if the bfg never reloads i wont
-          lose sleep" (owner). Note for later only: Ermac's Force Unleashed has `pod_bfg.md3` and a
-          FOUR-step pod reload (unload, grab, insert), so a BFG reload is precedented if he asks.
-        * **HellishMissileLauncher, NukeLauncher: ruled out.** "dont need a reload" (owner).
-      Numbers come off these two meshes with the repo's own tools, as every other gun's did.
+        * **GrenadeLauncher = M79: ALREADY BUILT. NOT IN THIS STEP.** I put it in the gap on
+          2026-10-25 and it was never in the gap -- it is break index 2 in `zscript/rsr/rsb_guns.zs`
+          with hinge (18.3427, -0.1278, -3.7417), which matches its survey record's (18.3, 0.0,
+          -3.7), and its own "GrenadeLauncher/Open" sound. I had counted the reload set from
+          `rsr_guns.bd.zs` alone, which is the MAGAZINE table; the pump and break guns live in
+          `rsr_pump_guns.zs` and `rsb_guns.zs`. Count all three or the answer is wrong.
+        * **Machinegun** -- card BD_Machinegun, 100, bd_40mm, needs a feed part. Its `Reload:`
+          jumps straight to `Ready` under `RSM_VR` (`Machinegun.dec:229`), so the hand reload is a
+          no-op today; the underbarrel 40mm is hand-loaded and stays so (`rsr_m203.zs`). The card
+          carries a note saying a magazine swap "should never have had" -- that was a REMA
+          decision and the owner has overruled it. The box DOES separate: our `M249_lowpoly` is
+          11996 verts, which is REMA's `body` 11581 + `magazine` 415 exactly. Find it in our own
+          mesh, not by loading theirs.
+        * **Minigun** -- card BD_Minigun, 200, bd_762, needs a feed part. The card already has
+          `part barrels` (hinge) and `part forend`, so the gun is partly described. Its surface
+          names in our mesh are Runko / Runko / Pipe / Runko / Trigger / Grip, which do not match
+          the card's; that is the join to make, not a reason to stop. F8 closed its EJECTION PORT,
+          which is a different question from its feed -- do not carry that conclusion across.
+        * **BIG_FUCKING_GUN** -- card BD_BFG, 40, bd_cell, needs a feed part. Ermac's Force
+          Unleashed has `pod_bfg.md3` and a FOUR-step pod reload (unload, grab, insert): the right
+          SHAPE for a BFG reload, from the man who invented this. Shape only -- his numbers are a
+          different gun.
+        * **BFG10k** -- card BD_BFG10k, 99, bd_cell, needs a feed part.
+        * **HellishMissileLauncher** -- card BD_Hellish, 6, bd_hell, needs a feed part.
+        * **Devastator** (`Sidewinder/sidewinder.md3`) -- no card. Make one.
+        * **NukeLauncher** (`Nuker/Nuker.md3`) -- no card. Make one.
+        * **GrenadeLauncher = M79: ALREADY DONE, leave it alone.** (Kept in this list only so the
+          next reader does not re-open it -- see the note below.)
+      THE M32 IS MEASURED ALREADY and is the one to build first -- it needs no carve and no
+      `_wm`, because its `magazine` is its own surface in the mesh we ship.
+      (2026-10-25, `rgeo.py`, controller frame, cm F/L/U.) The `magazine` surface:
+      centroid (14.60, -0.03, -4.04), principal axis (-1.000, 0.001, 0.003) -- along the bore --
+      extent 17.38 cm, radius mean 7.57 / max 10.27. A drum 17.4 long and ~15 across, on the bore
+      line, centred 14.6 forward and 4 below, dead centre laterally. An MGL cylinder.
+      Frame 1 is a RECOIL pose, not a reload: every surface shifts back 7-8 cm with some muzzle
+      rise. There is no open/eject animation in this mesh, so the motion is ours to drive -- which
+      is how every other gun in the pack does it.
 
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
