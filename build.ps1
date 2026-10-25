@@ -82,6 +82,12 @@ $files = $files | Where-Object { $_.FullName -notmatch '\\quest\\' }
 # the ones that came in beside the blend-file meshes were 26MB of dead weight.
 # Keep them on disk next to the mesh they belong to; just never pack them.
 $files = $files | Where-Object { $_.Extension -ne '.pdn' }
+# Working copies of a source file left beside it -- RS_ForeignModels.zs.before_import
+# and friends. zscript.txt does not #include them so they never compiled, but they
+# were shipping in both pk3s as 344K of dead weight, and a file that LOOKS like a
+# second copy of a class sitting next to the real one is a trap for whoever reads
+# this pack next.
+$files = $files | Where-Object { $_.Name -notmatch '(?i)\.(before_\w+|bak|orig|tmp)$' }
 # models/blend/ is the blend re-export experiment: meshes rebuilt from the .blend
 # sources, untextured, and referenced by no MODELDEF. The finished packages under
 # models/wolf, models/hacx, models/meat and models/bd replaced them -- those arrived
