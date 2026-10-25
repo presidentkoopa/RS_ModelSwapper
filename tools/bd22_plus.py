@@ -2798,15 +2798,15 @@ SIDE, DOWN, TIP = 0, 1, 2
 EJECT = [
     # class, the class whose MODELDEF block holds the mesh, REMA wm, ready frame (residual 0.0000
     # against it), surface(s) OR a hole box, what it is, how the case leaves
-    ('Shot_Gun', 'Shot_Gun', 'shotgun_wm.md3', 4, ['eject'], None,
+    ('Shot_Gun', 'Shot_Gun', 'shotgun_wm.md3', 4, ['eject'], None, None,
      'the port the model-maker named `eject`', SIDE),
-    ('SSG', 'SSG', 'ssg_wm.md3', 1, ['Open'], None,
+    ('SSG', 'SSG', 'ssg_wm.md3', 1, ['Open'], None, None,
      'the break-open breech, surface `Open`', TIP),
-    ('Revolver', 'Revolver', 'revolver_wm.md3', 0, ['shells'], None,
+    ('Revolver', 'Revolver', 'revolver_wm.md3', 0, ['shells'], None, None,
      'the cylinder: the mean of its five `shells`', TIP),
     # the Shotvolver draws on sprite REVO and has no MODELDEF block of its own: it IS the
     # Revolver's mesh, so it is the Revolver's port.
-    ('Revolver2', 'Revolver', 'revolver_wm.md3', 0, ['shells'], None,
+    ('Revolver2', 'Revolver', 'revolver_wm.md3', 0, ['shells'], None, None,
      'the Shotvolver, on the Revolver\'s own mesh', TIP),
     # THE MG42, once its mesh could be matched at all (see BUTT). Nobody named its port and it
     # has none in either wall -- the regular loops down its flank at x 68..108 are the barrel
@@ -2818,7 +2818,29 @@ EJECT = [
     ('MG42', 'MG42', 'buzzsaw_wm.md3', 0, None,
      dict(axis=2, facing=(0.6, 1.0), z=(-5.0, 2.0), x=(35.0, 55.0), off_centre=(0.0, 1.5),
           long=(5.0, 15.0), wide=(1.0, 6.0)),
-     'the chute in the receiver floor, the hole itself', DOWN),
+     None, 'the chute in the receiver floor, the hole itself', DOWN),
+    # THE MACHINEGUN, found the same way and missed for the same reason as the MG42's. I
+    # filtered for loops in the receiver WALLS, reported "an M249 body with no port loop", and
+    # an M249 ejects DOWNWARD. Drop the direction filter and the chute is there: 7.1 x 10.2,
+    # centred (y -0.27), below the bore (z -4.20), by the breech. Same signature as the MG42's.
+    ('Machinegun', 'Machinegun', 'machinegun_wm.md3', 4, None,
+     dict(axis=2, facing=(0.6, 1.0), z=(-8.0, 0.0), x=(38.0, 50.0), off_centre=(0.0, 1.5),
+          long=(4.0, 12.0), wide=(6.0, 14.0)),
+     None, 'the chute under the breech, the hole itself', DOWN),
+    # THE MP40 HAS NO PORT MODELLED and this one is CONSTRUCTED, not measured. Every slot in
+    # its receiver tube is mirrored at +-1.44 -- cooling slots -- and the one unmirrored
+    # opening is 2.2 x 2.2 on the LEFT, which on an MP40 is the cocking-handle slot, not the
+    # ejection port. So it is built from two surfaces that ARE modelled: `zamek` is the bolt
+    # and `korpus` the receiver, and a blowback gun ejects at the bolt face, through the right
+    # wall, on the bore line. Only their intersection is inferred.
+    #
+    # CORROBORATED, which is why it is here and the Minigun is not: it lands at 68% of this
+    # gun's length, and the owner's own hand-tuned BrutalSMG port sits at 68% of THAT gun's
+    # length. Two different guns, one measured by hand and one derived, same proportion.
+    ('MP40', 'MP40', 'mp40_wm.md3', 2, None, None,
+     dict(bolt='zamek_low_Cube', body='korpus_low_Cube', side='right'),
+     'CONSTRUCTED: the bolt face at the right wall, on the bore line -- no port is modelled',
+     SIDE),
 ]
 WEAPON_SCALE = 1.02          # vr_weaponScale's default, the scale melee.zs's Place() applies
 
@@ -2873,7 +2895,7 @@ def boundary_loops(V, T):
     return out
 
 
-def eject_port(cls, frame, names, hole=None):
+def eject_port(cls, frame, names, hole=None, build=None):
     """Where the brass leaves, in the held model's own units and then in the (forward, left, up)
     cm casings.zs speaks -- Place()'s arithmetic read backwards: f = .01*(ws*m.x - 30),
     r = .01*(-ws*m.y), u = .01*(ws*m.z), and casings' L is melee's -R.
@@ -2905,6 +2927,31 @@ def eject_port(cls, frame, names, hole=None):
         c, span, nv = found[0]
         port = (WEAPON_SCALE * c[0] - 30.0, WEAPON_SCALE * c[1], WEAPON_SCALE * c[2])
         return c, port, nv, '%s/%s' % (pa, mo)
+    if build:
+        # NO PORT IS MODELLED ON THIS GUN, so one is CONSTRUCTED from parts that are. That is
+        # not the same as measuring one and this says so wherever it is read. The pieces are
+        # real surfaces; only their intersection is inferred.
+        by = {s['name']: np.asarray(s['xyz'][frame], float) for s in surfs}
+        for k in (build['bolt'], build['body']):
+            if k not in by:
+                raise SystemExit('%s: no surface %r (it has %s)'
+                                 % (cls, k, [s['name'] for s in surfs]))
+        Z, K = by[build['bolt']], by[build['body']]
+        # the bolt WITHOUT its charging handle: the handle sticks out to one side, so trim to
+        # the vertices near the tube's axis and what is left is the bolt body
+        med = np.median(Z[:, 1])
+        core = Z[np.abs(Z[:, 1] - med) < build.get('trim', 2.0)]
+        if core.shape[0] < 8:
+            raise SystemExit('%s: the bolt core trimmed to %d vertices' % (cls, core.shape[0]))
+        face_x = core[:, 0].max()                 # the bolt face, closed
+        axis_z = core[:, 2].mean()                # the bore line
+        near = K[np.abs(K[:, 0] - face_x) < build.get('slab', 3.0)]
+        if near.shape[0] < 8:
+            raise SystemExit('%s: no body near the bolt face' % cls)
+        wall_y = near[:, 1].min() if build['side'] == 'right' else near[:, 1].max()
+        c = np.array([face_x, wall_y, axis_z])
+        port = (WEAPON_SCALE * c[0] - 30.0, WEAPON_SCALE * c[1], WEAPON_SCALE * c[2])
+        return c, port, core.shape[0], '%s/%s' % (pa, mo)
     hit = [s for s in surfs if s['name'] in names]
     if not hit:
         raise SystemExit('%s: no surface named %s (it has %s)'
@@ -2919,8 +2966,8 @@ def casings():
     p = OUT_SRC + 'zscript/rsq/casings.zs'
     t = open(p).read()
     st, lines = {}, ''
-    for cls, meshcls, wm, fr, names, hole, what, mode in EJECT:
-        c, port, nsurf, mesh = eject_port(meshcls, fr, names, hole)
+    for cls, meshcls, wm, fr, names, hole, build, what, mode in EJECT:
+        c, port, nsurf, mesh = eject_port(meshcls, fr, names, hole, build)
         port = tuple(round(x, 1) + 0.0 for x in port)       # round FIRST: -0.026 prints as -0.0
         test = "if (w is '%s')" % cls
         tabs = max(1, (40 - (8 + len(test)) + 3) // 4)      # `return` at column 40, as the four above
@@ -2977,7 +3024,7 @@ def casings():
 
     # how the case leaves: three things, not two
     thr = ''.join("\t\tif (w is '%s')\n\t\t\treturn %s;\n" % (cls, ['SIDE', 'DOWN', 'TIP'][m])
-                  for cls, _, _, _, _, _, _, m in EJECT if m)
+                  for cls, _, _, _, _, _, _, _, m in EJECT if m)
     t = t.replace("\t// the player who fired:",
                   "\t// 1.97: not every gun throws its case the same way, and it is three things.\n"
                   "\t// SIDE is flicked out of a port in the receiver wall, which is the default and\n"
@@ -3037,10 +3084,9 @@ def casings():
     open(p, 'w').write(t)
 
     st['_not_done'] = {
-        'MP40': 'every korpus slot is mirrored at +-1.44 (the tube\'s cooling slots); `zamek` is the bolt',
-        'Minigun': '91 boundary loops, all bores in `Pipe`: six barrels and no port',
-        'Machinegun': 'an M249 body with no port loop (its ready frame is settled: 4)',
-        'MG42': 'no port loop, and buzzsaw_wm.md3 splits the body 3059+15853 against one surface of 18912',
+        'Minigun': 'every down-facing loop on it is structural -- the rotating body\'s own open '
+                   'ends, the grip, the six bores. No chute is modelled and there is no bolt or '
+                   'breech surface to construct one from, so it keeps throwing from the body.',
     }
     st['_card_rejected'] = ('WMCARD.bd22 ejectport: all 25 say "the point and the direction are '
                             'estimates"; carried exactly it misses the four hand-tuned ports by '

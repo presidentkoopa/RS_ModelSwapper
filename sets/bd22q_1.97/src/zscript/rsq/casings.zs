@@ -25,6 +25,8 @@ class RSA_Casings : EventHandler
 		if (w is 'Revolver')			return (7.9, 0.0, 0.2);	// 1.97: the cylinder: the mean of its five `shells`
 		if (w is 'Revolver2')			return (7.9, 0.0, 0.2);	// 1.97: the Shotvolver, on the Revolver's own mesh
 		if (w is 'MG42')				return (15.3, 0.0, -0.6);	// 1.97: the chute in the receiver floor, the hole itself
+		if (w is 'Machinegun')			return (14.3, -0.3, -4.3);	// 1.97: the chute under the breech, the hole itself
+		if (w is 'MP40')				return (34.7, -2.2, 3.3);	// 1.97: CONSTRUCTED: the bolt face at the right wall, on the bore line -- no port is modelled
 		return (0, 0, 0);
 	}
 
@@ -80,6 +82,8 @@ class RSA_Casings : EventHandler
 		if (w is 'Revolver2')
 			return TIP;
 		if (w is 'MG42')
+			return DOWN;
+		if (w is 'Machinegun')
 			return DOWN;
 		return SIDE;
 	}
