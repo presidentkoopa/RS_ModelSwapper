@@ -43,3 +43,9 @@ user int rsq_recoil = 1;
 // Lower to read it in the headset. It cannot change where anything lands: the
 // hitscan has already hit by the time this is drawn.
 user float rsq_round_speed = 1.0;
+
+// 1.99 F7: the real casing meshes. Off = Brutal Doom's own sprites, sized per
+// cartridge as 1.97 did. rsq_casing_size is a multiplier on true size: a 9mm case
+// really is 19.2 mm, which is about 0.63 map units and may be small to see.
+user bool rsq_casing_models = true;
+user float rsq_casing_size = 1.0;

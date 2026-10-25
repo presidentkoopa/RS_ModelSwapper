@@ -31,7 +31,11 @@ LOG=$(cd "$(dirname "$LOG")" && pwd)/$(basename "$LOG")
 # WorldThingSpawned on a PistolCasing/EmptyBrass/ShotgunCasing, so a gun that is never fired
 # never reaches the new Port() rows and the gate passes without touching them. The Shotvolver
 # (Revolver2) is NOT here: it only exists when rsq_slug_revolver replaces the Revolver at spawn.
-cas="give Shot_Gun; give SSG; give Revolver; give Shell 80; give RevolverAmmo 24; wait 5; echo GATE_CASINGS; use Shot_Gun; wait 10; +attack; wait 25; -attack; wait 20; use SSG; wait 10; +attack; wait 25; -attack; wait 20; +reload; wait 3; -reload; wait 30; use Revolver; wait 10; +attack; wait 25; -attack; wait 20; +reload; wait 3; -reload; wait 40"
+# `give Shell` was wrong and this leg fired nothing for a day because of it: BD22's Shotgun, SSG
+# and Revolver all take Weapon.AmmoType1 "AmmoShell" (2026-10-25). An empty gun makes no casing,
+# no tail and no impact, and the leg still printed GATE_CASINGS and still passed -- the same
+# shape of hole as the pk3 that was never found and the handler that was never registered.
+cas="give Shot_Gun; give SSG; give Revolver; give AmmoShell 80; give RevolverAmmo 24; wait 5; echo GATE_CASINGS; use Shot_Gun; wait 40; +attack; wait 25; -attack; wait 20; use SSG; wait 40; +attack; wait 25; -attack; wait 20; +reload; wait 3; -reload; wait 30; use Revolver; wait 40; +attack; wait 25; -attack; wait 20; +reload; wait 3; -reload; wait 40"
 cmd="wait 40; god; echo GATE_START; give MG42; give Flamethrower2; give Unmaker; give Machinegun; give Clip2 200; give Gas 200; give SoulAmmo 60; give AmmoRocket 5; wait 5; use Machinegun; wait 10; echo GATE_FIRE; +attack; wait 15; -attack; wait 5; +altattack; wait 3; -altattack; wait 10; +reload; wait 3; -reload; wait 40; use MG42; wait 10; +attack; wait 15; -attack; wait 5; +reload; wait 3; -reload; wait 20; use Flamethrower2; wait 10; +attack; wait 15; -attack; wait 5; +reload; wait 3; -reload; wait 20; use Unmaker; wait 10; +attack; wait 15; -attack; wait 5; +reload; wait 3; -reload; wait 20; $cas; echo GATE_DONE; quit"
 # +logfile, not just the redirect. A FATAL script error does NOT reach the redirected stream --
 # it cost three diagnoses in one session: "Unknown sprite RQXM", "cvar already exists" and

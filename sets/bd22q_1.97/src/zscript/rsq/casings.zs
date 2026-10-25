@@ -103,7 +103,14 @@ class RSA_Casings : EventHandler
 			&& n != 'MGLinks')
 			return;
 		let mo = Shooter(c);
-		if (!mo || !mo.player || !RSVR_VRHand.InVR(mo))
+		if (!mo || !mo.player)
+			return;
+		// 1.99 F7: the real mesh, if this gun's cartridge has one. NOT behind the
+		// VR test below: a 12-gauge hull is a 12-gauge hull on a flat screen too.
+		// It sets scale 1.0 itself, because a lent model's size is the MODELDEF's
+		// and the actor's own scale multiplies into it.
+		RSQ_CaseModels.Lend(c, mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName() : 'None', n);
+		if (!RSVR_VRHand.InVR(mo))
 			return;
 		double sz = Size(mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName() : 'None', n);
 		if (sz > 0)
