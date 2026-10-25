@@ -61,8 +61,8 @@ In game:
 unless `rsr_grab_with == 1`; the default is the off-hand trigger. Symptom: the
 magazine drops out and nothing ever happens again.
 
-Reloadable today (pistol family, measured): MS_Pistol, MS_AE_Pistol,
-MS_alien_pistol, MS_MG_Bolter, MS_qvplus_guns, MS_vplus_guns.
+Reloadable: 57 models in 24 slots (reload_slots.json). Rebuilt 2026-10-25 by
+tools_kit/run_modelswapper.py -- see the commits below.
 
 ## Headless harness
 
@@ -91,10 +91,13 @@ Two switches when something does nothing:
 1. **The owner tests it in the headset.** Nothing here substitutes for that. Every
    result above is a scripted hand in a log: the geometry is measured and real,
    how it FEELS to reach for is not knowable from here.
-2. **The 24 carded guns with no reload code.** Six working pistols -> thirty guns,
-   same generator run that is already proven.
-3. **Fit the hands.** RSQ_HandTable is a stub (index 0 for every weapon) because
-   BD22's table matched BD22's classes. `handfit_cards.py` + `gripregions.json`.
+2. **Re-measure the nine held guns.** The WW2 set, the RPGs, the miniguns: their
+   wells land 43 cm to 1.9 m from the grip hand, which is nowhere on a gun you
+   are holding. Measuring at the seated frame recovers none, so the fault is the
+   card's grip palm or the gun's MODELDEF scale. That is a card pass, not a
+   generator change.
+3. **Breach's IQM guns** -- nine of them fail md3read outright (buffer overrun,
+   int too large). Their own pass.
 4. The 8 held magazine strokes (REVIEW_MAG_STROKE.md).
 5. The 84 single-surface carve candidates. 9 are carved and rendered, but their
    parts are NOT magazines — barrel groups and breech blocks — and are unwired.
