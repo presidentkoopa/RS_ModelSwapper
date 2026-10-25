@@ -1,0 +1,620 @@
+# ==========================================================================
+# RS_VR_BD22 -- THE WEAPON CARDS for Brutal Doom v22's guns in worldspace.
+#
+# What each gun IS. How its parts MOVE is WMCARD.bd22, measured off br_vr's meshes
+# and their labelled reload frames.
+#
+# SELECTION ORDER IS 96xx, a band nothing else in the family uses.
+# CAPACITIES match the model card's, which is where the reload system reads them.
+# ==========================================================================
+
+gun "BD_Pistol"
+  class
+    slot               = 2
+    selectionorder     = 9601
+    ammo               = "Clip"
+    hand               = main
+    name               = "Brutal Pistol"
+    pickupmessage      = "Brutal Pistol"
+  end
+  capacity             = 15
+  roundprofile         = "pistol_9mm"
+  flashprofile         = "pistol_9mm"
+  ejectaprofile        = "brass_9mm"
+  recoilprofile        = "pistol_9mm"
+  firesound            = "Pistol/Fire"
+  shotdamage           = 14, 14        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  shotspread           = 1, 1
+  firetics             = 11
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_ReFire Pistol.dec:278
+  fullauto             = yes
+end
+
+gun "BD_Revolver"
+  class
+    slot               = 2
+    selectionorder     = 9602
+    ammo               = "Clip"
+    hand               = main
+    name               = "Revolver"
+    pickupmessage      = "Revolver"
+  end
+  capacity             = 6
+  roundprofile         = "revolver_357"
+  flashprofile         = "revolver"
+  ejectaprofile        = "brass_357"
+  recoilprofile        = "revolver"
+  firesound            = "Revolver/Fire"
+  shotdamage           = 22, 22        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  shotpellets          = 9     # BD's own: Revolver.dec fires 7 then 2 in the same state; the 5 after it is behind the tactical-class jump
+  shotspread           = 20, 7
+  firetics             = 23
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_Refire Revolver.dec:243 -- 12 recoil + 11 hammer
+  fullauto             = yes
+end
+
+gun "BD_Shotgun"
+  class
+    slot               = 3
+    selectionorder     = 9603
+    ammo               = "Shell"
+    hand               = main
+    name               = "Shotgun"
+    pickupmessage      = "Shotgun"
+  end
+  capacity             = 9     # BD's own: ShotgunAmmo Inventory.MaxAmount 9
+  roundprofile         = "buckshot"
+  flashprofile         = "shotgun_doom"
+  ejectaprofile        = "hull_12ga"
+  recoilprofile        = "shotgun_doom"
+  firesound            = "Shotgun/Fire"
+  shotdamage           = 13, 13        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  shotpellets          = 9     # BD's own: Shotgun.txt:119 fires 4 and :120 fires 5 in the same state; :122's extra 5 is behind the tactical-class jump
+  shotspread           = 5, 1
+  firetics             = 27
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: pump; its A_Refire is COMMENTED OUT at Shotgun.dec:319
+  fullauto             = no
+end
+
+gun "BD_SSG"
+  class
+    slot               = 3
+    selectionorder     = 9604
+    ammo               = "Shell"
+    hand               = main
+    name               = "Super Shotgun"
+    pickupmessage      = "Super Shotgun"
+  end
+  capacity             = 2
+  roundprofile         = "buckshot_magnum"
+  flashprofile         = "shotgun_ssg"
+  ejectaprofile        = "hull_12ga_magnum"
+  recoilprofile        = "shotgun_ssg"
+  shotdamage           = 13, 13        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  shotpellets          = 9
+  shotspread           = 10, 1
+  firetics             = 59
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: the only A_ReFire is at the END of the 47-tic auto-reload, SSG.dec:438
+  fullauto             = yes
+  # BOTH BARRELS ON ONE PULL, as Vanilla's WM_SSG has it (WMSHEET.shotguns). Left unset the
+  # gun spends one chamber a pull: the second shell is NOT unreachable -- the next pull fires
+  # it -- but a sawn-off double that needs two pulls to empty is the wrong gun.
+  chambersperpull      = 2
+  firesound            = "SSG/Fire"          # the parent mod's own (SSHFIRE.ogg)
+end
+
+gun "BD_MP40"
+  class
+    slot               = 4
+    selectionorder     = 9605
+    ammo               = "Clip"
+    hand               = main
+    name               = "MP40"
+    pickupmessage      = "MP40"
+  end
+  capacity             = 32
+  roundprofile         = "smg_9mm"
+  flashprofile         = "ww2_mp40"
+  ejectaprofile        = "ww2_mp40"
+  recoilprofile        = "ww2_mp40"
+  firesound            = "MP40/Fire"
+  shotdamage           = 18, 18        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  shotspread           = 3, 1.5
+  firetics             = 4
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_Refire Mp40.dec:300
+  fullauto             = yes
+end
+
+gun "BD_M79"
+  class
+    slot               = 5
+    selectionorder     = 9606
+    ammo               = "RocketAmmo"
+    hand               = main
+    name               = "M79"
+    pickupmessage      = "M79"
+  end
+  capacity             = 1
+  roundprofile         = "rocket"
+  flashprofile         = "launcher_40mm"
+  recoilprofile        = "rocket"
+  firesound            = "GrenadeLauncher/Fire" # the parent mod's own (DSGRFIRE.ogg)
+  shotclass            = "GrenadeMissile"          # GrenadeLauncher Fire
+  firetics             = 54           # break open, one grenade at a time
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: 8 recoil + 46 mandatory break-open reload (GLAmmo max 1)
+  fullauto             = yes
+end
+
+gun "BD_FlameCannon"
+  class
+    slot               = 6
+    selectionorder     = 9607
+    ammo               = "Cell"
+    hand               = main
+    name               = "Flame Cannon"
+    pickupmessage      = "Flame Cannon"
+  end
+  capacity             = 100
+  # A FLAME IS NOT A BULLET, so there is no roundprofile: `napalm` and `ww2_flame` are
+  # `flame` profiles, a kind the sheet reader has no key for, and the fire is drawn by
+  # whatever throws it. THE FLASH IS NOW STATED RATHER THAN OMITTED. `flash none` exists
+  # for precisely this gun -- RSBDEFS calls it "a gun whose own effect is the muzzle (the
+  # flamers)" -- and leaving the key out instead gave it the house default muzzle flash,
+  # a rifle's bang in front of a flame jet.
+  flashprofile         = "none"
+  recoilprofile        = "flamer_heavy"
+  firetics             = 10
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: Fireball path FlameCannon.dec:152
+  fullauto             = yes
+  firesound            = "Flamer/loop"       # the parent mod's own (Flamer2.ogg)
+  shotclass            = "BigFireBallWithGravity"  # FlameCannon Fire
+  # THE MUZZLE SPRAY, counted off BD's own Fireball state (FlameCannon.dec): ELEVEN
+  # Shotgunparticles2 go out with every ball, not the four an earlier note here guessed at.
+  # BD scatters them random(-12, 12) yaw and random(-9, 9) pitch; muzzlethrow has no spread of
+  # its own yet, so they all go down the shot's line -- a tighter jet than BD's, and the gap
+  # worth closing first if this one wants more work.
+  muzzlethrow          = "Shotgunparticles2 x11"
+end
+
+gun "BD_Hellish"
+  class
+    slot               = 5
+    selectionorder     = 9608
+    ammo               = "RocketAmmo"
+    hand               = main
+    name               = "Hellish Missile Launcher"
+    pickupmessage      = "Hellish Missile Launcher"
+  end
+  capacity             = 6
+  roundprofile         = "rocket"
+  flashprofile         = "rocket_launcher"
+  recoilprofile        = "rocket"
+  firesound            = "Rocket/Fire"       # the parent mod's own (DSRFIRE.ogg)
+  shotclass            = "revenantseekermissiles2" # HellishMissileLauncher Fire
+  firetics             = 7           # a revenant missile pair
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: one missile per shot, alternating tubes
+  fullauto             = yes
+end
+
+gun "BD_Buzzsaw"
+  class
+    slot               = 4
+    selectionorder     = 9609
+    ammo               = "Clip"
+    hand               = main
+    name               = "Hitler's Buzzsaw"
+    pickupmessage      = "Hitler's Buzzsaw"
+  end
+  capacity             = 200
+  roundprofile         = "rifle_762"
+  flashprofile         = "ww2_mg42"
+  ejectaprofile        = "ww2_mg42"
+  recoilprofile        = "ww2_mg42"
+  firesound            = "Chaingun/Fire"
+  shotdamage           = 24, 24        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  shotspread           = 2, 2
+  firetics             = 3
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_Refire MG42.dec:112 -- TWO bullets per 3-tic cycle
+  fullauto             = yes
+end
+
+gun "BD_Axe"
+  class
+    slot               = 1
+    selectionorder     = 9610
+    hand               = main
+    name               = "Axe"
+    pickupmessage      = "Axe"
+  end
+  firesound            = "Axe/Swing"         # the parent mod's own (AXSWING1.ogg)
+  shotclass            = "AxeAttack"               # BrutalAxe Fire
+  firetics             = 25           # a swing
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: hold = charge, release = swing. No A_ReFire anywhere
+  fullauto             = no
+  # A SWUNG AXE HAS NO MUZZLE AND NO RECOIL, stated rather than omitted (RSBDEFS: "ABSENCE IS
+  # NOT A STATEMENT"). The hit is AxeAttack's own, which is BD's and stays BD's.
+  recoilprofile        = "none"
+  flashprofile         = "none"
+end
+
+gun "BD_Dragonslayer"
+  class
+    slot               = 1
+    selectionorder     = 9611
+    hand               = main
+    name               = "Dragonslayer"
+    pickupmessage      = "Dragonslayer"
+  end
+  firesound            = "Melee/SwingStrong" # the parent mod's own (dsswing.ogg)
+  shotclass            = "DSAttack"                # DSweap Fire
+  firetics             = 18           # a heavier swing
+  # Same as the axe: a swung sword, no muzzle, no recoil. Stated, not omitted.
+  recoilprofile        = "none"
+  flashprofile         = "none"
+end
+
+gun "BD_Chainsaw"
+  class
+    slot               = 1
+    selectionorder     = 9612
+    hand               = main
+    name               = "Chainsaw"
+    pickupmessage      = "Chainsaw"
+  end
+  shotsaw              = yes
+  shotdamage           = 7, 7          # BD's own A_CustomPunch(7)
+  sawsounds            = "Chainsaw/Loop", "Chainsaw/Cut"   # the parent mod's own
+  firetics             = 4            # a saw cuts continuously
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: the 4-tic contact loop, Saw.dec:318 -- already correct
+  fullauto             = yes
+  # STATED, NOT LEFT OUT. RSBDEFS' own rule: "ABSENCE IS NOT A STATEMENT" -- a missing key is
+  # the house default and reads identically to a forgotten one, so a gun that genuinely wants
+  # nothing says `none`. A saw has no muzzle at all (weapon.zs ShotSaw: "No muzzle flash"), and
+  # its shake belongs to the motor, which `recoil chainsaw` is.
+  recoilprofile        = "chainsaw"
+  flashprofile         = "none"
+end
+
+gun "BD_AssaultShotgun"
+  class
+    slot               = 3
+    selectionorder     = 9613
+    ammo               = "Shell"
+    hand               = main
+    name               = "Assault Shotgun"
+    pickupmessage      = "Assault Shotgun"
+  end
+  capacity             = 8
+  roundprofile         = "buckshot"
+  flashprofile         = "shotgun_assault"
+  ejectaprofile        = "hull_12ga"
+  recoilprofile        = "shotgun_assault"
+  firesound            = "ASG/Fire"
+  shotdamage           = 11, 11        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  shotpellets          = 9
+  shotspread           = 5, 5
+  firetics             = 6
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_Refire AssaultShotgun.dec:218
+  fullauto             = yes
+end
+
+gun "BD_BFG"
+  class
+    slot               = 7
+    selectionorder     = 9614
+    ammo               = "Cell"
+    hand               = main
+    name               = "BFG 9000"
+    pickupmessage      = "BFG 9000"
+  end
+  capacity             = 40
+  roundprofile         = "bfg_ball"
+  flashprofile         = "bfg_9000"
+  recoilprofile        = "bfg_9000"
+  firesound            = "BFG/Fire"
+  firetics             = 43
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: no Hold: state, so the 30-tic charge is RE-PAID every shot (+13 recoil)
+  fullauto             = yes
+  shotclass            = "BFGBall"                 # BIG_FUCKING_GUN Fire
+end
+
+gun "BD_BFG10k"
+  class
+    slot               = 7
+    selectionorder     = 9615
+    ammo               = "Cell"
+    hand               = main
+    name               = "BFG 10K"
+    pickupmessage      = "BFG 10K"
+  end
+  capacity             = 99
+  roundprofile         = "bfg_heavy"
+  flashprofile         = "bfg_heavy"
+  recoilprofile        = "bfg_heavy"
+  firetics             = 8
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: Hold: loop; the 26-tic charge is paid once per pull
+  fullauto             = yes
+  firesound            = "BFG10K/Fire"       # the parent mod's own (10KFIRE.ogg)
+  shotclass            = "BFG10K_Ball"             # BFG10k Fire
+end
+
+gun "BD_SMG"
+  class
+    slot               = 4
+    selectionorder     = 9616
+    ammo               = "Clip"
+    hand               = main
+    name               = "SMG"
+    pickupmessage      = "SMG"
+  end
+  capacity             = 40
+  roundprofile         = "smg_9mm"
+  flashprofile         = "smg"
+  ejectaprofile        = "brass_9mm"
+  recoilprofile        = "smg"
+  firesound            = "SMG/Fire"
+  shotdamage           = 12, 12        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  shotspread           = 6, 3
+  firetics             = 3
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_ReFire SubMachinegun.dec:298
+  fullauto             = yes
+end
+
+gun "BD_Flamethrower"
+  class
+    slot               = 6
+    selectionorder     = 9617
+    ammo               = "Cell"
+    hand               = main
+    name               = "Flamethrower"
+    pickupmessage      = "Flamethrower"
+  end
+  capacity             = 200
+  # A FLAME IS NOT A BULLET, so there is no roundprofile: `napalm` and `ww2_flame` are
+  # `flame` profiles, a kind the sheet reader has no key for, and the fire is drawn by
+  # whatever throws it. THE FLASH IS NOW STATED RATHER THAN OMITTED. `flash none` exists
+  # for precisely this gun -- RSBDEFS calls it "a gun whose own effect is the muzzle (the
+  # flamers)" -- and leaving the key out instead gave it the house default muzzle flash,
+  # a rifle's bang in front of a flame jet.
+  flashprofile         = "none"
+  recoilprofile        = "ww2_flame"
+  firetics             = 1
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: one flame per tic, Hold: loop -- already correct
+  fullauto             = yes
+  firesound            = "Flamer/loop"       # the parent mod's own (Flamer2.ogg)
+  # BD'S OWN FIRE WORK, WHICH IS THE WHOLE POINT OF THIS GUN. Flamethrower2's Hold is a strict
+  # three-gout rotation (Flamethrower.dec:166-187: New, New2, New3, repeating, one a tic), and the
+  # three are NOT interchangeable:
+  #
+  #   FlamethrowerProjectileNew    scale 0.15  the plain gout: sparks, one ember burst
+  #   FlamethrowerProjectileNew2   scale 0.20  THE RICH ONE -- rolling smoke, fire particles,
+  #                                            burning debris on death, and A_Explode(16, 128)
+  #   FlamethrowerProjectileNew3   scale 0.17  the plain gout again, a size between the two
+  #
+  # Firing any single one of them every tic is wrong in both directions: New alone is a thin,
+  # even, smokeless jet, and New2 alone is a 128-unit splash sixteen times a second. The roil
+  # comes from the three sizes overlapping, and the smoke and embers from every third one.
+  shotclasses          = "FlamethrowerProjectileNew, FlamethrowerProjectileNew2, FlamethrowerProjectileNew3"
+  # BD jitters the gout +/-1 degree of yaw between gouts (A_SetAngle(random(1, -1) + angle),
+  # :171). Its companion A_SetPitch climb is NOT copied: nothing moves the VR camera.
+  shotspread           = 1.0, 0
+end
+
+gun "BD_Grenade"
+  class
+    slot               = 1
+    selectionorder     = 9618
+    hand               = main
+    name               = "Hand Grenade"
+    pickupmessage      = "Hand Grenade"
+  end
+  capacity             = 1
+  firesound            = "Grenade/Toss"      # the parent mod's own (GRNTOSS.ogg)
+  shotclass            = "HandGrenade"             # HandGrenades A_ThrowGrenade
+  firetics             = 24           # a throw
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: hold = cook, release = throw; leaves the hand at t~17
+  fullauto             = no
+  # A THROW IS NOT A SHOT: nothing leaves a barrel, so no flash and no recoil. Stated, because
+  # a missing key would mean "give it the house default muzzle flash", which is a grenade with
+  # a muzzle blast. HandGrenade's own fuse, bounce and burst are BD's and are untouched.
+  recoilprofile        = "none"
+  flashprofile         = "none"
+end
+
+gun "BD_Machinegun"
+  class
+    slot               = 4
+    selectionorder     = 9619
+    ammo               = "Clip"
+    hand               = main
+    name               = "Machinegun"
+    pickupmessage      = "Machinegun"
+  end
+  capacity             = 100
+  roundprofile         = "machinegun_762"
+  flashprofile         = "machinegun_762"
+  ejectaprofile        = "brass_762"
+  recoilprofile        = "machinegun_762"
+  firesound            = "Chaingun/Fire"
+  shotdamage           = 20, 20        # NOT MG42's -- BD22 has NO machinegun class (its belt/rotary guns are MG42 and
+                                    # MiniGun only). This mesh is BD v21's, which v22 dropped. Numbers are
+                                    # BD's RIFLE: a magazine-fed rifle-calibre gun with an under-barrel
+                                    # grenade launcher -- the same configuration. Ours, not BD's. Change freely.
+  shotspread           = 1, 1
+  firetics             = 4
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: NO SUCH ACTOR IN BD22 -- matched to Rifle, whose stats it already copies
+  fullauto             = yes
+end
+
+gun "BD_Minigun"
+  class
+    slot               = 4
+    selectionorder     = 9620
+    ammo               = "Clip"
+    hand               = main
+    name               = "Minigun"
+    pickupmessage      = "Minigun"
+  end
+  capacity             = 200
+  roundprofile         = "chaingun_556"
+  flashprofile         = "chaingun_556"
+  ejectaprofile        = "brass_556"
+  recoilprofile        = "chaingun_556"
+  firetics             = 3
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_ReFire -> Hold:, Minigun.dec:291. 4-tic spin-up once per pull, not modelled here
+  fullauto             = yes
+  shotspread           = 3, 2
+  shotpellets          = 1
+  shotdamage           = 20, 20        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  firesound            = "Chaingun/Fire"     # the parent mod's own (MP40.ogg)
+end
+
+gun "BD_Plasma"
+  class
+    slot               = 6
+    selectionorder     = 9621
+    ammo               = "Cell"
+    hand               = main
+    name               = "Plasma Gun"
+    pickupmessage      = "Plasma Gun"
+  end
+  capacity             = 60
+  roundprofile         = "plasma_ball"
+  flashprofile         = "plasma_rifle"
+  recoilprofile        = "plasma_rifle"
+  firesound            = "Plasma/Fire"
+  firetics             = 3
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_Refire Plasma.dec:342 -- already correct
+  fullauto             = yes
+  shotclass            = "Plasma_Ball"             # Plasma_Gun Fire; the 10x PlasmaBall75 burst is its charged alt
+end
+
+gun "BD_RPG"
+  class
+    slot               = 5
+    selectionorder     = 9622
+    ammo               = "RocketAmmo"
+    hand               = main
+    name               = "Rocket Launcher"
+    pickupmessage      = "Rocket Launcher"
+  end
+  capacity             = 1
+  roundprofile         = "rocket_rpg"
+  flashprofile         = "rocket_rpg"
+  recoilprofile        = "rocket_rpg"
+  firetics             = 18
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_Refire RocketLauncher.dec:361; 6-round internal magazine, no per-shot reload
+  fullauto             = yes
+  firesound            = "Rocket/Fire"       # the parent mod's own (DSRFIRE.ogg)
+  shotclass            = "Rocket2"                 # Rocket_Launcher Fire
+end
+
+gun "BD_Railgun"
+  class
+    slot               = 6
+    selectionorder     = 9623
+    ammo               = "Cell"
+    hand               = main
+    name               = "Railgun"
+    pickupmessage      = "Railgun"
+  end
+  capacity             = 5     # BD's own: RailgunAmmo Inventory.MaxAmount 5 (brutal22test6 actors/MISC/Ammo.dec)
+  trailprofile         = "bd_rail"   # BD22's own, in this set's RSBDEFS -- turned up
+  flashprofile         = "bd_rail"
+  recoilprofile        = "rail"
+  firesound            = "Railgun/Fire"
+  firetics             = 43
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: 43-tic recharge before the A_Refire at Railgun.dec:240
+  fullauto             = yes
+  # IT IS A RAIL, NOT A PROJECTILE (2026-10-02). Owner: "the railgun visual and sound is
+  # all fucked up". It fired shotclass = RailgunProjectile and nothing else, so the one
+  # thing a rail gun is for -- the beam -- was never drawn.
+  #
+  # BD DOES THREE THINGS ON THE SHOT (Railgun.txt:121-123) and we were doing one:
+  #   A_FireCustomMissile("RailgunTrailEffectMissile")   the trail
+  #   A_FireCustomMissile("RailgunProjectile")           a 400-damage THRUACTORS blast
+  #   A_RailAttack(400, 0, 0, "none", "none", RGF_FULLBRIGHT, 1, "RailgunPuff2")
+  # The A_RailAttack is the visible rail and it was the one missing.
+  #
+  # shotrail REPLACES shotclass -- weapon.zs:1189-1204 skips it -- and it takes
+  # its damage from shotdamage rather than from the projectile's own -- unset, ShotText
+  # reports "100 (unset)" -- so BD's 400 is stated here. Flat, because BD's is
+  # Damage (random(400, 400)), which is not random at all.
+  #
+  # NOTHING IN THE TREE SET shotrail BEFORE THIS. The capability, its colours and the
+  # RS_Ballistics trail hand-off were all built and no gun had ever switched it on.
+  # trailprofile = "rail" above now does something: with it set, the engine's own rail
+  # colours go off and RS_Ballistics lays the profile from the muzzle to where the rail
+  # actually ENDED, scatter included.
+  shotrail             = yes
+  shotdamage           = 400, 400     # BD's own: Damage (random(400, 400)), Railgun.txt:383
+  # THE OTHER TWO OF BD'S THREE, which is where the "ass" look came from. Checked against
+  # Railgun.dec tonight, and the important line is BD's OWN RailAttack:
+  #
+  #     A_RailAttack(400, 0, 0, "none", "none", RGF_FULLBRIGHT, 1, "RailgunPuff2")
+  #
+  # "none", "none" -- BD DRAWS NO ENGINE RAIL AT ALL. The whole visible shot is
+  # RailgunTrailEffectMissile, a Speed 999 ripper carrying damage (random(0, 0)) that lays a
+  # RailgunTrailEffect every tic down the line and, where it stops, makes BD's craters,
+  # splash, flare and explosion particles. So the beam we switched on tonight was never the
+  # one this gun is supposed to have; this is.
+  #
+  # RailgunProjectile rides with it: a slow (Speed 80) 400-damage THRUACTORS orb that bounces
+  # three times and carries +FORCERADIUSDMG and a WhiteShockwave. It is a real second hit, not
+  # a decoration -- the set is now BD-accurate at 400 rail PLUS a 400 bouncing blast, which is
+  # what Brutal Doom does. Drop this one name if that is too much; the trail missile is the
+  # look and the orb is the damage, and they are separable.
+  # ONLY THE TRAIL MISSILE. BD also fires RailgunProjectile beside it (Railgun.dec:211) and
+  # that is cut on the owner's call, in the headset, 2026-10-02: a Speed 80 projectile is slow
+  # enough to stand and watch drift away, which reads as nonsense next to an instant beam.
+  # On a flatscreen it is a detail behind the hitscan; in VR it is the thing your eye follows.
+  #
+  # AND MY DESCRIPTION OF IT WAS WRONG when I wired it. I read +BounceOnWalls, BounceCount 3
+  # and BounceFactor 1.0 and called it a bouncing orb. The bounce STATES three lines below
+  # spawn a RailgunPenetrator and `Goto Death` -- it dies on first contact and the flags exist
+  # only to punch a round through to the other side. Flags named a behaviour the states did
+  # not implement, and I reported the flags.
+  muzzlethrow          = "RailgunTrailEffectMissile"
+end
+
+gun "BD_Rifle"
+  class
+    slot               = 4
+    selectionorder     = 9624
+    ammo               = "Clip"
+    hand               = main
+    name               = "Rifle"
+    pickupmessage      = "Rifle"
+  end
+  capacity             = 30
+  roundprofile         = "rifle_556"
+  flashprofile         = "rifle"
+  ejectaprofile        = "brass_556"
+  recoilprofile        = "rifle"
+  firesound            = "Rifle/Fire"
+  shotdamage           = 20, 20        # BD's own, flat: every BD A_FireBullets is FBF_NORANDOM
+  shotspread           = 1, 1
+  firetics             = 4
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: A_Refire Rifle.dec:288
+  fullauto             = yes
+end
+
+gun "BD_Unmaker"
+  class
+    slot               = 7
+    selectionorder     = 9625
+    ammo               = "Cell"
+    hand               = main
+    name               = "Unmaker"
+    pickupmessage      = "Unmaker"
+  end
+  capacity             = 60
+  trailprofile         = "unmaker"
+  flashprofile         = "unmaker"
+  recoilprofile        = "unmaker"
+  firetics             = 1
+  # BD22, measured from Brutal Doom's own DECORATE 2026-10-02: one laser per tic sustained, 4-tic spin-up -- already correct
+  fullauto             = yes
+  firesound            = "Unmaker/Loop"      # the parent mod's own (UNMLOP.ogg)
+  shotclass            = "UnmakerLaser"            # Unmaker Fire
+end

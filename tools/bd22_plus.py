@@ -27,7 +27,25 @@ import genpack, carve_by_ref, rgeo
 REPO = os.path.dirname(TOOLS)
 SRC = 'E:/DOOMWork/_buildtemp/rs_brutal22weaponsq/src/'            # RS_Brutal22WeaponsQ 1.96b src @ 27bef2b
                                                                    # (the repo's runtime/ is a 33-file subset, not the snapshot)
-REMA = 'E:/DOOMWork/RS_VR_Weapons/bd22/'                           # RS_VR_Weapons checkout, bd22/
+# THE MEASUREMENTS LIVE IN THIS REPO NOW (owner, 2026-10-25). WMCARD.bd22 is where BD22's 25 guns
+# were measured -- palm, support, ejection port, every moving part and its travel -- and
+# WMSHEET.bd22 is the ballistics sheet every recoil, flash and round figure in F5 came from. Both
+# were read out of an RS_VR_Weapons checkout until today, which meant this pack could not be built
+# without one, and quietly broke "USE TOOLS IN REPO. NOWHERE ELSE." They are 80 KB and 26 KB of
+# text; there was never a reason for them to live anywhere else.
+DATA = os.path.join(TOOLS, 'data') + '/'                           # the cards and the sheet, in-repo
+CARDS = DATA + 'WMCARD.bd22'
+SHEET = DATA + 'WMSHEET.bd22'
+
+# REMA IS NOW ONLY THE `*_wm.md3` REFERENCE MESHES, and the owner ruled those out on 2026-10-25:
+# "no _wm meshes, cards only for OUR animating copies". A _wm is a SINGLE-FRAME reference pose
+# with the surfaces pre-split, while our shipped meshes are animated (Machinegun 36 frames, SSG
+# 46, M79 26), so a _wm is a correspondence aid and never a thing to ship. The two stages below
+# that still read one -- geometry() and the slug-revolver fit -- are FROZEN: their output is
+# already committed under sets/bd22q_1.97/carved_models/, so a normal build never touches this
+# path. Do not add a new reader. If one of those stages must be re-run, it needs the owner's
+# checkout present and his say-so.
+REMA = 'E:/DOOMWork/RS_VR_Weapons/bd22/'                           # FROZEN: *_wm.md3 references only
 OUT = 'E:/DOOMWork/_buildtemp/rsq_bd22/'                           # build dir (outside the repo)
 BD22SRC = 'E:/DOOMWork/_buildtemp/bd22src/'                        # brutal22test6.pk3 extracted (actors/Weapons/*.dec)
 # THE RELEASE VERSION, in one place. readme() builds both the title and the pk3 name
@@ -75,12 +93,12 @@ PLUS = {
 def card_block(name):
     """the REMA card: keys + the feed part (wmcard.py's reader)"""
     import wmcard
-    cards = {w["cls"]: w for w in wmcard.load([REMA + "WMCARD.bd22"])}
+    cards = {w["cls"]: w for w in wmcard.load([CARDS])}
     return cards[name]
 
 
 def sheet_capacity(name):
-    t = open(REMA + 'WMSHEET.bd22', encoding='latin1').read()
+    t = open(SHEET, encoding='latin1').read()
     s = t.find('gun "%s"' % name); e = t.find('\nend', s)
     for ln in t[s:e].splitlines():
         if ln.strip().startswith('capacity'):
@@ -1676,7 +1694,7 @@ def flash():
     """F5: a per-gun muzzle flash light, from the sheet's flashprofile."""
     if os.path.exists(OUT_SRC + 'zscript/rsq/flash.zs'):
         raise SystemExit('flash: this tree already has it -- re-run apply() first')
-    sheet = open(RSVRW + 'bd22/WMSHEET.bd22', encoding='latin-1').read()
+    sheet = open(SHEET, encoding='latin-1').read()
     guns, cur = {}, None
     for ln in sheet.splitlines():
         s = ln.split('#')[0].strip()
@@ -1844,7 +1862,7 @@ def bullet():
     # m/s -> map units a tic is speed * vr_vunits_per_meter / 35. The 34 is the cvar's default
     # and is also what casings.zs assumes when the cvar is unreadable.
     defs = open(rb + 'RSBDEFS.txt', encoding='latin-1').read()
-    sheet = open(REMA + 'WMSHEET.bd22', encoding='latin-1').read()
+    sheet = open(SHEET, encoding='latin-1').read()
 
     def kindof(kind):
         out = {}
@@ -1942,7 +1960,7 @@ def impacts():
     """F5: per-gun impact weight, and the Stock / Low / Max dial on the pack's own effects."""
     if 'RSQ_Rounds' in open(OUT_SRC + 'ZSCRIPT.rsvr').read():
         raise SystemExit('impacts: this tree already has it -- re-run apply() first')
-    sheet = open(RSVRW + 'bd22/WMSHEET.bd22', encoding='latin-1').read()
+    sheet = open(SHEET, encoding='latin-1').read()
     guns, cur = {}, None
     for ln in sheet.splitlines():
         s = ln.split('#')[0].strip()
@@ -2100,7 +2118,7 @@ def recoil():
     cvar is already there, this tree has had the stage."""
     if 'rsq_recoil' in open(OUT_SRC + 'CVARINFO.rsq').read():
         raise SystemExit('recoil: this tree already has rsq_recoil -- re-run apply() first')
-    sheet = open(RSVRW + 'bd22/WMSHEET.bd22', encoding='latin-1').read()
+    sheet = open(SHEET, encoding='latin-1').read()
     guns, cur = {}, None
     for ln in sheet.splitlines():
         s = ln.split('#')[0].strip()
@@ -3260,7 +3278,7 @@ def hits():
         if os.path.exists(RSVRW + '../RS_Ballistics/RSBDEFS.txt') \
         else open('E:/DOOMWork/RS_Ballistics/RSBDEFS.txt', encoding='latin-1').read()
     RSB = 'E:/DOOMWork/RS_Ballistics/'
-    sheet = open(REMA + 'WMSHEET.bd22', encoding='latin-1').read()
+    sheet = open(SHEET, encoding='latin-1').read()
 
     def kindof(kind, text=None):
         out = {}
