@@ -30,7 +30,7 @@ def main(root, out, classes):
         if not w:
             report.append((cls, 'no card')); continue
         model = w['keys']['model'] if isinstance(w['keys']['model'], list) else [None, w['keys']['model']]
-        mp = os.path.join(root, model[0], model[1])
+        mp = gp.find_mesh(root, model[0], model[1])
         if not os.path.exists(mp):
             report.append((cls, 'mesh not found: %s' % mp)); continue
         # modeldef_scales keys on the MESH FILENAME, not the class

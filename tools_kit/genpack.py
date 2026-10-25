@@ -226,6 +226,110 @@ def surf_index(names, want):
     return None
 
 
+# Extra roots a card's mesh path may resolve against, searched after `root` itself.
+# A card measured for one package can name a mesh that ships in another: the BD22
+# cards were measured against RS_VR_Weapons' static `_wm` copies under its bd22/,
+# while the mesh a pack ships is the animated one in its own models/. Empty by
+# default, so a caller that sets nothing behaves exactly as before; a driver fills
+# it with the packages whose trees the cards in hand reach into.
+MESH_ROOTS = []
+
+
+def find_mesh(root, d, f):
+    """a card's (dir, file) -> the first path that exists, over root then MESH_ROOTS"""
+    first = os.path.join(root, d or '', f)
+    if os.path.exists(first):
+        return first
+    for r in MESH_ROOTS:
+        p = os.path.join(r, d or '', f)
+        if os.path.exists(p):
+            return p
+    return first
+
+
+def part_surfaces(root, w, part, names, surfs, rest_frame):
+    """A card part's surfaces -> mesh surface indices: by name where the name is the
+    mesh's own, and BY MEASUREMENT where it is not.
+
+    card_from_motion works from motion rather than from the author's naming, so it
+    writes a part's ROLE as its surface name -- `surface = mag`. The gun's own mesh
+    carries the author's names: Lipas, Runko, Cube, m41a_magazine, weapon.005. The
+    name can therefore never resolve, and that one string comparison rejected 23
+    measured guns outright.
+
+    Two independent measurements already in the card resolve it:
+
+      the carved part mesh  md3label carved the moving part out to its own file
+                            (magmodel). A carve copies that surface's vertices, so
+                            the carved file's VERTEX COUNT is the surface's.
+      the part's centre     magcenter, or the part's own grab point, is that
+                            surface's centroid in the gun's frame at the card's
+                            REST frame. The rest frame matters: frame 0 of a
+                            32-frame reload is mid-animation, and measuring the
+                            Rifle there put its magazine 11 units from its own
+                            magcenter and picked the wrong surface.
+
+    Where both are available they agree. Across the shelf the centre lands within
+    0.007 units of the surface the vertex count picks while the next-nearest
+    surface is 3 to 27 units away, and where the count is ambiguous (frame-stacked
+    duplicate surfaces -- the chex zorchers) the centre picks from among its own
+    candidates. Where they disagree, this returns nothing: a guessed magazine sends
+    the player's hand to the wrong part of the gun, which is worse than no VR
+    reload at all.
+
+    Returns (indices, note). indices is None when the part cannot be resolved, and
+    the note says which evidence was used or what disagreed -- printed per gun, so
+    a resolution is always visible rather than assumed.
+    """
+    idx = [surf_index(names, s) for s in part['surfaces']]
+    if all(i is not None for i in idx):
+        return idx, 'by name'
+
+    nv = [s['xyz'][0].shape[0] for s in surfs]
+    cand = None
+    mm = w['keys'].get('magmodel')
+    if isinstance(mm, list) and mm[0]:
+        mp = find_mesh(root, mm[0], mm[1])
+        if os.path.exists(mp):
+            try:
+                import md3read
+                n = md3read.read_md3(mp)['surfs'][0]['xyz'][0].shape[0]
+                cand = [i for i, v in enumerate(nv) if v == n]
+            except Exception:
+                cand = None
+
+    centre = w['keys'].get('magcenter') or part['keys'].get('grab') or part.get('grab')
+    near = None
+    if centre is not None:
+        try:
+            c = np.asarray([float(x) for x in centre], float)
+            d = [float(np.linalg.norm(s['xyz'][min(rest_frame, s['xyz'].shape[0] - 1)].mean(0) - c))
+                 for s in surfs]
+            order = sorted(range(len(d)), key=lambda i: d[i])
+            near = (order[0], d[order[0]], d[order[1]] if len(order) > 1 else None)
+        except Exception:
+            near = None
+
+    if cand is not None and len(cand) == 1 and near is not None and near[0] != cand[0]:
+        return None, ('evidence disagrees: carved mesh says surface %d, the card\'s centre says %d'
+                      % (cand[0], near[0]))
+    if near is not None and (cand is None or near[0] in cand):
+        i = near[0]
+        # A magazine is a part of a gun, never the bulk of it. The biggest surface in
+        # a gun mesh is its body; driving that as the magazine would take the whole
+        # gun out of the player's hand. A rule, not taste -- and no gun on the shelf
+        # trips it today, so it is here as the guard for the next card, not a filter.
+        if i == int(np.argmax(nv)):
+            return None, ('resolved to surface %d (%s), which is the gun\'s largest -- that is '
+                          'its body, not its %s' % (i, names[i], 'magazine'))
+        return [i], ('by %s (centre off %.3f, next surface %.2f away)'
+                     % ('carved mesh and centre' if cand else 'centre', near[1],
+                        near[2] if near[2] is not None else -1))
+    if cand is not None and len(cand) == 1:
+        return cand, 'by the carved mesh\'s vertex count'
+    return None, ('unresolved: %s names no surface of %s' % (part['surfaces'], names))
+
+
 def mouth_depth(surfs, frame, scale, off, mag_idx, well, ins):
     """the kit's well mouth: lowest body point (along -insert) inside a tube of the magazine's half
     width about the insert axis, below the magazine's top. Returns (depth cm, base point, mag top)"""
@@ -256,22 +360,85 @@ def build_gun(root, w, cls, geo_rec, surfs_names, surfs, nfr, spr):
     fname = feed[0]; fp = parts[fname]
     if not fp['surfaces']:
         return None, 'feed part %s names no surface (joint / baked part)' % fname
-    mag_idx = [surf_index(surfs_names, s) for s in fp['surfaces']]
-    mag_idx = [i for i in mag_idx if i is not None] if any(i is not None for i in mag_idx) else mag_idx
-    if any(i is None for i in mag_idx):
-        return None, 'feed surfaces not in mesh: %s vs %s' % (fp['surfaces'], surfs_names)
     act = [n for n in w['order'] if parts[n]['keys'].get('role') == 'action' and parts[n]['dof'].get('kind') == 'slide']
     hinged = [n for n in w['order'] if parts[n]['keys'].get('role') == 'action' and parts[n]['dof'].get('kind') == 'hinge']
     scale, off, fr = tuple(geo_rec['hud_scale']), tuple(geo_rec['offset']), geo_rec['rest_frame']
+    mag_idx, how = part_surfaces(root, w, fp, surfs_names, surfs, fr)
+    if mag_idx is None:
+        return None, 'feed part %s: %s' % (fname, how)
+    feed_how = how
     ins = np.array(geo_rec['parts'][fname]['insert_dir'], float)
     depth, base, top, hw = mouth_depth(surfs, fr, scale, off, mag_idx, None, ins)
     magp = dict(well_point=top.round(3).tolist(), insert_dir=ins.round(4).tolist(), insert_depth_cm=depth,
                 base_point=base.round(3).tolist(), half_width_cm=round(hw, 2))
+    # THE WELL MUST BE WITHIN REACH OF THE HAND HOLDING THE GUN.
+    #
+    # Every gun is placed so that its card's grip palm sits at GRIP_REF, the centre of
+    # the Quest gun hand. So the distance from the well to GRIP_REF is the distance from
+    # the player's own grip to the hole the magazine goes into, directly comparable
+    # across every gun on the shelf -- and on a real gun that is a hand's span, not a
+    # stride. Measured across the shelf it splits cleanly: 32 guns land between 4 and
+    # 40 cm, and the rest between 43 cm and 1.9 m. Nothing sits near the line.
+    #
+    # A well a metre from the grip is not a magazine well. It means something upstream
+    # is wrong for that gun -- its card's palm point, its MODELDEF scale, or a rest
+    # frame that catches the magazine already ejected (the Kar98's stripper clip is 45
+    # units out of the gun at frame 0 and 10 at frame 21). The measurement is wrong in
+    # a way this cannot repair, so the gun is HELD: it keeps the mod's own canned
+    # reload, which works, instead of being sent a VR reload that reaches into
+    # thin air.
+    #
+    # 40 cm, not tighter: an RPG is loaded at the mouth of the tube and a Garand's
+    # en-bloc goes in ahead of the trigger guard, and both are a real arm's reach from
+    # the grip. Tighter would hold guns whose geometry is sound.
+    reach = float(np.linalg.norm(top - c2q.GRIP_REF))
+    well_frame = fr
+    if reach > 40.0:
+        # SECOND CHANCE, AT THE FRAME WHERE THE MAGAZINE IS IN THE GUN.
+        #
+        # The rest frame is found by when the body stops turning after a raise. That is
+        # the right frame for the gun's pose, but it says nothing about where the
+        # magazine is, and on a gun whose reload throws the spent one clear of the
+        # screen the magazine at that frame is already out: the Kar98's stripper clip
+        # sits 45 units off the body at its rest frame and 10 at frame 21. Measuring
+        # the well off a magazine in mid-air puts the well in mid-air with it.
+        #
+        # Seated is measurable, not a guess: the frame where the magazine's centroid is
+        # closest to the body's. Tried only when the rest frame's answer already failed,
+        # so every gun that passes first time keeps the number it has always had.
+        mag_c = np.concatenate([surfs[i]['xyz'] for i in mag_idx], axis=1)
+        body_s = [s for s in surfs if s['i'] not in mag_idx]
+        if body_s and mag_c.shape[0] > 1:
+            nf2 = min([mag_c.shape[0]] + [s['xyz'].shape[0] for s in body_s])
+            d = [float(np.linalg.norm(mag_c[f].mean(0)
+                                      - np.concatenate([s['xyz'][f] for s in body_s]).mean(0)))
+                 for f in range(nf2)]
+            seated = int(np.argmin(d))
+            if seated != fr:
+                d2, b2, t2, h2 = mouth_depth(surfs, seated, scale, off, mag_idx, None, ins)
+                r2 = float(np.linalg.norm(t2 - c2q.GRIP_REF))
+                if r2 <= 40.0:
+                    depth, base, top, hw, reach, well_frame = d2, b2, t2, h2, r2, seated
+                    magp = dict(well_point=top.round(3).tolist(), insert_dir=ins.round(4).tolist(),
+                                insert_depth_cm=depth, base_point=base.round(3).tolist(),
+                                half_width_cm=round(hw, 2))
+    if reach > 40.0:
+        return None, ('well %s is %.0f cm from the grip hand, at its rest frame and at '
+                      'the frame its magazine is seated -- a magazine well is a hand\'s '
+                      'span away, so this gun\'s placement is wrong'
+                      % (np.round(top, 1).tolist(), reach))
     survey = dict(parts={'magazine': magp})
     handle_idx = []
+    handle_how = ''
     if act:
         ap = parts[act[0]]
         handle_idx = [i for i in (surf_index(surfs_names, s) for s in ap['surfaces']) if i is not None]
+        if not handle_idx:
+            # the same role-name-for-surface problem as the feed part; the handle is
+            # optional, so an unresolved one leaves the gun a magazine-only reload
+            # rather than rejecting it
+            hi, handle_how = part_surfaces(root, w, ap, surfs_names, surfs, fr)
+            handle_idx = hi or []
         g_ = geo_rec['parts'][act[0]]
         survey['parts']['handle'] = dict(grab_point=g_['grab'], pull_dir=g_['axis'], travel_cm=g_['travel_cm'])
     k = w['keys']
@@ -281,7 +448,7 @@ def build_gun(root, w, cls, geo_rec, surfs_names, surfs, nfr, spr):
     typ = k.get('type', '')
     fam = str(k.get('magfamily', typ)).lower()
     reserve = RESERVE.get(fam, RESERVE.get(typ, 'Clip'))
-    g = dict(key=cls, cls=cls, set='q', mesh=os.path.join(root, model[0], model[1]), ship_mesh=None,
+    g = dict(key=cls, cls=cls, set='q', mesh=find_mesh(root, model[0], model[1]), ship_mesh=None,
              path=model[0], model=model[1], skin=skin[1], scale=scale, off=off, extra='\tNoInterpolation\n',
              ready_frame=fr, mag_surfs=mag_idx, handle_surfs=handle_idx, bolt_surfs=[],
              ready_sprites=['%s A' % spr['gun']], spr_gun=spr['m'], spr_part=spr['p'], spr_world=spr['w'],
@@ -303,6 +470,16 @@ def build_gun(root, w, cls, geo_rec, surfs_names, surfs, nfr, spr):
         g['slide_lock'] = bool(act) and ('slide' in an or an.startswith('bolt'))
         g['slide_lock_src'] = 'default rule (part %s)' % (an or 'none')
     g['notes'] = ['action part %s is a hinge: not driven (the Quest handle is a straight pull)' % n for n in hinged]
+    # How each part's surfaces were resolved, so a measured resolution is never silent.
+    g['feed_surf_src'] = feed_how
+    # The frame the well was measured at: the rest frame, or the frame the magazine is
+    # seated at where the rest frame put the well out of the player's reach.
+    g['well_frame'] = well_frame
+    if well_frame != fr:
+        g['notes'].append('well measured at frame %d, where its magazine is seated '
+                          '(the rest frame %d has it out of the gun)' % (well_frame, fr))
+    if handle_how:
+        g['handle_surf_src'] = handle_how
     return g, survey
 
 
