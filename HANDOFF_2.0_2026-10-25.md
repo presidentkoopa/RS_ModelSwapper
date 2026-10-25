@@ -43,11 +43,12 @@ The Ruger is logic-verified only (the flat test camera does not frame it at its 
 ## Fixed along the way (each also wrong on `main`)
 
 8. **RSQ_GunMoves was BD22Q's table read by ModelSwapper's slot number.** Pivot (where the hands
-   turn with the gun) came from whichever BD22 gun had the same index; slots past 26 got nothing.
-   Seen in the gate: MS_AE_Pistol's hand beside the gun, and the BD22 pistol's hand off its grip
-   in last session's own screenshots. `tools_kit/gunmoves_sync.py` gives every lifted slot its
-   source set's row. **Slots 1-58 that no lift owns still carry BD22's rows by number** -- their
-   source sets' gunmoves are needed before they can be right.
+   turn with the gun when its layer moves) came from whichever BD22 gun had the same index; slots
+   past 26 got nothing. In the gate the hand floated off the gun on EVERY older donor checked
+   (MS_Pistol, PlasmaRifle, Rifle, BD_AssaultShotgun, BD_RailGun, AE_Flamer) and on the BD22 pistol.
+   `tools_kit/gunmoves_ms.py` computes every slot's Pivot / Mirrored / Blends from its donor's own
+   MODELDEF block -- the kit's formula, which reproduces BD22Q's and the Aliens set's own tables
+   exactly for every lifted gun (`--check`). After: the hand on the gun in all of them.
 9. **89 skins the shipped break/pump MODELDEFs named were not in the pk3** (rsr_clear.png beside
    the MS_Shotgun / SuperShotgun / Revolver / brt_M79 meshes, and `rev.png` where MS_Revolver uses
    WPN-REV.png). The asset check only read modeldef/.bd22/.rsq. Both builds now ship and check
