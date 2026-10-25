@@ -61,8 +61,9 @@ In game:
 unless `rsr_grab_with == 1`; the default is the off-hand trigger. Symptom: the
 magazine drops out and nothing ever happens again.
 
-Reloadable: 57 models in 24 slots (reload_slots.json). Rebuilt 2026-10-25 by
-tools_kit/run_modelswapper.py -- see the commits below.
+Reloadable: 54 selectable models in 30 slots, EVERY ONE PROVED IN THE ENGINE --
+tools_kit/verify_models.ps1, one launch each, phases counted; VERIFIED_MODELS.csv.
+(68 donors claim a slot; 14 are MS_PU_* pickup models, not menu-selectable.)
 
 ## Headless harness
 
