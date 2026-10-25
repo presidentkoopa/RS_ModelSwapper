@@ -96,5 +96,11 @@ server bool rs_foreignmodels_replaceown = true;
 // RS_WeaponArchetypeService, because those tables are clearscope and every Service
 // variant is play, ui or unable to reach a play handler's fields. A CVar is the one
 // store all three scopes can read. Empty = no model worn = stock reload.
-nosave user string ms_donor_main = "";
-nosave user string ms_donor_off = "";
+// SERVER, not user. A `user` cvar is per player and has to be read against one;
+// DonorInHand is `clearscope static` and has no player to read against. The Depot
+// hit this exact wall and wrote it down (bd22_plus.py, rsb_revolver_feed): "Server,
+// not user: Index() is clearscope static with no player to read a user cvar against."
+// It is also the right scope on its own terms -- which reload runs is playsim state,
+// not a per-player preference, so every peer must agree on it.
+server string ms_donor_main = "";
+server string ms_donor_off = "";

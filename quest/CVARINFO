@@ -188,3 +188,12 @@ server int rsm_ammo = 0;
 server bool rsa_pistol_semi = false;	// pistol: one shot per trigger pull
 server bool rsa_rev_magnum = false;	// revolver: secondary fires a slug
 server bool rsa_sg_slug = false;		// pump shotgun: secondary fires a slug
+
+// SERVER, not user. A `user` cvar is per player and has to be read against one;
+// DonorInHand is `clearscope static` and has no player to read against. The Depot
+// hit this exact wall and wrote it down (bd22_plus.py, rsb_revolver_feed): "Server,
+// not user: Index() is clearscope static with no player to read a user cvar against."
+// It is also the right scope on its own terms -- which reload runs is playsim state,
+// not a per-player preference, so every peer must agree on it.
+server string ms_donor_main = "";
+server string ms_donor_off = "";
