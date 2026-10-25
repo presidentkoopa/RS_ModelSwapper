@@ -8,6 +8,6 @@ GameInfo
     // answers a netevent -- which is how MS_EffectRelocator (casings) and
     // RS_ForeignDebug (msdebug, mstrace) sat inert from the day they
     // landed: both were added without touching this line.
-    AddEventHandlers = "RS_ForeignModelHandler", "MS_EffectRelocator", "RS_ForeignDebug"
+    AddEventHandlers = "RS_ForeignModelHandler", "MS_EffectRelocator", "RS_ForeignDebug", "MS_ReloadJoin"
 }
 
