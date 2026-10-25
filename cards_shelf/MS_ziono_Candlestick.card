@@ -1,0 +1,12 @@
+weapon MS_ziono_Candlestick
+  archetype   grenade        # owner-confirmed
+  model       MS_ziono_Candlestick.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [3.27, 2.89, 20.84]
+  grip        line [3.27, -3.28, 0.05] [-2.94, 2.89, 0.05]  trigger [0.31, 0.12, 13.8]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [4.31, 0.12, 13.8]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 29

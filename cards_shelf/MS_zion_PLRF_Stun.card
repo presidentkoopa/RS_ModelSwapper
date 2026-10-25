@@ -1,0 +1,13 @@
+weapon MS_zion_PLRF_Stun
+  archetype   plasma        # owner-confirmed
+  model       MS_zion_PLRF_Stun.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [41.22, -2.64, -1.25]
+  grip        line [23.5, 10.59, -3.0] [13.36, 15.23, -8.02]  trigger [25.18, 5.31, -3.99]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [29.18, 5.31, -3.99]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..108
+  baked_cant   frames 0..108 up to 160.9 deg   # psprite-era hand sway; removed in MS_zion_PLRF_Stun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4953

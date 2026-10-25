@@ -1,0 +1,12 @@
+weapon MS_voxel_BFG9000alt
+  archetype   bfg        # owner-confirmed
+  model       MS_voxel_BFG9000alt.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [24.5, -6.5, 16.0]
+  grip        line [-12.5, -6.5, 14.0] [-3.5, 0.5, -0.0]  trigger [-0.8, -0.09, 13.14]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [3.2, -0.09, 13.14]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source no  tags_in_source 1  frame_names_in_source no  verts 4942

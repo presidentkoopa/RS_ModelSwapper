@@ -1,0 +1,12 @@
+weapon MS_wolf_Flame
+  archetype   flamethrower        # owner-confirmed
+  model       MS_wolf_Flame.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [99.39, 1.61, 2.42]
+  grip        line [85.19, -2.34, -1.84] [68.61, -0.89, -15.88]  trigger [56.06, -1.01, -0.83]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [60.06, -1.01, -0.83]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..9
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1763

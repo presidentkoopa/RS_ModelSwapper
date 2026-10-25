@@ -1,0 +1,12 @@
+weapon MS_univ_RPG
+  archetype   launcher        # owner-confirmed
+  model       MS_univ_RPG.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [33.45, 3.25, 20.17]
+  grip        line [-3.97, -1.77, 17.06] [-10.84, -0.05, 9.91]  trigger [-1.87, 1.07, 18.16]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [2.13, 1.07, 18.16]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 160

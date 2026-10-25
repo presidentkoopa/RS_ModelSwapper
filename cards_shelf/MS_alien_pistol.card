@@ -1,0 +1,28 @@
+weapon MS_alien_pistol
+  archetype   pistol        # owner-confirmed
+  model       MS_alien_pistol.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [-0.09, 0.0, -1.41]  axis [-0.922, 0.0, 0.388]  travel 0.42  frames -..-  rot 11deg axis [-0.0, 1.0, -0.0]
+    part     surf 2  rest [-8.9, -0.05, 3.77]  axis [-0.627, -0.0, -0.779]  travel 2.53  frames 1..15  rot 62deg axis [0.0, -1.0, -0.0]
+    slide    surf 3  rest [4.56, -0.06, 3.56]  axis [-1.0, -0.0, -0.0]  travel 6.78  frames 3..15
+    mag      surf 4  rest [-6.28, 0.01, -9.2]  axis [-0.469, -0.313, -0.826]  travel 65.01  frames 9..12  rot 23deg axis [-1.0, -0.0, -0.0]
+    mag_well  [-6.28, 0.01, -9.2]  mouth [-6.53, -0.94, 1.44]  axis [-0.469, -0.313, -0.826]  travel_clear 65.01
+    muzzle    [18.58, -0.55, 3.77]
+  grip        line [-4.64, -1.98, -0.45] [-5.13, -0.0, -12.73]  trigger [-0.09, 0.0, -1.41]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [1.68, 0.01, -1.62]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..5
+    idle         6..8
+    mag_out      9..9
+    mag_in       10..12
+    rack         13..15
+    battery      16..16
+    idle         17..19
+  baked_cant   frames 6..19 up to 42.2 deg   # psprite-era hand sway; removed in MS_alien_pistol_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1934
+  carved      mag  seat_origin [-6.28, 0.01, -9.2]  file MS_alien_pistol_mag.md3

@@ -1,0 +1,12 @@
+weapon MS_classic_CHAINGUN
+  archetype   machinegun        # owner-confirmed
+  model       MS_classic_CHAINGUN.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [22.81, -0.2, -7.34]
+  grip        line [12.41, 0.53, -9.06] [10.89, 0.0, -12.86]  trigger [17.3, -0.04, -9.99]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [21.3, -0.04, -9.99]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 751

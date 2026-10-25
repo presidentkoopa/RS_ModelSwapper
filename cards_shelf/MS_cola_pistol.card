@@ -1,0 +1,31 @@
+weapon MS_cola_pistol
+  archetype   pistol        # owner-confirmed
+  model       MS_cola_pistol.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 1  rest [8.84, 0.26, 2.86]  axis [0.0, 0.639, -0.769]  travel 4.07  frames 31..42  rot 90deg axis [-1.0, -0.0, 0.0]
+    part2    surf 2  rest [2.88, -0.03, 4.43]  axis [-0.948, 0.226, -0.223]  travel 19.76  frames 31..42  rot 90deg axis [-1.0, 0.0, 0.0]
+    part3    surf 3  rest [-0.69, -0.02, 4.43]  axis [-0.001, 0.711, -0.704]  travel 6.27  frames 31..42  rot 90deg axis [-1.0, 0.0, 0.0]
+    part4    surf 4  rest [5.16, -0.03, 4.53]  axis [0.0, 0.712, -0.703]  travel 6.41  frames 31..42  rot 90deg axis [-1.0, -0.0, 0.0]
+    part5    surf 5  rest [-4.87, -0.08, 5.8]  axis [-0.999, -0.0, 0.044]  travel 1.91  frames 1..27  rot 30deg axis [-0.0, -1.0, -0.0]
+    trigger  surf 6  rest [0.11, -0.01, -1.9]  axis [0.952, -0.0, 0.305]  travel 1.00  frames 1..29  rot 30deg axis [-0.0, -1.0, 0.0]
+    muzzle    [32.22, -2.05, 8.17]
+  grip        line [-9.83, -2.08, -1.09] [-7.09, 0.0, -11.81]  trigger [0.11, -0.01, -1.9]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [15.38, -0.06, 4.43]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..4
+    idle         5..5
+    fire         6..9
+    idle         10..10
+    fire         11..14
+    idle         15..15
+    fire         16..19
+    idle         20..20
+    fire         21..24
+    idle         25..25
+    fire         26..29
+    idle         30..54
+  baked_cant   frames 31..35 up to 41.2 deg   # psprite-era hand sway; removed in MS_cola_pistol_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 3345

@@ -1,0 +1,13 @@
+weapon MS_brt_Unmaker
+  archetype   unmaker        # owner-confirmed
+  model       MS_brt_Unmaker.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 2  rest [38.45, -0.16, 8.44]  axis [-0.663, 0.125, -0.739]  travel 1.20  frames 4..15  rot 20deg axis [0.26, -0.96, 0.04]
+    muzzle    [94.81, 3.64, 6.11]
+  grip        line [55.64, 7.27, 3.14] [52.77, -0.0, -11.36]  trigger [57.46, -0.01, 2.17]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [61.46, -0.01, 2.17]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..15
+  authoring   surfaces_named_in_source no  tags_in_source 3  frame_names_in_source no  verts 11541

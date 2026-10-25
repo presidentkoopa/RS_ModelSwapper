@@ -1,0 +1,20 @@
+weapon MS_vplus_SHOTGUN
+  archetype   shotgun        # owner-confirmed
+  model       MS_vplus_SHOTGUN.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 2  rest [46.93, 0.02, 0.18]  axis [-0.684, 0.0, -0.729]  travel 17.08  frames 15..35
+    trigger  surf 3  rest [33.48, 0.02, -5.07]  axis [-1.0, -0.0, 0.001]  travel 0.45  frames -..-
+    slide    surf 4  rest [68.73, 0.02, -2.73]  axis [-1.0, 0.0, -0.002]  travel 6.27  frames 15..35
+    part2    surf 5  rest [41.96, -1.46, 0.0]  axis [-1.0, -0.0, 0.0]  travel 6.27  frames 15..35
+    muzzle    [93.45, -0.11, 1.34]
+  grip        line [28.56, 1.77, -4.08] [24.41, -0.16, -9.02]  trigger [33.48, 0.02, -5.07]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [61.58, -0.02, -1.97]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..2
+    idle         3..4
+    fire         5..6
+    idle         7..35
+  baked_cant   frames 11..31 up to 18.1 deg   # psprite-era hand sway; removed in MS_vplus_SHOTGUN_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 21884

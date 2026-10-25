@@ -1,0 +1,15 @@
+weapon MS_hacx_Pistol
+  archetype   pistol        # owner-confirmed
+  model       MS_hacx_Pistol.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    slide    surf 2  rest [22.25, 0.01, 0.4]  axis [-1.0, -0.001, 0.0]  travel 6.00  frames 2..4
+    part     surf 3  rest [29.59, -0.04, -5.4]  axis [-0.989, 0.001, 0.149]  travel 1.30  frames 1..4  rot 25deg axis [-0.0, 1.0, -0.01]
+    muzzle    [72.41, -1.12, -0.7]
+  grip        line [26.67, -0.66, -2.34] [22.8, 0.88, -15.14]  trigger [33.13, 0.07, -3.26]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [37.13, 0.07, -3.26]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..10
+  baked_cant   frames 5..10 up to 90.0 deg   # psprite-era hand sway; removed in MS_hacx_Pistol_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5936

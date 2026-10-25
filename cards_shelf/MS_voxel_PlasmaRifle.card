@@ -1,0 +1,12 @@
+weapon MS_voxel_PlasmaRifle
+  archetype   rifle        # owner-confirmed
+  model       MS_voxel_PlasmaRifle.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [99.95, -1.55, -3.83]
+  grip        line [51.94, -4.55, -6.83] [50.44, 2.94, -18.83]  trigger [52.8, 0.04, -7.63]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [56.8, 0.04, -7.63]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..249
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 825

@@ -1,0 +1,21 @@
+weapon MS_meat_ChainGun
+  archetype   machinegun        # owner-confirmed
+  model       MS_meat_ChainGun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 5  rest [92.26, 5.77, -10.68]  axis [0.0, -0.784, -0.621]  travel 5.25  frames 1..5  rot 45deg axis [-1.0, 0.0, 0.0]
+    part2    surf 6  rest [92.26, 5.77, -3.98]  axis [0.0, 0.117, -0.993]  travel 5.26  frames 1..5  rot 45deg axis [-1.0, 0.0, -0.0]
+    part3    surf 7  rest [92.26, -0.02, -14.03]  axis [0.0, -0.934, 0.356]  travel 5.12  frames 1..5  rot 45deg axis [-1.0, 0.0, -0.0]
+    part4    surf 8  rest [92.26, -0.02, -0.64]  axis [0.0, 0.913, -0.409]  travel 5.12  frames 1..5  rot 45deg axis [-1.0, -0.0, 0.0]
+    part5    surf 9  rest [92.26, -5.82, -3.98]  axis [0.0, 0.803, 0.596]  travel 5.00  frames 1..5  rot 45deg axis [-1.0, -0.0, 0.0]
+    part6    surf 10  rest [92.26, -5.82, -10.68]  axis [0.0, -0.144, 0.99]  travel 5.00  frames 1..5  rot 45deg axis [-1.0, -0.0, 0.0]
+    trigger  surf 13  rest [33.42, -0.23, -4.29]  axis [-0.823, -0.0, 0.568]  travel 0.80  frames 4..5  rot 15deg axis [-0.0, 1.0, -0.0]
+    part7    surf 17  rest [31.01, -0.23, 1.62]  axis [0.274, -0.001, -0.962]  travel 0.36  frames -..-
+    muzzle    [106.55, -1.39, -4.48]
+  grip        line [24.62, 1.09, -3.55] [33.0, -2.63, -16.09]  trigger [33.42, -0.23, -4.29]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [51.18, 4.03, -0.54]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..3
+    fire         4..5
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5180

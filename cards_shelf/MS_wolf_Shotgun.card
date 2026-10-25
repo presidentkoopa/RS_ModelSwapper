@@ -1,0 +1,26 @@
+weapon MS_wolf_Shotgun
+  archetype   shotgun        # owner-confirmed
+  model       MS_wolf_Shotgun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    slide    surf 2  rest [41.16, -1.6, 2.0]  axis [-1.0, 0.0, 0.0]  travel 6.90  frames 9..17
+    slide2   surf 3  rest [70.61, 0.02, -1.01]  axis [-1.0, -0.0, -0.001]  travel 6.90  frames 9..17
+    trigger  surf 5  rest [31.83, 0.01, -3.57]  axis [-1.0, -0.0, 0.0]  travel 0.50  frames -..-
+    mag      surf 6  rest [46.63, 0.03, 2.19]  axis [-0.685, -0.0, -0.729]  travel 18.79  frames 9..28
+    mag_well  [46.63, 0.03, 2.19]  mouth [44.88, 0.02, 3.39]  axis [-0.685, -0.0, -0.729]  travel_clear 18.79
+    muzzle    [97.8, -0.11, 3.48]
+  grip        line [28.78, -1.84, -2.58] [22.05, 0.05, -7.92]  trigger [31.83, 0.01, -3.57]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [62.34, -0.03, -0.17]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..8
+    slide_lock   9..9
+    mag_out      10..10
+    mag_in       11..17
+    idle         18..18
+    mag_out      19..19
+    mag_in       20..28
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 21884
+  carved      mag  seat_origin [46.63, 0.03, 2.19]  file MS_wolf_Shotgun_mag.md3

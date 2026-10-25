@@ -1,0 +1,18 @@
+weapon MS_zblood_tommygun
+  archetype   smg        # owner-confirmed
+  model       MS_zblood_tommygun.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 1  rest [49.01, 0.03, 6.39]  axis [-0.99, -0.002, 0.143]  travel 0.78  frames 4..18
+    part2    surf 2  rest [29.67, 0.19, 5.55]  axis [-0.997, 0.004, -0.081]  travel 0.76  frames 4..18
+    trigger  surf 3  rest [30.23, 0.17, 6.55]  axis [-0.992, 0.011, -0.127]  travel 1.17  frames 4..18  rot 31deg axis [-0.0, 1.0, 0.0]
+    muzzle    [68.86, 0.8, 13.53]
+  grip        line [22.92, 2.45, 7.08] [22.34, 0.12, -5.75]  trigger [30.23, 0.17, 6.55]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [42.14, 0.11, 9.51]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..1
+    idle         2..3
+    fire         4..18
+  baked_cant   frames 6..18 up to 21.8 deg   # psprite-era hand sway; removed in MS_zblood_tommygun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 572

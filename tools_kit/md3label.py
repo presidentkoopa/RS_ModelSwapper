@@ -228,7 +228,17 @@ def main():
     def trav(role,f): i=by_role.get(role); return float(np.linalg.norm(resid[i][f])) if i is not None else 0.0
     fnames=[]
     def moving(role,f,thr=0.5): return trav(role,f)>thr
-    if a.archetype == 'pistol_mag':
+    # The magazine labeller is chosen by what the GUN HAS, not by the archetype
+    # string it was invoked with. It used to run only for --archetype pistol_mag,
+    # so a gun carded as 'smg', 'rifle' or 'flamethrower' fell through to the
+    # generic branch, which never emits mag_out/mag_in -- and mag_in is the phase
+    # the reload generator measures the insertion stroke from. 157 guns were
+    # measured correctly and still produced no reload for exactly that reason.
+    # Any gun with a magazine that actually travels gets this branch now.
+    _mag_i = by_role.get('mag')
+    _mag_moves = _mag_i is not None and max(
+        (float(np.linalg.norm(resid[_mag_i][f])) for f in range(nf)), default=0.0) > 1.0
+    if a.archetype == 'pistol_mag' or _mag_moves:
         state='raise'
         for f in range(nf):
             if sway[f]>15 and f<a.idle: fnames.append(f"raise_{f}"); continue

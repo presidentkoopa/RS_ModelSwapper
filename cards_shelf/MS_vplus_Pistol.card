@@ -1,0 +1,34 @@
+weapon MS_vplus_Pistol
+  archetype   pistol        # owner-confirmed
+  model       MS_vplus_Pistol.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    hammer   surf 0  rest [22.28, 0.02, 0.47]  axis [-0.857, 0.0, -0.515]  travel 1.18  frames 3..3  rot 27deg axis [0.0, -1.0, -0.0]
+    slide    surf 1  rest [30.62, -0.07, 0.02]  axis [-1.0, -0.0, 0.0]  travel 4.59  frames 4..24
+    round    surf 2  rest [25.59, -0.03, -2.05]  axis [-0.187, -0.0, -0.982]  travel 13.35  frames 4..26
+    mag      surf 3  rest [25.2, -0.04, -8.43]  axis [-0.0, -0.0, -1.0]  travel 30.00  frames 9..16
+    trigger  surf 5  rest [30.95, -0.01, -5.0]  axis [-0.995, -0.0, 0.099]  travel 1.31  frames 3..4  rot 37deg axis [0.0, 1.0, 0.0]
+  ports
+    chamber   [31.9, -0.03, 0.12]  frame 26
+    eject     [31.9, 1.63, 0.12]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    mag_well  [25.2, -0.04, -8.43]  mouth [26.75, -0.03, -1.5]  axis [-0.0, -0.0, -1.0]  travel_clear 30.00
+    muzzle    [44.33, -0.14, -0.64]
+  grip        line [23.06, -1.38, -4.03] [21.03, -0.11, -14.03]  trigger [30.95, -0.01, -5.0]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [32.72, 0.05, -4.77]   # one-handed gun; placeholder
+  carve       mag round
+  phases
+    raise        0..1
+    idle         2..2
+    fire         3..6
+    idle         7..7
+    slide_lock   8..8
+    mag_out      9..9
+    mag_in       10..15
+    rack         16..26
+    lower        27..27
+    battery      28..28
+    idle         29..37
+  baked_cant   frames 10..37 up to 88.5 deg   # psprite-era hand sway; removed in MS_vplus_Pistol_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6828
+  carved      mag  seat_origin [25.2, -0.04, -8.43]  file MS_vplus_Pistol_mag.md3
+  carved      round  seat_origin [25.59, -0.03, -2.05]  file MS_vplus_Pistol_round.md3

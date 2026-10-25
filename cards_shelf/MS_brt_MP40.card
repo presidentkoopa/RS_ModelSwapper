@@ -1,0 +1,23 @@
+weapon MS_brt_MP40
+  archetype   smg        # owner-confirmed
+  model       MS_brt_MP40.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    slide    surf 0  rest [55.68, 1.2, 3.2]  axis [-0.999, -0.028, 0.046]  travel 16.80  frames 3..13  rot 44deg axis [1.0, -0.0, -0.0]
+    trigger  surf 9  rest [33.5, 0.0, -4.82]  axis [-0.998, -0.0, 0.071]  travel 0.86  frames 3..4  rot 28deg axis [0.0, 1.0, -0.0]
+    mag      surf 10  rest [60.14, -0.01, -4.57]  axis [-0.0, 0.0, -1.0]  travel 24.99  frames 8..13
+    mag_well  [60.14, -0.01, -4.57]  mouth [58.61, 0.11, 2.67]  axis [-0.0, 0.0, -1.0]  travel_clear 24.99
+    muzzle    [90.59, -0.59, 2.08]
+  grip        line [25.25, -0.78, -3.88] [25.44, 0.78, -14.69]  trigger [33.5, 0.0, -4.82]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [57.04, 0.09, 0.73]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..1
+    idle         2..2
+    fire         3..6
+    idle         7..7
+    mag_out      8..8
+    mag_in       9..13
+  baked_cant   frames 8..13 up to 18.3 deg   # psprite-era hand sway; removed in MS_brt_MP40_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4879
+  carved      mag  seat_origin [60.14, -0.01, -4.57]  file MS_brt_MP40_mag.md3

@@ -1,0 +1,22 @@
+weapon MS_meat_RPG
+  archetype   launcher        # owner-confirmed
+  model       MS_meat_RPG.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [47.04, 4.04, -1.88]  axis [-0.0, 0.596, -0.803]  travel 6.35  frames 1..3  rot 45deg axis [-1.0, 0.0, -0.0]
+    part2    surf 1  rest [60.3, -0.56, -9.3]  axis [-0.001, -0.32, 0.947]  travel 0.35  frames -..-  rot 45deg axis [-1.0, 0.0, -0.0]
+    part3    surf 3  rest [26.86, -0.22, -7.31]  axis [-0.0, 0.925, -0.38]  travel 1.30  frames 2..3  rot 45deg axis [-1.0, 0.0, -0.0]
+    trigger  surf 4  rest [33.42, -0.23, -5.95]  axis [-0.0, 0.925, -0.38]  travel 2.33  frames 1..6  rot 45deg axis [-1.0, 0.0, -0.0]
+    part4    surf 5  rest [28.17, -0.23, -16.15]  axis [-0.0, -0.923, 0.384]  travel 5.48  frames 1..3  rot 45deg axis [-1.0, 0.0, -0.0]
+    part5    surf 7  rest [31.26, -0.2, -0.78]  axis [-0.0, 0.923, -0.384]  travel 6.29  frames 1..3  rot 45deg axis [-1.0, 0.0, -0.0]
+    part6    surf 8  rest [31.01, -0.23, -0.03]  axis [-0.0, 0.924, -0.382]  travel 6.86  frames 1..3  rot 45deg axis [-1.0, 0.0, -0.0]
+    part7    surf 11  rest [-3.57, -0.23, -4.86]  axis [-0.0, 0.925, -0.38]  travel 3.17  frames 1..3  rot 45deg axis [-1.0, 0.0, -0.0]
+    muzzle    [97.62, 9.41, -8.83]
+  grip        line [66.78, 12.94, -6.95] [68.84, -0.22, -25.52]  trigger [33.42, -0.23, -5.95]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [76.13, 9.44, -3.45]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..6
+  baked_cant   frames 1..3 up to 45.0 deg   # psprite-era hand sway; removed in MS_meat_RPG_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 3  frame_names_in_source no  verts 9707

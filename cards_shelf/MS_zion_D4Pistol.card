@@ -1,0 +1,13 @@
+weapon MS_zion_D4Pistol
+  archetype   pistol        # owner-confirmed
+  model       MS_zion_D4Pistol.md3   space WPN   idle_frame 9
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [28.97, -3.67, -0.3]
+  grip        line [11.95, -4.83, -1.92] [12.91, -4.16, -8.67]  trigger [19.71, -3.99, -2.91]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [23.71, -3.99, -2.91]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..148
+  baked_cant   frames 0..148 up to 155.1 deg   # psprite-era hand sway; removed in MS_zion_D4Pistol_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6100

@@ -1,0 +1,12 @@
+weapon MS_hacx_Reznator
+  archetype   plasma        # owner-confirmed
+  model       MS_hacx_Reznator.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [47.95, 4.31, 0.02]
+  grip        line [14.31, -9.11, -4.45] [19.42, -2.63, -13.33]  trigger [21.48, -4.7, -4.97]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [25.48, -4.7, -4.97]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..5
+  authoring   surfaces_named_in_source no  tags_in_source 3  frame_names_in_source no  verts 7698

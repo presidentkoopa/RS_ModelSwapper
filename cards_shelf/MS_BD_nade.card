@@ -1,0 +1,16 @@
+weapon MS_BD_nade
+  archetype   grenade        # owner-confirmed
+  model       MS_BD_nade.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 2  rest [5.69, 1.25, 23.93]  axis [-0.0, 1.0, 0.014]  travel 39.47  frames 4..26  rot 154deg axis [0.31, 0.35, -0.88]
+    part2    surf 3  rest [5.24, -0.31, 23.81]  axis [0.833, 0.0, 0.553]  travel 16.89  frames 11..26  rot 87deg axis [-0.0, 1.0, 0.0]
+    muzzle    [11.44, -0.3, 20.84]
+  grip        line [3.78, -1.64, 12.73] [7.48, -2.66, 8.3]  trigger [7.61, -0.31, 16.75]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [11.61, -0.31, 16.75]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..1
+    idle         2..26
+  baked_cant   frames 17..26 up to 167.0 deg   # psprite-era hand sway; removed in MS_BD_nade_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2650

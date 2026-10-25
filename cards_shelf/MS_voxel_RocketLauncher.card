@@ -1,0 +1,12 @@
+weapon MS_voxel_RocketLauncher
+  archetype   launcher        # owner-confirmed
+  model       MS_voxel_RocketLauncher.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [107.52, 2.31, 2.78]
+  grip        line [56.67, -6.14, -2.28] [61.75, 2.31, -7.38]  trigger [67.13, -0.18, -0.67]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [71.13, -0.18, -0.67]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..249
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1794

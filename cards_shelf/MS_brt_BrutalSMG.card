@@ -1,0 +1,24 @@
+weapon MS_brt_BrutalSMG
+  archetype   smg        # owner-confirmed
+  model       MS_brt_BrutalSMG.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [54.91, 2.58, -2.38]  axis [-0.96, 0.279, 0.0]  travel 10.59  frames 20..25  rot 90deg axis [0.0, 0.0, 1.0]
+    trigger  surf 2  rest [31.98, 0.0, -4.65]  axis [-1.0, 0.0, 0.0]  travel 0.98  frames 4..4
+    mag      surf 3  rest [42.44, -0.03, -14.21]  axis [-0.298, 0.0, -0.954]  travel 16.76  frames 8..17
+    mag_well  [42.44, -0.03, -14.21]  mouth [45.3, -0.56, -4.0]  axis [-0.298, 0.0, -0.954]  travel_clear 16.76
+    muzzle    [63.8, -0.77, -3.98]
+  grip        line [29.86, -1.7, -3.83] [31.27, 1.89, -15.91]  trigger [31.98, 0.0, -4.65]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [41.69, 0.16, -4.8]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..1
+    idle         2..3
+    fire         4..4
+    idle         5..7
+    mag_out      8..8
+    mag_in       9..17
+    idle         18..26
+  baked_cant   frames 10..24 up to 21.3 deg   # psprite-era hand sway; removed in MS_brt_BrutalSMG_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 21072
+  carved      mag  seat_origin [42.44, -0.03, -14.21]  file MS_brt_BrutalSMG_mag.md3

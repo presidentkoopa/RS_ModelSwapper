@@ -1,0 +1,13 @@
+weapon MS_zion_D4SUPERSHOTGUN
+  archetype   supershotgun        # owner-confirmed
+  model       MS_zion_D4SUPERSHOTGUN.md3   space WPN   idle_frame 16
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [36.73, -2.42, -3.42]
+  grip        line [10.89, -3.2, -3.09] [6.53, -4.84, -9.61]  trigger [17.08, -3.63, -4.09]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [21.08, -3.63, -4.09]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..150
+  baked_cant   frames 0..150 up to 155.9 deg   # psprite-era hand sway; removed in MS_zion_D4SUPERSHOTGUN_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2784

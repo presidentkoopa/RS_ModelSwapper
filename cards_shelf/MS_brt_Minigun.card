@@ -1,0 +1,29 @@
+weapon MS_brt_Minigun
+  archetype   machinegun        # owner-confirmed
+  model       MS_brt_Minigun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 0  rest [52.23, 24.86, -33.7]  axis [-0.371, -0.67, -0.643]  travel 39.89  frames 5..15  rot 106deg axis [-0.87, 0.0, 0.5]
+    part     surf 1  rest [44.02, -0.27, -39.16]  axis [0.439, -0.479, 0.76]  travel 6.63  frames 5..15  rot 106deg axis [-0.87, 0.0, 0.5]
+    part2    surf 3  rest [16.34, 0.01, -27.27]  axis [0.412, -0.568, 0.713]  travel 12.23  frames 5..15  rot 106deg axis [-0.87, -0.0, 0.5]
+    part3    surf 4  rest [25.67, -0.0, -19.98]  axis [-0.461, 0.713, -0.528]  travel 5.97  frames 5..15  rot 107deg axis [-0.93, 0.13, 0.34]
+    part4    surf 5  rest [24.61, 0.02, -14.14]  axis [-0.387, 0.633, -0.67]  travel 12.55  frames 5..15  rot 106deg axis [-0.87, -0.0, 0.5]
+    mag_well  [52.23, 24.86, -33.7]  mouth [51.86, 26.25, -31.62]  axis [-0.371, -0.67, -0.643]  travel_clear 39.89
+    muzzle    [94.59, -1.06, -50.34]
+  grip        line [65.8, 0.33, -55.86] [75.55, -3.63, -63.53]  trigger [76.58, 0.27, -53.24]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [80.58, 0.27, -53.24]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..1
+    lower        2..4
+    mag_out      5..5
+    mag_in       6..7
+    lower        8..8
+    mag_out      9..9
+    mag_in       10..11
+    lower        12..12
+    mag_out      13..13
+    mag_in       14..15
+  baked_cant   frames 5..15 up to 108.9 deg   # psprite-era hand sway; removed in MS_brt_Minigun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 3  frame_names_in_source no  verts 5817
+  carved      mag  seat_origin [52.23, 24.86, -33.7]  file MS_brt_Minigun_mag.md3

@@ -1,0 +1,12 @@
+weapon MS_voxel_PistolD4
+  archetype   pistol        # owner-confirmed
+  model       MS_voxel_PistolD4.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [30.47, -2.02, 3.95]
+  grip        line [-3.52, 3.97, 0.95] [1.47, -2.02, -11.03]  trigger [7.31, -0.03, 0.89]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [11.31, -0.03, 0.89]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..2
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 737

@@ -1,0 +1,13 @@
+weapon MS_cola_piledriver
+  archetype   shotgun        # owner-confirmed
+  model       MS_cola_piledriver.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [39.64, 0.0, 7.69]
+  grip        line [-0.47, -0.38, 0.09] [-5.0, 0.95, -10.02]  trigger [0.11, 0.0, 3.03]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [4.11, 0.0, 3.03]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..19
+  baked_cant   frames 6..19 up to 47.7 deg   # psprite-era hand sway; removed in MS_cola_piledriver_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 994

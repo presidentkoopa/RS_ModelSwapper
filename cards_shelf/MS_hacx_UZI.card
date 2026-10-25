@@ -1,0 +1,21 @@
+weapon MS_hacx_UZI
+  archetype   smg        # owner-confirmed
+  model       MS_hacx_UZI.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    slide    surf 0  rest [24.26, -0.01, 1.6]  axis [1.0, 0.0, -0.0]  travel 6.00  frames 2..9
+    mag      surf 2  rest [25.92, 0.03, -11.95]  axis [0.0, 0.0, -1.0]  travel 20.00  frames 6..7
+    slide2   surf 6  rest [35.18, -0.0, 4.1]  axis [-1.0, 0.0, 0.0]  travel 8.00  frames 9..10
+    trigger  surf 9  rest [30.2, 0.02, -4.47]  axis [-0.986, -0.0, 0.168]  travel 1.12  frames 1..4  rot 35deg axis [0.0, 1.0, -0.0]
+    mag_well  [25.92, 0.03, -11.95]  mouth [26.73, 0.72, -2.47]  axis [0.0, 0.0, -1.0]  travel_clear 20.00
+    muzzle    [56.77, -0.63, 0.05]
+  grip        line [28.11, 0.88, -3.48] [25.22, 1.55, -13.98]  trigger [30.2, 0.02, -4.47]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [32.92, -0.08, -0.13]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..9
+    idle         10..15
+  baked_cant   frames 11..15 up to 90.0 deg   # psprite-era hand sway; removed in MS_hacx_UZI_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4582
+  carved      mag  seat_origin [25.92, 0.03, -11.95]  file MS_hacx_UZI_mag.md3

@@ -1,0 +1,13 @@
+weapon MS_zion_Dumb4gausscannon
+  archetype   railgun        # owner-confirmed
+  model       MS_zion_Dumb4gausscannon.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [31.98, -7.63, -0.91]
+  grip        line [12.22, 16.61, -7.87] [5.03, 5.58, -22.27]  trigger [14.71, 11.34, -8.86]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [18.71, 11.34, -8.86]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..84
+  baked_cant   frames 0..84 up to 142.0 deg   # psprite-era hand sway; removed in MS_zion_Dumb4gausscannon_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6933

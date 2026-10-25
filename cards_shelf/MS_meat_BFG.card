@@ -1,0 +1,15 @@
+weapon MS_meat_BFG
+  archetype   bfg        # owner-confirmed
+  model       MS_meat_BFG.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [31.99, 0.01, -4.22]  axis [-0.993, -0.017, 0.12]  travel 0.44  frames -..-  rot 15deg axis [-0.0, 1.0, -0.0]
+    muzzle    [105.66, 4.98, 13.84]
+  grip        line [30.94, -0.66, -3.25] [23.89, 1.16, -16.86]  trigger [31.99, 0.01, -4.22]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [57.7, -0.08, 0.64]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..7
+    idle         8..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7173

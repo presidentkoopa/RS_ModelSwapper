@@ -1,0 +1,27 @@
+weapon MS_d64_SSG
+  archetype   supershotgun        # owner-confirmed
+  model       MS_d64_SSG.md3   space WPN   idle_frame 1
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [50.55, 0.03, 0.35]  axis [-0.008, 0.0, -1.0]  travel 5.74  frames 15..42  rot 30deg axis [0.0, 1.0, 0.0]
+    round    surf 2  rest [38.04, 1.4, 1.13]  axis [-0.779, 0.0, 0.627]  travel 9.66  frames 17..42  rot 30deg axis [0.0, 1.0, -0.0]
+    round2   surf 3  rest [38.04, -1.28, 1.13]  axis [-0.779, 0.0, 0.627]  travel 9.66  frames 17..42  rot 30deg axis [0.0, 1.0, -0.0]
+    hammer   surf 4  rest [33.76, 0.04, 1.84]  axis [0.196, 0.981, 0.0]  travel 0.60  frames 14..42  rot 20deg axis [-0.0, 0.0, -1.0]
+    part2    surf 5  rest [33.07, 0.19, -5.16]  axis [-0.918, 0.0, 0.397]  travel 1.18  frames 2..7  rot 27deg axis [-0.0, 1.0, -0.0]
+  ports
+    chamber   [40.09, 1.4, 1.6]  frame 30
+    eject     [40.09, 4.06, 1.6]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    muzzle    [41.55, -1.73, -2.31]
+  grip        line [22.83, -1.55, -2.3] [19.02, -0.31, -10.83]  trigger [27.17, 0.2, -3.28]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [31.17, 0.2, -3.28]   # one-handed gun; placeholder
+  carve       round
+  phases
+    idle         0..13
+    fire         14..34
+    idle         35..37
+    fire         38..42
+    idle         43..48
+    lower        49..49
+    idle         50..51
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 17951
+  carved      round  seat_origin [38.04, 1.4, 1.13]  file MS_d64_SSG_round.md3

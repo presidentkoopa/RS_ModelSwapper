@@ -1,0 +1,13 @@
+weapon MS_RC_Auto9
+  archetype   pistol        # owner-confirmed
+  model       MS_RC_Auto9.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 1  rest [-2.76, -0.11, -3.7]  axis [-1.0, 0.0, -0.003]  travel 1.31  frames 1..2  rot 33deg axis [0.0, 1.0, 0.0]
+    muzzle    [35.47, 1.02, 3.75]
+  grip        line [-0.69, 1.69, 1.02] [-10.36, -0.11, -21.03]  trigger [0.06, -0.0, 0.1]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [4.06, -0.0, 0.1]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..2
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2326

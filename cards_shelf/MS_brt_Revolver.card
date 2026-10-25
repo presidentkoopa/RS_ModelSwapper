@@ -1,0 +1,24 @@
+weapon MS_brt_Revolver
+  archetype   revolver        # owner-confirmed
+  model       MS_brt_Revolver.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 1  rest [37.06, -0.0, 0.25]  axis [-0.0, 0.708, -0.707]  travel 5.01  frames 23..31  rot 90deg axis [-1.0, 0.0, 0.0]
+    part2    surf 2  rest [43.95, 0.33, -1.55]  axis [-0.0, 0.563, -0.826]  travel 2.52  frames 23..31  rot 90deg axis [-1.0, -0.0, 0.0]
+    trigger  surf 3  rest [34.19, -0.05, -5.4]  axis [-0.989, 0.0, -0.148]  travel 0.60  frames 1..2  rot 15deg axis [-0.0, 1.0, 0.0]
+    part3    surf 4  rest [28.68, -0.03, 0.46]  axis [0.802, -0.0, 0.597]  travel 1.40  frames 1..31  rot 39deg axis [-0.0, 1.0, -0.0]
+    slide    surf 5  rest [37.18, -1.62, 0.78]  axis [-0.909, 0.393, -0.143]  travel 17.04  frames 12..31  rot 90deg axis [-1.0, 0.0, 0.0]
+    slide2   surf 6  rest [37.18, -1.0, -1.07]  axis [-0.962, 0.262, -0.075]  travel 16.09  frames 12..31  rot 90deg axis [-1.0, 0.0, 0.0]
+    slide3   surf 7  rest [37.18, 0.94, -1.09]  axis [-0.97, 0.141, -0.197]  travel 15.96  frames 12..31  rot 90deg axis [-1.0, 0.0, 0.0]
+    slide4   surf 8  rest [37.18, 1.54, 0.73]  axis [-0.921, 0.207, -0.331]  travel 16.82  frames 12..31  rot 90deg axis [-1.0, 0.0, 0.0]
+    slide5   surf 9  rest [37.18, 0.01, 1.86]  axis [-0.888, 0.353, -0.295]  travel 17.44  frames 12..31  rot 90deg axis [-1.0, 0.0, 0.0]
+    muzzle    [50.53, 0.91, 1.63]
+  grip        line [31.52, -1.03, -4.41] [24.64, -0.05, -12.03]  trigger [34.19, -0.05, -5.4]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [41.9, 0.04, -1.3]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..3
+    idle         4..32
+  baked_cant   frames 18..31 up to 25.0 deg   # psprite-era hand sway; removed in MS_brt_Revolver_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 11849

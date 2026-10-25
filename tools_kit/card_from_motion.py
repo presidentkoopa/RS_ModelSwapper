@@ -83,114 +83,119 @@ def vec(m):
     return '%s, %s, %s' % m.groups()[-3:] if m else None
 
 
-out = []
-made = []
-for key, spec in MESH.items():
-    d, mesh, skin, typ, cap = spec[:5]
-    cls = spec[5] if len(spec) > 5 else key
-    p = os.path.join(SRC, key + '.card')
-    if not os.path.exists(p):
-        print(f'  {cls}: no card'); continue
-    t = open(p, encoding='utf-8', errors='replace').read()
-    if not os.path.exists(os.path.join(d, mesh)):
-        print(f'  {cls}: mesh not at {d}/{mesh}'); continue
-    skin_ok = os.path.exists(os.path.join(d, skin))
+def main(outpath):
+    out = []
+    made = []
+    for key, spec in MESH.items():
+        d, mesh, skin, typ, cap = spec[:5]
+        cls = spec[5] if len(spec) > 5 else key
+        p = os.path.join(SRC, key + '.card')
+        if not os.path.exists(p):
+            print(f'  {cls}: no card'); continue
+        t = open(p, encoding='utf-8', errors='replace').read()
+        if not os.path.exists(os.path.join(d, mesh)):
+            print(f'  {cls}: mesh not at {d}/{mesh}'); continue
+        skin_ok = os.path.exists(os.path.join(d, skin))
 
-    muz = re.search(r'muzzle\s+' + V3, t)
-    well = re.search(r'mag_well\s+' + V3 + r'\s+mouth\s+' + V3 + r'\s+axis\s+' + V3 +
-                     r'\s+travel_clear\s+([\d.]+)', t)
-    magp = re.search(r'^\s*mag\s+surf\s+\d+\s+rest\s+' + V3 + r'\s+axis\s+' + V3 +
-                     r'\s+travel\s+([\d.]+)', t, re.M)
-    bolt = re.search(r'^\s*bolt\s+surf\s+\d+\s+rest\s+' + V3 + r'\s+axis\s+' + V3 +
-                     r'\s+travel\s+([\d.]+)', t, re.M)
-    trig = re.search(r'^\s*trigger\s+surf\s+\d+\s+rest\s+' + V3, t, re.M)
-    ej = re.search(r'eject\s+' + V3 + r'\s+normal\s+' + V3, t)
-    grip = re.search(r'^\s*grip\s+line\s+' + V3 + r'\s+' + V3, t, re.M)
-    sup = re.search(r'support\s+feature\s+palm\s+' + V3, t)
+        muz = re.search(r'muzzle\s+' + V3, t)
+        well = re.search(r'mag_well\s+' + V3 + r'\s+mouth\s+' + V3 + r'\s+axis\s+' + V3 +
+                         r'\s+travel_clear\s+([\d.]+)', t)
+        magp = re.search(r'^\s*mag\s+surf\s+\d+\s+rest\s+' + V3 + r'\s+axis\s+' + V3 +
+                         r'\s+travel\s+([\d.]+)', t, re.M)
+        bolt = re.search(r'^\s*bolt\s+surf\s+\d+\s+rest\s+' + V3 + r'\s+axis\s+' + V3 +
+                         r'\s+travel\s+([\d.]+)', t, re.M)
+        trig = re.search(r'^\s*trigger\s+surf\s+\d+\s+rest\s+' + V3, t, re.M)
+        ej = re.search(r'eject\s+' + V3 + r'\s+normal\s+' + V3, t)
+        grip = re.search(r'^\s*grip\s+line\s+' + V3 + r'\s+' + V3, t, re.M)
+        sup = re.search(r'support\s+feature\s+palm\s+' + V3, t)
 
-    if not (magp and well):
-        print(f'  {cls}: no magazine in the card -- skipped (it would get a stock reload anyway)')
-        continue
+        if not (magp and well):
+            print(f'  {cls}: no magazine in the card -- skipped (it would get a stock reload anyway)')
+            continue
 
-    b = []
-    b.append(f'weapon "{cls}"')
-    b.append(f'  type      = {typ}')
-    b.append(f'  model     = "{d}" "{mesh}"')
-    if skin_ok:
-        b.append(f'  skin      = "{d}" "{skin}"')
-    b.append(f'  capacity  = {cap}')
-    if muz:
-        b.append(f'  muzzle    = {vec(muz)}')
-    b.append('  barrel    = 1, 0, 0')
-    if ej:
-        g = ej.groups()
-        b.append(f'  ejectport = {g[0]}, {g[1]}, {g[2]}')
-        b.append(f'  ejectdir  = {g[3]}, {g[4]}, {g[5]}')
-    b.append('end')
-    b.append('')
-    if grip or trig or sup:
-        b.append('grip')
-        if trig:
-            b.append(f'  triggerat = {vec(trig)}')
-        if grip:
-            g = grip.groups()
-            b.append(f'  palm = {g[3]}, {g[4]}, {g[5]}')
-            b.append(f'  seat = {g[0]}, {g[1]}, {g[2]}')
-        if sup:
-            b.append(f'  supportat = {vec(sup)}')
-        b.append('  rake = 0')
+        b = []
+        b.append(f'weapon "{cls}"')
+        b.append(f'  type      = {typ}')
+        b.append(f'  model     = "{d}" "{mesh}"')
+        if skin_ok:
+            b.append(f'  skin      = "{d}" "{skin}"')
+        b.append(f'  capacity  = {cap}')
+        if muz:
+            b.append(f'  muzzle    = {vec(muz)}')
+        b.append('  barrel    = 1, 0, 0')
+        if ej:
+            g = ej.groups()
+            b.append(f'  ejectport = {g[0]}, {g[1]}, {g[2]}')
+            b.append(f'  ejectdir  = {g[3]}, {g[4]}, {g[5]}')
         b.append('end')
         b.append('')
-    g = list(well.groups())
-    mi = re.search(r'mag_in\s+(\d+)\.\.(\d+)', t)
-    if not mi:
-        print(f'  {cls}: card has no mag_in phase -- no insertion to measure, skipped')
-        continue
-    st, ax = stroke(os.path.join(d, mesh), (int(mi.group(1)), int(mi.group(2))))
-    note = ''
-    if st is not None and abs(st - float(g[9])) > 0.5:
-        note = ("  # stroke taken from the insertion frames; travel_clear said %s,"
-                " which is the part's whole journey from wherever it is parked" % g[9])
-        g[9] = '%.2f' % st
-        g[6], g[7], g[8] = ('%.3f' % v for v in ax)
-    g = tuple(g)
-    b.append('# the magazine, measured from the gun\'s own reload animation' + note)
-    b.append('part magazine')
-    b.append('  role    = feed')
-    b.append('  surface = mag')
-    b.append(f'  grab       = {g[0]}, {g[1]}, {g[2]}')
-    b.append('  grabradius = 2.5')
-    b.append('  dof')
-    b.append('    kind     = slide')
-    b.append(f'    axis     = {g[6]}, {g[7]}, {g[8]}')
-    b.append(f'    distance = {g[9]}')
-    b.append('  end')
-    b.append('end')
-    if bolt:
-        bg = bolt.groups()
-        b.append('')
-        b.append('part bolt')
-        b.append('  role    = action')
-        b.append('  subject = slide')
-        b.append('  surface = bolt')
-        b.append(f'  grab       = {bg[0]}, {bg[1]}, {bg[2]}')
+        if grip or trig or sup:
+            b.append('grip')
+            if trig:
+                b.append(f'  triggerat = {vec(trig)}')
+            if grip:
+                g = grip.groups()
+                b.append(f'  palm = {g[3]}, {g[4]}, {g[5]}')
+                b.append(f'  seat = {g[0]}, {g[1]}, {g[2]}')
+            if sup:
+                b.append(f'  supportat = {vec(sup)}')
+            b.append('  rake = 0')
+            b.append('end')
+            b.append('')
+        g = list(well.groups())
+        mi = re.search(r'mag_in\s+(\d+)\.\.(\d+)', t)
+        if not mi:
+            print(f'  {cls}: card has no mag_in phase -- no insertion to measure, skipped')
+            continue
+        st, ax = stroke(os.path.join(d, mesh), (int(mi.group(1)), int(mi.group(2))))
+        note = ''
+        if st is not None and abs(st - float(g[9])) > 0.5:
+            note = ("  # stroke taken from the insertion frames; travel_clear said %s,"
+                    " which is the part's whole journey from wherever it is parked" % g[9])
+            g[9] = '%.2f' % st
+            g[6], g[7], g[8] = ('%.3f' % v for v in ax)
+        g = tuple(g)
+        b.append('# the magazine, measured from the gun\'s own reload animation' + note)
+        b.append('part magazine')
+        b.append('  role    = feed')
+        b.append('  surface = mag')
+        b.append(f'  grab       = {g[0]}, {g[1]}, {g[2]}')
         b.append('  grabradius = 2.5')
         b.append('  dof')
         b.append('    kind     = slide')
-        b.append(f'    axis     = {bg[3]}, {bg[4]}, {bg[5]}')
-        b.append(f'    distance = {bg[6]}')
+        b.append(f'    axis     = {g[6]}, {g[7]}, {g[8]}')
+        b.append(f'    distance = {g[9]}')
         b.append('  end')
         b.append('end')
-    out.append('\n'.join(b))
-    made.append(cls)
-    print(f'  {cls:<18} magazine stroke {g[9]}' + (f', bolt {bolt.group(7)}' if bolt else ''))
+        if bolt:
+            bg = bolt.groups()
+            b.append('')
+            b.append('part bolt')
+            b.append('  role    = action')
+            b.append('  subject = slide')
+            b.append('  surface = bolt')
+            b.append(f'  grab       = {bg[0]}, {bg[1]}, {bg[2]}')
+            b.append('  grabradius = 2.5')
+            b.append('  dof')
+            b.append('    kind     = slide')
+            b.append(f'    axis     = {bg[3]}, {bg[4]}, {bg[5]}')
+            b.append(f'    distance = {bg[6]}')
+            b.append('  end')
+            b.append('end')
+        out.append('\n'.join(b))
+        made.append(cls)
+        print(f'  {cls:<18} magazine stroke {g[9]}' + (f', bolt {bolt.group(7)}' if bolt else ''))
 
-hdr = ('# ============================================================================\n'
-       '# WMCARD.ww2 -- the Wolfenstein set, written from our OWN measurements.\n'
-       '#\n'
-       '# Every number here came out of the gun\'s own reload animation, measured by\n'
-       '# md3label on the ANIMATED mesh this mod ships. No static _wm world model was\n'
-       '# read at any point, and nothing was carried over from another gun\'s card.\n'
-       '# ============================================================================\n\n')
-open(sys.argv[1], 'w', encoding='utf-8').write(hdr + '\n\n'.join(out) + '\n')
-print(f'\n{len(made)} guns written')
+    hdr = ('# ============================================================================\n'
+           f'# {os.path.basename(outpath)} -- written from our OWN measurements.\n'
+           '#\n'
+           '# Every number here came out of the gun\'s own reload animation, measured by\n'
+           '# md3label on the ANIMATED mesh this mod ships. No static _wm world model was\n'
+           '# read at any point, and nothing was carried over from another gun\'s card.\n'
+           '# ============================================================================\n\n')
+    open(outpath, 'w', encoding='utf-8').write(hdr + '\n\n'.join(out) + '\n')
+    print(f'\n{len(made)} guns written')
+
+
+if __name__ == '__main__':
+    main(sys.argv[1])
