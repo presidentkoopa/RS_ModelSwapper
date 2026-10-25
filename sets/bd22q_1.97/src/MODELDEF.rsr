@@ -1391,6 +1391,94 @@ Model RSR_DroppedMag
 	USEACTORROLL
 	FrameIndex RQYW A 0 0
 }
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/IncendiaryLauncher.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model IncendiaryLauncher
+{
+	Path "models/bd/M32"
+	Model 0 "m32_rsr.md3"
+	SurfaceSkin 0 0 "m32.png"
+	SurfaceSkin 0 1 "m32.png"
+	SurfaceSkin 0 2 "m32.png"
+	SurfaceSkin 0 3 "m32.png"
+	SurfaceSkin 0 4 "m32.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "m32.png"
+	SurfaceSkin 0 7 "m32.png"
+	SurfaceSkin 0 8 "m32.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset 0.0000
+	NoInterpolation
+	FrameIndex RQVM A 0 0
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/M32"
+	Model 0 "m32_rsr.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "m32.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset 0.0000
+	NoInterpolation
+	FrameIndex RQVP A 0 0
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/M32"
+	Model 0 "m32_rsr.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "m32.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset 0.0000
+	NoInterpolation
+	FrameIndex RQVP A 0 0
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/M32"
+	Model 0 "m32_rsr.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "m32.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -8.0050 0.0159 0.0
+	ZOffset 0.4732
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQVW A 0 0
+}
 // RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/Unmaker.
 // The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
 // are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).

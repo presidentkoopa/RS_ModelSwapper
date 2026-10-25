@@ -7,12 +7,12 @@
 
 class RSQ_Counters : EventHandler
 {
-	static const Name GUN[] = { 'MG42', 'Flamethrower2', 'Unmaker' };
-	static const Name MAG[] = { 'RSQ_Mag_MG42', 'RSQ_Mag_Flamethrower2', 'RSQ_Mag_Unmaker' };
-	static const Name RES[] = { 'Clip2', 'Gas', 'SoulAmmo' };
-	static const int CAP[] = { 200, 200, 60 };
-	int lastRes[MAXPLAYERS][3];
-	bool inited[MAXPLAYERS][3];
+	static const Name GUN[] = { 'MG42', 'Flamethrower2', 'IncendiaryLauncher', 'Unmaker' };
+	static const Name MAG[] = { 'RSQ_Mag_MG42', 'RSQ_Mag_Flamethrower2', 'RSQ_Mag_IncendiaryLauncher', 'RSQ_Mag_Unmaker' };
+	static const Name RES[] = { 'Clip2', 'Gas', 'AmmoM202', 'SoulAmmo' };
+	static const int CAP[] = { 200, 200, 6, 60 };
+	int lastRes[MAXPLAYERS][4];
+	bool inited[MAXPLAYERS][4];
 
 	override void WorldTick()
 	{
@@ -74,6 +74,10 @@ class RSQ_Mag_Flamethrower2 : Inventory { Default { Inventory.MaxAmount 200; +IN
 class RSQ_NoMag_Flamethrower2 : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Empty_Flamethrower2 : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Fill_Flamethrower2 : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSQ_Mag_IncendiaryLauncher : Inventory { Default { Inventory.MaxAmount 6; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSQ_NoMag_IncendiaryLauncher : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSQ_Empty_IncendiaryLauncher : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSQ_Fill_IncendiaryLauncher : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Mag_Unmaker : Inventory { Default { Inventory.MaxAmount 60; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_NoMag_Unmaker : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Empty_Unmaker : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }

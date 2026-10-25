@@ -79,7 +79,7 @@ PLUS = {
                  toggle='rsq_plus_mg42', label='MG42: Belt Drum Reload',
                  reserve='Clip2', magammo='RSQ_MG42Drum', nomag='RSQ_NoDrum_MG42', ammouse=1,
                  ready_sprites=['HBUS A'], spr=('RQXM', 'RQXP', 'RQXW')),
-    'Flamethrower2': dict(card='BD_Flamethrower', ref='flamethrower_wm.md3', mesh='Flamethrower2/Flamethrower2.md3',
+    'Flamethrower2': dict(card='BD_Flamethrower', ref='flamethrower_wm.md3', mesh='Flamethrower2/Flamethrower2.md3', dec='Flamethrower.dec',
                  part='canister', ref_parts={'canister': 'magazine'}, ready_frame=0,
                  snd_out='rsr/canout', snd_in='rsr/canin', snd_land='rsr/bigdrop',
                  toggle='rsq_plus_flamer', label='Flamethrower: Canister Reload',
@@ -97,12 +97,12 @@ PLUS = {
     # 49.5 forward, measured per body). Left and right are within half a centimetre, so the mesh
     # does not choose a side -- the off hand does.
     # Capacity 6: a Milkor MGL holds six. bd_40mm already exists as the Machinegun's grenade family.
-    'IncendiaryLauncher': dict(mesh='M32/m32.md3', out=(0.0, 1.0, 0.0), travel=19.16, capacity=6,
+    'IncendiaryLauncher': dict(mesh='M32/m32.md3', out=(0.0, 1.0, 0.0), travel=19.16, capacity=6, shot='IncendiaryRocket',
                  scale=(-0.62, 0.62, 0.62), off=(0.0, -30.0, -8.0),   # its own MODELDEF, not the default
                  part='magazine', ready_frame=0,
                  snd_out='rsr/canout', snd_in='rsr/canin', snd_land='rsr/bigdrop',
                  toggle='rsq_plus_m32', label='Incendiary Launcher: Cylinder Reload',
-                 reserve='AmmoRocket', magammo='RSQ_M32Cylinder', nomag='RSQ_NoCylinder_M32', ammouse=1,
+                 reserve='AmmoM202', magammo='RSQ_M32Cylinder', nomag='RSQ_NoCylinder_M32', ammouse=1,
                  ready_sprites=['M202 A'], spr=('RQVM', 'RQVP', 'RQVW')),
     'Unmaker': dict(card='BD_Unmaker', ref='unmaker_wm.md3', mesh='Unmaker/Unmaker.md3',
                  part='skull', ref_parts={'skull': 'magazine', 'skull2': 'magazine'}, ready_frame=0,
@@ -241,6 +241,21 @@ WAIT = [
 # BD22's own ammo checks and shots: a guard goes after each check and before each shot
 GUARD_AFTER = re.compile(r'A_JumpIfNoAmmo\s*\(')
 GUARD_BEFORE = re.compile(r'A_FireBullets\s*\(.*FBF_USEAMMO|A_FireCustomMissile\s*\(\s*"(FlamethrowerProjectile|UnmakerLaser)')
+
+
+def guard_before(p):
+    """The lines that fire a shot, for THIS gun.
+
+    A_FireBullets with FBF_USEAMMO is self-describing, but a projectile weapon fires
+    A_FireCustomMissile("SomeName") and only the gun knows the name. Those names were baked into
+    GUARD_BEFORE for the first two guns that needed them, so a third gun matched NOTHING and got
+    zero guards: the drum could come out and the gun would still fire. An entry names its own
+    with `shot=`, and the hardcoded pair stays only so the existing two keep working.
+    """
+    if not p.get('shot'):
+        return GUARD_BEFORE
+    names = '|'.join(re.escape(s) for s in ([p['shot']] if isinstance(p['shot'], str) else p['shot']))
+    return re.compile(GUARD_BEFORE.pattern + r'|A_FireCustomMissile\s*\(\s*"(?:%s)' % names)
 import re
 
 
@@ -319,8 +334,9 @@ def patch_dec(cls, p, text, cap):
     a, b = actor_span(lines, cls)
     # 3. guards: after each A_JumpIfNoAmmo, before each shot
     out = []; n_after = n_before = 0
+    before_re = guard_before(p)
     for i, l in enumerate(lines):
-        if a < i < b and GUARD_BEFORE.search(l) and 'posefix' not in l:
+        if a < i < b and before_re.search(l) and 'posefix' not in l:
             out.append(guard); n_before += 1
         out.append(l)
         if a < i < b and GUARD_AFTER.search(l):
@@ -502,7 +518,10 @@ def apply():
     log['foley'] = {n: os.path.basename(s) for n, s, _ in FOLEY}
     # DECORATE
     for cls, p in PLUS.items():
-        fn = {'MG42': 'MG42.dec', 'Flamethrower2': 'Flamethrower.dec', 'Unmaker': 'Unmaker.dec'}[cls]
+        # BD22's file for this weapon. Usually the class name, but not always -- Flamethrower2
+        # lives in Flamethrower.dec -- so an entry may name its own with `dec=`. This was a
+        # hardcoded map of the first three guns and refused a fourth with a KeyError.
+        fn = p.get('dec', cls + '.dec')
         src = OUT_SRC + 'actors/Weapons/' + fn
         if not os.path.exists(src):
             shutil.copy(BD22SRC + 'actors/Weapons/' + fn, src)       # BD22's own file, untouched by 1.96b
