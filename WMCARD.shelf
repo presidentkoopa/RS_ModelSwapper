@@ -1,5 +1,5 @@
 # ============================================================================
-# WMCARD.shelf.raw4 -- written from our OWN measurements.
+# WMCARD.shelf.raw5 -- written from our OWN measurements.
 #
 # Every number here came out of the gun's own reload animation, measured by
 # md3label on the ANIMATED mesh this mod ships. No static _wm world model was
@@ -15,6 +15,10 @@ weapon "MS_Pistol2"
   barrel    = 1, 0, 0
   ejectport = 1.66, 1.77, -0.65
   ejectdir  = 0.0, 1.0, 0.0
+  magmodel  = "models/hud/Pistol" "MS_Pistol2_mag.md3"
+  magskin   = "models/hud/Pistol" "WPN-9mm2.png"
+  magscale  = 1.0
+  magcenter = -3.27, -0.11, -5.65
 end
 
 grip
@@ -44,6 +48,10 @@ weapon "MS_BD_BrutalSMG"
   capacity  = 32
   muzzle    = 25.36, -0.92, 2.0
   barrel    = 1, 0, 0
+  magmodel  = "models/hud/SMG" "MS_BD_BrutalSMG_mag.md3"
+  magskin   = "models/hud/SMG" "BrutalSMG.png"
+  magscale  = 1.0
+  magcenter = 4.01, -0.18, -8.22
 end
 
 grip
@@ -74,6 +82,10 @@ weapon "MS_AE_Flamer"
   capacity  = 100
   muzzle    = 34.89, -0.39, 1.28
   barrel    = 1, 0, 0
+  magmodel  = "models/hud/AE_Flamer" "MS_AE_Flamer_mag.md3"
+  magskin   = "models/hud/AE_Flamer" "m260b.png"
+  magscale  = 1.0
+  magcenter = -9.81, -0.49, -10.24
 end
 
 grip
@@ -103,6 +115,10 @@ weapon "MS_brt_Minigun"
   capacity  = 12
   muzzle    = 94.59, -1.06, -50.34
   barrel    = 1, 0, 0
+  magmodel  = "models/bd/Minigun" "MS_brt_Minigun_mag.md3"
+  magskin   = "models/bd/Minigun" "Minigun.png"
+  magscale  = 1.0
+  magcenter = 52.23, 24.86, -33.7
 end
 
 grip
@@ -134,6 +150,10 @@ weapon "MS_brt_BrutalPistol"
   barrel    = 1, 0, 0
   ejectport = 31.9, 1.63, 0.12
   ejectdir  = 0.0, 1.0, 0.0
+  magmodel  = "models/bd/BrutalPistol" "MS_brt_BrutalPistol_mag.md3"
+  magskin   = "models/bd/BrutalPistol" "BrutalPistol.png"
+  magscale  = 1.0
+  magcenter = 25.2, -0.04, -8.43
 end
 
 grip
@@ -164,6 +184,10 @@ weapon "MS_brt_RPG"
   capacity  = 1
   muzzle    = 80.05, 3.86, 10.31
   barrel    = 1, 0, 0
+  magmodel  = "models/bd/RPG" "MS_brt_RPG_mag.md3"
+  magskin   = "models/bd/RPG" "RPG.png"
+  magscale  = 1.0
+  magcenter = 17.51, -16.49, 10.73
 end
 
 grip
@@ -193,6 +217,10 @@ weapon "MS_brt_BrutalSMG"
   capacity  = 32
   muzzle    = 63.8, -0.77, -3.98
   barrel    = 1, 0, 0
+  magmodel  = "models/bd/BrutalSMG" "MS_brt_BrutalSMG_mag.md3"
+  magskin   = "models/bd/BrutalSMG" "BrutalSMG.png"
+  magscale  = 1.0
+  magcenter = 42.44, -0.03, -14.21
 end
 
 grip
@@ -223,6 +251,10 @@ weapon "MS_brt_MP40"
   capacity  = 32
   muzzle    = 90.59, -0.59, 2.08
   barrel    = 1, 0, 0
+  magmodel  = "models/bd/MP40" "MS_brt_MP40_mag.md3"
+  magskin   = "models/bd/MP40" "MP40.png"
+  magscale  = 1.0
+  magcenter = 60.14, -0.01, -4.57
 end
 
 grip
@@ -253,6 +285,10 @@ weapon "MS_brt_Rifle"
   capacity  = 20
   muzzle    = 74.45, -0.14, 9.3
   barrel    = 1, 0, 0
+  magmodel  = "models/bd/Rifle" "MS_brt_Rifle_mag.md3"
+  magskin   = "models/bd/Rifle" "Rifle.png"
+  magscale  = 1.0
+  magcenter = 40.86, 0.41, -5.8
 end
 
 grip
@@ -282,6 +318,10 @@ weapon "MS_wolf_Luger"
   capacity  = 12
   muzzle    = 44.77, 0.09, 0.45
   barrel    = 1, 0, 0
+  magmodel  = "models/wolf/Luger" "MS_wolf_Luger_mag.md3"
+  magskin   = "models/wolf/Luger" "Luger.png"
+  magscale  = 1.0
+  magcenter = 23.86, -0.08, -8.96
 end
 
 grip
@@ -312,6 +352,10 @@ weapon "MS_wolf_Shotgun"
   capacity  = 8
   muzzle    = 97.8, -0.11, 3.48
   barrel    = 1, 0, 0
+  magmodel  = "models/wolf/Shotgun" "MS_wolf_Shotgun_mag.md3"
+  magskin   = "models/wolf/Shotgun" "Shotgun.png"
+  magscale  = 1.0
+  magcenter = 46.63, 0.03, 2.19
 end
 
 grip
@@ -342,6 +386,10 @@ weapon "MS_wolf_Tommy"
   capacity  = 32
   muzzle    = 73.27, -0.0, 1.91
   barrel    = 1, 0, 0
+  magmodel  = "models/wolf/Tommy" "MS_wolf_Tommy_mag.md3"
+  magskin   = "models/wolf/Tommy" "Tommy.png"
+  magscale  = 1.0
+  magcenter = 37.03, -0.01, -1.83
 end
 
 grip
@@ -371,6 +419,10 @@ weapon "MS_alien_flamer"
   capacity  = 100
   muzzle    = 64.39, -0.05, 3.97
   barrel    = 1, 0, 0
+  magmodel  = "models/alien/flamer" "MS_alien_flamer_mag.md3"
+  magskin   = "models/alien/flamer" "m260b.png"
+  magscale  = 1.0
+  magcenter = 19.69, -0.14, -7.55
 end
 
 grip
@@ -400,6 +452,10 @@ weapon "MS_alien_pistol"
   capacity  = 12
   muzzle    = 18.58, -0.55, 3.77
   barrel    = 1, 0, 0
+  magmodel  = "models/alien/pistol" "MS_alien_pistol_mag.md3"
+  magskin   = "models/alien/pistol" "m4a3.png"
+  magscale  = 1.0
+  magcenter = -6.28, 0.01, -9.2
 end
 
 grip
@@ -430,6 +486,10 @@ weapon "MS_alien_rifle"
   capacity  = 20
   muzzle    = 48.36, 1.53, 1.27
   barrel    = 1, 0, 0
+  magmodel  = "models/alien/rifle" "MS_alien_rifle_mag.md3"
+  magskin   = "models/alien/rifle" "m41a.png"
+  magscale  = 1.0
+  magcenter = 7.93, -0.0, -12.12
 end
 
 grip
@@ -459,6 +519,10 @@ weapon "MS_chex_largezorcher"
   capacity  = 8
   muzzle    = 19.75, -8.06, 2.64
   barrel    = 1, 0, 0
+  magmodel  = "models/chex/largezorcher" "MS_chex_largezorcher_mag.md3"
+  magskin   = "models/chex/largezorcher" "LargeZorcher_clip_g.png"
+  magscale  = 1.0
+  magcenter = -0.34, -7.39, 1.86
 end
 
 grip
@@ -488,6 +552,10 @@ weapon "MS_chex_superlargezorcher"
   capacity  = 8
   muzzle    = 19.75, -8.06, 2.64
   barrel    = 1, 0, 0
+  magmodel  = "models/chex/superlargezorcher" "MS_chex_superlargezorcher_mag.md3"
+  magskin   = "models/chex/superlargezorcher" "LargeZorcher_clip_g.png"
+  magscale  = 1.0
+  magcenter = -0.34, -7.39, 1.86
 end
 
 grip
@@ -517,6 +585,10 @@ weapon "MS_d64_Minigun"
   capacity  = 12
   muzzle    = 94.59, -1.06, -50.34
   barrel    = 1, 0, 0
+  magmodel  = "models/d64/Minigun" "MS_d64_Minigun_mag.md3"
+  magskin   = "models/d64/Minigun" "Minigun.png"
+  magscale  = 1.0
+  magcenter = 52.23, 24.86, -33.7
 end
 
 grip
@@ -548,6 +620,10 @@ weapon "MS_d64_BrutalPistol"
   barrel    = 1, 0, 0
   ejectport = 31.9, 1.63, 0.12
   ejectdir  = 0.0, 1.0, 0.0
+  magmodel  = "models/d64/BrutalPistol" "MS_d64_BrutalPistol_mag.md3"
+  magskin   = "models/d64/BrutalPistol" "BrutalPistol.png"
+  magscale  = 1.0
+  magcenter = 25.2, -0.04, -8.43
 end
 
 grip
@@ -578,6 +654,10 @@ weapon "MS_d64_PlasmaGun"
   capacity  = 100
   muzzle    = 100.09, -1.77, -1.13
   barrel    = 1, 0, 0
+  magmodel  = "models/d64/PlasmaGun" "MS_d64_PlasmaGun_mag.md3"
+  magskin   = "models/d64/PlasmaGun" "Plasma.png"
+  magscale  = 1.0
+  magcenter = 47.99, -0.0, -14.5
 end
 
 grip
@@ -608,6 +688,10 @@ weapon "MS_d64_RPG"
   capacity  = 1
   muzzle    = 80.05, 3.86, 10.31
   barrel    = 1, 0, 0
+  magmodel  = "models/d64/RPG" "MS_d64_RPG_mag.md3"
+  magskin   = "models/d64/RPG" "RPG.png"
+  magscale  = 1.0
+  magcenter = 17.51, -16.49, 10.73
 end
 
 grip
@@ -639,6 +723,10 @@ weapon "MS_hdvr_Pistol"
   barrel    = 1, 0, 0
   ejectport = 31.9, 1.63, 0.12
   ejectdir  = 0.0, 1.0, 0.0
+  magmodel  = "models/hdvr/Pistol" "MS_hdvr_Pistol_mag.md3"
+  magskin   = "models/hdvr/Pistol" "Pistol.png"
+  magscale  = 1.0
+  magcenter = 25.2, -0.04, -8.43
 end
 
 grip
@@ -669,6 +757,10 @@ weapon "MS_hdvr_CHAINGUN"
   capacity  = 12
   muzzle    = 94.59, -1.06, -50.34
   barrel    = 1, 0, 0
+  magmodel  = "models/hdvr/CHAINGUN" "MS_hdvr_CHAINGUN_mag.md3"
+  magskin   = "models/hdvr/CHAINGUN" "Chaingun.png"
+  magscale  = 1.0
+  magcenter = 52.23, 24.86, -33.7
 end
 
 grip
@@ -698,6 +790,10 @@ weapon "MS_hdvr_RPG"
   capacity  = 1
   muzzle    = 80.05, 3.86, 10.31
   barrel    = 1, 0, 0
+  magmodel  = "models/hdvr/RPG" "MS_hdvr_RPG_mag.md3"
+  magskin   = "models/hdvr/RPG" "RPG.png"
+  magscale  = 1.0
+  magcenter = 17.51, -16.49, 10.73
 end
 
 grip
@@ -727,6 +823,10 @@ weapon "MS_hdvr_PlasmaRifle"
   capacity  = 20
   muzzle    = 100.09, -1.77, -1.13
   barrel    = 1, 0, 0
+  magmodel  = "models/hdvr/PlasmaRifle" "MS_hdvr_PlasmaRifle_mag.md3"
+  magskin   = "models/hdvr/PlasmaRifle" "PlasmaRifle.png"
+  magscale  = 1.0
+  magcenter = 47.99, -0.0, -14.5
 end
 
 grip
@@ -757,6 +857,10 @@ weapon "MS_qvplus_guns"
   capacity  = 12
   muzzle    = 56.08, 0.39, 2.42
   barrel    = 1, 0, 0
+  magmodel  = "models/qvplus/guns" "MS_qvplus_guns_mag.md3"
+  magskin   = "models/qvplus/guns" "WPN-M16.png"
+  magscale  = 1.0
+  magcenter = 31.0, -0.0, -7.51
 end
 
 grip
@@ -787,6 +891,10 @@ weapon "MS_voxel_SSGD4"
   capacity  = 12
   muzzle    = 8.55, -1.98, 1.0
   barrel    = 1, 0, 0
+  magmodel  = "models/voxel/SSGD4" "MS_voxel_SSGD4_mag.md3"
+  magskin   = "models/voxel/SSGD4" "sssg.png"
+  magscale  = 1.0
+  magcenter = 29.08, -0.04, -6.17
 end
 
 grip
@@ -818,6 +926,10 @@ weapon "MS_vplus_Pistol"
   barrel    = 1, 0, 0
   ejectport = 31.9, 1.63, 0.12
   ejectdir  = 0.0, 1.0, 0.0
+  magmodel  = "models/vplus/Pistol" "MS_vplus_Pistol_mag.md3"
+  magskin   = "models/vplus/Pistol" "Pistol.png"
+  magscale  = 1.0
+  magcenter = 25.2, -0.04, -8.43
 end
 
 grip
@@ -848,6 +960,10 @@ weapon "MS_vplus_CHAINGUN"
   capacity  = 12
   muzzle    = 94.59, -1.06, -50.34
   barrel    = 1, 0, 0
+  magmodel  = "models/vplus/CHAINGUN" "MS_vplus_CHAINGUN_mag.md3"
+  magskin   = "models/vplus/CHAINGUN" "Chaingun.png"
+  magscale  = 1.0
+  magcenter = 52.23, 24.86, -33.7
 end
 
 grip
@@ -877,6 +993,10 @@ weapon "MS_vplus_RPG"
   capacity  = 1
   muzzle    = 80.05, 3.86, 10.31
   barrel    = 1, 0, 0
+  magmodel  = "models/vplus/RPG" "MS_vplus_RPG_mag.md3"
+  magskin   = "models/vplus/RPG" "RPG.png"
+  magscale  = 1.0
+  magcenter = 17.51, -16.49, 10.73
 end
 
 grip
@@ -906,6 +1026,10 @@ weapon "MS_vplus_PlasmaRifle"
   capacity  = 20
   muzzle    = 100.09, -1.77, -1.13
   barrel    = 1, 0, 0
+  magmodel  = "models/vplus/PlasmaRifle" "MS_vplus_PlasmaRifle_mag.md3"
+  magskin   = "models/vplus/PlasmaRifle" "PlasmaRifle.png"
+  magscale  = 1.0
+  magcenter = 47.99, -0.0, -14.5
 end
 
 grip
@@ -936,6 +1060,10 @@ weapon "MS_vplus_guns"
   capacity  = 12
   muzzle    = 56.08, 0.39, 2.42
   barrel    = 1, 0, 0
+  magmodel  = "models/vplus/guns" "MS_vplus_guns_mag.md3"
+  magskin   = "models/vplus/guns" "WPN-M16.png"
+  magscale  = 1.0
+  magcenter = 31.0, -0.0, -7.51
 end
 
 grip
@@ -968,6 +1096,10 @@ weapon "MS_zblood_shotgun"
   barrel    = 1, 0, 0
   ejectport = 16.28, 4.28, -5.08
   ejectdir  = 0.0, 1.0, 0.0
+  magmodel  = "models/zblood/shotgun" "MS_zblood_shotgun_mag.md3"
+  magskin   = "models/zblood/shotgun" "shotgun.png"
+  magscale  = 1.0
+  magcenter = 10.94, 0.07, 3.12
 end
 
 grip

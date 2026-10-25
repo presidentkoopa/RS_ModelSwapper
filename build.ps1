@@ -95,7 +95,27 @@ $files = $files | Where-Object { $_.FullName -notmatch '\\models\\blend\\' }
 # at it. The asset-ref check below is what catches an over-exclusion.
 $mdRefs = [regex]::Matches((Get-Content (Join-Path $root 'modeldef') -Raw), '(?i)Path\s+"models/([^/"]+)') |
           ForEach-Object { $_.Groups[1].Value.ToLower() } | Sort-Object -Unique
+# modeldef is not the only thing that names a mesh. The reload cards name the
+# LOOSE MAGAZINE the player holds -- magmodel -- plus loose rounds, belts and the
+# gun mesh itself, and those live under models/vanilla, models/breach and
+# models/bd22, which no Model block points at. Filtering on modeldef alone
+# dropped every one of them: wm_tec9_mag.md3 is on disk, is named by
+# WMCARD.07_smg, and was not in the pk3, so that gun's reload had no magazine to
+# put in your hand. These are collected as exact paths rather than folders, so a
+# card cannot drag a whole unreferenced package in behind it.
+$cardRefs = @{}
+Get-ChildItem $root -Filter 'WMCARD.*' -File | ForEach-Object {
+    $ct = Get-Content $_.FullName -Raw
+    [regex]::Matches($ct, '(?i)(?:mag|round|link|)model\s*=\s*"([^"]+)"\s+"([^"]+)"') | ForEach-Object {
+        $cardRefs[(($_.Groups[1].Value.TrimEnd('/') + '/' + $_.Groups[2].Value) -replace '\\', '/').ToLower()] = $true
+    }
+    [regex]::Matches($ct, '(?i)(?:mag|round|link|)skin\s*=\s*"([^"]+)"\s+"([^"]+)"') | ForEach-Object {
+        $cardRefs[(($_.Groups[1].Value.TrimEnd('/') + '/' + $_.Groups[2].Value) -replace '\\', '/').ToLower()] = $true
+    }
+}
 $files = $files | Where-Object {
+    $rel = ($_.FullName.Substring($root.Length + 1) -replace '\\', '/').ToLower()
+    if ($cardRefs.ContainsKey($rel)) { return $true }
     if ($_.FullName -notmatch '\\models\\([^\\]+)\\') { return $true }
     $mdRefs -contains $matches[1].ToLower()
 }

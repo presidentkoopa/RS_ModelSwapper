@@ -128,6 +128,25 @@ def main(outpath):
             g = ej.groups()
             b.append(f'  ejectport = {g[0]}, {g[1]}, {g[2]}')
             b.append(f'  ejectdir  = {g[3]}, {g[4]}, {g[5]}')
+        # THE LOOSE MAGAZINE. A `part magazine` makes the gun's own surface slide;
+        # it does not put a magazine in the player's off hand. That is magmodel,
+        # and every entry the earlier lane wrote has one -- WMCARD.07_smg's TEC-9
+        # carries wm_tec9_mag.md3 this way. Everything written here before this
+        # had none, which is half a reload: the gun's magazine moved and the hand
+        # held nothing.
+        #
+        # md3label already carves it. The card's `carved mag ... file X_mag.md3`
+        # line names the file and `seat_origin` is where it sits when seated, which
+        # is exactly magcenter. magscale is 1.0 because the carve comes straight
+        # out of this gun's own mesh in this gun's own units.
+        cv = re.search(r'carved\s+mag\s+seat_origin\s+' + V3 +
+                       r'[^\n]*?file\s+(\S+)', t)
+        if cv and os.path.exists(os.path.join(d, cv.group(4))):
+            b.append(f'  magmodel  = "{d}" "{cv.group(4)}"')
+            if skin_ok:
+                b.append(f'  magskin   = "{d}" "{skin}"')
+            b.append('  magscale  = 1.0')
+            b.append(f'  magcenter = {cv.group(1)}, {cv.group(2)}, {cv.group(3)}')
         b.append('end')
         b.append('')
         if grip or trig or sup:
