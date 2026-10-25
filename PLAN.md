@@ -54,6 +54,13 @@ per-gun checklist below, in a headset, signed by the owner.
       loops are all bores, the Machinegun's M249 body has none -- so those three still throw from
       the body. Find a source that is a mesh or the parent mod, or say plainly that there is none.
 
+- F9  A gate ANY LANE can point at its own set. Today gate/bd22_gate.sh hardcodes bd22q's four
+      paths, its parent mod and its weapon class names, so a lane building another set cannot
+      use it. Split it into a generic runner plus a per-set config, add a marker per gun so the
+      log says WHICH guns actually fired, and write the method down with the traps -- the ones
+      that cost this session a day are all in it. (owner, 2026-10-25: "another lane is doing
+      another weaponset, they need to be able to do what you just did".)
+
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
 - S1  Vanilla / V+ roster + menu (V+ = toggles inside Vanilla per the owner's checklist).  (owner's order, 03:21)
