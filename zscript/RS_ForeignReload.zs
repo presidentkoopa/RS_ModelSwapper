@@ -76,8 +76,18 @@ class MS_ReloadStates : Weapon
 	// the idle sway fighting the hands; WRF_NOFIRE stops a trigger pull
 	// cancelling a reload halfway through, which is what the gun's own reload
 	// would do too.
+	// NO ACTION FUNCTION, deliberately. A state's action is compiled against the
+	// class that owns the state, so running it with the mod's weapon as the caller
+	// fails the type check at runtime:
+	//     Invalid class RwPistol in function call to MS_ReloadStates.StateFunction.0
+	// RSR_PartStates gets away with an arbitrary caller for exactly this reason --
+	// its state is `TNT1 A -1;` and calls nothing.
+	//
+	// And nothing is lost. A_WeaponReady is what lets a weapon fire, bob and be
+	// switched away from; a psprite parked on a plain ticking state does none of
+	// those, which IS the hold. The gun sits still in your hands while they work.
 	MS_Hold:
-		"####" "#" 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_NOSWITCH);
+		"####" "#" 1;
 		Loop;
 	}
 }
@@ -88,6 +98,11 @@ class MS_ReloadJoin : EventHandler
 	// put back exactly there. 0 = not driving.
 	private State mReturn[MAXPLAYERS];
 	private Weapon mHeld[MAXPLAYERS];
+	private State mLastSeen[MAXPLAYERS];   // trace: only speak when the state changes
+
+	// A trace for the one failure mode that looks like nothing happening.
+	private bool ms_join_trace;
+	override void OnRegister() { let c = CVar.FindCVar('ms_join_trace'); ms_join_trace = c && c.GetInt() != 0; }
 
 	// The remap for (weapon class, donor) -- the same object the model layer
 	// uses, found the way the handler finds it.
@@ -112,6 +127,39 @@ class MS_ReloadJoin : EventHandler
 	// attributed it? This is the question the whole join turns on, and it is
 	// already answered for every mod, including the ones that hide their real
 	// reload behind a custom label.
+	// TWO ROUTES, because the remap only exists on one of the two builds.
+	//
+	// The thorough one is RS_ForeignRemap: it attributes every state, including a
+	// DECORATE mod's custom reload labels, to the group it was written under. That
+	// is the right answer and it catches a mod that jumps straight into Work1 or
+	// ReloadChamber without passing through Reload:.
+	//
+	// But the STATIC build -- the Quest one -- draws models without animating them,
+	// so it builds no remaps at all ("[RSRM] scan ... STATIC BUILD -- no animation"),
+	// and the whole detection came back `remap NONE`. There the entry itself is
+	// enough: we take over AT the handover, not part way through, and a weapon
+	// entering its own Reload label is exactly that moment.
+	private bool AtReloadEntry(Weapon w, State s)
+	{
+		if (!w || !s)
+			return false;
+		let rs = w.FindState("Reload");
+		if (!rs)
+			return false;
+		// NOT just `s == rs`. A reload label's first state is very often 0 tics --
+		// a check, a jump, a sound -- so by the time WorldTick looks the psprite has
+		// already walked past it and the entry is missed every time. Walk the chain
+		// forward instead and ask whether the psprite is anywhere in the opening run
+		// of the mod's own reload. 64 is well past any opening sequence and stops
+		// dead on a loop, so a mod with a long reload costs nothing.
+		// NOT a NextState walk: that runs clean past the end of the reload block into
+		// whatever was declared after it, so the gun's own Ready loop measured as "in
+		// the reload" on every tic. DistanceTo gives the state's offset inside the
+		// class's own state array, which is bounded and does not wander.
+		int d = rs.DistanceTo(s);
+		return d >= 0 && d < 32;
+	}
+
 	private bool InReloadGroup(RS_ForeignRemap m, State s)
 	{
 		if (!m || !s)
@@ -190,8 +238,27 @@ class MS_ReloadJoin : EventHandler
 
 			// Not driving yet. Has the mod's weapon just entered its reload?
 			let m = RemapFor(mo, w);
-			if (!InReloadGroup(m, psp.CurState))
+			if (!InReloadGroup(m, psp.CurState) && !AtReloadEntry(w, psp.CurState))
+			{
+				// WHY NOT. A join that silently does nothing is the hardest kind of
+				// bug to see -- it looks exactly like a gun that is not reloading.
+				// One line per state change, only for a weapon that HAS a slot, so
+				// it is quiet on an arsenal we do not drive.
+				if (ms_join_trace && psp.CurState != mLastSeen[i])
+				{
+					mLastSeen[i] = psp.CurState;
+					int row = m ? m.LookupIndex(psp.CurState) : -2;
+					string clip = "-";
+					if (m && row >= 0 && row < m.mGroupId.Size())
+					{
+						int gid = m.mGroupId[row];
+						if (gid >= 0 && gid < m.mGroups.Size()) clip = m.mGroups[gid].clipName;
+					}
+					Console.Printf("[MSJOIN] %s slot %d: remap %s row %d clip '%s'",
+						w.GetClassName(), slot, m ? "found" : "NONE", row, clip);
+				}
 				continue;
+			}
 
 			Take(mo, p, i, w, psp);
 		}
@@ -201,20 +268,20 @@ class MS_ReloadJoin : EventHandler
 	// and start the reload the hands drive.
 	private void Take(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
 	{
-		let shim = MS_ReloadStates(mo.FindInventory('MS_ReloadStates'));
-		if (!shim)
-		{
-			mo.GiveInventory('MS_ReloadStates', 1);
-			shim = MS_ReloadStates(mo.FindInventory('MS_ReloadStates'));
-		}
-		if (!shim)
+		// The hold state off the CLASS DEFAULT -- nothing is given to the player.
+		// GiveInventory of a Weapon subclass silently fails (Weapon.TryPickup has its
+		// own rules), which is why this used to return here having done nothing at all.
+		// The caller stays the mod's OWN weapon, so A_WeaponReady in the hold holds
+		// that gun, and the psprite still belongs to the weapon it came from.
+		State hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+		if (!hold)
 			return;
 		mReturn[i] = psp.CurState;
 		mHeld[i] = w;
-		// RSR_Start is what vreload watches for; it answers with RSR_Go when it
-		// is willing to take the reload, and the hands take over from there.
+		// RSR_Start is what vreload watches for; it answers with RSR_Go when it is
+		// willing to take the reload, and the hands take over from there.
 		mo.GiveInventory('RSR_Start', 1);
-		p.SetPsprite(PSP_WEAPON, shim.FindState("MS_Hold"), false, shim);
+		p.SetPsprite(PSP_WEAPON, hold, false, w);
 		if (RS_ForeignRemap.DebugOn())
 			Console.Printf("[MSJOIN] took %s (slot %d) at its reload", w.GetClassName(), RSR_Guns.Index(w));
 	}

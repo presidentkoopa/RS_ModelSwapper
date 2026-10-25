@@ -197,3 +197,9 @@ server bool rsa_sg_slug = false;		// pump shotgun: secondary fires a slug
 // not a per-player preference, so every peer must agree on it.
 server string ms_donor_main = "";
 server string ms_donor_off = "";
+
+// The join's trace: one line per state change on a weapon that HAS a reload slot,
+// saying whether the remap was found and which labelled group its state is in.
+// Off by default; a join that silently declines looks exactly like a gun that is
+// simply not reloading, which is the hardest kind of bug to see.
+server int ms_join_trace = 0;
