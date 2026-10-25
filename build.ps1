@@ -106,10 +106,15 @@ $mdRefs = [regex]::Matches((Get-Content (Join-Path $root 'modeldef') -Raw), '(?i
 $cardRefs = @{}
 Get-ChildItem $root -Filter 'WMCARD.*' -File | ForEach-Object {
     $ct = Get-Content $_.FullName -Raw
-    [regex]::Matches($ct, '(?i)(?:mag|round|link|)model\s*=\s*"([^"]+)"\s+"([^"]+)"') | ForEach-Object {
-        $cardRefs[(($_.Groups[1].Value.TrimEnd('/') + '/' + $_.Groups[2].Value) -replace '\\', '/').ToLower()] = $true
-    }
-    [regex]::Matches($ct, '(?i)(?:mag|round|link|)skin\s*=\s*"([^"]+)"\s+"([^"]+)"') | ForEach-Object {
+    # ONLY THE PROPS. A card's bare `model =` is very often a static _wm world
+    # model, because that is the mesh the card lane measured against -- 39 cards
+    # name one. The gun the player holds comes from modeldef, which names no _wm
+    # anywhere, and shipping a static world model as a gun is the one thing this
+    # pack must never do. The first version of this regex was
+    # `(?:mag|round|link|)model`, whose EMPTY alternative also matched the bare
+    # `model =` and pulled 25 static world models into the pk3. The prefix is
+    # required, and the guard below is what proves it stayed that way.
+    [regex]::Matches($ct, '(?i)\b(?:mag|round|link)(?:model|skin)\s*=\s*"([^"]+)"\s+"([^"]+)"') | ForEach-Object {
         $cardRefs[(($_.Groups[1].Value.TrimEnd('/') + '/' + $_.Groups[2].Value) -replace '\\', '/').ToLower()] = $true
     }
 }
@@ -155,6 +160,14 @@ $z.Entries | ForEach-Object { $names[$_.FullName.ToLower()] = $true }
 
 $bad = ($z.Entries | Where-Object { $_.FullName -match '\\' }).Count
 
+# NO STATIC WORLD MODELS. A *_wm.md3 is the frozen pickup mesh; this pack ships
+# the ANIMATED mesh for every gun, because a gun that cannot move cannot be
+# reloaded and the whole point of the pack is that it can. This has been
+# reintroduced twice by accident through a filter that was too generous, so it is
+# a build failure now rather than something to notice later in a headset.
+$wm = $z.Entries | Where-Object { $_.FullName -match '(?i)_wm\.md3$' }
+foreach ($w in $wm) { Write-Warning "STATIC WORLD MODEL packed: $($w.FullName)" }
+
 $md = $z.Entries | Where-Object { $_.FullName -eq 'modeldef' }
 $sr = New-Object System.IO.StreamReader($md.Open())
 $txt = $sr.ReadToEnd(); $sr.Close()
@@ -197,8 +210,9 @@ $z.Dispose()
 
 Write-Host "$(Split-Path $out -Leaf)  --  $n entries, $mb MB$(if ($Static) { '  [STATIC / stock GZDoom]' })"
 Write-Host "  backslash entries : $bad"
+Write-Host "  static world models: $($wm.Count)   (must be 0)"
 Write-Host "  asset refs        : $refs checked, $miss unresolved"
 Write-Host "  donors            : $($donors.Count), $($dupes.Count) duplicate, $($nostub.Count) unstubbed"
-if ($bad -gt 0 -or $miss -gt 0 -or $dupes.Count -gt 0 -or $stubdup.Count -gt 0 -or $nostub.Count -gt 0) {
+if ($bad -gt 0 -or $miss -gt 0 -or $wm.Count -gt 0 -or $dupes.Count -gt 0 -or $stubdup.Count -gt 0 -or $nostub.Count -gt 0) {
     throw "package verification failed"
 }
