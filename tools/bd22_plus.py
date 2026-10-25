@@ -15,7 +15,7 @@ Sources, and nothing else:
 Stage 1 (this file, `geometry`): survey records + gen_rsr GUNS entries + the carved meshes to ship.
     python3 bd22_plus.py geometry   -> build/bd22/plus_geometry.json, build/bd22/models/*_rsr.md3
 """
-import os, sys, json
+import os, sys, json, shutil
 import numpy as np
 from scipy.spatial import cKDTree
 TOOLS = os.path.dirname(os.path.abspath(__file__))                 # this repo's tools/
@@ -54,7 +54,11 @@ BD22SRC = 'E:/DOOMWork/_buildtemp/bd22src/'                        # brutal22tes
 # renaming it would break check_plan.py and PLAN.md for nothing.
 VERSION = '1.99'
 
-SCALE, OFF = (-1.0, 1.0, 1.0), (0.0, 0.0, 0.0)        # MODELDEF.bd.txt: all three guns
+# MODELDEF.bd.txt placement. The first three guns added here share it, which is why it was a
+# constant -- but it is NOT universal, and assuming it is puts a part in the wrong place with no
+# error: the M32 is Scale -0.62 0.62 0.62, Offset 0 -30 -8, and read through these numbers its
+# drum measured 20 cm and 11 cm of mouth away from the truth. An entry may override both.
+SCALE, OFF = (-1.0, 1.0, 1.0), (0.0, 0.0, 0.0)        # the default: MG42, Flamethrower, Unmaker
 
 # the three toggles: 1.96b class -> sources
 PLUS = {
@@ -81,6 +85,25 @@ PLUS = {
                  toggle='rsq_plus_flamer', label='Flamethrower: Canister Reload',
                  reserve='Gas', magammo='RSQ_FlamerCanister', nomag='RSQ_NoCanister_Flamer', ammouse=1,
                  ready_sprites=['FLMT A', '2LMT A'], spr=('RQYM', 'RQYP', 'RQYW')),
+    # THE M32, AND THE FIRST GUN ADDED WITHOUT A CARD OR A REFERENCE MESH (owner, 2026-10-25:
+    # "we want reloading for all weapons that are not melee"). It needs neither: its `magazine`
+    # is already its own surface in the mesh we ship -- 484 verts, a drum 17.4 cm long and ~15
+    # across lying on the bore line -- so there is nothing to carve and no correspondence to
+    # solve. `out` is the only number a mesh cannot give: which way the drum leaves the gun. The
+    # well, the mouth, the base and the off hand's hold are all still measured off the mesh by
+    # genpack.mouth_depth and gen_rsr's grip='mesh', exactly as for the three guns above.
+    # Out to the LEFT, into the off hand: the kit measures the mouth at 19.16 cm that way, and
+    # sideways is the shortest way clear of the gun (19.0 left / 19.5 right / 24.5 down /
+    # 49.5 forward, measured per body). Left and right are within half a centimetre, so the mesh
+    # does not choose a side -- the off hand does.
+    # Capacity 6: a Milkor MGL holds six. bd_40mm already exists as the Machinegun's grenade family.
+    'IncendiaryLauncher': dict(mesh='M32/m32.md3', out=(0.0, 1.0, 0.0), travel=19.16, capacity=6,
+                 scale=(-0.62, 0.62, 0.62), off=(0.0, -30.0, -8.0),   # its own MODELDEF, not the default
+                 part='magazine', ready_frame=0,
+                 snd_out='rsr/canout', snd_in='rsr/canin', snd_land='rsr/bigdrop',
+                 toggle='rsq_plus_m32', label='Incendiary Launcher: Cylinder Reload',
+                 reserve='AmmoRocket', magammo='RSQ_M32Cylinder', nomag='RSQ_NoCylinder_M32', ammouse=1,
+                 ready_sprites=['M202 A'], spr=('RQVM', 'RQVP', 'RQVW')),
     'Unmaker': dict(card='BD_Unmaker', ref='unmaker_wm.md3', mesh='Unmaker/Unmaker.md3',
                  part='skull', ref_parts={'skull': 'magazine', 'skull2': 'magazine'}, ready_frame=0,
                  snd_out='Unmaker/Stop', snd_in='Unmaker/Start', snd_land='rsr/bigdrop',
@@ -122,35 +145,72 @@ def geometry():
     os.makedirs(OUT + 'models', exist_ok=True)
     out = {}
     for cls, p in PLUS.items():
-        ref = REMA + 'models/bd22/' + p['ref']
+        # EACH GUN'S OWN MODELDEF PLACEMENT, not one constant for all of them. See the note on
+        # SCALE/OFF above: read through the wrong pair, a part measures metres from where it is.
+        sc, of = tuple(p.get('scale', SCALE)), tuple(p.get('off', OFF))
         mesh = SRC + 'models/bd/' + p['mesh']
         carved = OUT + 'models/' + os.path.basename(p['mesh']).replace('.md3', '_rsr.md3')
-        cv = carve_by_ref.carve(ref, mesh, carved, p['ref_parts'])
-        Rm, t, dmean, dmax = rigid(ref, mesh, 0)
-        card = card_block(p['card'])
-        part = card['parts'][p['part']]
-        axis_out = np.array([float(x) for x in part['dof']['axis']])
-        grab = np.array([float(x) for x in part['keys']['grab']])
-        magc = np.array([float(x) for x in card['keys']['magcenter']])
-        # into the 1.96b mesh, then into the controller frame (F, L, U) through the gun's own MODELDEF
-        X = lambda v: rgeo.to_flu((Rm @ v + t)[None, :], SCALE, OFF)[0]
-        D = lambda v: rgeo.to_flu((Rm @ v)[None, :], SCALE, OFF)[0] - rgeo.to_flu(np.zeros((1, 3)), SCALE, OFF)[0]
+        # A GUN WHOSE PART IS ALREADY ITS OWN SURFACE NEEDS NO CARVE AND NO REFERENCE MESH.
+        # The first three guns here (MG42, Flamethrower, Unmaker) had their part welded into the
+        # body, so each was carved by correspondence against REMA's single-frame `*_wm.md3`. The
+        # M32 ships `magazine` as its own surface, so there is nothing to carve -- and the owner
+        # ruled the `_wm` route out on 2026-10-25 ("no _wm meshes, cards only for OUR animating
+        # copies") because a _wm has ONE frame while our meshes are animated. An entry with
+        # `out=` instead of `ref=` takes this path: the shipped mesh IS the carved mesh, the
+        # insert direction comes from the entry, and everything else is still measured off the
+        # mesh by genpack.mouth_depth exactly as before.
+        direct = 'ref' not in p
+        if direct:
+            shutil.copyfile(mesh, carved)
+            nsurf0, surfs0 = genpack.md3_surfaces(carved)
+            cv = dict(surfaces=[s['name'] for s in surfs0], frames=surfs0[0]['xyz'].shape[0],
+                      unlabelled=0, rot_deg=0.0)
+            dmean = dmax = 0.0
+            axis_out = -np.array([float(x) for x in p['out']], float)   # card axis = into the well
+            grab = magc = None
+            X = lambda v: v
+            D = lambda v: rgeo.to_flu(np.array(v, float)[None, :], sc, of)[0] - \
+                rgeo.to_flu(np.zeros((1, 3)), sc, of)[0]
+        else:
+            ref = REMA + 'models/bd22/' + p['ref']
+            cv = carve_by_ref.carve(ref, mesh, carved, p['ref_parts'])
+            Rm, t, dmean, dmax = rigid(ref, mesh, 0)
+            card = card_block(p['card'])
+            part = card['parts'][p['part']]
+            axis_out = np.array([float(x) for x in part['dof']['axis']])
+            grab = np.array([float(x) for x in part['keys']['grab']])
+            magc = np.array([float(x) for x in card['keys']['magcenter']])
+        # into the 1.96b mesh, then into the controller frame (F, L, U) through the gun's own MODELDEF.
+        # A direct gun has no reference mesh, so there is no rigid transform to carry: its own
+        # vertices are already the ones we ship, and X/D were set above as the identity pair.
+        if not direct:
+            X = lambda v: rgeo.to_flu((Rm @ v + t)[None, :], sc, of)[0]
+            D = lambda v: rgeo.to_flu((Rm @ v)[None, :], sc, of)[0] - rgeo.to_flu(np.zeros((1, 3)), sc, of)[0]
         ins = -D(axis_out); ins /= np.linalg.norm(ins)
         nsurf, surfs = genpack.md3_surfaces(carved)
         names = [s['name'] for s in surfs]
         mag_idx = [i for i, n in enumerate(names) if n == 'magazine']
-        depth, base, top, hw = genpack.mouth_depth(surfs, p['ready_frame'], SCALE, OFF, mag_idx, None, ins)
-        travel = float(part['dof']['distance'])
-        rec = dict(cls=cls, card=p['card'], carved=carved, surfaces=cv['surfaces'], frames=cv['frames'],
+        depth, base, top, hw = genpack.mouth_depth(surfs, p['ready_frame'], sc, of, mag_idx, None, ins)
+        # TRAVEL: a carded gun states it; a direct gun takes the mouth the kit just measured off
+        # its own mesh, which is the distance the part has to move to clear the well.
+        travel = float(p['travel']) if direct else float(part['dof']['distance'])
+        rec = dict(cls=cls, card=p.get('card'), carved=carved, surfaces=cv['surfaces'], frames=cv['frames'],
                    unlabelled=cv['unlabelled'], rigid=dict(mean_cm=round(dmean, 4), max_cm=round(dmax, 4), rot_deg=cv['rot_deg']),
-                   capacity=sheet_capacity(p['card']), ammouse=p['ammouse'],
+                   # CAPACITY IS INVENTED AND ALWAYS WAS. BD22 states none for any of these guns, so
+                   # MG42 200, Flamethrower 200 and Unmaker 60 all came off the owner's REMA sheet.
+                   # A direct gun states its own in the entry for the same reason.
+                   capacity=int(p['capacity']) if direct else sheet_capacity(p['card']), ammouse=p['ammouse'],
                    survey=dict(parts=dict(magazine=dict(well_point=top.round(3).tolist(), insert_dir=ins.round(4).tolist(),
                                                         insert_depth_cm=depth, base_point=base.round(3).tolist(),
                                                         half_width_cm=round(hw, 2), card_travel_cm=travel,
-                                                        card_grab=X(grab).round(3).tolist(), card_magcenter=X(magc).round(3).tolist()))),
-                   palm=X(np.array([float(x) for x in card['grip']['palm']])).round(3).tolist(),
-                   supportat=X(np.array([float(x) for x in card['grip']['supportat']])).round(3).tolist(),
-                   mag_idx=mag_idx, names=names)
+                                                        card_grab=(None if grab is None else X(grab).round(3).tolist()),
+                                                        card_magcenter=(None if magc is None else X(magc).round(3).tolist())))),
+                   # A direct gun has no card, so no palm/supportat to carry. It does not need
+                   # them: its hands are already fitted in the shipped hand table, and gen_rsr's
+                   # grip='mesh' rule takes the off hand's hold off the magazine's own vertices.
+                   palm=(None if direct else X(np.array([float(x) for x in card['grip']['palm']])).round(3).tolist()),
+                   supportat=(None if direct else X(np.array([float(x) for x in card['grip']['supportat']])).round(3).tolist()),
+                   direct=direct, mag_idx=mag_idx, names=names)
         out[cls] = rec
         print('%-14s carve %s unlabelled=%d rigid mean %.4f max %.4f rot %.2f deg' % (cls, cv['surfaces'], cv['unlabelled'], dmean, dmax, cv['rot_deg']))
         print('   well %s  in %s  mouth %.2f  base %s  hw %.1f  travel(card) %.1f  cap %d' % (
