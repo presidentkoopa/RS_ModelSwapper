@@ -359,7 +359,11 @@ class RS_ForeignClip
 			// BD22Q guns (tools_kit/lift_bd22.py)
 			"MS_BD22_Ruger|ready|0@1|-1|-1|-1",
 			// BD22Q guns (tools_kit/lift_bd22.py)
-			"MS_BD22_Shotgun|ready|4@1|-1|-1|-1"
+			"MS_BD22_Shotgun|ready|4@1|-1|-1|-1",
+			// BD22Q guns (tools_kit/lift_bd22.py)
+			"MS_BD22_SSG|ready|1@1|-1|-1|-1",
+			"MS_BD22_Revolver|ready|0@1|-1|-1|-1",
+			"MS_BD22_M79|ready|3@1|-1|-1|-1"
 		};
 		mRows.Clear();
 		for (int i = 0; i < CLIP.Size(); ++i) mRows.Push(CLIP[i]);

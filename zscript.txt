@@ -317,3 +317,6 @@ class MS_BD22_PlasmaGun : Actor {}
 class MS_BD22_RocketLauncher : Actor {}
 class MS_BD22_Ruger : Actor {}
 class MS_BD22_Shotgun : Actor {}
+class MS_BD22_SSG : Actor {}
+class MS_BD22_Revolver : Actor {}
+class MS_BD22_M79 : Actor {}

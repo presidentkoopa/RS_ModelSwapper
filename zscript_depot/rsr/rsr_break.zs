@@ -103,6 +103,27 @@ class RSB abstract
 		return h >= 0 && h < n.Size() ? n[h] : "?";
 	}
 
+	// The reserve and what is loaded. A table that names them is used as is; ModelSwapper's rows
+	// name neither, because the gun is the loaded mod's and so is its ammo: then they are the
+	// weapon's own two stores (RSR.WeaponStore: the larger the reserve, the smaller the loaded).
+	play static int ReserveCount(PlayerPawn mo, int i)
+	{
+		String n = RSB_Guns.Reserve(i);
+		if (n != "")
+			return Count(mo, n);
+		let a = RSR.WeaponStore(mo, true);
+		return a ? a.Amount : 0;
+	}
+
+	play static int LoadedCount(PlayerPawn mo, int i)
+	{
+		String n = RSB_Guns.Loaded(i);
+		if (n != "")
+			return Count(mo, n);
+		let a = RSR.WeaponStore(mo, false);
+		return a ? a.Amount : 0;
+	}
+
 	clearscope static int Count(Actor mo, String n)
 	{
 		class<Inventory> c = n;
@@ -488,7 +509,7 @@ class RSB_State play
 		int i = gun;
 		if (!AnyEmpty())
 			return false;
-		int res = RSB.Count(mo, RSB_Guns.Reserve(i));
+		int res = RSB.ReserveCount(mo, i);
 		// V+ super shotgun: its shells stay in the reserve until fired (its reload takes none)
 		int need = RSB_Guns.ReserveHoldsLoaded(i) ? LiveCount() + 1 : 1;
 		if (res < need)
@@ -571,7 +592,7 @@ class RSB_State play
 	void SetChambers(PlayerPawn mo)
 	{
 		int i = gun;
-		int live = RSB.Count(mo, RSB_Guns.Loaded(i));
+		int live = RSB.LoadedCount(mo, i);
 		bool unloaded = RSB_Guns.Unloaded(i) != "" && RSB.Count(mo, RSB_Guns.Unloaded(i)) > 0;
 		for (int k = 0; k < RSB.MAXCH; k++)
 			ch[k] = RSB.EMPTY;
@@ -727,7 +748,7 @@ class RSB_State play
 				// and the reserve has two; pushed home together, they fill both barrels at once.
 				int need2 = RSB_Guns.ReserveHoldsLoaded(i) ? LiveCount() + 2 : 2;
 				pair = nch == 2 && !RSB_Guns.Loader(i) && ch[0] == RSB.EMPTY && ch[1] == RSB.EMPTY
-					&& RSB.Count(mo, RSB_Guns.Reserve(i)) >= need2 && RSB.PlayerInt(mo.player, 'rsr_ssg_pair', 1) != 0;
+					&& RSB.ReserveCount(mo, i) >= need2 && RSB.PlayerInt(mo.player, 'rsr_ssg_pair', 1) != 0;
 				SetHand(mo, RSB.CARRY);
 				for (int k = 0; k < nch; k++)
 					sAt[k] = 999;
@@ -1074,7 +1095,7 @@ class RSB_State play
 		let w = p.ReadyWeapon;
 		bool active = phase != RSB.IDLE && w && w == weap;
 		let psp = p.FindPSprite(PSP_WEAPON);
-		if (active && psp && psp.CurState == w.FindState("RSB_Wait"))
+		if (active && psp && (psp.CurState == w.FindState("RSB_Wait") || RSR.InHold(psp, w)))
 		{
 			// the gun without its hinged part and rounds: they are on their own layers
 			psp.Sprite = Actor.GetSpriteIndex(RSB_Guns.SprGun(gun));

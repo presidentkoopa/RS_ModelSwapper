@@ -227,9 +227,10 @@ class MS_ReloadJoin : EventHandler
 			// which is the whole of the mod's arsenal on day one.
 			int slot = RSR_Guns.Index(w);
 			int pslot = slot > 0 ? 0 : RSP_Guns.Index(w);
+			int bslot = slot > 0 || pslot > 0 ? 0 : RSB_Guns.Index(w);
 			if (mFeeding[i] && mFeedW[i] != w)
 				mFeeding[i] = false;			// switched away mid-shell: the mod's own business now
-			if (slot <= 0 && pslot <= 0)
+			if (slot <= 0 && pslot <= 0 && bslot <= 0)
 			{
 				if (mHeld[i]) Release(p, i, false);
 				continue;
@@ -247,6 +248,11 @@ class MS_ReloadJoin : EventHandler
 			if (pslot > 0)
 			{
 				PumpTick(mo, p, i, w, psp);
+				continue;
+			}
+			if (bslot > 0)
+			{
+				BreakTick(mo, p, i, w, psp);
 				continue;
 			}
 
@@ -363,6 +369,54 @@ class MS_ReloadJoin : EventHandler
 	// Give it back. `finished` means the hands completed the reload, so the mod
 	// runs its own reload from the top; otherwise put the psprite exactly where
 	// it was, because nothing happened.
+	// ---------------------------------------------------------------- break-open
+	// A break-open gun or a revolver (RSB_Guns): the hands open it, the spent rounds come out,
+	// they load each chamber and close it. The join plays the weapon's part the way it does for
+	// a magazine: hold the gun through the hands' whole cycle, then give it to the mod's own
+	// reload, which fills its own ammo its own way. The per-round tokens the break reload hands
+	// a weapon that owns its reload (RSB_LoadT: run your one-round step; RSB_EjectT: your casing
+	// spawns; RSB_TopUpT) have no taker on a foreign gun -- its own reload does all of that when
+	// it runs -- so they are cleared here each tic rather than left to pile up.
+	private void BreakTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
+	{
+		if (mHeld[i])
+		{
+			mo.GiveInventory('RSB_Tick', 1);		// the heartbeat a weapon's RSB_Wait would give
+			mo.TakeInventory('RSB_EjectT', 999);
+			mo.TakeInventory('RSB_LoadT', 999);
+			mo.TakeInventory('RSB_TopUpT', 999);
+			if (mo.CountInv('RSB_Done') > 0)
+			{
+				mo.TakeInventory('RSB_Done', 999);
+				Release(p, i, true);
+			}
+			return;
+		}
+		let m = RemapFor(mo, w);
+		bool inReload = InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState);
+		if (mDisarmed[i])
+		{
+			if (!inReload)
+				mDisarmed[i] = false;
+			return;
+		}
+		if (!inReload)
+			return;
+		State hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+		if (!hold)
+			return;
+		mo.TakeInventory('RSB_Go', 999);
+		mo.GiveInventory('RSB_Start', 1);
+		if (mo.CountInv('RSB_Go') <= 0)
+			return;						// the break reload declined (VR off, Stock): the mod's own reload
+		mo.TakeInventory('RSB_Go', 999);
+		mReturn[i] = psp.CurState;
+		mHeld[i] = w;
+		p.SetPsprite(PSP_WEAPON, hold, false, w);
+		if (RS_ForeignRemap.DebugOn())
+			Console.Printf("[MSJOIN] took %s (break slot %d) at its reload", w.GetClassName(), RSB_Guns.Index(w));
+	}
+
 	// ---------------------------------------------------------------- the pump
 	private void PumpTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
 	{

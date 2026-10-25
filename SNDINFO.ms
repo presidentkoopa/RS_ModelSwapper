@@ -70,3 +70,21 @@ $alias ms/bd22/rocketlauncher/magdrop ms/magdrop
 ms/bd22/shotgun/shellin              sounds/ms/SHOTLOAD1.ogg
 ms/bd22/shotgun/pumpback             sounds/ms/shotcycle.wav
 $alias ms/bd22/shotgun/shelldrop ms/magdrop
+
+// BD22 SSG break-open (tools_kit/lift_bd22.py)
+ms/bd22/ssg/open                     sounds/ms/DSDBOPN.ogg
+ms/bd22/ssg/load                     sounds/ms/CLIPINSS.ogg
+ms/bd22/ssg/close                    sounds/ms/DSDBCLS.ogg
+$alias ms/bd22/ssg/rounddrop ms/magdrop
+
+// BD22 Revolver break-open (tools_kit/lift_bd22.py)
+ms/bd22/revolver/open                sounds/ms/DBOPN.ogg
+ms/bd22/revolver/load                sounds/ms/DBLOD.ogg
+ms/bd22/revolver/close               sounds/ms/DBCLS.ogg
+$alias ms/bd22/revolver/rounddrop ms/magdrop
+
+// BD22 GrenadeLauncher break-open (tools_kit/lift_bd22.py)
+ms/bd22/m79/open                     sounds/ms/DSGROPEN.ogg
+ms/bd22/m79/load                     sounds/ms/DSGRLOAD.ogg
+ms/bd22/m79/close                    sounds/ms/DSGRCLOS.ogg
+$alias ms/bd22/m79/rounddrop ms/magdrop

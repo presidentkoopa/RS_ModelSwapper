@@ -151,3 +151,32 @@ Model RSQ_GunSide
 	Offset 0.0 -30.0 -5.0
 	FrameIndex RQRT B 0 0
 }
+
+// The off hand's holding poses for the reloads (Ermac's ammo_hand, his ammo hidden: the gun's own
+// magazine / shell / cell is drawn in it): RQHN I magazine (from BD22 MODELDEF.rsr), J shell and L cell
+// (from BD22 MODELDEF.rsb). rsq/hands.zs names them RsrHold / RsbShell / RsbCell; until these shipped
+// the reloading hand had no pose to draw.
+// RS real VR reload: Ermac's off hand holding a magazine (ammo_hand frame 3), without his
+// magazine: the gun's own magazine is drawn in it on layer 2201 (RSR, MODELDEF above)
+Model RSQ_Hands
+{
+	Path "models/rsq"
+	Model 0 "ammo_hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQHN I 0 3
+}
+// RSR-BREAK: Ermac's off hand holding one shell (ammo_hand frame 1) and a cell (frame 5), without
+// his ammo: the gun's own round / speedloader is drawn in it on layer 2202 (MODELDEF.rsb above)
+Model RSQ_Hands
+{
+	Path "models/rsq"
+	Model 0 "ammo_hand.md3"
+	Skin 0 "hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQHN J 0 1
+	FrameIndex RQHN L 0 5
+}
+

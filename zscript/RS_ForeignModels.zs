@@ -342,7 +342,11 @@ class RS_ForeignShelf
 			// BD22Q guns (tools_kit/lift_bd22.py)
 			"rifle|MS_BD22_Ruger|CHGG|0|0|1",
 			// BD22Q guns (tools_kit/lift_bd22.py)
-			"shotgun|MS_BD22_Shotgun|SHTG|0|4|30"
+			"shotgun|MS_BD22_Shotgun|SHTG|0|4|30",
+			// BD22Q guns (tools_kit/lift_bd22.py)
+			"supershotgun|MS_BD22_SSG|SHT2|0|1|46",
+			"revolver|MS_BD22_Revolver|PISG|0|0|31",
+			"launcher|MS_BD22_M79|MISG|0|3|26"
 		};
 		mRows.Clear();
 		// Addon rows come first, so loading an addon makes its models the
@@ -492,7 +496,11 @@ class RS_ForeignShelf
 			// BD22Q guns (tools_kit/lift_bd22.py)
 			"MS_BD22_Ruger|BD22 Ruger Mini-14",
 			// BD22Q guns (tools_kit/lift_bd22.py)
-			"MS_BD22_Shotgun|BD22 Shotgun"
+			"MS_BD22_Shotgun|BD22 Shotgun",
+			// BD22Q guns (tools_kit/lift_bd22.py)
+			"MS_BD22_SSG|BD22 Super Shotgun",
+			"MS_BD22_Revolver|BD22 Revolver",
+			"MS_BD22_M79|BD22 Grenade Launcher"
 		};
 		string key = cls .. "|";
 		for (int i = 0; i < NAMES.Size(); ++i)

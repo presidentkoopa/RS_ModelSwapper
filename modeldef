@@ -3299,3 +3299,49 @@ Model MS_BD22_Shotgun
 	FrameIndex SHTG A 0 4
 	FrameIndex MSBL A 0 9999
 }
+
+// ---- BD22Q guns, lifted whole from RS_Brutal22WeaponsQ (tools_kit/lift_bd22.py)
+
+Model MS_BD22_SSG
+{
+	// BD22Q's own SSG: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 1
+	Path "models/depot_bd/bd/SSG"
+	Model 0 "SSG.md3"
+	Skin 0 "ssg.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	Nointerpolation
+	FrameIndex SHT2 A 0 1
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_BD22_Revolver
+{
+	// BD22Q's own Revolver: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 0
+	Path "models/depot_bd/bd/Revolver"
+	Model 0 "Revolver.md3"
+	Skin 0 "Revolver.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_BD22_M79
+{
+	// BD22Q's own GrenadeLauncher: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 3
+	Path "models/depot_bd/bd/M79"
+	Model 0 "M79.md3"
+	Skin 0 "M79.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	NoInterpolation
+	ZOffset -5
+	FrameIndex MISG A 0 3
+	FrameIndex MSBL A 0 9999
+}
