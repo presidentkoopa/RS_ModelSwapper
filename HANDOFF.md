@@ -2,7 +2,11 @@
 **USE TOOLS IN REPO. NOWHERE ELSE.**
 (owner, 2026-10-24 04:39 -- these two instructions stand above everything else in this repo)
 
-# RSQ Weapon Depot — HANDOFF (2026-10-24 04:40, owner: presidentkoopa)
+# RSQ Weapon Depot — HANDOFF (2026-10-25, owner: presidentkoopa)
+
+**State in one line: bd22q's F1–F9 are all built, committed and pushed. The release is 1.99. The only
+thing left on the flagship is the owner's headset pass, and nothing in this pack has ever been seen
+in VR.** The four other sets are TABLED (owner, 2026-10-25) — do not start one.
 
 **Addressed to: the next Claude session, any coding agent, and the local coding team.** `CLAUDE.md` at the
 root is the ten rules; this file is the state. Both are binding.
@@ -26,7 +30,7 @@ Nothing lives anywhere else.
 | `sets/aliens/` | presidentkoopa/RS_Aliens_VR-WeaponsQ @ 1ee0cd2 verbatim (588 files, 34 MB), 2026-10-24, PLAN.md's S4. Parent mod: Aliens Eradication TC 2.0; this pack replaces its `_A03` VR addon rather than loading beside it (`README.txt`). |
 | `dist/` | `RSQ_vanilla.pk3` (gate 5/5), `RSQ_plus.pk3`, `RSQ_modern.pk3` (older builds, no player class yet). The 43 MB BD22Q pk3 is NOT committed: build it (`tools/bd22_plus.py pk3 <out>`). |
 | `tools/` | the pipeline (`README.md` there). `kit/` = keeper tools from the Quest_Weapons_Kit (gen_rsr.py, rgeo.py …), `rtest/` = behaviour harness port (shelved: times out after S_Init). |
-| `gate/run.sh` | the engine gate (see below). |
+| `gate/run_set.sh` | the engine gate, generic. `sh gate/run_set.sh gate/<set>.gate [pk3]`. Per-set config in `gate/<set>.gate`; method and traps in `gate/GATING_A_SET.md`. `gate/bd22_gate.sh` is a wrapper on bd22q's config. |
 | `docs/` | BD21 `Machinegun.txt`, `Revolver2.txt` (owner-supplied parent files), `VR_MELEE_ON_QUESTZDOOM_2026-10-24.md`, `HANDS_IN_THE_MESH.md`, `KIT_INVENTORY.md`. |
 
 ## State of the flagship (bd22q 1.97-pre) — measured, not remembered
@@ -181,7 +185,10 @@ Gated on the owner's load order: both pages opened in a run (`openmenu RSQ_Optio
 `openmenu RSR_Debug`) with nothing logged against either, and the restored page loads clean. **The
 layout itself is the owner's headset pass**, as the plan says.
 
-## F4, done but for "the spike" (2026-10-24) — bash, whip, butt strike
+## F4, done (2026-10-24) — bash, whip, butt strike
+*(Header was "done but for 'the spike'". The spike was struck from PLAN.md on the owner's
+instruction — the word entered in this repo's first commit, attributed to a melee doc that does not
+contain it, and exists nowhere else on the machine. There is nothing outstanding on F4.)*
 All three melee moves built. Stages `bash`, `whip` and `butt`, all run after `options`. **Switch-punching with either hand was already built** — `zscript/rsq/fists.zs` runs an
 `RSQ_FistHand` for `mainH` and `offH` and the same path ends in `PunchUse`, so F4's fourth item
 needed nothing. **"The spike" is still undefined**: the word appears only in PLAN.md and in the
@@ -344,7 +351,10 @@ count read out of the built files rather than retyped. It states the load order,
 family is, the 1.97 additions, the melee, the credits (Brutal Doom is Sergeant_Mark_IV's; the hands
 are Ermac's under Rusted Legacy MIT; the engine is Emawind's) and the known gaps.
 
-## F5, PART DONE (2026-10-24) — recoil and the dial are in; flashes and casings are NOT
+## F5, done (2026-10-24) — recoil, the dial, the flashes, the round, the impacts and the casings
+*(Header read "PART DONE … flashes and casings are NOT". They landed later the same day and the
+numbered items below record each one. Flashes: 18 guns. Round in flight: 11. Impact character:
+sound, ricochet and light. Casings: ports and sizes, with the real meshes following in F7.)*
 
 Stages `recoil`, `impacts` and `bullet`, all after `butt`. **The owner's yes was given 2026-10-24.**
 
@@ -531,6 +541,99 @@ each entry says which.
 - A regex over RSBDEFS required a block name to end its line, but those headers carry trailing
   comments. It matched almost nothing and produced a plausible six-gun table instead of ten.
 
+## F7, done (2026-10-25, `65ad27e`) — the real casing meshes, lent to Brutal Doom's own actors
+
+The brass left the right port at the right size and was still Brutal Doom's sprite — one `EmptyBrass`
+doing duty for 5.56, 7.62 and 7.92. It now wears RS_Ballistics' measured meshes: `casing_9mm` at
+19.2 mm, `casing_rifle` at 44.7 and at 51.0 (the same mesh at RS's own two scales), `shell_12ga` at
+70.06, each with brass, inner wall and primer skinned separately. **12 guns.**
+`zscript/rsq/casemodels.zs`: 4 mesh holders, `CASE_FOR` over the 12, `CASE_LETTERS`.
+
+**A LEND, NOT A REPLACEMENT.** BD22's spawners name `PistolCasing` / `EmptyBrass` / `ShotgunCasing`
+as string literals, so a subclass is never reached; and replacing the classes means owning
+`actors/MISC/Casing.dec`, which also defines 20mmBrass, 40mmBrass, five EmptyClip variants,
+UnderwaterEmptyBrass, EnemyMinigunBrass and nine spawners with ACS janitor hooks — and could not be
+switched off. `A_ChangeModel` is stock and this pack already lends a model twice (voxels.zs,
+RSQ_Debris). The holder's FrameIndex rows name BD22's own sprite, so the casing tumbles through BD's
+own animation wearing our mesh. **It has to be per INSTANCE:** EmptyBrass is four cartridges
+depending on which gun threw it, so a MODELDEF on the class could only ever be one of them.
+
+**The MG42 has no mesh.** It fires 7.92×57 Mauser; RS's own ejecta `ww2_mg42` is the 9mm mesh at
+scale 1.35 — a 25.9 mm case, not a Mauser round — so that is not a source either. It takes the 7.62,
+the closest real mesh there is, and the table says so rather than pretending.
+
+Two things the test found that a compile could not: the lend was **behind the VR gate** and printed
+zero (a real casing is not a VR behaviour — where the brass starts depends on your hand, what it IS
+does not; moved above the gate, so it works on a flat screen too); and **the gate's casings leg had
+been firing nothing since I wrote it** — it gave `Shell` where BD22's Shotgun, SSG and Revolver all
+take `AmmoShell`. Empty guns make no casing, no tail and no impact, and the leg still passed.
+Weapon-switch waits also raised 10 → 40 tics.
+
+Proved by instrumentation: Machinegun → `RSQ_Case762` on EmptyBrass (10 lends), Revolver and SSG →
+`RSQ_Hull12ga` on ShotgunCasing. Both hosts, both holder families.
+**Still imperfect:** the casings leg fires only ONE of its three shotguns per run and which one
+varies, so its coverage is partial. Noted rather than chased.
+`rsq_casing_models` (on) and a Casing Size slider — a real 9mm case is about 0.63 map units and may
+be too small to see at arm's length. Off = 1.97 behaviour, sprites sized per cartridge.
+
+## F8, done (2026-10-25, `0f9a5d2`) — the Machinegun chute, and a constructed port for the MP40
+
+Three guns threw brass from the body. Two no longer do, and the third genuinely has nothing to
+measure. **11 ports now, up from 9.**
+
+**The Machinegun had a chute all along**, and I missed it for exactly the reason I missed the MG42's:
+I searched the receiver WALLS, found only barrel-jacket cooling slots and the M249 body outline, and
+wrote down "no port loop". An M249 ejects DOWNWARD. Drop the direction filter and it is there —
+7.1 × 10.2, centred (y −0.27), below the bore (z −4.20), by the breech. Port (14.3, −0.3, −4.3), DOWN.
+**Twice is a pattern, not bad luck:** filtering for side-facing holes hides every belt-fed gun in the
+set. That filter is now a box in the table rather than a thing I remembered to check.
+
+**The MP40's is CONSTRUCTED, not measured,** and the generated file says so on the line you read.
+Every slot in its receiver tube is mirrored at ±1.44 (cooling slots) and the one unmirrored opening
+is 2.2 × 2.2 on the LEFT, which on an MP40 is the cocking-handle slot. So it is built from two
+surfaces that ARE modelled — `zamek` (the bolt, trimmed to its core first, because its charging
+handle hangs off one side and would drag the axis) and `korpus` (the receiver) — on the bore line,
+where a blowback gun ejects. Only their intersection is inferred. It is in because it **corroborates**:
+it lands at 68% of the MP40's length, and the owner's own hand-tuned BrutalSMG port sits at 68% of
+THAT gun. Two guns, one judged by eye in a headset and one derived from geometry, same proportion.
+Port (34.7, −2.2, 3.3), SIDE.
+
+**The Minigun keeps throwing from the body.** Every down-facing loop on it is structural — the
+rotating body's own open ends, the grip, the six bores — and there is no bolt or breech surface to
+construct one from either. Nothing to measure and nothing to build on, so nothing invented.
+**This is the plan's "say plainly that there is none", said. Do not go hunting for it again.**
+
+## F9, done (2026-10-25, `bd8fa71`) — a gate any lane can point at its own set
+
+Owner, 2026-10-25: another lane is building another weapon set and needs to run the game and cycle
+its reloads the way this session has been. `gate/bd22_gate.sh` could not be handed over — it
+hardcoded bd22q's four paths, its parent mod and its weapon class names. Now three files:
+
+| file | what |
+|---|---|
+| `gate/run_set.sh` | generic. Builds the console script, runs the engine, reads the log. |
+| `gate/bd22q.gate` | this set: paths, parent files, guns, ammo, timings. **Copy it for a new set.** |
+| `gate/GATING_A_SET.md` | the method, and every way it passes while testing nothing. |
+
+`sh gate/run_set.sh gate/<set>.gate [pk3]`. `bd22_gate.sh` is kept as a one-line wrapper so the name
+this file and PLAN.md have always used still works, and so there are not two gates drifting apart.
+
+**A marker per gun is the real addition.** The old gate said the run finished and not WHICH guns took
+part, so a gun never selected, or with no ammo, was silent and indistinguishable from one that
+worked — exactly how a whole leg fired nothing for a day. `run_set.sh` prints a line per gun and
+warns on any zero. And it is honest about that marker: it proves the SCRIPT reached the gun, not that
+the class name was real, that the gun had ammo, or that a shot came out. §4 of the doc is the
+`Console.Printf` → throwaway pk3 → grep → strip loop that proves a path actually fired.
+
+The doc's **trap table** is the part worth sending: eight ways to get a green run that tested
+nothing, all eight found on this set, each with its fix. Plus what the gate CANNOT do — no VR
+(`+vr_mode 0`, so hands, melee and pose code return early), and no eyes.
+
+Also packaged as a standalone skill at `C:\Users\Command\.claude\skills\gate-a-doom-mod\` (SKILL.md,
+run_set.sh, example.gate) and sent to the **RS ModelSwapper** lane on the owner's instruction,
+2026-10-25. Verified under both names: exit 0, all seven guns reached, no faults, script parsing took
+4108.20 ms.
+
 ## What is NOT done (the plan's remaining flagship items, in order)
 1. ~~Gate `sets/bd22q_1.97` on the owner's exact load order.~~ **Done 2026-10-24** (see "F1 IS DONE"):
    runs clean, pk3 handed over. What is left of F1 is the owner's headset pass, which is his to do.
@@ -538,17 +641,38 @@ each entry says which.
    **Done 2026-10-24** (see "F2, done" below). Headset pass outstanding, like everything else VR.
 3. ~~Options page onto the shared `RSQ_Options` standard.~~ **Done 2026-10-24** (see "F3, done").
    The layout's headset pass is the owner's.
-4. **Melee** on bd22q from `docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md`: pistol whip, rifle/shotgun butt
-   strikes, the spike, switch-punching with either hand. **None of it is built.** It is flagship work,
-   not a later pass (owner, 04:24).
-5. Per-gun ballistics profiles from REMA's WMSHEET behind the Ballistics switch -- pending the owner's yes.
+4. ~~**Melee** on bd22q from `docs/VR_MELEE_ON_QUESTZDOOM_2026-10-24.md`: pistol whip, rifle/shotgun
+   butt strikes, switch-punching with either hand.~~ **Done 2026-10-24** (see "F4, done" below).
+   This line used to read "None of it is built" and was still saying so days after F4 landed, with
+   the F4-done section sitting in this same file — if you are reading a claim here that a section
+   below contradicts, the section is the newer one. Butt strikes went to all EIGHT stocked guns and
+   melee moved onto the §9 pose spine. Switch-punching was ALREADY BUILT in `zscript/rsq/fists.zs`.
+   "The spike" was struck from the plan on the owner's instruction: the word entered in this repo's
+   first commit, attributed to a melee doc that does not contain it, and exists nowhere else.
+5. ~~Per-gun ballistics profiles from REMA's WMSHEET behind the Ballistics switch -- pending the
+   owner's yes.~~ **Done 2026-10-24.** The yes was given that day ("Yes - build F5, the per-gun
+   ballistics and recoil"), so that PENDING is spent. Round in flight 11 guns, flash light 18, flash
+   tail 14, recoil 22, impact weight 17, impact sound / ricochet / light. Recoil `roll` is NOT
+   carried and cannot be -- tested, not assumed: `extend class Weapon` does not compile, so the only
+   hook with roll is unreachable on a weapon class this pack does not own. `psp.x`/`psp.y` is the
+   whole channel. The F5 section's header read "PART DONE … flashes and casings are NOT" for days
+   after they had landed; it is corrected now, and the numbered items under it record each piece.
 6. ~~Reload SOUNDS for the drum / canister / skull; README for the pack release; this handoff.~~
-   **Sounds and README done 2026-10-24** (see "F6, done" below). **The owner's headset pass is the
-   only thing left on the flagship** — and it is the only thing that can test any of this.
+   **Sounds and README done 2026-10-24** (see "F6, done" below).
+7. ~~The real casing meshes.~~ **Done 2026-10-25** (see "F7, done" below).
+8. ~~A port for the MP40, the Minigun and the Machinegun.~~ **Done 2026-10-25** (see "F8, done").
+   The Minigun's answer is "there is none", and that is final.
+9. ~~A gate any lane can point at its own set.~~ **Done 2026-10-25** (see "F9, done" below).
+
+**So: the owner's headset pass is the only thing left on the flagship** — and it is the only thing
+that can test any of this. Nothing in this pack has ever been seen in VR.
 
 Open questions for the owner: counter model vs REMA's fire-from-magazine for the three reloads; the
-revolver primary/alt swap asked at 03:41 (parked when Revolver2-with-option was asked at 03:56).
-Then the plan's next sets (PLAN.md): BW_Quest, Aliens, Meatgrinder, Modern wiring, Plus passes per set.
+revolver primary/alt swap asked at 03:41 (parked when Revolver2-with-option was asked at 03:56); a
+dropped partial magazine costing the reserve nothing (owner, 2026-10-25: "would be super cool but
+not something i am after right now" -- so it is parked, not forgotten).
+The plan's next sets -- Vanilla/V+, Modern, BW_Quest, Aliens -- were **TABLED by the owner on
+2026-10-25**: "Priority is bd22q." Do not start one.
 
 ## Owner's rules (violating these ended the last session's trust)
 - **Never from memory. Re-check source.** Every number comes from a mesh (tool-measured) or a parent
@@ -568,7 +692,7 @@ Then the plan's next sets (PLAN.md): BW_Quest, Aliens, Meatgrinder, Modern wirin
 - **Don't narrate tests every turn.** Run the gate, report results, move on.
 - Discuss before starting new projects. Stop when told to stop.
 
-## The engine gate (`gate/run.sh`, and the bd22 variant inside `tools/bd22_plus.py` history)
+## The engine gate (`gate/run_set.sh` + `gate/<set>.gate`; see "F9, done" and `gate/GATING_A_SET.md`)
 Stock qzd17.3 (emawind84/gzdoom tag qzd17.3 = GZDoom 4.14.3) built headless: `cmake -DNO_GTK=ON
 -DHAVE_VULKAN=OFF -DHAVE_GLES2=ON`, run under `xvfb-run … +extension GLX`, `LIBGL_ALWAYS_SOFTWARE=1`,
 `+vr_mode 0`. One launch: parse, map, give guns, fire, reload, quit; pass = no `Script error`, the
@@ -589,7 +713,8 @@ Each tool has its paths at the top. Set them once:
 - `tools/bd22_plus.py`: `SRC` → `runtime/` (1.96b src), `REMA` → your checkout of RS_VR_Weapons `bd22/`, `OUT` → a build dir; the kit path on the `sys.path.insert` line → `tools/kit` (gen_rsr.py, rgeo.py live there).
 - `tools/bd22_mg.py`: `OUT`, `BR` (br_vr `PK3_pbr/` from E:\DOOMWork\VR_WeaponSetRebuild), `BD21` → `docs/BD21_Machinegun.txt`, `REMA`, the kit path.
 - `tools/genpack.py`, `assemble.py`, `handfit_cards.py`: the `/mnt/user-data/uploads/Quest_Weapons_Kit/...` and `/home/claude/...` lines → `tools/kit` and your paths.
-- `gate/bd22_gate.sh`: the four paths at the top. This is the F1 command.
+- `gate/bd22q.gate`: QZD, IWAD, FILES, PK3 at the top. `gate/bd22_gate.sh` wraps it; this is the
+  F1 command. Paths no longer live in the script — a new set copies this config, not the runner.
 Regenerating is every stage below, in this order, then the pk3 — the earlier short form in this
 file was missing eight of them:
 

@@ -18,8 +18,19 @@ if not first and any(p.startswith('runtime/') for p in staged):
 plan = open(os.path.join(R, 'PLAN.md')).read()
 cur = re.search(r'Current step: \*\*(\w+)\*\*', plan)
 items = set(re.findall(r'^- (\w+) ', plan, re.M))
-if not cur or cur.group(1) not in items:
-    errs.append('PLAN.md "Current step" must be one of: %s' % ' '.join(sorted(items)))
+# "none" is a real state this checker did not model: every flagship item built, the work waiting on
+# the owner's headset pass. It is NOT a free pass -- it is accepted only while every `- F<n>` line is
+# marked DONE, so the completion claim is verified here rather than taken on trust. To do new work,
+# add an F item in a [plan] commit and name it as the current step; `none` will not cover it.
+undone = [i for i, body in re.findall(r'^- (F\d+)  (.*)$', plan, re.M) if 'DONE' not in body]
+if not cur:
+    errs.append('PLAN.md has no "Current step: **X**" line.')
+elif cur.group(1) == 'none':
+    if undone:
+        errs.append('PLAN.md "Current step" is **none**, but these are not marked DONE: %s'
+                    % ' '.join(undone))
+elif cur.group(1) not in items:
+    errs.append('PLAN.md "Current step" must be **none** or one of: %s' % ' '.join(sorted(items)))
 known = {'runtime', 'sets', 'tools', 'gate', 'dist', 'docs', '.github'}
 for p in staged:
     top = p.split('/')[0]

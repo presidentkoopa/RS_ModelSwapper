@@ -4,7 +4,12 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F7** -- F6 is done bar the owner's headset pass, which only he can do.
+Current step: **none** -- every F item below is DONE and committed (2026-10-25). The one thing left on
+bd22q is the owner's headset pass, which only he can do, and it is what gates the 1.99 release.
+Nothing in this pack has ever been seen in VR. The S items are TABLED; do not start one.
+
+(`none` is a state `tools/check_plan.py` accepts ONLY while every `- F<n>` line here is marked DONE.
+It is not a way to commit off-plan: start a new F item in a `[plan]` commit and name it here instead.)
 
 ## Principle
 Every shipped gun is built from two sources only: its MESH (tool-measured) and its PARENT MOD (behaviour
@@ -12,12 +17,15 @@ parsed from the mod's own code). Nothing retyped from old folders. Quality over 
 per-gun checklist below, in a headset, signed by the owner.
 
 ## Flagship: bd22q (sets/bd22q_1.97, base runtime/ = 1.96b) -- the COMPLETE BD22 VR experience; nothing of it is deferred
-- F1  Gate 1.97 on the owner's load order (doom2 → brutal22test6 → BD_VoxelPack → pack); fix; deliver pk3.
-- F2  Slug revolver (BD21 Revolver2): roster + RSB break entry (Clip2) + "replaces Shotvolver" row.
+- F1  DONE 2026-10-24. Gate 1.97 on the owner's load order (doom2 → brutal22test6 → BD_VoxelPack →
+      pack); fix; deliver pk3. Runs clean; pk3 handed over. The headset pass is the owner's.
+- F2  DONE 2026-10-24. Slug revolver (BD21 Revolver2): roster + RSB break entry (Clip2) + "replaces
+      Shotvolver" row.
       Plus a menu row **"Shot/Revolver Reload: Speedloader / PerRound"** covering BOTH revolvers
       (owner, 2026-10-24): the 2026-10-13 hand patch put BD22's Revolver on a speedloader and left its
       per-chamber rows unused; this makes that a choice instead of a fixed decision, for both guns.
-- F3  Options page onto the shared RSQ_Options standard (owner's headset turn for layout).
+- F3  DONE 2026-10-24. Options page onto the shared RSQ_Options standard. Four rows it was missing;
+      the layout itself is still the owner's headset turn.
 - F4  DONE 2026-10-24. Melee on bd22q: the gun bash (BD22's kick, with the gun in your hands, and an
       RS_CombatFX impact), the pistol whip, the two-handed butt strike (off by default).
       Later the same day, on the owner's instruction: butt strikes extended to all EIGHT stocked
@@ -43,23 +51,44 @@ per-gun checklist below, in a headset, signed by the owner.
       BEYOND THE LINE, from the owner's own list: per-gun impact weight (17 guns, read from
       RSBDEFS' authored `scale` after the derived one proved wrong on every shotgun), impact sound /
       ricochet / light, and the ejection ports and casing sizes.
-- F6  Reload sounds for the drum / canister / skull (empty today); pack README; HANDOFF update; owner headset pass.
+- F6  DONE 2026-10-24 (code) / 2026-10-25 (docs). Reload sounds for the drum / canister / skull
+      (they had shipped silent since F1); pack README; HANDOFF update; release numbered 1.99.
+      **The owner's headset pass is the one part still open, and it is the only thing that can test
+      any of this.** It is his to do, not a tool's.
 
-- F7  The real casing meshes. The brass leaves the right port at the right size, but it is still
-      Brutal Doom's sprite. RS_Ballistics has measured 3D casings -- 9mm, .357, .45, 5.56, 7.62,
-      12ga -- and the pack already lends a model to a foreign actor twice over (voxels.zs,
-      RSQ_Debris). Lend them the same way, per instance, so one EmptyBrass can be four cartridges.
-- F8  A port for the MP40, the Minigun and the Machinegun. Their meshes carry no ejection port to
-      measure -- every slot in the MP40's receiver tube is mirrored (cooling slots), the Minigun's
-      loops are all bores, the Machinegun's M249 body has none -- so those three still throw from
-      the body. Find a source that is a mesh or the parent mod, or say plainly that there is none.
+- F7  DONE 2026-10-25 (`65ad27e`). The real casing meshes. The brass leaves the right port at the
+      right size, but it was still Brutal Doom's sprite. RS_Ballistics has measured 3D casings --
+      9mm, .357, .45, 5.56, 7.62, 12ga -- and the pack already lends a model to a foreign actor
+      twice over (voxels.zs, RSQ_Debris). Lent the same way, per instance, so one EmptyBrass is now
+      four cartridges: `zscript/rsq/casemodels.zs`, 4 mesh holders, `CASE_FOR` over 12 guns.
+      The lend sat behind the VR gate at first and printed zero; it is above it now.
+- F8  DONE 2026-10-25 (`0f9a5d2`). A port for the MP40, the Minigun and the Machinegun. Two of the
+      three were a mistake of mine, not a missing feature: I had filtered for SIDE-facing holes,
+      which hides every belt-fed gun in the set. **The Machinegun had a chute all along** --
+      7.1 x 10.2, centred, below the bore by the breech, the same signature as the MG42 and found
+      by the same rule, which is now a box in the table instead of a thing I remembered to check.
+      Port (14.3, -0.3, -4.3), DOWN. **The MP40's is CONSTRUCTED, not measured**, and the generated
+      file says so on the line: every slot in its receiver tube is mirrored (cooling slots) and the
+      one unmirrored opening is the cocking-handle slot, so it is built from `zamek` (bolt, trimmed
+      to its core) and `korpus` (receiver) on the bore line, where a blowback gun ejects. It is in
+      only because it corroborates: it lands at 68% of the MP40's length, and the owner's own
+      hand-tuned BrutalSMG port sits at 68% of THAT gun. Port (34.7, -2.2, 3.3), SIDE.
+      **The Minigun keeps throwing from the body, permanently.** Every down-facing loop on it is
+      structural -- the rotating body's own open ends, the grip, the six bores -- and there is no
+      bolt or breech surface to construct one from. Nothing to measure, nothing to build on,
+      nothing invented. This question is CLOSED; do not go hunting for that port again.
+      11 ports, up from 9.
 
-- F9  A gate ANY LANE can point at its own set. Today gate/bd22_gate.sh hardcodes bd22q's four
-      paths, its parent mod and its weapon class names, so a lane building another set cannot
-      use it. Split it into a generic runner plus a per-set config, add a marker per gun so the
-      log says WHICH guns actually fired, and write the method down with the traps -- the ones
-      that cost this session a day are all in it. (owner, 2026-10-25: "another lane is doing
-      another weaponset, they need to be able to do what you just did".)
+- F9  DONE 2026-10-25 (`bd8fa71`). A gate ANY LANE can point at its own set. gate/bd22_gate.sh had
+      hardcoded bd22q's four paths, its parent mod and its weapon class names, so a lane building
+      another set could not use it. Split into `gate/run_set.sh` (generic) plus `gate/bd22q.gate`
+      (this set's paths, guns and ammo); bd22_gate.sh is now a one-line wrapper, keeping the name
+      this file and HANDOFF have always used. A marker per gun, so the log says WHICH guns were
+      actually reached. The method and the eight traps are written down in `gate/GATING_A_SET.md`.
+      (owner, 2026-10-25: "another lane is doing another weaponset, they need to be able to do
+      what you just did".) Also packaged as a standalone skill at
+      `C:\Users\Command\.claude\skills\gate-a-doom-mod\`, and sent to the RS ModelSwapper lane on
+      the owner's instruction, 2026-10-25.
 
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
