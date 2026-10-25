@@ -1,82 +1,62 @@
 {
- "8": [
-  "MS_alien_flamer",
-  "MS_AE_Flamer"
- ],
- "14": [
-  "MS_alien_pistol",
-  "MS_AE_Pistol"
- ],
- "3": [
-  "MS_brt_AssaultShotgun",
-  "MS_BD_AssaultShotgun"
- ],
- "10": [
-  "MS_brt_BrutalSMG",
-  "MS_BD_BrutalSMG"
- ],
- "9": [
-  "MS_brt_Flamethrower2",
-  "MS_BD_Flamethrower2"
- ],
- "16": [
-  "MS_brt_PlasmaGun",
-  "MS_d64_PlasmaGun",
-  "MS_hdvr_PlasmaRifle",
-  "MS_PlasmaRifle",
-  "MS_vplus_PlasmaRifle"
- ],
- "5": [
-  "MS_brt_Rifle",
-  "MS_BD_Rifle"
- ],
- "13": [
-  "MS_brt_RPG",
-  "MS_d64_RPG",
-  "MS_hdvr_RPG",
-  "MS_RocketLauncher",
-  "MS_vplus_RPG"
- ],
  "1": [
-  "MS_brt_Unmaker",
-  "MS_BD_Unmaker"
+  "MS_AE_Flamer",
+  "MS_PU_AE_Flamer",
+  "MS_alien_flamer"
  ],
  "2": [
-  "MS_MG_Bolter",
-  "MS_meat_Bolter"
+  "MS_AE_Pistol",
+  "MS_PU_AE_Pistol",
+  "MS_alien_pistol"
  ],
- "15": [
-  "MS_Pistol"
+ "3": [
+  "MS_BD_AssaultShotgun",
+  "MS_brt_AssaultShotgun"
+ ],
+ "4": [
+  "MS_BD_Flamethrower2",
+  "MS_PU_BD_Flamethrower2",
+  "MS_brt_Flamethrower2"
+ ],
+ "5": [
+  "MS_BD_RailGun",
+  "MS_PU_BD_RailGun",
+  "MS_brt_RailGun"
  ],
  "6": [
-  "MS_Rifle",
-  "MS_qvplus_guns",
-  "MS_vplus_guns"
+  "MS_BD_Rifle",
+  "MS_PU_BD_Rifle",
+  "MS_brt_Rifle"
  ],
- "11": [
-  "MS_MG_Tec9",
-  "MS_meat_TEC9"
+ "7": [
+  "MS_BD_Unmaker",
+  "MS_PU_BD_Unmaker",
+  "MS_brt_Unmaker"
  ],
- "18": [
-  "MS_wolf_KAR98"
- ],
- "19": [
+ "8": [
   "MS_brt_HitlersBuzzsaw",
   "MS_wolf_MG42"
  ],
- "20": [
-  "MS_wolf_MP40"
+ "9": [
+  "MS_MG_Bolter",
+  "MS_PU_MG_Bolter",
+  "MS_meat_Bolter"
  ],
- "21": [
-  "MS_wolf_PP41"
+ "10": [
+  "MS_MG_Tec9",
+  "MS_PU_MG_Tec9",
+  "MS_meat_TEC9"
  ],
- "22": [
-  "MS_wolf_BAR"
+ "11": [
+  "MS_brt_MP40"
  ],
- "23": [
-  "MS_wolf_Garand"
+ "12": [
+  "MS_PU_Pistol",
+  "MS_PU_Pistol2",
+  "MS_Pistol",
+  "MS_Pistol2"
  ],
- "24": [
+ "13": [
   "MS_PU_PlasmaRifle",
   "MS_PlasmaRifle",
   "MS_brt_PlasmaGun",
@@ -84,9 +64,42 @@
   "MS_hdvr_PlasmaRifle",
   "MS_vplus_PlasmaRifle"
  ],
- "25": [
-  "MS_BD_RailGun",
-  "MS_PU_BD_RailGun",
-  "MS_brt_RailGun"
+ "15": [
+  "MS_PU_Rifle",
+  "MS_Rifle",
+  "MS_qvplus_guns",
+  "MS_vplus_guns"
+ ],
+ "16": [
+  "MS_BD_BrutalSMG",
+  "MS_PU_BD_BrutalSMG",
+  "MS_brt_BrutalSMG"
+ ],
+ "17": [
+  "MS_alien_rifle"
+ ],
+ "18": [
+  "MS_brt_BrutalPistol",
+  "MS_d64_BrutalPistol",
+  "MS_hdvr_Pistol",
+  "MS_vplus_Pistol"
+ ],
+ "19": [
+  "MS_chex_largezorcher"
+ ],
+ "20": [
+  "MS_chex_superlargezorcher"
+ ],
+ "21": [
+  "MS_wolf_Luger"
+ ],
+ "22": [
+  "MS_wolf_Shotgun"
+ ],
+ "23": [
+  "MS_wolf_Tommy"
+ ],
+ "24": [
+  "MS_zblood_shotgun"
  ]
 }
