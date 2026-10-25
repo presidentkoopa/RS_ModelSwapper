@@ -43,6 +43,7 @@ GUNS = {
     'Plasma_Gun':     ('PlasmaGun', 'plasma', 'BD22 Plasma Gun'),
     'Sniper':         ('Ruger', 'rifle', 'BD22 Ruger Mini-14'),
     'Rocket_Launcher': ('RocketLauncher', 'launcher', 'BD22 Rocket Launcher'),
+    'Shot_Gun':       ('Shotgun', 'shotgun', 'BD22 Shotgun'),
 }
 # Reload foley per gun: (out, in, back, fwd) as paths under the RS_VR_Weapons repo (W:) or
 # RS_Brutal22WeaponsQ's src (B: -- BD22Q's own rack sounds). BD22 itself borrows Brutal
@@ -56,6 +57,10 @@ FOLEY = {
     'Rifle': RIFLE, 'Sniper': RIFLE, 'AssaultShotgun': RIFLE, 'BrutalSMG': SMG, 'MP40': SMG,
     'RailGun': CELL, 'Plasma_Gun': CELL,
     'Rocket_Launcher': ('W:sounds/launchers/RLCOUT.ogg', 'W:sounds/launchers/RLCIN.ogg', None, None),
+}
+# pump guns: (a shell in at the port, the pump back, the pump forward)
+PUMP_FOLEY = {
+    'Shot_Gun': ('W:sounds/shotguns/DoomPump/SHOTLOAD1.ogg', 'W:sounds/shotguns/DoomPump/shotcycle.wav', None),
 }
 WEAPONS = os.environ.get('RS_VR_WEAPONS', os.path.join(os.path.dirname(ROOT), 'presidentkoopa', 'rs_vr_weapons'))
 
@@ -79,6 +84,21 @@ def write_foley(src, guns):
             shutil.copy2(sf, os.path.join(ROOT, 'sounds/ms', os.path.basename(sf)))
             rows.append('%-36s sounds/ms/%s' % (sndname(g, what), os.path.basename(sf)))
         rows.append('$alias %s ms/magdrop' % sndname(g, 'magdrop'))
+        t += '\n' + '\n'.join(rows)
+    for g in guns:
+        if g not in PUMP_FOLEY or ('ms/bd22/%s/shellin' % GUNS[g][0].lower()) in t:
+            continue
+        rows = ['', '// BD22 %s pump (tools_kit/lift_bd22.py)' % g]
+        for what, f in zip(('shellin', 'pumpback', 'pumpfwd'), PUMP_FOLEY[g]):
+            if not f:
+                continue
+            base = WEAPONS if f.startswith('W:') else src
+            sf = os.path.join(base, f[2:])
+            if not os.path.exists(sf):
+                sys.exit('foley file missing: %s' % sf)
+            shutil.copy2(sf, os.path.join(ROOT, 'sounds/ms', os.path.basename(sf)))
+            rows.append('%-36s sounds/ms/%s' % (sndname(g, what), os.path.basename(sf)))
+        rows.append('$alias %s ms/magdrop' % sndname(g, 'shelldrop'))
         t += '\n' + '\n'.join(rows)
     write(p, t + '\n')
 
@@ -204,8 +224,10 @@ def main(src, which):
     p_rsr = os.path.join(ROOT, 'zscript_depot/rsr/rsr_guns.ms.zs')
     p_hand = os.path.join(ROOT, 'zscript_depot/rsq/handtable.zs')
     rsr = read(p_rsr); hand = read(p_hand)
+    p_pump = os.path.join(ROOT, 'zscript_depot/rsr/rsr_pump_guns.zs')
+    pump = read(p_pump)
     for g in guns:
-        if '"%s"' % donor(g) in rsr:
+        if '"%s"' % donor(g) in rsr or '"%s"' % donor(g) in pump:
             sys.exit('%s is already lifted -- git checkout the files first' % donor(g))
 
     b_rsr = read(os.path.join(src, 'zscript/rsr/rsr_guns.bd.zs'))
@@ -213,6 +235,10 @@ def main(src, which):
     b_md = read(os.path.join(src, 'MODELDEF.bd.txt'))
     b_mdr = read(os.path.join(src, 'MODELDEF.rsr'))
     ridx = bd22_index(src, 'zscript/rsr/rsr_guns.bd.zs')
+    b_pump = read(os.path.join(src, 'zscript/rsr/rsr_pump_guns.zs'))
+    pidx = bd22_index(src, 'zscript/rsr/rsr_pump_guns.zs')
+    pump_blocks = bd22_blocks(read(os.path.join(src, 'MODELDEF.rsrpump')))
+    n_pump = max([0] + [int(x) for x in re.findall(r'donor == "\w+"\)\s*return (\d+);', pump)])
     hidx = bd22_index(src, 'zscript/rsq/handtable.zs')
     md_blocks = bd22_blocks(b_md)
     rsr_blocks = bd22_blocks(b_mdr)
@@ -222,16 +248,24 @@ def main(src, which):
     n_hand = array_len(hand, 'GunOne') - 1
     for g in guns:
         d = donor(g)
-        if g not in ridx:
-            report.append('%s: no BD22 magazine reload row -- skipped' % g); continue
-        i = ridx[g]
-        row = T.row(b_rsr, i)
-        spr = {k: row[k].strip("'") for k in ('SprGun', 'SprPart', 'SprWorld')}
-        # ---- the gun's reload layers, re-keyed to the donor
-        mine = [b for b in rsr_blocks if any(s in spr.values() for s, *_ in frames_of(b['body']))]
+        if g not in ridx and g not in pidx:
+            report.append('%s: no BD22 magazine or pump reload row -- skipped' % g); continue
+        mine, spr, pspr = [], {}, {}
+        if g in ridx:
+            i = ridx[g]
+            row = T.row(b_rsr, i)
+            spr = {k: row[k].strip("'") for k in ('SprGun', 'SprPart', 'SprWorld')}
+            mine += [b for b in rsr_blocks if any(s in spr.values() for s, *_ in frames_of(b['body']))]
+        if g in pidx:
+            prow = T.row(b_pump, pidx[g])
+            pspr = {k: prow[k].strip("'") for k in ('SprGun', 'SprPart', 'SprWorld')}
+            # the hand's own pose block (models/rsq) is shared by every pump gun and already ships
+            mine += [b for b in pump_blocks if any(s in pspr.values() for s, *_ in frames_of(b['body']))
+                     and 'models/rsq"' not in b['body']]
         if not mine:
-            report.append('%s: no MODELDEF.rsr blocks for %s' % (g, spr)); continue
-        rf = int(next(f for s, l, _, f in frames_of(mine[0]['body']) if s == spr['SprGun']))
+            report.append('%s: no reload layer blocks for %s %s' % (g, spr, pspr)); continue
+        guns_spr = {spr.get('SprGun'), pspr.get('SprGun')} - {None}
+        rf = int(next(f for b in mine for s, l, _, f in frames_of(b['body']) if s in guns_spr))
         path = re.search(r'Path\s+"([^"]+)"', mine[0]['body']).group(1)
         for b in mine:
             t = b['text']
@@ -262,6 +296,26 @@ def main(src, which):
         shelf.append('"%s|%s|%s|0|%d|%d",' % (arch, d, anchor, rf, nframes))
         names.append('"%s|%s",' % (d, GUNS[g][2]))
         clips.append('"%s|ready|%d@1|-1|-1|-1",' % (d, rf))
+        # ---- pump table row
+        pslot = None
+        if g in pidx:
+            n_pump += 1
+            pov = dict(Reserve='""', Loaded='""', Cap='0', WaitLabels='""', ReadySprite='"%s A"' % anchor,
+                       SndShell='"%s"' % sndname(g, 'shellin'), SndBack='"%s"' % sndname(g, 'pumpback'),
+                       SndFwd='"%s"' % sndname(g, 'pumpfwd') if PUMP_FOLEY.get(g, (0, 0, 0))[2] else '""',
+                       SndLand='"%s"' % sndname(g, 'shelldrop'))
+            pump = append_rows(pump, b_pump, pidx[g], n_pump, pov)
+            pump = add_slot_for_donor(pump, d, n_pump)
+            pslot = n_pump
+        if g not in ridx:
+            i = None
+            if g in hidx:
+                n_hand += 1
+                hand = append_rows(hand, b_hand, hidx[g], n_hand, {})
+                hand = add_slot_for_donor(hand, d, n_hand)
+            report.append('%-16s -> %-22s pump slot %s (BD22 %s), hand slot %s (BD22 %s), ready frame %d, %d frames, layers %d'
+                          % (g, d, pslot, pidx.get(g), n_hand if g in hidx else None, hidx.get(g), rf, nframes, len(mine)))
+            continue
         # ---- reload table row
         n_rsr += 1
         ov = dict(MagAmmo='""', NoMag='"RSR_NoMag_%s"' % d, Reserve='""', ReloadToken='""',
@@ -291,8 +345,9 @@ def main(src, which):
 
     rsr = re.sub(r'(static int Count\(\) \{ return )\d+(; \})', r'\g<1>%d\2' % n_rsr, rsr)
     rsr = rsr.replace('\t\tStop;\n\t}\n}', '\n'.join(sprites) + '\n\t\tStop;\n\t}\n}', 1) if sprites else rsr
-    rsr = rsr.rstrip('\n') + '\n\n// BD22Q guns (tools_kit/lift_bd22.py)\n' + '\n'.join(tokens) + '\n'
-    write(p_rsr, rsr); write(p_hand, hand)
+    if tokens:
+        rsr = rsr.rstrip('\n') + '\n\n// BD22Q guns (tools_kit/lift_bd22.py)\n' + '\n'.join(tokens) + '\n'
+    write(p_rsr, rsr); write(p_hand, hand); write(p_pump, pump)
 
     md = read(os.path.join(ROOT, 'modeldef')).rstrip('\n')
     write(os.path.join(ROOT, 'modeldef'), md + '\n\n// ---- BD22Q guns, lifted whole from RS_Brutal22WeaponsQ (tools_kit/lift_bd22.py)\n\n' + '\n'.join(md_add))

@@ -3282,3 +3282,20 @@ Model MS_BD22_Ruger
 	FrameIndex CHGG A 0 0
 	FrameIndex MSBL A 0 9999
 }
+
+// ---- BD22Q guns, lifted whole from RS_Brutal22WeaponsQ (tools_kit/lift_bd22.py)
+
+Model MS_BD22_Shotgun
+{
+	// BD22Q's own Shot_Gun: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 4
+	Path "models/depot_bd/bd/ShotGun"
+	Model 0 "Shotgun.md3"
+	Skin 0 "Shotgun.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	Nointerpolation
+	FrameIndex SHTG A 0 4
+	FrameIndex MSBL A 0 9999
+}

@@ -1202,3 +1202,113 @@ Model RSR_DroppedMag
 	USEACTORROLL
 	FrameIndex RQKW A 0 0
 }
+
+// the gun without its pump and bolt (they are on their own layers while the hand works it)
+Model MS_BD22_Shotgun
+{
+	Path "models/depot_bd/bd/ShotGun"
+	Model 0 "Shotgun.md3"
+	SurfaceSkin 0 0 "Shotgun.png"
+	SurfaceSkin 0 1 "Shotgun.png"
+	SurfaceSkin 0 2 "Shotgun.png"
+	SurfaceSkin 0 3 "Shotgun.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "Shotgun.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQUG A 0 4
+}
+// the pump alone (main controller)
+Model RSR_GunParts
+{
+	Path "models/depot_bd/bd/ShotGun"
+	Model 0 "Shotgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "Shotgun.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQUP A 0 4
+}
+// the bolt alone: it moves with the pump
+Model RSR_GunParts
+{
+	Path "models/depot_bd/bd/ShotGun"
+	Model 0 "Shotgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "Shotgun.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQUP B 0 4
+}
+// the shell alone, at the loading port
+Model RSR_GunParts
+{
+	Path "models/depot_bd/bd/ShotGun"
+	Model 0 "Shotgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "Shotgun.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQUP C 0 4
+}
+// the shell alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/depot_bd/bd/ShotGun"
+	Model 0 "Shotgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "Shotgun.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQUP C 0 4
+}
+// a dropped shell (world)
+Model RSP_DroppedShell
+{
+	Path "models/depot_bd/bd/ShotGun"
+	Model 0 "Shotgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "Shotgun.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -16.2756 -0.0080 0.0
+	ZOffset -0.0527
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQUW A 0 4
+}

@@ -65,3 +65,8 @@ $alias ms/bd22/ruger/magdrop ms/magdrop
 ms/bd22/rocketlauncher/magout        sounds/ms/RLCOUT.ogg
 ms/bd22/rocketlauncher/magin         sounds/ms/RLCIN.ogg
 $alias ms/bd22/rocketlauncher/magdrop ms/magdrop
+
+// BD22 Shot_Gun pump (tools_kit/lift_bd22.py)
+ms/bd22/shotgun/shellin              sounds/ms/SHOTLOAD1.ogg
+ms/bd22/shotgun/pumpback             sounds/ms/shotcycle.wav
+$alias ms/bd22/shotgun/shelldrop ms/magdrop

@@ -316,6 +316,7 @@ class MS_BD22_RailGun : Actor {}
 class MS_BD22_PlasmaGun : Actor {}
 class MS_BD22_RocketLauncher : Actor {}
 class MS_BD22_Ruger : Actor {}
+class MS_BD22_Shotgun : Actor {}
 
 // ============================================================================
 // ModelSwapper -- donor stubs. A MODELDEF block is inert unless a real Actor

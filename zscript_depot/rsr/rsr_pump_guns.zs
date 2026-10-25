@@ -39,6 +39,7 @@ class RSP_Guns abstract
 		if (donor.Length() == 0)
 			return 0;
 		if (donor == "MS_Shotgun")	return 1;
+		if (donor == "MS_BD22_Shotgun")	return 2;
 		return 0;
 	}
 
@@ -47,6 +48,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (34.500, -0.000, 1.300);
+		case 2:	return (40.100, 0.000, -2.800);
 		}
 		return (0, 0, 0);
 	}
@@ -56,6 +58,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (-1.000, -0.000, 0.002);
+		case 2:	return (-1.000, 0.000, -0.002);
 		}
 		return (0, 0, 0);
 	}
@@ -65,6 +68,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 10.200;
+		case 2:	return 6.400;
 		}
 		return 0;
 	}
@@ -74,6 +78,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (0.000, 0.001, 0.741);
+		case 2:	return (0.000, -0.002, 1.000);
 		}
 		return (0, 0, 0);
 	}
@@ -83,6 +88,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 0.000;
+		case 2:	return 1.000;
 		}
 		return 0;
 	}
@@ -92,6 +98,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (-0.000, 0.002, 1.000);
+		case 2:	return (0.000, -0.002, 1.000);
 		}
 		return (0, 0, 0);
 	}
@@ -101,6 +108,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (12.500, -0.500, 3.300);
+		case 2:	return (19.000, 0.000, -2.800);
 		}
 		return (0, 0, 0);
 	}
@@ -110,6 +118,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (0.892, 0.429, -0.140);
+		case 2:	return (1.000, 0.000, 0.000);
 		}
 		return (0, 0, 0);
 	}
@@ -119,6 +128,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 1.500;
+		case 2:	return 6.000;
 		}
 		return 0;
 	}
@@ -128,6 +138,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (0.038, -2.397, -30.440);
+		case 2:	return (-0.024, -2.986, -1.130);
 		}
 		return (0, 0, 0);
 	}
@@ -137,6 +148,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (2.165, 2.823, -1.376);
+		case 2:	return (1.489, 2.834, -2.439);
 		}
 		return (0, 0, 0);
 	}
@@ -146,6 +158,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (0.537, -0.009, 0.844);
+		case 2:	return (0.537, -0.009, 0.844);
 		}
 		return (0, 0, 0);
 	}
@@ -155,6 +168,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (-0.804, -25.414, -1.151);
+		case 2:	return (3.087, -28.047, 33.050);
 		}
 		return (0, 0, 0);
 	}
@@ -164,6 +178,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (-41.862, 66.487, -44.858);
+		case 2:	return (0.976, 57.529, 0.536);
 		}
 		return (0, 0, 0);
 	}
@@ -173,6 +188,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (1.350, 1.350, 1.350);
+		case 2:	return (-1.000, 1.000, 1.000);
 		}
 		return (0, 0, 0);
 	}
@@ -182,6 +198,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return (0.000, 0.000, 0.000);
+		case 2:	return (0.000, 0.000, -5.000);
 		}
 		return (0, 0, 0);
 	}
@@ -191,6 +208,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 'RQUH';
+		case 2:	return 'RQUG';
 		}
 		return 'None';
 	}
@@ -200,6 +218,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 'RQUQ';
+		case 2:	return 'RQUP';
 		}
 		return 'None';
 	}
@@ -209,6 +228,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 'RQUX';
+		case 2:	return 'RQUW';
 		}
 		return 'None';
 	}
@@ -218,6 +238,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return "SHTG A";
+		case 2:	return "SHTG A";
 		}
 		return "";
 	}
@@ -227,6 +248,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return "RSP_LoadWait RSP_PWait";
+		case 2:	return "";
 		}
 		return "";
 	}
@@ -236,6 +258,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return "Shotgun/Reload";
+		case 2:	return "ms/bd22/shotgun/shellin";
 		}
 		return "";
 	}
@@ -245,6 +268,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 0;
+		case 2:	return 5;
 		}
 		return 0;
 	}
@@ -254,6 +278,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return "shotpump";
+		case 2:	return "ms/bd22/shotgun/pumpback";
 		}
 		return "";
 	}
@@ -263,6 +288,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 1;
+		case 2:	return 5;
 		}
 		return 0;
 	}
@@ -272,6 +298,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return "";
+		case 2:	return "";
 		}
 		return "";
 	}
@@ -281,6 +308,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 0;
+		case 2:	return 5;
 		}
 		return 0;
 	}
@@ -290,15 +318,19 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return "";
+		case 2:	return "ms/bd22/shotgun/shelldrop";
 		}
 		return "";
 	}
 
+	// ModelSwapper: the shotgun is the loaded mod's and so is its ammo -- "" makes the pump use
+	// that weapon's own reserve and tube (RSP.NoReserve, RSP.TubeFull).
 	clearscope static String Reserve(int i)
 	{
 		switch (i)
 		{
-		case 1:	return "Shell";
+		case 1:	return "";
+		case 2:	return "";
 		}
 		return "";
 	}
@@ -307,7 +339,8 @@ class RSP_Guns abstract
 	{
 		switch (i)
 		{
-		case 1:	return "MSShotLoaded";
+		case 1:	return "";
+		case 2:	return "";
 		}
 		return "";
 	}
@@ -317,6 +350,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 8;
+		case 2:	return 0;
 		}
 		return 0;
 	}
@@ -326,6 +360,7 @@ class RSP_Guns abstract
 		switch (i)
 		{
 		case 1:	return 0;
+		case 2:	return 0;
 		}
 		return 0;
 	}
