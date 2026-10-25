@@ -58,6 +58,12 @@ def shelf_pick(donor):
     return arch, [d for a, d in rows if a == arch].index(donor)
 
 
+def pump_slot(donor):
+    t = open(os.path.join(ROOT, 'zscript_depot/rsr/rsr_pump_guns.zs'), encoding='utf-8').read()
+    m = re.search(r'donor == "%s"\)\s*return (\d+);' % re.escape(donor), t)
+    return int(m.group(1)) if m else 0
+
+
 def slot_of(donor):
     """the reload slot RSR_Guns.SlotForDonor gives this donor -- the join prints it, so a
     matching number proves the WORN model is the one under test"""
@@ -69,11 +75,11 @@ def slot_of(donor):
 def build_aux(out):
     os.makedirs(out, exist_ok=True)
     ov = os.path.join(out, 'rtest_overlay.pk3')
-    body = '\n'.join(open(os.path.join(H, 'rtest', f)).read() for f in ('fakehands.zs', 'rsr_testdriver.zs', 'driver.zs'))
+    body = '\n'.join(open(os.path.join(H, 'rtest', f)).read() for f in ('fakehands.zs', 'rsr_testdriver.zs', 'driver.zs', 'pump_test.zs'))
     with zipfile.ZipFile(ov, 'w', zipfile.ZIP_DEFLATED) as z:
         z.writestr('zscript_depot/rsvr/vrhand.zs', body)
         z.writestr('CVARINFO.rtest', CVARS)
-        z.writestr('MAPINFO.rtest', 'gameinfo { AddEventHandlers = "RSR_TestDriver", "RSQT_Driver" }\n')
+        z.writestr('MAPINFO.rtest', 'gameinfo { AddEventHandlers = "RSR_TestDriver", "RSQT_Driver", "RSP_TestDriver" }\n')
     tm = os.path.join(out, 'testmod.pk3')
     with zipfile.ZipFile(tm, 'w', zipfile.ZIP_DEFLATED) as z:
         z.write(os.path.join(H, 'testmod', 'ZSCRIPT.txt'), 'ZSCRIPT.txt')
@@ -88,14 +94,19 @@ def run(pk3, donor, engine, shots, yaw=90):
     arch, idx = shelf_pick(donor)
     home = os.path.join(out, 'home'); os.makedirs(home)
     exe = os.path.join(engine, 'qzdoom') if os.path.exists(os.path.join(engine, 'qzdoom')) else os.path.join(engine, 'gzdoom')
+    pump = pump_slot(donor) > 0
+    gun = 'TMShotgun' if pump else 'TMPistol'
     t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s%s' % (yaw, VIEW, ('; ' + EXTRA) if EXTRA else '')),
          (25, 'netevent rs-fm-rescan'),
-         (40, 'rsqt_gun TMPistol; rsqt_empty 1'),
-         (110, 'rsrtest_script 1'),
-         (115, '+attack'), (125, '-attack')]
+         (40, 'rsqt_gun %s; rsqt_empty 1' % gun)]
+    if pump:
+        t += [(110, 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'), (115, '+reload'), (118, '-reload')]
+    else:
+        t += [(110, 'rsrtest_script 1'), (115, '+attack'), (125, '-attack')]
+    end = 900 if pump else 520
     if shots:
         t += [(x, 'screenshot') for x in (100, 140, 170, 200, 230, 260, 300, 340, 400)]
-    t += [(520, 'echo GATE_END')]
+    t += [(end, 'echo GATE_END')]
     cmds, now = [], 0
     for when, c in sorted(t):
         if when > now:
@@ -106,17 +117,49 @@ def run(pk3, donor, engine, shots, yaw=90):
     argv = [exe, '-iwad', IWAD, '-file', os.path.abspath(pk3), tm, ov,
             '-config', os.path.join(out, 'gate.ini'), '-nosound', '-nomusic', '-width', '640', '-height', '480',
             '+vid_fullscreen', '0', '+vr_mode', '0', '+vid_preferbackend', '0',
-            '+set', 'rs_fm_picks', 'TMPistol:%s:%d:%d' % (arch, idx, idx),
+            '+set', 'rs_fm_picks', '%s:%s:%d:%d' % (gun, arch, idx, idx),
             '+screenshot_dir', out, '+logfile', log, '-warp', '1', '+' + '; '.join(cmds)]
     env = dict(os.environ, HOME=home, LIBGL_ALWAYS_SOFTWARE='1', GALLIUM_DRIVER='llvmpipe')
-    try:
-        p = subprocess.run(['xvfb-run', '-a', '-s', '-screen 0 640x480x24 +extension GLX'] + argv, cwd=engine, env=env,
-                           stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=600)
-        rc = p.returncode; stdout = p.stdout.decode('latin-1')
-    except subprocess.TimeoutExpired:
-        rc = 'TIMEOUT'; stdout = ''
-    open(os.path.join(out, 'stdout.txt'), 'w').write(stdout)
+    # A script error leaves the engine on its error screen until the timeout. Watch the log
+    # and stop at the first one -- a failed compile is a FAIL in seconds, not ten minutes.
+    import time
+    so = open(os.path.join(out, 'stdout.txt'), 'w')
+    p = subprocess.Popen(['xvfb-run', '-a', '-s', '-screen 0 640x480x24 +extension GLX'] + argv, cwd=engine, env=env,
+                         stdout=so, stderr=subprocess.STDOUT, start_new_session=True)
+    t0 = time.time(); rc = None
+    while rc is None:
+        time.sleep(2)
+        rc = p.poll()
+        lg = open(log, encoding='latin-1').read() if os.path.exists(log) else ''
+        if rc is None and (re.search(r'Script error|Execution could not continue', lg) or time.time() - t0 > 600):
+            import signal
+            os.killpg(p.pid, signal.SIGKILL)
+            rc = 'KILLED (script error)' if 'rror' in lg else 'TIMEOUT'
+    so.close()
+    stdout = open(os.path.join(out, 'stdout.txt'), encoding='latin-1').read()
     text = (open(log, encoding='latin-1').read() if os.path.exists(log) else '') + stdout
+    if pump:
+        shells = len(re.findall(r'TM shotgun: a shell in', text))
+        checks = [
+            ('pack loaded', os.path.basename(pk3) in text),
+            ('scripts parsed', 'script parsing took' in text),
+            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted', text)),
+            ('join took it', 'TMShotgun pump: took it at its reload' in text),
+            ('hand fed shells', 'a shell pushed home' in text),
+            ('their loop ran', shells >= 2),
+            ('re-held per shell', 'a shell in -- held for the next' in text),
+            ('tube filled', re.search(r'tube full or reserve empty|reload done, tube 8', text) is not None),
+            ('reached the end', 'GATE_END' in text),
+        ]
+        print('donor %s  (%s #%d, pump slot %d)  exit %s  -- %d shells by the mod\'s own loop' % (donor, arch, idx, pump_slot(donor), rc, shells))
+        for name, c in checks:
+            print('  %-18s %s' % (name, 'ok' if c else 'FAIL'))
+        for l in text.splitlines():
+            if re.search(r'Script error|MSJOIN|TM shotgun|rsp t\d+', l):
+                print('   |', l[:150])
+        ok = all(c for _, c in checks)
+        print('PASS' if ok else 'FAIL', '-- log', log)
+        return 0 if ok else 1
     checks = [
         ('pack loaded', os.path.basename(pk3) in text),
         ('scripts parsed', 'script parsing took' in text),

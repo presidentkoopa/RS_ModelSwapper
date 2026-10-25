@@ -105,6 +105,19 @@ class MS_ReloadJoin : EventHandler
 	// weapon has left its reload entirely, which is the mod's reload finishing.
 	private bool mDisarmed[MAXPLAYERS];
 
+	// THE PUMP (a tube-fed shotgun, RSP_Guns). A pack that owns its shotguns writes a loading
+	// loop that waits for the hand and, per shell the hand pushes home, runs its own one-shell
+	// step. A foreign shotgun has no such loop -- but its own reload almost always IS one: a
+	// loop that puts one shell in per pass. So the hand PACES the mod's own loop: the gun is
+	// held while the hand fetches a shell; a shell pushed home lets the mod's reload run until
+	// its tube count rises by one; then it is held again, right where it stopped. The mod
+	// decides every shell -- whether there is room, what it costs, what it sounds like.
+	const FEED_LIMIT = 140;					// tics a shell may take in the mod's own loop
+	private bool mFeeding[MAXPLAYERS];		// the mod's loop is running for one shell
+	private int mTube[MAXPLAYERS];			// the tube count when that shell was let through
+	private int mFeedTics[MAXPLAYERS];
+	private Weapon mFeedW[MAXPLAYERS];
+
 	// A trace for the one failure mode that looks like nothing happening.
 	private bool ms_join_trace;
 	override void OnRegister() { let c = CVar.FindCVar('ms_join_trace'); ms_join_trace = c && c.GetInt() != 0; }
@@ -213,7 +226,10 @@ class MS_ReloadJoin : EventHandler
 			// reload we have actually measured. Everything else is untouched,
 			// which is the whole of the mod's arsenal on day one.
 			int slot = RSR_Guns.Index(w);
-			if (slot <= 0)
+			int pslot = slot > 0 ? 0 : RSP_Guns.Index(w);
+			if (mFeeding[i] && mFeedW[i] != w)
+				mFeeding[i] = false;			// switched away mid-shell: the mod's own business now
+			if (slot <= 0 && pslot <= 0)
 			{
 				if (mHeld[i]) Release(p, i, false);
 				continue;
@@ -227,6 +243,12 @@ class MS_ReloadJoin : EventHandler
 			let psp = p.FindPSprite(PSP_WEAPON);
 			if (!psp)
 				continue;
+
+			if (pslot > 0)
+			{
+				PumpTick(mo, p, i, w, psp);
+				continue;
+			}
 
 			if (mHeld[i])
 			{
@@ -341,6 +363,127 @@ class MS_ReloadJoin : EventHandler
 	// Give it back. `finished` means the hands completed the reload, so the mod
 	// runs its own reload from the top; otherwise put the psprite exactly where
 	// it was, because nothing happened.
+	// ---------------------------------------------------------------- the pump
+	private void PumpTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
+	{
+		let tube = RSR.WeaponStore(mo, false);
+		int have = tube ? tube.Amount : 0;
+		int pi = RSP_Guns.Index(w);
+		let m = RemapFor(mo, w);
+		bool inReload = InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState);
+
+		// 1. the mod's own reload is running for one shell the hand pushed home
+		if (mFeeding[i])
+		{
+			mFeedTics[i]++;
+			if (have > mTube[i])
+			{
+				mFeeding[i] = false;
+				bool more = tube && have < tube.MaxAmount && !RSP.NoReserve(mo, pi);
+				if (more && inReload)
+					PumpHold(p, i, w, psp, "a shell in -- held for the next");
+				else
+					PumpDone(i, w, "tube full or reserve empty -- the mod's own reload finishes");
+				return;
+			}
+			if (!inReload || mFeedTics[i] > FEED_LIMIT)
+			{
+				mFeeding[i] = false;
+				PumpDone(i, w, !inReload ? "the mod's reload ended" : "no shell went in");
+			}
+			return;
+		}
+
+		// 2. held: the hands load, and this stands in for the weapon's loading loop
+		if (mHeld[i])
+		{
+			mo.GiveInventory('RSP_LTick', 1);
+			if (p.cmd.buttons & BT_ATTACK)
+			{
+				// fire ends a reload, as it does on BD22's own shotgun
+				mHeld[i] = null;
+				mDisarmed[i] = true;
+				p.SetPsprite(PSP_WEAPON, w.GetReadyState(), false, w);
+				Trace(w, "fire -- the gun goes back to ready");
+				return;
+			}
+			if (mo.CountInv('RSP_ShellIn') > 0)
+			{
+				mo.TakeInventory('RSP_ShellIn', 1);
+				PumpFeed(p, i, w, have);
+			}
+			return;
+		}
+
+		// 3. idle
+		if (mDisarmed[i])
+		{
+			if (!inReload)
+				mDisarmed[i] = false;
+			return;
+		}
+		if (inReload)
+		{
+			mo.TakeInventory('RSP_Go', 999);
+			mo.GiveInventory('RSP_LoadStart', 1);
+			if (mo.CountInv('RSP_Go') <= 0)
+				return;					// the pump runtime declined (VR off, Stock): the mod's own reload
+			mo.TakeInventory('RSP_Go', 999);
+			PumpHold(p, i, w, psp, "took it at its reload");
+			return;
+		}
+		// a shell pushed straight into the port with no reload under way (the pump runtime's
+		// free feed): start the mod's own reload for that one shell
+		if (mo.CountInv('RSP_ShellIn') > 0)
+		{
+			mo.TakeInventory('RSP_ShellIn', 1);
+			let rs = w.FindState("Reload");
+			if (rs && !(tube && have >= tube.MaxAmount))
+			{
+				mReturn[i] = rs;
+				PumpFeed(p, i, w, have);
+			}
+		}
+	}
+
+	private void PumpHold(PlayerInfo p, int i, Weapon w, PSprite psp, String why)
+	{
+		State hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+		if (!hold)
+			return;
+		mReturn[i] = psp.CurState;		// the mod's loop resumes exactly here
+		mHeld[i] = w;
+		p.SetPsprite(PSP_WEAPON, hold, false, w);
+		Trace(w, why);
+	}
+
+	private void PumpFeed(PlayerInfo p, int i, Weapon w, int have)
+	{
+		mHeld[i] = null;
+		mFeeding[i] = true;
+		mFeedW[i] = w;
+		mTube[i] = have;
+		mFeedTics[i] = 0;
+		State go = mReturn[i] ? mReturn[i] : w.FindState("Reload");
+		if (go)
+			p.SetPsprite(PSP_WEAPON, go, false, w);
+		Trace(w, String.Format("a shell pushed home -- the mod's own reload runs for it (tube %d)", have));
+	}
+
+	private void PumpDone(int i, Weapon w, String why)
+	{
+		mHeld[i] = null;
+		mReturn[i] = null;
+		mDisarmed[i] = true;
+		Trace(w, why);
+	}
+
+	private void Trace(Weapon w, String what)
+	{
+		if (RS_ForeignRemap.DebugOn())
+			Console.Printf("[MSJOIN] %s pump: %s", w ? w.GetClassName() : 'none', what);
+	}
+
 	private void Release(PlayerInfo p, int i, bool finished)
 	{
 		let w = mHeld[i];
