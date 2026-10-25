@@ -8,6 +8,17 @@ GameInfo
     // answers a netevent -- which is how MS_EffectRelocator (casings) and
     // RS_ForeignDebug (msdebug, mstrace) sat inert from the day they
     // landed: both were added without touching this line.
-    AddEventHandlers = "RS_ForeignModelHandler", "MS_EffectRelocator", "RS_ForeignDebug", "MS_ReloadJoin"
+// THE RELOAD RUNTIME HAS TO BE SWITCHED ON. Every one of these classes has been
+// shipping in zscript_depot/ and none of them was registered, so the whole reload
+// compiled, loaded and did nothing -- RSR_ReloadHandler.StateOf returned null, so
+// RSR_Start refused every reload before it began. assemble.py registers exactly
+// these in the packs it builds; this pack never did.
+//
+// RSVR_MeleeHandler, RSQ_Fists and RSQ_ScopeReal are deliberately NOT here. They
+// are real gameplay -- swinging, punching, scopes -- and this pack loads beside
+// somebody else's mod, so they are theirs to add, not ours to impose. The reload
+// is the one thing ModelSwapper 2.0 is for.
+    AddEventHandlers = "RS_ForeignModelHandler", "MS_EffectRelocator", "RS_ForeignDebug", "MS_ReloadJoin",
+                       "RSQ_Handler", "RSR_ReloadHandler", "RSB_Handler", "RSP_Handler"
 }
 

@@ -225,6 +225,21 @@ class MS_ReloadJoin : EventHandler
 
 			if (mHeld[i])
 			{
+				// THE HEARTBEAT. vreload gives a reload three tics of silence before
+				// it decides the gun has left and tears everything down:
+				//     gone = ... || now - s.lastTick > 2
+				// A generated weapon's RSR_Wait keeps it alive with
+				// `A_GiveInventory("RSR_Tick", 1)` every tic. Our hold state cannot
+				// call an action at all -- its caller is the mod's weapon, and a
+				// state's action is compiled against the class that owns the state.
+				// So the handler gives the tick instead. Same token, same effect, from
+				// the one place here that is allowed to.
+				//
+				// Without this the reload ran for exactly three tics and aborted:
+				//     rsr t201 gun 15: IDLE -> EMPTY
+				//     rsr t204: the gun left the reload (EMPTY)
+				mo.GiveInventory('RSR_Tick', 1);
+
 				// Driving. The hands are working; wait for the reload to say it
 				// is finished, then give the gun back to the mod at the head of
 				// its own reload so IT does the ammo.
