@@ -30,6 +30,7 @@ import os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
+from lift_common import read, write, bd22_blocks, frames_of, append_rows, add_slot_for_donor, count_of, array_len, insert_after_array_head, md3_frames
 import rsr_table as T
 
 # BD22 class -> (donor suffix, shelf archetype, display name)
@@ -71,14 +72,28 @@ BREAK_FOLEY = {
 PUMP_FOLEY = {
     'Shot_Gun': ('W:sounds/shotguns/DoomPump/SHOTLOAD1.ogg', 'W:sounds/shotguns/DoomPump/shotcycle.wav', None),
 }
+RELOAD = os.environ.get('RS_VR_RELOAD', os.path.join(os.path.dirname(ROOT), 'presidentkoopa', 'rs_vr_reload'))
 WEAPONS = os.environ.get('RS_VR_WEAPONS', os.path.join(os.path.dirname(ROOT), 'presidentkoopa', 'rs_vr_weapons'))
 
 
 def write_foley(src, guns):
     """SNDINFO.ms rows + files for each gun (skips a gun whose rows are already there)"""
     import shutil
-    p = os.path.join(ROOT, 'SNDINFO.ms'); t = read(p).rstrip('\n')
+    p = os.path.join(ROOT, 'SNDINFO.ms')
     os.makedirs(os.path.join(ROOT, 'sounds/ms'), exist_ok=True)
+    if os.path.exists(p):
+        t = read(p).rstrip('\n')
+    else:
+        # a clean checkout has no SNDINFO.ms yet: start it with the magazine landing every
+        # gun's magdrop alias points at (RS_VR_Reload's bounce, as the shipped file has it)
+        for k in (1, 2, 3):
+            shutil.copy2(os.path.join(RELOAD, 'sounds/wm/DSBOUNC%d.ogg' % k), os.path.join(ROOT, 'sounds/ms'))
+        t = ('// ModelSwapper\'s own reload foley. Every name is under ms/, so it cannot collide with a\n'
+             '// name the loaded mod defines. Files: RS_VR_Weapons, RS_VR_Reload (the magazine landing).\n\n'
+             '$random ms/magdrop { ms/magdrop1 ms/magdrop2 ms/magdrop3 }\n'
+             'ms/magdrop1         sounds/ms/DSBOUNC1.ogg\n'
+             'ms/magdrop2         sounds/ms/DSBOUNC2.ogg\n'
+             'ms/magdrop3         sounds/ms/DSBOUNC3.ogg')
     for g in guns:
         if g not in FOLEY or ('ms/bd22/%s/magout' % GUNS[g][0].lower()) in t:
             continue
@@ -138,14 +153,6 @@ def sndname(cls, what):
     return 'ms/bd22/%s/%s' % (GUNS[cls][0].lower(), what)
 
 
-def read(p):
-    return open(p, encoding='utf-8', errors='replace').read()
-
-
-def write(p, t):
-    open(p, 'w', encoding='utf-8', newline='\n').write(t)
-
-
 # ------------------------------------------------------------------ BD22 side
 def bd22_index(src, table):
     """class -> index from a generated table's Index(Weapon w)"""
@@ -154,113 +161,7 @@ def bd22_index(src, table):
     return {c: int(n) for c, n in re.findall(r"(?:n == '|w is ')(\w+)'\)\s*return (\d+);", f['body'])}
 
 
-def bd22_blocks(text):
-    """every Model block with the comment lines just above it"""
-    out = []
-    for m in re.finditer(r'((?:^[ \t]*//[^\n]*\n)*)^[ \t]*Model\s+(\S+)\s*\n?\s*\{(.*?)^[ \t]*\}', text, re.S | re.M):
-        out.append(dict(comment=m.group(1), cls=m.group(2), body=m.group(3), text=m.group(0)))
-    return out
-
-
-def frames_of(body):
-    return re.findall(r'FrameIndex\s+(\S+)\s+(\S+)\s+(\d+)\s+(\d+)', body)
-
-
 # ------------------------------------------------------------------ table surgery
-def append_rows(target, source, src_idx, new_idx, overrides):
-    """append source row src_idx to every accessor of target as row new_idx"""
-    tf = T.functions(target)
-    sf = {f['name']: f for f in T.functions(source)}
-    edits = []
-    for f in tf:
-        name = f['name']
-        if name in ('Index', 'HandOf', 'DonorInHand', 'SlotForDonor', 'Count'):
-            continue
-        if 'int k' in f['args'] and name in sf:
-            # PER CHAMBER (rsb_guns.zs Base/Tip/Bore/Rest*): switch (i * 8 + k) -- copy the
-            # source gun's eight keys, renumbered to the new gun's
-            src = T.cases(sf[name]['body'])
-            rows = ['\t\tcase %d:\treturn %s;' % (new_idx * 8 + k - src_idx * 8, src[k])
-                    for k in sorted(src) if src_idx * 8 <= k < src_idx * 8 + 8]
-            last = list(re.finditer(r'^[ \t]*case\s+\d+:[^\n]*\n', f['body'], re.M))
-            if rows and last:
-                edits.append((f['end'] - 1 - len(f['body']) + last[-1].end(), '\n'.join(rows) + '\n'))
-            continue
-        if name == 'PushEdge' and name in sf:
-            # 25 values per gun, e[(i - 1) * 25 + b], and an i <= N guard
-            body = f['body']
-            m = re.search(r'static const double e\[\] = \{(.*?)\};', body, re.S)
-            sm = re.search(r'static const double e\[\] = \{(.*?)\};', sf[name]['body'], re.S)
-            cur = [x.strip() for x in m.group(1).split(',') if x.strip()]
-            sv = [x.strip() for x in sm.group(1).split(',') if x.strip()]
-            cur = cur[:(new_idx - 1) * 25] + ['-999.0'] * max(0, (new_idx - 1) * 25 - len(cur)) + sv[(src_idx - 1) * 25:src_idx * 25]
-            rows = ['\t\t\t' + ', '.join(cur[r * 25:(r + 1) * 25]) for r in range(len(cur) // 25)]
-            nb = body.replace(m.group(0), 'static const double e[] = {\n' + ',\n'.join(rows) + '};')
-            nb = re.sub(r'return i >= 1 && i <= \d+ \?', 'return i >= 1 && i <= %d ?' % new_idx, nb)
-            edits.append(('REPLACE', f['end'] - 1 - len(body), f['end'] - 1, nb))
-            continue
-        body = f['body']
-        if 'switch' in body:
-            if name in overrides:
-                val = overrides[name]
-            else:
-                val = T.cases(sf[name]['body']).get(src_idx) if name in sf else None
-            if val is None:
-                continue
-            last = list(re.finditer(r'^[ \t]*case\s+\d+:[^\n]*\n', body, re.M))
-            if not last:
-                continue
-            at = f['start'] + (len(target[f['start']:f['end']]) - len(body) - 1) + last[-1].end()
-            # recompute absolute: body begins at end-1-len(body)
-            body_abs = f['end'] - 1 - len(body)
-            at = body_abs + last[-1].end()
-            edits.append((at, '\t\tcase %d:\treturn %s;\n' % (new_idx, val)))
-        else:
-            body_abs = f['end'] - 1 - len(body)
-            for am in re.finditer(r'static const (\w+) (\w+)\[\] = \{(.*?)\};', body, re.S):
-                typ, arr, items = am.group(1), am.group(2), [x.strip() for x in am.group(3).split(',')]
-                if name in overrides:
-                    val = overrides[name]
-                else:
-                    val = None
-                    if name in sf:
-                        sm = re.search(r'static const \w+ %s\[\] = \{(.*?)\};' % arr, sf[name]['body'], re.S)
-                        if sm:
-                            sitems = [x.strip() for x in sm.group(1).split(',')]
-                            if src_idx < len(sitems):
-                                val = sitems[src_idx]
-                default = {'bool': 'false', 'String': '""', 'string': '""'}.get(typ, '0')
-                pad = [default] * max(0, new_idx - len(items))
-                add = pad + [val if val is not None else default]
-                close = body_abs + am.start(3) + len(am.group(3))
-                edits.append((close, ', ' + ', '.join(add)))
-    for e in sorted(edits, key=lambda e: e[1] if e[0] == 'REPLACE' else e[0], reverse=True):
-        if e[0] == 'REPLACE':
-            target = target[:e[1]] + e[3] + target[e[2]:]
-        else:
-            target = target[:e[0]] + e[1] + target[e[0]:]
-    return target
-
-
-def add_slot_for_donor(target, name, slot):
-    f = next(f for f in T.functions(target) if f['name'] == 'SlotForDonor')
-    body_abs = f['end'] - 1 - len(f['body'])
-    m = list(re.finditer(r'^[ \t]*return 0;', f['body'], re.M))[-1]
-    at = body_abs + m.start()
-    return target[:at] + '\t\tif (donor == "%s")\treturn %d;\n' % (name, slot) + target[at:]
-
-
-def count_of(target):
-    m = re.search(r'static int Count\(\) \{ return (\d+); \}', target)
-    return int(m.group(1)) if m else None
-
-
-def array_len(target, fname):
-    f = next(f for f in T.functions(target) if f['name'] == fname)
-    m = re.search(r'static const \w+ \w+\[\] = \{(.*?)\};', f['body'], re.S)
-    return len(m.group(1).split(','))
-
-
 # ------------------------------------------------------------------ main
 def main(src, which):
     guns = list(GUNS) if which == ['all'] else which
@@ -452,26 +353,10 @@ def main(src, which):
     print('\n'.join(report))
 
 
-def insert_after_array_head(t, head, rows):
-    """APPEND at the array's end. A saved pick is an index into its archetype's rows, in
-    array order, so a row inserted ahead of existing ones would move every player's pick."""
-    start = t.index(head) + len(head)
-    close = t.index('};', start)
-    body = t[start:close].rstrip()
-    if not body.endswith(','):
-        body += ','
-    return t[:start] + body + '\n\t\t\t// BD22Q guns (tools_kit/lift_bd22.py)\n' + '\n'.join('\t\t\t' + r for r in rows).rstrip(',') + '\n\t\t' + t[close:]
-
-
 def shelf_anchor(arch):
     t = read(os.path.join(ROOT, 'zscript/RS_ForeignModels.zs'))
     m = re.search(r'"%s\|MS_\w+\|(\w{4})\|' % re.escape(arch), t)
     return m.group(1) if m else ANCHOR_DEFAULT
-
-
-def md3_frames(p):
-    import struct
-    return struct.unpack_from('<i', open(p, 'rb').read(), 76)[0]
 
 
 if __name__ == '__main__':

@@ -21,57 +21,9 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-import lift_aliens as L
+from lift_common import donor_blocks, placement, vec, resolve, frame0, shelf_rest
+import lift_common as L
 import card2quest as C
-
-
-def donor_blocks():
-    md = open(os.path.join(ROOT, 'modeldef'), encoding='utf-8', errors='replace').read()
-    out = {}
-    for m in re.finditer(r'^Model\s+(\w+)\s*\n\{(.*?)^\}', md, re.S | re.M):
-        out.setdefault(m.group(1), m.group(2))
-    return out
-
-
-def placement(body):
-    sc = [float(x) for x in re.search(r'^\s*Scale\s+([^\n/]+)', body, re.M).group(1).split()]
-    om = re.search(r'^\s*Offset\s+([^\n/]+)', body, re.M)
-    off = [float(x) for x in om.group(1).split()] if om else [0.0, 0.0, 0.0]
-    off += [0.0] * (3 - len(off))
-    z = re.search(r'^\s*ZOffset\s+([-\d.]+)', body, re.M)
-    if z:
-        off[2] = float(z.group(1))
-    return sc, off
-
-
-def vec(s):
-    return [float(x) for x in s.strip('()').split(',')]
-
-
-def resolve(p):
-    """the file as the engine finds it: lump names are case-insensitive, Linux paths are not"""
-    if os.path.exists(p):
-        return p
-    cur = '/'
-    for part in os.path.abspath(p).strip('/').split('/'):
-        hit = [x for x in os.listdir(cur) if x.lower() == part.lower()] if os.path.isdir(cur) else []
-        if not hit:
-            return p
-        cur = os.path.join(cur, hit[0])
-    return cur
-
-
-def frame0(p, f=0):
-    import genpack as gp
-    p = resolve(p)
-    s = gp.md3_surfaces(p)[1]
-    f = min(f, s[0]['xyz'].shape[0] - 1)
-    return np.concatenate([x['xyz'][f] for x in s])
-
-
-def shelf_rest():
-    t = open(os.path.join(ROOT, 'zscript/RS_ForeignModels.zs')).read()
-    return {m.group(1): int(m.group(2)) for m in re.finditer(r'"\w+\|(\w+)\|\w{4}\|\d+\|(\d+)\|\d+"', t)}
 
 
 def audit():

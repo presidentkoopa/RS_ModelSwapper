@@ -29,16 +29,9 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
+from lift_common import donor_blocks
 D = np.diag([-1.0, 1.0, 1.0])
 O_H = np.array([0.0, -10.0, -24.0])
-
-
-def donor_blocks(text):
-    """class -> the FIRST block of that class (the donor block: placement + rest frame)"""
-    out = {}
-    for m in re.finditer(r'^Model\s+(\w+)\s*\n\{(.*?)^\}', text, re.S | re.M):
-        out.setdefault(m.group(1), m.group(2))
-    return out
 
 
 def placement(body):

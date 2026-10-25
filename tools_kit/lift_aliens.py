@@ -37,9 +37,10 @@ import os, re, shutil, struct, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
+from lift_common import ARR, read_row, set_row, slot_of, max_slot, tc_index, block_of, get_line, frame_names, LETTERS
 import rsr_table as T
 import md3_frames as M3
-from lift_bd22 import bd22_blocks as blocks, frames_of, read, write, add_slot_for_donor, count_of
+from lift_common import blocks, frames_of, read, write, add_slot_for_donor, count_of
 
 # Aliens class -> (kind, MS mesh folder, [donors]); the first donor is the models/alien one
 GUNS = {
@@ -68,85 +69,7 @@ def snd(cls, what):
 
 
 # ------------------------------------------------------------------ generic row read / write
-ARR = re.compile(r'static const (\w+) (\w+)\[\] = \{(.*?)\};', re.S)
-
-
-def read_row(text, idx):
-    out = {}
-    for f in T.functions(text):
-        c = T.cases(f['body'])
-        if c:
-            if idx in c:
-                out[f['name']] = ('case', c[idx])
-            continue
-        arrs = {}
-        for m in ARR.finditer(f['body']):
-            items = [x.strip() for x in m.group(3).split(',')]
-            if idx < len(items):
-                arrs[m.group(2)] = items[idx]
-        if arrs:
-            out[f['name']] = ('arr', arrs)
-    return out
-
-
-def set_row(target, idx, values):
-    """write row idx: replace a `case idx:` / array item that is there, else add it"""
-    for name, (kind, val) in values.items():
-        f = next((f for f in T.functions(target) if f['name'] == name), None)
-        if f is None:
-            continue
-        body = f['body']; b0 = f['end'] - 1 - len(body)
-        if kind == 'case':
-            if 'switch' not in body:
-                continue
-            m = re.search(r'^([ \t]*case\s+%d:\s*return\s+)([^;]+)(;)' % idx, body, re.M)
-            if m:
-                nb = body[:m.start(2)] + val + body[m.end(2):]
-            else:
-                last = list(re.finditer(r'^[ \t]*case\s+(\d+):[^\n]*\n', body, re.M))
-                after = [l for l in last if int(l.group(1)) > idx]
-                at = after[0].start() if after else last[-1].end()
-                nb = body[:at] + '\t\tcase %d:\treturn %s;\n' % (idx, val) + body[at:]
-        else:
-            nb = body
-            for m in reversed(list(ARR.finditer(body))):
-                typ, arr = m.group(1), m.group(2)
-                if arr not in val:
-                    continue
-                items = [x.strip() for x in m.group(3).split(',')]
-                default = {'bool': 'false', 'String': '""', 'string': '""'}.get(typ, '0')
-                items += [default] * max(0, idx + 1 - len(items))
-                items[idx] = val[arr]
-                nb = nb[:m.start(3)] + ', '.join(items) + nb[m.end(3):]
-        target = target[:b0] + nb + target[b0 + len(body):]
-    return target
-
-
-def slot_of(text, donor):
-    m = re.search(r'donor == "%s"\)\s*return (\d+);' % re.escape(donor), text)
-    return int(m.group(1)) if m else None
-
-
-def max_slot(text):
-    return max([0] + [int(x) for x in re.findall(r'donor == "\w+"\)\s*return (\d+);', text)])
-
-
-def tc_index(text):
-    f = next(f for f in T.functions(text) if f['name'] == 'Index')
-    return {c: int(n) for c, n in re.findall(r"w is '(\w+)'\)\s*return (\d+);", f['body'])}
-
-
 # ------------------------------------------------------------------ MODELDEF helpers
-def block_of(text, cls):
-    m = re.search(r'^Model\s+%s\s*\n\{(.*?)^\}' % re.escape(cls), text, re.S | re.M)
-    return m
-
-
-def get_line(body, key):
-    m = re.search(r'^[ \t]*%s\s+([^\n/]+)' % key, body, re.M | re.I)
-    return [float(x) for x in m.group(1).split()] if m else None
-
-
 def md3_frame0(p):
     _ = struct
     import numpy as np
@@ -181,14 +104,6 @@ def hand_letters(md_text, mesh, sprites):
             if s in out:
                 out[s][l] = int(f)
     return out
-
-
-def frame_names(p):
-    d = open(p, 'rb').read(); h = struct.unpack_from(M3.HDR, d, 0)
-    return [d[h[8] + i * 56 + 40:h[8] + i * 56 + 56].split(b'\0')[0].decode() for i in range(h[4])]
-
-
-LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
 def main(src, dry):

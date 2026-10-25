@@ -47,7 +47,7 @@ def main(dry, only, max_cm):
     cards = {w['cls']: w for w in C.load_cards(ROOT)}
     done = 0
     rsr = open(os.path.join(ROOT, 'zscript_depot/rsr/rsr_guns.ms.zs')).read()
-    import lift_aliens as L
+    import lift_common as L
     for r in rows:
         d = r['donor']
         if only and d not in only:

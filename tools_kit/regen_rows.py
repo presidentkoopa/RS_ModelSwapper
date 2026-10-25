@@ -31,8 +31,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import card2quest as C, genpack as G, gen_rsr
-import lift_aliens as L, placement_audit as PA
-from lift_bd22 import add_slot_for_donor, count_of
+import lift_common as L, placement_audit as PA
+from lift_common import add_slot_for_donor, count_of
 
 B36 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 CODES = ['V' + c for c in B36] + ['W' + c for c in B36]        # QV0M ... QWZM: this tool's sprites
