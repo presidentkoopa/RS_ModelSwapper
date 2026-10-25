@@ -44,6 +44,45 @@ GUNS = {
     'Sniper':         ('Ruger', 'rifle', 'BD22 Ruger Mini-14'),
     'Rocket_Launcher': ('RocketLauncher', 'launcher', 'BD22 Rocket Launcher'),
 }
+# Reload foley per gun: (out, in, back, fwd) as paths under the RS_VR_Weapons repo (W:) or
+# RS_Brutal22WeaponsQ's src (B: -- BD22Q's own rack sounds). BD22 itself borrows Brutal
+# Doom's sound names, which exist only when Brutal Doom is loaded; ModelSwapper loads beside
+# anything, so it ships its own, under ms/ names that no mod can collide with.
+RIFLE = ('W:sounds/rifles/RCOUT.ogg', 'W:sounds/rifles/RCIN.ogg', 'W:sounds/rifles/RCKBCK.ogg', 'W:sounds/rifles/RCKFWD.ogg')
+SMG = ('W:sounds/rifles/RCOUT.ogg', 'W:sounds/rifles/RCIN.ogg', 'B:sounds/rsr/rsrslide.wav', 'B:sounds/rsr/rsrsmgfw.wav')
+CELL = ('W:sounds/plasma/PLCOUT.ogg', 'W:sounds/plasma/PLCIN.ogg', None, None)
+FOLEY = {
+    'BrutalPistol': ('W:sounds/pistols/9mmclip1.wav', 'W:sounds/pistols/9mmclip2.wav', 'W:sounds/pistols/9mmslide.wav', 'W:sounds/pistols/PSNAP.ogg'),
+    'Rifle': RIFLE, 'Sniper': RIFLE, 'AssaultShotgun': RIFLE, 'BrutalSMG': SMG, 'MP40': SMG,
+    'RailGun': CELL, 'Plasma_Gun': CELL,
+    'Rocket_Launcher': ('W:sounds/launchers/RLCOUT.ogg', 'W:sounds/launchers/RLCIN.ogg', None, None),
+}
+WEAPONS = os.environ.get('RS_VR_WEAPONS', os.path.join(os.path.dirname(ROOT), 'presidentkoopa', 'rs_vr_weapons'))
+
+
+def write_foley(src, guns):
+    """SNDINFO.ms rows + files for each gun (skips a gun whose rows are already there)"""
+    import shutil
+    p = os.path.join(ROOT, 'SNDINFO.ms'); t = read(p).rstrip('\n')
+    os.makedirs(os.path.join(ROOT, 'sounds/ms'), exist_ok=True)
+    for g in guns:
+        if g not in FOLEY or ('ms/bd22/%s/magout' % GUNS[g][0].lower()) in t:
+            continue
+        rows = ['', '// BD22 %s (tools_kit/lift_bd22.py)' % g]
+        for what, f in zip(('magout', 'magin', 'slideback', 'slidefwd'), FOLEY[g]):
+            if not f:
+                continue
+            base = WEAPONS if f.startswith('W:') else src
+            sf = os.path.join(base, f[2:])
+            if not os.path.exists(sf):
+                sys.exit('foley file missing: %s' % sf)
+            shutil.copy2(sf, os.path.join(ROOT, 'sounds/ms', os.path.basename(sf)))
+            rows.append('%-36s sounds/ms/%s' % (sndname(g, what), os.path.basename(sf)))
+        rows.append('$alias %s ms/magdrop' % sndname(g, 'magdrop'))
+        t += '\n' + '\n'.join(rows)
+    write(p, t + '\n')
+
+
 # guns whose slide / bolt locks back on an empty gun (BD22 README "lock back when fired dry")
 SLIDELOCK = {'BrutalPistol', 'Rifle', 'BrutalSMG', 'AssaultShotgun'}
 # the stock sprite each archetype's donors anchor on (the first shelf row of that archetype)
@@ -201,7 +240,15 @@ def main(src, which):
             t = t.replace('Path "models/bd/', 'Path "models/depot_bd/bd/')
             layer_add.append(t)
         # ---- the donor block: BD22's own gun block, resting on BD22's ready frame
-        gb = next(b for b in md_blocks if b['cls'] == g)
+        # the gun's own block: same class AND the same mesh its reload layers use (a class can
+        # have several blocks -- the Ruger's also binds a grenade model)
+        lmesh = re.search(r'Model\s+0\s+"([^"]+)"', mine[0]['body']).group(1).lower()
+        cand = [b for b in md_blocks + [r for r in rsr_blocks if r not in mine] if b['cls'] == g and re.search(r'Path\s+"([^"]+)"', b['body'])
+                and re.search(r'Path\s+"([^"]+)"', b['body']).group(1).rstrip('/').lower() == path.rstrip('/').lower()
+                and (re.search(r'Model\s+0\s+"([^"]+)"', b['body']) or [None, ''])[1].lower() == lmesh]
+        if not cand:
+            report.append('%s: no MODELDEF.bd.txt block for %s/%s' % (g, path, lmesh)); continue
+        gb = max(cand, key=lambda b: len(frames_of(b['body'])))
         keep = [l.strip() for l in gb['body'].splitlines()
                 if re.match(r'\s*(Path|Model\s+\d|Skin|SurfaceSkin|Scale|Offset|ZOffset|NoInterpolation)\b', l, re.I)]
         keep = [l.replace('"models/bd/', '"models/depot_bd/bd/') for l in keep]
@@ -220,7 +267,8 @@ def main(src, which):
         ov = dict(MagAmmo='""', NoMag='"RSR_NoMag_%s"' % d, Reserve='""', ReloadToken='""',
                   ReadySprites='"%s A"' % anchor,
                   SndOut='"%s"' % sndname(g, 'magout'), SndIn='"%s"' % sndname(g, 'magin'),
-                  SndBack='"%s"' % sndname(g, 'slideback'), SndFwd='"%s"' % sndname(g, 'slidefwd'),
+                  SndBack='"%s"' % sndname(g, 'slideback') if FOLEY.get(g, (0, 0, 0, 0))[2] else '""',
+                  SndFwd='"%s"' % sndname(g, 'slidefwd') if FOLEY.get(g, (0, 0, 0, 0))[3] else '""',
                   SndLand='"%s"' % sndname(g, 'magdrop'),
                   SlideLock='true' if g in SLIDELOCK else 'false')
         rsr = append_rows(rsr, b_rsr, i, n_rsr, ov)
@@ -248,7 +296,11 @@ def main(src, which):
 
     md = read(os.path.join(ROOT, 'modeldef')).rstrip('\n')
     write(os.path.join(ROOT, 'modeldef'), md + '\n\n// ---- BD22Q guns, lifted whole from RS_Brutal22WeaponsQ (tools_kit/lift_bd22.py)\n\n' + '\n'.join(md_add))
-    write(os.path.join(ROOT, 'MODELDEF.bd22'),
+    p_l = os.path.join(ROOT, 'MODELDEF.bd22')
+    if os.path.exists(p_l):
+        write(p_l, read(p_l).rstrip('\n') + '\n\n' + '\n'.join(layer_add))
+    else:
+      write(p_l,
           '// GENERATED by tools_kit/lift_bd22.py from RS_Brutal22WeaponsQ MODELDEF.rsr -- do not edit by hand.\n'
           '// BD22Q\'s VR reload layers for the BD22 guns on the shelf. The weapon layer is the DONOR\'s\n'
           '// (A_ChangeModel), so the gun-without-magazine blocks are keyed to the donor class; the part,\n'
@@ -266,6 +318,7 @@ def main(src, which):
     p = os.path.join(ROOT, 'zscript/RS_ForeignAnim.zs'); t = read(p)
     t = insert_after_array_head(t, 'static const string CLIP[] = {', clips)
     write(p, t)
+    write_foley(src, guns)
     print('\n'.join(report))
 
 

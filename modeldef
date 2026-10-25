@@ -3145,3 +3145,140 @@ Model MS_BD22_Pistol
 	FrameIndex PISG A 0 3
 	FrameIndex MSBL A 0 9999
 }
+
+// ---- BD22Q guns, lifted whole from RS_Brutal22WeaponsQ (tools_kit/lift_bd22.py)
+
+Model MS_BD22_Rifle
+{
+	// BD22Q's own Rifle: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 3
+	Path "models/depot_bd/bd/Rifle"
+	Model 0 "Rifle.md3"
+	Skin 0 "Rifle.png"
+	Model 1 "M203.md3"	// 1.30: the M203 (kitbash/gen_m203.py)
+	Skin 1 "M203.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	NoInterpolation
+	FrameIndex CHGG A 0 3
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_BD22_SMG
+{
+	// BD22Q's own BrutalSMG: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 3
+	Path "models/depot_bd/bd/BrutalSMG"
+	Model 0 "BrutalSMG.md3"
+	Skin 0 "BrutalSMG.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	Nointerpolation
+	FrameIndex CHGG A 0 3
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_BD22_MP40
+{
+	// BD22Q's own MP40: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 2
+	Path "models/depot_bd/bd/MP40"
+	Model 0 "MP40.md3"
+	Skin 0 "MP40.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	NoInterpolation
+	ZOffset -5
+	FrameIndex CHGG A 0 2
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_BD22_AssaultShotgun
+{
+	// BD22Q's own AssaultShotgun: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 4
+	Path "models/depot_bd/bd/AssaultShotgun"
+	Model 0 "AssaultShotgun.md3"
+	Skin 0 "AssaultShotgun.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	NoInterpolation
+	ZOffset -5
+	FrameIndex SHTG A 0 4
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_BD22_RailGun
+{
+	// BD22Q's own RailGun: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 3
+	Path "models/depot_bd/bd/RailGun"
+	Model 0 "RailGun.md3"
+	Skin 0 "RailGun.png"
+	SurfaceSkin 0 1 "scope_glass.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	NoInterpolation
+	ZOffset -5
+	FrameIndex PLSG A 0 3
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_BD22_PlasmaGun
+{
+	// BD22Q's own Plasma_Gun: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 4
+	Path "models/depot_bd/bd/Plasma_Gun"
+	Model 0 "Plasma.md3"
+	Skin 0 "Plasma.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	Nointerpolation
+	FrameIndex PLSG A 0 4
+	FrameIndex MSBL A 0 9999
+}
+
+Model MS_BD22_RocketLauncher
+{
+	// BD22Q's own Rocket_Launcher: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 5
+	Path "models/depot_bd/bd/RPG"
+	Model 0 "RPG.md3"
+	Skin 0 "RPG.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	Nointerpolation
+	FrameIndex MISG A 0 5
+	FrameIndex MSBL A 0 9999
+}
+
+// ---- BD22Q guns, lifted whole from RS_Brutal22WeaponsQ (tools_kit/lift_bd22.py)
+
+Model MS_BD22_Ruger
+{
+	// BD22Q's own Sniper: mesh, skin and placement exactly as BD22Q ships them
+	// (tools_kit/lift_bd22.py); resting on BD22's ready frame 0
+	Path "models/depot_bd/bd/XM21"
+	Model 0 "XM21.md3"
+	SurfaceSkin 0 0 "223_rem.png"
+	SurfaceSkin 0 1 "mini14.png"
+	SurfaceSkin 0 2 "mini14.png"
+	SurfaceSkin 0 3 "leupold_vx1.png"
+	SurfaceSkin 0 4 "mini14.png"
+	SurfaceSkin 0 5 "mini14.png"
+	SurfaceSkin 0 6 "mini14.png"
+	SurfaceSkin 0 7 "leupold_vx1.png"
+	SurfaceSkin 0 8 "mini14.png"
+	SurfaceSkin 0 9 "mini14.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -10.4850 10.4850 10.4850
+	Offset -0.2816 -44.5467 0.0
+	ZOffset -6.3157
+	NoInterpolation
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}

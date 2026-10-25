@@ -330,7 +330,17 @@ class RS_ForeignShelf
 			"railgun|MS_zion_GC_Siege|PLSG|0|21|85",
 			"smg|MS_zion_HAR_Micro|CHGG|0|26|67",
 			// BD22Q guns (tools_kit/lift_bd22.py)
-			"pistol|MS_BD22_Pistol|PISG|0|3|24"
+			"pistol|MS_BD22_Pistol|PISG|0|3|24",
+			// BD22Q guns (tools_kit/lift_bd22.py)
+			"rifle|MS_BD22_Rifle|CHGG|0|3|29",
+			"smg|MS_BD22_SMG|CHGG|0|3|21",
+			"smg|MS_BD22_MP40|CHGG|0|2|14",
+			"shotgun|MS_BD22_AssaultShotgun|SHTG|0|4|32",
+			"plasma|MS_BD22_RailGun|PLSG|0|3|32",
+			"plasma|MS_BD22_PlasmaGun|PLSG|0|4|26",
+			"launcher|MS_BD22_RocketLauncher|MISG|0|5|30",
+			// BD22Q guns (tools_kit/lift_bd22.py)
+			"rifle|MS_BD22_Ruger|CHGG|0|0|1"
 		};
 		mRows.Clear();
 		// Addon rows come first, so loading an addon makes its models the
@@ -468,7 +478,17 @@ class RS_ForeignShelf
 			"MS_BD_DSweap|Sword",
 			"MS_BD_Boot|Boot",
 			// BD22Q guns (tools_kit/lift_bd22.py)
-			"MS_BD22_Pistol|BD22 Pistol"
+			"MS_BD22_Pistol|BD22 Pistol",
+			// BD22Q guns (tools_kit/lift_bd22.py)
+			"MS_BD22_Rifle|BD22 Assault Rifle",
+			"MS_BD22_SMG|BD22 SMG",
+			"MS_BD22_MP40|BD22 MP40",
+			"MS_BD22_AssaultShotgun|BD22 Assault Shotgun",
+			"MS_BD22_RailGun|BD22 Railgun",
+			"MS_BD22_PlasmaGun|BD22 Plasma Gun",
+			"MS_BD22_RocketLauncher|BD22 Rocket Launcher",
+			// BD22Q guns (tools_kit/lift_bd22.py)
+			"MS_BD22_Ruger|BD22 Ruger Mini-14"
 		};
 		string key = cls .. "|";
 		for (int i = 0; i < NAMES.Size(); ++i)

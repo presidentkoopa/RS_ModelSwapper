@@ -15,3 +15,53 @@ ms/bd22/pistol/slideback  sounds/ms/9mmslide.wav
 ms/bd22/pistol/slidefwd   sounds/ms/PSNAP.ogg
 $volume ms/bd22/pistol/slidefwd 0.8
 $alias ms/bd22/pistol/magdrop ms/magdrop
+
+// BD22 Rifle (tools_kit/lift_bd22.py)
+ms/bd22/rifle/magout                 sounds/ms/RCOUT.ogg
+ms/bd22/rifle/magin                  sounds/ms/RCIN.ogg
+ms/bd22/rifle/slideback              sounds/ms/RCKBCK.ogg
+ms/bd22/rifle/slidefwd               sounds/ms/RCKFWD.ogg
+$alias ms/bd22/rifle/magdrop ms/magdrop
+
+// BD22 BrutalSMG (tools_kit/lift_bd22.py)
+ms/bd22/smg/magout                   sounds/ms/RCOUT.ogg
+ms/bd22/smg/magin                    sounds/ms/RCIN.ogg
+ms/bd22/smg/slideback                sounds/ms/rsrslide.wav
+ms/bd22/smg/slidefwd                 sounds/ms/rsrsmgfw.wav
+$alias ms/bd22/smg/magdrop ms/magdrop
+
+// BD22 MP40 (tools_kit/lift_bd22.py)
+ms/bd22/mp40/magout                  sounds/ms/RCOUT.ogg
+ms/bd22/mp40/magin                   sounds/ms/RCIN.ogg
+ms/bd22/mp40/slideback               sounds/ms/rsrslide.wav
+ms/bd22/mp40/slidefwd                sounds/ms/rsrsmgfw.wav
+$alias ms/bd22/mp40/magdrop ms/magdrop
+
+// BD22 AssaultShotgun (tools_kit/lift_bd22.py)
+ms/bd22/assaultshotgun/magout        sounds/ms/RCOUT.ogg
+ms/bd22/assaultshotgun/magin         sounds/ms/RCIN.ogg
+ms/bd22/assaultshotgun/slideback     sounds/ms/RCKBCK.ogg
+ms/bd22/assaultshotgun/slidefwd      sounds/ms/RCKFWD.ogg
+$alias ms/bd22/assaultshotgun/magdrop ms/magdrop
+
+// BD22 RailGun (tools_kit/lift_bd22.py)
+ms/bd22/railgun/magout               sounds/ms/PLCOUT.ogg
+ms/bd22/railgun/magin                sounds/ms/PLCIN.ogg
+$alias ms/bd22/railgun/magdrop ms/magdrop
+
+// BD22 Plasma_Gun (tools_kit/lift_bd22.py)
+ms/bd22/plasmagun/magout             sounds/ms/PLCOUT.ogg
+ms/bd22/plasmagun/magin              sounds/ms/PLCIN.ogg
+$alias ms/bd22/plasmagun/magdrop ms/magdrop
+
+// BD22 Sniper (tools_kit/lift_bd22.py)
+ms/bd22/ruger/magout                 sounds/ms/RCOUT.ogg
+ms/bd22/ruger/magin                  sounds/ms/RCIN.ogg
+ms/bd22/ruger/slideback              sounds/ms/RCKBCK.ogg
+ms/bd22/ruger/slidefwd               sounds/ms/RCKFWD.ogg
+$alias ms/bd22/ruger/magdrop ms/magdrop
+
+// BD22 Rocket_Launcher (tools_kit/lift_bd22.py)
+ms/bd22/rocketlauncher/magout        sounds/ms/RLCOUT.ogg
+ms/bd22/rocketlauncher/magin         sounds/ms/RLCIN.ogg
+$alias ms/bd22/rocketlauncher/magdrop ms/magdrop

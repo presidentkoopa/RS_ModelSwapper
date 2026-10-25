@@ -308,3 +308,11 @@ class MS_zion_RL_Lock : Actor {}
 class MS_zion_GC_Siege : Actor {}
 class MS_zion_HAR_Micro : Actor {}
 class MS_BD22_Pistol : Actor {}
+class MS_BD22_Rifle : Actor {}
+class MS_BD22_SMG : Actor {}
+class MS_BD22_MP40 : Actor {}
+class MS_BD22_AssaultShotgun : Actor {}
+class MS_BD22_RailGun : Actor {}
+class MS_BD22_PlasmaGun : Actor {}
+class MS_BD22_RocketLauncher : Actor {}
+class MS_BD22_Ruger : Actor {}
