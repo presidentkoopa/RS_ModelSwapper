@@ -99,6 +99,8 @@ def main(dry, only, max_cm):
 
 
 if __name__ == '__main__':
+    if '--i-checked-the-hands' not in sys.argv:
+        sys.exit('MEASURED WRONG (2026-10-25): the hand rows fit the donor placement, not the row\'s -- moving donors pulls guns out of the hands. Use regen_rows.py. Kept as the record; pass --i-checked-the-hands to run anyway.')
     only = set(sys.argv[sys.argv.index('--only') + 1].split(',')) if '--only' in sys.argv else None
     mx = float(sys.argv[sys.argv.index('--max-cm') + 1]) if '--max-cm' in sys.argv else None
     main('--dry' in sys.argv, only, mx)
