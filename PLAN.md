@@ -4,12 +4,14 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **none** -- every F item below is DONE and committed (2026-10-25). The one thing left on
-bd22q is the owner's headset pass, which only he can do, and it is what gates the 1.99 release.
-Nothing in this pack has ever been seen in VR. The S items are TABLED; do not start one.
+Current step: **F10** -- F1-F9 are DONE and committed (2026-10-25). F10 finishes the roster: the two
+remaining non-melee guns that can reload. The owner's headset pass on F1-F9 is still outstanding and
+is what gates the 1.99 release; nothing in this pack has ever been seen in VR.
+The S items are TABLED; do not start one.
 
-(`none` is a state `tools/check_plan.py` accepts ONLY while every `- F<n>` line here is marked DONE.
-It is not a way to commit off-plan: start a new F item in a `[plan]` commit and name it here instead.)
+(`none` is also a legal current step, and `tools/check_plan.py` accepts it ONLY while every `- F<n>`
+line here is marked DONE. It is not a way to commit off-plan: start a new F item in a `[plan]` commit
+and name it here instead, which is what F10 is.)
 
 ## Principle
 Every shipped gun is built from two sources only: its MESH (tool-measured) and its PARENT MOD (behaviour
@@ -89,6 +91,30 @@ per-gun checklist below, in a headset, signed by the owner.
       what you just did".) Also packaged as a standalone skill at
       `C:\Users\Command\.claude\skills\gate-a-doom-mod\`, and sent to the RS ModelSwapper lane on
       the owner's instruction, 2026-10-25.
+
+- F10 The rest of the roster. 28 guns carry hands; 3 are melee (BrutalAxe, Chain_saw, DSweap) and
+      17 of the other 25 reload by hand. The owner's objective is that every non-melee gun reloads,
+      and no F item covered the remaining eight. He ruled on them 2026-10-25:
+        * **IncendiaryLauncher = M32**, a Milkor MGL: a six-shot revolving cylinder. DO THIS ONE
+          FIRST -- it is the easiest gun left, not the hardest. `models/bd/M32/m32.md3` ships the
+          magazine ALREADY NAMED as its own surface (`magazine`, 484 v / 488 t) with
+          `magazine_back`, `magazine_bracket` and `magazine_bracket_front` beside it, so there is
+          nothing to carve. A revolving cylinder is the Revolver's reload shape, and the pack has
+          that system twice over (speedloader and per-round, both on a menu row).
+        * **GrenadeLauncher = M79**, break action -- the owner's call, and the mesh agrees: a
+          surface named `Shell` (828 v) and 26 frames on a 5-surface model, which is an open/close
+          animation already in there. Break-open is a system the pack runs six times.
+        * **Minigun: NOT in this step.** `models/bd/Minigun/Minigun.md3` is Runko / Runko / Pipe /
+          Runko / Trigger / Grip -- no belt, no drum, no magazine, no ammo surface. Nothing to
+          grab. This is the SECOND time this gun has come back empty, after F8's ejection port, and
+          for the same reason: the part is not modelled. Only an imported mesh could change that
+          (Ermac's `mag_chaingun.md3` and `cg_ammo1..10` exist but are a different gun, so they
+          would be a stand-in, not a measurement). Do not re-derive this; the answer is in the mesh.
+        * **Devastator, BFG10k, BIG_FUCKING_GUN: not wanted.** "if the bfg never reloads i wont
+          lose sleep" (owner). Note for later only: Ermac's Force Unleashed has `pod_bfg.md3` and a
+          FOUR-step pod reload (unload, grab, insert), so a BFG reload is precedented if he asks.
+        * **HellishMissileLauncher, NukeLauncher: ruled out.** "dont need a reload" (owner).
+      Numbers come off these two meshes with the repo's own tools, as every other gun's did.
 
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
