@@ -17,15 +17,18 @@ import numpy as np
 from scipy.spatial import cKDTree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KIT = '/mnt/user-data/uploads/Quest_Weapons_Kit/kit/kit/tool/hands'
 sys.path.insert(0, HERE)
-sys.path.insert(0, KIT)
 import gunview, hudrender                      # kit, unmodified
 import card2quest as c2q, genpack
 
-ERMAC = '/mnt/user-data/uploads/Quest_Weapons_Kit/hands/ermac_original'   # the 211 / 196-frame originals the regions were measured on
+# 2026-10-25: these were upload paths that do not exist on this machine. The measured
+# gripping faces ship in the Depot (tools/kit/gripregions.json) and Ermac's cut hand
+# meshes inside the kit itself, where ermac.py already points -- the same two files the
+# melee fits use.
+REGIONS_JSON = 'E:/DOOMWork/RSQ_WeaponDepot/tools/kit/gripregions.json'
+ERMAC = 'C:/Users/Command/Desktop/Quest_Weapons_Kit/kit/kit/ermac/hand'   # hand.md3 / hand2.md3, the frames the regions were measured on
 PL = dict(scale=[-1.0, 1.0, 1.0], off=[0.0, -24.0, -10.0])                # Ermac's placement (ermac.PL)
-REGIONS = json.load(open(KIT + '/gripregions.json'))['poses']
+REGIONS = json.load(open(REGIONS_JSON))['poses']
 
 # Ermac pose -> the letter the shipped hand.md3 / hand2.md3 carry it under (1.96b MODELDEF.rsq comments)
 GUN_LETTER = {6: 'A', 19: 'B', 30: 'C', 47: 'D', 95: 'E', 106: 'F', 113: 'G', 29: 'H'}
