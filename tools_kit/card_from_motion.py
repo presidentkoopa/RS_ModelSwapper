@@ -155,11 +155,37 @@ def main(outpath):
         # for every other package it returned None and the entry silently kept
         # travel_clear -- the part's whole journey, 30 to 185 units.
         st, ax, _fr = mag_insertion.from_card(p, d, mesh) or (None, None, None)
+        # A gun that throws the spent magazine clear and flies the new one in from
+        # off screen has no slower approach inside its mag_in window to find, so
+        # the approach comes back as the whole flight -- 20 to 180 units. There the
+        # animation cannot tell us the stroke but the well can: mouth to seat,
+        # measured off the card. Shorter than the author's animation, ends at the
+        # same seat, and marked in the written entry so it is never mistaken for
+        # an animation reading.
+        ceil = mag_insertion.ceiling(p, d, mesh)
+        from_well = False
+        if ceil and (st is None or st > ceil[0] + ceil[1] + 0.5):
+            w = mag_insertion.well_stroke(p)
+            if w:
+                # Only the MAGNITUDE comes from the well. The heading stays the
+                # direction the magazine was actually travelling on its approach,
+                # which is a measurement; mouth-minus-seat and the card's own well
+                # axis both disagree with it on the railgun, and neither of those
+                # watched the part move.
+                st = w[0]
+                ax = ax if ax is not None else w[1]
+                from_well = True
         if st is None or ax is None:
             print(f'  {cls}: no insertion inside the mag_in window -- skipped')
             continue
         note = ''
-        if abs(st - float(g[9])) > 0.5:
+        if from_well:
+            note = ("  # NOT an animation reading: this gun throws the magazine clear"
+                    " of the screen, so the stroke is the well's own mouth-to-seat"
+                    " distance")
+            g[9] = '%.2f' % st
+            g[6], g[7], g[8] = ('%.3f' % v for v in ax)
+        elif abs(st - float(g[9])) > 0.5:
             note = ("  # stroke taken from the insertion frames; travel_clear said %s,"
                     " which is the part's whole journey from wherever it is parked" % g[9])
             g[9] = '%.2f' % st

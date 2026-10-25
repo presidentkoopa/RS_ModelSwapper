@@ -125,6 +125,43 @@ def from_card(card_path, model_dir, mesh):
     return insertion(P, int(mi.group(1)), int(mi.group(2)))
 
 
+def well_stroke(card_path):
+    """Mouth to seat of the magazine well: the insertion with no animation at all.
+
+    Some guns never show an insertion the animation can be read from. The
+    flamethrowers, Aliens' pistol and rifle, the Chex zorchers and the Vanilla+
+    multi-gun sheet all move the magazine 20 to 180 units across the whole of
+    their mag_in window -- the spent magazine is thrown clear and the new one
+    flies in from off screen, with no slower approach inside that to find.
+
+    For those the animation cannot tell us the stroke, but the GUN can. The
+    magazine well is measured in the card: its mouth and its seat. The insertion
+    is the distance between them, which is the shortest honest answer and errs
+    the safe way -- a stroke shorter than the author's animation leaves the
+    player's hand nearer the gun, and it still ends exactly at the seat.
+
+    Returns (distance, unit axis) or None.
+
+    The DIRECTION stays the card's measured magazine axis, not mouth minus seat.
+    Those two disagree on the railgun -- the measured axis is (-0.707, 0, -0.707)
+    and mouth-minus-seat is (-0.850, -0.288, 0.441), a different direction with
+    the Z sign flipped -- and the measured one is the authority, since the mouth
+    is a geometric construction and the axis came off the gun's own motion. So
+    the well supplies the magnitude and the animation still supplies the heading.
+    """
+    c = open(card_path, encoding='utf-8', errors='replace').read()
+    w = re.search(r'mag_well\s+' + VB + r'\s+mouth\s+' + VB + r'\s+axis\s+' + VB, c)
+    if not w:
+        return None
+    g = [float(x) for x in w.groups()]
+    seat, mouth, axis = np.array(g[0:3]), np.array(g[3:6]), np.array(g[6:9])
+    n = float(np.linalg.norm(mouth - seat))
+    an = float(np.linalg.norm(axis))
+    if n < 0.35 or an < 1e-9:
+        return None
+    return n, axis / an
+
+
 def ceiling(card_path, model_dir, mesh):
     """Well depth (seat to mouth) + the magazine's length along the insertion axis."""
     c = open(card_path, encoding='utf-8', errors='replace').read()

@@ -1,5 +1,5 @@
 # ============================================================================
-# WMCARD.shelf.raw2 -- written from our OWN measurements.
+# WMCARD.shelf.raw4 -- written from our OWN measurements.
 #
 # Every number here came out of the gun's own reload animation, measured by
 # md3label on the ANIMATED mesh this mod ships. No static _wm world model was
@@ -64,6 +64,35 @@ part magazine
     kind     = slide
     axis     = -0.886, -0.000, -0.464
     distance = 14.77
+  end
+end
+
+weapon "MS_AE_Flamer"
+  type      = flamethrower
+  model     = "models/hud/AE_Flamer" "m260b.md3"
+  skin      = "models/hud/AE_Flamer" "m260b.png"
+  capacity  = 100
+  muzzle    = 34.89, -0.39, 1.28
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = -1.02, -1.25, -6.95
+  seat = -9.8, 3.3, 1.64
+  supportat = 4.87, 0.03, 0.66
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = -9.81, -0.49, -10.24
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.000, -0.000, -1.000
+    distance = 10.82
   end
 end
 
@@ -335,6 +364,152 @@ part magazine
   end
 end
 
+weapon "MS_alien_flamer"
+  type      = flamethrower
+  model     = "models/alien/flamer" "m260b.md3"
+  skin      = "models/alien/flamer" "m260b.png"
+  capacity  = 100
+  muzzle    = 64.39, -0.05, 3.97
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 28.48, -0.91, -4.27
+  seat = 19.7, 3.64, 4.33
+  supportat = 34.37, 0.37, 3.35
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 19.69, -0.14, -7.55
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.000, -0.000, -1.000
+    distance = 10.81
+  end
+end
+
+weapon "MS_alien_pistol"
+  type      = pistol
+  model     = "models/alien/pistol" "m4a3.md3"
+  skin      = "models/alien/pistol" "m4a3.png"
+  capacity  = 12
+  muzzle    = 18.58, -0.55, 3.77
+  barrel    = 1, 0, 0
+end
+
+grip
+  triggerat = -0.09, 0.0, -1.41
+  palm = -5.13, -0.0, -12.73
+  seat = -4.64, -1.98, -0.45
+  supportat = 1.68, 0.01, -1.62
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = -6.28, 0.01, -9.2
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.485, -0.359, -0.798
+    distance = 10.69
+  end
+end
+
+weapon "MS_alien_rifle"
+  type      = rifle
+  model     = "models/alien/rifle" "m41a.md3"
+  skin      = "models/alien/rifle" "m41a.png"
+  capacity  = 20
+  muzzle    = 48.36, 1.53, 1.27
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 3.25, 2.03, -13.59
+  seat = 8.69, -1.97, 1.33
+  supportat = 16.95, 0.03, 0.36
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 7.93, -0.0, -12.12
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.266, -0.491, -0.830
+    distance = 8.43
+  end
+end
+
+weapon "MS_chex_largezorcher"
+  type      = shotgun
+  model     = "models/chex/largezorcher" "LargeZorcher.md3"
+  skin      = "models/chex/largezorcher" "LargeZorcher_clip_g.png"
+  capacity  = 8
+  muzzle    = 19.75, -8.06, 2.64
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 2.75, -3.09, -0.0
+  seat = 4.84, -4.05, 3.22
+  supportat = 9.23, -1.34, 2.24
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = -0.34, -7.39, 1.86
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.299, -0.502, -0.811
+    distance = 3.23
+  end
+end
+
+weapon "MS_chex_superlargezorcher"
+  type      = shotgun
+  model     = "models/chex/superlargezorcher" "SuperLargeZorcher.md3"
+  skin      = "models/chex/superlargezorcher" "LargeZorcher_clip_g.png"
+  capacity  = 8
+  muzzle    = 19.75, -8.06, 2.64
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = 2.75, -3.09, -0.0
+  seat = 4.84, -4.05, 3.22
+  supportat = 9.23, -1.34, 2.24
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = -0.34, -7.39, 1.86
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.299, -0.502, -0.811
+    distance = 3.23
+  end
+end
+
 weapon "MS_d64_Minigun"
   type      = machinegun
   model     = "models/d64/Minigun" "Minigun.md3"
@@ -575,6 +750,65 @@ part magazine
   end
 end
 
+weapon "MS_qvplus_guns"
+  type      = pistol
+  model     = "models/qvplus/guns" "m16.md3"
+  skin      = "models/qvplus/guns" "WPN-M16.png"
+  capacity  = 12
+  muzzle    = 56.08, 0.39, 2.42
+  barrel    = 1, 0, 0
+end
+
+grip
+  triggerat = 22.61, -0.0, -5.31
+  palm = 20.72, -0.94, -12.34
+  seat = 17.83, -0.97, -4.69
+  supportat = 39.27, 0.12, -1.2
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 31.0, -0.0, -7.51
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.138, 0.000, -0.990
+    distance = 5.47
+  end
+end
+
+weapon "MS_voxel_SSGD4"
+  type      = supershotgun
+  model     = "models/voxel/SSGD4" "sssg.md3"
+  skin      = "models/voxel/SSGD4" "sssg.png"
+  capacity  = 12
+  muzzle    = 8.55, -1.98, 1.0
+  barrel    = 1, 0, 0
+end
+
+grip
+  palm = -7.5, -1.98, -8.97
+  seat = -0.5, 3.0, 1.02
+  supportat = 5.32, 0.01, 0.74
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 29.08, -0.04, -6.17
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = 0.023, -0.000, 1.000
+    distance = 24.19
+  end
+end
+
 weapon "MS_vplus_Pistol"
   type      = pistol
   model     = "models/vplus/Pistol" "Pistol.md3"
@@ -692,6 +926,36 @@ part magazine
     kind     = slide
     axis     = -0.556, -0.025, -0.831
     distance = 13.02
+  end
+end
+
+weapon "MS_vplus_guns"
+  type      = pistol
+  model     = "models/vplus/guns" "m16.md3"
+  skin      = "models/vplus/guns" "WPN-M16.png"
+  capacity  = 12
+  muzzle    = 56.08, 0.39, 2.42
+  barrel    = 1, 0, 0
+end
+
+grip
+  triggerat = 22.61, -0.0, -5.31
+  palm = 20.72, -0.94, -12.34
+  seat = 17.83, -0.97, -4.69
+  supportat = 39.27, 0.12, -1.2
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 31.0, -0.0, -7.51
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.138, 0.000, -0.990
+    distance = 5.47
   end
 end
 
