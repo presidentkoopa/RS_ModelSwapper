@@ -21,7 +21,9 @@ that is not on the plan.**
   1.96b's release did the same and ran on QZD 17.3. Not yet gated on the owner's load order.
 - DONE (code, not yet gated): stage `bd22_plus.py fixes` (F11_FIXES, exact-match, idempotent,
   log in `sets/bd22q_1.97/fixes_apply.json`). Dot-scope `out Vector3` crash, axe hold 16 -> 32,
-  Ruger X21F/P21F B and C keyed, purist Rifle M203 order, reload R2 stale tokens, R4 netUse.
+  Ruger X21F/P21F B and C keyed, purist Rifle M203 order, reload R2 stale tokens, R4 netUse,
+  R1 (grip mode: the steadied grip holds the charging handle, CHARGE/PULL only). R3 waits for a
+  run in the rig: it touches every magazine gun's own Reload state.
   **How it was built:** the cloud session has no E: drive, br_vr or BD22 DECORATE, so it ran
   `fixes` then `sync` ON TOP OF the committed build (`BD22Q_OUT=<copy of sets/bd22q_1.97>`, stage
   list seeded from the old stamp). On the owner's PC a full rebuild is the usual pipeline with

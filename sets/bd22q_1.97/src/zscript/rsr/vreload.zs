@@ -293,7 +293,11 @@ class RSR_State play
 		int mask = RSR.GrabMask(mo.player);
 		bool trig = (RSVR_VRHand.Buttons(mo) & mask) != 0;
 		bool grip = netGrip && gripFree && !RSVR_VRHand.Steadied(mo);
-		return trig || grip || netUse;
+		// F11 (R1): at the handle the grip is always within steadying range, so in grip mode the
+		// steadied grip is the hold there, as on the M203 tube and the pump. Magazines keep the rule.
+		bool atHandle = (phase == RSR.CHARGE || phase == RSR.PULL) && RSR.GrabWith(mo.player) == 1
+			&& RSVR_VRHand.Steadied(mo);
+		return trig || grip || netUse || atHandle;
 	}
 
 	// where the magazine in the hand is against the well: depth (cm out of home along the

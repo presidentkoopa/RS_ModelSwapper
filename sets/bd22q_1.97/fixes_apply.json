@@ -48,5 +48,10 @@
   "fix": "reload: End clears the Use grab too",
   "file": "zscript/rsr/vreload.zs",
   "result": "already applied"
+ },
+ {
+  "fix": "reload R1: in grip mode a steadied grip takes the charging handle",
+  "file": "zscript/rsr/vreload.zs",
+  "result": "applied"
  }
 ]
