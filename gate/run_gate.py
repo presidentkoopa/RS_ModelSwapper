@@ -64,6 +64,12 @@ def pump_slot(donor):
     return int(m.group(1)) if m else 0
 
 
+def break_slot(donor):
+    t = open(os.path.join(ROOT, 'zscript_depot/rsr/rsb_guns.zs'), encoding='utf-8').read()
+    m = re.search(r'donor == "%s"\)\s*return (\d+);' % re.escape(donor), t)
+    return int(m.group(1)) if m else 0
+
+
 def slot_of(donor):
     """the reload slot RSR_Guns.SlotForDonor gives this donor -- the join prints it, so a
     matching number proves the WORN model is the one under test"""
@@ -75,11 +81,11 @@ def slot_of(donor):
 def build_aux(out):
     os.makedirs(out, exist_ok=True)
     ov = os.path.join(out, 'rtest_overlay.pk3')
-    body = '\n'.join(open(os.path.join(H, 'rtest', f)).read() for f in ('fakehands.zs', 'rsr_testdriver.zs', 'driver.zs', 'pump_test.zs'))
+    body = '\n'.join(open(os.path.join(H, 'rtest', f)).read() for f in ('fakehands.zs', 'rsr_testdriver.zs', 'driver.zs', 'pump_test.zs', 'break_test.zs'))
     with zipfile.ZipFile(ov, 'w', zipfile.ZIP_DEFLATED) as z:
         z.writestr('zscript_depot/rsvr/vrhand.zs', body)
         z.writestr('CVARINFO.rtest', CVARS)
-        z.writestr('MAPINFO.rtest', 'gameinfo { AddEventHandlers = "RSR_TestDriver", "RSQT_Driver", "RSP_TestDriver" }\n')
+        z.writestr('MAPINFO.rtest', 'gameinfo { AddEventHandlers = "RSR_TestDriver", "RSQT_Driver", "RSP_TestDriver", "RSB_TestDriver" }\n')
     tm = os.path.join(out, 'testmod.pk3')
     with zipfile.ZipFile(tm, 'w', zipfile.ZIP_DEFLATED) as z:
         z.write(os.path.join(H, 'testmod', 'ZSCRIPT.txt'), 'ZSCRIPT.txt')
@@ -95,11 +101,14 @@ def run(pk3, donor, engine, shots, yaw=90):
     home = os.path.join(out, 'home'); os.makedirs(home)
     exe = os.path.join(engine, 'qzdoom') if os.path.exists(os.path.join(engine, 'qzdoom')) else os.path.join(engine, 'gzdoom')
     pump = pump_slot(donor) > 0
-    gun = 'TMShotgun' if pump else 'TMPistol'
+    brk = not pump and break_slot(donor) > 0
+    gun = 'TMShotgun' if pump else 'TMSSG' if brk else 'TMPistol'
     t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s%s' % (yaw, VIEW, ('; ' + EXTRA) if EXTRA else '')),
          (25, 'netevent rs-fm-rescan'),
          (40, 'rsqt_gun %s; rsqt_empty 1' % gun)]
-    if pump:
+    if brk:
+        t += [(110, 'rsrtest_script 0; rsbtest_script 1'), (115, '+reload'), (118, '-reload')]
+    elif pump:
         t += [(110, 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'), (115, '+reload'), (118, '-reload')]
     else:
         t += [(110, 'rsrtest_script 1'), (115, '+attack'), (125, '-attack')]
@@ -138,6 +147,28 @@ def run(pk3, donor, engine, shots, yaw=90):
     so.close()
     stdout = open(os.path.join(out, 'stdout.txt'), encoding='latin-1').read()
     text = (open(log, encoding='latin-1').read() if os.path.exists(log) else '') + stdout
+    if brk:
+        checks = [
+            ('pack loaded', os.path.basename(pk3) in text),
+            ('scripts parsed', 'script parsing took' in text),
+            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted', text)),
+            ('join took it', 'took TMSSG (break slot %d)' % break_slot(donor) in text),
+            ('it opened', re.search(r'RSBT t\d+ phase 2', text) is not None),
+            ('chambers seated', len(re.findall(r'RSBT t\d+ seated chamber', text)) >= 1),
+            ('it closed', 'all chambers loaded: closing' in text),
+            ('handed back', 'gave TMSSG back' in text),
+            ('their reload ran', 'TM ssg: barrels 2' in text),
+            ('reached the end', 'GATE_END' in text),
+        ]
+        print('donor %s  (%s #%d, break slot %d)  exit %s' % (donor, arch, idx, break_slot(donor), rc))
+        for name, c in checks:
+            print('  %-18s %s' % (name, 'ok' if c else 'FAIL'))
+        for l in text.splitlines():
+            if re.search(r'Script error|MSJOIN|TM ssg|RSBT|rsb t\d+', l):
+                print('   |', l[:150])
+        ok = all(c for _, c in checks)
+        print('PASS' if ok else 'FAIL', '-- log', log)
+        return 0 if ok else 1
     if pump:
         shells = len(re.findall(r'TM shotgun: a shell in', text))
         checks = [

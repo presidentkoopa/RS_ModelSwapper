@@ -123,3 +123,61 @@ class TMShotgun : Weapon replaces Shotgun
 		Stop;
 	}
 }
+
+// A break-open double barrel written the way mods write them: two barrels (TMBarrels) and a
+// reserve (Shell), one reload that fills both. ModelSwapper must hold it through the hands'
+// open-load-close and then hand it to THIS reload.
+class TMBarrels : Ammo
+{
+	Default { Inventory.MaxAmount 2; Ammo.BackpackMaxAmount 2; +INVENTORY.IGNORESKILL; }
+}
+
+class TMSSG : Weapon replaces SuperShotgun
+{
+	Default
+	{
+		Weapon.SlotNumber 3;
+		Weapon.AmmoType1 "TMBarrels";
+		Weapon.AmmoUse1 2;
+		Weapon.AmmoGive1 2;
+		Weapon.AmmoType2 "Shell";
+		Weapon.AmmoGive2 20;
+		Weapon.SelectionOrder 400;
+		+WEAPON.AMMO_OPTIONAL
+		Tag "Test Super Shotgun";
+	}
+	States
+	{
+	Ready:
+		SHT2 A 1 A_WeaponReady(WRF_ALLOWRELOAD);
+		Loop;
+	Deselect:
+		SHT2 A 1 A_Lower;
+		Loop;
+	Select:
+		SHT2 A 1 A_Raise;
+		Loop;
+	Fire:
+		SHT2 A 0 A_JumpIfNoAmmo("Reload");
+		SHT2 A 3;
+		SHT2 A 7 A_FireShotgun2;
+		SHT2 B 7;
+		Goto Ready;
+	Reload:
+		SHT2 A 0 A_JumpIf(CountInv("TMBarrels") >= 2 || CountInv("Shell") <= 0, "Ready");
+		SHT2 C 7 A_Log("TM ssg: the mod's own reload runs");
+		SHT2 D 7;
+		SHT2 E 7
+		{
+			int have = min(2 - CountInv("TMBarrels"), CountInv("Shell"));
+			A_TakeInventory("Shell", have);
+			A_GiveInventory("TMBarrels", have);
+			A_Log(String.Format("TM ssg: barrels %d, reserve %d", CountInv("TMBarrels"), CountInv("Shell")));
+		}
+		SHT2 F 5;
+		Goto Ready;
+	Spawn:
+		SGN2 A -1;
+		Stop;
+	}
+}
