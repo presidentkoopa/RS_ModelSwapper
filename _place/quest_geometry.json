@@ -1,0 +1,467 @@
+{
+ "MS_brt_Minigun": {
+  "cls": "MS_brt_Minigun",
+  "variant_of": null,
+  "type": "machinegun",
+  "model": "models/bd/Minigun/Minigun.md3",
+  "skin": [
+   "models/bd/Minigun",
+   "Minigun.png"
+  ],
+  "rest_frame": 0,
+  "rema_world_scale": [
+   -0.34,
+   0.34,
+   0.34
+  ],
+  "hud_scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "rema_x_positive": false,
+  "offset": [
+   -3.7026,
+   52.561,
+   51.3006
+  ],
+  "capacity": 12,
+  "magfamily": null,
+  "sounds": {},
+  "magmodel": [
+   "models/bd/Minigun",
+   "MS_brt_Minigun_mag.md3"
+  ],
+  "magcenter": [
+   52.23,
+   24.86,
+   -33.7
+  ],
+  "palm": [
+   -5.5,
+   -0.0,
+   -8.5
+  ],
+  "supportat": [
+   -0.369,
+   3.978,
+   1.996
+  ],
+  "seat": [
+   -15.445,
+   4.039,
+   -0.677
+  ],
+  "rake_deg": 0,
+  "muzzle": [
+   13.921,
+   2.621,
+   4.954
+  ],
+  "barrel": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "parts": {
+   "magazine": {
+    "role": "feed",
+    "subject": null,
+    "surfaces": [
+     "mag"
+    ],
+    "kind": "slide",
+    "grab": [
+     -29.286,
+     29.06,
+     21.927
+    ],
+    "grab_radius_cm": 7.35,
+    "axis": [
+     0.067,
+     0.991,
+     0.116
+    ],
+    "travel_cm": 11.291,
+    "insert_dir": [
+     -0.067,
+     -0.991,
+     -0.116
+    ]
+   }
+  },
+  "sheet": "sheets/MS_brt_Minigun.png"
+ },
+ "MS_d64_Minigun": {
+  "cls": "MS_d64_Minigun",
+  "variant_of": null,
+  "type": "machinegun",
+  "model": "models/d64/Minigun/Minigun.md3",
+  "skin": [
+   "models/d64/Minigun",
+   "Minigun.png"
+  ],
+  "rest_frame": 0,
+  "rema_world_scale": [
+   -0.34,
+   0.34,
+   0.34
+  ],
+  "hud_scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "rema_x_positive": false,
+  "offset": [
+   -3.7026,
+   52.561,
+   51.3006
+  ],
+  "capacity": 12,
+  "magfamily": null,
+  "sounds": {},
+  "magmodel": [
+   "models/d64/Minigun",
+   "MS_d64_Minigun_mag.md3"
+  ],
+  "magcenter": [
+   52.23,
+   24.86,
+   -33.7
+  ],
+  "palm": [
+   -5.5,
+   -0.0,
+   -8.5
+  ],
+  "supportat": [
+   -0.369,
+   3.978,
+   1.996
+  ],
+  "seat": [
+   -15.445,
+   4.039,
+   -0.677
+  ],
+  "rake_deg": 0,
+  "muzzle": [
+   13.921,
+   2.621,
+   4.954
+  ],
+  "barrel": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "parts": {
+   "magazine": {
+    "role": "feed",
+    "subject": null,
+    "surfaces": [
+     "mag"
+    ],
+    "kind": "slide",
+    "grab": [
+     -29.286,
+     29.06,
+     21.927
+    ],
+    "grab_radius_cm": 7.35,
+    "axis": [
+     0.067,
+     0.991,
+     0.116
+    ],
+    "travel_cm": 11.291,
+    "insert_dir": [
+     -0.067,
+     -0.991,
+     -0.116
+    ]
+   }
+  },
+  "sheet": "sheets/MS_d64_Minigun.png"
+ },
+ "MS_hdvr_CHAINGUN": {
+  "cls": "MS_hdvr_CHAINGUN",
+  "variant_of": null,
+  "type": "machinegun",
+  "model": "models/hdvr/CHAINGUN/Chaingun.md3",
+  "skin": [
+   "models/hdvr/CHAINGUN",
+   "Chaingun.png"
+  ],
+  "rest_frame": 0,
+  "rema_world_scale": [
+   -0.34,
+   0.34,
+   0.34
+  ],
+  "hud_scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "rema_x_positive": false,
+  "offset": [
+   -3.7026,
+   52.561,
+   51.3006
+  ],
+  "capacity": 12,
+  "magfamily": null,
+  "sounds": {},
+  "magmodel": [
+   "models/hdvr/CHAINGUN",
+   "MS_hdvr_CHAINGUN_mag.md3"
+  ],
+  "magcenter": [
+   52.23,
+   24.86,
+   -33.7
+  ],
+  "palm": [
+   -5.5,
+   -0.0,
+   -8.5
+  ],
+  "supportat": [
+   -0.369,
+   3.978,
+   1.996
+  ],
+  "seat": [
+   -15.445,
+   4.039,
+   -0.677
+  ],
+  "rake_deg": 0,
+  "muzzle": [
+   13.921,
+   2.621,
+   4.954
+  ],
+  "barrel": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "parts": {
+   "magazine": {
+    "role": "feed",
+    "subject": null,
+    "surfaces": [
+     "mag"
+    ],
+    "kind": "slide",
+    "grab": [
+     -29.286,
+     29.06,
+     21.927
+    ],
+    "grab_radius_cm": 7.35,
+    "axis": [
+     0.067,
+     0.991,
+     0.116
+    ],
+    "travel_cm": 11.291,
+    "insert_dir": [
+     -0.067,
+     -0.991,
+     -0.116
+    ]
+   }
+  },
+  "sheet": "sheets/MS_hdvr_CHAINGUN.png"
+ },
+ "MS_voxel_SSGD4": {
+  "cls": "MS_voxel_SSGD4",
+  "variant_of": null,
+  "type": "supershotgun",
+  "model": "models/voxel/SSGD4/sssg.md3",
+  "skin": [
+   "models/voxel/SSGD4",
+   "sssg.png"
+  ],
+  "rest_frame": 3,
+  "rema_world_scale": [
+   -0.34,
+   0.34,
+   0.34
+  ],
+  "hud_scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "rema_x_positive": false,
+  "offset": [
+   -2.0196,
+   -32.15,
+   -4.3506
+  ],
+  "capacity": 12,
+  "magfamily": null,
+  "sounds": {},
+  "magmodel": [
+   "models/voxel/SSGD4",
+   "MS_voxel_SSGD4_mag.md3"
+  ],
+  "magcenter": [
+   29.08,
+   -0.04,
+   -6.17
+  ],
+  "palm": [
+   -5.5,
+   -0.0,
+   -8.5
+  ],
+  "supportat": [
+   7.576,
+   2.03,
+   1.404
+  ],
+  "seat": [
+   1.64,
+   5.08,
+   1.69
+  ],
+  "rake_deg": 0,
+  "muzzle": [
+   10.871,
+   -0.0,
+   1.669
+  ],
+  "barrel": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "parts": {
+   "magazine": {
+    "role": "feed",
+    "subject": null,
+    "surfaces": [
+     "mag"
+    ],
+    "kind": "slide",
+    "grab": [
+     31.812,
+     1.979,
+     -5.644
+    ],
+    "grab_radius_cm": 7.35,
+    "axis": [
+     0.023,
+     0.0,
+     1.0
+    ],
+    "travel_cm": 24.674,
+    "insert_dir": [
+     -0.023,
+     -0.0,
+     -1.0
+    ]
+   }
+  },
+  "sheet": "sheets/MS_voxel_SSGD4.png"
+ },
+ "MS_vplus_CHAINGUN": {
+  "cls": "MS_vplus_CHAINGUN",
+  "variant_of": null,
+  "type": "machinegun",
+  "model": "models/vplus/CHAINGUN/Chaingun.md3",
+  "skin": [
+   "models/vplus/CHAINGUN",
+   "Chaingun.png"
+  ],
+  "rest_frame": 0,
+  "rema_world_scale": [
+   -0.34,
+   0.34,
+   0.34
+  ],
+  "hud_scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "rema_x_positive": false,
+  "offset": [
+   -3.7026,
+   52.561,
+   51.3006
+  ],
+  "capacity": 12,
+  "magfamily": null,
+  "sounds": {},
+  "magmodel": [
+   "models/vplus/CHAINGUN",
+   "MS_vplus_CHAINGUN_mag.md3"
+  ],
+  "magcenter": [
+   52.23,
+   24.86,
+   -33.7
+  ],
+  "palm": [
+   -5.5,
+   -0.0,
+   -8.5
+  ],
+  "supportat": [
+   -0.369,
+   3.978,
+   1.996
+  ],
+  "seat": [
+   -15.445,
+   4.039,
+   -0.677
+  ],
+  "rake_deg": 0,
+  "muzzle": [
+   13.921,
+   2.621,
+   4.954
+  ],
+  "barrel": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "parts": {
+   "magazine": {
+    "role": "feed",
+    "subject": null,
+    "surfaces": [
+     "mag"
+    ],
+    "kind": "slide",
+    "grab": [
+     -29.286,
+     29.06,
+     21.927
+    ],
+    "grab_radius_cm": 7.35,
+    "axis": [
+     0.067,
+     0.991,
+     0.116
+    ],
+    "travel_cm": 11.291,
+    "insert_dir": [
+     -0.067,
+     -0.991,
+     -0.116
+    ]
+   }
+  },
+  "sheet": "sheets/MS_vplus_CHAINGUN.png"
+ }
+}

@@ -1,0 +1,92 @@
+// ModelSwapper cvars.
+
+// CONFIG VERSION. Bumped whenever a shipped DEFAULT changes, so an existing
+// ini picks the change up instead of silently overriding it -- an archived
+// server cvar always beats this file. See RS_ForeignModelHandler.MigrateConfig,
+// which applies the change once and stamps this.
+//
+//   0 -- never migrated. A fresh install starts here, already holds the
+//        current defaults from below, and is stamped on first load.
+//   1 -- rs_foreignmodels_byfamily defaults off.
+server int rs_fm_cfgver = 0;
+
+server bool rs_foreignmodels         = true;   // master switch
+server bool rs_foreignmodels_dump    = false;  // dump the scan to console
+server bool rs_foreignmodels_showall = false;  // include weapons with no slot binding
+
+// (rs_foreignmodels_natural and rs_fm_learned are gone: the remap engine
+// reads timing off the weapon's own state table every tic, so there is
+// no learned timing to store and no "natural rate" distinct from theirs.
+// A stale archived copy in an old ini is ignored harmlessly.)
+
+// The player's own model choices, packed as class:archetype:pick1:pick2;...
+// Written every time a pick changes. Keyed on class name only -- no notion
+// of "which mod" anywhere -- which is what makes this work as a per-mod
+// profile with nothing tracking which mod is loaded: only one mod's classes
+// exist in the world at a time. Clear it with the menu.
+server string rs_fm_picks = "";
+
+// THEIR CASINGS COME OUT OF YOUR FACE. A weapon mod spawns brass, smoke
+// and ejection effects relative to the PLAYER, because on a monitor the
+// player and the gun are the same place. In a headset they are not: the
+// gun is in a tracked hand and the eye is your face, so the brass leaves
+// your cheekbone and swings around as you look up and down.
+//
+// This shifts anything a mod spawns next to the eye, in the moment after
+// you work the weapon, by the vector from the eye to the muzzle. It
+// TRANSLATES rather than repositions, so every offset and every velocity
+// the author wrote survives intact -- the ejection arc is the one they
+// drew, starting from the gun instead of your face.
+//
+// Only for weapons wearing one of our models, because we are the reason
+// the gun moved. On by default: the displacement it corrects is one this
+// mod causes.
+server bool rs_fm_effects = true;
+
+// Extra distance from the grip to the muzzle, on top of the per-family
+// figure. The engine has no muzzle concept -- a weapon acts from the
+// hand -- so this is where the casing relocator aims its shift.
+server int rs_fm_muzzle = 0;   // map units, clamped -20..80
+
+// Collapse the picker to ONE ROW PER FAMILY -- one shotgun row, one smg row.
+//
+// OFF by default. The picker exists to show the weapons the scan actually
+// found, by name, and let you put a model on each one. A row labelled
+// "all shotgun" answers a question nobody asked first.
+//
+// Turn it ON when a mod's class count makes that unworkable: Brutal Doom 22
+// shows 85 rows, DoomRL Arsenal about 150, and across the test corpus there
+// are 934 weapon classes of which only 276 even declare a slot. Most of
+// those rows are the same gun in a different mode -- BrutalPistol,
+// DualPistols and PuristPistol are all your pistol -- and one row per
+// family is the escape hatch for exactly that case.
+server bool rs_foreignmodels_byfamily = false;
+
+// Show only weapons you are CARRYING. The cheapest honest filter there is:
+// a mod can invent classes without limit, but you only ever hold the ones
+// your player class was given. Guncaster and Trailblazer name their weapons
+// Brimstone and Bitchmaker -- no token list will ever classify those, and no
+// filter built on names will ever shorten that menu. Your inventory answers
+// both questions without asking the mod anything.
+//
+// Off by default: a player who wants to dress a gun before finding it should
+// meet the whole list first.
+server bool rs_foreignmodels_carried = false;
+
+// Offer models even when a weapon already has one of its own.
+//
+// ON by default, because the flag we can read cannot answer the question we
+// actually have. Actor.hasmodel means "this class has a model bound to SOME
+// sprite" -- it says nothing about WHICH. A mod that models its dropped
+// pickup and leaves the first-person view as flat sprites reads identically
+// to one that ships full HUD models.
+//
+// Project Brutality is exactly that mod. Its MODELDEF binds sprite VIFL and
+// its Spawn state runs A_PBVPFramework -- the pickup lying on the floor. Its
+// Fire states use R0F8 and have no model at all. hasmodel came back true, we
+// stood down, and we withheld models from the weapons that most needed them.
+//
+// Pickup models are common; first-person weapon models are rare -- a mod
+// that had them would not need this one. So offering is the right default.
+// Turn this off to leave any modelled weapon alone.
+server bool rs_foreignmodels_replaceown = true;

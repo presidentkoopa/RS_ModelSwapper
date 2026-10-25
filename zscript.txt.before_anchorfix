@@ -1,0 +1,93 @@
+version "4.13"
+
+// ============================================================================
+// ModelSwapper -- donor stubs. A MODELDEF block is inert unless a real Actor
+// class owns its name, and A_ChangeModel takes an actor class name. These must
+// NOT derive from Weapon and must NOT be subclassed (FindModelFrameRaw is an
+// exact class-pointer test).
+// ============================================================================
+
+class MS_AE_Flamer : Actor {}
+class MS_AE_Pistol : Actor {}
+class MS_AE_Shotgun : Actor {}
+class MS_BD_Boot : Actor {}
+class MS_BD_BrutalAxe : Actor {}
+class MS_BD_DSweap : Actor {}
+class MS_BD_BrutalSMG : Actor {}
+class MS_BD_Flamethrower2 : Actor {}
+class MS_BD_M79 : Actor {}
+class MS_BD_Machinegun : Actor {}
+class MS_BD_nade : Actor {}
+class MS_BD_RailGun : Actor {}
+class MS_BD_Rifle : Actor {}
+class MS_BD_AssaultShotgun : Actor {}
+class MS_Beretta : Actor {}
+class MS_BD_Unmaker : Actor {}
+class MS_Chaingun : Actor {}
+class MS_Chainsaw : Actor {}
+class MS_Fist : Actor {}
+class MS_Cola_Revolver : Actor {}
+class MS_Jackhammer : Actor {}
+class MS_MG_Bolter : Actor {}
+class MS_MG_Tec9 : Actor {}
+class MS_Pistol : Actor {}
+class MS_Pistol2 : Actor {}
+class MS_PlasmaRifle : Actor {}
+class MS_RC_Auto9 : Actor {}
+class MS_RC_Chainsaw : Actor {}
+class MS_RC_M32 : Actor {}
+class MS_Revolver : Actor {}
+class MS_Revolver2 : Actor {}
+class MS_Rifle : Actor {}
+class MS_RocketLauncher : Actor {}
+class MS_Shotgun : Actor {}
+class MS_SuperShotgun : Actor {}
+class MS_VR_BFG9000 : Actor {}
+
+// World-anchored display classes. Named by RS_Holsters via string
+// substitution -- see zscript/RS_ForeignWorldModels.zs.
+class MS_PU_AE_Flamer : MS_PickupModel {}
+class MS_PU_AE_Pistol : MS_PickupModel {}
+class MS_PU_AE_Shotgun : MS_PickupModel {}
+class MS_PU_BD_Boot : MS_PickupModel {}
+class MS_PU_BD_BrutalAxe : MS_PickupModel {}
+class MS_PU_BD_DSweap : MS_PickupModel {}
+class MS_PU_BD_BrutalSMG : MS_PickupModel {}
+class MS_PU_BD_Flamethrower2 : MS_PickupModel {}
+class MS_PU_BD_M79 : MS_PickupModel {}
+class MS_PU_BD_Machinegun : MS_PickupModel {}
+class MS_PU_BD_nade : MS_PickupModel {}
+class MS_PU_BD_RailGun : MS_PickupModel {}
+class MS_PU_BD_Rifle : MS_PickupModel {}
+class MS_PU_BD_Unmaker : MS_PickupModel {}
+class MS_PU_Chaingun : MS_PickupModel {}
+class MS_PU_Chainsaw : MS_PickupModel {}
+class MS_PU_Fist : MS_PickupModel {}
+class MS_PU_Cola_Revolver : MS_PickupModel {}
+class MS_PU_Jackhammer : MS_PickupModel {}
+class MS_PU_MG_Bolter : MS_PickupModel {}
+class MS_PU_MG_Tec9 : MS_PickupModel {}
+class MS_PU_Pistol : MS_PickupModel {}
+class MS_PU_Pistol2 : MS_PickupModel {}
+class MS_PU_PlasmaRifle : MS_PickupModel {}
+class MS_PU_RC_Auto9 : MS_PickupModel {}
+class MS_PU_RC_Chainsaw : MS_PickupModel {}
+class MS_PU_RC_M32 : MS_PickupModel {}
+class MS_PU_Revolver : MS_PickupModel {}
+class MS_PU_Revolver2 : MS_PickupModel {}
+class MS_PU_Rifle : MS_PickupModel {}
+class MS_PU_RocketLauncher : MS_PickupModel {}
+class MS_PU_Shotgun : MS_PickupModel {}
+class MS_PU_SuperShotgun : MS_PickupModel {}
+class MS_PU_VR_BFG9000 : MS_PickupModel {}
+
+#include "zscript/RS_ForeignFork.zs"
+#include "zscript/RS_ForeignPersist.zs"
+#include "zscript/RS_ForeignAnim.zs"
+#include "zscript/RS_ForeignRemap.zs"
+#include "zscript/RS_ForeignModels.zs"
+#include "zscript/RS_ForeignArchetypeService.zs"
+#include "zscript/RS_ForeignModelsMenu.zs"
+#include "zscript/RS_ForeignWorldModels.zs"
+#include "zscript/RS_ForeignEffects.zs"
+#include "zscript/RS_ForeignDebug.zs"
