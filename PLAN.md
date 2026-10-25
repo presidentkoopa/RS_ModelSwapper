@@ -189,7 +189,19 @@ per-gun checklist below, in a headset, signed by the owner.
           about 50 MB. 1.96b's own release compressed its .md3 files with LZMA (zip method 14) and
           was 24 MB. LZMA on .md3 alone gives about 30 MB from the same files. QZD 17.3 reads
           method 14 (`file_zip.cpp:247`, `files_decompress.cpp:889`).
-      The rest of the list is added here once the audit of bd22q's own additions is checked.
+      Confirmed in bd22q's source by the 2026-10-25 audit, re-read before each goes in (stage
+      `bd22_plus.py fixes`, after every other stage, before sync):
+        * Dot-scope crash: `scope.zs` Basis has `out Vector3` params (VM abort, vmexec.h:828-830).
+        * Axe throw hold `rsvr_axe_hold` 16 is BT_TURN180; alt fire is 32 (d_event.h:46-47).
+        * Ruger fire frames X21F B/C and P21F B/C unkeyed: the shot draws 2D for ~3 tics.
+        * Purist Rifle fires the M203 (the M203 jump precedes the purist check).
+        * Reload R2: stale RSR_Done / RSR_Seated end the next magazine reload at once.
+        * Reload R4: End() clears netGrip but not netUse.
+      Still to do in F11 (behaviour, not one-liners): R1 grip-mode rack cannot be grabbed
+      (STEADY_RANGE 50 vs handles at 8-15 cm); R3 dropped-mag rounds stranded at reserve 0; Ruger
+      A_Refire bypasses semi-auto; the four unresolved sound names. Owner's call, not bugs:
+      off-hand punch vs rsq_punch, free charge default, PuristSniper model ("Sniper stays out"),
+      lock-on ring art (RQLK has no lump). Plus whatever the audit of the F1-F10 additions confirms.
 
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
