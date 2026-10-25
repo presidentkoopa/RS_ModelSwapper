@@ -99,6 +99,11 @@ class MS_ReloadJoin : EventHandler
 	private State mReturn[MAXPLAYERS];
 	private Weapon mHeld[MAXPLAYERS];
 	private State mLastSeen[MAXPLAYERS];   // trace: only speak when the state changes
+	// ARMED. Handing the gun back puts it at the HEAD of the mod's own reload --
+	// which is exactly the thing this watches for, so it took the gun straight back
+	// and the reload looped forever. After a release we stay disarmed until the
+	// weapon has left its reload entirely, which is the mod's reload finishing.
+	private bool mDisarmed[MAXPLAYERS];
 
 	// A trace for the one failure mode that looks like nothing happening.
 	private bool ms_join_trace;
@@ -240,9 +245,23 @@ class MS_ReloadJoin : EventHandler
 				//     rsr t204: the gun left the reload (EMPTY)
 				mo.GiveInventory('RSR_Tick', 1);
 
-				// Driving. The hands are working; wait for the reload to say it
-				// is finished, then give the gun back to the mod at the head of
-				// its own reload so IT does the ammo.
+				// SEATED is the magazine home -- the hands are finished. On a generated
+				// weapon, RSR_Wait jumps to RSR_Fill here, which moves rounds from the
+				// reserve into the magazine and answers RSR_Filled. We do neither: the
+				// ammo is the MOD's, and the mod is about to run its own reload and do
+				// exactly that in its own terms. So take the token, tell the reload the
+				// magazine is filled so it closes out its own bookkeeping, and hand the
+				// gun back.
+				if (mo.CountInv('RSR_Seated') > 0)
+				{
+					mo.TakeInventory('RSR_Seated', 1);
+					mo.GiveInventory('RSR_Filled', 1);
+					Release(p, i, true);
+					continue;
+				}
+
+				// Or the reload says it is done by itself (it was cancelled, or a gun
+				// whose sequence ends elsewhere).
 				if (mo.CountInv('RSR_Done') > 0)
 				{
 					mo.TakeInventory('RSR_Done', 1);
@@ -253,7 +272,16 @@ class MS_ReloadJoin : EventHandler
 
 			// Not driving yet. Has the mod's weapon just entered its reload?
 			let m = RemapFor(mo, w);
-			if (!InReloadGroup(m, psp.CurState) && !AtReloadEntry(w, psp.CurState))
+			bool inReload = InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState);
+			if (mDisarmed[i])
+			{
+				// Re-arm only once the mod's own reload has run its course and the gun
+				// is back to whatever it does normally.
+				if (!inReload)
+					mDisarmed[i] = false;
+				continue;
+			}
+			if (!inReload)
 			{
 				// WHY NOT. A join that silently does nothing is the hardest kind of
 				// bug to see -- it looks exactly like a gun that is not reloading.
@@ -310,6 +338,7 @@ class MS_ReloadJoin : EventHandler
 		mHeld[i] = null;
 		State back = mReturn[i];
 		mReturn[i] = null;
+		mDisarmed[i] = true;
 		if (!w || !p)
 			return;
 		State go = null;
