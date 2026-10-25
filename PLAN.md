@@ -4,7 +4,7 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F6** -- and the only thing left in it is the owner's headset pass.
+Current step: **F7** -- F6 is done bar the owner's headset pass, which only he can do.
 
 ## Principle
 Every shipped gun is built from two sources only: its MESH (tool-measured) and its PARENT MOD (behaviour
@@ -45,7 +45,17 @@ per-gun checklist below, in a headset, signed by the owner.
       ricochet / light, and the ejection ports and casing sizes.
 - F6  Reload sounds for the drum / canister / skull (empty today); pack README; HANDOFF update; owner headset pass.
 
+- F7  The real casing meshes. The brass leaves the right port at the right size, but it is still
+      Brutal Doom's sprite. RS_Ballistics has measured 3D casings -- 9mm, .357, .45, 5.56, 7.62,
+      12ga -- and the pack already lends a model to a foreign actor twice over (voxels.zs,
+      RSQ_Debris). Lend them the same way, per instance, so one EmptyBrass can be four cartridges.
+- F8  A port for the MP40, the Minigun and the Machinegun. Their meshes carry no ejection port to
+      measure -- every slot in the MP40's receiver tube is mirrored (cooling slots), the Minigun's
+      loops are all bores, the Machinegun's M249 body has none -- so those three still throw from
+      the body. Find a source that is a mesh or the parent mod, or say plainly that there is none.
+
 ## Then, in this order
+TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
 - S1  Vanilla / V+ roster + menu (V+ = toggles inside Vanilla per the owner's checklist).  (owner's order, 03:21)
 - S2  Modern: player class, every Doom drop/pickup → a modern gun, start Glock.
 - S3  BW_Quest (Brutal Wolfenstein; E:\DOOMWork\BW_Quest; parent mod from the owner).
