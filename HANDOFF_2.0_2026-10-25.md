@@ -40,6 +40,28 @@ The Ruger is logic-verified only (the flat test camera does not frame it at its 
 * Foley: aliases onto the BD22 foley already shipped + the set's own bolt sounds. The TC's own
   sound names are lumps of the TC and are not in any repo.
 
+### The older reload guns (`main`'s), re-made where they are drawn
+
+`tools_kit/placement_audit.py` measured the older rows (slots 3-30) against what is DRAWN: rows
+made by genpack/card2quest at the card's placement, several donors per row, each donor drawn at its
+own block -- up to 1.4 m apart -- and no MODELDEF for any of their layers (the gun vanished
+mid-reload). The hand rows were checked first: their hooks land on the card palm at the DONOR's
+placement (brt_RPG 4 cm vs 26 cm at the row's), so the drawing and the hands are right and the
+rows are the odd ones out. (A trial that moved the donors instead was measured, found wrong, and
+reverted; `rebase_donors.py` stays only as the record of that check -- do not run it.)
+
+`tools_kit/regen_rows.py` runs the kit's own chain (card2quest.geometry -> genpack.build_gun ->
+gen_rsr) at each donor's own placement and rest frame. Validated: at the card's placement it gives
+back the shipped MS_Pistol row to 0.001 cm. 31 donors whose own card is on their real mesh now have
+their OWN row (slots 41-71) and layers (MODELDEF.cards, from their own folder and skin); foley by
+gun type. All 31 gated PASS, gun drawn through the reload.
+
+Left on the old rows: donors whose card is a `_wm` rebuild (BD_AssaultShotgun, BD_Flamethrower2,
+BD_RailGun, BD_Rifle, BD_Unmaker, MG_Bolter, MG_Tec9, PlasmaRifle, Rifle, RocketLauncher), donors
+with no card (brt_ AssaultShotgun / Flamethrower2 / Unmaker / HitlersBuzzsaw, meat_ Bolter / TEC9,
+wolf_KAR98), and brt_Rifle (genpack refuses: card and carved mesh disagree on the magazine surface).
+Those need real-mesh cards -- the card standard's job.
+
 ## Fixed along the way (each also wrong on `main`)
 
 8. **RSQ_GunMoves was BD22Q's table read by ModelSwapper's slot number.** Pivot (where the hands

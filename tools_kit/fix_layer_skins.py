@@ -27,6 +27,13 @@ RENAME = {
 }
 
 
+def exists(p):
+    """as the engine finds it: names inside a pk3 are case-insensitive"""
+    sys.path.insert(0, HERE)
+    import placement_audit
+    return os.path.exists(placement_audit.resolve(p))
+
+
 def refs(text):
     path = ''
     for n, line in enumerate(text.split('\n')):
@@ -49,7 +56,7 @@ def main(dry):
         lines = open(p, encoding='utf-8', errors='replace').read().split('\n')
         changed = False
         for n, path, skin in list(refs('\n'.join(lines))):
-            if os.path.exists(os.path.join(ROOT, path, skin)):
+            if exists(os.path.join(ROOT, path, skin)):
                 continue
             if skin == 'rsr_clear.png':
                 print('%s: %s/rsr_clear.png <- BD22Q\'s clear skin' % (lump, path))
@@ -57,7 +64,7 @@ def main(dry):
                     shutil.copy2(CLEAR, os.path.join(ROOT, path, skin))
                 continue
             new = RENAME.get((lump, path, skin))
-            if new and os.path.exists(os.path.join(ROOT, path, new)):
+            if new and exists(os.path.join(ROOT, path, new)):
                 lines[n] = lines[n].replace('"%s"' % skin, '"%s"' % new)
                 changed = True
                 continue
