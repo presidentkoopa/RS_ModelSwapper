@@ -368,6 +368,9 @@ class RSR_State play
 	// the weapon's Reload reached RSR_Start and the real reload takes it
 	void Begin(PlayerPawn mo, Weapon w, int i)
 	{
+		// F11: a token left by a reload that was switched away from must not end this one.
+		mo.TakeInventory('RSR_Done', 999);
+		mo.TakeInventory('RSR_Seated', 999);
 		FreeChargeDrop();		// 1.93: a reload takes the handle back from a free charge
 		gun = i;
 		weap = w;
@@ -709,6 +712,8 @@ class RSR_State play
 	// the weapon left the reload (switched away, died, ...): put everything away
 	void Abort(PlayerPawn mo)
 	{
+		mo.TakeInventory('RSR_Done', 999);	// F11: see Begin
+		mo.TakeInventory('RSR_Seated', 999);
 		if (phase == RSR.DROP || phase == RSR.INSERT)
 			Fall(mo, RSR_Guns.MagCentre(gun) - RSR_Guns.Axis(gun) * d);
 		else if (phase == RSR.CARRY)
@@ -725,6 +730,7 @@ class RSR_State play
 		d = dPrev = pull = pullPrev = 0;
 		lockedGrab = false;
 		netGrip = false;
+		netUse = false;		// F11: a release lost in a menu must not latch the grab
 	}
 
 	// after the psprites have ticked (RSR_ReloadHandler.WorldTick): what the gun and the layers show

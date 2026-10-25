@@ -19,8 +19,15 @@ that is not on the plan.**
 - DONE: `bd22_plus.py pk3` puts `.md3` lumps in as LZMA (zip method 14), the rest deflated. Same
   689 lumps from `sets/bd22q_1.97/src`, byte-identical on read-back: **30 MB, was about 50**.
   1.96b's release did the same and ran on QZD 17.3. Not yet gated on the owner's load order.
-- NEXT: the confirmed bug list from the 2026-10-25 audit goes into PLAN.md F11, then each fix
-  through the generators.
+- DONE (code, not yet gated): stage `bd22_plus.py fixes` (F11_FIXES, exact-match, idempotent,
+  log in `sets/bd22q_1.97/fixes_apply.json`). Dot-scope `out Vector3` crash, axe hold 16 -> 32,
+  Ruger X21F/P21F B and C keyed, purist Rifle M203 order, reload R2 stale tokens, R4 netUse.
+  **How it was built:** the cloud session has no E: drive, br_vr or BD22 DECORATE, so it ran
+  `fixes` then `sync` ON TOP OF the committed build (`BD22Q_OUT=<copy of sets/bd22q_1.97>`, stage
+  list seeded from the old stamp). On the owner's PC a full rebuild is the usual pipeline with
+  `fixes` added after `readme`, before `sync`. `BD22Q_OUT` unset changes nothing there.
+- NEXT: gate on the owner's load order with VR simulated (owner's Linux rig, coming), then the
+  rest of PLAN.md F11 and F10.
 
 ## What this repo is
 Everything for QuestZDoom 17.3 VR reloadable weapon sets: the owner's BD22 Quest pack as the runtime

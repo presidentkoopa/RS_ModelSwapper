@@ -7,12 +7,13 @@ user float rsvr_melee_swing = 1.0;
 // below level (owner, 2026-10-16: only a meaningful downward swing cuts; never level, never up).
 user float rsvr_melee_down = 0.25;
 
-// What you HOLD to ready the axe throw, as a usercmd button mask. Default 16 = BT_ALTATTACK,
+// What you HOLD to ready the axe throw, as a usercmd button mask. Default 32 = BT_ALTATTACK
+// (F11: it was 16, which is BT_TURN180 -- d_event.h:46-47 -- so alt fire never held it),
 // which is how it has always worked. QuestZDoom has no usercmd bit for the weapon hand's grip,
 // so to throw on the grip either bind the grip to one of the engine's user buttons and set this
 // to it (BT_USER1 2097152, BT_USER2 4194304, BT_USER3 8388608, BT_USER4 16777216), or put the
 // grip's raw key codes in rsvr_axe_keys below. 0 = never hold, so the throw is off.
-user int rsvr_axe_hold = 16;
+user int rsvr_axe_hold = 32;
 // Raw key codes that also ready the throw, space separated, read the way rsr_grip_keys is.
 // Empty by default. Turn on Print each reload step (rsr_debug) and press your grip to read its
 // code, then put it here.

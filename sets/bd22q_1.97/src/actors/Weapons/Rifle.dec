@@ -592,8 +592,8 @@ ACTOR Rifle : BrutalWeapon
 
 	AltFire:
 		RIFG A 0
+		2IFG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristWarning")	// F11: before the M203, purist has none
 		RIFG A 0 A_Jump(256, "RSM_AltGrenade")	// 1.33 rsm (owner): the rifle's secondary fire launches the underbarrel
-		2IFG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristWarning")
 		RIFG A 0 A_TakeInventory("FiredMGGrenade",1)
 		RIFG A 0 A_JumpIfInventory("Zoomed",1,"NoAim")
 		RIFG A 0 A_Giveinventory("GoSpecial",1)

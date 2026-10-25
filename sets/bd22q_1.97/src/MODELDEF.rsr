@@ -1013,6 +1013,11 @@ Model Sniper
 	// too or a regenerate drops this.
 	FrameIndex	X21F	A	0	0
 	FrameIndex	P21F	A	0	0
+	// F11: Fire's "####" B 1 and "####" C 2 inherit X21F (and P21F zoomed), so B and C too.
+	FrameIndex	X21F	B	0	0
+	FrameIndex	X21F	C	0	0
+	FrameIndex	P21F	B	0	0
+	FrameIndex	P21F	C	0	0
 	FrameIndex X21G B 0 0
 	FrameIndex X21G C 0 0
 	FrameIndex X21G D 0 0

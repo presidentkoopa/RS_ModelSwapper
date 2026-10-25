@@ -47,6 +47,9 @@ SHEET = DATA + 'WMSHEET.bd22'
 # checkout present and his say-so.
 REMA = 'E:/DOOMWork/RS_VR_Weapons/bd22/'                           # FROZEN: *_wm.md3 references only
 OUT = 'E:/DOOMWork/_buildtemp/rsq_bd22/'                           # build dir (outside the repo)
+# F11: BD22Q_OUT overrides the build dir, so a stage can run on a machine without this E: drive
+# (the cloud session, 2026-10-25). Unset, nothing changes on the owner's PC.
+OUT = os.environ.get('BD22Q_OUT', OUT).replace('\\', '/').rstrip('/') + '/'
 BD22SRC = 'E:/DOOMWork/_buildtemp/bd22src/'                        # brutal22test6.pk3 extracted (actors/Weapons/*.dec)
 # THE RELEASE VERSION, in one place. readme() builds both the title and the pk3 name
 # from it, so the two cannot say different things -- which is how a stale pk3 on the
@@ -4019,6 +4022,100 @@ def spine():
     print(json.dumps(st, indent=1))
 
 
+# ======================================================================= F11: fixes
+# Bugs confirmed in sets/bd22q_1.97/src by the 2026-10-25 audit, each re-read in the source before
+# it went in. Every edit is exact-match: it refuses to run if its old text is not there exactly
+# once, and it is skipped (not doubled) if its new text is already there, so the stage can run on
+# top of a finished build or at the end of a full one. Runs after every other stage, before sync.
+F11_FIXES = [
+    # 1. Dot scope: `out Vector3` aborts the VM on the first CALL ("REGT_ADDROF not implemented for
+    #    vectors", qzd17.3 vmexec.h:828-830). Basis is reached from ModifyBobLayer3D through DotAt /
+    #    EyeInHandFrame with no gate in 1.96b, so drawing the Railgun or the Ruger in Dot mode
+    #    (their default) kills the per-layer hook. Same fix as RS_Brutal22WeaponsQ dev a21035c:
+    #    return the three axes.
+    ('scope: Basis returns its axes (out Vector3 aborts the VM)', 'zscript/rsq/scope.zs',
+     '\tclearscope static void Basis(PlayerPawn mo, out Vector3 fwd, out Vector3 right, out Vector3 up)\n\t{\n',
+     '\t// F11: RETURNS the three axes. An `out Vector3` parameter aborts the VM the first time it is\n'
+     '\t// called (qzd17.3 vmexec.h:828-830, "REGT_ADDROF not implemented for vectors").\n'
+     '\tclearscope static Vector3, Vector3, Vector3 Basis(PlayerPawn mo)\n\t{\n\t\tVector3 fwd, right, up;\n'),
+    ('scope: Basis return', 'zscript/rsq/scope.zs',
+     '\t\tright = r0 * cr + u0 * sr;\n\t\tup = (right cross fwd);\n\t}\n',
+     '\t\tright = r0 * cr + u0 * sr;\n\t\tup = (right cross fwd);\n\t\treturn fwd, right, up;\n\t}\n'),
+    ('scope: Basis caller', 'zscript/rsq/scope.zs',
+     '\t\tBasis(mo, f, r, u);\n',
+     '\t\t[f, r, u] = Basis(mo);\n'),
+    # 2. Axe throw hold: 16 is BT_TURN180, 32 is BT_ALTATTACK (qzd17.3 d_event.h:46-47). With 16
+    #    alt fire released the throw on its first tic, so lock-on never painted a target.
+    ('axe throw hold button: alt fire is 32, not 16', 'CVARINFO.rsvr',
+     '// What you HOLD to ready the axe throw, as a usercmd button mask. Default 16 = BT_ALTATTACK,\n',
+     '// What you HOLD to ready the axe throw, as a usercmd button mask. Default 32 = BT_ALTATTACK\n'
+     '// (F11: it was 16, which is BT_TURN180 -- d_event.h:46-47 -- so alt fire never held it),\n'),
+    ('axe throw hold default', 'CVARINFO.rsvr',
+     'user int rsvr_axe_hold = 16;\n',
+     'user int rsvr_axe_hold = 32;\n'),
+    # 3. Ruger: Sniper.dec Fire sets X21F A, then "####" B 1 and "####" C 2 inherit X21F; only
+    #    X21F A / P21F A were keyed, so every unzoomed shot drew the 2D sprite for ~3 tics.
+    ('Ruger: key the fire frames B and C', 'MODELDEF.rsr',
+     '\tFrameIndex\tX21F\tA\t0\t0\n\tFrameIndex\tP21F\tA\t0\t0\n',
+     '\tFrameIndex\tX21F\tA\t0\t0\n\tFrameIndex\tP21F\tA\t0\t0\n'
+     '\t// F11: Fire\'s "####" B 1 and "####" C 2 inherit X21F (and P21F zoomed), so B and C too.\n'
+     '\tFrameIndex\tX21F\tB\t0\t0\n\tFrameIndex\tX21F\tC\t0\t0\n'
+     '\tFrameIndex\tP21F\tB\t0\t0\n\tFrameIndex\tP21F\tC\t0\t0\n'),
+    # 4. Purist Rifle: the M203 jump came before the purist check, so purist alt fire launched
+    #    grenades from a rifle hands.zs treats as having no launcher.
+    ('purist Rifle: purist check before the M203', 'actors/Weapons/Rifle.dec',
+     '\t\tRIFG A 0 A_Jump(256, "RSM_AltGrenade")\t// 1.33 rsm (owner): the rifle\'s secondary fire launches the underbarrel\n'
+     '\t\t2IFG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristWarning")\n',
+     '\t\t2IFG A 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristWarning")\t// F11: before the M203, purist has none\n'
+     '\t\tRIFG A 0 A_Jump(256, "RSM_AltGrenade")\t// 1.33 rsm (owner): the rifle\'s secondary fire launches the underbarrel\n'),
+    # 5. R2: RSR_Done / RSR_Seated were only ever taken in each gun's own RSR_Done state. Switch
+    #    away in the 1-tic RSR_Wait window after a no-charge gun fills and RSR_Done stays, so the
+    #    next magazine reload on any gun drops the mag and ends at once, empty.
+    ('reload: a new reload starts without stale RSR_Done / RSR_Seated', 'zscript/rsr/vreload.zs',
+     '\tvoid Begin(PlayerPawn mo, Weapon w, int i)\n\t{\n',
+     '\tvoid Begin(PlayerPawn mo, Weapon w, int i)\n\t{\n'
+     '\t\t// F11: a token left by a reload that was switched away from must not end this one.\n'
+     '\t\tmo.TakeInventory(\'RSR_Done\', 999);\n\t\tmo.TakeInventory(\'RSR_Seated\', 999);\n'),
+    ('reload: an aborted reload takes its tokens', 'zscript/rsr/vreload.zs',
+     '\tvoid Abort(PlayerPawn mo)\n\t{\n',
+     '\tvoid Abort(PlayerPawn mo)\n\t{\n'
+     '\t\tmo.TakeInventory(\'RSR_Done\', 999);\t// F11: see Begin\n\t\tmo.TakeInventory(\'RSR_Seated\', 999);\n'),
+    # 6. R4: End cleared netGrip but not netUse, so a Use key released inside a menu left the
+    #    hand grabbing until it was pressed and released again.
+    ('reload: End clears the Use grab too', 'zscript/rsr/vreload.zs',
+     '\t\tlockedGrab = false;\n\t\tnetGrip = false;\n\t}\n',
+     '\t\tlockedGrab = false;\n\t\tnetGrip = false;\n\t\tnetUse = false;\t\t// F11: a release lost in a menu must not latch the grab\n\t}\n'),
+]
+
+
+def fixes():
+    """F11: apply F11_FIXES to the build (OUT_SRC). Exact-match, idempotent, logged."""
+    log = []
+    for why, rel, old, new in F11_FIXES:
+        p = OUT_SRC + rel
+        t = open(p, newline='').read()
+        crlf = '\r\n' in t
+        if crlf:
+            t = t.replace('\r\n', '\n')
+        if new in t:		# several fixes keep their old text inside the new, so test the new
+            log.append(dict(fix=why, file=rel, result='already applied'))
+            continue
+        n = t.count(old)
+        if n != 1:
+            raise SystemExit('F11 fix %r: expected the old text once in %s, found %d -- nothing written'
+                             % (why, rel, n))
+        t = t.replace(old, new)
+        if crlf:
+            t = t.replace('\n', '\r\n')
+        open(p, 'w', newline='').write(t)
+        log.append(dict(fix=why, file=rel, result='applied'))
+    json.dump(log, open(OUT + 'fixes_apply.json', 'w'), indent=1)
+    shutil.copy(OUT + 'fixes_apply.json', os.path.join(REPO, 'sets', 'bd22q_1.97', 'fixes_apply.json'))
+    with open(OUT + '.generated', 'a') as f:
+        f.write('then tools/bd22_plus.py fixes\n')
+    print(json.dumps(log, indent=1))
+
+
 def sync():
     """Copy the built src/ into the set and write the stamp check_plan.py reads.
 
@@ -4191,6 +4288,8 @@ if __name__ == '__main__':
         pose()
     if sys.argv[1:2] == ['spine']:
         spine()
+    if sys.argv[1:2] == ['fixes']:
+        fixes()
     if sys.argv[1:2] == ['sync']:
         sync()
     if sys.argv[1:2] == ['pk3']:
