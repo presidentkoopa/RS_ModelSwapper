@@ -293,10 +293,10 @@ class RSR_State play
 		int mask = RSR.GrabMask(mo.player);
 		bool trig = (RSVR_VRHand.Buttons(mo) & mask) != 0;
 		bool grip = netGrip && gripFree && !RSVR_VRHand.Steadied(mo);
-		// F11 (R1): at the handle the grip is always within steadying range, so in grip mode the
-		// steadied grip is the hold there, as on the M203 tube and the pump. Magazines keep the rule.
+		// F11 (R1): a steadied gun is re-aimed at the off hand, so a grip can never be on a handle
+		// beside the gun hand. In grip mode the off trigger takes the handle (as on the M203 tube).
 		bool atHandle = (phase == RSR.CHARGE || phase == RSR.PULL) && RSR.GrabWith(mo.player) == 1
-			&& RSVR_VRHand.Steadied(mo);
+			&& (RSVR_VRHand.Buttons(mo) & BT_OFFHANDATTACK) != 0;
 		return trig || grip || netUse || atHandle;
 	}
 

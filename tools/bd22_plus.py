@@ -4106,18 +4106,20 @@ F11_FIXES = [
     ('reload: End clears the Use grab too', 'zscript/rsr/vreload.zs',
      '\t\tlockedGrab = false;\n\t\tnetGrip = false;\n\t}\n',
      '\t\tlockedGrab = false;\n\t\tnetGrip = false;\n\t\tnetUse = false;\t\t// F11: a release lost in a menu must not latch the grab\n\t}\n'),
-    # 7. R1: with "Grab ammo with: Grip" and two-handed steadying on, a grip press only grabs with
-    #    the controllers STEADY_RANGE (50 cm) apart, and every charging handle is 8-15 cm from the
-    #    gun hand -- so the rack could never be taken and the gun sat in RSR_Wait with fire blocked.
-    #    At the handle, the steadied grip IS the grab, as the M203 tube (rsr_m203.zs) and the pump
-    #    already treat it. Only in CHARGE / PULL: magazines keep the 50 cm rule.
-    ('reload R1: in grip mode a steadied grip takes the charging handle', 'zscript/rsr/vreload.zs',
+    # 7. R1: with "Grab ammo with: Grip" and two-handed steadying on, the charging handle could never
+    #    be taken: a grip press within 50 cm steadies, and a steadied gun is RE-AIMED AT THE OFF HAND
+    #    by the engine (the rig showed the off hand jump from the handle, (-5.0, 3.3) in the gun's
+    #    frame, to (11.2, 0.0) dead ahead the tic the grip went down). A handle beside the gun hand
+    #    is therefore unreachable by a steadied grip, whatever the code accepts. In grip mode the
+    #    OFF TRIGGER takes the handle instead (CHARGE / PULL only), as it already holds the M203
+    #    tube; magazines keep the grip and its 50 cm rule.
+    ('reload R1: in grip mode the off trigger takes the charging handle', 'zscript/rsr/vreload.zs',
      '\t\tbool grip = netGrip && gripFree && !RSVR_VRHand.Steadied(mo);\n\t\treturn trig || grip || netUse;\n',
      '\t\tbool grip = netGrip && gripFree && !RSVR_VRHand.Steadied(mo);\n'
-     '\t\t// F11 (R1): at the handle the grip is always within steadying range, so in grip mode the\n'
-     '\t\t// steadied grip is the hold there, as on the M203 tube and the pump. Magazines keep the rule.\n'
+     '\t\t// F11 (R1): a steadied gun is re-aimed at the off hand, so a grip can never be on a handle\n'
+     '\t\t// beside the gun hand. In grip mode the off trigger takes the handle (as on the M203 tube).\n'
      '\t\tbool atHandle = (phase == RSR.CHARGE || phase == RSR.PULL) && RSR.GrabWith(mo.player) == 1\n'
-     '\t\t\t&& RSVR_VRHand.Steadied(mo);\n'
+     '\t\t\t&& (RSVR_VRHand.Buttons(mo) & BT_OFFHANDATTACK) != 0;\n'
      '\t\treturn trig || grip || netUse || atHandle;\n'),
 ]
 

@@ -22,7 +22,7 @@ that is not on the plan.**
 - DONE (code, not yet gated): stage `bd22_plus.py fixes` (F11_FIXES, exact-match, idempotent,
   log in `sets/bd22q_1.97/fixes_apply.json`). Dot-scope `out Vector3` crash, axe hold 16 -> 32,
   Ruger X21F/P21F B and C keyed, purist Rifle M203 order, reload R2 stale tokens, R4 netUse,
-  R1 (grip mode: the steadied grip holds the charging handle, CHARGE/PULL only). R3 waits for a
+  R1 (grip mode: the OFF TRIGGER takes the charging handle, CHARGE/PULL only -- see below). R3 waits for a
   run in the rig: it touches every magazine gun's own Reload state.
   **How it was built:** the cloud session has no E: drive, br_vr or BD22 DECORATE, so it ran
   `fixes` then `sync` ON TOP OF the committed build (`BD22Q_OUT=<copy of sets/bd22q_1.97>`, stage
@@ -53,7 +53,19 @@ that is not on the plan.**
     * hidden guns (MP40, MG42) need `rsq_extra_weapons 1` before `give`, or `use` silently stays put.
     * the off hand is the gun hand MIRRORED in L: pose it like the gun hand and flip the magazine's
       in-hand L; for a side-loading well (|axis L| > 0.5: Rocket_Launcher, MG42, M32) also yaw it 180.
-  Not yet driven: charging handles after an empty reload, pump, break, revolvers, M203, flick, dual.
+- DONE (rig): empty reload + rack on all six handle guns (Rifle 30, BrutalPistol 15, BrutalSMG 40,
+  MP40 32, AssaultShotgun 20, Sniper 10 after the reload, as BD22's own); pump shotgun (shells into
+  the port, a hand pump stroke with both sounds); break SSG (pair), M79, Revolver speedloader and
+  per-round, Revolver2 -- the barrels shut by a pitch flick, the cylinders by a ROLL flick (707 deg/s);
+  Rifle M203 (latch held through the slide, open, round in, shut: loaded; held shut by the trigger,
+  since 51 cm out is past the engine's 50 cm steadying).
+- **R1, corrected.** The first fix (a steadied grip counts at the handle) compiled and could never
+  work: the engine RE-AIMS a steadied gun at the off hand (p_pspr.cpp SetState sets
+  WF_TWOHANDSTABILIZED from VrInputDefault's weaponStabilised), so the hand that was on the handle
+  is suddenly dead ahead of the gun -- rig: (-5.0, 3.3) -> (11.2, 0.0) the tic the grip went down.
+  Now the off trigger takes the handle in grip mode. Rig: grip takes the magazine 65 cm out, trigger
+  racks, CHARGE->PULL->RELEASED->DONE.
+- Not yet driven: the Machinegun's launcher, flick reload, dual wield, melee.
 - NEXT: those, then the rest of PLAN.md F11 and F10.
 
 ## What this repo is

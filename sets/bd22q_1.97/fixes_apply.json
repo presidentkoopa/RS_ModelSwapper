@@ -50,7 +50,7 @@
   "result": "applied"
  },
  {
-  "fix": "reload R1: in grip mode a steadied grip takes the charging handle",
+  "fix": "reload R1: in grip mode the off trigger takes the charging handle",
   "file": "zscript/rsr/vreload.zs",
   "result": "applied"
  }
