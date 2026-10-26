@@ -208,6 +208,8 @@ per-gun checklist below, in a headset, signed by the owner.
           SCALE/OFF and one `m32.png` to gen_rsr; the entry's own Scale -0.62 / Offset 0 -30 -8 and
           its two textures (m32_tex1/2) were used only by geometry(). Engine: "Surface Skin
           'm32.png' not found". The table's MagCentre (-6.46, -0.05, 3.33) disagreed with its own Well.
+        * **M32 reload key does nothing.** IncendiaryLauncher.dec kept BD22's stub `Reload:` (M202 A 0 /
+          Goto Ready3) after ours; DECORATE takes the later label. The rig pressed reload at 1 of 6.
 
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
