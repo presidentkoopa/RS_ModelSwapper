@@ -1,0 +1,5 @@
+# made at run time by bin/qz and the engine; never commit
+bin/libGLESv3.so
+bin/saves/
+# setup.sh's source checkout and build tree
+build/

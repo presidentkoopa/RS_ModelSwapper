@@ -1,5 +1,4 @@
-# Pad short rows in the engine's language CSVs (build.sh DATA FIX): FStringTable::ParseLanguageCSV
-# indexes row[col] without a bounds check, so a row with fewer columns than the header crashes.
+# Pad short rows in the engine's language CSVs (build.sh DATA FIX).
 import csv, sys, io
 for path in sys.argv[1:]:
     raw = open(path, encoding='utf-8', newline='').read()

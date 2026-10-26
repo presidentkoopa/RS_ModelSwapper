@@ -305,8 +305,32 @@ void TBXR_prepareEyeBuffer(int eye)
 	glDisable(GL_SCISSOR_TEST);
 }
 
+// TEST ONLY: QZ_DUMP_EVERY=n writes the left eye every n-th frame to $QZ_DUMP_DIR/fNNNNN.ppm
+static int g_dumpFrame = 0;
 void TBXR_finishEyeBuffer(int eye)
 {
+	if (eye == 0)
+	{
+		static int every = getenv("QZ_DUMP_EVERY") ? atoi(getenv("QZ_DUMP_EVERY")) : 0;
+		g_dumpFrame++;
+		if (every > 0 && g_dumpFrame % every == 0)
+		{
+			static unsigned char *px = nullptr;
+			if (!px) px = (unsigned char *)malloc(g_width * g_height * 4);
+			glReadPixels(0, 0, g_width, g_height, GL_RGBA, GL_UNSIGNED_BYTE, px);
+			char fn[512];
+			snprintf(fn, sizeof fn, "%s/f%05d.ppm", getenv("QZ_DUMP_DIR") ? getenv("QZ_DUMP_DIR") : ".", g_dumpFrame);
+			FILE *f = fopen(fn, "wb");
+			if (f)
+			{
+				fprintf(f, "P6\n%d %d\n255\n", g_width, g_height);
+				for (int y = g_height - 1; y >= 0; y--)
+					for (int x = 0; x < g_width; x++)
+						fwrite(px + (y * g_width + x) * 4, 1, 3, f);
+				fclose(f);
+			}
+		}
+	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 

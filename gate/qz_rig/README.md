@@ -1,25 +1,49 @@
-# The VR gate's rig: the owner's Quest_Weapons_Kit `quest_test_rig`, built here
+# The VR gate's rig: QuestZDoom 17.3 for Linux, in this repo, ready to run
 
-`run_gate.py --vr` runs on the owner's Quest-faithful Linux rig (Desktop\Quest_Weapons_Kit\quest_test_rig):
-the engine compiled from QuestZDoom's Android source set with the Android defines, the real OpenXR
-device mode (vr_mode 15) and the real VrInputDefault.cpp; only the OpenXR runtime / JNI layer is the
-rig's glue. The gate's off hand there is a CONTROLLER (pose, grip, trigger), read by the pack's own
-zscript_depot/rsvr/vrhand.zs -- not the fakehands.zs stand-in the desktop gate uses.
+`gate/run_gate.py --vr` runs here. The engine is Emawind's **QuestZDoom 17.3** (tag `qzd17.3`,
+`emawind84/gzdoom` 9afc750, wrapper `emawind84/questzdoom` a85c819): the release the owner and his
+players run, compiled for Linux from the Android source set with the Android defines, the real
+OpenXR device mode (vr_mode 15) and the real `VrInputDefault.cpp`. Only the OpenXR runtime / JNI
+layer is replaced, by `engine/glue/qz_linux_glue.cpp`. TEST ONLY, never ships.
 
-Built 2026-10-25 against emawind84/gzdoom tag qzd17.3 (9afc750) and emawind84/questzdoom a85c819:
+## Use it
+    QZ_RIG=$PWD/gate/qz_rig/bin python3 -B gate/run_gate.py <pk3> <model> --vr [--shots]
+`bin/` is prebuilt (Linux x86_64; needs Mesa GLES/EGL and OpenAL at run time). `bin/qz` launches it.
 
-    cp -r <kit>/quest_test_rig ~/qzlinux17 && cp -r gate/qz_rig/* ~/qzlinux17/
-    cp /usr/lib/jvm/java-21-openjdk-amd64/include/jni.h /usr/lib/jvm/java-21-openjdk-amd64/include/linux/jni_md.h ~/qzlinux17/shim/
-    cd ~/qzlinux17 && mv Makefile.txt Makefile && QGZ=<gzdoom qzd17.3> JNI=<questzdoom>/Projects/Android/jni ./build.sh
+## The version guard
+`bin/qz` reads `PINS` and **refuses to run** unless the engine binary reports `ENGINE_VERSION` and
+`res/qzdoom.pk3` declares `ZSCRIPT_VERSION`. It prints `qz: engine OK: QuestZDoom qzd17.3 ...` on
+every launch, so every log shows which engine ran. Why: on 2026-10-26 a rig built from a later,
+unreleased engine commit (4.15pre, ZScript 4.12) was in use; ModelSwapper could not compile on it
+and every result from it was void, with nothing saying so. Change `PINS` only when the owner moves
+to a new QuestZDoom release, and rebuild.
 
-What this folder adds to the kit's rig:
-- `glue/qz_linux_glue.cpp`: `__android_log_write`, and the TEST DRIVER HOOK -- ZScript may not set an
-  engine cvar, so a test pack defining `qzt_lhand` / `qzt_lgrip` / `qzt_ltrigger` (and r-) in CVARINFO
-  drives the controllers instead of `qz_*`. Without such a pack nothing changes.
-- `shim/android/*.h`: Linux stand-ins for the NDK headers; `tools/pad_csv.py`: the language-CSV fix
-  build.sh calls (both as the 2026-10-24 session's notes record).
+## Rebuild from source (only if bin/ must be rebuilt)
+    sh gate/qz_rig/setup.sh
+Fetches exactly the `PINS` commits, applies `engine/s_sound_log.patch`, builds into `build/`
+(gitignored) with `engine/build.sh` + `engine/Makefile`, checks the result against `PINS`, and
+installs it into `bin/`. ~20-40 min. A fresh cloud container cannot apt-install: SDL2, EGL, GLES3
+(incl. an empty `GLES3/gl3ext.h`, as Mesa ships), OpenAL and libvpx headers may have to come from
+their GitHub sources, with dev symlinks to the runtime `.so` files already present.
 
-Measured on the rig: stage -> world is 34 map units per metre, (F, L, U) = (-z, -x, y / pixelstretch) * 34
-from the player's floor point; controller pitch 30 is level. The grip arrives as key 443, the off
-trigger as key 42 -- the keys the reload already listens for. Screenshots are the eye buffer
-(1024 x 1024); `--shots` tilts the head 40 degrees down to look at the hands (QZ_SHOT_HMD).
+## What the glue adds (engine/glue/qz_linux_glue.cpp)
+- OpenXR stand-in: head and both controllers posed from cvars (`qz_hmd`, `qz_lhand`, `qz_rhand`,
+  triggers, grips, buttons, sticks).
+- **Test driver hook**: ZScript may not set an engine cvar, so a test pack defining `qzt_lhand` /
+  `qzt_rhand` / `qzt_lgrip` / `qzt_ltrigger` / `qzt_rgrip` / `qzt_rtrigger` in CVARINFO drives the
+  controllers instead of `qz_*`. Without such a pack nothing changes.
+- `__android_log_write`, and a frame dump: `QZ_DUMP_EVERY=n QZ_DUMP_DIR=<dir>` writes the left eye
+  every n-th frame as PPM (the engine's `screenshot` command returns garbage in VR mode).
+- Test-only sound log (`s_sound_log.patch`): `QZ_SNDLOG=1` prints every sound start.
+
+## Measured on the rig
+Stage -> world is 34 map units per metre, (F, L, U) = (-z, -x, y / pixelstretch) * 34 from the
+player's floor point; controller pitch 30 is level. The grip arrives as key 443, the off trigger as
+key 42 -- the keys the reload already listens for. Screenshots are the eye buffer (1024 x 1024);
+`--shots` tilts the head 40 degrees down to look at the hands (QZ_SHOT_HMD).
+
+## Traps
+- `-warp 1` is required with BD22 (its title map swallows `+map`, and its AimingCamera stops VR attaching).
+- Load order is always doom2 -> the parent mod (e.g. brutal22test6 -> BD_VoxelPack) -> the pack.
+- Running the engine creates `bin/libGLESv3.so` and may write `bin/config/qzdoom.ini`; the first is
+  gitignored, and the gate runs with its own `-config` copy so the committed ini stays as it is.
