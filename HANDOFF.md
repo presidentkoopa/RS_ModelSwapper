@@ -134,8 +134,23 @@ that is not on the plan.**
   every other ready tic. Their own auto fire (BD22's FiredPrimary jumps) is unaffected. A global
   fix (keep attackdown set while the trigger stays down) would make every gun fire as on desktop
   BD22 -- not done without the owner's yes, since it changes how held triggers feel on all guns.
+- DONE (F11): **sound names.** The four the audit could not place are all BD22's own, parsed from
+  brutal22test6's SNDINFO.BD with their lumps present: weapons/largemagdrop (DSAOUNC1-4),
+  weapons/smallmagdrop (DSBOUNC1-4), weapons/barrelpain (BARRELZ), weapons/shell (DSSHELL1-4).
+  Whole-pack audit: 171 sound names played, every one the pack itself adds resolves. The rest
+  are BD22's own silent references (rail_uz, rail_zm, usaspul1, weapons/aim, weapons/rifle/move:
+  no SNDINFO entry and no lump in BD22 either), engine names (imp/pain, brain/spit,
+  skeleton/swing, weapons/sshot*, *gasp, *grunt), and rsb_guns' VR_Revolver/VR_Revolver2 rows
+  (weapons/9mmclip1/2, 9mmslide), whose classes are not in this load order -- dead rows.
+- Menu audit: 67 cvars, 51 in the menus. The 16 that are not are tuning knobs and button masks
+  (rsvr_axe_*, rsr_grip_keys, rsr_grab_buttons, rsr_magrelease, rsr_eat_grip, rsb_flick_speed,
+  rsr_ssg_pair, rsr_sideport, rsq_round_speed, rsvr_butt_fwd/lead, rsvr_melee_down).
+- Load-order check: doom2 -> brutal22test6 -> BD_VoxelPack alone gives 5 script errors, all the
+  voxel pack's own (voxeldef.txt 66/72/77/892, sphere.txt 50). With the pack added: those
+  voxeldef four and nothing else.
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
-- NEXT: F11 ( sound names, owner calls, menu, alt fires);
+- NEXT: F11 (owner calls: NOAUTOFIRE on all guns, off-hand punch vs rsq_punch, free charge default,
+  PuristSniper model, RQLK ring art -- no lump in pack or BD22, so the ring is invisible);
   flick/dual/melee in the rig; then the gated pk3.
 
 ## What this repo is
