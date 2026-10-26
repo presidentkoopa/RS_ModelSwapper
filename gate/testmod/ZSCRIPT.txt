@@ -212,3 +212,15 @@ class TMKnife : Weapon
 		Stop;
 	}
 }
+
+// A pistol whose Ready never allows reload (A_WeaponReady without WRF_ALLOWRELOAD): its Reload is
+// reached only by firing it empty. Many older mods are written this way. run_gate --noallow.
+class TMPistolNR : TMPistol
+{
+	States
+	{
+	Ready:
+		PISG A 1 A_WeaponReady;
+		Loop;
+	}
+}

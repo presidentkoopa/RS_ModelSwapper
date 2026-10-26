@@ -187,11 +187,30 @@ class RSR_TestDriver : EventHandler
 		CVar.FindCVar('qzt_ltrigger').SetFloat(trig || trigWant ? 1 : 0);
 	}
 
+	// HELD PARTS: what layers 2201 (magazine), 2202 / 2203 (round, second shell) and 2210 (shell)
+	// draw, with which caller, and what weapon is in the off hand -- printed when it changes. The
+	// gate reads "HELD" lines: a part is in the off hand only when its layer has a state AND its
+	// caller is the off-hand weapon (hw_weapon.cpp places a layer by its caller's hand).
+	String heldWas;
+	void HeldLog(PlayerPawn mo)
+	{
+		let p = mo.player;
+		String off = "none";
+		if (p.OffhandWeapon)
+			off = p.OffhandWeapon.GetClassName();
+		String now = String.Format("off %s | 2201 %s 2202 %s 2203 %s 2210 %s", off,
+			Layer(p, 2201), Layer(p, 2202), Layer(p, 2203), Layer(p, 2210));
+		if (now != heldWas)
+			Console.Printf("HELD t%d %s", Level.maptime, now);
+		heldWas = now;
+	}
+
 	override void WorldTick()
 	{
 		let mo = players[0].mo;
 		if (!mo)
 			return;
+		HeldLog(mo);
 		let cv = CVar.FindCVar('rsrtest_script');
 		int script = cv ? cv.GetInt() : 0;
 		let s = RSR_ReloadHandler.StateOf(mo);

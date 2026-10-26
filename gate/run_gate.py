@@ -31,6 +31,8 @@ IWAD = os.environ.get('MS_IWAD', '/usr/share/games/doom/freedoom2.wad')
 VIEW = 'vr_3dweaponOffsetX 10; vr_3dweaponOffsetY -4; vr_3dweaponOffsetZ -45'
 EXTRA = ''
 OFFKNIFE = False
+BYFIRE = False
+NOALLOW = False
 VR_CVARS = '''
 user int rsrtest_vr = 1;
 user string qzt_lhand = "";
@@ -57,6 +59,18 @@ user int rsqt_empty = 0;
 user int rsqt_dbg = 0;
 user int aet_buttons = 0;
 '''
+
+
+def held_in_off(text, ids):
+    """a HELD line (rtest/rsr_testdriver.zs HeldLog) where one of these layers draws a part whose
+    caller IS the off-hand weapon: the part is in the off hand"""
+    for m in re.finditer(r'^HELD t\d+ off (\S+) \| (.*)$', text, re.M):
+        off = m.group(1).lower()
+        for i in ids:
+            q = re.search(r'\b%d (\S+)' % i, m.group(2))
+            if q and q.group(1) != '-' and not q.group(1).startswith('TNT1') and q.group(1).lower().endswith('@' + off):
+                return True
+    return False
 
 
 def shelf_pick(donor):
@@ -124,6 +138,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     pump = pump_slot(donor) > 0
     brk = not pump and break_slot(donor) > 0
     gun = 'TMShotgun' if pump else 'TMSSG' if brk else 'TMPistol'
+    if NOALLOW and gun == 'TMPistol':
+        gun = 'TMPistolNR'        # --noallow: a Ready without WRF_ALLOWRELOAD
     view = '' if vr else VIEW         # the flat-camera offset: off on the rig, which draws the real VR placement
     t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s%s' % (0 if vr else yaw, view, ('; ' + EXTRA) if EXTRA else '')),
          (25, 'netevent rs-fm-rescan'),
@@ -147,7 +163,11 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # the reload's input rule says is steadying, never a grab -- the handle cannot be taken
         # that way at all (BD22Q's rule, unchanged; see the handoff)
         sc = 'rsr_grab_with 0; rsrtest_script 7' if has_handle(donor) else 'rsrtest_script 1'
-        t += [(110, sc), (115, '+attack'), (125, '-attack')]
+        # the reload BUTTON (the Quest's R grip + R stick down sends +reload; the mod's own
+        # A_WeaponReady(WRF_ALLOWRELOAD) takes it to its Reload), held like a hand holds it.
+        # --by-fire: the other way a player starts it, the trigger on an empty gun (the mod's Fire
+        # jumps to its Reload)
+        t += [(110, sc)] + ([(115, '+attack'), (125, '-attack')] if BYFIRE else [(115, '+reload'), (up, '-reload')])
     # a handle adds its stroke after the magazine (the rig: up to ~400 tics more) before the mod's reload
     if OFFKNIFE:
         # a mod's own off-hand weapon taken into the off hand before the reload: the hands must
@@ -225,6 +245,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
             ('chambers seated', (len(re.findall(r'rsb t\d+ chamber \d+ loaded', text)) >= 1 and 'round at chamber' in text) if vr
                                 else len(re.findall(r'RSBT t\d+ seated chamber', text)) >= 1),
             ('it closed', re.search(r'shut \(flick\)', text) is not None if vr else 'all chambers loaded: closing' in text),
+            ('round in off hand', held_in_off(text, (2202, 2203))),
             ('handed back', 'gave TMSSG back' in text),
             ('their reload ran', 'TM ssg: barrels 2' in text),
             ('reached the end', 'GATE_END' in text),
@@ -270,6 +291,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
             ('scripts parsed', 'script parsing took' in text),
             ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
             ('join took it', 'TMShotgun pump: took it at its reload' in text),
+            ('shell in off hand', held_in_off(text, (2210,))),
             ('hand fed shells', 'a shell pushed home' in text),
             ('their loop ran', shells >= 2),
             ('re-held per shell', 'a shell in -- held for the next' in text),
@@ -290,19 +312,19 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         ('scripts parsed', 'script parsing took' in text),
         ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
         # --offknife: the magazine is drawn in the off hand (layer 2201, the hands' caller)
-        ('mag in the off hand', re.search(r'2201 \S+/\S@rsq_hands', text, re.I) is not None if OFFKNIFE else True),
+        ('mag in the off hand', held_in_off(text, (2201,))),
         # Reload Order "mod's reload first" (ms_mod_first, the default): the mod's reload ran, then
         # the gun was held -- no fire -- until the hands finished
-        ('fire held for hands', ('ms_mod_first 0' in EXTRA) or re.search(r'the mod\'s reload is done -- held.*?gave TMPistol back \(hands finished -- fire allowed\)', text, re.S) is not None),
-        ('join took it', 'took TMPistol' in text),
-        ('as this model', 'took TMPistol (slot %d)' % slot_of(donor) in text),
+        ('fire held for hands', ('ms_mod_first 0' in EXTRA) or re.search(r'the mod\'s reload is done -- held.*?gave \w+ back \(hands finished -- fire allowed\)', text, re.S) is not None),
+        ('join took it', 'took %s' % gun in text),
+        ('as this model', 'took %s (slot %d)' % (gun, slot_of(donor)) in text),
         ('magazine out', re.search(r'gun \d+: \w+ -> EMPTY', text) is not None),
         ('carried', re.search(r'-> CARRY', text) is not None),
         ('inserted', re.search(r'-> INSERT', text) is not None),
         ('seated', re.search(r'-> (SEATED|DONE)', text) is not None),
         # shot dry (rsqt_empty), a gun with a charging handle must ask the hand to work it
         ('handle racked', re.search(r'PULL -> RELEASED', text) is not None if has_handle(donor) else True),
-        ('handed back', 'gave TMPistol back' in text or re.search(r'\[MSJOIN\].*back', text) is not None),
+        ('handed back', 'gave %s back' % gun in text or re.search(r'\[MSJOIN\].*back', text) is not None),
         ('their reload ran', 'TM reload: mag 12' in text),
         ('reached the end', 'GATE_END' in text),
     ]
@@ -311,7 +333,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     for name, c in checks:
         print('  %-18s %s' % (name, 'ok' if c else 'FAIL'))
     for l in text.splitlines():
-        if re.search(r'Script error|error|rsr t\d+: gun|MSJOIN|TM reload|no magazine', l, re.I):
+        if re.search(r'Script error|error|rsr t\d+: gun|MSJOIN|TM reload|no magazine|^HELD', l, re.I):
             print('   |', l[:160])
     print('PASS' if ok else 'FAIL', '-- log', log)
     return 0 if ok else 1
@@ -324,6 +346,8 @@ if __name__ == '__main__':
     opt = lambda k, d: next((sys.argv[i + 1] for i, x in enumerate(sys.argv) if x == k), d)
     VIEW = opt('--view', VIEW)
     OFFKNIFE = '--offknife' in sys.argv
+    BYFIRE = '--by-fire' in sys.argv
+    NOALLOW = '--noallow' in sys.argv
     EXTRA = opt('--extra', '')
     a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None), opt('--extra', None))]
     sys.exit(run(a[0], a[1], eng, '--shots' in sys.argv, int(opt('--yaw', 60)), vr='--vr' in sys.argv, shot='--shot' in sys.argv))
