@@ -1,0 +1,65 @@
+{
+ "class": "Sniper",
+ "label": "Sniper Rifle",
+ "bd22_tag": "TAGBD_SNIPER",
+ "handtable_index": 22,
+ "handtable_row": {
+  "GunOne": "F",
+  "GunTwo": "F",
+  "Support": "E",
+  "GunHook": [
+   1.21,
+   -0.19,
+   2.18
+  ],
+  "GunRot": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "SupportHook": [
+   -0.86,
+   -0.45,
+   -2.98
+  ],
+  "SupportRot": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "SupportPoint": [
+   0.279,
+   0.004,
+   -0.057
+  ],
+  "Trigger": ""
+ },
+ "modeldef_gun_blocks": [
+  [
+   "MODELDEF.bd.txt",
+   11053,
+   "Model Sniper\n{\n   Path \"models/bd/Grenade\"\n   Model 0 \"nade.md3\"\n   Skin 0 \"nade.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n   FrameIndex\tGRTH\tA\t0\t3\n   FrameIndex\tGRTH\tB\t0\t4\n   FrameIndex\tGRTH\tC\t0\t5\n   FrameIndex\tGRTH\tD\t0\t6\n   FrameIndex\tGRTH\tE\t0\t7\n   FrameIndex\tGRTH\tF\t0\t8\n   FrameIndex\tGRTH\tG\t0\t9\n   FrameIndex\tGRTH\tH\t0\t10\n   FrameIndex\tGRTH\tI\t0\t11\n   FrameIndex\tGRTH\tJ\t0\t12\n   FrameIndex\tGRTH\tK\t0\t13\n   FrameIndex\tGRTH\tL\t0\t14\n   FrameIndex\tGRTH\tM\t0\t15\n   FrameIndex\tGRTH\tN\t0\t15\n   FrameIndex\tGRTH\tO\t0\t15\n   FrameIndex\tGRTH\tP\t0\t15\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   11082,
+   "Model Sniper\n{\n   Path \"models/bd/Boot\"\n   Model 0 \"Boot.md3\"\n   Skin 0 \"Boot.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n   FrameIndex\t1ICK\tA\t0\t10\n   FrameIndex\t1ICK\tB\t0\t11\n   FrameIndex\t1ICK\tC\t0\t12\n   FrameIndex\t1ICK\tD\t0\t13\n   FrameIndex\t1ICK\tE\t0\t14\n   FrameIndex\t1ICK\tF\t0\t15\n   FrameIndex\t1ICK\tG\t0\t16\n   FrameIndex\t1ICK\tH\t0\t17\n   FrameIndex\t1ICK\tI\t0\t18\n   FrameIndex\t1ICK\tJ\t0\t19\n   FrameIndex\t1ICK\tK\t0\t20\n   FrameIndex\t1ICK\tL\t0\t21\n   FrameIndex\t1ICK\tM\t0\t22\n   FrameIndex\t1ICK\tN\t0\t23\n   FrameIndex\t1ICK\tO\t0\t24\n   FrameIndex\t1ICK\tP\t0\t25\n   FrameIndex\t1ICK\tQ\t0\t26\n   FrameIndex\t1ICK\tR\t0\t27\n   FrameIndex\t1ICK\tS\t0\t28\n   FrameIndex\t1ICK\tT\t0\t29\n   FrameIndex\t1ICK\tU\t0\t30\n   FrameIndex\t1ICK\tV\t0\t30\n   FrameIndex\t1ICK\tW\t0\t30\n   FrameIndex\t1ICK\tX\t0\t30\n   FrameIndex\t1ICK\tY\t0\t30\n   FrameIndex\t1ICK\tZ\t0\t30\n   FrameIndex\t1ICK\t[\t0\t30\n   FrameIndex\t1ICK\t]\t0\t30\n   FrameIndex\t1LID\tA\t0\t14\n   FrameIndex\t1LID\tB\t0\t14\n   FrameIndex\t1LID\tC\t0\t14\n   FrameIndex\t1LID\tD\t0\t14\n   FrameIndex\t1LID\tE\t0\t14\n   FrameIndex\t1LID\tF\t0\t14\n   FrameIndex\t1LID\tG\t0\t14\n   FrameIndex\t1LID\tH\t0\t14\n   FrameIndex\t1LID\tI\t0\t14\n   FrameIndex\t1LID\tJ\t0\t14\n   FrameIndex\t1LID\tK\t0\t14\n   FrameIndex\t1LID\tL\t0\t14\n   FrameIndex\t1LID\tM\t0\t14\n   FrameIndex\t1LID\tN\t0\t14\n   FrameIndex\t1TOM\tA\t0\t31\n   FrameIndex\t2ICK\tA\t0\t10\n   FrameIndex\t2ICK\tB\t0\t11\n   FrameIndex\t2ICK\tC\t0\t12\n   FrameIndex\t2ICK\tD\t0\t13\n   FrameIndex\t2ICK\tE\t0\t14\n   FrameIndex\t2ICK\tF\t0\t15\n   FrameIndex\t2ICK\tG\t0\t16\n   FrameIndex\t2ICK\tH\t0\t17\n   FrameIndex\t2ICK\tI\t0\t18\n   FrameIndex\t2ICK\tJ\t0\t19\n   FrameIndex\t2ICK\tK\t0\t20\n   FrameIndex\t2ICK\tL\t0\t21\n   FrameIndex\t2ICK\tM\t0\t22\n   FrameIndex\t2ICK\tN\t0\t23\n   FrameIndex\t2ICK\tO\t0\t24\n   FrameIndex\t2ICK\tP\t0\t25\n   FrameIndex\t2ICK\tQ\t0\t26\n   FrameIndex\t2ICK\tR\t0\t27\n   FrameIndex\t2ICK\tS\t0\t28\n   FrameIndex\t2ICK\tT\t0\t29\n   FrameIndex\t2ICK\tU\t0\t30\n   FrameIndex\t2ICK\tV\t0\t30\n   FrameIndex\t2ICK\tW\t0\t30\n   FrameIndex\t2ICK\tX\t0\t30\n   FrameIndex\t2ICK\tY\t0\t30\n   FrameIndex\t2ICK\tZ\t0\t30\n   FrameIndex\t2ICK\t[\t0\t30\n   FrameIndex\t2ICK\t]\t0\t30\n   FrameIndex\t2LID\tA\t0\t14\n   FrameIndex\t2LID\tB\t0\t14\n   FrameIndex\t2LID\tC\t0\t14\n   FrameIndex\t2LID\tD\t0\t14\n   FrameIndex\t2LID\tE\t0\t14\n   FrameIndex\t2LID\tF\t0\t14\n   FrameIndex\t2LID\tG\t0\t14\n   FrameIndex\t2LID\tH\t0\t14\n   FrameIndex\t2LID\tI\t0\t14\n   FrameIndex\t2LID\tJ\t0\t14\n   FrameIndex\t2LID\tK\t0\t14\n   FrameIndex\t2LID\tL\t0\t14\n   FrameIndex\t2LID\tM\t0\t14\n   FrameIndex\t2LID\tN\t0\t14\n   FrameIndex\t2TOM\tA\t0\t31\n   FrameIndex\t3ICK\tA\t0\t10\n   FrameIndex\t3ICK\tB\t0\t11\n   FrameIndex\t3ICK\tC\t0\t12\n   FrameIndex\t3ICK\tD\t0\t13\n   FrameIndex\t3ICK\tE\t0\t14\n   FrameIndex\t3ICK\tF\t0\t15\n   FrameIndex\t3ICK\tG\t0\t16\n   FrameIndex\t3ICK\tH\t0\t17\n   FrameIndex\t3ICK\tI\t0\t18\n   FrameIndex\t3ICK\tJ\t0\t19\n   FrameIndex\t3ICK\tK\t0\t20\n   FrameIndex\t3ICK\tL\t0\t21\n   FrameIndex\t3ICK\tM\t0\t22\n   FrameIndex\t3ICK\tN\t0\t23\n   FrameIndex\t3ICK\tO\t0\t24\n   FrameIndex\t3ICK\tP\t0\t25\n   FrameIndex\t3ICK\tQ\t0\t26\n   FrameIndex\t3ICK\tR\t0\t27\n   FrameIndex\t3ICK\tS\t0\t28\n   FrameIndex\t3ICK\tT\t0\t29\n   FrameIndex\t3ICK\tU\t0\t30\n   FrameIndex\t3ICK\tV\t0\t30\n   FrameIndex\t3ICK\tW\t0\t30\n   FrameIndex\t3ICK\tX\t0\t30\n   FrameIndex\t3ICK\tY\t0\t30\n   FrameIndex\t3ICK\tZ\t0\t30\n   FrameIndex\t3ICK\t[\t0\t30\n   FrameIndex\t3ICK\t]\t0\t30\n   FrameIndex\t3LID\tA\t0\t14\n   FrameIndex\t3LID\tB\t0\t14\n   FrameIndex\t3LID\tC\t0\t14\n   FrameIndex\t3LID\tD\t0\t14\n   FrameIndex\t3LID\tE\t0\t14\n   FrameIndex\t3LID\tF\t0\t14\n   FrameIndex\t3LID\tG\t0\t14\n   FrameIndex\t3LID\tH\t0\t14\n   FrameIndex\t3LID\tI\t0\t14\n   FrameIndex\t3LID\tJ\t0\t14\n   FrameIndex\t3LID\tK\t0\t14\n   FrameIndex\t3LID\tL\t0\t14\n   FrameIndex\t3LID\tM\t0\t14\n   FrameIndex\t3LID\tN\t0\t14\n   FrameIndex\t3TOM\tA\t0\t31\n   FrameIndex\tKICK\tA\t0\t10\n   FrameIndex\tKICK\tB\t0\t11\n   FrameIndex\tKICK\tC\t0\t12\n   FrameIndex\tKICK\tD\t0\t13\n   FrameIndex\tKICK\tE\t0\t14\n   FrameIndex\tKICK\tF\t0\t15\n   FrameIndex\tKICK\tG\t0\t16\n   FrameIndex\tKICK\tH\t0\t17\n   FrameIndex\tKICK\tI\t0\t18\n   FrameIndex\tKICK\tJ\t0\t19\n   FrameIndex\tKICK\tK\t0\t20\n   FrameIndex\tKICK\tL\t0\t21\n   FrameIndex\tKICK\tM\t0\t22\n   FrameIndex\tKICK\tN\t0\t23\n   FrameIndex\tKICK\tO\t0\t24\n   FrameIndex\tKICK\tP\t0\t25\n   FrameIndex\tKICK\tQ\t0\t26\n   FrameIndex\tKICK\tR\t0\t27\n   FrameIndex\tKICK\tS\t0\t28\n   FrameIndex\tKICK\tT\t0\t29\n   FrameIndex\tKICK\tU\t0\t30\n   FrameIndex\tKICK\tV\t0\t30\n   FrameIndex\tKICK\tW\t0\t30\n   FrameIndex\tKICK\tX\t0\t30\n   FrameIndex\tKICK\tY\t0\t30\n   FrameIndex\tKICK\tZ\t0\t30\n   FrameIndex\tKICK\t[\t0\t30\n   FrameIndex\tKICK\t]\t0\t30\n   FrameIndex\tKIK1\tA\t0\t0\n   FrameIndex\tKIK1\tB\t0\t1\n   FrameIndex\tKIK1\tC\t0\t2\n   FrameIndex\tKIK1\tD\t0\t3\n   FrameIndex\tKIK1\tE\t0\t4\n   FrameIndex\tKIK2\tA\t0\t5\n   FrameIndex\tKIK2\tB\t0\t6\n   FrameIndex\tKIK2\tC\t0\t7\n   FrameIndex\tKIK2\tD\t0\t8\n   FrameIndex\tKIK2\tE\t0\t9\n   FrameIndex\tSLID\tA\t0\t14\n   FrameIndex\tSLID\tB\t0\t14\n   FrameIndex\tSLID\tC\t0\t14\n   FrameIndex\tSLID\tD\t0\t14\n   FrameIndex\tSLID\tE\t0\t14\n   FrameIndex\tSLID\tF\t0\t14\n   FrameIndex\tSLID\tG\t0\t14\n   FrameIndex\tSLID\tH\t0\t14\n   FrameIndex\tSLID\tI\t0\t14\n   FrameIndex\tSLID\tJ\t0\t14\n   FrameIndex\tSLID\tK\t0\t14\n   FrameIndex\tSLID\tL\t0\t14\n   FrameIndex\tSLID\tM\t0\t14\n   FrameIndex\tSLID\tN\t0\t14\n   FrameIndex\tSTOM\tA\t0\t31\n   FrameIndex\tSTOM\tB\t0\t32\n   FrameIndex\tSTOM\tC\t0\t33\n   FrameIndex\tSTOM\tD\t0\t34\n   FrameIndex\tSTOM\tE\t0\t35\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   11281,
+   "Model Sniper\n{\n   Path \"models/bd/FIST\"\n   Model 0 \"fistclosed.md3\"\n   Skin 0 \"fist.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n   FrameIndex\tFUCK\tA\t0\t41\n   FrameIndex\tFUCK\tB\t0\t42\n   FrameIndex\tFUCK\tC\t0\t43\n   FrameIndex\tFUCK\tD\t0\t44\n   FrameIndex\tFUCK\tE\t0\t44\n   FrameIndex\tFUCK\tF\t0\t45\n   FrameIndex\tFUCK\tG\t0\t46\n   FrameIndex\tFUCK\tH\t0\t47\n   FrameIndex\tFUCK\tI\t0\t48\n   FrameIndex\tFUCK\tJ\t0\t48\n   FrameIndex\tFUCK\tK\t0\t50\n   FrameIndex\tFUCK\tL\t0\t51\n   FrameIndex\tFUCK\tM\t0\t52\n   FrameIndex\tFUCK\tN\t0\t53\n   FrameIndex\tFUCK\tO\t0\t53\n   FrameIndex\tIEHW\tA\t0\t39\n   FrameIndex\tIEHW\tB\t0\t39\n   FrameIndex\tIEHW\tC\t0\t39\n   FrameIndex\tIEHW\tD\t0\t39\n   FrameIndex\tIEHW\tE\t0\t39\n   FrameIndex\tIEHW\tF\t0\t39\n   FrameIndex\tIEHW\tG\t0\t39\n   FrameIndex\tIEHW\tH\t0\t39\n   FrameIndex\tIEHW\tI\t0\t39\n   FrameIndex\tIEHW\tJ\t0\t39\n   FrameIndex\tIEHW\tK\t0\t39\n   FrameIndex\tIEHW\tL\t0\t40\n   FrameIndex\tIEHW\tM\t0\t40\n   FrameIndex\tIEHW\tN\t0\t40\n   FrameIndex\tIEHW\tO\t0\t40\n   FrameIndex\tIEHW\tP\t0\t40\n   FrameIndex\tIEHW\tQ\t0\t40\n   FrameIndex\tIEHW\tR\t0\t40\n   FrameIndex\tIEHW\tS\t0\t40\n   FrameIndex\tIEHW\tT\t0\t40\n   FrameIndex\tSALU\tA\t0\t18\n   FrameIndex\tSALU\tB\t0\t19\n   FrameIndex\tSALU\tC\t0\t20\n   FrameIndex\tSALU\tD\t0\t21\n   FrameIndex\tSALU\tE\t0\t22\n   FrameIndex\tVUCK\tA\t0\t41\n   FrameIndex\tVUCK\tB\t0\t42\n   FrameIndex\tVUCK\tC\t0\t43\n   FrameIndex\tVUCK\tD\t0\t44\n   FrameIndex\tVUCK\tE\t0\t44\n   FrameIndex\tVUCK\tF\t0\t45\n   FrameIndex\tVUCK\tG\t0\t46\n   FrameIndex\tVUCK\tH\t0\t47\n   FrameIndex\tVUCK\tI\t0\t48\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   11340,
+   "Model Sniper\n{\n   Path \"models/bd/FIST\"\n   Model 0 \"fistclosed.md3\"\n   Skin 0 \"rsr_clear.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n   FrameIndex\t1UNG\tD\t0\t10\n   FrameIndex\t1UNG\tE\t0\t11\n   FrameIndex\t1UNG\tF\t0\t12\n   FrameIndex\t1UNG\tG\t0\t12\n   FrameIndex\t1UNG\tH\t0\t12\n   FrameIndex\t1UNG\tI\t0\t12\n   FrameIndex\t1UNG\tJ\t0\t12\n   FrameIndex\t4ONG\tB\t0\t1\n   FrameIndex\t4ONG\tC\t0\t2\n   FrameIndex\t4ONG\tD\t0\t3\n   FrameIndex\t4ONG\tE\t0\t4\n   FrameIndex\t4ONG\tF\t0\t5\n   FrameIndex\t4ONG\tG\t0\t7\n   FrameIndex\t4ONG\tV\t0\t1\n   FrameIndex\t4ONG\tW\t0\t2\n   FrameIndex\t4ONG\tX\t0\t3\n   FrameIndex\t4ONG\tY\t0\t4\n   FrameIndex\t4ONG\tZ\t0\t5\n   FrameIndex\t4ONG\t[\t0\t6\n   FrameIndex\t4UNG\tA\t0\t1\n   FrameIndex\t4UNG\tD\t0\t10\n   FrameIndex\t4UNG\tE\t0\t11\n   FrameIndex\t4UNG\tF\t0\t12\n   FrameIndex\t4UNG\tG\t0\t12\n   FrameIndex\t4UNG\tH\t0\t12\n   FrameIndex\t4UNG\tI\t0\t12\n   FrameIndex\t4UNG\tJ\t0\t12\n   FrameIndex\tPONG\tB\t0\t1\n   FrameIndex\tPONG\tC\t0\t2\n   FrameIndex\tPONG\tD\t0\t3\n   FrameIndex\tPONG\tE\t0\t4\n   FrameIndex\tPONG\tF\t0\t5\n   FrameIndex\tPONG\tG\t0\t7\n   FrameIndex\tPONG\tV\t0\t1\n   FrameIndex\tPONG\tW\t0\t2\n   FrameIndex\tPONG\tX\t0\t3\n   FrameIndex\tPONG\tY\t0\t4\n   FrameIndex\tPONG\tZ\t0\t5\n   FrameIndex\tPONG\t[\t0\t6\n   FrameIndex\tPUNG\tA\t0\t1\n   FrameIndex\tPUNG\tB\t0\t8\n   FrameIndex\tPUNG\tC\t0\t9\n}"
+  ]
+ ],
+ "support_shown": false,
+ "notes": "1.92 has a hand row for it, but 1.92 switches the sniper off for good (zscript/nosniper/nosniper.zs: its model is gone; a given Sniper is swapped for the Rifle the next tic, even with rsq_extra_weapons 1). Not renderable.",
+ "views": [],
+ "problems": [
+  "not rendered"
+ ]
+}
