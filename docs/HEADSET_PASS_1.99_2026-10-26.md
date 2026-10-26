@@ -7,9 +7,7 @@ changed how every gun looks and behaves. **The rule from here on: 1.92 is the be
 Anything that makes a 1.92 gun look or act differently is a regression unless the owner asked for it.**
 
 State of the repos when this was written:
-- RSQ_WeaponDepot: last commit `6e1d0d8` (pushed). **The recoil removal below is built into the
-  set but NOT committed yet**: commit it with `[step F11]`. Its F11_FIXES entries in
-  `tools/bd22_plus.py` and the fix to `fixes()`' already-applied test are in the working tree.
+- RSQ_WeaponDepot: `4126d5b` (pushed) has everything below, including the recoil removal.
 - RS_Brutal22WeaponsQ `main` = `76c9a2d`. It does NOT have the recoil removal. The owner has the
   pk3 from `76c9a2d` (no spin, no phantom shots, BD22's own sounds back, recoil still in).
 - No GitHub release or tag exists for 1.99. This session cannot create releases or push tags.
@@ -29,9 +27,9 @@ State of the repos when this was written:
 3. **Recoil removed (owner: "this recoil needs to go").** It turns the gun model, but parts drawn on
    their own reload layers (the pistol's locked slide, the SSG's open barrels, a magazine at the
    well) are placed in the controller frame and don't turn with it, so the gun came apart.
-   `RSQ_Recoil` is out of MAPINFO and the "Gun Recoil" menu row is gone. **Not committed yet:**
-   built into `sets/bd22q_1.97/src`, pk3 at `/home/claude/gate_out/BD22Q_norec.pk3` (cloud
-   session), not run in the rig yet.
+   `RSQ_Recoil` is out of MAPINFO and the "Gun Recoil" menu row is gone. Committed in `4126d5b`;
+   pk3 `/home/claude/gate_out/BD22Q_norec.pk3` (cloud session). NOT yet run in the rig, NOT on
+   RS_Brutal22WeaponsQ, NOT sent to the owner.
 4. **BD22's own sounds were replaced by ours.** 19 of our sound files had the same 8-letter lump
    name as BD22's (ricoche1-7, and ricoche10-16 truncate to ricoche1, plus winbrea, sparks1,
    DSAOUNC1-3). BD22's SNDINFO names those by lump, so its ricochets, glass break, sparks and big
@@ -142,7 +140,7 @@ State of the repos when this was written:
 - Load order is always doom2 -> brutal22test6 -> BD_VoxelPack -> pack (CLAUDE.md rule 5).
 
 ## E. Suggested order
-1. Commit the recoil removal. Run the rig smoke and spin test, then visually compare 1.92 against
+1. Run the rig smoke and spin test, then visually compare 1.92 against
    now for every 1.92 gun (D). Most of items 6, 7 and 11 may already be gone with the recoil.
 2. Anything still different from 1.92 on a 1.92 gun: find the change and revert it toward 1.92.
 3. The headset-only reload failures (12, 13, 15): get the owner's exact input, reproduce, fix.
