@@ -113,8 +113,15 @@ that is not on the plan.**
   takes `z_above`; a direct gun can name its part by surface index (`part_surface=`).
 - Rig trap: the run script must not chain stages after a failed `apply` (`&&`, not `;`) -- a failed
   apply followed by `sync` emptied half the set once; restored from git, nothing committed.
+- DONE (F11 R3): **rounds held aside are no longer stranded on an empty reserve.** Rig, old pack:
+  Rifle at 28, magazine out (27 held, 1 chambered), reserve taken to 0 -> "no magazine to take,
+  reserve Clip2 is empty", the gun stuck at 1. New pack: the hand takes the magazine, seats it, 28.
+  Same after switching away mid-reload and back (Reload used to stop at BD22's reserve check).
+  Two parts, both in `fixes`: vreload's CanTakeMag counts RSR_Held_<gun>; the nine magazine guns'
+  Reload get a counted jump on their held rounds just before BD22's reserve check, landing where
+  that check lands (the Rifle's lands mid `TNT1 AAA 0`, which no label can name).
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
-- NEXT: F11 (R3 stranded rounds, Ruger semi-auto, sound names, owner calls, menu, alt fires);
+- NEXT: F11 (Ruger semi-auto, sound names, owner calls, menu, alt fires);
   flick/dual/melee in the rig; then the gated pk3.
 
 ## What this repo is

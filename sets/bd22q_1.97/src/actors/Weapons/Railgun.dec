@@ -609,6 +609,7 @@ Actor RailGun : BrutalWeapon
 		"####" "#" 0 A_Takeinventory("Reloading",1)
 		"####" "#" 0 A_JumpIfInventory("IsPlayingAsPurist", 1,"PuristWarning")
 		"####" "#" 0 A_JumpIfInventory("NoReloading", 1, "Ready")
+		"####" "#" 0 A_JumpIfInventory("RSR_Held_RailGun", 1, 4)	// posefix rsr F11 R3 (RSR_HeldGo): held rounds reload even on an empty reserve; lands where the next line does
 		"####" "#" 0 A_JumpIfInventory("AmmoCell",10,3)
 		"####" "#" 0 A_JumpIfInventory("ZoomHold", 1, "HoldAim")
 		Goto Ready

@@ -219,6 +219,8 @@ per-gun checklist below, in a headset, signed by the owner.
         * FOUND IN F10: the Flamethrower's `Goto Ready+6` landed a state early (our guard inside
           Ready). FIXED in patch_dec: every numeric jump / `Goto L+n` is checked against BD22's file.
         * Reload R4: End() clears netGrip but not netUse.
+        * Reload R3 (DONE, rig-proven): held rounds stranded at reserve 0 -- CanTakeMag counts them,
+          and the nine magazine guns' Reload jumps past BD22's reserve check on them.
       Still to do in F11 (behaviour, not one-liners): R1 grip-mode rack cannot be grabbed
       (STEADY_RANGE 50 vs handles at 8-15 cm); R3 dropped-mag rounds stranded at reserve 0; Ruger
       A_Refire bypasses semi-auto; the four unresolved sound names. Owner's call, not bugs:

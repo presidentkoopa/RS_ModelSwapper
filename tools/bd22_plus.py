@@ -4303,6 +4303,18 @@ def spine():
 # once, and it is skipped (not doubled) if its new text is already there, so the stage can run on
 # top of a finished build or at the end of a full one. Runs after every other stage, before sync.
 F11_FIXES = [
+    # R3, part 1: the rounds held aside from the magazine that came out (RSR_Held_<gun>) count as a
+    #    magazine to take. With the reserve at 0 the hand was refused and they were stranded until
+    #    ammo turned up: drop a part-full magazine (or leave the gun mid-reload) with the reserve
+    #    empty, and the gun could never be loaded again with the rounds it had.
+    ('R3: CanTakeMag counts held rounds', 'zscript/rsr/vreload.zs',
+     '\tbool CanTakeMag(PlayerPawn mo)\n\t{\n\t\tint i = gun;\n\t\tString res = RSR_Guns.Reserve(i);\n\t\tclass<Inventory> rc = res;\n\t\tif (rc && mo.CountInv(rc) <= 0)\n',
+     '\t// F11 R3: the rounds held aside when the magazine came out (RSR_Held_<gun>, given by the gun\'s\n'
+     '\t// RSR_Unload) -- they go back in when a magazine is home, so they are a magazine to take.\n'
+     '\tint HeldRounds(PlayerPawn mo)\n\t{\n\t\tif (!mo.player || !mo.player.ReadyWeapon)\n\t\t\treturn 0;\n'
+     '\t\tString hn = "RSR_Held_" .. mo.player.ReadyWeapon.GetClassName();\n\t\tclass<Inventory> hc = hn;\n'
+     '\t\treturn hc ? mo.CountInv(hc) : 0;\n\t}\n\n'
+     '\tbool CanTakeMag(PlayerPawn mo)\n\t{\n\t\tint i = gun;\n\t\tString res = RSR_Guns.Reserve(i);\n\t\tclass<Inventory> rc = res;\n\t\tif (rc && mo.CountInv(rc) <= 0 && HeldRounds(mo) <= 0)\n'),
     # 1. Dot scope: `out Vector3` aborts the VM on the first CALL ("REGT_ADDROF not implemented for
     #    vectors", qzd17.3 vmexec.h:828-830). Basis is reached from ModifyBobLayer3D through DotAt /
     #    EyeInHandFrame with no gate in 1.96b, so drawing the Railgun or the Ruger in Dot mode
@@ -4429,6 +4441,57 @@ def late():
     print(json.dumps(log, indent=1))
 
 
+# R3, part 2: the magazine guns whose Reload refuses on an empty reserve before it reaches ours
+# (BD22's `A_JumpIfInventory("<reserve>", n, 3)` / `Goto Ready`). Held rounds now get past it too.
+HELD_GUNS = {'Rifle': 'Rifle.dec', 'BrutalPistol': 'Pistol.dec', 'BrutalSMG': 'SubMachinegun.dec',
+             'MP40': 'Mp40.dec', 'AssaultShotgun': 'AssaultShotgun.dec', 'RailGun': 'Railgun.dec',
+             'Plasma_Gun': 'Plasma.dec', 'Sniper': 'Sniper.dec', 'Rocket_Launcher': 'RocketLauncher.dec'}
+
+
+def held_reload():
+    """R3, part 2: before each magazine gun's own reserve check in Reload, a jump on its held rounds
+    to the state that check jumps to (a new label there: a label is not a state, so no offset
+    moves; keep_offsets checks it). Idempotent."""
+    log = []
+    for cls, fn in HELD_GUNS.items():
+        rel = 'actors/Weapons/' + fn
+        p = OUT_SRC + rel
+        t = open(p, 'rb').read().decode('latin-1')
+        if 'RSR_HeldGo' in t:
+            log.append(dict(fix='R3 held rounds reload: ' + cls, file=rel, result='already applied')); continue
+        nl = '\r\n' if t.count('\r\n') == t.count('\n') else '\n'
+        lines = t.split(nl)
+        a, b = actor_span(lines, cls)
+        r = once(lines[a:b], lambda l: l.strip() == 'Reload:', cls + ' Reload') + a
+        e = next(i for i in range(r, b) if 'Goto RSR_Start' in lines[i])
+        code = dec_code(lines)
+        chk = [i for i in range(r, e) if re.search(r'A_JumpIfInventory\("[^"]+",\s*\d+,\s*3\)\s*$', code[i].strip())]
+        if len(chk) != 1:
+            raise SystemExit('R3 %s: expected one reserve check in Reload, found %d' % (cls, len(chk)))
+        c = chk[0]
+        refs, at, first = offset_targets(lines, cls)
+        tgt = [t_ for i_, k_, base, t_ in refs if i_ == c][0]
+        # The check lands on the 2nd frame of `TNT1 AAA 0` (Rifle), which no label can name, so the
+        # new line counts too: put just before the check, it lands where the check does with one more.
+        n = tgt - first[c] + 1
+        ind = re.match(r'\s*', lines[c]).group(0)
+        new = list(lines)
+        new.insert(c, ind + '"####" "#" 0 A_JumpIfInventory("RSR_Held_%s", 1, %d)\t// posefix rsr F11 R3 (RSR_HeldGo): '
+                   'held rounds reload even on an empty reserve; lands where the next line does' % (cls, n))
+        new, moved = keep_offsets(lines, new, cls)
+        if moved:
+            raise SystemExit('R3 %s: moved %s' % (cls, moved))
+        r2, at2, _ = offset_targets(new, cls)
+        mine = [t_ for i_, k_, base, t_ in r2 if i_ == c][0]
+        theirs = [t_ for i_, k_, base, t_ in r2 if i_ == c + 1][0]
+        assert at2[mine] == at2[theirs], (cls, at2[mine], at2[theirs])
+        tl = at[tgt][0]
+        open(p, 'wb').write(nl.join(new).encode('latin-1'))
+        log.append(dict(fix='R3 held rounds reload: ' + cls, file=rel, result='applied', check=lines[c].strip(),
+                        lands=lines[tl].strip()))
+    return log
+
+
 def fixes():
     """F11: apply F11_FIXES to the build (OUT_SRC). Exact-match, idempotent, logged."""
     log = []
@@ -4450,6 +4513,7 @@ def fixes():
             t = t.replace('\n', '\r\n')
         open(p, 'w', newline='').write(t)
         log.append(dict(fix=why, file=rel, result='applied'))
+    log += held_reload()
     json.dump(log, open(OUT + 'fixes_apply.json', 'w'), indent=1)
     shutil.copy(OUT + 'fixes_apply.json', os.path.join(REPO, 'sets', 'bd22q_1.97', 'fixes_apply.json'))
     with open(OUT + '.generated', 'a') as f:

@@ -314,12 +314,23 @@ class RSR_State play
 		return -along, side, acos(c);
 	}
 
+	// F11 R3: the rounds held aside when the magazine came out (RSR_Held_<gun>, given by the gun's
+	// RSR_Unload) -- they go back in when a magazine is home, so they are a magazine to take.
+	int HeldRounds(PlayerPawn mo)
+	{
+		if (!mo.player || !mo.player.ReadyWeapon)
+			return 0;
+		String hn = "RSR_Held_" .. mo.player.ReadyWeapon.GetClassName();
+		class<Inventory> hc = hn;
+		return hc ? mo.CountInv(hc) : 0;
+	}
+
 	bool CanTakeMag(PlayerPawn mo)
 	{
 		int i = gun;
 		String res = RSR_Guns.Reserve(i);
 		class<Inventory> rc = res;
-		if (rc && mo.CountInv(rc) <= 0)
+		if (rc && mo.CountInv(rc) <= 0 && HeldRounds(mo) <= 0)
 		{
 			if (RSR.Debug(mo.player))
 				Console.Printf("rsr t%d gun %d: no magazine to take, reserve %s is empty",
