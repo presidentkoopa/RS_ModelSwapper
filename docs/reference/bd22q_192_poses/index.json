@@ -151,9 +151,19 @@
   "class": "Sniper",
   "label": "Sniper Rifle",
   "slot": 4,
-  "support_shown": false,
-  "notes": "1.92 has a hand row for it, but 1.92 switches the sniper off for good (zscript/nosniper/nosniper.zs: its model is gone; a given Sniper is swapped for the Rifle the next tic, even with rsq_extra_weapons 1). Not renderable.; not rendered",
-  "json": "Sniper.json"
+  "side": "Sniper_side.jpg",
+  "eye": "Sniper_eye.jpg",
+  "top": "Sniper_top.jpg",
+  "bottom": "Sniper_bottom.jpg",
+  "front34": "Sniper_front34.jpg",
+  "grip": "Sniper_grip.jpg",
+  "support": "Sniper_support.jpg",
+  "scope_rest": "Sniper_scope_rest.jpg",
+  "scope_eye": "Sniper_scope_eye.jpg",
+  "support_shown": true,
+  "notes": "current main (not 1.92): the Ruger (models/bd/XM21/XM21.md3), Real scope on (rsq_scope_sniper 1). scope_rest: the ocular from behind, head 30+ cm back, plain glass skin; scope_eye: head at the eyepiece, RSQ_ScopeReal gate on (probe GRU skinOn 1), the glass wears camera texture RSQSCOPE (6x, fov 15).; seen 2026-10-26: support hand open, fingers spread under the forend, not closed on it; scope_rest glass shows the plain lens skin (blue disc); scope_eye glass shows the camera picture (the far green room and stairs, magnified), gate skinOn 1 while that view was on; hands are below the frame in scope_eye (head on the bore); scope_eye sets vr_ipd 0 so the dumped left eye sits on the bore",
+  "json": "Sniper.json",
+  "source": "current main 70b0574d7b6c6744d2379ecf6e9d41fc3bfb692b (1.92 had no Sniper)"
  },
  {
   "class": "Rifle",
