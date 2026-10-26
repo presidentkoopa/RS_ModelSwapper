@@ -147,3 +147,34 @@ State of the repos when this was written:
 4. Grips (8, 9, 14), then the F10 in-hand poses (10) with the hand-fitting skill.
 5. Melee (16, 17), sounds (18, 19), casings (20), scope (21).
 6. Publish to RS_Brutal22WeaponsQ only after the owner's headset pass on a test build.
+
+## PROGRESS after this doc was written (2026-10-26, same session) -- newest last
+- `e752cef` tools/rig: the rig scripts, probe, frame-dump glue, ini and build notes are IN THE REPO
+  now (tools/rig/README.md). `cmp2.py <pkA> <pkB> <Gun,...> <tag> [pose]` = one run per gun, side by side.
+- Rig renders, 1.92 vs now, recoil removed: Pistol, Plasma, BFG and SSG hold poses are the SAME at
+  rest. The "hands off" was the gun moving (recoil), not the hand data. Items 6/7/11: retest in the
+  headset on the next build before changing hand data.
+- `3360579` item 8/9: chainsaw hand 2 cm left (x -2: +x moved it right on screen), M32 hand 2 cm
+  forward (z -2). `GRIP_NUDGES` in bd22_plus.py, applied in `fixes`.
+- `e1c9a57` items 16/17: the axe and sword cut on a DOWN or SIDE swing only (no cut if the blade rises
+  more than ~9 degrees) and need 1.5x the swing speed. Two-handed: the engine REFUSES scripts
+  changing `vr_two_handed_weapons` ("outside of menu code"), so per-weapon disabling is impossible on
+  stock 17.3. It is a menu row now, "Two-Handed Steadying"; with it OFF, holding the off grip
+  within 50 cm of the axe or sword gives the two-handed pose and support hand (`RSVR_MeleeTwo`,
+  `RSVR_VRHand.TwoHands`) while one controller drives it (rig: meleeTwo/axeTwo 1 on grip). Guns lose
+  steadying too while it is off -- the owner's trade-off to judge.
+- `f16df01` item 12: the Minigun box is 100 (owner). At 200 it equalled BD22's Clip2 cap, so it was
+  always as full as the reserve and reload never started. **The same flaw remains, NOT changed, for
+  the owner to decide:** MG42 drum 200 vs Clip2 200, and the M32 cylinder 6 vs AmmoM202 max 4 (it
+  can never be filled past the reserve, so a reload never adds anything). A counter is only a real
+  magazine when its capacity is below the reserve's max.
+- `41d1c3b` item 14: the Machinegun's launcher numbers and its hand fit were measured WITHOUT the
+  gun's ZOffset -5, so the 40 mm round, latch, load point and hands were 5 cm high. Fixed in
+  bd22_mg.py; the rig render shows the gun hand moving down onto the pistol grip.
+- `f80df0f` (part of item 11): the MG42, Flamethrower and Unmaker reload model blocks were at ZOffset
+  0 while the gun sits at -5, so the gun jumped 5 cm when their reload started. Now -5; their
+  card-measured points are shifted, not re-measured. All three reload in the rig.
+- STILL OPEN: 10 (F10 in-hand poses, never hand-fitted), 13/15 (Machinegun box and M32 in the headset
+  -- 15 is likely the 6-vs-4 capacity above), 18 (bang on map load), 19 (BFG sounds after A4),
+  20 (voxel shells), 21 (Ruger scope default), and NO new build has been published to
+  RS_Brutal22WeaponsQ or sent to the owner since 76c9a2d.
