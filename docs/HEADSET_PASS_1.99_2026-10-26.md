@@ -126,17 +126,12 @@ State of the repos when this was written:
 - BFG and BFG10k: no reload.
 - Minigun: carve the block under the gun; a bigger in-hand ammo box later (not built).
 
-## D. Tooling that exists for this (cloud session `/home/claude`, NOT in any repo)
-- `rigtest/` + `rig2/`: the owner's quest_test_rig (real QZD 17.3 OpenXR path, poses from cvars).
-  `rig.py run()`. Set `B22_NOPROBE=1` to run old packs, whose class names the probe doesn't know.
-- **Frame dumps (new, this session):** `rig2/glue/qz_linux_glue.cpp` writes the left eye every N
-  frames when `QZ_DUMP_EVERY=N QZ_DUMP_DIR=<dir>` are set (PPM). Use `QZ_RES=480`.
-  `rigtest/shots.py shoot()` wraps it. The gun hand pose `qz_rhand "0.0 1.68 -0.40 20 -70 0"`
-  shows the held gun and hand side-on, in front of the eye. **Use this to compare 1.92
-  (`gate_out/BD22Q_192.pk3`, built from tag 1.92) against current, gun by gun, before changing
-  anything.** It was about to be run when the session ended.
-- `rigtest/holdtest3.py` (fire rates), `spintest.py` (gun offset, flashes), `mags.py` (reloads;
-  use `with_pouch`), `probe/` (`B22 W/SHOT/PSP/LOCK/AXE` lines).
+## D. Tooling: IN THE REPO, `tools/rig/` (read its README.md)
+- `sh tools/rig/setup.sh` builds the real engine rig from scratch (pinned engine 9afc750 = 4.14.3,
+  the owner's QZD17 version) plus the probe, the 1.92 baseline pack and the current pack.
+- `cd tools/rig && python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 <Gun,...> <tag>`:
+  each gun held, 1.92 left, now right. **Compare against 1.92 before changing anything.**
+- Game data (doom2, brutal22test6, BD_VoxelPack) is the owner's, not in git; see the README.
 - Load order is always doom2 -> brutal22test6 -> BD_VoxelPack -> pack (CLAUDE.md rule 5).
 
 ## E. Suggested order

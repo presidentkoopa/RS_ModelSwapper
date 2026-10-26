@@ -1,45 +1,63 @@
-# tools/rig: testing bd22q in the owner's quest_test_rig (TEST ONLY, never ships)
+# tools/rig: testing bd22q in the real engine (TEST ONLY, never ships)
 
-The real QuestZDoom 17.3 engine, built for Linux, on the OpenXR path, with controller poses set
-from cvars. It ran every check in the 1.99 work. These are the scripts and the rig changes, as
-used in the cloud session of 2026-10-25/26.
+The real QuestZDoom engine (emawind84/gzdoom 4.14.3, the owner's QZD17 version), built for Linux,
+on the OpenXR code path, with the headset and both controllers posed from cvars. It renders the
+left eye to image files, so you can SEE a held gun and its hands. Every check in the 1.99 work
+ran here: hand fits, reloads, fire rates, spin, casings, the axe lock-on.
 
-- `rigtest/` + `rig2/`: the owner's quest_test_rig (real QZD 17.3 OpenXR path, poses from cvars).
-  `rig.py run()`. Set `B22_NOPROBE=1` to run old packs, whose class names the probe doesn't know.
-- **Frame dumps (new, this session):** `rig2/glue/qz_linux_glue.cpp` writes the left eye every N
-  frames when `QZ_DUMP_EVERY=N QZ_DUMP_DIR=<dir>` are set (PPM). Use `QZ_RES=480`.
-  `rigtest/shots.py shoot()` wraps it. The gun hand pose `qz_rhand "0.0 1.68 -0.40 20 -70 0"`
-  shows the held gun and hand side-on, in front of the eye. **Use this to compare 1.92
-  (`gate_out/BD22Q_192.pk3`, built from tag 1.92) against current, gun by gun, before changing
-  anything.**
-- `rigtest/holdtest3.py` (fire rates), `spintest.py` (gun offset, flashes), `mags.py` (reloads; use
-  `with_pouch`), `probe/` (`B22 W/SHOT/PSP/LOCK/AXE` lines).
-- Load order is always doom2 -> brutal22test6 -> BD_VoxelPack -> pack (CLAUDE.md rule 5).
+## Start here (one command)
+```
+sh tools/rig/setup.sh          # ~20-40 min the first time; everything lands in tools/rig/build/
+cd tools/rig
+python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 Pistol,PlasmaGun t1
+#  -> build/shots/cmp2_t1.png : each gun held, 1.92 on the left, the depot's current set on the right
+```
+`setup.sh` clones the engine and the Android wrapper at the pinned commits, applies the test-only
+sound log, builds `build/rig/qzdoom`, and zips `build/probe.pk3`, `build/upstream.pk3`,
+`build/BD22Q_now.pk3` (this depot's `sets/bd22q_1.97/src`) and `build/BD22Q_192.pk3` (tag 1.92 of
+RS_Brutal22WeaponsQ, the owner's baseline). Re-run it after changing the set: it only rebuilds what
+is missing, and always re-zips BD22Q_now.
 
-## What is here, and where it lived in the session
-| here | session path | what |
-|---|---|---|
-| `rig.py` | `rigtest/rig.py` | `run(name, script, secs, extra)`: one engine run, load order + probe, logs to `rigtest/logs/`. Env: `B22_PK3`, `B22_RIG`, `B22_NOPROBE`, `QZ_RES` |
-| `shots.py`, `cmp.py` | `rigtest/` | frame dumps; `cmp.py <pk3> <Gun,Gun,...> <tag>` renders each gun held, 1.92 left, given pk3 right |
-| `mags.py` | `rigtest/` | magazine reloads driven by the off hand (`with_pouch` for guns whose well is near the rest pose) |
-| `spintest.py` | `rigtest/` | walk / fire / reload, logs the gun layer's psp.x/psp.y and flash count |
-| `holdtest3.py` | `rigtest/` | trigger held 140 tics, one gun per run, QZD as is vs upstream attackdown |
-| `upstream_zscript.txt` + `upstream_MAPINFO.txt` | `rigtest/upstream/` | zip as `upstream.pk3`: emulates upstream GZDoom's attackdown (for holdtest3) |
-| `handrot.py`, `pump.py`, `brk.py`, `m203.py`, `grip.py` | `rigtest/` | off-hand pose maths and the pump / break / M203 / grip-mode drivers |
-| `probe/` | `rigtest/probe/` | zip as `probe.pk3`: the B22 log lines (tables, state, shots, psp, axe lock) |
-| `glue/qz_linux_glue.cpp` | `rig2/glue/` | the rig's OpenXR stand-in, WITH the frame-dump patch |
-| `config/qzdoom.ini` | `rig2/config/` | the test ini (`playerclass=$TAGBD_CLASS_RIFLE`; NOTE it carries `rsvr_axe_hold=16`, the old default) |
-| `s_sound_log.patch` | rig engine `src/common/audio/sound/s_sound.cpp` | TEST ONLY: `QZ_SNDLOG=1` prints `QZSND <tic> <sound> ch vol src <class>` for every sound start, even under -nosound (for item 18, the bang on map load). Apply to the rig's engine tree, relink |
-| `Makefile.rig`, `build.sh.rig` | `rig2/` | the rig build. Relink after a glue change: `make QGZ=<gzdoom questzdoom> JNI=<questzdoom>/Projects/Android/jni DEPS=<rig2>/deps ZLIB=<rig2>/deps/zmusic-install/lib/` |
+**Game data is the owner's and is not in git:** doom2.wad, brutal22test6.pk3, BD_VoxelPack.pk3.
+`rig.py` looks in `/mnt/user-data/uploads` (where the cloud session had them) or in
+`B22_IWAD` / `B22_BD22` / `B22_VOX`. Ask the owner to attach them if they are missing.
+Needs: git, cmake, make, clang or gcc, zip, python3 + Pillow, Mesa GLES/EGL, OpenAL.
+
+## Posing the hands
+- `qz_hmd "x y z pitch yaw roll"` places the head; `qz_rhand` / `qz_lhand` place the controllers
+  (metres, degrees, stage space). `qz_rhand "0.0 1.68 -0.40 20 -70 0"` shows the held gun side-on
+  in front of the eye; `"0.0 1.50 -0.30 30 0 0"` from behind.
+- `rig.lpose(F, L, U)` / `engine/pose.py F L U`: an off-hand point given in the gun's frame (cm)
+  -> the `qz_lhand` value. `handrot.py` has the rotation maths for the off hand.
+- Frame dumps: `QZ_DUMP_EVERY=N QZ_DUMP_DIR=<dir>` with `QZ_RES=480`; `shots.shoot()` wraps it.
+- Sound log: `QZ_SNDLOG=1` prints `QZSND <tic> <sound> ch vol src <class>` for every sound start.
+
+## What is here
+| file | what |
+|---|---|
+| `setup.sh` | the one command above. Pins: engine `9afc750`, wrapper `a85c819` |
+| `engine/` | the rig build: `build.sh` + `Makefile`, `glue/qz_linux_glue.cpp` (OpenXR stand-in, poses from cvars, frame dump), `shim/` (NDK/JNI header stand-ins), `config/qzdoom.ini` (test ini), `pose.py`, `qz` (launcher) |
+| `s_sound_log.patch` | test-only `QZ_SNDLOG` in the engine's StartSound |
+| `rig.py` | `run(name, script, secs, extra)`: one engine run on the load order + probe; logs to `build/logs/`. Env: `B22_PK3`, `B22_RIG`, `B22_NOPROBE`, `QZ_RES` |
+| `shots.py`, `cmp.py`, `cmp2.py` | frame dumps; `cmp2.py <pkA> <pkB> <Gun,...> <tag> [pose]` = A left, B right |
+| `mags.py` | magazine reloads driven by the off hand (`with_pouch` for wells near the rest pose) |
+| `pump.py`, `brk.py`, `m203.py`, `grip.py` | pump, break-open, M203 and grip-mode drivers |
+| `spintest.py` | walk / fire / reload, logs psp.x/psp.y and flash count |
+| `holdtest3.py` | trigger held 140 tics per gun, QZD as is vs upstream attackdown (`build/upstream.pk3`) |
+| `probe/` | the `B22 ...` log lines (reload tables, state, shots, psp, casings, axe lock) |
+
+Load order is always doom2 -> brutal22test6 -> BD_VoxelPack -> pack (CLAUDE.md rule 5).
+BD_VoxelPack prints four `voxeldef.txt` script errors on its own; they are not ours.
 
 ## Traps (each cost a run)
-- `-warp 1`: BD22's title map swallows `+map` and its AimingCamera stops VR attaching. `QZ_RES=200`
-  for speed, 480 for pictures.
-- `playerclass=$TAGBD_CLASS_RIFLE`, or you get a random class (Purist has no reload).
+- `-warp 1` is required: BD22's title map swallows `+map` and its AimingCamera stops VR attaching.
+  `QZ_RES=200` for speed, 480 for pictures.
+- `playerclass=$TAGBD_CLASS_RIFLE` (in the ini), or you get a random class (Purist has no reload).
 - `rsq_extra_weapons 1` for the hidden guns. `give <class>` explicitly; `give all` gives Purist guns.
 - The off hand is the gun hand mirrored in L; side wells need a 180 degree yaw (`mags.at`).
 - `CanTakeMag` refuses a hand within 20 cm of the magazine (`POUCH_MIN`): reach to a pouch first.
 - Give a gun ~150 tics to finish its select animation before testing it.
-- Never chain pipeline stages with `;` after a failing stage (a failed apply + sync emptied the
-  set once). Use `set -o pipefail` and `&&`.
+- `wait` inside an alias does not fire; runs end by `timeout`.
 - The engine's `screenshot` command returns garbage in VR mode; use the frame dump.
+- `B22_NOPROBE=1` for old packs whose class names the probe does not know.
+- Never chain pipeline stages with `;` after a failing stage. Use `set -o pipefail` and `&&`.
