@@ -38,3 +38,14 @@ addmenukey "Frame Trace"      mstrace
 alias msdebug "netevent rs-fm-debug; condump E:/DOOMWork/RS_ModelSwapper/msdebug.txt"
 alias mstrace "netevent rs-fm-trace"
 alias mssave  "condump E:/DOOMWork/RS_ModelSwapper/msdebug.txt"
+
+// ---------------------------------------------------------------------
+// THE OFF-HAND FIST (owner, first headset pass 2026-10-26, finding 2: "the off hand should be the
+// [BD22] Offhand Fist all the time unless we move a weapon to the offhand"). RSQ_Hands -- the fists
+// and the hands that hold the magazine, shell and round -- is the off hand by default. After a gun is
+// moved there (switchhand 1), slot 1 in the OFF hand (weapnext 1 / weapprev 1) brings the fist back,
+// exactly as BD22Q 1.5+ does (its KEYCONF.rsq). RSQ_Hands is an off-hand weapon (OFFHANDWEAPON,
+// NOHANDSWITCH): it can never be selected into the main hand. No weaponsection: ModelSwapper loads
+// on any mod, and on BD22 the line lands in its "Brutal_Doom" section (rig, 2026-10-26).
+// ---------------------------------------------------------------------
+addslotdefault 1 RSQ_Hands

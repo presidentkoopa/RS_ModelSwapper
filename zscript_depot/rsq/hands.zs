@@ -232,13 +232,17 @@ class RSQ_Hands : Weapon
 		// weapon to the offhand"). A mod can put its OWN off-hand melee in the slot (a knife), and
 		// these hands -- BD22Q's Fist / Offhand Fist, and the only caller the engine draws the
 		// reload's magazine, shell or round on (vreload / rsr_pump / rsr_break SetPart) -- were
-		// only installed when the slot was EMPTY: never, on that mod. Now they replace anything
-		// in the off hand that is not a weapon the player moved there: not a
-		// gun (a weapon with a Reload state). Options: Off Hand (ms_off_fist).
+		// only installed when the slot was EMPTY: never, on that mod. Now they replace the mod's own
+		// off-hand weapon, never one the player moved there (below). Options: Off Hand (ms_off_fist).
 		bool fistsWanted = RSQ.PlayerInt(mo, 'ms_off_fist', 1) != 0;
-		// a gun the player moved to the off hand has a Reload state (RSQ_Flick.IsGun's test; dual.zs
-		// and flick.zs are not in this build); a mod's off-hand knife or fist has none
-		bool takeOff = !off || fistsWanted && off != h && !(off is 'RSQ_Hands') && !off.FindState("Reload");
+		// 2026-10-26: WHICH off-hand weapon is the mod's own. It used to be "no Reload state", but a
+		// vanilla Pistol or Shotgun has none either: on doom2 a pistol the player moved to the off hand
+		// (switchhand 1) was taken back 2 tics later (rig). A mod's own off-hand item is off-hand BY ITS
+		// DEFAULTS (+WEAPON.OFFHANDWEAPON); a weapon the player moved there carries the flag on the
+		// instance only (PlayerPawn.SwitchWeaponHand sets weap.bOffhandWeapon). So: take back what the
+		// mod declares off-hand, never what the player put there.
+		bool modsOwn = off && GetDefaultByType(off.GetClass()).bOffhandWeapon;
+		bool takeOff = !off || fistsWanted && off != h && !(off is 'RSQ_Hands') && modsOwn;
 		if (h && takeOff && p.PendingWeapon == WP_NOCHANGE)
 		{
 			// a mod that puts its knife straight back every tic would make this a loop: stop
