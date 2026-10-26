@@ -181,6 +181,10 @@ that is not on the plan.**
   given to every player by alts.zs, keeps player.attackdown set while the trigger stays down, as
   upstream does. Rig, held 140 tics: Pistol 13, pump Shotgun 1, M32 1, Dual Pistols 28 (= desktop);
   Rifle, Minigun, Ruger, SSG unchanged. The pistol semi-auto option (rsa_pistol_semi) stays.
+- PUBLISHED (owner's instruction, 2026-10-26): presidentkoopa/RS_Brutal22WeaponsQ main ca47d85 --
+  src/ replaced by sets/bd22q_1.97/src @ f358eb6, VERSION 1.99, build.py stores .md3 as LZMA, README
+  rewritten for 1.99. Its build equals the rig-tested pack (44 PNGs differ only in encoding, pixel-
+  identical). No tag or release made; dev branch untouched.
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
 - NEXT: F11 (owner calls: NOAUTOFIRE on all guns, off-hand punch vs rsq_punch, free charge default,
   PuristSniper model, RQLK ring art -- no lump in pack or BD22, so the ring is invisible);
