@@ -23,7 +23,7 @@ import os, re, sys, shutil, subprocess, zipfile, glob
 
 H = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(H)
-IWAD = '/usr/share/games/doom/freedoom2.wad'
+IWAD = os.environ.get('MS_IWAD', '/usr/share/games/doom/freedoom2.wad')
 # TEST VIEW ONLY. Models placed for a VR controller sit at the eye on a flat screen and are
 # not drawn at all (BD22's guns: Offset 0). vr_3dweaponOffset is applied to EVERY HUD model,
 # every layer alike (r_data/models.cpp, RenderHUDModel), so it moves the camera back without
@@ -38,7 +38,7 @@ user string qzt_rhand = "";
 user float qzt_lgrip = -1;
 user float qzt_ltrigger = -1;
 '''
-RIG = os.environ.get('QZ_RIG', '/home/claude/qzlinux17')   # Desktop/Quest_Weapons_Kit quest_test_rig, built
+RIG = os.environ.get('QZ_RIG', os.path.join(H, 'qz_rig', 'bin'))   # QuestZDoom 17.3 rig, prebuilt in this repo (gate/qz_rig)
 
 CVARS = '''user int rsrtest_script = 0;
 user bool rsr_test_offdraw = true;
@@ -208,6 +208,11 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     so.close()
     stdout = open(os.path.join(out, 'stdout.txt'), encoding='latin-1').read()
     text = (open(log, encoding='latin-1').read() if os.path.exists(log) else '') + stdout
+    # --vr: the launcher's version guard (gate/qz_rig/bin/qz) prints this, or exits 3 with WRONG ENGINE
+    if vr and 'qz: engine OK' not in stdout:
+        print('donor %s  exit %s\n  rig engine         FAIL (no "qz: engine OK" from %s/qz: not QuestZDoom 17.3)' % (donor, rc, RIG))
+        print('FAIL -- log', log)
+        return 1
     if brk:
         checks = [
             ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
