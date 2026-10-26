@@ -330,6 +330,14 @@ def patch_dec(cls, p, text, cap):
         assert lines[k - 1].strip() == 'ReadyDry:', lines[k - 1]
         del lines[k]
         a, b = actor_span(lines, cls)
+    # 1b. F11: the M32's own "Reload:" is a stub (M202 A 0 / Goto Ready3). Left in, it is the LATER
+    # of two Reload labels, DECORATE takes the later one, and the reload key never reaches ours: the
+    # owner's quest_test_rig pressed reload with the cylinder at 1 of 6 and nothing happened.
+    if cls == 'IncendiaryLauncher':
+        k = once(lines[a:b], lambda l: l.strip() == 'Reload:', 'IncendiaryLauncher Reload stub') + a
+        assert lines[k + 1].strip() == 'M202 A 0' and lines[k + 2].strip() == 'Goto Ready3', lines[k:k + 3]
+        del lines[k:k + 3]
+        a, b = actor_span(lines, cls)
     # 2. the Ready hook: the reload key (BD22's ACS gives "Reloading") after the first A_WeaponReady of Ready
     r = once(lines[a:b], lambda l: l.strip() in ('Ready:',), cls + ' Ready label') + a
     w = next(i for i in range(r, b) if 'A_WeaponReady' in lines[i])
