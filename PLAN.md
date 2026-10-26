@@ -150,7 +150,12 @@ per-gun checklist below, in a headset, signed by the owner.
           -3.7), and its own "GrenadeLauncher/Open" sound. I had counted the reload set from
           `rsr_guns.bd.zs` alone, which is the MAGAZINE table; the pump and break guns live in
           `rsr_pump_guns.zs` and `rsb_guns.zs`. Count all three or the answer is wrong.
-        * **Machinegun** -- card BD_Machinegun, 100, bd_40mm, needs a feed part. Its `Reload:`
+        * **Machinegun: BUILT 2026-10-25 (F10, `late` stage).** Box carved by position out of our own
+          M249_lowpoly: 31 islands, 415 vertices (REMA's magazine count exactly, without loading it),
+          rigid with the body in all 36 frames; owner confirmed the part on a render. Out straight down,
+          mouth 13.11 cm, capacity 100, a counter over Clip2 like the MG42's drum. Rig: full reload,
+          counter 100 -> 96 firing -> 0 box out -> 100 seated. The original note follows.
+          Card BD_Machinegun, 100, bd_40mm, needs a feed part. Its `Reload:`
           jumps straight to `Ready` under `RSM_VR` (`Machinegun.dec:229`), so the hand reload is a
           no-op today; the underbarrel 40mm is hand-loaded and stays so (`rsr_m203.zs`). The card
           carries a note saying a magazine swap "should never have had" -- that was a REMA
