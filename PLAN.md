@@ -162,6 +162,12 @@ per-gun checklist below, in a headset, signed by the owner.
           decision and the owner has overruled it. The box DOES separate: our `M249_lowpoly` is
           11996 verts, which is REMA's `body` 11581 + `magazine` 415 exactly. Find it in our own
           mesh, not by loading theirs.
+      OWNER'S CALLS, 2026-10-25 21:3x, on renders of our own meshes (f10_six_guns.png):
+        - Minigun: carve the blue block hanging under the body; later the block in the HAND can be
+          a bigger ammo-box model ("clever illusion"), the gun keeps its own block.
+        - BFG, BFG10k: NO RELOAD ("keep these simple"). Closed by the owner.
+        - Hellish: the rear drum ring.
+        - Devastator: its own `loading_bay` surface. Nuker: its green top-front block (surface 3).
         * **Minigun** -- card BD_Minigun, 200, bd_762, needs a feed part. The card already has
           `part barrels` (hinge) and `part forend`, so the gun is partly described. Its surface
           names in our mesh are Runko / Runko / Pipe / Runko / Trigger / Grip, which do not match
