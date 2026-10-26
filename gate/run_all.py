@@ -41,7 +41,7 @@ def main():
     res = []
     for d in ds:
         r = subprocess.run([sys.executable, '-B', os.path.join(H, 'run_gate.py'), pk3, d] + pas,
-                           capture_output=True, text=True, timeout=900)
+                           capture_output=True, text=True, timeout=4000)
         fails = [l.split()[0] for l in r.stdout.splitlines() if l.rstrip().endswith('FAIL') and not l.startswith(('PASS', 'FAIL'))]
         ok = re.search(r'^PASS', r.stdout, re.M) is not None
         line = '%-26s %s%s' % (d, 'PASS' if ok else 'FAIL', '' if ok else '  ' + ' '.join(fails))

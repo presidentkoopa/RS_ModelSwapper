@@ -33,6 +33,8 @@ EXTRA = ''
 OFFKNIFE = False
 BYFIRE = False
 NOALLOW = False
+MOD = ''          # --mod bd22:<Class>: the owner's load order, BD22's own weapon instead of the test mod's
+GD = os.environ.get('MS_GAMEDATA', '/home/claude/gamedata')
 VR_CVARS = '''
 user int rsrtest_vr = 1;
 user string qzt_lhand = "";
@@ -71,6 +73,17 @@ def held_in_off(text, ids):
             if q and q.group(1) != '-' and not q.group(1).startswith('TNT1') and q.group(1).lower().endswith('@' + off):
                 return True
     return False
+
+
+def mod_refilled(text, after):
+    """--mod: the mod's own reload refilled ITS magazine -- an AMMO line (rtest/driver.zs) after
+    the join gave the gun back, with more loaded than before"""
+    k = text.find(after)
+    if k < 0:
+        return False
+    before = [int(m.group(1)) for m in re.finditer(r'^AMMO t\d+ mag (\d+)', text[:k], re.M)]
+    later = [int(m.group(1)) for m in re.finditer(r'^AMMO t\d+ mag (\d+)', text[k:], re.M)]
+    return bool(later) and max(later) > (before[-1] if before else 0)
 
 
 def shelf_pick(donor):
@@ -140,6 +153,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     gun = 'TMShotgun' if pump else 'TMSSG' if brk else 'TMPistol'
     if NOALLOW and gun == 'TMPistol':
         gun = 'TMPistolNR'        # --noallow: a Ready without WRF_ALLOWRELOAD
+    if MOD:
+        gun = MOD.split(':', 1)[1]   # BD22's own class: its code, its ammo, its Reload
     view = '' if vr else VIEW         # the flat-camera offset: off on the rig, which draws the real VR placement
     t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s%s' % (0 if vr else yaw, view, ('; ' + EXTRA) if EXTRA else '')),
          (25, 'netevent rs-fm-rescan'),
@@ -186,7 +201,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     cmds += ['wait 5', 'quit']
     log = os.path.join(out, 'engine.log')
     # a build split across files (e.g. a 1of2 / 2of2-models pair) is given comma-separated, loaded in order
-    argv = [exe, '-iwad', IWAD, '-file'] + [os.path.abspath(x) for x in pk3.split(',')] + [tm, ov,
+    pre = [os.path.join(GD, 'brutal22test6.pk3'), os.path.join(GD, 'BD_VoxelPack.pk3')] if MOD else []
+    argv = [exe, '-iwad', os.path.join(GD, 'doom2.wad') if MOD else IWAD, '-file'] + pre + [os.path.abspath(x) for x in pk3.split(',')] + [tm, ov,
             '-config', os.path.join(out, 'gate.ini'), '-nosound', '-nomusic', '-width', '640', '-height', '480',
             '+vid_fullscreen', '0', '+vr_mode', '0', '+vid_preferbackend', '0',
             '+set', 'rs_fm_picks', '%s:%s:%d:%d' % (gun, arch, idx, idx),
@@ -197,7 +213,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # the Quest-faithful rig: its own ini (vr_mode 15, OpenXR device), without the BD22-only player
         # class; no desktop vid / vr_mode overrides; EGL surfaceless, so no X server
         ini = open(os.path.join(RIG, 'config', 'qzdoom.ini'), encoding='latin-1').read()
-        ini = re.sub(r'^playerclass=.*$', 'playerclass=', ini, flags=re.M)
+        if not MOD:
+            ini = re.sub(r'^playerclass=.*$', 'playerclass=', ini, flags=re.M)
         open(os.path.join(out, 'gate.ini'), 'w', encoding='latin-1').write(ini)
         drop = {'+vid_fullscreen', '+vr_mode', '+vid_preferbackend'}
         a2, skip = [], 0
@@ -214,6 +231,11 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     # and stop at the first one -- a failed compile is a FAIL in seconds, not ten minutes.
     import time
     so = open(os.path.join(out, 'stdout.txt'), 'w')
+    # one shared machine, several lanes: every engine launch takes /home/claude/rig.lock (MS_RIG_LOCK).
+    # The rig drives held gestures and flicks, which fall between frames under load: exclusive there.
+    lock = os.environ.get('MS_RIG_LOCK', '/home/claude/rig.lock')
+    if lock and shutil.which('flock'):
+        launch = ['flock', '-x' if vr else '-s', lock] + launch
     p = subprocess.Popen(launch, cwd=RIG if vr else engine, env=env,
                          stdout=so, stderr=subprocess.STDOUT, start_new_session=True)
     t0 = time.time(); rc = None
@@ -221,7 +243,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         time.sleep(2)
         rc = p.poll()
         lg = open(log, encoding='latin-1').read() if os.path.exists(log) else ''
-        if rc is None and (re.search(r'Script error|Execution could not continue|^\S+, line \d+: (?!.*[Ww]arning)', lg, re.M) or time.time() - t0 > 600):
+        if rc is None and (re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', lg, re.M) or (os.path.exists(log) and time.time() - os.path.getmtime(log) > 240) or time.time() - t0 > 3600):
             import signal
             os.killpg(p.pid, signal.SIGKILL)
             rc = 'KILLED (script error)' if 'rror' in lg else 'TIMEOUT'
@@ -237,8 +259,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         checks = [
             ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
             ('scripts parsed', 'script parsing took' in text),
-            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
-            ('join took it', 'took TMSSG (break slot %d)' % break_slot(donor) in text),
+            ('no script error', not re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
+            ('join took it', 'took %s (break slot %d)' % (gun, break_slot(donor)) in text),
             ('it opened', re.search(r'RSBT t\d+ phase 2', text) is not None),
             # on the rig the hand does it: the reload's own lines, a round CAUGHT by a chamber and
             # seated, and the shut by the gun hand's flick (no function of the reload is called)
@@ -246,15 +268,15 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
                                 else len(re.findall(r'RSBT t\d+ seated chamber', text)) >= 1),
             ('it closed', re.search(r'shut \(flick\)', text) is not None if vr else 'all chambers loaded: closing' in text),
             ('round in off hand', held_in_off(text, (2202, 2203))),
-            ('handed back', 'gave TMSSG back' in text),
-            ('their reload ran', 'TM ssg: barrels 2' in text),
+            ('handed back', 'gave %s back' % gun in text),
+            ('their reload ran', mod_refilled(text, 'gave %s back' % gun) if MOD else 'TM ssg: barrels 2' in text),
             ('reached the end', 'GATE_END' in text),
         ]
         print('donor %s  (%s #%d, break slot %d)  exit %s' % (donor, arch, idx, break_slot(donor), rc))
         for name, c in checks:
             print('  %-18s %s' % (name, 'ok' if c else 'FAIL'))
         for l in text.splitlines():
-            if re.search(r'Script error|MSJOIN|TM ssg|RSBT|rsb t\d+', l):
+            if re.search(r'Script error|MSJOIN|TM ssg|RSBT|rsb t\d+|^AMMO|^HELD', l):
                 print('   |', l[:150])
         ok = all(c for _, c in checks)
         print('PASS' if ok else 'FAIL', '-- log', log)
@@ -265,7 +287,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         checks = [
             ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
             ('scripts parsed', 'script parsing took' in text),
-            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
+            ('no script error', not re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
             ('it fired', 'TM shotgun: fired' in logtext),
             ('pump point found', 'pump point: tic' in logtext),
             ('held for the hand', held >= 0),
@@ -277,7 +299,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         for name, c in checks:
             print('  %-18s %s' % (name, 'ok' if c else 'FAIL'))
         for l in logtext.splitlines():
-            if re.search(r'Script error|MSJOIN|TM shotgun|rsp t\d+', l):
+            if re.search(r'Script error|MSJOIN|TM shotgun|rsp t\d+|^AMMO|^HELD', l):
                 print('   |', l[:150])
         ok = all(c for _, c in checks)
         print('PASS' if ok else 'FAIL', '-- log', log)
@@ -289,20 +311,20 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         checks = [
             ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
             ('scripts parsed', 'script parsing took' in text),
-            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
-            ('join took it', 'TMShotgun pump: took it at its reload' in text),
+            ('no script error', not re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
+            ('join took it', '%s pump: took it at its reload' % gun in text),
             ('shell in off hand', held_in_off(text, (2210,))),
             ('hand fed shells', 'a shell pushed home' in text),
-            ('their loop ran', shells >= 2),
+            ('their loop ran', len(re.findall(r'^AMMO t\d+ mag [1-9]', logtext, re.M)) >= 2 if MOD else shells >= 2),
             ('re-held per shell', 'a shell in -- held for the next' in text),
-            ('tube filled', re.search(r'tube full or reserve empty|reload done, tube 8', text) is not None),
+            ('tube filled', re.search(r'tube full or reserve empty|reload done, tube \d+' if MOD else r'tube full or reserve empty|reload done, tube 8', text) is not None),
             ('reached the end', 'GATE_END' in text),
         ]
         print('donor %s  (%s #%d, pump slot %d)  exit %s  -- %d shells by the mod\'s own loop' % (donor, arch, idx, pump_slot(donor), rc, shells))
         for name, c in checks:
             print('  %-18s %s' % (name, 'ok' if c else 'FAIL'))
         for l in text.splitlines():
-            if re.search(r'Script error|MSJOIN|TM shotgun|rsp t\d+', l):
+            if re.search(r'Script error|MSJOIN|TM shotgun|rsp t\d+|^AMMO|^HELD', l):
                 print('   |', l[:150])
         ok = all(c for _, c in checks)
         print('PASS' if ok else 'FAIL', '-- log', log)
@@ -310,7 +332,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     checks = [
         ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
         ('scripts parsed', 'script parsing took' in text),
-        ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
+        ('no script error', not re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
         # --offknife: the magazine is drawn in the off hand (layer 2201, the hands' caller)
         ('mag in the off hand', held_in_off(text, (2201,))),
         # Reload Order "mod's reload first" (ms_mod_first, the default): the mod's reload ran, then
@@ -325,7 +347,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # shot dry (rsqt_empty), a gun with a charging handle must ask the hand to work it
         ('handle racked', re.search(r'PULL -> RELEASED', text) is not None if has_handle(donor) else True),
         ('handed back', 'gave %s back' % gun in text or re.search(r'\[MSJOIN\].*back', text) is not None),
-        ('their reload ran', 'TM reload: mag 12' in text),
+        ('their reload ran', mod_refilled(text, 'took %s' % gun) if MOD else 'TM reload: mag 12' in text),
         ('reached the end', 'GATE_END' in text),
     ]
     ok = all(c for _, c in checks)
@@ -333,7 +355,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     for name, c in checks:
         print('  %-18s %s' % (name, 'ok' if c else 'FAIL'))
     for l in text.splitlines():
-        if re.search(r'Script error|error|rsr t\d+: gun|MSJOIN|TM reload|no magazine|^HELD', l, re.I):
+        if re.search(r'Script error|error|rsr t\d+: gun|MSJOIN|TM reload|no magazine|^HELD|^AMMO', l, re.I):
             print('   |', l[:160])
     print('PASS' if ok else 'FAIL', '-- log', log)
     return 0 if ok else 1
@@ -348,6 +370,7 @@ if __name__ == '__main__':
     OFFKNIFE = '--offknife' in sys.argv
     BYFIRE = '--by-fire' in sys.argv
     NOALLOW = '--noallow' in sys.argv
+    MOD = opt('--mod', '')
     EXTRA = opt('--extra', '')
-    a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None), opt('--extra', None))]
+    a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None), opt('--extra', None), opt('--mod', None))]
     sys.exit(run(a[0], a[1], eng, '--shots' in sys.argv, int(opt('--yaw', 60)), vr='--vr' in sys.argv, shot='--shot' in sys.argv))

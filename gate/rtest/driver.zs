@@ -8,6 +8,8 @@ class RSQT_Driver : EventHandler
 {
 	String was;
 	int settle;
+	class<Inventory> storeMag, storeRes;
+	int lastMag, lastRes;
 
 	static String S(Name n)
 	{
@@ -45,6 +47,19 @@ class RSQT_Driver : EventHandler
 			}
 		}
 
+		// AMMO lines: the gun's own two stores, printed when they change (the gate reads the mod's
+		// refill from these on a real mod, where no test-mod log line exists)
+		if (storeMag)
+		{
+			let a = mo.FindInventory(storeMag);
+			let r = storeRes ? mo.FindInventory(storeRes) : null;
+			int na = a ? a.Amount : 0, nr = r ? r.Amount : 0;
+			if (na != lastMag || nr != lastRes || Level.maptime < 2)
+				Console.Printf("AMMO t%d mag %d reserve %d", Level.maptime, na, nr);
+			lastMag = na;
+			lastRes = nr;
+		}
+
 		String want = S('rsqt_gun');
 		if (want == "" || want == was)
 			return;
@@ -69,22 +84,34 @@ class RSQT_Driver : EventHandler
 
 		// empty the magazine the gun itself names, which is the same thing the slide-lock path
 		// reads -- so "empty" here means exactly what the gun means by it
-		if (F('rsqt_empty', 0) > 0 && w.AmmoType1)
+		// Which store is the magazine is the weapon's own business: the smaller of its two (as
+		// RSR.WeaponStore reads it -- TM guns name it AmmoType1, BD22 names it AmmoType2)
+		class<Inventory> magT = w.AmmoType1, resT = w.AmmoType2;
+		if (magT && resT && GetDefaultByType(resT).MaxAmount < GetDefaultByType(magT).MaxAmount)
 		{
-			let a = mo.FindInventory(w.AmmoType1);
+			magT = w.AmmoType2;
+			resT = w.AmmoType1;
+		}
+		if (F('rsqt_empty', 0) > 0 && magT)
+		{
+			if (!mo.FindInventory(magT))
+				mo.GiveInventory(magT, 1);
+			let a = mo.FindInventory(magT);
 			if (a)
 				a.Amount = 0;
 		}
 		// and top up the reserve, or there is nothing to reload FROM
-		if (w.AmmoType2)
+		if (resT)
 		{
-			let r = mo.FindInventory(w.AmmoType2);
+			let r = mo.FindInventory(resT);
 			if (!r)
-				mo.GiveInventory(w.AmmoType2, 1);
-			r = mo.FindInventory(w.AmmoType2);
+				mo.GiveInventory(resT, 1);
+			r = mo.FindInventory(resT);
 			if (r)
 				r.Amount = r.MaxAmount;
 		}
+		storeMag = magT;
+		storeRes = resT;
 
 		Console.Printf("RSQT gun=%s mag=%s(%d) reserve=%s(%d)", want,
 			w.AmmoType1 ? w.AmmoType1.GetClassName() : 'none',
