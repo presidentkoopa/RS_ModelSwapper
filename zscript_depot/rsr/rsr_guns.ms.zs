@@ -2872,14 +2872,14 @@ class RSR_Guns abstract
 		case 29:	return "";
 		case 30:	return "";
 		case 31:	return "RSR_Charge";
-		case 32:	return "RifleReloadToken";
+		case 32:	return "RSR_Charge";
 		case 33:	return "RSR_Charge";
-		case 34:	return "MP40ReloadToken";
-		case 35:	return "ASGReloadToken";
+		case 34:	return "RSR_Charge";
+		case 35:	return "RSR_Charge";
 		case 36:	return "";
 		case 37:	return "";
 		case 38:	return "";
-		case 39:	return "SniperReloadToken";
+		case 39:	return "RSR_Charge";
 		case 40:	return "";
 		case 41:	return "";
 		case 42:	return "";

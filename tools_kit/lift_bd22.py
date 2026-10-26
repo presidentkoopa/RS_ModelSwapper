@@ -32,6 +32,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 from lift_common import read, write, bd22_blocks, frames_of, append_rows, add_slot_for_donor, count_of, array_len, insert_after_array_head, md3_frames
 import rsr_table as T
+import lift_common as L
 
 # BD22 class -> (donor suffix, shelf archetype, display name)
 GUNS = {
@@ -292,7 +293,7 @@ def main(src, which):
             continue
         # ---- reload table row
         n_rsr += 1
-        ov = dict(MagAmmo='""', NoMag='"RSR_NoMag_%s"' % d, Reserve='""', ReloadToken='""',
+        ov = dict(MagAmmo='""', NoMag='"RSR_NoMag_%s"' % d, Reserve='""', ReloadToken='""', ChargeToken='"RSR_Charge"',
                   ReadySprites='"%s A"' % anchor,
                   SndOut='"%s"' % sndname(g, 'magout'), SndIn='"%s"' % sndname(g, 'magin'),
                   SndBack='"%s"' % sndname(g, 'slideback') if FOLEY.get(g, (0, 0, 0, 0))[2] else '""',
@@ -358,6 +359,27 @@ def shelf_anchor(arch):
     m = re.search(r'"%s\|MS_\w+\|(\w{4})\|' % re.escape(arch), t)
     return m.group(1) if m else ANCHOR_DEFAULT
 
+
+def charge_tokens(dry=False):
+    """Every reload row whose charge token is one of the source set's own item names (BD22's
+    RifleReloadToken, MP40ReloadToken, ASGReloadToken, SniperReloadToken): ModelSwapper ships no
+    such class, so the reload could never ask for the handle (ChargeRule 1 needs the token).
+    The join gives RSR_Charge when the mod's gun ran dry; the row is pointed at it. The lift sets
+    it for new rows; this fixes rows lifted before (python -B tools_kit/lift_bd22.py --charge-tokens)."""
+    p = os.path.join(ROOT, 'zscript_depot/rsr/rsr_guns.ms.zs')
+    rsr = open(p).read()
+    for n in range(1, L.count_of(rsr) + 1):
+        tok = L.read_row(rsr, n).get('ChargeToken')
+        if tok and tok[1] not in ('""', '"RSR_Charge"'):
+            print('  slot %d: ChargeToken %s -> "RSR_Charge"' % (n, tok[1]))
+            rsr = L.set_row(rsr, n, {'ChargeToken': (tok[0], '"RSR_Charge"')})
+    if not dry:
+        open(p, 'w', newline='\n').write(rsr)
+
+
+if __name__ == '__main__' and '--charge-tokens' in sys.argv:
+    charge_tokens('--dry' in sys.argv)
+    sys.exit(0)
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
