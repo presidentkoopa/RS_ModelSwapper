@@ -107,21 +107,46 @@ turn, with no crash. The "Unexpected JIT error" in every older gate log was this
 ### DoomAblo 0.9.1a smoke (doom2 -> doomablo -> pack; no BD_VoxelPack, the mod's README names none)
 * Loads with no script error from the pack. The scan lists 29 weapons, and all 14 DoomAblo guns
   bind a model (rig).
-* VR reload on its own guns: rwPistol, rwShotgun, RwAssaultRifle, RwGrenadeLauncher and
-  RwPlasmaRifle PASS. **RwRocketLauncher FAILS on "hands on the gun" only**: its default donor
+* VR reload on its own 7 magazine guns (whose default models have reload rows): rwPistol, rwShotgun,
+  RwAssaultRifle, RwGrenadeLauncher, RwPlasmaRifle and RwRailgun PASS. **RwRocketLauncher FAILS on "hands on the gun" only**: its default donor
   MS_RocketLauncher has a card-fit support hand 2.2 cm off the tube. Its reload itself ran.
-  RwRailgun: see the gate table. Its magazine is a field (`currentClipAmmo`), so the gate fires it
+  RwRailgun PASS (6 of 7). Its magazine is a field (`currentClipAmmo`), so the gate fires it
   dry as a player would.
 
 ## 2. Gate on the final build (`/home/claude/lane_a_out/ms_final.pk3`, = branch head)
 
-GATE_TABLE
+QuestZDoom 17.3 rig (`gate/qz_rig`), `run_all.py --vr` in halves, run under the lock:
+* Half 1: **36 of 37 PASS**. The one FAIL is MS_BD_Flamethrower2, on the new hand check (gun hand 4.6 cm).
+* Half 2: **33 of 37**, then **34 of 37** after MS_Revolver was re-run. MS_Revolver had been a timing
+  miss: the round took three pushes and the gun shut at t522, past the 520 end, so break-open now runs
+  900 tics, and it PASSes with that. The remaining FAILs are MS_RocketLauncher and the two chex
+  zorchers, all on the hand check.
+* **Total: 70 of 74.** All 4 FAILs are the card-fit pose outliers, caught by the new
+  "hands on the gun" check. Every reload passes.
+
+Desktop: QZD 17.3 built here, `run_all.py`.
+* **64 of 74**, then **70 of 74** after the round-in-the-off-hand check was made rig-only and the 6
+  break-open donors were re-run. That check is rig-only because the desktop's break driver seats
+  chambers itself, so no hand carries a round. All 6 PASS. The same 4 hand outliers FAIL.
+
+Extra cases (`/home/claude/lane_a_out/extra_gates.txt`):
+* BD22's own guns: MS_BD22_M79 on GrenadeLauncher, MS_BD22_Rifle on Rifle: PASS.
+* `--offknife` magazine / pump / break-open: PASS.
+* `--noallow` by button: FAIL, by design; by fire: PASS.
+* brt_ / d64_ / hdvr_ / vplus_RPG, wolf_KAR98, brt_AssaultShotgun: PASS.
+* DoomAblo: rwPistol, rwShotgun, RwAssaultRifle, RwGrenadeLauncher, RwPlasmaRifle and RwRailgun PASS.
+  RwRocketLauncher FAILs on the hand check only: MS_RocketLauncher's support hand is 2.2 cm off.
+
+Before the fixes, on 4227925 (the owner's build): `--offknife` FAIL for all three kinds; MS_BD_M79's
+hands 8.6 / 9.0 cm off BD22Q's pose.
 
 ## 3. Not done
 * The 5 card-fit pose outliers above (Flamethrower2, Chainsaw, RocketLauncher, the two chex zorchers).
   They need a re-fit with the owner's toolkit (`RS_QuestHands/tools/posefix/hands`; `minigun_fit.py`'s
   `rot_hook` for the chainsaw handle), then a rig shot each.
 * Owner correction: no new models were converted (item 6 dropped).
+* DoomAblo's rwRevolver (MS_Revolver, break-open) and the pump / no-row guns were selected and bind,
+  but were not gated through a reload on DoomAblo.
 * The desktop gate needs `gl_portals 0`. This container's desktop QZD 17.3 (Mesa llvmpipe) segfaults
   in `HWSkyPortal::DrawContents` at MAG_OUT; the owner's 4227925 does the same. Not seen on the rig.
 
