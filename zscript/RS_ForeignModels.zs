@@ -876,8 +876,18 @@ class RS_ForeignScanner
 	// Is this one of OURS?
 	static bool IsOurs(string cn)
 	{
-		return (cn.IndexOf("MS_") == 0 || cn.IndexOf("RS_") == 0
-		     || cn.IndexOf("VR_") == 0 || cn.IndexOf("Vanilla_") == 0);
+		// 2026-10-26: the Quest build's hands and reloads are ours too. RSQ_Hands is a Weapon (the
+		// off-hand weapon that draws the free hand and the magazine in it); unlisted here it was
+		// scanned as a melee weapon and given the shelf's KNIFE: the owner's "all the offhand ever
+		// sees is a knife" (gate shots, MS_BD22_M79 on the rig: a knife where the off hand is).
+		// Class names are case-insensitive and GetClassName() gives the spelling the class was
+		// first named with: the scan saw "rsq_hands" (gate, [DBG] listed rsq_hands ... as melee),
+		// which a case-sensitive "RSQ_" test missed. Compared lower-cased.
+		string lc = cn; lc = lc.MakeLower();
+		return (lc.IndexOf("ms_") == 0 || lc.IndexOf("rs_") == 0
+		     || lc.IndexOf("vr_") == 0 || lc.IndexOf("vanilla_") == 0
+		     || lc.IndexOf("rsq_") == 0 || lc.IndexOf("rsr_") == 0 || lc.IndexOf("rsb_") == 0
+		     || lc.IndexOf("rsp_") == 0 || lc.IndexOf("rsk_") == 0 || lc.IndexOf("rsm_") == 0);
 	}
 
 	// The nine Chex Quest weapons, which GZDoom compiles into every session
