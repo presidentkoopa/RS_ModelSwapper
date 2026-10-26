@@ -149,7 +149,6 @@ State of the repos when this was written:
 6. Publish to RS_Brutal22WeaponsQ only after the owner's headset pass on a test build.
 
 ## PROGRESS after this doc was written (2026-10-26, same session) -- newest last
-- Item 7 (Nuker hands): Nuker GunHook/SupportHook/trigger set from the BFG's by a similarity fit of their identical 52-vertex trigger meshes (scale 0.9923, residual 0.014). Rig render: Nuker hand now sits where the BFG's does. Not yet headset-tested.
 - `e752cef` tools/rig: the rig scripts, probe, frame-dump glue, ini and build notes are IN THE REPO
   now (tools/rig/README.md). `cmp2.py <pkA> <pkB> <Gun,...> <tag> [pose]` = one run per gun, side by side.
 - Rig renders, 1.92 vs now, recoil removed: Pistol, Plasma, BFG and SSG hold poses are the SAME at
@@ -179,6 +178,8 @@ State of the repos when this was written:
   casing the F7 lend had given a real-size 3D mesh at scale 1.0 was then handed the voxel AT 1.0 --
   rig: a pump-shotgun shell at scale 1.000 against BD22's 0.25. Now the lend steps aside when voxel
   casings are on, and the F6 sprite sizing no longer shrinks a lent 3D casing. Rig after: 0.25.
+- `4ce3641` Item 7 (Nuker hands): Nuker GunHook/SupportHook/trigger set from the BFG's by a similarity fit of their identical 52-vertex trigger meshes (scale 0.9923, residual 0.014). Rig render: Nuker hand now sits where the BFG's does. Not yet headset-tested.
+- Item 18 (bang on map load), in progress: the rig engine now logs every sound start (`tools/rig/s_sound_log.patch`, `QZ_SNDLOG=1`). Next: run `map map01` with no pack, 1.92 and current, compare the first ~100 tics of `QZSND` lines.
 - STILL OPEN: 10 (F10 in-hand poses, never hand-fitted), 13/15 (Machinegun box and M32 in the headset
   -- 15 is likely the 6-vs-4 capacity above), 18 (bang on map load), 19 (BFG sounds after A4),
   20 (voxel shells), 21 (Ruger scope default), and NO new build has been published to

@@ -29,6 +29,7 @@ used in the cloud session of 2026-10-25/26.
 | `probe/` | `rigtest/probe/` | zip as `probe.pk3`: the B22 log lines (tables, state, shots, psp, axe lock) |
 | `glue/qz_linux_glue.cpp` | `rig2/glue/` | the rig's OpenXR stand-in, WITH the frame-dump patch |
 | `config/qzdoom.ini` | `rig2/config/` | the test ini (`playerclass=$TAGBD_CLASS_RIFLE`; NOTE it carries `rsvr_axe_hold=16`, the old default) |
+| `s_sound_log.patch` | rig engine `src/common/audio/sound/s_sound.cpp` | TEST ONLY: `QZ_SNDLOG=1` prints `QZSND <tic> <sound> ch vol src <class>` for every sound start, even under -nosound (for item 18, the bang on map load). Apply to the rig's engine tree, relink |
 | `Makefile.rig`, `build.sh.rig` | `rig2/` | the rig build. Relink after a glue change: `make QGZ=<gzdoom questzdoom> JNI=<questzdoom>/Projects/Android/jni DEPS=<rig2>/deps ZLIB=<rig2>/deps/zmusic-install/lib/` |
 
 ## Traps (each cost a run)
