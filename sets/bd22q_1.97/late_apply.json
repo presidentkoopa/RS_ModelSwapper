@@ -1,0 +1,49 @@
+{
+ "Machinegun": {
+  "tables_added": {
+   "ReloadToken": 1,
+   "ChargeToken": 1,
+   "NoMag": 1,
+   "MagAmmo": 1,
+   "Reserve": 1,
+   "SndLand": 1,
+   "SndFwd": 1,
+   "SndBack": 1,
+   "SndIn": 1,
+   "SndOut": 1,
+   "ReadySprites": 1,
+   "SprWorld": 1,
+   "SprPart": 1,
+   "SprGun": 1,
+   "Offset": 1,
+   "Scale": 1,
+   "Channel": 1,
+   "BackAt": 1,
+   "ChargeRule": 1,
+   "HandleLayers": 1,
+   "BoltRatio": 1,
+   "HandleHook": 1,
+   "Travel": 1,
+   "Pull": 1,
+   "Grab": 1,
+   "HasHandle": 1,
+   "WellHook": 1,
+   "HandHook": 1,
+   "TopInHand": 1,
+   "MagCentre": 1,
+   "MagLen": 1,
+   "Mouth": 1,
+   "Axis": 1,
+   "Well": 1,
+   "sprites": [
+    "RQJM",
+    "RQJP",
+    "RQJW"
+   ]
+  },
+  "dec": {
+   "guards_after_check": 0,
+   "guards_before_shot": 2
+  }
+ }
+}

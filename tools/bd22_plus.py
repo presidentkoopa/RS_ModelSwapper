@@ -107,6 +107,27 @@ PLUS = {
                  toggle='rsq_plus_m32', label='Incendiary Launcher: Cylinder Reload',
                  reserve='AmmoM202', magammo='RSQ_M32Cylinder', nomag='RSQ_NoCylinder_M32', ammouse=1,
                  ready_sprites=['M202 A'], spr=('RQVM', 'RQVP', 'RQVW')),
+    # F10: the BD21 Machinegun's 100-round box (owner: "every non-melee gun reloads"; the card's
+    # belt-fed note was REMA's decision and is overruled, PLAN.md F10). Its box is welded into
+    # M249_lowpoly, so it is carved out of OUR animating mesh by position, no _wm: every island
+    # lying wholly inside the box's footprint under the receiver (x 39.4..47.4, below z -0.9 at
+    # the ready frame) -- 31 islands, 415 vertices, which is exactly the count REMA's own
+    # `magazine` has, and stable from z -0.8 to -0.95. The box is rigid with the body in all 36
+    # frames (max departure < 0.05). The owner confirmed the part on a render, 2026-10-25.
+    # LATE: Machinegun.dec and its mesh only exist after bd22_mg.py, so its tables, MODELDEF and
+    # DECORATE are written by the `late` stage, run after bd22_mg. Its own Reload: is the M203's
+    # (non-VR), so ours is RSR_Box and the VR line of that Reload jumps to it.
+    'Machinegun': dict(mesh='Machinegun/Machinegun.md3', late=True,
+                 src='E:/DOOMWork/VR_WeaponSetRebuild/br_vr/PK3_pbr/Models/Weapons/Hud/Machinegun/Machinegun.md3',
+                 islands=dict(surface='M249_lowpoly', frame=4, x=(39.4, 47.4), z_below=-0.9),
+                 out=(0.0, 0.0, -1.0), travel=None, capacity=100,
+                 scale=(-1.0, 1.0, 1.0), off=(0.0, 0.0, -5.0),          # its own MODELDEF (Modeldef.Machinegun.def)
+                 part='magazine', ready_frame=4,
+                 snd_out='rsr/drumout', snd_in='rsr/drumin', snd_land='rsr/bigdrop',
+                 toggle='rsq_plus_mgbox', label='Machinegun: Box Reload',
+                 reserve='Clip2', magammo='RSQ_MGBox', nomag='RSQ_NoBox_Machinegun', ammouse=1,
+                 ready_sprites=['MGN1 A'], spr=('RQJM', 'RQJP', 'RQJW'),
+                 reload_label='RSR_Box'),
     'Unmaker': dict(card='BD_Unmaker', ref='unmaker_wm.md3', mesh='Unmaker/Unmaker.md3',
                  part='skull', ref_parts={'skull': 'magazine', 'skull2': 'magazine'}, ready_frame=0,
                  snd_out='Unmaker/Stop', snd_in='Unmaker/Start', snd_land='rsr/bigdrop',
@@ -144,14 +165,46 @@ def rigid(ref_md3, tgt_md3, frame=0):
     return Rm, t, float(d.mean()), float(d.max())
 
 
-def geometry():
+def carve_islands(mesh, out_md3, spec):
+    """F10: split one surface of OUR mesh into itself and `magazine`: every island (connected
+    triangles) lying wholly inside spec's footprint at spec's frame. All frames are kept."""
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import connected_components
+    m = carve_by_ref.read_md3(mesh)
+    new = []; info = {}
+    for su in m['surfs']:
+        if su['name'] != spec['surface']:
+            new.append(su); continue
+        t = su['tris']; nv = len(su['st'])
+        A = coo_matrix((np.ones(len(t) * 3), (np.r_[t[:, 0], t[:, 1], t[:, 2]], np.r_[t[:, 1], t[:, 2], t[:, 0]])), shape=(nv, nv))
+        n, lab = connected_components(A, directed=False)
+        P = su['xyzn'][spec['frame'], :, :3].astype(float) / 64.0
+        inside = (P[:, 0] >= spec['x'][0]) & (P[:, 0] <= spec['x'][1]) & (P[:, 2] < spec['z_below'])
+        bad = np.zeros(n, bool); np.logical_or.at(bad, lab, ~inside)
+        sel = ~bad[lab]
+        info = dict(islands=int((~bad).sum()), vertices=int(sel.sum()))
+        for name, keep in ((su['name'], ~sel), ('magazine', sel)):
+            tk = t[keep[t].all(1)]
+            used = np.unique(tk); remap = np.full(nv, -1); remap[used] = np.arange(len(used))
+            new.append(dict(name=name, flags=su['flags'], tris=remap[tk], shaders=su['shaders'], nsh=su['nsh'],
+                            st=su['st'][used], xyzn=su['xyzn'][:, used, :]))
+    m['surfs'] = new
+    carve_by_ref.write_md3(out_md3, m)
+    return info
+
+
+def geometry(only=()):
     os.makedirs(OUT + 'models', exist_ok=True)
     out = {}
+    if only and os.path.exists(OUT + 'plus_geometry.json'):
+        out = json.load(open(OUT + 'plus_geometry.json'))     # measure only the named guns, keep the rest
     for cls, p in PLUS.items():
+        if only and cls not in only:
+            continue
         # EACH GUN'S OWN MODELDEF PLACEMENT, not one constant for all of them. See the note on
         # SCALE/OFF above: read through the wrong pair, a part measures metres from where it is.
         sc, of = tuple(p.get('scale', SCALE)), tuple(p.get('off', OFF))
-        mesh = SRC + 'models/bd/' + p['mesh']
+        mesh = p.get('src') or (SRC + 'models/bd/' + p['mesh'])
         carved = OUT + 'models/' + os.path.basename(p['mesh']).replace('.md3', '_rsr.md3')
         # A GUN WHOSE PART IS ALREADY ITS OWN SURFACE NEEDS NO CARVE AND NO REFERENCE MESH.
         # The first three guns here (MG42, Flamethrower, Unmaker) had their part welded into the
@@ -164,7 +217,11 @@ def geometry():
         # mesh by genpack.mouth_depth exactly as before.
         direct = 'ref' not in p
         if direct:
-            shutil.copyfile(mesh, carved)
+            if p.get('islands'):
+                isl = carve_islands(mesh, carved, p['islands'])
+                print('%-14s islands carve: %s' % (cls, isl))
+            else:
+                shutil.copyfile(mesh, carved)
             nsurf0, surfs0 = genpack.md3_surfaces(carved)
             cv = dict(surfaces=[s['name'] for s in surfs0], frames=surfs0[0]['xyz'].shape[0],
                       unlabelled=0, rot_deg=0.0)
@@ -196,7 +253,7 @@ def geometry():
         depth, base, top, hw = genpack.mouth_depth(surfs, p['ready_frame'], sc, of, mag_idx, None, ins)
         # TRAVEL: a carded gun states it; a direct gun takes the mouth the kit just measured off
         # its own mesh, which is the distance the part has to move to clear the well.
-        travel = float(p['travel']) if direct else float(part['dof']['distance'])
+        travel = (float(p['travel']) if p['travel'] is not None else float(depth)) if direct else float(part['dof']['distance'])
         rec = dict(cls=cls, card=p.get('card'), carved=carved, surfaces=cv['surfaces'], frames=cv['frames'],
                    unlabelled=cv['unlabelled'], rigid=dict(mean_cm=round(dmean, 4), max_cm=round(dmax, 4), rot_deg=cv['rot_deg']),
                    # CAPACITY IS INVENTED AND ALWAYS WAS. BD22 states none for any of these guns, so
@@ -223,8 +280,8 @@ def geometry():
 
 
 if __name__ == '__main__':
-    if sys.argv[1:] == ['geometry']:
-        geometry()
+    if sys.argv[1:2] == ['geometry']:
+        geometry(tuple(sys.argv[2:]))
 
 
 # ======================================================================= stage 2: apply
@@ -286,7 +343,7 @@ def rsr_block(cls, p, cap):
          '\t// The %s is a COUNTER over BD22\'s own ammo (zscript/rsq/counters.zs, capacity %d -- the owner\'s' % (p['part'], cap),
          '\t// REMA number; BD22 has none): firing and the reserve are BD22\'s, untouched. With VR reloading',
          '\t// off (rsr_reload 0, or not in VR) the counter is idle and nothing below changes the gun.',
-         '\tReload:',
+         '\t%s:' % p.get('reload_label', 'Reload'),
          S('A_TakeInventory("Reloading", 1)'),
          S('A_JumpIfInventory("%s", 0, "Ready")\t// full' % mag),
          S('A_JumpIfInventory("%s", 1, "RSR_Start")' % p['reserve']),
@@ -480,6 +537,8 @@ def apply():
     import gen_rsr
     guns = []
     for cls, p in PLUS.items():
+        if p.get('late'):
+            continue        # written by the `late` stage, after bd22_mg.py
         r = geo[cls]
         gdir = p['mesh'].split('/')[0]
         model = os.path.basename(r['carved'])
@@ -511,7 +570,7 @@ def apply():
     # tables
     z = gen_rsr.zs(guns); z = z if isinstance(z, str) else '\n'.join(z)
     tp = OUT_SRC + 'zscript/rsr/rsr_guns.bd.zs'
-    merged, added, missing = merge_tables(open(tp).read(), z, list(PLUS))
+    merged, added, missing = merge_tables(open(tp).read(), z, [c for c in PLUS if not PLUS[c].get('late')])
     open(tp, 'w').write(merged)
     log['tables'] = dict(added=added, functions_new_only=missing)
     # MODELDEF.rsr
@@ -542,6 +601,8 @@ def apply():
     log['foley'] = {n: os.path.basename(s) for n, s, _ in FOLEY}
     # DECORATE
     for cls, p in PLUS.items():
+        if p.get('late'):
+            continue
         # BD22's file for this weapon. Usually the class name, but not always -- Flamethrower2
         # lives in Flamethrower.dec -- so an entry may name its own with `dec=`. This was a
         # hardcoded map of the first three guns and refused a fourth with a KeyError.
@@ -4124,6 +4185,57 @@ F11_FIXES = [
 ]
 
 
+def late():
+    """F10: the entries whose weapon only exists after bd22_mg.py (the BD21 Machinegun). Same
+    compute, tables, MODELDEF and DECORATE as apply(); run after bd22_mg, before the rest."""
+    geo = json.load(open(OUT + 'plus_geometry.json'))
+    sys.path.insert(0, KIT)
+    import gen_rsr
+    log = {}
+    for cls, p in PLUS.items():
+        if not p.get('late'):
+            continue
+        r = geo[cls]
+        gdir = p['mesh'].split('/')[0]
+        model = os.path.basename(r['carved'])
+        shutil.copy(r['carved'], OUT_SRC + 'models/bd/%s/%s' % (gdir, model))
+        clear = OUT_SRC + 'models/bd/%s/rsr_clear.png' % gdir
+        if not os.path.exists(clear):
+            shutil.copy(SRC + 'models/bd/Rifle/rsr_clear.png', clear)
+        skin1 = os.path.basename(p['mesh']).replace('.md3', '.png')
+        g = dict(key='BD22/' + cls, cls=cls, set='bd', mesh=r['carved'], path='models/bd/' + gdir, model=model,
+                 skin=skin1, scale=tuple(p.get('scale', SCALE)), off=tuple(p.get('off', OFF)), extra='\tNoInterpolation\n',
+                 ready_frame=p['ready_frame'], mag_surfs=r['mag_idx'], handle_surfs=[], bolt_surfs=[], ready_sprites=p['ready_sprites'],
+                 spr_gun=p['spr'][0], spr_part=p['spr'][1], spr_world=p['spr'][2], handle_mode=None, handle_part=None, bolt_part=None,
+                 grip='base', back_at=1.0, snd=dict(out=p.get('snd_out', ''), inn=p.get('snd_in', ''), back='', fwd='', land=p.get('snd_land', '')),
+                 reserve=p['reserve'], magammo='RSQ_Mag_' + cls, nomag='RSQ_NoMag_' + cls, charge='never', charge_token='',
+                 reload_token='Reloading', chan=5)
+        gg = gen_rsr.compute(g, {g['key']: r['survey']})
+        z = gen_rsr.zs([gg]); z = z if isinstance(z, str) else '\n'.join(z)
+        tp = OUT_SRC + 'zscript/rsr/rsr_guns.bd.zs'
+        merged, added, missing = merge_tables(open(tp).read(), z, [cls])
+        open(tp, 'w').write(merged)
+        md = gen_rsr.modeldef(gg); md = md if isinstance(md, str) else '\n'.join(md)
+        with open(OUT_SRC + 'MODELDEF.rsr', 'a') as f:
+            f.write('\n// ---- F10: %s (tools/bd22_plus.py late)\n' % cls + md + '\n')
+        src = OUT_SRC + 'actors/Weapons/' + p.get('dec', cls + '.dec')
+        text = open(src, 'rb').read().decode('latin-1')
+        new, st = patch_dec(cls, p, text, r['capacity'])
+        if p.get('reload_label'):
+            # its own Reload: stays for the M203 out of VR; in VR it now goes to ours
+            nl = '\r\n' if '\r\n' in new else '\n'
+            old_l = '\t\tMGN1 A 0 A_JumpIfInventory("RSM_VR", 1, "Ready")\t// 1.97 rsm'
+            assert new.count(old_l) == 2, new.count(old_l)    # Reload and ReloadGrenade
+            k = new.index(old_l)
+            new = new[:k] + '\t\tMGN1 A 0 A_JumpIfInventory("RSM_VR", 1, "%s")\t// F10: the box, by hand in VR' % p['reload_label'] + new[k + len(old_l):]
+        open(src, 'wb').write(new.encode('latin-1'))
+        log[cls] = dict(tables_added=added, dec=st)
+    json.dump(log, open(OUT + 'late_apply.json', 'w'), indent=1)
+    with open(OUT + '.generated', 'a') as f:
+        f.write('then tools/bd22_plus.py late\n')
+    print(json.dumps(log, indent=1))
+
+
 def fixes():
     """F11: apply F11_FIXES to the build (OUT_SRC). Exact-match, idempotent, logged."""
     log = []
@@ -4324,6 +4436,8 @@ if __name__ == '__main__':
         pose()
     if sys.argv[1:2] == ['spine']:
         spine()
+    if sys.argv[1:2] == ['late']:
+        late()
     if sys.argv[1:2] == ['fixes']:
         fixes()
     if sys.argv[1:2] == ['sync']:

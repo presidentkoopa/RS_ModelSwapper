@@ -243,5 +243,137 @@
    "magazine",
    "magazine#2"
   ]
+ },
+ "IncendiaryLauncher": {
+  "cls": "IncendiaryLauncher",
+  "card": null,
+  "carved": "E:/DOOMWork/_buildtemp/rsq_bd22/models/m32_rsr.md3",
+  "surfaces": [
+   "trigger_plate",
+   "trigger_guard",
+   "magazine_back",
+   "gun_barrel",
+   "magazine_bracket_front",
+   "magazine",
+   "gun_body",
+   "magazine_bracket",
+   "trigger"
+  ],
+  "frames": 2,
+  "unlabelled": 0,
+  "rigid": {
+   "mean_cm": 0.0,
+   "max_cm": 0.0,
+   "rot_deg": 0.0
+  },
+  "capacity": 6,
+  "ammouse": 1,
+  "survey": {
+   "parts": {
+    "magazine": {
+     "well_point": [
+      14.812,
+      7.995,
+      -4.216
+     ],
+     "insert_dir": [
+      -0.0,
+      1.0,
+      -0.0
+     ],
+     "insert_depth_cm": 19.04,
+     "base_point": [
+      14.812,
+      -8.1,
+      -4.269
+     ],
+     "half_width_cm": 12.88,
+     "card_travel_cm": 19.16,
+     "card_grab": null,
+     "card_magcenter": null
+    }
+   }
+  },
+  "palm": null,
+  "supportat": null,
+  "direct": true,
+  "mag_idx": [
+   5
+  ],
+  "names": [
+   "trigger_plate",
+   "trigger_guard",
+   "magazine_back",
+   "gun_barrel",
+   "magazine_bracket_front",
+   "magazine",
+   "gun_body",
+   "magazine_bracket",
+   "trigger"
+  ]
+ },
+ "Machinegun": {
+  "cls": "Machinegun",
+  "card": null,
+  "carved": "E:/DOOMWork/_buildtemp/rsq_bd22/models/Machinegun_rsr.md3",
+  "surfaces": [
+   "alt-trig-reload",
+   "alt-frame",
+   "alt-trig",
+   "alt-pipe",
+   "Trigger",
+   "M249_lowpoly",
+   "magazine"
+  ],
+  "frames": 36,
+  "unlabelled": 0,
+  "rigid": {
+   "mean_cm": 0.0,
+   "max_cm": 0.0,
+   "rot_deg": 0.0
+  },
+  "capacity": 100,
+  "ammouse": 1,
+  "survey": {
+   "parts": {
+    "magazine": {
+     "well_point": [
+      14.339,
+      -0.281,
+      -12.295
+     ],
+     "insert_dir": [
+      -0.0,
+      -0.0,
+      -1.0
+     ],
+     "insert_depth_cm": 13.11,
+     "base_point": [
+      14.331,
+      0.098,
+      -1.58
+     ],
+     "half_width_cm": 6.63,
+     "card_travel_cm": 13.11,
+     "card_grab": null,
+     "card_magcenter": null
+    }
+   }
+  },
+  "palm": null,
+  "supportat": null,
+  "direct": true,
+  "mag_idx": [
+   6
+  ],
+  "names": [
+   "alt-trig-reload",
+   "alt-frame",
+   "alt-trig",
+   "alt-pipe",
+   "Trigger",
+   "M249_lowpoly",
+   "magazine"
+  ]
  }
 }

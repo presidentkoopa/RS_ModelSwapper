@@ -66,7 +66,16 @@ that is not on the plan.**
   Now the off trigger takes the handle in grip mode. Rig: grip takes the magazine 65 cm out, trigger
   racks, CHARGE->PULL->RELEASED->DONE.
 - Not yet driven: the Machinegun's launcher, flick reload, dual wield, melee.
-- NEXT: those, then the rest of PLAN.md F11 and F10.
+- DONE (F10): **the Machinegun's box reloads.** 19 of 25 non-melee guns now. Pipeline change: a new
+  stage `bd22_plus.py late` runs right after `bd22_mg.py` (the Machinegun's .dec and mesh only exist
+  from then), and `geometry <Class>` measures only the named guns and keeps the rest of
+  plus_geometry.json. Full order now: geometry, apply, bd22_mg, **late**, revolver, options, bash,
+  whip, butt, recoil, impacts, flash, casings, hits, bullet, casemodels, pose, spine, readme, fixes,
+  sync. plus_geometry.json now also carries the M32 (measured direct; it was missing).
+- Headset question raised while building it: MG42 / Flamethrower / Unmaker reload blocks are
+  ZOffset 0 (SCALE/OFF default) while their ready blocks are ZOffset -5 -- does the gun jump 5 cm
+  when their reload starts?
+- NEXT: F10 Minigun, BFG, BFG10k, Hellish, Devastator, Nuker; flick/dual/melee in the rig.
 
 ## What this repo is
 Everything for QuestZDoom 17.3 VR reloadable weapon sets: the owner's BD22 Quest pack as the runtime

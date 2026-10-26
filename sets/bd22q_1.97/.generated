@@ -1,9 +1,10 @@
 bd22q 1.99 -- generated, do not hand-edit sets/bd22q_1.97/src
-689 files, written by tools/bd22_plus.py sync at 2026-10-25T20:55:51
+690 files, written by tools/bd22_plus.py sync at 2026-10-25T21:22:52
 
 tools/bd22_plus.py geometry + apply, then tools/bd22_mg.py
 SRC (1.96b) = E:/DOOMWork/_buildtemp/rs_brutal22weaponsq/src/
 OUT = E:/DOOMWork/_buildtemp/rsq_bd22/
+then tools/bd22_plus.py late
 then tools/bd22_plus.py revolver
 then tools/bd22_plus.py options
 then tools/bd22_plus.py bash

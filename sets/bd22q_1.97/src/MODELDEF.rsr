@@ -1548,3 +1548,85 @@ Model RSR_DroppedMag
 	USEACTORROLL
 	FrameIndex RQWW A 0 0
 }
+
+// ---- F10: Machinegun (tools/bd22_plus.py late)
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): BD22/Machinegun.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model Machinegun
+{
+	Path "models/bd/Machinegun"
+	Model 0 "Machinegun_rsr.md3"
+	SurfaceSkin 0 0 "Machinegun.png"
+	SurfaceSkin 0 1 "Machinegun.png"
+	SurfaceSkin 0 2 "Machinegun.png"
+	SurfaceSkin 0 3 "Machinegun.png"
+	SurfaceSkin 0 4 "Machinegun.png"
+	SurfaceSkin 0 5 "Machinegun.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQJM A 0 4
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "models/bd/Machinegun"
+	Model 0 "Machinegun_rsr.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "Machinegun.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQJP A 0 4
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "models/bd/Machinegun"
+	Model 0 "Machinegun_rsr.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "Machinegun.png"
+	Scale -1.0000 1.0000 1.0000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RQJP A 0 4
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "models/bd/Machinegun"
+	Model 0 "Machinegun_rsr.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "Machinegun.png"
+	Scale 0.3468 0.3468 0.3468
+	Offset -15.0757 0.0512 0.0
+	ZOffset 1.3351
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RQJW A 0 4
+}
