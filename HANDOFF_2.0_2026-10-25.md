@@ -84,7 +84,12 @@ shotguns. wolf_Tommy's slide moves forward (not a handle): left out.
 ## VR-rig gate (`run_gate.py --vr`, the owner's quest_test_rig -- see gate/qz_rig/README.md)
 
 The real OpenXR input path: the pack's own vrhand.zs reads the engine's controller positions; grip
-and trigger are real controller keys (443 / 42). **58 of 58 reloadable donors PASS** (2026-10-25).
+and trigger are real controller keys (443 / 42). **58 of 58 reloadable donors PASS** (2026-10-25, before
+tonight's additions). Full re-run on the final build NOT finished (stopped by the owner's close-down):
+27 of the first 29 PASS; AE_Pistol and BD22_Rifle were TIMING misses (the whole reload incl. the
+handle ran, the run ended before the mod's refill was logged -- handle guns now run 900 tics);
+desktop **74 of 74 PASS**. Next session: `python3 -B gate/run_all.py <pk3> --vr` (split with --only:
+one run must stay under 2 h).
 Every failure on the way was the TEST DRIVER, none ModelSwapper:
 - the engine mirrors the off controller's frame left-right (vrhand.zs says so; measured OffDir yaw 90
   = (0,-1,0)) -- held parts are now placed with the off hand's axes measured from the engine;

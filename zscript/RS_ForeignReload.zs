@@ -390,7 +390,7 @@ class MS_ReloadJoin : EventHandler
 		// the evidence, read and never changed: empty, nothing is chambered.
 		let mag = RSR.WeaponStore(mo, false);
 		mo.TakeInventory('RSR_Charge', 999);
-		if (mag && mag.Amount <= 0 && RSR_Guns.HasHandle(RSR_Guns.Index(w)))
+		if (mag && mag.Amount <= 0 && RSR_Guns.HasHandle(RSR_Guns.Index(w)) && RSR.PlayerInt(p, 'ms_charge_dry', 1) != 0)
 			mo.GiveInventory('RSR_Charge', 1);
 		p.SetPsprite(PSP_WEAPON, hold, false, w);
 		if (RS_ForeignRemap.DebugOn())
@@ -580,6 +580,8 @@ class MS_ReloadJoin : EventHandler
 
 	private bool ShotWatch(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
 	{
+		if (RSR.PlayerInt(p, 'ms_hand_pump', 1) == 0)
+			return false;			// Options, VR Reload: Pump by Hand After a Shot off -- the mod pumps by itself
 		if (mShotW[i] != w)
 			FindShotPoint(i, w);
 		if (!mShotPre[i] || psp.CurState != mShotPre[i] || psp.Tics > 1)
