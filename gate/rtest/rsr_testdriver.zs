@@ -73,7 +73,77 @@ class RSR_TestDriver : EventHandler
 	// by eye.
 	static Vector3 OffV(Vector3 v)
 	{
-		return VRT() ? (v.x, -v.y, v.z) : v;
+		if (!VRT())
+			return v;
+		let d = RSR_TestDriver(EventHandler.Find('RSR_TestDriver'));
+		if (!d || !d.haveBasis)
+			return (v.x, -v.y, v.z);
+		return d.bF * v.x + d.bL * v.y + d.bU * v.z;
+	}
+
+	// the off hand's axes in the GUN frame, measured from the engine each tic (VR, after maptime 70)
+	Vector3 bF, bL, bU;
+	bool haveBasis;
+	// THE WRIST (VR): yaw / pitch / roll added to the off controller, turned until the held part
+	// lines up with its well -- by the reload's own angle (MagAtWell), as a player turns by eye.
+	double wy, wp, wr, wStep, wBest;
+	int wAxis, wSign, wFails, wWait;
+	bool wTried;
+
+	void MeasureBasis(PlayerPawn mo)
+	{
+		double ps = mo.Level.pixelstretch > 0 ? mo.Level.pixelstretch : 1.2;
+		Vector3 gF = RSVR_VRHand.HandDir(mo, 0, 0, ps), gL = RSVR_VRHand.HandDir(mo, 90, 0, ps), gU = RSVR_VRHand.HandDir(mo, 0, 90, ps);
+		Vector3 oF = RSVR_VRHand.OffDir(mo, 0, 0, ps), oL = RSVR_VRHand.OffDir(mo, 90, 0, ps), oU = RSVR_VRHand.OffDir(mo, 0, 90, ps);
+		bF = (oF dot gF, oF dot gL, oF dot gU);
+		bL = (oL dot gF, oL dot gL, oL dot gU);
+		bU = (oU dot gF, oU dot gL, oU dot gU);
+		haveBasis = true;
+	}
+
+	// one step of the wrist search: the last tweak is kept if the angle fell, else undone and the
+	// next axis / sign tried; after all six fail the step halves
+	void TurnWrist(double ang)
+	{
+		if (wStep <= 0)
+		{
+			wStep = 32; wBest = ang; wAxis = 0; wSign = 1; wFails = 0; wTried = false; wWait = 0;
+		}
+		if (ang < 2.0 || wStep < 0.25)
+			return;
+		// the rig renders slower than the game tics: a new pose shows in the reload's numbers a few
+		// tics later, so each tweak is judged only after it has settled
+		if (wWait-- > 0)
+			return;
+		wWait = 4;
+		if (wTried)
+		{
+			if (ang < wBest - 0.01)
+			{
+				wBest = ang; wFails = 0;		// keep it, and push the same way again
+			}
+			else
+			{
+				Tweak(wAxis, -wSign * wStep);	// undo
+				wFails++;
+				wSign = -wSign;
+				if (wSign > 0)
+					wAxis = (wAxis + 1) % 3;
+				if (wFails >= 6)
+				{
+					wStep *= 0.5; wFails = 0;
+				}
+			}
+		}
+		Tweak(wAxis, wSign * wStep);
+		wTried = true;
+	}
+
+	void Tweak(int axis, double by)
+	{
+		if (axis == 0) wy += by;
+		else if (axis == 1) wp += by;
+		else wr += by;
 	}
 
 	static bool VRT()
@@ -91,7 +161,20 @@ class RSR_TestDriver : EventHandler
 		Vector3 g = mo.AttackPos - mo.pos;		// the gun controller, player frame
 		double gf = g.x * cos(a) + g.y * sin(a), gl = -g.x * sin(a) + g.y * cos(a);
 		double f = gf + off.x * 0.34, l = gl + off.y * 0.34, u = g.z + off.z * 0.34 / ps;
-		String pose = String.Format("%.4f %.4f %.4f %.2f 0 0", -l / 34.0, u * ps / 34.0, -f / 34.0, 30.0 + offPitch);
+		if (Level.maptime > 70)
+			MeasureBasis(mo);
+		let s = RSR_ReloadHandler.StateOf(mo);
+		if (s && s.phase == RSR.CARRY && Level.maptime > 70)
+		{
+			double dd, sd, an;
+			[dd, sd, an] = s.MagAtWell();
+			TurnWrist(an);
+		}
+		else if (!s || s.phase == RSR.IDLE || s.phase == RSR.DONE)
+		{
+			wy = wp = wr = 0; wStep = 0;		// the wrist relaxes between reloads
+		}
+		String pose = String.Format("%.4f %.4f %.4f %.2f %.2f %.2f", -l / 34.0, u * ps / 34.0, -f / 34.0, 30.0 + offPitch + wp, wy, wr);
 		CVar.FindCVar('qzt_lhand').SetString(pose);
 		CVar.FindCVar('qzt_lgrip').SetFloat(grip ? 1 : 0);
 		CVar.FindCVar('qzt_ltrigger').SetFloat(trig ? 1 : 0);

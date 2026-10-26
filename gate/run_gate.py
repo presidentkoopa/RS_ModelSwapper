@@ -118,10 +118,13 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False):
     t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s%s' % (0 if vr else yaw, view, ('; ' + EXTRA) if EXTRA else '')),
          (25, 'netevent rs-fm-rescan'),
          (40, 'rsqt_gun %s; rsqt_empty 1' % gun)]
+    # the rig renders slower than the game tics: a 3-tic tap can fall between its frames (kit README:
+    # "a gesture must be held"), so on --vr the reload button is held for 15
+    up = 130 if vr else 118
     if brk:
-        t += [(110, 'rsrtest_script 0; rsbtest_script 1'), (115, '+reload'), (118, '-reload')]
+        t += [(110, 'rsrtest_script 0; rsbtest_script 1'), (115, '+reload'), (up, '-reload')]
     elif pump:
-        t += [(110, 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'), (115, '+reload'), (118, '-reload')]
+        t += [(110, 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'), (115, '+reload'), (up, '-reload')]
     else:
         t += [(110, 'rsrtest_script 1'), (115, '+attack'), (125, '-attack')]
     end = 900 if pump else 520

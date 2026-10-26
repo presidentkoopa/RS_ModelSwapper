@@ -179,7 +179,7 @@ class RSP_TestDriver : EventHandler
 		double travel = RSP_Guns.Travel(i);
 		// where the off controller is on the pump: steadied (the engine aims the gun at it: on the
 		// gun's axis), or with the palm on it (the trigger grab)
-		Vector3 onPump = grabPump ? grab - RSR.PalmGrab() : (grab.x, 0, 0);
+		Vector3 onPump = grabPump ? grab - RSR_TestDriver.OffV(RSR.PalmGrab()) : (grab.x, 0, 0);
 
 		if (s.mode == RSP.PUMPING)
 		{
@@ -311,8 +311,9 @@ class RSP_TestDriver : EventHandler
 	{
 		Vector3 port = RSP_Guns.Port(i);
 		Vector3 push = RSP_Guns.Push(i);
-		Vector3 sih = RSP_Guns.ShellInHand(i);
-		Vector3 aih = RSP_Guns.AxisInHand(i);
+		// held in the OFF hand: on the VR rig, in the engine's mirrored off-hand frame (RSR_TestDriver.OffV)
+		Vector3 sih = RSR_TestDriver.OffV(RSP_Guns.ShellInHand(i));
+		Vector3 aih = RSR_TestDriver.OffV(RSP_Guns.AxisInHand(i));
 		double depth = RSP_Guns.Depth(i);
 		// the hand comes from below the port (BD22) / from the ejection port's side (V+)
 		Vector3 side = i == 1 ? (0, 0, -3) : (0, -3, 0);
