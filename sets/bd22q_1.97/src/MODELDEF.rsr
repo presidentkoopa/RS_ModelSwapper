@@ -1278,7 +1278,7 @@ Model MG42
 	SurfaceSkin 0 2 "HitlersBuzzsaw.png"
 	Scale -1.0000 1.0000 1.0000
 	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	ZOffset -5.0000
 	NoInterpolation
 	FrameIndex RQXM A 0 0
 }
@@ -1293,7 +1293,7 @@ Model RSR_GunParts
 	SurfaceSkin 0 2 "rsr_clear.png"
 	Scale -1.0000 1.0000 1.0000
 	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	ZOffset -5.0000
 	NoInterpolation
 	FrameIndex RQXP A 0 0
 }
@@ -1308,7 +1308,7 @@ Model RSQ_Hands
 	SurfaceSkin 0 2 "rsr_clear.png"
 	Scale -1.0000 1.0000 1.0000
 	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	ZOffset -5.0000
 	NoInterpolation
 	FrameIndex RQXP A 0 0
 }
@@ -1343,7 +1343,7 @@ Model Flamethrower2
 	SurfaceSkin 0 3 "Flamethrower2.png"
 	Scale -1.0000 1.0000 1.0000
 	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	ZOffset -5.0000
 	NoInterpolation
 	FrameIndex RQYM A 0 0
 }
@@ -1359,7 +1359,7 @@ Model RSR_GunParts
 	SurfaceSkin 0 3 "rsr_clear.png"
 	Scale -1.0000 1.0000 1.0000
 	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	ZOffset -5.0000
 	NoInterpolation
 	FrameIndex RQYP A 0 0
 }
@@ -1375,7 +1375,7 @@ Model RSQ_Hands
 	SurfaceSkin 0 3 "rsr_clear.png"
 	Scale -1.0000 1.0000 1.0000
 	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	ZOffset -5.0000
 	NoInterpolation
 	FrameIndex RQYP A 0 0
 }
@@ -1498,7 +1498,7 @@ Model Unmaker
 	SurfaceSkin 0 2 "Unmaker.png"
 	Scale -1.0000 1.0000 1.0000
 	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	ZOffset -5.0000
 	NoInterpolation
 	FrameIndex RQWM A 0 0
 }
@@ -1513,7 +1513,7 @@ Model RSR_GunParts
 	SurfaceSkin 0 2 "rsr_clear.png"
 	Scale -1.0000 1.0000 1.0000
 	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	ZOffset -5.0000
 	NoInterpolation
 	FrameIndex RQWP A 0 0
 }
@@ -1528,7 +1528,7 @@ Model RSQ_Hands
 	SurfaceSkin 0 2 "rsr_clear.png"
 	Scale -1.0000 1.0000 1.0000
 	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	ZOffset -5.0000
 	NoInterpolation
 	FrameIndex RQWP A 0 0
 }

@@ -81,13 +81,15 @@ PLUS = {
                  snd_out='rsr/drumout', snd_in='rsr/drumin', snd_land='rsr/bigdrop',
                  toggle='rsq_plus_mg42', label='MG42: Belt Drum Reload',
                  reserve='Clip2', magammo='RSQ_MG42Drum', nomag='RSQ_NoDrum_MG42', ammouse=1,
-                 ready_sprites=['HBUS A'], spr=('RQXM', 'RQXP', 'RQXW')),
+                 ready_sprites=['HBUS A'], spr=('RQXM', 'RQXP', 'RQXW'),
+                 off=(0.0, 0.0, -5.0)),	# F11: its own MODELDEF ZOffset -5 (the reload drew the gun 5 cm higher)
     'Flamethrower2': dict(card='BD_Flamethrower', ref='flamethrower_wm.md3', mesh='Flamethrower2/Flamethrower2.md3', dec='Flamethrower.dec',
                  part='canister', ref_parts={'canister': 'magazine'}, ready_frame=0,
                  snd_out='rsr/canout', snd_in='rsr/canin', snd_land='rsr/bigdrop',
                  toggle='rsq_plus_flamer', label='Flamethrower: Canister Reload',
                  reserve='Gas', magammo='RSQ_FlamerCanister', nomag='RSQ_NoCanister_Flamer', ammouse=1,
-                 ready_sprites=['FLMT A', '2LMT A'], spr=('RQYM', 'RQYP', 'RQYW')),
+                 ready_sprites=['FLMT A', '2LMT A'], spr=('RQYM', 'RQYP', 'RQYW'),
+                 off=(0.0, 0.0, -5.0)),	# F11: its own MODELDEF ZOffset -5 (the reload drew the gun 5 cm higher)
     # THE M32, AND THE FIRST GUN ADDED WITHOUT A CARD OR A REFERENCE MESH (owner, 2026-10-25:
     # "we want reloading for all weapons that are not melee"). It needs neither: its `magazine`
     # is already its own surface in the mesh we ship -- 484 verts, a drum 17.4 cm long and ~15
@@ -133,7 +135,8 @@ PLUS = {
                  snd_out='Unmaker/Stop', snd_in='Unmaker/Start', snd_land='rsr/bigdrop',
                  toggle='rsq_plus_unmaker', label='Unmaker: Skull Reload',
                  reserve='SoulAmmo', magammo='RSQ_UnmakerSkull', nomag='RSQ_NoSkull_Unmaker', ammouse=2,
-                 ready_sprites=['UNHG A', '2NHG A'], spr=('RQWM', 'RQWP', 'RQWW')),
+                 ready_sprites=['UNHG A', '2NHG A'], spr=('RQWM', 'RQWP', 'RQWW'),
+                 off=(0.0, 0.0, -5.0)),	# F11: its own MODELDEF ZOffset -5 (the reload drew the gun 5 cm higher)
     # F10: the Minigun's ammo box. Owner, 2026-10-25: "carve the blue block under the gun" (surface
     # 1, a `Runko`, blue on the contact sheet), and later a bigger box model for the one in the hand.
     # Carved by position like the Machinegun: every island of surface 1 wholly inside x 58..67, below
@@ -325,7 +328,7 @@ def geometry(only=()):
         # TRAVEL: a carded gun states it; a direct gun takes the mouth the kit just measured off
         # its own mesh, which is the distance the part has to move to clear the well.
         travel = (float(p['travel']) if p['travel'] is not None else float(depth)) if direct else float(part['dof']['distance'])
-        rec = dict(cls=cls, card=p.get('card'), carved=carved, surfaces=cv['surfaces'], frames=cv['frames'],
+        rec = dict(cls=cls, card=p.get('card'), carved=carved, off=list(of), surfaces=cv['surfaces'], frames=cv['frames'],
                    unlabelled=cv['unlabelled'], rigid=dict(mean_cm=round(dmean, 4), max_cm=round(dmax, 4), rot_deg=cv['rot_deg']),
                    # CAPACITY IS INVENTED AND ALWAYS WAS. BD22 states none for any of these guns, so
                    # MG42 200, Flamethrower 200 and Unmaker 60 all came off the owner's REMA sheet.
@@ -732,6 +735,25 @@ def apply():
         if p.get('late'):
             continue        # written by the `late` stage, after bd22_mg.py
         r = geo[cls]
+        # F11: points measured through another placement than the entry's (the MG42, Flamethrower and
+        # Unmaker were measured at ZOffset 0; their guns sit at -5) are carried over, not re-measured:
+        # an Offset is a pure shift of the controller frame (rgeo.to_flu).
+        # records from before 'off' was kept: the card-measured guns (MG42, Flamethrower, Unmaker) went
+        # through the default (0, 0, 0); every direct gun through its own entry's placement
+        goff = r.get('off', [0.0, 0.0, 0.0] if 'ref' in p else list(p.get('off', OFF)))
+        d_off = tuple(np.array(p.get('off', OFF), float) - np.array(goff, float))
+        if any(x != 0 for x in d_off):
+            import copy
+            r = copy.deepcopy(r)
+            sh = rgeo.to_flu(np.zeros((1, 3)), (-1, 1, 1), d_off)[0] - rgeo.to_flu(np.zeros((1, 3)), (-1, 1, 1), (0, 0, 0))[0]
+            mz = r['survey']['parts']['magazine']
+            for k in ('well_point', 'base_point', 'card_grab', 'card_magcenter'):
+                if mz.get(k) is not None:
+                    mz[k] = (np.array(mz[k]) + sh).round(3).tolist()
+            for k in ('palm', 'supportat'):
+                if r.get(k) is not None:
+                    r[k] = (np.array(r[k]) + sh).round(3).tolist()
+            log.setdefault('placement_shift', {})[cls] = sh.round(3).tolist()
         gdir = p['mesh'].split('/')[0]
         model = os.path.basename(r['carved'])
         shutil.copy(r['carved'], OUT_SRC + 'models/bd/%s/%s' % (gdir, model))
