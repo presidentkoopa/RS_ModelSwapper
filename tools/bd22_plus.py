@@ -4733,6 +4733,43 @@ def sound_lump_names():
     return [dict(fix='sound file renamed off a BD22 lump name', file=o, result=n) for o, n in renames]
 
 
+# F11 (owner, headset 2026-10-26): grips to move, in cm, (dx, dy, dz) on the hand-table row's own
+# axes. Measured on screen in the rig before and after (tools/rig/cmp.py), never assumed.
+GRIP_NUDGES = {
+    25: (-2.0, 0.0, 0.0),	# Chain_saw: "grip hand needs moved 2 cm to the left" (rig render: +x moved it right)
+    10: (0.0, 0.0, -2.0),	# IncendiaryLauncher: "bad grip, needs moved forward 2 cm" (z is back: -2 = forward, rig render)
+}
+
+
+def grip_nudges():
+    """Moves a gun-hand hook (GunHook and GunHookTwo) of the rows in GRIP_NUDGES. Idempotent: the
+    row's 1.96b value is read from SRC, the nudge added, the result written."""
+    log = []
+    p = OUT_SRC + 'zscript/rsq/handtable.zs'
+    t = open(p).read()
+    base = open(SRC + 'zscript/rsq/handtable.zs').read()
+    for fn in ('GunHook', 'GunHookTwo'):
+        m0 = re.search(r'static Vector3 %s\(int i\)\n\t\{\n(.*?)\n\t\t return' % fn, base, re.S) or \
+             re.search(r'static Vector3 %s\(int i\)\n\t\{\n(.*?)\n\t\treturn' % fn, base, re.S)
+        m1 = re.search(r'static Vector3 %s\(int i\)\n\t\{\n(.*?)\n\t\treturn' % fn, t, re.S)
+        if not m0 or not m1:
+            continue
+        rows0 = {a: [float(x) for x in b.split(',')] for a, b in re.findall(r'static const double (\w)\[\] = \{ (.*?) \};', m0.group(1))}
+        body = m1.group(1)
+        for ax, k in (('x', 0), ('y', 1), ('z', 2)):
+            mm = re.search(r'(static const double %s\[\] = \{ )(.*?)( \};)' % ax, body)
+            vals = [x.strip() for x in mm.group(2).split(',')]
+            for row, d in GRIP_NUDGES.items():
+                if row < len(vals) and row < len(rows0[ax]):
+                    vals[row] = '%.3f' % (rows0[ax][row] + d[k])
+            body = body[:mm.start(2)] + ', '.join(vals) + body[mm.end(2):]
+        t = t[:m1.start(1)] + body + t[m1.end(1):]
+    open(p, 'w').write(t)
+    for row, d in GRIP_NUDGES.items():
+        log.append(dict(fix='grip nudge row %d' % row, file='zscript/rsq/handtable.zs', result=str(d)))
+    return log
+
+
 def held_reload():
     """R3, part 2: before each magazine gun's own reserve check in Reload, a jump on its held rounds
     to the state that check jumps to (a new label there: a label is not a state, so no offset
@@ -4799,6 +4836,7 @@ def fixes():
         open(p, 'w', newline='').write(t)
         log.append(dict(fix=why, file=rel, result='applied'))
     log += held_reload()
+    log += grip_nudges()
     log += sound_lump_names()
     # the axe lock ring's art (tools/data/rqlk/SOURCE.txt): RSVR_AxeLock draws RQLK, which no file had
     for k in 'ABCD':

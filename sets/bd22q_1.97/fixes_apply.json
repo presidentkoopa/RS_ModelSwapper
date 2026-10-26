@@ -2,12 +2,12 @@
  {
   "fix": "recoil: removed (handler)",
   "file": "MAPINFO.rsvr",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "recoil: removed (menu row)",
   "file": "MENUDEF.rsq",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "ballistics: IsShot, the one test of what a shot is",
@@ -213,6 +213,16 @@
   "fix": "R3 held rounds reload: Rocket_Launcher",
   "file": "actors/Weapons/RocketLauncher.dec",
   "result": "already applied"
+ },
+ {
+  "fix": "grip nudge row 25",
+  "file": "zscript/rsq/handtable.zs",
+  "result": "(-2.0, 0.0, 0.0)"
+ },
+ {
+  "fix": "grip nudge row 10",
+  "file": "zscript/rsq/handtable.zs",
+  "result": "(0.0, 0.0, -2.0)"
  },
  {
   "fix": "axe lock ring art RQLKA0-D0",
