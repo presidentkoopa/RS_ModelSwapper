@@ -3167,6 +3167,7 @@ Model MS_BD22_Rifle
 	ZOffset -5
 	NoInterpolation
 	FrameIndex CHGG A 0 3
+	FrameIndex CHGG A 1 3
 	FrameIndex MSBL A 0 9999
 }
 

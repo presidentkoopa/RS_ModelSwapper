@@ -86,6 +86,17 @@ def mod_refilled(text, after):
     return bool(later) and max(later) > (before[-1] if before else 0)
 
 
+def hands_on_gun(donor):
+    """the support / gun hand distance check (tools_kit/hand_gap.py, from the tables the engine reads:
+    MODELDEF, RSQ_HandTable, MODELDEF.rsq). Owner's finding 3: a hand placed off the model."""
+    sys.path.insert(0, os.path.join(ROOT, 'tools_kit'))
+    import hand_gap
+    ok, lines = hand_gap.check(donor)
+    for l in lines:
+        print('   | hands:', l)
+    return ok
+
+
 def shelf_pick(donor):
     """(archetype, index of the donor within its archetype's rows) from RS_ForeignModels.zs"""
     t = open(os.path.join(ROOT, 'zscript/RS_ForeignModels.zs'), encoding='utf-8').read()
@@ -268,6 +279,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
                                 else len(re.findall(r'RSBT t\d+ seated chamber', text)) >= 1),
             ('it closed', re.search(r'shut \(flick\)', text) is not None if vr else 'all chambers loaded: closing' in text),
             ('round in off hand', held_in_off(text, (2202, 2203))),
+            ('hands on the gun', hands_on_gun(donor)),
             ('handed back', 'gave %s back' % gun in text),
             ('their reload ran', mod_refilled(text, 'gave %s back' % gun) if MOD else 'TM ssg: barrels 2' in text),
             ('reached the end', 'GATE_END' in text),
@@ -314,6 +326,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
             ('no script error', not re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
             ('join took it', '%s pump: took it at its reload' % gun in text),
             ('shell in off hand', held_in_off(text, (2210,))),
+            ('hands on the gun', hands_on_gun(donor)),
             ('hand fed shells', 'a shell pushed home' in text),
             ('their loop ran', len(re.findall(r'^AMMO t\d+ mag [1-9]', logtext, re.M)) >= 2 if MOD else shells >= 2),
             ('re-held per shell', 'a shell in -- held for the next' in text),
@@ -338,6 +351,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # Reload Order "mod's reload first" (ms_mod_first, the default): the mod's reload ran, then
         # the gun was held -- no fire -- until the hands finished
         ('fire held for hands', ('ms_mod_first 0' in EXTRA) or re.search(r'the mod\'s reload is done -- held.*?gave \w+ back \(hands finished -- fire allowed\)', text, re.S) is not None),
+        ('hands on the gun', hands_on_gun(donor)),
         ('join took it', 'took %s' % gun in text),
         ('as this model', 'took %s (slot %d)' % (gun, slot_of(donor)) in text),
         ('magazine out', re.search(r'gun \d+: \w+ -> EMPTY', text) is not None),

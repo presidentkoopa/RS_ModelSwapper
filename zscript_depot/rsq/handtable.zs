@@ -34,13 +34,13 @@ class RSQ_HandTable abstract
 		if (donor == "MS_AE_Flamer")	return 1;
 		if (donor == "MS_AE_Pistol")	return 2;
 		if (donor == "MS_AE_Shotgun")	return 3;
-		if (donor == "MS_BD_AssaultShotgun")	return 63;	// = MS_BD22_AssaultShotgun, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
-		if (donor == "MS_BD_BrutalSMG")	return 61;	// = MS_BD22_SMG, drawn identically (tools_kit/twin_hands.py, 0.00001 m)
+		if (donor == "MS_BD_AssaultShotgun")	return 63;	// = MS_BD22_AssaultShotgun, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was 4)
+		if (donor == "MS_BD_BrutalSMG")	return 61;	// = MS_BD22_SMG, drawn identically (tools_kit/twin_hands.py, 0.00001 m; was 5)
 		if (donor == "MS_BD_Flamethrower2")	return 6;
-		if (donor == "MS_BD_M79")	return 71;	// = MS_BD22_M79, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
+		if (donor == "MS_BD_M79")	return 71;	// = MS_BD22_M79, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was 7)
 		if (donor == "MS_BD_Machinegun")	return 8;
-		if (donor == "MS_BD_RailGun")	return 64;	// = MS_BD22_RailGun, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
-		if (donor == "MS_BD_Rifle")	return 60;	// = MS_BD22_Rifle, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
+		if (donor == "MS_BD_RailGun")	return 64;	// = MS_BD22_RailGun, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was 9)
+		if (donor == "MS_BD_Rifle")	return 10;
 		if (donor == "MS_BD_Unmaker")	return 11;
 		if (donor == "MS_Chaingun")	return 12;
 		if (donor == "MS_Chainsaw")	return 13;
@@ -60,17 +60,17 @@ class RSQ_HandTable abstract
 		if (donor == "MS_alien_pistol")	return 27;
 		if (donor == "MS_alien_rifle")	return 28;
 		if (donor == "MS_brt_BrutalPistol")	return 29;
-		if (donor == "MS_brt_BrutalSMG")	return 61;	// = MS_BD22_SMG, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
+		if (donor == "MS_brt_BrutalSMG")	return 61;	// = MS_BD22_SMG, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was 30)
 		if (donor == "MS_brt_MP40")	return 31;
-		if (donor == "MS_brt_PlasmaGun")	return 65;	// = MS_BD22_PlasmaGun, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
-		if (donor == "MS_brt_RPG")	return 66;	// = MS_BD22_RocketLauncher, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
+		if (donor == "MS_brt_PlasmaGun")	return 65;	// = MS_BD22_PlasmaGun, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was 32)
+		if (donor == "MS_brt_RPG")	return 66;	// = MS_BD22_RocketLauncher, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was 33)
 		if (donor == "MS_brt_RailGun")	return 34;
-		if (donor == "MS_brt_Rifle")	return 60;	// = MS_BD22_Rifle, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
+		if (donor == "MS_brt_Rifle")	return 35;
 		if (donor == "MS_chex_largezorcher")	return 36;
 		if (donor == "MS_chex_superlargezorcher")	return 37;
 		if (donor == "MS_d64_BrutalPistol")	return 38;
-		if (donor == "MS_d64_PlasmaGun")	return 65;	// = MS_BD22_PlasmaGun, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
-		if (donor == "MS_d64_RPG")	return 66;	// = MS_BD22_RocketLauncher, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
+		if (donor == "MS_d64_PlasmaGun")	return 65;	// = MS_BD22_PlasmaGun, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was 39)
+		if (donor == "MS_d64_RPG")	return 66;	// = MS_BD22_RocketLauncher, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was 40)
 		if (donor == "MS_hdvr_Pistol")	return 41;
 		if (donor == "MS_hdvr_PlasmaRifle")	return 42;
 		if (donor == "MS_hdvr_RPG")	return 43;
@@ -104,9 +104,9 @@ class RSQ_HandTable abstract
 		if (donor == "MS_BD22_M79")	return 71;
 		if (donor == "MS_alien_smartgun")	return 72;
 		if (donor == "MS_alien_shotgun")	return 73;
-		if (donor == "MS_brt_AssaultShotgun")	return 63;	// = MS_BD22_AssaultShotgun, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
-		if (donor == "MS_brt_Revolver")	return 70;	// = MS_BD22_Revolver, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
-		if (donor == "MS_d64_ShotGun")	return 68;	// = MS_BD22_Shotgun, drawn identically (tools_kit/twin_hands.py, 0.00000 m)
+		if (donor == "MS_brt_AssaultShotgun")	return 63;	// = MS_BD22_AssaultShotgun, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was -)
+		if (donor == "MS_brt_Revolver")	return 70;	// = MS_BD22_Revolver, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was -)
+		if (donor == "MS_d64_ShotGun")	return 68;	// = MS_BD22_Shotgun, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was -)
 		return 0;
 	}
 

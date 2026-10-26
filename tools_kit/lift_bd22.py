@@ -252,8 +252,8 @@ def main(src, which):
         anchor = shelf_anchor(arch)
         nframes = md3_frames(os.path.join(ROOT, path.replace('models/bd/', 'models/depot_bd/bd/'),
                                           re.search(r'Model\s+0\s+"([^"]+)"', gb['body']).group(1)))
-        md_add.append('Model %s\n{\n\t// BD22Q\'s own %s: mesh, skin and placement exactly as BD22Q ships them\n\t// (tools_kit/lift_bd22.py); resting on BD22\'s ready frame %d\n%s\n\tFrameIndex %s A 0 %d\n\tFrameIndex MSBL A 0 9999\n}\n'
-                      % (d, g, rf, '\n'.join('\t' + l for l in keep), anchor, rf))
+        md_add.append('Model %s\n{\n\t// BD22Q\'s own %s: mesh, skin and placement exactly as BD22Q ships them\n\t// (tools_kit/lift_bd22.py); resting on BD22\'s ready frame %d\n%s\n%s\tFrameIndex MSBL A 0 9999\n}\n'
+                      % (d, g, rf, '\n'.join('\t' + l for l in keep), rest_rows(gb['body'], anchor, rf)))
         stubs.append('class %s : Actor {}' % d)
         shelf.append('"%s|%s|%s|0|%d|%d",' % (arch, d, anchor, rf, nframes))
         names.append('"%s|%s",' % (d, GUNS[g][2]))
@@ -377,6 +377,53 @@ def charge_tokens(dry=False):
         open(p, 'w', newline='\n').write(rsr)
 
 
+def rest_rows(body, anchor, rf):
+    """one FrameIndex row per model the block draws. BD22Q's own blocks key every model on every
+    frame (its Rifle: Model 0 the gun, Model 1 its M203, both on frame 3); a row for Model 0 alone
+    drew no M203, and the support hand held the air where the tube should be (rig, 2026-10-26).
+    Each extra model takes the frame BD22Q gives it on the gun's ready sprite, else the gun's."""
+    rows = []
+    ready = None
+    for s, l, m, f in frames_of(body):
+        if m == '0' and int(f) == rf:
+            ready = (s, l); break
+    for n in sorted({m for m in re.findall(r'^[ \t]*Model\s+(\d+)\s+"', body, re.M)}, key=int):
+        f = rf
+        if n != '0' and ready:
+            for s, l, m, fr in frames_of(body):
+                if (s, l) == ready and m == n:
+                    f = int(fr); break
+        rows.append('\tFrameIndex %s A %s %d\n' % (anchor, n, f))
+    return ''.join(rows)
+
+
+def refresh_rest_rows(src, dry=False):
+    """re-write the FrameIndex rows of every lifted donor block by rest_rows (blocks lifted before it)
+    python -B tools_kit/lift_bd22.py --rest-rows <RS_Brutal22WeaponsQ/src> [--dry]"""
+    p = os.path.join(ROOT, 'modeldef')
+    md = read(p)
+    md_blocks = bd22_blocks(read(os.path.join(src, 'MODELDEF.bd.txt'))) + bd22_blocks(read(os.path.join(src, 'MODELDEF.rsr')))
+    for g in GUNS:
+        d = donor(g)
+        m = re.search(r'^Model %s\s*\{.*?^\}' % re.escape(d), md, re.M | re.S)
+        if not m:
+            continue
+        blk = m.group(0)
+        mesh = re.search(r'Model\s+0\s+"([^"]+)"', blk).group(1).lower()
+        cand = [b for b in md_blocks if b['cls'] == g and (re.search(r'Model\s+0\s+"([^"]+)"', b['body']) or [None, ''])[1].lower() == mesh]
+        if not cand:
+            continue
+        gb = max(cand, key=lambda b: len(frames_of(b['body'])))
+        am = re.search(r'FrameIndex\s+(\w{4})\s+A\s+0\s+(\d+)', blk)
+        rows = rest_rows(gb['body'], am.group(1), int(am.group(2)))
+        nb = re.sub(r'(?:^[ \t]*FrameIndex\s+%s\s+A\s+\d+\s+\d+[^\n]*\n)+' % am.group(1), rows, blk, count=1, flags=re.M)
+        if nb != blk:
+            print('  %-24s %s' % (d, rows.strip().replace('\n', ' | ')))
+            md = md.replace(blk, nb)
+    if not dry:
+        write(p, md)
+
+
 def refresh_hands(src, only=None, dry=False):
     """Re-copy every lifted donor's HAND row (GunOne .. Trigger, GunHookTwo / GunRotTwo) from a BD22Q
     src's own handtable.zs, by BD22 class, onto the donor's existing slot. The first lift copied
@@ -421,6 +468,10 @@ def refresh_hands(src, only=None, dry=False):
     if not dry:
         write(p, hand)
 
+
+if __name__ == '__main__' and '--rest-rows' in sys.argv:
+    refresh_rest_rows(sys.argv[sys.argv.index('--rest-rows') + 1], '--dry' in sys.argv)
+    sys.exit(0)
 
 if __name__ == '__main__' and '--hands' in sys.argv:
     k = sys.argv.index('--hands')

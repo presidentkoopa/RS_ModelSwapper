@@ -50,18 +50,27 @@ def placement(body):
 
 
 def drawn(body):
-    """every vertex of the block's model 0 on its rest frame, in the controller frame (m)"""
+    """every vertex of EVERY model the block draws (Model N on the frame its FrameIndex row gives it),
+    in the controller frame (m). A block that draws a part the other does not (BD22's Rifle carries
+    its M203 as Model 1, where the support hand holds it) is not a twin."""
     path = re.search(r'Path\s+"([^"]+)"', body)
-    mdl = re.search(r'Model\s+0\s+"([^"]+)"', body)
-    if not path or not mdl:
-        return None
-    f = os.path.join(ROOT, path.group(1), mdl.group(1))
-    if not os.path.exists(f):
+    if not path:
         return None
     sc, off, fr, _ = placement(body)
-    surf = H.load(f)
-    v = np.concatenate([x[min(fr, len(x) - 1)] for _, x in surf])
-    return H.to_local(v, {'scale': sc, 'off': off}, ws=1.0)
+    vs = []
+    for n, mdl in re.findall(r'^[ \t]*Model\s+(\d+)\s+"([^"]+)"', body, re.M):
+        frm = re.search(r'FrameIndex\s+\w+\s+A\s+%s\s+(\d+)' % n, body)
+        if n != '0' and not frm:
+            continue                    # no row: the engine draws nothing for it
+        f = os.path.join(ROOT, path.group(1), mdl)
+        if not os.path.exists(f):
+            return None
+        fn = int(frm.group(1)) if frm else fr
+        surf = H.load(f)
+        vs.append(np.concatenate([x[min(fn, len(x) - 1)] for _, x in surf]))
+    if not vs:
+        return None
+    return H.to_local(np.concatenate(vs), {'scale': sc, 'off': off}, ws=1.0)
 
 
 def main(dry):
@@ -93,7 +102,7 @@ def main(dry):
                 continue
             changes.append((d, r, slot.get(d), slot[r], gap))
     for d, r, old, new, gap in changes:
-        line = '\t\tif (donor == "%s")\treturn %d;\t// = %s, drawn identically (tools_kit/twin_hands.py, %.5f m)' % (d, new, r, gap)
+        line = '\t\tif (donor == "%s")\treturn %d;\t// = %s, drawn identically (tools_kit/twin_hands.py, %.5f m; was %s)' % (d, new, r, gap, old if old else '-')
         pat = re.compile(r'^[ \t]*if \(donor == "%s"\)\s*return \d+;.*$' % re.escape(d), re.M)
         if pat.search(t):
             t = pat.sub(lambda m: line, t, count=1)
