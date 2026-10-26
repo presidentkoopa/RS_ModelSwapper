@@ -4,8 +4,9 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F10** -- F1-F9 are DONE and committed (2026-10-25). F10 finishes the roster: the two
-remaining non-melee guns that can reload. The owner's headset pass on F1-F9 is still outstanding and
+Current step: **F11** -- F1-F10 are DONE and committed (2026-10-25). F10 finished the roster: every
+non-melee gun the owner kept reloads by hand (23; BFG and BFG10k closed by him). F11 is the fixes
+and polish, then the gated pk3. Open from F10: the Minigun's bigger in-hand box (owner's idea, later). The owner's headset pass on F1-F9 is still outstanding and
 is what gates the 1.99 release; nothing in this pack has ever been seen in VR.
 The S items are TABLED; do not start one.
 
@@ -92,7 +93,7 @@ per-gun checklist below, in a headset, signed by the owner.
       `C:\Users\Command\.claude\skills\gate-a-doom-mod\`, and sent to the RS ModelSwapper lane on
       the owner's instruction, 2026-10-25.
 
-- F10 **EVERY NON-MELEE GUN RELOADS.** The owner's objective, stated plainly on 2026-10-25:
+- F10 DONE 2026-10-25 (`dae5a68`). **EVERY NON-MELEE GUN RELOADS.** The owner's objective, stated plainly on 2026-10-25:
       "we want reloading for all weapons that are not melee / if bd22 does not allow it then we
       already ship our own weapon code anyway so why not". That settles it. 28 guns carry hands,
       3 are melee (BrutalAxe, Chain_saw, DSweap), and the other 25 all reload when this step ends.
