@@ -10,6 +10,32 @@ round; ModelSwapper puts its models on it and the hands do the physical part. Ne
 ammo; never guess a number (measure from the mesh / parse the code, and say which). No engine changes
 (QuestZDoom 17.3). Test load order: doom2 -> brutal22test6 -> BD_VoxelPack -> the pack.
 
+## FIXED the same night (2026-10-26 03:30-04:20), after this handoff was first written
+
+* **The knife (finding 1) was ModelSwapper's own.** The weapon scan listed `rsq_hands` -- OUR off-hand
+  weapon, spelled lower-case by GetClassName -- as a melee weapon and put the shelf's knife model on
+  it (`[DBG] listed rsq_hands from 'ms_off.pk3' as melee`). With the knife's modelDef on the hands, the
+  free hand AND every held part on them (magazine, shell, round) drew as the knife or not at all.
+  `IsOurs` now compares lower-cased and knows RSQ_/RSR_/RSB_/RSP_/RSK_/RSM_. Rig shot of MS_BD22_M79:
+  knife before, glove holding the grenade round after (`f260dc4`).
+* **ModelSwapper blanked our own layers.** BlankWeaponFlashes pinned every extra layer of any Weapon
+  caller to the blank anchor while a model was bound, our hands' too ("blanking layer 2201 of
+  rsq_hands" = the magazine). Our callers are skipped now (by name; the desktop build lacks them).
+* **A mod's own off-hand melee kept our hands out** (finding 2). Hands were installed only into an
+  EMPTY off hand; they now replace any off-hand weapon that is not a gun (no Reload state), bounded
+  against a mod that forces its own back. Options, VR Reload: **Off Hand: Fists / Mod's own**.
+  Gate `--offknife` (a test-mod knife put in the off hand): fails on 4227925, PASSES now (magazine,
+  pump, break-open).
+* **Reload order (finding 4), magazine guns:** Options **Reload Order: Mod's reload first** (default) /
+  Hands first. Mod first: the hands' reload starts at the press, the mod's reload runs at once to its
+  end, the gun is parked there (no fire) until the hands finish, then goes on from that state. Gate
+  check "fire held for hands" (log order: mod's refill, "held, no fire", "gave back -- fire allowed").
+  PASS: MS_Pistol, MS_AE_Pistol, MS_BD22_Rifle (with handle). Pump and break-open still hands first --
+  the owner's call (pump: whole tube at once, or one push per pass?).
+* **M79 support hand (finding 3): NOT confirmed fixed.** Its hand row, pivot and placement equal BD22Q's
+  number for number. Likely the same root cause -- the off-hand weapon's ModifyBobLayer3D places
+  every non-ready layer and that weapon wore the knife's model -- but only the headset can say.
+
 ## The owner's headset findings, in his words, with leads
 
 ### 1. "Magazines and shells do not appear in the offhand, all I see is a knife." — TOP PRIORITY
