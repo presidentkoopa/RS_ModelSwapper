@@ -15,6 +15,8 @@ root is the ten rules; this file is the state. Both are binding.
 `tools/check_plan.py` is run before every commit (pre-commit hook, see "No drift") and refuses work
 that is not on the plan.**
 
+**READ docs/HEADSET_PASS_1.99_2026-10-26.md FIRST: the owner's headset pass on 1.99 found 21 problems; 1.92 is the baseline.**
+
 ## F11 started (2026-10-25): fixes and polish
 - DONE: `bd22_plus.py pk3` puts `.md3` lumps in as LZMA (zip method 14), the rest deflated. Same
   689 lumps from `sets/bd22q_1.97/src`, byte-identical on read-back: **30 MB, was about 50**.

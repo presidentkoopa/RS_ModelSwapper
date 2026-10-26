@@ -4317,6 +4317,18 @@ def spine():
 # once, and it is skipped (not doubled) if its new text is already there, so the stage can run on
 # top of a finished build or at the end of a full one. Runs after every other stage, before sync.
 F11_FIXES = [
+    # RECOIL REMOVED (owner, 2026-10-26, in the headset: "did you build some kind of fucked up
+    #    recoil? we didn't have this in 1.92 ... this recoil needs to go"). F5's recoil turns the
+    #    gun model through psp.x/psp.y, but the parts the reload draws on their own layers (the
+    #    pistol's locked slide, the SSG's open barrels, a magazine at the well) are placed in the
+    #    controller's frame and do not turn with it -- so on a last shot or a reload the gun came
+    #    apart. Not registered, not in the menu: the guns are 1.92's again.
+    ('recoil: removed (handler)', 'MAPINFO.rsvr',
+     '"RSQ_Counters", "RSQ_Recoil", "RSQ_FlashHandler"',
+     '"RSQ_Counters", "RSQ_FlashHandler"'),
+    ('recoil: removed (menu row)', 'MENUDEF.rsq',
+     '\tOption "Gun Recoil", "rsq_recoil", "OnOff"\n',
+     ''),
     #  3. ...and BD22's FOOTSTEPS are damaging player missiles (ballistics.zs knew: "1.11"), so
     #     walking was a shot to recoil and the flash too. One test for all three: a missile is a
     #     shot when it does damage and is not melee, a trample (footstep) or the haptic buzz.
@@ -4774,7 +4786,7 @@ def fixes():
         crlf = '\r\n' in t
         if crlf:
             t = t.replace('\r\n', '\n')
-        if new in t:		# several fixes keep their old text inside the new, so test the new
+        if (new in t) if new else (old not in t):	# several keep the old inside the new; a deletion is done when the old is gone
             log.append(dict(fix=why, file=rel, result='already applied'))
             continue
         n = t.count(old)
