@@ -193,7 +193,11 @@ class RSR abstract
 		if (psp.CurState == w.FindState("RSR_Wait"))
 			return true;
 		let hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
-		return hold && psp.CurState == hold;
+		if (hold && psp.CurState == hold)
+			return true;
+		// ModelSwapper, Reload Order "mod's reload first": the mod's own reload states run while the
+		// hands work, before the gun is parked; it is drawn as held all the same
+		return psp.ID == PSP_WEAPON && MS_ReloadJoin.Drives(psp.Owner, w);
 	}
 
 	// The reserve a fresh magazine is taken from. A table that names one (a pack that owns

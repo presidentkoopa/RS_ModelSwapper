@@ -195,7 +195,15 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     # the rig renders slower than the game tics: a 3-tic tap can fall between its frames (kit README:
     # "a gesture must be held"), so on --vr the reload button is held for 15
     up = 130 if vr else 118
-    if brk:
+    if brk and MOD == 'bd22:SSG':
+        # BD22's SSG keeps its own "both barrels loaded" flag (SSGLoaded) beside SSGAmmo, and its
+        # Reload goes straight back to Ready while it is set (SSG.dec:383) -- emptying the count is
+        # not empty to BD22. A player fires it dry: loaded, one shot (both barrels, Fire takes
+        # SSGLoaded), then the reload button.
+        t[-1] = (40, 'rsqt_gun %s; rsqt_empty 0' % gun)
+        t += [(60, 'give ammo'), (100, 'rsrtest_script 0; rsbtest_script 1'), (105, '+attack'), (112, '-attack'),
+              (160, '+reload'), (175, '-reload')]
+    elif brk:
         t += [(110, 'rsrtest_script 0; rsbtest_script 1'), (115, '+reload'), (up, '-reload')]
     elif pump and shot:
         # --shot: the pump AFTER A SHOT. Loaded gun, the off hand steadied on the pump (script 2:
@@ -319,6 +327,9 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
             # desktop: break_test.zs seats each chamber itself (RSB_State.Seat), no hand carries a round
             ('round in off hand', held_in_off(text, (2202, 2203)) if vr else True),
             ('hands on the gun', hands_on_gun(donor)),
+            # Reload Order "mod's reload first" (ms_mod_first, the default, owner 2026-10-26): the mod's
+            # reload ran at the press, then the gun was held -- no fire -- until the hands shut it
+            ('fire held for hands', ('ms_mod_first 0' in EXTRA) or re.search(r"the mod's reload runs first.*?the mod's reload is done -- held.*?gave \w+ back \(hands finished -- fire allowed\)", text, re.S) is not None),
             ('handed back', 'gave %s back' % gun in text),
             ('their reload ran', mod_refilled(text, 'gave %s back' % gun) if MOD else 'TM ssg: barrels 2' in text),
             ('reached the end', 'GATE_END' in text),

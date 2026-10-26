@@ -247,7 +247,8 @@ OptionMenu "RSR_Debug"
 // the off hand: these hands (BD22Q's fists; they hold the magazine, shell or round in a reload)
 // unless a gun is moved there, or whatever off-hand weapon the loaded mod gives (ms_off_fist)
 // the order: the mod's reload at the press and the fire held until the hands finish, or the gun held
-// at the press and the mod's reload after the hands (ms_mod_first)
+// at the press and the mod's reload after the hands (ms_mod_first). Magazine and break-open guns
+// (SSG, M79, revolvers) both follow it.
 OptionValue "MS_ReloadOrder"
 {
 	1, "Mod's reload first"

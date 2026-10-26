@@ -144,6 +144,30 @@ class MS_ReloadJoin : EventHandler
 	private Weapon mDrivW[MAXPLAYERS];
 	private int mDrivTic[MAXPLAYERS];
 
+	// Is the join running the hands' reload beside the mod's own for this gun (mod first, before the
+	// park)? The reloads draw the gun without its moving parts while it is parked (RSR.InHold); with
+	// the mod's reload running first the psprite is on the MOD's states, so they ask this too, or the
+	// gun would show its magazine / its shut barrels while the hand holds the same part.
+	clearscope static bool Drives(PlayerInfo p, Weapon w)
+	{
+		let h = MS_ReloadJoin(EventHandler.Find('MS_ReloadJoin'));
+		if (!h || !p || !w || !p.mo)
+			return false;
+		int n = p.mo.PlayerNumber();
+		return n >= 0 && n < MAXPLAYERS && h.mDriving[n] && h.mDrivW[n] == w;
+	}
+
+	// The model handler's own answer for the main hand (it runs first: a StaticEventHandler) against
+	// the published cvar the reload tables read. Equal once the cvar has caught up.
+	private bool DonorSettled()
+	{
+		let h = RS_ForeignModelHandler(StaticEventHandler.Find("RS_ForeignModelHandler"));
+		if (!h)
+			return true;
+		String want = h.mBridgeHasMain ? h.mBridgeDonorMain : "";
+		return RSR_Guns.DonorInHand(0) == want;
+	}
+
 	// A trace for the one failure mode that looks like nothing happening.
 	private bool ms_join_trace;
 	override void OnRegister() { let c = CVar.FindCVar('ms_join_trace'); ms_join_trace = c && c.GetInt() != 0; }
@@ -254,6 +278,17 @@ class MS_ReloadJoin : EventHandler
 				continue;
 			}
 			if (!w)
+				continue;
+
+			// THE DONOR MUST BE THIS GUN'S. Every reload table keys on ms_donor_main, a `server`
+			// cvar, and a server cvar set from script reaches its value through the net queue
+			// (D_SendServerInfoChange: DEM_SINFCHANGED), a tic or more after the model handler
+			// published it. A gun switched to and reloaded at once (BD22's GrenadeLauncher, fired
+			// empty the tic it came up) was taken under the PREVIOUS gun's model: the rig showed
+			// "took GrenadeLauncher (slot 17)" -- MS_alien_rifle, the BD22 Rifle's model -- and a
+			// magazine reload on a break-open gun. Not driving yet: wait until the cvar says what
+			// the handler says. Its reload entry is a 32-state window, so a tic or two is not missed.
+			if (!mHeld[i] && !mDriving[i] && !mFeeding[i] && !DonorSettled())
 				continue;
 
 			// Only a weapon wearing one of OUR meshes, and only a mesh whose
@@ -485,6 +520,9 @@ class MS_ReloadJoin : EventHandler
 	private void ModFirstEnd(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp, String why)
 	{
 		mDriving[i] = false;
+		let bs = RSB_Handler.StateOf(mo);
+		if (bs)
+			bs.paid = false;
 		mo.TakeInventory('RSR_Charge', 999);
 		bool parked = mHeld[i] != null;
 		State go = mReturn[i];
@@ -513,12 +551,20 @@ class MS_ReloadJoin : EventHandler
 	// it runs -- so they are cleared here each tic rather than left to pile up.
 	private void BreakTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
 	{
-		if (mHeld[i])
+		if (mHeld[i] || mDriving[i])
 		{
 			mo.GiveInventory('RSB_Tick', 1);		// the heartbeat a weapon's RSB_Wait would give
 			mo.TakeInventory('RSB_EjectT', 999);
 			mo.TakeInventory('RSB_LoadT', 999);
 			mo.TakeInventory('RSB_TopUpT', 999);
+		}
+		if (mDriving[i])
+		{
+			BreakFirstTick(mo, p, i, w, psp);
+			return;
+		}
+		if (mHeld[i])
+		{
 			if (mo.CountInv('RSB_Done') > 0)
 			{
 				mo.TakeInventory('RSB_Done', 999);
@@ -540,15 +586,71 @@ class MS_ReloadJoin : EventHandler
 		if (!hold)
 			return;
 		mo.TakeInventory('RSB_Go', 999);
+		mo.TakeInventory('RSB_Done', 999);
 		mo.GiveInventory('RSB_Start', 1);
 		if (mo.CountInv('RSB_Go') <= 0)
 			return;						// the break reload declined (VR off, Stock): the mod's own reload
 		mo.TakeInventory('RSB_Go', 999);
+		if (RSR.PlayerInt(p, 'ms_mod_first', 1) != 0)
+		{
+			// MOD FIRST (owner, 2026-10-26: "whenever we press reload, the code does its reload stuff,
+			// but prevents us from firing until we do the mesh manipulation stuff"), as for a magazine:
+			// the gun is NOT parked at its reload -- the mod's own reload runs now, to its end, with its
+			// own ammo -- and BreakFirstTick parks it where that reload leaves off until the hands have
+			// opened it, loaded it and shut it.
+			let bs = RSB_Handler.StateOf(mo);
+			if (bs)
+				bs.paid = true;			// the mod pays for these rounds: its reserve is not the hand's limit
+			mReturn[i] = null;
+			mHeld[i] = null;
+			mDriving[i] = true;
+			mDrivW[i] = w;
+			mDrivTic[i] = mo.Level.maptime;
+			if (RS_ForeignRemap.DebugOn())
+				Console.Printf("[MSJOIN] took %s (break slot %d) at its reload -- the mod's reload runs first", w.GetClassName(), RSB_Guns.Index(w));
+			return;
+		}
 		mReturn[i] = psp.CurState;
 		mHeld[i] = w;
 		p.SetPsprite(PSP_WEAPON, hold, false, w);
 		if (RS_ForeignRemap.DebugOn())
 			Console.Printf("[MSJOIN] took %s (break slot %d) at its reload", w.GetClassName(), RSB_Guns.Index(w));
+	}
+
+	// Break-open, mod first: the mod's reload is running (or has run) while the hands open, load and
+	// shut the gun. Where the mod's reload ends, the gun is parked -- no A_WeaponReady, so no fire --
+	// until RSB_Done; then it goes on from that state. The same park and release as the magazine's
+	// ModFirstTick; only the "hands finished" signal differs.
+	private void BreakFirstTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
+	{
+		if (w != mDrivW[i] || mo.health <= 0)
+		{
+			ModFirstEnd(mo, p, i, w, psp, "the gun left");
+			return;
+		}
+		let bs = RSB_Handler.StateOf(mo);
+		if (mo.CountInv('RSB_Done') > 0 || bs && bs.phase == RSB.DONE)
+		{
+			mo.TakeInventory('RSB_Done', 999);
+			ModFirstEnd(mo, p, i, w, psp, "hands finished");
+			return;
+		}
+		if (!bs || bs.phase == RSB.IDLE && mo.Level.maptime - mDrivTic[i] > 4)
+		{
+			ModFirstEnd(mo, p, i, w, psp, "the hands' reload is not running");
+			return;
+		}
+		State hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+		if (mHeld[i] || !hold || psp.CurState == hold)
+			return;
+		let m = RemapFor(mo, w);
+		if (InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState))
+			return;
+		mReturn[i] = psp.CurState;
+		mHeld[i] = w;
+		p.SetPsprite(PSP_WEAPON, hold, false, w);
+		if (RS_ForeignRemap.DebugOn())
+			Console.Printf("[MSJOIN] %s: the mod's reload is done -- held, no fire, until the hands finish", w.GetClassName());
 	}
 
 	// ---------------------------------------------------------------- the pump

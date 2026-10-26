@@ -279,6 +279,10 @@ class RSB_State play
 	int loadedNow;				// rounds this reload put in
 	bool ejected;
 	int liveAtOpen;				// live rounds when it opened (a speedloader's set ejects them all)
+	// ModelSwapper, Reload Order "mod's reload first" (MS_ReloadJoin): the mod's own reload has run
+	// (or is running) and moved its own ammo. Its reserve is then no longer where the hand's rounds
+	// come from: the hand may load as many chambers as the gun now holds rounds.
+	bool paid;
 
 	// the off hand
 	int hand;
@@ -512,7 +516,7 @@ class RSB_State play
 		int res = RSB.ReserveCount(mo, i);
 		// V+ super shotgun: its shells stay in the reserve until fired (its reload takes none)
 		int need = RSB_Guns.ReserveHoldsLoaded(i) ? LiveCount() + 1 : 1;
-		if (res < need)
+		if (res < need && !(paid && RSB.LoadedCount(mo, i) > LiveCount()))
 			return false;
 		Vector3 palm = OffPoint(RSR.PalmGrab());
 		Vector3 mid = RSB.HingeTurn(i, (RSB_Guns.Base(i, 0) + RSB_Guns.Tip(i, 0)) / 2, theta);
@@ -748,7 +752,8 @@ class RSB_State play
 				// and the reserve has two; pushed home together, they fill both barrels at once.
 				int need2 = RSB_Guns.ReserveHoldsLoaded(i) ? LiveCount() + 2 : 2;
 				pair = nch == 2 && !RSB_Guns.Loader(i) && ch[0] == RSB.EMPTY && ch[1] == RSB.EMPTY
-					&& RSB.ReserveCount(mo, i) >= need2 && RSB.PlayerInt(mo.player, 'rsr_ssg_pair', 1) != 0;
+					&& (RSB.ReserveCount(mo, i) >= need2 || paid && RSB.LoadedCount(mo, i) >= LiveCount() + 2)
+					&& RSB.PlayerInt(mo.player, 'rsr_ssg_pair', 1) != 0;
 				SetHand(mo, RSB.CARRY);
 				for (int k = 0; k < nch; k++)
 					sAt[k] = 999;
@@ -1082,6 +1087,7 @@ class RSB_State play
 		if (phase != RSB.IDLE)
 			SetPhase(mo, RSB.IDLE);
 		weap = null;
+		paid = false;
 		hand = RSB.FREE;
 		theta = thetaPrev = 0;
 		s = sPrev = 0;
