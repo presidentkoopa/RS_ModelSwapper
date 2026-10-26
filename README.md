@@ -55,7 +55,19 @@ All 35 are in renders/, and renders/sheets/ lays the before and after views side
 
 ## 2.0: hands and VR reloading on Quest (branch `modelswapper-2.0-bd22-lift`)
 
-Our models, their code, collective reloads. ModelSwapper still puts its models on whatever weapon mod is loaded, and that mod's code still fires the gun and decides every round. What 2.0 adds on the Quest build:
+Our models, their code, collective reloads.
+
+Load Brutal Doom, or Ashes, or a weapon mod written in 2009 by someone who has never heard of VR. Hit reload, and the magazine drops out of the gun. You reach down and grab a fresh one, slap it into the well and rack the handle. The mod's own reload then fills the gun with the mod's own ammo, its own rules and its own sounds.
+
+Nobody wrote a VR version of that mod. Nobody had to.
+
+A pump shotgun waits for your hand on the forend between shots. A double barrel breaks open, throws its empties and takes shells one at a time, then shuts with a flick of the wrist. A revolver's cylinder swings out and snaps back in.
+
+All of it sits on top of weapon code ModelSwapper has never seen. It reads the mod's states from outside and holds the gun at the right moment while your hands do the work. Then it hands the gun back exactly where the mod expects it. It never touches the mod's ammo or its code. Every number the hands use is measured from the meshes themselves: where the magazine sits, how far it travels, where the pump starts in the fire animation. None of it is typed in by hand.
+
+One shelf of models is measured once and then reloads on every mod, forever. That's the whole idea. As far as we know, nobody has done it before.
+
+ModelSwapper still puts its models on whatever weapon mod is loaded, and that mod's code still fires the gun and decides every round. What 2.0 adds on the Quest build:
 
 - **Hands on the guns.** Ermac's VR hands hold each model: gun hand on the grip with a finger on the trigger, support hand on the gun.
 - **VR reloading on any mod that reloads.** When the mod's weapon starts its own reload, ModelSwapper hands the physical part to you, then gives the gun back and the mod's reload fills it with the mod's own ammo:
