@@ -8,7 +8,7 @@ class RSR_Guns abstract
 	// (index 8). Every other index is still the generator's. Re-run gen_rsr.py when the
 	// gun goes through the real reload survey and these are what it should reproduce.
 
-	clearscope static int Count() { return 15; }
+	clearscope static int Count() { return 18; }
 
 	clearscope static int Index(Weapon w)
 	{
@@ -28,8 +28,11 @@ class RSR_Guns abstract
 		if (n == 'Flamethrower2')	return 11;
 		if (n == 'IncendiaryLauncher')	return 12;
 		if (n == 'Unmaker')	return 13;
-		if (n == 'Minigun')	return 14;
-		if (n == 'Machinegun')	return 15;
+		if (n == 'Devastator')	return 14;
+		if (n == 'NukeLauncher')	return 15;
+		if (n == 'HellishMissileLauncher')	return 16;
+		if (n == 'Minigun')	return 17;
+		if (n == 'Machinegun')	return 18;
 		return 0;
 	}
 
@@ -51,8 +54,11 @@ class RSR_Guns abstract
 		case 11:	return (28.489, 0.010, 0.460);
 		case 12:	return (14.812, 7.995, -4.216);
 		case 13:	return (11.788, 0.614, 12.329);
-		case 14:	return (33.417, -4.333, -22.866);
-		case 15:	return (14.339, -0.281, -12.295);
+		case 14:	return (17.879, 11.250, 8.304);
+		case 15:	return (36.407, -0.105, 14.610);
+		case 16:	return (-5.105, 12.794, 4.914);
+		case 17:	return (33.417, -4.333, -22.866);
+		case 18:	return (14.339, -0.281, -12.295);
 		}
 		return (0, 0, 0);
 	}
@@ -75,8 +81,11 @@ class RSR_Guns abstract
 		case 11:	return (-0.000, 0.000, 1.000);
 		case 12:	return (-0.000, 1.000, -0.000);
 		case 13:	return (-0.000, 0.000, -1.000);
-		case 14:	return (-0.014, -0.259, -0.966);
-		case 15:	return (-0.000, -0.000, -1.000);
+		case 14:	return (-0.000, 1.000, -0.000);
+		case 15:	return (-0.000, -0.000, 1.000);
+		case 16:	return (-0.000, 1.000, -0.000);
+		case 17:	return (-0.014, -0.259, -0.966);
+		case 18:	return (-0.000, -0.000, -1.000);
 		}
 		return (0, 0, 0);
 	}
@@ -99,8 +108,11 @@ class RSR_Guns abstract
 		case 11:	return 14.89;
 		case 12:	return 19.04;
 		case 13:	return 4.61;
-		case 14:	return 6.76;
-		case 15:	return 13.11;
+		case 14:	return 7.84;
+		case 15:	return 21.52;
+		case 16:	return 23.98;
+		case 17:	return 6.76;
+		case 18:	return 13.11;
 		}
 		return 0;
 	}
@@ -122,8 +134,11 @@ class RSR_Guns abstract
 		case 11:	return 12.11;
 		case 12:	return 16.09;
 		case 13:	return 4.59;
-		case 14:	return 4.70;
-		case 15:	return 10.71;
+		case 14:	return 6.16;
+		case 15:	return 19.19;
+		case 16:	return 24.18;
+		case 17:	return 4.70;
+		case 18:	return 10.71;
 		}
 		return 0;
 	}
@@ -145,8 +160,11 @@ class RSR_Guns abstract
 		case 11:	return (27.703, 0.013, -5.374);
 		case 12:	return (14.597, -0.029, -4.035);
 		case 13:	return (11.350, -0.131, 14.854);
-		case 14:	return (33.315, -3.990, -22.316);
-		case 15:	return (14.340, -0.151, -4.712);
+		case 14:	return (17.879, 9.039, 9.982);
+		case 15:	return (43.317, -0.005, 4.505);
+		case 16:	return (-5.884, 0.678, 7.504);
+		case 17:	return (33.315, -3.990, -22.316);
+		case 18:	return (14.340, -0.151, -4.712);
 		}
 		return (0, 0, 0);
 	}
@@ -169,8 +187,11 @@ class RSR_Guns abstract
 		case 11:	return (-0.700, 3.900, 11.201);
 		case 12:	return (-0.700, 21.467, -2.274);
 		case 13:	return (-1.481, 4.252, -6.901);
-		case 14:	return (-0.327, -0.077, -7.170);
-		case 15:	return (-0.696, 3.710, -14.212);
+		case 14:	return (-0.700, 10.899, -3.672);
+		case 15:	return (5.079, 3.848, 18.055);
+		case 16:	return (-0.708, 27.978, -2.221);
+		case 17:	return (-0.327, -0.077, -7.170);
+		case 18:	return (-0.696, 3.710, -14.212);
 		}
 		return (0, 0, 0);
 	}
@@ -193,8 +214,11 @@ class RSR_Guns abstract
 		case 11:	return (3.890, 10.741, 29.189);
 		case 12:	return (21.730, 3.133, 25.019);
 		case 13:	return (3.637, -19.230, 13.269);
-		case 14:	return (4.256, 15.696, 33.744);
-		case 15:	return (3.991, -1.917, 15.035);
+		case 14:	return (-0.351, -11.976, 18.579);
+		case 15:	return (3.593, 3.132, 28.480);
+		case 16:	return (15.184, -7.135, -4.397);
+		case 17:	return (4.256, 15.696, 33.744);
+		case 18:	return (3.991, -1.917, 15.035);
 		}
 		return (0, 0, 0);
 	}
@@ -217,8 +241,11 @@ class RSR_Guns abstract
 		case 11:	return (-0.000, -1.000, -0.000);
 		case 12:	return (-1.613, 0.000, -0.000);
 		case 13:	return (-0.000, 1.000, -0.000);
-		case 14:	return (0.259, 0.966, -0.014);
-		case 15:	return (0.000, 1.000, -0.000);
+		case 14:	return (-1.000, 0.000, -0.000);
+		case 15:	return (0.000, -0.909, -0.000);
+		case 16:	return (-1.000, 0.000, -0.000);
+		case 17:	return (0.259, 0.966, -0.014);
+		case 18:	return (0.000, 1.000, -0.000);
 		}
 		return (0, 0, 0);
 	}
@@ -242,6 +269,9 @@ class RSR_Guns abstract
 		case 13:	return false;
 		case 14:	return false;
 		case 15:	return false;
+		case 16:	return false;
+		case 17:	return false;
+		case 18:	return false;
 		}
 		return false;
 	}
@@ -266,6 +296,9 @@ class RSR_Guns abstract
 		case 13:	return (0.000, 0.000, 0.000);
 		case 14:	return (0.000, 0.000, 0.000);
 		case 15:	return (0.000, 0.000, 0.000);
+		case 16:	return (0.000, 0.000, 0.000);
+		case 17:	return (0.000, 0.000, 0.000);
+		case 18:	return (0.000, 0.000, 0.000);
 		}
 		return (0, 0, 0);
 	}
@@ -289,6 +322,9 @@ class RSR_Guns abstract
 		case 13:	return (-1.000, 0.000, 0.000);
 		case 14:	return (-1.000, 0.000, 0.000);
 		case 15:	return (-1.000, 0.000, 0.000);
+		case 16:	return (-1.000, 0.000, 0.000);
+		case 17:	return (-1.000, 0.000, 0.000);
+		case 18:	return (-1.000, 0.000, 0.000);
 		}
 		return (0, 0, 0);
 	}
@@ -312,6 +348,9 @@ class RSR_Guns abstract
 		case 13:	return 0.00;
 		case 14:	return 0.00;
 		case 15:	return 0.00;
+		case 16:	return 0.00;
+		case 17:	return 0.00;
+		case 18:	return 0.00;
 		}
 		return 0;
 	}
@@ -335,7 +374,10 @@ class RSR_Guns abstract
 		case 12:	return (0.000, 0.000, 1.613);
 		case 13:	return (0.000, 0.000, 1.000);
 		case 14:	return (0.000, 0.000, 1.000);
-		case 15:	return (0.000, 0.000, 1.000);
+		case 15:	return (0.000, 0.000, 0.909);
+		case 16:	return (0.000, 0.000, 1.000);
+		case 17:	return (0.000, 0.000, 1.000);
+		case 18:	return (0.000, 0.000, 1.000);
 		}
 		return (0, 0, 0);
 	}
@@ -359,6 +401,9 @@ class RSR_Guns abstract
 		case 13:	return 0.000;
 		case 14:	return 0.000;
 		case 15:	return 0.000;
+		case 16:	return 0.000;
+		case 17:	return 0.000;
+		case 18:	return 0.000;
 		}
 		return 0;
 	}
@@ -382,6 +427,9 @@ class RSR_Guns abstract
 		case 13:	return false;
 		case 14:	return false;
 		case 15:	return false;
+		case 16:	return false;
+		case 17:	return false;
+		case 18:	return false;
 		}
 		return false;
 	}
@@ -406,6 +454,9 @@ class RSR_Guns abstract
 		case 13:	return 0;
 		case 14:	return 0;
 		case 15:	return 0;
+		case 16:	return 0;
+		case 17:	return 0;
+		case 18:	return 0;
 		}
 		return 0;
 	}
@@ -429,6 +480,9 @@ class RSR_Guns abstract
 		case 13:	return 1.00;
 		case 14:	return 1.00;
 		case 15:	return 1.00;
+		case 16:	return 1.00;
+		case 17:	return 1.00;
+		case 18:	return 1.00;
 		}
 		return 0;
 	}
@@ -453,6 +507,9 @@ class RSR_Guns abstract
 		case 13:	return 5;
 		case 14:	return 5;
 		case 15:	return 5;
+		case 16:	return 5;
+		case 17:	return 5;
+		case 18:	return 5;
 		}
 		return 0;
 	}
@@ -475,7 +532,10 @@ class RSR_Guns abstract
 		case 12:	return (-0.620, 0.620, 0.620);
 		case 13:	return (-1.000, 1.000, 1.000);
 		case 14:	return (-1.000, 1.000, 1.000);
-		case 15:	return (-1.000, 1.000, 1.000);
+		case 15:	return (-1.100, 1.100, 1.100);
+		case 16:	return (-1.000, 1.000, 1.000);
+		case 17:	return (-1.000, 1.000, 1.000);
+		case 18:	return (-1.000, 1.000, 1.000);
 		}
 		return (0, 0, 0);
 	}
@@ -498,8 +558,11 @@ class RSR_Guns abstract
 		case 11:	return (0.000, 0.000, 0.000);
 		case 12:	return (0.000, -30.000, -8.000);
 		case 13:	return (0.000, 0.000, 0.000);
-		case 14:	return (0.000, 0.000, -5.000);
+		case 14:	return (0.000, -13.000, 0.000);
 		case 15:	return (0.000, 0.000, -5.000);
+		case 16:	return (0.000, 0.000, -5.000);
+		case 17:	return (0.000, 0.000, -5.000);
+		case 18:	return (0.000, 0.000, -5.000);
 		}
 		return (0, 0, 0);
 	}
@@ -521,8 +584,11 @@ class RSR_Guns abstract
 		case 11:	return 'RQYM';
 		case 12:	return 'RQVM';
 		case 13:	return 'RQWM';
-		case 14:	return 'RQCM';
-		case 15:	return 'RQJM';
+		case 14:	return 'RQEM';
+		case 15:	return 'RQOM';
+		case 16:	return 'RQIM';
+		case 17:	return 'RQCM';
+		case 18:	return 'RQJM';
 		}
 		return 'None';
 	}
@@ -544,8 +610,11 @@ class RSR_Guns abstract
 		case 11:	return 'RQYP';
 		case 12:	return 'RQVP';
 		case 13:	return 'RQWP';
-		case 14:	return 'RQCP';
-		case 15:	return 'RQJP';
+		case 14:	return 'RQEP';
+		case 15:	return 'RQOP';
+		case 16:	return 'RQIP';
+		case 17:	return 'RQCP';
+		case 18:	return 'RQJP';
 		}
 		return 'None';
 	}
@@ -567,8 +636,11 @@ class RSR_Guns abstract
 		case 11:	return 'RQYW';
 		case 12:	return 'RQVW';
 		case 13:	return 'RQWW';
-		case 14:	return 'RQCW';
-		case 15:	return 'RQJW';
+		case 14:	return 'RQEW';
+		case 15:	return 'RQOW';
+		case 16:	return 'RQIW';
+		case 17:	return 'RQCW';
+		case 18:	return 'RQJW';
 		}
 		return 'None';
 	}
@@ -590,8 +662,11 @@ class RSR_Guns abstract
 		case 11:	return "FLMT A 2LMT A";
 		case 12:	return "M202 A";
 		case 13:	return "UNHG A 2NHG A";
-		case 14:	return "CHAE A CHAG A";
-		case 15:	return "MGN1 A";
+		case 14:	return "DEVA A";
+		case 15:	return "NKLG A";
+		case 16:	return "RVCG A PVCG A";
+		case 17:	return "CHAE A CHAG A";
+		case 18:	return "MGN1 A";
 		}
 		return "";
 	}
@@ -613,8 +688,11 @@ class RSR_Guns abstract
 		case 11:	return "rsr/canout";
 		case 12:	return "rsr/canout";
 		case 13:	return "Unmaker/Stop";
-		case 14:	return "rsr/drumout";
-		case 15:	return "rsr/drumout";
+		case 14:	return "rsr/canout";
+		case 15:	return "rsr/canout";
+		case 16:	return "rsr/drumout";
+		case 17:	return "rsr/drumout";
+		case 18:	return "rsr/drumout";
 		}
 		return "";
 	}
@@ -636,8 +714,11 @@ class RSR_Guns abstract
 		case 11:	return "rsr/canin";
 		case 12:	return "rsr/canin";
 		case 13:	return "Unmaker/Start";
-		case 14:	return "rsr/drumin";
-		case 15:	return "rsr/drumin";
+		case 14:	return "rsr/canin";
+		case 15:	return "rsr/canin";
+		case 16:	return "rsr/drumin";
+		case 17:	return "rsr/drumin";
+		case 18:	return "rsr/drumin";
 		}
 		return "";
 	}
@@ -661,6 +742,9 @@ class RSR_Guns abstract
 		case 13:	return "";
 		case 14:	return "";
 		case 15:	return "";
+		case 16:	return "";
+		case 17:	return "";
+		case 18:	return "";
 		}
 		return "";
 	}
@@ -684,6 +768,9 @@ class RSR_Guns abstract
 		case 13:	return "";
 		case 14:	return "";
 		case 15:	return "";
+		case 16:	return "";
+		case 17:	return "";
+		case 18:	return "";
 		}
 		return "";
 	}
@@ -707,6 +794,9 @@ class RSR_Guns abstract
 		case 13:	return "rsr/bigdrop";
 		case 14:	return "rsr/bigdrop";
 		case 15:	return "rsr/bigdrop";
+		case 16:	return "rsr/bigdrop";
+		case 17:	return "rsr/bigdrop";
+		case 18:	return "rsr/bigdrop";
 		}
 		return "";
 	}
@@ -728,8 +818,11 @@ class RSR_Guns abstract
 		case 11:	return "Gas";
 		case 12:	return "AmmoM202";
 		case 13:	return "SoulAmmo";
-		case 14:	return "Clip2";
-		case 15:	return "Clip2";
+		case 14:	return "DevastatorAmmo";
+		case 15:	return "Nuke";
+		case 16:	return "MiniHellRocketAmmo";
+		case 17:	return "Clip2";
+		case 18:	return "Clip2";
 		}
 		return "";
 	}
@@ -751,8 +844,11 @@ class RSR_Guns abstract
 		case 11:	return "RSQ_Mag_Flamethrower2";
 		case 12:	return "RSQ_Mag_IncendiaryLauncher";
 		case 13:	return "RSQ_Mag_Unmaker";
-		case 14:	return "RSQ_Mag_Minigun";
-		case 15:	return "RSQ_Mag_Machinegun";
+		case 14:	return "RSQ_Mag_Devastator";
+		case 15:	return "RSQ_Mag_NukeLauncher";
+		case 16:	return "RSQ_Mag_HellishMissileLauncher";
+		case 17:	return "RSQ_Mag_Minigun";
+		case 18:	return "RSQ_Mag_Machinegun";
 		}
 		return "";
 	}
@@ -774,8 +870,11 @@ class RSR_Guns abstract
 		case 11:	return "RSQ_NoMag_Flamethrower2";
 		case 12:	return "RSQ_NoMag_IncendiaryLauncher";
 		case 13:	return "RSQ_NoMag_Unmaker";
-		case 14:	return "RSQ_NoMag_Minigun";
-		case 15:	return "RSQ_NoMag_Machinegun";
+		case 14:	return "RSQ_NoMag_Devastator";
+		case 15:	return "RSQ_NoMag_NukeLauncher";
+		case 16:	return "RSQ_NoMag_HellishMissileLauncher";
+		case 17:	return "RSQ_NoMag_Minigun";
+		case 18:	return "RSQ_NoMag_Machinegun";
 		}
 		return "";
 	}
@@ -799,6 +898,9 @@ class RSR_Guns abstract
 		case 13:	return "";
 		case 14:	return "";
 		case 15:	return "";
+		case 16:	return "";
+		case 17:	return "";
+		case 18:	return "";
 		}
 		return "";
 	}
@@ -823,6 +925,9 @@ class RSR_Guns abstract
 		case 13:	return "Reloading";
 		case 14:	return "Reloading";
 		case 15:	return "Reloading";
+		case 16:	return "Reloading";
+		case 17:	return "Reloading";
+		case 18:	return "Reloading";
 		}
 		return "";
 	}
@@ -879,6 +984,15 @@ class RSR_GunSprites : Actor
 		RQWM A 0;	// BD22/Unmaker
 		RQWP A 0;
 		RQWW A 0;
+		RQEM A 0;	// BD22/Devastator
+		RQEP A 0;
+		RQEW A 0;
+		RQOM A 0;	// BD22/NukeLauncher
+		RQOP A 0;
+		RQOW A 0;
+		RQIM A 0;	// BD22/HellishMissileLauncher
+		RQIP A 0;
+		RQIW A 0;
 		RQCM A 0;	// BD22/Minigun
 		RQCP A 0;
 		RQCW A 0;
@@ -904,5 +1018,8 @@ class RSR_Held_MG42 : Inventory { Default { Inventory.MaxAmount 999; +INVENTORY.
 class RSR_Held_Flamethrower2 : Inventory { Default { Inventory.MaxAmount 999; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSR_Held_IncendiaryLauncher : Inventory { Default { Inventory.MaxAmount 999; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSR_Held_Unmaker : Inventory { Default { Inventory.MaxAmount 999; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSR_Held_Devastator : Inventory { Default { Inventory.MaxAmount 999; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSR_Held_NukeLauncher : Inventory { Default { Inventory.MaxAmount 999; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSR_Held_HellishMissileLauncher : Inventory { Default { Inventory.MaxAmount 999; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSR_Held_Minigun : Inventory { Default { Inventory.MaxAmount 999; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSR_Held_Machinegun : Inventory { Default { Inventory.MaxAmount 999; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }

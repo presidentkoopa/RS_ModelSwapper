@@ -162,6 +162,8 @@ per-gun checklist below, in a headset, signed by the owner.
           decision and the owner has overruled it. The box DOES separate: our `M249_lowpoly` is
           11996 verts, which is REMA's `body` 11581 + `magazine` 415 exactly. Find it in our own
           mesh, not by loading theirs.
+      **BUILT 2026-10-25: Devastator (loading_bay, cap 50 invented = DevastatorAmmo Amount), Nuker
+      (surface 3 up, cap 1 = Nuke MaxAmount), Hellish (rear drum ring, cap 6 sheet). Rig: all full.**
       OWNER'S CALLS, 2026-10-25 21:3x, on renders of our own meshes (f10_six_guns.png):
         - Minigun: carve the blue block hanging under the body; later the block in the HAND can be
           a bigger ammo-box model ("clever illusion"), the gun keeps its own block.
@@ -213,6 +215,8 @@ per-gun checklist below, in a headset, signed by the owner.
         * Ruger fire frames X21F B/C and P21F B/C unkeyed: the shot draws 2D for ~3 tics.
         * Purist Rifle fires the M203 (the M203 jump precedes the purist check).
         * Reload R2: stale RSR_Done / RSR_Seated end the next magazine reload at once.
+        * FOUND IN F10: the Flamethrower's `Goto Ready+6` landed a state early (our guard inside
+          Ready). FIXED in patch_dec: every numeric jump / `Goto L+n` is checked against BD22's file.
         * Reload R4: End() clears netGrip but not netUse.
       Still to do in F11 (behaviour, not one-liners): R1 grip-mode rack cannot be grabbed
       (STEADY_RANGE 50 vs handles at 8-15 cm); R3 dropped-mag rounds stranded at reserve 0; Ruger

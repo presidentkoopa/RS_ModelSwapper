@@ -88,9 +88,34 @@ that is not on the plan.**
   each entry's own `ready_frame` (was a literal 0; the Minigun's is 4).
   Rig trap: the off hand must start 20 cm or more from the magazine (`POUCH_MIN`) to take one --
   the Minigun's box is 33 cm forward, so the harness now reaches to a pouch first.
+- DONE (F10): **Devastator, Nuker, Hellish reload.** 23 of 23 (25 non-melee, BFG and BFG10k closed
+  by the owner). All three driven in the rig to IDLE>...>SEATED>DONE>IDLE on one pack, with the
+  Minigun, Machinegun and Flamethrower re-driven alongside (all full).
+  * Devastator: its own `loading_bay` (surface 3, 90 v), out LEFT, mouth 7.84, capacity 50 --
+    INVENTED (no sheet, no card): DevastatorAmmo's Inventory.Amount, one pickup per load.
+    Counter 0 -> 50.
+  * Nuker: surface 3 (675 v, the green block BD22's own fire animation lifts), out UP, mouth
+    21.52, capacity 1 = BD22's Nuke MaxAmount (it carries one). Fire with a fresh nuke but an
+    unloaded gun starts the reload instead of firing (rig).
+  * Hellish: the rear drum ring, island of the welded mesh (215 v; z_above -10 keeps an 11-v grip
+    piece on the gun), out LEFT, mouth 23.98, capacity 6 (sheet), reserve MiniHellRocketAmmo.
+  Gun indices: Devastator 14, Nuker 15, Hellish 16, Minigun 17, Machinegun 18.
+- F11 FOUND AND FIXED while building these: **the shipped Flamethrower's `Goto Ready+6` landed one
+  state early** -- our empty-canister guard sits inside Ready's first six states. The generator now
+  checks every state-counting reference (numeric `A_Jump*(.., n)` and `Goto Label+n`) of each actor
+  it patches against BD22's own file, and rewrites one that moved (`Goto Ready+7 // posefix rsr:
+  still lands on BD22's own state (was 6)`). The reload hook goes before the Ready loop's own
+  Loop/Goto when a `Goto Ready+n` counts past it (Nuker, Hellish). One-off audit of every other
+  .dec in the set against brutal22test6: no other reference moved (M79/SSG/SMG land on 1.96b's
+  RSR-BREAK / rsa hooks by design; the rest were rewritten to label jumps by 1.96b).
+- Tool fixes on the way: `patch_dec` takes CRLF only when every line is (BD22's Devastator.dec
+  mixes the two, and split on CRLF had no `Ready:`); guards skip `/* */` blocks; `carve_islands`
+  takes `z_above`; a direct gun can name its part by surface index (`part_surface=`).
+- Rig trap: the run script must not chain stages after a failed `apply` (`&&`, not `;`) -- a failed
+  apply followed by `sync` emptied half the set once; restored from git, nothing committed.
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
-- NEXT: F10 Hellish (rear drum ring), Devastator (`loading_bay`), Nuker (green block, surface 3);
-  flick/dual/melee in the rig.
+- NEXT: F11 (R3 stranded rounds, Ruger semi-auto, sound names, owner calls, menu, alt fires);
+  flick/dual/melee in the rig; then the gated pk3.
 
 ## What this repo is
 Everything for QuestZDoom 17.3 VR reloadable weapon sets: the owner's BD22 Quest pack as the runtime

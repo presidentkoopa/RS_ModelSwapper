@@ -143,6 +143,42 @@ PLUS = {
     # (PCA of the carved box at frame 4: 0.014 0.259 0.966), negated: down, 15 degrees off vertical,
     # the way the box is mounted. Capacity 200: the REMA card's. Ready frame 4, MODELDEF
     # Scale -1 1 1, ZOffset -5 (MODELDEF.bd.txt, Model Minigun). Ready sprites CHAE A / CHAG A.
+    # F10, the owner's calls of 2026-10-25 on renders of our own meshes. Capacities: the Hellish's is
+    # the REMA sheet's (6); the Nuker's is BD22's own Nuke Inventory.MaxAmount (1: it carries one);
+    # the Devastator's is INVENTED -- no sheet, no card -- and set to DevastatorAmmo's
+    # Inventory.Amount (50, one pickup is one load; MaxAmount 99) from brutal22test6 Ammo.dec.
+    # Devastator: its own `loading_bay` (surface 3, 90 verts), out to the LEFT, where it stands
+    # proud of the body (y 5.0..11.3 against the body's 8.4). Rigid with the body in all 9 frames.
+    'Devastator': dict(mesh='Sidewinder/sidewinder.md3', part_surface=3, out=(0.0, 1.0, 0.0), travel=None,
+                 capacity=50, shot='DEvastatorMissile',
+                 scale=(-1.0, 1.0, 1.0), off=(0.0, -13.0, 0.0),     # MODELDEF.bd.txt, Model Devastator
+                 part='magazine', ready_frame=0,
+                 snd_out='rsr/canout', snd_in='rsr/canin', snd_land='rsr/bigdrop',
+                 toggle='rsq_plus_devastator', label='Devastator: Loading Bay Reload',
+                 reserve='DevastatorAmmo', magammo='RSQ_DevBay', nomag='RSQ_NoBay_Devastator', ammouse=1,
+                 ready_sprites=['DEVA A'], spr=('RQEM', 'RQEP', 'RQEW')),
+    # Nuker: the green top-front block (surface 3, 675 verts). BD22's own fire animation lifts it
+    # (up to +7.3 by frame 5), so it comes off UP.
+    'NukeLauncher': dict(mesh='Nuker/Nuker.md3', dec='NukeLauncher.dec', part_surface=3, out=(0.0, 0.0, 1.0), travel=None,
+                 capacity=1, shot='NuclearRocket',
+                 scale=(-1.1, 1.1, 1.1), off=(0.0, 0.0, -5.0),      # MODELDEF.bd.txt, Model NukeLauncher
+                 part='magazine', ready_frame=0,
+                 snd_out='rsr/canout', snd_in='rsr/canin', snd_land='rsr/bigdrop',
+                 toggle='rsq_plus_nuker', label='Nuker: Warhead Reload',
+                 reserve='Nuke', magammo='RSQ_NukeBlock', nomag='RSQ_NoBlock_Nuker', ammouse=1,
+                 ready_sprites=['NKLG A'], spr=('RQOM', 'RQOP', 'RQOW')),
+    # Hellish: the rear drum ring, its own island of the one welded surface (215 verts, x 14.8..28.7,
+    # z -8.5..17.9); the only other island wholly in x 14.5..29.0 is an 11-vert piece of the grip
+    # loop at z -20, which z_above -10 leaves on the gun.
+    'HellishMissileLauncher': dict(mesh='HellishMissile/HellishMissile.md3', dec='HellishMissile.dec',
+                 islands=dict(surface='mp_revenant', frame=0, x=(14.5, 29.0), z_below=99.0, z_above=-10.0),
+                 out=(0.0, 1.0, 0.0), travel=None, capacity=6, shot='revenantseekermissiles2',
+                 scale=(-1.0, 1.0, 1.0), off=(0.0, 0.0, -5.0),      # MODELDEF.bd.txt, Model HellishMissileLauncher
+                 part='magazine', ready_frame=0,
+                 snd_out='rsr/drumout', snd_in='rsr/drumin', snd_land='rsr/bigdrop',
+                 toggle='rsq_plus_hellish', label='Hellish: Drum Reload',
+                 reserve='MiniHellRocketAmmo', magammo='RSQ_HellDrum', nomag='RSQ_NoDrum_Hellish', ammouse=1,
+                 ready_sprites=['RVCG A', 'PVCG A'], spr=('RQIM', 'RQIP', 'RQIW')),
     'Minigun': dict(mesh='Minigun/Minigun.md3',
                  islands=dict(surface='Runko', index=1, frame=4, x=(58.0, 67.0), z_below=-19.0),
                  out=(-0.014, -0.259, -0.966), travel=None, capacity=200,
@@ -205,7 +241,8 @@ def carve_islands(mesh, out_md3, spec):
         A = coo_matrix((np.ones(len(t) * 3), (np.r_[t[:, 0], t[:, 1], t[:, 2]], np.r_[t[:, 1], t[:, 2], t[:, 0]])), shape=(nv, nv))
         n, lab = connected_components(A, directed=False)
         P = su['xyzn'][spec['frame'], :, :3].astype(float) / 64.0
-        inside = (P[:, 0] >= spec['x'][0]) & (P[:, 0] <= spec['x'][1]) & (P[:, 2] < spec['z_below'])
+        inside = (P[:, 0] >= spec['x'][0]) & (P[:, 0] <= spec['x'][1]) & (P[:, 2] < spec['z_below']) \
+            & (P[:, 2] > spec.get('z_above', -1e9))
         bad = np.zeros(n, bool); np.logical_or.at(bad, lab, ~inside)
         sel = ~bad[lab]
         info = dict(islands=int((~bad).sum()), vertices=int(sel.sum()))
@@ -246,6 +283,14 @@ def geometry(only=()):
             if p.get('islands'):
                 isl = carve_islands(mesh, carved, p['islands'])
                 print('%-14s islands carve: %s' % (cls, isl))
+            elif p.get('part_surface') is not None:
+                # the part is already a surface of its own, under another name (the Devastator's
+                # `loading_bay`) or none (the Nuker's six `Untitled`s): rename it, by index
+                m_ = carve_by_ref.read_md3(mesh)
+                k_ = p['part_surface']
+                print('%-14s part = surface %d %r (%d verts)' % (cls, k_, m_['surfs'][k_]['name'], len(m_['surfs'][k_]['st'])))
+                m_['surfs'][k_]['name'] = 'magazine'
+                carve_by_ref.write_md3(carved, m_)
             else:
                 shutil.copyfile(mesh, carved)
             nsurf0, surfs0 = genpack.md3_surfaces(carved)
@@ -404,8 +449,108 @@ def rsr_block(cls, p, cap):
     return L
 
 
+def dec_code(lines):
+    """each line's CODE: /* */ blocks and // comments removed (BD22 comments out whole states)"""
+    out = []; blk = False
+    for t in lines:
+        res = ''; i = 0
+        while i < len(t):
+            if blk:
+                j = t.find('*/', i)
+                if j < 0:
+                    break
+                blk = False; i = j + 2
+            else:
+                j = t.find('/*', i); k = t.find('//', i)
+                if k >= 0 and (j < 0 or k < j):
+                    res += t[i:k]; break
+                if j < 0:
+                    res += t[i:]; break
+                res += t[i:j]; blk = True; i = j + 2
+        out.append(res)
+    return out
+
+
+def offset_targets(lines, cls):
+    """F10: every place in the actor that counts STATES rather than naming a label -- a numeric
+    A_Jump*(..., n) and a `Goto Label+n` -- as (line, kind, base ordinal, target ordinal), plus
+    ordinal -> (line, frame within the line) and line -> its first ordinal. BD22 uses both (the
+    Minigun picks its empty sprite with A_JumpIfNoAmmo(2); the Flamethrower, Devastator, Nuker and
+    Hellish return from firing with `Goto Ready+6`), and any state inserted between a reference and
+    its target moves where it lands, with no error."""
+    a, b = actor_span(lines, cls)
+    code = dec_code(lines)
+    s0 = next(i for i in range(a, b) if code[i].strip().lower() == 'states')
+    labels = {}; at = {}; first = {}; refs = []; n = 0
+    for i in range(s0, b):
+        c = code[i]
+        m = re.match(r'\s*([A-Za-z_][\w.]*)\s*:(?!:)(.*)$', c)
+        if m:
+            labels[m.group(1).lower()] = n; c = m.group(2)
+        st = c.strip()
+        f = 0
+        if st and not re.match(r'(?i)(goto|loop|stop|wait|fail)\b', st) and st not in ('{', '}'):
+            tk = re.findall(r'"[^"]*"|\S+', st)
+            if len(tk) >= 3:
+                f = len(tk[1].strip('"'))
+        for k in range(f):
+            at[n + k] = (i, k)
+        if f:
+            first[i] = n
+            mj = re.search(r'A_Jump\w*\s*\((.*)\)\s*$', st)
+            if mj and re.fullmatch(r'\d+', mj.group(1).split(',')[-1].strip()):
+                refs.append((i, 'jump', n, n + int(mj.group(1).split(',')[-1])))
+        mg = re.search(r'(?i)\bgoto\s+([A-Za-z_][\w.]*)\s*\+\s*(\d+)', st)
+        if mg:
+            base = labels.get(mg.group(1).lower(), -999)
+            refs.append((i, 'goto', base, base + int(mg.group(2))))
+        n += f
+    return refs, at, first
+
+
+def keep_offsets(before, after, cls, fix=False):
+    """`after` is `before` with lines inserted. Returns (after, moved): every state-counting
+    reference that no longer lands on BD22's own state. With fix=True each one is rewritten to land
+    there again (`Goto Ready+6` -> `Goto Ready+7` when we put a state in between) and marked."""
+    m = {}; j = 0
+    for k, l in enumerate(after):
+        if j < len(before) and l == before[j]:
+            m[j] = k; j += 1
+    if j != len(before):
+        raise SystemExit('%s: keep_offsets: not an insertion' % cls)
+    rb, atb, _ = offset_targets(before, cls)
+    ra, ata, fa = offset_targets(after, cls)
+    ra = {i: (kind, base, t) for i, kind, base, t in ra}
+    out = list(after); moved = []
+    for i, kind, base, t in rb:
+        want = None if t not in atb else (m[atb[t][0]], atb[t][1])
+        kind2, base2, t2 = ra[m[i]]
+        if ata.get(t2) == want or want is None:
+            continue
+        moved.append((before[i].strip(), before[atb[t][0]].strip()))
+        if fix:
+            nn = fa[want[0]] + want[1] - base2
+            l = out[m[i]]
+            if kind == 'goto':
+                l2 = re.sub(r'(?i)(\bgoto\s+[A-Za-z_][\w.]*\s*\+\s*)\d+', lambda q: q.group(1) + str(nn), l, count=1)
+            else:
+                l2 = re.sub(r'(,\s*)\d+(\s*\)\s*)(?=(//.*)?$)', lambda q: q.group(1) + str(nn) + q.group(2), l, count=1)
+            assert l2 != l, l
+            out[m[i]] = l2 + '\t// posefix rsr: still lands on BD22\'s own state (was %d)' % (t - base)
+    if fix and moved:
+        # verify on the rewritten text: same line numbers, so m still holds
+        ra, ata, _ = offset_targets(out, cls)
+        ra = {i: t for i, _, _, t in ra}
+        for i, kind, base, t in rb:
+            if t in atb:
+                assert ata.get(ra[m[i]]) == (m[atb[t][0]], atb[t][1]), (cls, before[i])
+    return out, moved
+
+
 def patch_dec(cls, p, text, cap):
-    nl = '\r\n' if '\r\n' in text else '\n'
+    # CRLF only when EVERY line is: BD22's Devastator.dec mixes the two, and split on CRLF it is a
+    # handful of giant 'lines' with no Ready: label among them.
+    nl = '\r\n' if text.count('\r\n') == text.count('\n') else '\n'
     lines = text.split(nl)
     a, b = actor_span(lines, cls)
     empty = 'RSQ_Empty_' + cls
@@ -427,17 +572,32 @@ def patch_dec(cls, p, text, cap):
     # 2. the Ready hook: the reload key (BD22's ACS gives "Reloading") after the first A_WeaponReady of Ready
     r = once(lines[a:b], lambda l: l.strip() in ('Ready:',), cls + ' Ready label') + a
     w = next(i for i in range(r, b) if 'A_WeaponReady' in lines[i])
-    lines.insert(w + 1, '\t\t"####" "#" 0 A_JumpIfInventory("Reloading", 1, "Reload")\t// posefix rsr: the reload key')
+    hook = '\t\t"####" "#" 0 A_JumpIfInventory("Reloading", 1, "Reload")\t// posefix rsr: the reload key'
+    # Right after that A_WeaponReady, unless a `Goto Ready+n` counts past it (the Nuker's and the
+    # Hellish's do): then just before the Ready loop's own Loop/Goto, still once per tic.
+    e = next(i for i in range(w, b) if re.match(r'(?i)\s*(loop|goto)\b', lines[i]))
+    orig = list(lines)
+    for pos in (w + 1, e):
+        trial = lines[:pos] + [hook] + lines[pos:]
+        if not keep_offsets(orig, trial, cls)[1]:
+            lines = trial
+            break
+    else:
+        raise SystemExit('%s: no place for the reload hook keeps BD22\'s state offsets' % cls)
     a, b = actor_span(lines, cls)
     # 3. guards: after each A_JumpIfNoAmmo, before each shot
     out = []; n_after = n_before = 0
     before_re = guard_before(p)
+    code = dec_code(lines)      # never guard a line BD22 commented out (// or inside /* */)
     for i, l in enumerate(lines):
-        if a < i < b and before_re.search(l) and 'posefix' not in l and not l.lstrip().startswith('//'):
+        if a < i < b and before_re.search(code[i]) and 'posefix' not in l:
             out.append(guard); n_before += 1
         out.append(l)
-        if a < i < b and GUARD_AFTER.search(l):
+        if a < i < b and GUARD_AFTER.search(code[i]):
             out.append(guard); n_after += 1
+    # A guard between a `Goto Ready+n` and its target moves where it lands (the shipped 1.97
+    # Flamethrower's ReadyDry return did, by one state): rewrite each such offset to BD22's state.
+    out, moved = keep_offsets(lines, out, cls, fix=True)
     lines = out
     a, b = actor_span(lines, cls)
     # 4. the RSR states, first inside States {
@@ -446,7 +606,10 @@ def patch_dec(cls, p, text, cap):
     lines[s + 2:s + 2] = rsr_block(cls, p, cap)
     if 'posefix' not in lines[0]:
         lines.insert(0, '// posefix: BD22 brutal22test6 file. Lines marked "posefix" are the only changes ("rsr": real VR reload).')
-    return nl.join(lines), dict(guards_after_check=n_after, guards_before_shot=n_before)
+    st = dict(guards_after_check=n_after, guards_before_shot=n_before)
+    if moved:
+        st['offsets_rewritten'] = moved
+    return nl.join(lines), st
 
 
 def merge_tables(old, new, newcls):

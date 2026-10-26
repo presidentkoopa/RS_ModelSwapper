@@ -1,40 +1,40 @@
 {
  "tables": {
   "added": {
-   "ReloadToken": 5,
-   "ChargeToken": 5,
-   "NoMag": 5,
-   "MagAmmo": 5,
-   "Reserve": 5,
-   "SndLand": 5,
-   "SndFwd": 5,
-   "SndBack": 5,
-   "SndIn": 5,
-   "SndOut": 5,
-   "ReadySprites": 5,
-   "SprWorld": 5,
-   "SprPart": 5,
-   "SprGun": 5,
-   "Offset": 5,
-   "Scale": 5,
-   "Channel": 5,
-   "BackAt": 5,
-   "ChargeRule": 5,
-   "HandleLayers": 5,
-   "BoltRatio": 5,
-   "HandleHook": 5,
-   "Travel": 5,
-   "Pull": 5,
-   "Grab": 5,
-   "HasHandle": 5,
-   "WellHook": 5,
-   "HandHook": 5,
-   "TopInHand": 5,
-   "MagCentre": 5,
-   "MagLen": 5,
-   "Mouth": 5,
-   "Axis": 5,
-   "Well": 5,
+   "ReloadToken": 8,
+   "ChargeToken": 8,
+   "NoMag": 8,
+   "MagAmmo": 8,
+   "Reserve": 8,
+   "SndLand": 8,
+   "SndFwd": 8,
+   "SndBack": 8,
+   "SndIn": 8,
+   "SndOut": 8,
+   "ReadySprites": 8,
+   "SprWorld": 8,
+   "SprPart": 8,
+   "SprGun": 8,
+   "Offset": 8,
+   "Scale": 8,
+   "Channel": 8,
+   "BackAt": 8,
+   "ChargeRule": 8,
+   "HandleLayers": 8,
+   "BoltRatio": 8,
+   "HandleHook": 8,
+   "Travel": 8,
+   "Pull": 8,
+   "Grab": 8,
+   "HasHandle": 8,
+   "WellHook": 8,
+   "HandHook": 8,
+   "TopInHand": 8,
+   "MagCentre": 8,
+   "MagLen": 8,
+   "Mouth": 8,
+   "Axis": 8,
+   "Well": 8,
    "sprites": [
     "RQXM",
     "RQXP",
@@ -48,6 +48,15 @@
     "RQWM",
     "RQWP",
     "RQWW",
+    "RQEM",
+    "RQEP",
+    "RQEW",
+    "RQOM",
+    "RQOP",
+    "RQOW",
+    "RQIM",
+    "RQIP",
+    "RQIW",
     "RQCM",
     "RQCP",
     "RQCW"
@@ -70,11 +79,19 @@
  },
  "copied_from_bd22": [
   "Flamethrower.dec",
-  "Unmaker.dec"
+  "Unmaker.dec",
+  "NukeLauncher.dec",
+  "HellishMissile.dec"
  ],
  "Flamethrower2": {
   "guards_after_check": 3,
-  "guards_before_shot": 12
+  "guards_before_shot": 12,
+  "offsets_rewritten": [
+   [
+    "Goto Ready+6",
+    "\"####\" A 0 A_PlaySound(\"Flamer/idle\", CHAN_WEAPON, 1, 1)"
+   ]
+  ]
  },
  "IncendiaryLauncher": {
   "guards_after_check": 1,
@@ -83,6 +100,18 @@
  "Unmaker": {
   "guards_after_check": 5,
   "guards_before_shot": 4
+ },
+ "Devastator": {
+  "guards_after_check": 1,
+  "guards_before_shot": 4
+ },
+ "NukeLauncher": {
+  "guards_after_check": 0,
+  "guards_before_shot": 1
+ },
+ "HellishMissileLauncher": {
+  "guards_after_check": 1,
+  "guards_before_shot": 2
  },
  "Minigun": {
   "guards_after_check": 12,

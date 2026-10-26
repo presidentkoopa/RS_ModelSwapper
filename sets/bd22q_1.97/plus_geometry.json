@@ -439,5 +439,183 @@
    "Trigger",
    "Grip"
   ]
+ },
+ "Devastator": {
+  "cls": "Devastator",
+  "card": null,
+  "carved": "/home/claude/pipe/E:/DOOMWork/_buildtemp/rsq_bd22/models/sidewinder_rsr.md3",
+  "surfaces": [
+   "bolt",
+   "smr",
+   "trigger",
+   "magazine",
+   "display",
+   "plate"
+  ],
+  "frames": 9,
+  "unlabelled": 0,
+  "rigid": {
+   "mean_cm": 0.0,
+   "max_cm": 0.0,
+   "rot_deg": 0.0
+  },
+  "capacity": 50,
+  "ammouse": 1,
+  "survey": {
+   "parts": {
+    "magazine": {
+     "well_point": [
+      17.879,
+      11.25,
+      8.304
+     ],
+     "insert_dir": [
+      -0.0,
+      1.0,
+      -0.0
+     ],
+     "insert_depth_cm": 7.84,
+     "base_point": [
+      17.879,
+      5.092,
+      11.048
+     ],
+     "half_width_cm": 5.79,
+     "card_travel_cm": 7.84,
+     "card_grab": null,
+     "card_magcenter": null
+    }
+   }
+  },
+  "palm": null,
+  "supportat": null,
+  "direct": true,
+  "mag_idx": [
+   3
+  ],
+  "names": [
+   "bolt",
+   "smr",
+   "trigger",
+   "magazine",
+   "display",
+   "plate"
+  ]
+ },
+ "NukeLauncher": {
+  "cls": "NukeLauncher",
+  "card": null,
+  "carved": "/home/claude/pipe/E:/DOOMWork/_buildtemp/rsq_bd22/models/Nuker_rsr.md3",
+  "surfaces": [
+   "Untitled",
+   "Untitled",
+   "Untitled",
+   "magazine",
+   "Untitled",
+   "Untitled"
+  ],
+  "frames": 6,
+  "unlabelled": 0,
+  "rigid": {
+   "mean_cm": 0.0,
+   "max_cm": 0.0,
+   "rot_deg": 0.0
+  },
+  "capacity": 1,
+  "ammouse": 1,
+  "survey": {
+   "parts": {
+    "magazine": {
+     "well_point": [
+      36.407,
+      -0.105,
+      14.61
+     ],
+     "insert_dir": [
+      -0.0,
+      -0.0,
+      1.0
+     ],
+     "insert_depth_cm": 21.52,
+     "base_point": [
+      24.849,
+      0.0,
+      -4.581
+     ],
+     "half_width_cm": 15.53,
+     "card_travel_cm": 21.52,
+     "card_grab": null,
+     "card_magcenter": null
+    }
+   }
+  },
+  "palm": null,
+  "supportat": null,
+  "direct": true,
+  "mag_idx": [
+   3
+  ],
+  "names": [
+   "Untitled",
+   "Untitled",
+   "Untitled",
+   "magazine",
+   "Untitled",
+   "Untitled"
+  ]
+ },
+ "HellishMissileLauncher": {
+  "cls": "HellishMissileLauncher",
+  "card": null,
+  "carved": "/home/claude/pipe/E:/DOOMWork/_buildtemp/rsq_bd22/models/HellishMissile_rsr.md3",
+  "surfaces": [
+   "mp_revenant",
+   "magazine"
+  ],
+  "frames": 9,
+  "unlabelled": 0,
+  "rigid": {
+   "mean_cm": 0.0,
+   "max_cm": 0.0,
+   "rot_deg": 0.0
+  },
+  "capacity": 6,
+  "ammouse": 1,
+  "survey": {
+   "parts": {
+    "magazine": {
+     "well_point": [
+      -5.105,
+      12.794,
+      4.914
+     ],
+     "insert_dir": [
+      -0.0,
+      1.0,
+      -0.0
+     ],
+     "insert_depth_cm": 23.98,
+     "base_point": [
+      -5.09,
+      -11.382,
+      4.755
+     ],
+     "half_width_cm": 14.86,
+     "card_travel_cm": 23.98,
+     "card_grab": null,
+     "card_magcenter": null
+    }
+   }
+  },
+  "palm": null,
+  "supportat": null,
+  "direct": true,
+  "mag_idx": [
+   1
+  ],
+  "names": [
+   "mp_revenant",
+   "magazine"
+  ]
  }
 }
