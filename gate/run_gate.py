@@ -141,7 +141,12 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     elif pump:
         t += [(110, 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'), (115, '+reload'), (up, '-reload')]
     else:
-        t += [(110, 'rsrtest_script 1'), (115, '+attack'), (125, '-attack')]
+        # a gun with a charging handle: the off TRIGGER grabs (rsr_grab_with 0, script 7). With
+        # "grab with the grip" the grip on a handle is within the engine's steadying range, which
+        # the reload's input rule says is steadying, never a grab -- the handle cannot be taken
+        # that way at all (BD22Q's rule, unchanged; see the handoff)
+        sc = 'rsr_grab_with 0; rsrtest_script 7' if has_handle(donor) else 'rsrtest_script 1'
+        t += [(110, sc), (115, '+attack'), (125, '-attack')]
     end = 900 if pump else 520
     if shots:
         t += [(x, 'screenshot') for x in (100, 140, 170, 200, 230, 260, 300, 340, 400)]

@@ -299,6 +299,13 @@ class MS_ReloadJoin : EventHandler
 				{
 					mo.TakeInventory('RSR_Seated', 1);
 					mo.GiveInventory('RSR_Filled', 1);
+					// a gun that ran dry goes on to its charging handle (RSR_Charge, given at
+					// Take): the hold stays until the hand has racked it and the reload says
+					// RSR_Done. Handed back here, the reload saw its gun leave and dropped the
+					// handle (CHARGE -> IDLE: every handle on a foreign gun, the gate showed).
+					let rs = RSR_ReloadHandler.StateOf(mo);
+					if (rs && rs.phase == RSR.CHARGE)
+						continue;
 					Release(p, i, true);
 					continue;
 				}

@@ -84,6 +84,7 @@ class RSR_TestDriver : EventHandler
 	// the off hand's axes in the GUN frame, measured from the engine each tic (VR, after maptime 70)
 	Vector3 bF, bL, bU;
 	bool trigWant, steadyWant;
+	Vector3 pullBase;		// PULL: the hand's offset where it took the handle
 	bool wristExternal;	// the break-open driver owns the wrist (no reset between RSR phases)
 	double rPitch, rYaw, rRoll;	// the gun controller's extra turn: the break-open flick	// the pump driver's trigger / steadying, as real controller input on the rig
 	bool haveBasis;
@@ -396,7 +397,13 @@ class RSR_TestDriver : EventHandler
 		case RSR.CHARGE:
 		{
 			Take(false, gripHandle);
-			Vector3 at0 = RSR_Guns.Grab(i) - OffV(RSR.PalmGrab());
+			// placed by FEEDBACK on the reload's own measure of the palm (OffPoint, from the hand
+			// the engine reports): the hand moved by its error to the handle. The open-loop guess
+			// (Grab - OffV(PalmGrab)) left the palm 7 cm off the AE pistol's slide, outside the grab.
+			Vector3 at0 = off + (RSR_Guns.Grab(i) - s.OffPoint(RSR.PalmGrab()));
+			if (now % 35 == 0)
+				Console.Printf("HANDLE t%d palm %.1f cm from the handle's grab (radius %.1f)", now,
+					(RSR_Guns.Grab(i) - s.OffPoint(RSR.PalmGrab())).Length(), RSR_Assist.MagGrab(mo.player, i));
 			if (sub == 0)
 			{
 				if (Hold(now, "SEATED", 36))
@@ -423,7 +430,10 @@ class RSR_TestDriver : EventHandler
 
 		case RSR.PULL:
 		{
-			Vector3 at0 = RSR_Guns.Grab(i) - OffV(RSR.PalmGrab());
+			// where the palm took the handle, held for the stroke (feedback, as above)
+			if (sub == 0 && pullBase == (0, 0, 0))
+				pullBase = off + (RSR_Guns.Grab(i) - s.OffPoint(RSR.PalmGrab()));
+			Vector3 at0 = pullBase;
 			double tr = RSR_Guns.Travel(i);
 			if (sub == 0)
 			{
@@ -447,6 +457,7 @@ class RSR_TestDriver : EventHandler
 
 		case RSR.RELEASED:
 			Take(false, gripHandle);
+			pullBase = (0, 0, 0);
 			break;
 		}
 	}
