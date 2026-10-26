@@ -148,6 +148,11 @@ that is not on the plan.**
 - Load-order check: doom2 -> brutal22test6 -> BD_VoxelPack alone gives 5 script errors, all the
   voxel pack's own (voxeldef.txt 66/72/77/892, sphere.txt 50). With the pack added: those
   voxeldef four and nothing else.
+- DELIVERED 2026-10-25: **BD22Q_1.99_test1.pk3** (commit c3b70e5, 31 MB, sha256 55fbf9e4...),
+  lump-for-lump the pack the rig ran. Before it went: all 35 weapon classes given, selected, fired,
+  alt-fired and reloaded on the owner's load order in the rig -- no VM abort, no script error from
+  the pack (only BD_VoxelPack's own voxeldef four and BD22's own Deh_Actor_153 / DeathSphereHealth
+  warnings). Waiting on the owner's headset pass.
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
 - NEXT: F11 (owner calls: NOAUTOFIRE on all guns, off-hand punch vs rsq_punch, free charge default,
   PuristSniper model, RQLK ring art -- no lump in pack or BD22, so the ring is invisible);
