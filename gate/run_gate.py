@@ -218,7 +218,11 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
             '+vid_fullscreen', '0', '+vr_mode', '0', '+vid_preferbackend', '0',
             '+set', 'rs_fm_picks', '%s:%s:%d:%d' % (gun, arch, idx, idx),
             '+screenshot_dir', out, '+logfile', log, '-warp', '1', '+' + '; '.join(cmds)]
-    env = dict(os.environ, HOME=home, LIBGL_ALWAYS_SOFTWARE='1', GALLIUM_DRIVER='llvmpipe')
+    # SDL_VIDEO_X11_FORCE_EGL: this container's SDL2 has no GLX path ("SDL not configured with OpenGL/GLX
+    # support"); EGL on the Xvfb display makes the same GL 4.5 core context. The engine's own library
+    # path (libzmusic) is the engine folder, as its launcher would set it.
+    env = dict(os.environ, HOME=home, LIBGL_ALWAYS_SOFTWARE='1', GALLIUM_DRIVER='llvmpipe', SDL_VIDEO_X11_FORCE_EGL='1',
+               LD_LIBRARY_PATH=engine + (':' + os.environ['LD_LIBRARY_PATH'] if os.environ.get('LD_LIBRARY_PATH') else ''))
     launch = ['xvfb-run', '-a', '-s', '-screen 0 640x480x24 +extension GLX'] + argv
     if vr:
         # the Quest-faithful rig: its own ini (vr_mode 15, OpenXR device), without the BD22-only player
@@ -377,7 +381,7 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
 
 if __name__ == '__main__':
     a = [x for x in sys.argv[1:] if not x.startswith('--')]
-    eng = next((sys.argv[i + 1] for i, x in enumerate(sys.argv) if x == '--engine'), '/home/claude/engine/qzd/build')
+    eng = next((sys.argv[i + 1] for i, x in enumerate(sys.argv) if x == '--engine'), os.environ.get('MS_DESKTOP_ENGINE', '/home/claude/engine/qzd/build'))
     a = [x for x in a if x != eng]
     opt = lambda k, d: next((sys.argv[i + 1] for i, x in enumerate(sys.argv) if x == k), d)
     VIEW = opt('--view', VIEW)
