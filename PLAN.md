@@ -202,6 +202,12 @@ per-gun checklist below, in a headset, signed by the owner.
       A_Refire bypasses semi-auto; the four unresolved sound names. Owner's call, not bugs:
       off-hand punch vs rsq_punch, free charge default, PuristSniper model ("Sniper stays out"),
       lock-on ring art (RQLK has no lump). Plus whatever the audit of the F1-F10 additions confirms.
+      Found by running the pack in the owner's quest_test_rig (real QZD 17.3 OpenXR path, posed by
+      cvars), 2026-10-25:
+        * **M32 reload drawn and measured with the wrong placement.** apply() passed the default
+          SCALE/OFF and one `m32.png` to gen_rsr; the entry's own Scale -0.62 / Offset 0 -30 -8 and
+          its two textures (m32_tex1/2) were used only by geometry(). Engine: "Surface Skin
+          'm32.png' not found". The table's MagCentre (-6.46, -0.05, 3.33) disagreed with its own Well.
 
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
