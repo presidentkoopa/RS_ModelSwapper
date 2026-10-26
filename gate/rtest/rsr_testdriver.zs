@@ -83,6 +83,9 @@ class RSR_TestDriver : EventHandler
 
 	// the off hand's axes in the GUN frame, measured from the engine each tic (VR, after maptime 70)
 	Vector3 bF, bL, bU;
+	bool trigWant, steadyWant;
+	bool wristExternal;	// the break-open driver owns the wrist (no reset between RSR phases)
+	double rPitch, rYaw, rRoll;	// the gun controller's extra turn: the break-open flick	// the pump driver's trigger / steadying, as real controller input on the rig
 	bool haveBasis;
 	// THE WRIST (VR): yaw / pitch / roll added to the off controller, turned until the held part
 	// lines up with its well -- by the reload's own angle (MagAtWell), as a player turns by eye.
@@ -170,14 +173,17 @@ class RSR_TestDriver : EventHandler
 			[dd, sd, an] = s.MagAtWell();
 			TurnWrist(an);
 		}
-		else if (!s || s.phase == RSR.IDLE || s.phase == RSR.DONE)
+		else if (!wristExternal && (!s || s.phase == RSR.IDLE || s.phase == RSR.DONE))
 		{
 			wy = wp = wr = 0; wStep = 0;		// the wrist relaxes between reloads
 		}
 		String pose = String.Format("%.4f %.4f %.4f %.2f %.2f %.2f", -l / 34.0, u * ps / 34.0, -f / 34.0, 30.0 + offPitch + wp, wy, wr);
 		CVar.FindCVar('qzt_lhand').SetString(pose);
-		CVar.FindCVar('qzt_lgrip').SetFloat(grip ? 1 : 0);
-		CVar.FindCVar('qzt_ltrigger').SetFloat(trig ? 1 : 0);
+		let rh = CVar.FindCVar('qzt_rhand');
+		if (rh)
+			rh.SetString(String.Format("0.25 1.3 -0.3 %.2f %.2f %.2f", 30.0 + rPitch, rYaw, rRoll));	// the rig's default gun hand, plus a flick
+		CVar.FindCVar('qzt_lgrip').SetFloat(grip || steadyWant ? 1 : 0);
+		CVar.FindCVar('qzt_ltrigger').SetFloat(trig || trigWant ? 1 : 0);
 	}
 
 	override void WorldTick()

@@ -42,6 +42,18 @@ class RSP_TestDriver : EventHandler
 
 	static void SetCV(Name n, bool v)
 	{
+		// ON THE VR RIG the two stand-ins become the real controller: the off trigger is the
+		// controller's trigger, and steadying is the engine's own -- the off grip pressed with the
+		// controllers within 50 cm (VrInputDefault.cpp), held until it is released
+		if (RSR_TestDriver.VRT() && (n == 'rsp_test_trigger' || n == 'rsp_test_steady'))
+		{
+			let d = RSR_TestDriver(EventHandler.Find('RSR_TestDriver'));
+			if (d && n == 'rsp_test_trigger')
+				d.trigWant = v;
+			else if (d)
+				d.steadyWant = v;
+			return;
+		}
 		let cv = CVar.FindCVar(n);
 		if (cv && cv.GetBool() != v)
 			cv.SetBool(v);

@@ -33,6 +33,7 @@ EXTRA = ''
 VR_CVARS = '''
 user int rsrtest_vr = 1;
 user string qzt_lhand = "";
+user string qzt_rhand = "";
 user float qzt_lgrip = -1;
 user float qzt_ltrigger = -1;
 '''
@@ -188,8 +189,11 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False):
             ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
             ('join took it', 'took TMSSG (break slot %d)' % break_slot(donor) in text),
             ('it opened', re.search(r'RSBT t\d+ phase 2', text) is not None),
-            ('chambers seated', len(re.findall(r'RSBT t\d+ seated chamber', text)) >= 1),
-            ('it closed', 'all chambers loaded: closing' in text),
+            # on the rig the hand does it: the reload's own lines, a round CAUGHT by a chamber and
+            # seated, and the shut by the gun hand's flick (no function of the reload is called)
+            ('chambers seated', (len(re.findall(r'rsb t\d+ chamber \d+ loaded', text)) >= 1 and 'round at chamber' in text) if vr
+                                else len(re.findall(r'RSBT t\d+ seated chamber', text)) >= 1),
+            ('it closed', re.search(r'shut \(flick\)', text) is not None if vr else 'all chambers loaded: closing' in text),
             ('handed back', 'gave TMSSG back' in text),
             ('their reload ran', 'TM ssg: barrels 2' in text),
             ('reached the end', 'GATE_END' in text),
