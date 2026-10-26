@@ -65,6 +65,17 @@ class RSR_TestDriver : EventHandler
 	// trigger become its grip and trigger -- which the engine turns into key 443 and the off
 	// trigger key exactly as a headset does. Stage -> world was measured on the rig: 34 map units
 	// per metre, z (back) = -F, x (right) = -L, y (up) = U * pixelstretch; the hand pitch 30 is level.
+	// A point held in the OFF hand (the magazine's top, the palm's grab point) is in the off
+	// controller's frame. The engine mirrors that frame left-right (vrhand.zs OffDir: "these are
+	// the axes the layers on each hand are drawn in"; measured on the rig: OffDir yaw 90 = (0,-1,0)
+	// where the gun's is (0,1,0)). The desktop stand-in gave the off hand the gun's frame; on the
+	// rig the hand that holds a part must be placed with the mirrored side axis, as a player does
+	// by eye.
+	static Vector3 OffV(Vector3 v)
+	{
+		return VRT() ? (v.x, -v.y, v.z) : v;
+	}
+
 	static bool VRT()
 	{
 		let c = CVar.FindCVar('rsrtest_vr');
@@ -171,8 +182,8 @@ class RSR_TestDriver : EventHandler
 			trig = false;
 			if (s.phase == RSR.EMPTY)
 			{
-				Vector3 home = RSR_Guns.Well(i) - RSR_Guns.TopInHand(i);
-				Vector3 h0 = RSR_Guns.Grab(i) - RSR.PalmGrab();
+				Vector3 home = RSR_Guns.Well(i) - OffV(RSR_Guns.TopInHand(i));
+				Vector3 h0 = RSR_Guns.Grab(i) - OffV(RSR.PalmGrab());
 				if (sub == 0 && MoveTo(home - RSR_Guns.Axis(i) * (RSR_Guns.Mouth(i) + 3), 2) && at > 10)
 					sub = 1;
 				else if (sub == 1 && MoveTo(home + RSR_Guns.Axis(i), 1) && at > 20)
@@ -255,7 +266,7 @@ class RSR_TestDriver : EventHandler
 		case RSR.CARRY:
 		{
 			// up beside the gun (the magazine in the hand, on view), then under the well
-			Vector3 under = RSR_Guns.Well(i) - RSR_Guns.Axis(i) * (RSR_Guns.Mouth(i) + 3) - RSR_Guns.TopInHand(i);
+			Vector3 under = RSR_Guns.Well(i) - RSR_Guns.Axis(i) * (RSR_Guns.Mouth(i) + 3) - OffV(RSR_Guns.TopInHand(i));
 			if (sub == 0)
 			{
 				if (!MoveTo(under - RSR_Guns.Axis(i) * 8 + (0, 4, 0), 3))	// beside the gun, out along the well's axis
@@ -270,7 +281,7 @@ class RSR_TestDriver : EventHandler
 
 		case RSR.INSERT:
 		{
-			Vector3 home = RSR_Guns.Well(i) - RSR_Guns.TopInHand(i);
+			Vector3 home = RSR_Guns.Well(i) - OffV(RSR_Guns.TopInHand(i));
 			// half into the well (a shallow well, the ASG's 0.9 cm: 2 cm, at its mouth, still not home)
 			Vector3 half = home - RSR_Guns.Axis(i) * max(RSR_Guns.Mouth(i) * 0.5, 2.0);
 			if (sub == 0)
@@ -296,7 +307,7 @@ class RSR_TestDriver : EventHandler
 		case RSR.CHARGE:
 		{
 			Take(false, gripHandle);
-			Vector3 at0 = RSR_Guns.Grab(i) - RSR.PalmGrab();
+			Vector3 at0 = RSR_Guns.Grab(i) - OffV(RSR.PalmGrab());
 			if (sub == 0)
 			{
 				if (Hold(now, "SEATED", 36))
@@ -323,7 +334,7 @@ class RSR_TestDriver : EventHandler
 
 		case RSR.PULL:
 		{
-			Vector3 at0 = RSR_Guns.Grab(i) - RSR.PalmGrab();
+			Vector3 at0 = RSR_Guns.Grab(i) - OffV(RSR.PalmGrab());
 			double tr = RSR_Guns.Travel(i);
 			if (sub == 0)
 			{
@@ -416,6 +427,18 @@ class RSR_TestDriver : EventHandler
 		Console.Printf("t%d %s [%s] %s state %s gun %s | phase %s d %.1f pull %.1f | off %.1f %.1f %.1f gap %.0f grip %d trig %d steady %d",
 			now, why, holdName, w ? w.GetClassName() : 'none', st, wp ? SprName(wp.Sprite) .. String.Format("/%c", 65 + wp.Frame) : "-",
 			s ? RSR.PhaseName(s.phase) : "?", s ? s.d : 0, s ? s.pull : 0, off.x, off.y, off.z, RSVR_VRHand.SteadyGap(mo), grip, trig, steady);
+		if (VRT() && s && now > 70)	// on the rig (VR fields are not valid before the first VR render: kit README): where the RELOAD measures the hand (its own offLocal), beside the commanded one
+		{
+			double dd, sd, an;
+			[dd, sd, an] = s.MagAtWell();
+			Console.Printf("   measured off %.1f %.1f %.1f (commanded %.1f %.1f %.1f) | at well: depth %.1f side %.1f angle %.1f | steadied %d",
+				s.offLocal.x, s.offLocal.y, s.offLocal.z, off.x, off.y, off.z, dd, sd, an, RSVR_VRHand.Steadied(mo));
+			double ps = mo.Level.pixelstretch > 0 ? mo.Level.pixelstretch : 1.2;
+			Vector3 of = RSVR_VRHand.OffDir(mo, 0, 0, ps), ou = RSVR_VRHand.OffDir(mo, 0, 90, ps), ol = RSVR_VRHand.OffDir(mo, 90, 0, ps);
+			Vector3 gf = RSVR_VRHand.HandDir(mo, 0, 0, ps), gu = RSVR_VRHand.HandDir(mo, 0, 90, ps), gl = RSVR_VRHand.HandDir(mo, 90, 0, ps);
+			Console.Printf("   dirs: off F(%.2f %.2f %.2f) L(%.2f %.2f %.2f) U(%.2f %.2f %.2f) | gun F(%.2f %.2f %.2f) L(%.2f %.2f %.2f) U(%.2f %.2f %.2f) | angle %.1f pitch %.1f",
+				of.x, of.y, of.z, ol.x, ol.y, ol.z, ou.x, ou.y, ou.z, gf.x, gf.y, gf.z, gl.x, gl.y, gl.z, gu.x, gu.y, gu.z, mo.angle, mo.pitch);
+		}
 		int g = RSR_Guns.Index(w);
 		if (g > 0)
 		{

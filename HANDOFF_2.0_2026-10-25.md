@@ -65,6 +65,19 @@ mid-raise; measured, its rest is frame 3 (card magcenter on the magazine surface
 the raise test, BD22Q's own) -- `tools_kit/rest_frames.py` sets it, and it has its own row now (slot 72).
 Those need real-mesh cards -- the card standard's job.
 
+## VR-rig gate (`run_gate.py --vr`, the owner's quest_test_rig -- see gate/qz_rig/README.md)
+
+The real OpenXR input path: the pack's own vrhand.zs reads the engine's controller positions; grip
+and trigger are real controller keys. 58 reloadable donors, first pass 44 PASS. Found and fixed in
+the DRIVER: the engine mirrors the off controller's frame left-right (vrhand.zs says so; measured:
+OffDir yaw 90 = (0,-1,0)); the desktop stand-in hid it. Placing held parts in that frame recovered
+the 4 RPGs and the MG42 -> 49 PASS. Open, all in the test driver unless shown otherwise:
+- chex large / superlarge zorcher, BD22 RocketLauncher: position exact (0.0 off axis), but the part
+  sits 60 / 137 degrees off the well axis -- the driver never turns the wrist. Needs a wrist step.
+- the four pump guns: the pump driver still feeds trigger and steadying through test-only cvars.
+- MS_SuperShotgun, MS_brt_M79 (main's own break-open): the join never takes the gun on the rig,
+  while the three BD22 break-open guns join fine -- NOT yet explained; may be real.
+
 ## Fixed along the way (each also wrong on `main`)
 
 8. **RSQ_GunMoves was BD22Q's table read by ModelSwapper's slot number.** Pivot (where the hands
