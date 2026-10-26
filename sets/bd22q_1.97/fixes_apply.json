@@ -1,5 +1,55 @@
 [
  {
+  "fix": "ballistics: IsShot, the one test of what a shot is",
+  "file": "zscript/rsq/ballistics.zs",
+  "result": "applied"
+ },
+ {
+  "fix": "recoil: remember what was written",
+  "file": "zscript/rsq/recoil.zs",
+  "result": "applied"
+ },
+ {
+  "fix": "recoil: off takes its kick back too",
+  "file": "zscript/rsq/recoil.zs",
+  "result": "applied"
+ },
+ {
+  "fix": "recoil: replace last tic's kick, never pile it up",
+  "file": "zscript/rsq/recoil.zs",
+  "result": "applied"
+ },
+ {
+  "fix": "recoil: one kick per tic, never for the buzz",
+  "file": "zscript/rsq/recoil.zs",
+  "result": "applied"
+ },
+ {
+  "fix": "recoil: stamp the kick tic",
+  "file": "zscript/rsq/recoil.zs",
+  "result": "applied"
+ },
+ {
+  "fix": "recoil: the buzz is not a shot",
+  "file": "zscript/rsq/recoil.zs",
+  "result": "applied"
+ },
+ {
+  "fix": "flash: the buzz is not a shot",
+  "file": "zscript/rsq/flash.zs",
+  "result": "applied"
+ },
+ {
+  "fix": "flash: one shot per tic",
+  "file": "zscript/rsq/flash.zs",
+  "result": "applied"
+ },
+ {
+  "fix": "flash: lastShot field",
+  "file": "zscript/rsq/flash.zs",
+  "result": "applied"
+ },
+ {
   "fix": "trigger held: every player carries RSQ_TriggerHeld",
   "file": "zscript/rsq/alts.zs",
   "result": "already applied"

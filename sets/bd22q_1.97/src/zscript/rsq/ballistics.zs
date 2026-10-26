@@ -53,6 +53,16 @@ class RSQ_Ballistics : EventHandler
 		RSQ_Tracer.Attach(a, self);
 	}
 
+	// F11: what counts as a SHOT for recoil and the flash, the test trails already used
+	static bool IsShot(Actor a)
+	{
+		if (!a || !a.bMISSILE || a.bNOINTERACTION || !a.target || !a.target.player)
+			return false;
+		if (a is 'RSVR_Buzz' || a.DamageType == 'Trample' || IsMelee(a) || MeleeHeld(a.target))
+			return false;
+		return a.GetMissileDamage(0, 1) > 0;
+	}
+
 	// BD22's melee hits are short invisible projectiles: punches, kicks (KickAttack and
 	// everything from it), the axe and sword strikes, a thrown axe
 	static bool IsMelee(Actor a)

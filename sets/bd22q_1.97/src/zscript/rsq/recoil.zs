@@ -67,6 +67,9 @@ class RSQ_Recoil : EventHandler
 	int    idle[MAXPLAYERS];
 	int    rising[MAXPLAYERS];
 	double riseLeft[MAXPLAYERS];
+	double addX[MAXPLAYERS], addY[MAXPLAYERS];	// F11: the kick added last tic
+	double wroteX[MAXPLAYERS], wroteY[MAXPLAYERS];	// F11: psp.x / psp.y as we left them
+	int lastKick[MAXPLAYERS];	// F11: one kick per tic, however many missiles a shot spawns
 
 	override void OnRegister()
 	{
@@ -217,6 +220,8 @@ class RSQ_Recoil : EventHandler
 	{
 		if (!mo || !mo.player || !On(mo))
 			return;
+		if (lastKick[mo.PlayerNumber()] == mo.Level.maptime)	// F11: one shot, one kick
+			return;
 		let w = mo.player.ReadyWeapon;
 		if (!w)
 			return;
@@ -224,6 +229,7 @@ class RSQ_Recoil : EventHandler
 		if (!d)
 			return;
 		int n = mo.PlayerNumber();
+		lastKick[n] = mo.Level.maptime;
 		shots[n]++;
 		idle[n] = 0;
 		// the snap: spread over the profile's own tics so it is a push, not a teleport
@@ -256,7 +262,7 @@ class RSQ_Recoil : EventHandler
 	override void WorldThingSpawned(WorldEvent e)
 	{
 		// the projectile guns: a missile the player just launched
-		if (e.Thing && e.Thing.bMissile)
+		if (e.Thing && e.Thing.bMissile && RSQ_Ballistics.IsShot(e.Thing))	// F11: not a footstep, a kick, a fist or the haptic buzz
 			Kick(PlayerPawn(e.Thing.target));
 	}
 
@@ -274,6 +280,9 @@ class RSQ_Recoil : EventHandler
 			if (!d || !On(mo))
 			{
 				pitch[i] = 0; yaw[i] = 0; riseLeft[i] = 0; rising[i] = 0;
+				let pq = mo.player.FindPSprite(PSP_WEAPON);	// F11: and last tic's kick comes off
+				if (pq && pq.x == wroteX[i] && pq.y == wroteY[i]) { pq.x -= addX[i]; pq.y -= addY[i]; }
+				addX[i] = 0; addY[i] = 0;
 				continue;		// and nothing is written, so the channel is the weapon's own
 			}
 			// the snap pays itself out over its tics, then recovery takes over
@@ -301,8 +310,14 @@ class RSQ_Recoil : EventHandler
 			if (!psp)
 				continue;
 			// ADD, never assign: the weapon has already written this channel this tic
-			psp.x += yaw[i] * 4.0;
-			psp.y -= pitch[i] * 4.0;
+			// F11: the weapon did not rewrite the channel since our last write -> take that kick back
+			if (psp.x == wroteX[i] && psp.y == wroteY[i]) { psp.x -= addX[i]; psp.y -= addY[i]; }
+			addX[i] = yaw[i] * 4.0;
+			addY[i] = -pitch[i] * 4.0;
+			psp.x += addX[i];
+			psp.y += addY[i];
+			wroteX[i] = psp.x;
+			wroteY[i] = psp.y;
 		}
 	}
 }

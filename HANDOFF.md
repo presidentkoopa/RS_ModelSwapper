@@ -185,6 +185,15 @@ that is not on the plan.**
   src/ replaced by sets/bd22q_1.97/src @ f358eb6, VERSION 1.99, build.py stores .md3 as LZMA, README
   rewritten for 1.99. Its build equals the rig-tested pack (44 PNGs differ only in encoding, pixel-
   identical). No tag or release made; dev branch untouched.
+- FIXED (F11, owner's headset report 2026-10-26, on 1.99): **guns spun round the shoulder, flashes and
+  gunshot sounds with no shot.** Recoil ADDED its kick to psp.x/psp.y every tic assuming the weapon
+  rewrites them; reload waits and most fire frames do not, so it piled up (rig, 1.99: psp.y to
+  -1439 during a reload = 368 degrees of pitch). Now last tic's kick is taken back when the weapon
+  left the channel alone. Recoil and the flash also counted EVERY player missile as a shot -- the
+  haptic buzz (RSVR_Buzz, every reload step and melee contact), BD22's footsteps (Trample missiles),
+  kicks, fists, and each of BD22's helper missiles per shot (4 flashes a shot). One test now,
+  RSQ_Ballistics.IsShot, and one shot per tic. Rig after: fire 10 deg max kick and back, reload 0,
+  one flash per shot, none on reload. This came in with F5 (1.97); 1.92 had no recoil.
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
 - NEXT: F11 (owner calls: NOAUTOFIRE on all guns, off-hand punch vs rsq_punch, free charge default,
   PuristSniper model, RQLK ring art -- no lump in pack or BD22, so the ring is invisible);

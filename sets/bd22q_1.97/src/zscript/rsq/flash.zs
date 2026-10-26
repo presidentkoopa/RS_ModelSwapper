@@ -97,10 +97,14 @@ class RSQ_FlashHandler : EventHandler
 		mo.A_StartSound(openSky ? sex : sin, CHAN_7, 0, min(vol, 1.0));
 	}
 
+	int lastShot;	// F11
 	void Shot(PlayerPawn mo)
 	{
 		if (!mo || !mo.player || RSQ_Ballistics.FxLevel() <= 0)
 			return;
+		if (lastShot == mo.Level.maptime)	// F11: one shot, one flash and one tail
+			return;
+		lastShot = mo.Level.maptime;
 		let w = mo.player.ReadyWeapon;
 		if (!w)
 			return;
@@ -128,7 +132,7 @@ class RSQ_FlashHandler : EventHandler
 
 	override void WorldThingSpawned(WorldEvent e)
 	{
-		if (e.Thing && e.Thing.bMissile)
+		if (e.Thing && e.Thing.bMissile && RSQ_Ballistics.IsShot(e.Thing))	// F11: not a footstep, a kick, a fist or the haptic buzz
 			Shot(PlayerPawn(e.Thing.target));
 	}
 }

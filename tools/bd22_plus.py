@@ -4317,6 +4317,70 @@ def spine():
 # once, and it is skipped (not doubled) if its new text is already there, so the stage can run on
 # top of a finished build or at the end of a full one. Runs after every other stage, before sync.
 F11_FIXES = [
+    #  3. ...and BD22's FOOTSTEPS are damaging player missiles (ballistics.zs knew: "1.11"), so
+    #     walking was a shot to recoil and the flash too. One test for all three: a missile is a
+    #     shot when it does damage and is not melee, a trample (footstep) or the haptic buzz.
+    ('ballistics: IsShot, the one test of what a shot is', 'zscript/rsq/ballistics.zs',
+     '\t// BD22\'s melee hits are short invisible projectiles: punches, kicks (KickAttack and\n',
+     '\t// F11: what counts as a SHOT for recoil and the flash, the test trails already used\n'
+     '\tstatic bool IsShot(Actor a)\n\t{\n'
+     '\t\tif (!a || !a.bMISSILE || a.bNOINTERACTION || !a.target || !a.target.player)\n\t\t\treturn false;\n'
+     "\t\tif (a is 'RSVR_Buzz' || a.DamageType == 'Trample' || IsMelee(a) || MeleeHeld(a.target))\n\t\t\treturn false;\n"
+     '\t\treturn a.GetMissileDamage(0, 1) > 0;\n\t}\n\n'
+     '\t// BD22\'s melee hits are short invisible projectiles: punches, kicks (KickAttack and\n'),
+    # OWNER, 2026-10-26, IN THE HEADSET: "all guns spin around my main hand shoulder in a 360 ...
+    #    constantly spinning when I reload ... muzzleflash and shooting noises constantly".
+    #  1. Recoil ADDED its kick to psp.x/psp.y every tic, on the belief that the weapon rewrites
+    #     them every tic. It does only in states that run A_WeaponReady; in a reload wait, or most
+    #     firing frames, it does not, so the kick piled up tic on tic, and the renderer turns the
+    #     model psp.x / 4 degrees: the gun wound round the shoulder. Now last tic's kick is taken
+    #     back first whenever the weapon left the channel as we wrote it.
+    ('recoil: remember what was written', 'zscript/rsq/recoil.zs',
+     '\tdouble riseLeft[MAXPLAYERS];\n',
+     '\tdouble riseLeft[MAXPLAYERS];\n'
+     '\tdouble addX[MAXPLAYERS], addY[MAXPLAYERS];\t// F11: the kick added last tic\n'
+     '\tdouble wroteX[MAXPLAYERS], wroteY[MAXPLAYERS];\t// F11: psp.x / psp.y as we left them\n'
+     '\tint lastKick[MAXPLAYERS];\t// F11: one kick per tic, however many missiles a shot spawns\n'),
+    ('recoil: off takes its kick back too', 'zscript/rsq/recoil.zs',
+     '\t\t\t\tpitch[i] = 0; yaw[i] = 0; riseLeft[i] = 0; rising[i] = 0;\n',
+     '\t\t\t\tpitch[i] = 0; yaw[i] = 0; riseLeft[i] = 0; rising[i] = 0;\n'
+     '\t\t\t\tlet pq = mo.player.FindPSprite(PSP_WEAPON);\t// F11: and last tic\'s kick comes off\n'
+     '\t\t\t\tif (pq && pq.x == wroteX[i] && pq.y == wroteY[i]) { pq.x -= addX[i]; pq.y -= addY[i]; }\n'
+     '\t\t\t\taddX[i] = 0; addY[i] = 0;\n'),
+    ('recoil: replace last tic\'s kick, never pile it up', 'zscript/rsq/recoil.zs',
+     '\t\t\tpsp.x += yaw[i] * 4.0;\n\t\t\tpsp.y -= pitch[i] * 4.0;\n',
+     '\t\t\t// F11: the weapon did not rewrite the channel since our last write -> take that kick back\n'
+     '\t\t\tif (psp.x == wroteX[i] && psp.y == wroteY[i]) { psp.x -= addX[i]; psp.y -= addY[i]; }\n'
+     '\t\t\taddX[i] = yaw[i] * 4.0;\n\t\t\taddY[i] = -pitch[i] * 4.0;\n'
+     '\t\t\tpsp.x += addX[i];\n\t\t\tpsp.y += addY[i];\n'
+     '\t\t\twroteX[i] = psp.x;\n\t\t\twroteY[i] = psp.y;\n'),
+    #  2. The haptic buzz is an invisible player missile (RSVR_Buzz: QZD buzzes the hand that
+    #     fires). Recoil and the flash counted every player missile as a shot, so every reload step
+    #     and every melee contact (the gun scraping a wall as you walk) kicked the gun and fired a
+    #     muzzle light and a gunshot tail. The buzz is not a shot; and one shot counts once a tic
+    #     (BD22's own shots spawn helper missiles -- tracers, case spawners -- alongside).
+    ('recoil: one kick per tic, never for the buzz', 'zscript/rsq/recoil.zs',
+     '\t\tif (!mo || !mo.player || !On(mo))\n\t\t\treturn;\n\t\tlet w = mo.player.ReadyWeapon;\n\t\tif (!w)\n\t\t\treturn;\n\t\tlet d = Find(w.GetClassName());\n',
+     '\t\tif (!mo || !mo.player || !On(mo))\n\t\t\treturn;\n'
+     '\t\tif (lastKick[mo.PlayerNumber()] == mo.Level.maptime)\t// F11: one shot, one kick\n\t\t\treturn;\n'
+     '\t\tlet w = mo.player.ReadyWeapon;\n\t\tif (!w)\n\t\t\treturn;\n\t\tlet d = Find(w.GetClassName());\n'),
+    ('recoil: stamp the kick tic', 'zscript/rsq/recoil.zs',
+     '\t\tint n = mo.PlayerNumber();\n\t\tshots[n]++;\n',
+     '\t\tint n = mo.PlayerNumber();\n\t\tlastKick[n] = mo.Level.maptime;\n\t\tshots[n]++;\n'),
+    ('recoil: the buzz is not a shot', 'zscript/rsq/recoil.zs',
+     '\t\tif (e.Thing && e.Thing.bMissile)\n\t\t\tKick(PlayerPawn(e.Thing.target));\n',
+     '\t\tif (e.Thing && e.Thing.bMissile && RSQ_Ballistics.IsShot(e.Thing))\t// F11: not a footstep, a kick, a fist or the haptic buzz\n\t\t\tKick(PlayerPawn(e.Thing.target));\n'),
+    ('flash: the buzz is not a shot', 'zscript/rsq/flash.zs',
+     '\t\tif (e.Thing && e.Thing.bMissile)\n\t\t\tShot(PlayerPawn(e.Thing.target));\n',
+     '\t\tif (e.Thing && e.Thing.bMissile && RSQ_Ballistics.IsShot(e.Thing))\t// F11: not a footstep, a kick, a fist or the haptic buzz\n\t\t\tShot(PlayerPawn(e.Thing.target));\n'),
+    ('flash: one shot per tic', 'zscript/rsq/flash.zs',
+     '\t\tif (!mo || !mo.player || RSQ_Ballistics.FxLevel() <= 0)\n\t\t\treturn;\n\t\tlet w = mo.player.ReadyWeapon;\n',
+     '\t\tif (!mo || !mo.player || RSQ_Ballistics.FxLevel() <= 0)\n\t\t\treturn;\n'
+     '\t\tif (lastShot == mo.Level.maptime)\t// F11: one shot, one flash and one tail\n\t\t\treturn;\n'
+     '\t\tlastShot = mo.Level.maptime;\n\t\tlet w = mo.player.ReadyWeapon;\n'),
+    ('flash: lastShot field', 'zscript/rsq/flash.zs',
+     '\tvoid Shot(PlayerPawn mo)\n',
+     '\tint lastShot;\t// F11\n\tvoid Shot(PlayerPawn mo)\n'),
     # Every gun at BD22's own fire rate: the RSQ_TriggerHeld item (semiauto.zs) on every player,
     #    given by the alts handler that already visits each player every tic.
     ('trigger held: every player carries RSQ_TriggerHeld', 'zscript/rsq/alts.zs',
