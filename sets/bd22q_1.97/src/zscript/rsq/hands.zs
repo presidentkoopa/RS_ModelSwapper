@@ -255,7 +255,7 @@ class RSQ_Hands : Weapon
 		// the minigun's handlebar grip.
 		// 1.12: never while a reload or the shell feed has the hand (rsr): grabbing a shell with grip
 		// near the gun also two-hands it, and that hid the hand and the shell it was holding
-		bool hold = i > 0 && (p.WeaponState & WF_TWOHANDSTABILIZED) != 0 && s && s.kind == 0 && carry == 0 && rsr == "";
+		bool hold = i > 0 && RSVR_VRHand.TwoHands(PlayerPawn(p.mo)) && s && s.kind == 0 && carry == 0 && rsr == "";
 		// 2026-10-16 (owner): pistols and revolvers. The engine's steadying aims the gun along
 		// the line from the gun hand to the off hand, which is right for a forend and wrong for
 		// a two-hand pistol grip, where the hands are together. So on a cup-support gun the

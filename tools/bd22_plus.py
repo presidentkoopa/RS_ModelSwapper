@@ -4317,6 +4317,66 @@ def spine():
 # once, and it is skipped (not doubled) if its new text is already there, so the stage can run on
 # top of a finished build or at the end of a full one. Runs after every other stage, before sync.
 F11_FIXES = [
+    ('melee: its own record of the off grip (the reload keeps one only in grip-grab mode)', 'zscript/rsvr/melee.zs',
+     '\toverride void NetworkProcess(ConsoleEvent e)\n\t{\n\t\tif (e.Name != "rsvr_axe_grip")\n\t\t\treturn;\n',
+     '\tbool offGrip[MAXPLAYERS];\t// F11: the off grip (rsr_grip events, sent by vreload.zs InputProcess)\n'
+     '\toverride void NetworkProcess(ConsoleEvent e)\n\t{\n'
+     '\t\tif (e.Name == "rsr_grip" && e.Player >= 0 && e.Player < MAXPLAYERS)\n\t\t\toffGrip[e.Player] = e.Args[0] != 0;\n'
+     '\t\tif (e.Name != "rsvr_axe_grip")\n\t\t\treturn;\n'),
+    # MELEE, owner 2026-10-26 in the headset: "can we disable two handed weapons on the sword and
+    #    axe? or have it so that when we press the button, the model and hands change where they
+    #    need to, but we still only control it with one controller", "the swing sensitivity seems
+    #    too high, attacks should only be on a down or side swing, not an upswing".
+    #  a. TwoHands(): the engine's steadying for guns, OR, for the axe and the sword, our own pose
+    #     flag (off grip held within 50 cm). Everything that showed or paid for two hands reads it.
+    ('melee: TwoHands', 'zscript/rsvr/vrhand.zs',
+     '\tstatic bool Steadied(PlayerPawn mo)\n\t{\n\t\treturn (mo.player.WeaponState & WF_TWOHANDSTABILIZED) != 0;\n\t}\n',
+     '\tstatic bool Steadied(PlayerPawn mo)\n\t{\n\t\treturn (mo.player.WeaponState & WF_TWOHANDSTABILIZED) != 0;\n\t}\n\n'
+     '\t// F11: two hands on the weapon as the player SEES it. Guns: the engine\'s steadying. The axe\n'
+     '\t// and the sword: RSVR_MeleeTwo (melee.zs), the off grip held near them -- the engine\'s\n'
+     '\t// steadying is switched off while they are in hand, so one controller still drives them.\n'
+     '\tstatic bool TwoHands(PlayerPawn mo)\n\t{\n'
+     "\t\treturn mo && mo.player && (Steadied(mo) || mo.CountInv('RSVR_MeleeTwo') > 0);\n\t}\n"),
+    ('melee: the support hand follows TwoHands', 'zscript/rsq/hands.zs',
+     '\t\tbool hold = i > 0 && (p.WeaponState & WF_TWOHANDSTABILIZED) != 0 && s && s.kind == 0',
+     '\t\tbool hold = i > 0 && RSVR_VRHand.TwoHands(PlayerPawn(p.mo)) && s && s.kind == 0'),
+    ('melee: the pose flag, set from the off grip', 'zscript/rsvr/melee.zs',
+     '\t\t\tbool twoUp = RSVR_VRHand.InVR(mo) && mo.player.ReadyWeapon\n\t\t\t\t&& RSVR_Hand.KindOf(mo) == RSVR_Hand.AXE && RSVR_VRHand.Steadied(mo);\n',
+     '\t\t\t// F11: the axe and the sword go two-handed on the off grip held near them (the engine\'s\n'
+     '\t\t\t// own steadying is off for them, RSVR_TwoHandSwitch), never by the engine re-aiming them\n'
+     '\t\t\tint mk = mo.player.ReadyWeapon ? RSVR_Hand.KindOf(mo) : 0;\n'
+     '\t\t\tbool meleeTwo = RSVR_VRHand.InVR(mo) && (mk == RSVR_Hand.AXE || mk == RSVR_Hand.SWORD)\n'
+     '\t\t\t\t&& offGrip[i] && RSVR_VRHand.SteadyGap(mo) < 50.0;\n'
+     "\t\t\tmo.SetInventory('RSVR_MeleeTwo', meleeTwo ? 1 : 0);\n"
+     '\t\t\tbool twoUp = RSVR_VRHand.InVR(mo) && mo.player.ReadyWeapon\n\t\t\t\t&& RSVR_Hand.KindOf(mo) == RSVR_Hand.AXE && RSVR_VRHand.TwoHands(mo);\n'),
+    ('melee: the bite reads TwoHands', 'zscript/rsvr/melee.zs',
+     '\t\tif (!RSVR_VRHand.Steadied(mo))\n\t\t\treturn false;\n\t\tdouble el = edge.Length(), dl = dir.Length();\n',
+     '\t\tif (!RSVR_VRHand.TwoHands(mo))\n\t\t\treturn false;\n\t\tdouble el = edge.Length(), dl = dir.Length();\n'),
+    ('melee: no throw two-handed reads TwoHands', 'zscript/rsvr/melee.zs',
+     '\t\tif (RSVR_VRHand.Steadied(mo))\n\t\t\treturn false;\n\n\t\t// fastest step',
+     '\t\tif (RSVR_VRHand.TwoHands(mo))\n\t\t\treturn false;\n\n\t\t// fastest step'),
+    ('melee: the token', 'zscript/rsvr/melee.zs',
+     "class RSVR_AxeTwo : RSVR_Token {}",
+     "class RSVR_MeleeTwo : RSVR_Token {}\t// F11: the off grip held near the axe or the sword\nclass RSVR_AxeTwo : RSVR_Token {}"),
+    #  b. The engine will NOT let a script switch its steadying off ("Attempt to change CVAR
+    #     'vr_two_handed_weapons' outside of menu code", rig), so it cannot be done per weapon on
+    #     stock QZD 17.3. It goes on our own options page instead: off, the axe and the sword take
+    #     the two-handed pose on the off grip and one controller drives them. Off also stops guns
+    #     steadying -- the owner's call.
+    ('melee: the engine steadying switch on our page', 'MENUDEF.rsq',
+     '\tOption "VR Throwing", "rsg_vr", "OnOff"\n',
+     '\tOption "VR Throwing", "rsg_vr", "OnOff"\n\tOption "Two-Handed Steadying", "vr_two_handed_weapons", "OnOff"\n'),
+    #  c. the swing: down OR sideways cuts, up never; and the axe and the sword need 1.5x the speed
+    ('melee: down or side, never up', 'zscript/rsvr/melee.zs',
+     "\t\tbool backswing = rise > -clamp(Cv(mo, 'rsvr_melee_down', 0.25), 0.0, 0.9);\n",
+     "\t\tbool backswing = rise > -clamp(Cv(mo, 'rsvr_melee_down', 0.25), 0.0, 0.9);\n"
+     '\t\t// F11 (owner): the axe and the sword cut on a DOWN or a SIDE swing, never an upswing --\n'
+     '\t\t// anything that rises more than about 9 degrees is a wind-up\n'
+     '\t\tif (k == AXE || k == SWORD)\n\t\t\tbackswing = rise > 0.15;\n'),
+    ('melee: less sensitive', 'zscript/rsvr/melee.zs',
+     "\t\t\t* max(0.2, Cv(mo, 'rsvr_melee_swing', 1.0));\n",
+     "\t\t\t* max(0.2, Cv(mo, 'rsvr_melee_swing', 1.0))\n"
+     '\t\t\t* ((k == AXE || k == SWORD) ? 1.5 : 1.0);\t// F11 (owner): "swing sensitivity seems too high"\n'),
     # RECOIL REMOVED (owner, 2026-10-26, in the headset: "did you build some kind of fucked up
     #    recoil? we didn't have this in 1.92 ... this recoil needs to go"). F5's recoil turns the
     #    gun model through psp.x/psp.y, but the parts the reload draws on their own layers (the

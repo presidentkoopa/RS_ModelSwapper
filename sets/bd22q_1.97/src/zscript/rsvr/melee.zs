@@ -38,8 +38,11 @@ class RSVR_MeleeHandler : EventHandler
 		return n >= 0 && n < MAXPLAYERS && h.keyDown[n];
 	}
 
+	bool offGrip[MAXPLAYERS];	// F11: the off grip (rsr_grip events, sent by vreload.zs InputProcess)
 	override void NetworkProcess(ConsoleEvent e)
 	{
+		if (e.Name == "rsr_grip" && e.Player >= 0 && e.Player < MAXPLAYERS)
+			offGrip[e.Player] = e.Args[0] != 0;
 		if (e.Name != "rsvr_axe_grip")
 			return;
 		int n = e.Player;
@@ -115,8 +118,14 @@ class RSVR_MeleeHandler : EventHandler
 				&& mo.player.ReadyWeapon && RSVR_Hand.KindOf(mo) == RSVR_Hand.AXE;
 			mo.SetInventory('RSVR_AxeVRThrow', trigThrow ? 1 : 0);
 			// both hands on the haft: Axe.dec swaps to the shifted placement
+			// F11: the axe and the sword go two-handed on the off grip held near them (the engine's
+			// own steadying is off for them, RSVR_TwoHandSwitch), never by the engine re-aiming them
+			int mk = mo.player.ReadyWeapon ? RSVR_Hand.KindOf(mo) : 0;
+			bool meleeTwo = RSVR_VRHand.InVR(mo) && (mk == RSVR_Hand.AXE || mk == RSVR_Hand.SWORD)
+				&& offGrip[i] && RSVR_VRHand.SteadyGap(mo) < 50.0;
+			mo.SetInventory('RSVR_MeleeTwo', meleeTwo ? 1 : 0);
 			bool twoUp = RSVR_VRHand.InVR(mo) && mo.player.ReadyWeapon
-				&& RSVR_Hand.KindOf(mo) == RSVR_Hand.AXE && RSVR_VRHand.Steadied(mo);
+				&& RSVR_Hand.KindOf(mo) == RSVR_Hand.AXE && RSVR_VRHand.TwoHands(mo);
 			mo.SetInventory('RSVR_AxeTwo', twoUp ? 1 : 0);
 		}
 	}
@@ -579,7 +588,8 @@ class RSVR_Hand play
 		bool isButt = k == RIFLEBUTT || k == SGBUTT || k == SSGBUTT || k == ASGBUTT || k == MP40BUTT || k == SMGBUTT || k == MGBUTT || k == MG42BUTT;
 		double thr = (k == AXE ? AXE_SWING : k == SWORD ? SWORD_SWING
 			: isButt ? BUTT_SWING : WHIP_SWING) * vu / 35.
-			* max(0.2, Cv(mo, 'rsvr_melee_swing', 1.0));
+			* max(0.2, Cv(mo, 'rsvr_melee_swing', 1.0))
+			* ((k == AXE || k == SWORD) ? 1.5 : 1.0);	// F11 (owner): "swing sensitivity seems too high"
 		// 1.11 (owner: "goes insane with attacks just when I move around"). The blade is measured
 		// in the BODY's own frame (from the pawn, turned by the pawn's angle), so walking,
 		// strafing and turning move nothing; only the arm swinging the blade counts. (World
@@ -611,6 +621,10 @@ class RSVR_Hand play
 		// least rsvr_melee_down of its speed (default 0.25, about 15 degrees below level); a
 		// level or rising blade never cuts.
 		bool backswing = rise > -clamp(Cv(mo, 'rsvr_melee_down', 0.25), 0.0, 0.9);
+		// F11 (owner): the axe and the sword cut on a DOWN or a SIDE swing, never an upswing --
+		// anything that rises more than about 9 degrees is a wind-up
+		if (k == AXE || k == SWORD)
+			backswing = rise > 0.15;
 		if (isButt)
 		{
 			// 1.97 the butt strike. Not the axe's must-point-DOWN test: this blow drives
@@ -755,7 +769,7 @@ class RSVR_Hand play
 	// from, so the damage and the hands the player sees can never disagree.
 	static bool TwoHandedBite(PlayerPawn mo, Vector3 dir, Vector3 edge)
 	{
-		if (!RSVR_VRHand.Steadied(mo))
+		if (!RSVR_VRHand.TwoHands(mo))
 			return false;
 		double el = edge.Length(), dl = dir.Length();
 		if (el <= 0 || dl <= 0)
@@ -993,7 +1007,7 @@ class RSVR_Hand play
 		// A two-handed axe is not thrown (owner, 2026-10-23). Let go with the off hand and
 		// it is one-handed again, so the throw is back -- the rule follows the grip, and
 		// the same flag that pays the damage withholds the throw.
-		if (RSVR_VRHand.Steadied(mo))
+		if (RSVR_VRHand.TwoHands(mo))
 			return false;
 
 		// fastest step of the axe's edge over the last few tics: people slow
@@ -1119,6 +1133,7 @@ class RSVR_AxeHold : RSVR_Token {}		// the hold input is down: Ready enters the 
 class RSVR_AxeThrown : RSVR_Token {}
 class RSVR_AxeTrig : RSVR_Token {}
 class RSVR_AxeVRThrow : RSVR_Token {}
+class RSVR_MeleeTwo : RSVR_Token {}	// F11: the off grip held near the axe or the sword
 class RSVR_AxeTwo : RSVR_Token {}		// both hands on the haft: the shifted placement
 class RSVR_NotVR : RSVR_Token {}
 

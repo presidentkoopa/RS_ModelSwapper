@@ -73,6 +73,14 @@ class RSVR_VRHand play
 		return (mo.player.WeaponState & WF_TWOHANDSTABILIZED) != 0;
 	}
 
+	// F11: two hands on the weapon as the player SEES it. Guns: the engine's steadying. The axe
+	// and the sword: RSVR_MeleeTwo (melee.zs), the off grip held near them -- the engine's
+	// steadying is switched off while they are in hand, so one controller still drives them.
+	static bool TwoHands(PlayerPawn mo)
+	{
+		return mo && mo.player && (Steadied(mo) || mo.CountInv('RSVR_MeleeTwo') > 0);
+	}
+
 	// the distance between the two controllers, real cm: the engine's own steadying
 	// distance (OffhandPos - AttackPos; heights are divided by pixelstretch,
 	// hw_openxrdevice.cpp, so they are multiplied back)
