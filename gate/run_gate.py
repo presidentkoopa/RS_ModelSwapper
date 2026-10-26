@@ -147,7 +147,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # that way at all (BD22Q's rule, unchanged; see the handoff)
         sc = 'rsr_grab_with 0; rsrtest_script 7' if has_handle(donor) else 'rsrtest_script 1'
         t += [(110, sc), (115, '+attack'), (125, '-attack')]
-    end = 900 if pump else 520
+    # a handle adds its stroke after the magazine (the rig: ~200 tics more) before the mod's reload
+    end = 900 if pump else 720 if not brk and has_handle(donor) else 520
     if shots:
         t += [(x, 'screenshot') for x in (100, 140, 170, 200, 230, 260, 300, 340, 400)]
     t += [(end, 'echo GATE_END')]
