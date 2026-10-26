@@ -62,7 +62,8 @@ def drawn(body):
         frm = re.search(r'FrameIndex\s+\w+\s+A\s+%s\s+(\d+)' % n, body)
         if n != '0' and not frm:
             continue                    # no row: the engine draws nothing for it
-        f = os.path.join(ROOT, path.group(1), mdl)
+        from hand_gap import resolve
+        f = resolve(os.path.join(ROOT, path.group(1), mdl))
         if not os.path.exists(f):
             return None
         fn = int(frm.group(1)) if frm else fr
@@ -101,15 +102,18 @@ def main(dry):
                 print('%-26s ~ %-22s gap %.5f m but the Scale x sign differs (GunMoves.Mirrored) -- left' % (d, r, gap))
                 continue
             changes.append((d, r, slot.get(d), slot[r], gap))
+    # the slot a donor had before any twin_hands run (kept in its comment across re-runs)
+    first = {d: w for d, w in re.findall(r'donor == "(\w+)"\)\s*return \d+;\s*// = \w+, drawn identically \([^;]*; was (\S+)\)', t)}
     for d, r, old, new, gap in changes:
-        line = '\t\tif (donor == "%s")\treturn %d;\t// = %s, drawn identically (tools_kit/twin_hands.py, %.5f m; was %s)' % (d, new, r, gap, old if old else '-')
+        old = first.get(d, old if old else '-')
+        line = '\t\tif (donor == "%s")\treturn %d;\t// = %s, drawn identically (tools_kit/twin_hands.py, %.5f m; was %s)' % (d, new, r, gap, old)
         pat = re.compile(r'^[ \t]*if \(donor == "%s"\)\s*return \d+;.*$' % re.escape(d), re.M)
         if pat.search(t):
             t = pat.sub(lambda m: line, t, count=1)
         else:
             k = t.index('\t\treturn 0;', t.index('static int SlotForDonor'))
             t = t[:k] + line + '\n' + t[k:]
-        print('%-26s hand slot %-4s -> %d (%s), max vertex gap %.5f m' % (d, old if old else '-', new, r, gap))
+        print('%-26s hand slot %-4s -> %d (%s), max vertex gap %.5f m' % (d, old, new, r, gap))
     if not dry:
         open(p, 'w', newline='\n', encoding='utf-8').write(t)
     print('%d twins%s' % (len(changes), ' (dry run)' if dry else ' written'))

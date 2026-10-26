@@ -25,8 +25,9 @@ import card2quest as c2q, genpack
 # gripping faces ship in the Depot (tools/kit/gripregions.json) and Ermac's cut hand
 # meshes inside the kit itself, where ermac.py already points -- the same two files the
 # melee fits use.
-REGIONS_JSON = 'E:/DOOMWork/RSQ_WeaponDepot/tools/kit/gripregions.json'
-ERMAC = 'C:/Users/Command/Desktop/Quest_Weapons_Kit/kit/kit/ermac/hand'   # hand.md3 / hand2.md3, the frames the regions were measured on
+# the owner's PC paths, overridable for any other machine (MS_GRIPREGIONS, MS_ERMAC_HANDS)
+REGIONS_JSON = os.environ.get('MS_GRIPREGIONS', 'E:/DOOMWork/RSQ_WeaponDepot/tools/kit/gripregions.json')
+ERMAC = os.environ.get('MS_ERMAC_HANDS', 'C:/Users/Command/Desktop/Quest_Weapons_Kit/kit/kit/ermac/hand')   # hand.md3 / hand2.md3, the frames the regions were measured on
 PL = dict(scale=[-1.0, 1.0, 1.0], off=[0.0, -24.0, -10.0])                # Ermac's placement (ermac.PL)
 REGIONS = json.load(open(REGIONS_JSON))['poses']
 

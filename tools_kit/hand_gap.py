@@ -89,6 +89,18 @@ def surface(path, frame, item, step=0.005):
     return np.concatenate(pts)
 
 
+def resolve(path):
+    """a MODELDEF names files without case (the engine's lookup is case-insensitive)"""
+    if os.path.exists(path):
+        return path
+    d, f = os.path.split(path)
+    if os.path.isdir(d):
+        for x in os.listdir(d):
+            if x.lower() == f.lower():
+                return os.path.join(d, x)
+    return path
+
+
 def gaps(donor, blocks, slot, tb, lt):
     i = slot.get(donor)
     if not i or donor not in blocks:
@@ -100,7 +112,7 @@ def gaps(donor, blocks, slot, tb, lt):
     base = re.search(r'Path\s+"([^"]+)"', body).group(1)
     parts = []
     for n, mdl in re.findall(r'^[ \t]*Model\s+(\d+)\s+"([^"]+)"', body, re.M):
-        gp = os.path.join(ROOT, base, mdl)
+        gp = resolve(os.path.join(ROOT, base, mdl))
         frm = re.search(r'FrameIndex\s+\w+\s+A\s+%s\s+(\d+)' % n, body)
         if os.path.exists(gp) and (frm or n == '0'):
             parts.append(surface(gp, int(frm.group(1)) if frm else fr, {'scale': sc, 'off': off}))

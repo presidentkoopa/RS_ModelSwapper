@@ -282,7 +282,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     # The rig drives held gestures and flicks, which fall between frames under load: exclusive there.
     lock = os.environ.get('MS_RIG_LOCK', '/home/claude/rig.lock')
     if lock and shutil.which('flock'):
-        launch = ['flock', '-x' if vr else '-s', lock] + launch
+        # -o: the lock is not inherited by what the engine spawns (an Xvfb left behind held it for good)
+        launch = ['flock', '-o', '-x' if vr else '-s', lock] + launch
     p = subprocess.Popen(launch, cwd=RIG if vr else engine, env=env,
                          stdout=so, stderr=subprocess.STDOUT, start_new_session=True)
     t0 = time.time(); rc = None
