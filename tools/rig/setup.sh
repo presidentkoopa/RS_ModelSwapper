@@ -32,13 +32,13 @@ if [ "$1" = build ]; then	# only to rebuild the engine from source; bin/ is the 
   mkdir -p "$B/rig"; cp -a "$HERE/engine/." "$B/rig/"
   QGZ="$B/src/qzd" JNI="$B/src/qzw/Projects/Android/jni" bash "$B/rig/build.sh"
 fi
-( cd "$HERE/probe" && rm -f "$B/probe.pk3" && zip -q -r "$B/probe.pk3" . )
+( cd "$HERE/probe" && rm -f "$B/probe.pk3" && zip -q -r -D "$B/probe.pk3" . )
 T=$(mktemp -d); cp "$HERE/upstream_zscript.txt" "$T/zscript.txt"; cp "$HERE/upstream_MAPINFO.txt" "$T/MAPINFO.txt"
-( cd "$T" && rm -f "$B/upstream.pk3" && zip -q -r "$B/upstream.pk3" . ); rm -rf "$T"
-( cd "$DEPOT/sets/bd22q_1.97/src" && rm -f "$B/BD22Q_now.pk3" && zip -q -r "$B/BD22Q_now.pk3" . )
+( cd "$T" && rm -f "$B/upstream.pk3" && zip -q -r -D "$B/upstream.pk3" . ); rm -rf "$T"
+( cd "$DEPOT/sets/bd22q_1.97/src" && rm -f "$B/BD22Q_now.pk3" && zip -q -r -D "$B/BD22Q_now.pk3" . )
 if [ ! -f "$B/BD22Q_192.pk3" ]; then
   fetch "$B/src/bd22q_192" https://github.com/presidentkoopa/RS_Brutal22WeaponsQ refs/tags/1.92 2>/dev/null || \
     { rm -rf "$B/src/bd22q_192"; git clone -q --depth 1 --branch 1.92 https://github.com/presidentkoopa/RS_Brutal22WeaponsQ "$B/src/bd22q_192"; }
-  ( cd "$B/src/bd22q_192/src" && zip -q -r "$B/BD22Q_192.pk3" . )
+  ( cd "$B/src/bd22q_192/src" && zip -q -r -D "$B/BD22Q_192.pk3" . )
 fi
 echo "rig ready: $HERE/bin/qz   try: cd $HERE && python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 Pistol t1"

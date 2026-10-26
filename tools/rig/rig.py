@@ -32,6 +32,7 @@ def run(name, script, secs=150, extra=()):
         if os.path.exists(f):
             os.remove(f)
     files = [BD22, VOX, PK3] + ([] if os.environ.get('B22_NOPROBE') else [PROBE]) + list(extra)
+    files = [os.path.abspath(f) for f in files]	# the engine runs from RIG, not from here
     for f in [IWAD] + files:
         if not os.path.exists(f):
             raise SystemExit('missing ' + f)
