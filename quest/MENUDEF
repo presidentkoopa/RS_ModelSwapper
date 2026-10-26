@@ -226,6 +226,7 @@ OptionMenu "RSMS_Reload"
 	Option "Pump by Hand After a Shot", "ms_hand_pump", "OnOff"
 	Option "Charging Handle After Empty", "ms_charge_dry", "OnOff"
 	Option "Check the Chamber by Hand", "rsr_freecharge", "OnOff"
+	Option "Shells per grab", "ms_shell_grab", "MS_ShellGrab"
 	Option "Shotgun Shells Per Insert", "rsr_shell_credit", "RSR_ShellCredit"
 	Option "Reload assist", "rsr_assist", "OnOff"
 	StaticText " "
@@ -249,6 +250,15 @@ OptionMenu "RSR_Debug"
 // the order: the mod's reload at the press and the fire held until the hands finish, or the gun held
 // at the press and the mod's reload after the hands (ms_mod_first). Magazine and break-open guns
 // (SSG, M79, revolvers) both follow it.
+// how many shells one grab at the pouch puts in the off hand (ms_shell_grab)
+OptionValue "MS_ShellGrab"
+{
+	1, "1"
+	2, "2"
+	3, "3"
+	4, "4"
+}
+
 OptionValue "MS_ReloadOrder"
 {
 	1, "Mod's reload first"

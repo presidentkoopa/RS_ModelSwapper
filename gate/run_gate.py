@@ -30,9 +30,11 @@ IWAD = os.environ.get('MS_IWAD', '/usr/share/games/doom/freedoom2.wad')
 # moving any layer relative to another -- which is the thing under test.
 VIEW = 'vr_3dweaponOffsetX 10; vr_3dweaponOffsetY -4; vr_3dweaponOffsetZ -45'
 EXTRA = ''
+EXPECT = ''
 OFFKNIFE = False
 BYFIRE = False
 NOALLOW = False
+WHOLE = False
 MOD = ''          # --mod bd22:<Class> / doomablo:<Class>: a real mod's own weapon instead of the test mod's (doom2 -> the mod -> the pack)
 GD = os.environ.get('MS_GAMEDATA', '/home/claude/gamedata')
 VR_CVARS = '''
@@ -180,6 +182,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     pump = pump_slot(donor) > 0
     brk = not pump and break_slot(donor) > 0
     gun = 'TMShotgun' if pump else 'TMSSG' if brk else 'TMPistol'
+    if WHOLE and gun == 'TMShotgun':
+        gun = 'TMShotgunW'        # --whole: a tube filled in one go by the mod's reload
     if NOALLOW and gun == 'TMPistol':
         gun = 'TMPistolNR'        # --noallow: a Ready without WRF_ALLOWRELOAD
     if MOD:
@@ -211,6 +215,12 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # pump starts, the hand works it, and the mod's own fire goes on from there.
         t[-1] = (40, 'rsqt_gun %s; rsqt_empty 0' % gun)
         t += [(110, 'rsrtest_script 0; rsptest_script 2; rsptest_every 0'), (130, '+attack'), (133 if not vr else 140, '-attack')]
+    elif pump and MOD.startswith('doomablo:'):
+        # doomablo keeps its tube in a field (currentClipAmmo): fired dry, its own Ready goes to its
+        # Reload (RWA_ReloadOrSwitchIfEmpty), as a player meets it. Its one store is the reserve, so
+        # it is topped up, not emptied.
+        t[-1] = (40, 'rsqt_gun %s; rsqt_empty 0' % gun)
+        t += [(60, 'give ammo'), (100, 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'), (105, '+attack'), (330, '-attack')]
     elif pump:
         t += [(110, 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'), (115, '+reload'), (up, '-reload')]
     else:
@@ -370,20 +380,33 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # the engine echoes its log to stdout too: count the log alone, or every shell counts twice
         logtext = open(log, encoding='latin-1').read() if os.path.exists(log) else stdout
         shells = len(re.findall(r'TM shotgun: a shell in', logtext))
+        # how the mod loads its tube, as the join read it off the mod's own reload (owner, 2026-10-26)
+        whole = 'loads the WHOLE tube at once' in logtext or 'the whole tube at once: the mod' in logtext
+        paced = 'loads ONE shell per pass' in logtext or 'one shell per pass: paced' in logtext
+        grab = int(re.search(r'ms_shell_grab (\d)', EXTRA).group(1)) if 'ms_shell_grab' in EXTRA else 1
         checks = [
             ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
             ('scripts parsed', 'script parsing took' in text),
             ('no script error', not re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
             ('join took it', '%s pump: took it at its reload' % gun in text),
+            ('kind read', (whole if EXPECT == 'whole' else paced if EXPECT == 'paced' else whole or paced)),
             ('shell in off hand', held_in_off(text, (2210,))),
+            # Shells per grab: that many taken at once, the extras drawn beside it in the off hand
+            ('grab of %d' % grab, re.search(r'took %d shell%s ' % (grab, '' if grab == 1 else 's'), logtext) is not None
+                                  and (grab == 1 or held_in_off(text, (2209 + grab,)))),
             ('hands on the gun', hands_on_gun(donor)),
             ('hand fed shells', 'a shell pushed home' in text),
-            ('their loop ran', len(re.findall(r'^AMMO t\d+ mag [1-9]', logtext, re.M)) >= 2 if MOD else shells >= 2),
-            ('re-held per shell', 'a shell in -- held for the next' in text),
-            ('tube filled', re.search(r'tube full or reserve empty|reload done, tube \d+' if MOD else r'tube full or reserve empty|reload done, tube 8', text) is not None),
+            ('their loop ran', (len(re.findall(r'^AMMO t\d+ mag [1-9]', logtext, re.M)) >= 2 or reserve_spent(text, 'took it at its reload')) if MOD else shells >= 2 or 'TM shotgun: whole tube' in logtext),
+            ('re-held per shell', 'a shell in -- held for the next' in text or 'held for the next shell' in text) if paced else
+            ('fire held for hands', re.search(r"the mod's reload is done \(\d+ shells\) -- held, no fire.*?(the hand pushed every shell|the hand pumped) -- fire allowed", text, re.S) is not None),
+            # a real mod: its own rule says when the tube is done (BD22 stops an empty gun at 8 of its 9 and
+            # chambers, Shotgun.dec CheckIfFinishReload) -- the tube went to 8 or more by its own count
+            ('tube filled', (max([int(x) for x in re.findall(r'^AMMO t\d+ mag (\d+)', logtext, re.M)] or [0]) >= 8
+                             or 'the hand pushed every shell' in text) if MOD else re.search(r'tube full or reserve empty|reload done, tube 8|whole tube, \d+ in, tube 8', text) is not None),
             ('reached the end', 'GATE_END' in text),
         ]
-        print('donor %s  (%s #%d, pump slot %d)  exit %s  -- %d shells by the mod\'s own loop' % (donor, arch, idx, pump_slot(donor), rc, shells))
+        print('donor %s  (%s #%d, pump slot %d)  exit %s  -- %d shells by the mod\'s own loop, %s' % (donor, arch, idx, pump_slot(donor), rc, shells,
+              'whole tube' if whole else 'one per pass' if paced else 'kind not read'))
         for name, c in checks:
             print('  %-18s %s' % (name, 'ok' if c else 'FAIL'))
         for l in text.splitlines():
@@ -435,7 +458,9 @@ if __name__ == '__main__':
     OFFKNIFE = '--offknife' in sys.argv
     BYFIRE = '--by-fire' in sys.argv
     NOALLOW = '--noallow' in sys.argv
+    WHOLE = '--whole' in sys.argv
     MOD = opt('--mod', '')
     EXTRA = opt('--extra', '')
-    a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None), opt('--extra', None), opt('--mod', None))]
+    EXPECT = opt('--expect', '')     # pump: 'paced' (one shell per pass) or 'whole' (whole tube at once)
+    a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None), opt('--extra', None), opt('--mod', None), opt('--expect', None))]
     sys.exit(run(a[0], a[1], eng, '--shots' in sys.argv, int(opt('--yaw', 60)), vr='--vr' in sys.argv, shot='--shot' in sys.argv))

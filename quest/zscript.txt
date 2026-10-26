@@ -436,4 +436,5 @@ class MS_BD22_M79 : Actor {}
 #include "zscript_depot/rsq/counters.zs"
 #include "zscript_depot/rsr/rsr_pump.zs"
 #include "zscript_depot/rsr/rsr_pump_guns.zs"
+#include "zscript_depot/rsr/rsp_stack.ms.zs"
 #include "zscript_depot/rsr/rsp_rack.ms.zs"

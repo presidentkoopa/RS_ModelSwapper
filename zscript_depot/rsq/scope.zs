@@ -30,7 +30,7 @@ class RSQ_ScopeLayers abstract
 	// and RSR_Guns has RailGun at 6 and Sniper at 8, so both scoped guns already use that id
 	// for their VR reload. One psprite id holds one caller; sharing it would have killed the
 	// reload on exactly the two guns getting scopes. Taken in the pack: 2100-2111, 2120-2123,
-	// 2130-2131, 2200-2203, 2210, 2300-2301. Free: 2112-2119, 2124-2129.
+	// 2130-2131, 2200-2203, 2210-2213, 2300-2301. Free: 2112-2119, 2124-2129.
 	const RETICLE = 2112;		// RSQ_GunSide, main controller: the collimated reticle
 }
 

@@ -118,6 +118,29 @@ class MS_ReloadJoin : EventHandler
 	private int mFeedTics[MAXPLAYERS];
 	private Weapon mFeedW[MAXPLAYERS];
 
+	// HOW THE MOD LOADS ITS TUBE (owner, 2026-10-26, item 2). Read from the mod's own states as they
+	// run, the first time each weapon class reloads, and remembered for the session:
+	//   PACED  its reload is a loop that puts ONE shell in per pass (TMShotgun, BD22's InsertingShells)
+	//          -- interruptible, so the hand paces it shell by shell as before;
+	//   WHOLE  its reload fills the tube in one go (DoomAblo's A_MagazineReload) -- the mod's reload
+	//          runs first, then the gun is held, no fire, until the hand has pushed that many shells.
+	// QuestZDoom 17.3's static build has no label table to walk (RS_Fork.CountLabels is a stub there)
+	// and a DECORATE loop's jumps live in action arguments, so the evidence is the run itself: the
+	// tube count (or, for a mod whose tube is a field, its reserve) the first time it moves, and
+	// whether the psprite then goes back to an earlier state of the same reload.
+	const KIND_PACED = 1;
+	const KIND_WHOLE = 2;
+	private Array<Name> mKindCls;
+	private Array<int> mKind;
+	private bool mProbe[MAXPLAYERS];		// the mod's reload runs while we learn which kind it is
+	private int mProbeTics[MAXPLAYERS];
+	private int mRise[MAXPLAYERS];			// tube rise / reserve drop since the press
+	private int mRes0[MAXPLAYERS];
+	private int mFurthest[MAXPLAYERS];		// the deepest state offset into its reload seen this pass
+	private bool mWhole[MAXPLAYERS];		// WHOLE: the mod's reload runs / ran; the hand owes mOwe shells
+	private int mOwe[MAXPLAYERS];
+	private int mPaidFirst[MAXPLAYERS];		// PACED, learnt on this reload: shells the mod's loop put in while we watched
+
 	// THE PUMP AFTER A SHOT (owner, 2026-10-25: "Hold at the mod's pump"). A pack that owns its
 	// shotgun calls RSP_PumpStart from its fire states at its pump. A foreign shotgun's pump is in
 	// ITS fire states, which we cannot edit -- so the join finds the point from outside: the mod's
@@ -225,7 +248,39 @@ class MS_ReloadJoin : EventHandler
 		// the reload" on every tic. DistanceTo gives the state's offset inside the
 		// class's own state array, which is bounded and does not wander.
 		int d = rs.DistanceTo(s);
-		return d >= 0 && d < 32;
+		return d >= 0 && d < ReloadEnd(w, rs);
+	}
+
+	// WHERE THE MOD'S RELOAD BLOCK ENDS, as a state offset from its Reload label. Its own reload
+	// labels (BD22's ReloadNormally / InsertingShells / InsertShellAnimation / TurboReload) follow it
+	// in source order; the block ends at the first STANDARD label declared after it. The static build
+	// cannot enumerate a class's labels (RS_Fork.CountLabels is a stub there), but it can look these
+	// names up, and DistanceTo gives where each sits. 32 was the old fixed window: BD22's Shot_Gun
+	// reaches its first tic ~45 states in (rig: the join never took it). Never below 32; at most 256.
+	private Array<Name> mEndCls;
+	private Array<int> mEndAt;
+	private int ReloadEnd(Weapon w, State rs)
+	{
+		Name cn = w.GetClassName();
+		int k = mEndCls.Find(cn);
+		if (k < mEndCls.Size())
+			return mEndAt[k];
+		static const String after[] = { "Ready", "Fire", "AltFire", "Hold", "AltHold", "Select", "Deselect", "Flash",
+			"AltFlash", "Spawn", "Death", "Zoom", "User1", "User2", "User3", "User4", "Unload", "Steady" };
+		int end = 256;
+		for (int n = 0; n < after.Size(); n++)
+		{
+			let st = w.FindStateByString(after[n], true);
+			int d = st ? rs.DistanceTo(st) : -1;
+			if (d > 0 && d < end)
+				end = d;
+		}
+		end = max(end, 32);
+		mEndCls.Push(cn);
+		mEndAt.Push(end);
+		if (RS_ForeignRemap.DebugOn())
+			Console.Printf("[MSJOIN] %s: its reload block is %d states from its Reload label", cn, end);
+		return end;
 	}
 
 	private bool InReloadGroup(RS_ForeignRemap m, State s)
@@ -299,6 +354,13 @@ class MS_ReloadJoin : EventHandler
 			int bslot = slot > 0 || pslot > 0 ? 0 : RSB_Guns.Index(w);
 			if (mFeeding[i] && mFeedW[i] != w)
 				mFeeding[i] = false;			// switched away mid-shell: the mod's own business now
+			if ((mProbe[i] || mWhole[i]) && mFeedW[i] != w)
+			{
+				if (mHeld[i] && players[i].mo)
+					Release(p, i, false);
+				mProbe[i] = mWhole[i] = false;
+				mOwe[i] = 0;
+			}
 			if (slot <= 0 && pslot <= 0 && bslot <= 0)
 			{
 				if (mHeld[i]) Release(p, i, false);
@@ -661,25 +723,48 @@ class MS_ReloadJoin : EventHandler
 		int pi = RSP_Guns.Index(w);
 		let m = RemapFor(mo, w);
 		bool inReload = InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState);
+		// Once the mod's reload is under way, it is running until its psprite is back in its Ready
+		// loop. The entry window (AtReloadEntry, 32 states) is too short for a long DECORATE reload:
+		// BD22's InsertShellAnimation is ~45 states past its Reload label, and the static build has
+		// no remap to say so.
+		bool running = inReload || InReloadBlock(w, psp.CurState) && !AtRest(w, psp.CurState);
+
+		// 0. learning how this mod loads (the first reload of this class), or a whole-tube reload
+		if (mProbe[i])
+		{
+			ProbeTick(mo, p, i, w, psp, have, running);
+			return;
+		}
+		if (mWhole[i])
+		{
+			WholeTick(mo, p, i, w, psp, running);
+			return;
+		}
 
 		// 1. the mod's own reload is running for one shell the hand pushed home
 		if (mFeeding[i])
 		{
+			mo.GiveInventory('RSP_LTick', 1);	// the hand keeps loading meanwhile (Shells per grab)
 			mFeedTics[i]++;
 			if (have > mTube[i])
 			{
 				mFeeding[i] = false;
 				bool more = tube && have < tube.MaxAmount && !RSP.NoReserve(mo, pi);
-				if (more && inReload)
+				if (more && running)
 					PumpHold(p, i, w, psp, "a shell in -- held for the next");
 				else
 					PumpDone(i, w, "tube full or reserve empty -- the mod's own reload finishes");
 				return;
 			}
-			if (!inReload || mFeedTics[i] > FEED_LIMIT)
+			if (!running || mFeedTics[i] > FEED_LIMIT)
 			{
 				mFeeding[i] = false;
-				PumpDone(i, w, !inReload ? "the mod's reload ended" : "no shell went in");
+				// the mod's own rule ended its reload (full by its count, out of reserve): the shells
+				// still in the hand are not wanted -- the reload's own end puts them away
+				let ps = RSP_Handler.StateOf(mo);
+				if (ps && ps.mode == RSP.LOAD)
+					ps.Abort(mo);
+				PumpDone(i, w, !running ? "the mod's reload ended" : "no shell went in");
 			}
 			return;
 		}
@@ -707,6 +792,13 @@ class MS_ReloadJoin : EventHandler
 			if (mo.CountInv('RSP_ShellIn') > 0)
 			{
 				mo.TakeInventory('RSP_ShellIn', 1);
+				if (mPaidFirst[i] > 0)
+				{
+					// learnt on this reload: a shell the mod put in while we watched is this push's
+					mPaidFirst[i]--;
+					Trace(w, String.Format("a shell pushed home -- one the mod's loop loaded while it was read (%d more)", mPaidFirst[i]));
+					return;
+				}
 				PumpFeed(p, i, w, have);
 			}
 			return;
@@ -728,7 +820,29 @@ class MS_ReloadJoin : EventHandler
 			if (mo.CountInv('RSP_Go') <= 0)
 				return;					// the pump runtime declined (VR off, Stock): the mod's own reload
 			mo.TakeInventory('RSP_Go', 999);
-			PumpHold(p, i, w, psp, "took it at its reload");
+			int kind = KindOf(w);
+			Trace(w, String.Format("took it at its reload (%s)", kind == KIND_PACED ? "one shell per pass: paced by the hand"
+				: kind == KIND_WHOLE ? "the whole tube at once: the mod's reload first" : "first reload: the mod's reload shows how it loads"));
+			if (kind == KIND_PACED)
+			{
+				PumpHold(p, i, w, psp, "held for the hand's first shell");
+				return;
+			}
+			// WHOLE, or not known yet: the mod's reload runs now; ProbeTick / WholeTick watch it
+			let res = RSR.WeaponStore(mo, true);
+			mRise[i] = 0;
+			mRes0[i] = res ? res.Amount : 0;
+			mTube[i] = have;
+			mFurthest[i] = -1;
+			mProbeTics[i] = 0;
+			mOwe[i] = 0;
+			mFeedW[i] = w;
+			if (kind == KIND_WHOLE)
+				mWhole[i] = true;
+			else
+				mProbe[i] = true;
+			mHeld[i] = null;
+			mReturn[i] = null;
 			return;
 		}
 		// a shell pushed straight into the port with no reload under way (the pump runtime's
@@ -864,10 +978,168 @@ class MS_ReloadJoin : EventHandler
 
 	private void PumpDone(int i, Weapon w, String why)
 	{
+		mPaidFirst[i] = 0;
 		mHeld[i] = null;
 		mReturn[i] = null;
 		mDisarmed[i] = true;
 		Trace(w, why);
+	}
+
+	// Anywhere in the states declared from the mod's Reload label on (its own reload's labels follow
+	// it in source order: BD22's InsertingShells / InsertShellAnimation / FinishedInsertingShells).
+	// A state declared before Reload (its Ready, Fire, a pump label) is not its reload.
+	private bool InReloadBlock(Weapon w, State s)
+	{
+		return AtReloadEntry(w, s);
+	}
+
+	// back in the weapon's Ready loop (its Ready label's run of states): the mod's reload is over
+	private bool AtRest(Weapon w, State s)
+	{
+		State hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+		if (!s || s == hold)
+			return false;
+		State r = w.GetReadyState();
+		return r && s.InStateSequence(r);
+	}
+
+	private int KindOf(Weapon w)
+	{
+		Name cn = w.GetClassName();
+		int k = mKindCls.Find(cn);
+		return k < mKindCls.Size() ? mKind[k] : 0;
+	}
+
+	private void SetKind(Weapon w, int kind)
+	{
+		Name cn = w.GetClassName();
+		if (mKindCls.Find(cn) < mKindCls.Size())
+			return;
+		mKindCls.Push(cn);
+		mKind.Push(kind);
+		Trace(w, kind == KIND_PACED ? "its reload loads ONE shell per pass (a loop): paced by the hand, shell by shell"
+			: "its reload loads the WHOLE tube at once: the mod's reload first, fire held until the hand has pushed as many");
+	}
+
+	// how far the mod's reload has moved the ammo since the press: its tube up, or (a tube kept in a
+	// field, DoomAblo's currentClipAmmo) its reserve down
+	private int Moved(PlayerPawn mo, int i, int have)
+	{
+		let res = RSR.WeaponStore(mo, true);
+		int drop = res ? mRes0[i] - res.Amount : 0;
+		return max(have - mTube[i], drop);
+	}
+
+	// the first reload of this class: let the mod's own reload run and read how it loads
+	private void ProbeTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp, int have, bool inReload)	// inReload: the mod's reload is still running
+	{
+		mo.GiveInventory('RSP_LTick', 1);
+		mProbeTics[i]++;
+		int moved = Moved(mo, i, have);
+		let rs = w.FindState("Reload");
+		int at = rs && psp.CurState ? rs.DistanceTo(psp.CurState) : -1;
+		let tube = RSR.WeaponStore(mo, false);
+		bool full = tube && have >= tube.MaxAmount;
+		// A loop goes BACK to an earlier state of its reload for its next shell; a whole-tube reload
+		// never does. Checked first: BD22's loop jumps back through 0-tic states and gives its next
+		// shell in the same tic (rig: tube 1 at t129, 2 at t139), so the count alone reads as "2 at once".
+		bool loopedBack = at >= 0 && mFurthest[i] >= 0 && at < mFurthest[i] && inReload;
+		if (moved >= 1 && loopedBack)
+		{
+			mProbe[i] = false;
+			SetKind(w, KIND_PACED);
+			mPaidFirst[i] = moved;
+			PumpHold(p, i, w, psp, String.Format("held for the next shell (the mod's loop loaded %d while it was read)", moved));
+			return;
+		}
+		if (moved >= 2 || moved >= 1 && (full || !inReload))
+		{
+			// more than one shell in one pass, or one and out: a reload that loads what it can at once
+			mProbe[i] = false;
+			SetKind(w, KIND_WHOLE);
+			mWhole[i] = true;
+			WholeTick(mo, p, i, w, psp, inReload);
+			return;
+		}
+		if (at > mFurthest[i])
+			mFurthest[i] = at;
+		if (moved <= 0 && (!inReload || mProbeTics[i] > FEED_LIMIT))
+		{
+			mProbe[i] = false;
+			PumpDone(i, w, "the mod's reload loaded nothing");
+			let s = RSP_Handler.StateOf(mo);
+			if (s)
+				s.Abort(mo);
+		}
+	}
+
+	// WHOLE: the mod's reload runs to its end (its ammo), the gun is parked there -- no fire -- until
+	// the hand has pushed as many shells as the mod loaded; then it goes on from that state.
+	private void WholeTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp, bool inReload)
+	{
+		let s = RSP_Handler.StateOf(mo);
+		let tube = RSR.WeaponStore(mo, false);
+		int have = tube ? tube.Amount : 0;
+		mo.GiveInventory('RSP_LTick', 1);
+		State hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+		if (!mHeld[i])
+		{
+			int moved = Moved(mo, i, have);
+			if (moved > mRise[i])
+			{
+				mOwe[i] += moved - mRise[i];
+				mRise[i] = moved;
+			}
+			if (s)
+			{
+				s.paid = true;
+				s.owe = mOwe[i];
+			}
+			if (!inReload && psp.CurState != hold && hold)
+			{
+				if (mOwe[i] <= 0)
+				{
+					mWhole[i] = false;
+					PumpDone(i, w, "the mod's reload loaded nothing");
+					if (s)
+						s.Abort(mo);
+					return;
+				}
+				mReturn[i] = psp.CurState;
+				mHeld[i] = w;
+				p.SetPsprite(PSP_WEAPON, hold, false, w);
+				Trace(w, String.Format("the mod's reload is done (%d shells) -- held, no fire, until the hand has pushed them", mOwe[i]));
+			}
+		}
+		while (mo.CountInv('RSP_ShellIn') > 0 && mOwe[i] > 0)
+		{
+			mo.TakeInventory('RSP_ShellIn', 1);
+			mOwe[i]--;
+			Trace(w, String.Format("a shell pushed home -- %d to go", mOwe[i]));
+		}
+		if (s)
+			s.owe = mOwe[i];
+		// the pump stroke ends a loading reload (RSP's own rule): the hand is done with it
+		bool stroke = s && s.mode == RSP.NONE;
+		if (mHeld[i] && (mOwe[i] <= 0 || stroke))
+		{
+			mWhole[i] = false;
+			mo.TakeInventory('RSP_ShellIn', 999);
+			State go = mReturn[i];
+			mHeld[i] = null;
+			mReturn[i] = null;
+			mDisarmed[i] = true;
+			if (s)
+			{
+				s.paid = false;
+				s.owe = 0;
+				if (s.mode == RSP.LOAD)
+					s.End(mo);
+			}
+			if (go)
+				p.SetPsprite(PSP_WEAPON, go, false, w);
+			Trace(w, stroke && mOwe[i] > 0 ? "the hand pumped -- fire allowed" : "the hand pushed every shell -- fire allowed");
+		}
 	}
 
 	private void Trace(Weapon w, String what)

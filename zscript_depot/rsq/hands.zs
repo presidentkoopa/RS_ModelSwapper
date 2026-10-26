@@ -46,7 +46,7 @@ class RSQ_Layers abstract
 			|| id >= RSR.LAYER_FIRST && id <= RSR.LAYER_LAST || id == RSR.HANDMAG
 			|| id >= RSB.LAYER_FIRST && id <= RSB.LAYER_LAST
 			|| id == RSB.HANDROUND || id == RSB.HANDROUND2
-			|| id >= RSP.LAYER_FIRST && id <= RSP.LAYER_LAST || id == RSP.HANDSHELL
+			|| id >= RSP.LAYER_FIRST && id <= RSP.LAYER_LAST || id >= RSP.HANDSHELL && id <= RSP.HANDSHELL4
 			|| id >= RSM.LAYER_FIRST && id <= RSM.LAYER_LAST;
 	}
 }

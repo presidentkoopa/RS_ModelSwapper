@@ -198,8 +198,8 @@ class RSR_TestDriver : EventHandler
 		String off = "none";
 		if (p.OffhandWeapon)
 			off = p.OffhandWeapon.GetClassName();
-		String now = String.Format("off %s | 2201 %s 2202 %s 2203 %s 2210 %s", off,
-			Layer(p, 2201), Layer(p, 2202), Layer(p, 2203), Layer(p, 2210));
+		String now = String.Format("off %s | 2201 %s 2202 %s 2203 %s 2210 %s 2211 %s 2212 %s 2213 %s", off,
+			Layer(p, 2201), Layer(p, 2202), Layer(p, 2203), Layer(p, 2210), Layer(p, 2211), Layer(p, 2212), Layer(p, 2213));
 		if (now != heldWas)
 			Console.Printf("HELD t%d %s", Level.maptime, now);
 		heldWas = now;

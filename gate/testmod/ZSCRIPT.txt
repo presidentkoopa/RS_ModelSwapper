@@ -224,3 +224,25 @@ class TMPistolNR : TMPistol
 		Loop;
 	}
 }
+
+// A pump shotgun whose reload fills the WHOLE tube at once (one state moves every shell), the way
+// DoomAblo's A_MagazineReload does -- not interruptible. run_gate --whole. Owner, 2026-10-26 item 2:
+// the mod's reload runs first, and the fire is held until the hand has pushed that many shells.
+class TMShotgunW : TMShotgun
+{
+	States
+	{
+	Reload:
+		SHTG A 0 A_JumpIf(CountInv("TMShells") >= 8 || CountInv("Shell") <= 0, "Ready");
+		SHTG B 8 A_Log("TM shotgun: the mod's own reload starts (whole tube)");
+		SHTG C 8
+		{
+			int have = min(8 - CountInv("TMShells"), CountInv("Shell"));
+			A_TakeInventory("Shell", have);
+			A_GiveInventory("TMShells", have);
+			A_Log(String.Format("TM shotgun: whole tube, %d in, tube %d, reserve %d", have, CountInv("TMShells"), CountInv("Shell")));
+		}
+		SHTG BA 5;
+		Goto Ready;
+	}
+}
