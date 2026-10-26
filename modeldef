@@ -2891,6 +2891,7 @@ Model MS_zion_D4SHOTGUN
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex SHTG A 0 61
+	FrameIndex SHTG A 1 61	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -2917,6 +2918,7 @@ Model MS_zion_D4CHAINGUN
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex CHGG A 0 57
+	FrameIndex CHGG A 1 57	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -2945,6 +2947,8 @@ Model MS_zion_D4PLASMARIFLE
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex PLSG A 0 21
+	FrameIndex PLSG A 1 21	// part_rows.py: measured on the base at this frame
+	FrameIndex PLSG A 2 21	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -2972,6 +2976,7 @@ Model MS_zion_D4BFGGUN
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex BFGG A 0 22
+	FrameIndex BFGG A 1 22	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -2985,6 +2990,7 @@ Model MS_zion_Dumb4gausscannon
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex PLSG A 0 21
+	FrameIndex PLSG A 1 21	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3011,6 +3017,8 @@ Model MS_zion_CG_Gatling
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex CHGG A 0 57
+	FrameIndex CHGG A 1 57	// part_rows.py: measured on the base at this frame
+	FrameIndex CHGG A 2 57	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3024,6 +3032,7 @@ Model MS_zion_CG_Turret
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex CHGG A 0 57
+	FrameIndex CHGG A 1 57	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3039,6 +3048,7 @@ Model MS_zion_CSG_Bomb
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex SHTG A 0 61
+	FrameIndex SHTG A 1 61	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3056,6 +3066,8 @@ Model MS_zion_CSG_Triple
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex SHTG A 0 61
+	FrameIndex SHTG A 1 61	// part_rows.py: measured on the base at this frame
+	FrameIndex SHTG A 2 61	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3069,6 +3081,7 @@ Model MS_zion_PLRF_Stun
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex PLSG A 0 21
+	FrameIndex PLSG A 1 21	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3082,6 +3095,7 @@ Model MS_zion_PLRF_Heat
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex PLSG A 0 21
+	FrameIndex PLSG A 1 21	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3094,6 +3108,7 @@ Model MS_zion_RL_Det
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex MISG A 0 27
+	FrameIndex MISG A 1 27	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3106,6 +3121,7 @@ Model MS_zion_RL_Lock
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex MISG A 0 27
+	FrameIndex MISG A 1 27	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3119,6 +3135,7 @@ Model MS_zion_GC_Siege
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex PLSG A 0 21
+	FrameIndex PLSG A 1 21	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
@@ -3131,6 +3148,7 @@ Model MS_zion_HAR_Micro
 	Scale -3.0 3.0 3.0
 	ZOffset 20
 	FrameIndex CHGG A 0 26
+	FrameIndex CHGG A 1 26	// part_rows.py: measured on the base at this frame
 	FrameIndex MSBL A 0 9999
 }
 
