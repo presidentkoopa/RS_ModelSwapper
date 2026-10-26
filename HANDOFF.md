@@ -172,6 +172,11 @@ that is not on the plan.**
   test1 (which can freeze on the axe's alt hold with a fresh ini). Before it went: all 35 weapon
   classes given, selected, fired, alt-held 25 tics, released and reloaded in the rig -- every batch
   ran to its end (no hang), no VM abort or script error from the pack.
+- MEASURED (F11, for the owner's per-gun call): trigger held 140 tics, one gun per run, QZD 17.3 as
+  is vs upstream GZDoom's attackdown (test-only emulator, rigtest/upstream.pk3). Shots (each logged
+  twice by rig.run, halved here). Only four guns differ: Pistol 21 vs 13, pump Shotgun 6 vs 1,
+  Incendiary Launcher (M32) 4 vs 1, Dual Pistols 32 vs 28. Every other gun is identical, including
+  all the automatics (MG42/Unmaker first differed by 2-4, identical on a rerun: noise).
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
 - NEXT: F11 (owner calls: NOAUTOFIRE on all guns, off-hand punch vs rsq_punch, free charge default,
   PuristSniper model, RQLK ring art -- no lump in pack or BD22, so the ring is invisible);
