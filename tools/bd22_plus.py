@@ -134,6 +134,24 @@ PLUS = {
                  toggle='rsq_plus_unmaker', label='Unmaker: Skull Reload',
                  reserve='SoulAmmo', magammo='RSQ_UnmakerSkull', nomag='RSQ_NoSkull_Unmaker', ammouse=2,
                  ready_sprites=['UNHG A', '2NHG A'], spr=('RQWM', 'RQWP', 'RQWW')),
+    # F10: the Minigun's ammo box. Owner, 2026-10-25: "carve the blue block under the gun" (surface
+    # 1, a `Runko`, blue on the contact sheet), and later a bigger box model for the one in the hand.
+    # Carved by position like the Machinegun: every island of surface 1 wholly inside x 58..67, below
+    # z -19 at the ready frame -- 20 islands, 265 vertices, the same set from z -18 to -19 -- a box
+    # 6.7 x 10.0 x 4.8 rigid with the body in all 12 frames (residual < 0.02 after the body's own fit).
+    # The mesh has THREE surfaces named `Runko`, hence index=1. `out` is the box's own thin axis
+    # (PCA of the carved box at frame 4: 0.014 0.259 0.966), negated: down, 15 degrees off vertical,
+    # the way the box is mounted. Capacity 200: the REMA card's. Ready frame 4, MODELDEF
+    # Scale -1 1 1, ZOffset -5 (MODELDEF.bd.txt, Model Minigun). Ready sprites CHAE A / CHAG A.
+    'Minigun': dict(mesh='Minigun/Minigun.md3',
+                 islands=dict(surface='Runko', index=1, frame=4, x=(58.0, 67.0), z_below=-19.0),
+                 out=(-0.014, -0.259, -0.966), travel=None, capacity=200,
+                 scale=(-1.0, 1.0, 1.0), off=(0.0, 0.0, -5.0),
+                 part='magazine', ready_frame=4,
+                 snd_out='rsr/drumout', snd_in='rsr/drumin', snd_land='rsr/bigdrop',
+                 toggle='rsq_plus_minigun', label='Minigun: Box Reload',
+                 reserve='Clip2', magammo='RSQ_MinigunBox', nomag='RSQ_NoBox_Minigun', ammouse=1,
+                 ready_sprites=['CHAE A', 'CHAG A'], spr=('RQCM', 'RQCP', 'RQCW')),
 }
 
 
@@ -172,8 +190,16 @@ def carve_islands(mesh, out_md3, spec):
     from scipy.sparse.csgraph import connected_components
     m = carve_by_ref.read_md3(mesh)
     new = []; info = {}
-    for su in m['surfs']:
-        if su['name'] != spec['surface']:
+    # A mesh may repeat a surface name (the Minigun has three `Runko`s), so an entry may name the
+    # surface by its index as well; with a repeated name and no index the carve refuses.
+    named = [k for k, su in enumerate(m['surfs']) if su['name'] == spec['surface']]
+    if 'index' in spec:
+        assert spec['index'] in named, (spec, named)
+        named = [spec['index']]
+    if len(named) != 1:
+        raise SystemExit('carve_islands: surface %r found %d times; give index=' % (spec['surface'], len(named)))
+    for k, su in enumerate(m['surfs']):
+        if k != named[0]:
             new.append(su); continue
         t = su['tris']; nv = len(su['st'])
         A = coo_matrix((np.ones(len(t) * 3), (np.r_[t[:, 0], t[:, 1], t[:, 2]], np.r_[t[:, 1], t[:, 2], t[:, 0]])), shape=(nv, nv))
@@ -299,7 +325,10 @@ WAIT = [
     '\t\tGoto RSR_Wait',
 ]
 # BD22's own ammo checks and shots: a guard goes after each check and before each shot
-GUARD_AFTER = re.compile(r'A_JumpIfNoAmmo\s*\(')
+# Only LABEL jumps: a numeric A_JumpIfNoAmmo(2) (the Minigun picks its empty sprite that way)
+# counts states, and a guard inserted after it would shift where it lands. Commented-out lines
+# (the Minigun's "//CHAG A 0 A_JumpIfNoAmmo("Ready")") are never guarded either.
+GUARD_AFTER = re.compile(r'^[^/]*A_JumpIfNoAmmo\s*\(\s*"')
 GUARD_BEFORE = re.compile(r'A_FireBullets\s*\(.*FBF_USEAMMO|A_FireCustomMissile\s*\(\s*"(FlamethrowerProjectile|UnmakerLaser)')
 
 
@@ -404,7 +433,7 @@ def patch_dec(cls, p, text, cap):
     out = []; n_after = n_before = 0
     before_re = guard_before(p)
     for i, l in enumerate(lines):
-        if a < i < b and before_re.search(l) and 'posefix' not in l:
+        if a < i < b and before_re.search(l) and 'posefix' not in l and not l.lstrip().startswith('//'):
             out.append(guard); n_before += 1
         out.append(l)
         if a < i < b and GUARD_AFTER.search(l):
@@ -559,7 +588,8 @@ def apply():
         skins = _sh if _sh and all(x and x in _have for x in _sh) and len(set(_sh)) > 1 else None
         g = dict(key='BD22/' + cls, cls=cls, set='bd', mesh=r['carved'], path='models/bd/' + gdir, model=model,
                  skin=skin1, scale=tuple(p.get('scale', SCALE)), off=tuple(p.get('off', OFF)), extra='\tNoInterpolation\n',
-                 ready_frame=0, mag_surfs=r['mag_idx'], handle_surfs=[], bolt_surfs=[], ready_sprites=p['ready_sprites'],
+                 ready_frame=p['ready_frame'],      # was a literal 0: right for the first four, wrong for the Minigun (4)
+                 mag_surfs=r['mag_idx'], handle_surfs=[], bolt_surfs=[], ready_sprites=p['ready_sprites'],
                  spr_gun=p['spr'][0], spr_part=p['spr'][1], spr_world=p['spr'][2], handle_mode=None, handle_part=None, bolt_part=None,
                  grip='base', back_at=1.0, snd=dict(out=p.get('snd_out', ''), inn=p.get('snd_in', ''), back='', fwd='', land=p.get('snd_land', '')),
                  reserve=p['reserve'], magammo='RSQ_Mag_' + cls, nomag='RSQ_NoMag_' + cls, charge='never', charge_token='',

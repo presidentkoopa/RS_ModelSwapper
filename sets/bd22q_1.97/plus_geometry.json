@@ -375,5 +375,69 @@
    "M249_lowpoly",
    "magazine"
   ]
+ },
+ "Minigun": {
+  "cls": "Minigun",
+  "card": null,
+  "carved": "/home/claude/pipe/E:/DOOMWork/_buildtemp/rsq_bd22/models/Minigun_rsr.md3",
+  "surfaces": [
+   "Runko",
+   "Runko",
+   "magazine",
+   "Pipe",
+   "Runko",
+   "Trigger",
+   "Grip"
+  ],
+  "frames": 12,
+  "unlabelled": 0,
+  "rigid": {
+   "mean_cm": 0.0,
+   "max_cm": 0.0,
+   "rot_deg": 0.0
+  },
+  "capacity": 200,
+  "ammouse": 1,
+  "survey": {
+   "parts": {
+    "magazine": {
+     "well_point": [
+      33.417,
+      -4.333,
+      -22.866
+     ],
+     "insert_dir": [
+      -0.014,
+      -0.2589,
+      -0.9658
+     ],
+     "insert_depth_cm": 6.76,
+     "base_point": [
+      32.577,
+      1.871,
+      -19.654
+     ],
+     "half_width_cm": 5.95,
+     "card_travel_cm": 6.76,
+     "card_grab": null,
+     "card_magcenter": null
+    }
+   }
+  },
+  "palm": null,
+  "supportat": null,
+  "direct": true,
+  "mag_idx": [
+   2
+  ],
+  "names": [
+   "Runko",
+   "Runko",
+   "magazine",
+   "Pipe",
+   "Runko",
+   "Trigger",
+   "Grip"
+  ]
  }
 }

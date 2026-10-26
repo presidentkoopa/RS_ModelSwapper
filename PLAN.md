@@ -168,7 +168,13 @@ per-gun checklist below, in a headset, signed by the owner.
         - BFG, BFG10k: NO RELOAD ("keep these simple"). Closed by the owner.
         - Hellish: the rear drum ring.
         - Devastator: its own `loading_bay` surface. Nuker: its green top-front block (surface 3).
-        * **Minigun** -- card BD_Minigun, 200, bd_762, needs a feed part. The card already has
+        * **Minigun: BUILT 2026-10-25 (F10).** The blue block carved by position out of surface 1
+          (`Runko`, index 1 -- the mesh has three `Runko`s): 20 islands, 265 vertices, a box 6.7 x
+          10.0 x 4.8 rigid with the body in all 12 frames. Out along the box's own thin axis (PCA):
+          down, 15 degrees off vertical. Mouth 6.76 cm, capacity 200 (card), counter over Clip2.
+          Rig: IDLE>EMPTY>DROP>EMPTY>CARRY>INSERT>SEATED>DONE>IDLE. The bigger in-hand box is not
+          built yet. The original note follows.
+          Card BD_Minigun, 200, bd_762, needs a feed part. The card already has
           `part barrels` (hinge) and `part forend`, so the gun is partly described. Its surface
           names in our mesh are Runko / Runko / Pipe / Runko / Trigger / Grip, which do not match
           the card's; that is the join to make, not a reason to stop. F8 closed its EJECTION PORT,

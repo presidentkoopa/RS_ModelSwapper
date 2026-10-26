@@ -75,7 +75,22 @@ that is not on the plan.**
 - Headset question raised while building it: MG42 / Flamethrower / Unmaker reload blocks are
   ZOffset 0 (SCALE/OFF default) while their ready blocks are ZOffset -5 -- does the gun jump 5 cm
   when their reload starts?
-- NEXT: F10 Minigun, BFG, BFG10k, Hellish, Devastator, Nuker; flick/dual/melee in the rig.
+- DONE (F10): **the Minigun's box reloads.** 20 of 25 non-melee guns (BFG and BFG10k closed by the
+  owner: no reload). The blue block under the body, surface 1 (`Runko`, index 1), 20 islands / 265
+  vertices, rigid in all 12 frames; out along its own thin axis (down, 15 deg off vertical), mouth
+  6.76 cm, capacity 200 (card), counter over Clip2. Rig: full reload; Machinegun and MG42 re-driven
+  in the same pack, both still full. Gun indices are now Minigun 14, Machinegun 15.
+  Tool changes: `GUARD_AFTER` guards only LABEL `A_JumpIfNoAmmo("...")` and never a commented
+  line (the Minigun picks its empty sprite with a numeric `A_JumpIfNoAmmo(2)`; a guard after it
+  would move where it lands -- checked: no numeric jump in any patched .dec spans an inserted
+  line); the set rebuilt byte-identical with the change before the Minigun was added.
+  `carve_islands` takes `index=` and refuses a repeated surface name without one. `apply` passes
+  each entry's own `ready_frame` (was a literal 0; the Minigun's is 4).
+  Rig trap: the off hand must start 20 cm or more from the magazine (`POUCH_MIN`) to take one --
+  the Minigun's box is 33 cm forward, so the harness now reaches to a pouch first.
+- Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
+- NEXT: F10 Hellish (rear drum ring), Devastator (`loading_bay`), Nuker (green block, surface 3);
+  flick/dual/melee in the rig.
 
 ## What this repo is
 Everything for QuestZDoom 17.3 VR reloadable weapon sets: the owner's BD22 Quest pack as the runtime

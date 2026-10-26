@@ -7,12 +7,12 @@
 
 class RSQ_Counters : EventHandler
 {
-	static const Name GUN[] = { 'MG42', 'Flamethrower2', 'IncendiaryLauncher', 'Machinegun', 'Unmaker' };
-	static const Name MAG[] = { 'RSQ_Mag_MG42', 'RSQ_Mag_Flamethrower2', 'RSQ_Mag_IncendiaryLauncher', 'RSQ_Mag_Machinegun', 'RSQ_Mag_Unmaker' };
-	static const Name RES[] = { 'Clip2', 'Gas', 'AmmoM202', 'Clip2', 'SoulAmmo' };
-	static const int CAP[] = { 200, 200, 6, 100, 60 };
-	int lastRes[MAXPLAYERS][5];
-	bool inited[MAXPLAYERS][5];
+	static const Name GUN[] = { 'MG42', 'Flamethrower2', 'IncendiaryLauncher', 'Machinegun', 'Unmaker', 'Minigun' };
+	static const Name MAG[] = { 'RSQ_Mag_MG42', 'RSQ_Mag_Flamethrower2', 'RSQ_Mag_IncendiaryLauncher', 'RSQ_Mag_Machinegun', 'RSQ_Mag_Unmaker', 'RSQ_Mag_Minigun' };
+	static const Name RES[] = { 'Clip2', 'Gas', 'AmmoM202', 'Clip2', 'SoulAmmo', 'Clip2' };
+	static const int CAP[] = { 200, 200, 6, 100, 60, 200 };
+	int lastRes[MAXPLAYERS][6];
+	bool inited[MAXPLAYERS][6];
 
 	override void WorldTick()
 	{
@@ -86,3 +86,7 @@ class RSQ_Mag_Unmaker : Inventory { Default { Inventory.MaxAmount 60; +INVENTORY
 class RSQ_NoMag_Unmaker : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Empty_Unmaker : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Fill_Unmaker : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSQ_Mag_Minigun : Inventory { Default { Inventory.MaxAmount 200; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSQ_NoMag_Minigun : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSQ_Empty_Minigun : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSQ_Fill_Minigun : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
