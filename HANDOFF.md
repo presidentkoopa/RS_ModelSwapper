@@ -28,8 +28,22 @@ that is not on the plan.**
   `fixes` then `sync` ON TOP OF the committed build (`BD22Q_OUT=<copy of sets/bd22q_1.97>`, stage
   list seeded from the old stamp). On the owner's PC a full rebuild is the usual pipeline with
   `fixes` added after `readme`, before `sync`. `BD22Q_OUT` unset changes nothing there.
-- NEXT: gate on the owner's load order with VR simulated (owner's Linux rig, coming), then the
-  rest of PLAN.md F11 and F10.
+- DONE: **the owner's quest_test_rig runs here**, against emawind84/gzdoom questzdoom `b2d7d3b`
+  (the commit it was proven on; the qzd17.3 tag built too but is not needed). Two things it needs:
+  `-warp 1` (BD22's TITLEMAP swallows a `+map`, and on the title map the view is BD22's
+  AimingCamera, so VR never attaches: `PlayInVR` stays 0) and `QZ_RES=200` (llvmpipe). With those,
+  bd22q is live in VR -- RSQ_Hands in the off hand, `Wanted()` true -- and a scripted off hand
+  (qz_lhand / qz_ltrigger) took the Rifle through IDLE->EMPTY->DROP->CARRY->INSERT->SEATED->DONE.
+- DONE: **the whole pipeline runs here too** (E:/DOOMWork mocked; REMA, br_vr Machinegun and Ermac's
+  hands staged from the owner's PC). From `apply` on, with the committed plus_geometry.json, it
+  reproduces sets/bd22q_1.97/src byte for byte bar 44 re-encoded, pixel-identical PNGs. A fresh
+  `geometry` here gives the OLD Unmaker skull (11.814 1.253) -- GitHub's RS_VR_Weapons is behind the
+  owner's checkout -- so geometry stays the owner's. plus_geometry.json has no M32 entry: it was
+  measured direct off m32.md3 and merged in for the run; it reproduces the shipped M32 rows exactly.
+- DONE: M32 reload placement (PLAN F11): apply() now passes each entry's own scale/off and the
+  mesh's per-surface skins. Only M32 rows changed; its MagCentre is now (14.60, -0.03, -4.04),
+  the drum centroid PLAN.md measured. Gated in the rig: clean parse, no 'm32.png not found'.
+- NEXT: every gun's reload driven in the rig; then the rest of PLAN.md F11 and F10.
 
 ## What this repo is
 Everything for QuestZDoom 17.3 VR reloadable weapon sets: the owner's BD22 Quest pack as the runtime

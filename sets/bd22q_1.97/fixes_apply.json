@@ -2,52 +2,52 @@
  {
   "fix": "scope: Basis returns its axes (out Vector3 aborts the VM)",
   "file": "zscript/rsq/scope.zs",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "scope: Basis return",
   "file": "zscript/rsq/scope.zs",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "scope: Basis caller",
   "file": "zscript/rsq/scope.zs",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "axe throw hold button: alt fire is 32, not 16",
   "file": "CVARINFO.rsvr",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "axe throw hold default",
   "file": "CVARINFO.rsvr",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "Ruger: key the fire frames B and C",
   "file": "MODELDEF.rsr",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "purist Rifle: purist check before the M203",
   "file": "actors/Weapons/Rifle.dec",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "reload: a new reload starts without stale RSR_Done / RSR_Seated",
   "file": "zscript/rsr/vreload.zs",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "reload: an aborted reload takes its tokens",
   "file": "zscript/rsr/vreload.zs",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "reload: End clears the Use grab too",
   "file": "zscript/rsr/vreload.zs",
-  "result": "already applied"
+  "result": "applied"
  },
  {
   "fix": "reload R1: in grip mode a steadied grip takes the charging handle",

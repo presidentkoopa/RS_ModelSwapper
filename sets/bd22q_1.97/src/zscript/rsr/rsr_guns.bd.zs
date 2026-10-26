@@ -133,7 +133,7 @@ class RSR_Guns abstract
 		case 9:	return (-11.955, -8.010, 11.389);
 		case 10:	return (14.190, 7.381, 10.400);
 		case 11:	return (27.703, 0.013, -5.374);
-		case 12:	return (-6.456, -0.047, 3.330);
+		case 12:	return (14.597, -0.029, -4.035);
 		case 13:	return (11.350, -0.131, 14.854);
 		}
 		return (0, 0, 0);
@@ -177,7 +177,7 @@ class RSR_Guns abstract
 		case 9:	return (16.699, -15.854, -11.289);
 		case 10:	return (-8.353, -12.771, 14.516);
 		case 11:	return (3.890, 10.741, 29.189);
-		case 12:	return (13.472, 1.942, 15.512);
+		case 12:	return (21.730, 3.133, 25.019);
 		case 13:	return (3.637, -19.230, 13.269);
 		}
 		return (0, 0, 0);
@@ -199,7 +199,7 @@ class RSR_Guns abstract
 		case 9:	return (-0.932, 0.362, -0.000);
 		case 10:	return (1.000, 0.000, -0.000);
 		case 11:	return (-0.000, -1.000, -0.000);
-		case 12:	return (-1.000, 0.000, -0.000);
+		case 12:	return (-1.613, 0.000, -0.000);
 		case 13:	return (-0.000, 1.000, -0.000);
 		}
 		return (0, 0, 0);
@@ -306,7 +306,7 @@ class RSR_Guns abstract
 		case 9:	return (0.000, 0.000, 1.000);
 		case 10:	return (0.000, 0.000, 1.000);
 		case 11:	return (0.000, 0.000, 1.000);
-		case 12:	return (0.000, 0.000, 1.000);
+		case 12:	return (0.000, 0.000, 1.613);
 		case 13:	return (0.000, 0.000, 1.000);
 		}
 		return (0, 0, 0);
@@ -434,7 +434,7 @@ class RSR_Guns abstract
 		case 9:	return (-1.000, 1.000, 1.000);
 		case 10:	return (-1.000, 1.000, 1.000);
 		case 11:	return (-1.000, 1.000, 1.000);
-		case 12:	return (-1.000, 1.000, 1.000);
+		case 12:	return (-0.620, 0.620, 0.620);
 		case 13:	return (-1.000, 1.000, 1.000);
 		}
 		return (0, 0, 0);
@@ -456,7 +456,7 @@ class RSR_Guns abstract
 		case 9:	return (0.000, 0.000, -5.000);
 		case 10:	return (0.000, 0.000, 0.000);
 		case 11:	return (0.000, 0.000, 0.000);
-		case 12:	return (0.000, 0.000, 0.000);
+		case 12:	return (0.000, -30.000, -8.000);
 		case 13:	return (0.000, 0.000, 0.000);
 		}
 		return (0, 0, 0);

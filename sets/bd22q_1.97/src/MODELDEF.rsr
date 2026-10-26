@@ -1405,18 +1405,18 @@ Model IncendiaryLauncher
 {
 	Path "models/bd/M32"
 	Model 0 "m32_rsr.md3"
-	SurfaceSkin 0 0 "m32.png"
-	SurfaceSkin 0 1 "m32.png"
-	SurfaceSkin 0 2 "m32.png"
-	SurfaceSkin 0 3 "m32.png"
-	SurfaceSkin 0 4 "m32.png"
+	SurfaceSkin 0 0 "m32_tex1.png"
+	SurfaceSkin 0 1 "m32_tex2.png"
+	SurfaceSkin 0 2 "m32_tex1.png"
+	SurfaceSkin 0 3 "m32_tex1.png"
+	SurfaceSkin 0 4 "m32_tex2.png"
 	SurfaceSkin 0 5 "rsr_clear.png"
-	SurfaceSkin 0 6 "m32.png"
-	SurfaceSkin 0 7 "m32.png"
-	SurfaceSkin 0 8 "m32.png"
-	Scale -1.0000 1.0000 1.0000
-	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	SurfaceSkin 0 6 "m32_tex1.png"
+	SurfaceSkin 0 7 "m32_tex2.png"
+	SurfaceSkin 0 8 "m32_tex1.png"
+	Scale -0.6200 0.6200 0.6200
+	Offset 0.0000 -30.0000 0.0
+	ZOffset -8.0000
 	NoInterpolation
 	FrameIndex RQVM A 0 0
 }
@@ -1431,13 +1431,13 @@ Model RSR_GunParts
 	SurfaceSkin 0 2 "rsr_clear.png"
 	SurfaceSkin 0 3 "rsr_clear.png"
 	SurfaceSkin 0 4 "rsr_clear.png"
-	SurfaceSkin 0 5 "m32.png"
+	SurfaceSkin 0 5 "m32_tex2.png"
 	SurfaceSkin 0 6 "rsr_clear.png"
 	SurfaceSkin 0 7 "rsr_clear.png"
 	SurfaceSkin 0 8 "rsr_clear.png"
-	Scale -1.0000 1.0000 1.0000
-	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	Scale -0.6200 0.6200 0.6200
+	Offset 0.0000 -30.0000 0.0
+	ZOffset -8.0000
 	NoInterpolation
 	FrameIndex RQVP A 0 0
 }
@@ -1452,13 +1452,13 @@ Model RSQ_Hands
 	SurfaceSkin 0 2 "rsr_clear.png"
 	SurfaceSkin 0 3 "rsr_clear.png"
 	SurfaceSkin 0 4 "rsr_clear.png"
-	SurfaceSkin 0 5 "m32.png"
+	SurfaceSkin 0 5 "m32_tex2.png"
 	SurfaceSkin 0 6 "rsr_clear.png"
 	SurfaceSkin 0 7 "rsr_clear.png"
 	SurfaceSkin 0 8 "rsr_clear.png"
-	Scale -1.0000 1.0000 1.0000
-	Offset 0.0000 0.0000 0.0
-	ZOffset 0.0000
+	Scale -0.6200 0.6200 0.6200
+	Offset 0.0000 -30.0000 0.0
+	ZOffset -8.0000
 	NoInterpolation
 	FrameIndex RQVP A 0 0
 }
@@ -1473,13 +1473,13 @@ Model RSR_DroppedMag
 	SurfaceSkin 0 2 "rsr_clear.png"
 	SurfaceSkin 0 3 "rsr_clear.png"
 	SurfaceSkin 0 4 "rsr_clear.png"
-	SurfaceSkin 0 5 "m32.png"
+	SurfaceSkin 0 5 "m32_tex2.png"
 	SurfaceSkin 0 6 "rsr_clear.png"
 	SurfaceSkin 0 7 "rsr_clear.png"
 	SurfaceSkin 0 8 "rsr_clear.png"
-	Scale 0.3468 0.3468 0.3468
-	Offset -8.0050 0.0159 0.0
-	ZOffset 0.4732
+	Scale 0.2150 0.2150 0.2150
+	Offset -4.9631 0.0098 0.0
+	ZOffset 0.2934
 	USEACTORPITCH
 	USEACTORROLL
 	FrameIndex RQVW A 0 0

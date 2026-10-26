@@ -479,13 +479,26 @@ def apply():
         clear = OUT_SRC + 'models/bd/%s/rsr_clear.png' % gdir
         if not os.path.exists(clear):
             shutil.copy(SRC + 'models/bd/Rifle/rsr_clear.png', clear)
+        # F11: THE GUN'S OWN PLACEMENT AND SKINS. geometry() measures each part through the entry's
+        # scale/off, but this used to pass the defaults to gen_rsr -- so the M32 (Scale -0.62, Offset
+        # 0 -30 -8) had its well measured one way and its magazine, hooks and MODELDEF written another,
+        # and its reload model drew 1.6x too big, 30 units off, with a skin file that does not exist.
+        # Skins: the mesh's own per-surface texture names when every one ships in the gun's folder
+        # (M32: m32_tex1 / m32_tex2), else the one <mesh>.png as before.
+        skin1 = p['mesh'].split('/')[1].replace('.md3', '.png')
+        _, _surfs = genpack.md3_surfaces(r['carved'])
+        _sh = [os.path.basename(x.get('shader', '') or '') for x in _surfs]
+        _have = set(os.listdir(SRC + 'models/bd/' + gdir))
+        skins = _sh if _sh and all(x and x in _have for x in _sh) and len(set(_sh)) > 1 else None
         g = dict(key='BD22/' + cls, cls=cls, set='bd', mesh=r['carved'], path='models/bd/' + gdir, model=model,
-                 skin=p['mesh'].split('/')[1].replace('.md3', '.png'), scale=SCALE, off=OFF, extra='\tNoInterpolation\n',
+                 skin=skin1, scale=tuple(p.get('scale', SCALE)), off=tuple(p.get('off', OFF)), extra='\tNoInterpolation\n',
                  ready_frame=0, mag_surfs=r['mag_idx'], handle_surfs=[], bolt_surfs=[], ready_sprites=p['ready_sprites'],
                  spr_gun=p['spr'][0], spr_part=p['spr'][1], spr_world=p['spr'][2], handle_mode=None, handle_part=None, bolt_part=None,
                  grip='base', back_at=1.0, snd=dict(out=p.get('snd_out', ''), inn=p.get('snd_in', ''), back='', fwd='', land=p.get('snd_land', '')),
                  reserve=p['reserve'], magammo='RSQ_Mag_' + cls, nomag='RSQ_NoMag_' + cls, charge='never', charge_token='',
                  reload_token='Reloading', chan=5)
+        if skins:
+            g['skins'] = skins
         guns.append(gen_rsr.compute(g, {g['key']: r['survey']}))
     # tables
     z = gen_rsr.zs(guns); z = z if isinstance(z, str) else '\n'.join(z)
