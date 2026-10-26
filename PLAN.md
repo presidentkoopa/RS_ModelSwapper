@@ -219,6 +219,8 @@ per-gun checklist below, in a headset, signed by the owner.
         * FOUND IN F10: the Flamethrower's `Goto Ready+6` landed a state early (our guard inside
           Ready). FIXED in patch_dec: every numeric jump / `Goto L+n` is checked against BD22's file.
         * Reload R4: End() clears netGrip but not netUse.
+        * Ruger semi-auto (DONE, rig-proven): QZD 17.3 breaks NOAUTOFIRE (player.zs:583); a lock
+          token instead (semiauto.zs). Owner's call pending on the same engine fault for all guns.
         * Reload R3 (DONE, rig-proven): held rounds stranded at reserve 0 -- CanTakeMag counts them,
           and the nine magazine guns' Reload jumps past BD22's reserve check on them.
       Still to do in F11 (behaviour, not one-liners): R1 grip-mode rack cannot be grabbed

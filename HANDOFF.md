@@ -120,8 +120,22 @@ that is not on the plan.**
   Two parts, both in `fixes`: vreload's CanTakeMag counts RSR_Held_<gun>; the nine magazine guns'
   Reload get a counted jump on their held rounds just before BD22's reserve check, landing where
   that check lands (the Rifle's lands mid `TNT1 AAA 0`, which no label can name).
+- DONE (F11): **the Ruger is semi-auto.** Rig, before: trigger held, a shot every 4 tics, the
+  magazine empty in 40 tics. After: held 120 tics = 1 shot; two taps = 2 shots. Cause is the
+  ENGINE, not BD22: QZD 17.3's PlayerPawn.TickPSprites stores CheckWeaponFire's return in
+  `player.attackdown` (wadsrc player.zs:583), and that return is false whenever NOAUTOFIRE held a
+  shot back, so the next ready tic fires anyway (upstream keeps attackdown set while held).
+  1.96b's +WEAPON.NOAUTOFIRE could never work. Fix (no engine change): `zscript/rsq/semiauto.zs`
+  RSQ_SemiLock, given with the shot, gone when the trigger (and BD22's FiredPrimary) is let go;
+  Sniper.dec's Fire waits at the end of Ready3 while it is there. `Goto Fire+3` and
+  `Goto ResumeFireFrame+14` rewritten to keep BD22's targets (keep_offsets).
+- OPEN, for the owner: **every BD22 gun has NOAUTOFIRE** (BrutalWeapon sets it; 9 guns clear it).
+  On desktop GZDoom a held trigger cannot re-fire them through A_WeaponReady; on QZD 17.3 it can,
+  every other ready tic. Their own auto fire (BD22's FiredPrimary jumps) is unaffected. A global
+  fix (keep attackdown set while the trigger stays down) would make every gun fire as on desktop
+  BD22 -- not done without the owner's yes, since it changes how held triggers feel on all guns.
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
-- NEXT: F11 (Ruger semi-auto, sound names, owner calls, menu, alt fires);
+- NEXT: F11 ( sound names, owner calls, menu, alt fires);
   flick/dual/melee in the rig; then the gated pk3.
 
 ## What this repo is

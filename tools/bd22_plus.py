@@ -4448,6 +4448,68 @@ HELD_GUNS = {'Rifle': 'Rifle.dec', 'BrutalPistol': 'Pistol.dec', 'BrutalSMG': 'S
              'Plasma_Gun': 'Plasma.dec', 'Sniper': 'Sniper.dec', 'Rocket_Launcher': 'RocketLauncher.dec'}
 
 
+SEMI_ZS = """// semiauto.zs (F11) -- a semi-automatic gun fires once per pull of the trigger.
+// +WEAPON.NOAUTOFIRE cannot do it on QZD 17.3: PlayerPawn.TickPSprites stores CheckWeaponFire's
+// return in player.attackdown, and that is false whenever NOAUTOFIRE just held the shot back, so
+// the very next ready tic fires again (wadsrc/static/zscript/actors/player/player.zs:583, against
+// upstream, which keeps attackdown set while the button is held). BD22's own Ready loop also
+// jumps to Fire on FiredPrimary every tic it is held. The gun gives this lock when it fires; its
+// Fire state goes back to waiting while the lock is there; the lock goes when the trigger is let go.
+class RSQ_SemiLock : Inventory
+{
+	Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET }
+	override void DoEffect()
+	{
+		Super.DoEffect();
+		if (!Owner || !Owner.player)
+			return;
+		if (!(Owner.player.cmd.buttons & BT_ATTACK) && Owner.CountInv("FiredPrimary") <= 0)
+			Owner.TakeInventory("RSQ_SemiLock", 1);
+	}
+}
+"""
+
+
+def semi_auto():
+    """F11: the Ruger (BD22's Sniper class, a Mini-14 Ranch) fires once per pull. Rig, 1.99 pack:
+    a held trigger emptied the magazine at one shot every 4 tics. A lock given with the shot, a
+    wait at Fire while it is there, the lock gone on release (semiauto.zs). Idempotent; every
+    state-counting reference is kept on BD22's state (keep_offsets)."""
+    log = []
+    zp = OUT_SRC + 'zscript/rsq/semiauto.zs'
+    open(zp, 'w').write(SEMI_ZS)
+    inc = OUT_SRC + 'ZSCRIPT.rsvr'
+    zt = open(inc).read()
+    if 'zscript/rsq/semiauto.zs' not in zt:
+        k = zt.index('#include "zscript/rsq/counters.zs"')
+        zt = zt[:k] + '#include "zscript/rsq/semiauto.zs"\n' + zt[k:]
+        open(inc, 'w').write(zt)
+    rel = 'actors/Weapons/Sniper.dec'; cls = 'Sniper'
+    p = OUT_SRC + rel
+    t = open(p, 'rb').read().decode('latin-1')
+    if 'RSQ_SemiLock' in t:
+        return [dict(fix='Ruger semi-auto', file=rel, result='already applied')]
+    nl = '\r\n' if t.count('\r\n') == t.count('\n') else '\n'
+    lines = t.split(nl)
+    a, b = actor_span(lines, cls)
+    f = once(lines[a:b], lambda l: l.strip() == 'Fire:', 'Sniper Fire') + a
+    r3 = once(lines[a:b], lambda l: l.strip() == 'Ready3:', 'Sniper Ready3') + a
+    lp = next(i for i in range(r3, b) if lines[i].strip() == 'Loop')
+    assert 'A_WeaponReady' in lines[lp - 1], lines[lp - 1]
+    shot = once(lines[a:b], lambda l: 'A_FireBullets (0, 0, -1, 50, "ShotgunPuff"' in l, 'Sniper first shot') + a
+    new = list(lines)
+    # bottom up, so the indices above stay right
+    new.insert(shot + 1, '\t\t"####" A 0 A_GiveInventory("RSQ_SemiLock", 1)\t// posefix F11: semi-auto -- one shot per pull (zscript/rsq/semiauto.zs)')
+    assert lp < f < shot, (lp, f, shot)
+    new.insert(f + 1, '\t\t"####" "#" 0 A_JumpIfInventory("RSQ_SemiLock", 1, "RSQ_SemiWait")\t// posefix F11: semi-auto -- not until the trigger is let go')
+    new.insert(lp - 1, '\tRSQ_SemiWait:\t// posefix F11: semi-auto -- the trigger is still held from the last shot')
+    assert new[f + 1].strip() == 'Fire:' and 'RSQ_SemiLock' in new[f + 2], new[f:f + 3]   # the label above shifted it by one
+    new, moved = keep_offsets(lines, new, cls, fix=True)
+    open(p, 'wb').write(nl.join(new).encode('latin-1'))
+    log.append(dict(fix='Ruger semi-auto', file=rel, result='applied', offsets_rewritten=moved))
+    return log
+
+
 def held_reload():
     """R3, part 2: before each magazine gun's own reserve check in Reload, a jump on its held rounds
     to the state that check jumps to (a new label there: a label is not a state, so no offset
@@ -4514,6 +4576,7 @@ def fixes():
         open(p, 'w', newline='').write(t)
         log.append(dict(fix=why, file=rel, result='applied'))
     log += held_reload()
+    log += semi_auto()
     json.dump(log, open(OUT + 'fixes_apply.json', 'w'), indent=1)
     shutil.copy(OUT + 'fixes_apply.json', os.path.join(REPO, 'sets', 'bd22q_1.97', 'fixes_apply.json'))
     with open(OUT + '.generated', 'a') as f:
