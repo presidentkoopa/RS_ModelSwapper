@@ -569,7 +569,7 @@ Model RSR_GunParts
 	NoInterpolation
 	FrameIndex RQ3P A 0 4
 }
-// the round in the breech: the rifle's round mesh moved to this gun's bore (dF 0.83 dL -0.59 dU 3.48)
+// the round in the breech: the rifle's round mesh moved to this gun's bore (dF 0.83 dL -0.59 dU -1.52)
 Model RSR_GunParts
 {
 	Path "models/bd/Rifle"
@@ -577,7 +577,7 @@ Model RSR_GunParts
 	Skin 0 "m203_round.png"
 	Scale -1.0 1.0 1.0
 	Offset 0.588 -0.832 0.0
-	ZOffset -1.517
+	ZOffset -6.517
 	NoInterpolation
 	FrameIndex RQ3P B 0 0
 }

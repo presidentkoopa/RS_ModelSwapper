@@ -13,9 +13,9 @@ class RSM_Geo abstract
 	const ROUND_SEAT = 0.400;		// cm the seated round's rear sits in front of the tube's rear
 
 	// 1.97: per gun -- 1 = the rifle (the numbers above), 2 = the BD21 Machinegun (c2q/bd22_mg.py, measured on
-	// its own mesh at MGN1 A: tube F 29.27..63.86, travel 9.69 (card 9.50), bore L -0.07 U -1.52)
+	// its own mesh at MGN1 A: tube F 29.27..63.86, travel 9.69 (card 9.50), bore L -0.07 U -6.52)
 	clearscope static double AxisL(int gun) { return gun == 2 ? -0.068 : AXIS_L; }
-	clearscope static double AxisU(int gun) { return gun == 2 ? -1.517 : AXIS_U; }
+	clearscope static double AxisU(int gun) { return gun == 2 ? -6.517 : AXIS_U; }
 	clearscope static double FrameFront(int gun) { return gun == 2 ? 29.272 : FRAME_FRONT; }
 	clearscope static double TubeRear(int gun) { return gun == 2 ? 29.272 : TUBE_REAR; }
 	clearscope static double TubeFront(int gun) { return gun == 2 ? 63.856 : TUBE_FRONT; }

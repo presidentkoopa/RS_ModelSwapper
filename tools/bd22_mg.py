@@ -68,7 +68,11 @@ def edit(path, pairs):
 def geometry():
     n, ts = genpack.md3_surfaces(BR + 'Models/Weapons/Hud/Machinegun/Machinegun.md3')
     names = [s['name'] for s in ts]
-    X = lambda v: rgeo.to_flu(np.asarray(v, float).reshape(-1, 3), SCALE, (OFF[0], OFF[1], 0.0))
+    # F11 (owner, headset 2026-10-26: "the grenade insert is too high, half in the barrel"): measured
+    # WITHOUT the gun's own ZOffset (-5), so the bore, latch, load point, palm and support were all
+    # 5 cm above the gun the player sees. The Rifle's M203 numbers include its ZOffset (round mesh
+    # centred at U 0, AXIS_U -5.0); these now do too.
+    X = lambda v: rgeo.to_flu(np.asarray(v, float).reshape(-1, 3), SCALE, (OFF[0], OFF[1], ZOFF))
     _, rs = genpack.md3_surfaces(REMA + 'models/bd22/machinegun_wm.md3')
     A = np.vstack([s['xyz'][0] for s in rs]); B = np.vstack([s['xyz'][READY_FRAME] for s in ts])
     from scipy.spatial import cKDTree
