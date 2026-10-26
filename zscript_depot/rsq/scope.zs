@@ -98,8 +98,13 @@ class RSQ_Scope abstract
 	// ANGLES are plain fields and ui may read play data -- so the basis is rebuilt here with
 	// trig instead. AttackAngle is the world yaw MINUS 90 and AttackPitch is negated, which
 	// is the engine's own convention (p_map.cpp adds the 90 back everywhere it uses them).
-	clearscope static void Basis(PlayerPawn mo, out Vector3 fwd, out Vector3 right, out Vector3 up)
+	// 2026-10-26: RETURNS the three axes. It used to fill three `out Vector3` parameters, and
+	// QuestZDoom 17.3's VM interpreter cannot pass a vector by reference (vmexec.h: "REGT_ADDROF
+	// not implemented for vectors", then I_Error): the first frame with BD22's RailGun or Sniper
+	// in hand closed the game. The x86 JIT hid it as "Unexpected JIT error"; Quest has no JIT.
+	clearscope static Vector3, Vector3, Vector3 Basis(PlayerPawn mo)
 	{
+		Vector3 fwd, right, up;
 		double yaw = mo.AttackAngle + 90.0;
 		double pit = -mo.AttackPitch;
 		double rol = mo.AttackRoll;
@@ -111,6 +116,7 @@ class RSQ_Scope abstract
 		Vector3 u0 = (fwd cross r0);
 		right = r0 * cr + u0 * sr;
 		up = (right cross fwd);
+		return fwd, right, up;
 	}
 
 	// Where the eye is, in the hand's own frame, in centimetres. The view point is the pawn's
@@ -131,7 +137,7 @@ class RSQ_Scope abstract
 		if (cv && cv.GetFloat() > 0)
 			vu = cv.GetFloat();
 		Vector3 f, r, u;
-		Basis(mo, f, r, u);
+		[f, r, u] = Basis(mo);
 		// map units -> cm in the hand frame
 		return ((d dot f) * 100.0 / vu, -(d dot r) * 100.0 / vu, (d dot u) * 100.0 / vu);
 	}
