@@ -183,6 +183,8 @@ class RSVR_Hand play
 		if (!mo || !mo.player)
 			return false;
 		int mask = CvI(mo, 'rsvr_axe_hold', BT_ALTATTACK);
+		if (mask == BT_TURN180)	// F11: the old default, still archived in players' inis -- it meant alt fire
+			mask = BT_ALTATTACK;
 		if (mask != 0 && (mo.player.cmd.buttons & mask) != 0)
 			return true;
 		return RSVR_MeleeHandler.KeyHeld(mo);
@@ -208,6 +210,7 @@ class RSVR_Hand play
 	int prevStamp;		// 1.97 F7: the stamp of the sample prevRel was taken from
 	Actor lockTarget;	// the monster painted while a throw is readied
 	Actor lockRing;
+	int lockKeep;		// F11: a release that was not a throw keeps the paint until this tic
 	int poseFrame;		// 0 = one hand, 1 = the two-handed placement
 	int swingTics;
 	int calmTics;
@@ -531,6 +534,11 @@ class RSVR_Hand play
 			whooshWait--;
 		if (scrapeWait > 0)
 			scrapeWait--;
+		// F11: a paint kept after a release that was not a throw -- gone after its second, or with its monster
+		if (lockKeep > 0 && (mo.Level.maptime > lockKeep || !lockTarget || lockTarget.health <= 0))
+			Unlock();
+		if (lockKeep > 0 && lockRing && lockTarget)
+			lockRing.SetOrigin(lockTarget.pos + (0, 0, lockTarget.height * 0.5), true);
 
 		int k = KindOf(mo);
 		if (k != kind)
@@ -875,18 +883,28 @@ class RSVR_Hand play
 		// the trigger path (Axe.dec TrigGrip, VR throwing on) holds with the trigger, like the grenade
 		bool held = mo.CountInv('RSVR_AxeTrig') > 0 ? (mo.player.cmd.buttons & BT_ATTACK) != 0 : HoldDown(mo);
 		mo.SetInventory('RSVR_AxeHolding', held ? 1 : 0);
+		if (!held)	// F11: WorldTick sets this AFTER the weapon ticks, so it is still 1 on the release tic,
+			mo.SetInventory('RSVR_AxeHold', 0);	// and Ready would send the axe straight back here: a zero-tic loop
 		let h = RSVR_MeleeHandler.HandOf(mo);
 		if (held)
 		{
 			// winding up: paint what the hand is pointing at
 			if (h)
+			{
+				h.lockKeep = 0;	// F11: a kept paint is picked back up
 				h.LockTick(mo);
+			}
 			return;
 		}
 		if (h && h.Throw(mo))
+		{
 			mo.SetInventory('RSVR_AxeThrown', 1);
-		if (h)
-			h.Unlock();	// thrown or not, the paint goes with the release
+			h.Unlock();
+		}
+		// F11 (owner): let go without a throw and the paint stays a second, as on the ShieldSaw and the
+		// saber -- pick the hold back up and it is still there; otherwise Tick takes it down
+		else if (h && h.lockTarget && h.lockKeep == 0)
+			h.lockKeep = mo.Level.maptime + 35;
 	}
 
 	// a world point in the body's own frame: forward, left, up (map units)
@@ -908,6 +926,7 @@ class RSVR_Hand play
 			lockRing.Destroy();
 		lockRing = null;
 		lockTarget = null;
+		lockKeep = 0;
 	}
 
 	// While the throw is held: paint the monster the hand points at. A lock STAYS locked
@@ -1004,6 +1023,11 @@ class RSVR_Hand play
 
 		double spd = clamp(vel.Length() * 3, 14, 42);
 		Vector3 dir = vel.Unit();
+		// F11 (owner): the arm's own motion blended with where the hand points, as the ShieldSaw
+		// (ssq_throw_blend 0.7) and the saber (0.6) do. 1 = all arm (as it was), 0 = all aim.
+		double bl = clamp(Cv(mo, 'rsvr_axe_throw_blend', 0.7), 0.0, 1.0);
+		if (fF.Length() > 0)
+			dir = (dir * bl + fF.Unit() * (1.0 - bl)).Unit();
 		Vector3 from = Place(AxeHead());
 		if (!Clear(mo, fH, from))
 			from = fH;

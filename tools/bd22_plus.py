@@ -4303,6 +4303,62 @@ def spine():
 # once, and it is skipped (not doubled) if its new text is already there, so the stage can run on
 # top of a finished build or at the end of a full one. Runs after every other stage, before sync.
 F11_FIXES = [
+    # The alt-fire axe hold FROZE THE GAME on release (rig, 2026-10-25, the first time the alt hold
+    #    was ever driven: a fresh ini has rsvr_axe_hold 32). RSVR_AxeHold is set in WorldTick, which
+    #    runs after the weapon's states, so on the release tic it is still 1: Grip sees the button up
+    #    and sends the axe to Ready, Ready's AxeHold check sends it back to AltGrip, all zero-tic --
+    #    an endless state loop. Clearing it with the release breaks the loop.
+    ('axe hold: no state loop on release', 'zscript/rsvr/melee.zs',
+     "\t\tmo.SetInventory('RSVR_AxeHolding', held ? 1 : 0);\n",
+     "\t\tmo.SetInventory('RSVR_AxeHolding', held ? 1 : 0);\n"
+     "\t\tif (!held)\t// F11: WorldTick sets this AFTER the weapon ticks, so it is still 1 on the release tic,\n"
+     "\t\t\tmo.SetInventory('RSVR_AxeHold', 0);\t// and Ready would send the axe straight back here: a zero-tic loop\n"),
+    # The axe-hold default went 16 -> 32 (16 is BT_TURN180), but a user cvar is archived: every
+    #    player who ran an earlier build keeps 16 in their ini and the alt hold never readies a
+    #    throw. Found in the rig, whose own ini had kept 16. 16 can never have been meant.
+    ('axe hold: an archived 16 is read as alt fire', 'zscript/rsvr/melee.zs',
+     "\t\tint mask = CvI(mo, 'rsvr_axe_hold', BT_ALTATTACK);\n",
+     "\t\tint mask = CvI(mo, 'rsvr_axe_hold', BT_ALTATTACK);\n"
+     "\t\tif (mask == BT_TURN180)\t// F11: the old default, still archived in players' inis -- it meant alt fire\n"
+     "\t\t\tmask = BT_ALTATTACK;\n"),
+    # Axe throw, owner 2026-10-25 ("1, 3, 4" of the comparison with the ShieldSaw and the saber):
+    #    the ring art (RQLK, from tools/data/rqlk -- copied by fixes()), the paint kept for a second
+    #    after a release that was not a throw, and the throw blending the arm's motion with where
+    #    the hand points (ShieldSaw ssq_throw_blend 0.7). One target stays one target (owner).
+    ('axe: lockKeep field', 'zscript/rsvr/melee.zs',
+     '\tActor lockRing;\n',
+     '\tActor lockRing;\n\tint lockKeep;\t\t// F11: a release that was not a throw keeps the paint until this tic\n'),
+    ('axe: Unlock clears lockKeep', 'zscript/rsvr/melee.zs',
+     '\t\tlockRing = null;\n\t\tlockTarget = null;\n\t}\n',
+     '\t\tlockRing = null;\n\t\tlockTarget = null;\n\t\tlockKeep = 0;\n\t}\n'),
+    ('axe: a release that is not a throw keeps the paint', 'zscript/rsvr/melee.zs',
+     "\t\tif (h && h.Throw(mo))\n\t\t\tmo.SetInventory('RSVR_AxeThrown', 1);\n\t\tif (h)\n\t\t\th.Unlock();\t// thrown or not, the paint goes with the release\n",
+     "\t\tif (h && h.Throw(mo))\n\t\t{\n\t\t\tmo.SetInventory('RSVR_AxeThrown', 1);\n\t\t\th.Unlock();\n\t\t}\n"
+     "\t\t// F11 (owner): let go without a throw and the paint stays a second, as on the ShieldSaw and the\n"
+     "\t\t// saber -- pick the hold back up and it is still there; otherwise Tick takes it down\n"
+     "\t\telse if (h && h.lockTarget && h.lockKeep == 0)\n\t\t\th.lockKeep = mo.Level.maptime + 35;\n"),
+    ('axe: holding again keeps the kept paint', 'zscript/rsvr/melee.zs',
+     '\t\t\t// winding up: paint what the hand is pointing at\n\t\t\tif (h)\n\t\t\t\th.LockTick(mo);\n',
+     '\t\t\t// winding up: paint what the hand is pointing at\n\t\t\tif (h)\n\t\t\t{\n\t\t\t\th.lockKeep = 0;\t// F11: a kept paint is picked back up\n\t\t\t\th.LockTick(mo);\n\t\t\t}\n'),
+    ('axe: kept paint expires and follows its monster', 'zscript/rsvr/melee.zs',
+     '\t\tif (scrapeWait > 0)\n\t\t\tscrapeWait--;\n\n',
+     '\t\tif (scrapeWait > 0)\n\t\t\tscrapeWait--;\n'
+     '\t\t// F11: a paint kept after a release that was not a throw -- gone after its second, or with its monster\n'
+     '\t\tif (lockKeep > 0 && (mo.Level.maptime > lockKeep || !lockTarget || lockTarget.health <= 0))\n\t\t\tUnlock();\n'
+     '\t\tif (lockKeep > 0 && lockRing && lockTarget)\n'
+     '\t\t\tlockRing.SetOrigin(lockTarget.pos + (0, 0, lockTarget.height * 0.5), true);\n\n'),
+    ('axe: the throw blends arm and aim', 'zscript/rsvr/melee.zs',
+     '\t\tVector3 dir = vel.Unit();\n',
+     '\t\tVector3 dir = vel.Unit();\n'
+     '\t\t// F11 (owner): the arm\'s own motion blended with where the hand points, as the ShieldSaw\n'
+     '\t\t// (ssq_throw_blend 0.7) and the saber (0.6) do. 1 = all arm (as it was), 0 = all aim.\n'
+     "\t\tdouble bl = clamp(Cv(mo, 'rsvr_axe_throw_blend', 0.7), 0.0, 1.0);\n"
+     '\t\tif (fF.Length() > 0)\n\t\t\tdir = (dir * bl + fF.Unit() * (1.0 - bl)).Unit();\n'),
+    ('axe: throw blend cvar', 'CVARINFO.rsvr',
+     'user float rsvr_axe_lock_range = 1200.0;\n',
+     'user float rsvr_axe_lock_range = 1200.0;\n'
+     '// F11: the throw\'s direction, 1 all the arm\'s motion, 0 all where the hand points (ShieldSaw: 0.7)\n'
+     'user float rsvr_axe_throw_blend = 0.7;\n'),
     # R3, part 1: the rounds held aside from the magazine that came out (RSR_Held_<gun>) count as a
     #    magazine to take. With the reserve at 0 the hand was refused and they were stranded until
     #    ammo turned up: drop a part-full magazine (or leave the gun mid-reload) with the reserve
@@ -4576,6 +4632,10 @@ def fixes():
         open(p, 'w', newline='').write(t)
         log.append(dict(fix=why, file=rel, result='applied'))
     log += held_reload()
+    # the axe lock ring's art (tools/data/rqlk/SOURCE.txt): RSVR_AxeLock draws RQLK, which no file had
+    for k in 'ABCD':
+        shutil.copy(os.path.join(REPO, 'tools', 'data', 'rqlk', 'RQLK%s0.png' % k), OUT_SRC + 'sprites/RQLK%s0.png' % k)
+    log.append(dict(fix='axe lock ring art RQLKA0-D0', file='sprites/', result='copied'))
     log += semi_auto()
     json.dump(log, open(OUT + 'fixes_apply.json', 'w'), indent=1)
     shutil.copy(OUT + 'fixes_apply.json', os.path.join(REPO, 'sets', 'bd22q_1.97', 'fixes_apply.json'))

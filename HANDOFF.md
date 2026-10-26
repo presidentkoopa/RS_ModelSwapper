@@ -153,6 +153,21 @@ that is not on the plan.**
   alt-fired and reloaded on the owner's load order in the rig -- no VM abort, no script error from
   the pack (only BD_VoxelPack's own voxeldef four and BD22's own Deh_Actor_153 / DeathSphereHealth
   warnings). Waiting on the owner's headset pass.
+- DONE (F11, owner's picks 1/3/4 of the axe-vs-ShieldSaw-vs-saber comparison; "axe can be just
+  one" target, and it has 10 rounds so it does not come back):
+  * the lock ring's art: RQLKA0-D0 = the ShieldSaw's SSQKA0-D0 (byte-identical to the saber's
+    UBLKA0-D0), vendored in tools/data/rqlk with its source, copied by `fixes`.
+  * a release that is not a throw keeps the paint 35 tics; holding again picks it back up.
+  * the throw blends the arm's motion with where the hand points, `rsvr_axe_throw_blend` 0.7
+    (ShieldSaw's own default).
+  Rig: lock on at the zombie with 1 ring; let go still -> kept, re-held, gone 35 tics after the last
+  release; a fast hand release throws and the zombie dies.
+- FOUND AND FIXED (F11): **the alt-fire axe hold froze the game on release** when rsvr_axe_hold is
+  32 -- the F11 default, so every FRESH ini; test build 1 has it. RSVR_AxeHold is set in WorldTick
+  after the weapon ticks, so on the release tic Ready sent the axe back to AltGrip: a zero-tic loop.
+  Grip now clears it on release. Also: an archived 16 (the old default, BT_TURN180) is read as alt
+  fire, so players upgrading get the alt hold too (the rig's own ini had 16, which is why the hold
+  was never exercised before).
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
 - NEXT: F11 (owner calls: NOAUTOFIRE on all guns, off-hand punch vs rsq_punch, free charge default,
   PuristSniper model, RQLK ring art -- no lump in pack or BD22, so the ring is invisible);
