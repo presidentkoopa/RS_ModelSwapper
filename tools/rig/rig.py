@@ -8,7 +8,10 @@ import os, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 B = os.environ.get('B22_BUILD', HERE + '/build')		# setup.sh builds everything here
-RIG = os.environ.get('B22_RIG', B + '/rig' if os.path.exists(B + '/rig/qzdoom') else HERE + '/bin')	# bin/ = prebuilt
+RIG = os.environ.get('B22_RIG', B + '/rig')	# QuestZDoom 17.3 only: setup.sh build, or RS_ModelSwapper's gate/qz_rig/bin
+if not os.path.exists(os.path.join(RIG, 'qzdoom')):
+	sys.exit('rig.py: no rig at %s. Set B22_RIG=<RS_ModelSwapper>/gate/qz_rig/bin (prebuilt QuestZDoom 17.3) '
+	         'or run: sh tools/rig/setup.sh build' % RIG)
 UP = '/mnt/user-data/uploads'				# where the cloud session had the owner's files
 IWAD = os.environ.get('B22_IWAD', UP + '/DOOMWork/QZD17-engine/build/Release/doom2.wad')
 BD22 = os.environ.get('B22_BD22', UP + '/DOOMWork/brutal22test6.pk3')

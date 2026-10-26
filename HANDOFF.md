@@ -18,6 +18,11 @@ that is not on the plan.**
 **READ docs/HEADSET_PASS_1.99_2026-10-26.md FIRST: the owner's headset pass on 1.99 found 21 problems; 1.92 is the baseline.**
 
 ## F11 started (2026-10-25): fixes and polish
+- FIXED (2026-10-26): **the prebuilt rig `tools/rig/bin` (pushed c896330) was NOT QuestZDoom 17.3** -- 4.15pre /
+  ZScript 4.12, from a later unreleased commit. Removed. The rig is now only ever the commits in
+  `tools/rig/PINS` (qzd17.3, 9afc750); `engine/qz` refuses any other engine. Prebuilt 17.3 rig:
+  RS_ModelSwapper `gate/qz_rig/bin` (use `B22_RIG=`), or `sh tools/rig/setup.sh build`. The glue now has
+  ModelSwapper's qzt_* test-driver hook too. Results measured on the old bin/ are void; re-run them.
 - DONE: `bd22_plus.py pk3` puts `.md3` lumps in as LZMA (zip method 14), the rest deflated. Same
   689 lumps from `sets/bd22q_1.97/src`, byte-identical on read-back: **30 MB, was about 50**.
   1.96b's release did the same and ran on QZD 17.3. Not yet gated on the owner's load order.

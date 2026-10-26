@@ -1,23 +1,29 @@
 # tools/rig: testing bd22q in the real engine (TEST ONLY, never ships)
 
-The real QuestZDoom engine (emawind84/gzdoom 4.14.3, the owner's QZD17 version), built for Linux,
-on the OpenXR code path, with the headset and both controllers posed from cvars. It renders the
-left eye to image files, so you can SEE a held gun and its hands. Every check in the 1.99 work
-ran here: hand fits, reloads, fire rates, spin, casings, the axe lock-on.
+The real QuestZDoom engine -- Emawind's **QuestZDoom 17.3** (tag `qzd17.3`, gzdoom 9afc750, the
+release the owner and his players run) -- built for Linux, on the OpenXR code path, with the
+headset and both controllers posed from cvars. It renders the left eye to image files, so you can
+SEE a held gun and its hands.
+
+**The engine is always QuestZDoom 17.3, the commits in `PINS`.** The launcher (`engine/qz`, copied
+to `build/rig/qz`) refuses to start any other engine and prints `qz: engine OK: ...` on every
+launch. A prebuilt `bin/` built from a later, unreleased commit (4.15pre, ZScript 4.12) was here
+on 2026-10-26 and ran silently; it was removed. The prebuilt 17.3 rig lives in RS_ModelSwapper,
+`gate/qz_rig/bin`.
 
 ## Start here (one command)
-The rig is PREBUILT in `bin/` (`bin/qz` launches it; Linux x86_64, needs Mesa GLES/EGL + OpenAL).
 ```
-sh tools/rig/setup.sh          # seconds: zips the probe and the test packs into tools/rig/build/
+B22_RIG=<RS_ModelSwapper>/gate/qz_rig/bin sh tools/rig/setup.sh   # seconds: prebuilt 17.3 rig
+#   or: sh tools/rig/setup.sh build                               # ~20-40 min: engine from PINS into build/rig/
 cd tools/rig
 python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 Pistol,PlasmaGun t1
 #  -> build/shots/cmp2_t1.png : each gun held, 1.92 on the left, the depot's current set on the right
 ```
 `setup.sh` zips `build/probe.pk3`, `build/upstream.pk3`,
 `build/BD22Q_now.pk3` (this depot's `sets/bd22q_1.97/src`) and `build/BD22Q_192.pk3` (tag 1.92 of
-RS_Brutal22WeaponsQ, the owner's baseline). Re-run it after changing the set (it re-zips BD22Q_now).
-`sh tools/rig/setup.sh build` rebuilds the engine from source (pinned commits, ~20-40 min) into
-`build/rig/`, which `rig.py` then prefers over `bin/`.
+RS_Brutal22WeaponsQ, the owner's baseline), then checks the rig is 17.3. Re-run it after changing
+the set (it re-zips BD22Q_now). `rig.py` uses `B22_RIG` if set, else `build/rig/`, and stops with
+a message if neither has an engine.
 
 **Game data is the owner's and is not in git:** doom2.wad, brutal22test6.pk3, BD_VoxelPack.pk3.
 `rig.py` looks in `/mnt/user-data/uploads` (where the cloud session had them) or in
@@ -36,9 +42,9 @@ Needs: git, cmake, make, clang or gcc, zip, python3 + Pillow, Mesa GLES/EGL, Ope
 ## What is here
 | file | what |
 |---|---|
-| `bin/` | the prebuilt rig: `qzdoom` (with the sound log), `libzmusic.so.1`, engine pk3s, `config/qzdoom.ini`, `qz` launcher |
-| `setup.sh` | the one command above. Source pins for `build`: engine `9afc750`, wrapper `a85c819` |
-| `engine/` | the rig build: `build.sh` + `Makefile`, `glue/qz_linux_glue.cpp` (OpenXR stand-in, poses from cvars, frame dump), `shim/` (NDK/JNI header stand-ins), `config/qzdoom.ini` (test ini), `pose.py`, `qz` (launcher) |
+| `PINS` | the one engine allowed: QuestZDoom 17.3 commits and the versions a correct build reports |
+| `setup.sh` | the one command above; builds from `PINS` and checks the rig is 17.3 |
+| `engine/` | the rig build: `build.sh` + `Makefile`, `glue/qz_linux_glue.cpp` (OpenXR stand-in, poses from cvars, the qzt_* test-driver hook, frame dump), `shim/` (NDK/JNI header stand-ins), `config/qzdoom.ini` (test ini), `pose.py`, `qz` (launcher with the version guard) |
 | `s_sound_log.patch` | test-only `QZ_SNDLOG` in the engine's StartSound |
 | `rig.py` | `run(name, script, secs, extra)`: one engine run on the load order + probe; logs to `build/logs/`. Env: `B22_PK3`, `B22_RIG`, `B22_NOPROBE`, `QZ_RES` |
 | `shots.py`, `cmp.py`, `cmp2.py` | frame dumps; `cmp2.py <pkA> <pkB> <Gun,...> <tag> [pose]` = A left, B right |

@@ -46,6 +46,12 @@ extern "C" int __android_log_print(int prio, const char *tag, const char *fmt, .
 	return r;
 }
 
+// (added 2026-10-25, as the 2026-10-24 rig did) the engine also calls the non-varargs writer
+extern "C" int __android_log_write(int prio, const char *tag, const char *text)
+{
+	return __android_log_print(prio, tag, "%s", text ? text : "");
+}
+
 // ---- globals normally defined in QzDoom_OpenXR.cpp / TBXR_Common.cpp ----
 class FArgs;
 FArgs *Args;	// defined by the wrapper on Android (d_main.cpp only declares it)
@@ -196,6 +202,24 @@ static void FillRemote(ovrInputStateTrackedRemote *r, float trig, float grip, in
 	sscanf(stick, "%f %f", &r->Joystick.x, &r->Joystick.y);
 }
 
+// TEST DRIVER HOOK (2026-10-25): ZScript may not change an engine cvar, so a test pack cannot move
+// these controllers from a script. If a loaded pack defines its own (CVARINFO, so scripts may set
+// them) qzt_lhand / qzt_rhand / qzt_lgrip / qzt_ltrigger / qzt_rgrip / qzt_rtrigger, a non-empty or
+// non-negative value replaces the qz_ one. Nothing in the engine changes; without such a pack the
+// controllers are driven exactly as before.
+static const char *PoseOr(const char *name, const char *dflt)
+{
+	FBaseCVar *v = FindCVar(name, nullptr);
+	if (v && v->GetRealType() == CVAR_String) { const char *s = v->GetGenericRep(CVAR_String).String; if (s && *s) return s; }
+	return dflt;
+}
+static float AxisOr(const char *name, float dflt)
+{
+	FBaseCVar *v = FindCVar(name, nullptr);
+	if (v) { float f = v->GetGenericRep(CVAR_Float).Float; if (f >= 0.f) return f; }
+	return dflt;
+}
+
 void TBXR_UpdateControllers()
 {
 	for (int i = 0; i < 2; i++)
@@ -203,13 +227,13 @@ void TBXR_UpdateControllers()
 		ovrTrackedController &c = gAppState.TrackedController[i];
 		memset(&c, 0, sizeof(c));
 		c.Active = GL_TRUE;
-		c.Pose = ParsePose(i == 0 ? *qz_lhand : *qz_rhand);
+		c.Pose = ParsePose(i == 0 ? PoseOr("qzt_lhand", *qz_lhand) : PoseOr("qzt_rhand", *qz_rhand));
 		c.Velocity.type = XR_TYPE_SPACE_VELOCITY;
 	}
 	leftRemoteTracking_new = gAppState.TrackedController[0];
 	rightRemoteTracking_new = gAppState.TrackedController[1];
-	FillRemote(&leftTrackedRemoteState_new, qz_ltrigger, qz_lgrip, qz_lbuttons, *qz_lstick);
-	FillRemote(&rightTrackedRemoteState_new, qz_rtrigger, qz_rgrip, qz_rbuttons, *qz_rstick);
+	FillRemote(&leftTrackedRemoteState_new, AxisOr("qzt_ltrigger", qz_ltrigger), AxisOr("qzt_lgrip", qz_lgrip), qz_lbuttons, *qz_lstick);
+	FillRemote(&rightTrackedRemoteState_new, AxisOr("qzt_rtrigger", qz_rtrigger), AxisOr("qzt_rgrip", qz_rgrip), qz_rbuttons, *qz_rstick);
 }
 
 void VR_HandleControllerInput()
