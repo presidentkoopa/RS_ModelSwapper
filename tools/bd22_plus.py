@@ -4303,6 +4303,15 @@ def spine():
 # once, and it is skipped (not doubled) if its new text is already there, so the stage can run on
 # top of a finished build or at the end of a full one. Runs after every other stage, before sync.
 F11_FIXES = [
+    # Every gun at BD22's own fire rate: the RSQ_TriggerHeld item (semiauto.zs) on every player,
+    #    given by the alts handler that already visits each player every tic.
+    ('trigger held: every player carries RSQ_TriggerHeld', 'zscript/rsq/alts.zs',
+     "\t\tstatic const Name tok[] = { 'RSA_Opt_Rev', 'RSA_Opt_Slug', 'RSA_Opt_Semi' };\n",
+     "\t\tstatic const Name tok[] = { 'RSA_Opt_Rev', 'RSA_Opt_Slug', 'RSA_Opt_Semi' };\n"
+     "\t\t// F11: every gun fires at BD22's own rate (semiauto.zs RSQ_TriggerHeld)\n"
+     "\t\tfor (int n = 0; n < MAXPLAYERS; n++)\n"
+     "\t\t\tif (playeringame[n] && players[n].mo && players[n].mo.CountInv('RSQ_TriggerHeld') <= 0)\n"
+     "\t\t\t\tplayers[n].mo.GiveInventory('RSQ_TriggerHeld', 1);\n"),
     # The alt-fire axe hold FROZE THE GAME on release (rig, 2026-10-25, the first time the alt hold
     #    was ever driven: a fresh ini has rsvr_axe_hold 32). RSVR_AxeHold is set in WorldTick, which
     #    runs after the weapon's states, so on the release tic it is still 1: Grip sees the button up
@@ -4511,6 +4520,22 @@ SEMI_ZS = """// semiauto.zs (F11) -- a semi-automatic gun fires once per pull of
 // upstream, which keeps attackdown set while the button is held). BD22's own Ready loop also
 // jumps to Fire on FiredPrimary every tic it is held. The gun gives this lock when it fires; its
 // Fire state goes back to waiting while the lock is there; the lock goes when the trigger is let go.
+// THE SAME FAULT, FOR EVERY GUN (owner 2026-10-26: "our bd guns should have normal bd22 fire rates").
+// Measured in the rig, trigger held 140 tics: Pistol 21 shots vs 13 with desktop's rule, pump
+// Shotgun 6 vs 1, Incendiary Launcher 4 vs 1, Dual Pistols 32 vs 28; every other gun identical.
+// Before the player thinks, attackdown is set the way upstream keeps it: down while the trigger has
+// stayed down since the last tic. DoEffect runs in the pawn's own Tick, ahead of TickPSprites.
+class RSQ_TriggerHeld : Inventory
+{
+	Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET }
+	override void DoEffect()
+	{
+		Super.DoEffect();
+		if (Owner && Owner.player)
+			Owner.player.attackdown = (Owner.player.oldbuttons & BT_ATTACK) && (Owner.player.cmd.buttons & BT_ATTACK);
+	}
+}
+
 class RSQ_SemiLock : Inventory
 {
 	Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET }

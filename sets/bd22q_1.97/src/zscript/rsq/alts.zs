@@ -19,6 +19,10 @@ class RSA_Handler : EventHandler
 	{
 		static const Name cv[] = { 'rsa_rev_magnum', 'rsa_sg_slug', 'rsa_pistol_semi' };
 		static const Name tok[] = { 'RSA_Opt_Rev', 'RSA_Opt_Slug', 'RSA_Opt_Semi' };
+		// F11: every gun fires at BD22's own rate (semiauto.zs RSQ_TriggerHeld)
+		for (int n = 0; n < MAXPLAYERS; n++)
+			if (playeringame[n] && players[n].mo && players[n].mo.CountInv('RSQ_TriggerHeld') <= 0)
+				players[n].mo.GiveInventory('RSQ_TriggerHeld', 1);
 		for (int k = 0; k < cv.Size(); k++)
 		{
 			let c = CVar.FindCVar(cv[k]);

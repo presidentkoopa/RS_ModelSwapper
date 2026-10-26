@@ -1,8 +1,13 @@
 [
  {
+  "fix": "trigger held: every player carries RSQ_TriggerHeld",
+  "file": "zscript/rsq/alts.zs",
+  "result": "applied"
+ },
+ {
   "fix": "axe hold: no state loop on release",
   "file": "zscript/rsvr/melee.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "axe hold: an archived 16 is read as alt fire",

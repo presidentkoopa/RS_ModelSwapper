@@ -177,6 +177,10 @@ that is not on the plan.**
   twice by rig.run, halved here). Only four guns differ: Pistol 21 vs 13, pump Shotgun 6 vs 1,
   Incendiary Launcher (M32) 4 vs 1, Dual Pistols 32 vs 28. Every other gun is identical, including
   all the automatics (MG42/Unmaker first differed by 2-4, identical on a rerun: noise).
+- DONE (F11, owner: "our bd guns should have normal bd22 fire rates"): RSQ_TriggerHeld (semiauto.zs),
+  given to every player by alts.zs, keeps player.attackdown set while the trigger stays down, as
+  upstream does. Rig, held 140 tics: Pistol 13, pump Shotgun 1, M32 1, Dual Pistols 28 (= desktop);
+  Rifle, Minigun, Ruger, SSG unchanged. The pistol semi-auto option (rsa_pistol_semi) stays.
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
 - NEXT: F11 (owner calls: NOAUTOFIRE on all guns, off-hand punch vs rsq_punch, free charge default,
   PuristSniper model, RQLK ring art -- no lump in pack or BD22, so the ring is invisible);
