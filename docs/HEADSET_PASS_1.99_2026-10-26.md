@@ -174,6 +174,10 @@ State of the repos when this was written:
 - `f80df0f` (part of item 11): the MG42, Flamethrower and Unmaker reload model blocks were at ZOffset
   0 while the gun sits at -5, so the gun jumped 5 cm when their reload started. Now -5; their
   card-measured points are shifted, not re-measured. All three reload in the rig.
+- Item 20 FIXED: with "Spent casings" voxels on (the rig's ini has it on, likely the owner's too), a
+  casing the F7 lend had given a real-size 3D mesh at scale 1.0 was then handed the voxel AT 1.0 --
+  rig: a pump-shotgun shell at scale 1.000 against BD22's 0.25. Now the lend steps aside when voxel
+  casings are on, and the F6 sprite sizing no longer shrinks a lent 3D casing. Rig after: 0.25.
 - STILL OPEN: 10 (F10 in-hand poses, never hand-fitted), 13/15 (Machinegun box and M32 in the headset
   -- 15 is likely the 6-vs-4 capacity above), 18 (bang on map load), 19 (BFG sounds after A4),
   20 (voxel shells), 21 (Ruger scope default), and NO new build has been published to

@@ -113,11 +113,11 @@ class RSA_Casings : EventHandler
 		// VR test below: a 12-gauge hull is a 12-gauge hull on a flat screen too.
 		// It sets scale 1.0 itself, because a lent model's size is the MODELDEF's
 		// and the actor's own scale multiplies into it.
-		RSQ_CaseModels.Lend(c, mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName() : 'None', n);
+		bool lent = RSQ_CaseModels.Lend(c, mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName() : 'None', n);
 		if (!RSVR_VRHand.InVR(mo))
 			return;
 		double sz = Size(mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName() : 'None', n);
-		if (sz > 0)
+		if (sz > 0 && !lent)	// F11: a lent 3D casing is real-size at 1.0 (casemodels.zs)
 			c.A_SetScale(sz, sz);
 		pend.Push(c);
 	}

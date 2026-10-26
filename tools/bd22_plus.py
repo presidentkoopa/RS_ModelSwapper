@@ -4339,6 +4339,28 @@ def spine():
 # once, and it is skipped (not doubled) if its new text is already there, so the stage can run on
 # top of a finished build or at the end of a full one. Runs after every other stage, before sync.
 F11_FIXES = [
+    # CASINGS (owner, headset 2026-10-26: "the voxel shells are enormous"). Three handlers touch a
+    #    spent case in turn: the F7 lend (a real-size 3D casing, scale 1.0), the F6 VR sizing (a
+    #    SPRITE scale, 0.1-0.27) and the voxel lender (the voxel pack's voxel, when "Spent casings" is
+    #    on). The sizing overwrote the lend's 1.0 (lent casings tiny), and the voxel replaced the lent
+    #    model at the lend's 1.0, several times BD22's own casing scale (voxel casings enormous).
+    #    Now the lend steps aside when voxel casings are on, says whether it lent, and the sprite
+    #    sizing leaves a lent casing alone.
+    ('casings: Lend says whether it lent', 'zscript/rsq/casemodels.zs',
+     '\tstatic void Lend(Actor c, Name gun, Name casing)\n\t{\n\t\tif (!c)\n\t\t\treturn;\n\t\tName h = Holder(gun, casing);\n\t\tif (h == \'None\')\n\t\t\treturn;\n\t\tlet cv = CVar.FindCVar(\'rsq_casing_models\');\n\t\tif (cv && cv.GetInt() == 0)\n\t\t\treturn;\n',
+     '\tstatic bool Lend(Actor c, Name gun, Name casing)\n\t{\n\t\tif (!c)\n\t\t\treturn false;\n\t\tName h = Holder(gun, casing);\n\t\tif (h == \'None\')\n\t\t\treturn false;\n\t\tlet cv = CVar.FindCVar(\'rsq_casing_models\');\n\t\tif (cv && cv.GetInt() == 0)\n\t\t\treturn false;\n'
+     '\t\t// F11: the voxel casings option wins (voxels.zs lends the voxel next, at the actor\'s scale)\n'
+     '\t\tlet vc = consoleplayer >= 0 && consoleplayer < MAXPLAYERS ? CVar.GetCVar(\'rsq_vox_casings\', players[consoleplayer]) : null;\n'
+     '\t\tif (vc && vc.GetBool())\n\t\t\treturn false;\n'),
+    ('casings: Lend returns true when it lent', 'zscript/rsq/casemodels.zs',
+     '\t\t\tk = clamp(sz.GetFloat(), 0.25, 4.0);\n\t\tc.A_SetScale(k, k);\n\t}\n',
+     '\t\t\tk = clamp(sz.GetFloat(), 0.25, 4.0);\n\t\tc.A_SetScale(k, k);\n\t\treturn true;\n\t}\n'),
+    ('casings: the sprite sizing leaves a lent casing alone', 'zscript/rsq/casings.zs',
+     "\t\tRSQ_CaseModels.Lend(c, mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName() : 'None', n);\n",
+     "\t\tbool lent = RSQ_CaseModels.Lend(c, mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName() : 'None', n);\n"),
+    ('casings: sizing only unlent', 'zscript/rsq/casings.zs',
+     '\t\tif (sz > 0)\n\t\t\tc.A_SetScale(sz, sz);\n\t\tpend.Push(c);\n',
+     '\t\tif (sz > 0 && !lent)\t// F11: a lent 3D casing is real-size at 1.0 (casemodels.zs)\n\t\t\tc.A_SetScale(sz, sz);\n\t\tpend.Push(c);\n'),
     ('melee: its own record of the off grip (the reload keeps one only in grip-grab mode)', 'zscript/rsvr/melee.zs',
      '\toverride void NetworkProcess(ConsoleEvent e)\n\t{\n\t\tif (e.Name != "rsvr_axe_grip")\n\t\t\treturn;\n',
      '\tbool offGrip[MAXPLAYERS];\t// F11: the off grip (rsr_grip events, sent by vreload.zs InputProcess)\n'

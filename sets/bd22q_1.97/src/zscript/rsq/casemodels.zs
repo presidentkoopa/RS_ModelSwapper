@@ -98,16 +98,20 @@ class RSQ_CaseModels abstract play
 		return 'None';
 	}
 
-	static void Lend(Actor c, Name gun, Name casing)
+	static bool Lend(Actor c, Name gun, Name casing)
 	{
 		if (!c)
-			return;
+			return false;
 		Name h = Holder(gun, casing);
 		if (h == 'None')
-			return;
+			return false;
 		let cv = CVar.FindCVar('rsq_casing_models');
 		if (cv && cv.GetInt() == 0)
-			return;
+			return false;
+		// F11: the voxel casings option wins (voxels.zs lends the voxel next, at the actor's scale)
+		let vc = consoleplayer >= 0 && consoleplayer < MAXPLAYERS ? CVar.GetCVar('rsq_vox_casings', players[consoleplayer]) : null;
+		if (vc && vc.GetBool())
+			return false;
 		c.A_ChangeModel(h);
 		// the actor's Scale multiplies the MODELDEF's, so a real-sized mesh needs 1.0 here --
 		// and F6's per-cartridge sprite sizing is superseded for this casing.
@@ -116,5 +120,6 @@ class RSQ_CaseModels abstract play
 		if (sz)
 			k = clamp(sz.GetFloat(), 0.25, 4.0);
 		c.A_SetScale(k, k);
+		return true;
 	}
 }
