@@ -181,7 +181,7 @@ PLUS = {
                  ready_sprites=['RVCG A', 'PVCG A'], spr=('RQIM', 'RQIP', 'RQIW')),
     'Minigun': dict(mesh='Minigun/Minigun.md3',
                  islands=dict(surface='Runko', index=1, frame=4, x=(58.0, 67.0), z_below=-19.0),
-                 out=(-0.014, -0.259, -0.966), travel=None, capacity=200,
+                 out=(-0.014, -0.259, -0.966), travel=None, capacity=100,	# owner 2026-10-26: '100 round per load'. 200 was the card's, but BD22 caps Clip2 at 200, so the box was always as full as the reserve and could never be reloaded
                  scale=(-1.0, 1.0, 1.0), off=(0.0, 0.0, -5.0),
                  part='magazine', ready_frame=4,
                  snd_out='rsr/drumout', snd_in='rsr/drumin', snd_land='rsr/bigdrop',

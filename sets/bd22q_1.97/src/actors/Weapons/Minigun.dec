@@ -17,7 +17,7 @@ ACTOR MiniGun : BrutalWeapon
 	States
 	{
 	// posefix rsr (1.97): real VR reload (zscript/rsr/vreload.zs) on a gun Brutal Doom never reloads.
-	// The magazine is a COUNTER over BD22's own ammo (zscript/rsq/counters.zs, capacity 200 -- the owner's
+	// The magazine is a COUNTER over BD22's own ammo (zscript/rsq/counters.zs, capacity 100 -- the owner's
 	// REMA number; BD22 has none): firing and the reserve are BD22's, untouched. With VR reloading
 	// off (rsr_reload 0, or not in VR) the counter is idle and nothing below changes the gun.
 	Reload:

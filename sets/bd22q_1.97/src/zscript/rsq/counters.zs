@@ -10,7 +10,7 @@ class RSQ_Counters : EventHandler
 	static const Name GUN[] = { 'MG42', 'Flamethrower2', 'IncendiaryLauncher', 'Machinegun', 'Unmaker', 'Devastator', 'NukeLauncher', 'HellishMissileLauncher', 'Minigun' };
 	static const Name MAG[] = { 'RSQ_Mag_MG42', 'RSQ_Mag_Flamethrower2', 'RSQ_Mag_IncendiaryLauncher', 'RSQ_Mag_Machinegun', 'RSQ_Mag_Unmaker', 'RSQ_Mag_Devastator', 'RSQ_Mag_NukeLauncher', 'RSQ_Mag_HellishMissileLauncher', 'RSQ_Mag_Minigun' };
 	static const Name RES[] = { 'Clip2', 'Gas', 'AmmoM202', 'Clip2', 'SoulAmmo', 'DevastatorAmmo', 'Nuke', 'MiniHellRocketAmmo', 'Clip2' };
-	static const int CAP[] = { 200, 200, 6, 100, 60, 50, 1, 6, 200 };
+	static const int CAP[] = { 200, 200, 6, 100, 60, 50, 1, 6, 100 };
 	int lastRes[MAXPLAYERS][9];
 	bool inited[MAXPLAYERS][9];
 
@@ -98,7 +98,7 @@ class RSQ_Mag_HellishMissileLauncher : Inventory { Default { Inventory.MaxAmount
 class RSQ_NoMag_HellishMissileLauncher : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Empty_HellishMissileLauncher : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Fill_HellishMissileLauncher : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
-class RSQ_Mag_Minigun : Inventory { Default { Inventory.MaxAmount 200; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
+class RSQ_Mag_Minigun : Inventory { Default { Inventory.MaxAmount 100; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_NoMag_Minigun : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Empty_Minigun : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
 class RSQ_Fill_Minigun : Inventory { Default { Inventory.MaxAmount 1; +INVENTORY.UNDROPPABLE; +INVENTORY.UNTOSSABLE; +INVENTORY.QUIET } }
