@@ -168,6 +168,10 @@ that is not on the plan.**
   Grip now clears it on release. Also: an archived 16 (the old default, BT_TURN180) is read as alt
   fire, so players upgrading get the alt hold too (the rig's own ini had 16, which is why the hold
   was never exercised before).
+- DELIVERED 2026-10-25: **BD22Q_1.99_test2.pk3** (commit e861d85, sha256 19066231...), replaces
+  test1 (which can freeze on the axe's alt hold with a fresh ini). Before it went: all 35 weapon
+  classes given, selected, fired, alt-held 25 tics, released and reloaded in the rig -- every batch
+  ran to its end (no hang), no VM abort or script error from the pack.
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
 - NEXT: F11 (owner calls: NOAUTOFIRE on all guns, off-hand punch vs rsq_punch, free charge default,
   PuristSniper model, RQLK ring art -- no lump in pack or BD22, so the ring is invisible);
