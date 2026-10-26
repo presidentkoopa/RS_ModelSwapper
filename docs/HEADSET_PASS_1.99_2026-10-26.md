@@ -149,6 +149,7 @@ State of the repos when this was written:
 6. Publish to RS_Brutal22WeaponsQ only after the owner's headset pass on a test build.
 
 ## PROGRESS after this doc was written (2026-10-26, same session) -- newest last
+- Item 7 (Nuker hands): Nuker GunHook/SupportHook/trigger set from the BFG's by a similarity fit of their identical 52-vertex trigger meshes (scale 0.9923, residual 0.014). Rig render: Nuker hand now sits where the BFG's does. Not yet headset-tested.
 - `e752cef` tools/rig: the rig scripts, probe, frame-dump glue, ini and build notes are IN THE REPO
   now (tools/rig/README.md). `cmp2.py <pkA> <pkB> <Gun,...> <tag> [pose]` = one run per gun, side by side.
 - Rig renders, 1.92 vs now, recoil removed: Pistol, Plasma, BFG and SSG hold poses are the SAME at

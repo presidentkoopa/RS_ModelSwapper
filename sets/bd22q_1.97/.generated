@@ -1,5 +1,5 @@
 bd22q 1.99 -- generated, do not hand-edit sets/bd22q_1.97/src
-705 files, written by tools/bd22_plus.py sync at 2026-10-26T04:50:58
+705 files, written by tools/bd22_plus.py sync at 2026-10-26T04:53:13
 
 tools/bd22_plus.py geometry + apply, then tools/bd22_mg.py
 SRC (1.96b) = E:/DOOMWork/_buildtemp/rs_brutal22weaponsq/src/
@@ -20,5 +20,4 @@ then tools/bd22_plus.py casemodels
 then tools/bd22_plus.py pose
 then tools/bd22_plus.py spine
 then tools/bd22_plus.py readme
-then tools/bd22_plus.py fixes
 then tools/bd22_plus.py fixes

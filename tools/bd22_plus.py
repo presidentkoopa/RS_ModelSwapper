@@ -4845,6 +4845,15 @@ GRIP_NUDGES = {
 }
 
 
+# F11 (owner: "the nuker is the same model as the bfg which had good hands"): the Nuker's body IS the
+# BFG's (similarity fit of their identical 52-vertex trigger meshes, as drawn: scale 0.9923, residual
+# 0.014), so the BFG's good grip is carried onto it instead of the Nuker's own fit, which was 4 cm high.
+HAND_SET = {
+    14: dict(GunHook=(0.086, -8.801, 4.069), GunHookTwo=(0.086, -8.801, 4.069), SupportHook=(1.741, -15.817, -2.271)),
+}
+HAND_TRIGGER = {14: 'B'}	# the BFG's trigger finger
+
+
 def grip_nudges():
     """Moves a gun-hand hook (GunHook and GunHookTwo) of the rows in GRIP_NUDGES. Idempotent: the
     row's 1.96b value is read from SRC, the nudge added, the result written."""
@@ -4852,7 +4861,7 @@ def grip_nudges():
     p = OUT_SRC + 'zscript/rsq/handtable.zs'
     t = open(p).read()
     base = open(SRC + 'zscript/rsq/handtable.zs').read()
-    for fn in ('GunHook', 'GunHookTwo'):
+    for fn in ('GunHook', 'GunHookTwo', 'SupportHook'):
         m0 = re.search(r'static Vector3 %s\(int i\)\n\t\{\n(.*?)\n\t\t return' % fn, base, re.S) or \
              re.search(r'static Vector3 %s\(int i\)\n\t\{\n(.*?)\n\t\treturn' % fn, base, re.S)
         m1 = re.search(r'static Vector3 %s\(int i\)\n\t\{\n(.*?)\n\t\treturn' % fn, t, re.S)
@@ -4864,11 +4873,22 @@ def grip_nudges():
             mm = re.search(r'(static const double %s\[\] = \{ )(.*?)( \};)' % ax, body)
             vals = [x.strip() for x in mm.group(2).split(',')]
             for row, d in GRIP_NUDGES.items():
-                if row < len(vals) and row < len(rows0[ax]):
+                if fn in ('GunHook', 'GunHookTwo') and row < len(vals) and row < len(rows0[ax]):
                     vals[row] = '%.3f' % (rows0[ax][row] + d[k])
+            for row, sets in HAND_SET.items():
+                if fn in sets and row < len(vals):
+                    vals[row] = '%.3f' % sets[fn][k]
             body = body[:mm.start(2)] + ', '.join(vals) + body[mm.end(2):]
         t = t[:m1.start(1)] + body + t[m1.end(1):]
+    m = re.search(r'(static String Trigger\(int i\)\n\t\{\n\t\tstatic const String v\[\] = \{ )(.*?)( \};)', t)
+    if m:
+        vals = [x.strip() for x in m.group(2).split(',')]
+        for row, letter in HAND_TRIGGER.items():
+            vals[row] = '"%s"' % letter
+        t = t[:m.start(2)] + ', '.join(vals) + t[m.end(2):]
     open(p, 'w').write(t)
+    for row, sets in HAND_SET.items():
+        log.append(dict(fix='hand set row %d' % row, file='zscript/rsq/handtable.zs', result=str(sets)))
     for row, d in GRIP_NUDGES.items():
         log.append(dict(fix='grip nudge row %d' % row, file='zscript/rsq/handtable.zs', result=str(d)))
     return log
