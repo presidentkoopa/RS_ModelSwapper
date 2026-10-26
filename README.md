@@ -122,6 +122,78 @@ Everything used on the models is in this repo. The scripts need Python 3, and th
 - build_quest.py is the Linux equivalent of `./build.ps1 -Static`, and it checks every asset.
 - gate/run_gate.py runs one gun through a full reload, headless, and prints PASS or FAIL per step. Add `--vr` to run it on the Quest-faithful rig, `--shot` to test the pump by hand after a shot, and `--shots` for screenshots, which on the rig are the real eye view. gate/run_all.py runs every reloadable model.
 
+## Making a model reloadable: the pipeline
+
+This is how one of the shelf's models becomes a gun you reload with your hands on any mod. Each step is a tool in this repo. Each reads what the step before it wrote. No number is typed in.
+
+**You need:**
+- Python 3 with numpy and Pillow (`pip install numpy pillow scipy`)
+- the model already on the shelf: its MODELDEF block in `modeldef` and its row in `zscript/RS_ForeignModels.zs`
+- for the test: a QuestZDoom 17.3 build and `freedoom2.wad`
+
+**1. Check the model rests on the right frame.**
+```
+python3 -B tools_kit/md3label.py <mesh.md3> /tmp/look MS_YourGun --idle 0
+```
+Look at the `phases` list in `/tmp/look/MS_YourGun.card`. If the frame the model is drawn on is a `raise` frame, the gun sits mid-raise. Add the measured rest frame to `REST` in `tools_kit/rest_frames.py`, with a note on how you know, and run:
+```
+python3 -B tools_kit/rest_frames.py
+```
+
+**2. Measure the gun from its own animation.**
+```
+python3 -B tools_kit/card_leftovers.py --donor MS_YourGun
+```
+This runs md3label on the mesh the model actually draws, at its rest frame:
+- It finds the parts by how they move: the magazine, the charging handle or slide, the trigger.
+- It finds the reload's phases and carves the magazine into its own mesh.
+- It writes the card to `cards_left/` and the carved magazine beside the mesh.
+- `card_from_motion` turns that into the reload grammar in `WMCARD.left`.
+
+If the animation never moves a magazine, it says so and stops. Nothing is guessed.
+
+**3. Make its reload row, at the spot it is drawn.**
+```
+python3 -B tools_kit/regen_rows.py --add MS_YourGun
+python3 -B tools_kit/fix_layer_skins.py
+```
+This runs the kit's own chain at the model's drawn placement and rest frame: card2quest → genpack → gen_rsr. The model gets:
+- its own reload slot;
+- its reload layers in `MODELDEF.cards`;
+- its foley aliases in `SNDINFO.ms`;
+- a charging handle, if a slide was measured.
+
+**4. Hands.** Most shelf models already have a hand row in `zscript_depot/rsq/handtable.zs`. A new one needs a fit: `tools_kit/handfit_cards.py`, the kit's method on Ermac's hands. Then run `tools_kit/gunmoves_ms.py`, which works out where the hands turn with the gun. Without a hand row, the reload still works, but no hands are drawn on the gun.
+
+**Pump shotguns** get their rows from `tools_kit/gen_pump.py`, then `python3 -B tools_kit/rack_frac.py`. That measures where the pump starts in the fire animation, for pumping by hand between shots. **Break-open guns** get theirs from `tools_kit/gen_rsb.py`.
+
+**5. Build.**
+```
+python3 -B tools_kit/build_quest.py ModelSwapper-QUEST.pk3     # Linux
+./build.ps1 -Static                                          # Windows
+```
+Both check every model, skin and sprite that any MODELDEF names.
+
+**6. Test it.**
+```
+python3 -B gate/run_gate.py ModelSwapper-QUEST.pk3 MS_YourGun            # desktop, headless
+python3 -B gate/run_gate.py ModelSwapper-QUEST.pk3 MS_YourGun --vr       # the Quest engine, simulated controllers
+python3 -B gate/run_gate.py ModelSwapper-QUEST.pk3 MS_YourGun --shots    # plus screenshots
+python3 -B gate/run_all.py  ModelSwapper-QUEST.pk3                       # every reloadable model
+```
+The test puts your model on a weapon written like any mod's, with its own Reload state and its own ammo. Then a scripted hand does the reload. Each step prints PASS or FAIL:
+- the join took the gun;
+- the magazine came out;
+- the hand carried a new one;
+- it seated, and the handle was racked;
+- the gun went back to the mod, and the mod's own reload filled it.
+
+`--vr` runs the same test on the Quest's own engine code with simulated controllers (`gate/qz_rig/README.md`).
+
+**7. Then the headset.** The gate proves the logic and what is drawn. Reach and feel are yours to judge.
+
+Worked through on MS_hacx_UZI (2026-10-26, dry run): step 2 measured a 20-unit magazine stroke and a 6-unit handle. Step 3 gave it slot 81, with the handle and the well 11 cm from the grip.
+
 ## Which build
 
 ModelSwapper.pk3 is the desktop VR build, for [UZDXREMA](https://github.com/presidentkoopa/UZDXREMA). Models are animated, reloads included.

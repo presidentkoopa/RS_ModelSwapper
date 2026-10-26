@@ -1,6 +1,6 @@
 """regen_rows.py -- each card-measured donor gets a reload row made at the placement it is DRAWN at.
 
-    python -B tools_kit/regen_rows.py [--dry] [--only MS_A,MS_B]
+    python -B tools_kit/regen_rows.py [--dry] [--only MS_A,MS_B] [--add MS_A,MS_B]
 
 WHY
 ModelSwapper's older reload rows (slots 3-30) were made by genpack.py from the cards at the card's
@@ -43,10 +43,17 @@ FOLEY = {'pistol': 'pistol', 'revolver': 'pistol', 'smg': 'smg', 'rifle': 'rifle
          'railgun': 'railgun', 'launcher': 'rocketlauncher', 'rocket': 'rocketlauncher', 'flamethrower': 'rocketlauncher'}
 
 
+# --add MS_A,MS_B: shelf models with no reload slot yet get their first one (appended) -- the
+# donor needs a card on its own mesh first (card_leftovers.py --donor)
+ADD = sys.argv[sys.argv.index('--add') + 1].split(',') if '--add' in sys.argv else []
+
+
 def donor_slots(rsr):
     out = {}
     for d, s in re.findall(r'donor == "(\w+)"\)\s*return (\d+);', rsr):
         out.setdefault(d, int(s))
+    for d in ADD:
+        out.setdefault(d, 0)        # 0: no row yet
     return out
 
 
@@ -162,8 +169,8 @@ def main(dry, only):
     report = []
     for c in cands:
         d = c['donor']
-        old = L.read_row(rsr, c['slot'])
-        mine = re.match(r"'Q([VW][0-9A-Z])M'", old['SprGun'][1])
+        old = L.read_row(rsr, c['slot']) if c['slot'] > 0 else None
+        mine = re.match(r"'Q([VW][0-9A-Z])M'", old['SprGun'][1]) if old else None
         if mine:
             c['code'] = mine.group(1)
         try:

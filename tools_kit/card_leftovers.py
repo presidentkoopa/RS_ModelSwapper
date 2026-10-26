@@ -1,6 +1,6 @@
 """card_leftovers.py -- the reloadable donors still on _wm rows get cards measured from their OWN mesh.
 
-    python -B tools_kit/card_leftovers.py [--dry]
+    python -B tools_kit/card_leftovers.py [--dry] [--donor MS_A,MS_B]
 
 WHY
 regen_rows.py remakes a donor's reload row from its card, but only when the card was measured on the
@@ -37,7 +37,11 @@ def leftovers():
     # in regen_rows' notes -- its card in cards_left/ keeps it on the list
     cands, notes = RR.candidates(None)
     left = [d for d, why in notes if why in ('no card', 'card mesh is a _wm rebuild')]
-    return left + [c['donor'] for c in cands if os.path.exists(os.path.join(OUT, c['donor'] + '.card'))]
+    return left + [c['donor'] for c in cands if os.path.exists(os.path.join(OUT, c['donor'] + '.card'))] + EXTRA
+
+
+# --donor MS_A,MS_B: shelf models with no reload yet, measured the same way (then regen_rows --add)
+EXTRA = sys.argv[sys.argv.index('--donor') + 1].split(',') if '--donor' in sys.argv else []
 
 
 def main(dry):
