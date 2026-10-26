@@ -94,11 +94,11 @@ class TMShotgun : Weapon replaces Shotgun
 		Loop;
 	Fire:
 		SHTG A 0 A_JumpIfNoAmmo("Reload");
-		SHTG A 3 A_FireShotgun;
+		SHTG A 3 { A_FireShotgun(); A_Log("TM shotgun: fired"); }
 		SHTG BC 5;
 		SHTG D 4;
 		SHTG CB 5;
-		SHTG A 3;
+		SHTG A 3 A_Log("TM shotgun: its own pump done");
 		SHTG A 7 A_ReFire;
 		Goto Ready;
 	Reload:

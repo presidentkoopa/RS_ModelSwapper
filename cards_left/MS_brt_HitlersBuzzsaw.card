@@ -1,0 +1,15 @@
+weapon MS_brt_HitlersBuzzsaw
+  archetype   pistol_mag        # owner-confirmed
+  model       HitlersBuzzsaw.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [34.26, -0.16, -5.25]  axis [-0.812, -0.0, 0.584]  travel 1.05  frames 1..2  rot 20deg axis [-0.0, 1.0, -0.0]
+    muzzle    [121.84, -0.14, 4.66]
+  grip        line [25.42, -1.23, -4.28] [26.75, 0.89, -14.72]  trigger [34.26, -0.16, -5.25]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [51.64, 0.95, 3.39]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 18972

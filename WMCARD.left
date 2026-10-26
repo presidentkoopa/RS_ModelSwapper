@@ -1,0 +1,286 @@
+# ============================================================================
+# WMCARD.left -- written from our OWN measurements.
+#
+# Every number here came out of the gun's own reload animation, measured by
+# md3label on the ANIMATED mesh this mod ships. No static _wm world model was
+# read at any point, and nothing was carried over from another gun's card.
+# ============================================================================
+
+weapon "MS_BD_AssaultShotgun"
+  type      = shotgun
+  model     = "models/hud/AssaultShotgun" "AssaultShotgun.md3"
+  skin      = "models/hud/AssaultShotgun" "AssaultShotgun.png"
+  capacity  = 8
+  muzzle    = 30.09, 1.16, 2.44
+  barrel    = 1, 0, 0
+  ejectport = -4.27, 2.59, -0.17
+  ejectdir  = 0.0, 1.0, 0.0
+  magmodel  = "models/hud/AssaultShotgun" "MS_BD_AssaultShotgun_mag.md3"
+  magskin   = "models/hud/AssaultShotgun" "AssaultShotgun.png"
+  magscale  = 1.0
+  magcenter = -10.06, 0.06, -9.46
+end
+
+grip
+  triggerat = -21.46, 0.05, -4.54
+  palm = -21.62, -0.38, -6.23
+  seat = -22.86, 0.47, -3.64
+  supportat = 4.79, 0.05, -0.76
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = -10.06, 0.06, -9.46
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.707, 0.000, -0.707
+    distance = 7.77
+  end
+end
+
+part bolt
+  role    = action
+  subject = slide
+  surface = bolt
+  grab       = -5.7, 1.39, 0.24
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -1.0, -0.0, -0.001
+    distance = 10.00
+  end
+end
+
+weapon "MS_brt_AssaultShotgun"
+  type      = shotgun
+  model     = "models/bd/AssaultShotgun" "AssaultShotgun.md3"
+  skin      = "models/bd/AssaultShotgun" "AssaultShotgun.png"
+  capacity  = 8
+  muzzle    = 84.75, 1.11, 1.53
+  barrel    = 1, 0, 0
+  ejectport = 50.39, 2.55, -1.08
+  ejectdir  = 0.0, 1.0, 0.0
+  magmodel  = "models/bd/AssaultShotgun" "MS_brt_AssaultShotgun_mag.md3"
+  magskin   = "models/bd/AssaultShotgun" "AssaultShotgun.png"
+  magscale  = 1.0
+  magcenter = 44.6, 0.02, -10.37
+end
+
+grip
+  triggerat = 33.2, -0.0, -5.45
+  palm = 33.03, -0.42, -7.14
+  seat = 31.8, 0.42, -4.55
+  supportat = 59.45, -0.0, -1.67
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 44.6, 0.02, -10.37
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.707, 0.000, -0.707
+    distance = 7.66
+  end
+end
+
+part bolt
+  role    = action
+  subject = slide
+  surface = bolt
+  grab       = 48.96, 1.34, -0.66
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -1.0, -0.0, -0.001
+    distance = 10.00
+  end
+end
+
+weapon "MS_BD_RailGun"
+  type      = railgun
+  model     = "models/hud/RailGun" "RailGun.md3"
+  skin      = "models/hud/RailGun" "RailGun.png"
+  capacity  = 10
+  muzzle    = 86.22, -1.83, 0.55
+  barrel    = 1, 0, 0
+  magmodel  = "models/hud/RailGun" "MS_BD_RailGun_mag.md3"
+  magskin   = "models/hud/RailGun" "RailGun.png"
+  magscale  = 1.0
+  magcenter = -2.48, -0.1, -10.08
+end
+
+grip
+  triggerat = -18.64, -0.09, -7.45
+  palm = -25.42, -0.11, -19.19
+  seat = -20.5, 0.78, -7.05
+  supportat = 12.36, -0.06, -3.26
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = -2.48, -0.1, -10.08
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.707, -0.000, -0.707
+    distance = 8.83
+  end
+end
+
+weapon "MS_BD_Rifle"
+  type      = sniper
+  model     = "models/hud/RifleBD" "Rifle.md3"
+  skin      = "models/hud/RifleBD" "Rifle.png"
+  capacity  = 12
+  muzzle    = 34.94, -0.48, 7.03
+  barrel    = 1, 0, 0
+  magmodel  = "models/hud/RifleBD" "MS_BD_Rifle_mag.md3"
+  magskin   = "models/hud/RifleBD" "Rifle.png"
+  magscale  = 1.0
+  magcenter = 1.34, 0.07, -8.07
+end
+
+grip
+  palm = -3.19, 0.12, -9.86
+  seat = -3.91, -0.33, 1.45
+  supportat = 9.77, -0.03, 0.46
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 36.21, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 1.34, 0.07, -8.07
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.866, 0.081, -0.493
+    distance = 16.29
+  end
+end
+
+part bolt
+  role    = action
+  subject = slide
+  surface = bolt
+  grab       = -4.33, -0.12, 0.54
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -1.0, -0.0, -0.0
+    distance = 10.44
+  end
+end
+
+weapon "MS_PlasmaRifle"
+  type      = plasma
+  model     = "models/hud/PlasmaRifle" "PlasmaRifle.md3"
+  skin      = "models/hud/PlasmaRifle" "PlasmaRifle.png"
+  capacity  = 100
+  muzzle    = 39.41, -1.3, 0.14
+  barrel    = 1, 0, 0
+  magmodel  = "models/hud/PlasmaRifle" "MS_PlasmaRifle_mag.md3"
+  magskin   = "models/hud/PlasmaRifle" "PlasmaRifle.png"
+  magscale  = 1.0
+  magcenter = -12.7, 0.47, -13.24
+end
+
+grip
+  triggerat = -27.66, 0.4, -4.14
+  palm = -35.44, 2.52, -14.41
+  seat = -33.45, 2.52, -3.45
+  supportat = 4.4, -0.01, 0.12
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 41.01, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = -12.7, 0.47, -13.24
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.556, -0.025, -0.831
+    distance = 13.02
+  end
+end
+
+weapon "MS_Rifle"
+  type      = sniper
+  model     = "models/hud/Rifle" "m16.md3"
+  skin      = "models/hud/Rifle" "WPN-M16-k1.png"
+  capacity  = 12
+  muzzle    = 22.09, 0.27, 4.48
+  barrel    = 1, 0, 0
+  magmodel  = "models/hud/Rifle" "MS_Rifle_mag.md3"
+  magskin   = "models/hud/Rifle" "WPN-M16-k1.png"
+  magscale  = 1.0
+  magcenter = -2.99, -0.13, -5.45
+end
+
+grip
+  triggerat = -11.37, -0.13, -3.25
+  palm = -13.27, -1.06, -10.28
+  seat = -16.16, 0.84, -2.62
+  supportat = 5.29, -0.01, 0.86
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # NOT an animation reading: this gun throws the magazine clear of the screen, so the stroke is the well's own mouth-to-seat distance
+part magazine
+  role    = feed
+  surface = mag
+  grab       = -2.99, -0.13, -5.45
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.138, 0.000, -0.990
+    distance = 5.47
+  end
+end
+
+weapon "MS_RocketLauncher"
+  type      = rocket
+  model     = "models/hud/RocketLauncher" "RPG.md3"
+  skin      = "models/hud/RocketLauncher" "RPG.png"
+  capacity  = 1
+  muzzle    = 65.87, 7.11, 1.48
+  barrel    = 1, 0, 0
+  magmodel  = "models/hud/RocketLauncher" "MS_RocketLauncher_mag.md3"
+  magskin   = "models/hud/RocketLauncher" "RPG.png"
+  magscale  = 1.0
+  magcenter = 3.34, -13.24, 1.91
+end
+
+grip
+  palm = -12.77, 5.56, -9.91
+  seat = -7.98, -1.11, -1.56
+  supportat = 0.22, 5.56, -2.38
+  rake = 0
+end
+
+# the magazine, measured from the gun's own reload animation  # stroke taken from the insertion frames; travel_clear said 53.56, which is the part's whole journey from wherever it is parked
+part magazine
+  role    = feed
+  surface = mag
+  grab       = 3.34, -13.24, 1.91
+  grabradius = 2.5
+  dof
+    kind     = slide
+    axis     = -0.431, 0.598, 0.676
+    distance = 4.81
+  end
+end

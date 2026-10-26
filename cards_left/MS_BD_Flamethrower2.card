@@ -1,0 +1,17 @@
+weapon MS_BD_Flamethrower2
+  archetype   pistol_mag        # owner-confirmed
+  model       Flamethrower2.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 1  rest [-25.66, -0.46, 0.99]  axis [0.038, -0.0, 0.999]  travel 0.98  frames 3..4  rot 15deg axis [-0.0, 1.0, -0.0]
+    trigger  surf 2  rest [55.5, 3.53, 0.19]  axis [-0.467, -0.022, -0.884]  travel 1.24  frames 3..5  rot 177deg axis [0.5, -0.04, 0.87]
+    muzzle    [53.28, -0.47, 7.22]
+  grip        line [50.45, -3.89, 1.19] [52.5, 3.5, -4.53]  trigger [55.5, 3.53, 0.19]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [3.34, -0.07, -0.02]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..2
+    fire         3..3
+    idle         4..4
+    fire         5..5
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6155

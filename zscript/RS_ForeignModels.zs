@@ -138,7 +138,7 @@ class RS_ForeignShelf
 			"sword|MS_BD_DSweap|PUNG|0|0|10",
 			"kick|MS_BD_Boot|PUNG|0|0|58",
 			// --- imported packages (see modeldef) ---
-			"shotgun|MS_brt_AssaultShotgun|SHTG|0|0|32",
+			"shotgun|MS_brt_AssaultShotgun|SHTG|0|4|32",
 			"grenade|MS_brt_Grenade|MISG|0|3|27",
 			"kick|MS_brt_Boot|PUNG|0|5|58",
 			"melee|MS_brt_FIST|PUNG|0|61|75",

@@ -1,0 +1,27 @@
+weapon MS_BD_RailGun
+  archetype   pistol_mag        # owner-confirmed
+  model       RailGun.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [-13.94, 0.13, 6.33]  axis [0.0, -0.0, -1.0]  travel 5.75  frames 36..36
+    part2    surf 1  rest [-24.78, -0.23, 8.83]  axis [0.0, -0.0, -1.0]  travel 6.25  frames 36..36
+    trigger  surf 3  rest [-18.64, -0.09, -7.45]  axis [-0.971, 0.0, 0.238]  travel 0.80  frames 4..6  rot 23deg axis [-0.0, 1.0, -0.0]
+    mag      surf 4  rest [-2.48, -0.1, -10.08]  axis [-0.0, -0.0, -1.0]  travel 30.00  frames 12..28
+    mag_well  [-2.48, -0.1, -10.08]  mouth [-9.98, 2.45, -6.19]  axis [-0.0, -0.0, -1.0]  travel_clear 30.00
+    muzzle    [86.22, -1.83, 0.55]
+  grip        line [-20.5, 0.78, -7.05] [-25.42, -0.11, -19.19]  trigger [-18.64, -0.09, -7.45]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [12.36, -0.06, -3.26]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..1
+    idle         2..3
+    fire         4..4
+    idle         5..5
+    fire         6..6
+    idle         7..11
+    mag_out      12..12
+    mag_in       13..28
+    idle         29..36
+  baked_cant   frames 12..34 up to 15.3 deg   # psprite-era hand sway; removed in MS_BD_RailGun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7552
+  carved      mag  seat_origin [-2.48, -0.1, -10.08]  file MS_BD_RailGun_mag.md3

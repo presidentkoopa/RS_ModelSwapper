@@ -1,0 +1,19 @@
+weapon MS_MG_Tec9
+  archetype   pistol_mag        # owner-confirmed
+  model       tec9.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [-7.09, -0.08, -2.81]  axis [-0.979, 0.0, 0.204]  travel 1.06  frames 1..5  rot 25deg axis [-0.0, 1.0, -0.0]
+    part     surf 2  rest [-0.98, 2.41, 3.12]  axis [-1.0, -0.0, -0.0]  travel 7.09  frames 3..4
+    slide    surf 3  rest [-1.24, -0.3, 2.23]  axis [-1.0, 0.001, -0.001]  travel 7.09  frames 3..4
+    muzzle    [14.44, -0.75, 1.61]
+  grip        line [-8.73, -0.08, -2.05] [-12.53, -0.08, -11.77]  trigger [-7.09, -0.08, -2.81]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [4.16, -0.08, -0.15]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..4
+    idle         5..5
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5469

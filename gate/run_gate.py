@@ -73,6 +73,14 @@ def pump_slot(donor):
     return int(m.group(1)) if m else 0
 
 
+def has_handle(donor):
+    t = open(os.path.join(ROOT, 'zscript_depot/rsr/rsr_guns.ms.zs'), encoding='utf-8').read()
+    s = slot_of(donor)
+    seg = t[t.find('static bool HasHandle(int i)'):]
+    m = re.search(r'case %d:\s*return (\w+);' % s, seg[:seg.find('\n\t}')])
+    return bool(m and m.group(1) == 'true')
+
+
 def break_slot(donor):
     t = open(os.path.join(ROOT, 'zscript_depot/rsr/rsb_guns.zs'), encoding='utf-8').read()
     m = re.search(r'donor == "%s"\)\s*return (\d+);' % re.escape(donor), t)
@@ -104,7 +112,7 @@ def build_aux(out, vr=False):
     return ov, tm
 
 
-def run(pk3, donor, engine, shots, yaw=90, vr=False):
+def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     out = os.path.join(H, 'out', donor)
     if os.path.isdir(out):
         shutil.rmtree(out)
@@ -124,6 +132,12 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False):
     up = 130 if vr else 118
     if brk:
         t += [(110, 'rsrtest_script 0; rsbtest_script 1'), (115, '+reload'), (up, '-reload')]
+    elif pump and shot:
+        # --shot: the pump AFTER A SHOT. Loaded gun, the off hand steadied on the pump (script 2:
+        # every pump a full stroke), one shot: the join must hold the mod's fire where the model's
+        # pump starts, the hand works it, and the mod's own fire goes on from there.
+        t[-1] = (40, 'rsqt_gun %s; rsqt_empty 0' % gun)
+        t += [(110, 'rsrtest_script 0; rsptest_script 2; rsptest_every 0'), (130, '+attack'), (133 if not vr else 140, '-attack')]
     elif pump:
         t += [(110, 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'), (115, '+reload'), (up, '-reload')]
     else:
@@ -207,6 +221,29 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False):
         ok = all(c for _, c in checks)
         print('PASS' if ok else 'FAIL', '-- log', log)
         return 0 if ok else 1
+    if pump and shot:
+        logtext = open(log, encoding='latin-1').read() if os.path.exists(log) else stdout
+        held = logtext.find('held for its stroke')
+        checks = [
+            ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
+            ('scripts parsed', 'script parsing took' in text),
+            ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
+            ('it fired', 'TM shotgun: fired' in logtext),
+            ('pump point found', 'pump point: tic' in logtext),
+            ('held for the hand', held >= 0),
+            ('pumped by hand', 'pumped by hand -- the mod\'s fire goes on' in logtext),
+            ('their fire went on', held >= 0 and logtext.find('TM shotgun: its own pump done', held) > held),
+            ('reached the end', 'GATE_END' in text),
+        ]
+        print('donor %s  (%s #%d, pump slot %d)  exit %s  -- the pump after a shot' % (donor, arch, idx, pump_slot(donor), rc))
+        for name, c in checks:
+            print('  %-18s %s' % (name, 'ok' if c else 'FAIL'))
+        for l in logtext.splitlines():
+            if re.search(r'Script error|MSJOIN|TM shotgun|rsp t\d+', l):
+                print('   |', l[:150])
+        ok = all(c for _, c in checks)
+        print('PASS' if ok else 'FAIL', '-- log', log)
+        return 0 if ok else 1
     if pump:
         # the engine echoes its log to stdout too: count the log alone, or every shell counts twice
         logtext = open(log, encoding='latin-1').read() if os.path.exists(log) else stdout
@@ -241,6 +278,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False):
         ('carried', re.search(r'-> CARRY', text) is not None),
         ('inserted', re.search(r'-> INSERT', text) is not None),
         ('seated', re.search(r'-> (SEATED|DONE)', text) is not None),
+        # shot dry (rsqt_empty), a gun with a charging handle must ask the hand to work it
+        ('handle racked', re.search(r'PULL -> RELEASED', text) is not None if has_handle(donor) else True),
         ('handed back', 'gave TMPistol back' in text or re.search(r'\[MSJOIN\].*back', text) is not None),
         ('their reload ran', 'TM reload: mag 12' in text),
         ('reached the end', 'GATE_END' in text),
@@ -264,4 +303,4 @@ if __name__ == '__main__':
     VIEW = opt('--view', VIEW)
     EXTRA = opt('--extra', '')
     a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None), opt('--extra', None))]
-    sys.exit(run(a[0], a[1], eng, '--shots' in sys.argv, int(opt('--yaw', 60)), vr='--vr' in sys.argv))
+    sys.exit(run(a[0], a[1], eng, '--shots' in sys.argv, int(opt('--yaw', 60)), vr='--vr' in sys.argv, shot='--shot' in sys.argv))

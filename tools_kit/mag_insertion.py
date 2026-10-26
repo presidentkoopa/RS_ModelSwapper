@@ -113,7 +113,7 @@ def from_card(card_path, model_dir, mesh):
         return None
     c = open(card_path, encoding='utf-8', errors='replace').read()
     si = re.search(r'(?m)^\s*mag\s+surf\s+(\d+)', c)
-    mi = re.search(r'mag_in\s+(\d+)\.\.(\d+)', c)
+    mi = re.findall(r'mag_in\s+(\d+)\.\.(\d+)', c)
     if not (si and mi):
         return None
     p = os.path.join(model_dir, mesh)
@@ -122,7 +122,16 @@ def from_card(card_path, model_dir, mesh):
     P = track(p, int(si.group(1)))
     if P is None:
         return None
-    return insertion(P, int(mi.group(1)), int(mi.group(2)))
+    # A card can label more than one mag_in window. The FIRST is not always the insertion: the
+    # rocket launchers' first (6..7) is the rocket twitching with the shot's recoil, 1.6 units,
+    # and the load is 19..33 (measured, models/hud/RocketLauncher/RPG.md3 surface 7: 53.6 units
+    # out at frame 24, seated at 34). The insertion is the window with the longest approach.
+    best = None
+    for a, b in mi:
+        r = insertion(P, int(a), int(b))
+        if r and r[0] is not None and (best is None or r[0] > best[0]):
+            best = r
+    return best
 
 
 def well_stroke(card_path):

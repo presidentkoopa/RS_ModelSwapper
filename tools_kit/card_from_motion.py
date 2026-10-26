@@ -84,6 +84,9 @@ def vec(m):
     return '%s, %s, %s' % m.groups()[-3:] if m else None
 
 
+ACTION_SLIDE = False
+
+
 def main(outpath):
     out = []
     made = []
@@ -105,6 +108,15 @@ def main(outpath):
                          r'\s+travel\s+([\d.]+)', t, re.M)
         bolt = re.search(r'^\s*bolt\s+surf\s+\d+\s+rest\s+' + V3 + r'\s+axis\s+' + V3 +
                          r'\s+travel\s+([\d.]+)', t, re.M)
+        # THE CHARGING HANDLE. md3label names a part that slides back along the bore and returns
+        # `slide` (a pistol's slide, a rifle's handle or bolt carrier) and only a turning-then-
+        # sliding one `bolt`. Either is the action the hand works. Before this only `bolt` was
+        # read, so every rifle measured from motion came out with no handle (the BD v21 rifle's
+        # surface 1, 10.4 units back and home over frames 5..24, was dropped). Opt-in by the
+        # caller (ACTION_SLIDE) so the shelf's shipped cards are not rewritten by a re-run.
+        if not bolt and ACTION_SLIDE:
+            bolt = re.search(r'^\s*slide\s+surf\s+\d+\s+rest\s+' + V3 + r'\s+axis\s+' + V3 +
+                             r'\s+travel\s+([\d.]+)', t, re.M)
         trig = re.search(r'^\s*trigger\s+surf\s+\d+\s+rest\s+' + V3, t, re.M)
         ej = re.search(r'eject\s+' + V3 + r'\s+normal\s+' + V3, t)
         grip = re.search(r'^\s*grip\s+line\s+' + V3 + r'\s+' + V3, t, re.M)

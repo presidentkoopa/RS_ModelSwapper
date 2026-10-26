@@ -54,7 +54,14 @@ def candidates(only=None):
     rsr = open(os.path.join(ROOT, 'zscript_depot/rsr/rsr_guns.ms.zs')).read()
     # class names are case-insensitive in the engine; the cards were not always written with the
     # donor's spelling (WMCARD.ww2 "MS_wolf_Kar98" is the donor MS_wolf_KAR98)
-    cards = {w['cls'].lower(): w for w in C.load_cards(ROOT)}
+    # and where a donor has two cards (a _wm rebuild's and one measured on its own mesh,
+    # card_leftovers.py), the one on a real mesh is the one that describes what is drawn
+    cards = {}
+    for w in C.load_cards(ROOT):
+        k = w['cls'].lower()
+        wm = '_wm' in os.path.basename(C.model_path(ROOT, w) or '').lower()
+        if k not in cards or not wm:
+            cards[k] = w
     blocks = PA.donor_blocks(); rest = PA.shelf_rest()
     out, notes = [], []
     for d, s in sorted(donor_slots(rsr).items(), key=lambda kv: kv[1]):
@@ -80,8 +87,53 @@ def candidates(only=None):
     return out, notes
 
 
+MOTION_DIRS = ('cards_shelf', 'cards_hud', 'cards_packs', 'cards_bd', 'cards_left')
+V3 = r'\[\s*(-?[\d.]+),\s*(-?[\d.]+),\s*(-?[\d.]+)\s*\]'
+
+
+def motion_handle(w):
+    """The charging handle from the donor's own motion card, for a card that has none.
+
+    The shelf's cards (WMCARD.shelf) were written from md3label's motion cards with the magazine
+    only: card_from_motion read a `bolt` and never a `slide`, and md3label names a rifle's handle
+    `slide`. The motion card is still on disk. Its part is used only when the evidence says it is
+    this gun's handle in this card's frame: the motion card's magazine rest is the card's magazine
+    grab (same mesh, same frame, to 0.05 units), the part slides BACK along the bore (axis x <= -0.9;
+    a part going forward is not a handle the hand pulls) by 2 units or more, and the gun is not a
+    shotgun (a shotgun's slide is its pump: the pump reload's). Returns the part, or None."""
+    if str(w['keys'].get('type', '')).lower() in ('shotgun', 'pump', 'supershotgun'):
+        return None
+    mag = next((p for p in w['parts'].values() if p['keys'].get('role') == 'feed'), None)
+    if not mag or any(p['keys'].get('role') == 'action' for p in w['parts'].values()):
+        return None
+    g = np.array([float(x) for x in mag['keys']['grab']])
+    for d in MOTION_DIRS:
+        dd = os.path.join(ROOT, d)
+        if not os.path.isdir(dd):
+            continue
+        f = next((x for x in os.listdir(dd) if x.lower() == w['cls'].lower() + '.card'), None)
+        if not f:
+            continue
+        t = open(os.path.join(dd, f), encoding='utf-8', errors='replace').read()
+        m = re.search(r'^\s*mag\s+surf\s+\d+\s+rest\s+' + V3, t, re.M)
+        if not m or np.linalg.norm(np.array([float(x) for x in m.groups()]) - g) > 0.05:
+            continue
+        s = re.search(r'^\s*(slide|bolt)\s+surf\s+\d+\s+rest\s+' + V3 + r'\s+axis\s+' + V3 + r'\s+travel\s+([\d.]+)', t, re.M)
+        if not s:
+            return None
+        v = [float(x) for x in s.groups()[1:]]
+        if v[3] > -0.9 or v[6] < 2.0:
+            return None
+        return dict(name='bolt', surfaces=['bolt'], keys=dict(role='action', subject='slide', grab=v[0:3], grabradius=2.5),
+                    dof=dict(kind='slide', axis=v[3:6], distance=v[6]), src='%s/%s' % (d, f))
+    return None
+
+
 def build(c, codes_used):
     w = c['card']
+    hp = motion_handle(w)
+    if hp:
+        w = dict(w, parts=dict(w['parts'], bolt=hp), order=list(w['order']) + ['bolt'])
     geo = C.geometry(w, c['scale'], c['off'])
     rec = dict(hud_scale=c['scale'], offset=c['off'], rest_frame=c['frame'], parts=geo['parts'], type=w['keys'].get('type'))
     nfr, surfs = G.md3_surfaces(c['mesh']); names = [s['name'] for s in surfs]

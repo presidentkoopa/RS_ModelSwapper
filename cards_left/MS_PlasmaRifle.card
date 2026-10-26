@@ -1,0 +1,25 @@
+weapon MS_PlasmaRifle
+  archetype   pistol_mag        # owner-confirmed
+  model       PlasmaRifle.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 1  rest [-12.7, 0.47, -13.24]  axis [0.158, -0.016, -0.987]  travel 41.01  frames 19..24
+    trigger  surf 2  rest [-27.66, 0.4, -4.14]  axis [-0.997, 0.0, 0.075]  travel 0.64  frames 5..6  rot 20deg axis [-0.0, 1.0, -0.0]
+    mag_well  [-12.7, 0.47, -13.24]  mouth [-7.0, 2.06, -7.84]  axis [0.158, -0.016, -0.987]  travel_clear 41.01
+    muzzle    [39.41, -1.3, 0.14]
+  grip        line [-33.45, 2.52, -3.45] [-35.44, 2.52, -14.41]  trigger [-27.66, 0.4, -4.14]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [4.4, -0.01, 0.12]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..2
+    idle         3..4
+    fire         5..5
+    idle         6..6
+    fire         7..7
+    idle         8..18
+    mag_out      19..19
+    mag_in       20..23
+    idle         24..29
+  baked_cant   frames 20..29 up to 21.9 deg   # psprite-era hand sway; removed in MS_PlasmaRifle_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7593
+  carved      mag  seat_origin [-12.7, 0.47, -13.24]  file MS_PlasmaRifle_mag.md3

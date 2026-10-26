@@ -1,0 +1,17 @@
+weapon MS_MG_Bolter
+  archetype   pistol_mag        # owner-confirmed
+  model       Bolter.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [-5.12, 0.01, -0.41]  axis [-1.0, 0.0, -0.001]  travel 0.90  frames 1..2
+    muzzle    [23.91, 1.25, 2.67]
+  grip        line [-9.64, -0.64, 0.52] [-10.28, 0.27, -10.69]  trigger [-5.12, 0.01, -0.41]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [4.07, 0.01, 0.0]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..4
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4565

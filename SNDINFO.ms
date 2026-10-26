@@ -116,6 +116,16 @@ $alias ms/aliens/shotgun/pumpback ms/bd22/shotgun/pumpback
 $alias ms/aliens/shotgun/shelldrop ms/magdrop
 
 // ---- card-regenerated guns (tools_kit/regen_rows.py)
+$alias ms/card/bd_assaultshotgun/magout ms/bd22/assaultshotgun/magout
+$alias ms/card/bd_assaultshotgun/magin ms/bd22/assaultshotgun/magin
+$alias ms/card/bd_assaultshotgun/slideback ms/bd22/assaultshotgun/slideback
+$alias ms/card/bd_assaultshotgun/slidefwd ms/bd22/assaultshotgun/slidefwd
+$alias ms/card/bd_assaultshotgun/magdrop ms/magdrop
+$alias ms/card/brt_assaultshotgun/magout ms/bd22/assaultshotgun/magout
+$alias ms/card/brt_assaultshotgun/magin ms/bd22/assaultshotgun/magin
+$alias ms/card/brt_assaultshotgun/slideback ms/bd22/assaultshotgun/slideback
+$alias ms/card/brt_assaultshotgun/slidefwd ms/bd22/assaultshotgun/slidefwd
+$alias ms/card/brt_assaultshotgun/magdrop ms/magdrop
 $alias ms/card/bd_brutalsmg/magout ms/bd22/smg/magout
 $alias ms/card/bd_brutalsmg/magin ms/bd22/smg/magin
 $alias ms/card/bd_brutalsmg/slideback ms/bd22/smg/slideback
@@ -281,3 +291,28 @@ $alias ms/card/wolf_kar98/magin ms/bd22/rifle/magin
 $alias ms/card/wolf_kar98/slideback ms/bd22/rifle/slideback
 $alias ms/card/wolf_kar98/slidefwd ms/bd22/rifle/slidefwd
 $alias ms/card/wolf_kar98/magdrop ms/magdrop
+$alias ms/card/bd_railgun/magout ms/bd22/railgun/magout
+$alias ms/card/bd_railgun/magin ms/bd22/railgun/magin
+$alias ms/card/bd_railgun/slideback ms/bd22/rifle/slideback
+$alias ms/card/bd_railgun/slidefwd ms/bd22/rifle/slidefwd
+$alias ms/card/bd_railgun/magdrop ms/magdrop
+$alias ms/card/bd_rifle/magout ms/bd22/rifle/magout
+$alias ms/card/bd_rifle/magin ms/bd22/rifle/magin
+$alias ms/card/bd_rifle/slideback ms/bd22/rifle/slideback
+$alias ms/card/bd_rifle/slidefwd ms/bd22/rifle/slidefwd
+$alias ms/card/bd_rifle/magdrop ms/magdrop
+$alias ms/card/plasmarifle/magout ms/bd22/plasmagun/magout
+$alias ms/card/plasmarifle/magin ms/bd22/plasmagun/magin
+$alias ms/card/plasmarifle/slideback ms/bd22/rifle/slideback
+$alias ms/card/plasmarifle/slidefwd ms/bd22/rifle/slidefwd
+$alias ms/card/plasmarifle/magdrop ms/magdrop
+$alias ms/card/rifle/magout ms/bd22/rifle/magout
+$alias ms/card/rifle/magin ms/bd22/rifle/magin
+$alias ms/card/rifle/slideback ms/bd22/rifle/slideback
+$alias ms/card/rifle/slidefwd ms/bd22/rifle/slidefwd
+$alias ms/card/rifle/magdrop ms/magdrop
+$alias ms/card/rocketlauncher/magout ms/bd22/rocketlauncher/magout
+$alias ms/card/rocketlauncher/magin ms/bd22/rocketlauncher/magin
+$alias ms/card/rocketlauncher/slideback ms/bd22/rifle/slideback
+$alias ms/card/rocketlauncher/slidefwd ms/bd22/rifle/slidefwd
+$alias ms/card/rocketlauncher/magdrop ms/magdrop

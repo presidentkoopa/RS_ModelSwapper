@@ -1,0 +1,27 @@
+weapon MS_BD_Rifle
+  archetype   pistol_mag        # owner-confirmed
+  model       Rifle.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [-16.15, 0.93, 2.59]  axis [-1.0, -0.001, -0.0]  travel 7.12  frames 5..24
+    slide    surf 1  rest [-4.33, -0.12, 0.54]  axis [-1.0, -0.0, -0.0]  travel 10.44  frames 5..24
+    part2    surf 2  rest [-7.45, 0.13, -6.99]  axis [-0.954, 0.0, 0.301]  travel 0.56  frames 4..4  rot 17deg axis [-0.0, 1.0, -0.0]
+    mag      surf 3  rest [1.34, 0.07, -8.07]  axis [-0.011, 0.151, -0.989]  travel 36.21  frames 9..14
+    mag_well  [1.34, 0.07, -8.07]  mouth [-2.08, 0.27, -0.22]  axis [-0.011, 0.151, -0.989]  travel_clear 36.21
+    muzzle    [34.94, -0.48, 7.03]
+  grip        line [-3.91, -0.33, 1.45] [-3.19, 0.12, -9.86]  trigger [5.77, -0.03, 0.46]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [9.77, -0.03, 0.46]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..4
+    rack         5..5
+    idle         6..8
+    mag_out      9..9
+    mag_in       10..14
+    idle         15..17
+    rack         18..24
+    battery      25..25
+    idle         26..31
+  baked_cant   frames 0..31 up to 62.8 deg   # psprite-era hand sway; removed in MS_BD_Rifle_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 9804
+  carved      mag  seat_origin [1.34, 0.07, -8.07]  file MS_BD_Rifle_mag.md3

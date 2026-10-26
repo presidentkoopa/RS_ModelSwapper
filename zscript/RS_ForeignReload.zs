@@ -118,6 +118,21 @@ class MS_ReloadJoin : EventHandler
 	private int mFeedTics[MAXPLAYERS];
 	private Weapon mFeedW[MAXPLAYERS];
 
+	// THE PUMP AFTER A SHOT (owner, 2026-10-25: "Hold at the mod's pump"). A pack that owns its
+	// shotgun calls RSP_PumpStart from its fire states at its pump. A foreign shotgun's pump is in
+	// ITS fire states, which we cannot edit -- so the join finds the point from outside: the mod's
+	// fire chain walked from its Fire label, and the tic at which the donor model's pump starts in
+	// its own fire animation (RSP_Rack.Frac, measured from the mesh by tools_kit/rack_frac.py --
+	// the same by-tic laying of a donor's clip over a mod's states the model animation uses).
+	// At that point, with the off hand on the pump, the gun is held and the hand works the pump
+	// (RSP's own stroke: track, back and forward sounds, the spent shell). Then the mod's own fire
+	// states carry on from exactly there -- its pump, its sounds, its refire. Hand off the pump:
+	// no hold, the mod pumps by itself, unchanged.
+	private Weapon mShotW[MAXPLAYERS];		// the weapon the hold point was found for
+	private State mShotPre[MAXPLAYERS];		// hold at the END of this state ...
+	private State mShotAt[MAXPLAYERS];		// ... and the mod's fire goes on from this one
+	private bool mShot[MAXPLAYERS];			// held for the hand's pump stroke
+
 	// A trace for the one failure mode that looks like nothing happening.
 	private bool ms_join_trace;
 	override void OnRegister() { let c = CVar.FindCVar('ms_join_trace'); ms_join_trace = c && c.GetInt() != 0; }
@@ -361,6 +376,15 @@ class MS_ReloadJoin : EventHandler
 		class<Inventory> nm = RSR_Guns.NoMag(RSR_Guns.Index(w));
 		if (!nm || mo.CountInv(nm) <= 0)
 			mo.GiveInventory('RSR_MagOut', 1);
+		// AND THE HANDLE WHEN IT RAN DRY. A pack that owns its guns gives RSR_Charge from its
+		// reload when the chamber is empty (BD22: the gun shot dry), and the reload then asks the
+		// hand to work the charging handle after the magazine is in (ChargeRule 1). Nothing gave
+		// it here, so no foreign gun's handle was ever asked for. The mod's own magazine count is
+		// the evidence, read and never changed: empty, nothing is chambered.
+		let mag = RSR.WeaponStore(mo, false);
+		mo.TakeInventory('RSR_Charge', 999);
+		if (mag && mag.Amount <= 0 && RSR_Guns.HasHandle(RSR_Guns.Index(w)))
+			mo.GiveInventory('RSR_Charge', 1);
 		p.SetPsprite(PSP_WEAPON, hold, false, w);
 		if (RS_ForeignRemap.DebugOn())
 			Console.Printf("[MSJOIN] took %s (slot %d) at its reload", w.GetClassName(), RSR_Guns.Index(w));
@@ -448,6 +472,13 @@ class MS_ReloadJoin : EventHandler
 			return;
 		}
 
+		// 2a. held after a shot: the hand works the pump (RSP's stroke), then the mod's fire goes on
+		if (mHeld[i] && mShot[i])
+		{
+			ShotTick(mo, p, i, w);
+			return;
+		}
+
 		// 2. held: the hands load, and this stands in for the weapon's loading loop
 		if (mHeld[i])
 		{
@@ -476,6 +507,8 @@ class MS_ReloadJoin : EventHandler
 				mDisarmed[i] = false;
 			return;
 		}
+		if (!inReload && ShotWatch(mo, p, i, w, psp))
+			return;
 		if (inReload)
 		{
 			mo.TakeInventory('RSP_Go', 999);
@@ -498,6 +531,97 @@ class MS_ReloadJoin : EventHandler
 				PumpFeed(p, i, w, have);
 			}
 		}
+	}
+
+	// The mod's fire chain from its Fire label, along the states as written (NextState), to its
+	// Ready, a loop or a stop; the hold point is the state the tic RSP_Rack.Frac of the way
+	// through falls in. Held at the end of the state before it, so no state's action runs twice
+	// and none is skipped: the mod goes on by entering that state, as it would have.
+	private void FindShotPoint(int i, Weapon w)
+	{
+		mShotW[i] = w;
+		mShotPre[i] = mShotAt[i] = null;
+		double fr = RSP_Rack.Frac(RSR_Guns.DonorInHand(0));
+		State st = w.FindState("Fire");
+		if (fr < 0 || !st)
+			return;
+		State ready = w.GetReadyState();
+		Array<State> ch;
+		int total = 0;
+		while (st && ch.Size() < 64 && st != ready && ch.Find(st) == ch.Size() && st.tics >= 0)
+		{
+			ch.Push(st);
+			total += st.tics;
+			st = st.NextState;
+		}
+		if (total < 4 || ch.Size() < 2)
+			return;
+		double want = fr * total;
+		int c = 0;
+		for (int k = 1; k < ch.Size(); k++)
+		{
+			c += ch[k - 1].tics;
+			if (c >= want && ch[k - 1].tics >= 1)
+			{
+				mShotPre[i] = ch[k - 1];
+				mShotAt[i] = ch[k];
+				Trace(w, String.Format("pump point: tic %d of its fire's %d (%.0f%%, measured on the model)", c, total, fr * 100));
+				return;
+			}
+		}
+	}
+
+	private bool ShotWatch(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
+	{
+		if (mShotW[i] != w)
+			FindShotPoint(i, w);
+		if (!mShotPre[i] || psp.CurState != mShotPre[i] || psp.Tics > 1)
+			return false;
+		// the pump runtime decides whether the hand is on the pump (steadied at it, or the grab
+		// held on it); waiting for a hand that is not there is not what was asked for
+		mo.GiveInventory('RSP_PumpStart', 1);
+		let s = RSP_Handler.StateOf(mo);
+		if (!s || s.mode != RSP.PUMPING)
+			return false;
+		if (s.waitHand)
+		{
+			s.End(mo);
+			return false;			// the hand is off the pump: the mod pumps by itself
+		}
+		State hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+		if (!hold)
+		{
+			s.End(mo);
+			return false;
+		}
+		mReturn[i] = mShotAt[i];
+		mHeld[i] = w;
+		mShot[i] = true;
+		p.SetPsprite(PSP_WEAPON, hold, false, w);
+		Trace(w, "after the shot: the hand is on the pump -- held for its stroke");
+		return true;
+	}
+
+	private void ShotTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w)
+	{
+		mo.GiveInventory('RSP_PTick', 1);
+		// what the stroke tells a weapon that owns it; the mod's own states do all of that
+		mo.TakeInventory('RSP_Back', 999);
+		mo.TakeInventory('RSP_Fwd', 999);
+		mo.TakeInventory('RSP_CaseOut', 999);
+		bool ready = mo.CountInv('RSP_Ready') > 0;
+		bool byItself = mo.CountInv('RSP_Auto') > 0;
+		if (!ready && !byItself)
+			return;
+		mo.TakeInventory('RSP_Ready', 999);
+		mo.TakeInventory('RSP_Auto', 999);
+		mShot[i] = false;
+		mHeld[i] = null;
+		State go = mReturn[i];
+		mReturn[i] = null;
+		if (go)
+			p.SetPsprite(PSP_WEAPON, go, false, w);
+		Trace(w, ready ? "pumped by hand -- the mod's fire goes on" : "the hand left the pump -- the mod's fire goes on");
 	}
 
 	private void PumpHold(PlayerInfo p, int i, Weapon w, PSprite psp, String why)
@@ -542,6 +666,15 @@ class MS_ReloadJoin : EventHandler
 	{
 		let w = mHeld[i];
 		mHeld[i] = null;
+		if (mShot[i])
+		{
+			// switched away or died while the hand was pumping: nothing to give back to
+			mShot[i] = false;
+			mReturn[i] = null;
+			return;
+		}
+		if (p && p.mo)
+			p.mo.TakeInventory('RSR_Charge', 999);	// ours, given at Take: the reload is over
 		State back = mReturn[i];
 		mReturn[i] = null;
 		mDisarmed[i] = true;

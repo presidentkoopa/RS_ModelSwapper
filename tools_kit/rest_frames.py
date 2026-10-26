@@ -20,6 +20,11 @@ REST = {
     # BD22Q rests the same rifle on 3. The shipped hand row lands 8.4 cm from the frame-3 palm and
     # 15.5 cm from the frame-0 one -- it was fitted at 3.
     'MS_brt_Rifle': 3,
+    # 2026-10-25. models/bd/AssaultShotgun/AssaultShotgun.md3, 32 frames: md3label names frames
+    # 0..2 raise_0..raise_2 and 3..4 idle; drawn on 0, the gun is mid-raise and md3label measured
+    # no slide at all there. MS_BD_AssaultShotgun draws the same mesh (re-origined copy, same
+    # vertex count) on frame 4.
+    'MS_brt_AssaultShotgun': 4,
 }
 
 
