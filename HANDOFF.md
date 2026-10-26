@@ -43,7 +43,18 @@ that is not on the plan.**
 - DONE: M32 reload placement (PLAN F11): apply() now passes each entry's own scale/off and the
   mesh's per-surface skins. Only M32 rows changed; its MagCentre is now (14.60, -0.03, -4.04),
   the drum centroid PLAN.md measured. Gated in the rig: clean parse, no 'm32.png not found'.
-- NEXT: every gun's reload driven in the rig; then the rest of PLAN.md F11 and F10.
+- DONE (2026-10-25, rig, after the two M32 fixes): **all 13 magazine reloads complete in VR**, each
+  IDLE->EMPTY->DROP->EMPTY->CARRY->INSERT->SEATED->DONE->IDLE with the gun's own sounds: Rifle,
+  BrutalPistol, BrutalSMG, MP40, AssaultShotgun, RailGun, Plasma_Gun, Sniper, Rocket_Launcher, MG42
+  (drum), Flamethrower2 (canister), IncendiaryLauncher (cylinder), Unmaker (skull). Tactical
+  reloads (a few shots fired first), off trigger, rsr_assist 1. Rig traps, all of them hit today:
+    * the class: `playerclass` matches the DisplayName as written, so the ini needs
+      `playerclass=$TAGBD_CLASS_RIFLE`; anything else is a random class, and Purist turns ours off.
+    * hidden guns (MP40, MG42) need `rsq_extra_weapons 1` before `give`, or `use` silently stays put.
+    * the off hand is the gun hand MIRRORED in L: pose it like the gun hand and flip the magazine's
+      in-hand L; for a side-loading well (|axis L| > 0.5: Rocket_Launcher, MG42, M32) also yaw it 180.
+  Not yet driven: charging handles after an empty reload, pump, break, revolvers, M203, flick, dual.
+- NEXT: those, then the rest of PLAN.md F11 and F10.
 
 ## What this repo is
 Everything for QuestZDoom 17.3 VR reloadable weapon sets: the owner's BD22 Quest pack as the runtime
