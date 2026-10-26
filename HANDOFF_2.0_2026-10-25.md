@@ -68,15 +68,16 @@ Those need real-mesh cards -- the card standard's job.
 ## VR-rig gate (`run_gate.py --vr`, the owner's quest_test_rig -- see gate/qz_rig/README.md)
 
 The real OpenXR input path: the pack's own vrhand.zs reads the engine's controller positions; grip
-and trigger are real controller keys. 58 reloadable donors, first pass 44 PASS. Found and fixed in
-the DRIVER: the engine mirrors the off controller's frame left-right (vrhand.zs says so; measured:
-OffDir yaw 90 = (0,-1,0)); the desktop stand-in hid it. Placing held parts in that frame recovered
-the 4 RPGs and the MG42 -> 49 PASS. Open, all in the test driver unless shown otherwise:
-- chex large / superlarge zorcher, BD22 RocketLauncher: position exact (0.0 off axis), but the part
-  sits 60 / 137 degrees off the well axis -- the driver never turns the wrist. Needs a wrist step.
-- the four pump guns: the pump driver still feeds trigger and steadying through test-only cvars.
-- MS_SuperShotgun, MS_brt_M79 (main's own break-open): the join never takes the gun on the rig,
-  while the three BD22 break-open guns join fine -- NOT yet explained; may be real.
+and trigger are real controller keys (443 / 42). **58 of 58 reloadable donors PASS** (2026-10-25).
+Every failure on the way was the TEST DRIVER, none ModelSwapper:
+- the engine mirrors the off controller's frame left-right (vrhand.zs says so; measured OffDir yaw 90
+  = (0,-1,0)) -- held parts are now placed with the off hand's axes measured from the engine;
+- long parts need the wrist turned: the driver turns the controller until the reload's own angle to
+  the well is inside its limit (zorchers 60 deg, BD22 rocket 137 deg off at first);
+- a 3-tic reload tap fell between the rig's frames under load (kit README: "a gesture must be
+  held"): held 15 tics on --vr.
+Still test-only on the rig: the pump driver's off trigger and steadying (rsp_test_trigger /
+rsp_test_steady); the break-open hand aim (RSB_TestDriver calls the reload's own functions).
 
 ## Fixed along the way (each also wrong on `main`)
 
