@@ -2,52 +2,52 @@
  {
   "fix": "ballistics: IsShot, the one test of what a shot is",
   "file": "zscript/rsq/ballistics.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "recoil: remember what was written",
   "file": "zscript/rsq/recoil.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "recoil: off takes its kick back too",
   "file": "zscript/rsq/recoil.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "recoil: replace last tic's kick, never pile it up",
   "file": "zscript/rsq/recoil.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "recoil: one kick per tic, never for the buzz",
   "file": "zscript/rsq/recoil.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "recoil: stamp the kick tic",
   "file": "zscript/rsq/recoil.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "recoil: the buzz is not a shot",
   "file": "zscript/rsq/recoil.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "flash: the buzz is not a shot",
   "file": "zscript/rsq/flash.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "flash: one shot per tic",
   "file": "zscript/rsq/flash.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "flash: lastShot field",
   "file": "zscript/rsq/flash.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "trigger held: every player carries RSQ_TriggerHeld",
@@ -203,6 +203,101 @@
   "fix": "R3 held rounds reload: Rocket_Launcher",
   "file": "actors/Weapons/RocketLauncher.dec",
   "result": "already applied"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/glass/winbrea.ogg",
+  "result": "sounds/rsb/glass/rqs00001.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/impact_electric/sparks1.ogg",
+  "result": "sounds/rsb/impact_electric/rqs00002.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche1.ogg",
+  "result": "sounds/rsb/ricochet/rqs00003.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche10.ogg",
+  "result": "sounds/rsb/ricochet/rqs00004.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche11.ogg",
+  "result": "sounds/rsb/ricochet/rqs00005.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche12.ogg",
+  "result": "sounds/rsb/ricochet/rqs00006.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche13.ogg",
+  "result": "sounds/rsb/ricochet/rqs00007.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche14.ogg",
+  "result": "sounds/rsb/ricochet/rqs00008.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche15.ogg",
+  "result": "sounds/rsb/ricochet/rqs00009.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche16.ogg",
+  "result": "sounds/rsb/ricochet/rqs00010.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche2.ogg",
+  "result": "sounds/rsb/ricochet/rqs00011.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche3.ogg",
+  "result": "sounds/rsb/ricochet/rqs00012.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche4.ogg",
+  "result": "sounds/rsb/ricochet/rqs00013.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche5.ogg",
+  "result": "sounds/rsb/ricochet/rqs00014.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche6.ogg",
+  "result": "sounds/rsb/ricochet/rqs00015.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsb/ricochet/ricoche7.ogg",
+  "result": "sounds/rsb/ricochet/rqs00016.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsr/DSAOUNC1.ogg",
+  "result": "sounds/rsr/rqs00017.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsr/DSAOUNC2.ogg",
+  "result": "sounds/rsr/rqs00018.ogg"
+ },
+ {
+  "fix": "sound file renamed off a BD22 lump name",
+  "file": "sounds/rsr/DSAOUNC3.ogg",
+  "result": "sounds/rsr/rqs00019.ogg"
  },
  {
   "fix": "axe lock ring art RQLKA0-D0",

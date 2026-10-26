@@ -194,6 +194,16 @@ that is not on the plan.**
   kicks, fists, and each of BD22's helper missiles per shot (4 flashes a shot). One test now,
   RSQ_Ballistics.IsShot, and one shot per tic. Rig after: fire 10 deg max kick and back, reload 0,
   one flash per shot, none on reload. This came in with F5 (1.97); 1.92 had no recoil.
+- FIXED (F11, owner 2026-10-26 "many other sounds are incorrect"): 19 of our sound files had the same
+  8-letter lump name as BD22's (ricoche1-7 -- and ricoche10-16 truncate to ricoche1 --, winbrea,
+  sparks1, DSAOUNC1-3). BD22's SNDINFO names those by lump, ours load last, so BD22's ricochets,
+  glass break, sparks and big mag drops played OUR files. `fixes` now renames any such file
+  (rqsNNNNN) and our SNDINFO follows. No other namespace collides. The pack does not touch BD22's
+  BFG code; owner to say what is still wrong with the BFG after this.
+- Checked against 1.92 (owner: poses and behaviour should be 1.92's): hand tables (handtable.zs) and
+  reload MODELDEF identical for every 1.92 gun; reload tables identical except the Ruger (new XM21
+  model). The F10 guns' in-hand parts are held by grip='base' with no hand fit -- the likely wrong
+  "hold magazine" poses; waiting for the owner's list.
 - Not built yet: the Minigun's bigger in-hand box (owner's "clever illusion").
 - NEXT: F11 (owner calls: NOAUTOFIRE on all guns, off-hand punch vs rsq_punch, free charge default,
   PuristSniper model, RQLK ring art -- no lump in pack or BD22, so the ring is invisible);

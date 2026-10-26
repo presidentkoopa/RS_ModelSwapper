@@ -216,27 +216,27 @@ rsb/impact/wood5             sounds/rsb/impact_wood/blt_imp_wood_near_05.ogg
 rsb/impact/wood6             sounds/rsb/impact_wood/blt_imp_wood_near_06.ogg
 $random rsb/impact/wood { rsb/impact/wood1 rsb/impact/wood2 rsb/impact/wood3 rsb/impact/wood4 rsb/impact/wood5 rsb/impact/wood6 }
 $limit rsb/impact/wood 6
-rsb/ricochet1                sounds/rsb/ricochet/ricoche1.ogg
-rsb/ricochet2                sounds/rsb/ricochet/ricoche2.ogg
-rsb/ricochet3                sounds/rsb/ricochet/ricoche3.ogg
-rsb/ricochet4                sounds/rsb/ricochet/ricoche4.ogg
-rsb/ricochet5                sounds/rsb/ricochet/ricoche5.ogg
-rsb/ricochet6                sounds/rsb/ricochet/ricoche6.ogg
-rsb/ricochet7                sounds/rsb/ricochet/ricoche7.ogg
+rsb/ricochet1                sounds/rsb/ricochet/rqs00003.ogg
+rsb/ricochet2                sounds/rsb/ricochet/rqs00011.ogg
+rsb/ricochet3                sounds/rsb/ricochet/rqs00012.ogg
+rsb/ricochet4                sounds/rsb/ricochet/rqs00013.ogg
+rsb/ricochet5                sounds/rsb/ricochet/rqs00014.ogg
+rsb/ricochet6                sounds/rsb/ricochet/rqs00015.ogg
+rsb/ricochet7                sounds/rsb/ricochet/rqs00016.ogg
 rsb/ricochet8                sounds/rsb/ricochet/ricoche8.ogg
 rsb/ricochet9                sounds/rsb/ricochet/ricoche9.ogg
-rsb/ricochet10               sounds/rsb/ricochet/ricoche10.ogg
-rsb/ricochet11               sounds/rsb/ricochet/ricoche11.ogg
-rsb/ricochet12               sounds/rsb/ricochet/ricoche12.ogg
-rsb/ricochet13               sounds/rsb/ricochet/ricoche13.ogg
-rsb/ricochet14               sounds/rsb/ricochet/ricoche14.ogg
-rsb/ricochet15               sounds/rsb/ricochet/ricoche15.ogg
-rsb/ricochet16               sounds/rsb/ricochet/ricoche16.ogg
+rsb/ricochet10               sounds/rsb/ricochet/rqs00004.ogg
+rsb/ricochet11               sounds/rsb/ricochet/rqs00005.ogg
+rsb/ricochet12               sounds/rsb/ricochet/rqs00006.ogg
+rsb/ricochet13               sounds/rsb/ricochet/rqs00007.ogg
+rsb/ricochet14               sounds/rsb/ricochet/rqs00008.ogg
+rsb/ricochet15               sounds/rsb/ricochet/rqs00009.ogg
+rsb/ricochet16               sounds/rsb/ricochet/rqs00010.ogg
 $random rsb/ricochet { rsb/ricochet1 rsb/ricochet2 rsb/ricochet3 rsb/ricochet4 rsb/ricochet5 rsb/ricochet6 rsb/ricochet7 rsb/ricochet8 rsb/ricochet9 rsb/ricochet10 rsb/ricochet11 rsb/ricochet12 rsb/ricochet13 rsb/ricochet14 rsb/ricochet15 rsb/ricochet16 }
 $limit rsb/ricochet 4
 rsb/glass1                   sounds/rsb/glass/dsbottle.ogg
 rsb/glass2                   sounds/rsb/glass/glsfal.ogg
-rsb/glass3                   sounds/rsb/glass/winbrea.ogg
+rsb/glass3                   sounds/rsb/glass/rqs00001.ogg
 $random rsb/glass { rsb/glass1 rsb/glass2 rsb/glass3 }
 $limit rsb/glass 4
 rsb/flame/hiss1              sounds/rsb/flame/flamerhiss1.ogg
@@ -247,7 +247,7 @@ rsb/impact/electric1         sounds/rsb/impact_electric/electro8.wav
 rsb/impact/electric2         sounds/rsb/impact_electric/pzaphit.ogg
 rsb/impact/electric3         sounds/rsb/impact_electric/dsdevzap.ogg
 rsb/impact/electric4         sounds/rsb/impact_electric/electro7.ogg
-rsb/impact/electric5         sounds/rsb/impact_electric/sparks1.ogg
+rsb/impact/electric5         sounds/rsb/impact_electric/rqs00002.ogg
 $random rsb/impact/electric { rsb/impact/electric1 rsb/impact/electric2 rsb/impact/electric3 rsb/impact/electric4 rsb/impact/electric5 }
 rsb/impact/pipe1             sounds/rsb/impact_pipe/pipe_hit1.ogg
 rsb/impact/pipe2             sounds/rsb/impact_pipe/pipe_hit2.ogg

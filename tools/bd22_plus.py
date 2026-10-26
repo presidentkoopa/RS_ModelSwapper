@@ -4669,6 +4669,58 @@ def semi_auto():
     return log
 
 
+BD22_PK3_FOR_NAMES = '/mnt/user-data/uploads/DOOMWork/brutal22test6.pk3' if os.path.exists(
+    '/mnt/user-data/uploads/DOOMWork/brutal22test6.pk3') else 'E:/DOOMWork/brutal22test6.pk3'
+
+
+def sound_lump_names():
+    """F11 (owner, 2026-10-26: "many other sounds are incorrect"). A sound file in a pk3 is also a
+    LUMP, named by the first 8 letters of its file name, and Brutal Doom's SNDINFO names most of
+    its sounds that way (`world/ricochet1  ricoche1`). Ours load last, so any of ours whose 8-letter
+    name matched one of BD22's REPLACED BD22's sound: its ricochets (ricoche1..7, and our
+    ricoche10..16 all cut to ricoche1), the window break, sparks, the big magazine drops. Every such
+    file gets a name of its own, and our SNDINFO, which names files by their full path, follows."""
+    import zipfile as _z
+    bd = set()
+    for n in _z.ZipFile(BD22_PK3_FOR_NAMES).namelist():
+        if not n.endswith('/'):
+            bd.add(os.path.splitext(os.path.basename(n))[0].lower()[:8])
+    root = OUT_SRC + 'sounds/'
+    ours = set()
+    for r, _, fs in os.walk(root):
+        for f in fs:
+            ours.add(os.path.splitext(f)[0].lower()[:8])
+    renames = []
+    k = 0
+    for r, _, fs in sorted(os.walk(root)):
+        for f in sorted(fs):
+            b, ext = os.path.splitext(f)
+            if b.lower()[:8] not in bd:
+                continue
+            while True:
+                k += 1
+                nb = 'rqs%05d' % k
+                if nb not in bd and nb not in ours:
+                    break
+            ours.add(nb)
+            old = os.path.relpath(os.path.join(r, f), OUT_SRC).replace(os.sep, '/')
+            new = os.path.relpath(os.path.join(r, nb + ext), OUT_SRC).replace(os.sep, '/')
+            os.rename(OUT_SRC + old, OUT_SRC + new)
+            renames.append((old, new))
+    if renames:
+        for sf in glob.glob(OUT_SRC + 'SNDINFO*'):
+            t = open(sf, encoding='latin-1').read()
+            t0 = t
+            for old, new in renames:
+                t = re.sub(r'(?<![\w/])' + re.escape(old) + r'(?![\w.])', new, t, flags=re.I)
+            if t != t0:
+                open(sf, 'w', encoding='latin-1').write(t)
+    left = [o for o, n in renames if any(o.lower() in open(sf, encoding='latin-1').read().lower() for sf in glob.glob(OUT_SRC + 'SNDINFO*'))]
+    if left:
+        raise SystemExit('sound_lump_names: still referenced by the old name: %s' % left[:3])
+    return [dict(fix='sound file renamed off a BD22 lump name', file=o, result=n) for o, n in renames]
+
+
 def held_reload():
     """R3, part 2: before each magazine gun's own reserve check in Reload, a jump on its held rounds
     to the state that check jumps to (a new label there: a label is not a state, so no offset
@@ -4735,6 +4787,7 @@ def fixes():
         open(p, 'w', newline='').write(t)
         log.append(dict(fix=why, file=rel, result='applied'))
     log += held_reload()
+    log += sound_lump_names()
     # the axe lock ring's art (tools/data/rqlk/SOURCE.txt): RSVR_AxeLock draws RQLK, which no file had
     for k in 'ABCD':
         shutil.copy(os.path.join(REPO, 'tools', 'data', 'rqlk', 'RQLK%s0.png' % k), OUT_SRC + 'sprites/RQLK%s0.png' % k)
