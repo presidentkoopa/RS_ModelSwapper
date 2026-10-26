@@ -316,7 +316,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
             ('chambers seated', (len(re.findall(r'rsb t\d+ chamber \d+ loaded', text)) >= 1 and 'round at chamber' in text) if vr
                                 else len(re.findall(r'RSBT t\d+ seated chamber', text)) >= 1),
             ('it closed', re.search(r'shut \(flick\)', text) is not None if vr else 'all chambers loaded: closing' in text),
-            ('round in off hand', held_in_off(text, (2202, 2203))),
+            # desktop: break_test.zs seats each chamber itself (RSB_State.Seat), no hand carries a round
+            ('round in off hand', held_in_off(text, (2202, 2203)) if vr else True),
             ('hands on the gun', hands_on_gun(donor)),
             ('handed back', 'gave %s back' % gun in text),
             ('their reload ran', mod_refilled(text, 'gave %s back' % gun) if MOD else 'TM ssg: barrels 2' in text),
