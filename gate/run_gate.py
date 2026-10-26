@@ -30,6 +30,7 @@ IWAD = '/usr/share/games/doom/freedoom2.wad'
 # moving any layer relative to another -- which is the thing under test.
 VIEW = 'vr_3dweaponOffsetX 10; vr_3dweaponOffsetY -4; vr_3dweaponOffsetZ -45'
 EXTRA = ''
+OFFKNIFE = False
 VR_CVARS = '''
 user int rsrtest_vr = 1;
 user string qzt_lhand = "";
@@ -148,6 +149,11 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         sc = 'rsr_grab_with 0; rsrtest_script 7' if has_handle(donor) else 'rsrtest_script 1'
         t += [(110, sc), (115, '+attack'), (125, '-attack')]
     # a handle adds its stroke after the magazine (the rig: up to ~400 tics more) before the mod's reload
+    if OFFKNIFE:
+        # a mod's own off-hand weapon taken into the off hand before the reload: the hands must
+        # take the off hand back, or no magazine / shell / round is drawn in it
+        t += [(60, 'give TMKnife; use TMKnife')]
+        t.sort(key=lambda x: x[0])
     end = 900 if pump or (not brk and has_handle(donor)) else 520
     if shots:
         t += [(x, 'screenshot') for x in (100, 140, 170, 200, 230, 260, 300, 340, 400)]
@@ -278,6 +284,11 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         ('pack loaded', os.path.basename(pk3.split(',')[0]) in text),
         ('scripts parsed', 'script parsing took' in text),
         ('no script error', not re.search(r'Script error|Execution could not continue|VM execution aborted|^\S+, line \d+: (?!.*[Ww]arning)', text, re.M)),
+        # --offknife: the magazine is drawn in the off hand (layer 2201, the hands' caller)
+        ('mag in the off hand', re.search(r'2201 \S+/\S@rsq_hands', text, re.I) is not None if OFFKNIFE else True),
+        # Reload Order "mod's reload first" (ms_mod_first, the default): the mod's reload ran, then
+        # the gun was held -- no fire -- until the hands finished
+        ('fire held for hands', ('ms_mod_first 0' in EXTRA) or re.search(r'the mod\'s reload is done -- held.*?gave TMPistol back \(hands finished -- fire allowed\)', text, re.S) is not None),
         ('join took it', 'took TMPistol' in text),
         ('as this model', 'took TMPistol (slot %d)' % slot_of(donor) in text),
         ('magazine out', re.search(r'gun \d+: \w+ -> EMPTY', text) is not None),
@@ -307,6 +318,7 @@ if __name__ == '__main__':
     a = [x for x in a if x != eng]
     opt = lambda k, d: next((sys.argv[i + 1] for i, x in enumerate(sys.argv) if x == k), d)
     VIEW = opt('--view', VIEW)
+    OFFKNIFE = '--offknife' in sys.argv
     EXTRA = opt('--extra', '')
     a = [x for x in a if x not in (opt('--view', None), opt('--yaw', None), opt('--extra', None))]
     sys.exit(run(a[0], a[1], eng, '--shots' in sys.argv, int(opt('--yaw', 60)), vr='--vr' in sys.argv, shot='--shot' in sys.argv))

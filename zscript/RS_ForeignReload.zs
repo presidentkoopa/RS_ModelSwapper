@@ -133,6 +133,17 @@ class MS_ReloadJoin : EventHandler
 	private State mShotAt[MAXPLAYERS];		// ... and the mod's fire goes on from this one
 	private bool mShot[MAXPLAYERS];			// held for the hand's pump stroke
 
+	// MOD FIRST (owner, 2026-10-26: "when we press the reload button, we want the code to advance
+	// to the end of its reload state, but not complete / allow the player to fire, until the player
+	// finishes the physical VR reload sequence"). Options: Reload Order (ms_mod_first, on). The
+	// hands' reload starts at the press as before, but the gun is NOT parked: the mod's own reload
+	// runs at once, to its end (its ammo, its rules, its sounds). Where it leaves its reload the
+	// gun is parked -- no A_WeaponReady, no fire -- until the hands say done; then it goes on from
+	// exactly that state. Off: the old order (held at the press, the mod's reload after the hands).
+	private bool mDriving[MAXPLAYERS];		// the hands' reload is running beside the mod's
+	private Weapon mDrivW[MAXPLAYERS];
+	private int mDrivTic[MAXPLAYERS];
+
 	// A trace for the one failure mode that looks like nothing happening.
 	private bool ms_join_trace;
 	override void OnRegister() { let c = CVar.FindCVar('ms_join_trace'); ms_join_trace = c && c.GetInt() != 0; }
@@ -229,6 +240,14 @@ class MS_ReloadJoin : EventHandler
 
 			// Dropped the weapon, died, or switched mid-reload: let go cleanly
 			// rather than hold a psprite for a gun that is no longer in hand.
+			if (mDriving[i] && (!w || w != mDrivW[i] || mo.health <= 0))
+			{
+				mDriving[i] = false;
+				mHeld[i] = null;
+				mReturn[i] = null;
+				mDrivW[i] = null;
+				mo.TakeInventory('RSR_Charge', 999);
+			}
 			if (mHeld[i] && (!w || w != mHeld[i] || mo.health <= 0))
 			{
 				Release(p, i, false);
@@ -268,6 +287,12 @@ class MS_ReloadJoin : EventHandler
 			if (bslot > 0)
 			{
 				BreakTick(mo, p, i, w, psp);
+				continue;
+			}
+
+			if (mDriving[i])
+			{
+				ModFirstTick(mo, p, i, w, psp);
 				continue;
 			}
 
@@ -392,9 +417,87 @@ class MS_ReloadJoin : EventHandler
 		mo.TakeInventory('RSR_Charge', 999);
 		if (mag && mag.Amount <= 0 && RSR_Guns.HasHandle(RSR_Guns.Index(w)) && RSR.PlayerInt(p, 'ms_charge_dry', 1) != 0)
 			mo.GiveInventory('RSR_Charge', 1);
+		if (RSR.PlayerInt(p, 'ms_mod_first', 1) != 0)
+		{
+			// mod first: no hold now -- the mod's reload runs; ModFirstTick parks it at its end
+			mReturn[i] = null;
+			mHeld[i] = null;
+			mDriving[i] = true;
+			mDrivW[i] = w;
+			mDrivTic[i] = mo.Level.maptime;
+			if (RS_ForeignRemap.DebugOn())
+				Console.Printf("[MSJOIN] took %s (slot %d) at its reload -- the mod's reload runs first", w.GetClassName(), RSR_Guns.Index(w));
+			return;
+		}
 		p.SetPsprite(PSP_WEAPON, hold, false, w);
 		if (RS_ForeignRemap.DebugOn())
 			Console.Printf("[MSJOIN] took %s (slot %d) at its reload", w.GetClassName(), RSR_Guns.Index(w));
+	}
+
+	private void ModFirstTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
+	{
+		if (w != mDrivW[i] || mo.health <= 0)
+		{
+			// switched away or died: the hands' reload sees its gun leave and ends itself
+			ModFirstEnd(mo, p, i, w, psp, "the gun left");
+			return;
+		}
+		mo.GiveInventory('RSR_Tick', 1);		// the heartbeat (see the hold path)
+		let rs = RSR_ReloadHandler.StateOf(mo);
+		if (rs && rs.phase == RSR.IDLE && mo.Level.maptime - mDrivTic[i] > 4)
+		{
+			// the reload declined (or is over without a word): nothing to wait for
+			ModFirstEnd(mo, p, i, w, psp, "the hands' reload is not running");
+			return;
+		}
+		let m = RemapFor(mo, w);
+		bool inReload = InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState);
+		if (!mHeld[i] && !inReload && psp.CurState != GetDefaultByType('MS_ReloadStates').FindState("MS_Hold"))
+		{
+			// the mod's reload has run to its end: park the gun there, no fire, until the hands finish
+			State hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+			if (hold)
+			{
+				mReturn[i] = psp.CurState;
+				mHeld[i] = w;
+				p.SetPsprite(PSP_WEAPON, hold, false, w);
+				if (RS_ForeignRemap.DebugOn())
+					Console.Printf("[MSJOIN] %s: the mod's reload is done -- held, no fire, until the hands finish", w.GetClassName());
+			}
+		}
+		if (mo.CountInv('RSR_Seated') > 0)
+		{
+			mo.TakeInventory('RSR_Seated', 1);
+			mo.GiveInventory('RSR_Filled', 1);
+			rs = RSR_ReloadHandler.StateOf(mo);
+			if (rs && rs.phase == RSR.CHARGE)
+				return;			// the charging handle next
+			ModFirstEnd(mo, p, i, w, psp, "hands finished");
+			return;
+		}
+		if (mo.CountInv('RSR_Done') > 0)
+		{
+			mo.TakeInventory('RSR_Done', 1);
+			ModFirstEnd(mo, p, i, w, psp, "hands finished");
+		}
+	}
+
+	private void ModFirstEnd(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp, String why)
+	{
+		mDriving[i] = false;
+		mo.TakeInventory('RSR_Charge', 999);
+		bool parked = mHeld[i] != null;
+		State go = mReturn[i];
+		mHeld[i] = null;
+		mReturn[i] = null;
+		if (parked && go && w == mDrivW[i])
+			p.SetPsprite(PSP_WEAPON, go, false, w);		// on from where the mod's reload left it
+		// the mod's reload still running (the hands were quicker): stay off until it ends
+		mDisarmed[i] = !parked;
+		mDrivW[i] = null;
+		if (RS_ForeignRemap.DebugOn())
+			Console.Printf("[MSJOIN] gave %s back (%s -- %s)", w ? w.GetClassName() : 'none', why,
+				parked ? "fire allowed" : "the mod's reload was still running");
 	}
 
 	// Give it back. `finished` means the hands completed the reload, so the mod

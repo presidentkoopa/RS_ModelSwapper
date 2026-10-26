@@ -165,6 +165,9 @@ class RSQ_Hands : Weapon
 	int offPunchTic;					// -1 idle; the off-hand trigger punch's tic
 	bool offTrigPrev;	// sprites where BD22's own hand model shows (taunts, grabs, carries)
 	bool dotClash;		// the scope reticle's layer id clashes with another lane's: said once
+	int offTakeTic;
+	int offTaken;		// times these hands took the off hand back from a mod's own off-hand weapon
+	bool offGaveUp;
 
 	override void BeginPlay()
 	{
@@ -224,8 +227,40 @@ class RSQ_Hands : Weapon
 		// slot is neither empty nor RSQ_Hands and reloading dies silently for EVERY gun.
 		// A copy that matches the ready weapon is a real dual wield and is left alone.
 		let off = p.OffhandWeapon;
-		if (h && !off && p.PendingWeapon == WP_NOCHANGE)
+		// 2026-10-26 (owner, first headset pass on brutal22test6: "all the offhand ever sees is a
+		// knife"; "the offhand should be the [BD22 Offhand Fist] all the time unless we move a
+		// weapon to the offhand"). A mod can put its OWN off-hand melee in the slot (a knife), and
+		// these hands -- BD22Q's Fist / Offhand Fist, and the only caller the engine draws the
+		// reload's magazine, shell or round on (vreload / rsr_pump / rsr_break SetPart) -- were
+		// only installed when the slot was EMPTY: never, on that mod. Now they replace anything
+		// in the off hand that is not a weapon the player moved there: not a
+		// gun (a weapon with a Reload state). Options: Off Hand (ms_off_fist).
+		bool fistsWanted = RSQ.PlayerInt(mo, 'ms_off_fist', 1) != 0;
+		// a gun the player moved to the off hand has a Reload state (RSQ_Flick.IsGun's test; dual.zs
+		// and flick.zs are not in this build); a mod's off-hand knife or fist has none
+		bool takeOff = !off || fistsWanted && off != h && !(off is 'RSQ_Hands') && !off.FindState("Reload");
+		if (h && takeOff && p.PendingWeapon == WP_NOCHANGE)
+		{
+			// a mod that puts its knife straight back every tic would make this a loop: stop
+			// after a few takes back, and say so once
+			let rh = RSQ_Hands(h);
+			if (off && off != h && rh)
+			{
+				int now = mo.Level.maptime;
+				if (now - rh.offTakeTic > 70)
+					rh.offTaken = 0;		// the player chose it again later: fine, take it back
+				if (rh.offTaken >= 4)
+				{
+					if (!rh.offGaveUp)
+						Console.Printf("RSQ: %s keeps returning to the off hand -- left there (ms_off_fist)", off.GetClassName());
+					rh.offGaveUp = true;
+					return;
+				}
+				rh.offTaken++;
+				rh.offTakeTic = now;
+			}
 			p.PendingWeapon = h;
+		}
 	}
 
 	action void A_RSQ_Layers()

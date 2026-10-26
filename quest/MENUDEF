@@ -221,6 +221,8 @@ OptionMenu "RSMS_Reload"
 	Option "Reloading", "rsr_reload", "RSR_ReloadMode"
 	Option "Reload sounds", "ms_reload_sounds", "MS_ReloadSounds"
 	Option "Grab ammo with", "rsr_grab_with", "RSR_GrabWith"
+	Option "Reload Order", "ms_mod_first", "MS_ReloadOrder"
+	Option "Off Hand", "ms_off_fist", "MS_OffHand"
 	Option "Pump by Hand After a Shot", "ms_hand_pump", "OnOff"
 	Option "Charging Handle After Empty", "ms_charge_dry", "OnOff"
 	Option "Check the Chamber by Hand", "rsr_freecharge", "OnOff"
@@ -242,6 +244,22 @@ OptionMenu "RSR_Debug"
 
 // ModelSwapper's own reload foley while the hands work, or the loaded mod's sounds only (its
 // own reload plays them when the hands give the gun back). ms_reload_sounds, quest/CVARINFO.
+// the off hand: these hands (BD22Q's fists; they hold the magazine, shell or round in a reload)
+// unless a gun is moved there, or whatever off-hand weapon the loaded mod gives (ms_off_fist)
+// the order: the mod's reload at the press and the fire held until the hands finish, or the gun held
+// at the press and the mod's reload after the hands (ms_mod_first)
+OptionValue "MS_ReloadOrder"
+{
+	1, "Mod's reload first"
+	0, "Hands first"
+}
+
+OptionValue "MS_OffHand"
+{
+	1, "Fists"
+	0, "Mod's own"
+}
+
 OptionValue "MS_ReloadSounds"
 {
 	1, "ModelSwapper"

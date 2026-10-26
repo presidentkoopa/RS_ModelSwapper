@@ -181,3 +181,34 @@ class TMSSG : Weapon replaces SuperShotgun
 		Stop;
 	}
 }
+
+// A mod's own off-hand melee, the way brutal22test6 puts a knife in the off hand (owner's first
+// headset pass, 2026-10-26: "all the offhand ever sees is a knife"). No Reload state: not a gun.
+class TMKnife : Weapon
+{
+	Default
+	{
+		+WEAPON.OFFHANDWEAPON
+		+WEAPON.MELEEWEAPON
+		Weapon.SelectionOrder 3700;
+		Tag "Test Off-hand Knife";
+	}
+	States
+	{
+	Ready:
+		PUNG A 1 A_WeaponReady;
+		Loop;
+	Deselect:
+		PUNG A 1 A_Lower;
+		Loop;
+	Select:
+		PUNG A 1 A_Raise;
+		Loop;
+	Fire:
+		PUNG B 4;
+		Goto Ready;
+	Spawn:
+		TNT1 A -1;
+		Stop;
+	}
+}

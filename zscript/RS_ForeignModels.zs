@@ -2504,6 +2504,14 @@ class RS_ForeignModelHandler : StaticEventHandler
 			// mod's own layers are all it has and must be left alone.
 			if (mLastMain == null && mLastOff == null) continue;
 			if (!(c is 'Weapon')) continue;
+			// OUR OWN LAYERS ARE NOT THE MOD'S. The hands (RSQ_Hands: the free hand, the magazine,
+			// shell or round in it) and the reloads' part carriers are Weapon subclasses too, so
+			// this blanked them: the gate saw "blanking layer 2201 of rsq_hands" -- the magazine in
+			// the off hand pinned to the blank anchor (owner, first headset pass: "magazines and
+			// shells do not appear in the offhand").
+			// (by name: this file is in the desktop build too, which has none of these classes)
+			Name ocn = c.GetClassName();
+			if (ocn == 'RSQ_Hands' || ocn == 'RSR_PartStates' || ocn == 'RSB_PartStates' || ocn == 'MS_ReloadStates') continue;
 
 			int si = (c == mLastOff) ? mFlashSprOff : mFlashSprMain;
 			if (si < 0) continue;
