@@ -9,10 +9,6 @@ ModelSwapper doesn't wait for that. It carries one shelf of models and fits it t
 
 ![The model picker, with Project Brutality loaded](media/pb-choose-models.png)
 
-Every weapon the loaded mod gives you, the family it was sorted into, and the model it is wearing. Any model can go on any weapon.
-
-Coming in 2.0: renamed models, so every one says clearly what it is, and selectable skins, including weapons coloured to match the theme and palette of popular mods.
-
 ## How it works
 
 ModelSwapper reads every weapon the loaded mods define and sorts each one into a family, such as pistol, shotgun, rifle or launcher. It goes by the weapon's name, its ammo and its parent class, and finally by the weapon slot it sits in, so nothing is left without a model. Each weapon then wears a model from its family.
