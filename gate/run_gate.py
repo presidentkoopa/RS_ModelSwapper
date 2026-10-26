@@ -33,7 +33,7 @@ EXTRA = ''
 OFFKNIFE = False
 BYFIRE = False
 NOALLOW = False
-MOD = ''          # --mod bd22:<Class>: the owner's load order, BD22's own weapon instead of the test mod's
+MOD = ''          # --mod bd22:<Class> / doomablo:<Class>: a real mod's own weapon instead of the test mod's (doom2 -> the mod -> the pack)
 GD = os.environ.get('MS_GAMEDATA', '/home/claude/gamedata')
 VR_CVARS = '''
 user int rsrtest_vr = 1;
@@ -95,6 +95,24 @@ def hands_on_gun(donor):
     for l in lines:
         print('   | hands:', l)
     return ok
+
+
+def ablo_reloaded(text):
+    """doomablo: the mod's own reload ran to its end -- the join logged "the mod's reload is done"
+    (its psprite left the reload group back to Ready, ms_mod_first) -- the magazine is a field the
+    gate cannot read, and its pistol reloads free (RwWeapon.FreeReload), so the reserve need not move"""
+    return re.search(r"\[MSJOIN\] \w+: the mod's reload is done", text) is not None
+
+
+def reserve_spent(text, after):
+    """a mod whose magazine is a field (doomablo): its own reload takes from the reserve, so the
+    reserve going down after the join took the gun is the mod's reload having run"""
+    k = text.find(after)
+    if k < 0:
+        return False
+    before = [int(m.group(1)) for m in re.finditer(r'^AMMO t\d+ mag (\d+)', text[:k], re.M)]
+    later = [int(m.group(1)) for m in re.finditer(r'^AMMO t\d+ mag (\d+)', text[k:], re.M)]
+    return bool(before) and bool(later) and min(later) < before[-1]
 
 
 def shelf_pick(donor):
@@ -166,6 +184,10 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         gun = 'TMPistolNR'        # --noallow: a Ready without WRF_ALLOWRELOAD
     if MOD:
         gun = MOD.split(':', 1)[1]   # BD22's own class: its code, its ammo, its Reload
+    # doomablo keeps its magazine in a field (RwWeapon.currentClipAmmo), not an inventory item, so
+    # nothing here can empty it: the player's way -- hold the trigger until the mod's own Ready
+    # (RWA_ReloadOrSwitchIfEmpty) goes to its Reload -- is the only one
+    FIREOUT = MOD.startswith('doomablo:')
     view = '' if vr else VIEW         # the flat-camera offset: off on the rig, which draws the real VR placement
     t = [(20, 'god; rsr_reload 1; rsr_grab_with 1; ms_join_trace 1; rsr_debug 1; rsr_test_yaw %d; %s%s' % (0 if vr else yaw, view, ('; ' + EXTRA) if EXTRA else '')),
          (25, 'netevent rs-fm-rescan'),
@@ -193,14 +215,18 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # A_WeaponReady(WRF_ALLOWRELOAD) takes it to its Reload), held like a hand holds it.
         # --by-fire: the other way a player starts it, the trigger on an empty gun (the mod's Fire
         # jumps to its Reload)
-        t += [(110, sc)] + ([(115, '+attack'), (125, '-attack')] if BYFIRE else [(115, '+reload'), (up, '-reload')])
+        if FIREOUT:
+            t[-1] = (40, 'rsqt_gun %s; rsqt_empty 0' % gun)
+            t += [(60, 'give ammo'), (100, sc), (105, '+attack'), (330, '-attack')]
+        else:
+            t += [(110, sc)] + ([(115, '+attack'), (125, '-attack')] if BYFIRE else [(115, '+reload'), (up, '-reload')])
     # a handle adds its stroke after the magazine (the rig: up to ~400 tics more) before the mod's reload
     if OFFKNIFE:
         # a mod's own off-hand weapon taken into the off hand before the reload: the hands must
         # take the off hand back, or no magazine / shell / round is drawn in it
         t += [(60, 'give TMKnife; use TMKnife')]
         t.sort(key=lambda x: x[0])
-    end = 900 if pump or (not brk and has_handle(donor)) else 520
+    end = 900 if pump or (not brk and has_handle(donor)) or MOD.startswith('doomablo:') else 520
     if shots:
         t += [(x, 'screenshot') for x in (100, 140, 170, 200, 230, 260, 300, 340, 400)]
     t += [(end, 'echo GATE_END')]
@@ -212,10 +238,16 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     cmds += ['wait 5', 'quit']
     log = os.path.join(out, 'engine.log')
     # a build split across files (e.g. a 1of2 / 2of2-models pair) is given comma-separated, loaded in order
-    pre = [os.path.join(GD, 'brutal22test6.pk3'), os.path.join(GD, 'BD_VoxelPack.pk3')] if MOD else []
+    MODFILES = {'bd22': ['brutal22test6.pk3', 'BD_VoxelPack.pk3'], 'doomablo': ['doomablo_0.9.1a.pk3']}
+    pre = [os.path.join(GD, f) for f in MODFILES[MOD.split(':')[0]]] if MOD else []
     argv = [exe, '-iwad', os.path.join(GD, 'doom2.wad') if MOD else IWAD, '-file'] + pre + [os.path.abspath(x) for x in pk3.split(',')] + [tm, ov,
             '-config', os.path.join(out, 'gate.ini'), '-nosound', '-nomusic', '-width', '640', '-height', '480',
             '+vid_fullscreen', '0', '+vr_mode', '0', '+vid_preferbackend', '0',
+            # DESKTOP TEST VIEW ONLY (dropped on --vr below). This container's desktop QZD 17.3 (9afc750,
+            # Mesa llvmpipe) segfaults in HWSkyPortal::DrawContents (hw_skyportal.cpp:62, dynamic_cast on
+            # the sky texture) the moment the driver tilts the view to the floor at MAG_OUT -- the same
+            # with the owner's 4227925 pack, never on the Quest rig. The sky is not under test.
+            '+gl_portals', '0',
             '+set', 'rs_fm_picks', '%s:%s:%d:%d' % (gun, arch, idx, idx),
             '+screenshot_dir', out, '+logfile', log, '-warp', '1', '+' + '; '.join(cmds)]
     # SDL_VIDEO_X11_FORCE_EGL: this container's SDL2 has no GLX path ("SDL not configured with OpenGL/GLX
@@ -228,10 +260,10 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # the Quest-faithful rig: its own ini (vr_mode 15, OpenXR device), without the BD22-only player
         # class; no desktop vid / vr_mode overrides; EGL surfaceless, so no X server
         ini = open(os.path.join(RIG, 'config', 'qzdoom.ini'), encoding='latin-1').read()
-        if not MOD:
+        if not MOD.startswith('bd22:'):
             ini = re.sub(r'^playerclass=.*$', 'playerclass=', ini, flags=re.M)
         open(os.path.join(out, 'gate.ini'), 'w', encoding='latin-1').write(ini)
-        drop = {'+vid_fullscreen', '+vr_mode', '+vid_preferbackend'}
+        drop = {'+vid_fullscreen', '+vr_mode', '+vid_preferbackend', '+gl_portals'}
         a2, skip = [], 0
         for x in argv[1:]:
             if skip:
@@ -356,16 +388,17 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # the gun was held -- no fire -- until the hands finished
         ('fire held for hands', ('ms_mod_first 0' in EXTRA) or re.search(r'the mod\'s reload is done -- held.*?gave \w+ back \(hands finished -- fire allowed\)', text, re.S) is not None),
         ('hands on the gun', hands_on_gun(donor)),
-        ('join took it', 'took %s' % gun in text),
-        ('as this model', 'took %s (slot %d)' % (gun, slot_of(donor)) in text),
+        ('join took it', re.search(r'took %s\b' % gun, text, re.I) is not None),
+        ('as this model', re.search(r'took %s \(slot %d\)' % (gun, slot_of(donor)), text, re.I) is not None),
         ('magazine out', re.search(r'gun \d+: \w+ -> EMPTY', text) is not None),
         ('carried', re.search(r'-> CARRY', text) is not None),
         ('inserted', re.search(r'-> INSERT', text) is not None),
         ('seated', re.search(r'-> (SEATED|DONE)', text) is not None),
         # shot dry (rsqt_empty), a gun with a charging handle must ask the hand to work it
         ('handle racked', re.search(r'PULL -> RELEASED', text) is not None if has_handle(donor) else True),
-        ('handed back', 'gave %s back' % gun in text or re.search(r'\[MSJOIN\].*back', text) is not None),
-        ('their reload ran', mod_refilled(text, 'took %s' % gun) if MOD else 'TM reload: mag 12' in text),
+        ('handed back', re.search(r'gave %s back' % gun, text, re.I) is not None or re.search(r'\[MSJOIN\].*back', text) is not None),
+        ('their reload ran', (mod_refilled(text, 'took %s' % gun) if MOD.startswith('bd22:') else
+                              ablo_reloaded(text) if MOD else 'TM reload: mag 12' in text)),
         ('reached the end', 'GATE_END' in text),
     ]
     ok = all(c for _, c in checks)
