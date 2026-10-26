@@ -6,17 +6,18 @@ left eye to image files, so you can SEE a held gun and its hands. Every check in
 ran here: hand fits, reloads, fire rates, spin, casings, the axe lock-on.
 
 ## Start here (one command)
+The rig is PREBUILT in `bin/` (`bin/qz` launches it; Linux x86_64, needs Mesa GLES/EGL + OpenAL).
 ```
-sh tools/rig/setup.sh          # ~20-40 min the first time; everything lands in tools/rig/build/
+sh tools/rig/setup.sh          # seconds: zips the probe and the test packs into tools/rig/build/
 cd tools/rig
 python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 Pistol,PlasmaGun t1
 #  -> build/shots/cmp2_t1.png : each gun held, 1.92 on the left, the depot's current set on the right
 ```
-`setup.sh` clones the engine and the Android wrapper at the pinned commits, applies the test-only
-sound log, builds `build/rig/qzdoom`, and zips `build/probe.pk3`, `build/upstream.pk3`,
+`setup.sh` zips `build/probe.pk3`, `build/upstream.pk3`,
 `build/BD22Q_now.pk3` (this depot's `sets/bd22q_1.97/src`) and `build/BD22Q_192.pk3` (tag 1.92 of
-RS_Brutal22WeaponsQ, the owner's baseline). Re-run it after changing the set: it only rebuilds what
-is missing, and always re-zips BD22Q_now.
+RS_Brutal22WeaponsQ, the owner's baseline). Re-run it after changing the set (it re-zips BD22Q_now).
+`sh tools/rig/setup.sh build` rebuilds the engine from source (pinned commits, ~20-40 min) into
+`build/rig/`, which `rig.py` then prefers over `bin/`.
 
 **Game data is the owner's and is not in git:** doom2.wad, brutal22test6.pk3, BD_VoxelPack.pk3.
 `rig.py` looks in `/mnt/user-data/uploads` (where the cloud session had them) or in
@@ -35,7 +36,8 @@ Needs: git, cmake, make, clang or gcc, zip, python3 + Pillow, Mesa GLES/EGL, Ope
 ## What is here
 | file | what |
 |---|---|
-| `setup.sh` | the one command above. Pins: engine `9afc750`, wrapper `a85c819` |
+| `bin/` | the prebuilt rig: `qzdoom` (with the sound log), `libzmusic.so.1`, engine pk3s, `config/qzdoom.ini`, `qz` launcher |
+| `setup.sh` | the one command above. Source pins for `build`: engine `9afc750`, wrapper `a85c819` |
 | `engine/` | the rig build: `build.sh` + `Makefile`, `glue/qz_linux_glue.cpp` (OpenXR stand-in, poses from cvars, frame dump), `shim/` (NDK/JNI header stand-ins), `config/qzdoom.ini` (test ini), `pose.py`, `qz` (launcher) |
 | `s_sound_log.patch` | test-only `QZ_SNDLOG` in the engine's StartSound |
 | `rig.py` | `run(name, script, secs, extra)`: one engine run on the load order + probe; logs to `build/logs/`. Env: `B22_PK3`, `B22_RIG`, `B22_NOPROBE`, `QZ_RES` |
