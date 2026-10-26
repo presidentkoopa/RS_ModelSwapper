@@ -1,0 +1,10 @@
+#!/bin/bash
+# Run the QuestZDoom Linux test binary. Engine looks for res/lzdoom.pk3 and ./config relative to cwd
+# (Android behaviour), so we run inside this dir. Existing relative file args are made absolute first.
+HERE="$(cd "$(dirname "$0")" && pwd)"
+args=()
+for a in "$@"; do
+  if [[ "$a" != -* && "$a" != +* && "$a" != /* && -e "$a" ]]; then a="$(realpath "$a")"; fi
+  args+=("$a")
+done
+cd "$HERE" && exec ./qzdoom "${args[@]}"

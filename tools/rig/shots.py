@@ -1,7 +1,7 @@
 """TEST ONLY: render the held gun in front of the eye and save frames: shots.py <tag> <pk3> <script-part>"""
 import rig, os, sys, glob, shutil, subprocess
 from PIL import Image
-SP = '/tmp/claude-0/-home-claude/c45ffb7c-714e-5a6d-b2b0-72f5eec63d69/scratchpad/shots'
+SP = __import__('rig').B + '/shots'
 def shoot(tag, pk3, body, every=20, secs=500, probe=False):
     d = os.path.join(SP, tag); shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
     env = dict(QZ_RES='480', QZ_DUMP_EVERY=str(every), QZ_DUMP_DIR=d, B22_PK3=pk3)

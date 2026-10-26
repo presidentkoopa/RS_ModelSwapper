@@ -7,7 +7,7 @@ GUNS = ['BrutalPistol','Shot_Gun','SSG','Rifle','BrutalSMG','MP40','AssaultShotg
 out = {}
 for g in GUNS:
     row = {}
-    for tag, extra in (('qzd', ()), ('up', ['/home/claude/rigtest/upstream.pk3'])):
+    for tag, extra in (('qzd', ()), ('up', [__import__('rig').B + '/upstream.pk3'])):
         s = ('wait 120; god; rsq_extra_weapons 1; rsr_reload 0; give ammo; give %s; wait 2; use %s; wait 170; '
              'echo B22MARK; +attack; wait 140; -attack; wait 30; echo B22END; quit') % (g, g)
         rc, t = rig.run('h3_%s_%s' % (tag, g), s, 700, extra=extra)
@@ -18,5 +18,5 @@ for g in GUNS:
     out[g] = row
     print('%-24s qzd %3d%s  upstream %3d%s%s' % (g, row['qzd']['shots'], '' if row['qzd']['ok'] else '?', row['up']['shots'], '' if row['up']['ok'] else '?',
           '  <-- differs' if row['qzd']['shots'] != row['up']['shots'] else ''), flush=True)
-json.dump(out, open('/home/claude/rigtest/logs/holdtest3.json', 'w'), indent=1)
+json.dump(out, open(__import__('rig').OUT + '/holdtest3.json', 'w'), indent=1)
 print('DONE')

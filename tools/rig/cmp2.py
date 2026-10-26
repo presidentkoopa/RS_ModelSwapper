@@ -1,5 +1,5 @@
 """TEST ONLY: cmp2.py <pkA> <pkB> <Gun,...> <tag> [pose]: one run per gun, last frame, A left, B right."""
-import sys; sys.path.insert(0,'/home/claude/rigtest')
+import sys; sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 import shots
 from PIL import Image, ImageDraw
 A, B, guns, tag = sys.argv[1], sys.argv[2], sys.argv[3].split(','), sys.argv[4]

@@ -1,6 +1,6 @@
 """TEST ONLY: R1 -- empty Rifle reload with Grab ammo with = Grip (rsr_grab_with 1), rack by a steadied grip."""
 import re, sys
-sys.path.insert(0, '/home/claude/rigtest')
+sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 import rig, mags
 g = mags.tables()[1]
 FAR = '-0.40 1.3 -0.3 30 0 0'     # 65 cm from the gun hand: a grip press here is a grab, not steadying

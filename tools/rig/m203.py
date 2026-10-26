@@ -1,6 +1,6 @@
 """TEST ONLY: the Rifle's M203 in the rig -- steady, latch, slide the tube open, load a 40 mm round, slide shut, fire."""
 import re, sys
-sys.path.insert(0, '/home/claude/rigtest')
+sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 import rig, handrot as h
 import os
 MG = os.environ.get('GUN') == 'mg'

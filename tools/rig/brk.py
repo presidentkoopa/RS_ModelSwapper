@@ -1,6 +1,6 @@
 """TEST ONLY: break-open reloads in the rig -- open, take a round, seat it in each empty chamber, flick shut."""
 import re, sys
-sys.path.insert(0, '/home/claude/rigtest')
+sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 import numpy as np, rig, handrot as h
 FAR = '-0.25 1.3 -0.3 30 0 0'
 RH = '0.25 1.3 -0.3 %s %s %s'

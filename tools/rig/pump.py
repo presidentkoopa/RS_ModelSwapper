@@ -1,6 +1,6 @@
 """TEST ONLY: two shells into BD22's pump shotgun through the loading port, then a hand pump stroke."""
 import re, sys
-sys.path.insert(0, '/home/claude/rigtest')
+sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 import rig, handrot as h
 PORT = (19.0, 0.0, -2.8); PUSH = (1.0, 0.0, 0.0); DEPTH = 6.0
 SHELL = (1.489, 2.834, -2.439); AXIS = (0.537, -0.009, 0.844)

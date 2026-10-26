@@ -5,7 +5,7 @@ The off hand is posed like the gun hand, but the left hand's L axis is mirrored 
 put the magazine 2 x 3.9 cm off the axis), so the magazine's in-hand offset is flipped in L.
 """
 import re, sys
-sys.path.insert(0, '/home/claude/rigtest')
+sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 import rig
 
 CLS = {1: 'Rifle', 2: 'BrutalPistol', 3: 'BrutalSMG', 4: 'MP40', 5: 'AssaultShotgun', 6: 'RailGun',

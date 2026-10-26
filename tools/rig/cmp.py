@@ -1,9 +1,9 @@
-import sys, os; sys.path.insert(0,'/home/claude/rigtest')
+import sys, os; sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 import shots
 from PIL import Image, ImageDraw
 POSE = '0.0 1.68 -0.40 20 -70 0'
 guns = sys.argv[2].split(',')
-pk = {'v192': '/home/claude/gate_out/BD22Q_192.pk3', 'vnow': sys.argv[1]}
+pk = {'v192': __import__('rig').B + '/BD22Q_192.pk3', 'vnow': sys.argv[1]}
 out = {}
 for tag, pk3 in pk.items():
     body = 'qz_rhand "%s"; rsq_extra_weapons 1; give ammo; ' % POSE

@@ -6,14 +6,16 @@ one chained console script, and returns the log.
 """
 import os, subprocess, sys
 
-RIG = os.environ.get('B22_RIG', '/home/claude/rig2')
-UP = '/mnt/user-data/uploads'
-IWAD = UP + '/DOOMWork/QZD17-engine/build/Release/doom2.wad'
-BD22 = UP + '/DOOMWork/brutal22test6.pk3'
-VOX = UP + '/Desktop/BD_VoxelPack.pk3'
-PROBE = '/home/claude/rigtest/probe.pk3'
-OUT = '/home/claude/rigtest/logs'
-PK3 = os.environ.get('B22_PK3', '/home/claude/gate_out/BD22Q_199f11.pk3')
+HERE = os.path.dirname(os.path.abspath(__file__))
+B = os.environ.get('B22_BUILD', HERE + '/build')		# setup.sh builds everything here
+RIG = os.environ.get('B22_RIG', B + '/rig')
+UP = '/mnt/user-data/uploads'				# where the cloud session had the owner's files
+IWAD = os.environ.get('B22_IWAD', UP + '/DOOMWork/QZD17-engine/build/Release/doom2.wad')
+BD22 = os.environ.get('B22_BD22', UP + '/DOOMWork/brutal22test6.pk3')
+VOX = os.environ.get('B22_VOX', UP + '/Desktop/BD_VoxelPack.pk3')
+PROBE = B + '/probe.pk3'
+OUT = B + '/logs'
+PK3 = os.environ.get('B22_PK3', B + '/BD22Q_now.pk3')
 
 # gun frame (cm, F L U) -> stage pose for the OFF hand, oriented like the gun hand (pitch 30 = level
 # after vr_weaponRotate -30), so the off hand's frame IS the gun's frame and OffDirInGun(axis) = axis.

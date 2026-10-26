@@ -22,7 +22,7 @@ if __name__ == '__main__':
         M = offdir(*k); print(k, 'max err %.3f' % abs(M.T - np.array(m)).max())
 
 from scipy.optimize import minimize
-import sys; sys.path.insert(0, '/home/claude/rigtest')
+import sys; sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 
 def solve_dir(a_hand, t_gun, start=(30, 0, 0)):
     """off-hand pitch, yaw, roll that turn the hand-frame direction a_hand onto the gun-frame t_gun."""
