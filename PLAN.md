@@ -223,6 +223,10 @@ per-gun checklist below, in a headset, signed by the owner.
           token instead (semiauto.zs). Owner's call pending on the same engine fault for all guns.
         * Reload R3 (DONE, rig-proven): held rounds stranded at reserve 0 -- CanTakeMag counts them,
           and the nine magazine guns' Reload jumps past BD22's reserve check on them.
+      OWNER, 2026-10-25 22:4x: off-hand punch stays behind rsq_punch, off by default; free charge
+      ("Check the Chamber by Hand") stays off by default -- both as shipped, closed. Lock-on ring:
+      art from RS_CombatFX, owner picks from seven sheets. NOAUTOFIRE on all guns: owner wants
+      the list of guns it changes before deciding.
       Still to do in F11 (behaviour, not one-liners): R1 grip-mode rack cannot be grabbed
       (STEADY_RANGE 50 vs handles at 8-15 cm); R3 dropped-mag rounds stranded at reserve 0; Ruger
       A_Refire bypasses semi-auto; the four unresolved sound names. Owner's call, not bugs:
