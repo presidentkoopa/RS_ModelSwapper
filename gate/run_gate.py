@@ -226,7 +226,8 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
         # take the off hand back, or no magazine / shell / round is drawn in it
         t += [(60, 'give TMKnife; use TMKnife')]
         t.sort(key=lambda x: x[0])
-    end = 900 if pump or (not brk and has_handle(donor)) or MOD.startswith('doomablo:') else 520
+    # break-open: a round that needs a second or third push to seat runs past 520 (MS_Revolver: shut at t522)
+    end = 900 if pump or brk or (not brk and has_handle(donor)) or MOD.startswith('doomablo:') else 520
     if shots:
         t += [(x, 'screenshot') for x in (100, 140, 170, 200, 230, 260, 300, 340, 400)]
     t += [(end, 'echo GATE_END')]
