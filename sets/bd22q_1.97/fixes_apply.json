@@ -2,7 +2,7 @@
  {
   "fix": "trigger held: every player carries RSQ_TriggerHeld",
   "file": "zscript/rsq/alts.zs",
-  "result": "applied"
+  "result": "already applied"
  },
  {
   "fix": "axe hold: no state loop on release",

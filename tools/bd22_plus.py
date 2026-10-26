@@ -1475,17 +1475,26 @@ Doom 2, not Freedoom: BD_VoxelPack's voxeldef names Doom 2's own sprites and Fre
 
 RELOADING, WITH YOUR HANDS
 --------------------------
-  magazine    12 guns -- Rifle, Pistol, SMG, MP40, Assault Shotgun, Railgun, Plasma,
-              Sniper, Rocket Launcher, and the MG42's belt drum, the Flamethrower's
-              canister and the Unmaker's skull
+EVERY GUN THAT ISN'T A MELEE WEAPON RELOADS BY HAND -- 23 of them. (The BFG and the BFG10k
+stay as Brutal Doom made them.)
+
+  magazine    Rifle, Pistol, SMG, MP40, Assault Shotgun, Railgun, Plasma, Ruger,
+              Rocket Launcher, and the Machinegun's 100-round box
+  drum / can  the MG42's belt drum, the Flamethrower's canister, the Unmaker's skull,
+              the Minigun's ammo box, the Hellish launcher's rear drum
+  cylinder    the Incendiary Launcher's six-shot cylinder
+  bay / block the Devastator's loading bay, the Nuker's warhead block
   pump        the Shotgun
-  break-open  the SSG, the Grenade Launcher, the Shotvolver, and the slug revolver
+  break-open  the SSG, the Grenade Launcher, the Shotvolver, and the slug revolver,
+              plus the Rifle's and the Machinegun's underbarrel 40 mm
 
-Take the magazine out with your off hand, bring a fresh one up, push it home. Break guns swing
-open, take a round at a time or a speedloader, and a flick of the wrist shuts them.
+Take the part out with your off hand, reach to your belt for a fresh one, push it home. Break
+guns swing open, take a round at a time or a speedloader, and a flick of the wrist shuts them.
+Rounds left in a magazine you pulled are kept and go back in, even with no ammo left in reserve.
 
-Brutal Doom never reloads the MG42, the Flamethrower or the Unmaker at all. Their drum, canister
-and skull were carved out of their own meshes so they could come off.
+Brutal Doom never reloads most of the heavy guns at all. Each of their parts was carved out of
+the gun's own mesh so it could come off; on those guns the "magazine" counts down Brutal Doom's
+own ammo, so the ammo you carry and the damage you do are exactly Brutal Doom's.
 
 
 MELEE
@@ -1540,6 +1549,11 @@ voxel pages, and "Reload: tuning and debug" for the capture zones and a step-by-
 Every option defaults to how Brutal Doom behaves, or to the gentler setting, except the VR hands
 and reloading themselves. Turn Reloading to "Stock (BD22)" and the guns reload as they always did.
 
+Every gun fires at Brutal Doom's own rate and does its own damage. (QuestZDoom 17.3 lets a held
+trigger re-fire the pistol, the pump shotgun, the Incendiary Launcher and the dual pistols faster
+than Brutal Doom does on PC; this pack holds them to PC's rate. Want the pistol one shot per pull?
+That's "Pistol Semi Auto".)
+
 
 CREDITS
 -------
@@ -1576,8 +1590,8 @@ KNOWN GAPS
   * The Shotvolver's cylinder has five chambers and a capacity of six; that is how Brutal Doom
     counts it, and loading a round at a time inherits it.
   * The Machinegun's HUD is its model: its sprite lumps are placeholders.
-  * The MP40, the Minigun and the Machinegun throw their brass from the body, not a port: there
-    is no ejection port modelled in those three meshes to measure.
+  * The Minigun throws its brass from the body: there is no ejection port modelled in its mesh.
+  * The Minigun's ammo box in your hand is the small box off the gun; a bigger one is planned.
 
 Built from the RSQ Weapon Depot. Every number in it is measured off a mesh or parsed out of the
 parent mod -- sets/bd22q_1.97/PROVENANCE.txt says what came from where and how to rebuild it.
