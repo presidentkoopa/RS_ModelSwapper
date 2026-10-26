@@ -377,6 +377,58 @@ def charge_tokens(dry=False):
         open(p, 'w', newline='\n').write(rsr)
 
 
+def refresh_hands(src, only=None, dry=False):
+    """Re-copy every lifted donor's HAND row (GunOne .. Trigger, GunHookTwo / GunRotTwo) from a BD22Q
+    src's own handtable.zs, by BD22 class, onto the donor's existing slot. The first lift copied
+    BD22Q's table as it stood that day; BD22Q's poses moved on (1.92 is the owner's reference), and
+    three rows here (AssaultShotgun, Revolver, Sniper) no longer matched any BD22Q release. Prints
+    every field that changes.  python -B tools_kit/lift_bd22.py --hands <RS_Brutal22WeaponsQ/src> [gun ...] [--dry]"""
+    p = os.path.join(ROOT, 'zscript_depot/rsq/handtable.zs')
+    hand = read(p)
+    b_hand = read(os.path.join(src, 'zscript/rsq/handtable.zs'))
+    hidx = L.tc_index(b_hand)
+    for g in (only or list(GUNS)):
+        d = donor(g)
+        s = L.slot_of(hand, d)
+        if s is None or g not in hidx:
+            print('  %-16s %-24s no slot here or no BD22 row -- left' % (g, d)); continue
+        want = L.read_row(b_hand, hidx[g])
+        have = L.read_row(hand, s)
+        vals, diffs = {}, []
+        for name, (kind, v) in want.items():
+            if name not in have or kind != 'arr':
+                continue
+            for ax, x in v.items():
+                y = have[name][1].get(ax)
+                if y is not None and y.strip('"') != x.strip('"'):
+                    try:
+                        if abs(float(x) - float(y)) < 5e-4:
+                            continue
+                    except ValueError:
+                        pass
+                    diffs.append('%s.%s %s -> %s' % (name, ax, y, x))
+            vals[name] = (kind, v)
+        # BD22Q tables without GunHookTwo/GunRotTwo (1.92): the two-hand hook defaults to the hook
+        for two, one in (('GunHookTwo', 'GunHook'), ('GunRotTwo', 'GunRot')):
+            if two in have and two not in want and one in want:
+                for ax, x in want[one][1].items():
+                    if have[two][1].get(ax) != x:
+                        diffs.append('%s.%s %s -> %s' % (two, ax, have[two][1].get(ax), x))
+                vals[two] = ('arr', dict(want[one][1]))
+        print('  %-16s %-24s slot %d <- BD22 row %d: %s' % (g, d, s, hidx[g], '; '.join(diffs) if diffs else 'same'))
+        if diffs:
+            hand = L.set_row(hand, s, vals)
+    if not dry:
+        write(p, hand)
+
+
+if __name__ == '__main__' and '--hands' in sys.argv:
+    k = sys.argv.index('--hands')
+    rest = [x for x in sys.argv[k + 2:] if not x.startswith('--')]
+    refresh_hands(sys.argv[k + 1], rest or None, '--dry' in sys.argv)
+    sys.exit(0)
+
+
 if __name__ == '__main__' and '--charge-tokens' in sys.argv:
     charge_tokens('--dry' in sys.argv)
     sys.exit(0)
