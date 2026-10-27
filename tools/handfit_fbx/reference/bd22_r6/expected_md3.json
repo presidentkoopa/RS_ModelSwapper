@@ -1,0 +1,22 @@
+{
+ "fbx_r6_R.md3": {
+  "sha256": "6390319e319d28802f92522f7a766ff3e1b1df1cdf997effb80a5f69edc2cda3",
+  "bytes": 117948,
+  "frames": 4,
+  "frame_sha256": [
+   "922293726a1318d3fe48f4b5dda822ad43f0d3422b91c94a09f7cea90eff5b72",
+   "d1c07a28de45f2baa15f15a199f80bf6af566bef27aa2fd40a4757362d7c2727",
+   "13b2bca96a3aeaafcbf3afc35a3ce7fac3ecbcfb28274c0a78eeedc6a8b2dddc",
+   "6f9b5bfaac01af62d4eb12e969aead2aac72f1c3ed3b2b4ae3231fb27f0bc5a9"
+  ]
+ },
+ "fbx_r6_L.md3": {
+  "sha256": "a7b9d77b966e710215b4dffa57c456180377cba4572ced40127a8eb7c3ee7cff",
+  "bytes": 86844,
+  "frames": 2,
+  "frame_sha256": [
+   "c707675e05c81ac0628efde4c6adbf9d8832caa849ac2f4fb3342b27691a1560",
+   "e2970bf572d07bc13fcbb942367658719ae4fd30faf236f5adc05f3562c93fc1"
+  ]
+ }
+}

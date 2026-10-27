@@ -12,3 +12,7 @@ tools/rig/bin/libGLESv3.so
 tools/rig/bin/saves/
 # tools/questhands check sheets and temp images (RSQ_QH_OUT default)
 tools/questhands/out/
+# tools/handfit_fbx run output (HANDFIT_WORK default): results, distance-field cache, MD3/pk3, sheets, engine runs
+tools/handfit_fbx/work/
+# the FBX hand is never committed (provenance: tools/handfit_fbx/README.md)
+*.fbx

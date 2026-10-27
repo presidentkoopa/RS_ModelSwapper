@@ -1,0 +1,9 @@
+{
+ "round3_final.json": "350e01a72c0b85a37c7df4c0d9b1c76a50f10bbd8ca741353bfba45d97cc0f77",
+ "round4_final.json": "4f831c75f5f5242429fffe706988c92a45f918429ee57346bb7a2b9e2f132e1a",
+ "squeeze_r5.json": "05bcf33ead8bc17c35e3fbb86c9dff7aaa02206513a09b8dbbe6a996c4eef583",
+ "round6_final.json": "3a20f894d7b2268237a980388ac18764a4bb323955d8c4619fd106012b56d423",
+ "squeeze_r6.json": "440eaf983a662851a7c28f5613951a325ec6cd4bf2846bccc3ad2b162ef792f6",
+ "gun_modeldef_R3.json": "5aefa26b3dab73a6b947ce299449e135c1eb75a5dc0d4665ff7f1c311314dffa",
+ "gun_modeldef_R6.json": "fd960f2f3bb04fa390e089dd31f87b73ab04662d1bb029ed9edd3d8470713b41"
+}
