@@ -1,6 +1,6 @@
 """realplay.py -- the owner's real play, on the Quest rig (triage 2026-10-27, made a gate).
 
-    python3 -B gate/realplay.py <pack.pk3> [Class,Class,...]
+    python3 -B gate/realplay.py <pack.pk3> [Class,Class,...]      (Class=MS_Donor: that model picked on it)
 
 doom2 -> brutal22test6 -> BD_VoxelPack -> the pack, the rig's own ini (shipped cvars), the AUTO picker
 (no rs_fm_picks), the pack's own vrhand.zs with the rig's scripted off hand (gate/rtest) so reloads
@@ -48,8 +48,8 @@ def script(g):
     return 'rsrtest_script 7'   # shipped rsr_grab_with 0: the off TRIGGER takes the magazine (and works a handle)
 
 
-def run(pk3, g):
-    out = os.path.join(H, 'out', 'rp_' + g)
+def run(pk3, g, pick=None):
+    out = os.path.join(H, 'out', 'rp_' + g + ('_' + pick if pick else ''))
     shutil.rmtree(out, ignore_errors=True)
     ov, _tm = run_gate.build_aux(out, vr=True)
     ini = open(os.path.join(RIG, 'config', 'qzdoom.ini'), encoding='latin-1').read()
@@ -84,7 +84,9 @@ def run(pk3, g):
     log = os.path.join(out, 'engine.log')
     home = os.path.join(out, 'home'); os.makedirs(home, exist_ok=True)
     argv = [os.path.join(RIG, 'qz'), '-iwad', os.path.join(GD, 'doom2.wad'), '-file', os.path.join(GD, 'brutal22test6.pk3'),
-            os.path.join(GD, 'BD_VoxelPack.pk3'), os.path.abspath(pk3), ov,
+            os.path.join(GD, 'BD_VoxelPack.pk3'), os.path.abspath(pk3), ov] + (
+            # Class=Donor: the player's own pick from the menu (rs_fm_picks), as run_gate.py sets it
+            ['+set', 'rs_fm_picks', '%s:%s:%d:%d' % ((g,) + run_gate.shelf_pick(pick) + (run_gate.shelf_pick(pick)[1],))] if pick else []) + [
             '-config', os.path.join(out, 'gate.ini'), '-nosound', '-nomusic', '+logfile', log, '-warp', '1', '+' + '; '.join(cmds)]
     env = dict(os.environ, HOME=home, QZ_SNDLOG='1')
     so = open(os.path.join(out, 'stdout.txt'), 'w')
@@ -191,7 +193,8 @@ if __name__ == '__main__':
     bad = 0
     print('%-18s %-26s row takes magout back  %s' % ('class', 'model', '  '.join(n.split()[0] for n in ['err', '1', '2', '3', '4', '5', 'end'])))
     for g in guns:
-        g, d, r, n, mo, gb, rl, c, dup = run(pk3, g)
+        g, pick = (g.split('=') + [None])[:2]     # Class=Donor picks that model on the class
+        g, d, r, n, mo, gb, rl, c, dup = run(pk3, g, pick)
         ok = all(x for _, x in c)
         bad += not ok
         print('%-18s %-26s %-3s %5d %6d %4d  %s  %s%s%s' % (g, d or '(none)', 'yes' if r else 'no', n, mo, gb,

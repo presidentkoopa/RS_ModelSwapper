@@ -1,0 +1,372 @@
+{
+ "MS_BD_Unmaker": {
+  "ref": "models/vanilla/unmaker/Unmaker/unmaker_wm.md3",
+  "mesh": "models/hud/Unmaker/Unmaker.md3",
+  "frame": 4,
+  "nref": 11541,
+  "nmesh": 11541,
+  "scale": 0.999988,
+  "rot_deg": 6.25,
+  "t": [
+   0.0207,
+   0.0042,
+   0.0231
+  ],
+  "max_ref_to_mesh": 1.3471,
+  "max_mesh_to_ref": 1.6112,
+  "within_0_05": 10968,
+  "frame0": {
+   "scale": 0.9999999999999987,
+   "max": 5.169825964861259e-14
+  },
+  "body_f0_to_rest": {
+   "scale": 1.00002,
+   "rot_deg": 6.247,
+   "t": [
+    -0.731,
+    0.0,
+    -6.12
+   ],
+   "max": 0.0278
+  },
+  "parts_vs_body_at_rest": {
+   "mp_salvocannon/361": {
+    "off_body": 0.292
+   },
+   "mp_salvocannon/249": {
+    "off_body": 2.21
+   }
+  },
+  "carved": {
+   "surfaces": [
+    [
+     "body",
+     10931
+    ],
+    [
+     "flap",
+     361
+    ],
+    [
+     "lever",
+     249
+    ]
+   ],
+   "frames": 16,
+   "unlabelled": 0,
+   "rot_deg": 0.0
+  }
+ },
+ "MS_brt_Unmaker": {
+  "ref": "models/vanilla/unmaker/Unmaker/unmaker_wm.md3",
+  "mesh": "models/bd/Unmaker/Unmaker.md3",
+  "frame": 0,
+  "nref": 11541,
+  "nmesh": 11541,
+  "scale": 1.0,
+  "rot_deg": 0.0,
+  "t": [
+   56.5156,
+   -0.0156,
+   2.5469
+  ],
+  "max_ref_to_mesh": 0.0,
+  "max_mesh_to_ref": 0.0,
+  "within_0_05": 11541,
+  "carved": {
+   "surfaces": [
+    [
+     "body",
+     10931
+    ],
+    [
+     "flap",
+     361
+    ],
+    [
+     "lever",
+     249
+    ]
+   ],
+   "frames": 16,
+   "unlabelled": 0,
+   "rot_deg": 0.0
+  }
+ },
+ "MS_BD_Flamethrower2": {
+  "ref": "models/vanilla/flamers/Flamethrower2/flamethrower2_wm.md3",
+  "mesh": "models/hud/Flamethrower/Flamethrower2.md3",
+  "frame": 0,
+  "nref": 6155,
+  "nmesh": 6155,
+  "scale": 1.0,
+  "rot_deg": 0.0,
+  "t": [
+   -0.0,
+   0.0,
+   0.0
+  ],
+  "max_ref_to_mesh": 0.0,
+  "max_mesh_to_ref": 0.0,
+  "within_0_05": 6155,
+  "carved": {
+   "surfaces": [
+    [
+     "body",
+     4660
+    ],
+    [
+     "canister",
+     1306
+    ],
+    [
+     "pilotflame",
+     109
+    ],
+    [
+     "trigger",
+     80
+    ]
+   ],
+   "frames": 6,
+   "unlabelled": 0,
+   "rot_deg": 0.0
+  }
+ },
+ "MS_brt_Flamethrower2": {
+  "ref": "models/vanilla/flamers/Flamethrower2/flamethrower2_wm.md3",
+  "mesh": "models/bd/Flamethrower2/Flamethrower2.md3",
+  "frame": 0,
+  "nref": 6155,
+  "nmesh": 6155,
+  "scale": 1.0,
+  "rot_deg": 0.0,
+  "t": [
+   57.0312,
+   0.4688,
+   -8.3594
+  ],
+  "max_ref_to_mesh": 0.0,
+  "max_mesh_to_ref": 0.0,
+  "within_0_05": 6155,
+  "carved": {
+   "surfaces": [
+    [
+     "body",
+     4660
+    ],
+    [
+     "canister",
+     1306
+    ],
+    [
+     "pilotflame",
+     109
+    ],
+    [
+     "trigger",
+     80
+    ]
+   ],
+   "frames": 6,
+   "unlabelled": 0,
+   "rot_deg": 0.0
+  }
+ },
+ "MS_MG_Bolter": {
+  "ref": "models/vanilla/plasma/Bolter/bolter_wm.md3",
+  "mesh": "models/hud/Bolter/Bolter.md3",
+  "frame": 0,
+  "nref": 4565,
+  "nmesh": 4565,
+  "scale": 1.0,
+  "rot_deg": 0.0,
+  "t": [
+   -0.0,
+   0.0,
+   -0.0
+  ],
+  "max_ref_to_mesh": 0.0,
+  "max_mesh_to_ref": 0.0,
+  "within_0_05": 4565,
+  "carved": {
+   "surfaces": [
+    [
+     "body",
+     4025
+    ],
+    [
+     "mag",
+     468
+    ],
+    [
+     "trigger",
+     72
+    ]
+   ],
+   "frames": 5,
+   "unlabelled": 0,
+   "rot_deg": 0.0
+  }
+ },
+ "MS_meat_Bolter": {
+  "ref": "models/vanilla/plasma/Bolter/bolter_wm.md3",
+  "mesh": "models/meat/Bolter/Bolter.md3",
+  "frame": 0,
+  "nref": 4565,
+  "nmesh": 4565,
+  "scale": 1.0,
+  "rot_deg": 0.0,
+  "t": [
+   37.6719,
+   0.2031,
+   -4.4688
+  ],
+  "max_ref_to_mesh": 0.0,
+  "max_mesh_to_ref": 0.0,
+  "within_0_05": 4565,
+  "carved": {
+   "surfaces": [
+    [
+     "body",
+     4025
+    ],
+    [
+     "mag",
+     468
+    ],
+    [
+     "trigger",
+     72
+    ]
+   ],
+   "frames": 5,
+   "unlabelled": 0,
+   "rot_deg": 0.0
+  }
+ },
+ "MS_MG_Tec9": {
+  "ref": "models/vanilla/smgs/Tec9/tec9_wm.md3",
+  "mesh": "models/hud/Tec9/tec9.md3",
+  "frame": 0,
+  "nref": 5469,
+  "nmesh": 5469,
+  "scale": 1.0,
+  "rot_deg": 0.0,
+  "t": [
+   0.0,
+   -0.0,
+   0.0
+  ],
+  "max_ref_to_mesh": 0.0,
+  "max_mesh_to_ref": 0.0,
+  "within_0_05": 5469,
+  "carved": {
+   "surfaces": [
+    [
+     "body",
+     3849
+    ],
+    [
+     "bolt",
+     168
+    ],
+    [
+     "bolt_2",
+     186
+    ],
+    [
+     "magazine",
+     1206
+    ],
+    [
+     "trigger",
+     60
+    ]
+   ],
+   "frames": 6,
+   "unlabelled": 0,
+   "rot_deg": 0.0
+  }
+ },
+ "MS_meat_TEC9": {
+  "ref": "models/vanilla/smgs/Tec9/tec9_wm.md3",
+  "mesh": "models/meat/TEC9/tec9.md3",
+  "frame": 0,
+  "nref": 5469,
+  "nmesh": 5469,
+  "scale": 1.0,
+  "rot_deg": 0.0,
+  "t": [
+   39.3125,
+   0.0781,
+   -1.6562
+  ],
+  "max_ref_to_mesh": 0.0,
+  "max_mesh_to_ref": 0.0,
+  "within_0_05": 5469,
+  "carved": {
+   "surfaces": [
+    [
+     "body",
+     3849
+    ],
+    [
+     "bolt",
+     168
+    ],
+    [
+     "bolt_2",
+     186
+    ],
+    [
+     "magazine",
+     1206
+    ],
+    [
+     "trigger",
+     60
+    ]
+   ],
+   "frames": 6,
+   "unlabelled": 0,
+   "rot_deg": 0.0
+  }
+ },
+ "MS_brt_HitlersBuzzsaw": {
+  "ref": "models/bd22/bd22/buzzsaw_wm.md3",
+  "mesh": "models/bd/HitlersBuzzsaw/HitlersBuzzsaw.md3",
+  "frame": 0,
+  "nref": 18972,
+  "nmesh": 18972,
+  "scale": 1.0,
+  "rot_deg": 0.0,
+  "t": [
+   47.5938,
+   0.9531,
+   3.3594
+  ],
+  "max_ref_to_mesh": 0.0,
+  "max_mesh_to_ref": 0.0,
+  "within_0_05": 18972,
+  "carved": {
+   "surfaces": [
+    [
+     "body",
+     15974
+    ],
+    [
+     "magazine",
+     3164
+    ],
+    [
+     "trigger",
+     60
+    ]
+   ],
+   "frames": 3,
+   "unlabelled": 0,
+   "rot_deg": 1.7075472925031877e-06
+  }
+ }
+}
