@@ -241,7 +241,7 @@ per-gun checklist below, in a headset, signed by the owner.
         * **M32 reload key does nothing.** IncendiaryLauncher.dec kept BD22's stub `Reload:` (M202 A 0 /
           Goto Ready3) after ours; DECORATE takes the later label. The rig pressed reload at 1 of 6.
 
-- F12 **THE DEPOT'S TEST RIG AND VR-HAND TEST TOOLS, ONE HOME** (owner, 2026-10-26: "I would like the
+- F12 DONE 2026-10-26 (63b35d5, 6847150, 28e7598, 8e262c8; (3) md3.py/md3_write.py not moved: nothing imports them -- HANDOFF F12). **THE DEPOT'S TEST RIG AND VR-HAND TEST TOOLS, ONE HOME** (owner, 2026-10-26: "I would like the
       depot to have a test rig for linux and the relevant test tools to use vr hands"; chosen 21:5x
       as the work while he is out of the headset). Moves, does not invent: (1) the prebuilt
       QuestZDoom 17.3 rig from RS_ModelSwapper `gate/qz_rig/bin` (26 MB, guarded by PINS) into

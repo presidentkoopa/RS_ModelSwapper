@@ -17,11 +17,59 @@ that is not on the plan.**
 
 **READ docs/HEADSET_PASS_1.99_2026-10-26.md FIRST: the owner's headset pass on 1.99 found 21 problems; 1.92 is the baseline.**
 
+## F12 (2026-10-26): the Depot's test rig and VR-hand test tools, one home -- DONE bar what is open below
+Done (measured, on a fresh `git clone` of this repo at 28e7598, no other repo on disk; one engine at a
+time under `flock -o -s /home/claude/rig.lock`):
+- **`tools/rig/bin` = the prebuilt QuestZDoom 17.3 rig** (26 MB), moved from RS_ModelSwapper
+  `gate/qz_rig/bin` (98ae205). `qzdoom` byte-identical to ModelSwapper's and to the source build in
+  `tools/rig/build/rig`; launcher = the Depot's `engine/qz` (guard against `PINS`). `setup.sh`,
+  `rig.py` and `docs/reference/bd22q_192_poses/make_gallery.py` default to it; `B22_RIG` overrides;
+  `setup.sh build` still builds from PINS into `build/rig`. Not gitignored (only `bin/saves/` and the
+  run-time `bin/libGLESv3.so` link are).
+  `sh tools/rig/setup.sh` -> `qz: engine OK: QuestZDoom qzd17.3 (9afc750917bf54870f2d16b7ba0d00f2b77e6fb5),
+  engine 4.14.3, ZScript 4.14.2`, rc 0 (it still fetches tag 1.92 of RS_Brutal22WeaponsQ from GitHub
+  for the baseline pack, as before).
+- **cmp2 example on the owner's load order** (doom2 -> brutal22test6 -> BD_VoxelPack -> pack; data
+  from /home/claude/gamedata via B22_IWAD/B22_BD22/B22_VOX): `cmp2.py build/BD22Q_192.pk3
+  build/BD22Q_now.pk3 BrutalPistol,Plasma_Gun t1` -> `build/shots/cmp2_t1.png`, both guns held with
+  hands in 1.92 and now; 4 runs, each `engine OK`, the only script errors BD_VoxelPack's own voxeldef
+  four. The README's old `Pistol,PlasmaGun` runs too but draws no pistol and shows the start rifle
+  for PlasmaGun -- README now names BD22's classes.
+- **`tools/questhands/`** = RS_QuestHands `tools/posefix/hands`: handfit, minigun_fit and their imports
+  (align, ermac, fitall, guns, gunview, handtable, hudrender, pk3model, support), HAND_FITTING.md,
+  fits.json; README lists each. Code unchanged but paths: `RSQ_GUNPACK` (default the 1.92 checkout
+  setup.sh makes), `RSQ_ERMAC` and `RSQ_HAND_MD3` (Ermac's, not vendored; clear error when unset or a
+  file is missing), `RSQ_QH_OUT` (default `tools/questhands/out`, gitignored), `RSQ_FITS`.
+  Measuring mode on 1.92: `support.front_point('Rifle', 28)` = [28, 0.0, 1.38] (section U -1.12..6.29)
+  and a gunview side sheet. Over every `wrap` gun, front_point reproduces fits.json's target for 16
+  of 17; Rocket_Launcher measures [25, 0, 5.1] at its table F while fits.json has [22, 0, 4.6].
+  Nothing refit, no pose changed.
+
+Not done:
+- **md3.py / md3_write.py** (depot_import/found) NOT moved: nothing in tools/questhands or tools/kit
+  imports them (grep), and the lane's instruction was to move them only if the questhands tools do.
+  PLAN F12 (3) lists them; the call is the lead's/owner's.
+- `fitall.py` / `minigun_fit.py` / `align.fit` cannot run on this machine: Ermac's GUN meshes
+  (pistol/berreta.md3 ... incinerator/flamethrower.md3) are not here -- his models/ has only hand/,
+  ammo_hand/, heatwave/. The error says so.
+
+Open:
+- The engine rewrites the tracked `tools/rig/bin/config/qzdoom.ini` on exit (on these runs only the
+  timestamp line). `git checkout` it before committing (rig README, traps).
+- `rig.py`'s game-data defaults are still the old upload paths (/mnt/user-data/uploads/DOOMWork/...,
+  Desktop/...), which do not exist here; set B22_IWAD/B22_BD22/B22_VOX (README shows it).
+- `tools/kit/` keeps older copies of align/ermac/fitall/gunview/hudrender/support (same code,
+  Windows paths). Not touched.
+- fits.json's Rocket_Launcher target (F 22) vs handtable (F 25): which one 1.92 shipped is a
+  question, not changed.
+- Not moved (not imported by the two tools): RS_QuestHands hands/ bladeinfo, gripcheck, handframe,
+  hudview, regen_displayed, rtest/; HAND_FITTING.md still names them and ../rsq_hands_gen.py, ../vplus.
+
 ## F11 started (2026-10-25): fixes and polish
 - FIXED (2026-10-26): **the prebuilt rig `tools/rig/bin` (pushed c896330) was NOT QuestZDoom 17.3** -- 4.15pre /
   ZScript 4.12, from a later unreleased commit. Removed. The rig is now only ever the commits in
   `tools/rig/PINS` (qzd17.3, 9afc750); `engine/qz` refuses any other engine. Prebuilt 17.3 rig:
-  RS_ModelSwapper `gate/qz_rig/bin` (use `B22_RIG=`), or `sh tools/rig/setup.sh build`. The glue now has
+  RS_ModelSwapper `gate/qz_rig/bin` (use `B22_RIG=`), or `sh tools/rig/setup.sh build`. (F12: now `tools/rig/bin`, the default.) The glue now has
   ModelSwapper's qzt_* test-driver hook too. Results measured on the old bin/ are void; re-run them.
 - DONE: `bd22_plus.py pk3` puts `.md3` lumps in as LZMA (zip method 14), the rest deflated. Same
   689 lumps from `sets/bd22q_1.97/src`, byte-identical on read-back: **30 MB, was about 50**.
