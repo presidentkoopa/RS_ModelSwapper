@@ -112,3 +112,14 @@ support, 1 flamer support. (In the pack they are `models/rsq/fbx/fbx_r3_R.md3` /
   on fire, so there is no pull to follow.
 - Script and env names keep the prototype's (`LANEC_*`, `final3/4/6`, `fbx_r3_*` in the pack) so the round-6 frames
   reproduce byte for byte.
+
+## Rule: start from the existing poses (owner, 2026-10-27)
+Every gun starts from an existing named pose:
+- pistol grip / trigger / squeeze;
+- foregrip / vgrip;
+- pump / wrap;
+- under / cup.
+
+A new grip is solved from scratch only when none of these fits.
+- **The Flamethrower lesson:** its gas-pump grip IS the pump-shotgun support grip, palm sideways round a bar along the bore. In VR a pistol-held controller under a drawn pump-wrap is normal, so the wrist pin is relaxed for that pose the same way support hands relax it. Ignoring this cost over an hour (rounds 6-7). The Flamethrower is parked at r5 (lane notes: FLAMETHROWER_PARKED.md).
+- **Time box:** each batch has a fixed time box, and the owner gets the sheet when it ends.
