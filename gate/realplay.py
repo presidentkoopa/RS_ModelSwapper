@@ -197,7 +197,10 @@ if __name__ == '__main__':
         g, d, r, n, mo, gb, rl, c, dup = run(pk3, g, pick)
         ok = all(x for _, x in c)
         bad += not ok
+        # A run where the hands never took a part is not a hand reload, whatever the checks say
+        # (round 5: Unmaker/Flamethrower2/MG42 printed PASS with 0 takes -- tests must match real play).
+        verdict = ('PASS' if n > 0 else 'NOHAND') if ok else 'FAIL'
         print('%-18s %-26s %-3s %5d %6d %4d  %s  %s%s%s' % (g, d or '(none)', 'yes' if r else 'no', n, mo, gb,
-              ' '.join('ok' if x else 'FAIL' for _, x in c), 'PASS' if ok else 'FAIL',
+              ' '.join('ok' if x else 'FAIL' for _, x in c), verdict,
               ' (Reload = Ready loop: no hand reload)' if rl else '', ' dup %s' % dup if dup else ''), flush=True)
     sys.exit(1 if bad else 0)

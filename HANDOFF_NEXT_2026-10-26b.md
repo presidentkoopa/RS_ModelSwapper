@@ -483,9 +483,8 @@ Everything here is **rig only, not headset-confirmed**.
     MagLen, MagCentre identical; hand hooks differ by the grip fits).
 * **Rig, testmod gun, model picked (`run_gate.py --vr --shots`): 5/5 PASS.** Each: empty -> reload button ->
   part out -> off hand takes one (HELD 2201 Q..P@rsq_hands) -> carried -> inserted -> seated -> given back
-  -> the mod's reload refilled. Frames on the sheet (the part is clearly visible for the canister,
-  Bolter mag and the drum at its seat; the Unmaker skull and the black TEC-9 mag are small in the crop,
-  the HELD log lines show them in the hand).
+  -> the mod's reload refilled. (CORRECTED in 5b below: the HELD lines only say the layer is set. The
+  part in the hand is SHOWN for 4 of 5; the Unmaker skull is not.)
 * **BD22 load order, real play (doom2 -> brutal22test6 -> BD_VoxelPack -> ms_r5, realplay.py, now with
   `Class=MS_Donor` picks): fire, burst, fire empty, reload button, the hands, fire again.**
   PASS with 2 takes / 2 magazine-outs / 2 give-backs and firing after: Plasma_Gun=MS_MG_Bolter,
@@ -505,3 +504,64 @@ Everything here is **rig only, not headset-confirmed**.
 * MS_wolf_MG42 still shares the old slot 9 (no layers drawn). Not in this job.
 * The Unmaker rest frame (BD_ frame 4 vs brt_ frame 0) is still the owner's call.
 * run_all on the rig: see section 3.
+
+# Round 5b (2026-10-27 10:02-10:4x, ModelSwapper lane): the round-5 claims re-checked
+
+Same build: `/home/claude/lane_a_out/ms_r5.pk3`, sha256 `599212cb8a2bc028964bd8ce4f1ac0583194789b9dca861bf65ab7fb2e274346`
+(no pack content changed in 5b). Sheet `/home/claude/lane_a_out/r5_five_reloads.png` rebuilt from new rig
+frames (Unmaker, TEC-9, Buzzsaw; Flamethrower2 and Bolter rows kept from round 5). Logs
+`/home/claude/lane_a_out/r5/logs/rig2_*, rig3_*, rig4_*, rig5_*`. **Rig only, not headset-confirmed.**
+
+## 1. Done (measured)
+* **Transform, independently re-checked** by nearest POSITION (bbox start + ICP, scale + translation, no
+  vertex order; scratchpad poscheck.py / partcheck.py, md3cmp.py's loader), against the Plus pk3's own
+  `*_wm.md3` (read from /mnt/user-data/uploads/DOOMWork/RS_VR_Weapons/RS_VR_Weapons_Plus.pk3):
+  all 8 RS_VR donor meshes (hud/ and bd/ or meat/ copies) **scale 1.00000, max 0.0000 both ways**, every
+  surface equal to the same-named _wm surface; translations equal plusport_transforms.json. The Plus
+  carved part meshes on the drawn part surfaces: `wm_unmaker_skull` = flap+lever (610 v), `wm_flamethrower2_can`
+  = canister (1306), `wm_bolter_mag` = mag (468) all scale 1.00000, max 0.0000; `wm_tec9_mag` = magazine
+  (1206) scale 0.99984, max 0.21 units. The fitted offsets equal the cards' magcenter to 0.01.
+  Buzzsaw: the drawn `bd/HitlersBuzzsaw.md3` equals BD22 Weapons Q's own carved
+  `src/models/bd/HitlersBuzzsaw/HitlersBuzzsaw_rsr.md3` (lane-b-1.99x) exactly (19198 v, body/magazine/trigger,
+  max 0.0000); against `buzzsaw_wm.md3` scale 1.00000, max 0.0000 (the carve split 226 seam vertices).
+* **BD22's own code, parsed** (brutal22test6.pk3 actors/Weapons): `MG42` has no Reload label, fires
+  `FBF_USEAMMO` from Clip2; `Unmaker` has no Reload label (SoulAmmo); `Flamethrower2` has `ReadyDry: Reload:`
+  (its idle loop -- the owner's fix-2 rule says no hand reload there). So round 5's "nothing to join" is
+  from the code, not from animation.
+* **Rig reruns, dense shots through the hold:**
+  * TEC-9: PASS; the magazine is in the off hand at t245/t255, into the well t265. One earlier rerun
+    FAILED before any reload (the +reload at t115 never reached the gun: no `TM reload` line, all
+    later steps FAIL); the next run passed. 2 PASS / 1 flake of 3 on this build.
+  * Buzzsaw: PASS; the drum is in the off hand at t255-t275 (held t221-289).
+  * Unmaker: PASS on every logged step (held t231-265, carried, inserted, seated, given back, the mod's
+    reload ran), **but the skull is NOT shown in the hand** in 4 camera poses (QZ_SHOT_HMD pitch -40,
+    -15, -65 and head 1.0 m pitch +15). Seen: the skull leaving the hand for the well (t275) and seated.
+    Why (measured from the row): the skull seats fully (Mouth 6.14 >= MagLen 6.07), the card takes it
+    by its top, so the row puts the part centre 6.2 cm from the palm on the wrist side (-z of the
+    off-hand frame; the canister/Bolter/TEC-9 parts are on +z). The fist is between the camera and the
+    skull. Not fixed here (a grip change is a hand-placement change).
+* `gate/realplay.py`: a run with 0 hand takes now prints `NOHAND`, not PASS. Round 5's
+  Unmaker/Flamethrower2/MG42 lines (0 takes, "PASS") were that case.
+
+## 2. Not done / open
+* **The Unmaker skull in the hand is not shown working.** Lead: hold it by its middle (gen_rsr grip
+  'base', or a grip on the part for any part with Mouth >= MagLen) and re-shoot.
+* **In the owner's real game the Unmaker, Flamethrower2 and MG42 models on their OWN BD22 classes still
+  have no hand reload** (real play: 0 takes). The magazine guns that borrow these models
+  (Plasma_Gun / Rifle / BrutalSMG) reload by hand. A magazine on those three BD22 guns is the owner's call.
+* Regression: only a rig spot check this round; the full 74 (two rig halves + desktop) was not re-run
+  on ms_r5.
+
+## 3. Regression spot check (rig, ms_r5) -- a gate-driver regression found
+* `run_all.py --vr --only` 6 donors untouched by round 5: **2 of 6 PASS** (`r5/rig_spot.txt`):
+  MS_alien_rifle, MS_BD22_Pistol, MS_BD22_SMG, MS_Pistol FAIL "fire handle handed" (all PASS in
+  final_rig_half1, 2026-10-26). Log: magazine taken, carried, SEATED, then stuck in CHARGE to t900 -- the
+  driver never caught the handle.
+* **BLOCKER, cause NOT found.** Tried: the driver's wrist relaxing in CHARGE (round 5's TurnWrist
+  quarter turns persist until IDLE). Same 4 still FAIL, Buzzsaw PASS (`r5/rig_spot2.txt`), so that
+  was not it; the edit was reverted, not committed.
+* Next, in this order: run MS_Pistol with `ms_r4.pk3` and today's gate (pack vs harness); if r4 also
+  fails, check out `gate/rtest/rsr_testdriver.zs` from 7c3d00f and rerun; if only r5 fails, diff 517f816's
+  `zscript_depot/rsr/rsr_guns.ms.zs` rows 1-80 (it rewrote 360 lines) and `SNDINFO.ms`.
+* Until this is found, **ms_r5.pk3 must not go to the headset**: 4 guns that passed in round 4 do not
+  finish a reload on the rig.
