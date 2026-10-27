@@ -263,6 +263,19 @@ per-gun checklist below, in a headset, signed by the owner.
       reproduces the r6 BrutalPistol and Flamethrower2 frames byte-identically, measured. Open, recorded:
       licences for the FBX source; per-set frame letters; the pistol trigger through the finger on fire
       frames (0.66 cm, owner: minor).
+- F14 **CRITICAL, NOT STARTED: THE NEW-GUN PIPELINE, COMPLETE** (owner, 2026-10-27 16:32: "I want the
+      pipeline, complete. With the correct qzd rig and all tools needed. Mark this for a critical task."
+      16:32: "That can happen later just don't forget it"). Queued after BD 2.0 hands; not to be started
+      before the owner says go. Done = a fresh clone of this repo takes one md3 (rifle archetype first)
+      and, with tools in this repo only, produces: the parts carved/named (mag, bolt/rack, trigger);
+      a measured card (ejection port, mag/shell insert point, rack/pump/charge stroke); FBX hands posed
+      (gun hand + support) by the one method (wrist pinned, the gun moves); reload tables; and the gun
+      as a choice in ModelSwapper. It runs on tools/rig (QuestZDoom 17.3, 9afc750, PINS-guarded) on the
+      owner's load order with zero script errors, with rig frames as proof ("rig only, not
+      headset-confirmed"), plus one runbook. Gaps known today (2026-10-27): surface naming is partly by
+      eye; a one-surface md3 needs carve_by_ref first; the fitter needs per-gun scene.GUNS/gunlm.py
+      entries by hand; no step adds a new gun to ModelSwapper as a choice (needs the owner's
+      replace/new-pickup call per gun); ModelSwapper r5's CHARGE regression blocks rifle reloads.
 ## Set meshes: animated originals only (owner, 2026-10-27)
 "every single one of my md3s is animated with dozens and dozens of frames." The Plus, Vanilla and Modern
 sets (sets/plus_0.7, vanilla_0.9, modern_0.9) were built from REMA's single-frame *_wm.md3 reference meshes
