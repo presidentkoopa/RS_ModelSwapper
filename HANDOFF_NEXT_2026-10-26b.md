@@ -375,3 +375,71 @@ Branch `modelswapper-2.0-bd22-lift`, on origin 6c26bdf. Build `/home/claude/lane
   * The fix is not small: rows are generated at each donor's placement, so a mesh-keyed table needs rows in mesh
     space plus a per-donor placement transform (or a mesh -> canonical donor alias wherever placement is
     identical, which covers the 14 twins). Not done; owner's go needed for the shape.
+
+---
+
+# Round 4 finish (2026-10-27, ModelSwapper lane), 75-min box
+
+Branch `modelswapper-2.0-bd22-lift`. Build `/home/claude/lane_a_out/ms_r4.pk3`
+(sha256 `f43ceca12565747a02e66badef85c4ffc36337785cbcf318aeeb3e6cb58eb3a5`, = 3f38eec's code).
+Everything here is **rig only, not headset-confirmed**. The rig was shared with Lane B the whole time
+(load 2.0-4.7), so held gestures were slow.
+
+## 1. Done (measured)
+* **The 9 `_wm` rows -> the owner's originals.** Read-only from `E:\DOOMWork\VR_WeaponSetRebuild`, staged to
+  `/mnt/user-data/uploads/DOOMWork/VR_WeaponSetRebuild/`:
+  `br_vr/PK3_pbr/Models/Weapons/Hud/{Flamethrower2,Unmaker,HitlersBuzzsaw}/*.md3` + `Modeldef.{Flamethrower2,Unmaker,HitlersBuzzsaw}.def`;
+  `BR_VR_MeatGrinder/Models/{Bolter/Bolter.md3,TEC9/tec9.md3}` + `Modeldef.{Bolter,TEC9}.def`;
+  `Aliens-Eradication-VR-addon/models/weapons/flamer/m260b.md3` + `modeldef[.quest].flamethrower.txt`.
+  BrutalWolf has no buzzsaw (no folder or MODELDEF), so the buzzsaw is br_vr's.
+  * **Each original IS the mesh the shelf already draws**: byte-identical (`models/bd/Flamethrower2`,
+    `models/bd/HitlersBuzzsaw`, `models/meat/TEC9`, `models/alien/flamer/m260b.md3`) or the same vertices moved
+    by one rigid translation (spread 0.000; the `models/hud/` copies after tools_reorigin_all.py).
+  * **md3label on each original: no magazine moves in any of them.** Frames are fire / idle / lower only.
+    Flamethrower2 6 frames (trigger 1.24, part 0.98); Unmaker 16 (idle 0-4, lower 5-7, idle 8-15; parts 1.2);
+    HitlersBuzzsaw 3 (trigger 1.05); Bolter 5 (trigger 0.90); Tec9 6 (bolt/slide 7.09 along -X in the fire
+    frames 3-4, a recoil cycle, not a reload). So no reload row can come from their animation: the old rows stay.
+    The Aliens M260B is the second flamethrower; it already has its own canister row (slot 1, canister moves 186 units).
+  * **Duplicates collapse (hands):** brt_Flamethrower2, meat_Bolter and meat_TEC9 draw their pair's vertices
+    within 0.01 mm (twin_hands.drawn) and now use its hand slot (6 / 15 / 16). hand_gap: 0.09/0.03, 0.03/0.06,
+    0.02/0.01 cm. They already shared the reload slot (5 / 10 / 11).
+  * **Not collapsed: the Unmaker pair.** MS_BD_Unmaker rests on frame 4, MS_brt_Unmaker on frame 0. Frame 4 is
+    10.3 units into the "lower" motion (frames 0-3 are identical). Which rest is right is the owner's call.
+  * HitlersBuzzsaw (only brt_) still has no hand row.
+* **Pump: a parked gun can always be fired out (09bc6d0).** Real play, BD22 Shot_Gun dry-fired with the
+  trigger held: BD22 loads ONE shell and leaves through Pump2. The probe reads that as a whole-tube reload
+  and parks the gun until the hand pushes 1 shell. The scripted hand gripped at the pouch and never got a
+  shell, so the gun was parked for good. A new trigger press now ends that hold (the mod already loaded the
+  shell). Final build: Shot_Gun real play PASS. **But** the hand still pushes nothing there. The AGAIN press
+  freed the gun, which went back into BD22's reload (5 shells by the mod); the next press fired.
+  **Open: why the hand takes no shell in that hold.**
+* **Gate (realplay.py):** decision D is checked per cycle (one shot fired, one take, one give-back, no shot
+  from a fire press while held, given back by the cycle's end). Revolver is a break slot and gets the rsb
+  driver. The pump's give-back is recognised. The first break shot waits 70 more tics.
+* Disk: deleted ms_a1..a6, ms_4227925, ms_r4_wip, ms_r4_final (+ its sha). Kept ms_r2_final, ms_r3_final, ms_r4.
+
+## 2. Decision D (SSG / M79: break, load, close after EVERY shot): NOT clean on the rig
+* Final build, real play (logs `/home/claude/lane_a_out/r4/logs/rp_SSG_r4final.log`, `rp_GL_r4final.log`):
+  * SSG cycle 1: shot -> took -> mod loaded -> held -> hands open/load/close -> gave back. Clean.
+  * **SSG cycle 2: a leak, the same as on the pre-fix build (`rp_SSG_r4.log`).** The mod's reload left through
+    a different exit (parked "at -298 of its reload", not -413), a fire press at that tic fired (SHOT 4 t1301,
+    SSGAmmo 2 -> 0), and the now-empty gun was taken a SECOND time (a double break cycle). The way-out
+    park (a36c744) only sees the direct next state.
+  * M79: cycle 1 clean. Cycle 2's hands did not finish inside 500 tics (carry from t1346, no insert by t1740).
+    That is load 2.6-3.2, the rig's known held-gesture miss. It was not re-run at low load.
+  * Cycle 0 on both: the 6-tic press at t200 did not fire (the gun was not ready). The hold press fired
+    instead, so the checker counts it as "fired while held". That is a timing artefact, not a leak.
+* **Tried and reverted (0ef7b2c -> 3f38eec):** park a break-open gun the moment the mod's reload fills it.
+  Real play got worse: the SSG was taken twice per cycle (the rest of the mod's reload re-entered the join
+  after the give-back) and the M79 was stuck after cycle 1. Logs: `rp_SSG_midpark.log`, `rp_GL_midpark.log`.
+* Next step: map the SSG's -298 exit (SSG.dec) and make LeavesReload / the re-arm see it. Or keep the gun
+  disarmed after a give-back until its psprite has been in Ready once.
+
+## 3. Gates on ms_r4: NOT complete
+* Real play, final build: **Shot_Gun PASS; SSG FAIL (the D leak); GrenadeLauncher FAIL (D cycle 2 under load).**
+  Revolver and the other 14 BD22 classes were not reached in the box.
+* rig halves / desktop / extras: started on the pre-fix build, then stopped (1 result in 10 min: MS_AE_Flamer
+  PASS). **Counts vs r2 (74/74, 74/74, 13/13) are NOT re-proven on r4.** Run `lane_a_out/r4/final_gates.sh
+  /home/claude/lane_a_out/ms_r4.pk3` when the rig is calm.
+* The owner's load order ran with no script error from the pack on every engine run above (doom2 ->
+  brutal22test6 -> BD_VoxelPack -> ms_r4).
