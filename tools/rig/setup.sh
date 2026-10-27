@@ -1,12 +1,13 @@
 #!/bin/bash
 # TEST ONLY, never ships. One command from a fresh clone to a working rig:
-#   B22_RIG=<RS_ModelSwapper>/gate/qz_rig/bin sh tools/rig/setup.sh   the test packs only (seconds),
-#                                       using ModelSwapper's prebuilt QuestZDoom 17.3 rig
-#   sh tools/rig/setup.sh               the test packs, and the engine from source if build/rig has none
-#   sh tools/rig/setup.sh build         rebuild the engine from source into build/rig/ (~20-40 min)
-# The engine is ALWAYS QuestZDoom 17.3, the commits in PINS. The launcher (engine/qz) refuses any
-# other engine: a prebuilt rig from a later, unreleased commit (4.15pre) was shipped here on
-# 2026-10-26 and ran silently; it was removed.
+#   sh tools/rig/setup.sh               the test packs (seconds), using the prebuilt QuestZDoom 17.3
+#                                       rig in tools/rig/bin (from RS_ModelSwapper gate/qz_rig/bin, F12)
+#   B22_RIG=<dir> sh tools/rig/setup.sh the same, checking another rig instead of tools/rig/bin
+#   sh tools/rig/setup.sh build         rebuild the engine from source into build/rig/ (~20-40 min);
+#                                       use it with B22_RIG=tools/rig/build/rig
+# The engine is ALWAYS QuestZDoom 17.3, the commits in PINS. The launcher (engine/qz = bin/qz) refuses
+# any other engine: a prebuilt rig from a later, unreleased commit (4.15pre) was shipped here on
+# 2026-10-26 and ran silently; it was removed the same day. tools/rig/bin is the correct 17.3 build.
 # Builds under tools/rig/build/ (gitignored):
 #   build/src/qzd   emawind84/gzdoom @ QZD_REV (tag qzd17.3), + s_sound_log.patch
 #   build/src/qzw   emawind84/questzdoom @ QZW_REV (the Android wrapper: VR input code, headers)
@@ -26,7 +27,7 @@ fetch() {	# dir url rev
   [ -d "$1/.git" ] || { git init -q "$1"; git -C "$1" remote add origin "$2"; }
   [ "$(git -C "$1" rev-parse HEAD 2>/dev/null)" = "$3" ] || { git -C "$1" fetch -q --depth 1 origin "$3"; git -C "$1" checkout -q -f FETCH_HEAD; }
 }
-if [ "$1" = build ] || { [ -z "$B22_RIG" ] && [ ! -x "$B/rig/qzdoom" ]; }; then
+if [ "$1" = build ]; then
   fetch "$B/src/qzd" "$QZD_REPO" "$QZD_REV"
   [ "$(git -C "$B/src/qzd" rev-parse HEAD)" = "$QZD_REV" ] || { echo "setup: engine source is not $QZD_REV" >&2; exit 3; }
   git -C "$B/src/qzd" submodule update -q --init --depth 1 2>/dev/null || true
@@ -38,6 +39,8 @@ if [ "$1" = build ] || { [ -z "$B22_RIG" ] && [ ! -x "$B/rig/qzdoom" ]; }; then
   QGZ="$B/src/qzd" JNI="$B/src/qzw/Projects/Android/jni" bash "$B/rig/build.sh"
 fi
 [ -x "$B/rig/qzdoom" ] && { cp "$HERE/engine/qz" "$B/rig/qz"; cp "$HERE/PINS" "$B/rig/PINS"; }
+if [ "$1" = build ]; then RIG="${B22_RIG:-$B/rig}"; else RIG="${B22_RIG:-$HERE/bin}"; fi
+[ -x "$RIG/qzdoom" ] && [ -x "$RIG/qz" ] || { echo "setup: no engine at $RIG (expected tools/rig/bin from git, or: sh tools/rig/setup.sh build)" >&2; exit 3; }
 ( cd "$HERE/probe" && rm -f "$B/probe.pk3" && zip -q -r -D "$B/probe.pk3" . )
 T=$(mktemp -d); cp "$HERE/upstream_zscript.txt" "$T/zscript.txt"; cp "$HERE/upstream_MAPINFO.txt" "$T/MAPINFO.txt"
 ( cd "$T" && rm -f "$B/upstream.pk3" && zip -q -r -D "$B/upstream.pk3" . ); rm -rf "$T"
@@ -47,7 +50,6 @@ if [ ! -f "$B/BD22Q_192.pk3" ]; then
     { rm -rf "$B/src/bd22q_192"; git clone -q --depth 1 --branch 1.92 https://github.com/presidentkoopa/RS_Brutal22WeaponsQ "$B/src/bd22q_192"; }
   ( cd "$B/src/bd22q_192/src" && zip -q -r -D "$B/BD22Q_192.pk3" . )
 fi
-RIG="${B22_RIG:-$B/rig}"
 timeout 120 "$RIG/qz" -norun >/dev/null 2>"$B/logs/engine_check.txt" || true
 grep -q 'qz: engine OK' "$B/logs/engine_check.txt" || { cat "$B/logs/engine_check.txt" >&2; echo "setup: the rig at $RIG is not QuestZDoom 17.3" >&2; exit 3; }
 echo "rig ready: $RIG/qz ($(grep 'qz: engine OK' "$B/logs/engine_check.txt" | cut -c15-))"

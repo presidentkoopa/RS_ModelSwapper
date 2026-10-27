@@ -17,7 +17,7 @@ from PIL import Image, ImageChops
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEPOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
-RIGDIR = os.environ.get('B22_RIG', os.path.join(DEPOT, 'tools/rig/build/rig'))
+RIGDIR = os.environ.get('B22_RIG', os.path.join(DEPOT, 'tools/rig/bin'))
 IWAD = os.environ.get('B22_IWAD', '/home/claude/gamedata/doom2.wad')
 BD22 = os.environ.get('B22_BD22', '/home/claude/gamedata/brutal22test6.pk3')
 VOX = os.environ.get('B22_VOX', '/home/claude/gamedata/BD_VoxelPack.pk3')
