@@ -291,7 +291,7 @@ TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
       Brutality. Probably a lot of carving needed"). Starting reference: the PB Voxel Patch v2 pickups
       (9 weapons, OBJ, credit required). Built in its own repo like BD22; queued after BD 2.0 and
       ModelSwapper 2.0. Probably for the REMA engine (UZDXREMA), not QuestZDoom: PB runs badly on mobile
-      (owner). Not scheduled; not to be started without the owner's yes.
+      (owner); on Quest, ModelSwapper already covers PB. Not scheduled; not to be started without the owner's yes.
 
 ## Per set
 1 inventory the parent mod · 2 measure every mesh fresh, carve/bake parts, sheets, owner signs placement ·
