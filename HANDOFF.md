@@ -89,6 +89,13 @@ Open:
   Desktop/...), which do not exist here; set B22_IWAD/B22_BD22/B22_VOX (README shows it).
 - `tools/kit/` keeps older copies of align/ermac/fitall/gunview/hudrender/support (same code,
   Windows paths). Not touched.
+- `tools/kit/md3_carve_disc.py` (2026-10-27, F11 scope polish): md3_carve_surface's sibling for a piece
+  that is NOT axis-aligned. Selects a surface's triangles in a tilted disc (plane from another surface's
+  centroid + PCA normal, or given; band along the normal; radius about it; one --frame) and splits them
+  to a new surface (--name) or deletes them (--delete). Measured: on BD22 RailGun.md3 (ready frame 3,
+  plane from ScopeGlass, band -0.15..0.25, radius 1.65) it picks exactly surface 0 tris 2131-2154, the
+  same 24 an independent numpy check picks. NOT applied to the shipped RailGun: that fan lies behind the
+  glass (ray cast), and the lens fault was MODELDEF's whole-model Skin (RS_Brutal22WeaponsQ r6-scope2).
 - fits.json's Rocket_Launcher target (F 22) vs handtable (F 25): which one 1.92 shipped is a
   question, not changed.
 - Not moved (not imported by the two tools): RS_QuestHands hands/ bladeinfo, gripcheck, handframe,
