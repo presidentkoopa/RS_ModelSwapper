@@ -179,11 +179,20 @@ class RSR abstract
 	// ModelSwapper's own reload foley is named ms/... (SNDINFO.ms). The player can turn it off
 	// (ms_reload_sounds 0) and hear only the loaded mod: its own reload still plays its own sounds
 	// when the hands hand the gun back. A pack's own names are never touched.
+	// "ModelSwapper quiet" (owner, 2026-10-27): every hand reload in this pack is on a loaded mod's
+	// gun, and that gun's own reload plays its own sounds and drops its own magazine. With
+	// ms_reload_sounds 0 -- the shipped default -- ModelSwapper adds NONE: no foley under any name
+	// (ms/... or a row naming the mod's own sound) and no dropped magazine, shell or casing of its own
+	// (Quiet). Before, "mod's reload first" played both sets and dropped two magazines (triage
+	// finding 3). 1 puts ModelSwapper's foley and drops back.
+	play static bool Quiet(PlayerPawn mo)
+	{
+		return mo && PlayerInt(mo.player, 'ms_reload_sounds', 0) == 0;
+	}
+
 	play static bool Muted(PlayerPawn mo, String snd)
 	{
-		if (snd.Left(3) != "ms/")
-			return false;
-		return PlayerInt(mo.player, 'ms_reload_sounds', 1) == 0;
+		return Quiet(mo);
 	}
 
 	play static bool InHold(PSprite psp, Weapon w)
@@ -416,6 +425,8 @@ class RSR_State play
 	// a magazine falls: the gun's own magazine as a world actor, where it is now
 	void Fall(PlayerPawn mo, Vector3 at)
 	{
+		if (RSR.Quiet(mo))
+			return;		// the mod's reload drops its own magazine
 		Vector3 pos = RSVR_VRHand.HandPos(mo) + FromGun(at);
 		let m = RSR_DroppedMag(Actor.Spawn('RSR_DroppedMag', pos));
 		if (!m)

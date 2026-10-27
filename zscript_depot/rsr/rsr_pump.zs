@@ -693,6 +693,8 @@ class RSP_State play
 	// a shell falls: the gun's own shell as a world actor, where it is now (gun frame cm)
 	void DropShell(PlayerPawn mo, Vector3 at)
 	{
+		if (RSR.Quiet(mo))
+			return;		// ModelSwapper quiet: the mod's own reload spawns its own
 		Vector3 pos = RSVR_VRHand.HandPos(mo) + geo.FromGun(at);
 		let d = RSP_DroppedShell(Actor.Spawn('RSP_DroppedShell', pos));
 		Log(mo, "the shell drops");

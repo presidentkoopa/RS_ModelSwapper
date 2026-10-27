@@ -549,6 +549,8 @@ class RSB_State play
 
 	void ThrowCasing(PlayerPawn mo, Vector3 at, Vector3 dirGun, double spd)
 	{
+		if (RSR.Quiet(mo))
+			return;		// ModelSwapper quiet: the mod's own reload spawns its own casings
 		Vector3 pos = RSVR_VRHand.HandPos(mo) + FromGun(at);
 		let m = Actor.Spawn('RSB_Casing', pos);
 		if (!m)

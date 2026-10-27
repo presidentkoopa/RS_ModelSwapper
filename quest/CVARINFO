@@ -167,7 +167,7 @@ user bool ms_off_fist = true;	// the off hand is these hands (the fists) unless 
 user int ms_shell_grab = 1;
 user bool ms_hand_pump = true;	// pump a foreign shotgun by hand after each shot (off: the mod pumps by itself)
 user bool ms_charge_dry = true;	// a gun reloaded from empty asks for its charging handle (off: the magazine is the whole reload)
-user int ms_reload_sounds = 1;	// 1 ModelSwapper's reload foley while the hands work, 0 the loaded mod's sounds only
+user int ms_reload_sounds = 0;	// 0 (default, owner 2026-10-27 "ModelSwapper quiet"): the loaded mod's reload sounds and dropped magazine only; 1 adds ModelSwapper's foley and its own dropped magazine / shell / casing
 user bool rsr_debug = false;		// print every key code pressed, and each reload step
 
 // 1.93: take the charging handle / slide with no reload running, so the action can be cracked
