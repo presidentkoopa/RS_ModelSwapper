@@ -28,7 +28,48 @@ def lpose(F, L, U, pitch=30.0, yaw=0.0, roll=0.0):
     return '%.4f %.4f %.4f %.1f %.1f %.1f' % (RHAND[0] - L / 100.0, RHAND[1] + U / 100.0,
                                              RHAND[2] - F / 100.0, pitch, yaw, roll)
 
+def pack_cvars(pk3):
+    """(name, default) for every cvar the pack's CVARINFO lumps declare."""
+    import re, zipfile
+    out = []
+    with zipfile.ZipFile(pk3) as z:
+        for n in z.namelist():
+            if os.path.basename(n).upper().startswith('CVARINFO'):
+                t = re.sub(r'//[^\n]*', '', z.read(n).decode('latin-1'))
+                out += re.findall(r'\b(?:user|server)\s+(?:noarchive\s+|cheat\s+|latch\s+|nosave\s+)*\w+\s+(\w+)\s*=\s*"?([^";]*)"?\s*;', t)
+    return out
+
+def cvar_report(cv, text):
+    """The engine's value of each pack cvar at start ('"x" is "v"'); a saved ini value that hides a
+    feature (the owner's rsq_hands=false, 2026-10-27) shows here instead of hiding silently."""
+    import re
+    got = dict(re.findall(r'"(\w+)" is "([^"]*)"', text))
+    def norm(v):
+        v = v.strip().lower()
+        try: return float({'true': 1, 'false': 0}.get(v, v))
+        except ValueError: return v
+    off = [(n, got[n], d) for n, d in cv if n in got and norm(got[n]) != norm(d)]
+    hid = [n for n, v, d in off if norm(v) == 0 and norm(d) != 0]	# a feature on by default, saved off
+    return 'RIG CVARS %d of %d read; FEATURES SAVED OFF: %s; not at default: %s' % (
+        sum(n in got for n, _ in cv), len(cv), ', '.join(hid) or 'none',
+        '; '.join('%s=%s (default %s)' % o for o in off) or 'none')
+
+def ini_report(cv, ini):
+    """Before launch: the pack cvars a saved ini sets away from the pack's default. The rig and the
+    owner's qzdoom ini both keep them; a hidden feature (rsq_hands=false) shows here."""
+    import re
+    got = {}
+    if os.path.exists(ini):
+        for k, v in re.findall(r'^(\w+)=(.*)$', open(ini, errors='replace').read(), re.M):
+            got[k.lower()] = v
+    t = cvar_report(cv, '\n'.join('"%s" is "%s"' % (n, got[n.lower()]) for n, _ in cv if n.lower() in got))
+    return t.replace('RIG CVARS', 'INI CVARS %s:' % ini, 1)
+
 def run(name, script, secs=150, extra=()):
+    cv = pack_cvars(PK3) if os.path.exists(PK3) else []
+    if cv:
+        print(ini_report(cv, RIG + '/config/qzdoom.ini'), file=sys.stderr)
+    script = ''.join('%s; ' % n for n, _ in cv) + script	# the console prints each value at start
     os.makedirs(OUT, exist_ok=True)
     log = '%s/%s.log' % (OUT, name)
     for f in (log, log + '.out'):
@@ -49,9 +90,14 @@ def run(name, script, secs=150, extra=()):
     for f in (log, log + '.out'):
         if os.path.exists(f):
             text += open(f, errors='replace').read()
+    if cv:
+        print(cvar_report(cv, text), file=sys.stderr)
     return rc, text
 
 if __name__ == '__main__':
+    if sys.argv[1:2] == ['--cvars']:		# rig.py --cvars <pk3> <ini>: check any ini (e.g. the owner's) without a run
+        print(ini_report(pack_cvars(sys.argv[2]), sys.argv[3]))
+        sys.exit(0)
     rc, t = run(sys.argv[1], sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 150)
     print('rc', rc)
     print(t[-4000:])
