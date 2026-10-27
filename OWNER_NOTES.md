@@ -9,3 +9,4 @@
   - **Bolter:** only one, from MeatGrinder.
   - **Tec9:** from MeatGrinder. The other SMG is BrutalSMG, a different gun.
   - The owner looks at VR_WeaponSetRebuild himself; take only what he points to (his rule: "lots of noise ... need my eyes").
+- 2026-10-27 08:15: **A skin-tone slider for the hands, a 2.0 requirement** (also in BD22 Weapons Q 2.0). It comes with the switch to the FBX hands. Discrete steps (pre-recoloured skins swapped by the option) are safe on 17.3; a smooth slider needs a shader proven on the rig first.
