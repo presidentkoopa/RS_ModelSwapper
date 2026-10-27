@@ -110,6 +110,9 @@ class RSQ_HandTable abstract
 		if (donor == "MS_wolf_KAR98")	return 74;	// tools_kit/handfit_cards.py (rifle: hand 106 / hand2 15) on card MS_wolf_Kar98, contact 1.17 / 1.11 cm
 		if (donor == "MS_brt_SSG")	return 69;	// = MS_BD22_SSG, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was -)
 		if (donor == "MS_d64_SSG")	return 69;	// = MS_BD22_SSG, drawn identically (tools_kit/twin_hands.py, 0.00000 m; was -)
+		if (donor == "MS_brt_Flamethrower2")	return 6;	// = MS_BD_Flamethrower2, the same original drawn identically (tools_kit/twin_hands.py drawn(), 0.00000 m; owner 2026-10-27: one model behind the pair; was -)
+		if (donor == "MS_meat_Bolter")	return 15;	// = MS_MG_Bolter, the same original drawn identically (tools_kit/twin_hands.py drawn(), 0.00000 m; owner 2026-10-27: one model behind the pair; was -)
+		if (donor == "MS_meat_TEC9")	return 16;	// = MS_MG_Tec9, the same original drawn identically (tools_kit/twin_hands.py drawn(), 0.00001 m; owner 2026-10-27: one model behind the pair; was -)
 		return 0;
 	}
 

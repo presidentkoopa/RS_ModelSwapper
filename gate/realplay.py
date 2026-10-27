@@ -57,7 +57,11 @@ def run(pk3, g):
     s = 130
     if g in BREAK:
         for k in range(3):
-            t += [(s, 'echo RP_BREAKSHOT %s %d; +attack' % (g, k)), (s + 6, '-attack')]; s += 520
+            # decision D: one shot, then the gun is held until the hands have broken / loaded / closed it.
+            # A fire press while held must do nothing (RP_HOLDFIRE), and the next cycle's shot must fire.
+            t += [(s, 'echo RP_BREAKSHOT %s %d; +attack' % (g, k)), (s + 6, '-attack'),
+                  (s + 60, 'echo RP_HOLDFIRE %s %d; +attack' % (g, k)), (s + 66, '-attack'),
+                  (s + 500, 'echo RP_CYCLEEND %s %d' % (g, k))]; s += 520
         s += 40
     else:
         for k in range(3):
@@ -96,11 +100,30 @@ def judge(g, text):
     phase, takes, magouts, gaveback = 'pre', [], [], []
     donor, pre_take, snd, ms_snd, fired_after = '', 0, {}, 0, False
     mag_back = None
+    cyc, last_mag = [], None
     ready_loop_skip = 'its Reload label is its Ready loop' in text
     for l in text.splitlines():
-        m = re.match(r'RP_(GUN|SELECTED|SHOT|BURST|EMPTY|RELOAD|AGAIN|BREAKSHOT) ', l)
+        m = re.match(r'RP_(GUN|SELECTED|SHOT|BURST|EMPTY|RELOAD|AGAIN|BREAKSHOT|HOLDFIRE|CYCLEEND) ?(\S*) ?(\d*)', l)
         if m:
-            phase = m.group(1); continue
+            phase = m.group(1)
+            if phase == 'BREAKSHOT':
+                cyc.append({'take': 0, 'back': 0, 'held_shot': False, 'shot': False, 'm0': last_mag})
+            if phase in ('HOLDFIRE', 'CYCLEEND') and cyc:
+                cyc[-1][phase] = cyc[-1]['back']     # gave back before the held press / by the cycle's end
+            continue
+        mm0 = re.match(r'AMMO t\d+ mag (\d+)', l)
+        if mm0:
+            prev_mag, last_mag = last_mag, int(mm0.group(1))
+        if cyc and phase in ('BREAKSHOT', 'HOLDFIRE'):
+            mm = re.match(r'AMMO t\d+ mag (\d+)', l)
+            if mm:
+                n, c0 = int(mm.group(1)), cyc[-1]
+                if c0['m0'] is not None and n < c0['m0']:
+                    if phase == 'HOLDFIRE' and c0['back'] == 0:
+                        c0['held_shot'] = True   # fired while the hands still held it
+                    elif phase == 'BREAKSHOT':
+                        c0['shot'] = True
+                c0['m0'] = n
         m = re.search(r'"ms_donor_main" is "(\w*)"', l)
         if m and phase == 'SELECTED':
             donor = m.group(1)
@@ -115,12 +138,16 @@ def judge(g, text):
                 mag_back = min(mag_back, n) if n < mag_back else n
         if re.search(r'\[MSJOIN\] took %s\b|%s pump: took it' % (g, g), l):
             takes.append(phase)
+            if cyc:
+                cyc[-1]['take'] += 1
             if phase in ('GUN', 'SELECTED', 'SHOT', 'BURST'):
                 pre_take += 1
         if re.search(r'rsr t\d+ gun \d+: IDLE -> EMPTY', l):
             magouts.append(phase)
         if re.search(r'\[MSJOIN\] gave %s back \(hands finished' % g, l):
             gaveback.append(phase)
+            if cyc:
+                cyc[-1]['back'] += 1
             mag_back = None if not gaveback else mag_back
         if re.match(r'(rsr|rsb|rsp) t\d+ sound ', l):
             ms_snd += 1
@@ -130,7 +157,14 @@ def judge(g, text):
         if m:
             k = (m.group(1), m.group(2)); snd[k] = snd.get(k, 0) + 1
     if g in BREAK:
-        fired_after = len(re.findall(r'RP_BREAKSHOT', text)) == 3 and len(gaveback) >= 2
+        # D: every cycle = one shot that fired, exactly one take and one give-back, no shot while held,
+        # and given back before the cycle ended (never stuck)
+        fired_after = len(cyc) == 3 and all(c['take'] == 1 and c['back'] == 1 and not c['held_shot']
+                                            and c.get('CYCLEEND') == 1 for c in cyc) \
+            and all(c['shot'] for c in cyc[1:])
+        for i, c in enumerate(cyc):
+            print('  D %s cycle %d: shot fired %s, take %d, back %d, fired while held %s, given back by cycle end %s' % (
+                g, i, c['shot'], c['take'], c['back'], c['held_shot'], c.get('CYCLEEND') == 1), flush=True)
     dup = [k for k, v in snd.items() if v > 1 and re.search(r'reload|clip|mag|shell|open|close|insert|load', k[1], re.I)]
     reloads = len(takes) - pre_take
     lifted = LIFTED.get(g)
