@@ -63,7 +63,54 @@ def track(mesh_path, surf_index, body_index=None):
     return np.array(out)
 
 
-def insertion(P, lo, hi, tol=0.35):
+def rigid_group(mesh_path, surf_index, lo, hi, tol=0.05):
+    """Every surface that rides with the magazine as one rigid body over frames lo..hi+1.
+
+    A drum is not one surface: the shelf RPG (models/*/RPG/RPG.md3) carries its drum as eight
+    surfaces, round2..round9, that share one transform per frame. Tracking one round
+    (surf 7) follows that round around the drum's twist-lock and wobbles (9.12 -> 10.35 ->
+    5.94 units on the approach), so the walk back stops one frame early. Their joint centroid
+    is the drum's, which the twist does not move. Returns the surface list (always holding
+    surf_index); a magazine that is one surface gets [surf_index] and is measured as before.
+    """
+    m = read_md3(mesh_path)
+    S = m['surfs']
+    hi = min(hi + 1, m['nframes'] - 1)
+    M = S[surf_index]['xyz']
+    out = [surf_index]
+    for i, s in enumerate(S):
+        if i == surf_index:
+            continue
+        X = s['xyz']
+        ok = True
+        for f in range(lo, hi + 1):
+            R, t = kabsch(M[f], M[lo])
+            if np.abs(X[f] @ R.T + t - X[lo]).max() > tol:
+                ok = False
+                break
+        if ok and np.linalg.norm(X[hi] - X[lo], axis=1).max() > tol:
+            out.append(i)
+    return out
+
+
+def track_group(mesh_path, surfs, body_index=None):
+    """track() over the joint vertices of several surfaces (see rigid_group)."""
+    m = read_md3(mesh_path)
+    S = m['surfs']
+    cand = [i for i in range(len(S)) if i not in surfs]
+    if body_index is None:
+        named = [i for i in cand if S[i]['name'] == 'body']
+        body_index = named[0] if named else max(cand, key=lambda i: S[i]['nverts'])
+    B = S[body_index]['xyz']
+    out = []
+    for f in range(m['nframes']):
+        R, t = kabsch(B[f], B[0])
+        X = np.vstack([S[i]['xyz'][f] for i in surfs])
+        out.append((X @ R.T + t).mean(0))
+    return np.array(out)
+
+
+def insertion(P, lo, hi, tol=0.35, swap_cut=False):
     """Stroke and axis of the final approach, inside the card's mag_in window.
 
     The anchor is where the magazine ENDS -- P[hi], the end of the insertion
@@ -89,6 +136,15 @@ def insertion(P, lo, hi, tol=0.35):
     f = hi
     while f > lo and d[f - 1] >= d[f] - 1e-9:
         f -= 1
+    # A one-frame jump far larger than every other step of the approach is not the hand moving
+    # the part: it is the old magazine leaving and the new one appearing (the shelf RPG drum:
+    # 37.6 units from frame 24 to 25, every later step 0.3-4.2). The approach starts after it.
+    steps = np.linalg.norm(np.diff(P[f:hi + 1], axis=0), axis=1)
+    if len(steps) > 2:
+        j = int(np.argmax(steps))
+        rest = np.delete(steps, j)
+        if swap_cut and j == 0 and steps[j] > 3.0 * rest.max():
+            f += 1
     start = f
     stroke = float(d[start])
     if stroke < tol:
@@ -122,13 +178,28 @@ def from_card(card_path, model_dir, mesh):
     P = track(p, int(si.group(1)))
     if P is None:
         return None
+    nf = len(P)
     # A card can label more than one mag_in window. The FIRST is not always the insertion: the
     # rocket launchers' first (6..7) is the rocket twitching with the shot's recoil, 1.6 units,
     # and the load is 19..33 (measured, models/hud/RocketLauncher/RPG.md3 surface 7: 53.6 units
     # out at frame 24, seated at 34). The insertion is the window with the longest approach.
     best = None
     for a, b in mi:
-        r = insertion(P, int(a), int(b))
+        a, b = int(a), int(b)
+        g = rigid_group(p, int(si.group(1)), a, b)
+        if len(g) == 1:
+            # one-surface magazine: measured exactly as before this change
+            r = insertion(P, a, b)
+            if r and r[0] is not None and (best is None or r[0] > best[0]):
+                best = r
+            continue
+        Q = track_group(p, g)
+        # A window that stops one frame short of the seat: the shelf RPG's card says mag_in
+        # 19..33, but the drum is still 0.31 units out at 33 and seats at 34, the first idle
+        # frame. Extend while the next frame still moves the part and is where it then rests.
+        while b + 2 < nf and np.linalg.norm(Q[b + 1] - Q[b]) > 1e-3 and np.linalg.norm(Q[b + 2] - Q[b + 1]) < 1e-3:
+            b += 1
+        r = insertion(Q, a, b, swap_cut=True)
         if r and r[0] is not None and (best is None or r[0] > best[0]):
             best = r
     return best
@@ -186,5 +257,11 @@ def ceiling(card_path, model_dir, mesh):
     i = int(si.group(1))
     if n < 1e-9 or i >= len(m['surfs']):
         return None
-    d = m['surfs'][i]['xyz'][0] @ (axis / n)
+    # the magazine's length is the rigid group's (a drum is several surfaces, see rigid_group)
+    g = [i]
+    for a, b in re.findall(r'mag_in\s+(\d+)\.\.(\d+)', c):
+        gg = rigid_group(os.path.join(model_dir, mesh), i, int(a), int(b))
+        if len(gg) > len(g):
+            g = gg
+    d = np.vstack([m['surfs'][k]['xyz'][0] for k in g]) @ (axis / n)
     return depth, float(d.max() - d.min())
