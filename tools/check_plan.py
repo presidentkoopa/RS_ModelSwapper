@@ -31,6 +31,37 @@ elif cur.group(1) == 'none':
                     % ' '.join(undone))
 elif cur.group(1) not in items:
     errs.append('PLAN.md "Current step" must be **none** or one of: %s' % ' '.join(sorted(items)))
+# NO STILL FRAMES IN PLACE OF ANIMATED GUNS (owner, 2026-10-27: "every single one of my md3s is animated
+# with dozens and dozens of frames"). The Plus/Vanilla/Modern sets were built from REMA's *_wm.md3, which
+# are single-frame reference meshes the owner ruled out on 2026-10-25, so every gun in them is a still. A
+# staged set mesh is refused when it is a *_wm.md3 or has ONE frame, unless the set lists it in
+# sets/<set>/single_frame_ok.txt with a reason (a carved part that truly never animates; one path + reason
+# per line). `python3 tools/check_plan.py --audit` lists every set mesh this would refuse today.
+import struct
+def md3_frames(path):
+    try:
+        with open(path, 'rb') as f: h = f.read(80)
+        return struct.unpack('<i', h[76:80])[0] if h[:4] == b'IDP3' else None
+    except OSError:
+        return None
+def still_frame_errors(paths):
+    out = []
+    for p in paths:
+        if not (p.startswith('sets/') and p.lower().endswith('.md3')): continue
+        st = p.split('/')[1]
+        okf = os.path.join(R, 'sets', st, 'single_frame_ok.txt')
+        ok = set(l.split()[0] for l in open(okf) if l.strip() and not l.startswith('#')) if os.path.exists(okf) else set()
+        n = md3_frames(os.path.join(R, p))
+        if p.lower().endswith('_wm.md3'):
+            out.append('%s is a REMA *_wm.md3 single-frame reference (ruled out 2026-10-25): use the animated original' % p)
+        elif n == 1 and p not in ok:
+            out.append('%s has 1 frame: use the animated original, or list it in sets/%s/single_frame_ok.txt with a reason' % (p, st))
+    return out
+if '--audit' in sys.argv:
+    allm = subprocess.run(['git', 'ls-files', 'sets'], cwd=R, capture_output=True, text=True).stdout.split()
+    bad = still_frame_errors(allm)
+    print('\n'.join(bad)); print('%d set mesh(es) would be refused' % len(bad)); sys.exit(0)
+errs += still_frame_errors(staged)
 known = {'runtime', 'sets', 'tools', 'gate', 'dist', 'docs', '.github'}
 for p in staged:
     top = p.split('/')[0]

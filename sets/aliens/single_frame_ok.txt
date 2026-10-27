@@ -1,0 +1,27 @@
+# path reason (meshes that truly never animate; checked by tools/check_plan.py)
+sets/aliens/src/models/casings/casing_357.md3 ejected casing prop
+sets/aliens/src/models/casings/casing_45.md3 ejected casing prop
+sets/aliens/src/models/casings/casing_9mm.md3 ejected casing prop
+sets/aliens/src/models/casings/casing_rifle.md3 ejected casing prop
+sets/aliens/src/models/casings/shell_12ga.md3 ejected casing prop
+sets/aliens/src/models/rsq/debris/chip1.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/chip2.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/chip3.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/chip4.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/chunk1.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/chunk2.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/chunk3.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/chunk4.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/clod1.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/clod2.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/clod3.md3 impact debris prop
+sets/aliens/src/models/rsq/debris/clod4.md3 impact debris prop
+sets/aliens/src/models/tracer.md3 tracer prop
+sets/aliens/src/models/weapons/flamer/m260b_pickup.md3 world pickup / static prop
+sets/aliens/src/models/weapons/mech/loader_lamp.md3 world pickup / static prop
+sets/aliens/src/models/weapons/mech/loader_pickup.md3 world pickup / static prop
+sets/aliens/src/models/weapons/pistol/m4a3_pickup.md3 world pickup / static prop
+sets/aliens/src/models/weapons/rifle/counter.md3 world pickup / static prop
+sets/aliens/src/models/weapons/rifle/m41a_pickup.md3 world pickup / static prop
+sets/aliens/src/models/weapons/shotgun/m37a2_pickup.md3 world pickup / static prop
+sets/aliens/src/models/weapons/smartgun/m56_pickup.md3 world pickup / static prop

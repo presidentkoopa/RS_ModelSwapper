@@ -263,6 +263,14 @@ per-gun checklist below, in a headset, signed by the owner.
       reproduces the r6 BrutalPistol and Flamethrower2 frames byte-identically, measured. Open, recorded:
       licences for the FBX source; per-set frame letters; the pistol trigger through the finger on fire
       frames (0.66 cm, owner: minor).
+## Set meshes: animated originals only (owner, 2026-10-27)
+"every single one of my md3s is animated with dozens and dozens of frames." The Plus, Vanilla and Modern
+sets (sets/plus_0.7, vanilla_0.9, modern_0.9) were built from REMA's single-frame *_wm.md3 reference meshes
+(ruled out 2026-10-25), so every gun in them is a still: they are wrong at the root and are REBUILT from the
+animated originals when S1/S2 resume, never patched. `tools/check_plan.py` now refuses any staged set mesh
+that is a *_wm.md3 or has one frame (exceptions: sets/<set>/single_frame_ok.txt, path + reason).
+`python3 tools/check_plan.py --audit` lists today's offenders.
+
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
 - S1  Vanilla / V+ roster + menu (V+ = toggles inside Vanilla per the owner's checklist).  (owner's order, 03:21)
