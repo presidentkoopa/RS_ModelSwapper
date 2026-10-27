@@ -285,3 +285,90 @@ commit after it changes only the gate and docs.
 * Grip mode taking a charging handle (BD22Q's rule makes a grip near the gun steady it, never grab).
 * Is Ermac's fist the "Offhand Fist" you meant, or BD22's own 2D off-hand fist sprite?
 * (Round 1's question 6, the twins' reloads, still stands.)
+
+---
+
+# Round 3 (2026-10-27, Lane A), time box cut to 30 min by the owner
+
+Branch `modelswapper-2.0-bd22-lift`, on origin 6c26bdf. Build `/home/claude/lane_a_out/ms_r3_final.pk3`.
+
+## 1. Done (measured)
+
+### Shelf RPG rows: the drum's real seat travel, 18.41 units (was 4.81)
+* Round 1's 4.81 was wrong as well. The shelf RPG (`models/bd/RPG/RPG.md3`, and the one mesh shared by
+  d64/hdvr/vplus) reloads a **drum**: eight surfaces, round2..round9, that move as one rigid body
+  (one transform per frame, checked to 0.05 units). Tracking one round (surf 7) follows it around the drum's
+  twist-lock (rotation up to 75.7 deg), so its distance to the seat wobbles (9.12 -> 10.35 -> 5.94). The walk
+  back then stopped at frame 32. The card's `mag_in 19..33` also ends one frame early: the drum is still
+  0.31 out at 33 and seats at 34.
+* Measured on the drum's joint centroid: the old drum is thrown out (50.37 units at f24), the new one appears
+  at f25 as a pure translation of the seated pose (rotation 0.0), and it closes monotonically 18.41 -> 15.13
+  -> 10.95 -> 8.21 -> 6.10 -> 4.31 -> 2.71 -> 1.26 -> 0.31 -> 0 (f25..f34). **Stroke 18.41**, axis
+  (0.745, -0.660, -0.101) from the seat. Ceiling (well 5.17 + drum 25.06) holds. All four meshes give the same numbers.
+* `tools_kit/mag_insertion.py`: `rigid_group` / `track_group` (surfaces that ride with the magazine as one
+  body), a window extended to the frame the part rests at, and a cut at a one-frame swap jump (more than 3x
+  every other step). **Only for multi-surface magazines**; a one-surface magazine measures exactly as before.
+  Re-run over all 157 shelf cards: only the 4 RPGs changed in what was written. If WMCARD.shelf is ever
+  regenerated whole, the tool would also move MS_Pistol2 (3.858 -> 3.855), both chex zorchers (38.32 -> 36.77)
+  and zblood_shotgun (2.30 -> 2.74). They are multi-surface magazines too. Not reviewed; don't regen whole
+  without looking at them.
+* WMCARD.shelf: only the four blocks re-made (`run_shelf_cards.py`, spliced). `regen_rows.py --only` the
+  four: rsr rows 58-61 only. MODELDEF.cards / SNDINFO.ms came out only reordered (same 186 blocks, same lines)
+  and were restored.
+* **Open on the RPGs:** the carved hand part `MS_*_RPG_mag.md3` is ONE round (surf 7, 230 verts), but the
+  stroke is the drum's. The hand pushes a single rocket the drum's travel. Carving the whole drum group is the
+  next step (carve_by_ref / md3_carve_surface over surfaces 5-12).
+
+## 2. Not done (time box)
+* **KAR98 / brt_AssaultShotgun hand rows:** nothing new needed. Round 1 already gave them rows. Re-measured
+  today with `hand_gap.py` on the shipped tables: MS_wolf_KAR98 slot 74 (handfit_cards.py), gun 0.04 / support
+  0.07 cm; MS_brt_AssaultShotgun slot 63 (twin of MS_BD22_AssaultShotgun), 0.07 / 0.03 cm.
+* **The 9 `_wm` rows -> animated originals: BLOCKER, no original found.** None of the 9 blocks DRAWS a
+  `_wm` mesh. Each already draws a multi-frame mesh, but its reload ROW still comes from the old `_wm` card,
+  and none of the drawn meshes moves a magazine (round 1, md3label). Drawn now (frames / surfaces):
+  BD_Flamethrower2 `models/hud/Flamethrower/Flamethrower2.md3` 6/3; brt_Flamethrower2 `models/bd/Flamethrower2` 6/3;
+  BD_Unmaker `models/hud/Unmaker` 16/3; brt_Unmaker `models/bd/Unmaker` 16/3; brt_HitlersBuzzsaw `models/bd/HitlersBuzzsaw` 3/2;
+  MG_Bolter `models/hud/Bolter` 5/2; meat_Bolter `models/meat/Bolter` 5/2; MG_Tec9 `models/hud/Tec9/tec9.md3` 6/4;
+  meat_Tec9: **no Model block named MS_meat_Tec9 in `modeldef`** (`models/meat/TEC9/tec9.md3` 6/4 is on disk).
+  Searched by name (flame*, unmaker*, buzzsaw*, bolter*, tec9*, mg42*; md3/iqm/fbx/blend/md2) in `models/` and
+  `/mnt/user-data/uploads/DOOMWork` (plus the one archive there, the VR hands handover zip): 86 files. The
+  most frames any copy has is 16 (Unmaker, also in blend/, depot_bd/, carved/); everything else is 1-8. Nothing
+  has the owner's "dozens and dozens of frames", and nothing has a magazine that moves. **Needed from the
+  owner:** where the animated originals of these 9 are (file names or folder). Until then the old rows stay,
+  and they are flagged here, not kept silently.
+* Full rig halves, desktop set and extras: **not run** on r3 (30-min box). Run on r3: the four RPGs only.
+  Round 2's counts (rig 74/74, desktop 74/74, extras 13/13) are on r2_final and are **not re-proven** on r3.
+  r3 differs from r2 only in rsr rows 58-61 and WMCARD.shelf's four RPG dofs.
+
+## Gate on r3 (`/home/claude/lane_a_out/ms_r3_final.pk3`, sha256 ae562270cddbdaf47d26d0bf1a6f2d8d9ac4cbb72d34ecaac840e3f25b579ef1)
+* Rig (QZD 17.3, under the lock, load 1.2-1.7): MS_brt_RPG, MS_d64_RPG, MS_hdvr_RPG, MS_vplus_RPG **4/4 PASS**.
+  Log: row 58, CARRY -> INSERT (14.7 out) -> SEATED -> DONE.
+* Desktop: the same four, **4/4 PASS**. Log: `/home/claude/lane_a_out/r3_rpg.txt` (the first desktop pass
+  tracebacked because MS_DESKTOP_ENGINE wasn't set; re-run with it set).
+* Not run: the full rig halves, the desktop 74, the extras, and the owner's load order (doom2 -> brutal22test6
+  -> BD_VoxelPack -> pack) script-error pass on r3.
+
+## 3. Owner answers (2026-10-27) and where they stand
+* **(a) Grip may grab a charging handle: YES. Not implemented, next item.** It isn't small. A handle sits on
+  the gun, inside `RSR.STEADY_RANGE`, and there the engine itself starts two-hand steadying on the grip press
+  (`vreload.zs:99-113`, `GripCanGrab`; the `rsr_grip` event at ~1263 refuses the grab when steadied or
+  within range). Plan: under rsr_grab_with 1, a grip press within grabradius of a gun's handle (the CHARGE
+  phase, or a handle part) takes the handle, even inside STEADY_RANGE. While held, steadying is ignored for
+  the handle part (we can't stop the engine steadying; check on the rig that the steadied pose doesn't fight
+  the pull). Gate: a grip-mode handle case on MS_BD22_Rifle and MS_AE_Pistol with vr_two_handed_weapons 1.
+* **(b) Off-hand fist:** dropped. FBX hands come later. Nothing changed.
+* **(c) A mesh is just a mesh: reload rows belong to the mesh.** Audit, nothing changed:
+  * All three tables are keyed by **donor name** (the MODELDEF block), not by mesh:
+    `RSR_Guns.SlotForDonor` (rsr_guns.ms.zs:3067, 78 donors), `RSB_Guns.SlotForDonor` (rsb_guns.zs:37, 6),
+    the pump table (rsr_pump_guns.zs:37, 4). The mod's class doesn't pick a row: the join uses the donor in hand.
+  * Result: the same mesh under two donor names reloads differently. MS_BD_M79 and MS_BD22_M79 draw the
+    same M79.md3, but only MS_BD22_M79 has the break-open row. The 14 twins (twin_hands.py) share hands
+    but keep their own reload rows. brt_RPG / d64_RPG are twins of MS_BD22_RocketLauncher, yet they have card
+    rows 58/59 while BD22_RocketLauncher has the lifted BD22Q row. hdvr_ / vplus_RPG are the same mesh FILE
+    as d64_RPG at a different placement (+5 Z), so they aren't "drawn identically" and get separate rows.
+  * **Class-keyed:** `rsr_m203.zs:47-55` `IsRifle` / `IsAnyRifle` test `GetClassName() == 'Rifle'` (BD22's
+    class). The M203 underbarrel reload exists only on BD22's Rifle, not on the same rifle mesh under another
+    mod's class.
+  * The fix is not small: rows are generated at each donor's placement, so a mesh-keyed table needs rows in mesh
+    space plus a per-donor placement transform (or a mesh -> canonical donor alias wherever placement is
+    identical, which covers the 14 twins). Not done; owner's go needed for the shape.
