@@ -37,7 +37,7 @@ F12 moved them, it did not refit. The measuring side needs only the pack, e.g. t
 and a side view of a 1.92 gun:
 
 ```
-cd tools/questhands
+cd tools/questhands && mkdir -p out
 python3 -c "import support, gunview, guns; print(support.front_point('Rifle', 28)); \
   gunview.view([guns.item('Rifle')], 'out/Rifle_side.png', 'side', title='Rifle 1.92')"
 #  ([28, 0.0, 1.38], (-1.12, 6.29))  = fits.json's Rifle target
