@@ -58,6 +58,7 @@ def run(pk3, g):
          (60, 'echo RP_GUN %s; give ammo; rsqt_gun %s; rsqt_empty 0' % (g, g)), (110, 'echo RP_SELECTED %s; ms_donor_main; %s' % (g, script(g)))]
     s = 130
     if g in BREAK:
+        s += 70     # the SSG's first select animation is still playing at t130 (rig: cycle 0's shot did nothing)
         for k in range(3):
             # decision D: one shot, then the gun is held until the hands have broken / loaded / closed it.
             # A fire press while held must do nothing (RP_HOLDFIRE), and the next cycle's shot must fire.
