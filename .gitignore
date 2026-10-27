@@ -10,3 +10,5 @@ tools/rig/build/
 # made at run time in the prebuilt rig by bin/qz and the engine
 tools/rig/bin/libGLESv3.so
 tools/rig/bin/saves/
+# tools/questhands check sheets and temp images (RSQ_QH_OUT default)
+tools/questhands/out/
