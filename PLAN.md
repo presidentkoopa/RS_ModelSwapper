@@ -4,7 +4,7 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F11** -- F1-F10 are DONE and committed (2026-10-25). F10 finished the roster: every
+Current step: **F12** (owner's yes 2026-10-26 21:5x, while his headset pass on F11 is outstanding; F11's open items wait for it) -- F1-F10 are DONE and committed (2026-10-25). F10 finished the roster: every
 non-melee gun the owner kept reloads by hand (23; BFG and BFG10k closed by him). F11 is the fixes
 and polish, then the gated pk3. Open from F10: the Minigun's bigger in-hand box (owner's idea, later). The owner's headset pass on F1-F9 is still outstanding and
 is what gates the 1.99 release; nothing in this pack has ever been seen in VR.
@@ -241,6 +241,16 @@ per-gun checklist below, in a headset, signed by the owner.
         * **M32 reload key does nothing.** IncendiaryLauncher.dec kept BD22's stub `Reload:` (M202 A 0 /
           Goto Ready3) after ours; DECORATE takes the later label. The rig pressed reload at 1 of 6.
 
+- F12 **THE DEPOT'S TEST RIG AND VR-HAND TEST TOOLS, ONE HOME** (owner, 2026-10-26: "I would like the
+      depot to have a test rig for linux and the relevant test tools to use vr hands"; chosen 21:5x
+      as the work while he is out of the headset). Moves, does not invent: (1) the prebuilt
+      QuestZDoom 17.3 rig from RS_ModelSwapper `gate/qz_rig/bin` (26 MB, guarded by PINS) into
+      `tools/rig/bin`, so `setup.sh` needs no other repo; (2) the RS_QuestHands hand-fitting kit
+      (`tools/posefix/hands`: handfit, minigun_fit, fits.json -- the tools behind the 1.92 poses)
+      into `tools/questhands/`, paths made Depot-relative; (3) md3.py / md3_write.py found in
+      E:\DOOMWork\_old\_oldtools. Done = a fresh clone runs `sh tools/rig/setup.sh` and the
+      gallery/cmp2 example with no other repo, on the owner's load order, measured. No new tools,
+      no hand-fitter changes (the FBX fitter is a prototype outside the repo until the headset pass).
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
 - S1  Vanilla / V+ roster + menu (V+ = toggles inside Vanilla per the owner's checklist).  (owner's order, 03:21)
