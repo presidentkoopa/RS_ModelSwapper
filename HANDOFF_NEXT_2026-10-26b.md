@@ -345,8 +345,11 @@ Branch `modelswapper-2.0-bd22-lift`, on origin 6c26bdf. Build `/home/claude/lane
   Log: row 58, CARRY -> INSERT (14.7 out) -> SEATED -> DONE.
 * Desktop: the same four, **4/4 PASS**. Log: `/home/claude/lane_a_out/r3_rpg.txt` (the first desktop pass
   tracebacked because MS_DESKTOP_ENGINE wasn't set; re-run with it set).
-* Not run: the full rig halves, the desktop 74, the extras, and the owner's load order (doom2 -> brutal22test6
-  -> BD_VoxelPack -> pack) script-error pass on r3.
+* Owner's load order (doom2 -> brutal22test6 -> BD_VoxelPack -> r3), rig, `--mod bd22:Rifle` MS_BD22_Rifle:
+  **no script error from the pack** (only BD_VoxelPack's own 3: sphere.txt:50, voxeldef.txt:66/72). First run
+  FAIL at load 1.57 / 1.81; which check failed was not captured (the log was overwritten). Re-run at load 1.5:
+  **PASS**, all 16 checks ok. Count it as unproven until a calm-load batch confirms it.
+* Not run: the full rig halves, the desktop 74, the rest of the extras.
 
 ## 3. Owner answers (2026-10-27) and where they stand
 * **(a) Grip may grab a charging handle: YES. Not implemented, next item.** It isn't small. A handle sits on
