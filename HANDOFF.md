@@ -17,6 +17,35 @@ that is not on the plan.**
 
 **READ docs/HEADSET_PASS_1.99_2026-10-26.md FIRST: the owner's headset pass on 1.99 found 21 problems; 1.92 is the baseline.**
 
+## WORK ORDER (owner, 2026-10-26) -- read this before anything else
+
+Everything waits on the owner's headset pass. Packs out for that pass, in this order of importance:
+
+1. **The FBX hands test, `BD22Q_192_fbx_headset_r5.pk3`** (sha `ff355a24...`). This is 1.92 with the FBX-skeleton hands on BrutalPistol and Flamethrower2 only:
+   - the off hand is an open palm under the Flamethrower's tank;
+   - the trigger finger squeezes on fire.
+   It is a prototype from the cloud session, outside the repo (`/home/claude/lane_c`).
+2. **RS_ModelSwapper round 2** (sha `15fd5578...`, branch `modelswapper-2.0-bd22-lift` @ 6c26bdf; main untouched).
+3. **BD22 r3** (`BD22_VR-Reloaded_1.99x-lb-r3.pk3`, RS_Brutal22WeaponsQ `lane-b-1.99x` @ 5e9d1ac).
+
+After the owner approves the FBX hands, the agreed order is:
+
+1. The FBX fitter becomes the Depot's hand pipeline (pipeline 2), as a `[plan]` item with his yes. Still to do for it:
+   - per-set frame letters;
+   - the moved-muzzle vs shot origin;
+   - the pistol trigger that swings forward in BD22's fire frames;
+   - licences for the FBX source.
+2. All of BD22 through it.
+3. ModelSwapper (lifted guns and twins first).
+4. The catalog pipeline (measure, label and catalog meshes) and the mesh library, with the owner.
+5. The E:\DOOMWork cleanup (move nothing without his yes) and the tooling review.
+
+**Rig versions (checked 2026-10-26 on the pushed branches):**
+- The only test engine is QuestZDoom 17.3 (9afc750, engine 4.14.3, ZScript 4.14.2).
+- Depot `tools/rig/bin/qzdoom` and RS_ModelSwapper `modelswapper-2.0-bd22-lift:gate/qz_rig/bin/qzdoom` are byte-identical (sha `3c7414a7...`).
+- RS_ModelSwapper main and RS_Brutal22WeaponsQ carry no rig binary.
+- The wrong 4.15pre bin is gone from every branch.
+
 ## F12 (2026-10-26): the Depot's test rig and VR-hand test tools, one home -- DONE bar what is open below
 Done (measured, on a fresh `git clone` of this repo at 28e7598, no other repo on disk; one engine at a
 time under `flock -o -s /home/claude/rig.lock`):
