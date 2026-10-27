@@ -4,7 +4,7 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F12** (owner's yes 2026-10-26 21:5x, while his headset pass on F11 is outstanding; F11's open items wait for it) -- F1-F10 are DONE and committed (2026-10-25). F10 finished the roster: every
+Current step: **F11** (F12 DONE 2026-10-26, 0e21fe8) -- F1-F10 are DONE and committed (2026-10-25). F10 finished the roster: every
 non-melee gun the owner kept reloads by hand (23; BFG and BFG10k closed by him). F11 is the fixes
 and polish, then the gated pk3. Open from F10: the Minigun's bigger in-hand box (owner's idea, later). The owner's headset pass on F1-F9 is still outstanding and
 is what gates the 1.99 release; nothing in this pack has ever been seen in VR.
