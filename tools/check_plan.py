@@ -10,7 +10,7 @@ The commit message check ([step N] / [plan]) is in tools/commit-msg.
 """
 import os, re, subprocess, sys
 R = subprocess.run(["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True).stdout.strip()
-staged = subprocess.run(['git', 'diff', '--cached', '--name-only', '--diff-filter=ACMR'], cwd=R, capture_output=True, text=True).stdout.split()
+staged = subprocess.run(['git', 'diff', '--cached', '--name-only', '--diff-filter=ACMR'], cwd=R, capture_output=True, text=True).stdout.splitlines()  # one path per line: paths may hold spaces
 errs = []
 first = subprocess.run(['git', 'rev-parse', '--verify', '-q', 'HEAD'], cwd=R, capture_output=True).returncode != 0
 if not first and any(p.startswith('runtime/') for p in staged):

@@ -300,11 +300,14 @@ TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
       and the dropped one is that carved piece, unlit and empty-looking. Not scheduled, and not to
       be started without the owner's yes.
 
-- C2  Project Brutality: 3D weapons for PB (owner, 2026-10-27: "Expect us to make 3d Voxel weapons for
-      Brutality. Probably a lot of carving needed"). Starting reference: the PB Voxel Patch v2 pickups
-      (9 weapons, OBJ, credit required). Built in its own repo like BD22; queued after BD 2.0 and
-      ModelSwapper 2.0. Probably for the REMA engine (UZDXREMA), not QuestZDoom: PB runs badly on mobile
-      (owner); on Quest, ModelSwapper already covers PB. Not scheduled; not to be started without the owner's yes.
+- C2  Project Brutality, a COMPLETE BRUTAL VOXEL SET (owner, 2026-10-27 16:34; widens the earlier C2):
+      (a) HUD weapons for the whole set, built from the PB voxel models; some need scaling up;
+      (b) an environment pack (decorations/pickups), toggled by type the way the BD voxel pack is toggled.
+      Probably a standalone mod, not ModelSwapper (owner: "I don't know if I see that as a modelswapper
+      thing"). Probably REMA (UZDXREMA) rather than Quest (earlier note). The voxels live in the Depot:
+      `docs/reference/pbvp_v2/` (verbatim, credit required, PROVENANCE.md). Measured: 9 weapon-pickup OBJs only,
+      no environment models; the environment source (PBVP v1 KVX or newer) is still to be found.
+      Queued after BD 2.0 and ModelSwapper 2.0; not to be started without the owner's yes.
 
 ## Per set
 1 inventory the parent mod · 2 measure every mesh fresh, carve/bake parts, sheets, owner signs placement ·

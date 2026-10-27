@@ -316,6 +316,7 @@ Nothing lives anywhere else.
 | `dist/` | `RSQ_vanilla.pk3` (gate 5/5), `RSQ_plus.pk3`, `RSQ_modern.pk3` (older builds, no player class yet). The 43 MB BD22Q pk3 is NOT committed: build it (`tools/bd22_plus.py pk3 <out>`). |
 | `tools/` | the pipeline (`README.md` there). `kit/` = keeper tools from the Quest_Weapons_Kit (gen_rsr.py, rgeo.py …), `rtest/` = behaviour harness port (shelved: times out after S_Init). |
 | `gate/run_set.sh` | the engine gate, generic. `sh gate/run_set.sh gate/<set>.gate [pk3]`. Per-set config in `gate/<set>.gate`; method and traps in `gate/GATING_A_SET.md`. `gate/bd22_gate.sh` is a wrapper on bd22q's config. |
+| `docs/reference/pbvp_v2/` | Project Brutality Voxel Patch v2, verbatim (owner, 2026-10-27; credit required; 9 weapon-pickup OBJs; PROVENANCE.md; PLAN.md C2). |
 | `docs/` | BD21 `Machinegun.txt`, `Revolver2.txt` (owner-supplied parent files), `VR_MELEE_ON_QUESTZDOOM_2026-10-24.md`, `HANDS_IN_THE_MESH.md`, `KIT_INVENTORY.md`. |
 
 ## State of the flagship (bd22q 1.97-pre) — measured, not remembered
