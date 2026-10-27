@@ -22,9 +22,12 @@ sh tools/rig/setup.sh                 # seconds: test packs + check that tools/r
 #   or: sh tools/rig/setup.sh build   # ~20-40 min: engine from PINS into build/rig/ (then B22_RIG=tools/rig/build/rig)
 cd tools/rig
 B22_IWAD=<doom2.wad> B22_BD22=<brutal22test6.pk3> B22_VOX=<BD_VoxelPack.pk3> \
-  flock -o -s /home/claude/rig.lock python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 Pistol,PlasmaGun t1
+  flock -o -s /home/claude/rig.lock python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 BrutalPistol,Plasma_Gun t1
 #  -> build/shots/cmp2_t1.png : each gun held, 1.92 on the left, the depot's current set on the right
 ```
+Gun names are BD22's classes (`BrutalPistol`, `Plasma_Gun`, ...). The example used to say
+`Pistol,PlasmaGun`: that runs and writes the PNG, but no pistol is drawn and the PlasmaGun row shows
+the start rifle (measured on a fresh clone, F12).
 `setup.sh` zips `build/probe.pk3`, `build/upstream.pk3`,
 `build/BD22Q_now.pk3` (this depot's `sets/bd22q_1.97/src`) and `build/BD22Q_192.pk3` (tag 1.92 of
 RS_Brutal22WeaponsQ, the owner's baseline), then checks the rig is 17.3. Re-run it after changing
@@ -70,4 +73,6 @@ BD_VoxelPack prints four `voxeldef.txt` script errors on its own; they are not o
 - `wait` inside an alias does not fire; runs end by `timeout`.
 - The engine's `screenshot` command returns garbage in VR mode; use the frame dump.
 - `B22_NOPROBE=1` for old packs whose class names the probe does not know.
+- The engine rewrites `bin/config/qzdoom.ini` (tracked) on exit -- on the F12 runs only its first,
+  timestamp line. `git checkout tools/rig/bin/config/qzdoom.ini` before committing.
 - Never chain pipeline stages with `;` after a failing stage. Use `set -o pipefail` and `&&`.

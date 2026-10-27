@@ -53,4 +53,4 @@ fi
 timeout 120 "$RIG/qz" -norun >/dev/null 2>"$B/logs/engine_check.txt" || true
 grep -q 'qz: engine OK' "$B/logs/engine_check.txt" || { cat "$B/logs/engine_check.txt" >&2; echo "setup: the rig at $RIG is not QuestZDoom 17.3" >&2; exit 3; }
 echo "rig ready: $RIG/qz ($(grep 'qz: engine OK' "$B/logs/engine_check.txt" | cut -c15-))"
-echo "try: cd $HERE && python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 Pistol t1"
+echo "try: cd $HERE && python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 BrutalPistol t1"
