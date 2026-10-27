@@ -804,8 +804,6 @@ class MS_ReloadJoin : EventHandler
 			mDriving[i] = true;
 			mDrivW[i] = w;
 			mDrivTic[i] = mo.Level.maptime;
-			mAmmo1At[i] = w.AmmoType1 ? mo.CountInv(w.AmmoType1) : 0;
-			mAmmo2At[i] = w.AmmoType2 ? mo.CountInv(w.AmmoType2) : 0;
 			if (RS_ForeignRemap.DebugOn())
 				Console.Printf("[MSJOIN] took %s (break slot %d) at its reload -- the mod's reload runs first", w.GetClassName(), RSB_Guns.Index(w));
 			return;
@@ -845,17 +843,7 @@ class MS_ReloadJoin : EventHandler
 			return;
 		let m = RemapFor(mo, w);
 		State exitTo = null;
-		// DECISION D (owner, 2026-10-27): a break-open gun that the mod's reload has just filled (BD22's
-		// SSG 0 -> 2, M79 0 -> 1) is parked AT ONCE, mid-reload, not where that reload leaves off. Its
-		// exits vary (rig, real play: the SSG's third cycle left through a state the way-out check did
-		// not see, fired one shot with the trigger pressed, and the empty gun was taken a second time).
-		// The rest of the mod's reload runs after the hands have shut the gun. A gun that loads one
-		// round per pass (BD22's Revolver) is not full until its last pass: unchanged.
-		let st = RSR.WeaponStore(mo, false);
-		int a1 = w.AmmoType1 ? mo.CountInv(w.AmmoType1) : 0;
-		int a2 = w.AmmoType2 ? mo.CountInv(w.AmmoType2) : 0;
-		bool filled = st && st.Amount > 0 && st.Amount >= st.MaxAmount && (a1 != mAmmo1At[i] || a2 != mAmmo2At[i]);
-		if (!filled && InReload(m, w, psp.CurState))
+		if (InReload(m, w, psp.CurState))
 		{
 			// park on the way out (see ModFirstTick): no shot slips through with the trigger held
 			if (psp.Tics <= 1)
@@ -866,8 +854,6 @@ class MS_ReloadJoin : EventHandler
 		mReturn[i] = exitTo ? psp.CurState.NextState : psp.CurState;
 		mHeld[i] = w;
 		p.SetPsprite(PSP_WEAPON, hold, false, w);
-		if (RS_ForeignRemap.DebugOn() && filled)
-			Console.Printf("[MSJOIN] %s: the mod's reload filled it -- held now, mid-reload", w.GetClassName());
 		if (RS_ForeignRemap.DebugOn())
 			Console.Printf("[MSJOIN] %s: the mod's reload is done -- held, no fire, until the hands finish (at %d of its reload, tics %d)", w.GetClassName(), w.FindState("Reload") ? w.FindState("Reload").DistanceTo(mReturn[i]) : -1, psp.Tics);
 	}
