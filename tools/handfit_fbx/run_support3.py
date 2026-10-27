@@ -3,6 +3,7 @@ pen_tol into gun AND gun hand (grid fields; exact check after: exactpen), S6 = s
 (offwrist.py) held to the 1.92 median (offwrist192.json thresholds: stabilised re-aim 15.1 deg / mismatch 10.2 cm; cup
 off-controller distance 8.9 cm / rotation 14.9 deg), S1-S5 kept (round-2 terms: vgrip wrap 0.7 / 270 deg, S4 0.9).
 usage: run_support3.py <cls@v> <hold> <gunkey> <outkey> <pen_tol> [json weights]"""
+import paths
 import numpy as np, json, os, sys
 import solve, fields, evaluate, rules, handmodel, fistwrap, offwrist, exactpen, scene
 LANE=solve.LANE
@@ -19,7 +20,7 @@ if fld_full is not None:
     fld_s=fld_both
 else: fld_s=fld
 ctx=solve.Ctx(cls,'L',fld_s,hold,other_sdf=hsdf); ctx.Lg=gctx.L
-th=json.load(open(os.path.join(LANE,'offwrist192.json')))['thresholds']
+th=json.load(open(paths.data('offwrist192.json')))['thresholds']
 ctx.s6_kind='cup' if hold=='cup' else 'stab'; ctx.s6_gun=(Rg,tg)
 ctx.s6_ref=dict(dist=th['cup_dist_cm'][0],rot=th['cup_rot_deg'][0],cm=th['stab_mismatch_cm'][0],deg=th['stab_reaim_deg'][0])
 solve.TOL['pen']=pen; solve.TOL['pen_other']=float(os.environ.get('LANEC_PENOTHER',pen)); solve.TOL['contact']=float(os.environ.get('LANEC_CONTACT',solve.TOL['contact']))
