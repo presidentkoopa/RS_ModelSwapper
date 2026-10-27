@@ -20,6 +20,14 @@ class RSB_TestDriver : EventHandler
 	// to the bore is in its limit -- push it home along the bore, let go; when all are loaded,
 	// FLICK the gun hand (the right controller pitched ~60 degrees in 3 tics, the reload's closing
 	// test: 450 deg/s about the hinge), the other way if the first does not close it.
+	// the player's own "Grab ammo with" (rsr_grab_with): 0 the off trigger (the shipped default), 1 the grip
+	static void Press(RSR_TestDriver d, bool on)
+	{
+		let cv = CVar.FindCVar('rsr_grab_with');
+		if (cv && cv.GetInt() == 0) { d.trig = on; d.grip = false; }
+		else { d.grip = on; d.trig = false; }
+	}
+
 	void Hand(PlayerPawn mo, RSB_State s, int now)
 	{
 		let d = RSR_TestDriver(EventHandler.Find('RSR_TestDriver'));
@@ -49,7 +57,7 @@ class RSB_TestDriver : EventHandler
 		}
 		if (s.phase != RSB.OPEN)
 		{
-			d.grip = false;
+			Press(d, false);
 			d.MoveTo((d.REST_F, d.REST_L, d.REST_U), 3);
 			return;
 		}
@@ -65,7 +73,7 @@ class RSB_TestDriver : EventHandler
 		if (k < 0)
 		{
 			// all loaded: let go, hand back to rest, flick to close
-			d.grip = false;
+			Press(d, false);
 			if (!d.MoveTo((d.REST_F, d.REST_L, d.REST_U), 3) || d.at < 10)
 				return;
 			// about the controller axis nearest the gun's hinge (pitch: across, roll: along the
@@ -90,15 +98,15 @@ class RSB_TestDriver : EventHandler
 		switch (s.hand)
 		{
 		case RSB.FREE:
-			d.grip = false;
+			Press(d, false);
 			if (!d.MoveTo((-10, 28, -48), 3) || d.at < 4)		// the belt: away from the chambers
 				return;
 			pressAt = now;
-			d.grip = true;		// the press takes a round
+			Press(d, true);		// the press takes a round
 			break;
 		case RSB.CARRY:
 		{
-			d.grip = true;
+			Press(d, true);
 			double ss, side, ang;
 			[ss, side, ang] = s.AtChamber(k);
 			d.TurnWrist(ang);
@@ -107,7 +115,7 @@ class RSB_TestDriver : EventHandler
 			break;
 		}
 		case RSB.INSERT:
-			d.grip = true;
+			Press(d, true);
 			d.MoveTo(d.off + (home + bore * 1.0 - rt), 1);			// pushed home along the bore
 			break;
 		}

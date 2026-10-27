@@ -1,0 +1,161 @@
+"""realplay.py -- the owner's real play, on the Quest rig (triage 2026-10-27, made a gate).
+
+    python3 -B gate/realplay.py <pack.pk3> [Class,Class,...]
+
+doom2 -> brutal22test6 -> BD_VoxelPack -> the pack, the rig's own ini (shipped cvars), the AUTO picker
+(no rs_fm_picks), the pack's own vrhand.zs with the rig's scripted off hand (gate/rtest) so reloads
+finish. One engine per BD22 class: select, three single shots, a burst, fire it empty, the reload
+button, the hands' reload, then three more shots. SSG / GrenadeLauncher (break-open after EVERY shot,
+owner 2026-10-27): three cycles of one shot and the hands' break / load / close.
+
+Asserts, from the engine's log:
+  1 no take while selecting / ready / singles / burst with the magazine above 0
+  2 one take and one magazine-out per real reload (a take that the mod refused never starts the hands)
+  3 the gun fires again afterwards (its magazine count goes down after the hands gave it back)
+  4 each reload sound once: no ModelSwapper reload sound (ms_reload_sounds 0, the default) and no
+    sound name twice in one tic
+  5 a class whose lifted MS_BD22_ model has a reload row wears a model with a row
+"""
+import os, re, sys, subprocess, time, signal, shutil
+H = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, H)
+import run_gate
+RIG = run_gate.RIG
+GD = run_gate.GD
+CLASSES = ['BrutalPistol', 'Rifle', 'BrutalSMG', 'MP40', 'AssaultShotgun', 'Shot_Gun', 'SSG', 'Revolver',
+           'GrenadeLauncher', 'Rocket_Launcher', 'RailGun', 'Plasma_Gun', 'Sniper', 'MG42', 'MiniGun',
+           'FlameCannon', 'Flamethrower2', 'IncendiaryLauncher']
+BREAK = {'SSG', 'GrenadeLauncher'}
+PUMP = {'Shot_Gun'}
+# the lifted model of each class (tools_kit/lift_bd22.py) -- assert 5 checks these wear a row
+LIFTED = {'BrutalPistol': 'MS_BD22_Pistol', 'Rifle': 'MS_BD22_Rifle', 'BrutalSMG': 'MS_BD22_SMG', 'MP40': 'MS_BD22_MP40',
+          'AssaultShotgun': 'MS_BD22_AssaultShotgun', 'Shot_Gun': 'MS_BD22_Shotgun', 'SSG': 'MS_BD22_SSG',
+          'Revolver': 'MS_BD22_Revolver', 'GrenadeLauncher': 'MS_BD22_M79', 'Rocket_Launcher': 'MS_BD22_RocketLauncher',
+          'RailGun': 'MS_BD22_RailGun', 'Plasma_Gun': 'MS_BD22_PlasmaGun'}
+
+
+def has_row(donor):
+    return donor and (run_gate.slot_of(donor) > 0 or run_gate.pump_slot(donor) > 0 or run_gate.break_slot(donor) > 0)
+
+
+def script(g):
+    if g in PUMP:
+        return 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'
+    if g in BREAK:
+        return 'rsrtest_script 0; rsbtest_script 1'
+    return 'rsrtest_script 7'   # shipped rsr_grab_with 0: the off TRIGGER takes the magazine (and works a handle)
+
+
+def run(pk3, g):
+    out = os.path.join(H, 'out', 'rp_' + g)
+    shutil.rmtree(out, ignore_errors=True)
+    ov, _tm = run_gate.build_aux(out, vr=True)
+    ini = open(os.path.join(RIG, 'config', 'qzdoom.ini'), encoding='latin-1').read()
+    open(os.path.join(out, 'gate.ini'), 'w', encoding='latin-1').write(ini)
+    t = [(20, 'god; ms_join_trace 1; rsr_debug 1'), (40, 'take Rifle; take BrutalPistol; take Pistol'),
+         (60, 'echo RP_GUN %s; give ammo; rsqt_gun %s; rsqt_empty 0' % (g, g)), (110, 'echo RP_SELECTED %s; ms_donor_main; %s' % (g, script(g)))]
+    s = 130
+    if g in BREAK:
+        for k in range(3):
+            t += [(s, 'echo RP_BREAKSHOT %s %d; +attack' % (g, k)), (s + 6, '-attack')]; s += 520
+        s += 40
+    else:
+        for k in range(3):
+            t += [(s, 'echo RP_SHOT %s %d; +attack' % (g, k)), (s + 3, '-attack')]; s += 35
+        t += [(s, 'echo RP_BURST %s; +attack' % g), (s + 30, '-attack')]; s += 70
+        t += [(s, 'echo RP_EMPTY %s; +attack' % g), (s + 200, '-attack')]; s += 230
+        t += [(s, 'echo RP_RELOAD %s; +reload' % g), (s + 15, '-reload')]; s += 700
+        for k in range(3):
+            t += [(s, 'echo RP_AGAIN %s %d; +attack' % (g, k)), (s + 3, '-attack')]; s += 35
+    t += [(s, 'echo GATE_END')]
+    cmds, now = [], 0
+    for w, c in sorted(t, key=lambda x: x[0]):
+        if w > now:
+            cmds.append('wait %d' % (w - now)); now = w
+        cmds.append(c)
+    cmds += ['wait 5', 'quit']
+    log = os.path.join(out, 'engine.log')
+    home = os.path.join(out, 'home'); os.makedirs(home, exist_ok=True)
+    argv = [os.path.join(RIG, 'qz'), '-iwad', os.path.join(GD, 'doom2.wad'), '-file', os.path.join(GD, 'brutal22test6.pk3'),
+            os.path.join(GD, 'BD_VoxelPack.pk3'), os.path.abspath(pk3), ov,
+            '-config', os.path.join(out, 'gate.ini'), '-nosound', '-nomusic', '+logfile', log, '-warp', '1', '+' + '; '.join(cmds)]
+    env = dict(os.environ, HOME=home, QZ_SNDLOG='1')
+    so = open(os.path.join(out, 'stdout.txt'), 'w')
+    p = subprocess.Popen(['flock', '-o', '-x', '/home/claude/rig.lock'] + argv, cwd=RIG, env=env, stdout=so, stderr=subprocess.STDOUT, start_new_session=True)
+    t0 = time.time()
+    while p.poll() is None:
+        time.sleep(2)
+        lg = open(log, encoding='latin-1').read() if os.path.exists(log) else ''
+        if re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|VM execution aborted', lg) or time.time() - t0 > 900:
+            os.killpg(p.pid, signal.SIGKILL); break
+    so.close()
+    return judge(g, open(log, encoding='latin-1').read() if os.path.exists(log) else '')
+
+
+def judge(g, text):
+    phase, takes, magouts, gaveback = 'pre', [], [], []
+    donor, pre_take, snd, ms_snd, fired_after = '', 0, {}, 0, False
+    mag_back = None
+    ready_loop_skip = 'its Reload label is its Ready loop' in text
+    for l in text.splitlines():
+        m = re.match(r'RP_(GUN|SELECTED|SHOT|BURST|EMPTY|RELOAD|AGAIN|BREAKSHOT) ', l)
+        if m:
+            phase = m.group(1); continue
+        m = re.search(r'"ms_donor_main" is "(\w*)"', l)
+        if m and phase == 'SELECTED':
+            donor = m.group(1)
+        m = re.match(r'AMMO t\d+ mag (\d+)', l)
+        if m:
+            n = int(m.group(1))
+            if mag_back is not None and n < mag_back:
+                fired_after = True
+            if gaveback and mag_back is None:
+                mag_back = n
+            elif mag_back is not None:
+                mag_back = min(mag_back, n) if n < mag_back else n
+        if re.search(r'\[MSJOIN\] took %s\b|%s pump: took it' % (g, g), l):
+            takes.append(phase)
+            if phase in ('GUN', 'SELECTED', 'SHOT', 'BURST'):
+                pre_take += 1
+        if re.search(r'rsr t\d+ gun \d+: IDLE -> EMPTY', l):
+            magouts.append(phase)
+        if re.search(r'\[MSJOIN\] gave %s back \(hands finished' % g, l):
+            gaveback.append(phase)
+            mag_back = None if not gaveback else mag_back
+        if re.match(r'(rsr|rsb|rsp) t\d+ sound ', l):
+            ms_snd += 1
+        # the gun's sounds (started on the player) and ModelSwapper's reload actors; a world actor of
+        # the mod's own (two BD22 casings landing in one tic) is not a reload sound played twice
+        m = re.match(r'QZSND (\d+) (\S+) ch \d+ .* src (BDoomer|\w*Player\w*|RSR_\w+|RSB_\w+|RSP_\w+)\s*$', l)
+        if m:
+            k = (m.group(1), m.group(2)); snd[k] = snd.get(k, 0) + 1
+    if g in BREAK:
+        fired_after = len(re.findall(r'RP_BREAKSHOT', text)) == 3 and len(gaveback) >= 2
+    dup = [k for k, v in snd.items() if v > 1 and re.search(r'reload|clip|mag|shell|open|close|insert|load', k[1], re.I)]
+    reloads = len(takes) - pre_take
+    lifted = LIFTED.get(g)
+    c = [
+        ('no script error', not re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|VM execution aborted', text)),
+        ('1 no early take', pre_take == 0),
+        ('2 one take/magout', (reloads == len(magouts) and reloads == len(gaveback)) if g not in BREAK and g not in PUMP else (reloads == len(gaveback))),
+        ('3 fires again', fired_after or reloads == 0),
+        ('4 sounds once', ms_snd == 0 and not dup),
+        ('5 row model', (not lifted or not has_row(lifted)) or has_row(donor)),
+        ('reached end', 'GATE_END' in text),
+    ]
+    return g, donor, has_row(donor), reloads, len(magouts), len(gaveback), ready_loop_skip, c, dup[:3]
+
+
+if __name__ == '__main__':
+    pk3 = sys.argv[1]
+    guns = sys.argv[2].split(',') if len(sys.argv) > 2 else CLASSES
+    bad = 0
+    print('%-18s %-26s row takes magout back  %s' % ('class', 'model', '  '.join(n.split()[0] for n in ['err', '1', '2', '3', '4', '5', 'end'])))
+    for g in guns:
+        g, d, r, n, mo, gb, rl, c, dup = run(pk3, g)
+        ok = all(x for _, x in c)
+        bad += not ok
+        print('%-18s %-26s %-3s %5d %6d %4d  %s  %s%s%s' % (g, d or '(none)', 'yes' if r else 'no', n, mo, gb,
+              ' '.join('ok' if x else 'FAIL' for _, x in c), 'PASS' if ok else 'FAIL',
+              ' (Reload = Ready loop: no hand reload)' if rl else '', ' dup %s' % dup if dup else ''), flush=True)
+    sys.exit(1 if bad else 0)
