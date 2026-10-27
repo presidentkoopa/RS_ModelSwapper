@@ -27,6 +27,8 @@ CLASSES = ['BrutalPistol', 'Rifle', 'BrutalSMG', 'MP40', 'AssaultShotgun', 'Shot
            'FlameCannon', 'Flamethrower2', 'IncendiaryLauncher']
 BREAK = {'SSG', 'GrenadeLauncher'}
 PUMP = {'Shot_Gun'}
+# a gun whose hands' reload is the break-open driver (rsb) but which fires a full cylinder first
+CHAMBERS = {'Revolver'}
 # the lifted model of each class (tools_kit/lift_bd22.py) -- assert 5 checks these wear a row
 LIFTED = {'BrutalPistol': 'MS_BD22_Pistol', 'Rifle': 'MS_BD22_Rifle', 'BrutalSMG': 'MS_BD22_SMG', 'MP40': 'MS_BD22_MP40',
           'AssaultShotgun': 'MS_BD22_AssaultShotgun', 'Shot_Gun': 'MS_BD22_Shotgun', 'SSG': 'MS_BD22_SSG',
@@ -41,7 +43,7 @@ def has_row(donor):
 def script(g):
     if g in PUMP:
         return 'rsrtest_script 0; rsptest_script 1; rsptest_every 0'
-    if g in BREAK:
+    if g in BREAK or g in CHAMBERS:
         return 'rsrtest_script 0; rsbtest_script 1'
     return 'rsrtest_script 7'   # shipped rsr_grab_with 0: the off TRIGGER takes the magazine (and works a handle)
 
@@ -144,7 +146,9 @@ def judge(g, text):
                 pre_take += 1
         if re.search(r'rsr t\d+ gun \d+: IDLE -> EMPTY', l):
             magouts.append(phase)
-        if re.search(r'\[MSJOIN\] gave %s back \(hands finished' % g, l):
+        # the magazine / break join gives the gun back with "gave X back (hands finished"; the pump's
+        # whole-tube hold with "pump: the hand pushed every shell" / "pump: the hand pumped"
+        if re.search(r'\[MSJOIN\] gave %s back \(hands finished|\[MSJOIN\] %s pump: (the hand (pushed every shell|pumped) -- fire allowed|tube full or reserve empty)' % (g, g), l):
             gaveback.append(phase)
             if cyc:
                 cyc[-1]['back'] += 1
@@ -171,7 +175,7 @@ def judge(g, text):
     c = [
         ('no script error', not re.search(r'Script error(?!, "BD_VoxelPack\.pk3:)|VM execution aborted', text)),
         ('1 no early take', pre_take == 0),
-        ('2 one take/magout', (reloads == len(magouts) and reloads == len(gaveback)) if g not in BREAK and g not in PUMP else (reloads == len(gaveback))),
+        ('2 one take/magout', (reloads == len(magouts) and reloads == len(gaveback)) if g not in BREAK and g not in PUMP and g not in CHAMBERS else (reloads == len(gaveback))),
         ('3 fires again', fired_after or reloads == 0),
         ('4 sounds once', ms_snd == 0 and not dup),
         ('5 row model', (not lifted or not has_row(lifted)) or has_row(donor)),

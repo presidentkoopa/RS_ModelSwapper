@@ -1262,6 +1262,16 @@ class MS_ReloadJoin : EventHandler
 		}
 		if (s)
 			s.owe = mOwe[i];
+		// A NEW trigger press ends the hold, as fire ends a reload on BD22's own shotgun (the paced
+		// path's rule). The mod has already loaded and paid for these shells, so nothing is lost; the
+		// gun is never left parked with no way out (real play 2026-10-27: BD22's Shot_Gun, dry-fired
+		// with the trigger held, loaded one shell and went out through Pump2; the hold then waited on
+		// a hand that never pushed, and the gun stayed parked for good).
+		if (mHeld[i] && (p.cmd.buttons & BT_ATTACK) && !(p.oldbuttons & BT_ATTACK))
+		{
+			Trace(w, String.Format("fire -- the hold ends (%d shells the hand had not pushed; the mod loaded them)", mOwe[i]));
+			mOwe[i] = 0;
+		}
 		// the pump stroke ends a loading reload (RSP's own rule): the hand is done with it
 		bool stroke = s && s.mode == RSP.NONE;
 		if (mHeld[i] && (mOwe[i] <= 0 || stroke))
