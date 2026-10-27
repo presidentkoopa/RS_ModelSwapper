@@ -111,7 +111,9 @@ class RSR_TestDriver : EventHandler
 	{
 		if (wStep <= 0)
 		{
-			wStep = 32; wBest = ang; wAxis = 0; wSign = 1; wFails = 0; wTried = false; wWait = 0;
+			// a part held back to front (a drum that goes in from the side, the off hand's frame mirrored:
+			// 120-180 deg) is turned round in quarter turns first, as a player turns it over in the hand
+			wStep = ang > 100 ? 90 : 32; wBest = ang; wAxis = 0; wSign = 1; wFails = 0; wTried = false; wWait = 0;
 		}
 		if (ang < 2.0 || wStep < 0.25)
 			return;

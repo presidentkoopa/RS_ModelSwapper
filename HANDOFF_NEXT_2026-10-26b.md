@@ -443,3 +443,65 @@ Everything here is **rig only, not headset-confirmed**. The rig was shared with 
   /home/claude/lane_a_out/ms_r4.pk3` when the rig is calm.
 * The owner's load order ran with no script error from the pack on every engine run above (doom2 ->
   brutal22test6 -> BD_VoxelPack -> ms_r4).
+
+# Round 5 (2026-10-27, ModelSwapper lane): the five guns reload by hand (75-min box)
+
+Build `/home/claude/lane_a_out/ms_r5.pk3` (sha256 `599212cb8a2bc028964bd8ce4f1ac0583194789b9dca861bf65ab7fb2e274346`, = 517f816 data). Sheet
+`/home/claude/lane_a_out/r5_five_reloads.png`. Logs `/home/claude/lane_a_out/r5/logs/`.
+Everything here is **rig only, not headset-confirmed**.
+
+## 1. Done (measured)
+* **Why they did not reload.** Unmaker / Flamethrower2 / Bolter / TEC-9 / Buzzsaw sat on the old slots
+  5 / 8 / 9 / 10 / 11. No MODELDEF in the pack names their layer sprites (Q04M..Q0AM): mid-reload the
+  gun's sprite pointed at nothing (the gun vanished) and the hand's part drew nothing. regen_rows.py
+  skipped them ("card mesh is a _wm rebuild"). Slots 3-30 except 17 have the same hole; the other
+  donors on them were re-pointed to slots 41-80 earlier, these five were the last.
+* **Port, not re-measure** (`tools_kit/port_plus_rows.py`, data `WMCARD.plusport`, `plusport_transforms.json`):
+  * Sources: the RS_VR_Weapons model cards that Vanilla+ borrows (`WMSHEET.plus_exotics/extras`:
+    `model = WM_Unmaker / WM_Bolter / WM_Tec9 / WM_Flamethrower`), measured on the `*_wm.md3` the Plus
+    pk3 ships (byte-identical to ours in `models/vanilla/`). Buzzsaw: BD22 Weapons Q's MG42 belt drum
+    (Depot `tools/bd22_plus.py` 'MG42': card BD_Buzzsaw, ref `buzzsaw_wm.md3`, part magazine) = our
+    `WMCARD.bd22` "MS_Buzzsaw" on `models/bd22/bd22/buzzsaw_wm.md3`.
+  * Transform per donor, by nearest-POSITION correspondence (never vertex order), scale free:
+    all 9 donors **scale 1.00000, rotation 0.000, every vertex within 0.0000** both ways
+    (11541 / 6155 / 4565 / 5469 / 18972 vertices). The hud/ copies: t = 0; the bd/ and meat/ copies:
+    Unmaker (56.52, -0.02, 2.55), Flamethrower2 (57.03, 0.47, -8.36), Bolter (37.67, 0.20, -4.47),
+    TEC-9 (39.31, 0.08, -1.66), Buzzsaw (47.59, 0.95, 3.36). The four RS_VR ones equal
+    `card_transforms.json`'s earlier, independent fit to 0.0001. The scale between the sets lives in
+    MODELDEF (1.1 vs the card's 0.374 world scale); regen_rows builds each row at the donor's own
+    MODELDEF placement.
+  * MS_BD_Unmaker rests on frame 4 (the owner's open call from round 4). Frame 0 matches exactly; frame
+    0 -> 4 is the body's rigid move in the same file (6.247 deg, max 0.028). At frame 4 the flap is
+    0.29 and the lever 2.21 units off that move (they animate). The card is carried to frame 4.
+  * The drawn meshes are carved by that correspondence (carve_by_ref, all frames kept, 0 unlabelled):
+    surfaces now named body/flap/lever, body/canister/pilotflame/trigger, body/mag/trigger,
+    body/bolt/bolt_2/magazine/trigger, body/magazine/trigger. Same vertices, same skins.
+  * `regen_rows.py` then gave each donor its own row with layers: slots 81 BD_Flamethrower2,
+    82 brt_Flamethrower2, 83 BD_Unmaker, 84 brt_Unmaker, 85 brt_HitlersBuzzsaw, 86 MG_Bolter,
+    87 meat_Bolter, 88 MG_Tec9, 89 meat_TEC9 (TEC-9 with its bolt handle on layers). All 186 old
+    MODELDEF.cards blocks are unchanged. The Buzzsaw's row equals BD22Q's MG42 row (Well, Axis, Mouth,
+    MagLen, MagCentre identical; hand hooks differ by the grip fits).
+* **Rig, testmod gun, model picked (`run_gate.py --vr --shots`): 5/5 PASS.** Each: empty -> reload button ->
+  part out -> off hand takes one (HELD 2201 Q..P@rsq_hands) -> carried -> inserted -> seated -> given back
+  -> the mod's reload refilled. Frames on the sheet (the part is clearly visible for the canister,
+  Bolter mag and the drum at its seat; the Unmaker skull and the black TEC-9 mag are small in the crop,
+  the HELD log lines show them in the hand).
+* **BD22 load order, real play (doom2 -> brutal22test6 -> BD_VoxelPack -> ms_r5, realplay.py, now with
+  `Class=MS_Donor` picks): fire, burst, fire empty, reload button, the hands, fire again.**
+  PASS with 2 takes / 2 magazine-outs / 2 give-backs and firing after: Plasma_Gun=MS_MG_Bolter,
+  BrutalSMG=MS_MG_Tec9, Plasma_Gun=MS_BD_Unmaker, Rifle=MS_BD_Flamethrower2,
+  BrutalSMG=MS_brt_HitlersBuzzsaw. No script error from the pack (only BD_VoxelPack's own 5).
+* Gate driver: a part held back to front (the drum goes in from the side; the off hand's frame is
+  mirrored: 118-180 deg) is now turned in quarter turns first (`rsr_testdriver.zs`, TurnWrist). Before
+  it the Buzzsaw stalled in CARRY at 118-148 deg. `run_gate.py`: `MS_SHOT_TICS` sets the shot tics.
+
+## 2. Not done / open
+* **BD22's own Unmaker, Flamethrower2 and MG42 never reload, with any model.** Measured in real play
+  (picked models, logs `rp_Unmaker_*`, `rp_Flamethrower2_*`, `rp_MG42_*`): Unmaker and Flamethrower2
+  fire from a 999 pool with no reload ("its Reload label is its Ready loop -- no hand reload on it");
+  MG42 fires straight from its Clip2 pool (200 -> 30 over 170 shots in the run) and never entered a reload. ModelSwapper joins the mod's own reload, so there is nothing to join.
+  Giving those three BD22 guns a magazine is a new VR mechanic on BD22's balance: the owner's call
+  (BD22 Weapons Q does it with its own Plus toggles).
+* MS_wolf_MG42 still shares the old slot 9 (no layers drawn). Not in this job.
+* The Unmaker rest frame (BD_ frame 4 vs brt_ frame 0) is still the owner's call.
+* run_all on the rig: see section 3.

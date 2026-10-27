@@ -247,7 +247,9 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
     # break-open: a round that needs a second or third push to seat runs past 520 (MS_Revolver: shut at t522)
     end = 900 if pump or brk or (not brk and has_handle(donor)) or MOD.startswith('doomablo:') else 520
     if shots:
-        t += [(x, 'screenshot') for x in (100, 140, 170, 200, 230, 260, 300, 340, 400)]
+        # MS_SHOT_TICS=a,b,...: the tics to shoot (e.g. dense through the carry, to see the part in the hand)
+        st = os.environ.get('MS_SHOT_TICS')
+        t += [(x, 'screenshot') for x in ([int(v) for v in st.split(',')] if st else (100, 140, 170, 200, 230, 260, 300, 340, 400))]
     t += [(end, 'echo GATE_END')]
     cmds, now = [], 0
     for when, c in sorted(t):
