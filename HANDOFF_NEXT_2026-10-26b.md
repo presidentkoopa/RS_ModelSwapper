@@ -178,3 +178,110 @@ hands 8.6 / 9.0 cm off BD22Q's pose.
 6. **Twins' reloads:** should a shelf model drawn exactly like a lifted BD22Q gun also take that gun's
    reload rows (e.g. MS_BD_M79 -> BD22Q's break-open), or should the default model on BD22's own guns
    simply be the MS_BD22_ one?
+
+---
+
+# Round 2 (2026-10-26, Lane A)
+
+The owner's four decisions of 2026-10-26, in order. Branch `modelswapper-2.0-bd22-lift`, `main` untouched.
+Final build: `/home/claude/lane_a_out/ms_r2_final.pk3` (= branch head before this handoff). The rig is
+QuestZDoom 17.3 (`gate/qz_rig`, "qz: engine OK" in every log).
+
+## 1. Done (measured, rig-proven)
+
+### Item 1: break-open reload order, the mod's reload first (057a2f4)
+* *Reload Order* (`ms_mod_first`, default *Mod's reload first*) now covers break-open guns (SSG, M79,
+  revolvers) as well as magazines. At the press, the hands' break reload starts and the mod's own reload
+  runs straight away, moving its own ammo. The gun is parked where that reload ends (no A_WeaponReady,
+  so no fire) until the hands have opened the gun, loaded it and shut it. *Hands first* is unchanged.
+  `RSB_State.paid`: once the mod has paid for the rounds, its emptied reserve doesn't stop the hand's grab.
+* **Bug found and fixed:** `ms_donor_main` is a `server` cvar, so a value set from script arrives through
+  the net queue a tic later (`D_SendServerInfoChange`, DEM_SINFCHANGED, read in the 17.3 source). If BD22's
+  GrenadeLauncher was fired dry the same tic it came up, the join took it under the *previous* gun's model.
+  The log showed "took GrenadeLauncher (slot 17)", which is MS_alien_rifle: a magazine reload on the M79.
+  The join now waits until the cvar matches the model handler.
+* Gate: break-open checks *fire held for hands*. The gate fires BD22's SSG dry, because its `SSGLoaded`
+  flag makes an emptied count read as loaded (SSG.dec:383).
+* Rig PASS: MS_SuperShotgun in both orders, MS_Revolver, MS_BD22_SSG, MS_BD22_SSG on `bd22:SSG`,
+  MS_BD22_M79 on `bd22:GrenadeLauncher`. Log: `/home/claude/lane_a_out/r2/item1.txt`.
+
+### Item 2: pump, *Shells per grab* 1-4 (f3372ad)
+* *Shells per grab* (`ms_shell_grab`, default 1, the same as before). One grab takes that many shells,
+  capped by the reserve and by the room left in the tube, and each push counts. Shells 2-4 are drawn on
+  layers 2211-2213 beside the held one, parallel and touching. Their direction was measured on Ermac's
+  one-shell hold (`tools_kit/shell_stack.py` -> `rsp_stack.ms.zs`): each added shell touches the hand and
+  none sits deeper in it than the held shell. The spacing is each gun's own shell diameter (2.395 / 2.191 /
+  2.021 cm). If the hand lets go, every shell falls.
+  Render: `/home/claude/lane_a_out/report/shells_per_grab.png`.
+* **How a mod loads its tube** is read from the mod's own reload the first time each class reloads, then
+  kept for the session. QZD 17.3's static build has no label table, so the run itself is the evidence:
+  * if the psprite goes back to an earlier state of its reload for the next shell, the mod loads **one
+    shell per pass** and the hand paces it shell by shell;
+  * if more than one shell goes in during one pass, or one goes in and the reload ends, it loads the
+    **whole tube**: the mod's reload runs first, and the gun can't fire until the hand has pushed that
+    many shells.
+  * **Per donor (rig):** BD22 `Shot_Gun` (its InsertingShells loop) is one per pass. DoomAblo `rwShotgun`
+    (A_MagazineReload) is whole tube. Test mod: `TMShotgun` one per pass, `TMShotgunW` (new) whole tube.
+* The join's reload window now ends at the next standard label after `Reload:`. It used to be a fixed 32
+  states, but BD22's Shot_Gun reaches its first tic about 45 states in, so the join never took it on the rig.
+* Rig PASS: BD22 Shot_Gun one per pass with grab 1 and grab 4; DoomAblo rwShotgun whole tube with grab 1
+  and grab 4. Desktop PASS: TMShotgun grab 1 and 4; TMShotgunW grab 1 and 4.
+  Logs: `/home/claude/lane_a_out/r2/item2.txt` and `*.log` beside it.
+
+### Item 3: the hand-pose outliers, minimal re-fit (791eaf2)
+`tools_kit/refit_outliers.py` uses handfit_cards.py's own method: Ermac's pose is kept, and his measured
+gripping face is translated onto the gun by trimmed ICP, starting from where the hand is drawn now. Only a
+hand that fails is touched. hand_gap in cm (gun hand / support):
+| model | before | after |
+|---|---|---|
+| MS_BD_Flamethrower2 | 4.64 / 0.03 | 0.09 / 0.03 |
+| MS_RocketLauncher (DoomAblo RwRocketLauncher) | 0.02 / 2.17 | 0.02 / 0.16 |
+| MS_Chainsaw | 4.10 / 2.58 | 0.06 / 0.04 |
+| MS_chex_largezorcher | 5.29 / 3.81 | 0.04 / 0.05 |
+| MS_chex_superlargezorcher | 5.30 / 3.57 | 0.04 / 0.05 |
+Renders: `/home/claude/lane_a_out/report/refit_<model>.png`. The renders show that the zorchers' gun hand
+now touches the top of the body rather than the arc grip below it. It is on the gun but not yet a real
+grip; that is left for the FBX fitter, as asked.
+
+### Item 4: the 16 zion_ blocks with the missing frame row (1af94d9)
+`tools_kit/part_rows.py` adds a FrameIndex row for each extra model on the same sprite and frame, but only
+where it measures that the part belongs there: every triangle island of the part must chain back to the
+gun through gaps of 3.5 mesh units or less. 15 blocks now draw every part. Renders, before and after, plus
+a contact sheet: `/home/claude/lane_a_out/report/zion_parts/`.
+**Not written, measured:** MS_zion_D4SUPERSHOTGUN's shells (SuperShotgunShells.md3). At the rest frame 62,
+6 pieces sit 20.4-23.4 units below the gun; they only reach it from frame 95, during its reload. That block
+stays as it was. None of the zion_ models has a hand row, so they draw no hands either way.
+
+## 2. Gate on the final build
+Pack `/home/claude/lane_a_out/ms_r2_final.pk3`, sha256 `15fd55781d276abac6ceed95bff13c048cbf8840adae88ee464e79a5d9fadea6`. It is built from f3372ad; the
+commit after it changes only the gate and docs.
+* **Rig, half 1: 37 of 37 PASS.** MS_BD_Flamethrower2 (round 1's FAIL) now passes.
+* **Rig, half 2: 36 of 37**, then **37 of 37** after a re-run. MS_RocketLauncher and both chex zorchers
+  (round 1's FAILs) pass. MS_BD22_M79's round was never seated during the batch.
+* **Desktop: 74 of 74 PASS.**
+* **Extras: 11 of 13**, then **13 of 13** after the re-gate. Covered: hands-first SSG, bd22:SSG,
+  bd22:GrenadeLauncher, bd22:Shot_Gun one per pass with grab 1 and 4, DoomAblo rwShotgun whole tube with
+  grab 1 and 4, test-mod whole tube with grab 4, DoomAblo RwRocketLauncher (round 1's FAIL), bd22:Rifle, and
+  `--offknife` for magazine, pump and break-open.
+* **Triage of the 3 FAILs.** Neither was a code regression.
+  * *MS_BD22_M79 not seated* is rig load. On the M79 the item-1 commit seated, HEAD with the item-1 join
+    seated, and so did the final pk3 at load 1.35. The final pk3 failed 3 of 3 at load ~2.5, while other
+    lanes were running engines. The rig's scripted wrist search misses frames under load (round 1 saw the
+    same with MS_Revolver).
+  * *"their reload ran" on bd22:SSG and bd22:GrenadeLauncher* was a **gate bug**. With the mod's reload
+    first, the mod refills before the hands give the gun back, but the check only looked for the refill
+    after the give-back. It now looks after the join took the gun.
+  * Re-gate on the same pk3, at load 1.2-1.9: bd22:SSG (both orders), bd22:GrenadeLauncher, MS_BD22_M79,
+    MS_brt_M79, MS_BD22_SSG, MS_SuperShotgun, MS_BD22_Revolver and MS_Revolver all PASS (9 of 9).
+* Logs: `/home/claude/lane_a_out/r2/` (`final_*.txt`, `regate.txt`, `item1.txt`, `item2.txt`).
+* **Blocker to know about:** the shared rig gives false FAILs on held gestures when other lanes load the
+  machine (load average above ~2). Gate under lower load, or run `-x` batches back to back.
+
+## 3. Not done
+* The SSG shells above (a reload-only part; drawing them at rest would hang them in the air).
+* Shells per grab on break-open guns: not asked for (the SSG already takes a pair).
+
+## 4. Open (owner calls, unchanged)
+* Grip mode taking a charging handle (BD22Q's rule makes a grip near the gun steady it, never grab).
+* Is Ermac's fist the "Offhand Fist" you meant, or BD22's own 2D off-hand fist sprite?
+* (Round 1's question 6, the twins' reloads, still stands.)

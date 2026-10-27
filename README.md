@@ -80,6 +80,8 @@ ModelSwapper still puts its models on whatever weapon mod is loaded, and that mo
   - *Pump by Hand After a Shot*: on or off.
   - *Charging Handle After Empty*: on or off.
   - *Grab ammo with*: trigger or grip. A charging handle can only be taken with the trigger.
+  - *Reload Order*: the mod's reload first (default; the gun can't fire until your hands finish) or hands first. Magazine and break-open guns both follow it.
+  - *Shells per grab*: 1-4 shells per grab at the pouch for pump shotguns. If a mod loads its tube one shell at a time, your hand paces that loop. If it loads the whole tube at once, the mod's reload runs first and the gun can't fire until you've pushed that many shells in.
 
 Each model is tested headless by `gate/run_gate.py`, and `gate/run_all.py` runs them all:
 - **Desktop build:** all 74 PASS (2026-10-25). This covers the logic, the models and the drawing.

@@ -341,7 +341,9 @@ def run(pk3, donor, engine, shots, yaw=90, vr=False, shot=False):
             # reload ran at the press, then the gun was held -- no fire -- until the hands shut it
             ('fire held for hands', ('ms_mod_first 0' in EXTRA) or re.search(r"the mod's reload runs first.*?the mod's reload is done -- held.*?gave \w+ back \(hands finished -- fire allowed\)", text, re.S) is not None),
             ('handed back', 'gave %s back' % gun in text),
-            ('their reload ran', mod_refilled(text, 'gave %s back' % gun) if MOD else 'TM ssg: barrels 2' in text),
+            # mod first (the default): the mod's reload fills before the hands give the gun back, so its
+            # refill is looked for after the join TOOK it; hands first: after it gave it back
+            ('their reload ran', mod_refilled(text, ('gave %s back' if 'ms_mod_first 0' in EXTRA else 'took %s (break slot') % gun) if MOD else 'TM ssg: barrels 2' in text),
             ('reached the end', 'GATE_END' in text),
         ]
         print('donor %s  (%s #%d, break slot %d)  exit %s' % (donor, arch, idx, break_slot(donor), rc))
