@@ -4,7 +4,7 @@
 
 # PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
 
-Current step: **F11** (F12 DONE 2026-10-26, 0e21fe8) -- F1-F10 are DONE and committed (2026-10-25). F10 finished the roster: every
+Current step: **F13** (owner's yes 2026-10-27 02:2x; F12 DONE 2026-10-26, 0e21fe8; F11's open items wait for his headset pass) -- F1-F10 are DONE and committed (2026-10-25). F10 finished the roster: every
 non-melee gun the owner kept reloads by hand (23; BFG and BFG10k closed by him). F11 is the fixes
 and polish, then the gated pk3. Open from F10: the Minigun's bigger in-hand box (owner's idea, later). The owner's headset pass on F1-F9 is still outstanding and
 is what gates the 1.99 release; nothing in this pack has ever been seen in VR.
@@ -251,6 +251,18 @@ per-gun checklist below, in a headset, signed by the owner.
       E:\DOOMWork\_old\_oldtools. Done = a fresh clone runs `sh tools/rig/setup.sh` and the
       gallery/cmp2 example with no other repo, on the owner's load order, measured. No new tools,
       no hand-fitter changes (the FBX fitter is a prototype outside the repo until the headset pass).
+- F13 **THE HAND FITTER, A DEPOT TOOL (pipeline 2: hands on the gun, finger on the trigger)** (owner,
+      2026-10-27: "yes, in the depot please"). The FBX-skeleton fitter prototyped outside the repo
+      (/home/claude/lane_c, rounds 1-6; the owner provisionally passed BrutalPistol and Flamethrower2 in his
+      headset, 2026-10-27) moves into `tools/handfit_fbx/`, with paths Depot-relative or env. It reads the FBX
+      hand (DXR models/hands/hand_final.fbx; NOT the DXR IQM hands, owner's rule), solves wrist, gun move
+      and finger joints against grip rules (G, S, U families and the gas-pump grip; tolerances from 1.92's
+      measured poses), and bakes MD3 frames (`trigger`, `squeeze`, support poses). It writes per-gun
+      MODELDEF/gunmoves/hands rows, a rules table and engine sheets. Sets are built in their own repos
+      (BD22 in RS_Brutal22WeaponsQ) with this tool; the Depot only holds the tool. Done = a fresh clone
+      reproduces the r6 BrutalPistol and Flamethrower2 frames byte-identically, measured. Open, recorded:
+      licences for the FBX source; per-set frame letters; the pistol trigger through the finger on fire
+      frames (0.66 cm, owner: minor).
 ## Then, in this order
 TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
 - S1  Vanilla / V+ roster + menu (V+ = toggles inside Vanilla per the owner's checklist).  (owner's order, 03:21)
