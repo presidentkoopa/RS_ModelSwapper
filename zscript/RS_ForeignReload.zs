@@ -104,6 +104,13 @@ class MS_ReloadJoin : EventHandler
 	// and the reload looped forever. After a release we stay disarmed until the
 	// weapon has left its reload entirely, which is the mod's reload finishing.
 	private bool mDisarmed[MAXPLAYERS];
+	// FIX 4 (owner, 2026-10-27): the hands start only once the mod's reload has COMMITTED. Took at
+	// the reload entry, the mod's own refusal checks (mag full, no reserve, purist, zoomed) have not
+	// run yet; RSR_Start / RSR_MagOut / RSR_Charge wait in mPending until the mod's ammo moves or
+	// its psprite rests on a ticking state of its reload (not an inspect, fidget or aim branch).
+	private bool mPending[MAXPLAYERS];
+	private int mAmmo1At[MAXPLAYERS];
+	private int mAmmo2At[MAXPLAYERS];
 
 	// THE PUMP (a tube-fed shotgun, RSP_Guns). A pack that owns its shotguns writes a loading
 	// loop that waits for the hand and, per shell the hand pushes home, runs its own one-shell
@@ -177,7 +184,7 @@ class MS_ReloadJoin : EventHandler
 		if (!h || !p || !w || !p.mo)
 			return false;
 		int n = p.mo.PlayerNumber();
-		return n >= 0 && n < MAXPLAYERS && h.mDriving[n] && h.mDrivW[n] == w;
+		return n >= 0 && n < MAXPLAYERS && h.mDriving[n] && !h.mPending[n] && h.mDrivW[n] == w;
 	}
 
 	// The model handler's own answer for the main hand (it runs first: a StaticEventHandler) against
@@ -230,9 +237,63 @@ class MS_ReloadJoin : EventHandler
 	// and the whole detection came back `remap NONE`. There the entry itself is
 	// enough: we take over AT the handover, not part way through, and a weapon
 	// entering its own Reload label is exactly that moment.
+	// A RELOAD LABEL THAT IS REALLY THE GUN'S READY LOOP IS NOT A RELOAD (owner, 2026-10-27, fix 2).
+	// BD22 names its idle loop Reload on guns with no reload of their own: FlameCannon.dec
+	// `Ready: Ready3: Reload:` on one state, Flamethrower.dec `ReadyDry: Reload:` (its out-of-fuel idle
+	// loop, which ends in Loop). Taken as a reload entry, the magazine dropped on select, the gun was
+	// held with no fire, and once the hands finished it re-armed and dropped again after every shot
+	// (triage, 2026-10-27). The test, per class, cached: the Reload state IS the Ready state or lies in
+	// its run (State.InStateSequence), or the Reload label's own chain (fall-through and gotos, no
+	// action jumps) comes back to the Reload state itself within 64 states -- an idle loop. A real
+	// reload runs on to Ready and stays there. Such a gun reloads only through a real reload path,
+	// or not at all by hand.
+	private Array<Name> mRdyCls;
+	private Array<bool> mRdyIs;
+	private bool ReloadIsReady(Weapon w)
+	{
+		if (!w)
+			return false;
+		Name cn = w.GetClassName();
+		int k = mRdyCls.Find(cn);
+		if (k < mRdyCls.Size())
+			return mRdyIs[k];
+		bool rdy = false;
+		let rs = w.FindState("Reload");
+		State r = w.GetReadyState();
+		if (rs && r)
+		{
+			if (rs == r || rs.InStateSequence(r))
+				rdy = true;
+			else
+			{
+				State s = rs;
+				for (int n = 0; n < 64 && s; n++)
+				{
+					s = s.NextState;
+					if (s == rs) { rdy = true; break; }
+					if (s && s.InStateSequence(r)) break;		// reached its Ready: a real reload
+				}
+			}
+		}
+		mRdyCls.Push(cn);
+		mRdyIs.Push(rdy);
+		if (rdy && RS_ForeignRemap.DebugOn())
+			Console.Printf("[MSJOIN] %s: its Reload label rdy its Ready loop -- not a reload entry; no hand reload on it", cn);
+		return rdy;
+	}
+
+	private bool InReload(RS_ForeignRemap m, Weapon w, State s)
+	{
+		if (ReloadIsReady(w))
+			return false;
+		return InReloadGroup(m, s) || AtReloadEntry(w, s);
+	}
+
 	private bool AtReloadEntry(Weapon w, State s)
 	{
 		if (!w || !s)
+			return false;
+		if (ReloadIsReady(w))
 			return false;
 		let rs = w.FindState("Reload");
 		if (!rs)
@@ -444,7 +505,7 @@ class MS_ReloadJoin : EventHandler
 
 			// Not driving yet. Has the mod's weapon just entered its reload?
 			let m = RemapFor(mo, w);
-			bool inReload = InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState);
+			bool inReload = InReload(m, w, psp.CurState);
 			if (mDisarmed[i])
 			{
 				// Re-arm only once the mod's own reload has run its course and the gun
@@ -493,6 +554,30 @@ class MS_ReloadJoin : EventHandler
 			return;
 		mReturn[i] = psp.CurState;
 		mHeld[i] = w;
+		if (RSR.PlayerInt(p, 'ms_mod_first', 1) != 0)
+		{
+			// mod first: nothing is given to the hands until the mod's reload commits (CommitTick)
+			mReturn[i] = null;
+			mHeld[i] = null;
+			mDriving[i] = true;
+			mPending[i] = true;
+			mDrivW[i] = w;
+			mDrivTic[i] = mo.Level.maptime;
+			mAmmo1At[i] = w.AmmoType1 ? mo.CountInv(w.AmmoType1) : 0;
+			mAmmo2At[i] = w.AmmoType2 ? mo.CountInv(w.AmmoType2) : 0;
+			if (RS_ForeignRemap.DebugOn())
+				Console.Printf("[MSJOIN] %s at its reload entry -- waiting for the mod's reload to commit", w.GetClassName());
+			return;
+		}
+		StartHands(mo, p, i, w);
+		p.SetPsprite(PSP_WEAPON, hold, false, w);
+		if (RS_ForeignRemap.DebugOn())
+			Console.Printf("[MSJOIN] took %s (slot %d) at its reload", w.GetClassName(), RSR_Guns.Index(w));
+	}
+
+	// The hands' reload starts: what a pack's own weapon would send from its Reload.
+	private void StartHands(PlayerPawn mo, PlayerInfo p, int i, Weapon w)
+	{
 		// RSR_Start is what vreload watches for; it answers with RSR_Go when it is
 		// willing to take the reload, and the hands take over from there.
 		mo.GiveInventory('RSR_Start', 1);
@@ -514,21 +599,28 @@ class MS_ReloadJoin : EventHandler
 		mo.TakeInventory('RSR_Charge', 999);
 		if (mag && mag.Amount <= 0 && RSR_Guns.HasHandle(RSR_Guns.Index(w)) && RSR.PlayerInt(p, 'ms_charge_dry', 1) != 0)
 			mo.GiveInventory('RSR_Charge', 1);
-		if (RSR.PlayerInt(p, 'ms_mod_first', 1) != 0)
+	}
+
+	// Has the mod's reload committed? Its ammo moved, or its psprite rests (tics > 0) on a state of
+	// its reload block that is not one of BD22's non-reload branches inside that block.
+	private bool Committed(PlayerPawn mo, int i, Weapon w, PSprite psp)
+	{
+		int a1 = w.AmmoType1 ? mo.CountInv(w.AmmoType1) : 0;
+		int a2 = w.AmmoType2 ? mo.CountInv(w.AmmoType2) : 0;
+		if (a1 != mAmmo1At[i] || a2 != mAmmo2At[i])
+			return true;
+		State s = psp.CurState;
+		if (!s || psp.Tics <= 0 || !AtReloadEntry(w, s))
+			return false;
+		static const String notReload[] = { "Inspect", "Inspect2", "InspectHold", "Fidget", "ContinueFidget",
+			"PuristWarning", "NoAim", "IsHolding", "HoldAim", "HoldingAim", "NoAmmo", "Ready", "Ready3" };
+		for (int n = 0; n < notReload.Size(); n++)
 		{
-			// mod first: no hold now -- the mod's reload runs; ModFirstTick parks it at its end
-			mReturn[i] = null;
-			mHeld[i] = null;
-			mDriving[i] = true;
-			mDrivW[i] = w;
-			mDrivTic[i] = mo.Level.maptime;
-			if (RS_ForeignRemap.DebugOn())
-				Console.Printf("[MSJOIN] took %s (slot %d) at its reload -- the mod's reload runs first", w.GetClassName(), RSR_Guns.Index(w));
-			return;
+			let ns = w.FindStateByString(notReload[n], true);
+			if (ns && s.InStateSequence(ns))
+				return false;
 		}
-		p.SetPsprite(PSP_WEAPON, hold, false, w);
-		if (RS_ForeignRemap.DebugOn())
-			Console.Printf("[MSJOIN] took %s (slot %d) at its reload", w.GetClassName(), RSR_Guns.Index(w));
+		return true;
 	}
 
 	private void ModFirstTick(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp)
@@ -537,6 +629,29 @@ class MS_ReloadJoin : EventHandler
 		{
 			// switched away or died: the hands' reload sees its gun leave and ends itself
 			ModFirstEnd(mo, p, i, w, psp, "the gun left");
+			return;
+		}
+		if (mPending[i])
+		{
+			let m0 = RemapFor(mo, w);
+			if (Committed(mo, i, w, psp))
+			{
+				mPending[i] = false;
+				mDrivTic[i] = mo.Level.maptime;
+				StartHands(mo, p, i, w);
+				if (RS_ForeignRemap.DebugOn())
+					Console.Printf("[MSJOIN] took %s (slot %d) at its reload -- the mod's reload runs first", w.GetClassName(), RSR_Guns.Index(w));
+			}
+			else if (!InReload(m0, w, psp.CurState) || mo.Level.maptime - mDrivTic[i] > 70)
+			{
+				// the mod refused (full, no reserve, an inspect): the hands never start
+				mPending[i] = false;
+				mDriving[i] = false;
+				mDrivW[i] = null;
+				mDisarmed[i] = InReload(m0, w, psp.CurState);
+				if (RS_ForeignRemap.DebugOn())
+					Console.Printf("[MSJOIN] %s: the mod's reload did not commit -- no hand reload", w.GetClassName());
+			}
 			return;
 		}
 		mo.GiveInventory('RSR_Tick', 1);		// the heartbeat (see the hold path)
@@ -548,18 +663,26 @@ class MS_ReloadJoin : EventHandler
 			return;
 		}
 		let m = RemapFor(mo, w);
-		bool inReload = InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState);
-		if (!mHeld[i] && !inReload && psp.CurState != GetDefaultByType('MS_ReloadStates').FindState("MS_Hold"))
+		bool inReload = InReload(m, w, psp.CurState);
+		// PARK ON THE WAY OUT, not after. The mod's reload ends into its Ready, whose A_WeaponReady fires
+		// at once with the trigger still held (real play: the gun shot dry, trigger down, its Fire went to
+		// its Reload) -- parked a tic later, one shot had already gone (rig: "SHOT 32 t447" right at the
+		// park). On the last tic of a reload state whose 0-tic chain leaves the reload, park now and go
+		// on from its next state when the hands finish.
+		State exitTo = null;
+		if (!mHeld[i] && inReload && psp.Tics <= 1)
+			exitTo = LeavesReload(m, w, psp.CurState.NextState);
+		if (!mHeld[i] && (exitTo || !inReload) && psp.CurState != GetDefaultByType('MS_ReloadStates').FindState("MS_Hold"))
 		{
 			// the mod's reload has run to its end: park the gun there, no fire, until the hands finish
 			State hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
 			if (hold)
 			{
-				mReturn[i] = psp.CurState;
+				mReturn[i] = exitTo ? psp.CurState.NextState : psp.CurState;
 				mHeld[i] = w;
 				p.SetPsprite(PSP_WEAPON, hold, false, w);
 				if (RS_ForeignRemap.DebugOn())
-					Console.Printf("[MSJOIN] %s: the mod's reload is done -- held, no fire, until the hands finish", w.GetClassName());
+					Console.Printf("[MSJOIN] %s: the mod's reload is done -- held, no fire, until the hands finish (at %d of its reload, tics %d)", w.GetClassName(), w.FindState("Reload") ? w.FindState("Reload").DistanceTo(mReturn[i]) : -1, psp.Tics);
 			}
 		}
 		if (mo.CountInv('RSR_Seated') > 0)
@@ -579,9 +702,22 @@ class MS_ReloadJoin : EventHandler
 		}
 	}
 
+	// `s` (the state after the one on its last tic) when it is already OUT of the mod's reload: the
+	// reload's last ticking state goes straight to its Ready (BD22: `"####" AA 1 A_ReFire` / `Goto Ready`).
+	// Only that direct step counts. A 0-tic chain cannot be walked: its states may jump by action
+	// (A_JumpIfInventory) past a Goto that the walk would take for the exit (BD22 SSG RaiseReloading:
+	// a false exit 27 states in parked it before it had loaded). Null otherwise.
+	private State LeavesReload(RS_ForeignRemap m, Weapon w, State s)
+	{
+		if (s && !InReload(m, w, s))
+			return s;
+		return null;
+	}
+
 	private void ModFirstEnd(PlayerPawn mo, PlayerInfo p, int i, Weapon w, PSprite psp, String why)
 	{
 		mDriving[i] = false;
+		mPending[i] = false;
 		let bs = RSB_Handler.StateOf(mo);
 		if (bs)
 			bs.paid = false;
@@ -635,7 +771,7 @@ class MS_ReloadJoin : EventHandler
 			return;
 		}
 		let m = RemapFor(mo, w);
-		bool inReload = InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState);
+		bool inReload = InReload(m, w, psp.CurState);
 		if (mDisarmed[i])
 		{
 			if (!inReload)
@@ -706,13 +842,20 @@ class MS_ReloadJoin : EventHandler
 		if (mHeld[i] || !hold || psp.CurState == hold)
 			return;
 		let m = RemapFor(mo, w);
-		if (InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState))
-			return;
-		mReturn[i] = psp.CurState;
+		State exitTo = null;
+		if (InReload(m, w, psp.CurState))
+		{
+			// park on the way out (see ModFirstTick): no shot slips through with the trigger held
+			if (psp.Tics <= 1)
+				exitTo = LeavesReload(m, w, psp.CurState.NextState);
+			if (!exitTo)
+				return;
+		}
+		mReturn[i] = exitTo ? psp.CurState.NextState : psp.CurState;
 		mHeld[i] = w;
 		p.SetPsprite(PSP_WEAPON, hold, false, w);
 		if (RS_ForeignRemap.DebugOn())
-			Console.Printf("[MSJOIN] %s: the mod's reload is done -- held, no fire, until the hands finish", w.GetClassName());
+			Console.Printf("[MSJOIN] %s: the mod's reload is done -- held, no fire, until the hands finish (at %d of its reload, tics %d)", w.GetClassName(), w.FindState("Reload") ? w.FindState("Reload").DistanceTo(mReturn[i]) : -1, psp.Tics);
 	}
 
 	// ---------------------------------------------------------------- the pump
@@ -722,7 +865,7 @@ class MS_ReloadJoin : EventHandler
 		int have = tube ? tube.Amount : 0;
 		int pi = RSP_Guns.Index(w);
 		let m = RemapFor(mo, w);
-		bool inReload = InReloadGroup(m, psp.CurState) || AtReloadEntry(w, psp.CurState);
+		bool inReload = InReload(m, w, psp.CurState);
 		// Once the mod's reload is under way, it is running until its psprite is back in its Ready
 		// loop. The entry window (AtReloadEntry, 32 states) is too short for a long DECORATE reload:
 		// BD22's InsertShellAnimation is ~45 states past its Reload label, and the static build has
