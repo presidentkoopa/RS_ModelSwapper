@@ -30,6 +30,6 @@ earlier hand-fitting kits) is kept on the branch **`archive/depot-2026-10-28`**.
 
 ## Outside the repo, on purpose
 - The owner's game data: `doom2.wad`, `brutal22test6.pk3`, `BD_VoxelPack.pk3` (`RSQ_GAMEDATA`).
-- The FBX hand, `hand_final.fbx` (`RSQ_FBX`): unknown licence, so it is never committed. Only baked MD3
-  frames ship.
+- The FBX hand, `hand_final.fbx`, is in the repo at `tools/handfit/core/fbx_hand/` (`RSQ_FBX` overrides it).
+  Only baked MD3 frames ship in a pack.
 - Ermac's Force Unleashed models (`RSQ_ERMAC`): only the measuring scripts read them.

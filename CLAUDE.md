@@ -30,7 +30,7 @@ reloads by hand, live scopes, melee, all on a stock QuestZDoom 17.3. Take a set 
   (parsed). Say which. Don't ask the owner to check what a tool can check.
 - **Look at every frame.** Numbers lie: an open palm floating under a gun passed every numeric check.
 - **Commit every tool and pose.** A committed tool never imports from or defaults to an uncommitted
-  folder. The FBX hand is the one outside input, and it is never committed (`RSQ_FBX`).
+  folder. The FBX hand is in the repo at `tools/handfit/core/fbx_hand/` (owner, 2026-10-28); `RSQ_FBX` overrides it.
 - **Say a blocker the moment it appears.** Never work round it silently. Don't narrate tests every turn.
 - Never tell the owner when to sleep or work. Stop when told to stop. Discuss before new projects.
 - Keep `HANDOFF.md` current: what is done (measured), what is not, what is open, in that order.

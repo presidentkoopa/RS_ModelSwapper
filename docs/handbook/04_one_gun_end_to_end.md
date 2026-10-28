@@ -147,7 +147,7 @@ cd ../..
 The poses rebuild from data, and every placement number regenerates:
 
 ```sh
-RSQ_FBX=/path/to/hand_final.fbx python3 tools/handfit/port/rebake.py check
+python3 tools/handfit/port/rebake.py check
 #  == Rifle ... vs shipped src/models/rsq/fbx/fbx_b4_Rifle_R.md3: bytes identical ...
 #  placement: {"cls": "Rifle", ... "modeldef_match": 27, "modeldef_mismatch": 0, ... "fire_rows_max_diff": 0.0}
 ```

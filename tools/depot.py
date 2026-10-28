@@ -39,7 +39,7 @@ LOCK = _env('RSQ_RIGLOCK', os.path.join(DEPOT, '..', 'rig.lock'))		# one engine 
 WORK = _env('RSQ_WORK', os.path.join(DEPOT, 'work'))
 
 # outside inputs that are never committed (licence or size). Empty = not set: the tool that needs one says so.
-FBX = os.environ.get('RSQ_FBX', '')				# hand_final.fbx (unknown licence: never commit it)
+FBX = os.environ.get('RSQ_FBX', '') or os.path.join(os.path.dirname(os.path.abspath(__file__)), 'handfit', 'core', 'fbx_hand', 'hand_final.fbx')	# the FBX hand, in the repo (owner, 2026-10-28)
 FBX_TEX = os.environ.get('RSQ_FBX_TEX', '') or (os.path.join(os.path.dirname(FBX), 'textures') if FBX else '')
 ERMAC = os.environ.get('RSQ_ERMAC', '')			# Ermac's doom-force-unleashed_devbuild/models (hand/, ammo_hand/)
 DOOMWORK = os.environ.get('RSQ_DOOMWORK', '')		# the owner's E:\DOOMWork (REMA, RS_VR_Reload): history tools only

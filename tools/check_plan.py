@@ -5,7 +5,7 @@ Refuses the commit when:
   * the commit adds a top-level directory the layout does not name (README.md, "The layout");
   * a set mesh is ADDED that is a REMA *_wm.md3 reference or has ONE frame and is not listed in
     sets/<set>/single_frame_ok.txt (owner, 2026-10-27: "every single one of my md3s is animated");
-  * a file is committed that must never be: the FBX hand (*.fbx, unknown licence), frame dumps (*.ppm),
+  * a file is committed that must never be: any .fbx other than the one FBX hand (tools/handfit/core/fbx_hand/), frame dumps (*.ppm),
     or anything under work/ (run output).
 The commit message check ([step <id>] / [plan]) is in tools/commit-msg.
 `python3 tools/check_plan.py --audit` lists every set mesh the mesh rule would refuse today.
@@ -73,8 +73,8 @@ for p in staged('ACMR'):
         break
 for p in staged('ACMR'):
     low = p.lower()
-    if low.endswith('.fbx'):
-        errs.append('%s: the FBX hand is never committed (unknown licence; point RSQ_FBX at it)' % p)
+    if low.endswith('.fbx') and p != 'tools/handfit/core/fbx_hand/hand_final.fbx':
+        errs.append('%s: only tools/handfit/core/fbx_hand/hand_final.fbx is committed' % p)
     elif low.endswith('.ppm'):
         errs.append('%s: frame dumps are converted to PNG and deleted, never committed' % p)
     elif p.startswith('work/'):

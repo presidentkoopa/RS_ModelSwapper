@@ -37,7 +37,7 @@ Pose with `qz_hmd` / `qz_rhand` / `qz_lhand "x y z pitch yaw roll"`, triggers `q
 the `.ppm` at once. One engine at a time. Restore `tools/rig/bin/config/qzdoom.ini` with `git checkout`.
 
 ## Checks that catch most mistakes
-- `RSQ_FBX=<hand_final.fbx> python3 tools/handfit/port/rebake.py check` (poses rebuild from data; placements regenerate).
+- `python3 tools/handfit/port/rebake.py check` (poses rebuild from data; placements regenerate).
 - `python3 tools/handfit/port/gate_gun.py sheet|hands|compose ...` (one gun's frames and hand reload).
 - `tools/int20_rig/f20all.sh <pk3>` (whole pack on the fresh default ini); `mdslots.py <pk3>`; `variants_all.py <pk3>`.
 
@@ -49,4 +49,4 @@ EventHandler never runs. Interrupts silently stop lanes: check before reporting.
 
 ## Paths
 All in `tools/depot.py`: `RSQ_SET`, `RSQ_SRC`, `RSQ_POSES`, `RSQ_FITS_DIR`, `RSQ_GAMEDATA`, `RSQ_RIGLOCK`,
-`RSQ_WORK`, `RSQ_GUNPACK`; outside inputs never committed: `RSQ_FBX` (unknown licence), `RSQ_ERMAC`.
+`RSQ_WORK`, `RSQ_GUNPACK`; the FBX hand is in the repo (`tools/handfit/core/fbx_hand/`, `RSQ_FBX` overrides); outside input never committed: `RSQ_ERMAC`.

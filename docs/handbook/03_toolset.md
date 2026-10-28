@@ -25,7 +25,7 @@ repo except the three that cannot be committed.
 | `RSQ_GAMEDATA` | `doom2.wad`, `brutal22test6.pk3`, `BD_VoxelPack.pk3` | `gamedata/` beside the Depot checkout |
 | `RSQ_RIGLOCK` | the rig lock | `rig.lock` beside the Depot checkout |
 | `RSQ_WORK` | run output: logs, frames, sheets, scratch packs | `work/` (gitignored) |
-| `RSQ_FBX` | `hand_final.fbx`, the FBX hand. **Never committed** (unknown licence) | none: tools that need it say so |
+| `RSQ_FBX` | `hand_final.fbx`, the FBX hand | `tools/handfit/core/fbx_hand/hand_final.fbx` (in the repo) |
 | `RSQ_FBX_TEX` | its textures folder | `<folder of RSQ_FBX>/textures` |
 | `RSQ_ERMAC` | Ermac's `doom-force-unleashed_devbuild/models` | none: only measuring scripts read it |
 | `RSQ_MODELSWAPPER` | an RS_ModelSwapper checkout (`core/hands_tool/scene.py` can read its meshes) | `rs_modelswapper/` beside the Depot |
@@ -138,7 +138,7 @@ Every finished hand is stored as data in `$RSQ_POSES/<Class>.json`: the FBX join
 squeeze), the solved fingers, the wrist placement on the gun, the gun move, the support, the measurements.
 
 ```sh
-RSQ_FBX=/path/to/hand_final.fbx python3 tools/handfit/port/rebake.py check
+python3 tools/handfit/port/rebake.py check
 ```
 
 re-bakes every pose from its JSON and compares with the shipped MD3s, and regenerates every MODELDEF number,
