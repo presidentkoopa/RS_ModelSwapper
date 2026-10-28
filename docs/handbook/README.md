@@ -25,6 +25,7 @@ that, chapter 4 (one gun end to end) and chapter 6 (traps) are the ones you come
 | [06 Traps and fixes](06_traps_and_fixes.md) | Every trap that cost a day, and its fix. |
 | [07 Working with Claude](07_working_with_claude.md) | Running this with Claude agents: lanes, briefs, liveness, the fit farm, reviewing frames. |
 | [SKILL.md](SKILL.md) | The same process in one page, for a Claude session to load. |
+| [REMA_BLOCKERS.md](REMA_BLOCKERS.md) | Addendum for REMA: what it takes to put these hands on REMA's avatars, and what blocks it. |
 | [VERIFIED.md](VERIFIED.md) | This handbook followed on a fresh clone: what was run, and the result of each step. |
 
 ## Words used everywhere
