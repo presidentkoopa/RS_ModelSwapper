@@ -79,15 +79,16 @@ is answered by the Depot's fits where they exist (the Ruger: pistol-style, owner
 **Closes when:** a card can hold a Depot placement exactly. This needs an engine change in REMA, which is
 allowed there and is not the Depot's concern.
 
-### B4. Hand size
-**Inferred:** the Depot's fingers close on a gun at the FBX hand's own size, but each REMA body's hand is
-scaled to that body (`vr_avatar_handscale`, `HandScaleFor`). On a body whose hand is not FBX-sized, the
-same joint rotations stand off the grip or sink into it.
+### B4. Each avatar's own hand
+**Read:** every REMA avatar has its own hand mesh and finger bones (each body's `HandRest`, `O_hand`), and
+REMA already drives every body's fingers from the FBX rotations in the canonical bone frame
+(`vrhandpose.txt`). The Depot's poses were solved on the FBX hand's own mesh and size. **Inferred:** the
+same rotations on a body whose hand is longer, shorter or shaped differently stand off the grip or sink
+into it.
 
-**Missing:** one of these.
-- Measure each body's hand against the FBX hand and correct the placement for the difference.
-- Re-curl the fingers per body against the gun. The Depot's `curl3` / `curl4` close fingers to 0.2 cm,
-  and could run per body.
+**Missing:** fit each avatar's own hand to the gun, starting from the Depot pose (rule 2: start from the
+existing pose). The Depot's `rigid3` re-seat and `curl3` / `curl4` finger close are the method, run on
+that body's hand mesh instead of the FBX's.
 
 **Closes when:** REMA's `gun_fit_preview` shows each body's hand closing on the grip within the Depot's
 tolerances: penetration at most 0.5 cm, and pads 0.2 to 0.5 cm.
@@ -126,11 +127,6 @@ REMA would then take it through B1-B5, and gets nothing a set doesn't have.
 grenade pinch, and melee hands. REMA's reload hands are `hold_<subject>[_<class>]` poses on real parts
 (`GUN_POSE_STANDARD.md` §5, §9). They come after B1-B3, through the same exporter.
 
-### B9. Licence of the FBX hand
-**Read:** the Depot never commits `hand_final.fbx` ("unknown licence", `check_plan.py`). REMA's pose
-generator reads it from `models/hands/hand_final.fbx`. **To check:** whether REMA has committed it
-anywhere, so both projects follow the same rule.
-
 ## The order
 
 1. **B2's measurement**, on one body (c_doom_marine) and one gun (the Rifle or the pistol). Until a hand sits
@@ -144,4 +140,3 @@ anywhere, so both projects follow the same rule.
 ## Questions for the owner
 - B5: should REMA's world guns move from the `_wm` stills to the animated originals, as the Depot did?
 - B3: a full transform on the card, or roll plus offset?
-- B9: where `hand_final.fbx` lives for REMA, and whether it is committed.
