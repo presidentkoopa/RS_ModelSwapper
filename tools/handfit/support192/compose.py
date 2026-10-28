@@ -1,10 +1,10 @@
 """compose.py <out.png> <title> <Class> [...]: the support-fix sheet. Per gun three rows (near = the player's eye looking down at the off hand, side, eye = the r10/r11 camera): 1.92's hold (Depot
-docs/reference/bd22q_192_poses <Class>_<view>.jpg) | steadied | the kick | firing | (reload, when shot) from rigsheet.py, then a
+<set>/reference/192_poses <Class>_<view>.jpg) | steadied | the kick | firing | (reload, when shot) from rigsheet.py, then a
 row with the fit's own views (fit192: 1.92 Ermac above, the FBX fit below) and its numbers."""
 import os as _dpo, sys as _dps; _dps.path.append(_dpo.path.normpath(_dpo.path.join(_dpo.path.dirname(_dpo.path.abspath(__file__)), '../..'))); import depot as _DP	# Depot paths (tools/depot.py)
 import os, sys, glob, json
 from PIL import Image, ImageDraw
-RUN = os.environ.get('S192_RUN', _DP.WORK + '/runs/sup192run'); REF = (_DP.DEPOT + '/docs/reference/bd22q_192_poses')
+RUN = os.environ.get('S192_RUN', _DP.WORK + '/runs/sup192run'); REF = (_DP.SET + '/reference/192_poses')
 def main(out, title, guns):
     w = h = 480; lh = 22; top = 30; sts = ['steady', 'kick', 'fire', 'reload']; rows = []
     for g in guns:

@@ -1,9 +1,9 @@
 """b4_hands.png: each fitted gun at rest / steadied / firing, from the eye and from the side (QZD 17.3 rig frames), next to its
-1.92 render (Depot docs/reference/bd22q_192_poses/<Class>_eye.jpg / _side.jpg)."""
+1.92 render (<set>/reference/192_poses/<Class>_eye.jpg / _side.jpg)."""
 import os as _dpo, sys as _dps; _dps.path.append(_dpo.path.normpath(_dpo.path.join(_dpo.path.dirname(_dpo.path.abspath(__file__)), '../..'))); import depot as _DP	# Depot paths (tools/depot.py)
 import sys, os
 from PIL import Image, ImageDraw
-D = (_DP.WORK + '/runs/lane_b_sgrun' + '/shots'); REF = (_DP.DEPOT + '/docs/reference/bd22q_192_poses/')
+D = (_DP.WORK + '/runs/lane_b_sgrun' + '/shots'); REF = (_DP.SET + '/reference/192_poses/')
 guns = sys.argv[1].split(','); pick = dict(a.split('=') for a in sys.argv[2:])
 sts = ['rest', 'steady', 'fire']; lab = {'rest': 'at rest', 'steady': 'steadied (off hand on, grip)', 'fire': 'firing (squeeze)'}
 rows = [(g, v) for g in guns for v in ('eye', 'side')]

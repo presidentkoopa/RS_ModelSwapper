@@ -1,9 +1,9 @@
-"""hands_heavies.png: per gun, from the eye and from the side: 1.92 render (Depot docs/reference/bd22q_192_poses/<Class>_<view>.jpg),
+"""hands_heavies.png: per gun, from the eye and from the side: 1.92 render (<set>/reference/192_poses/<Class>_<view>.jpg),
 then rest / steadied / firing (sheet_hv.py picks). usage: python3 compose_hv.py <out.png> <Gun,...> [title]"""
 import os as _dpo, sys as _dps; _dps.path.append(_dpo.path.normpath(_dpo.path.join(_dpo.path.dirname(_dpo.path.abspath(__file__)), '../..'))); import depot as _DP	# Depot paths (tools/depot.py)
 import sys, os
 from PIL import Image, ImageDraw
-RUN = os.environ.get('HV_RUN', _DP.WORK + '/runs/lane_b_hvrun'); D = RUN + '/shots'; REF = (_DP.DEPOT + '/docs/reference/bd22q_192_poses/')
+RUN = os.environ.get('HV_RUN', _DP.WORK + '/runs/lane_b_hvrun'); D = RUN + '/shots'; REF = (_DP.SET + '/reference/192_poses/')
 out = sys.argv[1]; guns = sys.argv[2].split(','); title = sys.argv[3] if len(sys.argv) > 3 else ''
 REFNAME = {'Machinegun': None}
 sts = ['rest', 'steady', 'fire']; lab = {'rest': 'at rest', 'steady': 'steadied (off hand on, grip)', 'fire': 'firing (squeeze)'}
