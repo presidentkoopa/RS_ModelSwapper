@@ -62,9 +62,30 @@ All of it sits on top of weapon code ModelSwapper has never seen. It reads the m
 
 One shelf of models is measured once and then reloads on every mod, forever. That's the whole idea. As far as we know, nobody has done it before.
 
+### Where 2.0 stands (2026-10-28): in progress, not released
+
+The goal above is the point of 2.0, and the design works: on the rig, models from the shelf have been
+reloaded by hand on another mod's own reload, with the mod's ammo, rules and sounds. It is not finished,
+and nothing below has been confirmed in a headset.
+
+- **Hands:** the 2.0 branch still uses the older hands. BD22 VR Weapons Q 2.0 now has new hands on every
+  gun (grip, support, fists and every reload hold), and they are coming to ModelSwapper.
+- **What has been shown on the rig:** all 74 reloadable models passed on the 2026-10-26 build (r2).
+  The later builds changed reload code and were not fully re-tested. On r4: the pump shotgun passes in
+  real play; the super shotgun and the M79 reload once, then glitch on the second reload. r5 added five
+  more reloads (Unmaker, Flamethrower, Bolter, TEC-9, Buzzsaw models) but four pistol and rifle models
+  stick before the charging handle; that cause is not found yet.
+- **A mod's gun that never reloads** just fires as the mod made it, with the model and hands on it.
+- **A mod that builds its reload in an unusual way** can be missed: the reload then plays as an idle pose,
+  without an error. Testing on several mods is how those are found.
+
+**The road to 2.0:** fix the open bugs above, bring the new hands across, then take the shelf through the
+RSQ Weapon Depot's process one mesh at a time. Each mesh is tested in three mods, each on a random gun in
+slots 2, 3 and 5 (a pistol, a shotgun and a launcher type), before the next mesh starts.
+
 ModelSwapper still puts its models on whatever weapon mod is loaded, and that mod's code still fires the gun and decides every round. What 2.0 adds on the Quest build:
 
-- **Hands on the guns.** Ermac's VR hands hold each model: gun hand on the grip with a finger on the trigger, support hand on the gun.
+- **Hands on the guns.** VR hands hold each model (Ermac's today; the new BD22 2.0 hands are coming): gun hand on the grip with a finger on the trigger, support hand on the gun.
 - **VR reloading on any mod that reloads.** When the mod's weapon starts its own reload, ModelSwapper hands the physical part to you, then gives the gun back and the mod's reload fills it with the mod's own ammo:
   - **Magazine guns:** pull the magazine, take a new one, seat it. Reloaded from empty, guns with a charging handle or slide ask you to rack it too.
   - **Pump shotguns:** push shells into the port one by one; the mod's own loop counts them. Between shots, with your off hand on the forend, the gun waits at the mod's own pump for you to work it, then the mod's fire carries on.
@@ -84,7 +105,7 @@ ModelSwapper still puts its models on whatever weapon mod is loaded, and that mo
   - *Shells per grab*: 1-4 shells per grab at the pouch for pump shotguns. If a mod loads its tube one shell at a time, your hand paces that loop. If it loads the whole tube at once, the mod's reload runs first and the gun can't fire until you've pushed that many shells in.
 
 Each model is tested headless by `gate/run_gate.py`, and `gate/run_all.py` runs them all:
-- **Desktop build:** all 74 PASS (2026-10-25). This covers the logic, the models and the drawing.
+- **Desktop build:** all 74 PASS on 2026-10-25 (not re-run on the later builds; see "Where 2.0 stands"). This covers the logic, the models and the drawing.
 - **The Quest's own engine build, with real VR input:** simulated controllers, the real grip and trigger keys, and the pack's own hand code. Every reload kind is driven by a simulated hand, with no shortcut through the reload's own functions. This is the owner's `Quest_Weapons_Kit` rig; see `gate/qz_rig/`.
 
 Feel and reach are the headset's to judge. `HANDOFF_2.0_2026-10-25.md` lists what is measured, what is open, and every fault found on the way.
