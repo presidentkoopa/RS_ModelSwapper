@@ -1,0 +1,66 @@
+{
+ "cls": "AssaultShotgun",
+ "place": [
+  -4.70078836005504,
+  -4.804961335543272,
+  -12.03095782575122,
+  3.853999999999988,
+  3.362999999999995,
+  10.974000000000006
+ ],
+ "R": [
+  [
+   0.996020376007257,
+   -0.07712697355505173,
+   -0.044663637655169314
+  ],
+  [
+   0.06709852807028907,
+   0.978743000198859,
+   -0.19380383663007547
+  ],
+  [
+   0.05866172610104939,
+   0.19003570588701174,
+   0.9800230774726031
+  ]
+ ],
+ "t": [
+  4.685572615760986,
+  6.713744202163712,
+  -5.271106042719738
+ ],
+ "moved": [
+  "MODELDEF MODELDEF.bd.txt AssaultShotgun x1",
+  "MODELDEF MODELDEF.purist PuristAssaultShotgun x3",
+  "MODELDEF MODELDEF.rsqoff RSQ_Off_AssaultShotgun x4",
+  "MODELDEF MODELDEF.rsr AssaultShotgun x3",
+  "MODELDEF MODELDEF.rsr RSR_GunParts x2",
+  "gunmoves Pivot row 1 [ 0.  5. 24.] -> [ 4.701 -2.031 19.195]",
+  "gunmoves row 0 (2SASB, md3 frame 5) 0.00, 0.00, 0.00, 0.00, 0.00, 1.53 -> 0.00, 0.00, 0.00, -0.10, -0.09, 1.52",
+  "gunmoves row 1 (2SASC, md3 frame 6) 0.00, 0.00, 0.00, 0.00, 0.00, 3.06 -> 0.00, 0.00, 0.00, -0.21, -0.18, 3.05",
+  "gunmoves row 2 (2SASD, md3 frame 8) 0.00, 0.00, 0.00, 0.00, 0.00, 2.02 -> 0.00, 0.00, 0.00, -0.14, -0.12, 2.02",
+  "gunmoves row 3 (2SASE, md3 frame 9) 0.00, 0.00, 0.00, 0.00, 0.00, 1.04 -> 0.00, 0.00, 0.00, -0.07, -0.06, 1.03",
+  "gunmoves row 4 (3SARI, md3 frame 27) 1.07, 3.88, 12.29, 0.10, 1.60, -0.39 -> 0.99, 2.85, 12.56, -1.53, -0.09, 0.10",
+  "gunmoves row 5 (USASJNO, md3 frame 7) 0.00, 0.00, 0.00, 0.00, 0.00, 2.79 -> 0.00, 0.00, 0.00, -0.19, -0.16, 2.78",
+  "reload Well case 5 (15.600, 0.000, -4.200) -> (20.411, 8.574, -8.472)",
+  "reload MagCentre case 5 (14.803, -0.113, -2.882) -> (19.567, 8.155, -7.249)",
+  "reload Grab case 5 (11.700, -0.700, -0.800) -> (16.429, 6.969, -5.502)",
+  "reload Axis case 5 (-0.000, 0.002, 1.000) -> (-0.045, -0.192, 0.980)",
+  "reload WellHook case 5 (-0.002, -1.000, -0.000) -> (0.192, -0.980, -0.045)",
+  "reload Pull case 5 (-1.000, 0.000, 0.000) -> (-0.996, -0.067, -0.059)",
+  "reload HandleHook case 5 (0.000, 0.000, 1.000) -> (-0.067, -0.059, 0.996)",
+  "reload Offset case 5 (0.000, 0.000, -5.000) -> (-4.701, -4.805, -12.031)",
+  "casing port AssaultShotgun 16.0, -1.4, -0.6 -> 20.8, 6.5, -5.2",
+  "muzzle row ADDED AssaultShotgun drawn tip [62.87 -0.13 -1.08] -> [67.36 11.02 -2.66]",
+  "hand md3 fbx_sg_AssaultShotgun_R.md3 <- /home/claude/lane_b_sgrun/bake/fbx_sg_AssaultShotgun_R.md3",
+  "hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQFQ",
+  "hand block (dual) MODELDEF.rsqdual AssaultShotgun",
+  "hand block (dual) MODELDEF.rsqoff RSQ_Off_AssaultShotgun",
+  "hand block (dual) MODELDEF.purist PuristAssaultShotgun",
+  "hands.zs labels FbxTrgAS / FbxSqzAS (+ dual)",
+  "dualhands.zs label",
+  "handtable GunHook / GunHookTwo row 1 = 0",
+  "handtable Support row 1 [-1.555960350713755, 4.989054805268171, -5.223131037809508] [-7.927498143864204, 2.302018100012503, 10.73246024838633] [0.44629114022658484, 0.09843434149224456, -0.051786900768646726]"
+ ]
+}

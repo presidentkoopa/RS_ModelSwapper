@@ -1,23 +1,36 @@
 **NO DRIFT. FOCUS ON WEAPON SET PRODUCTION.**
 **USE TOOLS IN REPO. NOWHERE ELSE.**
-(owner, 2026-10-24 04:39 -- these two instructions stand above everything else in this repo)
+(owner, 2026-10-24 04:39: these two instructions stand above everything else in this repo)
 
-# To every Claude, coding agent or human picking this repo up
+# RSQ Weapon Depot: the workshop (owner: presidentkoopa)
 
-1. Read `HANDOFF.md` in full, then `PLAN.md`. The plan's "Current step" is your job. Nothing else is.
-2. Run `sh tools/install_hooks.sh` once. The pre-commit hook (`tools/check_plan.py`) refuses commits
-   that drift; every commit message starts with `[step <id>]` from PLAN.md, or `[plan]`.
-3. Do not invent steps, sets, toggles, names or tools. If the plan does not list it, you do not build
-   it. If you believe the plan is wrong, change PLAN.md in a `[plan]` commit with one line of reason
-   and get the owner's yes BEFORE building.
-4. Never from memory: every number comes from a mesh (tool-measured) or the parent mod's code (parsed),
-   and you say which. Don't guess, measure. Don't ask the owner to verify what a tool can check.
-5. Nothing leaves this repo for the owner's headset until it has run on his load order
-   (doom2 -> brutal22test6 -> BD_VoxelPack -> the pack) without a script error. Not even if asked
-   "do you have a pk3" -- the answer is "not yet". The headless gate in `gate/` is optional tooling;
-   the owner's headset pass is the test.
-6. `runtime/` (1.96b) is frozen. Work goes in `sets/`, produced by the tools, never hand-edited.
-7. No engine changes to QZD 17.3. Ermac's assets ship (REMA is 1/3 Ermac, 1/3 Emawind, 1/3 owner).
-8. Say a blocker the moment it appears. Do not work around it silently. Do not narrate tests every turn.
-9. Never tell the owner when to sleep or work. Stop when told to stop. Discuss before new projects.
-10. Keep `HANDOFF.md` current: what is done (measured), what is not, what is open, in that order.
+This repo is where weapon sets are turned into VR sets as good as BD22 VR Weapons Q: hands on every gun,
+reloads by hand, live scopes, melee, all on a stock QuestZDoom 17.3. Take a set from `sets/`, follow
+`docs/handbook/`, and build it with the tools in `tools/`.
+
+## Before anything
+1. Read `docs/handbook/README.md`, then `PLAN.md` and `HANDOFF.md`. The plan's "Current step" is your job.
+2. Run `sh tools/install_hooks.sh` once. Every commit message starts with `[step <id>]` (an id PLAN.md
+   lists) or `[plan]`. `tools/check_plan.py` refuses drift.
+3. If the plan does not list it, do not build it. To change the plan: a `[plan]` commit with one line of
+   reason, and the owner's yes BEFORE building.
+
+## The owner's standing rules
+- **No engine changes to QuestZDoom 17.3.** Everything is ZScript, DECORATE, MODELDEF and data.
+- **Load order and zero script errors before the headset.** Nothing goes to the owner until it ran on
+  doom2 -> brutal22test6 -> BD_VoxelPack -> the pack with no script error from the pack. Asked "do you
+  have a pk3?" before that, the answer is "not yet".
+- **Shown working only.** Working means in-engine frames or a log of the behaviour, never "the code
+  exists" or "it compiles". VR behaviour is "rig only, not headset-confirmed" until the owner says so.
+- **One method.** The drawn wrist is pinned to the controller; the GUN moves to the hand, and everything
+  on the gun moves with it (muzzle, ejection port, reload rows, scope, recoil rows, melee points).
+- **Start from the existing poses.** Never solve a grip from scratch when a named pose fits.
+- **Variants copy rows.** A Purist or other variant copies its base gun's rows; it is never re-fitted.
+- **Measure, don't guess.** Every number comes from a mesh (tool-measured) or the parent mod's code
+  (parsed). Say which. Don't ask the owner to check what a tool can check.
+- **Look at every frame.** Numbers lie: an open palm floating under a gun passed every numeric check.
+- **Commit every tool and pose.** A committed tool never imports from or defaults to an uncommitted
+  folder. The FBX hand is the one outside input, and it is never committed (`RSQ_FBX`).
+- **Say a blocker the moment it appears.** Never work round it silently. Don't narrate tests every turn.
+- Never tell the owner when to sleep or work. Stop when told to stop. Discuss before new projects.
+- Keep `HANDOFF.md` current: what is done (measured), what is not, what is open, in that order.

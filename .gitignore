@@ -1,18 +1,15 @@
-dist/BD22Q_*.pk3
 __pycache__/
 *.pyc
-
-gate/*.log
-gate/*.log.engine
-
+# the FBX hand is never committed (unknown licence): point RSQ_FBX at it
+*.fbx
+# frame dumps: convert to PNG, then delete
+*.ppm
+# run output of every tool (RSQ_WORK default)
+work/
 # tools/rig/setup.sh output (engine sources, rig build, test pk3s, logs, shots)
 tools/rig/build/
 # made at run time in the prebuilt rig by bin/qz and the engine
 tools/rig/bin/libGLESv3.so
 tools/rig/bin/saves/
-# tools/questhands check sheets and temp images (RSQ_QH_OUT default)
-tools/questhands/out/
-# tools/handfit_fbx run output (HANDFIT_WORK default): results, distance-field cache, MD3/pk3, sheets, engine runs
-tools/handfit_fbx/work/
-# the FBX hand is never committed (provenance: tools/handfit_fbx/README.md)
-*.fbx
+# a set's built pack (each set's build.py writes it next to itself)
+sets/*/*.pk3

@@ -1,0 +1,124 @@
+{
+ "cls": "Flamethrower2",
+ "form": "lane_c",
+ "fbx": "hand_final.fbx (DXR models/hands, never shipped)",
+ "source": {
+  "trigger": "lane_c results/round4_final.json [Flamethrower2].x_gun (sha256 4f831c75f5f5242429fffe706988c92a45f918429ee57346bb7a2b9e2f132e1a)",
+  "squeeze": "lane_c results/squeeze_r5.json [Flamethrower2].q_index_squeeze (squeeze.py, round 5)",
+  "gun_move": "lane_c results/gun_modeldef_R3.json [Flamethrower2] (modeldef3.py: gunplace.fit of gun_T(ctx, x_gun))",
+  "md3": "lane_c bake3.py LANEC_FINAL=round4_final.json LANEC_SQUEEZE=1 (squeeze_r5.json) -> fbx_b1_R.md3"
+ },
+ "hand": {
+  "landmarks": "Flamethrower2@nozzle",
+  "key": "Flamethrower2",
+  "vertex_correction": "round4_final.json [Flamethrower2].Xg - FK(x_gun): kept on every vertex outside exact_joints"
+ },
+ "q_trigger": [
+  -1.1161176942297648,
+  -0.31999770054524923,
+  0.16392196284011798,
+  -8.982042797003967,
+  0.013296959032338232,
+  -6.036130451364743,
+  -0.39999999999999997,
+  -0.09999999999999999,
+  13.965641119366591,
+  0.792304337180613,
+  0.7519313634929516,
+  -6.3768578159929445,
+  1.1224820751756548,
+  0.9480197596322915,
+  8.345018274043309,
+  1.1499999999999997,
+  0.4075299579998902,
+  15.491563667017495,
+  1.0791609649828686,
+  1.0841051200423475,
+  -29.634197649780855,
+  4.929914646815281,
+  -17.546454315194037,
+  -14.999999997466364,
+  0.0007079879445898702,
+  -0.031543948576683994,
+  -0.06625974243446689,
+  8.3764060854317,
+  2.822126007530712,
+  0.06864380137790486
+ ],
+ "q_squeeze": [
+  -1.1161176942297648,
+  -0.31999770054524923,
+  0.16392196284011798,
+  -8.982042797003967,
+  0.013296959032338232,
+  -6.036130451364743,
+  -0.39999999999999997,
+  0.07604066023229136,
+  1.9399681127896902,
+  0.792304337180613,
+  0.7519313634929516,
+  -6.3768578159929445,
+  1.1224820751756548,
+  0.9480197596322915,
+  8.345018274043309,
+  1.1499999999999997,
+  0.4075299579998902,
+  15.491563667017495,
+  1.0791609649828686,
+  1.0841051200423475,
+  -29.634197649780855,
+  4.929914646815281,
+  -17.546454315194037,
+  -14.999999997466364,
+  0.0007079879445898702,
+  -0.031543948576683994,
+  -0.06625974243446689,
+  8.3764060854317,
+  2.822126007530712,
+  0.06864380137790486
+ ],
+ "exact_joints": {
+  "trigger": [],
+  "squeeze": [
+   "INDEX_BASE_joint",
+   "INDEX_MID_joint",
+   "INDEX_TOP_joint",
+   "INDEX_UP_TOP_joint"
+  ]
+ },
+ "gun_move": {
+  "Offset_x": -4.371,
+  "Offset_y": -8.313,
+  "ZOffset": -5.669,
+  "AngleOffset": -3.798,
+  "PitchOffset": 1.805,
+  "RollOffset": 0.1,
+  "how": "the gun move IS the pose wrist: solve.gun_T(ctx, x_gun) as MODELDEF numbers (gunplace.fit)"
+ },
+ "md3": {
+  "baked": "fbx_b1_R.md3",
+  "frames": [
+   [
+    "BrutalPistol",
+    "trigger",
+    "Brutal_gun"
+   ],
+   [
+    "Flamethrower2",
+    "trigger",
+    "Flamet_gun"
+   ],
+   [
+    "BrutalPistol",
+    "squeeze",
+    "Brutal_sqz"
+   ],
+   [
+    "Flamethrower2",
+    "squeeze",
+    "Flamet_sqz"
+   ]
+  ]
+ },
+ "support": "lane_c support pose: fbx_b1_L.md3 frame 1 (round4_final.json [Flamethrower2].Xs, Flamethrower2_under_D.json); its joint vectors are in lane_c results, not re-exported here"
+}

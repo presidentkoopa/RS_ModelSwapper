@@ -1,0 +1,108 @@
+{
+ "shift": [
+  -1.7792896656080686,
+  -0.05268172343968569,
+  1.6383893330804415
+ ],
+ "hand": {
+  "md3": "fbx_hv_Unmaker_R.md3",
+  "md3_name": "fbx_hv_Unmaker_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "no trigger on this mesh: the squeeze frame = the hold",
+  "support": {
+   "sup_hook": [
+    -5.388605371374978,
+    11.884170229151344,
+    2.783099256153779
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.36628075109354236,
+    0.04345388187637228,
+    0.003707814600774224
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) under the gun at its SupportPoint, moved with the gun (fit_hv.py)"
+ },
+ "metrics": {
+  "stage2": null,
+  "curl": {
+   "gun": "Unmaker",
+   "mode": "dense",
+   "thr": 0.1,
+   "rigid_only": {
+    "pen": 0.7107474418873978,
+    "padI_trig": null,
+    "gap_I": 0.23981428322553405,
+    "gap_M": 0.06675367502464814,
+    "gap_R": 0.9420357750749472,
+    "gap_P": 0.7053952444117694,
+    "gap_T": 0.3114529782472051,
+    "gap_palm": 0.3661449974356286,
+    "gap_web": 0.05675402361261013
+   },
+   "trigger": {
+    "pen": 0.4094881437213947,
+    "padI_trig": null,
+    "gap_I": 0.06436946854893948,
+    "gap_M": 0.19999554160382912,
+    "gap_R": 0.2000406144847919,
+    "gap_P": 0.49273430532518575,
+    "gap_T": 0.3114529782472051,
+    "gap_palm": 0.3661449974356286,
+    "gap_web": 0.02076540977741029
+   },
+   "squeeze": {
+    "pen": 0.4094881437213947,
+    "padI_trig": null,
+    "gap_I": 0.06436946854893948,
+    "gap_M": 0.19999554160382912,
+    "gap_R": 0.2000406144847919,
+    "gap_P": 0.49273430532518575,
+    "gap_T": 0.3114529782472051,
+    "gap_palm": 0.3661449974356286,
+    "gap_web": 0.02076540977741029
+   },
+   "squeeze_travel": 0.0,
+   "wrap": true,
+   "q_curl": [
+    -0.3999862524178992,
+    0.45215312988885326,
+    19.63637386008022,
+    -0.07605798491610667,
+    0.5979605371067732,
+    13.52122234275816,
+    0.3185172272179477,
+    0.5105996723469576,
+    -5.291616999748789,
+    0.13796666370414337,
+    0.5166322129739767,
+    0.24705424154195696
+   ],
+   "q_index_squeeze": [
+    -0.3999862524178992,
+    0.45215312988885326,
+    19.63637386008022
+   ]
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'Unmaker_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.1480255910393996e-15, 'bake_check_max_cm': 0.007965477064061588, 'md3': 'fbx_hv_Unmaker_R.md3'}",
+    "{'name': 'Unmaker_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.1480255910393996e-15, 'bake_check_max_cm': 0.007965477064061588, 'md3': 'fbx_hv_Unmaker_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, 0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 9.485749680535094e-16, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_Unmaker_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.47847183506666247,
+   "sup_gap": 1.2676359918172855,
+   "sup_dz": -1.6,
+   "sup_search_cm": 1.5
+  }
+ },
+ "baked_by": "r4/bake_r4.py (cloud; farm curl)"
+}

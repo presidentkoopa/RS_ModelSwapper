@@ -1,0 +1,37 @@
+# One-frame meshes in BD22 VR Weapons Q 2.0.1, as it shipped (copied 2026-10-28). Each is a part, a hand pose or
+# an effect that never animates: none is a still standing in for an animated gun. One path + reason per line.
+sets/bd22q/handfit/fits/farm_melee/Chain_saw/fbx_melee_Chain_saw_sup_L.md3	a hand-fit bake record (hand frames, not a gun)
+sets/bd22q/handfit/fits/farm_melee/DSweap/fbx_melee_DSweap_sup_L.md3	a hand-fit bake record (hand frames, not a gun)
+sets/bd22q/handfit/fits/farm_r4/FlameCannon/FlameCannon_under40/fbx_r4_FlameCannon_under40_L.md3	a hand-fit bake record (hand frames, not a gun)
+sets/bd22q/handfit/fits/farm_r4/FlameCannon/FlameCannon_under58/fbx_r4_FlameCannon_under58_L.md3	a hand-fit bake record (hand frames, not a gun)
+sets/bd22q/handfit/fits/farm_r4/HellishMissileLauncher/support_s192/fbx_s192_HellishMissileLauncher_L.md3	a hand-fit bake record (hand frames, not a gun)
+sets/bd22q/handfit/fits/farm_r4/Minigun/support_r4_bar/fbx_r4_Minigun_bar_L.md3	a hand-fit bake record (hand frames, not a gun)
+sets/bd22q/handfit/fits/farm_r4/Minigun/support_r4_bar_ref/fbx_r4_Minigun_bar_L.md3	a hand-fit bake record (hand frames, not a gun)
+sets/bd22q/handfit/fits/farm_r4/Unmaker/support_s192/fbx_s192_Unmaker_L.md3	a hand-fit bake record (hand frames, not a gun)
+sets/bd22q/handfit/fits/r12/offhand/rsq_ring_fbx.md3	a hand-fit bake record (hand frames, not a gun)
+sets/bd22q/src/models/bd/Rifle/m203_round.md3	an M203 part (launcher tube / round), never animates
+sets/bd22q/src/models/bd/Rifle/m203_spent.md3	an M203 part (launcher tube / round), never animates
+sets/bd22q/src/models/bd/XM21/XM21.md3	the XM21 (Ruger) mesh: one frame as BD22 2.0.1 ships it
+sets/bd22q/src/models/rsq/m203_round_hand.md3	a helper part (dot quad / ring / round), never animates
+sets/bd22q/src/models/rsq/rsq_dot.md3	a helper part (dot quad / ring / round), never animates
+sets/bd22q/src/models/rsq/rsq_ring.md3	a helper part (dot quad / ring / round), never animates
+sets/bd22q/src/models/rsq/casings/casing_9mm.md3	a spent casing (a part)
+sets/bd22q/src/models/rsq/casings/casing_rifle.md3	a spent casing (a part)
+sets/bd22q/src/models/rsq/casings/shell_12ga.md3	a spent casing (a part)
+sets/bd22q/src/models/rsq/debris/chip1.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/chip2.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/chip3.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/chip4.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/chunk1.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/chunk2.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/chunk3.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/chunk4.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/clod1.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/clod2.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/clod3.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/debris/clod4.md3	a debris piece (an effect)
+sets/bd22q/src/models/rsq/fbx/fbx_melee_Chain_saw_sup_L.md3	an FBX hand pose bake (hand frames, not a gun)
+sets/bd22q/src/models/rsq/fbx/fbx_melee_DSweap_sup_L.md3	an FBX hand pose bake (hand frames, not a gun)
+sets/bd22q/src/models/rsq/fbx/fbx_r4_FlameCannon_under40_L.md3	an FBX hand pose bake (hand frames, not a gun)
+sets/bd22q/src/models/rsq/fbx/fbx_r4_Minigun_bar_L.md3	an FBX hand pose bake (hand frames, not a gun)
+sets/bd22q/src/models/rsq/fbx/rsq_ring_oh.md3	an FBX hand pose bake (hand frames, not a gun)

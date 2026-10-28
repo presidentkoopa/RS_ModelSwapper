@@ -1,331 +1,53 @@
 **NO DRIFT. FOCUS ON WEAPON SET PRODUCTION.**
 **USE TOOLS IN REPO. NOWHERE ELSE.**
-(owner, 2026-10-24 04:39 -- these two instructions stand above everything else in this repo)
+(owner, 2026-10-24 04:39: these two instructions stand above everything else in this repo)
 
-# PLAN — RS Quest weapon sets (owner approved 2026-10-24 02:35; this file is the only plan)
+# PLAN: the RSQ Weapon Depot workshop (owner, 2026-10-28; this file is the only plan)
 
-Current step: **F13** (owner's yes 2026-10-27 02:2x; F12 DONE 2026-10-26, 0e21fe8; F11's open items wait for his headset pass) -- F1-F10 are DONE and committed (2026-10-25). F10 finished the roster: every
-non-melee gun the owner kept reloads by hand (23; BFG and BFG10k closed by him). F11 is the fixes
-and polish, then the gated pk3. Open from F10: the Minigun's bigger in-hand box (owner's idea, later). The owner's headset pass on F1-F9 is still outstanding and
-is what gates the 1.99 release; nothing in this pack has ever been seen in VR.
-The S items are TABLED; do not start one.
+Current step: **W1**
 
-(`none` is also a legal current step, and `tools/check_plan.py` accepts it ONLY while every `- F<n>`
-line here is marked DONE. It is not a way to commit off-plan: start a new F item in a `[plan]` commit
-and name it here instead, which is what F10 is.)
+`none` is also a legal current step, and `tools/check_plan.py` accepts it only while every `- F<n>` and
+`- W<n>` line here is marked DONE. To do new work, add an item in a `[plan]` commit and name it here.
 
-## Principle
-Every shipped gun is built from two sources only: its MESH (tool-measured) and its PARENT MOD (behaviour
-parsed from the mod's own code). Nothing retyped from old folders. Quality over speed. "Done" = the
-per-gun checklist below, in a headset, signed by the owner.
+## What the workshop is for
+Take a set from `sets/`, follow `docs/handbook/`, and turn it into a reloadable, VR-centred set like BD22
+VR Weapons Q: hands on every gun, reloads by hand, scopes, melee. The plan before 2026-10-28 (F1-F13: the
+bd22q 1.97-1.99 work, the rig, the first fitter) is on the branch `archive/depot-2026-10-28`.
 
-## Flagship: bd22q (sets/bd22q_1.97, base runtime/ = 1.96b) -- the COMPLETE BD22 VR experience; nothing of it is deferred
-- F1  DONE 2026-10-24. Gate 1.97 on the owner's load order (doom2 → brutal22test6 → BD_VoxelPack →
-      pack); fix; deliver pk3. Runs clean; pk3 handed over. The headset pass is the owner's.
-- F2  DONE 2026-10-24. Slug revolver (BD21 Revolver2): roster + RSB break entry (Clip2) + "replaces
-      Shotvolver" row.
-      Plus a menu row **"Shot/Revolver Reload: Speedloader / PerRound"** covering BOTH revolvers
-      (owner, 2026-10-24): the 2026-10-13 hand patch put BD22's Revolver on a speedloader and left its
-      per-chamber rows unused; this makes that a choice instead of a fixed decision, for both guns.
-- F3  DONE 2026-10-24. Options page onto the shared RSQ_Options standard. Four rows it was missing;
-      the layout itself is still the owner's headset turn.
-- F4  DONE 2026-10-24. Melee on bd22q: the gun bash (BD22's kick, with the gun in your hands, and an
-      RS_CombatFX impact), the pistol whip, the two-handed butt strike (off by default).
-      Later the same day, on the owner's instruction: butt strikes extended to all EIGHT stocked
-      guns, and melee moved onto the pose spine of the melee document's Part Two section 9 --
-      a per-player, per-hand netevent history, which made the snap-turn and teleport patch
-      deletable rather than tunable. Two commits were tagged `[step F7]`, which is not a step in
-      this file; the work is melee and belongs here. Do not read F7 as a plan item.
-      Switch-punching with either hand was ALREADY BUILT in zscript/rsq/fists.zs and needed nothing.
-      "The spike" was struck from this line on the owner's instruction: the word entered in this
-      repo's first commit, attributed to a melee doc that does not contain it, and exists nowhere
-      else -- not in brutal22test6, not in the pack, not in any transcript on the machine.
-- F5  DONE 2026-10-24. Per-gun ballistics / CombatFX profiles (REMA WMSHEET round/flash/recoil) on
-      bd22q, behind the existing Ballistics switch (off = stock BD22). The owner's yes was given on
-      2026-10-24 ("Yes - build F5, the per-gun ballistics and recoil"), so the PENDING note this
-      line carried is spent.
-      ROUND: the bullet in flight, 11 guns, flying the hitscan itself from muzzle to impact.
-      FLASH: the light, 18 guns; the tail, 14 guns, with its interior / exterior pair chosen on
-      whether the ceiling over the muzzle is sky.
-      RECOIL: 22 guns. Its `roll` and backward shove are NOT carried and cannot be -- tested, not
-      assumed: `extend class Weapon` does not compile ("Class Weapon cannot be found in the current
-      translation unit"), so the only hook with roll is unreachable on a weapon class this pack does
-      not own. `psp.x`/`psp.y`, yaw and pitch, is the whole channel.
-      BEYOND THE LINE, from the owner's own list: per-gun impact weight (17 guns, read from
-      RSBDEFS' authored `scale` after the derived one proved wrong on every shotgun), impact sound /
-      ricochet / light, and the ejection ports and casing sizes.
-- F6  DONE 2026-10-24 (code) / 2026-10-25 (docs). Reload sounds for the drum / canister / skull
-      (they had shipped silent since F1); pack README; HANDOFF update; release numbered 1.99.
-      **The owner's headset pass is the one part still open, and it is the only thing that can test
-      any of this.** It is his to do, not a tool's.
+## Items
+- W1  THE WORKSHOP AND THE HANDBOOK (owner, 2026-10-28 16:28: "I need this toolset, this test rig,
+      instructions for others ... yes, this is how you design these kinds of reloading and weapon mechanics
+      in VR on QuestZDoom 17.3"; 16:29-16:4x: "depot must be clean, holding only the sets + BD22 + the
+      proven toolset"). The layout cleaned (everything removed stays on `archive/depot-2026-10-28`);
+      BD22 VR Weapons Q 2.0.1 copied in as `sets/bd22q`; the toolset proven on BD22 in `tools/`, every path
+      Depot-relative or an environment variable; `docs/handbook/` written and followed on a fresh clone
+      (`docs/handbook/VERIFIED.md`).
+- F14 CRITICAL, NOT STARTED: THE NEW-GUN PIPELINE, COMPLETE (owner, 2026-10-27 16:32: "I want the
+      pipeline, complete. With the correct qzd rig and all tools needed. Mark this for a critical task.";
+      "That can happen later just don't forget it"). Not to be started before the owner says go. Done = a
+      fresh clone takes one md3 (rifle archetype first) and, with tools in this repo only, produces: the
+      parts carved/named (mag, bolt/rack, trigger); a measured card (ejection port, insert point, stroke);
+      FBX hands (gun hand + support) by the one method; reload tables; the gun as a choice in ModelSwapper;
+      on tools/rig, the owner's load order, zero script errors, rig frames as proof, one runbook.
+      Known gaps: surface naming partly by eye; the mesh tools (carve, label, card) are on the archive
+      branch, not in tools/; a new gun needs registry entries by hand (port_gun.GUNS, scene.GUNS, gunlm).
 
-- F7  DONE 2026-10-25 (`65ad27e`). The real casing meshes. The brass leaves the right port at the
-      right size, but it was still Brutal Doom's sprite. RS_Ballistics has measured 3D casings --
-      9mm, .357, .45, 5.56, 7.62, 12ga -- and the pack already lends a model to a foreign actor
-      twice over (voxels.zs, RSQ_Debris). Lent the same way, per instance, so one EmptyBrass is now
-      four cartridges: `zscript/rsq/casemodels.zs`, 4 mesh holders, `CASE_FOR` over 12 guns.
-      The lend sat behind the VR gate at first and printed zero; it is above it now.
-- F8  DONE 2026-10-25 (`0f9a5d2`). A port for the MP40, the Minigun and the Machinegun. Two of the
-      three were a mistake of mine, not a missing feature: I had filtered for SIDE-facing holes,
-      which hides every belt-fed gun in the set. **The Machinegun had a chute all along** --
-      7.1 x 10.2, centred, below the bore by the breech, the same signature as the MG42 and found
-      by the same rule, which is now a box in the table instead of a thing I remembered to check.
-      Port (14.3, -0.3, -4.3), DOWN. **The MP40's is CONSTRUCTED, not measured**, and the generated
-      file says so on the line: every slot in its receiver tube is mirrored (cooling slots) and the
-      one unmirrored opening is the cocking-handle slot, so it is built from `zamek` (bolt, trimmed
-      to its core) and `korpus` (receiver) on the bore line, where a blowback gun ejects. It is in
-      only because it corroborates: it lands at 68% of the MP40's length, and the owner's own
-      hand-tuned BrutalSMG port sits at 68% of THAT gun. Port (34.7, -2.2, 3.3), SIDE.
-      **The Minigun keeps throwing from the body, permanently.** Every down-facing loop on it is
-      structural -- the rotating body's own open ends, the grip, the six bores -- and there is no
-      bolt or breech surface to construct one from. Nothing to measure, nothing to build on,
-      nothing invented. This question is CLOSED; do not go hunting for that port again.
-      11 ports, up from 9.
+## The sets, in no order until the owner picks (TABLED: do not start one without his yes)
+- S1  sets/vanilla + sets/vanilla_plus: Doom's eight, Doom's names and numbers; V+ = toggles inside it.
+      Rebuild from the animated originals (they are stills today), then the handbook.
+- S2  sets/modern: player class, every Doom drop / pickup -> a modern gun, start Glock.
+- S3  sets/aliens: RS_Aliens_VR-WeaponsQ, through the handbook.
 
-- F9  DONE 2026-10-25 (`bd8fa71`). A gate ANY LANE can point at its own set. gate/bd22_gate.sh had
-      hardcoded bd22q's four paths, its parent mod and its weapon class names, so a lane building
-      another set could not use it. Split into `gate/run_set.sh` (generic) plus `gate/bd22q.gate`
-      (this set's paths, guns and ammo); bd22_gate.sh is now a one-line wrapper, keeping the name
-      this file and HANDOFF have always used. A marker per gun, so the log says WHICH guns were
-      actually reached. The method and the eight traps are written down in `gate/GATING_A_SET.md`.
-      (owner, 2026-10-25: "another lane is doing another weaponset, they need to be able to do
-      what you just did".) Also packaged as a standalone skill at
-      `C:\Users\Command\.claude\skills\gate-a-doom-mod\`, and sent to the RS ModelSwapper lane on
-      the owner's instruction, 2026-10-25.
-
-- F10 DONE 2026-10-25 (`dae5a68`). **EVERY NON-MELEE GUN RELOADS.** The owner's objective, stated plainly on 2026-10-25:
-      "we want reloading for all weapons that are not melee / if bd22 does not allow it then we
-      already ship our own weapon code anyway so why not". That settles it. 28 guns carry hands,
-      3 are melee (BrutalAxe, Chain_saw, DSweap), and the other 25 all reload when this step ends.
-      17 do today. These 8 do not.
-
-      I TWICE TRIED TO CLOSE GUNS IN THIS STEP AND WAS WRONG BOTH TIMES. Once by reading a card's
-      design note as if it were a law -- a card is REMA's decision, not the owner's, and he owns
-      this pack. Once by declaring a part "absent" from SURFACE NAMES without looking at the
-      geometry, when a welded surface can hold many separate bodies (M249_lowpoly holds 124).
-      Neither is evidence that a gun cannot reload. Do not close a gun in this step without the
-      owner saying so.
-
-      SOURCE RULE (owner, 2026-10-25): **no `_wm` meshes. Cards only, against our own animating
-      copies.** THE CARD MEASURES; OUR MESH ANIMATES. The reason is in the frame counts:
-      REMA's `machinegun_wm.md3` has ONE frame -- it is a static reference pose with the surfaces
-      already split -- while our `Machinegun.md3` has 36, our `SSG.md3` 46, `M79.md3` 26,
-      `Minigun.md3` 12, `m32.md3` 2. Ship a `_wm` and the gun goes stiff. (The existing carves
-      used a `_wm` for vertex CORRESPONDENCE only and kept all our frames, which is why MG42,
-      Flamethrower and Unmaker still animate -- but the owner has ruled that route out, and the
-      card does not need it.)
-      A card's numbers are in the CONTROLLER's frame, which is mesh-independent: where the part
-      is, which way it comes out, how far it travels. That transfers to our animated mesh without
-      touching theirs. The join to make: the cards name REMA's surfaces (`canister`, `barrels`,
-      `forend`) and ours are named differently (`Runko`, `Pipe`, `magazine`) -- so locate the part
-      in OUR mesh by the card's position, not by its surface name.
-
-      WHAT MAKES A GUN RELOADABLE, from the one that works (BD_Flamethrower):
-          firesfrom = magazine       capacity = 200       magfamily = "bd_fuel"
-          part canister -> role = feed, surface = canister, dof kind = slide
-      A capacity and a `part` with `role = feed`. Capacity is NOT a blocker and never was: the
-      owner's point is that we invent it. MG42 200, Flamethrower 200, Unmaker 60 are all numbers
-      chosen off his REMA sheet because BD22 has none.
-
-      FIVE OF THE EIGHT ALREADY CARRY A CAPACITY AND AN AMMO FAMILY. They are `firesfrom = reserve`
-      with no feed part, and that is the ONLY thing missing:
-          BD_Machinegun  100  bd_40mm       BD_Minigun  200  bd_762
-          BD_BFG          40  bd_cell       BD_BFG10k    99  bd_cell
-          BD_Hellish       6  bd_hell
-      Someone already decided a Minigun holds 200 of 7.62 and a BFG holds 40 cells. Adding a feed
-      part to a card is an edit to a card, not a new system.
-
-      THREE HAVE NO CARD AT ALL -- IncendiaryLauncher (M32), NukeLauncher (Nuker), Devastator
-      (Sidewinder). Those need one made, the way every other card in this pack was.
-
-      Per gun:
-        * **IncendiaryLauncher = M32**, a Milkor MGL: a six-shot revolving cylinder. DO THIS ONE
-          FIRST -- it is the easiest gun left, not the hardest. `models/bd/M32/m32.md3` ships the
-          magazine ALREADY NAMED as its own surface (`magazine`, 484 v / 488 t) with
-          `magazine_back`, `magazine_bracket` and `magazine_bracket_front` beside it, so there is
-          nothing to carve. A revolving cylinder is the Revolver's reload shape, and the pack has
-          that system twice over (speedloader and per-round, both on a menu row).
-        * **GrenadeLauncher = M79: ALREADY BUILT. NOT IN THIS STEP.** I put it in the gap on
-          2026-10-25 and it was never in the gap -- it is break index 2 in `zscript/rsr/rsb_guns.zs`
-          with hinge (18.3427, -0.1278, -3.7417), which matches its survey record's (18.3, 0.0,
-          -3.7), and its own "GrenadeLauncher/Open" sound. I had counted the reload set from
-          `rsr_guns.bd.zs` alone, which is the MAGAZINE table; the pump and break guns live in
-          `rsr_pump_guns.zs` and `rsb_guns.zs`. Count all three or the answer is wrong.
-        * **Machinegun: BUILT 2026-10-25 (F10, `late` stage).** Box carved by position out of our own
-          M249_lowpoly: 31 islands, 415 vertices (REMA's magazine count exactly, without loading it),
-          rigid with the body in all 36 frames; owner confirmed the part on a render. Out straight down,
-          mouth 13.11 cm, capacity 100, a counter over Clip2 like the MG42's drum. Rig: full reload,
-          counter 100 -> 96 firing -> 0 box out -> 100 seated. The original note follows.
-          Card BD_Machinegun, 100, bd_40mm, needs a feed part. Its `Reload:`
-          jumps straight to `Ready` under `RSM_VR` (`Machinegun.dec:229`), so the hand reload is a
-          no-op today; the underbarrel 40mm is hand-loaded and stays so (`rsr_m203.zs`). The card
-          carries a note saying a magazine swap "should never have had" -- that was a REMA
-          decision and the owner has overruled it. The box DOES separate: our `M249_lowpoly` is
-          11996 verts, which is REMA's `body` 11581 + `magazine` 415 exactly. Find it in our own
-          mesh, not by loading theirs.
-      **BUILT 2026-10-25: Devastator (loading_bay, cap 50 invented = DevastatorAmmo Amount), Nuker
-      (surface 3 up, cap 1 = Nuke MaxAmount), Hellish (rear drum ring, cap 6 sheet). Rig: all full.**
-      OWNER'S CALLS, 2026-10-25 21:3x, on renders of our own meshes (f10_six_guns.png):
-        - Minigun: carve the blue block hanging under the body; later the block in the HAND can be
-          a bigger ammo-box model ("clever illusion"), the gun keeps its own block.
-        - BFG, BFG10k: NO RELOAD ("keep these simple"). Closed by the owner.
-        - Hellish: the rear drum ring.
-        - Devastator: its own `loading_bay` surface. Nuker: its green top-front block (surface 3).
-        * **Minigun: BUILT 2026-10-25 (F10).** The blue block carved by position out of surface 1
-          (`Runko`, index 1 -- the mesh has three `Runko`s): 20 islands, 265 vertices, a box 6.7 x
-          10.0 x 4.8 rigid with the body in all 12 frames. Out along the box's own thin axis (PCA):
-          down, 15 degrees off vertical. Mouth 6.76 cm, capacity 200 (card), counter over Clip2.
-          Rig: IDLE>EMPTY>DROP>EMPTY>CARRY>INSERT>SEATED>DONE>IDLE. The bigger in-hand box is not
-          built yet. The original note follows.
-          Card BD_Minigun, 200, bd_762, needs a feed part. The card already has
-          `part barrels` (hinge) and `part forend`, so the gun is partly described. Its surface
-          names in our mesh are Runko / Runko / Pipe / Runko / Trigger / Grip, which do not match
-          the card's; that is the join to make, not a reason to stop. F8 closed its EJECTION PORT,
-          which is a different question from its feed -- do not carry that conclusion across.
-        * **BIG_FUCKING_GUN** -- card BD_BFG, 40, bd_cell, needs a feed part. Ermac's Force
-          Unleashed has `pod_bfg.md3` and a FOUR-step pod reload (unload, grab, insert): the right
-          SHAPE for a BFG reload, from the man who invented this. Shape only -- his numbers are a
-          different gun.
-        * **BFG10k** -- card BD_BFG10k, 99, bd_cell, needs a feed part.
-        * **HellishMissileLauncher** -- card BD_Hellish, 6, bd_hell, needs a feed part.
-        * **Devastator** (`Sidewinder/sidewinder.md3`) -- no card. Make one.
-        * **NukeLauncher** (`Nuker/Nuker.md3`) -- no card. Make one.
-        * **GrenadeLauncher = M79: ALREADY DONE, leave it alone.** (Kept in this list only so the
-          next reader does not re-open it -- see the note below.)
-      THE M32 IS MEASURED ALREADY and is the one to build first -- it needs no carve and no
-      `_wm`, because its `magazine` is its own surface in the mesh we ship.
-      (2026-10-25, `rgeo.py`, controller frame, cm F/L/U.) The `magazine` surface:
-      centroid (14.60, -0.03, -4.04), principal axis (-1.000, 0.001, 0.003) -- along the bore --
-      extent 17.38 cm, radius mean 7.57 / max 10.27. A drum 17.4 long and ~15 across, on the bore
-      line, centred 14.6 forward and 4 below, dead centre laterally. An MGL cylinder.
-      Frame 1 is a RECOIL pose, not a reload: every surface shifts back 7-8 cm with some muzzle
-      rise. There is no open/eject animation in this mesh, so the motion is ours to drive -- which
-      is how every other gun in the pack does it.
-
-- F11 **FIXES AND POLISH ON bd22q** (owner, 2026-10-25: "I wanted bugfixes and polish"). Runs
-      beside F10. Every item is a bug confirmed in sets/bd22q_1.97/src by the 2026-10-25 audit, fixed
-      in the generators, never by hand. First item, owner's yes 2026-10-25 18:25:
-        * **pk3 compression.** `bd22_plus.py pk3` writes every lump ZIP_DEFLATED, so the pack is
-          about 50 MB. 1.96b's own release compressed its .md3 files with LZMA (zip method 14) and
-          was 24 MB. LZMA on .md3 alone gives about 30 MB from the same files. QZD 17.3 reads
-          method 14 (`file_zip.cpp:247`, `files_decompress.cpp:889`).
-      Confirmed in bd22q's source by the 2026-10-25 audit, re-read before each goes in (stage
-      `bd22_plus.py fixes`, after every other stage, before sync):
-        * Dot-scope crash: `scope.zs` Basis has `out Vector3` params (VM abort, vmexec.h:828-830).
-        * Axe throw hold `rsvr_axe_hold` 16 is BT_TURN180; alt fire is 32 (d_event.h:46-47).
-        * Ruger fire frames X21F B/C and P21F B/C unkeyed: the shot draws 2D for ~3 tics.
-        * Purist Rifle fires the M203 (the M203 jump precedes the purist check).
-        * Reload R2: stale RSR_Done / RSR_Seated end the next magazine reload at once.
-        * FOUND IN F10: the Flamethrower's `Goto Ready+6` landed a state early (our guard inside
-          Ready). FIXED in patch_dec: every numeric jump / `Goto L+n` is checked against BD22's file.
-        * Reload R4: End() clears netGrip but not netUse.
-        * Ruger semi-auto (DONE, rig-proven): QZD 17.3 breaks NOAUTOFIRE (player.zs:583); a lock
-          token instead (semiauto.zs). Owner's call pending on the same engine fault for all guns.
-        * Reload R3 (DONE, rig-proven): held rounds stranded at reserve 0 -- CanTakeMag counts them,
-          and the nine magazine guns' Reload jumps past BD22's reserve check on them.
-      OWNER, 2026-10-25 22:4x: off-hand punch stays behind rsq_punch, off by default; free charge
-      ("Check the Chamber by Hand") stays off by default -- both as shipped, closed. Lock-on ring:
-      art from RS_CombatFX, owner picks from seven sheets. NOAUTOFIRE on all guns: owner wants
-      the list of guns it changes before deciding.
-      Still to do in F11 (behaviour, not one-liners): R1 grip-mode rack cannot be grabbed
-      (STEADY_RANGE 50 vs handles at 8-15 cm); R3 dropped-mag rounds stranded at reserve 0; Ruger
-      A_Refire bypasses semi-auto; the four unresolved sound names. Owner's call, not bugs:
-      off-hand punch vs rsq_punch, free charge default, PuristSniper model ("Sniper stays out"),
-      lock-on ring art (RQLK has no lump). Plus whatever the audit of the F1-F10 additions confirms.
-      Found by running the pack in the owner's quest_test_rig (real QZD 17.3 OpenXR path, posed by
-      cvars), 2026-10-25:
-        * **M32 reload drawn and measured with the wrong placement.** apply() passed the default
-          SCALE/OFF and one `m32.png` to gen_rsr; the entry's own Scale -0.62 / Offset 0 -30 -8 and
-          its two textures (m32_tex1/2) were used only by geometry(). Engine: "Surface Skin
-          'm32.png' not found". The table's MagCentre (-6.46, -0.05, 3.33) disagreed with its own Well.
-        * **M32 reload key does nothing.** IncendiaryLauncher.dec kept BD22's stub `Reload:` (M202 A 0 /
-          Goto Ready3) after ours; DECORATE takes the later label. The rig pressed reload at 1 of 6.
-
-- F12 DONE 2026-10-26 (63b35d5, 6847150, 28e7598, 8e262c8; (3) md3.py/md3_write.py not moved: nothing imports them -- HANDOFF F12). **THE DEPOT'S TEST RIG AND VR-HAND TEST TOOLS, ONE HOME** (owner, 2026-10-26: "I would like the
-      depot to have a test rig for linux and the relevant test tools to use vr hands"; chosen 21:5x
-      as the work while he is out of the headset). Moves, does not invent: (1) the prebuilt
-      QuestZDoom 17.3 rig from RS_ModelSwapper `gate/qz_rig/bin` (26 MB, guarded by PINS) into
-      `tools/rig/bin`, so `setup.sh` needs no other repo; (2) the RS_QuestHands hand-fitting kit
-      (`tools/posefix/hands`: handfit, minigun_fit, fits.json -- the tools behind the 1.92 poses)
-      into `tools/questhands/`, paths made Depot-relative; (3) md3.py / md3_write.py found in
-      E:\DOOMWork\_old\_oldtools. Done = a fresh clone runs `sh tools/rig/setup.sh` and the
-      gallery/cmp2 example with no other repo, on the owner's load order, measured. No new tools,
-      no hand-fitter changes (the FBX fitter is a prototype outside the repo until the headset pass).
-- F13 **THE HAND FITTER, A DEPOT TOOL (pipeline 2: hands on the gun, finger on the trigger)** (owner,
-      2026-10-27: "yes, in the depot please"). The FBX-skeleton fitter prototyped outside the repo
-      (/home/claude/lane_c, rounds 1-6; the owner provisionally passed BrutalPistol and Flamethrower2 in his
-      headset, 2026-10-27) moves into `tools/handfit_fbx/`, with paths Depot-relative or env. It reads the FBX
-      hand (DXR models/hands/hand_final.fbx; NOT the DXR IQM hands, owner's rule), solves wrist, gun move
-      and finger joints against grip rules (G, S, U families and the gas-pump grip; tolerances from 1.92's
-      measured poses), and bakes MD3 frames (`trigger`, `squeeze`, support poses). It writes per-gun
-      MODELDEF/gunmoves/hands rows, a rules table and engine sheets. Sets are built in their own repos
-      (BD22 in RS_Brutal22WeaponsQ) with this tool; the Depot only holds the tool. Done = a fresh clone
-      reproduces the r6 BrutalPistol and Flamethrower2 frames byte-identically, measured. Open, recorded:
-      licences for the FBX source; per-set frame letters; the pistol trigger through the finger on fire
-      frames (0.66 cm, owner: minor).
-- F14 **CRITICAL, NOT STARTED: THE NEW-GUN PIPELINE, COMPLETE** (owner, 2026-10-27 16:32: "I want the
-      pipeline, complete. With the correct qzd rig and all tools needed. Mark this for a critical task."
-      16:32: "That can happen later just don't forget it"). Queued after BD 2.0 hands; not to be started
-      before the owner says go. Done = a fresh clone of this repo takes one md3 (rifle archetype first)
-      and, with tools in this repo only, produces: the parts carved/named (mag, bolt/rack, trigger);
-      a measured card (ejection port, mag/shell insert point, rack/pump/charge stroke); FBX hands posed
-      (gun hand + support) by the one method (wrist pinned, the gun moves); reload tables; and the gun
-      as a choice in ModelSwapper. It runs on tools/rig (QuestZDoom 17.3, 9afc750, PINS-guarded) on the
-      owner's load order with zero script errors, with rig frames as proof ("rig only, not
-      headset-confirmed"), plus one runbook. Gaps known today (2026-10-27): surface naming is partly by
-      eye; a one-surface md3 needs carve_by_ref first; the fitter needs per-gun scene.GUNS/gunlm.py
-      entries by hand; no step adds a new gun to ModelSwapper as a choice (needs the owner's
-      replace/new-pickup call per gun); ModelSwapper r5's CHARGE regression blocks rifle reloads.
-## Set meshes: animated originals only (owner, 2026-10-27)
-"every single one of my md3s is animated with dozens and dozens of frames." The Plus, Vanilla and Modern
-sets (sets/plus_0.7, vanilla_0.9, modern_0.9) were built from REMA's single-frame *_wm.md3 reference meshes
-(ruled out 2026-10-25), so every gun in them is a still: they are wrong at the root and are REBUILT from the
-animated originals when S1/S2 resume, never patched. `tools/check_plan.py` now refuses any staged set mesh
-that is a *_wm.md3 or has one frame (exceptions: sets/<set>/single_frame_ok.txt, path + reason).
-`python3 tools/check_plan.py --audit` lists today's offenders.
-
-## Then, in this order
-TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
-- S1  Vanilla / V+ roster + menu (V+ = toggles inside Vanilla per the owner's checklist).  (owner's order, 03:21)
-- S2  Modern: player class, every Doom drop/pickup → a modern gun, start Glock.
-- S3  BW_Quest (Brutal Wolfenstein; E:\DOOMWork\BW_Quest; parent mod from the owner).
-- S4  Aliens, Meatgrinder, survivors of the discarded sets whose parent the owner keeps (re-measure or ditch).
-      `sets/aliens/` = presidentkoopa/RS_Aliens_VR-WeaponsQ @ 1ee0cd2, verbatim (owner, 2026-10-24).
-- P   Plus pass per set (menu-row extras), only after that set stands.
-
-## To consider, not scheduled
-- C1  RS_VR_Reload's own meshes for clips and magazines, instead of carving each one out of the
-      gun's mesh. Port over its DROPPED MAGAZINE in particular: it glows, and it shows the ammo
-      still in it. (owner, 2026-10-24.) Today every set carves its magazine from the gun's own mesh
-      and the dropped one is that carved piece, unlit and empty-looking. Not scheduled, and not to
-      be started without the owner's yes.
-
-- C2  Project Brutality, a COMPLETE BRUTAL VOXEL SET (owner, 2026-10-27 16:34; widens the earlier C2):
-      (a) HUD weapons for the whole set, built from the PB voxel models; some need scaling up;
-      (b) an environment pack (decorations/pickups), toggled by type the way the BD voxel pack is toggled.
-      Probably a standalone mod, not ModelSwapper (owner: "I don't know if I see that as a modelswapper
-      thing"). Probably REMA (UZDXREMA) rather than Quest (earlier note). The voxels live in the Depot:
-      `docs/reference/pbvp_v2/` (verbatim, credit required, PROVENANCE.md). Measured: 9 weapon-pickup OBJs only,
-      no environment models; the environment source (PBVP v1 KVX or newer) is still to be found.
-      Queued after BD 2.0 and ModelSwapper 2.0; not to be started without the owner's yes.
-
-- C3  UNIVERSAL REAL-TIME SCOPE MOD (owner, 2026-10-28 01:43: "That scope is critical. The code used to render a scope
-      display in real time needs to be something I can give... a kind of universal scope mod. Eventually we will use it
-      here and other places"). Extract BD22's live camera scope (RSQ_ScopeTable + scope zscript: per-eye camera,
-      HmdPosition eye height, lens surface camera texture, 3x FOV) into a standalone, documented, data-driven ZScript
-      mod: any weapon + any lens surface + a magnification, set in one table, no engine changes. Release-ready for
-      other mods (BD22, ModelSwapper, others). Not started; the owner's go first. Proven BD22 scope first (lane-scope).
-
-## Per set
-1 inventory the parent mod · 2 measure every mesh fresh, carve/bake parts, sheets, owner signs placement ·
-3 numbers parsed from the parent, diffed · 4 build, static check, engine gate (start item, pickups, every
-gun fired + reloaded), hand-fit scores · 5 headset pass vs checklist; fixes through the pipe only ·
-6 ship with README, menu rows, provenance.
+## To consider, not scheduled (each needs the owner's yes)
+- C1  RS_VR_Reload's own meshes for clips and magazines (its dropped magazine glows and shows its ammo).
+- C2  Project Brutality, a complete brutal voxel set (`sources/pbvp_v2`). Probably REMA, probably standalone.
+- C3  Universal real-time scope mod: BD22's live scope (RSQ_ScopeTable + scope zscript) as a standalone,
+      data-driven ZScript mod. The handbook's scope recipe is the starting point.
 
 ## Definition of done, per gun
-parts separate/hidden · reload works in headset · hands ≤1.5 cm on sheet, signed · eject side right ·
-sounds · numbers = parent · reachable by start/pickup/toggle · in the menu.
+Parts separate/hidden; reload works in the headset; hands checked on the sheet and signed; eject side right;
+sounds; numbers = parent; reachable by start / pickup / toggle; in the menu.
 
 ## Changing this plan
-Only in its own `[plan]` commit, one line of reason, owner's yes before building. `tools/check_plan.py`
+Only in its own `[plan]` commit, one line of reason, the owner's yes before building. `tools/check_plan.py`
 enforces the rest.

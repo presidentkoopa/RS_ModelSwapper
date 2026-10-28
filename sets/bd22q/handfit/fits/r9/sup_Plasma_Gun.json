@@ -1,0 +1,40 @@
+{
+ "cls": "Plasma_Gun",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -1.701,
+  10.343,
+  -4.575
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.445,
+  0.075,
+  -0.004
+ ],
+ "sp192_cm": [
+  40.0,
+  0.0,
+  -9.4
+ ],
+ "dz": -0.2,
+ "pen_at_contact": 0.55,
+ "pen_gun": 0.5,
+ "pen_gunhand": null,
+ "pen_also_gun_hand": [],
+ "palm_gap_to_gun": 0.2,
+ "check": 0.0,
+ "names": [
+  "Plasma.md3"
+ ],
+ "under": [
+  43.112,
+  7.949,
+  -2.934
+ ]
+}

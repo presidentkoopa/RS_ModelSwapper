@@ -1,0 +1,148 @@
+version "4.10"
+// TEST ONLY (2.0 integration lane): dump weapon classes and the player's weapons. Never ships.
+class INT20Dump : EventHandler
+{
+	override void NetworkProcess(ConsoleEvent e)
+	{
+		let mo = players[e.Player].mo;
+		if (e.Name == "int_classes")
+		{
+			for (int i = 0; i < AllActorClasses.Size(); i++)
+			{
+				let c = AllActorClasses[i];
+				if (!(c is 'Weapon') || c.IsAbstract()) continue;
+				let d = GetDefaultByType((class<Weapon>)(c));
+				Console.Printf("INT CLS %s parent %s slot %d repl %s ammo1 %s ammo2 %s", c.GetClassName(), c.GetParentClass().GetClassName(),
+					d.SlotNumber, Actor.GetReplacement(c).GetClassName(), d.AmmoType1 ? d.AmmoType1.GetClassName() : 'none', d.AmmoType2 ? d.AmmoType2.GetClassName() : 'none');
+			}
+		}
+		if (e.Name == "int_inv" && mo)
+		{
+			for (let it = mo.Inv; it; it = it.Inv)
+				if (it is 'Weapon')
+					Console.Printf("INT INV %s", it.GetClassName());
+			let ws = mo.player.weapons;
+			for (int s = 0; s < 10; s++)
+				for (int k = 0; k < ws.SlotSize(s); k++)
+					Console.Printf("INT SLOT %d %s", s, ws.GetWeapon(s, k).GetClassName());
+		}
+	}
+}
+
+// per-run counters: what the player's shots made (rounds, Dakka FX, projectiles) and what they hurt
+class INT20Log : EventHandler
+{
+	ui int rf;
+	override void RenderOverlay(RenderEvent e) { rf++; if (level.maptime > 200) Console.Printf("B22 FRAME %d t %d", rf, level.maptime); }
+	int rounds, pierce, dots, puffs, sparks, proj, dmg, dmgsum, lines, lastLines;
+	Name lastMain, lastOff;
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		let t = e.Thing; if (!t) return;
+		Name n = t.GetClassName();
+		if (t is 'RSQ_PiercingRound') pierce++;
+		else if (t is 'RSQ_PlayerRound') rounds++;
+		else if (t is 'RSQ_DakkaDot') dots++;
+		else if (t is 'RSQ_DakkaPuff') puffs++;
+		else if (t is 'RSQ_DakkaSpark') sparks++;
+		else if (t.bMISSILE && t.target && t.target.player) proj++;
+		Name cn2 = t.GetClassName();
+		if (level.maptime > 250 && players[consoleplayer].mo && t.Distance3D(players[consoleplayer].mo) < 200 && !(t is 'RSQ_DakkaDot') && !(t is 'RSQ_DakkaPuff') && !(t is 'RSQ_DakkaSpark')) Console.Printf("INT SPAWN t%d %s spr %s scale %.3f dist %.0f", level.maptime, cn2, t.CurState ? t.CurState.Sprite .. "" : "-", t.scale.x, t.Distance3D(players[consoleplayer].mo));
+		if (cn2 == 'ShotgunCasing' || cn2 == 'EmptyBrass' || cn2 == 'PistolCasing' || cn2 == 'MGLinks') { cases.Push(t); caseT.Push(level.maptime); }
+		if (t is 'Inventory' && !Inventory(t).Owner && level.maptime > 50 && players[consoleplayer].mo)
+			Console.Printf("INT ISPAWN t%d %s dist %.0f", level.maptime, n, t.Distance3D(players[consoleplayer].mo));
+	}
+	Array<Actor> cases; Array<int> caseT;
+	void CaseTick()
+	{
+		let mo = players[consoleplayer].mo;
+		for (int i = cases.Size() - 1; i >= 0; i--)
+		{
+			let c = cases[i];
+			int age = level.maptime - caseT[i];
+			if (!c || age > 60) { cases.Delete(i); caseT.Delete(i); continue; }
+			if (age <= 3 || age % 4 == 0)
+				Console.Printf("INT CASE t%d %s age %d scale %.3f %.3f spr %s:%c style %d alpha %.2f dist %.1f dz %.1f vel %.1f", level.maptime, c.GetClassName(), age, c.scale.x, c.scale.y,
+					c.CurState ? c.CurState.Sprite .. "" : "-", 65 + c.frame, c.GetRenderStyle(), c.alpha, mo ? c.Distance3D(mo) : -1, mo ? c.pos.z - mo.pos.z : 0, c.vel.Length());
+		}
+	}
+	override void WorldThingDestroyed(WorldEvent e)
+	{
+		let t = e.Thing; let mo = players[consoleplayer].mo;
+		if (t && t is 'Inventory' && !Inventory(t).Owner && level.maptime > 50 && mo)
+			Console.Printf("INT IGONE t%d %s dist %.0f", level.maptime, t.GetClassName(), t.Distance3D(mo));
+	}
+	override void WorldThingDamaged(WorldEvent e)
+	{
+		if (e.DamageSource && e.DamageSource.player && e.Thing && !e.Thing.player) { dmg++; dmgsum += e.Damage; }
+	}
+	bool trace; String traceItem; int pspchg; State lastSt; Map<Name, int> snap;
+	override void WorldTick()
+	{
+		let mo = players[consoleplayer].mo; if (!mo) return;
+		if (trace)
+		{
+			let a = mo.player.FindPSprite(PSP_WEAPON), b = mo.player.FindPSprite(1000000);
+			class<Inventory> ti = traceItem;
+			Console.Printf("INT TR t%d main %s:%c tics %d | off %s:%c tics %d | %s=%d btn %x",
+				level.maptime, a && a.CurState ? a.CurState.Sprite.. "" : "-", a ? 65 + a.Frame : 32, a ? a.Tics : -1,
+				b && b.CurState ? b.CurState.Sprite .. "" : "-", b ? 65 + b.Frame : 32, b ? b.Tics : -1,
+				traceItem, ti ? mo.CountInv(ti) : -9, mo.player.cmd.buttons);
+		}
+		CaseTick();
+		let pw = mo.player.FindPSprite(PSP_WEAPON);
+		if (pw && pw.CurState != lastSt) { pspchg++; lastSt = pw.CurState; }
+		let rw = mo.player.ReadyWeapon, ow = mo.player.OffhandWeapon;
+		Name m = rw ? rw.GetClassName() : 'none', o = ow ? ow.GetClassName() : 'none';
+		if (m != lastMain || o != lastOff)
+		{
+			Console.Printf("INT WPN t%d main %s off %s", level.maptime, m, o);
+			lastMain = m; lastOff = o;
+		}
+		if (level.maptime % 5 == 0)
+		{
+			int n = 0; let it = ThinkerIterator.Create('RSQ_DakkaLine', Thinker.STAT_USER + 7); while (it.Next()) n++;
+			if (n > lastLines) lines += n - lastLines;
+			lastLines = n;
+		}
+	}
+	override void NetworkProcess(ConsoleEvent e)
+	{
+		let mo = players[e.Player].mo;
+		if (e.Name.Left(10) == "int_trace_") { traceItem = e.Name.Mid(10); trace = traceItem != "off"; }
+		if (e.Name.Left(8) == "int_cnt_" && mo)
+		{
+			Array<String> its; e.Name.Mid(8).Split(its, "_");
+			String o = "";
+			for (int i = 0; i < its.Size(); i++) { class<Inventory> c = its[i]; o.AppendFormat("%s=%d ", its[i], c ? mo.CountInv(c) : -9); }
+			let psp = mo.player.FindPSprite(PSP_WEAPON);
+			Console.Printf("INT CNT t%d %s main state %s", level.maptime, o, psp && psp.CurState ? psp.CurState.DistanceTo(mo.player.ReadyWeapon.FindState("Ready")) .. "" : "none");
+		}
+		if (e.Name.Left(9) == "int_drop_" && mo)
+		{
+			String cn = e.Name.Mid(9);
+			class<Actor> c = cn;
+			let a = c ? Actor.Spawn(c, mo.pos, ALLOW_REPLACE) : null;
+			Console.Printf("INT DROP t%d %s -> %s", level.maptime, cn, a ? a.GetClassName() : 'none');
+		}
+		if (e.Name == "int_mark" || e.Name.Left(8) == "int_mark")
+		{
+			Console.Printf("INT MARK %s t%d rounds %d pierce %d dots %d puffs %d sparks %d proj %d dmg %d/%d lines %d main %s off %s ammo1 %d ammo2 %d psp %d alt %d",
+				e.Name, level.maptime, rounds, pierce, dots, puffs, sparks, proj, dmg, dmgsum, lines, lastMain, lastOff,
+				(mo && mo.player.ReadyWeapon && mo.player.ReadyWeapon.Ammo1) ? mo.player.ReadyWeapon.Ammo1.Amount : -1,
+				(mo && mo.player.ReadyWeapon && mo.player.ReadyWeapon.Ammo2) ? mo.player.ReadyWeapon.Ammo2.Amount : -1,
+				pspchg, (mo && mo.player.ReadyWeapon && mo.player.ReadyWeapon.FindState("AltFire")) ? 1 : 0);
+			pspchg = 0;
+			String df = "";
+			Map<Name, int> now;
+			for (let it = mo.Inv; it; it = it.Inv) now.Insert(it.GetClassName(), it.Amount);
+			MapIterator<Name, int> mi; mi.Init(now);
+			while (mi.Next()) { int o = snap.CheckKey(mi.GetKey()) ? snap.Get(mi.GetKey()) : 0; if (o != mi.GetValue()) df.AppendFormat("%s %d>%d, ", mi.GetKey(), o, mi.GetValue()); }
+			MapIterator<Name, int> mo2; mo2.Init(snap);
+			while (mo2.Next()) if (!now.CheckKey(mo2.GetKey())) df.AppendFormat("%s %d>0, ", mo2.GetKey(), mo2.GetValue());
+			snap.Move(now);
+			Console.Printf("INT DIFF %s t%d %s", e.Name, level.maptime, df);
+			rounds = pierce = dots = puffs = sparks = proj = dmg = dmgsum = lines = 0;
+		}
+	}
+}

@@ -1,0 +1,41 @@
+{
+ "cls": "Rifle",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -3.232,
+  11.358,
+  6.741
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.336,
+  0.033,
+  0.08
+ ],
+ "sp192_cm": [
+  28.0,
+  0.0,
+  1.4
+ ],
+ "dz": -0.2,
+ "pen_at_contact": 0.55,
+ "pen_gun": 0.45,
+ "pen_gunhand": null,
+ "palm_gap_to_gun": 0.14,
+ "check": 0.0,
+ "names": [
+  "Rifle.md3",
+  "M203.md3"
+ ],
+ "under": [
+  32.118,
+  4.709,
+  -2.676
+ ],
+ "cond": " && !(p.ReadyWeapon is 'PuristRifle')"
+}

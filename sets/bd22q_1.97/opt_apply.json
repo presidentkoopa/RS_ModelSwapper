@@ -1,9 +1,0 @@
-{
- "added": [
-  "rsr_pouch (its OptionValue was defined but no row used it)",
-  "rsr_assist",
-  "rsvr_melee_swing",
-  "Submenu RSR_Debug (the page existed but nothing opened it)"
- ],
- "page": "unchanged otherwise: OptionMenu \"RSQ_Options\", Title \"BD22 VR WEAPONS\", the owner's order"
-}

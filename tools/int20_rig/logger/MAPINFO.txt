@@ -1,0 +1,1 @@
+GameInfo { AddEventHandlers = "INT20Dump", "INT20Log" }

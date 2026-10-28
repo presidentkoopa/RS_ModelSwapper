@@ -1,6 +1,6 @@
-"""TEST ONLY: drive bd22q in the owner's quest_test_rig (real QZD 17.3, OpenXR mode, poses from cvars).
+"""TEST ONLY: drive a pack in the QuestZDoom 17.3 rig (real QZD 17.3, OpenXR mode, poses from cvars).
 
-Lives outside the depot and never ships. run(name, script) launches the load order the depot's
+Never ships. run(name, script) launches the load order the depot's
 CLAUDE.md names -- doom2 -> brutal22test6 -> BD_VoxelPack -> the pack -- plus the test probe, with
 one chained console script, and returns the log.
 """
@@ -12,10 +12,12 @@ RIG = os.environ.get('B22_RIG', HERE + '/bin')	# QuestZDoom 17.3 only: the prebu
 if not os.path.exists(os.path.join(RIG, 'qzdoom')):
 	sys.exit('rig.py: no rig at %s. tools/rig/bin is in git (prebuilt QuestZDoom 17.3); '
 	         'or run: sh tools/rig/setup.sh build and set B22_RIG=tools/rig/build/rig' % RIG)
-UP = '/mnt/user-data/uploads'				# where the cloud session had the owner's files
-IWAD = os.environ.get('B22_IWAD', UP + '/DOOMWork/QZD17-engine/build/Release/doom2.wad')
-BD22 = os.environ.get('B22_BD22', UP + '/DOOMWork/brutal22test6.pk3')
-VOX = os.environ.get('B22_VOX', UP + '/Desktop/BD_VoxelPack.pk3')
+# the owner's game data, never committed: B22_IWAD / B22_BD22 / B22_VOX, else $RSQ_GAMEDATA/<name>
+# (RSQ_GAMEDATA defaults to a 'gamedata' folder beside the Depot checkout; tools/depot.py)
+sys.path.append(os.path.dirname(HERE)); import depot as _DP
+IWAD = os.environ.get('B22_IWAD', os.path.join(_DP.GAMEDATA, 'doom2.wad'))
+BD22 = os.environ.get('B22_BD22', os.path.join(_DP.GAMEDATA, 'brutal22test6.pk3'))
+VOX = os.environ.get('B22_VOX', os.path.join(_DP.GAMEDATA, 'BD_VoxelPack.pk3'))
 PROBE = B + '/probe.pk3'
 OUT = B + '/logs'
 PK3 = os.environ.get('B22_PK3', B + '/BD22Q_now.pk3')

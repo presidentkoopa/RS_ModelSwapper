@@ -1,0 +1,40 @@
+{
+ "cls": "Rocket_Launcher",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -3.168,
+  25.772,
+  13.93
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.262,
+  0.023,
+  0.132
+ ],
+ "sp192_cm": [
+  22.0,
+  0.0,
+  4.6
+ ],
+ "dz": -0.1,
+ "pen_at_contact": 0.48,
+ "pen_gun": 0.49,
+ "pen_gunhand": null,
+ "pen_also_gun_hand": [],
+ "palm_gap_to_gun": 0.1,
+ "check": 0.0,
+ "names": [
+  "RPG.md3"
+ ],
+ "under": [
+  24.801,
+  1.044,
+  11.097
+ ]
+}

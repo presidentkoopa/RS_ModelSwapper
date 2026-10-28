@@ -1,0 +1,62 @@
+// RS VR hands / reload / ballistics. Options: RSQ_Options in MENUDEF.rsq. v9.
+user bool rsq_hands = true;			// VR hands on the controllers
+user int rsr_reload = 1;			// Reloading: 1 VR (zscript/rsr, on the guns that have it; the rest stock), 0 stock
+user bool rsq_reload_nonstd = true;	// 1.99x: Reload Non-Standard Guns -- the guns Brutal Doom gives no reload (zscript/rsq/counters.zs GUN[]); off = Brutal Doom's own
+server int rsq_ballistics = 0;	// 1.97 F5: 0 Stock (BD22), 1 Low, 2 Max	// enhanced impacts and projectile trails (server: they use playsim random)
+user int rsq_punch = 0;			// VR punching: a real punch with either fist lands (zscript/rsq/fists.zs)
+// 2026-10-23: a punch that lands on a switch or any usable line works it, at the fist's own reach
+// instead of the engine's 64-unit use range. The LINE'S SPECIAL decides, not its texture.
+user bool rsq_punch_use = true;
+server bool rsq_extra_weapons = false;	// cheats also give the MP40, MG42, Devastator, Hellish launcher, flame cannon (zscript/nosniper)
+user int rsr_grab_with = 0;		// 1.17 Grab ammo with: 0 off trigger, 1 off grip (1.14 rule), 2 Use key (only while a reload has the hand)
+user bool rsq_flick = true;		// 1.17 Flick to reload: a gun in each hand, snap a barrel down to reload that gun (zscript/rsq/flick.zs)
+// 2026-10-23: the VR scopes (zscript/rsq/scope.zs). Per gun, 0 DOT (a collimated red dot on
+// the gun's own glass, no magnification) or 1 REAL (the view down the bore rendered into it).
+// RSQ_ScopeTable.ModeCVar() maps the table index to these names, so a new scoped gun needs a
+// row in that table and a cvar here and nothing else.
+// 2.0 (owner 2026-10-28, "the real-time scope renders 3x at all times"): both default to Real 3x.
+// Renamed from rsq_scope_sniper / rsq_scope_railgun: those are archived, so a 0 saved by an older
+// build (the rig's ini held railgun 0; the owner's menu showed Dot on both) would have kept the
+// scope at 1x on top of the new default. New names start at the new default on every ini.
+user int rsq_scope2_sniper = 1;
+user int rsq_scope2_railgun = 1;
+
+// 1.97: roster
+server bool rsq_mg_replaces_mg42 = false;	// every MG42 spawn is the BD21 Machinegun
+// owner 2026-10-27 20:45, zscript/rsq/roster.zs: the Moonlight (BrutalRevolver) takes the Brutal Pistol's place
+// everywhere (start, map pistols, the pistol zombie's drop); its rounds spawn on maps only while this is on.
+// Start With Two: a new game starts with both Moonlights in hand (needs the first). Off: BD22's own start.
+server bool rsq_moonlight_pistol = false;
+server bool rsq_moonlight_two = false;
+
+// owner 2026-10-27 20:47: HUD Ammo. 0 Magazine + Reserve (the held gun's magazine and its reserve), 1 Reserve Only.
+// zscript/rsq/counters.zs RSQ_Counters.Hud sets what SBARINFO.rsq draws.
+user int rsq_hud_ammo = 0;
+
+// 1.97: the gun bash (BD22's kick, with the gun you are holding)
+user int rsq_bash = 1;			// 0: the boot, as BD22 ships it
+user int rsq_bash_fx = 0;		// which RS_CombatFX impact
+user int rsq_bash_tint = 0;		// recolours the RSH0 flash only; 0 is the art as drawn
+
+// 1.97: the two-handed butt strike. OFF by default: of the three melee moves this
+// is the one most likely to misfire, because two hands on a rifle is the aiming
+// posture, so it is the player's choice to turn on.
+user int rsq_butt = 0;
+user float rsvr_butt_fwd = 0.5;		// of the butt's speed that must point forward
+user float rsvr_butt_lead = 1.3;	// how much faster the butt must be than the muzzle
+
+// 1.97 F5: per-gun recoil. Its own row, not the ballistics dial -- this costs one
+// float a tic, the effects cost a frame budget, and they are not the same decision.
+user int rsq_recoil = 1;
+
+// 1.97 F6: the round in flight. 1.0 is RS_Ballistics' authored speed, which is
+// 330 to 874 map units a tic -- a streak, because that is what a real round is.
+// Lower to read it in the headset. It cannot change where anything lands: the
+// hitscan has already hit by the time this is drawn.
+user float rsq_round_speed = 1.0;
+
+// 1.99 F7: the real casing meshes. Off = Brutal Doom's own sprites, sized per
+// cartridge as 1.97 did. rsq_casing_size is a multiplier on true size: a 9mm case
+// really is 19.2 mm, which is about 0.63 map units and may be small to see.
+user bool rsq_casing_models = true;
+user float rsq_casing_size = 1.0;

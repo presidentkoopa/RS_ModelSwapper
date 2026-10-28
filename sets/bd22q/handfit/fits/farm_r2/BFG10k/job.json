@@ -1,0 +1,92 @@
+{
+ "job": {
+  "token": "BFG10k:from=Minigun:../results/Minigun/st2_Minigun.npy:as=BFG10k_fromMinigun",
+  "gun": "BFG10k",
+  "skip_stage": false,
+  "bake_only": false,
+  "idx": "auto",
+  "from": [
+   "Minigun",
+   "../results/Minigun/st2_Minigun.npy"
+  ],
+  "out": "BFG10k_fromMinigun"
+ },
+ "pid": 5552,
+ "start": "14:24:34",
+ "status": "ok",
+ "metrics": {
+  "stage2": {
+   "gun": "BFG10k",
+   "start": {
+    "pen": 0.6985510971344355,
+    "padI": 0.28437369358404013,
+    "palm": 2.3408271940351835,
+    "web": 0.44074689947682116
+   },
+   "rot_vs_start_deg": 3.9225237304739897,
+   "rot_vs_pistol_deg": 8.128022440886353,
+   "move_vs_start_cm": [
+    1.8,
+    0.58,
+    -1.28
+   ],
+   "pad_I_to_trigger": 1.8079457370226988,
+   "pen_max": 0.5824599318164535,
+   "gap_palm": 0.49430684109610556,
+   "gap_web": 0.10119391280374643,
+   "gap_M": 1.0360041978240655,
+   "gap_R": 1.5075289396028642,
+   "gap_P": 1.70516788604708,
+   "gap_T": 0.039774375372502675,
+   "start_from": "Minigun"
+  },
+  "curl": {
+   "gun": "BFG10k",
+   "rigid_only": {
+    "pen": 0.5824599318164599,
+    "padI_trig": 1.807945737022707,
+    "gap_M": 1.0360041978240682,
+    "gap_R": 1.5075289396028717,
+    "gap_P": 1.705167886047088,
+    "gap_T": 0.03977437537249441,
+    "gap_palm": 0.49430684109610096,
+    "gap_web": 0.10119391280375128
+   },
+   "trigger": {
+    "pen": 0.5824599318164599,
+    "padI_trig": 0.004520616595174854,
+    "gap_M": 0.20004086727729037,
+    "gap_R": 0.20021675023632368,
+    "gap_P": 0.2000966537594016,
+    "gap_T": 0.03977437537249441,
+    "gap_palm": 0.49430684109610096,
+    "gap_web": 0.09868924050670858
+   },
+   "squeeze": {
+    "pen": 0.5824599318164599,
+    "padI_trig": 0.597149179995301,
+    "gap_M": 0.20004086727729037,
+    "gap_R": 0.20021675023632368,
+    "gap_P": 0.2000966537594016,
+    "gap_T": 0.03977437537249441,
+    "gap_palm": 0.49430684109610096,
+    "gap_web": 0.10175413448195997
+   },
+   "squeeze_travel": 0.5980798039462819
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'BFG10k_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, 0.0, 0.0], 'rot': [-0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 2.808666774861361e-15, 'bake_check_max_cm': 0.00796865860702578, 'md3': 'fbx_hv_BFG10k_R.md3'}",
+    "{'name': 'BFG10k_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, 0.0, 0.0], 'rot': [-0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 2.808666774861361e-15, 'bake_check_max_cm': 0.00796865860702578, 'md3': 'fbx_hv_BFG10k_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_BFG10k_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.4373529599238421,
+   "sup_gap": 1.4532391397700046,
+   "sup_dz": -1.6,
+   "sup_search_cm": 1.5
+  }
+ },
+ "minutes": 66.95,
+ "end": "15:31:31"
+}

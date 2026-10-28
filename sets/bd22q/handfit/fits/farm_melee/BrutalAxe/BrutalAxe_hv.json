@@ -1,0 +1,85 @@
+{
+ "shift": [
+  4.614788277157206,
+  -1.974350518192201,
+  -0.6966288376453882
+ ],
+ "hand": {
+  "md3": "fbx_hv_BrutalAxe_R.md3",
+  "md3_name": "fbx_hv_BrutalAxe_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "melee: frame 1 unused except Chain_saw (its trigger)",
+  "support": null,
+  "support_note": "melee: support is its own step (support_melee.py)"
+ },
+ "metrics": {
+  "stage2": {
+   "gun": "BrutalAxe",
+   "start": {
+    "pen": 0.14390748060798605,
+    "padI": 3.530481367518903,
+    "palm": 1.5166236263070783,
+    "web": 0.41029212832673717
+   },
+   "rot_vs_start_deg": 11.635853408648314,
+   "rot_vs_pistol_deg": 13.650538675037176,
+   "move_vs_start_cm": [
+    -0.06,
+    0.61,
+    -2.9
+   ],
+   "pad_I_to_trigger": 2.8631323884615165,
+   "pen_max": 0.7224026345139054,
+   "gap_palm": 0.7242103741321952,
+   "gap_web": 0.042252663838339394,
+   "gap_M": 2.5440892253696052,
+   "gap_R": 2.4179405927164908,
+   "gap_P": 2.285208155990427,
+   "gap_T": 1.1106376376168352
+  },
+  "curl": {
+   "gun": "BrutalAxe",
+   "rigid_only": {
+    "pen": 0.7224026345139067,
+    "padI_trig": 2.863132388461527,
+    "gap_M": 2.544089225369617,
+    "gap_R": 2.4179405927165014,
+    "gap_P": 2.285208155990437,
+    "gap_T": 1.1106376376168308,
+    "gap_palm": 0.7242103741321875,
+    "gap_web": 0.042252663838331754
+   },
+   "trigger": {
+    "pen": 0.7058412911350476,
+    "padI_trig": 0.40739870114059945,
+    "gap_M": 0.20034700202173414,
+    "gap_R": 0.200370959707205,
+    "gap_P": 0.2006654024290538,
+    "gap_T": 1.1106376376168308,
+    "gap_palm": 0.7134167692559161,
+    "gap_web": 0.017624584952272017
+   },
+   "squeeze": {
+    "pen": 0.7058412911350476,
+    "padI_trig": 0.6822086173876686,
+    "gap_M": 0.20034700202173414,
+    "gap_R": 0.200370959707205,
+    "gap_P": 0.2006654024290538,
+    "gap_T": 1.1106376376168308,
+    "gap_palm": 0.719537050339226,
+    "gap_web": 0.03746672872443203
+   },
+   "squeeze_travel": 0.5929277272211549
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'BrutalAxe_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, -0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 1.2074182697257333e-06, 'wrist_move_cm': 5.714144372096617e-15, 'bake_check_max_cm': 0.007967491063743726, 'md3': 'fbx_hv_BrutalAxe_R.md3'}",
+    "{'name': 'BrutalAxe_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, -0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 1.2074182697257333e-06, 'wrist_move_cm': 5.714144372096617e-15, 'bake_check_max_cm': 0.007967491063743726, 'md3': 'fbx_hv_BrutalAxe_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_BrutalAxe_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0
+  }
+ }
+}

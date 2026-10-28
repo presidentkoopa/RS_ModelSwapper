@@ -7,8 +7,8 @@
 # (QzDoom_OpenXR.cpp, TBXR_Common.cpp, OpenXrInput.cpp) is replaced by glue/qz_linux_glue.cpp.
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"
-QGZ=${QGZ:-/home/claude/emawind/qzd17}
-JNI=${JNI:-/home/claude/emawind84/questzdoom/Projects/Android/jni}
+QGZ=${QGZ:?set QGZ to the engine source (setup.sh build does)}
+JNI=${JNI:?set JNI to questzdoom Projects/Android/jni (setup.sh build does)}
 JOBS=${JOBS:-$(nproc)}
 D="$HERE/deps"
 cd "$HERE"; mkdir -p "$D"

@@ -1,0 +1,134 @@
+{
+ "cls": "BrutalSMG",
+ "form": "lane_c",
+ "fbx": "hand_final.fbx (DXR models/hands, never shipped)",
+ "source": {
+  "fit": "batch 2 revindex.py output revindex_BrutalSMG.json (sha256 d7428e4de4efdf12edb80af67eb12fa04556d3c0722ecd5c31c9f10e1e974ffb): q_trigger / q_squeeze (index), shift",
+  "md3": "batch2/bake_b2.py -> fbx_b2_R.md3 (frames SMG_trg, SMG_sqz, PISTOL_chk)",
+  "gun_move": "batch2/move_b2.py place(shift) = port_gun.place: the pistol r5 aim, translated by shift (original frame)"
+ },
+ "hand": {
+  "landmarks": "BrutalPistol",
+  "key": "BrutalPistol",
+  "vertex_correction": "round4_final.json [BrutalPistol].Xg - FK(x_gun): kept on every vertex outside exact_joints"
+ },
+ "q_trigger": [
+  -1.3172373954349883,
+  -0.6384468756918092,
+  -0.26772333563889195,
+  -4.5205913716125705,
+  -0.6699714189899167,
+  -6.658694116149708,
+  -0.21950110922906763,
+  0.28052442500498764,
+  19.999999999999996,
+  -0.06409402216620254,
+  0.6267075365001996,
+  13.516292892592617,
+  0.1637959884317876,
+  0.5821197554064608,
+  -5.302888769877919,
+  0.17672032691727704,
+  0.5472547290362515,
+  -18.125456882537627,
+  1.0395181046012212,
+  0.07909910307630677,
+  -34.307722009368575,
+  8.783169933159876,
+  -21.858744704391945,
+  14.999999999999998,
+  0.19338649311748823,
+  -0.05205908088190825,
+  0.07265426151598477,
+  8.657659389079491,
+  2.6853466978695546,
+  5.2404284803611425
+ ],
+ "q_squeeze": [
+  -1.3172373954349883,
+  -0.6384468756918092,
+  -0.26772333563889195,
+  -4.5205913716125705,
+  -0.6699714189899167,
+  -6.658694116149708,
+  -0.23745166071130175,
+  0.383212195651402,
+  19.999999999999996,
+  -0.06409402216620254,
+  0.6267075365001996,
+  13.516292892592617,
+  0.1637959884317876,
+  0.5821197554064608,
+  -5.302888769877919,
+  0.17672032691727704,
+  0.5472547290362515,
+  -18.125456882537627,
+  1.0395181046012212,
+  0.07909910307630677,
+  -34.307722009368575,
+  8.783169933159876,
+  -21.858744704391945,
+  14.999999999999998,
+  0.19338649311748823,
+  -0.05205908088190825,
+  0.07265426151598477,
+  8.657659389079491,
+  2.6853466978695546,
+  5.2404284803611425
+ ],
+ "exact_joints": {
+  "trigger": [
+   "INDEX_BASE_joint",
+   "INDEX_MID_joint",
+   "INDEX_TOP_joint",
+   "INDEX_UP_TOP_joint"
+  ],
+  "squeeze": [
+   "INDEX_BASE_joint",
+   "INDEX_MID_joint",
+   "INDEX_TOP_joint",
+   "INDEX_UP_TOP_joint"
+  ]
+ },
+ "shift_cm": [
+  -3.881624315975805,
+  -0.17619929785520394,
+  -1.77970958737769
+ ],
+ "fit": {
+  "pad_err_trigger_cm": 0.5829814974460252,
+  "pad_err_squeeze_cm": 0.1372054187565245,
+  "pen_index_cm": 0.257538863582379,
+  "pen_hand_cm": 0.6505066342208574,
+  "non_index_moved_cm": 0.1343062207944759
+ },
+ "gun_move": {
+  "Offset_x": 0.9079905614184213,
+  "Offset_y": -4.559901112011108,
+  "ZOffset": -3.4133434072250295,
+  "AngleOffset": 3.853999999999986,
+  "PitchOffset": 3.3629999999999955,
+  "RollOffset": 10.974000000000006
+ },
+ "md3": {
+  "baked": "fbx_b2_R.md3",
+  "frames": [
+   [
+    "BrutalSMG",
+    "trigger",
+    "SMG_trg"
+   ],
+   [
+    "BrutalSMG",
+    "squeeze",
+    "SMG_sqz"
+   ],
+   [
+    "BrutalPistol",
+    "trigger",
+    "PISTOL_chk"
+   ]
+  ]
+ },
+ "support": "batch 2: fbx_b1_L.md3 frame 1 (RQFS B) placed under the SMG forend (bake_b2.py), handtable row 5"
+}

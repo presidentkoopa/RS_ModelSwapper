@@ -1,0 +1,29 @@
+NukeLauncher: MODELDEF Offset 0.463 -2.370  ZOffset 4.577  Angle/Pitch/Roll 3.854/3.363/10.974 (chain residual 0.0000 cm)
+  MODELDEF MODELDEF.bd.txt NukeLauncher x1
+  MODELDEF MODELDEF.purist PuristNukeLauncher x1
+  MODELDEF MODELDEF.rsr NukeLauncher x1
+  MODELDEF MODELDEF.rsr RSR_GunParts x1
+  gunmoves Pivot row 14 [ 0.  5. 24.] -> [-0.463 14.577 21.63 ]
+  gunmoves row 53 (NKLFABCD, md3 frame 5) 0.19, -0.81, -0.69, 0.00, -0.33, 2.11 -> 0.07, -0.78, -0.74, -0.21, -0.39, 2.24
+  gunmoves row 54 (NKLFEF, md3 frame 4) 0.18, -0.73, -0.61, 0.01, 0.01, -0.13 -> 0.08, -0.71, -0.66, -0.11, 0.07, 0.02
+  gunmoves row 55 (NKLFGH, md3 frame 3) 0.17, -0.54, -0.46, 0.01, 0.01, -0.12 -> 0.09, -0.53, -0.49, -0.07, 0.06, -0.02
+  gunmoves row 56 (NKLFIJ, md3 frame 2) 0.15, -0.31, -0.27, 0.02, 0.01, -0.11 -> 0.10, -0.31, -0.28, -0.03, 0.04, -0.04
+  reload Well case 15 (36.407, -0.105, 14.610) -> (37.869, 1.059, 27.771)
+  reload MagCentre case 15 (43.317, -0.005, 4.505) -> (45.195, 3.579, 18.292)
+  reload Grab case 15 (0.000, 0.000, 0.000) -> (2.251, 1.550, 11.337)
+  reload Axis case 15 (-0.000, -0.000, 1.000) -> (-0.045, -0.194, 0.980)
+  reload WellHook case 15 (0.000, -0.909, -0.000) -> (0.176, -0.891, -0.041)
+  reload Pull case 15 (-1.000, 0.000, 0.000) -> (-0.996, -0.067, -0.059)
+  reload HandleHook case 15 (0.000, 0.000, 0.909) -> (-0.061, -0.053, 0.905)
+  reload Offset case 15 (0.000, 0.000, -5.000) -> (0.463, -2.370, 4.577)
+  muzzle row ADDED NukeLauncher drawn tip [53.57  0.   -2.87] -> [55.74  5.7  11.67]
+  hand squeeze: fire frames: NKLF ABCDEFGHIJ
+  hand md3 fbx_hv_NukeLauncher_R.md3 <- fbx_hv_NukeLauncher_R.md3
+  hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQV9
+  hand block (dual) MODELDEF.rsqdual NukeLauncher
+  hand block (dual) MODELDEF.purist PuristNukeLauncher
+  hands.zs labels FbxTrgNuke / FbxSqzNuke (+ dual)
+  dualhands.zs label
+  handtable GunHook / GunHookTwo row 14 = 0
+  handtable Support row 14 [-2.653, 11.451, 9.613] [-7.927, 2.302, 10.732] [0.278, 0.06, -0.01]
+moved 27 items

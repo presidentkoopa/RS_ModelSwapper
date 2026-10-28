@@ -1,0 +1,18 @@
+{
+ "shift": [
+  -2.4038967633306605,
+  0.5716398241780101,
+  -0.3791606400942644
+ ],
+ "hand": {
+  "md3": "bake/fbx_b4_Rifle_R.md3",
+  "md3_name": "fbx_b4_Rifle_R.md3",
+  "sprite": "RQFJ",
+  "label": "Rif",
+  "squeeze": "(mf <= 3 && (mgp.Sprite == Actor.GetSpriteIndex('RIFF') || mgp.Sprite == Actor.GetSpriteIndex('RI2F') || mgp.Sprite == Actor.GetSpriteIndex('2IFF') || mgp.Sprite == Actor.GetSpriteIndex('QT09') || mgp.Sprite == Actor.GetSpriteIndex('QT0A') || mgp.Sprite == Actor.GetSpriteIndex('QT08')))",
+  "squeeze_note": "FIRE frames (gunmoves rows 93-95: RIFF / RI2F / 2IFF A-D and the no-tube twins QT09 / QT0A / QT08)",
+  "support": "move",
+  "support_frame": 2,
+  "support_note": "FBX gun hand (hook 0); the support (Ermac hand2 pose C under the M203 tube) moved with the gun"
+ }
+}

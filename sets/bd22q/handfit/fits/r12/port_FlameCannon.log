@@ -1,0 +1,13 @@
+FlameCannon: MODELDEF Offset 0.070 -13.155  ZOffset -6.744  Angle/Pitch/Roll -3.368/-7.292/-0.038 (fc_place, residual 3.6e-14 cm)
+  handtable row 28 added (Index FlameCannon, 25 tables)
+  gunmoves Pivot rows 27 (0 0 0) + 28 (0 5 24) added
+  MODELDEF MODELDEF.bd.txt FlameCannon x1
+  MODELDEF MODELDEF.purist PuristFlameCannon x1
+  gunmoves Pivot row 28 [ 0.  5. 24.] -> [-0.07   3.256 10.845]
+  muzzle row ADDED FlameCannon nozzle tip [49.9  -0.31 -2.67] -> [ 61.92  -5.02 -14.53]
+  barrel axis after the move (F, L, U) [ 0.99189 -0.0722  -0.10456] vs fc_place forearm axis [0.99189, -0.0722, -0.10455]
+  support md3 fbx_r4_FlameCannon_under40_L.md3 <- tools/handfit/port/fits/farm_r4/FlameCannon/FlameCannon_under40/fbx_r4_FlameCannon_under40_L.md3
+  MODELDEF.rsq RSQ_GunSide + RSQ_Hands RQXB
+  hands.zs FbxSupFC row 28
+  handtable Support row 28 [-3.094, 18.392, 2.135] [3.574, -37.502, -0.526] [0.3209, -0.0373, -0.2317]
+moved 11 items

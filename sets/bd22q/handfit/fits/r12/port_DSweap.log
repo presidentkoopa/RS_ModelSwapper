@@ -1,0 +1,18 @@
+DSweap: MODELDEF Offset 2.723 -1.541  ZOffset -4.336  Angle/Pitch/Roll 3.854/3.363/10.974 (chain residual 0.0000 cm)
+  (not moved: MODELDEF.bd.txt DSweap at Offset [0.0, -40.26, 0.0] ZOffset [-33.19], not this gun's base placement)
+  (not moved: MODELDEF.bd.txt DSweap at Offset [0.0, -40.26, 0.0] ZOffset [-33.19], not this gun's base placement)
+  MODELDEF MODELDEF.bd.txt DSweap x1
+  gunmoves Pivot row 26 [ 0.  5. 24.] -> [-2.723  5.664 22.459]
+  DSL2 turn K (rigid DSL1 -> DSL2, FLU) [[-0.342, 0.0, -0.9397], [-0.0, 1.0, -0.0], [0.9397, 0.0, -0.342]] [-0.0006 -0.      0.0008]
+  MODELDEF MODELDEF.bd.txt DSL2 block re-placed [  0.   -40.26 -33.19   0.   110.     0.  ] -> [  2.7233 -39.1092 -31.9687  -9.6221 113.6676  20.0265] residual 0.0000 cm
+  hand md3 fbx_hv_DSweap_R.md3 <- fbx_hv_DSweap_R.md3
+  hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQVH
+  hands.zs labels FbxTrgDS / FbxSqzDS (+ dual)
+  handtable GunHook / GunHookTwo row 26 = 0
+  handtable row 26 GunRot 0 (was [ 0.97 31.45  1.16]); GunHookTwo / GunRotTwo = M (H2 H1^-1) M^-1: [0. 0. 0.] [0. 0. 0.] (was hook [-4.4   0.25  1.27] / [ 0.97 31.45  1.16], two [-4.4   0.25  1.27] / [ 0.97 31.45  1.16])
+  support md3 fbx_melee_DSweap_sup_L.md3 <- tools/handfit/port/fits/farm_melee/DSweap/fbx_melee_DSweap_sup_L.md3
+  MODELDEF.rsq RSQ_GunSide + RSQ_Hands RQXD
+  hands.zs FbxSupDS row 26
+  handtable Support row 26 [-1.695, -10.904, 5.289] [-15.393, 11.318, 26.71] [np.float64(-0.0033), np.float64(0.0192), np.float64(-0.1183)]
+  melee.zs RSVR_MeleeMove SWORD: poseFrames [0, 3]
+moved 14 items

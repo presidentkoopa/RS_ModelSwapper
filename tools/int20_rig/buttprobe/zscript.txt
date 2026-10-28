@@ -1,0 +1,36 @@
+version "4.10"
+// TEST ONLY (2.0 int r2): where the melee code puts the butt (RSVR_Hand.Place(BladeOut(k)), the moved point) every tic, a
+// marker drawn there, and every hit the player lands with the distance from the butt point. Never ships.
+class INT20ButtMark : Actor
+{
+	Default { +NOINTERACTION; +NOBLOCKMAP; +BRIGHT; RenderStyle "Add"; Scale 0.06; }
+	States { Spawn: PLSS A 2 Bright; Stop; }
+}
+class INT20Butt : EventHandler
+{
+	Vector3 last; int lastT;
+	override void WorldTick()
+	{
+		let mo = PlayerPawn(players[consoleplayer].mo);
+		let h = RSVR_MeleeHandler(EventHandler.Find('RSVR_MeleeHandler'));
+		if (!mo || !h || !h.hands[consoleplayer]) return;
+		let hd = h.hands[consoleplayer];
+		int k = RSVR_Hand.KindOf(mo);
+		if (k == 0 || !hd.Frame(mo)) return;
+		Vector3 b = hd.Place(RSVR_Hand.BladeOut(k));
+		last = b; lastT = level.maptime;
+		Actor.Spawn('INT20ButtMark', b);
+		if (level.maptime % 2 == 0 || mo.CountInv('INT20Loud'))
+			Console.Printf("INT BUTT t%d k %d steady %d butt %.1f %.1f %.1f hand %.1f %.1f %.1f", level.maptime, k, RSVR_VRHand.Steadied(mo), b.x, b.y, b.z, mo.AttackPos.x, mo.AttackPos.y, mo.AttackPos.z);
+	}
+	override void WorldThingDamaged(WorldEvent e)
+	{
+		if (!e.DamageSource || !e.DamageSource.player || !e.Thing || e.Thing.player) return;
+		let inf = e.Inflictor;
+		Vector3 c = e.Thing.pos + (0, 0, e.Thing.height / 2);
+		Console.Printf("INT HIT t%d %s dmg %d inflictor %s at %.1f %.1f %.1f | butt (t%d) %.1f %.1f %.1f | inflictor-butt %.1f victim-centre-butt %.1f (victim radius %.0f)",
+			level.maptime, e.Thing.GetClassName(), e.Damage, inf ? inf.GetClassName() : 'none', inf ? inf.pos.x : 0, inf ? inf.pos.y : 0, inf ? inf.pos.z : 0,
+			lastT, last.x, last.y, last.z, inf ? (inf.pos - last).Length() : -1, (c - last).Length(), e.Thing.radius);
+	}
+}
+class INT20Loud : Inventory {}

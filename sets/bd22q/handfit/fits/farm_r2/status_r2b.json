@@ -1,0 +1,33 @@
+{
+ "batch": "r2b",
+ "workers": 3,
+ "jobs": [
+  "BFG10k:from=Minigun:../results/Minigun/st2_Minigun.npy:as=BFG10k_fromMinigun",
+  "BIG_FUCKING_GUN:from=Minigun:../results/Minigun/st2_Minigun.npy:as=BIG_FUCKING_GUN_fromMinigun",
+  "NukeLauncher:from=Minigun:../results/Minigun/st2_Minigun.npy:as=NukeLauncher_fromMinigun"
+ ],
+ "done": [
+  {
+   "job": {
+    "token": "NukeLauncher:from=Minigun:../results/Minigun/st2_Minigun.npy:as=NukeLauncher_fromMinigun",
+    "gun": "NukeLauncher",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto",
+    "from": [
+     "Minigun",
+     "../results/Minigun/st2_Minigun.npy"
+    ],
+    "out": "NukeLauncher_fromMinigun"
+   },
+   "status": "ok",
+   "minutes": 43.63,
+   "start": "14:24:34",
+   "end": "15:08:12",
+   "error": null
+  }
+ ],
+ "final": false,
+ "wall_minutes": 43.64,
+ "cpu_count": 16
+}

@@ -1,0 +1,36 @@
+{
+ "shift": [
+  -0.7280616839131255,
+  -1.8520401717780626,
+  4.789096878610806
+ ],
+ "hand": {
+  "md3": "fbx_hv_HellishMissileLauncher_R.md3",
+  "md3_name": "fbx_hv_HellishMissileLauncher_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "no trigger on this mesh: the squeeze frame = the hold",
+  "support": "move",
+  "support_note": "r12: the old support (Ermac hand2 pose D, frame 3) moved with the gun; the support lane is redoing it (owner 2026-10-28)",
+  "support_farm_not_used": {
+   "sup_hook": [
+    -5.576293823534991,
+    2.028607217435283,
+    0.5959086125800147
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.3829400117364832,
+    0.0473806867045033,
+    -0.10444048716746729
+   ]
+  },
+  "support_frame": 3
+ },
+ "baked_by": "r4/bake_r4.py (cloud; farm curl)"
+}

@@ -1,0 +1,85 @@
+{
+ "shift": [
+  -43.44806456692392,
+  12.42941096128787,
+  -27.388677976919382
+ ],
+ "hand": {
+  "md3": "fbx_hv_Chain_saw_top_R.md3",
+  "md3_name": "fbx_hv_Chain_saw_top_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "melee: frame 1 unused except Chain_saw (its trigger)",
+  "support": null,
+  "support_note": "melee: support is its own step (support_melee.py)"
+ },
+ "metrics": {
+  "stage2": {
+   "gun": "Chain_saw_top",
+   "start": {
+    "pen": 0.0,
+    "padI": 2.677417228505443,
+    "palm": 1.920736366355789,
+    "web": 0.4276979575422685
+   },
+   "rot_vs_start_deg": 15.439890204856532,
+   "rot_vs_pistol_deg": 104.40097946701579,
+   "move_vs_start_cm": [
+    3.1,
+    -2.97,
+    -1.05
+   ],
+   "pad_I_to_trigger": 2.054581395332458,
+   "pen_max": 0.3267150601447503,
+   "gap_palm": 0.5420600193247919,
+   "gap_web": 0.045936868178494454,
+   "gap_M": 2.0710257786153425,
+   "gap_R": 2.310489304715658,
+   "gap_P": 2.4446405015052566,
+   "gap_T": 1.0326116127683358
+  },
+  "curl": {
+   "gun": "Chain_saw_top",
+   "rigid_only": {
+    "pen": 0.3267150601447451,
+    "padI_trig": 2.054581395332448,
+    "gap_M": 2.071025778615328,
+    "gap_R": 2.3104893047156434,
+    "gap_P": 2.444640501505264,
+    "gap_T": 1.0326116127683396,
+    "gap_palm": 0.5420600193248014,
+    "gap_web": 0.045936868178488556
+   },
+   "trigger": {
+    "pen": 0.3903333891194121,
+    "padI_trig": 0.09910394987094517,
+    "gap_M": 0.20337408232202236,
+    "gap_R": 0.20006858511143166,
+    "gap_P": 0.20005195257670255,
+    "gap_T": 1.0326116127683396,
+    "gap_palm": 0.5367546187741001,
+    "gap_web": 0.011316565090162725
+   },
+   "squeeze": {
+    "pen": 0.48210753301393167,
+    "padI_trig": 0.2357650783607839,
+    "gap_M": 0.20337408232202236,
+    "gap_R": 0.20006858511143166,
+    "gap_P": 0.20005195257670255,
+    "gap_T": 1.0326116127683396,
+    "gap_palm": 0.5360760661239555,
+    "gap_web": 0.004681138598337426
+   },
+   "squeeze_travel": 0.23754368611555304
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'Chain_saw__trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 1.7075472925031877e-06, 'wrist_move_cm': 7.273443782444743e-15, 'bake_check_max_cm': 0.007967426622307983, 'md3': 'fbx_hv_Chain_saw_top_R.md3'}",
+    "{'name': 'Chain_saw__sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 1.7075472925031877e-06, 'wrist_move_cm': 7.273443782444743e-15, 'bake_check_max_cm': 0.007967426622307983, 'md3': 'fbx_hv_Chain_saw_top_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_Chain_saw_top_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0
+  }
+ }
+}

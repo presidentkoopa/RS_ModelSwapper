@@ -1,0 +1,152 @@
+{
+ "batch": "r2",
+ "workers": 12,
+ "jobs": [
+  "SSG",
+  "BIG_FUCKING_GUN",
+  "BFG10k",
+  "NukeLauncher",
+  "Devastator",
+  "MG42:from=Minigun:../results/Minigun/st2_Minigun.npy:as=MG42_fromMinigun",
+  "MG42:from=MP40:lane_b_b3run/st2_MP40.npy:as=MG42_fromMP40",
+  "Machinegun:from=Minigun:../results/Minigun/st2_Minigun.npy:as=Machinegun_fromMinigun",
+  "Machinegun:from=MP40:lane_b_b3run/st2_MP40.npy:as=Machinegun_fromMP40"
+ ],
+ "done": [
+  {
+   "job": {
+    "token": "Machinegun:from=MP40:lane_b_b3run/st2_MP40.npy:as=Machinegun_fromMP40",
+    "gun": "Machinegun",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto",
+    "from": [
+     "MP40",
+     "lane_b_b3run/st2_MP40.npy"
+    ],
+    "out": "Machinegun_fromMP40"
+   },
+   "status": "ok",
+   "minutes": 45.34,
+   "start": "14:08:11",
+   "end": "14:53:31",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "Devastator",
+    "gun": "Devastator",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto"
+   },
+   "status": "ok",
+   "minutes": 49.18,
+   "start": "14:08:11",
+   "end": "14:57:21",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "BFG10k",
+    "gun": "BFG10k",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto"
+   },
+   "status": "ok",
+   "minutes": 63.27,
+   "start": "14:08:11",
+   "end": "15:11:27",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "MG42:from=MP40:lane_b_b3run/st2_MP40.npy:as=MG42_fromMP40",
+    "gun": "MG42",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto",
+    "from": [
+     "MP40",
+     "lane_b_b3run/st2_MP40.npy"
+    ],
+    "out": "MG42_fromMP40"
+   },
+   "status": "ok",
+   "minutes": 65.71,
+   "start": "14:08:11",
+   "end": "15:13:53",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "BIG_FUCKING_GUN",
+    "gun": "BIG_FUCKING_GUN",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto"
+   },
+   "status": "ok",
+   "minutes": 68.54,
+   "start": "14:08:11",
+   "end": "15:16:43",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "NukeLauncher",
+    "gun": "NukeLauncher",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto"
+   },
+   "status": "ok",
+   "minutes": 70.59,
+   "start": "14:08:11",
+   "end": "15:18:46",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "MG42:from=Minigun:../results/Minigun/st2_Minigun.npy:as=MG42_fromMinigun",
+    "gun": "MG42",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto",
+    "from": [
+     "Minigun",
+     "../results/Minigun/st2_Minigun.npy"
+    ],
+    "out": "MG42_fromMinigun"
+   },
+   "status": "ok",
+   "minutes": 71.9,
+   "start": "14:08:11",
+   "end": "15:20:05",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "Machinegun:from=Minigun:../results/Minigun/st2_Minigun.npy:as=Machinegun_fromMinigun",
+    "gun": "Machinegun",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto",
+    "from": [
+     "Minigun",
+     "../results/Minigun/st2_Minigun.npy"
+    ],
+    "out": "Machinegun_fromMinigun"
+   },
+   "status": "ok",
+   "minutes": 73.01,
+   "start": "14:08:11",
+   "end": "15:21:11",
+   "error": null
+  }
+ ],
+ "final": false,
+ "wall_minutes": 73.02,
+ "cpu_count": 16
+}

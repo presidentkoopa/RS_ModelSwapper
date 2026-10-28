@@ -17,7 +17,7 @@
 #   build/BD22Q_192.pk3   RS_Brutal22WeaponsQ tag 1.92 (the owner's behavioural baseline)
 # Building needs: git, cmake, make, a C++ compiler, zip, python3 + Pillow, SDL2/EGL/GLES/OpenAL/libvpx headers.
 # The game data is the owner's: doom2.wad, brutal22test6.pk3, BD_VoxelPack.pk3. rig.py looks in
-# /mnt/user-data/uploads (where the cloud session had them) or B22_IWAD / B22_BD22 / B22_VOX.
+# $RSQ_GAMEDATA (default: a gamedata folder beside the Depot) or B22_IWAD / B22_BD22 / B22_VOX.
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"; DEPOT="$(cd "$HERE/../.." && pwd)"; B="$HERE/build"
 . "$HERE/PINS"

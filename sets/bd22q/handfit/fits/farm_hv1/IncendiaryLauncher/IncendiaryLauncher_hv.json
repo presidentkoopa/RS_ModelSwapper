@@ -1,0 +1,105 @@
+{
+ "shift": [
+  1.6618682330274375,
+  1.3973188348498504,
+  -3.3636807970623988
+ ],
+ "hand": {
+  "md3": "fbx_hv_IncendiaryLauncher_R.md3",
+  "md3_name": "fbx_hv_IncendiaryLauncher_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "fullbright (firing) frames",
+  "support": {
+   "sup_hook": [
+    -4.215992368815839,
+    3.824641146543152,
+    -10.800791176649334
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.4898434862584875,
+    0.08207573335271597,
+    -0.06875668007175317
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) under the gun at its SupportPoint, moved with the gun (fit_hv.py)"
+ },
+ "metrics": {
+  "stage2": {
+   "gun": "IncendiaryLauncher",
+   "start": {
+    "pen": 1.451529916838452,
+    "padI": 7.2763168457700305,
+    "palm": 1.626148690343342,
+    "web": 1.9929101847555393
+   },
+   "rot_vs_start_deg": 14.164891768332067,
+   "rot_vs_pistol_deg": 8.592836494027038,
+   "move_vs_start_cm": [
+    -0.45,
+    2.95,
+    -1.18
+   ],
+   "pad_I_to_trigger": 6.9742627561086845,
+   "pen_max": 1.2958092654680173,
+   "gap_palm": 0.19795098673447442,
+   "gap_web": 1.2516947020150997,
+   "gap_M": 0.012647922206046942,
+   "gap_R": 0.20431637452110582,
+   "gap_P": 0.025618376927096412,
+   "gap_T": 0.026929371334243397
+  },
+  "curl": {
+   "gun": "IncendiaryLauncher",
+   "rigid_only": {
+    "pen": 1.2958092654680167,
+    "padI_trig": 6.974262756108683,
+    "gap_M": 0.012647922206051819,
+    "gap_R": 0.20431637452110935,
+    "gap_P": 0.025618376927101998,
+    "gap_T": 0.026929371334247554,
+    "gap_palm": 0.19795098673447642,
+    "gap_web": 1.2516947020151006
+   },
+   "trigger": {
+    "pen": 1.2958092654680167,
+    "padI_trig": 5.224644319545513,
+    "gap_M": 0.1999904042861602,
+    "gap_R": 0.1678821602125093,
+    "gap_P": 0.022165425226389587,
+    "gap_T": 0.026929371334247554,
+    "gap_palm": 0.19795098673447642,
+    "gap_web": 1.2620760121675374
+   },
+   "squeeze": {
+    "pen": 1.2958092654680167,
+    "padI_trig": 5.479250624334,
+    "gap_M": 0.1999904042861602,
+    "gap_R": 0.1678821602125093,
+    "gap_P": 0.022165425226389587,
+    "gap_T": 0.026929371334247554,
+    "gap_palm": 0.19795098673447642,
+    "gap_web": 1.2568383739207818
+   },
+   "squeeze_travel": 0.5471817514615923
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'IncendiaryLauncher_trg', 'side': 'R', 'frame': 0, 'hook': [0.0, -0.0, -0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 5.4025784115714076e-15, 'bake_check_max_cm': 0.007967086588551275, 'md3': 'fbx_hv_IncendiaryLauncher_R.md3'}",
+    "{'name': 'IncendiaryLauncher_sqz', 'side': 'R', 'frame': 1, 'hook': [0.0, -0.0, -0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 5.4025784115714076e-15, 'bake_check_max_cm': 0.007967086588551275, 'md3': 'fbx_hv_IncendiaryLauncher_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_IncendiaryLauncher_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.43052686476726265,
+   "sup_gap": 1.0999999999999996,
+   "sup_dz": -1.1,
+   "sup_search_cm": 1.5
+  }
+ }
+}

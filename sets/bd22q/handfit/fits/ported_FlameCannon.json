@@ -1,0 +1,56 @@
+{
+ "cls": "FlameCannon",
+ "place": [
+  0.06987334962830152,
+  -13.15502137555562,
+  -6.743670375306058,
+  -3.367883286217475,
+  -7.292104840710713,
+  -0.03791184106297349
+ ],
+ "R": [
+  [
+   0.9901988258307265,
+   0.05866295424586572,
+   0.1267475566730852
+  ],
+  [
+   -0.05827166095765519,
+   0.9982776302331832,
+   -0.00679606542465689
+  ],
+  [
+   -0.12692792778851272,
+   -0.0006563346459009364,
+   0.9919117250905684
+  ]
+ ],
+ "t": [
+  12.860986150477416,
+  -1.818023178357957,
+  -5.55150820896144
+ ],
+ "nozzle_tip": [
+  61.91792466932772,
+  -5.018635811699864,
+  -14.532410925076736
+ ],
+ "barrel_axis": [
+  0.9918933542391523,
+  -0.07220037419819737,
+  -0.10455641865444261
+ ],
+ "moved": [
+  "handtable row 28 added (Index FlameCannon, 25 tables)",
+  "gunmoves Pivot rows 27 (0 0 0) + 28 (0 5 24) added",
+  "MODELDEF MODELDEF.bd.txt FlameCannon x1",
+  "MODELDEF MODELDEF.purist PuristFlameCannon x1",
+  "gunmoves Pivot row 28 [ 0.  5. 24.] -> [-0.07   3.256 10.845]",
+  "muzzle row ADDED FlameCannon nozzle tip [49.9  -0.31 -2.67] -> [ 61.92  -5.02 -14.53]",
+  "barrel axis after the move (F, L, U) [ 0.99189 -0.0722  -0.10456] vs fc_place forearm axis [0.99189, -0.0722, -0.10455]",
+  "support md3 fbx_r4_FlameCannon_under40_L.md3 <- tools/handfit/port/fits/farm_r4/FlameCannon/FlameCannon_under40/fbx_r4_FlameCannon_under40_L.md3",
+  "MODELDEF.rsq RSQ_GunSide + RSQ_Hands RQXB",
+  "hands.zs FbxSupFC row 28",
+  "handtable Support row 28 [-3.094, 18.392, 2.135] [3.574, -37.502, -0.526] [0.3209, -0.0373, -0.2317]"
+ ]
+}

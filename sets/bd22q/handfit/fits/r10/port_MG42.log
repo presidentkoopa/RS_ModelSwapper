@@ -1,0 +1,28 @@
+MG42: MODELDEF Offset -0.730 -2.859  ZOffset -0.442  Angle/Pitch/Roll 3.854/3.363/10.974 (chain residual 0.0000 cm)
+  MODELDEF MODELDEF.bd.txt MG42 x1
+  MODELDEF MODELDEF.purist PuristMG42 x1
+  MODELDEF MODELDEF.rsr MG42 x1
+  MODELDEF MODELDEF.rsr RSR_GunParts x1
+  gunmoves Pivot row 11 [ 0.  5. 24.] -> [ 0.73   9.558 21.141]
+  gunmoves row 40 (HBUSBF, md3 frame 1) 0.00, 0.45, 0.00, 0.00, 0.20, 1.49 -> 0.09, 0.44, 0.04, -0.13, 0.08, 1.45
+  gunmoves row 41 (HBUSC, md3 frame 2) 0.00, 0.90, 0.00, 0.00, 0.42, 2.98 -> 0.17, 0.88, 0.07, -0.27, 0.19, 2.90
+  reload Well case 10 (13.926, 3.115, 6.593) -> (16.075, 5.448, 14.188)
+  reload MagCentre case 10 (14.190, 7.381, 5.400) -> (16.063, 9.873, 13.845)
+  reload Grab case 10 (0.000, 0.000, 0.000) -> (2.740, 2.743, 6.318)
+  reload Axis case 10 (-0.000, -1.000, -0.000) -> (0.077, -0.979, -0.190)
+  reload WellHook case 10 (1.000, 0.000, -0.000) -> (0.979, 0.190, 0.077)
+  reload Pull case 10 (-1.000, 0.000, 0.000) -> (-0.996, -0.067, -0.059)
+  reload HandleHook case 10 (0.000, 0.000, 1.000) -> (-0.067, -0.059, 0.996)
+  reload Offset case 10 (0.000, 0.000, -5.000) -> (-0.730, -2.859, -0.442)
+  casing port MG42 15.3, 0.0, -0.6 -> 18.0, 3.9, 6.6
+  muzzle row ADDED MG42 drawn tip [100.51  -0.15   1.86] -> [102.78   8.98  14.  ]
+  hand squeeze: fire frames: HBUS BCF, PBUS BCF
+  hand md3 fbx_hv_MG42_R.md3 <- fbx_hv_MG42_R.md3
+  hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQV1
+  hand block (dual) MODELDEF.rsqdual MG42
+  hand block (dual) MODELDEF.purist PuristMG42
+  hands.zs labels FbxTrgMG42 / FbxSqzMG42 (+ dual)
+  dualhands.zs label
+  handtable GunHook / GunHookTwo row 11 = 0
+  handtable Support row 11 [-2.0178206237143037, 19.46694103190852, 6.49199764762726] [-7.927498143864204, 2.302018100012503, 10.73246024838633] [0.32566640854090295, 0.0452338368330017, 0.09253723281952465]
+moved 26 items

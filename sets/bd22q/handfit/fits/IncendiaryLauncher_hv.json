@@ -1,0 +1,107 @@
+{
+ "shift": [
+  -2.5327857004678958,
+  4.97222673114576,
+  -10.875104852583434
+ ],
+ "hand": {
+  "md3": "fbx_hv_IncendiaryLauncher_R.md3",
+  "md3_name": "fbx_hv_IncendiaryLauncher_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "fullbright (firing) frames",
+  "support": {
+   "sup_hook": [
+    -0.3738067351900592,
+    -3.808931264905846,
+    -7.090971608722716
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.44866153533299125,
+    0.1288077711094048,
+    -0.13803742420850532
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B), the farm's placement (fit_hv.py): pen 0.43, palm 1.10 cm from the gun (<= 0.5: kept)"
+ },
+ "metrics": {
+  "stage2": {
+   "gun": "IncendiaryLauncher",
+   "start": {
+    "pen": 1.3764475984295657,
+    "padI": 2.2600235862060116,
+    "palm": 0.4655054142833832,
+    "web": 0.48943451973977037
+   },
+   "rot_vs_start_deg": 8.255990145726564,
+   "rot_vs_pistol_deg": 48.267775318725846,
+   "move_vs_start_cm": [
+    1.33,
+    -1.1,
+    -2.65
+   ],
+   "pad_I_to_trigger": 1.6755404266131182,
+   "pen_max": 0.9451375636069448,
+   "gap_palm": 0.6192713101146057,
+   "gap_web": 0.18224806856310538,
+   "gap_M": 0.17882348922122926,
+   "gap_R": 0.07048613965452066,
+   "gap_P": 0.0119005132631599,
+   "gap_T": 0.0007619376771641484,
+   "start_from": "GrenadeLauncher"
+  },
+  "curl": {
+   "gun": "IncendiaryLauncher",
+   "rigid_only": {
+    "pen": 0.9451375636069443,
+    "padI_trig": 1.675540426613121,
+    "gap_M": 0.1788234892212297,
+    "gap_R": 0.07048613965452022,
+    "gap_P": 0.011900513263154413,
+    "gap_T": 0.0007619376771641484,
+    "gap_palm": 0.6192713101146075,
+    "gap_web": 0.18224806856310605
+   },
+   "trigger": {
+    "pen": 0.9451375636069443,
+    "padI_trig": 0.4442090830195373,
+    "gap_M": 0.19999966479258147,
+    "gap_R": 0.19999869647936208,
+    "gap_P": 0.025718256879572188,
+    "gap_T": 0.0007619376771641484,
+    "gap_palm": 0.6192713101146075,
+    "gap_web": 0.182774644559129
+   },
+   "squeeze": {
+    "pen": 0.9451375636069443,
+    "padI_trig": 0.710413124648095,
+    "gap_M": 0.19999966479258147,
+    "gap_R": 0.19999869647936208,
+    "gap_P": 0.025718256879572188,
+    "gap_T": 0.0007619376771641484,
+    "gap_palm": 0.6192713101146075,
+    "gap_web": 0.17612821679588048
+   },
+   "squeeze_travel": 0.6003213035947065
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'IncendiaryLauncher_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, 0.0, -0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 6.408593517931132e-15, 'bake_check_max_cm': 0.007968247045253563, 'md3': 'fbx_hv_IncendiaryLauncher_R.md3'}",
+    "{'name': 'IncendiaryLauncher_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, 0.0, -0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 6.408593517931132e-15, 'bake_check_max_cm': 0.007968247045253563, 'md3': 'fbx_hv_IncendiaryLauncher_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_IncendiaryLauncher_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.4305268647672623,
+   "sup_gap": 1.1000000000000014,
+   "sup_dz": -1.1,
+   "sup_search_cm": 1.5
+  }
+ },
+ "source": "fit farm round 3 (owner PC), fits/farm_r3/IncendiaryLauncher (PICKS_r3.md: IncendiaryLauncher_fromGrenadeLauncher)"
+}

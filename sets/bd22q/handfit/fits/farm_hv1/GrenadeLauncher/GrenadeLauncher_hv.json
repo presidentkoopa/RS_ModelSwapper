@@ -1,0 +1,84 @@
+{
+ "shift": [
+  -4.045992686817893,
+  3.5414450950025995,
+  -13.306466707005283
+ ],
+ "hand": {
+  "md3": "fbx_hv_GrenadeLauncher_R.md3",
+  "md3_name": "fbx_hv_GrenadeLauncher_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "fullbright (firing) frames",
+  "support": {
+   "sup_hook": [
+    1.848886397677215,
+    3.6786493856539453,
+    4.86141270390158
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.2859816439551013,
+    0.1869527370152618,
+    -0.12100800562601925
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) under the gun at its SupportPoint, moved with the gun (fit_hv.py)"
+ },
+ "metrics": {
+  "stage2": {
+   "reused": "E:/DOOMWork/_buildtemp/claude_bridge/work/fitfarm/results/GrenadeLauncher/st2_GrenadeLauncher.npy"
+  },
+  "curl": {
+   "gun": "GrenadeLauncher",
+   "rigid_only": {
+    "pen": 0.46636152013165716,
+    "padI_trig": 2.2600235862060116,
+    "gap_M": 0.17345584334578157,
+    "gap_R": 0.06394552796463479,
+    "gap_P": 0.003855742200052502,
+    "gap_T": 0.012767780963386871,
+    "gap_palm": 0.23208808062198255,
+    "gap_web": 0.06483639569126008
+   },
+   "trigger": {
+    "pen": 0.668253735632368,
+    "padI_trig": 0.3884239804450019,
+    "gap_M": 0.19932874345500315,
+    "gap_R": 0.06561336169487408,
+    "gap_P": 0.19405351484282446,
+    "gap_T": 0.012767780963386871,
+    "gap_palm": 0.23208808062198255,
+    "gap_web": 0.061111595642794586
+   },
+   "squeeze": {
+    "pen": 0.668253735632368,
+    "padI_trig": 0.876702706962183,
+    "gap_M": 0.19932874345500315,
+    "gap_R": 0.06561336169487408,
+    "gap_P": 0.19405351484282446,
+    "gap_T": 0.012767780963386871,
+    "gap_palm": 0.23208808062198255,
+    "gap_web": 0.0464633406339769
+   },
+   "squeeze_travel": 0.6033909883041098
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'GrenadeLauncher_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, -0.0, 0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 1.2074182697257333e-06, 'wrist_move_cm': 6.008553267260379e-15, 'bake_check_max_cm': 0.00796628553895573, 'md3': 'fbx_hv_GrenadeLauncher_R.md3'}",
+    "{'name': 'GrenadeLauncher_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, -0.0, 0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 1.2074182697257333e-06, 'wrist_move_cm': 6.008553267260379e-15, 'bake_check_max_cm': 0.00796628553895573, 'md3': 'fbx_hv_GrenadeLauncher_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_GrenadeLauncher_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.17064727548706268,
+   "sup_gap": 0.0,
+   "sup_dz": 0.0,
+   "sup_search_cm": 7.5
+  }
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "job": {
+  "token": "NukeLauncher:seat=../results/NukeLauncher_fromMinigun/st2_NukeLauncher.npy:dense:as=NukeLauncher_r4dense",
+  "gun": "NukeLauncher",
+  "skip_stage": true,
+  "bake_only": false,
+  "idx": "force",
+  "seat": "../results/NukeLauncher_fromMinigun/st2_NukeLauncher.npy",
+  "dense": true,
+  "out": "NukeLauncher_r4dense"
+ },
+ "pid": 12840,
+ "start": "20:37:24",
+ "status": "ok",
+ "metrics": {
+  "stage2": {
+   "gun": "NukeLauncher",
+   "mode": "dense",
+   "thr": 0.1,
+   "start": {
+    "pen": 0.5970716518894342,
+    "pen_nonI": 0.5970716518894342,
+    "padI": 0.4276237441424715,
+    "palm": 0.29284789223874685,
+    "web": 0.09282727041851116
+   },
+   "rot_vs_start_deg": 1.9824097888868777,
+   "move_vs_start_cm": [
+    -0.036,
+    -0.311,
+    0.195
+   ],
+   "pad_I_to_trigger": 0.6398843265270832,
+   "pen_max": 0.21207593702125332,
+   "pen_nonI": 0.21207593702125332,
+   "gap_palm": 0.39601385698100683,
+   "gap_web": 0.09964368085749355,
+   "nfev": 45
+  },
+  "curl": {
+   "gun": "NukeLauncher",
+   "mode": "dense",
+   "thr": 0.1,
+   "rigid_only": {
+    "pen": 0.21207593702125674,
+    "padI_trig": 0.6398843265270895,
+    "gap_M": 0.5897099154456171,
+    "gap_R": 1.2656587325943247,
+    "gap_P": 1.5978105204865016,
+    "gap_T": 0.6973799676473084,
+    "gap_palm": 0.3960138569810043,
+    "gap_web": 0.09964368085749119
+   },
+   "trigger": {
+    "pen": 0.21207593702125674,
+    "padI_trig": 0.01679889613328342,
+    "gap_M": 0.20000548547510807,
+    "gap_R": 0.22087803772872971,
+    "gap_P": 0.20003706404814575,
+    "gap_T": 0.6973799676473084,
+    "gap_palm": 0.3960138569810043,
+    "gap_web": 0.062455099745598555
+   },
+   "squeeze": {
+    "pen": 0.21207593702125674,
+    "padI_trig": 0.6031334024554459,
+    "gap_M": 0.20000548547510807,
+    "gap_R": 0.22087803772872971,
+    "gap_P": 0.20003706404814575,
+    "gap_T": 0.6973799676473084,
+    "gap_palm": 0.3960138569810043,
+    "gap_web": 0.05641866654024335
+   },
+   "squeeze_travel": 0.5995993208906407,
+   "q_curl": [
+    -0.28582109403704564,
+    0.3106059768096062,
+    2.430339567686978,
+    0.006361775305705197,
+    0.6660350689543978,
+    11.546544476929714,
+    0.325261665010034,
+    0.6933212745568639,
+    -9.132119404019734,
+    0.43680704713714325,
+    0.6244144467871252,
+    -18.437731932130962
+   ],
+   "q_index_squeeze": [
+    -0.2929004998915477,
+    0.40853768436803817,
+    1.3198746235483818
+   ]
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'NukeLauncher_trg', 'side': 'R', 'frame': 0, 'hook': [0.0, -0.0, 0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 1.2074182697257333e-06, 'wrist_move_cm': 2.0753747956710674e-14, 'bake_check_max_cm': 0.007968312823431134, 'md3': 'fbx_hv_NukeLauncher_R.md3'}",
+    "{'name': 'NukeLauncher_sqz', 'side': 'R', 'frame': 1, 'hook': [0.0, -0.0, 0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 1.2074182697257333e-06, 'wrist_move_cm': 2.0753747956710674e-14, 'bake_check_max_cm': 0.007968312823431134, 'md3': 'fbx_hv_NukeLauncher_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_NukeLauncher_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.4683702540101047,
+   "sup_gap": 1.865372298924823,
+   "sup_dz": -1.9000000000000001,
+   "sup_search_cm": 1.5
+  }
+ },
+ "minutes": 125.53,
+ "end": "22:42:56"
+}

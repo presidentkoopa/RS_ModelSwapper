@@ -1,0 +1,63 @@
+{
+ "cls": "GrenadeLauncher",
+ "place": [
+  -4.953528743261739,
+  -4.62428310803644,
+  -14.012988348798087,
+  3.853999999999989,
+  3.3629999999999933,
+  10.974000000000009
+ ],
+ "R": [
+  [
+   0.9960203760072639,
+   -0.07712697355505173,
+   -0.044663637655169314
+  ],
+  [
+   0.06709852807028907,
+   0.978743000198859,
+   -0.19380383663007547
+  ],
+  [
+   0.058661726101050256,
+   0.19003570588701174,
+   0.9800230774726031
+  ]
+ ],
+ "t": [
+  4.504894388254353,
+  6.966484585370411,
+  -7.25313656576658
+ ],
+ "moved": [
+  "MODELDEF MODELDEF.bd.txt GrenadeLauncher x1",
+  "MODELDEF MODELDEF.purist PuristGrenadeLauncher x2",
+  "MODELDEF MODELDEF.rsb GrenadeLauncher x1",
+  "MODELDEF MODELDEF.rsb RSB_GunParts x2",
+  "MODELDEF MODELDEF.rsb RSQ_Hands x1",
+  "gunmoves Pivot row 8 [ 0.  5. 24.] -> [ 4.954 -4.013 19.376]",
+  "gunmoves row 30 (2RLNB, md3 frame 4) 0.00, 0.00, 0.00, 0.00, 0.00, 1.02 -> 0.00, 0.00, 0.00, -0.07, -0.06, 1.02",
+  "gunmoves row 31 (2RLNCD, md3 frame 6) 0.00, 0.00, 0.00, 0.00, 0.00, 1.02 -> 0.00, 0.00, 0.00, -0.07, -0.06, 1.02",
+  "gunmoves row 32 (2RLNE, md3 frame 5) 0.00, 0.00, 0.00, 0.00, 0.00, 2.04 -> 0.00, 0.00, 0.00, -0.14, -0.12, 2.03",
+  "reload Hinge case 2 (18.3427, -0.1278, -3.7417) -> (22.9516, 8.7973, -9.8684)",
+  "reload Axis case 2 (0.0000, 1.0000, 0.0000) -> (-0.0771, 0.9787, 0.1900)",
+  "reload Offset case 2 (0.0000, 0.0000, -5.0000) -> (-4.9535, -4.6243, -14.0130)",
+  "reload PushRef case 2 (0.9762, 0.0000, 0.2169) -> (0.9626, 0.0235, 0.2698)",
+  "reload rsb Bore gun 2 chamber 0 1.0000, 0.0006, 0.0013 -> 0.9959, 0.0674, 0.0600",
+  "reload Hand0 case 2 (0.2409, 0.0486, -0.9693) -> (0.2795, 0.2516, -0.9266)",
+  "reload Hand1 case 2 (-0.0496, 0.9981, 0.0377) -> (-0.1281, 0.9662, 0.2237)",
+  "reload Hand2 case 2 (0.9693, 0.0390, 0.2429) -> (0.9516, 0.0561, 0.3023)",
+  "reload HandT case 2 (-2.9386, 4.3565, -11.2309) -> (-12.6708, -0.1753, -13.7160)",
+  "muzzle row ADDED GrenadeLauncher drawn tip [46.39  0.    1.16] -> [50.66  9.86 -3.4 ]",
+  "hand squeeze: fire frames: 2RLN BCDE, GRLN BCDE",
+  "hand md3 fbx_hv_GrenadeLauncher_R.md3 <- fbx_hv_GrenadeLauncher_R.md3",
+  "hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQV7",
+  "hand block (dual) MODELDEF.rsqdual GrenadeLauncher",
+  "hand block (dual) MODELDEF.purist PuristGrenadeLauncher",
+  "hands.zs labels FbxTrgGL / FbxSqzGL (+ dual)",
+  "dualhands.zs label",
+  "handtable GunHook / GunHookTwo row 8 = 0",
+  "handtable Support row 8 [-0.41821375590416604, 1.5575199948274638, 15.388521844962122] [-7.927498143864204, 2.302018100012503, 10.73246024838633] [0.24519095547475378, 0.08715443203699355, -0.08137950506438031]"
+ ]
+}

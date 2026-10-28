@@ -1,0 +1,68 @@
+{
+ "cls": "Plasma_Gun",
+ "place": [
+  -0.9776503774012882,
+  -4.36921188518153,
+  -0.2647278471209035,
+  3.853999999999983,
+  3.3630000000000035,
+  10.974000000000006
+ ],
+ "R": [
+  [
+   0.9960203760072639,
+   -0.07712697355504824,
+   -0.044663637655169314
+  ],
+  [
+   0.06709852807028896,
+   0.9787430001988588,
+   -0.19380383663007536
+  ],
+  [
+   0.05866172610105113,
+   0.19003570588701088,
+   0.9800230774726031
+  ]
+ ],
+ "t": [
+  4.2498231653994445,
+  2.990606219509957,
+  6.49512393591063
+ ],
+ "moved": [
+  "MODELDEF MODELDEF.bd.txt Plasma_Gun x1",
+  "MODELDEF MODELDEF.purist PuristPlasma_Gun x2",
+  "MODELDEF MODELDEF.rsqoff RSQ_Off_Plasma_Gun x2",
+  "MODELDEF MODELDEF.rsr Plasma_Gun x1",
+  "MODELDEF MODELDEF.rsr RSR_GunParts x1",
+  "gunmoves Pivot row 15 [ 0.  5. 24.] -> [ 0.978  9.735 19.631]",
+  "gunmoves row 57 (2RSGD, md3 frame 6) 0.00, 3.10, 0.00, 0.00, 0.20, 9.18 -> 0.60, 3.03, 0.26, -0.58, -0.61, 8.87",
+  "gunmoves row 58 (2RSGE, md3 frame 7) 0.00, 1.21, 0.00, 0.00, -0.02, 4.59 -> 0.23, 1.18, 0.09, -0.28, -0.39, 4.46",
+  "gunmoves row 59 (PRSAA, md3 frame 13) 0.00, 0.00, 0.00, 0.00, 0.00, 5.10 -> 0.00, 0.00, 0.00, -0.34, -0.30, 5.08",
+  "gunmoves row 60 (PRSAB, md3 frame 12) 0.00, 0.00, 0.00, 0.00, 0.00, 2.55 -> 0.00, 0.00, 0.00, -0.17, -0.15, 2.54",
+  "gunmoves row 61 (PRSACD, md3 frame 8) 0.00, 6.38, 0.00, 0.00, 0.08, -0.15 -> 1.24, 6.23, 0.56, 0.15, -0.47, -0.72",
+  "gunmoves row 62 (PRSAE, md3 frame 9) 0.00, 8.87, 0.00, 0.00, 1.63, 0.63 -> 1.75, 8.67, 0.82, -0.14, 0.77, -0.08",
+  "gunmoves row 63 (PRSAFG, md3 frame 10) 0.00, 10.93, 0.00, 0.00, 3.91, 2.67 -> 2.18, 10.68, 1.05, -0.67, 2.69, 1.89",
+  "gunmoves row 64 (PRSAHI, md3 frame 11) 0.00, 10.68, 0.00, 0.00, 4.95, 3.73 -> 2.13, 10.44, 1.02, -0.95, 3.67, 3.02",
+  "reload Well case 7 (12.600, 0.000, -10.000) -> (17.246, 5.774, -2.566)",
+  "reload MagCentre case 7 (18.946, -0.000, -14.794) -> (23.781, 7.129, -6.892)",
+  "reload Grab case 7 (0.000, 0.000, 0.000) -> (4.250, 2.991, 6.495)",
+  "reload Axis case 7 (-0.192, 0.132, 0.973) -> (-0.245, -0.072, 0.967)",
+  "reload WellHook case 7 (-0.132, -0.973, -0.192) -> (0.072, -0.967, -0.245)",
+  "reload Pull case 7 (-1.000, 0.000, 0.000) -> (-0.996, -0.067, -0.059)",
+  "reload HandleHook case 7 (0.000, 0.000, 1.000) -> (-0.067, -0.059, 0.996)",
+  "reload Offset case 7 (0.000, 0.000, -5.000) -> (-0.978, -4.369, -0.265)",
+  "muzzle row ADDED Plasma_Gun drawn tip [ 7.21e+01  7.00e-02 -1.15e+00] -> [76.1   8.12  9.61]",
+  "hand squeeze: fire frames: 2RSG DE, PRSA ABCDEFGHI, PRSG DE",
+  "hand md3 fbx_hv_Plasma_Gun_R.md3 <- fbx_hv_Plasma_Gun_R.md3",
+  "hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQV4",
+  "hand block (dual) MODELDEF.rsqdual Plasma_Gun",
+  "hand block (dual) MODELDEF.rsqoff RSQ_Off_Plasma_Gun",
+  "hand block (dual) MODELDEF.purist PuristPlasma_Gun",
+  "hands.zs labels FbxTrgPlas / FbxSqzPlas (+ dual)",
+  "dualhands.zs label",
+  "handtable GunHook / GunHookTwo row 15 = 0",
+  "handtable Support row 15 [-1.701, 10.343, -4.575] [-7.927, 2.302, 10.732] [0.445, 0.075, -0.004]"
+ ]
+}

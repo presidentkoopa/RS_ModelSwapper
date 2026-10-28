@@ -1,0 +1,68 @@
+{
+ "cls": "RailGun",
+ "place": [
+  -0.8948144917594483,
+  -5.098868681469721,
+  -1.7472379805289757,
+  3.853999999999987,
+  3.363000000000004,
+  10.974000000000006
+ ],
+ "R": [
+  [
+   0.9960203760072605,
+   -0.07712697355505173,
+   -0.044663637655169314
+  ],
+  [
+   0.06709852807028918,
+   0.978743000198859,
+   -0.19380383663007536
+  ],
+  [
+   0.058661726101049826,
+   0.19003570588701088,
+   0.9800230774726018
+  ]
+ ],
+ "t": [
+  4.9794799616875345,
+  2.9077703338681236,
+  5.0126138025025195
+ ],
+ "moved": [
+  "MODELDEF MODELDEF.bd.txt RailGun x1",
+  "MODELDEF MODELDEF.purist PuristRailGun x2",
+  "MODELDEF MODELDEF.rsqoff RSQ_Off_RailGun x2",
+  "MODELDEF MODELDEF.rsr RSR_GunParts x1",
+  "MODELDEF MODELDEF.rsr RailGun x1",
+  "gunmoves Pivot row 16 [ 0.  5. 24.] -> [ 0.895  8.253 18.901]",
+  "gunmoves row 65 (2AIFB, md3 frame 5) 0.00, 0.00, 0.00, 0.00, 0.00, 4.59 -> 0.00, 0.00, 0.00, -0.31, -0.27, 4.57",
+  "gunmoves row 66 (2AIFC, md3 frame 6) 0.00, 0.00, 0.00, 0.00, 0.00, 9.18 -> 0.00, 0.00, 0.00, -0.62, -0.54, 9.14",
+  "gunmoves row 67 (2AIFD, md3 frame 7) 0.00, 0.00, 0.00, 0.00, 0.00, 8.37 -> 0.00, 0.00, 0.00, -0.56, -0.49, 8.33",
+  "gunmoves row 68 (2AIFE, md3 frame 8) 0.00, 0.00, 0.00, 0.00, 0.00, 6.07 -> 0.00, 0.00, 0.00, -0.41, -0.36, 6.05",
+  "gunmoves row 69 (2AIFF, md3 frame 9) 0.00, 0.00, 0.00, 0.00, 0.00, 3.11 -> 0.00, 0.00, 0.00, -0.21, -0.18, 3.10",
+  "gunmoves row 70 (2AIFG, md3 frame 10) 0.00, 0.00, 0.00, 0.00, 0.00, 0.81 -> 0.00, 0.00, 0.00, -0.05, -0.05, 0.81",
+  "reload Well case 6 (22.100, 0.000, -3.500) -> (27.148, 5.069, 2.879)",
+  "reload MagCentre case 6 (21.035, 0.043, -7.475) -> (26.261, 5.810, -1.071)",
+  "reload Grab case 6 (0.000, 0.000, 0.000) -> (4.979, 2.908, 5.013)",
+  "reload Axis case 6 (0.001, -0.000, 1.000) -> (-0.044, -0.194, 0.980)",
+  "reload WellHook case 6 (0.000, -1.000, 0.001) -> (0.194, -0.980, -0.044)",
+  "reload Pull case 6 (-1.000, 0.000, 0.000) -> (-0.996, -0.067, -0.059)",
+  "reload HandleHook case 6 (0.000, 0.000, 1.000) -> (-0.067, -0.059, 0.996)",
+  "reload Offset case 6 (0.000, 0.000, -5.000) -> (-0.895, -5.099, -1.747)",
+  "muzzle row ADDED RailGun drawn tip [1.1151e+02 3.0000e-02 5.9000e-01] -> [116.02  10.31  12.14]",
+  "scope Lens 1 [-1.71 -0.09 11.81] -> [ 2.7557  0.4161 16.4693]",
+  "scope Axis 1 [0.9998 0.0149 0.0152] -> [0.994  0.0787 0.0764]",
+  "hand squeeze: fire frames: 2AIF BCDEFG, RAIF BCDEFG",
+  "hand md3 fbx_hv_RailGun_R.md3 <- fbx_hv_RailGun_R.md3",
+  "hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQV5",
+  "hand block (dual) MODELDEF.rsqdual RailGun",
+  "hand block (dual) MODELDEF.rsqoff RSQ_Off_RailGun",
+  "hand block (dual) MODELDEF.purist PuristRailGun",
+  "hands.zs labels FbxTrgRail / FbxSqzRail (+ dual)",
+  "dualhands.zs label",
+  "handtable GunHook / GunHookTwo row 16 = 0",
+  "handtable Support row 16 [-3.494, 10.778, -7.016] [-7.927, 2.302, 10.732] [0.471, 0.07, 0.009]"
+ ]
+}

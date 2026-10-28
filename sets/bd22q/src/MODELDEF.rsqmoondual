@@ -1,0 +1,82 @@
+// 2026-10-27 (lane rev-unmaker, owner 19:40): dual Moonlight. MODELDEF blocks are per class, so the off-hand
+// copy RSQ_Off_BrutalRevolver needs its own. Block 1 is MODELDEF.rsqmoon's first `Model BrutalRevolver`
+// block COPIED BYTE FOR BYTE with the class renamed (the engine mirrors the off hand itself, as for the
+// generated RSQ_Off_* blocks in MODELDEF.rsqoff): RE-COPY IT whenever that block's placement is refitted.
+// Blocks 2-3: the dual-wield gun hand (dualhands.zs labels DFbxTrgBru / DFbxSqzBru, sprite RQFL), which the
+// gun itself calls, so each class needs it: the same FBX hand as MODELDEF.rsq's BrutalRevolver rows.
+Model RSQ_Off_BrutalRevolver
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev.md3"
+	Skin 0 "WPN-REV.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RVMA A 0 0
+	FrameIndex RVMA B 0 1
+	FrameIndex RVMA C 0 2
+	FrameIndex RVMA D 0 3
+	FrameIndex RVMA E 0 4
+	FrameIndex RVMA F 0 5
+	FrameIndex RVMA G 0 6
+	FrameIndex RVMA H 0 7
+	FrameIndex RVMA I 0 8
+	FrameIndex RVMA J 0 9
+	FrameIndex RVMA K 0 10
+	FrameIndex RVMA L 0 11
+	FrameIndex RVMA M 0 12
+	FrameIndex RVMA N 0 13
+	FrameIndex RVMA O 0 14
+	FrameIndex RVMA P 0 15
+	FrameIndex RVMA Q 0 16
+	FrameIndex RVMA R 0 17
+	FrameIndex RVMA S 0 18
+	FrameIndex RVMA T 0 19
+	FrameIndex RVMA U 0 20
+	FrameIndex RVMA V 0 21
+	FrameIndex RVMA W 0 22
+	FrameIndex RVMA X 0 23
+	FrameIndex RVMA Y 0 24
+	FrameIndex RVMA Z 0 25
+	FrameIndex RVMB A 0 26
+	FrameIndex RVMB B 0 27
+	FrameIndex RVMB C 0 28
+	FrameIndex RVMB D 0 29
+	FrameIndex RVMB E 0 30
+	FrameIndex RVMB F 0 31
+	FrameIndex RVMB G 0 32
+	FrameIndex RVMB H 0 33
+	FrameIndex RVMB I 0 34
+	FrameIndex RVMB J 0 35
+	FrameIndex RVMB K 0 36
+	FrameIndex RVMB L 0 37
+	FrameIndex RVMB M 0 38
+	FrameIndex RVMB N 0 39
+	FrameIndex RVMB O 0 40
+}
+
+Model BrutalRevolver
+{
+	Path "models/rsq/fbx"
+	Model 0 "fbx_b4_BrutalRevolver_R.md3"
+	Skin 0 "fbx_hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQFL A 0 0	// BrutalRevolver, finger on the trigger
+	FrameIndex RQFL B 0 1	// BrutalRevolver, squeezed
+}
+
+Model RSQ_Off_BrutalRevolver
+{
+	Path "models/rsq/fbx"
+	Model 0 "fbx_b4_BrutalRevolver_R.md3"
+	Skin 0 "fbx_hand.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQFL A 0 0	// BrutalRevolver, finger on the trigger
+	FrameIndex RQFL B 0 1	// BrutalRevolver, squeezed
+}

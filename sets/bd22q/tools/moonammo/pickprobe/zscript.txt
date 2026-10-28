@@ -1,0 +1,28 @@
+version "4.10"
+// TEST ONLY (rig, never ships): `netevent rsqt_pick`: the player's position, its AmmoShell / Clip2 counts, and every
+// unowned AmmoShell / Clip2 within 512 units with its position, flags and state; and every pickup touch logged.
+class RSQT_PickProbe : EventHandler
+{
+	override void NetworkProcess(ConsoleEvent e)
+	{
+		if (e.Name != "rsqt_pick")
+			return;
+		let mo = players[consoleplayer].mo;
+		Console.Printf("PICKPROBE t%d player at %.0f %.0f %.0f r %.0f; AmmoShell %d/%d Clip2 %d/%d", Level.maptime, mo.pos.x, mo.pos.y, mo.pos.z,
+			mo.radius, mo.CountInv('AmmoShell'), mo.FindInventory('AmmoShell') ? mo.FindInventory('AmmoShell').MaxAmount : 0,
+			mo.CountInv('Clip2'), mo.FindInventory('Clip2') ? mo.FindInventory('Clip2').MaxAmount : 0);
+		let it = BlockThingsIterator.Create(mo, 512);
+		while (it.Next())
+		{
+			let a = it.thing;
+			if (!a || !(a is 'Inventory') || Inventory(a).Owner)
+				continue;
+			Name n = a.GetClassName();
+			if (n != 'AmmoShell' && n != 'Clip2')
+				continue;
+			Console.Printf("PICKPROBE   %s at %.0f %.0f %.0f r %.0f h %.0f special %d solid %d shootable %d nointeraction %d thruactors %d dist %.0f sprite %d frame %d",
+				n, a.pos.x, a.pos.y, a.pos.z, a.radius, a.height, a.bSpecial, a.bSolid, a.bShootable, a.bNoInteraction, a.bThruActors,
+				mo.Distance2D(a), a.sprite, a.frame);
+		}
+	}
+}

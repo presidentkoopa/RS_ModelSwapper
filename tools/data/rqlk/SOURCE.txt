@@ -1,3 +1,0 @@
-RQLKA0-D0.png: the lock mark of the owner's Quest ShieldSaw (presidentkoopa/RS_ShieldSawQ @ 5a69ec1,
-sprites/SSQKA0-D0.png), byte-identical to RS_QuestSaber's sprites/ubqs/UBLKA0-D0.png. Renamed to the
-sprite bd22q's axe lock (zscript/rsvr/melee.zs RSVR_AxeLock) already draws. Copied by bd22_plus.py fixes.

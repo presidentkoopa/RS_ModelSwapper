@@ -1,0 +1,107 @@
+{
+ "shift": [
+  -5.5133895021671435,
+  1.683480072369623,
+  -0.8111807383629674
+ ],
+ "hand": {
+  "md3": "fbx_hv_Devastator_R.md3",
+  "md3_name": "fbx_hv_Devastator_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "fullbright (firing) frames",
+  "support": {
+   "sup_hook": [
+    -3.343395831316437,
+    7.566961256058152,
+    1.0564042558215656
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.3811399337809921,
+    0.06967559501342077,
+    -0.02868955203669074
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B), the farm's placement (fit_hv.py): pen 0.49, palm 1.69 cm from the gun (<= 0.5: kept)"
+ },
+ "metrics": {
+  "stage2": {
+   "gun": "Devastator",
+   "start": {
+    "pen": 1.5644708360998856,
+    "padI": 2.0509451840459714,
+    "palm": 0.006720931149770237,
+    "web": 0.023767403627987894
+   },
+   "rot_vs_start_deg": 9.952382179441953,
+   "rot_vs_pistol_deg": 12.920036897377852,
+   "move_vs_start_cm": [
+    0.1,
+    -0.25,
+    -0.38
+   ],
+   "pad_I_to_trigger": 3.1684528142303865,
+   "pen_max": 1.2587493997721997,
+   "gap_palm": 0.021259116242965614,
+   "gap_web": 0.07135354765599636,
+   "gap_M": 0.002106309824971748,
+   "gap_R": 0.042902160300262185,
+   "gap_P": 0.42738013165156313,
+   "gap_T": 0.04223101756744674,
+   "start_from": "Rocket_Launcher"
+  },
+  "curl": {
+   "gun": "Devastator",
+   "rigid_only": {
+    "pen": 1.2587493997721924,
+    "padI_trig": 3.1684528142303794,
+    "gap_M": 0.0021063098249800897,
+    "gap_R": 0.04290216030026886,
+    "gap_P": 0.42738013165156746,
+    "gap_T": 0.042231017567446294,
+    "gap_palm": 0.021259116242966503,
+    "gap_web": 0.07135354765599107
+   },
+   "trigger": {
+    "pen": 0.5809699262738144,
+    "padI_trig": 1.3209105076978376,
+    "gap_M": 0.022942880837317325,
+    "gap_R": 0.06674669353725071,
+    "gap_P": 0.2026790066551357,
+    "gap_T": 0.042231017567446294,
+    "gap_palm": 0.020282966906697286,
+    "gap_web": 0.06658738431641575
+   },
+   "squeeze": {
+    "pen": 0.5809699262738144,
+    "padI_trig": 2.55581910081394,
+    "gap_M": 0.022942880837317325,
+    "gap_R": 0.06674669353725071,
+    "gap_P": 0.2026790066551357,
+    "gap_T": 0.042231017567446294,
+    "gap_palm": 0.028503726897808335,
+    "gap_web": 0.06541774110958658
+   },
+   "squeeze_travel": 1.4239747140479952
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'Devastator_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.1421469200065623e-15, 'bake_check_max_cm': 0.007968129734915674, 'md3': 'fbx_hv_Devastator_R.md3'}",
+    "{'name': 'Devastator_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.1421469200065623e-15, 'bake_check_max_cm': 0.007968129734915674, 'md3': 'fbx_hv_Devastator_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_Devastator_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.4896580244849706,
+   "sup_gap": 1.6877270837969418,
+   "sup_dz": -1.7000000000000002,
+   "sup_search_cm": 1.5
+  }
+ },
+ "source": "fit farm round 3 (owner PC), fits/farm_r3/Devastator (PICKS_r3.md: Devastator_fromRocket_Launcher)"
+}

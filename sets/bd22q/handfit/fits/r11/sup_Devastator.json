@@ -1,0 +1,40 @@
+{
+ "cls": "Devastator",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -4.08,
+  7.385,
+  0.628
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.381,
+  0.07,
+  -0.029
+ ],
+ "sp192_cm": [
+  35.2,
+  0.1,
+  -9.7
+ ],
+ "dz": -1.9,
+ "pen_at_contact": 1.85,
+ "pen_gun": 0.46,
+ "pen_gunhand": null,
+ "pen_also_gun_hand": [],
+ "palm_gap_to_gun": 1.89,
+ "check": 0.0,
+ "names": [
+  "sidewinder.md3"
+ ],
+ "under": [
+  38.342,
+  5.481,
+  -4.789
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "place": [
+  -0.9824570150261916,
+  -4.470375661269564,
+  -2.212805113676137,
+  3.853999999999986,
+  3.36299999999999,
+  10.974000000000007
+ ],
+ "no_muzzle": true,
+ "hand": {
+  "md3": "../../../../src/models/rsq/fbx/fbx_b3_R.md3",
+  "md3_name": "fbx_b3_R.md3",
+  "sprite": "RQFI",
+  "label": "M",
+  "squeeze": "(mgp.Sprite == Actor.GetSpriteIndex('MP40') && (mf == 1 || mf == 3 || mf == 4 || (mf >= 16 && mf <= 18))) || (mgp.Sprite == Actor.GetSpriteIndex('PP40') && (mf == 1 || mf == 3 || mf == 4))",
+  "squeeze_note": "FIRE frames (gunmoves rows 42-45: MP40 B D E Q R S, PP40 B D E)",
+  "support": {
+   "sup_hook": [
+    -2.184908431237145,
+    21.316495146604055,
+    -4.391439733741416
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.4404441197751585,
+    0.05039801319067186,
+    0.10127591869056982
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) under the MP40 barrel at 1.92's SupportPoint, moved with the gun (bake_b3.py)"
+ }
+}

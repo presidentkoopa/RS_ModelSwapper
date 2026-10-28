@@ -1,0 +1,17 @@
+{
+ "shift": [
+  -2.9634535718021127,
+  0.30657634960721714,
+  -1.303616194766354
+ ],
+ "hand": {
+  "md3": "bake/fbx_b4_Revolver_R.md3",
+  "md3_name": "fbx_b4_Revolver_R.md3",
+  "sprite": "RQFK",
+  "label": "Rev",
+  "cond": " && !(p.ReadyWeapon is 'BrutalRevolver')",
+  "dcond": " && !(w is 'BrutalRevolver')",
+  "squeeze": "(mf >= 1 && mf <= 6 && (mgp.Sprite == Actor.GetSpriteIndex('REVO') || mgp.Sprite == Actor.GetSpriteIndex('2EVO')))",
+  "squeeze_note": "FIRE frames (Revolver.dec Fire: REVO / 2EVO B C bright, D-G the kick; Revolver2 draws REVO on the same mesh)"
+ }
+}

@@ -1,0 +1,152 @@
+// RS VR hands / reload / ballistics (zscript/rsq, zscript/rsr). v9.
+// Nothing here changes the engine's two-hand steadying.
+//
+// NO StaticText help in here, deliberately and by owner's instruction (asked twice). An
+// options menu is a list of options. How the reload works is documented in the repo:
+// LOAD_ORDER.md and docs/RELOAD_ON_QUEST.md in presidentkoopa/RS_Quest.
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "BD22 VR Weapons", "RSQ_Options"
+}
+
+AddOptionMenu "BrutalMenu"
+{
+	StaticText " "
+	Submenu "BD22 VR Weapons", "RSQ_Options"
+}
+
+OptionValue "RSR_ReloadMode"
+{
+	1, "VR"
+	0, "Stock (BD22)"
+}
+
+OptionValue "RSR_GrabWith"
+{
+	0, "Off-hand trigger"
+	1, "Off-hand grip"
+	2, "Use key"
+}
+
+OptionValue "RSQ_Ballistics"
+{
+	0, "Stock (BD22)"
+	1, "Low"
+	2, "Max"
+}
+
+OptionValue "RSR_Pouch"
+{
+	0, "Anywhere, 20 cm from the gun"
+	1, "Low, 40 cm below the eyes"
+}
+
+// 2026-10-23: the VR scopes (zscript/rsq/scope.zs), per gun
+OptionValue "RSQ_ScopeMode"
+{
+	0, "Dot (1x)"
+	1, "Real (3x)"
+}
+
+OptionValue "RSR_ShellCredit"
+{
+	1, "1"
+	2, "2"
+	3, "3"
+	4, "4"
+}
+
+OptionMenu "RSQ_Options"
+{
+	Title "BD22 VR WEAPONS"
+	Option "VR Hands", "rsq_hands", "OnOff"
+	Option "Hand Skin Tone", "rsq_hand_tone", "RSQ_HandTone"	// BD 2.0: zscript/rsq/handtone.zs
+	Option "Reloading", "rsr_reload", "RSR_ReloadMode"
+	Option "Reload Non-Standard Guns", "rsq_reload_nonstd", "OnOff"
+	Option "Grab ammo with", "rsr_grab_with", "RSR_GrabWith"
+	Option "New magazine from", "rsr_pouch", "RSR_Pouch"
+	Option "Check the Chamber by Hand", "rsr_freecharge", "OnOff"
+	Option "Shotgun Shells Per Insert", "rsr_shell_credit", "RSR_ShellCredit"
+	Slider "Reload assist", "rsr_assist", 0.5, 3.0, 0.1
+	Option "Pistol Semi Auto", "rsa_pistol_semi", "OnOff"
+	Option "Shotgun Slugshot Alt Fire", "rsa_sg_slug", "OnOff"
+	Option "Shotvolver Slugshot Alt Fire", "rsa_rev_slug", "OnOff"
+	Option "Shot/Revolver Reload", "rsb_revolver_feed", "RSB_RevFeed"
+	Option "Rifle Underbarrel Ammo", "rsm_ammo", "RSM_Ammo"
+	Option "Machinegun replaces MG42", "rsq_mg_replaces_mg42", "OnOff"
+	Option "Moonlight Replaces Pistol", "rsq_moonlight_pistol", "OnOff"
+	Option "Start With Two Moonlights", "rsq_moonlight_two", "OnOff"
+	Option "HUD Ammo", "rsq_hud_ammo", "RSQ_HudAmmo"
+	Option "Sniper Scope", "rsq_scope2_sniper", "RSQ_ScopeMode"
+	Option "Railgun Scope", "rsq_scope2_railgun", "RSQ_ScopeMode"
+	Option "Ballistics", "rsq_ballistics", "RSQ_Ballistics"
+	Option "Player Ballistics", "sv_rsq_player_ballistics", "RSQ_PlayerBallistics"	// BD 2.0: zscript/rsq/playerrounds.zs
+	Option "Shot Tracers", "rsq_shot_tracers", "RSQ_ShotTracers"	// BD 2.0: zscript/rsq/shotfx.zs (Dakka by ijon)
+	Option "Pump Shotgun Spread", "rsq_pump_spread", "RSQ_PumpSpread"	// BD 2.0: actors/Weapons/Shotgun.dec
+	StaticText " "
+	Submenu "Voxel Options", "RSQ_VoxelOptions"
+	StaticText " "
+	Submenu "Dual Options", "RSQ_DualOptions"
+	Option "Dual Flick to Reload", "rsq_flick", "OnOff"
+	StaticText " "
+	Option "VR Throwing", "rsg_vr", "OnOff"
+	Option "Two-Handed Steadying", "vr_two_handed_weapons", "OnOff"
+	Option "VR Punching", "rsq_punch", "OnOff"
+	Option "Punch Switches Open", "rsq_punch_use", "OnOff"
+	Option "Gun Bash (kick key)", "rsq_bash", "OnOff"
+	Option "Two-Handed Butt Strike", "rsq_butt", "OnOff"
+	Option "Real Casing Models", "rsq_casing_models", "OnOff"
+	Slider "Casing Size", "rsq_casing_size", 0.5, 2.5, 0.1, 1
+	Option "Melee Hit Flash", "rsq_bash_fx", "RSQ_BashFXOpt"
+	Option "Melee Hit Flash Colour", "rsq_bash_tint", "RSQ_BashTintOpt"
+	Slider "Melee swing strength", "rsvr_melee_swing", 0.2, 3.0, 0.1
+	StaticText " "
+	Option "Extra weapons with cheats", "rsq_extra_weapons", "OnOff"
+	StaticText " "
+	Submenu "Reload: tuning and debug", "RSR_Debug"
+}
+
+OptionMenu "RSR_Debug"
+{
+	Title "RELOAD: TUNING AND DEBUG"
+	Option "Show the capture zones", "rsr_assist_debug", "OnOff"
+	Option "Print each reload step", "rsr_debug", "OnOff"
+}
+
+// owner 2026-10-27 20:47: what the HUD shows of the held gun's ammo (zscript/rsq/counters.zs RSQ_Counters.Hud)
+OptionValue "RSQ_HudAmmo"
+{
+	0, "Magazine + Reserve"
+	1, "Reserve Only"
+}
+
+// 1.30 the rifle's M203: what a hand-loaded round costs
+OptionValue "RSM_Ammo"
+{
+	0, "Rockets"
+	1, "Hand grenades"
+}
+
+OptionValue "RSB_RevFeed"
+{
+	0, "Speedloader"
+	1, "Per Round"
+}
+
+OptionValue "RSQ_BashFXOpt"
+{
+	0, "RSS3"
+	1, "RSU1"
+	2, "RSU4"
+	3, "RSU5"
+	4, "RSH0"
+}
+
+OptionValue "RSQ_BashTintOpt"
+{
+	0, "Original"
+	1, "Blue"
+	2, "Green"
+	3, "Amber"
+	4, "White"
+}

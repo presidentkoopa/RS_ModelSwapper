@@ -1,0 +1,540 @@
+// r5: the Moonlight six-shooter (BrutalRevolver), reference/moonlight/README.md "Measured".
+// rev.md3 (RS_ModelSwapper models/vplus/gats, 41 frames, sha1 81e48872) at the Depot's hand-fitted
+// placement: rev_wm.md3 (sets/plus_0.7, MODELDEF.wmq WM_Moonlight) is rev.md3 frame 0 moved
+// (-25.08, 0, 3.47) mesh units, residual 0, so its Offset -33.6102 / ZOffset -4.1887 become
+// 0.9224 / 0.5878 here (measure_moonlight.py). Sprites: RVMA A-Z = frames 0-25, RVMB A-O = 26-40.
+Model BrutalRevolver
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev.md3"
+	Skin 0 "WPN-REV.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RVMA A 0 0
+	FrameIndex RVMA B 0 1
+	FrameIndex RVMA C 0 2
+	FrameIndex RVMA D 0 3
+	FrameIndex RVMA E 0 4
+	FrameIndex RVMA F 0 5
+	FrameIndex RVMA G 0 6
+	FrameIndex RVMA H 0 7
+	FrameIndex RVMA I 0 8
+	FrameIndex RVMA J 0 9
+	FrameIndex RVMA K 0 10
+	FrameIndex RVMA L 0 11
+	FrameIndex RVMA M 0 12
+	FrameIndex RVMA N 0 13
+	FrameIndex RVMA O 0 14
+	FrameIndex RVMA P 0 15
+	FrameIndex RVMA Q 0 16
+	FrameIndex RVMA R 0 17
+	FrameIndex RVMA S 0 18
+	FrameIndex RVMA T 0 19
+	FrameIndex RVMA U 0 20
+	FrameIndex RVMA V 0 21
+	FrameIndex RVMA W 0 22
+	FrameIndex RVMA X 0 23
+	FrameIndex RVMA Y 0 24
+	FrameIndex RVMA Z 0 25
+	FrameIndex RVMB A 0 26
+	FrameIndex RVMB B 0 27
+	FrameIndex RVMB C 0 28
+	FrameIndex RVMB D 0 29
+	FrameIndex RVMB E 0 30
+	FrameIndex RVMB F 0 31
+	FrameIndex RVMB G 0 32
+	FrameIndex RVMB H 0 33
+	FrameIndex RVMB I 0 34
+	FrameIndex RVMB J 0 35
+	FrameIndex RVMB K 0 36
+	FrameIndex RVMB L 0 37
+	FrameIndex RVMB M 0 38
+	FrameIndex RVMB N 0 39
+	FrameIndex RVMB O 0 40
+}
+
+// ---- moon-reload: the hand-driven break-open reload (zscript/rsr/rsr_break.zs, rsb_guns.zs rows 10/11).
+// rev_rsb.md3 = rev.md3 with frames 1-3 baked (reference/moonlight/bake_reload.py): 1 rounds 4-9 and the
+// speedloader seated in the CLOSED gun, 2 the empty cage, 3 the loader's rounds only. Pieces by clear skins:
+// gun = surfaces 0+2, hinged part = 1+3, rounds 4-9, speedloader 10.
+
+// the gun without its hinged part (the gun's layer while the action is open)
+Model BrutalRevolver
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "WPN-REV.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "WPN-REV.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBMG A 0 0
+}
+
+// the hinged part: barrel, top strap and cylinder, turned about the hinge
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "WPN-REV.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "WPN-REV.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBMP A 0 0
+}
+
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "WPN-REV.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "WPN-REV.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBNP A 0 0
+}
+
+// speedloader mode: its six rounds seated (frame 3), the loader going in (frame 1)
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "WPN-REV.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBMP B 0 3
+}
+
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "WPN-REV.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBMP I 0 1
+}
+
+// the speedloader in the off hand, full (H) and empty (J)
+Model RSQ_Hands
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "WPN-REV.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBMP H 0 1
+}
+
+Model RSQ_Hands
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "WPN-REV.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBMP J 0 2
+}
+
+// a round at a time: chamber k shows surface 4+k (frame 1); one round in the off hand
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "WPN-REV.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBNP B 0 1
+}
+
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "WPN-REV.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBNP C 0 1
+}
+
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "WPN-REV.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBNP D 0 1
+}
+
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "WPN-REV.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBNP E 0 1
+}
+
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "WPN-REV.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBNP F 0 1
+}
+
+Model RSB_GunParts
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "WPN-REV.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBNP G 0 1
+}
+
+Model RSQ_Hands
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "WPN-REV.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 1.35 1.35 1.35
+	Offset 0.843 -7.091 0.0
+	ZOffset 1.059
+	AngleOffset -3.854
+	PitchOffset 3.363
+	RollOffset -10.974	// batch 4 (lane B): gun to the FBX hand fitted from 1.92
+	NoInterpolation
+	FrameIndex RBNP H 0 1
+}
+
+// world (Scale = held 1.35 x MODELDEF.rsb's 0.3468; centred, bake_reload.txt): A cage / round, B full loader, C a thrown round
+Model RSB_Round
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "WPN-REV.png"
+	Scale 0.4682 0.4682 0.4682
+	Offset -10.4808 -0.0388 0.0
+	ZOffset 1.0393
+	USEACTORPITCH
+	USEACTORROLL
+	NoInterpolation
+	FrameIndex RBMW A 0 2
+}
+
+Model RSB_Round
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "WPN-REV.png"
+	Scale 0.4682 0.4682 0.4682
+	Offset -11.0734 -0.0428 0.0
+	ZOffset 1.0511
+	USEACTORPITCH
+	USEACTORROLL
+	NoInterpolation
+	FrameIndex RBMW B 0 1
+}
+
+Model RSB_Round
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "WPN-REV.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 0.4682 0.4682 0.4682
+	Offset -11.9026 0.0015 0.0
+	ZOffset 1.4881
+	USEACTORPITCH
+	USEACTORROLL
+	NoInterpolation
+	FrameIndex RBNW A 0 1
+}
+
+Model RSB_Casing
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "WPN-REV.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 0.4682 0.4682 0.4682
+	Offset -11.9026 0.0015 0.0
+	ZOffset 1.4881
+	USEACTORPITCH
+	USEACTORROLL
+	NoInterpolation
+	FrameIndex RBMW C 0 1
+}
+
+Model RSB_Casing
+{
+	Path "models/bd/Moonlight"
+	Model 0 "rev_rsb.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "WPN-REV.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale 0.4682 0.4682 0.4682
+	Offset -11.9026 0.0015 0.0
+	ZOffset 1.4881
+	USEACTORPITCH
+	USEACTORROLL
+	NoInterpolation
+	FrameIndex RBNW C 0 1
+}

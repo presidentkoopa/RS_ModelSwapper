@@ -1,0 +1,36 @@
+{
+ "shift": [
+  -1.7792896656080686,
+  -0.05268172343968569,
+  1.6383893330804415
+ ],
+ "hand": {
+  "md3": "fbx_hv_Unmaker_R.md3",
+  "md3_name": "fbx_hv_Unmaker_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "no trigger on this mesh: the squeeze frame = the hold",
+  "support": "move",
+  "support_note": "r12: the old support (Ermac hand2 pose D, frame 3) moved with the gun; the support lane is redoing it (owner 2026-10-28)",
+  "support_farm_not_used": {
+   "sup_hook": [
+    -5.388605371374978,
+    11.884170229151344,
+    2.783099256153779
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.36628075109354236,
+    0.04345388187637228,
+    0.003707814600774224
+   ]
+  },
+  "support_frame": 3
+ },
+ "baked_by": "r4/bake_r4.py (cloud; farm curl)"
+}

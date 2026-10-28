@@ -1,0 +1,7 @@
+HellishMissileLauncher seed refit to 1.92 Ermac {'landmark_rms_cm': 2.18, 'chamfer_med_cm': 0.6}
+HellishMissileLauncher sdf ready (2543 / 3330 tris) 16s
+HellishMissileLauncher seed lowered 1.2 cm out of the gun
+HellishMissileLauncher seed {"pen_gun": 0.29, "pen_gunhand": 0.0, "touch9": 2, "wrap_deg": 146, "contact_cm": {"palm": 0.27, "pad_I": 1.26, "pad_M": 0.29, "pad_R": 0.09, "pad_P": 1.45, "pad_T": 2.5, "prox_I": 2.42, "prox_M": 2.12, "prox_R": 0.97, "prox_P": 0.62, "prox_T": 1.14}} 
+ HellishMissileLauncher fit  {"pen_gun": 0.1, "pen_gunhand": 0.0, "touch9": 3, "wrap_deg": 55, "contact_cm": {"palm": 0.44, "pad_I": 0.13, "pad_M": 0.04, "pad_R": 0.05, "pad_P": 0.54, "pad_T": 2.56, "prox_I": 2.25, "prox_M": 2.16, "prox_R": 1.08, "prox_P": 0.48, "prox_T": 1.28}, "cost": 51.780554491354444, "nfev": 46, "secs": 51, "cuff_move_cm": 0.15, "seed_refit": {"landmark_rms_cm": 2.18, "chamfer_med_cm": 0.6, "lowered_cm": 1.2}, "palm_move_cm": 0.18, "move192_res": 5.684341886080802e-14, "sframe": 3, "seed_fit_rms_cm": 1.7298852874846753}
+MINUTES 53s
+DONE

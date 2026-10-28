@@ -1,0 +1,72 @@
+{
+ "cls": "SSG",
+ "place": [
+  -3.812803680304645,
+  -3.9591520455399944,
+  -12.773107420676522,
+  3.8539999999999903,
+  3.362999999999973,
+  10.974000000000004
+ ],
+ "R": [
+  [
+   0.996020376007257,
+   -0.07712697355505173,
+   -0.044663637655169314
+  ],
+  [
+   0.06709852807028907,
+   0.9787430001988585,
+   -0.19380383663007503
+  ],
+  [
+   0.058661726101050256,
+   0.19003570588701174,
+   0.9800230774726031
+  ]
+ ],
+ "t": [
+  3.839763325757705,
+  5.825759522413317,
+  -6.013255637645015
+ ],
+ "moved": [
+  "MODELDEF MODELDEF.bd.txt SSG x1",
+  "MODELDEF MODELDEF.purist PuristSSG x2",
+  "MODELDEF MODELDEF.rsb RSB_GunParts x3",
+  "MODELDEF MODELDEF.rsb RSQ_Hands x1",
+  "MODELDEF MODELDEF.rsb SSG x1",
+  "MODELDEF MODELDEF.rsqoff RSQ_Off_SSG x2",
+  "gunmoves Pivot row 20 [ 0.  5. 24.] -> [ 3.813 -2.773 20.041]",
+  "gunmoves row 107 (SHT2B, md3 frame 2) 0.00, 0.62, 0.00, 0.00, -0.06, 0.96 -> 0.12, 0.61, 0.05, -0.05, -0.16, 1.04",
+  "gunmoves row 108 (SHT2C, md3 frame 3) 0.00, 2.41, 0.00, 0.00, -0.11, 3.68 -> 0.46, 2.36, 0.20, -0.21, -0.51, 3.97",
+  "gunmoves row 109 (SHT2D, md3 frame 4) 0.00, 7.58, 0.00, 0.00, 0.48, 9.77 -> 1.49, 7.41, 0.68, -0.73, -0.63, 10.76",
+  "gunmoves row 110 (SHT2E, md3 frame 5) 0.00, 9.38, 0.00, 0.00, 0.75, 10.64 -> 1.86, 9.17, 0.87, -0.83, -0.52, 11.88",
+  "gunmoves row 111 (SHT2F, md3 frame 6) 0.00, 10.00, 0.00, 0.00, 0.63, 9.61 -> 1.99, 9.77, 0.94, -0.74, -0.62, 10.94",
+  "gunmoves row 112 (SHT2G, md3 frame 7) 0.00, 8.62, 0.00, 0.00, 0.12, 6.92 -> 1.70, 8.42, 0.79, -0.46, -0.88, 8.05",
+  "gunmoves row 113 (SHT2H, md3 frame 8) 0.00, 5.00, 0.00, 0.00, -0.23, 3.54 -> 0.97, 4.89, 0.43, -0.17, -0.80, 4.17",
+  "gunmoves row 114 (SHT2IJ, md3 frame 9) 0.00, 1.38, 0.00, 0.00, -0.13, 0.92 -> 0.26, 1.35, 0.11, -0.03, -0.29, 1.09",
+  "reload Hinge case 1 (10.7185, 0.0346, -2.4812) -> (14.6238, 7.0597, -7.8095)",
+  "reload Axis case 1 (0.0000, 1.0000, 0.0000) -> (-0.0771, 0.9787, 0.1900)",
+  "reload Offset case 1 (0.0000, 0.0000, -5.0000) -> (-3.8128, -3.9592, -12.7731)",
+  "reload PushRef case 1 (0.9884, 0.0000, 0.1522) -> (0.9777, 0.0368, 0.2071)",
+  "reload rsb Bore gun 1 chamber 0 1.0000, -0.0029, -0.0006 -> 0.9963, 0.0644, 0.0575",
+  "reload rsb Bore gun 1 chamber 1 1.0000, -0.0031, -0.0006 -> 0.9963, 0.0642, 0.0575",
+  "reload Hand0 case 1 (0.5363, 0.0089, -0.8440) -> (0.5712, 0.2083, -0.7940)",
+  "reload Hand1 case 1 (-0.0062, 1.0000, 0.0066) -> (-0.0836, 0.9770, 0.1961)",
+  "reload Hand2 case 1 (0.8440, 0.0017, 0.5364) -> (0.8166, -0.0457, 0.5755)",
+  "reload HandT case 1 (-2.4369, 1.4551, -10.7462) -> (-10.6178, -2.7365, -10.1548)",
+  "casing port SSG 4.4, 0.0, 1.9 -> 8.1, 5.8, -3.9",
+  "muzzle row ADDED SSG drawn tip [36.84  0.04  1.12] -> [40.48  8.12 -2.75]",
+  "hand squeeze: fire frames: SHT2 BCDEFGHIJ, VSSG BCDEFGHIJ",
+  "hand md3 fbx_hv_SSG_R.md3 <- fbx_hv_SSG_R.md3",
+  "hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQVD",
+  "hand block (dual) MODELDEF.rsqdual SSG",
+  "hand block (dual) MODELDEF.rsqoff RSQ_Off_SSG",
+  "hand block (dual) MODELDEF.purist PuristSSG",
+  "hands.zs labels FbxTrgSSG / FbxSqzSSG (+ dual)",
+  "dualhands.zs label",
+  "handtable GunHook / GunHookTwo row 20 = 0",
+  "handtable Support row 20 [-0.7026589324170143, 3.903498525456542, 19.509710545394455] [-7.927498143864204, 2.302018100012503, 10.73246024838633] [0.17806380408687106, 0.06862040833712407, -0.056820030109666145]"
+ ]
+}

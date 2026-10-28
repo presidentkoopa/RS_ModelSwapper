@@ -1,0 +1,40 @@
+{
+ "cls": "Sniper",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -2.329,
+  17.166,
+  5.374
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.346,
+  0.062,
+  -0.027
+ ],
+ "sp192_cm": [
+  27.9,
+  0.4,
+  -5.7
+ ],
+ "dz": -0.4,
+ "pen_at_contact": 0.55,
+ "pen_gun": 0.5,
+ "pen_gunhand": null,
+ "pen_also_gun_hand": [],
+ "palm_gap_to_gun": 0.39,
+ "check": 0.0,
+ "names": [
+  "XM21.md3"
+ ],
+ "under": [
+  33.264,
+  4.672,
+  3.448
+ ]
+}

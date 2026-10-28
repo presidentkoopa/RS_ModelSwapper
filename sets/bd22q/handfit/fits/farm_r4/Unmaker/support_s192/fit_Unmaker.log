@@ -1,0 +1,6 @@
+Unmaker seed refit to 1.92 Ermac {'landmark_rms_cm': 2.21, 'chamfer_med_cm': 0.63}
+Unmaker sdf ready (20082 / 3330 tris) 14s
+Unmaker seed {"pen_gun": 1.51, "pen_gunhand": 0.0, "touch9": 5, "wrap_deg": 215, "contact_cm": {"palm": 0.18, "pad_I": 0.55, "pad_M": 0.02, "pad_R": 0.16, "pad_P": 0.01, "pad_T": 2.07, "prox_I": 0.0, "prox_M": 0.24, "prox_R": 0.44, "prox_P": 1.59, "prox_T": 2.08}} 
+ Unmaker fit  {"pen_gun": 0.11, "pen_gunhand": 0.0, "touch9": 3, "wrap_deg": 119, "contact_cm": {"palm": 0.81, "pad_I": 0.37, "pad_M": 0.0, "pad_R": 0.02, "pad_P": 0.02, "pad_T": 2.46, "prox_I": 1.2, "prox_M": 0.97, "prox_R": 1.57, "prox_P": 2.02, "prox_T": 2.1}, "cost": 41.14845509134691, "nfev": 80, "secs": 130, "cuff_move_cm": 2.15, "seed_refit": {"landmark_rms_cm": 2.21, "chamfer_med_cm": 0.63}, "palm_move_cm": 2.13, "move192_res": 1.7763568394002505e-13, "sframe": 3, "seed_fit_rms_cm": 1.7298852874846753}
+MINUTES 135s
+DONE

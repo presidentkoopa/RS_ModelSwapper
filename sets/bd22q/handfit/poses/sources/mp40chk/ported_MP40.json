@@ -1,0 +1,63 @@
+{
+ "cls": "MP40",
+ "place": [
+  -0.9824570150261916,
+  -4.470375661269564,
+  -2.212805113676137,
+  3.853999999999986,
+  3.36299999999999,
+  10.974000000000007
+ ],
+ "R": [
+  [
+   0.9960203760072639,
+   -0.07712697355505173,
+   -0.04466363765516235
+  ],
+  [
+   0.06709852807028918,
+   0.9787430001988591,
+   -0.19380383663007536
+  ],
+  [
+   0.058661726101050256,
+   0.19003570588701088,
+   0.9800230774726026
+  ]
+ ],
+ "t": [
+  4.350986941487477,
+  2.995412857134867,
+  4.547046669355371
+ ],
+ "moved": [
+  "MODELDEF MODELDEF.bd.txt MP40 x1",
+  "MODELDEF MODELDEF.purist PuristMP40 x3",
+  "MODELDEF MODELDEF.rsqoff RSQ_Off_MP40 x3",
+  "MODELDEF MODELDEF.rsr MP40 x2",
+  "MODELDEF MODELDEF.rsr RSR_GunParts x2",
+  "gunmoves Pivot row 12 [ 0.  5. 24.] -> [ 0.982  7.787 19.53 ]",
+  "gunmoves row 42 (MP40B, md3 frame 3) 0.00, 0.85, 0.00, 0.00, -0.05, 1.01 -> 0.16, 0.83, 0.07, -0.04, -0.18, 0.95",
+  "gunmoves row 43 (MP40DR, md3 frame 5) 0.00, 1.28, 0.00, 0.00, -0.07, 1.53 -> 0.24, 1.26, 0.10, -0.06, -0.26, 1.44",
+  "gunmoves row 44 (MP40ES, md3 frame 6) 0.00, 0.41, 0.00, 0.00, -0.03, 0.49 -> 0.08, 0.40, 0.03, -0.02, -0.09, 0.46",
+  "gunmoves row 45 (MP40Q, md3 frame 4) 0.00, 1.69, 0.00, 0.00, -0.07, 2.01 -> 0.32, 1.65, 0.13, -0.09, -0.33, 1.90",
+  "reload Well case 4 (31.400, -0.000, 1.800) -> (35.546, 4.753, 8.153)",
+  "reload MagCentre case 4 (31.339, -0.015, -4.664) -> (35.775, 5.987, 1.812)",
+  "reload Grab case 4 (22.700, 1.200, 3.200) -> (26.725, 5.073, 9.243)",
+  "reload Axis case 4 (0.000, -0.001, 1.000) -> (-0.045, -0.195, 0.980)",
+  "reload WellHook case 4 (0.001, -1.000, 0.000) -> (0.195, -0.980, -0.045)",
+  "reload Pull case 4 (-1.000, 0.000, 0.000) -> (-0.996, -0.067, -0.059)",
+  "reload HandleHook case 4 (0.000, 0.000, 1.000) -> (-0.067, -0.059, 0.996)",
+  "reload Offset case 4 (0.000, 0.000, -5.000) -> (-0.982, -4.470, -2.213)",
+  "casing port MP40 34.7, -2.2, 3.3 -> 38.9, 2.5, 9.4",
+  "hand md3 fbx_b3_R.md3 <- fbx_b3_MP40_R.md3",
+  "hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQFI",
+  "hand block (dual) MODELDEF.rsqdual MP40",
+  "hand block (dual) MODELDEF.rsqoff RSQ_Off_MP40",
+  "hand block (dual) MODELDEF.purist PuristMP40",
+  "hands.zs labels FbxTrgM / FbxSqzM (+ dual)",
+  "dualhands.zs label",
+  "handtable GunHook / GunHookTwo row 12 = 0",
+  "handtable Support row 12 [-2.184908431237145, 21.316495146604055, -4.391439733741416] [-7.927498143864204, 2.302018100012503, 10.73246024838633] [0.4404441197751585, 0.05039801319067186, 0.10127591869056982]"
+ ]
+}

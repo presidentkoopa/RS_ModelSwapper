@@ -1,0 +1,32 @@
+Unmaker: MODELDEF Offset 1.308 -6.492  ZOffset 0.083  Angle/Pitch/Roll 3.854/3.363/10.974 (chain residual 0.0000 cm)
+  MODELDEF MODELDEF.bd.txt Unmaker x1
+  MODELDEF MODELDEF.purist PuristUnmaker x1
+  MODELDEF MODELDEF.rsr RSR_GunParts x1
+  MODELDEF MODELDEF.rsr Unmaker x1
+  gunmoves Pivot row 23 [ 0.  5. 24.] -> [-1.308 10.083 17.508]
+  gunmoves row 138 (2NHFB, md3 frame 9) 0.00, 0.00, 0.00, 0.00, 0.00, 0.73 -> 0.00, 0.00, 0.00, -0.05, -0.04, 0.73
+  gunmoves row 139 (2NHFC, md3 frame 10) 0.00, 0.00, 0.00, 0.00, 0.00, 2.33 -> 0.00, 0.00, 0.00, -0.16, -0.14, 2.32
+  gunmoves row 140 (2NHFD, md3 frame 11) 0.00, 0.00, 0.00, 0.00, 0.00, 3.92 -> 0.00, 0.00, 0.00, -0.26, -0.23, 3.91
+  gunmoves row 141 (2NHFE, md3 frame 12) 0.00, 0.00, 0.00, 0.00, 0.00, 4.64 -> 0.00, 0.00, 0.00, -0.31, -0.27, 4.62
+  gunmoves row 142 (2NHFF, md3 frame 13) 0.00, 0.67, 0.00, 1.15, -0.36, 3.51 -> 0.13, 0.66, 0.05, 0.98, -0.41, 3.50
+  gunmoves row 143 (2NHFG, md3 frame 14) 0.00, 0.00, 0.00, 0.26, -1.58, 3.10 -> 0.00, 0.00, 0.00, 0.35, -1.68, 3.03
+  gunmoves row 144 (2NHFH, md3 frame 15) 0.00, -0.53, 0.00, -1.20, -0.66, 3.07 -> -0.10, -0.52, -0.04, -1.26, -1.00, 3.00
+  reload Well case 13 (11.026, 0.794, 6.467) -> (17.004, 0.968, 13.979)
+  reload MagCentre case 13 (10.481, -0.144, 9.345) -> (16.405, -0.544, 16.589)
+  reload Grab case 13 (0.000, 0.000, 0.000) -> (6.372, 0.704, 6.843)
+  reload Axis case 13 (-0.000, 0.000, -1.000) -> (0.045, 0.194, -0.980)
+  reload WellHook case 13 (-0.000, 1.000, -0.000) -> (-0.194, 0.980, 0.045)
+  reload Pull case 13 (-1.000, 0.000, 0.000) -> (-0.996, -0.067, -0.059)
+  reload HandleHook case 13 (0.000, 0.000, 1.000) -> (-0.067, -0.059, 0.996)
+  reload Offset case 13 (0.000, 0.000, -5.000) -> (1.308, -6.492, 0.083)
+  muzzle row ADDED Unmaker drawn tip [66.71  0.    6.4 ] -> [72.53  3.94 17.03]
+  hand squeeze: fire frames: 2NHF BCDEFGH, UNHF BCDEFGH
+  hand md3 fbx_hv_Unmaker_R.md3 <- fbx_hv_Unmaker_R.md3
+  hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQVE
+  hand block (dual) MODELDEF.rsqdual Unmaker
+  hand block (dual) MODELDEF.purist PuristUnmaker
+  hands.zs labels FbxTrgUnm / FbxSqzUnm (+ dual)
+  dualhands.zs label
+  handtable GunHook / GunHookTwo row 23 = 0
+  handtable Support row 23 moved with the gun hook [ 1.75 -9.72 -1.52] -> [ 3.736 -3.803 -8.585] rot [0. 0. 0.] -> [-3.854  3.363 10.974] point [ 0.3    0.    -0.084] -> [0.366 0.043 0.004]
+moved 30 items

@@ -1,0 +1,108 @@
+{
+ "shift": [
+  -0.7280616839131255,
+  -1.8520401717780626,
+  4.789096878610806
+ ],
+ "hand": {
+  "md3": "fbx_hv_HellishMissileLauncher_R.md3",
+  "md3_name": "fbx_hv_HellishMissileLauncher_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "no trigger on this mesh: the squeeze frame = the hold",
+  "support": {
+   "sup_hook": [
+    -5.576293823534991,
+    2.028607217435283,
+    0.5959086125800147
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.3829400117364832,
+    0.0473806867045033,
+    -0.10444048716746729
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) under the gun at its SupportPoint, moved with the gun (fit_hv.py)"
+ },
+ "metrics": {
+  "stage2": null,
+  "curl": {
+   "gun": "HellishMissileLauncher",
+   "mode": "dense",
+   "thr": 0.1,
+   "rigid_only": {
+    "pen": 1.5065547980889578,
+    "padI_trig": null,
+    "gap_I": 0.031055796433796717,
+    "gap_M": 3.0991686701916525,
+    "gap_R": 1.8461079812102223,
+    "gap_P": 0.04458535235165001,
+    "gap_T": 0.9299832901659542,
+    "gap_palm": 0.6786739019284618,
+    "gap_web": 0.3881494819751957
+   },
+   "trigger": {
+    "pen": 0.1755023658813173,
+    "padI_trig": null,
+    "gap_I": 0.19579458740272596,
+    "gap_M": 0.22477277522379213,
+    "gap_R": 0.20112475369132934,
+    "gap_P": 0.19998950197250354,
+    "gap_T": 0.9299832901659542,
+    "gap_palm": 0.6786739019284618,
+    "gap_web": 0.3750543249786059
+   },
+   "squeeze": {
+    "pen": 0.1755023658813173,
+    "padI_trig": null,
+    "gap_I": 0.19579458740272596,
+    "gap_M": 0.22477277522379213,
+    "gap_R": 0.20112475369132934,
+    "gap_P": 0.19998950197250354,
+    "gap_T": 0.9299832901659542,
+    "gap_palm": 0.6786739019284618,
+    "gap_web": 0.3750543249786059
+   },
+   "squeeze_travel": 0.0,
+   "wrap": true,
+   "q_curl": [
+    -0.24368142508014395,
+    0.5049629390375361,
+    19.999999999999996,
+    -0.3999999999999937,
+    0.2110755605642201,
+    0.1643928299541672,
+    0.5467637797289518,
+    0.6178472866682977,
+    14.80296987610299,
+    0.25698638360867754,
+    0.44930337246370583,
+    -18.931074787415817
+   ],
+   "q_index_squeeze": [
+    -0.24368142508014395,
+    0.5049629390375361,
+    19.999999999999996
+   ]
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'HellishMissileLauncher_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, 0.0, -0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 2.8435583831733384e-15, 'bake_check_max_cm': 0.007964542049212042, 'md3': 'fbx_hv_HellishMissileLauncher_R.md3'}",
+    "{'name': 'HellishMissileLauncher_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, 0.0, -0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 2.8435583831733384e-15, 'bake_check_max_cm': 0.007964542049212042, 'md3': 'fbx_hv_HellishMissileLauncher_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, 0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 9.485749680535094e-16, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_HellishMissileLauncher_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.48453495866151064,
+   "sup_gap": 0.9882335896763934,
+   "sup_dz": -1.0,
+   "sup_search_cm": 1.5
+  }
+ },
+ "baked_by": "r4/bake_r4.py (cloud; farm curl)"
+}

@@ -1,0 +1,44 @@
+{
+ "cls": "Revolver",
+ "pose": "A",
+ "frame": 0,
+ "sup_hook": [
+  0.458,
+  -2.521,
+  -0.373
+ ],
+ "sup_rot": [
+  -0.0,
+  0.0,
+  -0.0
+ ],
+ "sup_point_m": [
+  0.043,
+  0.064,
+  -0.08
+ ],
+ "sp192_cm": [
+  -1.4,
+  2.6,
+  -12.6
+ ],
+ "dz": -1.4,
+ "pen_at_contact": 0.71,
+ "pen_gun": 0.0,
+ "pen_gunhand": 0.5,
+ "pen_also_gun_hand": [
+  0.39,
+  0.48
+ ],
+ "palm_gap_to_gun": 2.4,
+ "check": 0.0,
+ "names": [
+  "Revolver.md3"
+ ],
+ "pistol_sp_drawn": [
+  3.891,
+  5.982,
+  -6.857
+ ],
+ "also": "BrutalRevolver"
+}

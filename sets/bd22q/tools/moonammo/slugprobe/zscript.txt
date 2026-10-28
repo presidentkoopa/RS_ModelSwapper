@@ -1,0 +1,27 @@
+version "4.10"
+// TEST ONLY (rig, never ships): counts the bullets' puffs a weapon makes each tic, and says which of the
+// Shotvolver's shots it was (RSA_Magnum in the player's inventory the tic before = the slug).
+class RSQT_SlugProbe : EventHandler
+{
+	int puffs, magnumBefore;
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		if (e.Thing && (e.Thing.GetClassName() == 'ShotgunPuff' || e.Thing.GetClassName() == 'ShotgunPuff2'))
+			puffs++;
+	}
+	override void WorldTick()
+	{
+		let mo = players[consoleplayer].mo;
+		if (!mo)
+			return;
+		if (puffs > 0)
+			Console.Printf("SLUGPROBE t%d %s: %d bullet puffs this tic%s", Level.maptime,
+				mo.player.ReadyWeapon ? mo.player.ReadyWeapon.GetClassName() : 'None', puffs,
+				magnumBefore > 0 ? " (RSA_Magnum was set: the SLUG)" : "");
+		puffs = 0;
+		int m = mo.CountInv('RSA_Magnum');
+		if (m != magnumBefore)
+			Console.Printf("SLUGPROBE t%d RSA_Magnum %d -> %d (%s)", Level.maptime, magnumBefore, m, m > magnumBefore ? "alt fire asked for the slug" : "taken: the slug fired, or dropped");
+		magnumBefore = m;
+	}
+}

@@ -1,0 +1,72 @@
+{
+ "shift": [
+  -1.7713929206616044,
+  0.9055210717279856,
+  -4.348311219789277
+ ],
+ "source": "r9: the Rifle's solved hold (st2_Rifle) held PISTOL-STYLE on the Ruger (owner, 2026-10-27): no re-seat against the stock wrist, translated by the trigger-face difference (sniper_pistol.py), index + M/R/P curled (curl_gun.py)",
+ "hand": {
+  "md3": "bake/fbx_r9_Sniper_R.md3",
+  "md3_name": "fbx_r9_Sniper_R.md3",
+  "sprite": "RQFN",
+  "label": "Sni",
+  "squeeze": "(mf <= 2 && (mgp.Sprite == Actor.GetSpriteIndex('X21F') || mgp.Sprite == Actor.GetSpriteIndex('P21F')))",
+  "squeeze_note": "FIRE frames (X21F / P21F A-C, the gunmoves rows of row 22)",
+  "support": {
+   "sup_hook": [
+    -2.329,
+    17.166,
+    5.374
+   ],
+   "sup_rot": [
+    -7.927,
+    2.302,
+    10.732
+   ],
+   "sup_point_m": [
+    0.346,
+    0.062,
+    -0.027
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) at 1.92's SupportPoint moved with the gun, lowered 0.4 cm until clear: pen 0.50, palm 0.39 cm from the forend (support_gun.py, fits/r9/sup_Sniper.json)"
+ },
+ "metrics": {
+  "rigid_only": {
+   "pen": 1.6114974342368036,
+   "padI_trig": 0.2768777117103647,
+   "gap_M": 1.9129352792583638,
+   "gap_R": 3.9329688322913516,
+   "gap_P": 5.177612363597662,
+   "gap_T": 0.05859353994409133,
+   "gap_palm": 0.05610712446577453,
+   "gap_web": 0.0003986427574851247
+  },
+  "trigger": {
+   "pen": 1.6114974342368036,
+   "padI_trig": 5.380499652291836e-06,
+   "gap_M": 0.20017074454029787,
+   "gap_R": 0.6479112430250599,
+   "gap_P": 1.4186365927123805,
+   "gap_T": 0.05859353994409133,
+   "gap_palm": 0.05610712446577453,
+   "gap_web": 0.00569966677939329
+  },
+  "squeeze": {
+   "pen": 1.6114974342368036,
+   "padI_trig": 0.5999934340829346,
+   "gap_M": 0.20017074454029787,
+   "gap_R": 0.6479112430250599,
+   "gap_P": 1.4186365927123805,
+   "gap_T": 0.05859353994409133,
+   "gap_palm": 0.05610712446577453,
+   "gap_web": 0.008031181569929557
+  },
+  "squeeze_travel": 0.5999941504556633,
+  "shift": [
+   -1.7713929206616044,
+   0.9055210717279856,
+   -4.348311219789277
+  ]
+ }
+}

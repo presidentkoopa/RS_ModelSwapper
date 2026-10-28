@@ -1,0 +1,2 @@
+// r5: the Moonlight six-shooter, BD22's normal "Revolver" (class BrutalRevolver), owner 2026-10-27
+#include "actors/Weapons/BrutalRevolver.dec"

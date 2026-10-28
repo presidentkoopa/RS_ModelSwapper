@@ -1,0 +1,3 @@
+// r5: the Revolver (BrutalRevolver, the Moonlight) on slot 2 with BD22's pistols and the Shotvolver
+weaponsection "Brutal_Doom"
+addslotdefault 2 BrutalRevolver

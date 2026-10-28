@@ -1,0 +1,40 @@
+{
+ "cls": "GrenadeLauncher",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -0.405,
+  1.551,
+  15.584
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.245,
+  0.087,
+  -0.081
+ ],
+ "sp192_cm": [
+  20.0,
+  0.0,
+  -2.1
+ ],
+ "dz": -1.5,
+ "pen_at_contact": 0.9,
+ "pen_gun": 0.48,
+ "pen_gunhand": null,
+ "pen_also_gun_hand": [],
+ "palm_gap_to_gun": 1.5,
+ "check": 0.0,
+ "names": [
+  "M79.md3"
+ ],
+ "under": [
+  23.094,
+  8.1,
+  -10.833
+ ]
+}

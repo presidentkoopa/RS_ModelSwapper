@@ -1,0 +1,65 @@
+{
+ "cls": "Minigun",
+ "place": [
+  -1.1560857961872322,
+  -5.106445818338977,
+  -1.9228933444911993,
+  3.853999999999983,
+  3.3630000000000044,
+  10.974000000000006
+ ],
+ "R": [
+  [
+   0.9960203760072605,
+   -0.07712697355505173,
+   -0.044663637655169314
+  ],
+  [
+   0.06709852807028907,
+   0.978743000198859,
+   -0.19380383663007536
+  ],
+  [
+   0.05866172610105113,
+   0.1900357058870113,
+   0.9800230774726022
+  ]
+ ],
+ "t": [
+  4.9870570985567895,
+  3.169041638295904,
+  4.836958438540335
+ ],
+ "moved": [
+  "MODELDEF MODELDEF.bd.txt Minigun x1",
+  "MODELDEF MODELDEF.purist PuristMinigun x1",
+  "MODELDEF MODELDEF.rsr Minigun x1",
+  "MODELDEF MODELDEF.rsr RSR_GunParts x1",
+  "gunmoves Pivot row 13 [ 0.  5. 24.] -> [ 1.156  8.077 18.894]",
+  "gunmoves row 46 (CHAEBC, md3 frame 5) 0.00, 0.00, 0.00, 0.00, 0.00, 0.00 -> 0.00, 0.00, 0.00, 0.00, 0.00, 0.00",
+  "gunmoves row 47 (CHAED, md3 frame 6) 0.00, 0.00, 0.00, 0.00, 0.00, 0.00 -> 0.00, 0.00, 0.00, 0.00, 0.00, 0.00",
+  "gunmoves row 48 (CHAEEF, md3 frame 7) 0.00, 0.00, 0.00, 0.00, 0.00, 0.00 -> 0.00, 0.00, 0.00, 0.00, 0.00, 0.00",
+  "gunmoves row 49 (CHAFAGKO, md3 frame 8) 0.00, 0.00, 0.00, 0.00, 0.00, 2.04 -> 0.00, 0.00, 0.00, -0.14, -0.12, 2.03",
+  "gunmoves row 50 (CHAFBHLP, md3 frame 9) 0.00, 0.00, 0.00, 0.00, 0.00, 0.00 -> 0.00, 0.00, 0.00, 0.00, 0.00, 0.00",
+  "gunmoves row 51 (CHAFCDIM, md3 frame 10) 0.00, 0.00, 0.00, 0.00, 0.00, 2.04 -> 0.00, 0.00, 0.00, -0.14, -0.12, 2.03",
+  "gunmoves row 52 (CHAFEFJNQ, md3 frame 11) 0.00, 0.00, 0.00, 0.00, 0.00, 0.00 -> 0.00, 0.00, 0.00, 0.00, 0.00, 0.00",
+  "reload Well case 17 (33.417, -4.333, -22.866) -> (39.627, 5.602, -16.435)",
+  "reload MagCentre case 17 (33.315, -3.990, -22.316) -> (39.474, 5.824, -15.837)",
+  "reload Grab case 17 (0.000, 0.000, 0.000) -> (4.987, 3.169, 4.837)",
+  "reload Axis case 17 (-0.014, -0.259, -0.966) -> (0.049, -0.067, -0.997)",
+  "reload WellHook case 17 (0.259, 0.966, -0.014) -> (0.067, 0.997, 0.049)",
+  "reload Pull case 17 (-1.000, 0.000, 0.000) -> (-0.996, -0.067, -0.059)",
+  "reload HandleHook case 17 (0.000, 0.000, 1.000) -> (-0.067, -0.059, 0.996)",
+  "reload Offset case 17 (0.000, 0.000, -5.000) -> (-1.156, -5.106, -1.923)",
+  "muzzle row ADDED Minigun drawn tip [95.92  0.35 -7.94] -> [100.86  11.49   2.74]",
+  "hand squeeze: fire frames: CHAE BCDEF, CHAF ABCDEFGHIJKLMNOPQST, CHAG BCDEF, CHAV GHIJKLMNO",
+  "hand md3 fbx_hv_Minigun_R.md3 <- fbx_hv_Minigun_R.md3",
+  "hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQV3",
+  "hand block (dual) MODELDEF.rsqdual Minigun",
+  "hand block (dual) MODELDEF.purist PuristMinigun",
+  "hands.zs labels FbxTrgMini / FbxSqzMini (+ dual)",
+  "dualhands.zs label",
+  "handtable GunHook / GunHookTwo row 13 = 0",
+  "handtable Support row 13 moved with the gun hook [ -9.07 -25.68  -2.1 ] -> [ -7.496 -30.917  -7.798] rot [10.21 16.06 95.16] -> [  9.447  17.111 107.081] point [ 0.323  0.203 -0.037] -> [0.358 0.259 0.07 ]"
+ ]
+}

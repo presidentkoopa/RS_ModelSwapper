@@ -1,0 +1,40 @@
+{
+ "cls": "RailGun",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -3.494,
+  10.778,
+  -7.016
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.471,
+  0.07,
+  0.009
+ ],
+ "sp192_cm": [
+  42.0,
+  0.0,
+  -6.7
+ ],
+ "dz": -1.1,
+ "pen_at_contact": 1.08,
+ "pen_gun": 0.45,
+ "pen_gunhand": null,
+ "pen_also_gun_hand": [],
+ "palm_gap_to_gun": 1.1,
+ "check": 0.0,
+ "names": [
+  "RailGun.md3"
+ ],
+ "under": [
+  45.778,
+  6.46,
+  -1.841
+ ]
+}

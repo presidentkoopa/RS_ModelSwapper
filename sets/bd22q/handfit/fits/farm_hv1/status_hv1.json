@@ -1,0 +1,110 @@
+{
+ "batch": "hv1",
+ "workers": 12,
+ "jobs": [
+  "GrenadeLauncher:seat=lane_b_hvrun/st2_GrenadeLauncher.npy",
+  "RailGun:seat=lane_b_hvrun/st2_RailGun.npy:idx",
+  "Plasma_Gun:from=MP40:lane_b_b3run/st2_MP40.npy",
+  "Rocket_Launcher:seat=lane_b_hvrun/st2_Rocket_Launcher.npy:idx",
+  "MG42",
+  "Minigun",
+  "IncendiaryLauncher",
+  "Machinegun"
+ ],
+ "done": [
+  {
+   "job": {
+    "token": "IncendiaryLauncher",
+    "gun": "IncendiaryLauncher",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto"
+   },
+   "status": "ok",
+   "minutes": 13.18,
+   "start": "11:50:09",
+   "end": "12:03:21",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "GrenadeLauncher:seat=lane_b_hvrun/st2_GrenadeLauncher.npy",
+    "gun": "GrenadeLauncher",
+    "skip_stage": true,
+    "bake_only": false,
+    "idx": "auto",
+    "seat": "lane_b_hvrun/st2_GrenadeLauncher.npy"
+   },
+   "status": "ok",
+   "minutes": 25.72,
+   "start": "11:50:09",
+   "end": "12:15:52",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "RailGun:seat=lane_b_hvrun/st2_RailGun.npy:idx",
+    "gun": "RailGun",
+    "skip_stage": true,
+    "bake_only": false,
+    "idx": "force",
+    "seat": "lane_b_hvrun/st2_RailGun.npy"
+   },
+   "status": "ok",
+   "minutes": 26.37,
+   "start": "11:50:09",
+   "end": "12:16:32",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "Rocket_Launcher:seat=lane_b_hvrun/st2_Rocket_Launcher.npy:idx",
+    "gun": "Rocket_Launcher",
+    "skip_stage": true,
+    "bake_only": false,
+    "idx": "force",
+    "seat": "lane_b_hvrun/st2_Rocket_Launcher.npy"
+   },
+   "status": "ok",
+   "minutes": 26.85,
+   "start": "11:50:09",
+   "end": "12:17:00",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "Minigun",
+    "gun": "Minigun",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto"
+   },
+   "status": "ok",
+   "minutes": 29.48,
+   "start": "11:50:09",
+   "end": "12:19:38",
+   "error": null
+  },
+  {
+   "job": {
+    "token": "Plasma_Gun:from=MP40:lane_b_b3run/st2_MP40.npy",
+    "gun": "Plasma_Gun",
+    "skip_stage": false,
+    "bake_only": false,
+    "idx": "auto",
+    "from": [
+     "MP40",
+     "lane_b_b3run/st2_MP40.npy"
+    ]
+   },
+   "status": "ok",
+   "minutes": 31.08,
+   "start": "11:50:09",
+   "end": "12:21:14",
+   "error": null
+  }
+ ],
+ "final": false,
+ "wall_minutes": 31.09,
+ "cpu_count": 16
+}

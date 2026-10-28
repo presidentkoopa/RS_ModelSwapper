@@ -1,0 +1,107 @@
+{
+ "shift": [
+  -5.563735089449123,
+  1.9467438195815334,
+  6.062844952852659
+ ],
+ "hand": {
+  "md3": "fbx_hv_NukeLauncher_R.md3",
+  "md3_name": "fbx_hv_NukeLauncher_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "fullbright (firing) frames",
+  "support": {
+   "sup_hook": [
+    -2.653,
+    11.451,
+    9.613
+   ],
+   "sup_rot": [
+    -7.927,
+    2.302,
+    10.732
+   ],
+   "sup_point_m": [
+    0.278,
+    0.06,
+    -0.01
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) at 1.92's SupportPoint moved with the gun, lowered 1.3 cm until clear: pen 0.45, palm 1.30 cm from the gun (support_gun.py via heavies/sup_hv.py, fits/r10/sup_NukeLauncher.json; the farm's placement had pen 0.47, palm 1.87)"
+ },
+ "metrics": {
+  "stage2": {
+   "gun": "NukeLauncher",
+   "start": {
+    "pen": 0.676825905795751,
+    "padI": 0.28437369358404113,
+    "palm": 2.355603955160876,
+    "web": 0.4720877510209354
+   },
+   "rot_vs_start_deg": 11.501047131497664,
+   "rot_vs_pistol_deg": 14.814167568661055,
+   "move_vs_start_cm": [
+    1.94,
+    0.34,
+    -3.95
+   ],
+   "pad_I_to_trigger": 0.42762374414246873,
+   "pen_max": 0.597071651889437,
+   "gap_palm": 0.2928478922387494,
+   "gap_web": 0.09282727041850691,
+   "gap_M": 0.5586143842140845,
+   "gap_R": 1.3050218478232483,
+   "gap_P": 1.7286206559259312,
+   "gap_T": 0.7802137105182859,
+   "start_from": "Minigun"
+  },
+  "curl": {
+   "gun": "NukeLauncher",
+   "rigid_only": {
+    "pen": 0.5970716518894346,
+    "padI_trig": 0.42762374414247284,
+    "gap_M": 0.5586143842140878,
+    "gap_R": 1.3050218478232523,
+    "gap_P": 1.7286206559259374,
+    "gap_T": 0.7802137105182827,
+    "gap_palm": 0.29284789223874685,
+    "gap_web": 0.09282727041851181
+   },
+   "trigger": {
+    "pen": 0.5970716518894346,
+    "padI_trig": 0.42762374414247284,
+    "gap_M": 0.20000577540499428,
+    "gap_R": 0.20002863750590283,
+    "gap_P": 0.20012468184462384,
+    "gap_T": 0.7802137105182827,
+    "gap_palm": 0.29284789223874685,
+    "gap_web": 0.09282727041851181
+   },
+   "squeeze": {
+    "pen": 0.5970716518894346,
+    "padI_trig": 0.5654761723210479,
+    "gap_M": 0.20000577540499428,
+    "gap_R": 0.20002863750590283,
+    "gap_P": 0.20012468184462384,
+    "gap_T": 0.7802137105182827,
+    "gap_palm": 0.29284789223874685,
+    "gap_web": 0.08795011105816235
+   },
+   "squeeze_travel": 0.6000241955515674
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'NukeLauncher_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, -0.0, 0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 1.2074182697257333e-06, 'wrist_move_cm': 3.636721891222372e-15, 'bake_check_max_cm': 0.007968396937164002, 'md3': 'fbx_hv_NukeLauncher_R.md3'}",
+    "{'name': 'NukeLauncher_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, -0.0, 0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 1.2074182697257333e-06, 'wrist_move_cm': 3.636721891222372e-15, 'bake_check_max_cm': 0.007968396937164002, 'md3': 'fbx_hv_NukeLauncher_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_NukeLauncher_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.4683702540101072,
+   "sup_gap": 1.865372298924823,
+   "sup_dz": -1.9000000000000001,
+   "sup_search_cm": 1.5
+  }
+ },
+ "source": "fit farm round 2 (owner PC), fits/farm_r2/NukeLauncher (PICKS_r2.md: NukeLauncher_fromMinigun)"
+}

@@ -1,0 +1,19 @@
+{
+ "job": {
+  "token": "HellishMissileLauncher:wrap:as=HellishMissileLauncher_r4wrap",
+  "gun": "HellishMissileLauncher",
+  "skip_stage": false,
+  "bake_only": false,
+  "idx": "auto",
+  "dense": true,
+  "wrap": true,
+  "out": "HellishMissileLauncher_r4wrap"
+ },
+ "pid": 15328,
+ "start": "21:39:28",
+ "status": "error",
+ "error": "TypeError(\"type NoneType doesn't define __round__ method\")",
+ "trace": "Traceback (most recent call last):\n  File \"E:\\DOOMWork\\_buildtemp\\claude_bridge\\work\\fitfarm\\fit_batch.py\", line 107, in run_job\n    F = _fit(H, g, job.get('skip_stage', False), job.get('bake_only', False), job.get('idx', 'auto'), job.get('dense', False), job.get('thr'), job.get('wrap', False), bool(job.get('seat')))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\DOOMWork\\_buildtemp\\claude_bridge\\work\\fitfarm\\fit_batch.py\", line 65, in _fit\n    print(g, 'curl', json.dumps({k: ({a: round(b, 2) for a, b in v.items()} if isinstance(v, dict) else v) for k, v in o2.items()}, default=float), flush=True)\n                                         ^^^^^^^^^^^\nTypeError: type NoneType doesn't define __round__ method\n",
+ "minutes": 28.41,
+ "end": "22:07:53"
+}

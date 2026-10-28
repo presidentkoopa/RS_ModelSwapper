@@ -1,0 +1,107 @@
+{
+ "shift": [
+  -5.291529003776295,
+  2.122852373881948,
+  0.8907795323395575
+ ],
+ "hand": {
+  "md3": "fbx_hv_MG42_R.md3",
+  "md3_name": "fbx_hv_MG42_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "fullbright (firing) frames",
+  "support": {
+   "sup_hook": [
+    -2.0178206237143037,
+    19.46694103190852,
+    6.49199764762726
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.32566640854090295,
+    0.0452338368330017,
+    0.09253723281952465
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B), the farm's placement (fit_hv.py): pen 0.44, palm 1.38 cm from the gun (<= 0.5: kept; support_gun.py gives pen 0.45, palm 1.37, fits/r10/sup_MG42.json)"
+ },
+ "metrics": {
+  "stage2": {
+   "gun": "MG42",
+   "start": {
+    "pen": 0.5730679014821736,
+    "padI": 0.28437369358403985,
+    "palm": 0.07470737567829877,
+    "web": 0.4064619775941005
+   },
+   "rot_vs_start_deg": 0.7031138319000477,
+   "rot_vs_pistol_deg": 7.775846127796375,
+   "move_vs_start_cm": [
+    -0.19,
+    0.31,
+    -0.2
+   ],
+   "pad_I_to_trigger": 0.2651378215696092,
+   "pen_max": 0.40163569457290405,
+   "gap_palm": 0.09293120670303137,
+   "gap_web": 0.2361948057525569,
+   "gap_M": 1.0452734812609892,
+   "gap_R": 2.5555884372579336,
+   "gap_P": 2.303620844833597,
+   "gap_T": 0.008838874292509846,
+   "start_from": "Minigun"
+  },
+  "curl": {
+   "gun": "MG42",
+   "rigid_only": {
+    "pen": 0.40163569457290016,
+    "padI_trig": 0.2651378215696097,
+    "gap_M": 1.0452734812609945,
+    "gap_R": 2.555588437257936,
+    "gap_P": 2.3036208448335955,
+    "gap_T": 0.008838874292506294,
+    "gap_palm": 0.09293120670303061,
+    "gap_web": 0.23619480575255292
+   },
+   "trigger": {
+    "pen": 0.40163569457290016,
+    "padI_trig": 0.2651378215696097,
+    "gap_M": 0.2000701118400725,
+    "gap_R": 0.20109140627761105,
+    "gap_P": 0.22229987221004388,
+    "gap_T": 0.008838874292506294,
+    "gap_palm": 0.09293120670303061,
+    "gap_web": 0.23619480575255292
+   },
+   "squeeze": {
+    "pen": 0.40163569457290016,
+    "padI_trig": 0.8591291568250666,
+    "gap_M": 0.2000701118400725,
+    "gap_R": 0.20109140627761105,
+    "gap_P": 0.22229987221004388,
+    "gap_T": 0.008838874292506294,
+    "gap_palm": 0.09293120670303061,
+    "gap_web": 0.23539518084498523
+   },
+   "squeeze_travel": 0.5999949773835156
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'MG42_trg', 'side': 'R', 'frame': 0, 'hook': [0.0, -0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 2.4148365394514667e-06, 'wrist_move_cm': 7.563381623332743e-15, 'bake_check_max_cm': 0.007966809171850997, 'md3': 'fbx_hv_MG42_R.md3'}",
+    "{'name': 'MG42_sqz', 'side': 'R', 'frame': 1, 'hook': [0.0, -0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 2.4148365394514667e-06, 'wrist_move_cm': 7.563381623332743e-15, 'bake_check_max_cm': 0.007966809171850997, 'md3': 'fbx_hv_MG42_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_MG42_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.43506006490754995,
+   "sup_gap": 1.3776204411357238,
+   "sup_dz": -3.7,
+   "sup_search_cm": 1.5
+  }
+ },
+ "source": "fit farm round 2 (owner PC), fits/farm_r2/MG42 (PICKS_r2.md: MG42_fromMinigun)"
+}

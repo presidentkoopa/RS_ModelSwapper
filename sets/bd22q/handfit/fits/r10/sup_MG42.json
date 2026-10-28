@@ -1,0 +1,40 @@
+{
+ "cls": "MG42",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -3.28,
+  19.329,
+  7.535
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.326,
+  0.045,
+  0.093
+ ],
+ "sp192_cm": [
+  30.0,
+  0.0,
+  1.2
+ ],
+ "dz": -1.4,
+ "pen_at_contact": 0.81,
+ "pen_gun": 0.45,
+ "pen_gunhand": null,
+ "pen_also_gun_hand": [],
+ "palm_gap_to_gun": 1.37,
+ "check": 0.0,
+ "names": [
+  "HitlersBuzzsaw.md3"
+ ],
+ "under": [
+  31.232,
+  3.039,
+  6.308
+ ]
+}

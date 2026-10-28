@@ -1,0 +1,84 @@
+{
+ "shift": [
+  -3.5515359646506095,
+  1.228491244989979,
+  2.0816218161723654
+ ],
+ "hand": {
+  "md3": "fbx_hv_Rocket_Launcher_R.md3",
+  "md3_name": "fbx_hv_Rocket_Launcher_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "fullbright (firing) frames",
+  "support": {
+   "sup_hook": [
+    -4.01004469300878,
+    30.7413479670498,
+    15.20914486772999
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.2981726827417118,
+    0.03204483611326339,
+    0.22327331142398196
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) under the gun at its SupportPoint, moved with the gun (fit_hv.py)"
+ },
+ "metrics": {
+  "stage2": {
+   "reused": "E:/DOOMWork/_buildtemp/claude_bridge/work/fitfarm/results/Rocket_Launcher/st2_Rocket_Launcher.npy"
+  },
+  "curl": {
+   "gun": "Rocket_Launcher",
+   "rigid_only": {
+    "pen": 1.0029391382375863,
+    "padI_trig": 2.0509451840459723,
+    "gap_M": 0.8575093700016613,
+    "gap_R": 0.6164631184138404,
+    "gap_P": 0.0271867796346145,
+    "gap_T": 0.06676999237802045,
+    "gap_palm": 0.015782661329002485,
+    "gap_web": 0.035656499748905945
+   },
+   "trigger": {
+    "pen": 0.8840588720903078,
+    "padI_trig": 0.47928826352772846,
+    "gap_M": 0.20001038365319904,
+    "gap_R": 0.19967825506821105,
+    "gap_P": 0.038417629588184295,
+    "gap_T": 0.06676999237802045,
+    "gap_palm": 0.015782661329002485,
+    "gap_web": 0.0006875295456143515
+   },
+   "squeeze": {
+    "pen": 0.8840588720903078,
+    "padI_trig": 1.0509027207644719,
+    "gap_M": 0.20001038365319904,
+    "gap_R": 0.19967825506821105,
+    "gap_P": 0.038417629588184295,
+    "gap_T": 0.06676999237802045,
+    "gap_palm": 0.015782661329002485,
+    "gap_web": 0.03144403132580842
+   },
+   "squeeze_travel": 0.6000064582019379
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'Rocket_Launcher_trg', 'side': 'R', 'frame': 0, 'hook': [0.0, -0.0, 0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 1.7075472925031877e-06, 'wrist_move_cm': 3.985994439185401e-15, 'bake_check_max_cm': 0.00796859011905049, 'md3': 'fbx_hv_Rocket_Launcher_R.md3'}",
+    "{'name': 'Rocket_Launcher_sqz', 'side': 'R', 'frame': 1, 'hook': [0.0, -0.0, 0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 1.7075472925031877e-06, 'wrist_move_cm': 3.985994439185401e-15, 'bake_check_max_cm': 0.00796859011905049, 'md3': 'fbx_hv_Rocket_Launcher_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_Rocket_Launcher_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 2.429582763546487,
+   "sup_gap": 1.486635751607318,
+   "sup_dz": -4.0,
+   "sup_search_cm": 6.5
+  }
+ }
+}

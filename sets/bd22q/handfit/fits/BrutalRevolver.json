@@ -1,0 +1,17 @@
+{
+ "shift": [
+  -0.17154860497086233,
+  0.5684197715503347,
+  -3.109968359642112
+ ],
+ "hand": {
+  "md3": "bake/fbx_b4_BrutalRevolver_R.md3",
+  "md3_name": "fbx_b4_BrutalRevolver_R.md3",
+  "sprite": "RQFL",
+  "label": "Bru",
+  "cond": " && p.ReadyWeapon is 'BrutalRevolver'",
+  "dcond": " && w is 'BrutalRevolver'",
+  "squeeze": "(mf >= 1 && mf <= 7 && mgp.Sprite == Actor.GetSpriteIndex('RVMA'))",
+  "squeeze_note": "FIRE frames (BrutalRevolver.dec Fire: RVMA B D bright, F H)"
+ }
+}

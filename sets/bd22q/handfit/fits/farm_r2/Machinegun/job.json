@@ -1,0 +1,92 @@
+{
+ "job": {
+  "token": "Machinegun:from=MP40:lane_b_b3run/st2_MP40.npy:as=Machinegun_fromMP40",
+  "gun": "Machinegun",
+  "skip_stage": false,
+  "bake_only": false,
+  "idx": "auto",
+  "from": [
+   "MP40",
+   "lane_b_b3run/st2_MP40.npy"
+  ],
+  "out": "Machinegun_fromMP40"
+ },
+ "pid": 14064,
+ "start": "14:08:11",
+ "status": "ok",
+ "metrics": {
+  "stage2": {
+   "gun": "Machinegun",
+   "start": {
+    "pen": 0.3236856807882102,
+    "padI": 0.5099363159920889,
+    "palm": 0.4257066248882436,
+    "web": 0.40605412051893175
+   },
+   "rot_vs_start_deg": 2.654147628011242,
+   "rot_vs_pistol_deg": 9.79641888008083,
+   "move_vs_start_cm": [
+    0.04,
+    0.53,
+    0.67
+   ],
+   "pad_I_to_trigger": 0.21666938467254948,
+   "pen_max": 0.2708396224188876,
+   "gap_palm": 0.3033180527119711,
+   "gap_web": 0.29343228782569475,
+   "gap_M": 1.35920491903406,
+   "gap_R": 0.7078141254111338,
+   "gap_P": 0.49586026388303167,
+   "gap_T": 0.020319235163474534,
+   "start_from": "MP40"
+  },
+  "curl": {
+   "gun": "Machinegun",
+   "rigid_only": {
+    "pen": 0.2708396224188894,
+    "padI_trig": 0.21666938467254848,
+    "gap_M": 1.3592049190340598,
+    "gap_R": 0.7078141254111365,
+    "gap_P": 0.495860263883032,
+    "gap_T": 0.020319235163474766,
+    "gap_palm": 0.3033180527119721,
+    "gap_web": 0.2934322878256958
+   },
+   "trigger": {
+    "pen": 0.35494927536134874,
+    "padI_trig": 0.21666938467254848,
+    "gap_M": 0.2000934499611171,
+    "gap_R": 0.20000783324662766,
+    "gap_P": 0.20000529753146068,
+    "gap_T": 0.020319235163474766,
+    "gap_palm": 0.3033180527119721,
+    "gap_web": 0.2934322878256958
+   },
+   "squeeze": {
+    "pen": 0.35494927536134874,
+    "padI_trig": 0.7818363416855691,
+    "gap_M": 0.2000934499611171,
+    "gap_R": 0.20000783324662766,
+    "gap_P": 0.20000529753146068,
+    "gap_T": 0.020319235163474766,
+    "gap_palm": 0.3033180527119721,
+    "gap_web": 0.2946731772917081
+   },
+   "squeeze_travel": 0.5999946133772837
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'Machinegun_trg', 'side': 'R', 'frame': 0, 'hook': [0.0, -0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 2.0621477437872914e-15, 'bake_check_max_cm': 0.007967832221083437, 'md3': 'fbx_hv_Machinegun_R.md3'}",
+    "{'name': 'Machinegun_sqz', 'side': 'R', 'frame': 1, 'hook': [0.0, -0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 2.0621477437872914e-15, 'bake_check_max_cm': 0.00796733306108699, 'md3': 'fbx_hv_Machinegun_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_Machinegun_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.4376085565914468,
+   "sup_gap": 0.7000000000000002,
+   "sup_dz": -0.7000000000000001,
+   "sup_search_cm": 1.5
+  }
+ },
+ "minutes": 45.34,
+ "end": "14:53:31"
+}

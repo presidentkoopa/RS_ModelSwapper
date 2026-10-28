@@ -1,0 +1,5 @@
+  support md3 fbx_r4_Minigun_bar_L.md3 <- tools/handfit/port/fits/farm_r4/Minigun/support_r4_bar_ref/fbx_r4_Minigun_bar_L.md3
+  MODELDEF.rsq RSQ_GunSide + RSQ_Hands RQXA
+  hands.zs FbxSupMini row 13
+  handtable Support row 13 [-49.06, 1.105, 37.564] [64.324, 31.932, -175.346] [0.3535, 0.2159, 0.0911]
+moved 4 items

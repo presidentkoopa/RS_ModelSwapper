@@ -1,0 +1,71 @@
+{
+ "cls": "Rifle",
+ "place": [
+  0.3483266711538944,
+  -5.911515685744739,
+  -1.81197093336657,
+  3.8539999999999863,
+  3.363000000000005,
+  10.974000000000009
+ ],
+ "R": [
+  [
+   0.9960203760072605,
+   -0.07712697355505173,
+   -0.044663637655169314
+  ],
+  [
+   0.06709852807028913,
+   0.978743000198859,
+   -0.19380383663007547
+  ],
+  [
+   0.05866172610105069,
+   0.1900357058870113,
+   0.9800230774726031
+  ]
+ ],
+ "t": [
+  5.792126965962552,
+  1.6646291709547794,
+  4.9478808496649505
+ ],
+ "moved": [
+  "MODELDEF MODELDEF.bd.txt Rifle x1",
+  "MODELDEF MODELDEF.purist PuristRifle x3",
+  "MODELDEF MODELDEF.rsm RSR_GunParts x2",
+  "MODELDEF MODELDEF.rsm Rifle x5",
+  "MODELDEF MODELDEF.rsqoff RSQ_Off_Rifle x9",
+  "MODELDEF MODELDEF.rsr RSR_GunParts x3",
+  "MODELDEF MODELDEF.rsr Rifle x3",
+  "gunmoves Pivot row 18 [ 0.  5. 24.] -> [-0.348  8.188 18.088]",
+  "gunmoves row 93 (2IFFAD, md3 frame 4) 0.00, 0.00, 0.00, 0.00, 0.00, 1.94 -> 0.00, 0.00, 0.00, -0.13, -0.11, 1.93",
+  "gunmoves row 94 (2IFFB, md3 frame 5) 0.00, 1.22, 0.00, 0.00, -0.05, 1.45 -> 0.23, 1.19, 0.10, -0.05, -0.27, 1.35",
+  "gunmoves row 95 (2IFFC, md3 frame 6) 0.00, 0.61, 0.00, 0.00, -0.04, 0.49 -> 0.12, 0.59, 0.05, -0.01, -0.13, 0.44",
+  "reload Well case 1 (12.000, 0.400, 1.000) -> (17.669, 2.668, 6.708)",
+  "reload MagCentre case 1 (11.676, 0.421, -5.919) -> (17.654, 4.007, -0.088)",
+  "reload Grab case 1 (-6.500, 1.300, 4.900) -> (-1.001, 1.551, 9.616)",
+  "reload Axis case 1 (0.022, 0.000, 1.000) -> (-0.023, -0.192, 0.981)",
+  "reload WellHook case 1 (-0.000, -1.000, 0.022) -> (0.192, -0.981, -0.023)",
+  "reload Pull case 1 (-1.000, -0.001, -0.000) -> (-0.996, -0.068, -0.059)",
+  "reload HandleHook case 1 (-0.001, -0.000, 1.000) -> (-0.068, -0.059, 0.996)",
+  "reload Offset case 1 (0.000, 0.000, -5.000) -> (0.348, -5.912, -1.812)",
+  "casing port Rifle 10.0, -0.6, 2.6 -> 15.7, 1.2, 8.0",
+  "muzzle row ADDED Rifle drawn tip [65.8   0.49  2.57] -> [71.18  6.06 11.42]",
+  "M203 FwdHook [ 0.0671  0.0587 -0.996 ] + ToGun / DirToGun / FromGun (R, t of this move)",
+  "M203 rsr_m203.zs: palm via ToGun/FromGun",
+  "M203 rsr_m203.zs: Vector3 mid via ToGun/FromGun",
+  "M203 rsr_m203.zs: Vector3 nose via ToGun/FromGun",
+  "M203 rsr_m203.zs: Vector3 pos via ToGun/FromGun",
+  "purist rifle support hook (-0.090, -1.390, 11.380)/0 -> [2.52 2.51 4.94] [-3.854  3.363 10.974]",
+  "hand md3 fbx_b4_Rifle_R.md3 <- bake/fbx_b4_Rifle_R.md3",
+  "hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQFJ",
+  "hand block (dual) MODELDEF.rsqdual Rifle",
+  "hand block (dual) MODELDEF.rsqoff RSQ_Off_Rifle",
+  "hand block (dual) MODELDEF.purist PuristRifle",
+  "hands.zs labels FbxTrgRif / FbxSqzRif (+ dual)",
+  "dualhands.zs label",
+  "handtable GunHook / GunHookTwo row 18 = 0",
+  "handtable Support row 18 moved with the gun hook [  0.954 -12.744 -17.4  ] -> [  4.202  -9.357 -23.84 ] rot [ 0.  0. 10.] -> [-3.854  3.363 20.974] point [0.28  0.    0.014] -> [0.336 0.033 0.08 ]"
+ ]
+}

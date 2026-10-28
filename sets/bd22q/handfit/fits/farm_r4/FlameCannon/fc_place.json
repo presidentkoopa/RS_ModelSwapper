@@ -1,0 +1,104 @@
+{
+ "gun": "FlameCannon",
+ "method": "wrist pinned (fbx_b1_R frame 0); the cannon moves: rear slit centre -> wrist, housing axis -> forearm axis (smallest turn)",
+ "measured": {
+  "slit_centre": [
+   -17.073,
+   -0.328,
+   -3.705
+  ],
+  "slit_faces": 300,
+  "muzzle_centre": [
+   41.846,
+   -0.2,
+   -2.85
+  ],
+  "bore_faces": 57,
+  "housing_axis": [
+   0.99965,
+   -0.01382,
+   0.0225
+  ],
+  "housing_axis_point_F0": [
+   0.0,
+   0.618,
+   -3.092
+  ],
+  "housing_radius_cm": 10.66,
+  "housing_fit_median_res_cm": 0.81,
+  "forearm_axis": [
+   0.99189,
+   -0.0722,
+   -0.10455
+  ],
+  "forearm_radius_cm": 3.25,
+  "forearm_fit_median_res_cm": 0.32,
+  "wrist": [
+   -4.533,
+   -1.126,
+   -7.059
+  ],
+  "turn_deg": 8.03
+ },
+ "R": [
+  [
+   0.9901988258307269,
+   0.058662954245867295,
+   0.12674755667308546
+  ],
+  [
+   -0.05827166095765516,
+   0.9982776302331832,
+   -0.006796065424656901
+  ],
+  [
+   -0.12692792778851242,
+   -0.0006563346459011543,
+   0.9919117250905681
+  ]
+ ],
+ "t": [
+  12.860986150477427,
+  -1.8180231783579561,
+  -5.5515082089614305
+ ],
+ "place": [
+  0.06987334962830152,
+  -13.15502137555562,
+  -6.743670375306058,
+  -3.367883286217475,
+  -7.292104840710713,
+  -0.03791184106297349
+ ],
+ "place_note": "Offset x, Offset y, ZOffset, AngleOffset, PitchOffset, RollOffset (port_gun.chain)",
+ "place_residual_cm": 3.552713678800501e-14,
+ "place_vs_rigid": {
+  "R": 1.5751289161869408e-15,
+  "t": 1.0658141036401503e-14
+ },
+ "slit_after": [
+  -4.533,
+  -1.126,
+  -7.059
+ ],
+ "muzzle_after": [
+  53.924,
+  -4.437,
+  -13.689
+ ],
+ "hand_in_housing": {
+  "hand_no_stub": {
+   "verts": 1700,
+   "inside": 1579,
+   "outside": 121,
+   "outside_max_cm": 1.943
+  },
+  "forearm_stub": {
+   "verts": 237,
+   "inside": 0,
+   "outside": 237,
+   "outside_max_cm": 9.198
+  }
+ },
+ "gun_hand": "none drawn (owner)"
+}

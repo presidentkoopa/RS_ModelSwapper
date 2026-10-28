@@ -1,0 +1,12 @@
+{
+ "rows": [
+  "{'name': 'Unmaker_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.1480255910393996e-15, 'bake_check_max_cm': 0.007965477064061588, 'md3': 'fbx_hv_Unmaker_R.md3'}",
+  "{'name': 'Unmaker_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.1480255910393996e-15, 'bake_check_max_cm': 0.007965477064061588, 'md3': 'fbx_hv_Unmaker_R.md3'}",
+  "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, 0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 9.485749680535094e-16, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_Unmaker_R.md3'}"
+ ],
+ "pistol_rebake_max": 0.0,
+ "sup_pen": 0.47847183506666247,
+ "sup_gap": 1.2676359918172855,
+ "sup_dz": -1.6,
+ "sup_search_cm": 1.5
+}

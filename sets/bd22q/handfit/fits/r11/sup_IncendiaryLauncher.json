@@ -1,0 +1,40 @@
+{
+ "cls": "IncendiaryLauncher",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -0.373,
+  -3.809,
+  -7.091
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.449,
+  0.129,
+  -0.138
+ ],
+ "sp192_cm": [
+  38.7,
+  0.0,
+  -11.8
+ ],
+ "dz": -1.1,
+ "pen_at_contact": 0.84,
+ "pen_gun": 0.43,
+ "pen_gunhand": null,
+ "pen_also_gun_hand": [],
+ "palm_gap_to_gun": 1.1,
+ "check": 0.0,
+ "names": [
+  "m32.md3"
+ ],
+ "under": [
+  45.602,
+  12.274,
+  -15.578
+ ]
+}

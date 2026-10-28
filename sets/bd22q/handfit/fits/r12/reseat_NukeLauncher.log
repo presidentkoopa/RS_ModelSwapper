@@ -1,0 +1,22 @@
+NukeLauncher: MODELDEF [ 0.463 -2.37   4.577  3.854  3.363 10.974] -> [ 0.118 -2.391  4.448  3.854  3.363 10.974] (chain residual 0.0000 cm)
+  relative move: turn 0.0000 deg, translation [ 0.021  0.345 -0.13 ] cm (|0.369|)
+  MODELDEF MODELDEF.bd.txt x1
+  MODELDEF MODELDEF.purist x1
+  MODELDEF MODELDEF.rsr x2
+  gunmoves Pivot row 14 [-0.463 14.577 21.63 ] -> [-0.118 14.448 21.609]
+  gunmoves row 53 (NKLFABCD, md3 frame 5) 0.07, -0.78, -0.74, -0.21, -0.39, 2.24 -> 0.07, -0.78, -0.74, -0.21, -0.39, 2.24
+  gunmoves row 54 (NKLFEF, md3 frame 4) 0.08, -0.71, -0.66, -0.11, 0.07, 0.02 -> 0.08, -0.71, -0.66, -0.11, 0.07, 0.01
+  gunmoves row 55 (NKLFGH, md3 frame 3) 0.09, -0.53, -0.49, -0.07, 0.06, -0.02 -> 0.09, -0.53, -0.49, -0.07, 0.06, -0.02
+  gunmoves row 56 (NKLFIJ, md3 frame 2) 0.10, -0.31, -0.28, -0.03, 0.04, -0.04 -> 0.10, -0.31, -0.28, -0.03, 0.04, -0.04
+  reload Well case 15 37.869, 1.059, 27.771 -> (37.890, 1.404, 27.641)
+  reload MagCentre case 15 45.195, 3.579, 18.292 -> (45.216, 3.924, 18.162)
+  reload Grab case 15 2.251, 1.550, 11.337 -> (2.272, 1.895, 11.207)
+  reload Axis case 15 -0.045, -0.194, 0.980 -> (-0.045, -0.194, 0.980)
+  reload WellHook case 15 0.176, -0.891, -0.041 -> (0.176, -0.891, -0.041)
+  reload Pull case 15 -0.996, -0.067, -0.059 -> (-0.996, -0.067, -0.059)
+  reload HandleHook case 15 -0.061, -0.053, 0.905 -> (-0.061, -0.054, 0.905)
+  reload Offset case 15 0.463, -2.370, 4.577 -> (0.118, -2.391, 4.448)
+  muzzle row NukeLauncher 55.74, 5.70, 11.67 -> 55.76, 6.04, 11.54
+  hand md3 fbx_hv_NukeLauncher_R.md3 <- tools/handfit/port/fits/farm_r4/NukeLauncher/fbx_hv_NukeLauncher_R.md3
+  support rows NOT touched (support lane): handtable SupportHook / SupportRot / SupportPoint row 14 stay as shipped
+moved 19 items

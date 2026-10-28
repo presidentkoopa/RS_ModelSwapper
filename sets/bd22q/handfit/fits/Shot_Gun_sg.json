@@ -1,0 +1,33 @@
+{
+ "shift": [
+  -4.213865039010372,
+  3.10702049434556,
+  -8.069258006650593
+ ],
+ "hand": {
+  "md3": "/home/claude/lane_b_sgrun/bake/fbx_sg_Shot_Gun_R.md3",
+  "md3_name": "fbx_sg_Shot_Gun_R.md3",
+  "sprite": "RQFP",
+  "label": "SG",
+  "squeeze": "((mgp.Sprite == Actor.GetSpriteIndex('SHTN') || mgp.Sprite == Actor.GetSpriteIndex('2HTN')) && mf >= 1 && mf <= 7)",
+  "squeeze_note": "fire frames (SHTN / 2HTN B-H)",
+  "support": {
+   "sup_hook": [
+    -1.9776690725401438,
+    11.893052802107718,
+    -3.3512824670121755
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.4308927056252736,
+    0.0859701122391965,
+    -0.022772031134567536
+   ]
+  },
+  "support_note": "the FBX pump grip (RQFS B, the flamer's gas-pump grip) on the Shot_Gun pump at 1.92's SupportPoint, moved with the gun (bake_sg.py; pen 0.70 cm, over the 0.5 tolerance: flag)"
+ }
+}

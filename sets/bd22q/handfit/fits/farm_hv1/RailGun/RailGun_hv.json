@@ -1,0 +1,84 @@
+{
+ "shift": [
+  -3.1260994491257286,
+  1.8633341120334692,
+  -0.5203506079453586
+ ],
+ "hand": {
+  "md3": "fbx_hv_RailGun_R.md3",
+  "md3_name": "fbx_hv_RailGun_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "fullbright (firing) frames",
+  "support": {
+   "sup_hook": [
+    -0.7174809065374117,
+    18.627475082766846,
+    -9.357897469513425
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.47111582126282214,
+    0.07024394218241772,
+    0.00910251679680229
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) under the gun at its SupportPoint, moved with the gun (fit_hv.py)"
+ },
+ "metrics": {
+  "stage2": {
+   "reused": "E:/DOOMWork/_buildtemp/claude_bridge/work/fitfarm/results/RailGun/st2_RailGun.npy"
+  },
+  "curl": {
+   "gun": "RailGun",
+   "rigid_only": {
+    "pen": 0.5754106420776253,
+    "padI_trig": 1.1795324718488156,
+    "gap_M": 0.6722490001002983,
+    "gap_R": 0.46934160344908255,
+    "gap_P": 0.6038510572528892,
+    "gap_T": 0.07821108645214578,
+    "gap_palm": 0.33918160253525953,
+    "gap_web": 0.03341072668817106
+   },
+   "trigger": {
+    "pen": 0.5754106420776253,
+    "padI_trig": 0.23106110494080812,
+    "gap_M": 0.2000264612409645,
+    "gap_R": 0.20000420773109737,
+    "gap_P": 0.2000199923128344,
+    "gap_T": 0.07821108645214578,
+    "gap_palm": 0.33918160253525953,
+    "gap_web": 0.033697905091927605
+   },
+   "squeeze": {
+    "pen": 0.5754106420776253,
+    "padI_trig": 0.7828642972309676,
+    "gap_M": 0.2000264612409645,
+    "gap_R": 0.20000420773109737,
+    "gap_P": 0.2000199923128344,
+    "gap_T": 0.07821108645214578,
+    "gap_palm": 0.33918160253525953,
+    "gap_web": 0.016079289780460432
+   },
+   "squeeze_travel": 0.6012050622921155
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'RailGun_trg', 'side': 'R', 'frame': 0, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 1.9389211565826713e-15, 'bake_check_max_cm': 0.007965773342530014, 'md3': 'fbx_hv_RailGun_R.md3'}",
+    "{'name': 'RailGun_sqz', 'side': 'R', 'frame': 1, 'hook': [-0.0, 0.0, 0.0], 'rot': [0.0, 0.0, 0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 1.9389211565826713e-15, 'bake_check_max_cm': 0.007968275612857845, 'md3': 'fbx_hv_RailGun_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 3.5038047658940695e-15, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_RailGun_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 1.758590113694444,
+   "sup_gap": 0.10815702829905358,
+   "sup_dz": -4.0,
+   "sup_search_cm": 1.5
+  }
+ }
+}

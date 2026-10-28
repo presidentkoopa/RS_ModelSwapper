@@ -1,0 +1,84 @@
+{
+ "shift": [
+  -4.045992686817893,
+  3.5414450950025995,
+  -13.306466707005283
+ ],
+ "hand": {
+  "md3": "fbx_hv_GrenadeLauncher_R.md3",
+  "md3_name": "fbx_hv_GrenadeLauncher_R.md3",
+  "sprite": null,
+  "label": null,
+  "squeeze": "false",
+  "squeeze_note": "fullbright (firing) frames",
+  "support": {
+   "sup_hook": [
+    -0.41821375590416604,
+    1.5575199948274638,
+    15.388521844962122
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.24519095547475378,
+    0.08715443203699355,
+    -0.08137950506438031
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) under the gun at its SupportPoint, moved with the gun (fit_hv.py)"
+ },
+ "metrics": {
+  "stage2": {
+   "reused": "/home/claude/lane_b_hvrun/st2_GrenadeLauncher.npy"
+  },
+  "curl": {
+   "gun": "GrenadeLauncher",
+   "rigid_only": {
+    "pen": 0.46636152013165716,
+    "padI_trig": 2.2600235862060116,
+    "gap_M": 0.17345584334578157,
+    "gap_R": 0.06394552796463479,
+    "gap_P": 0.003855742200052502,
+    "gap_T": 0.012767780963386871,
+    "gap_palm": 0.23208808062198255,
+    "gap_web": 0.06483639569126008
+   },
+   "trigger": {
+    "pen": 0.6682540495172344,
+    "padI_trig": 0.38842406281187003,
+    "gap_M": 0.1993288645824817,
+    "gap_R": 0.06560691709497099,
+    "gap_P": 0.19405847420445205,
+    "gap_T": 0.012767780963386871,
+    "gap_palm": 0.23208808062198255,
+    "gap_web": 0.06111159462551148
+   },
+   "squeeze": {
+    "pen": 0.6682540495172344,
+    "padI_trig": 0.8767020089835795,
+    "gap_M": 0.1993288645824817,
+    "gap_R": 0.06560691709497099,
+    "gap_P": 0.19405847420445205,
+    "gap_T": 0.012767780963386871,
+    "gap_palm": 0.23208808062198255,
+    "gap_web": 0.04646333126492601
+   },
+   "squeeze_travel": 0.6033909835116178
+  },
+  "bake": {
+   "rows": [
+    "{'name': 'GrenadeLauncher_trg', 'side': 'R', 'frame': 0, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 2.288783399261119e-15, 'bake_check_max_cm': 0.00796736854080038, 'md3': 'fbx_hv_GrenadeLauncher_R.md3'}",
+    "{'name': 'GrenadeLauncher_sqz', 'side': 'R', 'frame': 1, 'hook': [0.0, 0.0, -0.0], 'rot': [-0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 2.288783399261119e-15, 'bake_check_max_cm': 0.00796736854080038, 'md3': 'fbx_hv_GrenadeLauncher_R.md3'}",
+    "{'name': 'PISTOL_chk', 'side': 'R', 'frame': 2, 'hook': [0.0, 0.0, 0.0], 'rot': [0.0, 0.0, -0.0], 'wrist_rot_deg': 0.0, 'wrist_move_cm': 9.485749680535094e-16, 'bake_check_max_cm': 0.007965451730729711, 'md3': 'fbx_hv_GrenadeLauncher_R.md3'}"
+   ],
+   "pistol_rebake_max": 0.0,
+   "sup_pen": 0.48474822628884456,
+   "sup_gap": 1.497416877243743,
+   "sup_dz": -1.5,
+   "sup_search_cm": 1.5
+  }
+ }
+}

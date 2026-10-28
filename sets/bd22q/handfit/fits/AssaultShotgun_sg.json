@@ -1,0 +1,55 @@
+{
+ "shift": [
+  -3.766722666750441,
+  3.656798618733386,
+  -11.323118745112989
+ ],
+ "fit": {
+  "trigger": {
+   "pen": 0.4936096240964387,
+   "padI_trig": 0.14542766131614263,
+   "gap_M": 0.2000085113900604,
+   "gap_R": 0.20035392355368237,
+   "gap_P": 0.20011867943780018,
+   "gap_T": 0.07320792209838549,
+   "gap_palm": 0.27338061823494614,
+   "gap_web": 0.25506717108748544
+  },
+  "squeeze": {
+   "pen": 0.4936096240964387,
+   "padI_trig": 0.5747816103652689,
+   "gap_M": 0.2000085113900604,
+   "gap_R": 0.20035392355368237,
+   "gap_P": 0.20011867943780018,
+   "gap_T": 0.07320792209838549,
+   "gap_palm": 0.27338061823494614,
+   "gap_web": 0.23168363944455095
+  }
+ },
+ "hand": {
+  "md3": "/home/claude/lane_b_sgrun/bake/fbx_sg_AssaultShotgun_R.md3",
+  "md3_name": "fbx_sg_AssaultShotgun_R.md3",
+  "sprite": "RQFQ",
+  "label": "AS",
+  "squeeze": "(mgp.Sprite == Actor.GetSpriteIndex('2SAS') && mf >= 1 && mf <= 4) || (mgp.Sprite == Actor.GetSpriteIndex('3SAR') && mf == 8) || (mgp.Sprite == Actor.GetSpriteIndex('USAS') && (mf == 9 || mf == 13 || mf == 14))",
+  "squeeze_note": "FIRE frames (gunmoves rows 0-5: 2SAS B-E, 3SAR I, USAS J N O)",
+  "support": {
+   "sup_hook": [
+    -1.555960350713755,
+    4.989054805268171,
+    -5.223131037809508
+   ],
+   "sup_rot": [
+    -7.927498143864204,
+    2.302018100012503,
+    10.73246024838633
+   ],
+   "sup_point_m": [
+    0.44629114022658484,
+    0.09843434149224456,
+    -0.051786900768646726
+   ]
+  },
+  "support_note": "the FBX palm-under (RQFS B) under the AssaultShotgun forend at 1.92's SupportPoint, moved with the gun (bake_sg.py)"
+ }
+}

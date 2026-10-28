@@ -1,0 +1,40 @@
+{
+ "cls": "Machinegun",
+ "pose": "B",
+ "frame": 1,
+ "sup_hook": [
+  -3.378,
+  11.032,
+  -2.727
+ ],
+ "sup_rot": [
+  -7.927,
+  2.302,
+  10.732
+ ],
+ "sup_point_m": [
+  0.428,
+  0.064,
+  0.006
+ ],
+ "sp192_cm": [
+  38.8,
+  -0.1,
+  -6.5
+ ],
+ "dz": -0.7,
+ "pen_at_contact": 0.89,
+ "pen_gun": 0.44,
+ "pen_gunhand": null,
+ "pen_also_gun_hand": [],
+ "palm_gap_to_gun": 0.7,
+ "check": 0.0,
+ "names": [
+  "Machinegun.md3"
+ ],
+ "under": [
+  41.514,
+  5.933,
+  -2.144
+ ]
+}

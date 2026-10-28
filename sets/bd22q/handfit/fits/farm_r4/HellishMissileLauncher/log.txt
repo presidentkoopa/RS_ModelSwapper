@@ -1,0 +1,10 @@
+HellishMissileLauncher stage2 dense {"gun": "HellishMissileLauncher", "mode": "dense", "thr": 0.1, "start": {"pen": 1.573800417534154, "pen_nonI": 1.573800417534154, "padI": null, "palm": 1.2716509639088645, "web": 0.05208568240486032}, "rot_vs_start_deg": 9.27031786066187, "move_vs_start_cm": [1.305, -1.239, -1.949], "pad_I_to_trigger": null, "pen_max": 1.5065547980889578, "pen_nonI": 0.17550236588131962, "gap_palm": 0.6786739019284636, "gap_web": 0.388149481975194, "nfev": 17}
+Traceback (most recent call last):
+  File "E:\DOOMWork\_buildtemp\claude_bridge\work\fitfarm\fit_batch.py", line 107, in run_job
+    F = _fit(H, g, job.get('skip_stage', False), job.get('bake_only', False), job.get('idx', 'auto'), job.get('dense', False), job.get('thr'), job.get('wrap', False), bool(job.get('seat')))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\DOOMWork\_buildtemp\claude_bridge\work\fitfarm\fit_batch.py", line 65, in _fit
+    print(g, 'curl', json.dumps({k: ({a: round(b, 2) for a, b in v.items()} if isinstance(v, dict) else v) for k, v in o2.items()}, default=float), flush=True)
+                                         ^^^^^^^^^^^
+TypeError: type NoneType doesn't define __round__ method
+

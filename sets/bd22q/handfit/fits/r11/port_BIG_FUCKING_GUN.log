@@ -1,0 +1,19 @@
+BIG_FUCKING_GUN: MODELDEF Offset -0.338 -2.964  ZOffset -0.782  Angle/Pitch/Roll 3.854/3.363/10.974 (chain residual 0.0000 cm)
+  MODELDEF MODELDEF.bd.txt BIG_FUCKING_GUN x1
+  MODELDEF MODELDEF.purist PuristBIG_FUCKING_GUN x1
+  gunmoves Pivot row 3 [ 0.  5. 24.] -> [ 0.338  9.218 21.036]
+  gunmoves row 11 (BFGAA, md3 frame 10) 0.00, 0.00, 0.00, 0.00, 0.00, 13.77 -> 0.00, 0.00, 0.00, -0.92, -0.81, 13.72
+  gunmoves row 12 (BFGAB, md3 frame 11) 0.00, 0.00, 0.00, 0.00, 0.00, 27.54 -> 0.00, 0.00, 0.00, -1.85, -1.62, 27.43
+  gunmoves row 13 (BFGACD, md3 frame 12) 0.00, 10.00, 0.00, 0.00, 7.72, 19.34 -> 1.99, 9.77, 0.94, -2.60, 5.79, 18.78
+  gunmoves row 14 (BFGAEF, md3 frame 13) 0.00, 5.00, 0.00, 0.00, 2.77, 7.38 -> 0.97, 4.89, 0.43, -0.94, 1.97, 7.05
+  muzzle row ADDED BIG_FUCKING_GUN drawn tip [84.7   0.   11.24] -> [86.71  5.85 21.97]
+  hand squeeze: fire frames: BFGA ABCDEF
+  hand md3 fbx_hv_BIG_FUCKING_GUN_R.md3 <- fbx_hv_BIG_FUCKING_GUN_R.md3
+  hand blocks MODELDEF.rsq RSQ_GunSide, RSQ_Hands RQVB
+  hand block (dual) MODELDEF.rsqdual BIG_FUCKING_GUN
+  hand block (dual) MODELDEF.purist PuristBIG_FUCKING_GUN
+  hands.zs labels FbxTrgBFG9 / FbxSqzBFG9 (+ dual)
+  dualhands.zs label
+  handtable GunHook / GunHookTwo row 3 = 0
+  handtable Support row 3 [-3.4383350421465795, 9.299623990640383, 5.667473860442387] [-7.927498143864204, 2.302018100012503, 10.73246024838633] [0.3320336894630407, 0.06437200217695566, -0.02748504895504359]
+moved 17 items

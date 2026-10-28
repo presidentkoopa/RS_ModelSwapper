@@ -1,0 +1,70 @@
+version "4.10"
+// TEST ONLY (scope-3x lane rig run): never ships. Two identical magenta targets at the same depth:
+// one on the scope camera's line (seen in the lens), one 0.45*D to the left (seen by the naked eye).
+// Logs the scope state each second and the frame rate (RenderOverlay count over MSTime).
+class RSQT_Target : Actor
+{
+	Default { +NOINTERACTION +NOGRAVITY +NOBLOCKMAP +BRIGHT Radius 1; Height 8; Scale 0.5; }
+	States { Spawn: RQTG A -1 BRIGHT; Stop; }
+}
+class RSQT_Scope3x : EventHandler
+{
+	RSQT_Target t1, t2;
+	ui int nfr; ui double t0;
+	int altLast;
+	const OUTR = 0.27;	// to the player's right, same depth
+	int placeAt, turnFrom, turnTo, cmpFrom;
+	override void WorldLoaded(WorldEvent e)
+	{
+	}
+	override void WorldTick()
+	{
+		let mo = players[consoleplayer].mo;
+		if (!mo) return;
+		let h = RSQ_ScopeReal(EventHandler.Find('RSQ_ScopeReal'));
+		int T = level.maptime;
+		double D = 256;
+		if (T == 330 && h && h.cam)
+		{
+			Vector3 dir = (cos(h.cam.angle) * cos(h.cam.pitch), sin(h.cam.angle) * cos(h.cam.pitch), -sin(h.cam.pitch));
+			Vector3 p = h.cam.pos + dir * D;
+			Vector3 lat = (-sin(mo.angle), cos(mo.angle), 0);	// player's left
+			t1 = RSQT_Target(Actor.Spawn('RSQT_Target', p - (0, 0, 4.8), NO_REPLACE));
+			t2 = RSQT_Target(Actor.Spawn('RSQT_Target', p + (sin(mo.angle), -cos(mo.angle), 0) * (OUTR * D) - (0, 0, 4.8), NO_REPLACE));
+			Console.Printf("RSQT targets at D=%.0f cam=(%.1f %.1f %.1f) ang=%.2f pit=%.2f", D, h.cam.pos.x, h.cam.pos.y, h.cam.pos.z, h.cam.angle, h.cam.pitch);
+		}
+		let w = mo.player.ReadyWeapon;
+		int i = RSQ_ScopeTable.Index(w);
+		// FRAME-TIME A/B: from tic OFFAT on, take the camera texture off the glass every tic (the scope
+		// handler keeps skinOn, so it never re-applies it): the same gun and view, scope render off.
+		let oc = CVar.FindCVar('rsqt_offat');
+		int offat = oc ? oc.GetInt() : 0;
+		if (offat > 0 && T >= offat && i > 0)
+			w.A_ChangeModel('None', 0, "", 'None', RSQ_ScopeReal.GlassSurface(i), "", 'None', CMDL_USESURFACESKIN);
+		if (T == offat) Console.Printf("RSQT scope render OFF from here");
+		int alt = (mo.player.cmd.buttons & BT_ALTATTACK) ? 1 : 0;
+		if (alt != altLast) Console.Printf("RSQT alt t=%d %d off=%d mag=%d/%d zoomed=%d", T, alt, h ? h.scopeOff : -1, mo.CountInv('xm21Ammo'), mo.CountInv('RailgunAmmo'), mo.CountInv('Zoomed'));
+		altLast = alt;
+		if (T % 35 == 17) Console.Printf("RSQT ammo t=%d off=%d mag=%d/%d zoomed=%d", T, h ? h.scopeOff : -1, mo.CountInv('xm21Ammo'), mo.CountInv('RailgunAmmo'), mo.CountInv('Zoomed'));
+		if (T % 35 != 0) return;
+		Vector3 el = RSQ_Scope.EyeInHandFrame(mo, -1);
+		Vector3 er = RSQ_Scope.EyeInHandFrame(mo, 1);
+		let cv = i > 0 ? CVar.GetCVar(RSQ_ScopeTable.ModeCVar(i), mo.player) : null;
+		Console.Printf("RSQT t=%d off=%d gun=%s idx=%d mode=%d eyeL=(%.2f %.2f %.2f) eyeR=(%.2f %.2f %.2f) skinOn=%d cam=%d along=%.2f fov=%.3f roll=%.1f attackroll=%.1f apitch=%.2f aang=%.2f mang=%.2f",
+			T, h ? h.scopeOff : -1, w ? w.GetClassName() : 'none', i, cv ? cv.GetInt() : -1, el.x, el.y, el.z, er.x, er.y, er.z,
+			h ? h.skinOn : -1, h && h.cam ? 1 : 0, h ? h.eyeAlong : 0,
+			(h && i > 0) ? RSQ_ScopeReal.FovFor(RSQ_ScopeTable.Radius(i), h.eyeAlong, (cv && cv.GetInt() == 1) ? RSQ_ScopeTable.Mag(i) : 1.0) : 0,
+			h && h.cam ? h.cam.roll : 0, mo.AttackRoll, mo.AttackPitch, mo.AttackAngle, mo.angle);
+	}
+	override void RenderOverlay(RenderEvent e)
+	{
+		if (nfr == 0) t0 = MSTimeF();
+		nfr++;
+		if (nfr % 40 == 0)
+		{
+			double now = MSTimeF();
+			Console.Printf("RSQFPS t=%d frames=40 ms=%.1f per=%.2f", level.maptime, now - t0, (now - t0) / 40.0);
+			t0 = now;
+		}
+	}
+}

@@ -1,0 +1,10 @@
+Unmaker stage2 dense {"gun": "Unmaker", "mode": "dense", "thr": 0.1, "start": {"pen": 2.1435614280478434, "pen_nonI": 2.1435614280478434, "padI": null, "palm": 3.355108624853839, "web": 1.7413789963716721}, "rot_vs_start_deg": 30.08570012629875, "move_vs_start_cm": [0.063, 4.306, -0.578], "pad_I_to_trigger": null, "pen_max": 0.7107474418873972, "pen_nonI": 0.12061968757427555, "gap_palm": 0.36614499743563544, "gap_web": 0.05675402361261207, "nfev": 38}
+Traceback (most recent call last):
+  File "E:\DOOMWork\_buildtemp\claude_bridge\work\fitfarm\fit_batch.py", line 107, in run_job
+    F = _fit(H, g, job.get('skip_stage', False), job.get('bake_only', False), job.get('idx', 'auto'), job.get('dense', False), job.get('thr'), job.get('wrap', False), bool(job.get('seat')))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\DOOMWork\_buildtemp\claude_bridge\work\fitfarm\fit_batch.py", line 65, in _fit
+    print(g, 'curl', json.dumps({k: ({a: round(b, 2) for a, b in v.items()} if isinstance(v, dict) else v) for k, v in o2.items()}, default=float), flush=True)
+                                         ^^^^^^^^^^^
+TypeError: type NoneType doesn't define __round__ method
+
