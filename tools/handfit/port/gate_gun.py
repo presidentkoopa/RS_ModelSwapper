@@ -102,7 +102,7 @@ def hands(pk3, job):
     return (r.stdout + r.stderr).splitlines()[-25:]
 def compose(out, guns):
     from PIL import Image, ImageDraw
-    REF = os.path.join(_DP.SET, 'reference', '192_poses')	# the owner's 1.92 holds, rendered; sts = ['rest', 'steady', 'fire']
+    REF = os.path.join(_DP.SET, 'reference', '192_poses'); sts = ['rest', 'steady', 'fire']	# REF: the owner's 1.92 holds, rendered
     rows = [(g, v) for g in guns for v in ('eye', 'side')]; w, h = 480, 360; lh = 22; top = 34
     for f in glob.glob(OUT + '/shots/*.png'): w, h = Image.open(f).size; break
     sheet = Image.new('RGB', (w * 4, top + (h + lh) * len(rows)), (24, 24, 24)); dr = ImageDraw.Draw(sheet)
