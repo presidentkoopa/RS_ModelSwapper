@@ -11,7 +11,7 @@ ModelSwapper doesn't wait for that. It carries one shelf of models and fits it t
 
 Every weapon the loaded mod gives you, the family it was sorted into, and the model it is wearing. Any model can go on any weapon.
 
-Coming in 2.0: renamed models, so every one says clearly what it is, and selectable skins, including weapons coloured to match the theme and palette of popular mods.
+**Coming in 2.0: VR hands and hand reloading on any mod. Our models, their code.** Load any weapon mod, even one written long before VR, and its guns reload by hand the way each model is built: pull the magazine and seat a new one, break the shotgun and load the shells, work the pump, swing out the cylinder. The mod's own reload decides the ammo, rules and sounds. 2.0 is in progress on the `modelswapper-2.0-bd22-lift` branch, and its README says honestly what works today and what does not. Also coming: renamed models and selectable skins.
 
 ## How it works
 
