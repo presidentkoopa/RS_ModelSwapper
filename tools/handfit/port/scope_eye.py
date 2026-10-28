@@ -4,7 +4,7 @@ Method (lane B scope, r6-scope): the right hand held level at the rig's RHAND, t
 Lens - 8 cm * Axis in the hand frame (target read from scope.zs in the tree), corrected from the eye position the
 probe logs (RSQ_Scope.EyeInHandFrame); the scope test probe (lane_b_scope_rig/test.pk3: RSQT lines) logs the REAL
 state (skinOn, cam, along, fov); frames dumped at the last pose. Rig only: not a headset test.
-Env: RSQ_DEPOT, RSQ_GAMEDATA, RSQ_RIGLOCK as gate_gun.py; RSQ_SCOPE_PROBE (default <repo>/../lane_b_scope_rig/test.pk3)."""
+Env: RSQ_DEPOT, RSQ_GAMEDATA, RSQ_RIGLOCK as gate_gun.py; RSQ_SCOPE_PROBE (default <work>/scope_rig/test.pk3)."""
 import os, re, sys, json, numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import gate_gun as GG
@@ -15,7 +15,7 @@ def table(fn, i=2):
 SC = {'Sniper': 2, 'RailGun': 1}
 def run(pk3, out, it=3, gun='Sniper'):
     ix = SC[gun]; L = table('Lens', ix); A = table('Axis', ix); tgt = L - 8.0 * A / np.linalg.norm(A); print('lens', L, 'axis', A, 'eye target (F L U cm)', tgt.round(2))
-    probe = os.environ.get('RSQ_SCOPE_PROBE', os.path.join(REPO, '..', 'lane_b_scope_rig', 'test.pk3'))
+    probe = os.environ.get('RSQ_SCOPE_PROBE', os.path.join(_DP.WORK, 'scope_rig', 'test.pk3'))
     GG.setpk3(pk3); os.environ['B22_NOPROBE'] = '1'
     off = np.array([0.0, -3.2, 0.0])	# the head centre is half the IPD to the right of the left eye (first guess; corrected below)
     res = []

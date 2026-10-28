@@ -1,0 +1,239 @@
+{
+ "class": "HellishMissileLauncher",
+ "label": "Revenant missiles",
+ "bd22_tag": "TAGBD_REVMISSILE",
+ "handtable_index": 9,
+ "kind": "two",
+ "support_shown": true,
+ "handtable_row": {
+  "GunOne": "E",
+  "GunTwo": "E",
+  "Support": "D",
+  "GunHook": [
+   3.59,
+   -8.08,
+   3.6
+  ],
+  "GunRot": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "SupportHook": [
+   1.75,
+   -24.53,
+   2.08
+  ],
+  "SupportRot": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "SupportPoint": [
+   0.3,
+   0.0,
+   -0.223
+  ],
+  "Trigger": "G"
+ },
+ "handtable_source": "BD22Q_192.pk3:zscript/rsq/handtable.zs",
+ "modeldef_hand_frames": [
+  "MODELDEF.rsq:17: FrameIndex RQGS E 0 7\t// Ermac hand.md3 frame 95",
+  "MODELDEF.rsq:33: FrameIndex RQGT G 0 22\t// index finger on the trigger",
+  "MODELDEF.rsq:34: FrameIndex RQGU G 0 23\t// trigger squeezed",
+  "MODELDEF.rsq:67: FrameIndex RQSP D 0 3\t// Ermac hand2.md3 frame 80"
+ ],
+ "modeldef_hand_common": "MODELDEF.rsq RSQ_GunSide blocks: Model 0 \"hand.md3\" (gun hand) / \"hand2.md3\" (support), Skin \"hand.png\", Scale -1.0 1.0 1.0, Offset 0.0 -24.0 -10.0",
+ "modeldef_gun_blocks": [
+  [
+   "MODELDEF.bd.txt",
+   1232,
+   "Model HellishMissileLauncher\n{\n   Path \"models/bd/HellishMissile\"\n   Model 0 \"HellishMissile.md3\"\n   Skin 0 \"HellishMissile.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n// Pose: restored 2026-10-10 -- each BD22 sprite frame takes the authored\n// BD21 pose for the same moment (tools/pose_tables.py, fill_tables.py).\n\n   FrameIndex\tRVCG\tA\t0\t0\n   FrameIndex\tRVCG\tQ\t0\t0\n   FrameIndex\tRVCG\tP\t0\t0\n   FrameIndex\tRVCG\tO\t0\t0\n   FrameIndex\tRVCG\tN\t0\t0\n   FrameIndex\tPLAY\tA\t0\t0\n   FrameIndex\tPIST\tF\t0\t0\n   FrameIndex\tFATB\tD\t0\t0\n   FrameIndex\tFATB\tA\t0\t0\n   FrameIndex\tPVCG\tA\t0\t0\n   FrameIndex\tRVCG\tB\t0\t1\n   FrameIndex\tRVCG\tC\t0\t1\n   FrameIndex\tRVCG\tD\t0\t2\n   FrameIndex\tRVCG\tE\t0\t2\n   FrameIndex\tRVCG\tF\t0\t3\n   FrameIndex\tRVCG\tG\t0\t4\n   FrameIndex\tRVCG\tH\t0\t5\n   FrameIndex\tRVCG\tI\t0\t5\n   FrameIndex\tRVCG\tJ\t0\t6\n   FrameIndex\tRVCG\tK\t0\t6\n   FrameIndex\tRVCG\tL\t0\t7\n   FrameIndex\tRVCG\tM\t0\t8\n   // v4: frames BD22 shows that had no key (fill_tables.py SIBLING/READY)\n   FrameIndex\tPVCG\tB\t0\t1\n   FrameIndex\tPVCG\tC\t0\t1\n   FrameIndex\tPVCG\tD\t0\t2\n   FrameIndex\tPVCG\tE\t0\t2\n   FrameIndex\tPVCG\tF\t0\t3\n   FrameIndex\tPVCG\tG\t0\t4\n   FrameIndex\tPVCG\tH\t0\t5\n   FrameIndex\tPVCG\tI\t0\t5\n   FrameIndex\tPVCG\tJ\t0\t6\n   FrameIndex\tPVCG\tK\t0\t6\n   FrameIndex\tPVCG\tL\t0\t7\n   FrameIndex\tPVCG\tM\t0\t8\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   6293,
+   "Model HellishMissileLauncher\n{\n   Path \"models/bd/Grenade\"\n   Model 0 \"nade.md3\"\n   Skin 0 \"nade.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n   FrameIndex\tGRTH\tA\t0\t3\n   FrameIndex\tGRTH\tB\t0\t4\n   FrameIndex\tGRTH\tC\t0\t5\n   FrameIndex\tGRTH\tD\t0\t6\n   FrameIndex\tGRTH\tE\t0\t7\n   FrameIndex\tGRTH\tF\t0\t8\n   FrameIndex\tGRTH\tG\t0\t9\n   FrameIndex\tGRTH\tH\t0\t10\n   FrameIndex\tGRTH\tI\t0\t11\n   FrameIndex\tGRTH\tJ\t0\t12\n   FrameIndex\tGRTH\tK\t0\t13\n   FrameIndex\tGRTH\tL\t0\t14\n   FrameIndex\tGRTH\tM\t0\t15\n   FrameIndex\tGRTH\tN\t0\t15\n   FrameIndex\tGRTH\tO\t0\t15\n   FrameIndex\tGRTH\tP\t0\t15\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   6322,
+   "Model HellishMissileLauncher\n{\n   Path \"models/bd/Boot\"\n   Model 0 \"Boot.md3\"\n   Skin 0 \"Boot.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n   FrameIndex\t1ICK\tA\t0\t10\n   FrameIndex\t1ICK\tB\t0\t11\n   FrameIndex\t1ICK\tC\t0\t12\n   FrameIndex\t1ICK\tD\t0\t13\n   FrameIndex\t1ICK\tE\t0\t14\n   FrameIndex\t1ICK\tF\t0\t15\n   FrameIndex\t1ICK\tG\t0\t16\n   FrameIndex\t1ICK\tH\t0\t17\n   FrameIndex\t1ICK\tI\t0\t18\n   FrameIndex\t1ICK\tJ\t0\t19\n   FrameIndex\t1ICK\tK\t0\t20\n   FrameIndex\t1ICK\tL\t0\t21\n   FrameIndex\t1ICK\tM\t0\t22\n   FrameIndex\t1ICK\tN\t0\t23\n   FrameIndex\t1ICK\tO\t0\t24\n   FrameIndex\t1ICK\tP\t0\t25\n   FrameIndex\t1ICK\tQ\t0\t26\n   FrameIndex\t1ICK\tR\t0\t27\n   FrameIndex\t1ICK\tS\t0\t28\n   FrameIndex\t1ICK\tT\t0\t29\n   FrameIndex\t1ICK\tU\t0\t30\n   FrameIndex\t1ICK\tV\t0\t30\n   FrameIndex\t1ICK\tW\t0\t30\n   FrameIndex\t1ICK\tX\t0\t30\n   FrameIndex\t1ICK\tY\t0\t30\n   FrameIndex\t1ICK\tZ\t0\t30\n   FrameIndex\t1ICK\t[\t0\t30\n   FrameIndex\t1ICK\t]\t0\t30\n   FrameIndex\t1LID\tA\t0\t14\n   FrameIndex\t1LID\tB\t0\t14\n   FrameIndex\t1LID\tC\t0\t14\n   FrameIndex\t1LID\tD\t0\t14\n   FrameIndex\t1LID\tE\t0\t14\n   FrameIndex\t1LID\tF\t0\t14\n   FrameIndex\t1LID\tG\t0\t14\n   FrameIndex\t1LID\tH\t0\t14\n   FrameIndex\t1LID\tI\t0\t14\n   FrameIndex\t1LID\tJ\t0\t14\n   FrameIndex\t1LID\tK\t0\t14\n   FrameIndex\t1LID\tL\t0\t14\n   FrameIndex\t1LID\tM\t0\t14\n   FrameIndex\t1LID\tN\t0\t14\n   FrameIndex\t1TOM\tA\t0\t31\n   FrameIndex\t2ICK\tA\t0\t10\n   FrameIndex\t2ICK\tB\t0\t11\n   FrameIndex\t2ICK\tC\t0\t12\n   FrameIndex\t2ICK\tD\t0\t13\n   FrameIndex\t2ICK\tE\t0\t14\n   FrameIndex\t2ICK\tF\t0\t15\n   FrameIndex\t2ICK\tG\t0\t16\n   FrameIndex\t2ICK\tH\t0\t17\n   FrameIndex\t2ICK\tI\t0\t18\n   FrameIndex\t2ICK\tJ\t0\t19\n   FrameIndex\t2ICK\tK\t0\t20\n   FrameIndex\t2ICK\tL\t0\t21\n   FrameIndex\t2ICK\tM\t0\t22\n   FrameIndex\t2ICK\tN\t0\t23\n   FrameIndex\t2ICK\tO\t0\t24\n   FrameIndex\t2ICK\tP\t0\t25\n   FrameIndex\t2ICK\tQ\t0\t26\n   FrameIndex\t2ICK\tR\t0\t27\n   FrameIndex\t2ICK\tS\t0\t28\n   FrameIndex\t2ICK\tT\t0\t29\n   FrameIndex\t2ICK\tU\t0\t30\n   FrameIndex\t2ICK\tV\t0\t30\n   FrameIndex\t2ICK\tW\t0\t30\n   FrameIndex\t2ICK\tX\t0\t30\n   FrameIndex\t2ICK\tY\t0\t30\n   FrameIndex\t2ICK\tZ\t0\t30\n   FrameIndex\t2ICK\t[\t0\t30\n   FrameIndex\t2ICK\t]\t0\t30\n   FrameIndex\t2LID\tA\t0\t14\n   FrameIndex\t2LID\tB\t0\t14\n   FrameIndex\t2LID\tC\t0\t14\n   FrameIndex\t2LID\tD\t0\t14\n   FrameIndex\t2LID\tE\t0\t14\n   FrameIndex\t2LID\tF\t0\t14\n   FrameIndex\t2LID\tG\t0\t14\n   FrameIndex\t2LID\tH\t0\t14\n   FrameIndex\t2LID\tI\t0\t14\n   FrameIndex\t2LID\tJ\t0\t14\n   FrameIndex\t2LID\tK\t0\t14\n   FrameIndex\t2LID\tL\t0\t14\n   FrameIndex\t2LID\tM\t0\t14\n   FrameIndex\t2LID\tN\t0\t14\n   FrameIndex\t2TOM\tA\t0\t31\n   FrameIndex\t3ICK\tA\t0\t10\n   FrameIndex\t3ICK\tB\t0\t11\n   FrameIndex\t3ICK\tC\t0\t12\n   FrameIndex\t3ICK\tD\t0\t13\n   FrameIndex\t3ICK\tE\t0\t14\n   FrameIndex\t3ICK\tF\t0\t15\n   FrameIndex\t3ICK\tG\t0\t16\n   FrameIndex\t3ICK\tH\t0\t17\n   FrameIndex\t3ICK\tI\t0\t18\n   FrameIndex\t3ICK\tJ\t0\t19\n   FrameIndex\t3ICK\tK\t0\t20\n   FrameIndex\t3ICK\tL\t0\t21\n   FrameIndex\t3ICK\tM\t0\t22\n   FrameIndex\t3ICK\tN\t0\t23\n   FrameIndex\t3ICK\tO\t0\t24\n   FrameIndex\t3ICK\tP\t0\t25\n   FrameIndex\t3ICK\tQ\t0\t26\n   FrameIndex\t3ICK\tR\t0\t27\n   FrameIndex\t3ICK\tS\t0\t28\n   FrameIndex\t3ICK\tT\t0\t29\n   FrameIndex\t3ICK\tU\t0\t30\n   FrameIndex\t3ICK\tV\t0\t30\n   FrameIndex\t3ICK\tW\t0\t30\n   FrameIndex\t3ICK\tX\t0\t30\n   FrameIndex\t3ICK\tY\t0\t30\n   FrameIndex\t3ICK\tZ\t0\t30\n   FrameIndex\t3ICK\t[\t0\t30\n   FrameIndex\t3ICK\t]\t0\t30\n   FrameIndex\t3LID\tA\t0\t14\n   FrameIndex\t3LID\tB\t0\t14\n   FrameIndex\t3LID\tC\t0\t14\n   FrameIndex\t3LID\tD\t0\t14\n   FrameIndex\t3LID\tE\t0\t14\n   FrameIndex\t3LID\tF\t0\t14\n   FrameIndex\t3LID\tG\t0\t14\n   FrameIndex\t3LID\tH\t0\t14\n   FrameIndex\t3LID\tI\t0\t14\n   FrameIndex\t3LID\tJ\t0\t14\n   FrameIndex\t3LID\tK\t0\t14\n   FrameIndex\t3LID\tL\t0\t14\n   FrameIndex\t3LID\tM\t0\t14\n   FrameIndex\t3LID\tN\t0\t14\n   FrameIndex\t3TOM\tA\t0\t31\n   FrameIndex\tKICK\tA\t0\t10\n   FrameIndex\tKICK\tB\t0\t11\n   FrameIndex\tKICK\tC\t0\t12\n   FrameIndex\tKICK\tD\t0\t13\n   FrameIndex\tKICK\tE\t0\t14\n   FrameIndex\tKICK\tF\t0\t15\n   FrameIndex\tKICK\tG\t0\t16\n   FrameIndex\tKICK\tH\t0\t17\n   FrameIndex\tKICK\tI\t0\t18\n   FrameIndex\tKICK\tJ\t0\t19\n   FrameIndex\tKICK\tK\t0\t20\n   FrameIndex\tKICK\tL\t0\t21\n   FrameIndex\tKICK\tM\t0\t22\n   FrameIndex\tKICK\tN\t0\t23\n   FrameIndex\tKICK\tO\t0\t24\n   FrameIndex\tKICK\tP\t0\t25\n   FrameIndex\tKICK\tQ\t0\t26\n   FrameIndex\tKICK\tR\t0\t27\n   FrameIndex\tKICK\tS\t0\t28\n   FrameIndex\tKICK\tT\t0\t29\n   FrameIndex\tKICK\tU\t0\t30\n   FrameIndex\tKICK\tV\t0\t30\n   FrameIndex\tKICK\tW\t0\t30\n   FrameIndex\tKICK\tX\t0\t30\n   FrameIndex\tKICK\tY\t0\t30\n   FrameIndex\tKICK\tZ\t0\t30\n   FrameIndex\tKICK\t[\t0\t30\n   FrameIndex\tKICK\t]\t0\t30\n   FrameIndex\tKIK1\tA\t0\t0\n   FrameIndex\tKIK1\tB\t0\t1\n   FrameIndex\tKIK1\tC\t0\t2\n   FrameIndex\tKIK1\tD\t0\t3\n   FrameIndex\tKIK1\tE\t0\t4\n   FrameIndex\tKIK2\tA\t0\t5\n   FrameIndex\tKIK2\tB\t0\t6\n   FrameIndex\tKIK2\tC\t0\t7\n   FrameIndex\tKIK2\tD\t0\t8\n   FrameIndex\tKIK2\tE\t0\t9\n   FrameIndex\tSLID\tA\t0\t14\n   FrameIndex\tSLID\tB\t0\t14\n   FrameIndex\tSLID\tC\t0\t14\n   FrameIndex\tSLID\tD\t0\t14\n   FrameIndex\tSLID\tE\t0\t14\n   FrameIndex\tSLID\tF\t0\t14\n   FrameIndex\tSLID\tG\t0\t14\n   FrameIndex\tSLID\tH\t0\t14\n   FrameIndex\tSLID\tI\t0\t14\n   FrameIndex\tSLID\tJ\t0\t14\n   FrameIndex\tSLID\tK\t0\t14\n   FrameIndex\tSLID\tL\t0\t14\n   FrameIndex\tSLID\tM\t0\t14\n   FrameIndex\tSLID\tN\t0\t14\n   FrameIndex\tSTOM\tA\t0\t31\n   FrameIndex\tSTOM\tB\t0\t32\n   FrameIndex\tSTOM\tC\t0\t33\n   FrameIndex\tSTOM\tD\t0\t34\n   FrameIndex\tSTOM\tE\t0\t35\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   6521,
+   "Model HellishMissileLauncher\n{\n   Path \"models/bd/FIST\"\n   Model 0 \"fistclosed.md3\"\n   Skin 0 \"fist.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n   FrameIndex\tFUCK\tA\t0\t41\n   FrameIndex\tFUCK\tB\t0\t42\n   FrameIndex\tFUCK\tC\t0\t43\n   FrameIndex\tFUCK\tD\t0\t44\n   FrameIndex\tFUCK\tE\t0\t44\n   FrameIndex\tFUCK\tF\t0\t45\n   FrameIndex\tFUCK\tG\t0\t46\n   FrameIndex\tFUCK\tH\t0\t47\n   FrameIndex\tFUCK\tI\t0\t48\n   FrameIndex\tFUCK\tJ\t0\t48\n   FrameIndex\tFUCK\tK\t0\t50\n   FrameIndex\tFUCK\tL\t0\t51\n   FrameIndex\tFUCK\tM\t0\t52\n   FrameIndex\tFUCK\tN\t0\t53\n   FrameIndex\tFUCK\tO\t0\t53\n   FrameIndex\tIEHW\tA\t0\t39\n   FrameIndex\tIEHW\tB\t0\t39\n   FrameIndex\tIEHW\tC\t0\t39\n   FrameIndex\tIEHW\tD\t0\t39\n   FrameIndex\tIEHW\tE\t0\t39\n   FrameIndex\tIEHW\tF\t0\t39\n   FrameIndex\tIEHW\tG\t0\t39\n   FrameIndex\tIEHW\tH\t0\t39\n   FrameIndex\tIEHW\tI\t0\t39\n   FrameIndex\tIEHW\tJ\t0\t39\n   FrameIndex\tIEHW\tK\t0\t39\n   FrameIndex\tIEHW\tL\t0\t40\n   FrameIndex\tIEHW\tM\t0\t40\n   FrameIndex\tIEHW\tN\t0\t40\n   FrameIndex\tIEHW\tO\t0\t40\n   FrameIndex\tIEHW\tP\t0\t40\n   FrameIndex\tIEHW\tQ\t0\t40\n   FrameIndex\tIEHW\tR\t0\t40\n   FrameIndex\tIEHW\tS\t0\t40\n   FrameIndex\tIEHW\tT\t0\t40\n   FrameIndex\tSALU\tA\t0\t18\n   FrameIndex\tSALU\tB\t0\t19\n   FrameIndex\tSALU\tC\t0\t20\n   FrameIndex\tSALU\tD\t0\t21\n   FrameIndex\tSALU\tE\t0\t22\n   FrameIndex\tVUCK\tA\t0\t41\n   FrameIndex\tVUCK\tB\t0\t42\n   FrameIndex\tVUCK\tC\t0\t43\n   FrameIndex\tVUCK\tD\t0\t44\n   FrameIndex\tVUCK\tE\t0\t44\n   FrameIndex\tVUCK\tF\t0\t45\n   FrameIndex\tVUCK\tG\t0\t46\n   FrameIndex\tVUCK\tH\t0\t47\n   FrameIndex\tVUCK\tI\t0\t48\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   6580,
+   "Model HellishMissileLauncher\n{\n   Path \"models/bd/FIST\"\n   Model 0 \"fistclosed.md3\"\n   Skin 0 \"rsr_clear.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n   FrameIndex\t1UNG\tD\t0\t10\n   FrameIndex\t1UNG\tE\t0\t11\n   FrameIndex\t1UNG\tF\t0\t12\n   FrameIndex\t1UNG\tG\t0\t12\n   FrameIndex\t1UNG\tH\t0\t12\n   FrameIndex\t1UNG\tI\t0\t12\n   FrameIndex\t1UNG\tJ\t0\t12\n   FrameIndex\t4ONG\tB\t0\t1\n   FrameIndex\t4ONG\tC\t0\t2\n   FrameIndex\t4ONG\tD\t0\t3\n   FrameIndex\t4ONG\tE\t0\t4\n   FrameIndex\t4ONG\tF\t0\t5\n   FrameIndex\t4ONG\tG\t0\t7\n   FrameIndex\t4ONG\tV\t0\t1\n   FrameIndex\t4ONG\tW\t0\t2\n   FrameIndex\t4ONG\tX\t0\t3\n   FrameIndex\t4ONG\tY\t0\t4\n   FrameIndex\t4ONG\tZ\t0\t5\n   FrameIndex\t4ONG\t[\t0\t6\n   FrameIndex\t4UNG\tA\t0\t1\n   FrameIndex\t4UNG\tD\t0\t10\n   FrameIndex\t4UNG\tE\t0\t11\n   FrameIndex\t4UNG\tF\t0\t12\n   FrameIndex\t4UNG\tG\t0\t12\n   FrameIndex\t4UNG\tH\t0\t12\n   FrameIndex\t4UNG\tI\t0\t12\n   FrameIndex\t4UNG\tJ\t0\t12\n   FrameIndex\tPONG\tB\t0\t1\n   FrameIndex\tPONG\tC\t0\t2\n   FrameIndex\tPONG\tD\t0\t3\n   FrameIndex\tPONG\tE\t0\t4\n   FrameIndex\tPONG\tF\t0\t5\n   FrameIndex\tPONG\tG\t0\t7\n   FrameIndex\tPONG\tV\t0\t1\n   FrameIndex\tPONG\tW\t0\t2\n   FrameIndex\tPONG\tX\t0\t3\n   FrameIndex\tPONG\tY\t0\t4\n   FrameIndex\tPONG\tZ\t0\t5\n   FrameIndex\tPONG\t[\t0\t6\n   FrameIndex\tPUNG\tA\t0\t1\n   FrameIndex\tPUNG\tB\t0\t8\n   FrameIndex\tPUNG\tC\t0\t9\n}"
+  ],
+  [
+   "MODELDEF.rsqdual",
+   95,
+   "Model HellishMissileLauncher\n{\n\tPath \"models/rsq\"\n\tModel 0 \"hand.md3\"\n\tSkin 0 \"hand.png\"\n\tScale -1.0 1.0 1.0\n\tOffset -3.590 -20.400 -18.080\n\tFrameIndex RQGT G 0 22\n\tFrameIndex RQGU G 0 23\n}"
+  ]
+ ],
+ "rig": {
+  "engine": "/home/claude/rsq_weapondepot/tools/rig/build/rig/qz",
+  "engine_ok": true,
+  "rc": 0,
+  "res": 960,
+  "dump_every": 2,
+  "select_tics": 200,
+  "load_order": [
+   "/home/claude/gamedata/doom2.wad",
+   "/home/claude/gamedata/brutal22test6.pk3",
+   "/home/claude/gamedata/BD_VoxelPack.pk3",
+   "/home/claude/rsq_weapondepot/tools/rig/build/BD22Q_192.pk3",
+   "/home/claude/gallery_192/probe192.pk3"
+  ],
+  "console": "wait 100; god; notarget; screenblocks 12; crosshair 0; con_notifytime 0; give Infrared; rsq_extra_weapons 1; give ammo; give HellishMissileLauncher; wait 2; use HellishMissileLauncher; r_drawplayersprites 0; qz_hmd \"0 1.6 0 89.9 0 0\"; qz_rhand \"0.0000 1.6800 -0.4000 30 -70.0 0\"; qz_lhand \"0.1128 1.6800 -0.4410 30 -70.0 0\"; wait 200; qz_lgrip 1; wait 20; qz_rhand \"0.0000 1.6800 -0.4000 30 -70.0 0\"; qz_lhand \"0.1128 1.6800 -0.4410 30 -70.0 0\"; qz_hmd \"0 1.6 0.12 0 0 0\"; r_drawplayersprites 1; echo G192VIEW 0 on; wait 45; r_drawplayersprites 0; echo G192VIEW 0 off; wait 30; echo G192VIEW 0 end; qz_rhand \"0.2500 1.3000 -0.3000 30 0.0 0\"; qz_lhand \"0.2500 1.3000 -0.4200 30 0.0 0\"; qz_hmd \"0 1.6 0 -40 0 0\"; r_drawplayersprites 1; echo G192VIEW 1 on; wait 45; r_drawplayersprites 0; echo G192VIEW 1 off; wait 30; echo G192VIEW 1 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"0.0010 2.4200 -0.7700 -89.94 90.00 0\"; r_drawplayersprites 1; echo G192VIEW 2 on; wait 45; r_drawplayersprites 0; echo G192VIEW 2 off; wait 30; echo G192VIEW 2 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"0.0010 0.3800 -0.7700 89.94 90.00 0\"; r_drawplayersprites 1; echo G192VIEW 3 on; wait 45; r_drawplayersprites 0; echo G192VIEW 3 off; wait 30; echo G192VIEW 3 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"0.5901 1.7570 -1.4732 -21.25 140.00 0\"; r_drawplayersprites 1; echo G192VIEW 4 on; wait 45; r_drawplayersprites 0; echo G192VIEW 4 off; wait 30; echo G192VIEW 4 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"0.2600 1.2600 -0.4900 21.79 70.91 0\"; r_drawplayersprites 1; echo G192VIEW 5 on; wait 45; r_drawplayersprites 0; echo G192VIEW 5 off; wait 30; echo G192VIEW 5 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"0.2200 1.0370 -0.8100 32.05 79.70 0\"; r_drawplayersprites 1; echo G192VIEW 6 on; wait 45; r_drawplayersprites 0; echo G192VIEW 6 off; wait 30; echo G192VIEW 6 end; quit",
+  "fixed_cvars": "rig config/qzdoom.ini: vr_two_handed_weapons=true vr_weaponRotate=-30 playerclass=$TAGBD_CLASS_RIFLE; give Infrared (light amp) for brightness",
+  "script_errors": [],
+  "probe": [
+   "G192VIEW 4 end",
+   "G192VIEW 5 on",
+   "G192 700 ready HellishMissileLauncher pending - state READY two 1 sup 932 gun 930 refire 0",
+   "G192 735 ready HellishMissileLauncher pending - state READY two 1 sup 932 gun 930 refire 0",
+   "G192VIEW 5 off",
+   "G192 770 ready HellishMissileLauncher pending - state READY two 1 sup 932 gun 930 refire 0",
+   "G192VIEW 5 end",
+   "G192VIEW 6 on",
+   "G192 805 ready HellishMissileLauncher pending - state READY two 1 sup 932 gun 930 refire 0",
+   "G192VIEW 6 off",
+   "G192 840 ready HellishMissileLauncher pending - state READY two 1 sup 932 gun 930 refire 0",
+   "G192VIEW 6 end"
+  ]
+ },
+ "camera_scale": 1.5,
+ "notes": "support hand open under the body; the grip hand is mostly hidden by the gun in every view",
+ "views": [
+  {
+   "view": "side",
+   "hmd": "0 1.6 0.12 0 0 0",
+   "rhand": "0.0000 1.6800 -0.4000 30 -70.0 0",
+   "lhand": "0.1128 1.6800 -0.4410 30 -70.0 0",
+   "file": "HellishMissileLauncher_side.jpg",
+   "frames": [
+    "f00108.ppm",
+    "f00118.ppm"
+   ],
+   "crop_box": [
+    72,
+    96,
+    960,
+    762,
+    "edge"
+   ]
+  },
+  {
+   "view": "eye",
+   "hmd": "0 1.6 0 -40 0 0",
+   "rhand": "0.2500 1.3000 -0.3000 30 0.0 0",
+   "lhand": "0.2500 1.3000 -0.4200 30 0.0 0",
+   "file": "HellishMissileLauncher_eye.jpg",
+   "frames": [
+    "f00128.ppm",
+    "f00136.ppm"
+   ],
+   "crop_box": [
+    0,
+    1,
+    960,
+    960,
+    "edge"
+   ]
+  },
+  {
+   "view": "top",
+   "hmd": "0.0010 2.4200 -0.7700 -89.94 90.00 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "file": "HellishMissileLauncher_top.jpg",
+   "frames": [
+    "f00146.ppm",
+    "f00154.ppm"
+   ],
+   "crop_box": [
+    211,
+    260,
+    798,
+    701
+   ]
+  },
+  {
+   "view": "bottom",
+   "hmd": "0.0010 0.3800 -0.7700 89.94 90.00 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "file": "HellishMissileLauncher_bottom.jpg",
+   "frames": [
+    "f00164.ppm",
+    "f00174.ppm"
+   ],
+   "crop_box": [
+    199,
+    267,
+    786,
+    707
+   ]
+  },
+  {
+   "view": "front34",
+   "hmd": "0.5901 1.7570 -1.4732 -21.25 140.00 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "file": "HellishMissileLauncher_front34.jpg",
+   "frames": [
+    "f00184.ppm",
+    "f00192.ppm"
+   ],
+   "crop_box": [
+    320,
+    320,
+    800,
+    680
+   ]
+  },
+  {
+   "view": "grip",
+   "hmd": "0.2600 1.2600 -0.4900 21.79 70.91 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "closeup": 0.62,
+   "file": "HellishMissileLauncher_grip.jpg",
+   "frames": [
+    "f00200.ppm",
+    "f00206.ppm"
+   ],
+   "crop_box": [
+    182,
+    257,
+    778,
+    703
+   ]
+  },
+  {
+   "view": "support",
+   "hmd": "0.2200 1.0370 -0.8100 32.05 79.70 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "closeup": 0.62,
+   "file": "HellishMissileLauncher_support.jpg",
+   "frames": [
+    "f00216.ppm",
+    "f00222.ppm"
+   ],
+   "crop_box": [
+    182,
+    257,
+    778,
+    703
+   ]
+  }
+ ],
+ "problems": []
+}

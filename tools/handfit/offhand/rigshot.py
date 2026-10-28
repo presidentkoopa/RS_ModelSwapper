@@ -7,7 +7,7 @@ Returns the run's log text. extra: test-only pk3s after the pack (e.g. oht_dmg.p
 import os as _dpo, sys as _dps; _dps.path.append(_dpo.path.normpath(_dpo.path.join(_dpo.path.dirname(_dpo.path.abspath(__file__)), '../..'))); import depot as _DP	# Depot paths (tools/depot.py)
 import os, sys, glob, shutil, time
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = _DP.SET
-os.environ.setdefault('RSQ_GATE', os.path.join(REPO, '..', 'lane_b_out', 'offhand_gate'))
+os.environ.setdefault('RSQ_GATE', os.path.join(_DP.WORK, 'offhand_gate'))
 sys.path.insert(0, os.path.join(HERE, '..', 'port'))
 import gate_gun as G
 from PIL import Image

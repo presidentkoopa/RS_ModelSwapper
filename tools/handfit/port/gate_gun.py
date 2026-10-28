@@ -4,15 +4,15 @@ BD_VoxelPack -> pack, ONE engine at a time under an exclusive lock, the rig ini 
   gate_gun.py sheet  <pk3> <Class...>      rest / steady / fire frames from the eye and the side (PNG tiles)
   gate_gun.py hands  <pk3> <job...>        Depot mags.py <ids> / brk<ids> (brk.py) / m203 (the moved rifle's launcher reload)
   gate_gun.py compose <out.png> <Class...> the sheet beside each gun's 1.92 eye / side render
-Env (all optional): RSQ_DEPOT (the Depot checkout; default <repo>/../rsq_weapondepot), RSQ_GAMEDATA (doom2.wad,
-brutal22test6.pk3, BD_VoxelPack.pk3; default <repo>/../gamedata), RSQ_RIGLOCK (default <repo>/../rig.lock),
-RSQ_GATE (logs and shots; default ./gate_out). Rig only: nothing here is a headset test."""
+Env (all optional, tools/depot.py): RSQ_SET (the set; default sets/bd22q), RSQ_GAMEDATA (doom2.wad,
+brutal22test6.pk3, BD_VoxelPack.pk3; default <depot>/../gamedata), RSQ_RIGLOCK (default <depot>/../rig.lock),
+RSQ_GATE (logs and shots; default <work>/gate). Rig only: nothing here is a headset test."""
 import os as _dpo, sys as _dps; _dps.path.append(_dpo.path.normpath(_dpo.path.join(_dpo.path.dirname(_dpo.path.abspath(__file__)), '../..'))); import depot as _DP	# Depot paths (tools/depot.py)
 import os, sys, re, json, glob, shutil, fcntl, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = _DP.SET
-DEPOT = os.environ.get('RSQ_DEPOT', os.path.join(REPO, '..', 'rsq_weapondepot')); RIGD = os.path.join(DEPOT, 'tools', 'rig')
-GD = os.environ.get('RSQ_GAMEDATA', os.path.join(REPO, '..', 'gamedata')); LOCK = os.environ.get('RSQ_RIGLOCK', os.path.join(REPO, '..', 'rig.lock'))
-OUT = os.path.abspath(os.environ.get('RSQ_GATE', 'gate_out')); os.makedirs(OUT + '/shots', exist_ok=True)
+DEPOT = _DP.DEPOT; RIGD = _DP.RIG
+GD = _DP.GAMEDATA; LOCK = _DP.LOCK
+OUT = os.path.abspath(os.environ.get('RSQ_GATE', os.path.join(_DP.WORK, 'gate'))); os.makedirs(OUT + '/shots', exist_ok=True)
 os.environ.update(B22_IWAD=GD + '/doom2.wad', B22_BD22=GD + '/brutal22test6.pk3', B22_VOX=GD + '/BD_VoxelPack.pk3', B22_BUILD=OUT)
 os.environ.pop('B22_RIG', None)
 sys.path.insert(0, RIGD); sys.path.insert(0, HERE)
@@ -102,7 +102,7 @@ def hands(pk3, job):
     return (r.stdout + r.stderr).splitlines()[-25:]
 def compose(out, guns):
     from PIL import Image, ImageDraw
-    REF = os.path.join(DEPOT, 'docs/reference/bd22q_192_poses'); sts = ['rest', 'steady', 'fire']
+    REF = os.path.join(_DP.SET, 'reference', '192_poses')	# the owner's 1.92 holds, rendered; sts = ['rest', 'steady', 'fire']
     rows = [(g, v) for g in guns for v in ('eye', 'side')]; w, h = 480, 360; lh = 22; top = 34
     for f in glob.glob(OUT + '/shots/*.png'): w, h = Image.open(f).size; break
     sheet = Image.new('RGB', (w * 4, top + (h + lh) * len(rows)), (24, 24, 24)); dr = ImageDraw.Draw(sheet)

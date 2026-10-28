@@ -1,0 +1,234 @@
+{
+ "class": "Chain_saw",
+ "label": "Chainsaw",
+ "bd22_tag": "TAGBD_SAW",
+ "handtable_index": 25,
+ "kind": "two",
+ "support_shown": true,
+ "handtable_row": {
+  "GunOne": "H",
+  "GunTwo": "H",
+  "Support": "E",
+  "GunHook": [
+   -4.39,
+   3.43,
+   -0.63
+  ],
+  "GunRot": [
+   0.88,
+   -10.2,
+   0.54
+  ],
+  "SupportHook": [
+   9.99,
+   -12.13,
+   -7.75
+  ],
+  "SupportRot": [
+   9.83,
+   14.35,
+   89.3
+  ],
+  "SupportPoint": [
+   0.322,
+   0.06,
+   0.126
+  ],
+  "Trigger": ""
+ },
+ "handtable_source": "BD22Q_192.pk3:zscript/rsq/handtable.zs",
+ "modeldef_hand_frames": [
+  "MODELDEF.rsq:20: FrameIndex RQGS H 0 4\t// Ermac hand.md3 frame 29",
+  "MODELDEF.rsq:68: FrameIndex RQSP E 0 4\t// Ermac hand2.md3 frame 91"
+ ],
+ "modeldef_hand_common": "MODELDEF.rsq RSQ_GunSide blocks: Model 0 \"hand.md3\" (gun hand) / \"hand2.md3\" (support), Skin \"hand.png\", Scale -1.0 1.0 1.0, Offset 0.0 -24.0 -10.0",
+ "modeldef_gun_blocks": [
+  [
+   "MODELDEF.bd.txt",
+   662,
+   "Model Chain_saw\n{\n   Path \"models/bd/Chain_saw\"\n   Model 0 \"Chain_saw.md3\"\n   Skin 0 \"Chain_saw.png\"\n   Scale -1.5 1.5 1.5\n   Offset 0.0 10.0 0.0\n   ZOffset -5\n   NOINTERPOLATION\n// Pose: restored 2026-10-10 -- each BD22 sprite frame takes the authored\n// BD21 pose for the same moment (tools/pose_tables.py, fill_tables.py).\n\n   FrameIndex\tPAWG\tA\t0\t11\n   FrameIndex\t3AWS\tA\t0\t4\n   FrameIndex\t2AWS\tA\t0\t4\n   FrameIndex\t1AWS\tA\t0\t4\n   FrameIndex\tSAWS\tA\t0\t4\n   FrameIndex\tSAWS\tV\t0\t11\n   FrameIndex\tSAWS\tW\t0\t12\n   FrameIndex\tSAWS\tX\t0\t11\n   FrameIndex\tSAWS\tY\t0\t12\n   FrameIndex\tSAWS\t[\t0\t12\n   FrameIndex\tSAWS\tZ\t0\t11\n   FrameIndex\tCSAW\tA\t0\t11\n   FrameIndex\tSAWS\tL\t0\t11\n   FrameIndex\tSAWS\tK\t0\t12\n   FrameIndex\tSAWS\tJ\t0\t11\n   FrameIndex\tSAWS\tI\t0\t12\n   FrameIndex\tSAWS\tH\t0\t4\n   FrameIndex\tSAWS\tG\t0\t10\n   FrameIndex\tSAWS\tC\t0\t6\n   FrameIndex\tSAWS\tD\t0\t7\n   FrameIndex\tSAWS\tE\t0\t8\n   FrameIndex\tSAWS\tF\t0\t9\n   FrameIndex\tSAWS\tM\t0\t12\n   FrameIndex\tSAWS\tR\t0\t3\n   FrameIndex\tSAWS\tS\t0\t2\n   FrameIndex\tSAWS\tT\t0\t1\n   FrameIndex\tSAWS\tU\t0\t0\n   FrameIndex\tSAWG\tA\t0\t11\n   FrameIndex\tAXEG\tA\t0\t11\n   FrameIndex\tSAWS\tN\t0\t0\n   FrameIndex\tSAWS\tO\t0\t1\n   FrameIndex\tSAWS\tP\t0\t2\n   FrameIndex\tSAWS\tQ\t0\t3\n   FrameIndex\tSAWS\tB\t0\t5\n   FrameIndex\t3AWG\tA\t0\t11\n   FrameIndex\t2AWG\tA\t0\t11\n   FrameIndex\t1AWG\tA\t0\t11\n   FrameIndex\tSAWG\tB\t0\t12\n   FrameIndex\tSAWG\tC\t0\t11\n   FrameIndex\tSAWG\tD\t0\t12\n   FrameIndex\tSAWG\tE\t0\t11\n   FrameIndex\tSAWG\tF\t0\t12\n   FrameIndex\tSAWG\tG\t0\t11\n   FrameIndex\t3AWB\tA\t0\t13\n   FrameIndex\t2AWB\tA\t0\t13\n   FrameIndex\t1AWB\tA\t0\t13\n   FrameIndex\t1AWB\tB\t0\t14\n   FrameIndex\t1AWB\tC\t0\t15\n   FrameIndex\t1AWB\tD\t0\t16\n   FrameIndex\t1AWB\tE\t0\t17\n   FrameIndex\t1AWB\tF\t0\t18\n   FrameIndex\t1AWB\tG\t0\t19\n   FrameIndex\t1AWB\tH\t0\t20\n   FrameIndex\t1AWB\tI\t0\t21\n   FrameIndex\t1AWB\tJ\t0\t22\n   FrameIndex\t1AWB\tK\t0\t13\n   FrameIndex\t1AWB\tL\t0\t14\n   FrameIndex\t1AWB\tM\t0\t15\n   FrameIndex\t1AWB\tN\t0\t16\n   FrameIndex\tSAWG\tH\t0\t23\n   FrameIndex\tSAWG\tI\t0\t24\n   FrameIndex\tSAWG\tJ\t0\t25\n   FrameIndex\tPAWF\tA\t0\t26\n   FrameIndex\t1AWF\tA\t0\t26\n   FrameIndex\t3AWF\tA\t0\t26\n   FrameIndex\t2AWF\tA\t0\t26\n   FrameIndex\tSAWF\tA\t0\t26\n   FrameIndex\tSAWF\tB\t0\t27\n   FrameIndex\tSAWF\tC\t0\t28\n   FrameIndex\tSAWF\tD\t0\t29\n   FrameIndex\tSAWF\tE\t0\t31\n   FrameIndex\tSAWF\tF\t0\t32\n   FrameIndex\tSAWF\tG\t0\t33\n   FrameIndex\tSAWF\tH\t0\t34\n   FrameIndex\tSAWF\tI\t0\t34\n   FrameIndex\tSAWF\t[\t0\t34\n   FrameIndex\tSAWG\tM\t0\t35\n   FrameIndex\tSAWG\tL\t0\t36\n   FrameIndex\tSAWG\tK\t0\t37\n   FrameIndex\tSAWF\tJ\t0\t34\n   FrameIndex\tSAWF\tK\t0\t33\n   FrameIndex\tSAWF\tL\t0\t32\n   FrameIndex\tSAWF\tM\t0\t31\n   FrameIndex\tSAWF\tN\t0\t30\n   FrameIndex\tSAWF\tO\t0\t29\n   FrameIndex\tSAWF\tP\t0\t28\n   FrameIndex\tSAWF\tQ\t0\t27\n   FrameIndex\tSAWF\tR\t0\t26\n   FrameIndex\tSAWF\tS\t0\t45\n   FrameIndex\tSAWF\tT\t0\t46\n   FrameIndex\tSAWF\tU\t0\t47\n   FrameIndex\tSAWF\tV\t0\t48\n   FrameIndex\tSAWG\tS\t0\t39\n   FrameIndex\tSAWG\tT\t0\t40\n   FrameIndex\tSAWG\tU\t0\t39\n   FrameIndex\tSAWG\tV\t0\t41\n   FrameIndex\tSAWF\tW\t0\t45\n   FrameIndex\tSAWF\tX\t0\t46\n   FrameIndex\tSAWF\tY\t0\t47\n   FrameIndex\tSAWF\tZ\t0\t48\n   FrameIndex\tSAWG\tW\t0\t43\n   FrameIndex\tSAWG\tX\t0\t40\n   FrameIndex\tSAWG\tY\t0\t39\n   FrameIndex\tSAWG\tZ\t0\t40\n   FrameIndex\tSAWG\tN\t0\t44\n   FrameIndex\tSAWG\tO\t0\t42\n   FrameIndex\tSAWG\tP\t0\t38\n   FrameIndex\tSAWG\tQ\t0\t39\n   FrameIndex\tSAWG\tR\t0\t40\n   FrameIndex\tSAWG\t[\t0\t39\n   FrameIndex\tPLAY\tA\t0\t11\n   // v4: frames BD22 shows that had no key (fill_tables.py SIBLING/READY)\n   FrameIndex\t1AWF\tB\t0\t27\n   FrameIndex\t1AWF\tC\t0\t28\n   FrameIndex\t1AWF\tD\t0\t29\n   FrameIndex\t1AWF\tE\t0\t31\n   FrameIndex\t1AWF\tF\t0\t32\n   FrameIndex\t1AWF\tG\t0\t33\n   FrameIndex\t1AWF\tH\t0\t34\n   FrameIndex\t1AWF\tI\t0\t34\n   FrameIndex\t1AWF\tJ\t0\t34\n   FrameIndex\t1AWF\tK\t0\t33\n   FrameIndex\t1AWF\tL\t0\t32\n   FrameIndex\t1AWF\tM\t0\t31\n   FrameIndex\t1AWF\tN\t0\t30\n   FrameIndex\t1AWF\tO\t0\t29\n   FrameIndex\t1AWF\tP\t0\t28\n   FrameIndex\t1AWF\tQ\t0\t27\n   FrameIndex\t1AWF\tR\t0\t26\n   FrameIndex\t1AWF\tS\t0\t45\n   FrameIndex\t1AWF\tT\t0\t46\n   FrameIndex\t1AWF\tU\t0\t47\n   FrameIndex\t1AWF\tV\t0\t48\n   FrameIndex\t1AWF\tW\t0\t45\n   FrameIndex\t1AWF\tX\t0\t46\n   FrameIndex\t1AWF\tY\t0\t47\n   FrameIndex\t1AWF\tZ\t0\t48\n   FrameIndex\t1AWG\tB\t0\t12\n   FrameIndex\t1AWG\tC\t0\t11\n   FrameIndex\t1AWG\tD\t0\t12\n   FrameIndex\t1AWG\tE\t0\t11\n   FrameIndex\t1AWG\tF\t0\t12\n   FrameIndex\t1AWG\tG\t0\t11\n   FrameIndex\t1AWG\tH\t0\t23\n   FrameIndex\t1AWG\tI\t0\t24\n   FrameIndex\t1AWG\tJ\t0\t25\n   FrameIndex\t1AWG\tK\t0\t37\n   FrameIndex\t1AWG\tL\t0\t36\n   FrameIndex\t1AWG\tM\t0\t35\n   FrameIndex\t1AWG\tN\t0\t44\n   FrameIndex\t1AWG\tO\t0\t42\n   FrameIndex\t1AWG\tP\t0\t38\n   FrameIndex\t1AWG\tQ\t0\t39\n   FrameIndex\t1AWG\tR\t0\t40\n   FrameIndex\t1AWG\tS\t0\t39\n   FrameIndex\t1AWG\tT\t0\t40\n   FrameIndex\t1AWG\tU\t0\t39\n   FrameIndex\t1AWG\tV\t0\t41\n   FrameIndex\t1AWG\tW\t0\t43\n   FrameIndex\t1AWG\tX\t0\t40\n   FrameIndex\t1AWG\tY\t0\t39\n   FrameIndex\t1AWG\tZ\t0\t40\n   FrameIndex\t1AWG\t[\t0\t39\n   FrameIndex\t1AWS\tC\t0\t6\n   FrameIndex\t1AWS\tD\t0\t7\n   FrameIndex\t1AWS\tE\t0\t8\n   FrameIndex\t1AWS\tF\t0\t9\n   FrameIndex\t1AWS\tG\t0\t10\n   FrameIndex\t1AWS\tH\t0\t4\n   FrameIndex\t1AWS\tI\t0\t12\n   FrameIndex\t1AWS\tJ\t0\t11\n   FrameIndex\t1AWS\tK\t0\t12\n   FrameIndex\t1AWS\tL\t0\t11\n   FrameIndex\t1AWS\tM\t0\t12\n   FrameIndex\t1AWS\tR\t0\t3\n   FrameIndex\t1AWS\tS\t0\t2\n   FrameIndex\t1AWS\tT\t0\t1\n   FrameIndex\t1AWS\tU\t0\t0\n   FrameIndex\t1AWS\tV\t0\t11\n   FrameIndex\t1AWS\tW\t0\t12\n   FrameIndex\t1AWS\tX\t0\t11\n   FrameIndex\t1AWS\tY\t0\t12\n   FrameIndex\t1AWS\tZ\t0\t11\n   FrameIndex\t1AWS\t[\t0\t12\n   FrameIndex\t2AWB\tB\t0\t14\n   FrameIndex\t2AWB\tC\t0\t15\n   FrameIndex\t2AWB\tD\t0\t16\n   FrameIndex\t2AWB\tE\t0\t17\n   FrameIndex\t2AWB\tF\t0\t18\n   FrameIndex\t2AWB\tG\t0\t19\n   FrameIndex\t2AWB\tH\t0\t20\n   FrameIndex\t2AWB\tI\t0\t21\n   FrameIndex\t2AWB\tJ\t0\t22\n   FrameIndex\t2AWB\tK\t0\t13\n   FrameIndex\t2AWB\tL\t0\t14\n   FrameIndex\t2AWB\tM\t0\t15\n   FrameIndex\t2AWB\tN\t0\t16\n   FrameIndex\t2AWF\tB\t0\t27\n   FrameIndex\t2AWF\tC\t0\t28\n   FrameIndex\t2AWF\tD\t0\t29\n   FrameIndex\t2AWF\tE\t0\t31\n   FrameIndex\t2AWF\tF\t0\t32\n   FrameIndex\t2AWF\tG\t0\t33\n   FrameIndex\t2AWF\tH\t0\t34\n   FrameIndex\t2AWF\tI\t0\t34\n   FrameIndex\t2AWF\tJ\t0\t34\n   FrameIndex\t2AWF\tK\t0\t33\n   FrameIndex\t2AWF\tL\t0\t32\n   FrameIndex\t2AWF\tM\t0\t31\n   FrameIndex\t2AWF\tN\t0\t30\n   FrameIndex\t2AWF\tO\t0\t29\n   FrameIndex\t2AWF\tP\t0\t28\n   FrameIndex\t2AWF\tQ\t0\t27\n   FrameIndex\t2AWF\tR\t0\t26\n   FrameIndex\t2AWF\tS\t0\t45\n   FrameIndex\t2AWF\tT\t0\t46\n   FrameIndex\t2AWF\tU\t0\t47\n   FrameIndex\t2AWF\tV\t0\t48\n   FrameIndex\t2AWF\tW\t0\t45\n   FrameIndex\t2AWF\tX\t0\t46\n   FrameIndex\t2AWF\tY\t0\t47\n   FrameIndex\t2AWF\tZ\t0\t48\n   FrameIndex\t2AWG\tB\t0\t12\n   FrameIndex\t2AWG\tC\t0\t11\n   FrameIndex\t2AWG\tD\t0\t12\n   FrameIndex\t2AWG\tE\t0\t11\n   FrameIndex\t2AWG\tF\t0\t12\n   FrameIndex\t2AWG\tG\t0\t11\n   FrameIndex\t2AWG\tH\t0\t23\n   FrameIndex\t2AWG\tI\t0\t24\n   FrameIndex\t2AWG\tJ\t0\t25\n   FrameIndex\t2AWG\tK\t0\t37\n   FrameIndex\t2AWG\tL\t0\t36\n   FrameIndex\t2AWG\tM\t0\t35\n   FrameIndex\t2AWG\tN\t0\t44\n   FrameIndex\t2AWG\tO\t0\t42\n   FrameIndex\t2AWG\tP\t0\t38\n   FrameIndex\t2AWG\tQ\t0\t39\n   FrameIndex\t2AWG\tR\t0\t40\n   FrameIndex\t2AWG\tS\t0\t39\n   FrameIndex\t2AWG\tT\t0\t40\n   FrameIndex\t2AWG\tU\t0\t39\n   FrameIndex\t2AWG\tV\t0\t41\n   FrameIndex\t2AWG\tW\t0\t43\n   FrameIndex\t2AWG\tX\t0\t40\n   FrameIndex\t2AWG\tY\t0\t39\n   FrameIndex\t2AWG\tZ\t0\t40\n   FrameIndex\t2AWG\t[\t0\t39\n   FrameIndex\t2AWS\tC\t0\t6\n   FrameIndex\t2AWS\tD\t0\t7\n   FrameIndex\t2AWS\tE\t0\t8\n   FrameIndex\t2AWS\tF\t0\t9\n   FrameIndex\t2AWS\tG\t0\t10\n   FrameIndex\t2AWS\tH\t0\t4\n   FrameIndex\t2AWS\tI\t0\t12\n   FrameIndex\t2AWS\tJ\t0\t11\n   FrameIndex\t2AWS\tK\t0\t12\n   FrameIndex\t2AWS\tL\t0\t11\n   FrameIndex\t2AWS\tM\t0\t12\n   FrameIndex\t2AWS\tR\t0\t3\n   FrameIndex\t2AWS\tS\t0\t2\n   FrameIndex\t2AWS\tT\t0\t1\n   FrameIndex\t2AWS\tU\t0\t0\n   FrameIndex\t2AWS\tV\t0\t11\n   FrameIndex\t2AWS\tW\t0\t12\n   FrameIndex\t2AWS\tX\t0\t11\n   FrameIndex\t2AWS\tY\t0\t12\n   FrameIndex\t2AWS\tZ\t0\t11\n   FrameIndex\t2AWS\t[\t0\t12\n   FrameIndex\t3AWB\tB\t0\t14\n   FrameIndex\t3AWB\tC\t0\t15\n   FrameIndex\t3AWB\tD\t0\t16\n   FrameIndex\t3AWB\tE\t0\t17\n   FrameIndex\t3AWB\tF\t0\t18\n   FrameIndex\t3AWB\tG\t0\t19\n   FrameIndex\t3AWB\tH\t0\t20\n   FrameIndex\t3AWB\tI\t0\t21\n   FrameIndex\t3AWB\tJ\t0\t22\n   FrameIndex\t3AWB\tK\t0\t13\n   FrameIndex\t3AWB\tL\t0\t14\n   FrameIndex\t3AWB\tM\t0\t15\n   FrameIndex\t3AWB\tN\t0\t16\n   FrameIndex\t3AWF\tB\t0\t27\n   FrameIndex\t3AWF\tC\t0\t28\n   FrameIndex\t3AWF\tD\t0\t29\n   FrameIndex\t3AWF\tE\t0\t31\n   FrameIndex\t3AWF\tF\t0\t32\n   FrameIndex\t3AWF\tG\t0\t33\n   FrameIndex\t3AWF\tH\t0\t34\n   FrameIndex\t3AWF\tI\t0\t34\n   FrameIndex\t3AWF\tJ\t0\t34\n   FrameIndex\t3AWF\tK\t0\t33\n   FrameIndex\t3AWF\tL\t0\t32\n   FrameIndex\t3AWF\tM\t0\t31\n   FrameIndex\t3AWF\tN\t0\t30\n   FrameIndex\t3AWF\tO\t0\t29\n   FrameIndex\t3AWF\tP\t0\t28\n   FrameIndex\t3AWF\tQ\t0\t27\n   FrameIndex\t3AWF\tR\t0\t26\n   FrameIndex\t3AWF\tS\t0\t45\n   FrameIndex\t3AWF\tT\t0\t46\n   FrameIndex\t3AWF\tU\t0\t47\n   FrameIndex\t3AWF\tV\t0\t48\n   FrameIndex\t3AWF\tW\t0\t45\n   FrameIndex\t3AWF\tX\t0\t46\n   FrameIndex\t3AWF\tY\t0\t47\n   FrameIndex\t3AWF\tZ\t0\t48\n   FrameIndex\t3AWG\tB\t0\t12\n   FrameIndex\t3AWG\tC\t0\t11\n   FrameIndex\t3AWG\tD\t0\t12\n   FrameIndex\t3AWG\tE\t0\t11\n   FrameIndex\t3AWG\tF\t0\t12\n   FrameIndex\t3AWG\tG\t0\t11\n   FrameIndex\t3AWG\tH\t0\t23\n   FrameIndex\t3AWG\tI\t0\t24\n   FrameIndex\t3AWG\tJ\t0\t25\n   FrameIndex\t3AWG\tK\t0\t37\n   FrameIndex\t3AWG\tL\t0\t36\n   FrameIndex\t3AWG\tM\t0\t35\n   FrameIndex\t3AWG\tN\t0\t44\n   FrameIndex\t3AWG\tO\t0\t42\n   FrameIndex\t3AWG\tP\t0\t38\n   FrameIndex\t3AWG\tQ\t0\t39\n   FrameIndex\t3AWG\tR\t0\t40\n   FrameIndex\t3AWG\tS\t0\t39\n   FrameIndex\t3AWG\tT\t0\t40\n   FrameIndex\t3AWG\tU\t0\t39\n   FrameIndex\t3AWG\tV\t0\t41\n   FrameIndex\t3AWG\tW\t0\t43\n   FrameIndex\t3AWG\tX\t0\t40\n   FrameIndex\t3AWG\tY\t0\t39\n   FrameIndex\t3AWG\tZ\t0\t40\n   FrameIndex\t3AWG\t[\t0\t39\n   FrameIndex\t3AWS\tC\t0\t6\n   FrameIndex\t3AWS\tD\t0\t7\n   FrameIndex\t3AWS\tE\t0\t8\n   FrameIndex\t3AWS\tF\t0\t9\n   FrameIndex\t3AWS\tG\t0\t10\n   FrameIndex\t3AWS\tH\t0\t4\n   FrameIndex\t3AWS\tI\t0\t12\n   FrameIndex\t3AWS\tJ\t0\t11\n   FrameIndex\t3AWS\tK\t0\t12\n   FrameIndex\t3AWS\tL\t0\t11\n   FrameIndex\t3AWS\tM\t0\t12\n   FrameIndex\t3AWS\tR\t0\t3\n   FrameIndex\t3AWS\tS\t0\t2\n   FrameIndex\t3AWS\tT\t0\t1\n   FrameIndex\t3AWS\tU\t0\t0\n   FrameIndex\t3AWS\tV\t0\t11\n   FrameIndex\t3AWS\tW\t0\t12\n   FrameIndex\t3AWS\tX\t0\t11\n   FrameIndex\t3AWS\tY\t0\t12\n   FrameIndex\t3AWS\tZ\t0\t11\n   FrameIndex\t3AWS\t[\t0\t12\n   FrameIndex\tPAWF\tB\t0\t27\n   FrameIndex\tPAWF\tC\t0\t28\n   FrameIndex\tPAWF\tD\t0\t29\n   FrameIndex\tPAWF\tE\t0\t31\n   FrameIndex\tPAWF\tF\t0\t32\n   FrameIndex\tPAWF\tG\t0\t33\n   FrameIndex\tPAWF\tH\t0\t34\n   FrameIndex\tPAWF\tI\t0\t34\n   FrameIndex\tPAWF\tJ\t0\t34\n   FrameIndex\tPAWF\tK\t0\t33\n   FrameIndex\tPAWF\tL\t0\t32\n   FrameIndex\tPAWF\tM\t0\t31\n   FrameIndex\tPAWF\tN\t0\t30\n   FrameIndex\tPAWF\tO\t0\t29\n   FrameIndex\tPAWF\tP\t0\t28\n   FrameIndex\tPAWF\tQ\t0\t27\n   FrameIndex\tPAWF\tR\t0\t26\n   FrameIndex\tPAWF\tS\t0\t45\n   FrameIndex\tPAWF\tT\t0\t46\n   FrameIndex\tPAWF\tU\t0\t47\n   FrameIndex\tPAWF\tV\t0\t48\n   FrameIndex\tPAWF\tW\t0\t45\n   FrameIndex\tPAWF\tX\t0\t46\n   FrameIndex\tPAWF\tY\t0\t47\n   FrameIndex\tPAWF\tZ\t0\t48\n   FrameIndex\tPAWG\tB\t0\t12\n   FrameIndex\tPAWG\tC\t0\t11\n   FrameIndex\tPAWG\tD\t0\t12\n   FrameIndex\tPAWG\tE\t0\t11\n   FrameIndex\tPAWG\tF\t0\t12\n   FrameIndex\tPAWG\tG\t0\t11\n   FrameIndex\tPAWG\tH\t0\t23\n   FrameIndex\tPAWG\tI\t0\t24\n   FrameIndex\tPAWG\tJ\t0\t25\n   FrameIndex\tPAWG\tK\t0\t37\n   FrameIndex\tPAWG\tL\t0\t36\n   FrameIndex\tPAWG\tM\t0\t35\n   FrameIndex\tPAWG\tN\t0\t44\n   FrameIndex\tPAWG\tO\t0\t42\n   FrameIndex\tPAWG\tP\t0\t38\n   FrameIndex\tPAWG\tQ\t0\t39\n   FrameIndex\tPAWG\tR\t0\t40\n   FrameIndex\tPAWG\tS\t0\t39\n   FrameIndex\tPAWG\tT\t0\t40\n   FrameIndex\tPAWG\tU\t0\t39\n   FrameIndex\tPAWG\tV\t0\t41\n   FrameIndex\tPAWG\tW\t0\t43\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   4933,
+   "Model Chain_saw\n{\n   Path \"models/bd/Grenade\"\n   Model 0 \"nade.md3\"\n   Skin 0 \"nade.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n   FrameIndex\tGRTH\tA\t0\t3\n   FrameIndex\tGRTH\tB\t0\t4\n   FrameIndex\tGRTH\tC\t0\t5\n   FrameIndex\tGRTH\tD\t0\t6\n   FrameIndex\tGRTH\tE\t0\t7\n   FrameIndex\tGRTH\tF\t0\t8\n   FrameIndex\tGRTH\tG\t0\t9\n   FrameIndex\tGRTH\tH\t0\t10\n   FrameIndex\tGRTH\tI\t0\t11\n   FrameIndex\tGRTH\tJ\t0\t12\n   FrameIndex\tGRTH\tK\t0\t13\n   FrameIndex\tGRTH\tL\t0\t14\n   FrameIndex\tGRTH\tM\t0\t15\n   FrameIndex\tGRTH\tN\t0\t15\n   FrameIndex\tGRTH\tO\t0\t15\n   FrameIndex\tGRTH\tP\t0\t15\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   4962,
+   "Model Chain_saw\n{\n   Path \"models/bd/Boot\"\n   Model 0 \"Boot.md3\"\n   Skin 0 \"Boot.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n   FrameIndex\t1ICK\tA\t0\t10\n   FrameIndex\t1ICK\tB\t0\t11\n   FrameIndex\t1ICK\tC\t0\t12\n   FrameIndex\t1ICK\tD\t0\t13\n   FrameIndex\t1ICK\tE\t0\t14\n   FrameIndex\t1ICK\tF\t0\t15\n   FrameIndex\t1ICK\tG\t0\t16\n   FrameIndex\t1ICK\tH\t0\t17\n   FrameIndex\t1ICK\tI\t0\t18\n   FrameIndex\t1ICK\tJ\t0\t19\n   FrameIndex\t1ICK\tK\t0\t20\n   FrameIndex\t1ICK\tL\t0\t21\n   FrameIndex\t1ICK\tM\t0\t22\n   FrameIndex\t1ICK\tN\t0\t23\n   FrameIndex\t1ICK\tO\t0\t24\n   FrameIndex\t1ICK\tP\t0\t25\n   FrameIndex\t1ICK\tQ\t0\t26\n   FrameIndex\t1ICK\tR\t0\t27\n   FrameIndex\t1ICK\tS\t0\t28\n   FrameIndex\t1ICK\tT\t0\t29\n   FrameIndex\t1ICK\tU\t0\t30\n   FrameIndex\t1ICK\tV\t0\t30\n   FrameIndex\t1ICK\tW\t0\t30\n   FrameIndex\t1ICK\tX\t0\t30\n   FrameIndex\t1ICK\tY\t0\t30\n   FrameIndex\t1ICK\tZ\t0\t30\n   FrameIndex\t1ICK\t[\t0\t30\n   FrameIndex\t1ICK\t]\t0\t30\n   FrameIndex\t1LID\tA\t0\t14\n   FrameIndex\t1LID\tB\t0\t14\n   FrameIndex\t1LID\tC\t0\t14\n   FrameIndex\t1LID\tD\t0\t14\n   FrameIndex\t1LID\tE\t0\t14\n   FrameIndex\t1LID\tF\t0\t14\n   FrameIndex\t1LID\tG\t0\t14\n   FrameIndex\t1LID\tH\t0\t14\n   FrameIndex\t1LID\tI\t0\t14\n   FrameIndex\t1LID\tJ\t0\t14\n   FrameIndex\t1LID\tK\t0\t14\n   FrameIndex\t1LID\tL\t0\t14\n   FrameIndex\t1LID\tM\t0\t14\n   FrameIndex\t1LID\tN\t0\t14\n   FrameIndex\t1TOM\tA\t0\t31\n   FrameIndex\t2ICK\tA\t0\t10\n   FrameIndex\t2ICK\tB\t0\t11\n   FrameIndex\t2ICK\tC\t0\t12\n   FrameIndex\t2ICK\tD\t0\t13\n   FrameIndex\t2ICK\tE\t0\t14\n   FrameIndex\t2ICK\tF\t0\t15\n   FrameIndex\t2ICK\tG\t0\t16\n   FrameIndex\t2ICK\tH\t0\t17\n   FrameIndex\t2ICK\tI\t0\t18\n   FrameIndex\t2ICK\tJ\t0\t19\n   FrameIndex\t2ICK\tK\t0\t20\n   FrameIndex\t2ICK\tL\t0\t21\n   FrameIndex\t2ICK\tM\t0\t22\n   FrameIndex\t2ICK\tN\t0\t23\n   FrameIndex\t2ICK\tO\t0\t24\n   FrameIndex\t2ICK\tP\t0\t25\n   FrameIndex\t2ICK\tQ\t0\t26\n   FrameIndex\t2ICK\tR\t0\t27\n   FrameIndex\t2ICK\tS\t0\t28\n   FrameIndex\t2ICK\tT\t0\t29\n   FrameIndex\t2ICK\tU\t0\t30\n   FrameIndex\t2ICK\tV\t0\t30\n   FrameIndex\t2ICK\tW\t0\t30\n   FrameIndex\t2ICK\tX\t0\t30\n   FrameIndex\t2ICK\tY\t0\t30\n   FrameIndex\t2ICK\tZ\t0\t30\n   FrameIndex\t2ICK\t[\t0\t30\n   FrameIndex\t2ICK\t]\t0\t30\n   FrameIndex\t2LID\tA\t0\t14\n   FrameIndex\t2LID\tB\t0\t14\n   FrameIndex\t2LID\tC\t0\t14\n   FrameIndex\t2LID\tD\t0\t14\n   FrameIndex\t2LID\tE\t0\t14\n   FrameIndex\t2LID\tF\t0\t14\n   FrameIndex\t2LID\tG\t0\t14\n   FrameIndex\t2LID\tH\t0\t14\n   FrameIndex\t2LID\tI\t0\t14\n   FrameIndex\t2LID\tJ\t0\t14\n   FrameIndex\t2LID\tK\t0\t14\n   FrameIndex\t2LID\tL\t0\t14\n   FrameIndex\t2LID\tM\t0\t14\n   FrameIndex\t2LID\tN\t0\t14\n   FrameIndex\t2TOM\tA\t0\t31\n   FrameIndex\t3ICK\tA\t0\t10\n   FrameIndex\t3ICK\tB\t0\t11\n   FrameIndex\t3ICK\tC\t0\t12\n   FrameIndex\t3ICK\tD\t0\t13\n   FrameIndex\t3ICK\tE\t0\t14\n   FrameIndex\t3ICK\tF\t0\t15\n   FrameIndex\t3ICK\tG\t0\t16\n   FrameIndex\t3ICK\tH\t0\t17\n   FrameIndex\t3ICK\tI\t0\t18\n   FrameIndex\t3ICK\tJ\t0\t19\n   FrameIndex\t3ICK\tK\t0\t20\n   FrameIndex\t3ICK\tL\t0\t21\n   FrameIndex\t3ICK\tM\t0\t22\n   FrameIndex\t3ICK\tN\t0\t23\n   FrameIndex\t3ICK\tO\t0\t24\n   FrameIndex\t3ICK\tP\t0\t25\n   FrameIndex\t3ICK\tQ\t0\t26\n   FrameIndex\t3ICK\tR\t0\t27\n   FrameIndex\t3ICK\tS\t0\t28\n   FrameIndex\t3ICK\tT\t0\t29\n   FrameIndex\t3ICK\tU\t0\t30\n   FrameIndex\t3ICK\tV\t0\t30\n   FrameIndex\t3ICK\tW\t0\t30\n   FrameIndex\t3ICK\tX\t0\t30\n   FrameIndex\t3ICK\tY\t0\t30\n   FrameIndex\t3ICK\tZ\t0\t30\n   FrameIndex\t3ICK\t[\t0\t30\n   FrameIndex\t3ICK\t]\t0\t30\n   FrameIndex\t3LID\tA\t0\t14\n   FrameIndex\t3LID\tB\t0\t14\n   FrameIndex\t3LID\tC\t0\t14\n   FrameIndex\t3LID\tD\t0\t14\n   FrameIndex\t3LID\tE\t0\t14\n   FrameIndex\t3LID\tF\t0\t14\n   FrameIndex\t3LID\tG\t0\t14\n   FrameIndex\t3LID\tH\t0\t14\n   FrameIndex\t3LID\tI\t0\t14\n   FrameIndex\t3LID\tJ\t0\t14\n   FrameIndex\t3LID\tK\t0\t14\n   FrameIndex\t3LID\tL\t0\t14\n   FrameIndex\t3LID\tM\t0\t14\n   FrameIndex\t3LID\tN\t0\t14\n   FrameIndex\t3TOM\tA\t0\t31\n   FrameIndex\tKICK\tA\t0\t10\n   FrameIndex\tKICK\tB\t0\t11\n   FrameIndex\tKICK\tC\t0\t12\n   FrameIndex\tKICK\tD\t0\t13\n   FrameIndex\tKICK\tE\t0\t14\n   FrameIndex\tKICK\tF\t0\t15\n   FrameIndex\tKICK\tG\t0\t16\n   FrameIndex\tKICK\tH\t0\t17\n   FrameIndex\tKICK\tI\t0\t18\n   FrameIndex\tKICK\tJ\t0\t19\n   FrameIndex\tKICK\tK\t0\t20\n   FrameIndex\tKICK\tL\t0\t21\n   FrameIndex\tKICK\tM\t0\t22\n   FrameIndex\tKICK\tN\t0\t23\n   FrameIndex\tKICK\tO\t0\t24\n   FrameIndex\tKICK\tP\t0\t25\n   FrameIndex\tKICK\tQ\t0\t26\n   FrameIndex\tKICK\tR\t0\t27\n   FrameIndex\tKICK\tS\t0\t28\n   FrameIndex\tKICK\tT\t0\t29\n   FrameIndex\tKICK\tU\t0\t30\n   FrameIndex\tKICK\tV\t0\t30\n   FrameIndex\tKICK\tW\t0\t30\n   FrameIndex\tKICK\tX\t0\t30\n   FrameIndex\tKICK\tY\t0\t30\n   FrameIndex\tKICK\tZ\t0\t30\n   FrameIndex\tKICK\t[\t0\t30\n   FrameIndex\tKICK\t]\t0\t30\n   FrameIndex\tKIK1\tA\t0\t0\n   FrameIndex\tKIK1\tB\t0\t1\n   FrameIndex\tKIK1\tC\t0\t2\n   FrameIndex\tKIK1\tD\t0\t3\n   FrameIndex\tKIK1\tE\t0\t4\n   FrameIndex\tKIK2\tA\t0\t5\n   FrameIndex\tKIK2\tB\t0\t6\n   FrameIndex\tKIK2\tC\t0\t7\n   FrameIndex\tKIK2\tD\t0\t8\n   FrameIndex\tKIK2\tE\t0\t9\n   FrameIndex\tSLID\tA\t0\t14\n   FrameIndex\tSLID\tB\t0\t14\n   FrameIndex\tSLID\tC\t0\t14\n   FrameIndex\tSLID\tD\t0\t14\n   FrameIndex\tSLID\tE\t0\t14\n   FrameIndex\tSLID\tF\t0\t14\n   FrameIndex\tSLID\tG\t0\t14\n   FrameIndex\tSLID\tH\t0\t14\n   FrameIndex\tSLID\tI\t0\t14\n   FrameIndex\tSLID\tJ\t0\t14\n   FrameIndex\tSLID\tK\t0\t14\n   FrameIndex\tSLID\tL\t0\t14\n   FrameIndex\tSLID\tM\t0\t14\n   FrameIndex\tSLID\tN\t0\t14\n   FrameIndex\tSTOM\tA\t0\t31\n   FrameIndex\tSTOM\tB\t0\t32\n   FrameIndex\tSTOM\tC\t0\t33\n   FrameIndex\tSTOM\tD\t0\t34\n   FrameIndex\tSTOM\tE\t0\t35\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   5161,
+   "Model Chain_saw\n{\n   Path \"models/bd/FIST\"\n   Model 0 \"fistclosed.md3\"\n   Skin 0 \"fist.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n   FrameIndex\tFUCK\tA\t0\t41\n   FrameIndex\tFUCK\tB\t0\t42\n   FrameIndex\tFUCK\tC\t0\t43\n   FrameIndex\tFUCK\tD\t0\t44\n   FrameIndex\tFUCK\tE\t0\t44\n   FrameIndex\tFUCK\tF\t0\t45\n   FrameIndex\tFUCK\tG\t0\t46\n   FrameIndex\tFUCK\tH\t0\t47\n   FrameIndex\tFUCK\tI\t0\t48\n   FrameIndex\tFUCK\tJ\t0\t48\n   FrameIndex\tFUCK\tK\t0\t50\n   FrameIndex\tFUCK\tL\t0\t51\n   FrameIndex\tFUCK\tM\t0\t52\n   FrameIndex\tFUCK\tN\t0\t53\n   FrameIndex\tFUCK\tO\t0\t53\n   FrameIndex\tIEHW\tA\t0\t39\n   FrameIndex\tIEHW\tB\t0\t39\n   FrameIndex\tIEHW\tC\t0\t39\n   FrameIndex\tIEHW\tD\t0\t39\n   FrameIndex\tIEHW\tE\t0\t39\n   FrameIndex\tIEHW\tF\t0\t39\n   FrameIndex\tIEHW\tG\t0\t39\n   FrameIndex\tIEHW\tH\t0\t39\n   FrameIndex\tIEHW\tI\t0\t39\n   FrameIndex\tIEHW\tJ\t0\t39\n   FrameIndex\tIEHW\tK\t0\t39\n   FrameIndex\tIEHW\tL\t0\t40\n   FrameIndex\tIEHW\tM\t0\t40\n   FrameIndex\tIEHW\tN\t0\t40\n   FrameIndex\tIEHW\tO\t0\t40\n   FrameIndex\tIEHW\tP\t0\t40\n   FrameIndex\tIEHW\tQ\t0\t40\n   FrameIndex\tIEHW\tR\t0\t40\n   FrameIndex\tIEHW\tS\t0\t40\n   FrameIndex\tIEHW\tT\t0\t40\n   FrameIndex\tSALU\tA\t0\t18\n   FrameIndex\tSALU\tB\t0\t19\n   FrameIndex\tSALU\tC\t0\t20\n   FrameIndex\tSALU\tD\t0\t21\n   FrameIndex\tSALU\tE\t0\t22\n   FrameIndex\tVUCK\tA\t0\t41\n   FrameIndex\tVUCK\tB\t0\t42\n   FrameIndex\tVUCK\tC\t0\t43\n   FrameIndex\tVUCK\tD\t0\t44\n   FrameIndex\tVUCK\tE\t0\t44\n   FrameIndex\tVUCK\tF\t0\t45\n   FrameIndex\tVUCK\tG\t0\t46\n   FrameIndex\tVUCK\tH\t0\t47\n   FrameIndex\tVUCK\tI\t0\t48\n}"
+  ],
+  [
+   "MODELDEF.bd.txt",
+   5220,
+   "Model Chain_saw\n{\n   Path \"models/bd/FIST\"\n   Model 0 \"fistclosed.md3\"\n   Skin 0 \"rsr_clear.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n   FrameIndex\t1UNG\tD\t0\t10\n   FrameIndex\t1UNG\tE\t0\t11\n   FrameIndex\t1UNG\tF\t0\t12\n   FrameIndex\t1UNG\tG\t0\t12\n   FrameIndex\t1UNG\tH\t0\t12\n   FrameIndex\t1UNG\tI\t0\t12\n   FrameIndex\t1UNG\tJ\t0\t12\n   FrameIndex\t4ONG\tB\t0\t1\n   FrameIndex\t4ONG\tC\t0\t2\n   FrameIndex\t4ONG\tD\t0\t3\n   FrameIndex\t4ONG\tE\t0\t4\n   FrameIndex\t4ONG\tF\t0\t5\n   FrameIndex\t4ONG\tG\t0\t7\n   FrameIndex\t4ONG\tV\t0\t1\n   FrameIndex\t4ONG\tW\t0\t2\n   FrameIndex\t4ONG\tX\t0\t3\n   FrameIndex\t4ONG\tY\t0\t4\n   FrameIndex\t4ONG\tZ\t0\t5\n   FrameIndex\t4ONG\t[\t0\t6\n   FrameIndex\t4UNG\tA\t0\t1\n   FrameIndex\t4UNG\tD\t0\t10\n   FrameIndex\t4UNG\tE\t0\t11\n   FrameIndex\t4UNG\tF\t0\t12\n   FrameIndex\t4UNG\tG\t0\t12\n   FrameIndex\t4UNG\tH\t0\t12\n   FrameIndex\t4UNG\tI\t0\t12\n   FrameIndex\t4UNG\tJ\t0\t12\n   FrameIndex\tPONG\tB\t0\t1\n   FrameIndex\tPONG\tC\t0\t2\n   FrameIndex\tPONG\tD\t0\t3\n   FrameIndex\tPONG\tE\t0\t4\n   FrameIndex\tPONG\tF\t0\t5\n   FrameIndex\tPONG\tG\t0\t7\n   FrameIndex\tPONG\tV\t0\t1\n   FrameIndex\tPONG\tW\t0\t2\n   FrameIndex\tPONG\tX\t0\t3\n   FrameIndex\tPONG\tY\t0\t4\n   FrameIndex\tPONG\tZ\t0\t5\n   FrameIndex\tPONG\t[\t0\t6\n   FrameIndex\tPUNG\tA\t0\t1\n   FrameIndex\tPUNG\tB\t0\t8\n   FrameIndex\tPUNG\tC\t0\t9\n}"
+  ]
+ ],
+ "rig": {
+  "engine": "/home/claude/rsq_weapondepot/tools/rig/build/rig/qz",
+  "engine_ok": true,
+  "rc": 0,
+  "res": 960,
+  "dump_every": 2,
+  "select_tics": 200,
+  "load_order": [
+   "/home/claude/gamedata/doom2.wad",
+   "/home/claude/gamedata/brutal22test6.pk3",
+   "/home/claude/gamedata/BD_VoxelPack.pk3",
+   "/home/claude/rsq_weapondepot/tools/rig/build/BD22Q_192.pk3",
+   "/home/claude/gallery_192/probe192.pk3"
+  ],
+  "console": "wait 100; god; notarget; screenblocks 12; crosshair 0; con_notifytime 0; give Infrared; rsq_extra_weapons 1; give ammo; give Chain_saw; wait 2; use Chain_saw; r_drawplayersprites 0; qz_hmd \"0 1.6 0 89.9 0 0\"; qz_rhand \"0.0000 1.6800 -0.4000 30 -70.0 0\"; qz_lhand \"0.1128 1.6800 -0.4410 30 -70.0 0\"; wait 200; qz_lgrip 1; wait 20; qz_rhand \"0.0000 1.6800 -0.4000 30 -70.0 0\"; qz_lhand \"0.1128 1.6800 -0.4410 30 -70.0 0\"; qz_hmd \"0 1.6 0.12 0 0 0\"; r_drawplayersprites 1; echo G192VIEW 0 on; wait 45; r_drawplayersprites 0; echo G192VIEW 0 off; wait 30; echo G192VIEW 0 end; qz_rhand \"0.2500 1.3000 -0.3000 30 0.0 0\"; qz_lhand \"0.2500 1.3000 -0.4200 30 0.0 0\"; qz_hmd \"0 1.6 0 -40 0 0\"; r_drawplayersprites 1; echo G192VIEW 1 on; wait 45; r_drawplayersprites 0; echo G192VIEW 1 off; wait 30; echo G192VIEW 1 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"0.0010 2.4514 -0.7821 -89.95 90.00 0\"; r_drawplayersprites 1; echo G192VIEW 2 on; wait 45; r_drawplayersprites 0; echo G192VIEW 2 off; wait 30; echo G192VIEW 2 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"0.0010 0.3486 -0.7821 89.95 90.00 0\"; r_drawplayersprites 1; echo G192VIEW 3 on; wait 45; r_drawplayersprites 0; echo G192VIEW 3 off; wait 30; echo G192VIEW 3 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"0.6082 1.7680 -1.5069 -21.25 140.00 0\"; r_drawplayersprites 1; echo G192VIEW 4 on; wait 45; r_drawplayersprites 0; echo G192VIEW 4 off; wait 30; echo G192VIEW 4 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"0.2600 1.4600 -0.4700 -15.82 67.07 0\"; r_drawplayersprites 1; echo G192VIEW 5 on; wait 45; r_drawplayersprites 0; echo G192VIEW 5 off; wait 30; echo G192VIEW 5 end; qz_rhand \"0.0000 1.4000 -0.5500 30 0.0 0\"; qz_lhand \"0.0000 1.4000 -0.6700 30 0.0 0\"; qz_hmd \"-0.2800 1.3860 -0.8320 32.05 -79.70 0\"; r_drawplayersprites 1; echo G192VIEW 6 on; wait 45; r_drawplayersprites 0; echo G192VIEW 6 off; wait 30; echo G192VIEW 6 end; quit",
+  "fixed_cvars": "rig config/qzdoom.ini: vr_two_handed_weapons=true vr_weaponRotate=-30 playerclass=$TAGBD_CLASS_RIFLE; give Infrared (light amp) for brightness",
+  "script_errors": [],
+  "probe": [
+   "G192VIEW 4 end",
+   "G192VIEW 5 on",
+   "G192 700 ready Chain_saw pending - state READY two 1 sup 932 gun 929 refire 0",
+   "G192 735 ready Chain_saw pending - state READY two 1 sup 932 gun 929 refire 0",
+   "G192VIEW 5 off",
+   "G192 770 ready Chain_saw pending - state READY two 1 sup 932 gun 929 refire 0",
+   "G192VIEW 5 end",
+   "G192VIEW 6 on",
+   "G192 805 ready Chain_saw pending - state READY two 1 sup 932 gun 929 refire 0",
+   "G192VIEW 6 off",
+   "G192 840 ready Chain_saw pending - state READY two 1 sup 932 gun 929 refire 0",
+   "G192VIEW 6 end"
+  ]
+ },
+ "camera_scale": 1.5,
+ "notes": "support hand on the top handle; the support close-up is crowded by the handle (see side / front34)",
+ "views": [
+  {
+   "view": "side",
+   "hmd": "0 1.6 0.12 0 0 0",
+   "rhand": "0.0000 1.6800 -0.4000 30 -70.0 0",
+   "lhand": "0.1128 1.6800 -0.4410 30 -70.0 0",
+   "file": "Chain_saw_side.jpg",
+   "frames": [
+    "f00070.ppm",
+    "f00074.ppm"
+   ],
+   "crop_box": [
+    274,
+    173,
+    960,
+    687,
+    "edge"
+   ]
+  },
+  {
+   "view": "eye",
+   "hmd": "0 1.6 0 -40 0 0",
+   "rhand": "0.2500 1.3000 -0.3000 30 0.0 0",
+   "lhand": "0.2500 1.3000 -0.4200 30 0.0 0",
+   "file": "Chain_saw_eye.jpg",
+   "frames": [
+    "f00080.ppm",
+    "f00084.ppm"
+   ],
+   "crop_box": [
+    34,
+    36,
+    960,
+    731,
+    "edge"
+   ]
+  },
+  {
+   "view": "top",
+   "hmd": "0.0010 2.4514 -0.7821 -89.95 90.00 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "file": "Chain_saw_top.jpg",
+   "frames": [
+    "f00088.ppm",
+    "f00092.ppm"
+   ],
+   "crop_box": [
+    251,
+    185,
+    960,
+    717
+   ]
+  },
+  {
+   "view": "bottom",
+   "hmd": "0.0010 0.3486 -0.7821 89.95 90.00 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "file": "Chain_saw_bottom.jpg",
+   "frames": [
+    "f00098.ppm",
+    "f00102.ppm"
+   ],
+   "crop_box": [
+    200,
+    233,
+    960,
+    802,
+    "edge"
+   ]
+  },
+  {
+   "view": "front34",
+   "hmd": "0.6082 1.7680 -1.5069 -21.25 140.00 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "file": "Chain_saw_front34.jpg",
+   "frames": [
+    "f00108.ppm",
+    "f00110.ppm"
+   ],
+   "crop_box": [
+    254,
+    337,
+    960,
+    866,
+    "edge"
+   ]
+  },
+  {
+   "view": "grip",
+   "hmd": "0.2600 1.4600 -0.4700 -15.82 67.07 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "closeup": 0.62,
+   "file": "Chain_saw_grip.jpg",
+   "frames": [
+    "f00114.ppm",
+    "f00118.ppm"
+   ],
+   "crop_box": [
+    182,
+    257,
+    778,
+    703
+   ]
+  },
+  {
+   "view": "support",
+   "hmd": "-0.2800 1.3860 -0.8320 32.05 -79.70 0",
+   "rhand": "0.0000 1.4000 -0.5500 30 0.0 0",
+   "lhand": "0.0000 1.4000 -0.6700 30 0.0 0",
+   "closeup": 0.62,
+   "file": "Chain_saw_support.jpg",
+   "frames": [
+    "f00124.ppm",
+    "f00128.ppm"
+   ],
+   "crop_box": [
+    182,
+    257,
+    778,
+    703
+   ]
+  }
+ ],
+ "problems": []
+}
