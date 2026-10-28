@@ -137,6 +137,13 @@ grenade pinch, and melee hands. REMA's reload hands are `hold_<subject>[_<class>
 5. **B6**, then **B8**.
 6. **B7**, one set at a time, when the owner picks the Depot set.
 
-## Questions for the owner
-- B5: should REMA's world guns move from the `_wm` stills to the animated originals, as the Depot did?
-- B3: a full transform on the card, or roll plus offset?
+## Decided (owner, 2026-10-28)
+- **B5: animated originals.** REMA's held guns move off the single-frame `*_wm.md3` stills onto the same
+  animated meshes the Depot fits. The stills are retired for REMA, as they were for the Depot.
+- **B3: the full transform.** The card carries the Depot's measured wrist-on-gun exactly, rotation and
+  offset, in one field. Not roll plus offset on top of palm and rake: that is a second method beside the
+  measured one (rule 1).
+- **First proof: the Pistol and the Rifle, both,** on c_doom_marine. Full poses (gun hand and support) and
+  the reloads (magazine and charging handle; the Rifle's M203 too).
+- **The avatars' own hands are fitted.** Each body's hand is fitted from the Depot pose (B4). The Depot's
+  hand meshes are never drawn on a REMA body.
