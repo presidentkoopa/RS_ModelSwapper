@@ -10,5 +10,6 @@ for i, g in enumerate(guns):
     for j, pk in enumerate((A, B)):
         fs = shots.shoot('%s_%d_%d' % (tag, i, j), pk, 'qz_rhand "%s"; rsq_extra_weapons 1; give ammo; give %s; wait 2; use %s; wait 170' % (POSE, g, g), every=30, secs=400)
         if fs: big.paste(Image.open(fs[-1]), (j * w, i * h))
+        if fs: __import__('shutil').rmtree(__import__('os').path.dirname(fs[-1]))	# frame dumps (.ppm) deleted once the frame is used
         d.text((j * w + 8, i * h + 8), '%s %s' % ('A' if j == 0 else 'B', g), fill=(255, 255, 0))
 big.resize((w * 3 // 2, h * len(guns) * 3 // 4)).save(shots.SP + '/cmp2_%s.png' % tag); print('ok')

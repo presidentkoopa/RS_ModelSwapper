@@ -21,18 +21,18 @@ as its launcher. It reports `qz: engine OK: QuestZDoom qzd17.3 (9afc750...), eng
 sh tools/rig/setup.sh                 # seconds: test packs + check that tools/rig/bin is 17.3
 #   or: sh tools/rig/setup.sh build   # ~20-40 min: engine from PINS into build/rig/ (then B22_RIG=tools/rig/build/rig)
 cd tools/rig
-B22_IWAD=<doom2.wad> B22_BD22=<brutal22test6.pk3> B22_VOX=<BD_VoxelPack.pk3> \
-  flock -o -s /home/claude/rig.lock python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 BrutalPistol,Plasma_Gun t1
+RSQ_GAMEDATA=<folder with doom2.wad, brutal22test6.pk3, BD_VoxelPack.pk3> \
+  flock -o -x /home/claude/rig.lock python3 cmp2.py build/BD22Q_192.pk3 build/BD22Q_now.pk3 BrutalPistol,Plasma_Gun t1
 #  -> build/shots/cmp2_t1.png : each gun held, 1.92 on the left, the depot's current set on the right
 ```
 Gun names are BD22's classes (`BrutalPistol`, `Plasma_Gun`, ...). The example used to say
 `Pistol,PlasmaGun`: that runs and writes the PNG, but no pistol is drawn and the PlasmaGun row shows
 the start rifle (measured on a fresh clone, F12).
 `setup.sh` zips `build/probe.pk3`, `build/upstream.pk3`,
-`build/BD22Q_now.pk3` (this depot's `sets/bd22q_1.97/src`) and `build/BD22Q_192.pk3` (tag 1.92 of
+`build/BD22Q_now.pk3` (the set under work, `$RSQ_SET` or `sets/bd22q`, built by its own `build.py`) and `build/BD22Q_192.pk3` (tag 1.92 of
 RS_Brutal22WeaponsQ, the owner's baseline), then checks the rig is 17.3. Re-run it after changing
 the set (it re-zips BD22Q_now). `rig.py` uses `B22_RIG` if set, else `bin/`, and stops with
-a message if it has no engine. On a shared machine run one engine at a time (`flock` as above).
+a message if it has no engine. On a shared machine run one engine at a time: `flock -o -x` as above (`-o`: a child such as a stray Xvfb never inherits the lock).
 
 ## Posing the hands
 - `qz_hmd "x y z pitch yaw roll"` places the head; `qz_rhand` / `qz_lhand` place the controllers
@@ -59,7 +59,7 @@ a message if it has no engine. On a shared machine run one engine at a time (`fl
 | `holdtest3.py` | trigger held 140 tics per gun, QZD as is vs upstream attackdown (`build/upstream.pk3`) |
 | `probe/` | the `B22 ...` log lines (reload tables, state, shots, psp, casings, axe lock) |
 
-Load order is always doom2 -> brutal22test6 -> BD_VoxelPack -> pack (CLAUDE.md rule 5).
+Load order is always doom2 -> brutal22test6 -> BD_VoxelPack -> pack (CLAUDE.md). The full how-to is docs/handbook/02_test_rig.md.
 BD_VoxelPack prints four `voxeldef.txt` script errors on its own; they are not ours.
 
 ## Traps (each cost a run)
