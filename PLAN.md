@@ -309,6 +309,13 @@ TABLED 2026-10-25 (owner): the four sets below wait. **Priority is bd22q.**
       no environment models; the environment source (PBVP v1 KVX or newer) is still to be found.
       Queued after BD 2.0 and ModelSwapper 2.0; not to be started without the owner's yes.
 
+- C3  UNIVERSAL REAL-TIME SCOPE MOD (owner, 2026-10-28 01:43: "That scope is critical. The code used to render a scope
+      display in real time needs to be something I can give... a kind of universal scope mod. Eventually we will use it
+      here and other places"). Extract BD22's live camera scope (RSQ_ScopeTable + scope zscript: per-eye camera,
+      HmdPosition eye height, lens surface camera texture, 3x FOV) into a standalone, documented, data-driven ZScript
+      mod: any weapon + any lens surface + a magnification, set in one table, no engine changes. Release-ready for
+      other mods (BD22, ModelSwapper, others). Not started; the owner's go first. Proven BD22 scope first (lane-scope).
+
 ## Per set
 1 inventory the parent mod · 2 measure every mesh fresh, carve/bake parts, sheets, owner signs placement ·
 3 numbers parsed from the parent, diffed · 4 build, static check, engine gate (start item, pickups, every
