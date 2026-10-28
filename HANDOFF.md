@@ -15,12 +15,20 @@ example, the toolset proven on BD22, and the handbook. Everything older is on `a
   `lane_c/hands_tool` and the measured data it reads), now in the repo. The 1.92 pack it measures against is
   the tag-1.92 checkout `sh tools/rig/setup.sh` makes (`RSQ_GUNPACK`).
 - Every tool path is Depot-relative or an environment variable (`tools/depot.py`).
-- `rebake.py check` in this checkout: 30 poses rebaked from data; every shipped hand MD3 reproduced to at most
-  0.0156 md3 units (one quantum), every MODELDEF / pivot / fire row regenerated equal. VERIFIED.md has the run on
-  a fresh clone.
+- The handbook (`docs/handbook/`, README + 01-07 + SKILL.md) followed on a fresh clone of `dc3bb6f`
+  (`docs/handbook/VERIFIED.md`): rig setup, BD22 2.0.1 booted on doom2 -> brutal22test6 -> BD_VoxelPack -> pack
+  with 0 pack script errors, `rebake.py check` (30 poses, every MD3 within one quantum, 0 MODELDEF mismatches),
+  the Rifle's frames and hand reload, a 3-gun sweep, `mdslots.py` 0 bad, `variants_all.py` 0 differ. Rig only.
+- `sets/bd22q/reference/192_poses` = the 1.92 hold renders (from the old `docs/reference/bd22q_192_poses`):
+  kept because the method starts from them and `gate_gun.py compose` reads them.
 
 ## Not done
-- See `docs/handbook/VERIFIED.md` for what the fresh-clone run proved and what it did not.
+- Not re-run after the move (compiled, paths moved): the fitters (`fit_hv.py`, `fit192.py`, `hold_fit.py`, the farm),
+  the scope driver, `rsweep.py`, `dualsweep.py`, `f20all.sh`. `VERIFIED.md` "Not verified here".
+- `tools/handfit/farm/pack_farm.py` still packs the old cloud layout; point it at `tools/handfit/core` and `$RSQ_SET`
+  before the next farm run.
+- `fitter_lib` reads old batch 1-4 stage files from `RS_FITTER_HOME` (default `work/fitter_home`); the ones the BD22
+  port needs are in `sets/bd22q/handfit/fits/`, the rest only on the farm's mirror.
 - The mesh tools (carve, label, card: the old `tools/kit`, `tools/hqt`) are on the archive branch only; F14 needs
   them back, proven, before it starts.
 

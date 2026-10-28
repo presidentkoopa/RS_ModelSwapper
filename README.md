@@ -13,7 +13,7 @@ through the same process.
 
 | path | what |
 |---|---|
-| `sets/bd22q/` | BD22 VR Weapons Q 2.0.1, copied from [presidentkoopa/RS_Brutal22WeaponsQ](https://github.com/presidentkoopa/RS_Brutal22WeaponsQ) `main` at b360875: `src/` (the pack), `build.py`, `VERSION`, its own `README.md` and `CLAUDE.md`, its set-only tools (`tools/`: hand tones, HUD, Moonlight ammo) and its hand-fit data (`handfit/poses`, `handfit/fits`). Its history, handoffs and renders stay in that repo. |
+| `sets/bd22q/` | BD22 VR Weapons Q 2.0.1, copied from [presidentkoopa/RS_Brutal22WeaponsQ](https://github.com/presidentkoopa/RS_Brutal22WeaponsQ) `main` at b360875: `src/` (the pack), `build.py`, `VERSION`, its own `README.md` and `CLAUDE.md`, its set-only tools (`tools/`: hand tones, HUD, Moonlight ammo), its hand-fit data (`handfit/poses`, `handfit/fits`) and the 1.92 holds rendered (`reference/192_poses`, where every 2.0 grip started). Its history, handoffs and renders stay in that repo. |
 | `sets/vanilla/` `sets/vanilla_plus/` `sets/modern/` | the c2q-built sets (were `vanilla_0.9`, `plus_0.7`, `modern_0.9`). Built from REMA's single-frame `_wm` meshes, so every gun is a still: they are rebuilt from the animated originals, never patched. |
 | `sets/aliens/` | RS_Aliens_VR-WeaponsQ @ 1ee0cd2, verbatim. |
 | `tools/rig/` | the QuestZDoom 17.3 test rig for Linux (prebuilt `bin/`, version-guarded by `PINS`), its drivers and probe. |
