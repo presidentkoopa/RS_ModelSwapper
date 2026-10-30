@@ -1,7 +1,8 @@
 __pycache__/
 *.pyc
-# the FBX hand is never committed (unknown licence): point RSQ_FBX at it
+# FBX files stay out, except the FBX hand (owner, 2026-10-28/30: it lives in the repo)
 *.fbx
+!tools/handfit/core/fbx_hand/hand_final.fbx
 # frame dumps: convert to PNG, then delete
 *.ppm
 # run output of every tool (RSQ_WORK default)
