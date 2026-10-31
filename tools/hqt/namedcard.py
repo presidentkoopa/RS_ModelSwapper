@@ -3,7 +3,7 @@
 Card for a GOLD model: surfaces are named in the source, so roles come from the names and
 geometry from the mesh (single frame is fine). WPN space = file space (bore +X, up +Z) -- run
 obj2md3.py with the right --axes first. Role words: VR_Weapon_Spec.md §5 plus crane/ejector/latch."""
-import sys, re; sys.path.insert(0, '/home/claude/md3')
+import sys, re, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 from md3read import read_md3
 

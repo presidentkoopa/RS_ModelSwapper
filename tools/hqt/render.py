@@ -3,7 +3,7 @@ import numpy as np, matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.collections import PolyCollection
 from md3read import read_md3
-m=read_md3(sys.argv[1]); S=m['surfs']; body=max(range(len(S)), key=lambda i:S[i]['nverts']); B=S[body]['xyz']
+m=read_md3(sys.argv[1]); S=m['surfs']; import os; body=int(os.environ['BODY']) if os.environ.get('BODY') else max(range(len(S)), key=lambda i:S[i]['nverts']); B=S[body]['xyz']  # BODY=n: the still surface, when the biggest one spins (minigun barrels)
 def kabsch(P,Q):
     pc,qc=P.mean(0),Q.mean(0); H=(P-pc).T@(Q-qc); U,_,Vt=np.linalg.svd(H); d=np.sign(np.linalg.det(Vt.T@U.T)); R=Vt.T@np.diag([1,1,d])@U.T; return R,qc-R@pc
 # rotate frame-0 body space so the slide axis (-0.71,0,0.71)=back is drawn as -X: rotate by 45deg about Y
@@ -13,6 +13,9 @@ cols={i:pal[i%len(pal)] for i in range(len(S))}; cols[body]='#999999'
 lab={i:f'surf{i} {S[i]["name"][:12]}' for i in range(len(S))}
 frames=[int(x) for x in sys.argv[2].split(',')]
 import os; IDLE=int(os.environ.get('IDLE','0'))
+# VIEW=side (default, looks along -Y) or top (looks down -Z): swing-out cylinders and side drums only show from the top
+VIEW=os.environ.get('VIEW','side')
+if VIEW=='top': Rv=np.array([[1,0,0],[0,0,1],[0,-1,0]])@Rv
 fig,axs=plt.subplots(1,len(frames),figsize=(4.2*len(frames),4.2))
 for ax,f in zip(np.atleast_1d(axs),frames):
     R,t=kabsch(B[IDLE],B[f])

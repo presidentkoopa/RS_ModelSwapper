@@ -130,9 +130,10 @@ def kabsch(P,Q):
 def unit(v):
     n=np.linalg.norm(v); return v/n if n>1e-9 else v
 
-def analyse(m, idle):
+def analyse(m, idle, body=None):
     S=[dict(xyz=surf_xyz(s), nverts=s['nverts'], name=s['name']) for s in m['surfs']]
-    body=max(range(len(S)), key=lambda i:S[i]['nverts'])
+    # the body is the biggest surface unless told otherwise: a minigun's biggest surface is its SPINNING barrels
+    if body is None: body=max(range(len(S)), key=lambda i:S[i]['nverts'])
     B=S[body]['xyz']; nf=m['nframes']
     # everything in WPN = body space at the idle frame
     Rs=[kabsch(B[f], B[idle]) for f in range(nf)]   # maps frame f body -> idle body
@@ -196,20 +197,21 @@ def main():
     ap.add_argument('--assign', default='', help='surf=role,... overrides')
     ap.add_argument('--archetype', default='pistol_mag', help='pistol_mag | shotgun_pump | revolver_topbreak | shotgun_break')
     ap.add_argument('--no-stabilize-check', action='store_true')
+    ap.add_argument('--body', type=int, default=None, help='surface index that is the still body (default: the biggest)')
     ap.add_argument('--bore', default='1,0,0'); ap.add_argument('--down', default='0,0,-1')
     a=ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     m=read_raw(a.src)
     nf=m['nframes']
     # idle: first frame whose body pose is shared by the most frames (the sway-free pose)
-    S0=[surf_xyz(s) for s in m['surfs']]; body0=max(range(len(S0)), key=lambda i:S0[i].shape[1])
+    S0=[surf_xyz(s) for s in m["surfs"]]; body0=a.body if a.body is not None else max(range(len(S0)), key=lambda i:S0[i].shape[1])
     if a.idle is None:
         # the raise ends where consecutive-frame body rotation first drops under 2 degrees
         B=S0[body0]; a.idle=0
         for f in range(1,nf):
             ang=np.degrees(np.arccos(np.clip((np.trace(kabsch(B[f-1],B[f])[0])-1)/2,-1,1)))
             if ang<2.0: a.idle=f-1; break
-    S, body, Rs, to_wpn, rest, resid, sway, cant = analyse(m, a.idle)
+    S, body, Rs, to_wpn, rest, resid, sway, cant = analyse(m, a.idle, a.body)
     bore=unit(np.array([float(x) for x in a.bore.split(',')])); down=unit(np.array([float(x) for x in a.down.split(',')]))
     roles, info = classify(S, body, rest, resid, bore, down)
     for kv in filter(None, a.assign.split(',')):

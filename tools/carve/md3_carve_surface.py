@@ -239,11 +239,34 @@ def reproject(m, index, axis, scale=(1.0, 1.0, 1.0), offset=(0.0, 0.0, 0.0)):
     return {'name': sname(s), 'nv': s['nv'], 'nt': s['nt']}
 
 
+def select_like(pos, ref_pos, tol):
+    """Indices whose frame-0 position coincides with a vertex of a reference surface: the same
+    mesh already parted somewhere else (BD22 Weapons Q's *_rsr.md3, RS VR Weapons' *_wm.md3) is
+    the measurement; the part's own triangles are taken, nothing geometric guessed (2026-10-31)."""
+    cells = {}
+    q = max(tol, 1e-6)
+    for j, r in enumerate(ref_pos):
+        cells.setdefault(tuple(int(round(c / q)) for c in r), []).append(r)
+    keep = set()
+    for i, p in enumerate(pos):
+        k = tuple(int(round(c / q)) for c in p)
+        for dk in ((0,0,0),(1,0,0),(-1,0,0),(0,1,0),(0,-1,0),(0,0,1),(0,0,-1)):
+            for r in cells.get((k[0]+dk[0], k[1]+dk[1], k[2]+dk[2]), ()):
+                if abs(p[0]-r[0]) <= tol and abs(p[1]-r[1]) <= tol and abs(p[2]-r[2]) <= tol:
+                    keep.add(i); break
+            if i in keep: break
+    return keep
+
+
 def carve(m, index, newname, axis, lo, hi, centre, radius, tol, do_project, half=None,
-          scale=(1.0, 1.0, 1.0), offset=(0.0, 0.0, 0.0)):
+          scale=(1.0, 1.0, 1.0), offset=(0.0, 0.0, 0.0), like=None):
     src = m['surfs'][index]
     pos = positions(src, 0, scale, offset)
-    chosen = select(pos, axis, lo, hi, centre, radius, tol, half)
+    if like is not None:
+        ref = parse(open(like[0], 'rb').read())['surfs'][int(like[1])]
+        chosen = select_like(pos, positions(ref, 0, scale, offset), max(tol, 0.03))
+    else:
+        chosen = select(pos, axis, lo, hi, centre, radius, tol, half)
     tris = tri_list(src)
     moved, stayed = [], []
     for t in range(src['nt']):
@@ -281,6 +304,9 @@ def main(argv=None):
     ap.add_argument('--radius', type=float, default=0.0)
     ap.add_argument('--half', type=float, nargs=2, default=None, metavar=('HA', 'HB'),
                     help='box half-widths on the two non-slab axes instead of a cylinder radius')
+    ap.add_argument('--like', nargs=2, default=None, metavar=('REF.md3', 'SURF'),
+                    help='take the vertices that coincide with surface SURF of REF.md3 (the same mesh '
+                         'parted elsewhere) instead of a slab/cylinder/box')
     ap.add_argument('--scale', type=float, nargs=3, default=(1.0, 1.0, 1.0))
     ap.add_argument('--offset', type=float, nargs=3, default=(0.0, 0.0, 0.0))
     ap.add_argument('--tol', type=float, default=None,
@@ -336,7 +362,7 @@ def main(argv=None):
         return 0
 
     r = carve(m, a.surface, a.name, axis, a.slab[0], a.slab[1],
-              a.centre, a.radius, tol, a.project_uv, a.half, a.scale, a.offset)
+              a.centre, a.radius, tol, a.project_uv, a.half, a.scale, a.offset, a.like)
     print('  selected %d verts; %d whole triangles moved (%d selected verts were in no '
           'whole triangle)' % (r['chosen'], r['moved_tris'], r['orphans']))
     print('  source %d -> %d verts / %d -> %d tris'
