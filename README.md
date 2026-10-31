@@ -1,138 +1,121 @@
-<img width="1248" height="1011" alt="ModelSwapper" src="https://github.com/user-attachments/assets/b21b0fef-8a9f-41d2-a60f-d264206f1716" />
+# ModelSwapper 1.5
 
-# ModelSwapper
+ModelSwapper puts VR weapon models on the guns of any Doom weapon mod, and lets you reload them with your hands.
 
-**3D weapons for any Doom weapon mod, made for VR, with hand reloads on the guns that can reload.**
+You keep the mod. Its weapons, ammo, damage and reload rules all stay as the mod wrote them. ModelSwapper changes what
+you hold: a 3D model from one of 17 VR weapon sets, placed in your hand where that set's author placed it. When a gun
+reloads, your hands do the work the model was built for, while the mod keeps the books.
 
-Load a weapon mod, then load ModelSwapper. Every weapon the mod gives you wears a 3D model, held in your hand, and
-you can put any model on any weapon. Where the model can be reloaded, you reload it by hand: pull the magazine and
-seat a new one, work the pump, break the shotgun and load the shells, swing out the cylinder. The mod's own code still
-decides the ammo, the rules and the sounds. Nothing is written for any one mod, so a mod released tomorrow works the
-same way as one from 2016.
+## What works today
 
-![The model picker, with Project Brutality loaded](media/pb-choose-models.png)
+Tested on the QuestZDoom 17.3 rig. Not yet confirmed in a headset.
 
-## Status: version 1.5 (2026-10-31)
+**Models.** 143 meshes. Any of them can be chosen for any weapon of any mod. Each uses its own set's MODELDEF for
+skin, scale, offsets and the frame it rests on.
 
-All results below were run on the QuestZDoom 17.3 test rig. **None are headset-confirmed yet.**
+**Hand reloads, built from the cards:**
+- Magazine: 37 models. Pull the empty, take a fresh one from the pouch, seat it, rack the handle or slide if the gun
+  was shot dry.
+- Pump: 6 shotguns. Push shells into the port one by one, work the pump after a shot.
+- Break-open and revolver: 5 models (BD M79, BD revolver, BD super shotgun, the alek revolver with its speedloader,
+  the alek super shotgun). Open the action, load the rounds, flick it shut.
 
-| | |
-|---|---|
-| Models | 143 meshes from 17 VR weapon sets, every one selectable on any weapon |
-| Placement | each model sits where its own set's hand-authored MODELDEF puts it, on the frame that set shows at Ready |
-| Magazine reloads | 37 models, generated from their cards |
-| Pump reloads | 6 shotguns (the Meatgrinder SSG uses Ermac's shell in the loading hand) |
-| Break-open / revolver | 5 models (BD M79, BD revolver, BD SSG, V+ revolver with speedloader, V+ SSG) |
-| Charging handle | asked for after an empty reload; racked by the off hand |
-
-Shown working on two mods that reload properly, with 0 script errors from the pack:
+**Seen working on mods with real reloads (0 pack script errors):**
 
 | Mod | Weapon | Model | Reload |
 |---|---|---|---|
-| Generic weapons | ARifle | BD rifle | magazine, and charging handle when shot dry |
-| Generic weapons | Beretta | BD pistol | magazine + slide |
-| Generic weapons | Riotgun | BD shotgun | shells into the port, pump after the shot |
-| Generic weapons | DoubleSG | BD SSG | break open, two shells, flick shut |
+| Generic weapons | ARifle | BD rifle | magazine, charging handle after empty |
+| Generic weapons | Beretta | BD pistol | magazine, slide after empty |
+| Generic weapons | Riotgun | BD shotgun | shells by hand, pump |
+| Generic weapons | DoubleSG | BD super shotgun | break open, two shells, flick shut |
 | Weapons of Saturn | MachineRifle | BD rifle | magazine |
-| Weapons of Saturn | Beretta / 1911 / MP40 | BD pistol / BW 1911 / BD MP40, BD SMG | magazine + slide or handle |
-| Weapons of Saturn | Riotgun | BD shotgun | shells + pump |
-| Weapons of Saturn | Coachgun | BD SSG | break open, shell, flick shut |
+| Weapons of Saturn | Beretta, 1911, MP40 | BD pistol, BW 1911, BD MP40 / SMG | magazine, slide or handle after empty |
+| Weapons of Saturn | Riotgun | BD shotgun | shells by hand, pump |
+| Weapons of Saturn | Coachgun | BD super shotgun | break open, shell, flick shut |
 
-What is still open is listed in [HANDOFF.md](HANDOFF.md), most important first.
+The open list, in order of priority, is in [HANDOFF.md](HANDOFF.md).
 
-## Using it
+## Install
 
-- **Desktop VR:** `ModelSwapper.pk3`, for [UZDXREMA](https://github.com/presidentkoopa/UZDXREMA). Models animate with
-  the weapon.
-- **Quest:** `ModelSwapper-QUEST.pk3`, for [QuestZDoom](https://github.com/emawind84/QuestZDoom) 17.3. Same models,
-  picker and reloads. The models hold their rest pose, because animating them needs engine features Quest does not
-  have.
+| Platform | File | Engine |
+|---|---|---|
+| Quest | `ModelSwapper-QUEST.pk3` | QuestZDoom 17.3 |
+| PC VR | `ModelSwapper.pk3` | UZDXREMA |
 
-Load it **after** your weapon mod. The model picker lists every weapon the mod defines and which family it was sorted
-into (pistol, shotgun, rifle, launcher and so on), with the model it is wearing. Pick any model for any weapon.
+Load your weapon mod first and ModelSwapper after it. On Quest the models stay in their rest pose (no animation on that
+engine); everything else, reloads included, is the same.
 
-Reload options are in the menu. **Reload Order** decides whether the mod's own reload runs first (the default) or the
-hands go first. **Charging Handle After Empty** decides whether an empty gun asks for its handle. The menu also has
-pump-by-hand-after-a-shot and shells per grab.
+## In game
 
-## How it works
+- **Model menu:** every weapon of the loaded mod, the family ModelSwapper filed it under, and the model on it. Change
+  any of them.
+- **Reload Order:** the mod's own reload runs first and the hands follow (default), or the hands go first.
+- **Charging Handle After Empty:** a gun reloaded from empty waits for you to rack it.
+- **Pump by Hand After a Shot**, **Shells per grab**, **Shotgun Shells Per Insert**: pump-gun behaviour.
 
-1. **Sorting.** ModelSwapper reads every weapon the loaded mods define and sorts each into a family. It looks at the
-   name, the ammo, the parent class, and last the weapon slot, so no weapon is ever left without a model. A weapon
-   that takes ammo or shows a muzzle flash always counts as a gun. Handlebars, lanterns and other helpers a mod builds
-   out of weapon code don't get a model.
-2. **Wearing a model.** The weapon's model data is pointed at the chosen model, so the engine draws our model in its
-   place, with that model's own skin, scale and offsets. On desktop the weapon's own states drive the model's frames
-   every tic.
-3. **Hand reloads.** When a weapon wearing one of our models reloads, the join (`zscript/RS_ForeignReload.zs`) takes
-   over:
-   - It lets the mod's own reload run, so its ammo and rules stand.
-   - It holds the weapon while the hands do the reload.
-   - It gives the weapon back when the hands finish.
+## Under the hood
 
-   Which reload a model gets comes from its slot in the reload tables: magazine (`RSR_Guns`), pump (`RSP_Guns`) or
-   break-open (`RSB_Guns`). The slot is looked up from the model in the hand, not from the mod's weapon class. That's
-   why it works on mods nobody has looked at.
+**Filing.** Each weapon of the loaded mod is filed into a family (pistol, shotgun, super shotgun, rifle, chaingun,
+launcher, plasma, BFG, melee, ...) by name, ammo, parent class and finally slot. Anything that takes ammo or flashes is
+a gun. Helpers that never fire get no model.
 
-## The cards
+**Wearing.** The weapon's model data is redirected to the chosen model's MODELDEF entry, so the engine draws that model
+with its own skin, scale and offsets.
 
-Everything starts from `cards/<set>/<gun>/`. Each folder holds:
-- **The card** (`.card`): measured parts, roles, states, muzzle, grip and magazine well.
-- **The labelled mesh** with all of its source frames.
-- **The carved reload parts:** magazine, pump, hinge, rounds.
-- **Its textures and a render sheet.**
+**Reloading.** `zscript/RS_ForeignReload.zs` watches every weapon that wears one of our models. When the mod enters its
+Reload state, the join lets the mod's reload finish so its ammo is right, then holds the weapon while the hands do the
+reload. It hands the weapon back when the hands are done. The reload type comes from the model in the hand (magazine,
+pump or break-open table), not from the mod. That is how it works on mods it has never seen.
 
-The cards are measured with the RSQ_WeaponDepot tools (`tools/hqt`, `tools/carve`). The donor system and every
-reload table are **generated** from them. Nothing is placed or wired by hand.
+## Cards and generators
 
-| Generator | Writes |
+Each model lives in `cards/<set>/<gun>/` with:
+- its card: measured parts, roles, states, grip, muzzle and magazine well
+- the labelled mesh with every source frame
+- the carved reload parts
+- textures and a render sheet
+
+The cards are measured with RSQ_WeaponDepot's `tools/hqt` and `tools/carve`. Everything the game reads is generated
+from the cards:
+
+1. `tools_gen_from_cards.py`: model definitions, donor classes, the shelf and names. `sources.lock.json` pins every
+   resolution, so it runs from this repo alone.
+2. `tools_kit/card_mag.py`: magazine reload rows and layers.
+3. `tools_kit/card_pump.py`: pump reload rows and layers.
+4. `tools_kit/card_break.py`: break-open and revolver rows and layers.
+5. `tools_reload_modeldefs.py`: the few layers still taken from the 2.0 measurements.
+
+Each one writes a `*.report.md` listing what it built and why it skipped anything.
+
+## Build and test
+
+- `./build.ps1` builds the PC VR pk3. `./build.ps1 -Static` builds the Quest pk3. `tools_zs_lint.py` checks the
+  ZScript before packing.
+- `tools_rig_check.py --donors <models> --weapon <class> --extra <mod.pk3>` puts models on a mod's weapons on the
+  Linux QuestZDoom rig and makes a contact sheet.
+- `tools_rig_reload.py --kind mag|pump|break --donor <model> --weapon <class> --extra <mod.pk3>` runs one full hand
+  reload and prints each phase. For magazine guns, `--clicks` / `--fire-tics` shoot the gun dry first and `--rack`
+  works the handle.
+
+Test reloads on weapons that have their own Reload state. Doomablo's shotguns reload inside Fire and are not a valid
+reload test.
+
+## Layout
+
+| Path | Contents |
 |---|---|
-| `tools_gen_from_cards.py` | `modeldef`, donor stubs, shelf + names (each model on its own set's MODELDEF block; `sources.lock.json` makes it reproducible from this repo alone) |
-| `tools_kit/card_mag.py` | magazine rows `zscript_depot/rsr/rsr_guns.ms.zs` + layers `MODELDEF.cards` |
-| `tools_kit/card_pump.py` | pump rows `rsr_pump_guns.zs`, `rsp_rack.ms.zs` + layers `MODELDEF.rsrpump` |
-| `tools_kit/card_break.py` | break-open rows `rsb_guns.zs` + layers `MODELDEF.rsb` |
-| `tools_reload_modeldefs.py` | `MODELDEF.cards2x`: the 2.0-measured layers for the few models card_mag does not build |
+| `zscript/` | model swapping, filing, the reload join, the menu |
+| `zscript_depot/` | the hand-reload system, VR hands, generated reload tables |
+| `cards/` | models, textures, cards |
+| `tools_kit/` | generators and measuring kit |
+| `tools_*.py` | rig, placement and mesh tools |
+| `models/rsq/`, `sounds/`, `SNDINFO.ms` | VR hands and reload sounds |
+| `reload_1x/` | earlier reload layers, reference for `tools_reload_modeldefs.py` |
 
-Regenerate in that order. Each generator writes a report (`*.report.md`) saying what it built and why it left
-anything out.
-
-## Building
-
-`./build.ps1` builds the desktop pk3; `./build.ps1 -Static` builds the Quest pk3. `tools_zs_lint.py` checks the
-ZScript before anything is packed.
-
-## Testing on the rig
-
-The rig is QuestZDoom 17.3 on Linux, run on the real `doom2.wad`, with simulated head and hand poses.
-
-- `tools_rig_check.py --donors MS_BD_Pistol,... --weapon <class> --extra <mod.pk3>` builds the Quest pk3. It puts
-  each model on a weapon, reads back the model actually applied, and makes a contact sheet.
-- `tools_rig_reload.py --kind mag|pump|break --donor <model> --weapon <class> --extra <mod.pk3>` drives one full
-  hand reload and prints every phase. For magazine guns:
-  - `--clicks N` or `--fire-tics N` shoots the gun dry first.
-  - `--rack` works the charging handle.
-
-**Test reloads on a mod whose weapons really have a Reload state.** The generic weapons pack and Weapons of Saturn
-both do. Doomablo's shotgun and super shotgun reload inside Fire, so they never hand over a reload.
-
-## Repository
-
-- `zscript/`: the model swapper, the reload join, the picker.
-- `zscript_depot/`: the reload system and the VR hands, plus the generated reload tables.
-- `cards/`: the meshes, textures and cards.
-- `tools_kit/`: the generators and the measuring kit.
-- `tools_*.py`: placement, rig and mesh tools.
-- `models/rsq`, `sounds/`, `SNDINFO.ms`: the VR hands and the reload foley.
-- `reload_1x/`: the 1.x / 2.0 reload layers kept as reference for `tools_reload_modeldefs.py`.
-
-Earlier work, including the 1.x model shelf and the 2.0 branch (`modelswapper-2.0-bd22-lift`), is described in
-[ARCHIVE.md](ARCHIVE.md). The old tree is on branch `archive/pre-cards-2026-10-31`.
+History of earlier versions: [ARCHIVE.md](ARCHIVE.md), branch `archive/pre-cards-2026-10-31`.
 
 ## Credits
 
-The models are the work of the VR weapon set authors: Ermac, alek, and the Brutal Doom, Brutal Wolfenstein, Aliens,
-MeatGrinder, HacX, Chex, Cola, Doom 64, Robocop, Universal Voxel, ZBlood and other set makers. See each set's
-`cards/<set>/NOTES.md`. The VR hands are Ermac's.
-
-ModelSwapper builds on teambeef QuestZDoom, ported to PC by Emawind84, moved into UZDoom by Ermac, and brought up
-to UZDoom 5.0 with its VR features by presidentkoopa.
+Models by the authors of the VR weapon sets, Ermac and alek among them; each set's `cards/<set>/NOTES.md` names its
+makers. VR hands by Ermac. Engine lineage: teambeef QuestZDoom, PC port by Emawind84, UZDoom by Ermac, UZDoom 5.0 and
+VR work by presidentkoopa.
