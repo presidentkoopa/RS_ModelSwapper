@@ -13,6 +13,30 @@ Every weapon the loaded mod gives you, the family it was sorted into, and the mo
 
 **Coming in 2.0: VR hands and hand reloading on any mod. Our models, their code.** Load any weapon mod, even one written long before VR, and its guns reload by hand the way each model is built: pull the magazine and seat a new one, break the shotgun and load the shells, work the pump, swing out the cylinder. The mod's own reload decides the ammo, rules and sounds. 2.0 is in progress on the `modelswapper-2.0-bd22-lift` branch, and its README says honestly what works today and what does not. Also coming: renamed models and selectable skins.
 
+## Project goal and status (MS 1.5, 2026-10-31)
+
+**Goal.** Load any Doom weapon mod in VR, pick any of our 3D models for any of its weapons, and reload by hand the
+ones whose model can be reloaded (magazine out and in, shells into a pump or break-action, cylinder swung out) --
+the mod's own code deciding ammo, rules and sounds. Quest (QuestZDoom 17.3) and PCVR.
+
+**Where it stands.**
+- The model well was rebuilt from scratch into one unified system: `cards/<set>/<gun>/` holds, for every mesh, its
+  card (measured parts, roles, states), the labelled mesh, the carved reload parts, its textures and a render sheet.
+  19 sets, 145 meshes, every reloadable part identified (see each set's `NOTES.md`). The measuring tools live in
+  RSQ_WeaponDepot (`tools/hqt`, `tools/carve`); the cards and meshes live here.
+- The donor systems are GENERATED from the cards (`tools_gen_from_cards.py` -> `modeldef`, donor stubs, shelf, names),
+  placed by `placement.json` (28 donors exactly as 1.x placed them, the rest by family reference). `tools_rig_check.py`
+  builds the Quest pk3 and runs it on the Linux QuestZDoom rig.
+- Loads with zero script errors on doom2 and on Doomablo 0.9.1a; donors draw with their skins.
+- Repository = three things: systems, cards (meshes + textures), the generators. Everything older is on branch
+  `archive/pre-cards-2026-10-31` (see `ARCHIVE.md`).
+
+**Next (tests when the owner is back).** 1) In the rig, confirm model picks and weapon switching apply, then the six
+Doomablo checks: its pistol / shotgun / SMG / rifle / SSG / rocket wearing the family-matched BD21 donors. 2) Select
+ALL models, reload the ones that can be reloaded (2.0 reload lane: re-point `MODELDEF.rsb` / `MODELDEF.rsrpump` and the
+WMCARD props at the cards). 3) Zion and Samsara: large sets, tabled, to be done together later. The other well folders
+are duplicates and are ignored.
+
 ## How it works
 
 ModelSwapper reads every weapon the loaded mods define and sorts each one into a family, such as pistol, shotgun, rifle or launcher. It goes by the weapon's name, its ammo and its parent class, and finally by the weapon slot it sits in, so nothing is left without a model. Each weapon then wears a model from its family.
