@@ -1,0 +1,45 @@
+weapon bd_assaultshotgun
+  archetype   rifle_mag        # owner-confirmed
+  model       bd_assaultshotgun.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 1  rest [43.77, -0.14, -1.08]  axis [-0.028, 0.005, -1.0]  travel 31.22  frames 6..31
+    slide    surf 2  rest [48.96, 1.34, -0.66]  axis [-1.0, -0.0, -0.001]  travel 10.00  frames 6..31
+    trigger  surf 5  rest [33.2, -0.0, -5.45]  axis [-1.0, 0.0, 0.0]  travel 0.56  frames 5..6  rot 20deg axis [-0.0, 1.0, 0.0]
+    mag2     surf 6  rest [44.6, 0.02, -10.37]  axis [0.0, -0.0, -1.0]  travel 28.00  frames 14..21
+    mag_well  [43.77, -0.14, -1.08]  mouth [42.08, 0.05, 0.0]  axis [-0.028, 0.005, -1.0]  travel_clear 31.22
+    muzzle    [84.75, 1.11, 1.53]
+  grip        line [31.8, 0.42, -4.55] [33.03, -0.42, -7.14]  trigger [33.2, -0.0, -5.45]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [59.45, -0.0, -1.67]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..2
+    idle         3..4
+    fire         5..7
+    idle         8..31
+  baked_cant   frames 17..30 up to 15.8 deg   # psprite-era hand sway; removed in bd_assaultshotgun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5002
+  carved      mag  surfs [1, 6]  seat_origin [43.92, -0.11, -2.83]  file bd_assaultshotgun_mag.md3
+  bd22        pose sets/bd22q/handfit/poses/AssaultShotgun.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 4, 4, 4, 4, 4, 4, 17, 18, 18, 18, 18, 18, 18, 18, 25, 26, 27, 28, 29, 30, 31]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.AssaultShotgun.def + AssaultShotgun.txt (statephase.py)
+    Fire              26 tics  frames 4,5,4,5,4,6,4,7,8,9,10,4
+    Fire2             24 tics  frames 8,4,5,4,9,4,10,7,4,7
+    AltFire           17 tics  frames 4,5,6,4,7,4,7,4,7,4
+    HoldAim            7 tics  frames 4,7,4,7,4,7,4
+    NoAim              6 tics  frames 4,6,5,4
+    NoAmmo             4 tics  frames 4
+    Reload            34 tics  frames 4,11,12,13,14,15,4,16,17,18,19,20,21,22,4,23,24,25,26,4
+    PutMag            11 tics  frames 27,28,29,30,31,4
+    InsertBullets      8 tics  frames 4
+    InsertBullets2     8 tics  frames 4
+    Unload            52 tics  frames 4,11,12,13,14,15,4,16,17,18,19,20,21,22,4,23,24,25,26,27,4
+    RemoveBullets      3 tics  frames 4
+    FInishUnload       5 tics  frames 4
+    CheckSprint        3 tics  frames 4
+    CheckSprint2       2 tics  frames 4
+    StartSprint        5 tics  frames 4
+    Sprinting         28 tics  frames 3,4,3,4,3,4
+    StopSprintTired   32 tics  frames 4
+    StopSprint         2 tics  frames 3,4

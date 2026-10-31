@@ -1,0 +1,9 @@
+weapon Flamethrower2
+  source      Flamethrower2.blend   blender 2.81.16   frames 0..5
+  space       world = the MD3 frame (Main Hand at the origin, scale 28); units = MD3 model units
+  handle      loc [28.36, -0.00, -0.31]  rot_deg [-0.0, -105.0, 0.0]   # the gun under the hand: the artist's grip relation
+  parts
+    13        armature "Armature.002"  rest [35.13, 0.00, -7.02]  axis [-1.000, 0.000, 0.000]  travel 1.00  frames 3..4  meshes ['13.l'] (60 verts)
+    cyl       armature "Armature.003"  rest [111.97, 3.98, -9.28]  axis [-1.000, 0.000, 0.000]  travel 1.00  frames 3..4  meshes ['Cylinder'] (40 verts)
+  body        meshes ['15.l']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes

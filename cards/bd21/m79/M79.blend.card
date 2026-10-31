@@ -1,0 +1,11 @@
+weapon M79
+  source      M79.blend   blender 2.79.0   frames 0..32
+  space       world = the MD3 frame (Main Hand at the origin, scale 28); units = MD3 model units
+  handle      loc [28.00, -0.00, -4.00]  rot_deg [1.6, -160.1, -0.5]   # the gun under the hand: the artist's grip relation
+  parts
+    pcylinder10 armature "Armature.002"  rest [21.59, 0.00, -27.38]  axis [0.488, -0.000, 0.873]  travel 26.74  frames 1..32  meshes ['pCylinder10.002'] (48 verts)
+    pcylinder10 armature "Armature.003"  rest [30.92, 0.00, -36.11]  axis [0.451, 0.003, 0.892]  travel 36.52  frames 1..32  meshes ['pCylinder10.001'] (1158 verts)
+    pcylinder10 armature "Armature.004"  rest [25.95, 0.00, -21.85]  axis [0.302, 0.010, 0.953]  travel 25.97  frames 1..32  meshes ['pCylinder10.003'] (102 verts)
+    shell     armature "Armature.005"  rest [25.53, 0.00, -25.53]  axis [-0.107, 0.206, 0.973]  travel 40.49  frames 1..32  meshes ['Shell'] (321 verts)
+  body        meshes ['pCylinder10']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes

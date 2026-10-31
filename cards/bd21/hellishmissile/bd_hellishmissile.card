@@ -1,0 +1,30 @@
+weapon bd_hellishmissile
+  archetype   launcher        # owner-confirmed
+  model       bd_hellishmissile.md3   space WPN   idle_frame 8
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [98.42, 0.23, 8.5]
+  grip        line [38.41, -7.34, -2.41] [37.3, 2.98, -26.27]  trigger [48.65, 0.92, -3.31]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [52.65, 0.92, -3.31]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..9
+  baked_cant   frames 2..6 up to 7.1 deg   # psprite-era hand sway; removed in bd_hellishmissile_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1484
+  # NO RELOAD (owner, 2026-10-31): "hellish missile doesn't reload". One surface, no parts. Fire frames only.
+  bd22        pose sets/bd22q/handfit/poses/HellishMissileLauncher.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 3, 0, 5, 6, 7, 0]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.HellishMissile.def + HellishMissile.txt (statephase.py)
+    Reload             8 tics  frames 0
+    CheckSprint        3 tics  frames 0
+    StartSprint        5 tics  frames 0
+    Sprinting         28 tics  frames 0
+    StopSprintTired   32 tics  frames 0
+    StopSprint         2 tics  frames 0
+    Fire              14 tics  frames 0,1,0,2,3,4,0
+    OpenFire2          9 tics  frames 5,0,6,7,8,0
+    AltFire           16 tics  frames 0,1,0,2,3,4,0
+    AltOpenFire2       9 tics  frames 5,0,6,7,8,0
+    Death              1 tics  frames 0
+    Missile            1 tics  frames 0

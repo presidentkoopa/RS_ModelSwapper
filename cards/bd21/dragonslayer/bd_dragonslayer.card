@@ -1,0 +1,21 @@
+weapon bd_dragonslayer
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_dragonslayer.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [96.33, -0.39, 135.08]
+  grip        line [31.69, 1.52, 1.77] [20.75, -1.67, -37.05]  trigger [32.63, -2.21, 0.85]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [36.63, -2.21, 0.85]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..5
+    lower        6..9
+  baked_cant   frames 1..5 up to 122.9 deg   # psprite-era hand sway; removed in bd_dragonslayer_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 11507
+  bd22        pose sets/bd22q/handfit/poses/DSweap.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 4, 5, 6, 7, 8]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.DSweap.def + Dragonslayer.txt (statephase.py)
+    Fire               4 tics  frames 5,6,7,8
+    Hold              14 tics  frames 1,2,8,7,6,5
+    Attack2           13 tics  frames 4,8,7,6,5

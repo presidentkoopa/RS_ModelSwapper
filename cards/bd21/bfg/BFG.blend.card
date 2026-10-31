@@ -1,0 +1,8 @@
+weapon BFG
+  source      BFG.blend   blender 2.79.0   frames 0..15
+  space       world = the MD3 frame (Main Hand at the origin, scale 28); units = MD3 model units
+  handle      loc [28.00, -0.00, -4.00]  rot_deg [-0.0, -160.0, 0.0]   # the gun under the hand: the artist's grip relation
+  parts
+    untitled  armature "Armature.002"  rest [21.11, 0.00, -25.26]  axis [-0.299, -0.000, 0.954]  travel 29.41  frames 1..15  meshes ['Untitled.001'] (52 verts)
+  body        meshes ['Untitled']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes

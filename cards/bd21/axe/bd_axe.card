@@ -1,0 +1,54 @@
+weapon bd_axe
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_axe.md3   space WPN   idle_frame 8
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [45.59, -0.03, 28.98]
+  grip        line [23.8, -0.0, 5.36] [15.22, 0.0, -18.33]  trigger [25.48, 0.04, 6.05]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [29.48, 0.04, 6.05]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..4
+    idle         5..11
+    lower        12..14
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1101
+  bd22        pose sets/bd22q/handfit/poses/BrutalAxe.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]   # IDENTICAL mesh
+  states      # Modeldef.BrutalAxe.def + Axe.txt (statephase.py)
+    CheckSprint        7 tics  frames 5
+    StartSprint        2 tics  frames 5
+    Sprinting         27 tics  frames 3,5,3,5,3,5
+    StopSprintTired   32 tics  frames 5
+    StopSprint         2 tics  frames 3,5
+    Fire               9 tics  frames 5,6,7,8,9
+    Hold              14 tics  frames 5,9,5,8,10,11,12,5
+    EndSwing           9 tics  frames 13,14,0,1,2,3,5
+    StrongAttack       2 tics  frames 5
+    RedBloodCheckSprint   2 tics  frames 5
+    RedBloodStartSprint   1 tics  frames 5
+    RedBloodSprinting  11 tics  frames 3,5
+    RedBloodStopSprintTired   6 tics  frames 5
+    RedBloodStopSprint   1 tics  frames 5
+    Hold.RedBlood      5 tics  frames 5
+    RedBloodEndSwing   2 tics  frames 5
+    RedBloodStrongAttack   2 tics  frames 5
+    BlueBloodCheckSprint   2 tics  frames 5
+    BlueBloodStartSprint   1 tics  frames 5
+    BlueBloodSprinting  11 tics  frames 3,5
+    BlueBloodStopSprintTired   6 tics  frames 5
+    BlueBloodStopSprint   1 tics  frames 5
+    Hold.BlueBlood     5 tics  frames 5
+    BlueBloodEndSwing   2 tics  frames 5
+    BlueBloodStrongAttack   2 tics  frames 5
+    GreenBloodCheckSprint   2 tics  frames 5
+    GreenBloodStartSprint   1 tics  frames 5
+    GreenBloodSprinting  11 tics  frames 3,5
+    GreenBloodStopSprintTired   6 tics  frames 5
+    GreenBloodStopSprint   1 tics  frames 5
+    Hold.GreenBlood    5 tics  frames 5
+    GreenBloodEndSwing   2 tics  frames 5
+    GreenBloodStrongAttack   2 tics  frames 5
+    Death              8 tics  frames 5
+    Crash              5 tics  frames 5
+    Berserk            1 tics  frames 5

@@ -1,0 +1,29 @@
+weapon bd_flamecannon
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_flamecannon.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [78.52, -0.0, 4.08]
+  grip        line [41.05, -10.44, -1.25] [34.95, 1.39, -16.19]  trigger [42.02, 1.98, -2.16]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [46.02, 1.98, -2.16]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..7
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5085
+  bd22        pose sets/bd22q/handfit/poses/FlameCannon.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 4, 2, 6, 7]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.FlameCannon.def + FlameCannon.txt (statephase.py)
+    Reload             8 tics  frames 0
+    CheckSprint        3 tics  frames 0
+    StartSprint        5 tics  frames 0
+    Sprinting         28 tics  frames 0
+    StopSprintTired   32 tics  frames 0
+    StopSprint         2 tics  frames 0
+    DryFire           10 tics  frames 0
+    Fire               4 tics  frames 0
+    AltFire            4 tics  frames 0
+    Fireball          12 tics  frames 1,0,2,3,4,0
+    Flamethrower      38 tics  frames 0,6,7,0,6,7,0,6,7,0,6,7,0
+    Death              1 tics  frames 0
+    See                4 tics  frames 0

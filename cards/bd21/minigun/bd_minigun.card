@@ -1,0 +1,39 @@
+weapon bd_minigun
+  archetype   minigun        # owner-confirmed
+  model       bd_minigun.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    feedcover surf 0  rest [62.09, 24.86, -3.07]  axis [-0.325, 0.106, -0.94]  travel 0.00  frames -..-
+    barrel   surf 2  rest [92.94, 0.27, -7.81]  axis [0.0, 0.932, -0.363]  travel 0.11  frames -..-  rot 106deg axis [1.0, 0.0, -0.0]
+    trigger  surf 4  rest [32.23, -0.0, -4.47]  axis [-0.774, 0.0, 0.634]  travel 1.04  frames 8..11  rot 20deg axis [0.0, 1.0, 0.0]
+    grip     surf 5  rest [28.39, 0.02, 0.05]  axis [0.082, -0.066, 0.994]  travel 0.01  frames -..-
+    muzzle    [123.45, 3.42, -5.77]
+  grip        line [28.94, -1.28, 5.72] [21.14, 1.44, -14.94]  trigger [32.23, -0.0, -4.47]   # from the grip surface
+  support     feature palm [61.71, -0.27, -11.9]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..1
+    idle         2..7
+    fire         8..11
+    idle         12..15
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5817
+  # NO RELOAD (owner, 2026-10-31): "minigun doesn't reload". Surf 0 (111 v) is the top feed cover, not a magazine.
+  # BD22 Weapons Q's Minigun_rsr.md3 carved an ammo box into it; this card does not follow that.
+  # Body is surf 1 (--body 1): the biggest surface, surf 2, is the barrel cluster and it SPINS (frames 4..15).
+  bd22        pose sets/bd22q/handfit/poses/Minigun.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 3, 4, 4, 4, 4, 8, 4, 8, 4]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.Minigun.def + Minigun.txt (statephase.py)
+    IdleNoAmmo         6 tics  frames 12,4
+    CheckSprint        3 tics  frames 4
+    StartSprint        5 tics  frames 4
+    Sprinting         27 tics  frames 3,4,3,4,3,4
+    StopSprintTired   32 tics  frames 4
+    StopSprint         2 tics  frames 3,4
+    NoAmmo            10 tics  frames 12
+    Fire              11 tics  frames 4,5,6,7,4,5,4
+    Hold              94 tics  frames 4,8,4,8,4,9,4,10,4,8,4,11,4,5,4,6,4,7,4,5,4,6,7,4,5,4,6,7,4,5,6,7,4,5,6,7
+    AltFire           13 tics  frames 4,5,6,7,4
+    StopAlt           38 tics  frames 4,5,6,7,4,5,6,7,4,5,6,7,4,5,6,7,4
+    PuristGun          2 tics  frames 4
+  classic     Modeldef.ClassicChaingun.def binds the SAME mesh for the Classic weapon: one card, two state maps

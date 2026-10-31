@@ -1,0 +1,10 @@
+weapon br_shotgun_f
+  source      br_shotgun_f.blend   blender 2.79.0   frames 0..35
+  space       world = the MD3 frame (Main Hand at the origin, scale 30); units = MD3 model units
+  handle      loc [18.66, 0.00, -21.26]  rot_deg [-0.0, -105.0, 0.0]   # the gun under the hand: the artist's grip relation
+  parts
+    eject     armature "Armature.002"  rest [49.46, 0.00, -56.36]  axis [0.390, 0.021, 0.921]  travel 64.63  frames 1..35  meshes ['eject', 'pump'] (1337 verts)
+    trigger   armature "Armature.003"  rest [20.91, 0.00, -26.60]  axis [0.482, -0.012, 0.876]  travel 26.93  frames 1..35  meshes ['trigger'] (68 verts)
+    trigger   armature "Armature.004"  rest [32.11, -1.94, -31.83]  axis [0.333, 0.036, 0.942]  travel 37.47  frames 1..35  meshes ['trigger.001'] (161 verts)
+  body        meshes ['Runko']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes

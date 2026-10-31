@@ -1,0 +1,25 @@
+weapon bd_grenade
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_grenade.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 2  rest [26.62, 1.54, 5.9]  axis [-0.0, 1.0, 0.014]  travel 39.47  frames 4..26  rot 163deg axis [0.45, 0.54, -0.71]
+    part2    surf 3  rest [26.16, -0.02, 5.78]  axis [0.833, 0.0, 0.553]  travel 16.89  frames 11..26  rot 87deg axis [-0.0, 1.0, 0.0]
+    muzzle    [32.36, -0.0, 2.81]
+  grip        line [28.41, 3.94, -5.3] [28.41, -2.36, -9.73]  trigger [28.53, -0.02, -1.28]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [32.53, -0.02, -1.28]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..1
+    idle         2..26
+  baked_cant   frames 17..26 up to 167.0 deg   # psprite-era hand sway; removed in bd_grenade_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2650
+  bd22        pose sets/bd22q/handfit/poses/HandGrenades.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.Grenade.def + Grenades.txt (statephase.py)
+    Steady             1 tics  frames 2
+    Fire               8 tics  frames 3,4,5,6,7,8,9
+    Hold               6 tics  frames 10,11,12,13,14,15
+    AltFire            8 tics  frames 3,4,5,6,7,8,9
+    AltHold            6 tics  frames 10,11,12,13,14,15

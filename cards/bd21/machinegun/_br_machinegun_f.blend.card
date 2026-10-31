@@ -1,0 +1,12 @@
+weapon _br_machinegun_f
+  source      _br_machinegun_f.blend   blender 2.79.0   frames 0..35
+  space       world = the MD3 frame (Main Hand at the origin, scale 33); units = MD3 model units
+  handle      loc [28.82, -0.00, -4.67]  rot_deg [-0.0, -160.0, 0.0]   # the gun under the hand: the artist's grip relation
+  parts
+    trigger   armature "Armature.002"  rest [25.62, 0.00, -24.14]  axis [0.246, -0.000, 0.969]  travel 26.08  frames 1..35  meshes ['Trigger'] (24 verts)
+    alt-pipe  armature "Armature.003"  rest [44.02, 0.00, -41.37]  axis [0.579, -0.000, 0.816]  travel 43.54  frames 1..35  meshes ['alt-pipe'] (2317 verts)
+    alt-trig  armature "Armature.004"  rest [35.93, 0.00, -37.20]  axis [0.335, -0.000, 0.942]  travel 37.09  frames 1..35  meshes ['alt-trig'] (92 verts)
+    alt-frame armature "Armature.005"  rest [36.62, 0.00, -33.29]  axis [0.272, -0.000, 0.962]  travel 35.83  frames 1..35  meshes ['alt-frame'] (552 verts)
+    alt-trig-reload armature "Armature.006"  rest [38.15, 0.00, -39.22]  axis [0.337, -0.000, 0.942]  travel 39.14  frames 1..35  meshes ['alt-trig-reload'] (97 verts)
+  body        meshes ['M249_lowpoly']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes
