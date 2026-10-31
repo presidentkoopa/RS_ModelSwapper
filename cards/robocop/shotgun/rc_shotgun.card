@@ -1,0 +1,16 @@
+weapon rc_shotgun
+  archetype   shotgun_pump        # owner-confirmed
+  model       rc_shotgun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    pump     surf 1  rest [60.85, -0.06, 6.19]  axis [-1.0, -0.0, 0.0]  travel 14.66  frames 5..7
+    muzzle    [99.86, 1.48, 10.92]
+  grip        line [50.06, -1.27, 8.8] [47.56, -0.03, 4.47]  trigger [50.72, -0.05, 8.59]   # centroid-based; owner's hand fit supersedes
+  support     feature bar [60.85, -0.06, 6.19]  axis [-1.0, -0.0, 0.0]  travel 14.66   # the pump: the support hand works it
+  carve       
+  phases
+    idle         0..4
+    pump         5..8
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 3079
+  states      # modeldefs/weapons/shotgun.txt + actors/weapons/shotgun.txt (statephase.py)
+    Ready              1 tics  frames 0

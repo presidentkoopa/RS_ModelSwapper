@@ -1,0 +1,19 @@
+weapon rc_ksg
+  archetype   shotgun_pump        # owner-confirmed
+  model       rc_ksg.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    pump     surf 1  rest [18.29, 0.0, 5.9]  axis [-0.002, -0.006, -1.0]  travel 0.00  frames -..-
+    barrel   surf 2  rest [44.37, 0.0, 6.67]  axis [-0.207, -0.009, -0.978]  travel 0.00  frames -..-
+    trigger  surf 3  rest [0.21, 0.0, -2.03]  axis [-0.986, 0.0, 0.164]  travel 0.88  frames 1..4  rot 14deg axis [-0.0, 1.0, 0.0]
+    muzzle    [45.25, 2.98, 6.09]
+  grip        line [-39.11, 1.12, -3.03] [-28.83, -1.25, -14.25]  trigger [0.21, 0.0, -2.03]   # centroid-based; owner's hand fit supersedes
+  support     feature bar [18.29, 0.0, 5.9]  axis [-0.002, -0.006, -1.0]  travel 0.00   # the pump: the support hand works it
+  carve       
+  phases
+    idle         0..0
+    fire         1..4
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6845
+  states      # modeldefs/weapons/shotgun.txt + actors/weapons/ksg.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire              19 tics  frames 0,1,2,3,4,3,0

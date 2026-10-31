@@ -1,0 +1,17 @@
+weapon rc_chaingun
+  archetype   chaingun        # owner-confirmed
+  model       rc_chaingun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    barrel   surf 0  rest [27.86, -0.03, 4.65]  axis [0.0, 0.859, 0.512]  travel 0.19  frames -..-  rot 90deg axis [1.0, -0.0, -0.0]
+    barrel2  surf 3  rest [27.86, 15.32, 4.65]  axis [0.0, -0.586, 0.811]  travel 0.15  frames -..-  rot 90deg axis [-1.0, 0.0, -0.0]
+    muzzle    [53.75, 1.53, 10.06]
+  grip        line [3.62, 19.75, 6.59] [4.08, 19.22, 0.56]  trigger [4.57, 17.69, 6.63]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [8.57, 17.69, 6.63]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..5
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2862
+  states      # modeldefs/weapons/chaingun.txt + actors/weapons/chaingun.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire               9 tics  frames 0,1,2,3,4,5,0

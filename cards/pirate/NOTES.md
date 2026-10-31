@@ -20,7 +20,7 @@ give a hand: the cock on every gun (a real hinge, 12..20 units of travel in the 
 
 `_hands/`: glove.md3 (62 frames, the fist/pipe animation) + pipe.md3 -- a FOURTH hand source (one glove).
 
-CARVING (owner: "expect some carving here"): OPEN. Measured so far: musket and nock barrels carry no ramrod
+CARVING: NONE (owner, 2026-10-31: "i doubt the pirate guns reload"). Flintlocks do not reload by hand here; the cock and frizzen stay as the only moving parts.
 geometry (one tube under the barrel line); blunderbuss and flintlock have two thin 8-vertex rods under the
 barrel (z ~7.9 and ~9.9 on the blunderbuss at x 64) that may be ramrod + rib. Waiting for the owner to name
 the parts to carve.

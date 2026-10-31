@@ -1,0 +1,21 @@
+weapon rc_cobra
+  archetype   rifle        # owner-confirmed
+  model       rc_cobra.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    barrel   surf 0  rest [138.49, -0.01, 8.18]  axis [-1.0, 0.0, 0.0]  travel 28.74  frames 2..3
+    leg      surf 1  rest [47.09, -6.6, -0.95]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    leg2     surf 2  rest [45.49, 7.74, -0.96]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    trigger  surf 4  rest [0.2, -0.07, -2.63]  axis [-0.986, 0.0, 0.165]  travel 1.25  frames 1..1  rot 27deg axis [0.0, 1.0, -0.0]
+    muzzle    [152.87, 1.72, 9.58]
+  grip        line [-3.61, 1.69, -1.67] [-10.17, -1.66, -16.73]  trigger [0.2, -0.07, -2.63]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [-12.12, 0.06, 0.73]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 9113
+  states      # modeldefs/weapons/rifle.txt + actors/weapons/cobra.txt (statephase.py)
+    Ready              2 tics  frames 0
+    Fire              29 tics  frames 0,1,2,3,0

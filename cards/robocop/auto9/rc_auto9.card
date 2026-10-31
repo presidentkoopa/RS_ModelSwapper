@@ -1,0 +1,24 @@
+weapon rc_auto9
+  archetype   pistol_mag        # owner-confirmed
+  model       rc_auto9.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 1  rest [1.6, -0.0, -10.1]  axis [-0.957, -0.285, -0.058]  travel 0.02  frames -..-
+    mag_well  [1.6, -0.0, -10.1]  mouth [3.66, -0.0, -9.87]  axis [-0.957, -0.285, -0.058]  travel_clear 0.02
+    muzzle    [38.52, 0.86, 8.41]
+  grip        line [0.91, 0.28, 6.58] [3.42, -1.09, -9.87]  trigger [12.08, 0.09, 5.62]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [16.08, 0.09, 5.62]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..3
+    lower        4..10
+    idle         11..11
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1726
+  carved      mag  surfs [1]  seat_origin [1.6, -0.0, -10.1]  file rc_auto9_mag.md3
+  states      # modeldefs/weapons/pistol.txt + actors/weapons/auto9.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire               1 tics  frames 0
+    AltFire            1 tics  frames 4
+  # RELOAD: the Auto-9 (Beretta 93R) mesh is ONE surface; its magazine base plate (the nub under the grip, z -10.3..-9.9,
+  # 25 tris) was carved as mag with tools/carve (slab z -10.5..-9.2, box x 1.5+-3.5 y 0+-2). Same treatment as the
+  # HacX pistol nub. auto9.txt has a Reload state; the slide is not separable (no slide geometry moves in the mesh).

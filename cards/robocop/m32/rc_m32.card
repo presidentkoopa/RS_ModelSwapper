@@ -1,0 +1,35 @@
+weapon rc_m32
+  archetype   revolver        # owner-confirmed
+  model       rc_m32.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger_plate surf 0  rest [-3.17, -0.23, 2.42]  axis [0.811, -0.089, -0.578]  travel 0.01  frames -..-
+    trigger_guard surf 1  rest [-9.99, -0.25, -7.85]  axis [0.839, -0.098, 0.535]  travel 0.00  frames -..-
+    mag      surf 2  rest [-1.53, 1.69, 13.0]  axis [-0.896, -0.065, 0.439]  travel 0.00  frames -..-
+    bracket  surf 4  rest [40.13, 0.06, -18.36]  axis [-0.967, -0.176, -0.185]  travel 0.00  frames -..-
+    mag2     surf 5  rest [23.08, -0.05, -1.64]  axis [-0.002, 0.113, 0.994]  travel 0.27  frames -..-  rot 174deg axis [1.0, 0.0, -0.0]
+    bracket2 surf 7  rest [11.13, 0.01, -11.32]  axis [0.996, -0.068, -0.06]  travel 0.01  frames -..-
+    trigger  surf 8  rest [0.39, -0.06, -4.92]  axis [-0.782, -0.0, 0.623]  travel 2.76  frames 1..34  rot 21deg axis [-0.0, 1.0, 0.0]
+    mag_well  [-1.53, 1.69, 13.0]  mouth [7.84, -1.78, 25.77]  axis [-0.896, -0.065, 0.439]  travel_clear 0.00
+    muzzle    [88.06, -1.89, 13.95]
+  grip        line [39.84, -14.61, -9.41] [39.84, 3.83, -18.94]  trigger [0.39, -0.06, -4.92]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [62.41, 0.06, 10.62]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..4
+    idle         5..6
+    fire         7..10
+    idle         11..12
+    fire         13..16
+    idle         17..18
+    fire         19..22
+    idle         23..24
+    fire         25..28
+    idle         29..30
+    fire         31..34
+    idle         35..36
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4895
+  carved      mag  surfs [2, 5]  seat_origin [12.5, 0.7, 4.66]  file rc_m32_mag.md3
+  states      # modeldefs/weapons/grenadelauncher.txt + actors/weapons/grenadelauncher.txt (statephase.py)
+    Ready              6 tics  frames 0
