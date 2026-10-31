@@ -1645,7 +1645,7 @@ Model MS_UV_SsgD4
 	Skin 0 "sssg.png"
 	Scale -1.0 1.0 1.0
 	Offset 0.0 -28.0 -4.0
-	FrameIndex SHT2 A 0 3
+	FrameIndex SHT2 A 0 0
 	FrameIndex MSBL A 0 9999
 }
 

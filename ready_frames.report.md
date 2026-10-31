@@ -116,9 +116,9 @@
 | MS_RC_M27 | 0 | 0 | ready PLMRA |
 | MS_RC_M32 | 0 | 0 | ready MMISA |
 | MS_RC_Shotgun | 0 | 0 | ready RSHGA |
-| MS_UV_ChaingunD4 | 0 | - | Ready frame not in block Vanilla_Chaingun |
-| MS_UV_ShotgunD4 | 0 | - | Ready frame not in block Vanilla_Shotgun |
-| MS_UV_SsgD4 | 3 | - | Ready frame not in block Vanilla_SuperShotgun |
+| MS_UV_ChaingunD4 | 0 | 0 | ready CGD4A |
+| MS_UV_ShotgunD4 | 0 | 0 | ready SHD4A |
+| MS_UV_SsgD4 | 3 | 0 | ready SGD4A |
 | MS_HV_Crossbow | 0 | 0 | ready CRBWA |
 | MS_HV_Dragonclaw | 0 | 0 | ready BLSRA |
 | MS_HV_Gauntlet | 0 | 0 | ready GAUNA (actor puff) |

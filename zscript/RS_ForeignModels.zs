@@ -214,7 +214,7 @@ class RS_ForeignShelf
 			"shotgun|MS_RC_Shotgun|SHTG|0|0|9",
 			"chaingun|MS_UV_ChaingunD4|CHGG|0|0|2",
 			"shotgun|MS_UV_ShotgunD4|SHTG|0|0|4",
-			"supershotgun|MS_UV_SsgD4|SHT2|0|3|8",
+			"supershotgun|MS_UV_SsgD4|SHT2|0|0|8",
 			"rifle|MS_HV_Crossbow|CHGG|0|0|12",
 			"pistol|MS_HV_Dragonclaw|PISG|0|0|1",
 			"melee|MS_HV_Gauntlet|PUNG|0|0|3",

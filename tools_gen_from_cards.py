@@ -133,6 +133,12 @@ def labels(text):
         m = re.match(r'^(?:[A-Za-z_][\w.]*\s*:\s*)*(\w{4})\s+"?([A-Z\[\]\\#]+)"?\s+(-?\d+)', st)
         if m and open_:
             for L in open_: lab[L].append((m.group(1).upper(), m.group(2)))
+            # Universal Doom swaps the sprite at runtime: A_ReplaceSprite("cvar","CHGA,CGD4") -- each listed
+            # sprite plays with the same letter
+            rs = re.search(r'A_ReplaceSprite\s*\(\s*"[^"]*"\s*,\s*"([^"]+)"', st, re.I)
+            if rs:
+                for sp in rs.group(1).split(','):
+                    for L in open_: lab[L].append((sp.strip().upper(), m.group(2)))
             last_row = True
     return lab
 
