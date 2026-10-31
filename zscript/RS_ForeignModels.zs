@@ -238,7 +238,7 @@ class RS_ForeignShelf
 			"grenade|MS_ZB_Spraycan|MISG|0|0|43",
 			"plasma|MS_ZB_Teslagun|PLSG|0|0|47",
 			"smg|MS_ZB_Tommygun|CHGG|0|3|19",
-			"grenade|MS_ZB_Voodoo|MISG|0|2|18",
+			"grenade|MS_ZB_Voodoo|MISG|0|0|18",
 			"grenade|MS_ZB_Zippo|MISG|0|0|9"
 		};
 		mRows.Clear();

@@ -1,6 +1,6 @@
 weapon zb_voodoo
   archetype   thrown        # owner-confirmed
-  model       zb_voodoo.md3   space WPN   idle_frame 2
+  model       zb_voodoo.md3   space WPN   idle_frame 0   # DOLL A = 0: same Ready as the VoodooDoll weapon (VDOL A), in the off hand (owner)
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
   parts
     part     surf 1  rest [-2.13, 10.5, -0.13]  axis [0.16, 0.33, 0.93]  travel 2.14  frames 6..17  rot 27deg axis [0.97, 0.12, -0.21]

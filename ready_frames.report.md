@@ -142,5 +142,5 @@
 | MS_ZB_Spraycan | 0 | 0 | ready SPRRA |
 | MS_ZB_Teslagun | 0 | 0 | ready TESLA |
 | MS_ZB_Tommygun | 3 | 3 | ready TOMGA |
-| MS_ZB_Voodoo | 2 | - | actor OffhandVoodooDoll not found |
+| MS_ZB_Voodoo | 0 | - | actor OffhandVoodooDoll not found |
 | MS_ZB_Zippo | 0 | - | actor Zippo not found |

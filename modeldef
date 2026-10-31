@@ -1933,7 +1933,7 @@ Model MS_ZB_Voodoo
 	Skin 0 "voodoo.png"
 	Scale 0.6 0.6 0.6
 	Offset 0.0 -30.0 -8.0
-	FrameIndex MISG A 0 2
+	FrameIndex MISG A 0 0
 	FrameIndex MSBL A 0 9999
 }
 
