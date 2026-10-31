@@ -1,4 +1,5 @@
 weapon vplus_shotgun
+  author      alek (alek_DoomGuns_v1.1a), not Ermac; shipped in the Vanilla VR Plus folders (owner); mesh identical to alek's, every frame
   archetype   shotgun_pump        # owner-confirmed
   model       vplus_shotgun.md3   space WPN   idle_frame 2
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
