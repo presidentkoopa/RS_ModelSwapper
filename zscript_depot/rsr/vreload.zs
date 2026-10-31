@@ -607,6 +607,8 @@ class RSR_State play
 			if (press)
 			{
 				Vector3 rel = OffPoint(RSR.PalmGrab()) - RSR_Guns.Grab(i);
+				if (RSR.Debug(mo.player))
+					Console.Printf("rsr t%d gun %d CHARGE: grab pressed %.1f cm from the handle (reach %.1f) rel %.1f %.1f %.1f", now, i, rel.Length(), RSR_Assist.MagGrab(mo.player, i), rel.x, rel.y, rel.z);
 				if (rel.Length() < RSR_Assist.MagGrab(mo.player, i))
 				{
 					grabS = rel dot RSR_Guns.Pull(i);

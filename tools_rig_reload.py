@@ -162,6 +162,9 @@ def main():
     ap.add_argument('--donor', required=True)
     ap.add_argument('--weapon', required=True, help='the mod weapon class to hold (e.g. RwAssaultRifle)')
     ap.add_argument('--extra', nargs='*', default=[])
+    ap.add_argument('--clicks', type=int, default=0, help='mag: trigger presses before the reload (shoot a semi-auto dry)')
+    ap.add_argument('--rack', action='store_true', help='mag: after the magazine, work the charging handle by hand')
+    ap.add_argument('--fire-tics', type=int, default=12, help='mag: tics the trigger is held before the reload (long: shoot it dry, the charging handle is asked for)')
     ap.add_argument('--tag', default='reload')
     ap.add_argument('--no-build', action='store_true')
     ap.add_argument('--kind', default='mag', choices=['mag', 'break', 'pump'], help='mag = magazine (RSR_Guns); break = break-open / revolver (RSB_Guns, Depot brk.py)')
@@ -188,11 +191,22 @@ def main():
     fam, idx = sh[a.donor]; fist = sh['MS_BD_Fist'][1]
     picks = ';%s:%s:%d:%d;rsq_hands:melee:%d:%d;' % (a.weapon, fam, idx, idx, fist, fist)
     pouch = rig.lpose(0, 40, -30)
-    s = ('wait 120; god; qz_hmd "%s"; rsr_reload 1; rsr_grab_with 0; rsr_debug 1; give ammo; give %s; wait 2; use %s; wait 170; '
-         '+attack; wait 12; -attack; wait 25; +reload; wait 4; -reload; wait 30; '
+    clicks = '+attack; wait 3; -attack; wait 9; ' * a.clicks   # semi-auto guns: one shot per press
+    rack = ''
+    if a.rack:
+        # the charging handle: the palm (RSR.PalmGrab, off-hand frame) on RSR_Guns.Grab, then back along Pull by Travel
+        G, P, TR = table('Grab', i), table('Pull', i), table('Travel', i)
+        PG = (-1.5, 2.0, -4.5)
+        hp = lambda f: rig.lpose(*[G[k] + P[k] * TR * f - PG[k] for k in range(3)], pitch=0.0)
+        print('handle: grab %s pull %s travel %.2f' % (G, P, TR))
+        rack = ('qz_lhand "%s"; wait 15; qz_ltrigger 1; wait 10; qz_lhand "%s"; wait 6; qz_lhand "%s"; wait 6; '
+                'qz_lhand "%s"; wait 10; qz_ltrigger 0; wait 4; qz_lhand "%s"; wait 60; '
+                % (hp(0), hp(0.5), hp(1.0), hp(1.1), pouch))
+    s = (('wait 120; god; qz_hmd "%s"; rsr_reload 1; rsr_grab_with 0; rsr_debug 1; give ammo; give %s; wait 2; use %s; wait 170; '
+         + clicks.replace('%', '%%') + '+attack; wait %d; -attack; wait 25; +reload; wait 4; -reload; wait 30; '
          'qz_lhand "%s"; wait 10; qz_ltrigger 1; wait 12; '
-         'qz_lhand "%s"; wait 15; qz_lhand "%s"; wait 15; qz_lhand "%s"; wait 25; qz_ltrigger 0; wait 60; quit'
-         % (a.hmd, a.weapon, a.weapon, pouch, at(W, A, T, M + 3), at(W, A, T, M * 0.5), at(W, A, T, 0)))
+         'qz_lhand "%s"; wait 15; qz_lhand "%s"; wait 15; qz_lhand "%s"; wait 25; qz_ltrigger 0; wait 60; ')
+         % (a.hmd, a.weapon, a.weapon, a.fire_tics, pouch, at(W, A, T, M + 3), at(W, A, T, M * 0.5), at(W, A, T, 0))) + rack + 'quit'
     d = os.path.join(rc.SHOTS, 'rigreload_%s_%s' % (a.tag, a.donor)); shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
     args = ['./qz', '-iwad', rc.IWAD, '-file'] + [os.path.abspath(x) for x in a.extra] + [rc.PK3, '-warp', '1',
             '-nomonsters', '-nosound', '+set', 'rs_foreignmodels_dump', 'true', '+set', 'rsq_hands', '1', '+set', 'rs_fm_picks', '"%s"' % picks,
