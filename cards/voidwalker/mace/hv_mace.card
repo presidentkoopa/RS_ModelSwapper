@@ -1,0 +1,13 @@
+weapon hv_mace
+  archetype   melee        # from source names
+  model       hv_mace.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    part     surf 1  rest [7.16, 0.08, -0.03]  axis [-1.000, 0.002, -0.000]  size [52.94, 8.52, 9.69]
+    muzzle    [35.30, 0.00, -1.05]
+  grip        line [30.69, 0.04, -5.98] [34.56, 0.14, -11.75]  trigger [30.69, 0.04, -5.98]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [34.69, 0.04, -5.98]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 158  frames 1
+  states      # modeldefs/weapons/mace.txt + zscript/actors/weapons/mace.txt (statephase.py)

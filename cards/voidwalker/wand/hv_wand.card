@@ -1,0 +1,14 @@
+weapon hv_wand
+  archetype   pistol        # from source names
+  model       hv_wand.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    muzzle    [62.39, 0.00, -2.74]
+  grip        line [34.38, 0.00, -2.68] [58.37, -0.20, -5.19]  trigger [34.38, 0.00, -2.68]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [38.38, 0.00, -2.68]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 812  frames 1
+  states      # modeldefs/weapons/wand.txt + zscript/actors/weapons/wand.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire               1 tics  frames 0

@@ -1,0 +1,21 @@
+weapon hv_crossbow
+  archetype   crossbow        # owner-confirmed
+  model       hv_crossbow.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    round    surf 0  rest [62.32, 0.17, 1.71]  axis [1.0, 0.015, -0.001]  travel 0.48  frames -..-
+    bow      surf 2  rest [55.16, 0.17, 1.82]  axis [1.0, 0.0, -0.0]  travel 6.69  frames 1..11  rot 16deg axis [-0.0, 1.0, -0.0]
+    cap      surf 3  rest [30.5, 0.12, 2.59]  axis [-0.999, -0.013, 0.053]  travel 0.00  frames -..-
+    trigger  surf 5  rest [16.71, -0.0, -6.28]  axis [-0.979, -0.005, 0.205]  travel 0.00  frames -..-
+  ports
+    chamber   [62.8, 0.18, 1.71]  frame 6
+    eject     [62.8, 5.37, 1.71]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    muzzle    [66.17, -3.89, 3.75]
+  grip        line [0.52, 2.91, -10.41] [-12.73, -2.48, -13.72]  trigger [16.71, -0.0, -6.28]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [38.96, 0.15, 0.28]   # one-handed gun; placeholder
+  carve       round
+  phases
+    idle         0..11
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 874
+  carved      round  surfs [0]  seat_origin [62.32, 0.17, 1.71]  file hv_crossbow_round.md3
+  states      # modeldefs/weapons/crossbow.txt + zscript/actors/weapons/crossbow.txt (statephase.py)

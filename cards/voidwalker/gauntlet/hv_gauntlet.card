@@ -1,0 +1,14 @@
+weapon hv_gauntlet
+  archetype   melee        # owner-confirmed
+  model       hv_gauntlet.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    glove    surf 0  rest [11.15, 0.1, 0.1]  axis [-0.207, -0.978, 0.015]  travel 4.33  frames 1..2  rot 21deg axis [-0.33, 0.01, -0.94]
+    muzzle    [-1.23, 3.66, 0.47]
+  grip        line [-7.62, 5.34, 0.59] [-7.75, 0.3, -5.58]  trigger [-3.9, 0.09, 0.25]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [0.1, 0.09, 0.25]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..2
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1214
+  states      # modeldefs/weapons/gauntlet.txt + zscript/actors/weapons/gauntlet.txt (statephase.py)

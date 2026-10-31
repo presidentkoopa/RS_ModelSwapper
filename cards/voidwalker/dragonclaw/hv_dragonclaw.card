@@ -1,0 +1,15 @@
+weapon hv_dragonclaw
+  archetype   energy        # from source names
+  model       hv_dragonclaw.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    part     surf 1  rest [14.27, -0.03, 8.63]  axis [-0.798, -0.000, -0.603]  size [6.25, 2.70, 4.55]
+    part2    surf 2  rest [16.18, 0.04, 2.11]  axis [-0.010, 1.000, 0.001]  size [10.05, 25.70, 4.47]
+    grip     surf 3  rest [9.30, 0.00, 0.00]  axis [-0.003, 1.000, 0.000]  size [3.52, 13.75, 1.25]
+    muzzle    [18.34, 0.00, -0.12]
+  grip        line [14.82, -0.01, -1.99] [9.99, -1.48, -5.47]  trigger [14.82, -0.01, -1.99]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [18.82, -0.01, -1.99]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 464  frames 1
+  states      # modeldefs/weapons/blaster.txt + zscript/actors/weapons/blaster.txt (statephase.py)
