@@ -17,7 +17,7 @@ weapon hx_uzi
     muzzle    [56.44, 1.05, -0.38]
   grip        line [28.11, -0.89, -3.48] [24.73, -1.78, -13.77]  trigger [30.2, 0.02, -4.47]   # centroid-based; owner's hand fit supersedes
   support     feature palm [32.92, -0.08, -0.13]   # one-handed gun; placeholder
-  carve       
+  carve       mag
   phases
     idle         0..0
     fire         1..1
@@ -32,6 +32,10 @@ weapon hx_uzi
     idle         12..15
   baked_cant   frames 11..15 up to 90.0 deg   # psprite-era hand sway; removed in hx_uzi_stable.md3
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4582
+  carved      mag  seat_origin [25.92, 0.03, -11.95]  file hx_uzi_mag.md3
+  # OWNER, 2026-10-31: the orange part is the MAGAZINE (artist 'clip', surf 2, 274 verts, z -25.8..-2.5).
+  # Drops 20.0 straight down in DoReload (frames 5..10 there-and-back). Carved out as hx_uzi_mag.md3.
+  # clipRelease (surf 3) is the mag release button, its own part.
   states      # Modeldef.UZI.def + filter/Hacx/Weapons.txt (statephase.py)
     Idle               1 tics  frames 0
     Hold              12 tics  frames 0,1,2,3,4,1,2,4,1

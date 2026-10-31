@@ -18,6 +18,10 @@ weapon hx_cryogun
     lower        7..10
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6273
   carved      mag  seat_origin [26.7, -0.0, 1.67]  file hx_cryogun_mag.md3
+  # OWNER, 2026-10-31: the orange block on top of the receiver (artist 'mag_low', surf 2, x 24.5..29.1,
+  # z -0.9..3.1) is the MAGAZINE / cell. Already its own surface; it never moves in the animation. Carved
+  # out as hx_cryogun_mag.md3 so the runtime can pull it: it sits in a top well, so the drop axis is +Z (up
+  # and out), not down. Slide (surf 4) 10.0 along the bore on altfire.
   states      # Modeldef.Cryogun.def + filter/Hacx/Weapons.txt (statephase.py)
     Idle               1 tics  frames 0
     Fire              51 tics  frames 0,1,2,3,4
