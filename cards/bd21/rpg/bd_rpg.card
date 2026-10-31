@@ -48,3 +48,4 @@ weapon bd_rpg
     HoldAim            4 tics  frames 5
     NoAim              8 tics  frames 39,38,36,35,5
   classic     Modeldef.ClassicRPG.def binds the SAME mesh for the Classic weapon: one card, two state maps
+  # OWNER 2026-10-31: surf 4 (46 v, moves 1.4) does not need to move; cosmetic, no role. RPG does not reload by parts other than the pod (surfs 5..12 = mag).

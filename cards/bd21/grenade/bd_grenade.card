@@ -23,3 +23,5 @@ weapon bd_grenade
     Hold               6 tics  frames 10,11,12,13,14,15
     AltFire            8 tics  frames 3,4,5,6,7,8,9
     AltHold            6 tics  frames 10,11,12,13,14,15
+  # OWNER 2026-10-31: the grenade does not reload. Pin (surf 2) and spoon (surf 3) fly off in the mesh animation; for
+  # ModelSwapper it is STATIC unless the runtime can drop those two surfaces on fire.
