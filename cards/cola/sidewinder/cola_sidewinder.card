@@ -25,3 +25,5 @@ weapon cola_sidewinder
     Ready3             1 tics  frames 9
     Ready4             1 tics  frames 14
     Ready5             1 tics  frames 19
+  # NO RELOAD (owner, 2026-10-31): flagged non-reloading. The belt meshes (sw_ammo_*.md3) stay here as the mod's own
+  # fire/feed animation, not a hand reload. loading_bay is a named surface, nothing more.
