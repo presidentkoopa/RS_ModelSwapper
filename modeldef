@@ -939,7 +939,6 @@ Model MS_Cola_Ks23
 	Path "cards/cola/ks23"
 	Model 0 "cola_ks23.md3"
 	Skin 0 "shotgun.png"
-	Skin 0 "shotgun.png"
 	Scale -1.0 1.0 1.0
 	Offset 0.0 -28.0 -7.0
 	FrameIndex SHTG A 0 0

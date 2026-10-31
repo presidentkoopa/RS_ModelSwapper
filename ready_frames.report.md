@@ -64,7 +64,7 @@
 | MS_CX_Zorchpropulsor | 0 | 0 | ready MISGA |
 | MS_Cola_Carddeck | 2 | 0 | ready VDCKA |
 | MS_Cola_Frypan | 0 | - | Ready frame not in block ColaHandgun |
-| MS_Cola_Ks23 | 0 | - | actor DualPumpShotgun not found |
+| MS_Cola_Ks23 | 0 | 0 | ready 2SHTA |
 | MS_Cola_Particlegun | 0 | 0 | ready TPLGA |
 | MS_Cola_Piledriver | 0 | 0 | ready PDRVA |
 | MS_Cola_Plasmagun | 0 | 0 | ready ZPL0A |
