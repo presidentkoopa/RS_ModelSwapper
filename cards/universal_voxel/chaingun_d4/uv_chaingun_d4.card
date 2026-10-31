@@ -1,0 +1,14 @@
+weapon uv_chaingun_d4
+  archetype   chaingun        # owner-confirmed
+  model       uv_chaingun_d4.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    barrel   surf 0  rest [46.77, -0.16, 0.1]  axis [0.0, 0.985, -0.173]  travel 0.08  frames -..-  rot 45deg axis [1.0, 0.0, 0.0]
+    muzzle    [57.44, -2.67, 0.61]
+  grip        line [-3.55, 7.31, -1.37] [4.44, -3.67, -11.38]  trigger [5.73, 0.58, -1.88]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [9.73, 0.58, -1.88]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..1
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 3778
+  states      # modeldef/modeldef_chaingun.txt + DECORATE/weapons/chaingun.txt (statephase.py)
