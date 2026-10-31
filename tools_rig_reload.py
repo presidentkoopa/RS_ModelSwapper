@@ -143,10 +143,11 @@ def run_pump(a):
          '+attack; wait 3; -attack; wait 50; +attack; wait 3; -attack; wait 50; +reload; wait 4; -reload; wait 40; ' % (a.hmd, a.weapon, a.weapon) + load +
          # off hand on the forend and gripping BEFORE the shot (the gun then waits at the mod's pump for the
          # stroke); a 1-tic trigger press (fire held through the pump point ends the wait); back, forward
-         'qz_lhand "%s"; wait 10; qz_ltrigger 1; wait 10; +attack; wait 1; -attack; wait 10; qz_lhand "%s"; wait 12; '
+         # the stroke starts once the gun has reached its pump point (RSP_Rack.Frac of the mod's fire): pump_wait tics
+         'qz_lhand "%s"; wait 10; qz_ltrigger 1; wait 10; +attack; wait 1; -attack; wait %d; qz_lhand "%s"; wait 12; '
          'qz_lhand "%s"; wait 12; qz_ltrigger 0; wait 30; '
-         'qz_ltrigger 1; wait 6; +attack; wait 1; -attack; wait 10; qz_lhand "%s"; wait 12; qz_lhand "%s"; wait 12; qz_ltrigger 0; wait 40; quit'
-         % (pump(0), pump(1.0), pump(0), pump(1.0), pump(0)))
+         'qz_ltrigger 1; wait 6; +attack; wait 1; -attack; wait %d; qz_lhand "%s"; wait 12; qz_lhand "%s"; wait 12; qz_ltrigger 0; wait 40; quit'
+         % (pump(0), a.pump_wait, pump(1.0), pump(0), a.pump_wait, pump(1.0), pump(0)))
     d, tt = rig_run(a, picks, s, 'pump')
     ma = re.search(r'^\s+%s\s+slot\s+-?\d+\s+->\s+\S+\s+(MS_\w+)' % re.escape(a.weapon), tt, re.M)
     errs = sorted(set(l.strip() for l in tt.splitlines() if rc.ERR.search(l) and not rc.ENGINE_NOISE.search(l)))
@@ -166,6 +167,7 @@ def main():
     ap.add_argument('--kind', default='mag', choices=['mag', 'break', 'pump'], help='mag = magazine (RSR_Guns); break = break-open / revolver (RSB_Guns, Depot brk.py)')
     ap.add_argument('--pk3', default=None, help='a pk3 to test instead of building one (e.g. a test-only build)')
     ap.add_argument('--shells', type=int, default=2)
+    ap.add_argument('--pump-wait', type=int, default=36, help='pump: tics after the shot before the stroke (past the gun\'s pump point)')
     ap.add_argument('--flick', default='70 0 0', help='break: gun-hand rotation that flicks the action shut (brk.py default)')
     ap.add_argument('--hmd', default='0 1.6 0 -45 -25 0', help='head pose for the frames (pitch down, yaw right: looks at the gun at the rig rest pose)')
     a = ap.parse_args()

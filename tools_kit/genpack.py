@@ -247,7 +247,7 @@ def find_mesh(root, d, f):
     return first
 
 
-def part_surfaces(root, w, part, names, surfs, rest_frame):
+def part_surfaces(root, w, part, names, surfs, rest_frame, feed=True):
     """A card part's surfaces -> mesh surface indices: by name where the name is the
     mesh's own, and BY MEASUREMENT where it is not.
 
@@ -287,7 +287,9 @@ def part_surfaces(root, w, part, names, surfs, rest_frame):
 
     nv = [s['xyz'][0].shape[0] for s in surfs]
     cand = None
-    mm = w['keys'].get('magmodel')
+    # The carve and magcenter are the MAGAZINE's evidence. Any other part (the charging handle)
+    # is found by its own grab point alone: given the magazine's, it resolved to the magazine.
+    mm = w['keys'].get('magmodel') if feed else None
     if isinstance(mm, list) and mm[0]:
         mp = find_mesh(root, mm[0], mm[1])
         if os.path.exists(mp):
@@ -298,7 +300,7 @@ def part_surfaces(root, w, part, names, surfs, rest_frame):
             except Exception:
                 cand = None
 
-    centre = w['keys'].get('magcenter') or part['keys'].get('grab') or part.get('grab')
+    centre = (w['keys'].get('magcenter') if feed else None) or part['keys'].get('grab') or part.get('grab')
     near = None
     if centre is not None:
         try:
@@ -437,7 +439,7 @@ def build_gun(root, w, cls, geo_rec, surfs_names, surfs, nfr, spr):
             # the same role-name-for-surface problem as the feed part; the handle is
             # optional, so an unresolved one leaves the gun a magazine-only reload
             # rather than rejecting it
-            hi, handle_how = part_surfaces(root, w, ap, surfs_names, surfs, fr)
+            hi, handle_how = part_surfaces(root, w, ap, surfs_names, surfs, fr, feed=False)
             handle_idx = hi or []
         g_ = geo_rec['parts'][act[0]]
         survey['parts']['handle'] = dict(grab_point=g_['grab'], pull_dir=g_['axis'], travel_cm=g_['travel_cm'])
