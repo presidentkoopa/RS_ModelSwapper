@@ -1,0 +1,34 @@
+weapon vplus_pistol
+  author      alek (alek_DoomGuns_v1.1a: pistolet.md3); the owner's favourite pistol mesh in Doom
+  archetype   pistol_mag        # owner-confirmed
+  model       vplus_pistol.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 1  rest [19.42, -0.0, -9.84]  axis [-0.271, 0.0, -0.963]  travel 17.13  frames 6..19  rot 45deg axis [0.01, 1.0, 0.01]
+    casing   surf 2  rest [24.16, 1.8, -3.64]  axis [-0.03, 0.901, -0.433]  travel 35.42  frames 1..31  HIDDEN at idle; appears 1..31
+    round    surf 3  rest [19.61, -0.0, -3.7]  axis [-0.209, -0.0, -0.978]  travel 23.14  frames 6..19  rot 54deg axis [-0.01, 1.0, 0.0]
+    slide    surf 4  rest [23.15, 0.02, -1.29]  axis [-1.0, 0.0, -0.001]  travel 3.89  frames 1..30
+    hammer   surf 5  rest [22.46, 0.0, -5.49]  axis [-0.693, 0.0, 0.721]  travel 0.91  frames 1..2  rot 41deg axis [0.0, 1.0, 0.0]
+  ports
+    chamber   [21.54, -0.0, -5.55]  frame 7
+    eject     [21.54, 1.27, -5.55]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    mag_well  [19.42, -0.0, -9.84]  mouth [18.53, 0.77, -3.48]  axis [-0.271, 0.0, -0.963]  travel_clear 17.13
+    muzzle    [37.2, 0.59, -2.11]
+  grip        line [14.19, -0.28, -2.81] [20.88, 0.97, -12.22]  trigger [23.37, -0.0, -3.81]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [27.37, -0.0, -3.81]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..2
+    idle         3..4
+    slide_lock   5..5
+    mag_out      6..6
+    mag_in       7..19
+    rack         20..22
+    battery      23..23
+    idle         24..26
+    rack         27..30
+    idle         31..31
+  baked_cant   frames 7..30 up to 4.5 deg   # psprite-era hand sway; removed in vplus_pistol_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 704
+  carved      mag  surfs [1]  seat_origin [19.42, -0.0, -9.84]  file vplus_pistol_mag.md3

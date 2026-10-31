@@ -1783,6 +1783,17 @@ Model MS_VP_Minigun
 	FrameIndex MSBL A 0 9999
 }
 
+Model MS_VP_Pistol
+{
+	// source: add-on /home/claude/parents/alek/models/weapons/hud/gats/pistolet.md3
+	Path "cards/vplus/pistol"
+	Model 0 "vplus_pistol.md3"
+	Skin 0 "WPN-9MM.png"
+	Scale 1.35 1.35 1.35
+	FrameIndex PISG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
 Model MS_VP_Plasma
 {
 	// source: questvanillavrplusforclaude/models/weapons/hud/guns/plasma.md3

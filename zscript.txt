@@ -211,6 +211,7 @@ class MS_HV_Wand : Actor {}
 class MS_VP_Chainsaw : Actor {}
 class MS_VP_M16 : Actor {}
 class MS_VP_Minigun : Actor {}
+class MS_VP_Pistol : Actor {}
 class MS_VP_Plasma : Actor {}
 class MS_VP_Rev : Actor {}
 class MS_VP_Shotgun : Actor {}

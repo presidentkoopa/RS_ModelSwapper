@@ -1,4 +1,5 @@
 weapon vplus_plasma
+  reload      none (owner)
   author      alek (alek_DoomGuns_v1.1a), not Ermac; shipped in the Vanilla VR Plus folders (owner)
   archetype   energy        # owner-confirmed
   model       vplus_plasma.md3   space WPN   idle_frame 0

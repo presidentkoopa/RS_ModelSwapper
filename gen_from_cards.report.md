@@ -130,6 +130,7 @@
 | MS_VP_Chainsaw | vplus/chainsaw | saw | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/chainsaw.md3::Vanilla_Chainsaw | (source numbers) | chainsaw.png, sheet.png |
 | MS_VP_M16 | vplus/m16 | rifle | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/m16.md3::VR_Rifle | (source numbers) | WPN-M16-k1.png, sheet.png -- source skin ['WPN-M16.png'] not in folder; used WPN-M16-k1.png |
 | MS_VP_Minigun | vplus/minigun | chaingun | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/minigun.md3::minigun | (source numbers) | WPN-GUNS.png, WPN-M16.png, WPN-PLAS.png |
+| MS_VP_Pistol | vplus/pistol | pistol | ../../../../home/claude/parents/alek/models/weapons/hud/gats/pistolet.md3::pistolet | (source numbers) | WPN-9MM.png, sheet.png |
 | MS_VP_Plasma | vplus/plasma | plasma | questvanillavrplusforclaude/models/weapons/hud/guns/plasma.md3::plasmon | (source numbers) | WPN-GUNS.png, WPN-M16.png, WPN-PLAS.png |
 | MS_VP_Rev | vplus/rev | revolver | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/gats/rev.md3::VR_Revolver | (source numbers) | WPN-REV.png, WPN-REV2.png, sheet.png |
 | MS_VP_Shotgun | vplus/shotgun | shotgun | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/shotgun.md3::VR_Shotgun | (source numbers) | WPN-GUNS-k1.png, sheet.png -- source skin ['WPN-GUNS.png'] not in folder; used WPN-GUNS-k1.png |

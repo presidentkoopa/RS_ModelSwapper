@@ -130,6 +130,7 @@
 | MS_VP_Chainsaw | 0 | 0 | ready SAWGA |
 | MS_VP_M16 | 0 | 0 | ready RIFLA |
 | MS_VP_Minigun | 0 | 0 | ready CHGGA |
+| MS_VP_Pistol | 0 | 0 | ready PISGA |
 | MS_VP_Plasma | 0 | 0 | ready PLSGA |
 | MS_VP_Rev | 0 | 0 | ready REVLA |
 | MS_VP_Shotgun | 2 | 0 | ready SHTGA |
