@@ -118,7 +118,7 @@ def actor_index(roots):
             heads = [(m.start(), m.group(1)) for m in re.finditer(r'(?im)^\s*(?:actor|class)\s+(\w+)', t)]
             for k, (pos, name) in enumerate(heads):
                 end = heads[k + 1][0] if k + 1 < len(heads) else len(t)
-                idx.setdefault(name.lower(), t[pos:end])
+                idx.setdefault(name.lower(), []).append(t[pos:end])
     return idx
 
 
@@ -158,15 +158,17 @@ def ready_frame(block, idx):
     FrameIndex. None if nothing resolves (reported, never guessed)."""
     if not block: return None, 'no source block'
     B = {(b.group(1).upper(), b.group(2).upper()): int(b.group(3)) for b in re.finditer(r'FrameIndex\s+(\w{4})\s+([A-Za-z\[\]\\])\s+0\s+(\d+)', block['body'], re.I)}	# model 0 only (a glove on model 1 has its own frames)
-    text = idx.get(block['name'].lower())
-    if text:
+    texts = idx.get(block['name'].lower(), [])
+    for text in texts:	# the same actor name can exist in several mods (BD SSG, MeatGrinder SSG)
         f, how = _ready_in(labels(text), B)
         if f is not None: return f, how
+    text = texts[0] if texts else None
     sprites = {k[0] for k in B}
-    for name, t in idx.items():
+    for name, tl in idx.items():
+      for k, t in enumerate(tl):
         if not any(sp in t for sp in sprites): continue
-        lab = _LABELS.get(name)
-        if lab is None: lab = _LABELS[name] = labels(t)
+        lab = _LABELS.get((name, k))
+        if lab is None: lab = _LABELS[(name, k)] = labels(t)
         if not ('select' in lab and 'deselect' in lab): continue	# weapons only
         f, how = _ready_in(lab, B)
         if f is not None: return f, '%s (actor %s)' % (how, name)

@@ -92,7 +92,7 @@
 | MS_MG_Rpg | 0 | 0 | ready RLNCA |
 | MS_MG_Saw | 0 | 0 | ready SAWGC |
 | MS_MG_Shotgun | 0 | 0 | ready SHTGA |
-| MS_MG_Ssg | 0 | - | Ready frame not in block SSG |
+| MS_MG_Ssg | 0 | 0 | ready SSGGA |
 | MS_MG_Tec9 | 0 | - | no source block |
 | MS_PD_Blunderbuss | 0 | 0 | ready SGUNA |
 | MS_PD_Bomb | 0 | 0 | ready BOMBA |
@@ -121,10 +121,10 @@
 | MS_UV_SsgD4 | 3 | - | Ready frame not in block Vanilla_SuperShotgun |
 | MS_HV_Crossbow | 0 | 0 | ready CRBWA |
 | MS_HV_Dragonclaw | 0 | 0 | ready BLSRA |
-| MS_HV_Gauntlet | 0 | 0 | ready GAUNA (actor hvrgauntletspowered) |
-| MS_HV_Mace | 0 | - | Ready frame not in block HVRMace |
+| MS_HV_Gauntlet | 0 | 0 | ready GAUNA (actor puff) |
+| MS_HV_Mace | 0 | 0 | ready MACEA (actor ball) |
 | MS_HV_Phoenixrod | 0 | 0 | ready PHNXA |
-| MS_HV_Skullrod | 0 | - | Ready frame not in block HVRSkullRod |
+| MS_HV_Skullrod | 0 | 0 | ready HRODA (actor mo) |
 | MS_HV_Staff | 0 | 0 | ready STFFA |
 | MS_HV_Wand | 0 | 0 | ready GWNDA |
 | MS_VP_Chainsaw | 0 | 0 | ready SAWGA |
