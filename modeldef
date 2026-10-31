@@ -598,10 +598,10 @@ Model MS_BW_Knife
 	// source: BrutalWolf/Models/Knife/Knife.md3
 	Path "cards/brutalwolf/knife"
 	Model 0 "bw_knife.md3"
-	Skin 0 "knife.png"
-	Scale -0.65 0.65 0.65
-	Offset 0.0 -16.0 -16.0
-	NoInterpolation
+	Skin 0 "Knife.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 0.0 0.0
+	ZOffset -5
 	FrameIndex PUNG A 0 0
 	FrameIndex MSBL A 0 9999
 }
@@ -1777,9 +1777,8 @@ Model MS_VP_Minigun
 	// source: _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/minigun.md3
 	Path "cards/vplus/minigun"
 	Model 0 "vplus_minigun.md3"
-	Skin 0 "WPN-PLAS.png"
-	Scale 1.0 1.0 1.0
-	Offset 0.0 0.0 0.0
+	Skin 0 "WPN-GUNS.png"
+	Scale 1.35 1.35 1.35
 	FrameIndex CHGG A 0 0
 	FrameIndex MSBL A 0 9999
 }
@@ -1790,8 +1789,7 @@ Model MS_VP_Plasma
 	Path "cards/vplus/plasma"
 	Model 0 "vplus_plasma.md3"
 	Skin 0 "WPN-PLAS.png"
-	Scale 1.0 1.0 1.0
-	Offset 0.0 0.0 0.0
+	Scale 1.35 1.35 1.35
 	FrameIndex PLSG A 0 0
 	FrameIndex MSBL A 0 9999
 }

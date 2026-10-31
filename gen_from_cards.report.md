@@ -45,7 +45,7 @@
 | MS_BW_Garand | brutalwolf/garand | rifle | BrutalWolf/Models/Garand/garand.md3::M1GARAND | (source numbers) | garand.png, sheet.png |
 | MS_BW_Grenade | brutalwolf/grenade | grenade | BrutalWolf/Models/Grenade/Grenade.md3::Colt | (source numbers) | grenade.png, sheet.png |
 | MS_BW_Kar98 | brutalwolf/kar98 | rifle | BrutalWolf/Models/Kar98/Kar98.md3::Karabine98 | (source numbers) | kar98.png, sheet.png |
-| MS_BW_Knife | brutalwolf/knife | melee | BrutalWolf/Models/Knife/Knife.md3::Knife_3D | (source numbers) | knife.png, sheet.png |
+| MS_BW_Knife | brutalwolf/knife | melee | BrutalWolf/Models/Knife/Knife.md3::Colt | (source numbers) | knife.png, sheet.png |
 | MS_BW_Luger | brutalwolf/luger | pistol | BrutalWolf/Models/Luger/luger.md3::Luger | (source numbers) | Luger.png, sheet.png |
 | MS_BW_Mg42 | brutalwolf/mg42 | machinegun | BrutalWolf/Models/MG42/MG42.md3::MG42 | (source numbers) | MG42.png, sheet.png |
 | MS_BW_Mp40 | brutalwolf/mp40 | smg | BrutalWolf/Models/MP40/MP40.md3::SecretWeapon_MP40 | (source numbers) | MP40.png, sheet.png |
@@ -129,8 +129,8 @@
 | MS_HV_Wand | voidwalker/wand | pistol | heretic-voidwalker/models/weapons/wand/wand.md3::HVRWand | (source numbers) | crystal.png, sheet.png, wand.png |
 | MS_VP_Chainsaw | vplus/chainsaw | saw | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/chainsaw.md3::Vanilla_Chainsaw | (source numbers) | chainsaw.png, sheet.png |
 | MS_VP_M16 | vplus/m16 | rifle | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/m16.md3::VR_Rifle | (source numbers) | WPN-M16-k1.png, sheet.png -- source skin ['WPN-M16.png'] not in folder; used WPN-M16-k1.png |
-| MS_VP_Minigun | vplus/minigun | chaingun | mesh matched, no block: _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/minigun.md3 | (source numbers) | WPN-GUNS.png, WPN-M16.png, WPN-PLAS.png |
-| MS_VP_Plasma | vplus/plasma | plasma | mesh matched, no block: questvanillavrplusforclaude/models/weapons/hud/guns/plasma.md3 | (source numbers) | WPN-GUNS.png, WPN-M16.png, WPN-PLAS.png |
+| MS_VP_Minigun | vplus/minigun | chaingun | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/minigun.md3::minigun | (source numbers) | WPN-GUNS.png, WPN-M16.png, WPN-PLAS.png |
+| MS_VP_Plasma | vplus/plasma | plasma | questvanillavrplusforclaude/models/weapons/hud/guns/plasma.md3::plasmon | (source numbers) | WPN-GUNS.png, WPN-M16.png, WPN-PLAS.png |
 | MS_VP_Rev | vplus/rev | revolver | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/gats/rev.md3::VR_Revolver | (source numbers) | WPN-REV.png, WPN-REV2.png, sheet.png |
 | MS_VP_Shotgun | vplus/shotgun | shotgun | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/shotgun.md3::VR_Shotgun | (source numbers) | WPN-GUNS-k1.png, sheet.png -- source skin ['WPN-GUNS.png'] not in folder; used WPN-GUNS-k1.png |
 | MS_VP_Ssg | vplus/ssg | supershotgun | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/ssg.md3::VR_SuperShotgun | (source numbers) | WPN-GUNS-k1.png, sheet.png -- source skin ['WPN-GUNS.png'] not in folder; used WPN-GUNS-k1.png |

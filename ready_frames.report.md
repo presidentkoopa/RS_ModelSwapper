@@ -45,7 +45,7 @@
 | MS_BW_Garand | 0 | 0 | ready M1GGA |
 | MS_BW_Grenade | 0 | - | Ready frame not in block Colt |
 | MS_BW_Kar98 | 0 | 0 | ready ZK9GA |
-| MS_BW_Knife | 0 | 0 | ready ATKNA |
+| MS_BW_Knife | 0 | - | Ready frame not in block Colt |
 | MS_BW_Luger | 0 | 0 | ready LUGEA |
 | MS_BW_Mg42 | 0 | 0 | ready ZMGGA |
 | MS_BW_Mp40 | 0 | 0 | ready MP40A |
@@ -129,8 +129,8 @@
 | MS_HV_Wand | 0 | 0 | ready GWNDA |
 | MS_VP_Chainsaw | 0 | 0 | ready SAWGA |
 | MS_VP_M16 | 0 | 0 | ready RIFLA |
-| MS_VP_Minigun | 0 | - | no source block |
-| MS_VP_Plasma | 0 | - | no source block |
+| MS_VP_Minigun | 0 | 0 | ready CHGGA |
+| MS_VP_Plasma | 0 | 0 | ready PLSGA |
 | MS_VP_Rev | 0 | 0 | ready REVLA |
 | MS_VP_Shotgun | 2 | 0 | ready SHTGA |
 | MS_VP_Ssg | 0 | 0 | ready SHT2A |

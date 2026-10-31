@@ -200,7 +200,7 @@ def parse_blocks(text):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--well', default='/mnt/user-data/uploads/VR_WeaponSetRebuild'); ap.add_argument('--extra', nargs='*', default=['/home/claude/rs_aliens_vr-weaponsq'], help='more roots holding the sets'' own MODELDEFs (the Aliens Q repo)')
     ap.add_argument('--actors', nargs='*', default=sorted(glob.glob('/home/claude/parents/*')), help='parent mods (text lumps) read for actor states only, never for MODELDEF blocks')
-    ap.add_argument('--set-extra', nargs='*', default=['meatgrinder=/mnt/user-data/uploads/__Games/MeatGrinder/BR_VR_MeatGrinder'], help='SET=DIR: more MODELDEF/actor files that belong to that one set only (owner\'s D: copy where the well copy is short)')
+    ap.add_argument('--set-extra', nargs='*', default=['meatgrinder=/mnt/user-data/uploads/__Games/MeatGrinder/BR_VR_MeatGrinder', 'vplus=/home/claude/parents/alek'], help='SET=DIR: more MODELDEF/actor files that belong to that one set only (owner\'s D: copy where the well copy is short)')
     ap.add_argument('--placement', default='placement.json', help='per-donor Scale/Offset table (the placement agent writes it); missing file = skipped')
     a = ap.parse_args(); os.chdir(HERE)
     placement = {}
@@ -224,6 +224,7 @@ def main():
         except Exception: continue
         if 'frameindex' not in t.lower() and 'model 0' not in t.lower(): continue
         for b in parse_blocks(t):
+            b['dir'] = os.path.dirname(p)
             well_blocks.setdefault((os.path.dirname(p), b['path'].lower(), b['file'].lower()), []).append(b)
     idx = actor_index([a.well] + a.extra + a.actors + [v for vs in SET_EXTRA.values() for v in vs])
     # ---- cards
@@ -247,11 +248,14 @@ def main():
                 srcfile = p
                 rel = os.path.relpath(p, a.well).replace('\\', '/')
                 setdir = os.path.join(a.well, WELL_DIR[sset])
-                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile) and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra + SET_EXTRA.get(sset, [])))]
-                same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra + SET_EXTRA.get(sset, [])))]
+                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile) and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in (a.extra if sset == 'aliens' else []) + SET_EXTRA.get(sset, [])))]
+                same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in (a.extra if sset == 'aliens' else []) + SET_EXTRA.get(sset, [])))]
                 cands = exact + [b for b in same_set if b not in exact]
-                # prefer the block whose Model name is a real actor with a readable Ready state
-                src = next((b for b in cands if ready_frame(b, idx)[0] is not None), (cands or [None])[0])
+                # the set's own well folder wins over add-on sources (alek's DoomGuns, the D: copies);
+                # inside each tier prefer the block whose actor's Ready state resolves
+                own = [b for b in cands if b.get('dir', '').startswith(setdir)]
+                tier = own or cands
+                src = next((b for b in tier if ready_frame(b, idx)[0] is not None), (tier or [None])[0])
                 if src: break
         if src is None:
             # carved or re-encoded card mesh: same frame count and same whole-mesh frame-0 bounds,
@@ -269,10 +273,12 @@ def main():
             if best:
                 p = best[1]; srcfile = p
                 rel = os.path.relpath(p, a.well).replace('\\', '/')
-                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile) and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra + SET_EXTRA.get(sset, [])))]
+                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile) and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in (a.extra if sset == 'aliens' else []) + SET_EXTRA.get(sset, [])))]
                 same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in SET_EXTRA.get(sset, [])))]
                 cands = exact + [b for b in same_set if b not in exact]
-                src = next((b for b in cands if ready_frame(b, idx)[0] is not None), (cands or [None])[0])
+                own = [b for b in cands if b.get('dir', '').startswith(setdir)]
+                tier = own or cands
+                src = next((b for b in tier if ready_frame(b, idx)[0] is not None), (tier or [None])[0])
         card_idle = idle; rf, rwhy = ready_frame(src, idx)
         if rf is not None and rf < nfr: idle = rf
         skins = sorted(f for f in os.listdir(d) if f.lower().endswith(('.png', '.jpg', '.tga')))
