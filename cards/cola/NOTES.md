@@ -11,5 +11,5 @@ files are byte-identical copies for Quest. No .blend in the well.
 | piledriver = PANCOR JACKHAMMER (owner): bullpup auto shotgun | jackhammer.md3 + jackhammer_mag.md3 20f | YES: the 10-round rotating ammo CASSETTE is the magazine, shipped as the mod's own second mesh (Model 1); copied as cola_piledriver_mag.md3, its 20 frames are the reload (drops -Z 38, swings back in by frame 11). surf 1 = the drum face | archetype shotgun_drum |
 | sidewinder (missile launcher) | sidewinder.md3 45f + sw_ammo_*.md3 | NO (owner: non-reloading). Belt of five rockets as SEPARATE meshes is the mod's own feed animation (sw_ammo_reload: rockets enter one by one 0..19; sw_ammo_fire: one leaves per shot; full_reload): copied here. bolt, loading_bay, display, plate are named parts | |
 | plasmagun (plasma autorifle) | 3f | no (heat skins cycle) | wheel_thingy, heat |
-| particlegun (toothpaste laser) | 2f | surface AmmoClip exists (143 v) -> carved as mag, never animated; display = separate md3 | OPEN: does the toothpaste tube reload? the mod has an AmmoClip surface and 5 display skins |
+| particlegun (toothpaste laser) | 2f | NO RELOAD (owner). AmmoClip surface named, not carved; display = separate md3 | |
 | frypan, carddeck | melee / thrown | no | cards: Card_1, Card_2 fly off the deck |

@@ -8,7 +8,7 @@ with their own lighter/arm meshes) -- that is code, not mesh, and belongs to Mod
 | weapon | mesh | reload | parts |
 |---|---|---|---|
 | sawedoff | shotgun.md3 33f + shotgun_shell.md3 (two shells, 33f) | YES: `sg_barrel` hinges (break open, 42 units at the muzzle), `sg_bolt1/2` move, the SHELLS are the mod's own second mesh (copied as zb_sawedoff_shells.md3); SawedOff.txt has ReloadGun | body = `sg_body` (the stock, 117 v) |
-| tommygun | tommygun.md3 19f | no magazine surface (stick/drum not separable); `tommy_handle` = foregrip, trigger guard, trigger | no reload without a carve; owner to say |
+| tommygun | tommygun.md3 19f | YES (owner: it has a DRUM): drum carved out of the body as surf 4 = mag (174 tris); `tommy_handle` = foregrip | reloadable |
 | flaregun | flaregun.md3 23f | no break modelled; trigger guard + trigger | no |
 | napalm | napalm.md3 13f | `napalm_bottom` (tank underside), handle, trigger | no |
 | teslagun | teslagun.md3 47f | `teslarifl_barrel` | no |

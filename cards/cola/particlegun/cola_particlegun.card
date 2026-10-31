@@ -26,3 +26,4 @@ weapon cola_particlegun
     FireLow            2 tics  frames 0
     FireFinish        21 tics  frames 0
     Altfire            6 tics  frames 0
+  # OWNER 2026-10-31: NO RELOAD. AmmoClip surface stays named, nothing carved.

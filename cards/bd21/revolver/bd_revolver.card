@@ -38,3 +38,4 @@ weapon bd_revolver
               gun_move Offset 0.466138096429157 -5.415918794489387 ZOffset -2.8011548037743905 Angle 3.853999999999991 Pitch 3.362999999999979 Roll 10.974000000000004
               frames bd22->bd21 [0, 0, 0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 32]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
   states      # Modeldef.Revolver.def + DEFAULTWEAPON.txt (statephase.py)
+  # OWNER 2026-10-31: for ModelSwapper the SPEEDLOADER is the reload (bd_revolver_speedloader.md3); the single rounds stay carded for later.

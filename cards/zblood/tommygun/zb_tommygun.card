@@ -3,19 +3,24 @@ weapon zb_tommygun
   model       zb_tommygun.md3   space WPN   idle_frame 3
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
   parts
-    handle   surf 1  rest [49.01, 0.03, 6.39]  axis [-0.99, -0.002, 0.143]  travel 0.78  frames 4..18
-    trigger_guard surf 2  rest [29.67, 0.19, 5.55]  axis [-0.997, 0.004, -0.081]  travel 0.76  frames 4..18
-    trigger  surf 3  rest [30.23, 0.17, 6.55]  axis [-0.992, 0.011, -0.127]  travel 1.17  frames 4..18  rot 31deg axis [-0.0, 1.0, 0.0]
+    handle   surf 1  rest [49.01, 0.03, 6.39]  axis [0.158, 0.909, -0.386]  travel 0.01  frames -..-
+    trigger_guard surf 2  rest [29.67, 0.19, 5.55]  axis [0.17, 0.97, -0.176]  travel 0.01  frames -..-
+    trigger  surf 3  rest [30.23, 0.17, 6.55]  axis [-0.977, 0.012, -0.213]  travel 0.40  frames -..-  rot 32deg axis [-0.0, 1.0, 0.0]
+    mag      surf 4  rest [30.33, 0.21, 7.8]  axis [1.0, -0.001, -0.026]  travel 2.15  frames 0..18  rot 10deg axis [0.01, 1.0, 0.02]
+    mag_well  [30.33, 0.21, 7.8]  mouth [22.09, -0.06, 16.19]  axis [1.0, -0.001, -0.026]  travel_clear 2.15
     muzzle    [68.86, 0.8, 13.53]
-  grip        line [22.92, 2.45, 7.08] [22.34, 0.12, -5.75]  trigger [30.23, 0.17, 6.55]   # centroid-based; owner's hand fit supersedes
-  support     feature palm [42.14, 0.11, 9.51]   # one-handed gun; placeholder
-  carve       
+  grip        line [22.92, 0.12, 7.08] [22.34, 0.12, -5.75]  trigger [30.23, 0.17, 6.55]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [46.38, 0.05, 10.59]   # one-handed gun; placeholder
+  carve       mag
   phases
     raise        0..1
     idle         2..3
     fire         4..18
-  baked_cant   frames 6..18 up to 21.8 deg   # psprite-era hand sway; removed in zb_tommygun_stable.md3
-  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 572
+  baked_cant   frames 6..18 up to 21.9 deg   # psprite-era hand sway; removed in zb_tommygun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 582
+  carved      mag  surfs [4]  seat_origin [30.33, 0.21, 7.8]  file zb_tommygun_mag.md3
+  # OWNER 2026-10-31: "it is a literal tommygun, it has a drum". The drum was merged into the body: carved with tools/carve
+  # (slab x 32.5..48, box y 0.5+-10.5 z -17.7+-14.5) into surf 4 = mag, 174 tris, zb_tommygun_mag.md3.
   states      # modeldef.tommygun.txt + actors/Weapons/TommyGun.txt (statephase.py)
     select             1 tics  frames 3
     deselect           1 tics  frames 3

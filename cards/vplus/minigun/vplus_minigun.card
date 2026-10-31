@@ -16,3 +16,6 @@ weapon vplus_minigun
     fire         14..14
     idle         15..15
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1060
+  # OWNER 2026-10-31: the BOX on the right side with the bullet chain (surf 2 = the chain, 32 v, moves 1.2) is the ammo box.
+  # MEASURED: the box (x 33..42.5, y 4.9..11.9, z -14..1) is welded into the body like the Cobra mag -- a geometric carve takes
+  # 8..14 triangles and leaves the walls (18 orphan verts). Needs the plane-split carve. Until then: surf 2 = chain (round), box not separable.
