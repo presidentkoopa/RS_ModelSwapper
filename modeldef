@@ -256,12 +256,14 @@ Model MS_BD_Flamecannon
 
 Model MS_BD_Flamethrower
 {
-	// source: no well match -> PLACEMENT needed
+	// source: br_vr/PK3_pbr/Models/Weapons/Hud/Flamethrower2/Flamethrower2.md3
 	Path "cards/bd21/flamethrower"
 	Model 0 "bd_flamethrower.md3"
 	Skin 0 "Flamethrower2.png"
-	Scale 1.0 1.0 1.0
+	Scale -1.0 1.0 1.0
 	Offset 0.0 0.0 0.0
+	ZOffset -5
+	NoInterpolation
 	FrameIndex PLSG A 0 0
 	FrameIndex MSBL A 0 9999
 }
@@ -1321,12 +1323,13 @@ Model MS_MG_Ssg
 
 Model MS_MG_Tec9
 {
-	// source: no well match -> PLACEMENT needed
+	// source: BR_VR_MeatGrinder/Models/TEC9/tec9.md3
 	Path "cards/meatgrinder/tec9"
 	Model 0 "tec9.md3"
-	Skin 0 "tec9.png"
-	Scale 1.0 1.0 1.0
+	Skin 0 "TEC9.png"
+	Scale -1.1 1.1 1.1
 	Offset 0.0 0.0 0.0
+	ZOffset -6
 	FrameIndex CHGG A 0 0
 	FrameIndex MSBL A 0 9999
 }

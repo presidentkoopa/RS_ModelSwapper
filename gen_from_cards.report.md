@@ -20,7 +20,7 @@
 | MS_BD_Dragonslayer | bd21/dragonslayer | sword | br_vr/PK3_pbr/Models/Weapons/Hud/DSweap/DSweap.md3::DSweap | (source numbers) | DSweap.png, sheet.png |
 | MS_BD_Fist | bd21/fist | melee | br_vr/PK3_pbr/Models/Weapons/Hud/Fist/fistclosed.md3::ClassicFist | (source numbers) | fist.png, sheet.png |
 | MS_BD_Flamecannon | bd21/flamecannon | flamethrower | br_vr/PK3_pbr/Models/Weapons/Hud/FlameCannon/FlameCannon.md3::FlameCannon | (source numbers) | FlameCannon.png, sheet.png |
-| MS_BD_Flamethrower | bd21/flamethrower | flamethrower | **PLACEMENT needed** | (source numbers) | Flamethrower2.png, sheet.png |
+| MS_BD_Flamethrower | bd21/flamethrower | flamethrower | br_vr/PK3_pbr/Models/Weapons/Hud/Flamethrower2/Flamethrower2.md3::Flamethrower2 | (source numbers) | Flamethrower2.png, sheet.png |
 | MS_BD_Grenade | bd21/grenade | grenade | br_vr/PK3_pbr/Models/Weapons/Hud/Grenade/nade.md3::HandGrenades | (source numbers) | nade.png, sheet.png |
 | MS_BD_Hellishmissile | bd21/hellishmissile | rocket | br_vr/PK3_pbr/Models/Weapons/Hud/HellishMissile/HellishMissile.md3::HellishMissileLauncher | (source numbers) | HellishMissile.png, sheet.png |
 | MS_BD_M79 | bd21/m79 | launcher | br_vr/PK3_pbr/Models/Weapons/Hud/M79/M79.md3::GrenadeLauncher | (source numbers) | M79.png, sheet.png |
@@ -93,7 +93,7 @@
 | MS_MG_Saw | meatgrinder/saw | saw | BR_VR_MeatGrinder/Models/Saw/Saw.md3::SuperSaw | (source numbers) | Saw.png, sheet.png |
 | MS_MG_Shotgun | meatgrinder/shotgun | shotgun | BR_VR_MeatGrinder/Models/Shotgun/Shotgun.md3::AutoShotgun | (source numbers) | Shotgun.png, sheet.png |
 | MS_MG_Ssg | meatgrinder/ssg | supershotgun | BR_VR_MeatGrinder/Models/SSG/SSG.md3::SSG | (source numbers) | sheet.png, ssg.png |
-| MS_MG_Tec9 | meatgrinder/tec9 | smg | **PLACEMENT needed** | (source numbers) | sheet.png, tec9.png |
+| MS_MG_Tec9 | meatgrinder/tec9 | smg | BR_VR_MeatGrinder/Models/TEC9/tec9.md3::Machinegun | (source numbers) | sheet.png, tec9.png |
 | MS_PD_Blunderbuss | pirate/blunderbuss | shotgun | pirate-doom-vr/models/blunderbuss/blunderbuss.md3::PDVR_Blunderbuss | (source numbers) | sheet.png, shotgun.png -- source skin [] not in folder; used shotgun.png |
 | MS_PD_Bomb | pirate/bomb | grenade | pirate-doom-vr/models/bomb/bomb.md3::PDVR_Bomb | (source numbers) | bomb.png -- source skin [] not in folder; used bomb.png |
 | MS_PD_Cannon | pirate/cannon | launcher | pirate-doom-vr/models/cannon/cannon.md3::PDVR_Cannon | (source numbers) | cannon.png -- source skin [] not in folder; used cannon.png |

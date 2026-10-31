@@ -20,7 +20,7 @@
 | MS_BD_Dragonslayer | 0 | 0 | ready DSLAA |
 | MS_BD_Fist | 0 | 48 | ready PKFSA |
 | MS_BD_Flamecannon | 0 | 0 | ready FLMGA |
-| MS_BD_Flamethrower | 0 | - | no source block |
+| MS_BD_Flamethrower | 0 | 0 | ready FLMTA |
 | MS_BD_Grenade | 2 | 0 | ready GRHOA |
 | MS_BD_Hellishmissile | 8 | 0 | ready RVCGA |
 | MS_BD_M79 | 3 | 3 | ready GLANA |
@@ -93,7 +93,7 @@
 | MS_MG_Saw | 0 | 0 | ready SAWGC |
 | MS_MG_Shotgun | 0 | 0 | ready SHTGA |
 | MS_MG_Ssg | 0 | 0 | ready SSGGA |
-| MS_MG_Tec9 | 0 | - | no source block |
+| MS_MG_Tec9 | 0 | 0 | ready MGNGA |
 | MS_PD_Blunderbuss | 0 | 0 | ready SGUNA |
 | MS_PD_Bomb | 0 | 0 | ready BOMBA |
 | MS_PD_Cannon | 0 | 0 | ready CANOA |
