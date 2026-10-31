@@ -19,23 +19,33 @@ Every weapon the loaded mod gives you, the family it was sorted into, and the mo
 ones whose model can be reloaded (magazine out and in, shells into a pump or break-action, cylinder swung out) --
 the mod's own code deciding ammo, rules and sounds. Quest (QuestZDoom 17.3) and PCVR.
 
-**Where it stands.**
+**Where it stands (measured, 2026-10-31).**
 - The model well was rebuilt from scratch into one unified system: `cards/<set>/<gun>/` holds, for every mesh, its
   card (measured parts, roles, states), the labelled mesh, the carved reload parts, its textures and a render sheet.
-  19 sets, 145 meshes, every reloadable part identified (see each set's `NOTES.md`). The measuring tools live in
-  RSQ_WeaponDepot (`tools/hqt`, `tools/carve`); the cards and meshes live here.
-- The donor systems are GENERATED from the cards (`tools_gen_from_cards.py` -> `modeldef`, donor stubs, shelf, names),
-  placed by `placement.json` (28 donors exactly as 1.x placed them, the rest by family reference). `tools_rig_check.py`
-  builds the Quest pk3 and runs it on the Linux QuestZDoom rig.
-- Loads with zero script errors on doom2 and on Doomablo 0.9.1a; donors draw with their skins.
+  143 donors; every card mesh has all of its source frames (checked against the source mesh, frame count and space).
+  The measuring tools live in RSQ_WeaponDepot (`tools/hqt`, `tools/carve`); the cards and meshes live here.
+- The donor systems are GENERATED from the cards (`tools_gen_from_cards.py` -> `modeldef`, donor stubs, shelf, names).
+  **There is no placement math.** Every donor copies its own set's calibrated MODELDEF block (Skin, Scale, Offset,
+  ZOffset, angles) and rests on the frame that block shows at the weapon's Ready state:
+  - 142 of 143 donors on their own set's block. The exception is the Robocop KSG: the mod dropped it, no MODELDEF
+    names the held mesh, so it sits at Scale 1.
+  - Held frame read from the original code (Ready state through the block's model-0 FrameIndex, A_ReplaceSprite and
+    renamed/pasted blocks followed) for the large majority; the rest are overlay parts or owner answers, each noted
+    in `ready_frames.report.md`.
+  - `sources.lock.json` records what every donor resolved to, so the output reproduces from this repo alone.
+    The parent mods and add-on sources used to resolve it are listed in the generator's `--actors` / `--set-extra` help.
+- `tools_rig_check.py` builds the Quest pk3, runs a donor on the Linux QuestZDoom rig on doom2 (+ a mod), pins the
+  off hand, selects the gun the Depot-rig way, reads back the donor actually applied and makes a contact sheet.
+- Rig, doom2 + Doomablo 0.9.1a, zero script errors from the pack: Doomablo's pistol, shotgun, rifle, SSG, rocket
+  launcher and chaingun wear BD21's pistol, shotgun, rifle, SSG, RPG and minigun; alek's pistol on the pistol.
+  Rig only, not headset-confirmed.
 - Repository = three things: systems, cards (meshes + textures), the generators. Everything older is on branch
   `archive/pre-cards-2026-10-31` (see `ARCHIVE.md`).
 
-**Next (tests when the owner is back).** 1) In the rig, confirm model picks and weapon switching apply, then the six
-Doomablo checks: its pistol / shotgun / SMG / rifle / SSG / rocket wearing the family-matched BD21 donors. 2) Select
-ALL models, reload the ones that can be reloaded (2.0 reload lane: re-point `MODELDEF.rsb` / `MODELDEF.rsrpump` and the
-WMCARD props at the cards). 3) Zion and Samsara: large sets, tabled, to be done together later. The other well folders
-are duplicates and are ignored.
+**Next.** 1) Reload: re-point `MODELDEF.rsb` / `MODELDEF.rsrpump` and the WMCARD props at the cards, then drive one
+hand reload on the rig (BD21 rifle on Doomablo's assault rifle). 2) Picks across all 143 donors on the rig.
+3) Zion and Samsara: large sets, tabled, to be done together later. The other well folders are duplicates and are
+ignored.
 
 ## How it works
 
