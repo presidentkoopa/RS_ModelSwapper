@@ -1,5 +1,9 @@
 # HDVRweapons -- 9 meshes, 6 of them ARE the BD21 meshes
 
+**VERDICT (owner, 2026-10-31): SKIP THIS SET.** Six meshes are BD21 (already carded), the PBR maps alone are
+pointless without the whole set having them, and the three new meshes (BFG, chainsaw, glove) reload nothing.
+Cards kept here for the record only; ModelSwapper pulls nothing from HDVR.
+
 Checked vertex-for-vertex against br_vr/PK3_pbr (same surfaces, same frame counts, frame-0 geometry equal):
 
 | HDVR mesh | is | card |
