@@ -1,0 +1,20 @@
+weapon mg_saw
+  archetype   pistol_mag        # owner-confirmed
+  model       mg_saw.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    blade    surf 3  rest [105.14, -3.14, 0.07]  axis [0.042, 0.037, 0.998]  travel 0.01  frames -..-
+    trigger  surf 4  rest [96.84, -3.08, -1.04]  axis [-0.977, -0.026, 0.21]  travel 1.83  frames 1..5  rot 126deg axis [-0.27, -0.41, 0.87]
+    case     surf 5  rest [95.05, -3.12, -0.66]  axis [0.981, 0.014, -0.195]  travel 2.37  frames 1..5  HIDDEN at idle; appears 1..5
+    muzzle    [135.42, -2.44, 4.56]
+  grip        line [36.81, 13.36, -2.05] [30.3, 13.84, -13.95]  trigger [96.84, -3.08, -1.04]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [48.84, 5.71, 0.27]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..4
+    fire         5..5
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7399

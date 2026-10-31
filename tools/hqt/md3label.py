@@ -289,6 +289,8 @@ def main():
     card.append("  parts")
     for i in range(len(S)):
         if roles[i]=='body': continue
+        if i not in info:	# an --assign'd part that never moves (a still tube, a grip): written with travel 0
+            info[i]=dict(travel=0.0, axis=np.zeros(3), frames=[], size=S[i]['xyz'][a.idle].max(0)-S[i]['xyz'][a.idle].min(0), down_travel=0.0, bore_travel=0.0)
         d=info[i]; c=rest[i]
         e0=S[i]['xyz'][a.idle].max(0)-S[i]['xyz'][a.idle].min(0); hidden=np.linalg.norm(e0)<0.5
         # rotation relative to body at the frame of max travel
