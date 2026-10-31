@@ -31,7 +31,7 @@ $out  = Join-Path $root $(if ($Static) { 'ModelSwapper-QUEST.pk3' } else { 'Mode
 $include = @('zscript.txt', 'modeldef', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF')
 # Donors anchor on stock Doom sprite names, so this pk3 ships no sprite lumps
 # at all.
-$dirs    = @('zscript', 'models')
+$dirs    = @('zscript', 'cards')   # MS 1.5: the meshes + textures live in cards/<set>/<gun>/ (2026-10-31)
 # -Static (Quest) additionally ships the VR reload / hands / melee code and the
 # model cards. The desktop build does not: that code is QuestZDoom 17.3's, and the
 # REMA version of it is a separate pass.
@@ -78,6 +78,8 @@ foreach ($d in $dirs) {
 $files = $files | Where-Object { $_.FullName -notmatch '\\zscript\\static\\' }
 # quest/ holds -Static replacements for root lumps; never shipped at that path.
 $files = $files | Where-Object { $_.FullName -notmatch '\\quest\\' }
+# cards/ ships only what the engine reads: meshes and textures. The cards, sheets, blend cards and notes stay in the repo.
+$files = $files | Where-Object { -not ($_.FullName -match '\\cards\\' -and ($_.Name -match '^sheet.*\.png$' -or $_.Extension -in @('.card', '.json', '.md', '.log', '.txt'))) }
 # .pdn is Paint.NET's layered source for a skin -- the engine cannot read it, and
 # the ones that came in beside the blend-file meshes were 26MB of dead weight.
 # Keep them on disk next to the mesh they belong to; just never pack them.

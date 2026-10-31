@@ -1,0 +1,208 @@
+#!/usr/bin/env python3
+"""tools_gen_from_cards.py -- re-point ModelSwapper's donor systems at cards/ (MS 1.5, 2026-10-31).
+
+Reads every cards/<set>/<gun>/<label>.card and writes the four places a donor lives:
+  1. modeldef               one `Model MS_<PREFIX>_<Gun>` block per card (Path cards/<set>/<gun>, the card's
+                            labelled mesh, the skin(s) found in the folder). Scale/Offset/ZOffset/Angle/Pitch/Roll
+                            are COPIED from the source mod's own MODELDEF block for that mesh (found by matching the
+                            card mesh to the staged well mesh vertex-for-vertex, then that mesh's block). The card
+                            mesh keeps the source mesh's origin, so the source numbers place it exactly as its mod did.
+                            No match -> Scale 1, Offset 0, flagged PLACEMENT in the report.
+  2. zscript.txt (+ quest/) the empty donor classes `class MS_X : Actor {}` between the GEN markers.
+  3. zscript/RS_ForeignModels.zs   SHELF[] rows  "family|MS_X|ANCHOR|0|restFrame|frameCount"  and NAMES[] rows.
+  4. gen_from_cards.report.md      what was generated, what was guessed (family), what has no placement.
+
+Family (ModelSwapper's archetype vocabulary) comes from the card's archetype + the gun's name; see FAMILY().
+Run from the repo root:  python3 tools_gen_from_cards.py [--well /path/to/VR_WeaponSetRebuild]
+"""
+import sys, os, re, glob, argparse, struct
+import numpy as np
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, 'tools_kit'))
+try:
+    from md3read import read_md3
+except Exception:  # the Depot's reader, if tools_kit lacks one
+    sys.path.insert(0, '/home/claude/rsq_weapondepot/tools/hqt'); from md3read import read_md3
+
+PREFIX = {'vplus': 'VP', 'aliens': 'AE', 'meatgrinder': 'MG', 'brutalwolf': 'BW', 'hacx': 'HX', 'bd21': 'BD',
+          'chex': 'CX', 'cola': 'Cola', 'd64': 'D64', 'voidwalker': 'HV', 'hocus': 'HP', 'pirate': 'PD',
+          'robocop': 'RC', 'universal_voxel': 'UV', 'zblood': 'ZB', 'punchout': 'PO'}
+SKIP_SETS = {'hdvr'}          # owner, 2026-10-31: skip
+WELL_DIR = {'vplus': '_01_DOOM_VanillaVRPlus_ErmacPack', 'aliens': 'Aliens-Eradication-VR-addon',
+            'meatgrinder': 'BR_VR_MeatGrinder', 'brutalwolf': 'BrutalWolf', 'hacx': 'HacX', 'bd21': 'br_vr/PK3_pbr',
+            'chex': 'Chex-Quest-VR-Weapons', 'cola': 'Cola-3-VR-Weapons', 'd64': 'D64Retribution',
+            'voidwalker': 'heretic-voidwalker', 'hocus': 'Hocus-Doom-VR', 'pirate': 'pirate-doom-vr',
+            'robocop': 'Robocop-Retribution', 'universal_voxel': 'Universal_Doom_VoxelWeapons_VR',
+            'zblood': 'ZBlood-VR/ZBlood-VR-Weapons', 'punchout': 'virtual-punch-out'}
+# family -> stock anchor sprite (from the 1.x SHELF)
+ANCHOR = {'pistol': 'PISG', 'revolver': 'PISG', 'rifle': 'CHGG', 'sniper': 'CHGG', 'shotgun': 'SHTG',
+          'supershotgun': 'SHT2', 'saw': 'SAWG', 'chaingun': 'CHGG', 'plasma': 'PLSG', 'rocket': 'MISG',
+          'bfg': 'BFGG', 'smg': 'CHGG', 'machinegun': 'CHGG', 'launcher': 'MISG', 'grenade': 'MISG',
+          'railgun': 'PLSG', 'flamethrower': 'PLSG', 'unmaker': 'BFGG', 'melee': 'PUNG', 'axe': 'PUNG',
+          'kick': 'PUNG', 'sword': 'PUNG'}
+
+
+def FAMILY(arche, gun):
+    """ModelSwapper family for a card. NAME FIRST (the card archetype is often md3label's default), archetype last."""
+    g = gun.lower(); a = (arche or '').lower()
+    def has(*ks): return any(k in g for k in ks)
+    if has('bfg', 'lazdevice', 'nuker'): return 'bfg'
+    if has('unmaker'): return 'unmaker'
+    if has('railgun'): return 'railgun'
+    if has('superpistol'): return 'pistol'
+    if has('zooka'): return 'rocket'
+    if has('garand'): return 'rifle'
+    if has('tommy'): return 'smg'
+    if g in ('melee', 'stick') or has('hx_melee'): return 'melee'
+    if has('ssg', 'super', 'sawedoff', 'doublebarrel'): return 'supershotgun'
+    if has('flame', 'm260b', 'napalm', 'incendiary'): return 'flamethrower'
+    if has('rpg', 'rocket', 'zorchpropulsor', 'sidewinder', 'hellish', 'missile', 'phoenixrod'): return 'rocket'
+    if has('machinegun', 'buzzsaw', 'mg42', 'bar'): return 'machinegun'
+    if has('chainsaw', 'spork', 'grinder') or g == 'saw': return 'saw'
+    if has('axe'): return 'axe'
+    if has('boot', 'kick'): return 'kick'
+    if has('sword', 'cutlass', 'dragonslayer'): return 'sword'
+    if has('knife', 'pitchfork', 'spoon', 'fist', 'glove', 'gauntlet', 'staff', 'mace', 'frypan', 'loader', 'piledriver_melee'): return 'melee'
+    if has('grenade', 'bomb', 'tnt', 'satchel', 'carddeck', 'voodoo', 'zippo', 'grog', 'doll') or a == 'thrown': return 'grenade'
+    if has('revolver') or g == 'rev': return 'revolver'
+    if has('smg', 'tec9', 'mp40', 'tommygun', 'uzi', 'mp5'): return 'smg'
+    if has('chaingun', 'minigun', 'rapidzorcher', 'smartgun', 'm56', 'gatling'): return 'chaingun'
+    if has('m79', 'm32', 'mortar', 'cannon', 'launcher'): return 'launcher'
+    if has('plasma', 'phasing', 'tesla', 'lifeleech', 'cryo', 'particle', 'skullrod', 'm27', 'bolter'): return 'plasma'
+    if has('shotgun', 'largezorcher', 'ksg', 'blunderbuss', 'trench', 'piledriver', 'm37'): return 'shotgun'
+    if has('rifle', 'm16', 'm41a', 'pulserifle', 'kar98', 'stg44', 'crossbow', 'musket', 'nock', 'cobra', 'repeater', 'sniper'): return 'rifle'
+    if has('pistol', 'auto9', 'minizorcher', 'wand', 'blaster', 'dragonclaw', 'flaregun', 'luger', 'm4a3', 'glock', 'superpistol'): return 'pistol'
+    if a.startswith('revolver'): return 'revolver'
+    if a.startswith('shotgun_break'): return 'supershotgun'
+    if a.startswith('shotgun'): return 'shotgun'
+    if a.startswith('rifle') or a == 'crossbow': return 'rifle'
+    if a in ('chaingun', 'minigun', 'rifle_belt'): return 'chaingun'
+    if a.startswith('launcher'): return 'launcher'
+    if a == 'energy': return 'plasma'
+    if a == 'flamethrower': return 'flamethrower'
+    if a == 'melee': return 'melee'
+    if a.startswith('pistol') or a == 'flintlock': return 'pistol'
+    return None
+
+
+def main_skin(dn):
+    """The folder's main texture: the biggest image that is not a render sheet or a muzzle flash."""
+    c = [f for f in dn['skins'] if not f.lower().startswith('sheet') and not re.search(r'mf\d*\.|flash|muzzle|_n\.|_r\.|_m\.|_ao\.|_bm\.', f.lower())]
+    c = c or dn['skins']
+    return max(c, key=lambda f: os.path.getsize(os.path.join(dn['dir'], f)))
+
+def sig(m): return (m['nframes'], tuple(s['xyz'].shape[1] for s in m['surfs']))
+def f0(m): return np.concatenate([s['xyz'][0].ravel() for s in m['surfs']])
+
+
+def parse_blocks(text):
+    out = []
+    for m in re.finditer(r'Model\s+(\w+)\s*\{(.*?)\}', text, re.S):
+        body = m.group(2)
+        p = re.search(r'Path\s+"([^"]+)"', body); f = re.search(r'Model\s+0\s+"([^"]+)"', body)
+        if not p or not f: continue
+        out.append(dict(name=m.group(1), path=p.group(1).replace('\\', '/').strip('/'), file=f.group(1), body=body))
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser(); ap.add_argument('--well', default='/mnt/user-data/uploads/VR_WeaponSetRebuild'); ap.add_argument('--extra', nargs='*', default=['/home/claude/rs_aliens_vr-weaponsq'], help='more roots holding the sets'' own MODELDEFs (the Aliens Q repo)')
+    a = ap.parse_args(); os.chdir(HERE)
+    # ---- the well: every staged mesh by signature, every MODELDEF block by (path,file)
+    well_mesh = {}; well_blocks = {}
+    for p in glob.glob(a.well + '/**/*.md3', recursive=True):
+        try: m = read_md3(p)
+        except Exception: continue
+        well_mesh.setdefault(sig(m), []).append((p, m))
+    for p in [q for root in [a.well] + a.extra for q in glob.glob(root + '/**/*', recursive=True)]:
+        if not os.path.isfile(p) or os.path.getsize(p) > 400000 or '/.git/' in p: continue
+        if os.path.splitext(p)[1].lower() in ('.png', '.jpg', '.md3', '.md2', '.wav', '.ogg', '.kvx', '.flac', '.mp3', '.pk3', '.wad', '.zip', '.blend', '.psd', '.tga', '.iqm', '.bmp'): continue
+        try: t = open(p, errors='ignore').read()
+        except Exception: continue
+        if 'FrameIndex' not in t and 'Model 0' not in t: continue
+        for b in parse_blocks(t):
+            well_blocks.setdefault((os.path.dirname(p), b['path'].lower(), b['file'].lower()), b)
+    # ---- cards
+    donors = []; report = []
+    for card in sorted(glob.glob('cards/*/*/*.card')):
+        if '.blend' in card: continue
+        d = os.path.dirname(card); parts = d.split('/'); sset, gun = parts[1], parts[2]
+        if sset in SKIP_SETS or gun.startswith('_'): continue
+        lab = os.path.basename(card)[:-5]; mesh = os.path.join(d, lab + '.md3')
+        if not os.path.exists(mesh): continue
+        txt = open(card).read()
+        arche = (re.search(r'archetype\s+(\S+)', txt) or [None, ''])[1]
+        idle = int((re.search(r'idle_frame\s+(\d+)', txt) or [None, '0'])[1])
+        m = read_md3(mesh); nfr = m['nframes']
+        fam = FAMILY(arche, gun)
+        # source block: match the card mesh to a well mesh, then that mesh's MODELDEF block
+        src = None; srcfile = None
+        for p, wm in well_mesh.get(sig(m), []):
+            if np.array_equal(f0(wm), f0(m)):
+                srcfile = p
+                rel = os.path.relpath(p, a.well).replace('\\', '/')
+                setdir = os.path.join(a.well, WELL_DIR[sset])
+                exact = [b for (mdir, bpath, bfile), b in well_blocks.items() if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile)]
+                same_set = [b for (mdir, bpath, bfile), b in well_blocks.items() if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra))]
+                src = (exact or same_set or [None])[0]
+                if src: break
+        skins = sorted(f for f in os.listdir(d) if f.lower().endswith(('.png', '.jpg', '.tga')))
+        name = 'MS_%s_%s' % (PREFIX[sset], ''.join(w.capitalize() for w in re.split(r'[_\-]', gun)))
+        donors.append(dict(name=name, set=sset, gun=gun, dir=d, mesh=os.path.basename(mesh), arche=arche, fam=fam,
+                           idle=idle, nfr=nfr, src=src, srcfile=srcfile, skins=skins))
+    # ---- modeldef
+    head = open('modeldef').read().split('\nModel ', 1)[0].rstrip() + '\n'
+    out = [head, '// ---- GENERATED by tools_gen_from_cards.py from cards/ (MS 1.5). Do not edit below; edit the cards.\n']
+    for dn in donors:
+        b = dn['src']; lines = ['Model %s' % dn['name'], '{',
+                                '\t// source: %s' % (os.path.relpath(dn['srcfile'], a.well) if dn['srcfile'] else 'no well match -> PLACEMENT needed'),
+                                '\tPath "%s"' % dn['dir'], '\tModel 0 "%s"' % dn['mesh']]
+        if b:
+            body = b['body']
+            sk = re.findall(r'^\s*(SurfaceSkin\s+0\s+\d+\s+"[^"]+"|Skin\s+0\s+"[^"]+")', body, re.M)
+            sk = [s for s in sk if re.search(r'"([^"]+)"', s).group(1) in dn['skins'] or re.search(r'"([^"]+)"', s).group(1).lower() in [x.lower() for x in dn['skins']]]
+            if not sk and dn['skins']:
+                sk = ['Skin 0 "%s"' % main_skin(dn)]; dn['skin_note'] = 'source skin %s not in folder; used %s' % (re.findall(r'Skin\s+0\s+"([^"]+)"', body)[:1], main_skin(dn))
+            lines += ['\t' + s.strip() for s in sk]
+            for key in ('Scale', 'Offset', 'ZOffset', 'AngleOffset', 'PitchOffset', 'RollOffset'):
+                mm = re.search(r'^\s*%s\s+([^\n/]+)' % key, body, re.M)
+                if mm: lines.append('\t%s %s' % (key, mm.group(1).strip()))
+            if re.search(r'NoInterpolation', body): lines.append('\tNoInterpolation')
+        else:
+            if dn['skins']: lines.append('\tSkin 0 "%s"' % main_skin(dn))
+            lines += ['\tScale 1.0 1.0 1.0', '\tOffset 0.0 0.0 0.0']
+        anchor = ANCHOR.get(dn['fam'] or '', 'PISG')
+        lines += ['\tFrameIndex %s A 0 %d' % (anchor, min(dn['idle'], dn['nfr'] - 1)), '\tFrameIndex MSBL A 0 9999', '}', '']
+        out.append('\n'.join(lines))
+    open('modeldef', 'w').write('\n'.join(out))
+    # ---- zscript.txt donor classes (both copies)
+    for zf in ('zscript.txt', 'quest/zscript.txt'):
+        if not os.path.exists(zf): continue
+        t = open(zf).read()
+        gen = '// GEN-DONORS-BEGIN (tools_gen_from_cards.py)\n' + '\n'.join('class %s : Actor {}' % dn['name'] for dn in donors) + '\n// GEN-DONORS-END\n'
+        t = re.sub(r'// GEN-DONORS-BEGIN.*?// GEN-DONORS-END\n', '', t, flags=re.S)
+        # every 1.x donor stub, wherever it sits in the file (the imports appended their own lists): one GEN block replaces them all
+        first = re.search(r'^class MS_\w+ : Actor \{\}\n', t, re.M)
+        t = re.sub(r'^class MS_\w+ : Actor \{\}\n', '', t, flags=re.M)
+        t = re.sub(r'^(// -{3,}.*\n)+(?=\n*(// -{3,}|$))', '', t, flags=re.M) if False else t
+        pos = first.start() if first else len(t)
+        t = t[:pos] + gen + t[pos:]
+        open(zf, 'w').write(t)
+    # ---- SHELF and NAMES
+    zs = 'zscript/RS_ForeignModels.zs'; t = open(zs).read()
+    shelf = ',\n'.join('\t\t\t"%s|%s|%s|0|%d|%d"' % (dn['fam'], dn['name'], ANCHOR.get(dn['fam'], 'PISG'), min(dn['idle'], dn['nfr'] - 1), dn['nfr']) for dn in donors if dn['fam'])
+    names = ',\n'.join('\t\t\t"%s|%s %s"' % (dn['name'], dn['set'], dn['gun']) for dn in donors)
+    t = re.sub(r'(static const string SHELF\[\] = \{\n).*?(\n\t\t\};)', lambda m: m.group(1) + shelf + m.group(2), t, count=1, flags=re.S)
+    t = re.sub(r'(static const string NAMES\[\] = \{\n).*?(\n\t\t\};)', lambda m: m.group(1) + names + m.group(2), t, count=1, flags=re.S)
+    open(zs, 'w').write(t)
+    # ---- report
+    rep = ['# gen_from_cards report', '', '| donor | set/gun | family | source block | skins |', '|---|---|---|---|---|']
+    for dn in donors:
+        rep.append('| %s | %s/%s | %s | %s | %s |' % (dn['name'], dn['set'], dn['gun'], dn['fam'] or '**NONE (not shelved)**',
+                   ('%s::%s' % (os.path.relpath(dn['srcfile'], a.well), dn['src']['name'])) if dn['src'] else ('mesh matched, no block' if dn['srcfile'] else '**PLACEMENT needed**'), ', '.join(dn['skins'][:3]) + (' -- ' + dn['skin_note'] if dn.get('skin_note') else '')))
+    open('gen_from_cards.report.md', 'w').write('\n'.join(rep) + '\n')
+    print('donors', len(donors), '| shelved', sum(1 for d in donors if d['fam']), '| with source block', sum(1 for d in donors if d['src']), '| placement needed', sum(1 for d in donors if not d['srcfile']))
+
+
+if __name__ == '__main__': main()
