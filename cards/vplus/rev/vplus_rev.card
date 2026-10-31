@@ -1,0 +1,32 @@
+weapon vplus_rev
+  archetype   revolver_topbreak        # owner-confirmed
+  model       vplus_rev.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    cyl      surf 1  rest [25.68, 0.0, -2.52]  axis [0.989, -0.0, 0.146]  travel 6.04  frames 18..31  rot 86deg axis [0.0, 1.0, 0.0]
+    hammer   surf 2  rest [21.08, -0.0, -1.24]  axis [-0.548, -0.0, -0.837]  travel 1.19  frames 1..2  rot 55deg axis [0.0, -1.0, 0.0]
+    barrel   surf 3  rest [31.9, 0.0, -1.89]  axis [0.142, -0.0, -0.99]  travel 5.96  frames 18..31  rot 86deg axis [0.0, 1.0, 0.0]
+    case     surf 4  rest [36.83, 0.0, -7.22]  axis [0.409, -0.034, -0.912]  travel 112.11  frames 4..40  HIDDEN at idle; appears 20..29
+    case2    surf 5  rest [36.83, 0.0, -7.22]  axis [0.46, 0.149, -0.875]  travel 110.80  frames 4..40  HIDDEN at idle; appears 20..26
+    case3    surf 6  rest [36.83, 0.0, -7.22]  axis [0.409, -0.034, -0.912]  travel 112.11  frames 4..40  HIDDEN at idle; appears 20..29
+    case4    surf 7  rest [36.83, 0.0, -7.22]  axis [0.587, -0.02, -0.81]  travel 123.20  frames 4..40  HIDDEN at idle; appears 20..29
+    case5    surf 8  rest [36.83, 0.0, -7.22]  axis [0.409, -0.034, -0.912]  travel 112.11  frames 4..40  HIDDEN at idle; appears 20..29
+    case6    surf 9  rest [36.83, 0.0, -7.22]  axis [0.409, -0.034, -0.912]  travel 112.11  frames 4..40  HIDDEN at idle; appears 20..29
+    loader   surf 10  rest [31.22, 24.58, -78.02]  axis [-0.094, -0.264, 0.96]  travel 88.12  frames 2..38  HIDDEN at idle; appears 21..38
+    muzzle    [42.48, 0.0, 0.11]
+  grip        line [19.09, -0.0, -4.39] [20.86, 0.37, -12.3]  trigger [22.93, 0.0, -4.42]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [26.93, 0.0, -4.42]   # one-handed gun; placeholder
+  carve       loader
+  phases
+    idle         0..0
+    fire         1..2
+    idle         3..18
+    open         19..19
+    eject        20..29
+    load         30..31
+    close        32..32
+    load         33..38
+    idle         39..40
+  baked_cant   frames 11..35 up to 10.0 deg   # psprite-era hand sway; removed in vplus_rev_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 859
+  carved      loader  seat_origin [31.22, 24.58, -78.02]  file vplus_rev_loader.md3

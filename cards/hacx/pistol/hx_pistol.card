@@ -1,0 +1,29 @@
+weapon hx_pistol
+  archetype   pistol_mag        # owner-confirmed
+  model       hx_pistol.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 1  rest [23.1, -0.08, -7.43]  axis [-0.183, -0.944, -0.275]  travel 0.00  frames -..-
+    slide    surf 2  rest [22.25, 0.01, 0.4]  axis [-1.0, -0.001, 0.0]  travel 6.00  frames 2..4
+    trigger  surf 3  rest [29.59, -0.04, -5.4]  axis [-0.989, 0.001, 0.149]  travel 1.30  frames 1..4  rot 25deg axis [-0.0, 1.0, -0.01]
+    barrel   surf 4  rest [46.9, 0.04, 0.17]  axis [0.31, -0.292, -0.905]  travel 0.00  frames -..-
+    barrel2  surf 5  rest [63.14, 0.06, 0.16]  axis [-0.396, 0.568, -0.722]  travel 0.01  frames -..-
+    mag_well  [23.1, -0.08, -7.43]  mouth [23.87, -0.83, -1.12]  axis [-0.183, -0.944, -0.275]  travel_clear 0.00
+    muzzle    [72.41, -1.12, -0.7]
+  grip        line [21.52, -1.53, -4.41] [27.61, 1.41, -14.81]  trigger [29.59, -0.04, -5.4]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [37.13, 0.07, -3.26]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..4
+    idle         5..10
+  baked_cant   frames 5..10 up to 90.0 deg   # psprite-era hand sway; removed in hx_pistol_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5936
+  carved      mag  seat_origin [23.1, -0.08, -7.43]  file hx_pistol_mag.md3
+  # OWNER, 2026-10-31: RELOADABLE. The magazine is its own surface (surf 1, 562 verts, z -15.1 up to -1.1
+  # inside the grip; the base nub shows below the grip). The animation never drops it; the runtime does.
+  # Well mouth at the grip bottom, drop axis along the grip (card axis above). Slide 6.0 on fire.
+  states      # Modeldef.Pistol.def + filter/Hacx/Weapons.txt (statephase.py)
+    Idle               1 tics  frames 0
+    Fire              18 tics  frames 1,2,3,4,2,1,2,3,4,2,0
+    AltFire           16 tics  frames 6,7,8,9,10,9,8,7,6,0

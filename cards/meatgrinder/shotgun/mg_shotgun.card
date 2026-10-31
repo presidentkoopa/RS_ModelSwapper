@@ -1,0 +1,21 @@
+weapon mg_shotgun
+  archetype   pistol_mag        # owner-confirmed
+  model       mg_shotgun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    handle   surf 1  rest [52.38, -0.15, 0.17]  axis [-0.995, 0.0, -0.103]  travel 7.32  frames 1..3
+    bolt     surf 2  rest [50.82, 1.46, 0.62]  axis [-1.0, -0.0, 0.0]  travel 10.79  frames 1..3
+    trigger  surf 5  rest [33.66, 0.0, -4.58]  axis [-1.0, 0.0, 0.002]  travel 0.61  frames 1..3  rot 20deg axis [-0.0, 1.0, 0.0]
+    mag      surf 6  rest [46.08, 0.02, -9.94]  axis [0.0, -0.0, 0.0]  travel 0.00  frames -..-
+    mag_well  [46.08, 0.02, -9.94]  mouth [41.94, 1.3, -2.81]  axis [0.0, -0.0, 0.0]  travel_clear 0.00
+    muzzle    [89.8, 1.2, 3.02]
+  grip        line [32.14, 0.47, -3.59] [33.48, -0.47, -6.42]  trigger [33.66, 0.0, -4.58]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [61.95, -0.0, -0.44]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4994
+  carved      mag  seat_origin [46.08, 0.02, -9.94]  file mg_shotgun_mag.md3

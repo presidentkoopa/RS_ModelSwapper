@@ -1,0 +1,15 @@
+weapon ae_knife
+  archetype   pistol_mag        # owner-confirmed
+  model       ae_knife.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [33.95, 1.0, 34.25]
+  grip        line [16.48, 1.0, 14.5] [15.72, -1.16, -9.5]  trigger [21.36, 1.01, 14.57]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [25.36, 1.01, 14.57]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    lower        1..2
+    idle         3..18
+  baked_cant   frames 3..18 up to 131.3 deg   # psprite-era hand sway; removed in ae_knife_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 518

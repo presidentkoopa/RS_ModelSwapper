@@ -1,0 +1,20 @@
+weapon mg_ssg
+  archetype   shotgun_pump        # owner-confirmed
+  model       mg_ssg.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 0  rest [33.49, -0.0, -5.51]  axis [-0.959, 0.0, 0.285]  travel 0.40  frames -..-  rot 10deg axis [0.0, 1.0, -0.0]
+    barrel   surf 1  rest [58.31, -0.0, -2.23]  axis [-1.0, 0.0, 0.0]  travel 10.78  frames 6..11
+    pump     surf 5  rest [55.02, 0.0, -4.28]  axis [-1.0, 0.0, 0.0]  travel 10.78  frames 6..11
+    grip     surf 6  rest [27.55, 0.02, -10.71]  axis [0.989, 0.01, 0.146]  travel 0.00  frames -..-
+    stock    surf 10  rest [-1.46, -0.0, -2.17]  axis [0.87, 0.003, -0.494]  travel 0.00  frames -..-
+    muzzle    [69.44, -0.0, 3.81]
+  grip        line [26.06, 0.66, -4.2] [29.42, -0.61, -15.64]  trigger [33.49, -0.0, -5.51]   # from the grip surface
+  support     feature vgrip [55.02, 0.0, -4.28]  axis [-1.0, 0.0, 0.0]  travel 10.78   # the pump: the support hand works it
+  carve       
+  phases
+    idle         0..0
+    fire         1..2
+    idle         3..5
+    pump         6..11
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7472

@@ -1,0 +1,33 @@
+weapon hx_zooka
+  archetype   pistol_mag        # owner-confirmed
+  model       hx_zooka.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    round    surf 0  rest [46.19, 0.01, 0.32]  axis [-0.693, 0.487, 0.531]  travel 87.11  frames 1..5  rot 152deg axis [-0.0, -0.98, 0.21]
+    string   surf 2  rest [43.57, -0.0, 0.18]  axis [1.0, 0.0, 0.0]  travel 19.74  frames 1..5  rot 89deg axis [0.0, 1.0, -0.0]
+    string2  surf 3  rest [63.31, 0.0, 0.41]  axis [0.97, 0.002, -0.245]  travel 0.91  frames 1..1  HIDDEN at idle; appears 1..1
+    trigger  surf 4  rest [30.07, -0.0, -7.46]  axis [-0.888, 0.0, 0.46]  travel 1.03  frames 1..3  rot 30deg axis [0.0, 1.0, 0.0]
+    round2   surf 6  rest [86.98, -0.01, 0.35]  axis [-0.865, 0.293, 0.408]  travel 158.79  frames 1..5  rot 152deg axis [-0.0, -0.98, 0.21]
+  ports
+    chamber   [58.21, 4.03, 5.06]  frame 5
+    eject     [58.21, 24.95, 5.06]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    muzzle    [90.64, -6.67, 0.47]
+  grip        line [85.02, -10.72, 2.95] [75.22, -0.0, -4.64]  trigger [30.07, -0.0, -7.46]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [82.14, 0.0, -0.59]   # one-handed gun; placeholder
+  carve       round
+  phases
+    idle         0..0
+    fire         1..5
+    idle         6..6
+    lower        7..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 11996
+  carved      round  seat_origin [46.19, 0.01, 0.32]  file hx_zooka_round.md3
+  # OWNER, 2026-10-31: CROSSBOW. THE BOLT IS THE AMMO: the runtime slaps a bolt into the rig. The loaded
+  # bolt is surf 0 (shaft, x 22.5..84.7) + surf 6 (head, x 82.9..95.5); bolt.md3 is the loose one with
+  # three heads (Bolt, Detohead, Grenade). Seat = the loaded position on the rail, axis +X along the
+  # stock; firing launches it (surf 0 flies 87 on fire) and the string (surf 2) snaps 19.7. Carved out
+  # as hx_zooka_round.md3 (the loaded bolt in place). No magazine.
+  states      # Modeldef.Zooka.def + filter/Hacx/Weapons.txt (statephase.py)
+    Idle               1 tics  frames 0
+    Fire              33 tics  frames 1,0,2,3,4,5,0
+    AltFire           15 tics  frames 0,6,7,8,9,10,9,8,7,6

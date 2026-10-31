@@ -1,0 +1,45 @@
+weapon hx_uzi
+  archetype   pistol_mag        # owner-confirmed
+  model       hx_uzi.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    bolt     surf 0  rest [24.26, -0.01, 1.6]  axis [1.0, 0.0, -0.0]  travel 6.00  frames 2..9
+    button   surf 1  rest [22.08, -0.01, -6.35]  axis [-0.587, -0.671, 0.453]  travel 0.01  frames -..-
+    mag      surf 2  rest [25.92, 0.03, -11.95]  axis [0.0, 0.0, -1.0]  travel 20.00  frames 6..7
+    release  surf 3  rest [26.01, 1.7, -13.41]  axis [0.868, 0.143, 0.476]  travel 0.01  frames -..-
+    selector surf 4  rest [26.89, 1.65, -4.37]  axis [0.33, -0.931, -0.157]  travel 0.01  frames -..-
+    handle   surf 5  rest [28.92, -0.08, -0.13]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    slide    surf 6  rest [35.18, -0.0, 4.1]  axis [-1.0, 0.0, 0.0]  travel 8.00  frames 9..10
+    stock    surf 7  rest [9.86, 0.0, -1.56]  axis [0.032, -0.81, -0.586]  travel 0.01  frames -..-
+    stock2   surf 8  rest [10.74, 0.0, -6.65]  axis [0.116, -0.562, 0.819]  travel 0.01  frames -..-
+    trigger  surf 9  rest [30.2, 0.02, -4.47]  axis [-0.986, -0.0, 0.168]  travel 1.12  frames 1..4  rot 35deg axis [0.0, 1.0, -0.0]
+    mag_well  [25.92, 0.03, -11.95]  mouth [24.09, -0.72, -2.47]  axis [0.0, 0.0, -1.0]  travel_clear 20.00
+    muzzle    [56.44, 1.05, -0.38]
+  grip        line [28.11, -0.89, -3.48] [24.73, -1.78, -13.77]  trigger [30.2, 0.02, -4.47]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [32.92, -0.08, -0.13]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..5
+    mag_out      6..6
+    mag_in       7..7
+    idle         8..8
+    rack         9..10
+    battery      11..11
+    idle         12..15
+  baked_cant   frames 11..15 up to 90.0 deg   # psprite-era hand sway; removed in hx_uzi_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4582
+  carved      mag  seat_origin [25.92, 0.03, -11.95]  file hx_uzi_mag.md3
+  # OWNER, 2026-10-31: the orange part is the MAGAZINE (artist 'clip', surf 2, 274 verts, z -25.8..-2.5).
+  # Drops 20.0 straight down in DoReload (frames 5..10 there-and-back). Carved out as hx_uzi_mag.md3.
+  # clipRelease (surf 3) is the mag release button, its own part.
+  states      # Modeldef.UZI.def + filter/Hacx/Weapons.txt (statephase.py)
+    Idle               1 tics  frames 0
+    Hold              12 tics  frames 0,1,2,3,4,1,2,4,1
+    DoReload          21 tics  frames 5,6,7,6,5,8,9,10
+    Refire             1 tics  frames 1
+    Reload             3 tics  frames 0
+    AltFire           16 tics  frames 11,12,13,14,15,14,13,12,11,0

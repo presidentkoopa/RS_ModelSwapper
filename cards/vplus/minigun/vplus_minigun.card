@@ -1,0 +1,18 @@
+weapon vplus_minigun
+  archetype   pistol_mag        # owner-confirmed
+  model       vplus_minigun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 2  rest [36.6, 6.58, 0.64]  axis [0.0, -0.978, 0.207]  travel 1.12  frames 2..3  rot 6deg axis [1.0, -0.0, -0.0]
+    trigger  surf 3  rest [36.22, -4.8, -0.55]  axis [0.0, 0.595, 0.804]  travel 1.72  frames 12..15  rot 121deg axis [-1.0, -0.0, -0.0]
+    muzzle    [59.69, 1.73, 1.73]
+  grip        line [32.72, -3.89, 0.2] [33.16, -1.86, -14.17]  trigger [36.22, -4.8, -0.55]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [35.56, -0.44, -0.79]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..11
+    fire         12..12
+    idle         13..13
+    fire         14..14
+    idle         15..15
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1060

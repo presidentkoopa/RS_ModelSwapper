@@ -1,0 +1,10 @@
+weapon pistol
+  source      pistol.blend   blender 2.81.16   frames 0..10
+  space       world = the MD3 frame (Main Hand at the origin, scale 28); units = MD3 model units
+  handle      loc [55.71, -3.43, 0.03]  rot_deg [-89.3, 0.2, 160.0]   # the gun under the hand: the artist's grip relation
+  parts
+    extra     armature "Extra"  rest [26.35, 0.05, 3.11]  axis [0.989, 0.101, -0.104]  travel 30.32  frames 2..10  meshes ['slide.001'] (503 verts)
+    body      armature "Handle.001"  rest [24.05, -0.05, -5.24]  axis [0.971, -0.168, 0.171]  travel 30.90  frames 2..10  meshes ['mag.001'] (220 verts)
+    trigger   armature "Trigger"  rest [29.39, -0.01, -2.41]  axis [0.994, -0.079, 0.080]  travel 30.19  frames 2..10  meshes ['trigger.001'] (52 verts)
+  body        meshes ['base.001', 'Cylinder', 'Cylinder.001']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes

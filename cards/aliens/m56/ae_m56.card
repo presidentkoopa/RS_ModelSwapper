@@ -1,0 +1,29 @@
+weapon ae_m56
+  archetype   pistol_mag        # owner-confirmed
+  model       ae_m56.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [-50.87, -0.07, -5.7]  axis [0.055, -0.001, 0.998]  travel 2.22  frames 1..2  rot 16deg axis [0.01, 1.0, 0.0]
+    lever    surf 2  rest [29.2, 6.26, 11.38]  axis [-0.966, 0.258, -0.023]  travel 0.26  frames -..-  rot 28deg axis [-0.26, -0.97, -0.0]
+    mag      surf 3  rest [-0.39, 11.39, 0.06]  axis [-1.0, 0.007, 0.008]  travel 32.91  frames 14..20  rot 30deg axis [-1.0, -0.0, -0.0]
+    latch    surf 4  rest [-3.17, 12.72, -1.36]  axis [-0.999, -0.019, 0.037]  travel 34.30  frames 9..27  rot 94deg axis [-0.25, 0.94, 0.24]
+    lever2   surf 5  rest [24.83, 6.67, 10.27]  axis [-0.187, -0.975, -0.121]  travel 0.37  frames -..-
+    mag_well  [-0.39, 11.39, 0.06]  mouth [-0.16, 10.52, 7.28]  axis [-1.0, 0.007, 0.008]  travel_clear 32.91
+    muzzle    [80.84, -1.64, 3.14]
+  grip        line [-53.12, -2.42, -8.84] [-53.5, -0.06, -11.14]  trigger [-50.87, -0.07, -5.7]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [18.28, 1.43, 1.74]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..5
+    lower        6..23
+    idle         24..27
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4921
+  carved      mag  seat_origin [-0.39, 11.39, 0.06]  file ae_m56_mag.md3
+  # OWNER, 2026-10-31 (corrected from his marked-up sheet): the rear pistol grip with the trigger
+  # surface is UNUSED -- not the grip, not the support. The MAIN hand is on the VERTICAL BAR hanging
+  # under the receiver just behind the drum: x -4..4, y -6..-10 (right side), z -8..-9.6. The SUPPORT
+  # hand is on the HORIZONTAL HANDLEBAR on top, forward of the drum: x 24..36, z 8..12, running across
+  # y -6..+20 (a bar through the fist). The tool's grip line above is wrong for this gun. Both holds
+  # are headset recordings. Magazine drum (surf 3) slides back 33 cm after its latch (surf 4) swings 94 deg.

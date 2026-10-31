@@ -1,0 +1,9 @@
+weapon cryogun
+  source      cryogun.blend   blender 2.81.16   frames 0..10
+  space       world = the MD3 frame (Main Hand at the origin, scale 28); units = MD3 model units
+  handle      loc [23.66, 0.00, -5.73]  rot_deg [-0.0, -160.0, 0.0]   # the gun under the hand: the artist's grip relation
+  parts
+    body_low  armature "Armature"  rest [60.00, 0.00, -7.00]  axis [-0.616, -0.346, 0.708]  travel 56.69  frames 2..10  meshes ['body_low.002'] (212 verts)
+    trigger   armature "Trigger"  rest [28.75, 0.00, -5.15]  axis [0.974, -0.086, 0.207]  travel 41.44  frames 2..10  meshes ['body_low.001'] (40 verts)
+  body        meshes ['body_low', 'chick_low.001', 'mag_low.001']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes

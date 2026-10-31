@@ -1,0 +1,21 @@
+weapon tec9
+  archetype   pistol_mag        # from source names
+  model       tec9.md3   space WPN   idle_frame 0
+  bore        [1.000, 0.000, 0.000]   down [0.000, 0.000, -1.000]
+  parts
+    mag      surf 1  rest [-1.09, -0.11, -1.18]  axis [-0.025, -0.001, 1.000]  size [3.98, 2.28, 18.23]
+    trigger  surf 2  rest [-7.09, -0.08, -2.81]  axis [-0.249, 0.000, 0.968]  size [1.41, 0.69, 2.92]  rot 20deg axis [0.000, 1.000, 0.000]  pivot [-7.31, -0.08, -1.34]
+    bolt     surf 3  rest [-1.12, 0.99, 2.65]  axis [-0.999, -0.023, -0.036]  size [9.98, 5.62, 4.02]
+    muzzle    [14.44, 0.00, 2.52]
+  grip        line [-7.37, -0.08, -6.50] [-14.01, -0.08, -11.60]  trigger [-7.09, -0.08, -2.81]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [-3.37, -0.08, -6.50]   # one-handed gun; placeholder
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source yes  tags_in_source 0  frame_names_in_source no  verts 5469  frames 1
+  # RELOADABLE: detachable box magazine, 32 rounds. The magazine is its own surface (surf 1, 792 tris,
+  # the full box base plate to receiver with the three rounds on top), lifted out as tec9_mag.md3 and
+  # proven to drop in game. The animation never reloads (the mod's Machinegun has no reload state);
+  # ModelSwapper's reload runtime drops and seats it from this card.
+  # From the 6-frame original (tools/hqt/md3label.py): the bolt (surf 3) runs 7.09 cm back along the
+  # bore on fire frames 3..4, the cocking handle with it. Magazine drop axis: -Z (card axis above).
+  # Hands: grip and support are headset recordings. Eject port side: -y (right), from the bolt handle's side.

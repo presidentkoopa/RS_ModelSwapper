@@ -1,0 +1,17 @@
+weapon hx_stick
+  archetype   pistol_mag        # owner-confirmed
+  model       hx_stick.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [74.73, -0.91, 0.25]
+  grip        line [37.58, -1.31, 0.87] [37.58, -1.31, -0.95]  trigger [37.97, -1.72, -0.04]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [41.97, -1.72, -0.04]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..6
+    lower        7..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4093
+  states      # Modeldef.Stick.def + filter/Hacx/Weapons.txt (statephase.py)
+    Idle               1 tics  frames 0
+    Fire              10 tics  frames 2,3,4,5,2
+    AltFire           16 tics  frames 0,6,7,8,9,10

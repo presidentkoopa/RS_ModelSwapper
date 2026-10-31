@@ -1,0 +1,28 @@
+weapon hx_cryogun
+  archetype   pistol_mag        # owner-confirmed
+  model       hx_cryogun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    lever    surf 1  rest [13.82, -0.0, 2.77]  axis [0.418, -0.07, 0.906]  travel 0.02  frames -..-
+    mag      surf 2  rest [26.7, -0.0, 1.67]  axis [-0.351, 0.166, 0.922]  travel 0.01  frames -..-
+    slide    surf 4  rest [55.5, 0.0, -8.71]  axis [-1.0, 0.0, 0.0]  travel 10.00  frames 3..3
+    mag_well  [26.7, -0.0, 1.67]  mouth [26.92, 0.3, 3.06]  axis [-0.351, 0.166, 0.922]  travel_clear 0.01
+    muzzle    [89.03, -1.64, 3.81]
+  grip        line [40.41, -0.69, -1.33] [32.52, 1.39, -10.06]  trigger [43.32, -0.0, -1.96]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [47.32, -0.0, -1.96]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..2
+    rack         3..3
+    idle         4..6
+    lower        7..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6273
+  carved      mag  seat_origin [26.7, -0.0, 1.67]  file hx_cryogun_mag.md3
+  # OWNER, 2026-10-31: the orange block on top of the receiver (artist 'mag_low', surf 2, x 24.5..29.1,
+  # z -0.9..3.1) is the MAGAZINE / cell. Already its own surface; it never moves in the animation. Carved
+  # out as hx_cryogun_mag.md3 so the runtime can pull it: it sits in a top well, so the drop axis is +Z (up
+  # and out), not down. Slide (surf 4) 10.0 along the bore on altfire.
+  states      # Modeldef.Cryogun.def + filter/Hacx/Weapons.txt (statephase.py)
+    Idle               1 tics  frames 0
+    Fire              51 tics  frames 0,1,2,3,4
+    AltFire           17 tics  frames 6,5,6,7,8,9,10,9,8,7,6,5
