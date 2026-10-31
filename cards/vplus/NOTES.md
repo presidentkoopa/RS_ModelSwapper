@@ -15,3 +15,9 @@ Tool gap found: md3label writes `ports/eject` only for magazine guns (chamber + 
 and the SSG the eject is the shell/case's own measured path and sits in `parts`, not `ports`.
 
 Folder complete 2026-10-31: 8 meshes, 6 measured here, 2 already carded in ModelSwapper. The grip/support lines on every card are placeholders for the recorded hold.
+
+## questvanillavrplusforclaude (checked 2026-10-31)
+The Quest build of the same set. Vertex-checked against `_01_DOOM_VanillaVRPlus_ErmacPack`: rev, chainsaw, m16,
+minigun, shotgun, ssg are IDENTICAL (all frames) -> the cards above stand. One mesh the other folder lacked:
+`plasma.md3` (32 f, 3 surfaces) -> carded here as `plasma/`. Its Modeldef.Revolver/Rifle/shotty and Decorate are the
+Quest-side state maps for the same guns.

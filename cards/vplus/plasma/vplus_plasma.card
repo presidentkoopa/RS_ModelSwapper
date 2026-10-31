@@ -1,0 +1,15 @@
+weapon vplus_plasma
+  archetype   energy        # owner-confirmed
+  model       vplus_plasma.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 1  rest [57.48, -0.01, -1.75]  axis [-0.987, 0.0, -0.159]  travel 1.63  frames 1..10
+    part2    surf 2  rest [21.35, -0.0, -5.97]  axis [-1.0, -0.0, -0.008]  travel 0.81  frames 1..2
+    muzzle    [51.03, 1.91, 1.05]
+  grip        line [19.7, -1.27, -1.08] [18.36, -0.55, -12.31]  trigger [30.16, 0.0, -1.7]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [34.16, 0.0, -1.7]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..31
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1369
+  states      # modeldef.weapons.txt + Decorate/plasmarifle.txt (statephase.py)
