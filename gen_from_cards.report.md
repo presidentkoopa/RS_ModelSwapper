@@ -97,7 +97,7 @@
 | MS_PD_Blunderbuss | pirate/blunderbuss | shotgun | pirate-doom-vr/models/blunderbuss/blunderbuss.md3::PDVR_Blunderbuss | (source numbers) | sheet.png, shotgun.png -- source skin [] not in folder; used shotgun.png |
 | MS_PD_Bomb | pirate/bomb | grenade | pirate-doom-vr/models/bomb/bomb.md3::PDVR_Bomb | (source numbers) | bomb.png -- source skin [] not in folder; used bomb.png |
 | MS_PD_Cannon | pirate/cannon | launcher | pirate-doom-vr/models/cannon/cannon.md3::PDVR_Cannon | (source numbers) | cannon.png -- source skin [] not in folder; used cannon.png |
-| MS_PD_Cutlass | pirate/cutlass | sword | pirate-doom-vr/models/cutlass/cutlass.md3::PDVR_OffhandCutlass | (source numbers) | sword.png -- source skin [] not in folder; used sword.png |
+| MS_PD_Cutlass | pirate/cutlass | sword | pirate-doom-vr/models/cutlass/cutlass.md3::PDVR_Cutlass | (source numbers) | sword.png -- source skin [] not in folder; used sword.png |
 | MS_PD_Flintlock | pirate/flintlock | pistol | pirate-doom-vr/models/pistol/flintlock.md3::PDVR_Flintlock | (source numbers) | Pistol.png, sheet.png -- source skin [] not in folder; used Pistol.png |
 | MS_PD_Grog | pirate/grog | grenade | pirate-doom-vr/models/grog/grog.md3::PDVR_GrogSpitter | (source numbers) | grog.png -- source skin [] not in folder; used grog.png |
 | MS_PD_Mortar | pirate/mortar | launcher | pirate-doom-vr/models/mortar/mortar.md3::PDVR_Mortar | (source numbers) | mortar.png, sheet.png -- source skin [] not in folder; used mortar.png |
@@ -121,7 +121,7 @@
 | MS_UV_SsgD4 | universal_voxel/ssg_d4 | supershotgun | Universal_Doom_VoxelWeapons_VR/MODELS/Weapons/Hud/SSG_D4/sssg.md3::Vanilla_SuperShotgun | (source numbers) | sheet.png, sshell.png, sssg.png |
 | MS_HV_Crossbow | voidwalker/crossbow | rifle | heretic-voidwalker/models/weapons/crossbow/xbow.md3::HVRCrossbow | (source numbers) | boules.png, cross.png, crossl.png -- source skin [] not in folder; used fleches.png |
 | MS_HV_Dragonclaw | voidwalker/dragonclaw | pistol | heretic-voidwalker/models/weapons/blaster/dragonclaw.md3::HVRBlaster | (source numbers) | bracer.png, claw1.png, claw2.png -- source skin [] not in folder; used bracer.png |
-| MS_HV_Gauntlet | voidwalker/gauntlet | melee | heretic-voidwalker/models/weapons/gauntlet/gauntlet.md3::HVRGauntletsPowered | (source numbers) | Gauntlets.png, Gloves-Bracers.png, Gloves-Spikes.png -- source skin [] not in folder; used Gauntlets.png |
+| MS_HV_Gauntlet | voidwalker/gauntlet | melee | heretic-voidwalker/models/weapons/gauntlet/gauntlet.md3::HVRGauntlets | (source numbers) | Gauntlets.png, Gloves-Bracers.png, Gloves-Spikes.png -- source skin [] not in folder; used Gauntlets.png |
 | MS_HV_Mace | voidwalker/mace | melee | heretic-voidwalker/models/weapons/mace/mace.md3::HVRMace | (source numbers) | FireMace.png, FireMace2.png, sheet.png |
 | MS_HV_Phoenixrod | voidwalker/phoenixrod | rocket | heretic-voidwalker/models/weapons/phoenixrod/phoenixrod.md3::HVRPhoenixRod | (source numbers) | Phx-Crystal.png, Phx-Rod.png, sheet.png |
 | MS_HV_Skullrod | voidwalker/skullrod | plasma | heretic-voidwalker/models/weapons/skullrod/skullrod.md3::HVRSkullRod | (source numbers) | g_skull.png, sheet.png |

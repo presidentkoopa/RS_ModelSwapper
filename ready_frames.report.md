@@ -7,7 +7,7 @@
 | MS_AE_M260b | 0 | 0 | ready FLBFA |
 | MS_AE_M37a2 | 1 | 0 | ready ATSGA |
 | MS_AE_M41a | 0 | 0 | ready PULSA |
-| MS_AE_M4a3 | 0 | 0 | emptyready MM91A |
+| MS_AE_M4a3 | 0 | 0 | realready MM91A |
 | MS_AE_M56 | 0 | 0 | ready SMRTA |
 | MS_AE_Satchel | 0 | 0 | ready STCGA |
 | MS_BD_Assaultshotgun | 4 | 4 | ready A12GA |
@@ -59,7 +59,7 @@
 | MS_CX_Phasingzorcher | 0 | 0 | ready PLSGA |
 | MS_CX_Rapidzorcher | 0 | 0 | ready CHGGA |
 | MS_CX_Spoon | 0 | 0 | ready PUNGA |
-| MS_CX_Spork | 0 | 35 | ready SAWGA |
+| MS_CX_Spork | 0 | 0 | ready SAWGA |
 | MS_CX_Superlargezorcher | 0 | 0 | ready SHT2A |
 | MS_CX_Zorchpropulsor | 0 | 0 | ready MISGA |
 | MS_Cola_Carddeck | 2 | 0 | ready VDCKA |
@@ -94,18 +94,18 @@
 | MS_MG_Shotgun | 0 | 0 | ready SHTGA |
 | MS_MG_Ssg | 0 | - | Ready frame not in block SSG |
 | MS_MG_Tec9 | 0 | - | no source block |
-| MS_PD_Blunderbuss | 0 | 28 | ready SGUNA |
-| MS_PD_Bomb | 0 | 50 | ready BOMBA |
-| MS_PD_Cannon | 0 | 49 | ready CANOA |
-| MS_PD_Cutlass | 0 | 1 | ready SWORA |
-| MS_PD_Flintlock | 0 | 19 | ready PISGA |
-| MS_PD_Grog | 0 | 60 | ready PLSGA |
-| MS_PD_Mortar | 0 | 28 | ready MRTRA |
-| MS_PD_Musket | 0 | 28 | ready SGUNA |
-| MS_PD_Nock | 0 | 28 | ready SHT2A |
-| MS_PD_Repeater | 0 | 46 | ready GATLA |
-| MS_PD_Superpistol | 0 | 52 | ready SHT2A |
-| MS_PD_Swivelcannon | 0 | 46 | ready MINIA |
+| MS_PD_Blunderbuss | 0 | 0 | ready SGUNA |
+| MS_PD_Bomb | 0 | 0 | ready BOMBA |
+| MS_PD_Cannon | 0 | 0 | ready CANOA |
+| MS_PD_Cutlass | 0 | 0 | ready SWORA (actor puff) |
+| MS_PD_Flintlock | 0 | 0 | ready PISGA |
+| MS_PD_Grog | 0 | 0 | ready PLSGA |
+| MS_PD_Mortar | 0 | 0 | ready MRTRA |
+| MS_PD_Musket | 0 | 0 | ready SGUNA |
+| MS_PD_Nock | 0 | 0 | ready SHT2A |
+| MS_PD_Repeater | 0 | 0 | ready GATLA |
+| MS_PD_Superpistol | 0 | 0 | ready SHT2A |
+| MS_PD_Swivelcannon | 0 | 0 | ready MINIA |
 | MS_PO_Glove | 0 | 0 | ready FISTA |
 | MS_RC_Auto9 | 0 | 0 | ready AUT9A |
 | MS_RC_Chaingun | 0 | 0 | ready SHRPA |
@@ -121,7 +121,7 @@
 | MS_UV_SsgD4 | 3 | - | Ready frame not in block Vanilla_SuperShotgun |
 | MS_HV_Crossbow | 0 | 0 | ready CRBWA |
 | MS_HV_Dragonclaw | 0 | 0 | ready BLSRA |
-| MS_HV_Gauntlet | 0 | 0 | ready GAUNA |
+| MS_HV_Gauntlet | 0 | 0 | ready GAUNA (actor hvrgauntletspowered) |
 | MS_HV_Mace | 0 | - | Ready frame not in block HVRMace |
 | MS_HV_Phoenixrod | 0 | 0 | ready PHNXA |
 | MS_HV_Skullrod | 0 | - | Ready frame not in block HVRSkullRod |
