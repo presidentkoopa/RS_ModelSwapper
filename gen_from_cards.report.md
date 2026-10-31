@@ -45,7 +45,7 @@
 | MS_BW_Garand | brutalwolf/garand | rifle | BrutalWolf/Models/Garand/garand.md3::M1GARAND | (source numbers) | garand.png, sheet.png |
 | MS_BW_Grenade | brutalwolf/grenade | grenade | BrutalWolf/Models/Grenade/Grenade.md3::Colt | (source numbers) | grenade.png, sheet.png |
 | MS_BW_Kar98 | brutalwolf/kar98 | rifle | BrutalWolf/Models/Kar98/Kar98.md3::Karabine98 | (source numbers) | kar98.png, sheet.png |
-| MS_BW_Knife | brutalwolf/knife | melee | BrutalWolf/Models/Knife/Knife.md3::Knife_3D | (source numbers) | knife.png, sheet.png |
+| MS_BW_Knife | brutalwolf/knife | melee | BrutalWolf/Models/Knife/Knife.md3::GrinderFist | (source numbers) | knife.png, sheet.png |
 | MS_BW_Luger | brutalwolf/luger | pistol | BrutalWolf/Models/Luger/luger.md3::Luger | (source numbers) | Luger.png, sheet.png |
 | MS_BW_Mg42 | brutalwolf/mg42 | machinegun | BrutalWolf/Models/MG42/MG42.md3::MG42 | (source numbers) | MG42.png, sheet.png |
 | MS_BW_Mp40 | brutalwolf/mp40 | smg | BrutalWolf/Models/MP40/MP40.md3::SecretWeapon_MP40 | (source numbers) | MP40.png, sheet.png |
@@ -86,11 +86,11 @@
 | MS_HP_Rifle | hocus/rifle | rifle | Hocus-Doom-VR/Models/weapons/rifle/rifle.md3::ElectromanGun | (source numbers) | rifle.png, rifle_mf.png, sheet.png |
 | MS_HP_Wand | hocus/wand | pistol | Hocus-Doom-VR/Models/weapons/wand/wand.md3::HVRWand | (source numbers) | magicwand.png, magicwand_bm.jpg, phoenix_tex1.png -- source skin ['wand.png'] not in folder; used wand_fire.png |
 | MS_MG_Bfg | meatgrinder/bfg | bfg | BR_VR_MeatGrinder/Models/BFG/BFG.md3::BFG9K | (source numbers) | BFG_9k.png, BFG_9k2.png, sheet.png |
-| MS_MG_Bolter | meatgrinder/bolter | plasma | mesh matched, no block: BR_VR_MeatGrinder/Models/Bolter/Bolter.md3 | (source numbers) | bolter.png, sheet.png |
+| MS_MG_Bolter | meatgrinder/bolter | plasma | BR_VR_MeatGrinder/Models/Bolter/Bolter.md3::PlasmaThrower | (source numbers) | bolter.png, sheet.png |
 | MS_MG_Chaingun | meatgrinder/chaingun | chaingun | BR_VR_MeatGrinder/Models/ChainGun/Chaingun.md3::BWGatling | (source numbers) | Chaingun.png, sheet.png |
-| MS_MG_Knife | meatgrinder/knife | melee | BR_VR_MeatGrinder/Models/Knife/knife.md3::Knife_3D | (source numbers) | Knife.png, sheet.png |
-| MS_MG_Rpg | meatgrinder/rpg | rocket | mesh matched, no block: BR_VR_MeatGrinder/Models/RPG/RPG.md3 | (source numbers) | RPG.png, sheet.png |
-| MS_MG_Saw | meatgrinder/saw | saw | mesh matched, no block: BR_VR_MeatGrinder/Models/Saw/Saw.md3 | (source numbers) | Saw.png, sheet.png |
+| MS_MG_Knife | meatgrinder/knife | melee | BR_VR_MeatGrinder/Models/Knife/knife.md3::GrinderFist | (source numbers) | Knife.png, sheet.png |
+| MS_MG_Rpg | meatgrinder/rpg | rocket | BR_VR_MeatGrinder/Models/RPG/RPG.md3::MultiRocketLauncher | (source numbers) | RPG.png, sheet.png |
+| MS_MG_Saw | meatgrinder/saw | saw | BR_VR_MeatGrinder/Models/Saw/Saw.md3::SuperSaw | (source numbers) | Saw.png, sheet.png |
 | MS_MG_Shotgun | meatgrinder/shotgun | shotgun | BR_VR_MeatGrinder/Models/Shotgun/Shotgun.md3::TRGUN | (source numbers) | Shotgun.png, sheet.png |
 | MS_MG_Ssg | meatgrinder/ssg | supershotgun | BR_VR_MeatGrinder/Models/SSG/SSG.md3::SSG | (source numbers) | sheet.png, ssg.png |
 | MS_MG_Tec9 | meatgrinder/tec9 | smg | **PLACEMENT needed** | (source numbers) | sheet.png, tec9.png |
@@ -127,13 +127,13 @@
 | MS_HV_Skullrod | voidwalker/skullrod | plasma | heretic-voidwalker/models/weapons/skullrod/skullrod.md3::HVRSkullRod | (source numbers) | g_skull.png, sheet.png |
 | MS_HV_Staff | voidwalker/staff | melee | heretic-voidwalker/models/weapons/staff/staff.md3::HVRStaff | (source numbers) | ambou.png, bag.png, baton.png -- source skin [] not in folder; used electro.png |
 | MS_HV_Wand | voidwalker/wand | pistol | heretic-voidwalker/models/weapons/wand/wand.md3::HVRWand | (source numbers) | crystal.png, sheet.png, wand.png |
-| MS_VP_Chainsaw | vplus/chainsaw | saw | questvanillavrplusforclaude/models/weapons/hud/guns/chainsaw.md3::Vanilla_Chainsaw | (source numbers) | chainsaw.png, sheet.png |
-| MS_VP_M16 | vplus/m16 | rifle | questvanillavrplusforclaude/models/weapons/hud/guns/m16.md3::VR_Rifle | (source numbers) | WPN-M16-k1.png, sheet.png -- source skin ['WPN-M16.png'] not in folder; used WPN-M16-k1.png |
+| MS_VP_Chainsaw | vplus/chainsaw | saw | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/chainsaw.md3::Vanilla_Chainsaw | (source numbers) | chainsaw.png, sheet.png |
+| MS_VP_M16 | vplus/m16 | rifle | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/m16.md3::VR_Rifle | (source numbers) | WPN-M16-k1.png, sheet.png -- source skin ['WPN-M16.png'] not in folder; used WPN-M16-k1.png |
 | MS_VP_Minigun | vplus/minigun | chaingun | mesh matched, no block: _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/minigun.md3 | (source numbers) | WPN-GUNS.png, WPN-M16.png, WPN-PLAS.png |
 | MS_VP_Plasma | vplus/plasma | plasma | mesh matched, no block: questvanillavrplusforclaude/models/weapons/hud/guns/plasma.md3 | (source numbers) | WPN-GUNS.png, WPN-M16.png, WPN-PLAS.png |
-| MS_VP_Rev | vplus/rev | revolver | questvanillavrplusforclaude/models/weapons/hud/gats/rev.md3::VR_Revolver | (source numbers) | WPN-REV.png, WPN-REV2.png, sheet.png |
-| MS_VP_Shotgun | vplus/shotgun | shotgun | questvanillavrplusforclaude/models/weapons/hud/guns/shotgun.md3::VR_Shotgun | (source numbers) | WPN-GUNS-k1.png, sheet.png -- source skin ['WPN-GUNS.png'] not in folder; used WPN-GUNS-k1.png |
-| MS_VP_Ssg | vplus/ssg | supershotgun | questvanillavrplusforclaude/models/weapons/hud/guns/ssg.md3::VR_SuperShotgun | (source numbers) | WPN-GUNS-k1.png, sheet.png -- source skin ['WPN-GUNS.png'] not in folder; used WPN-GUNS-k1.png |
+| MS_VP_Rev | vplus/rev | revolver | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/gats/rev.md3::VR_Revolver | (source numbers) | WPN-REV.png, WPN-REV2.png, sheet.png |
+| MS_VP_Shotgun | vplus/shotgun | shotgun | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/shotgun.md3::VR_Shotgun | (source numbers) | WPN-GUNS-k1.png, sheet.png -- source skin ['WPN-GUNS.png'] not in folder; used WPN-GUNS-k1.png |
+| MS_VP_Ssg | vplus/ssg | supershotgun | _01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/ssg.md3::VR_SuperShotgun | (source numbers) | WPN-GUNS-k1.png, sheet.png -- source skin ['WPN-GUNS.png'] not in folder; used WPN-GUNS-k1.png |
 | MS_ZB_Flaregun | zblood/flaregun | pistol | ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/flaregun/flaregun.md3::FlareGun | (source numbers) | empty.png, flare_mf1.png, flare_mf2.png |
 | MS_ZB_Lifeleech | zblood/lifeleech | plasma | ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/lifeleech/lifeleech.md3::LifeLeech | (source numbers) | leechbuddy.jpg, lifeleech.png |
 | MS_ZB_Napalm | zblood/napalm | flamethrower | ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/napalm/napalm.md3::NapalmLauncher | (source numbers) | empty.png, napalm0.png, napalm1.png |

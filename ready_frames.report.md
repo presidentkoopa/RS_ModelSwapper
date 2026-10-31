@@ -45,7 +45,7 @@
 | MS_BW_Garand | 0 | 0 | ready M1GGA |
 | MS_BW_Grenade | 0 | - | Ready frame not in block Colt |
 | MS_BW_Kar98 | 0 | 0 | ready ZK9GA |
-| MS_BW_Knife | 0 | 0 | ready ATKNA |
+| MS_BW_Knife | 0 | 0 | ready FSTZA |
 | MS_BW_Luger | 0 | 0 | ready LUGEA |
 | MS_BW_Mg42 | 0 | 0 | ready ZMGGA |
 | MS_BW_Mp40 | 0 | 0 | ready MP40A |
@@ -86,11 +86,11 @@
 | MS_HP_Rifle | 1 | 0 | ready ELECA |
 | MS_HP_Wand | 0 | 0 | ready GWNDA |
 | MS_MG_Bfg | 0 | 0 | ready BFGNA |
-| MS_MG_Bolter | 0 | - | no source block |
+| MS_MG_Bolter | 0 | 0 | ready PLSCA |
 | MS_MG_Chaingun | 0 | 16 | ready BWCSA |
-| MS_MG_Knife | 0 | 0 | ready ATKNA |
-| MS_MG_Rpg | 0 | - | no source block |
-| MS_MG_Saw | 0 | - | no source block |
+| MS_MG_Knife | 0 | 0 | ready FSTZA |
+| MS_MG_Rpg | 0 | 0 | ready RLNCA |
+| MS_MG_Saw | 0 | 0 | ready SAWGC |
 | MS_MG_Shotgun | 0 | 0 | ready ZSGGA |
 | MS_MG_Ssg | 0 | - | Ready frame not in block SSG |
 | MS_MG_Tec9 | 0 | - | no source block |

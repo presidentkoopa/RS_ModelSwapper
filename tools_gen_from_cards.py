@@ -169,6 +169,7 @@ def parse_blocks(text):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--well', default='/mnt/user-data/uploads/VR_WeaponSetRebuild'); ap.add_argument('--extra', nargs='*', default=['/home/claude/rs_aliens_vr-weaponsq'], help='more roots holding the sets'' own MODELDEFs (the Aliens Q repo)')
     ap.add_argument('--actors', nargs='*', default=sorted(glob.glob('/home/claude/parents/*')), help='parent mods (text lumps) read for actor states only, never for MODELDEF blocks')
+    ap.add_argument('--set-extra', nargs='*', default=['meatgrinder=/mnt/user-data/uploads/__Games/MeatGrinder/BR_VR_MeatGrinder'], help='SET=DIR: more MODELDEF/actor files that belong to that one set only (owner\'s D: copy where the well copy is short)')
     ap.add_argument('--placement', default='placement.json', help='per-donor Scale/Offset table (the placement agent writes it); missing file = skipped')
     a = ap.parse_args(); os.chdir(HERE)
     placement = {}
@@ -176,13 +177,16 @@ def main():
         import json
         try: placement = json.load(open(a.placement))
         except Exception as e: print('placement.json unreadable:', e); placement = {}
+    SET_EXTRA = {}
+    for kv in a.set_extra:
+        k, v = kv.split('=', 1); SET_EXTRA.setdefault(k, []).append(v)
     # ---- the well: every staged mesh by signature, every MODELDEF block by (path,file)
     well_mesh = {}; well_blocks = {}
     for p in glob.glob(a.well + '/**/*.md3', recursive=True):
         try: m = read_md3(p)
         except Exception: continue
         well_mesh.setdefault(sig(m), []).append((p, m))
-    for p in [q for root in [a.well] + a.extra for q in glob.glob(root + '/**/*', recursive=True)]:
+    for p in [q for root in [a.well] + a.extra + [v for vs in SET_EXTRA.values() for v in vs] for q in glob.glob(root + '/**/*', recursive=True)]:
         if not os.path.isfile(p) or os.path.getsize(p) > 400000 or '/.git/' in p: continue
         if os.path.splitext(p)[1].lower() in ('.png', '.jpg', '.md3', '.md2', '.wav', '.ogg', '.kvx', '.flac', '.mp3', '.pk3', '.wad', '.zip', '.blend', '.psd', '.tga', '.iqm', '.bmp'): continue
         try: t = open(p, errors='ignore').read()
@@ -190,7 +194,7 @@ def main():
         if 'frameindex' not in t.lower() and 'model 0' not in t.lower(): continue
         for b in parse_blocks(t):
             well_blocks.setdefault((os.path.dirname(p), b['path'].lower(), b['file'].lower()), []).append(b)
-    idx = actor_index([a.well] + a.extra + a.actors)
+    idx = actor_index([a.well] + a.extra + a.actors + [v for vs in SET_EXTRA.values() for v in vs])
     # ---- cards
     donors = []; report = []
     for card in sorted(glob.glob('cards/*/*/*.card')):
@@ -206,13 +210,14 @@ def main():
         fam = FAMILY(arche, gun)
         # source block: match the card mesh to a well mesh, then that mesh's MODELDEF block
         src = None; srcfile = None
-        for p, wm in well_mesh.get(sig(m), []):
+        _own = os.path.join(a.well, WELL_DIR[sset])
+        for p, wm in sorted(well_mesh.get(sig(m), []), key=lambda t: not t[0].startswith(_own)):
             if np.array_equal(f0(wm), f0(m)):
                 srcfile = p
                 rel = os.path.relpath(p, a.well).replace('\\', '/')
                 setdir = os.path.join(a.well, WELL_DIR[sset])
                 exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile)]
-                same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra))]
+                same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra + SET_EXTRA.get(sset, [])))]
                 cands = exact + [b for b in same_set if b not in exact]
                 # prefer the block whose Model name is a real actor with a readable Ready state
                 src = next((b for b in cands if ready_frame(b, idx)[0] is not None), (cands or [None])[0])
@@ -234,7 +239,7 @@ def main():
                 p = best[1]; srcfile = p
                 rel = os.path.relpath(p, a.well).replace('\\', '/')
                 exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile)]
-                same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and mdir.startswith(setdir)]
+                same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in SET_EXTRA.get(sset, [])))]
                 cands = exact + [b for b in same_set if b not in exact]
                 src = next((b for b in cands if ready_frame(b, idx)[0] is not None), (cands or [None])[0])
         card_idle = idle; rf, rwhy = ready_frame(src, idx)
