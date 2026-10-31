@@ -1,0 +1,46 @@
+weapon bd_mp40
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_mp40.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    slide    surf 0  rest [55.68, 1.2, 3.2]  axis [-0.999, -0.028, 0.046]  travel 16.80  frames 3..13  rot 44deg axis [1.0, -0.0, -0.0]
+    trigger  surf 9  rest [33.5, 0.0, -4.82]  axis [-0.998, -0.0, 0.071]  travel 0.86  frames 3..4  rot 28deg axis [0.0, 1.0, -0.0]
+    mag      surf 10  rest [60.14, -0.01, -4.57]  axis [-0.0, 0.0, -1.0]  travel 24.99  frames 8..13
+    mag_well  [60.14, -0.01, -4.57]  mouth [58.61, 0.11, 2.67]  axis [-0.0, 0.0, -1.0]  travel_clear 24.99
+    muzzle    [90.59, -0.59, 2.08]
+  grip        line [25.25, 0.78, -3.88] [25.44, -0.78, -14.69]  trigger [33.5, 0.0, -4.82]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [57.04, 0.09, 0.73]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..1
+    idle         2..2
+    fire         3..6
+    idle         7..7
+    mag_out      8..8
+    mag_in       9..13
+  baked_cant   frames 8..13 up to 18.3 deg   # psprite-era hand sway; removed in bd_mp40_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4879
+  carved      mag  seat_origin [60.14, -0.01, -4.57]  file bd_mp40_mag.md3
+  bd22        pose sets/bd22q/handfit/poses/MP40.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset -0.9824570150261916 -4.470375661269564 ZOffset -2.212805113676137 Angle 3.853999999999986 Pitch 3.36299999999999 Roll 10.974000000000007
+              frames bd22->bd21 [0, 1, 2, 3, 4, 5, 6, 2, 8, 9, 10, 11, 11, 11]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.MP40.def + Mp40.txt (statephase.py)
+    NoAmmo             2 tics  frames 2
+    CheckSprint        3 tics  frames 2
+    StartSprint        5 tics  frames 2
+    Sprinting         28 tics  frames 1,2,1,2,1,2
+    StopSprintTired   32 tics  frames 2
+    StopSprint         2 tics  frames 1,2
+    Fire              17 tics  frames 2
+    Fire2             14 tics  frames 2,4,2,5,2,6,2
+    AltFire           23 tics  frames 2
+    HoldAim            7 tics  frames 2
+    NoAim              5 tics  frames 2
+    Reload            34 tics  frames 2,7,8,9,10,11,12,2,13,12,11,10,9,8,7,2
+    InsertBullets      7 tics  frames 2
+    TurboReload        6 tics  frames 2
+    Unload            23 tics  frames 2,7,8,9,10,11,12,13,2
+    RemoveBullets      3 tics  frames 2
+    FInishUnload       3 tics  frames 2
+    DualWield          3 tics  frames 2
+    GetDual           12 tics  frames 2

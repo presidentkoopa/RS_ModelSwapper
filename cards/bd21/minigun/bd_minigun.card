@@ -1,0 +1,49 @@
+weapon bd_minigun
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_minigun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 0  rest [52.23, 24.86, -33.7]  axis [-0.371, -0.67, -0.643]  travel 39.89  frames 5..15  rot 106deg axis [-0.87, 0.0, 0.5]
+    part     surf 1  rest [44.02, -0.27, -39.16]  axis [0.439, -0.479, 0.76]  travel 6.63  frames 5..15  rot 106deg axis [-0.87, 0.0, 0.5]
+    barrel   surf 2  rest [76.58, 0.27, -53.24]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    part2    surf 3  rest [16.34, 0.01, -27.27]  axis [0.412, -0.568, 0.713]  travel 12.23  frames 5..15  rot 106deg axis [-0.87, -0.0, 0.5]
+    trigger  surf 4  rest [25.67, -0.0, -19.98]  axis [-0.461, 0.713, -0.528]  travel 5.97  frames 5..15  rot 107deg axis [-0.93, 0.13, 0.34]
+    grip     surf 5  rest [24.61, 0.02, -14.14]  axis [-0.387, 0.633, -0.67]  travel 12.55  frames 5..15  rot 106deg axis [-0.87, -0.0, 0.5]
+    mag_well  [52.23, 24.86, -33.7]  mouth [51.86, 26.25, -31.62]  axis [-0.371, -0.67, -0.643]  travel_clear 39.89
+    muzzle    [94.59, -1.06, -50.34]
+  grip        line [27.11, 0.02, -9.27] [16.28, 0.0, -26.66]  trigger [25.67, -0.0, -19.98]   # from the grip surface
+  support     feature palm [80.58, 0.27, -53.24]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..1
+    lower        2..4
+    fire         5..5
+    idle         6..6
+    fire         7..7
+    lower        8..8
+    idle         9..9
+    fire         10..10
+    idle         11..11
+    lower        12..12
+    fire         13..13
+    idle         14..14
+    fire         15..15
+  baked_cant   frames 5..15 up to 108.9 deg   # psprite-era hand sway; removed in bd_minigun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5817
+  bd22        pose sets/bd22q/handfit/poses/Minigun.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 3, 4, 4, 4, 4, 8, 4, 8, 4]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.Minigun.def + Minigun.txt (statephase.py)
+    IdleNoAmmo         6 tics  frames 12,4
+    CheckSprint        3 tics  frames 4
+    StartSprint        5 tics  frames 4
+    Sprinting         27 tics  frames 3,4,3,4,3,4
+    StopSprintTired   32 tics  frames 4
+    StopSprint         2 tics  frames 3,4
+    NoAmmo            10 tics  frames 12
+    Fire              11 tics  frames 4,5,6,7,4,5,4
+    Hold              94 tics  frames 4,8,4,8,4,9,4,10,4,8,4,11,4,5,4,6,4,7,4,5,4,6,7,4,5,4,6,7,4,5,6,7,4,5,6,7
+    AltFire           13 tics  frames 4,5,6,7,4
+    StopAlt           38 tics  frames 4,5,6,7,4,5,6,7,4,5,6,7,4,5,6,7,4
+    PuristGun          2 tics  frames 4
+  classic     Modeldef.ClassicChaingun.def binds the SAME mesh for the Classic weapon: one card, two state maps

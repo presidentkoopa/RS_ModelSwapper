@@ -1,0 +1,21 @@
+weapon bd_chainsaw
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_chainsaw.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    blade    surf 2  rest [53.86, -2.14, -61.3]  axis [-0.054, 0.001, 0.999]  travel 12.21  frames 1..64  rot 105deg axis [-0.0, -1.0, -0.0]
+    handle   surf 4  rest [29.26, 6.62, -35.37]  axis [0.118, 0.0, -0.993]  travel 44.51  frames 1..64  rot 105deg axis [-0.0, -1.0, -0.0]
+    muzzle    [55.5, -2.17, -56.33]
+  grip        line [49.12, -2.14, -56.52] [49.12, -2.14, -56.52]  trigger [49.12, -2.14, -56.52]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [53.12, -2.14, -56.52]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..64
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 35296
+  bd22        pose sets/bd22q/handfit/poses/Chain_saw.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 2, 3, 4, 5, 6, 6, 5, 6, 5, 6, 5, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 6, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 44, 45, 50, 6, 55, 56, 60, 61, 62, 61, 62]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.Chain_saw.def + Saw.txt (statephase.py)
+    Death              1 tics  frames 15
+    XDeath             2 tics  frames 15
+  classic     Modeldef.ClassicSaw.def binds the SAME mesh for the Classic weapon: one card, two state maps

@@ -1,0 +1,12 @@
+weapon br_pistol_f
+  source      br_pistol_f.blend   blender 2.79.0   frames 0..37
+  space       world = the MD3 frame (Main Hand at the origin, scale 20); units = MD3 model units
+  handle      loc [26.09, -1.00, -3.00]  rot_deg [1.1, -168.3, 1.3]   # the gun under the hand: the artist's grip relation
+  parts
+    cube      armature "Armature"  rest [14.95, -1.00, -17.62]  axis [0.932, -0.007, 0.361]  travel 40.64  frames 1..37  meshes ['Cube.002'] (148 verts)
+    cube      armature "Armature.001"  rest [15.96, -5.05, -18.89]  axis [0.952, 0.082, 0.295]  travel 40.37  frames 1..37  meshes ['Cube.001'] (336 verts)
+    lipas     armature "Lipas"  rest [13.80, -1.00, -21.91]  axis [0.912, 0.062, 0.406]  travel 46.26  frames 1..37  meshes ['Cube.000'] (340 verts)
+    slide     armature "Slide"  rest [24.46, -1.00, -24.46]  axis [0.869, -0.113, 0.481]  travel 44.94  frames 1..37  meshes ['Cube.004'] (1465 verts)
+    trigger   armature "Trigger"  rest [19.45, -1.00, -23.68]  axis [0.892, -0.025, 0.451]  travel 45.84  frames 1..37  meshes ['Cube.006'] (124 verts)
+  body        meshes ['Cube.005']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes

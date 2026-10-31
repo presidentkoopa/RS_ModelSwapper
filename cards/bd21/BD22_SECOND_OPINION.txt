@@ -1,0 +1,124 @@
+== pistol  (bd21 6 surfs / bd22 6 surfs)
+   surf 0 (  158 v) mine=hammer    bd22=surf 0 body
+   surf 1 ( 1659 v) mine=slide     bd22=surf 1 slide
+   surf 2 (  414 v) mine=case      bd22=surf 2 mag   <-- DIFFERS
+   surf 3 (  352 v) mine=mag       bd22=surf 3 mag
+   surf 4 ( 4111 v) mine=-         bd22=surf 4 body
+   surf 5 (  134 v) mine=trigger   bd22=surf 5 body
+== smg  (bd21 4 surfs / bd22 4 surfs)
+   surf 0 (  239 v) mine=part      bd22=surf 0 slide   <-- DIFFERS
+   surf 1 (17897 v) mine=-         bd22=surf 1 body
+   surf 2 (  222 v) mine=trigger   bd22=surf 2 body
+   surf 3 ( 2714 v) mine=mag       bd22=surf 3 mag
+== shotgun  (bd21 7 surfs / bd22 7 surfs)
+   surf 0 (  342 v) mine=-         bd22=surf 0 body
+   surf 1 (  152 v) mine=-         bd22=surf 1 body
+   surf 2 (  831 v) mine=trigger   bd22=surf 2 shell   <-- DIFFERS
+   surf 3 (  106 v) mine=trigger2  bd22=surf 3 body
+   surf 4 ( 1220 v) mine=pump      bd22=surf 4 pump
+   surf 5 (  304 v) mine=shell     bd22=surf 5 bolt   <-- DIFFERS
+   surf 6 (18929 v) mine=-         bd22=surf 6 body
+== ssg  (bd21 7 surfs / bd22 7 surfs)
+   surf 0 ( 1785 v) mine=barrel    bd22=surf 0 hinge   <-- DIFFERS
+   surf 1 (12019 v) mine=-         bd22=surf 1 hinge   <-- DIFFERS
+   surf 2 (  848 v) mine=shell     bd22=surf 2 round
+   surf 3 (  848 v) mine=shell2    bd22=surf 3 round   <-- DIFFERS
+   surf 4 (  960 v) mine=hammer    bd22=surf 4 hinge   <-- DIFFERS
+   surf 5 (  416 v) mine=lever     bd22=surf 5 hinge   <-- DIFFERS
+   surf 6 ( 1075 v) mine=-         bd22=surf 6 hinge   <-- DIFFERS
+== rifle  (bd21 6 surfs / bd22 6 surfs)
+   surf 0 (  268 v) mine=bolt      bd22=surf 0 slide   <-- DIFFERS
+   surf 1 (   79 v) mine=case      bd22=surf 1 bolt   <-- DIFFERS
+   surf 2 (   76 v) mine=trigger   bd22=surf 2 body
+   surf 3 ( 2046 v) mine=mag       bd22=surf 3 mag
+   surf 4 ( 4554 v) mine=-         bd22=surf 4 body
+   surf 5 ( 2781 v) mine=sight     bd22=surf 5 body
+== assaultshotgun  (bd21 7 surfs / bd22 7 surfs)
+   surf 0 (  665 v) mine=-         bd22=surf 0 body
+   surf 1 (  847 v) mine=handle    bd22=surf 1 mag   <-- DIFFERS
+   surf 2 (   38 v) mine=bolt      bd22=surf 2 slide   <-- DIFFERS
+   surf 3 ( 2776 v) mine=-         bd22=surf 3 body
+   surf 4 (  436 v) mine=-         bd22=surf 4 body
+   surf 5 (   44 v) mine=trigger   bd22=surf 5 body
+   surf 6 (  196 v) mine=mag       bd22=surf 6 mag
+== mp40  (bd21 11 surfs / bd22 11 surfs)
+   surf 0 (  259 v) mine=slide     bd22=surf 0 slide
+   surf 1 ( 3098 v) mine=-         bd22=surf 1 body
+   surf 2 (   66 v) mine=-         bd22=surf 2 body
+   surf 3 (  242 v) mine=-         bd22=surf 3 body
+   surf 4 (   36 v) mine=-         bd22=surf 4 body
+   surf 5 (  101 v) mine=-         bd22=surf 5 body
+   surf 6 (   48 v) mine=-         bd22=surf 6 body
+   surf 7 (  289 v) mine=-         bd22=surf 7 body
+   surf 8 (  303 v) mine=-         bd22=surf 8 body
+   surf 9 (   73 v) mine=trigger   bd22=surf 9 body
+   surf 10 (  364 v) mine=mag       bd22=surf 10 mag
+== railgun  (bd21 5 surfs / bd22 5 surfs)
+   surf 0 ( 2672 v) mine=scope     bd22=surf 0 body
+   surf 1 (   18 v) mine=lens      bd22=surf 1 body
+   surf 2 ( 4660 v) mine=-         bd22=surf 2 body
+   surf 3 (   46 v) mine=trigger   bd22=surf 3 body
+   surf 4 (  156 v) mine=mag       bd22=surf 4 mag
+== plasma  (bd21 4 surfs / bd22 4 surfs)
+   surf 0 (    4 v) mine=-         bd22=surf 0 body
+   surf 1 (   34 v) mine=mag       bd22=surf 1 mag
+   surf 2 (   88 v) mine=trigger   bd22=surf 2 body
+   surf 3 ( 7467 v) mine=-         bd22=surf 3 body
+== rpg  (bd21 13 surfs / bd22 13 surfs)
+   surf 0 ( 3762 v) mine=-         bd22=surf 0 body
+   surf 1 (  300 v) mine=-         bd22=surf 1 body
+   surf 2 (  151 v) mine=-         bd22=surf 2 body
+   surf 3 (   48 v) mine=-         bd22=surf 3 body
+   surf 4 (   46 v) mine=part      bd22=surf 4 body
+   surf 5 ( 2549 v) mine=part2     bd22=surf 5 mag   <-- DIFFERS
+   surf 6 (  234 v) mine=part3     bd22=surf 6 mag   <-- DIFFERS
+   surf 7 (  230 v) mine=mag       bd22=surf 7 mag
+   surf 8 (  232 v) mine=part4     bd22=surf 8 mag   <-- DIFFERS
+   surf 9 (  234 v) mine=part5     bd22=surf 9 mag   <-- DIFFERS
+   surf 10 (  234 v) mine=part6     bd22=surf 10 mag   <-- DIFFERS
+   surf 11 (  234 v) mine=part7     bd22=surf 11 mag   <-- DIFFERS
+   surf 12 (  228 v) mine=part8     bd22=surf 12 mag   <-- DIFFERS
+== revolver  (bd21 10 surfs / bd22 10 surfs)
+   surf 0 ( 5169 v) mine=-         bd22=surf 0 hinge   <-- DIFFERS
+   surf 1 ( 2141 v) mine=part      bd22=surf 1 hinge   <-- DIFFERS
+   surf 2 (  420 v) mine=part2     bd22=surf 2 hinge   <-- DIFFERS
+   surf 3 (  606 v) mine=trigger   bd22=surf 3 hinge   <-- DIFFERS
+   surf 4 (  583 v) mine=part3     bd22=surf 4 hinge   <-- DIFFERS
+   surf 5 (  586 v) mine=slide     bd22=surf 5 round   <-- DIFFERS
+   surf 6 (  586 v) mine=slide2    bd22=surf 6 round   <-- DIFFERS
+   surf 7 (  586 v) mine=slide3    bd22=surf 7 round   <-- DIFFERS
+   surf 8 (  586 v) mine=slide4    bd22=surf 8 round   <-- DIFFERS
+   surf 9 (  586 v) mine=slide5    bd22=surf 9 round   <-- DIFFERS
+== m79  (bd21 5 surfs / bd22 5 surfs)
+   surf 0 (  241 v) mine=part      bd22=surf 0 hinge   <-- DIFFERS
+   surf 1 ( 2980 v) mine=-         bd22=surf 1 hinge   <-- DIFFERS
+   surf 2 (  142 v) mine=trigger   bd22=surf 2 hinge   <-- DIFFERS
+   surf 3 (  828 v) mine=shell     bd22=surf 3 round
+   surf 4 ( 2667 v) mine=part2     bd22=surf 4 hinge   <-- DIFFERS
+== machinegun  (bd21 6 surfs / bd22 6 surfs)
+   surf 0 (  104 v) mine=trigger   bd22=surf 0 body
+   surf 1 ( 1014 v) mine=-         bd22=surf 1 body
+   surf 2 (  106 v) mine=trigger2  bd22=surf 2 body
+   surf 3 ( 3470 v) mine=slide     bd22=surf 3 tube   <-- DIFFERS
+   surf 4 (   58 v) mine=trigger3  bd22=surf 4 body
+   surf 5 (11996 v) mine=-         bd22=surf 5 body
+== minigun  (bd21 6 surfs / bd22 7 surfs  <-- recarved mesh in bd22)
+   surf 0 (  111 v) mine=mag       bd22=surf 0 body
+   surf 1 ( 2336 v) mine=part      bd22=no match
+   surf 2 ( 2568 v) mine=barrel    bd22=surf 3 body
+   surf 3 (   62 v) mine=part2     bd22=surf 4 body
+   surf 4 (   40 v) mine=trigger   bd22=surf 5 body
+   surf 5 (  700 v) mine=grip      bd22=surf 6 body
+== flamethrower  (bd21 3 surfs / bd22 4 surfs  <-- recarved mesh in bd22)
+   surf 0 ( 5966 v) mine=-         bd22=no match
+   surf 1 (   80 v) mine=part      bd22=surf 3 body
+   surf 2 (  109 v) mine=trigger   bd22=surf 1 body
+== hellishmissile  (bd21 1 surfs / bd22 2 surfs  <-- recarved mesh in bd22)
+   surf 0 ( 1484 v) mine=-         bd22=no match
+== buzzsaw  (bd21 2 surfs / bd22 3 surfs  <-- recarved mesh in bd22)
+   surf 0 (18912 v) mine=-         bd22=no match
+   surf 1 (   60 v) mine=trigger   bd22=surf 2 body
+== unmaker  (bd21 3 surfs / bd22 3 surfs)
+   surf 0 (10931 v) mine=-         bd22=surf 0 body
+   surf 1 (  361 v) mine=-         bd22=surf 1 mag   <-- DIFFERS
+   surf 2 (  249 v) mine=part      bd22=surf 2 mag   <-- DIFFERS

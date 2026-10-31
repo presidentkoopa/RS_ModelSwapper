@@ -1,0 +1,60 @@
+weapon bd_shotgun
+  archetype   shotgun_pump        # owner-confirmed
+  model       bd_shotgun.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    shell    surf 2  rest [46.93, 0.02, 0.18]  axis [-0.684, 0.0, -0.729]  travel 17.08  frames 15..35
+    trigger  surf 3  rest [33.48, 0.02, -5.07]  axis [-1.0, -0.0, 0.001]  travel 0.45  frames -..-
+    pump     surf 4  rest [68.73, 0.02, -2.73]  axis [-1.0, 0.0, -0.002]  travel 6.27  frames 15..35
+    bolt     surf 5  rest [41.96, -1.46, 0.0]  axis [-1.0, 0.0, 0.0]  travel 6.27  frames 15..35
+    muzzle    [93.45, -0.11, 1.34]
+  grip        line [30.75, -1.86, -4.08] [24.41, -0.16, -9.02]  trigger [33.48, 0.02, -5.07]   # centroid-based; owner's hand fit supersedes
+  support     feature bar [68.73, 0.02, -2.73]  axis [-1.0, 0.0, -0.002]  travel 6.27   # the pump: the support hand works it
+    load      [48.05, 0.02, -2.73]  frame 28   # where the shell ends up: the loading port
+  carve       shell
+  phases
+    raise        0..2
+    idle         3..4
+    fire         5..6
+    idle         7..14
+    pump         15..22
+    load         23..31
+    idle         32..32
+    pump         33..35
+  baked_cant   frames 11..31 up to 18.1 deg   # psprite-era hand sway; removed in bd_shotgun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 21884
+  carved      shell  surfs [2]  seat_origin [46.93, 0.02, 0.18]  file bd_shotgun_shell.md3
+  bd22        pose sets/bd22q/handfit/poses/Shot_Gun.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 3, 4, 5, 6, 7, 8, 4, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 24, 26, 27, 28, 4, 4, 4, 4]
+  states      # Modeldef.Shotgun.def + Shotgun.txt (statephase.py)
+    OkToFire           3 tics  frames 4
+    Fire              30 tics  frames 4,5,4,6,7,8,4
+    Pump1             34 tics  frames 4,9,10,11,12,13,14,4,15,16,17,4,18,19,18,17,16,15,4,14,13,12,11,10,4
+    Pump2             24 tics  frames 4,13,14,15,16,17,18,19,18,17,16,15,4,14,13,12,11,10
+    Fire2             19 tics  frames 4,5,6,8,32,4
+    Pump3             19 tics  frames 4,33,34,35,4,35,34,33,4
+    AltFire           24 tics  frames 4
+    HoldAim            7 tics  frames 4
+    NoAim              6 tics  frames 4
+    CheckSprint        7 tics  frames 4
+    StartSprint        5 tics  frames 4
+    Sprinting         28 tics  frames 3,4,3,4,3,4
+    StopSprintTired   32 tics  frames 4
+    StopSprint         2 tics  frames 3,4
+    Reload            10 tics  frames 4
+    ReloadNormally     6 tics  frames 4,9,10,11,12
+    InsertingShells    8 tics  frames 4,23,4
+    InsertShellAnimation  13 tics  frames 4,23,24,25,26,27,28,23,4
+    CheckIfFinishReload   5 tics  frames 23,4
+    FinishedInsertingShells   9 tics  frames 4,13,12,11,10,9,4
+    TurboReload        2 tics  frames 1,2
+    TurboBullets       5 tics  frames 4
+    FinishTurboReload   1 tics  frames 4
+    PuristGun          2 tics  frames 4
+    Unload            16 tics  frames 4,9,10,11,12,13
+    RemoveBullets     16 tics  frames 4,14,15,16,17,18,19,18,17,16,15,4,14,13
+    FInishUnload       6 tics  frames 12,11,10,9,4
+    DoKickReloading    3 tics  frames 4
+    DryFire            7 tics  frames 4
+  classic     Modeldef.ClassicShotgun.def binds the SAME mesh: one card, two state maps

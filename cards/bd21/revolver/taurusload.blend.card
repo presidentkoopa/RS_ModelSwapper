@@ -1,0 +1,11 @@
+weapon taurusload
+  source      taurusload.blend   blender 2.81.16   frames 0..32
+  space       world = the MD3 frame (Main Hand at the origin, scale 28); units = MD3 model units
+  handle      loc [28.18, -0.00, -3.00]  rot_deg [0.5, -145.0, -0.2]   # the gun under the hand: the artist's grip relation
+  parts
+    frame_low armature "Armature.002"  rest [33.57, 0.00, -3.20]  axis [-0.957, -0.000, 0.290]  travel 10.69  frames 3..32  meshes ['frame_low.003'] (504 verts)
+    frame_low armature "Armature.004"  rest [30.43, -0.00, -0.72]  axis [-0.988, -0.000, 0.157]  travel 11.07  frames 3..32  meshes ['frame_low.004'] (454 verts)
+    frame_low armature "Armature.005"  rest [44.07, 0.00, -3.30]  axis [-0.445, 0.031, 0.895]  travel 14.68  frames 3..32  meshes ['frame_low.002'] (302 verts)
+    frame_low armature "Armature.006"  rest [43.38, -0.00, 0.24]  axis [-0.882, -0.000, 0.471]  travel 13.89  frames 3..32  meshes ['frame_low.001'] (1731 verts)
+  body        meshes ['frame_low']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes

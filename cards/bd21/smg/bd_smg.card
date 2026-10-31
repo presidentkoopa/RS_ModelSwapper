@@ -1,0 +1,76 @@
+weapon bd_smg
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_smg.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    slide    surf 0  rest [54.91, 2.58, -2.38]  axis [-0.96, 0.279, 0.0]  travel 10.59  frames 20..25  rot 90deg axis [0.0, 0.0, 1.0]
+    trigger  surf 2  rest [31.98, -0.0, -4.65]  axis [-1.0, 0.0, 0.0]  travel 0.98  frames 4..4
+    mag      surf 3  rest [42.44, -0.03, -14.21]  axis [-0.298, 0.0, -0.954]  travel 16.76  frames 8..17
+    mag_well  [42.44, -0.03, -14.21]  mouth [45.3, -0.56, -4.0]  axis [-0.298, 0.0, -0.954]  travel_clear 16.76
+    muzzle    [63.8, -0.77, -3.98]
+  grip        line [29.86, -1.7, -3.83] [31.27, 1.89, -15.91]  trigger [31.98, -0.0, -4.65]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [41.69, 0.16, -4.8]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..1
+    idle         2..3
+    fire         4..4
+    idle         5..7
+    mag_out      8..8
+    mag_in       9..17
+    idle         18..19
+    rack         20..25
+    battery      26..26
+  baked_cant   frames 10..24 up to 21.3 deg   # psprite-era hand sway; removed in bd_smg_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 21072
+  carved      mag  surfs [3]  seat_origin [42.44, -0.03, -14.21]  file bd_smg_mag.md3
+  bd22        pose sets/bd22q/handfit/poses/BrutalSMG.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset 0.9079905614184213 -4.559901112011108 ZOffset -3.4133434072250295 Angle 3.853999999999986 Pitch 3.3629999999999955 Roll 10.974000000000006
+              frames bd22->bd21 [0, 1, 2, 3, 4, 5, 6, 3, 8, 9, 10, 11, 14, 16, 18, 19, 20, 21, 22, 23, 25]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.SMG.def + SubMachinegun.txt (statephase.py)
+    AltFire           21 tics  frames 3
+    HoldAim            7 tics  frames 3
+    NoAim              4 tics  frames 3
+    CheckSprint        3 tics  frames 3
+    StartSprint        2 tics  frames 3
+    Sprinting         28 tics  frames 2,3,2,3,2,3
+    StopSprintTired   32 tics  frames 3
+    StopSprint         2 tics  frames 2,3
+    Fire              24 tics  frames 3,4,3,5,3,6,3
+    Fire2             22 tics  frames 3,4,3,5,3,6,3
+    NoAmmo             1 tics  frames 3
+    Reload            33 tics  frames 3,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,3
+    TurboReload        3 tics  frames 3,1,0
+    InsertBullets      9 tics  frames 3
+    InsertBullets2     9 tics  frames 3
+    Unload            32 tics  frames 3,7,8,9,10,11,12,13,14,15,16,17
+    RemoveBullets      8 tics  frames 3
+    DualWield          4 tics  frames 3
+    GetDual           11 tics  frames 3
+    NoDual             2 tics  frames 3
+  classic     Modeldef.ClassicSMG.def binds the SAME mesh for the Classic weapon: one card, two state maps
+  bd22        pose sets/bd22q/handfit/poses/BrutalSMG.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset 0.9079905614184213 -4.559901112011108 ZOffset -3.4133434072250295 Angle 3.853999999999986 Pitch 3.3629999999999955 Roll 10.974000000000006
+              frames bd22->bd21 [0, 1, 2, 3, 4, 5, 6, 3, 8, 9, 10, 11, 14, 16, 18, 19, 20, 21, 22, 23, 25]
+  states      # Modeldef.SMG.def + SubMachinegun.txt (statephase.py)
+    AltFire           21 tics  frames 3
+    HoldAim            7 tics  frames 3
+    NoAim              4 tics  frames 3
+    CheckSprint        3 tics  frames 3
+    StartSprint        2 tics  frames 3
+    Sprinting         28 tics  frames 2,3,2,3,2,3
+    StopSprintTired   32 tics  frames 3
+    StopSprint         2 tics  frames 2,3
+    Fire              24 tics  frames 3,4,3,5,3,6,3
+    Fire2             22 tics  frames 3,4,3,5,3,6,3
+    NoAmmo             1 tics  frames 3
+    Reload            33 tics  frames 3,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,3
+    TurboReload        3 tics  frames 3,1,0
+    InsertBullets      9 tics  frames 3
+    InsertBullets2     9 tics  frames 3
+    Unload            32 tics  frames 3,7,8,9,10,11,12,13,14,15,16,17
+    RemoveBullets      8 tics  frames 3
+    DualWield          4 tics  frames 3
+    GetDual           11 tics  frames 3
+    NoDual             2 tics  frames 3
+  classic     Modeldef.ClassicSMG.def binds the SAME mesh: one card, two state maps

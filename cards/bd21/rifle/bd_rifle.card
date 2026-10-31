@@ -1,0 +1,55 @@
+weapon bd_rifle
+  archetype   rifle_mag        # owner-confirmed
+  model       bd_rifle.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    slide    surf 0  rest [23.37, 1.28, 4.85]  axis [-1.0, -0.001, -0.0]  travel 7.12  frames 5..24
+    bolt     surf 1  rest [35.18, 0.22, 2.8]  axis [-1.0, -0.0, -0.0]  travel 10.44  frames 5..24
+    trigger  surf 2  rest [32.07, 0.48, -4.72]  axis [-0.954, 0.0, 0.301]  travel 0.56  frames 4..4  rot 17deg axis [-0.0, 1.0, -0.0]
+    mag      surf 3  rest [40.86, 0.41, -5.8]  axis [-0.011, 0.151, -0.989]  travel 36.21  frames 9..14
+    sight    surf 5  rest [30.97, 0.26, 7.36]  axis [-0.015, -0.884, -0.467]  travel 0.01  frames -..-
+    mag_well  [40.86, 0.41, -5.8]  mouth [37.44, 0.61, 2.05]  axis [-0.011, 0.151, -0.989]  travel_clear 36.21
+    muzzle    [93.92, 0.47, 3.59]
+  grip        line [29.09, 1.86, -3.75] [25.17, -0.91, -15.7]  trigger [32.07, 0.48, -4.72]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [49.28, 0.31, 2.73]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..3
+    fire         4..4
+    pump         5..6
+    idle         7..17
+    pump         18..25
+    idle         26..31
+  baked_cant   frames 0..31 up to 62.8 deg   # psprite-era hand sway; removed in bd_rifle_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 9804
+  carved      mag  surfs [3]  seat_origin [40.86, 0.41, -5.8]  file bd_rifle_mag.md3
+  bd22        pose sets/bd22q/handfit/poses/Rifle.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset 0.3483266711538944 -5.911515685744739 ZOffset -1.81197093336657 Angle 3.8539999999999863 Pitch 3.363000000000005 Roll 10.974000000000009
+              frames bd22->bd21 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 22, 23, 24, 25, 3, 3, 3, 3, 30, 31]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.Rifle.def + Rifle.txt (statephase.py)
+    WarmUp             3 tics  frames 3
+    LetsGetStarted    20 tics  frames 3,21,22,23,24,25,14,15,17,18,3,19,20,21,22,23,24,25,26
+    CheckSprint        3 tics  frames 3
+    CheckSprint2       3 tics  frames 3
+    StartSprint        5 tics  frames 3
+    Sprinting         30 tics  frames 3,30,3,30,3,30,3
+    StopSprintTired   32 tics  frames 3
+    StopSprint         2 tics  frames 30,3
+    Fire              23 tics  frames 3,4,3,4,3,5,4,3,6,3
+    Fire2             32 tics  frames 3,4,3,5,3,6,3,5,3
+    AltFire           24 tics  frames 3,27,28,29,3
+    HoldAim            8 tics  frames 3
+    NoAim              7 tics  frames 3,28,27
+    NoAmmo             9 tics  frames 3
+    Reload            38 tics  frames 3,7,8,9,10,11,3,12,13,14,15,17,18,19,20,21,22,23,24,25,26,3
+    TurboReload        5 tics  frames 3,0,1,2
+    InsertBullets      9 tics  frames 3
+    InsertBullets2     9 tics  frames 3
+    FinishReloading    2 tics  frames 3
+    Unload            16 tics  frames 3,26,25,24,23,22,21,3
+    RemoveBullets      4 tics  frames 3
+    FInishUnload      17 tics  frames 20,19,18,17,15,13,14,13,12,11,10,9,8,7,3
+    DualWield          5 tics  frames 3
+    NoDual             2 tics  frames 3
+    GetDual           11 tics  frames 3
+    Execution2         2 tics  frames 3

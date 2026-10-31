@@ -1,0 +1,60 @@
+weapon bd_fist
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_fist.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    round    surf 1  rest [-0.0, -0.0, 0.0]  axis [1.0, 0.023, -0.016]  travel 75.77  frames 1..74  HIDDEN at idle; appears 14..72
+    round2   surf 2  rest [-0.0, -0.0, 0.0]  axis [0.9, 0.296, 0.321]  travel 43.52  frames 1..74  HIDDEN at idle; appears 63..74
+    round3   surf 3  rest [2.3, -1.63, -2.98]  axis [0.846, 0.522, 0.106]  travel 54.45  frames 1..74  HIDDEN at idle; appears 63..74
+  ports
+    chamber   [75.74, 1.77, -1.21]  frame 21
+    eject     [75.74, 6.84, -1.21]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    muzzle    [32.89, 1.83, -6.44]
+  grip        line [26.36, 2.42, -5.56] [26.08, -0.09, -12.19]  trigger [26.48, 1.26, -6.52]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [30.48, 1.26, -6.52]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..59
+    lower        60..60
+    idle         61..69
+    lower        70..70
+    idle         71..74
+  baked_cant   frames 5..72 up to 110.5 deg   # psprite-era hand sway; removed in bd_fist_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4620
+  states      # Modeldef.Fist.def + Melee.txt (statephase.py)
+    Steady             1 tics  frames 0
+    Reload            25 tics  frames 36,37,38,39,40,41,40,39,38,37,36
+    FatalityOn        25 tics  frames 36,37,38,39,40,41,40,39,38,37,36
+    FatalityOff       25 tics  frames 36,37,38,39,40,41,40,39,38,37,36
+    CheckGrab          1 tics  frames 0
+    CheckGrab2         1 tics  frames 0
+    StealthAttack     11 tics  frames 35,0
+    Pick               4 tics  frames 35,55,0,56
+    GrabCheckDist      1 tics  frames 0
+    GrabAttack        12 tics  frames 51,52,53,54,55,56
+    DoingFatality      1 tics  frames 0
+    CheckSprint        1 tics  frames 0
+    StartSprint        1 tics  frames 0
+    Sprinting         15 tics  frames 0
+    StopSprintTired   26 tics  frames 0
+    StopSprint         1 tics  frames 0
+    Fire               2 tics  frames 0
+    Hold               1 tics  frames 1
+    Jab                4 tics  frames 1,2,3,0
+    PowerJabSmash      1 tics  frames 0
+    PowerJab           1 tics  frames 0
+    FinishJab          5 tics  frames 6,5,7,8,9
+    LeftCross          3 tics  frames 7,8,9
+    LeftCrossHold      2 tics  frames 1,0
+    PowerLeftCross     2 tics  frames 0
+    FinishLeftCross    4 tics  frames 10,11,12,13
+    Cross              3 tics  frames 14,15,16
+    PowerCross         2 tics  frames 0
+    FinishCross        5 tics  frames 21
+    Upper             18 tics  frames 24,25,26,27,28,29,30,31,32,33,34
+    PowerUpper        15 tics  frames 27,28,29,30,31,32,33,34
+    Taunt             23 tics  frames 71,72,73,74,73,72,71
+    TauntFemale       22 tics  frames 72,73,74,73,72,71
+    FireBarrel        18 tics  frames 45,46,47,48,49,50
+    AltFireBarrel      6 tics  frames 45,0
+  classic     Modeldef.ClassicFist.def binds the SAME mesh for the Classic weapon: one card, two state maps

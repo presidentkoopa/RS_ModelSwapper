@@ -97,6 +97,18 @@ def write_raw(m, path, frame_names, tag_list):
     out += frames + tags + surfs
     open(path,'wb').write(out)
 
+def merge_surfs(surfs):
+    """Several surfaces of one mesh -> one surface dict (tris re-indexed, st/xyz concatenated)."""
+    if len(surfs)==1: return surfs[0]
+    out=dict(surfs[0]); nv=0; tris=[]; st=[]; xyz=[]
+    for s in surfs:
+        t=np.frombuffer(s['tris'],dtype='<i4').reshape(-1,3)+nv; tris.append(t)
+        st.append(np.frombuffer(s['st'],dtype='<f4').reshape(-1,2))
+        xyz.append(np.frombuffer(s['xyz'],dtype='<i2').reshape(s['nframes'],s['nverts'],4)); nv+=s['nverts']
+    out['nverts']=nv; out['ntris']=sum(len(t) for t in tris); out['tris']=np.vstack(tris).astype('<i4').tobytes()
+    out['st']=np.vstack(st).astype('<f4').tobytes(); out['xyz']=np.concatenate(xyz,axis=1).astype('<i2').tobytes()
+    return out
+
 def write_single(src_surf, name, xyz_local, path):
     """One-surface, one-frame MD3 for a carved part. xyz_local: (nverts,3) floats."""
     nv = src_surf['nverts']
@@ -327,7 +339,9 @@ def main():
         tagdefs.append(("tag_mag_well", tag_per_frame(rest[i], frame_axes(-info[i]['axis'],bore))))
     # muzzle: body point furthest along bore among points near the bore line (top half)
     barrels=[i for i in range(len(S)) if roles[i] in ('barrel','body')]
-    W=np.vstack([to_wpn(i,a.idle) for i in barrels]); top=W[W@(-down) > np.median(W@(-down))]; muz=top[np.argmax(top@bore)]
+    W=np.vstack([to_wpn(i,a.idle) for i in barrels]); top=W[W@(-down) > np.median(W@(-down))]
+    if len(top)==0: top=W	# a degenerate surface (one point) or a body drawn below the median: use it all
+    muz=top[np.argmax(top@bore)]
     W=to_wpn(body,a.idle)
     card.append(f"    muzzle    {np.round(muz,2).tolist()}")
     tagdefs.append(("tag_muzzle", tag_per_frame(muz, frame_axes(bore,-down))))
@@ -401,9 +415,12 @@ def main():
     write_raw(ms, os.path.join(a.out,a.name+'_stable.md3'), fnames, stable_tags)
     # ---- carves
     for role in carve:
-        i=by_role[role]; W=to_wpn(i,a.idle); c=W.mean(0)
-        write_single(m['surfs'][i], role, W-c, os.path.join(a.out,f"{a.name}_{role}.md3"))
-        card.append(f"  carved      {role}  seat_origin {np.round(c,2).tolist()}  file {a.name}_{role}.md3")
+        # every surface that carries the role is ONE part (BD22 Weapons Q masks them together:
+        # pistol mag = surfs 2+3, RPG pod = surfs 5..12). Merged into one surface, one frame.
+        idx=[i for i in range(len(S)) if roles[i]==role]
+        W=np.vstack([to_wpn(i,a.idle) for i in idx]); c=W.mean(0)
+        write_single(merge_surfs([m['surfs'][i] for i in idx]), role, W-c, os.path.join(a.out,f"{a.name}_{role}.md3"))
+        card.append(f"  carved      {role}  surfs {idx}  seat_origin {np.round(c,2).tolist()}  file {a.name}_{role}.md3")
     open(os.path.join(a.out,a.name+'.card'),'w').write('\n'.join(card)+'\n')
     print('\n'.join(card))
     print("\nframe names:", fnames)

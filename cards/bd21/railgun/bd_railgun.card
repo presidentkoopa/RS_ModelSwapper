@@ -1,0 +1,57 @@
+weapon bd_railgun
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_railgun.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    scope    surf 0  rest [38.57, 0.27, 9.08]  axis [0.0, -0.0, -1.0]  travel 5.75  frames 36..36
+    lens     surf 1  rest [27.73, -0.09, 11.58]  axis [0.0, -0.0, -1.0]  travel 6.25  frames 36..36
+    trigger  surf 3  rest [33.88, 0.05, -4.7]  axis [-0.971, 0.0, 0.238]  travel 0.80  frames 4..6  rot 23deg axis [-0.0, 1.0, -0.0]
+    mag      surf 4  rest [50.03, 0.04, -7.33]  axis [-0.0, -0.0, -1.0]  travel 30.00  frames 12..28
+    mag_well  [50.03, 0.04, -7.33]  mouth [42.53, -2.5, -3.44]  axis [-0.0, -0.0, -1.0]  travel_clear 30.00
+    muzzle    [138.73, -1.69, 3.3]
+  grip        line [32.02, -0.83, -4.3] [27.09, 0.03, -16.44]  trigger [33.88, 0.05, -4.7]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [64.87, 0.08, -0.51]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    raise        0..1
+    idle         2..3
+    fire         4..4
+    idle         5..5
+    fire         6..6
+    idle         7..11
+    mag_out      12..12
+    mag_in       13..28
+    idle         29..36
+  baked_cant   frames 12..34 up to 15.3 deg   # psprite-era hand sway; removed in bd_railgun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7552
+  carved      mag  seat_origin [50.03, 0.04, -7.33]  file bd_railgun_mag.md3
+  bd22        pose sets/bd22q/handfit/poses/RailGun.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.Railgun.def + Railgun.txt (statephase.py)
+    DontNeedToReload   1 tics  frames 2
+    Fire              74 tics  frames 2,4,2,5,6,7,8,9,10,3,2,3,2,3,2
+    ZoomedRecoil       6 tics  frames 2
+    SuddenStopAim     46 tics  frames 2,3,36,3,2,3,2
+    SuddenStopAim2    39 tics  frames 2,3,36,3,2
+    AltFire           12 tics  frames 2,3,36,2
+    HoldAim            4 tics  frames 2
+    NoAim              6 tics  frames 36,3,2
+    Reload            40 tics  frames 2,11,2,11,12,13,14,15,16,2,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,2
+    InsertBullets      4 tics  frames 2
+    Unload            24 tics  frames 2,11,2,11,12,13,14,15,16,17,18,19,20,21,22,2
+    RemoveBullets      3 tics  frames 2
+    CheckSprint        3 tics  frames 2
+    CheckSprint2       2 tics  frames 2
+    StartSprint        5 tics  frames 2
+    Sprinting         28 tics  frames 2
+    StopSprintTired   32 tics  frames 2
+    StopSprint         2 tics  frames 2
+    GoTaunt            5 tics  frames 2
+    DM                 3 tics  frames 2
+    Bounce.Wall        3 tics  frames 2
+    Bounce.Ceiling     2 tics  frames 2
+    Xdeath             4 tics  frames 2
+    XDeath             1 tics  frames 2
+    Death              7 tics  frames 2
+    XDEath             1 tics  frames 2

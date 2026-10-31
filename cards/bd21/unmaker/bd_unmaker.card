@@ -1,0 +1,29 @@
+weapon bd_unmaker
+  archetype   energy        # owner-confirmed
+  model       bd_unmaker.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 1  rest [40.54, -0.13, 9.66]  axis [0.308, 0.937, -0.167]  travel 0.18  frames -..-  rot 6deg axis [0.95, -0.3, 0.06]
+    mag2     surf 2  rest [38.45, -0.16, 8.44]  axis [-0.663, 0.125, -0.739]  travel 1.20  frames 4..15  rot 20deg axis [0.26, -0.96, 0.04]
+    mag_well  [40.54, -0.13, 9.66]  mouth [42.7, 0.03, 11.92]  axis [0.308, 0.937, -0.167]  travel_clear 0.18
+    muzzle    [94.81, 3.64, 6.11]
+  grip        line [55.64, -7.27, 3.14] [52.77, 0.0, -11.36]  trigger [57.46, -0.01, 2.17]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [61.46, -0.01, 2.17]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..15
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 11541
+  carved      mag  surfs [1, 2]  seat_origin [39.69, -0.14, 9.16]  file bd_unmaker_mag.md3
+  bd22        pose sets/bd22q/handfit/poses/Unmaker.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 0, 0, 0, 4, 5, 6, 7, 0, 9, 10, 11, 12, 13, 14, 15]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.Unmaker.def + Unmaker.txt (statephase.py)
+    Reload            47 tics  frames 0,1,2,3,0,3,2,1,0
+    CheckSprint        3 tics  frames 0
+    StartSprint        5 tics  frames 0
+    Sprinting         28 tics  frames 0
+    StopSprintTired   32 tics  frames 0
+    StopSprint         2 tics  frames 0
+    Fire               7 tics  frames 0,8,9,10,11,0
+    Hold              22 tics  frames 12,0,13,0,14,0,15,0,11,10,9,8
+    XDeath             3 tics  frames 0

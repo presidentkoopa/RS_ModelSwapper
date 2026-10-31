@@ -1,0 +1,26 @@
+weapon bd_boot
+  archetype   pistol_mag        # owner-confirmed
+  model       bd_boot.md3   space WPN   idle_frame 53
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [68.78, -1.19, -5.31]
+  grip        line [39.14, -4.89, -8.8] [47.97, 0.58, -24.58]  trigger [48.68, -1.41, -9.78]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [52.68, -1.41, -9.78]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..1
+    idle         2..3
+    raise        4..4
+    idle         5..19
+    raise        20..21
+    idle         22..26
+    raise        27..27
+    idle         28..37
+    raise        38..40
+    idle         41..48
+    raise        49..51
+    idle         52..55
+    lower        56..57
+  baked_cant   frames 2..52 up to 100.9 deg   # psprite-era hand sway; removed in bd_boot_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 11484
+

@@ -1,0 +1,50 @@
+weapon bd_rpg
+  archetype   launcher        # owner-confirmed
+  model       bd_rpg.md3   space WPN   idle_frame 4
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 4  rest [33.31, 0.0, -5.24]  axis [-1.0, 0.0, 0.0]  travel 1.39  frames 8..12
+    mag      surf 5  rest [17.81, -7.91, 11.17]  axis [0.0, -0.435, -0.901]  travel 50.37  frames 17..32  rot 29deg axis [1.0, 0.0, -0.0]
+    mag2     surf 6  rest [17.45, -13.41, 18.05]  axis [0.0, -0.448, -0.894]  travel 54.64  frames 5..33  rot 29deg axis [1.0, -0.0, -0.0]
+    mag3     surf 7  rest [17.51, -16.49, 10.73]  axis [0.0, -0.385, -0.923]  travel 53.56  frames 5..33  rot 29deg axis [1.0, 0.0, 0.0]
+    mag4     surf 8  rest [17.5, -13.37, 4.23]  axis [0.0, -0.355, -0.935]  travel 50.43  frames 5..33  rot 29deg axis [1.0, -0.0, 0.0]
+    mag5     surf 9  rest [17.45, -5.68, 2.48]  axis [0.0, -0.384, -0.923]  travel 46.85  frames 5..33  rot 29deg axis [1.0, 0.0, -0.0]
+    mag6     surf 10  rest [17.45, -0.05, 7.7]  axis [0.0, -0.457, -0.889]  travel 46.31  frames 5..33  rot 29deg axis [1.0, 0.0, -0.0]
+    mag7     surf 11  rest [17.54, -0.22, 15.21]  axis [0.0, -0.506, -0.863]  travel 48.91  frames 5..33  rot 29deg axis [1.0, -0.0, -0.0]
+    mag8     surf 12  rest [17.66, -6.35, 19.66]  axis [0.0, -0.497, -0.868]  travel 52.61  frames 5..33  rot 29deg axis [1.0, 0.0, -0.0]
+    mag_well  [17.81, -7.91, 11.17]  mouth [9.53, -8.2, 23.53]  axis [0.0, -0.435, -0.901]  travel_clear 50.37
+    muzzle    [80.05, 3.86, 10.31]
+  grip        line [-1.31, 2.31, 3.66] [1.41, -2.31, -1.08]  trigger [10.4, 2.31, 6.45]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [14.4, 2.31, 6.45]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..38
+  baked_cant   frames 0..3 up to 52.1 deg   # psprite-era hand sway; removed in bd_rpg_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 8482
+  carved      mag  surfs [5, 6, 7, 8, 9, 10, 11, 12]  seat_origin [17.69, -7.91, 11.15]  file bd_rpg_mag.md3
+  bd22        pose sets/bd22q/handfit/poses/Rocket_Launcher.json  (the APPROVED HOLD: gun_move = the six MODELDEF numbers that put this gun in the approved FBX hand)
+              gun_move Offset None None ZOffset None Angle None Pitch None Roll None
+              frames bd22->bd21 [0, 1, 2, 3, 4, 4, 4, 4, 4, 9, 10, 11, 12, 13, 14, 15, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]   # BD22 = this mesh with frames dropped (-1 = BD22 frame not in BD21)
+  states      # Modeldef.RPG.def + RocketLauncher.txt (statephase.py)
+    CheckSprint        3 tics  frames 5
+    StartSprint        6 tics  frames 5
+    Sprinting         28 tics  frames 3,5,3,5,3,5
+    StopSprintTired   32 tics  frames 5
+    StopSprint         2 tics  frames 3,5
+    Fire              13 tics  frames 5,9,5
+    DM                 5 tics  frames 5,9,5
+    RecoilAnimation   24 tics  frames 5,10,11,12,13,14,15,16,5,6,7,8,5
+    ZoomedFire         7 tics  frames 5
+    ZoomedFireDM       4 tics  frames 5
+    ZoomedRecoil       5 tics  frames 5
+    Reload            48 tics  frames 5,17,18,19,20,21,5,21,22,23,24,25,26,27,28,29,30,31,32,31,30,29,33,34,6,7,8,5
+    FinishReload       4 tics  frames 5
+    NoNeedToReload     1 tics  frames 5
+    TurboReload        1 tics  frames 5
+    Unload            24 tics  frames 5,17,18,19,20,21,22,23,24,25,5
+    FinishUnload       3 tics  frames 5
+    PuristGun          2 tics  frames 5
+    AltFire           15 tics  frames 5,35,36,37,38,39,5
+    HoldAim            4 tics  frames 5
+    NoAim              8 tics  frames 39,38,36,35,5
+  classic     Modeldef.ClassicRPG.def binds the SAME mesh for the Classic weapon: one card, two state maps
