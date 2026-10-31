@@ -1,4 +1,0 @@
-// 2026-10-16: racking sounds where BD22 has none (from RS_Main rs_weapon)
-rsr/slideback	sounds/rsr/rsrslide.wav
-rsr/smgback	sounds/rsr/rsrslide.wav
-rsr/smgfwd	sounds/rsr/rsrsmgfw.wav

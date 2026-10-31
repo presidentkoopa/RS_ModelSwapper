@@ -1,8 +1,0 @@
-// 1.5: the off-hand fist (RSQ_Hands, the off hand's own weapon) in slot 1, so the OFF hand can be
-// switched back to the fist after a gun was moved there (slot 1 for the off hand). It can never be
-// selected into the main hand: it is an off-hand weapon and cannot change hands.
-weaponsection "Brutal_Doom"
-addslotdefault 1 RSQ_Hands
-
-// 1.97: the Machinegun on slot 4 with the MG42 (BD22 KEYCONF setslot 4 ... MG42)
-addslot 4 Machinegun
