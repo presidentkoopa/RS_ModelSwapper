@@ -1,9 +1,9 @@
 weapon cola_piledriver
-  archetype   melee        # owner-confirmed
+  archetype   shotgun_drum        # owner-confirmed
   model       cola_piledriver.md3   space WPN   idle_frame 0
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
   parts
-    cylinder surf 1  rest [-14.33, -6.31, 8.65]  axis [0.302, -0.921, -0.247]  travel 0.01  frames -..-
+    drum     surf 1  rest [-14.33, -6.31, 8.65]  axis [0.302, -0.921, -0.247]  travel 0.01  frames -..-
     muzzle    [39.64, 0.0, 7.69]
   grip        line [-0.47, 0.37, 0.09] [-5.0, 0.95, -10.02]  trigger [0.11, 0.0, 3.03]   # centroid-based; owner's hand fit supersedes
   support     feature palm [4.11, 0.0, 3.03]   # one-handed gun; placeholder
@@ -26,3 +26,10 @@ weapon cola_piledriver
     Reload             2 tics  frames 0
     ReloadStart       42 tics  frames 1,2,3,4,5,11,12,13,14,15,16,17,18,19,0
     Altfire           25 tics  frames 0
+  # PANCOR JACKHAMMER (owner, 2026-10-31): the prototype bullpup auto shotgun, NOT a melee tool. Its magazine is the
+  # 10-round rotating "ammo cassette" (drum). In this mesh: surf 1 "cylinder" = the drum's visible face, still
+  # (travel 0.01); the cassette itself is the mod's OWN second mesh jackhammer_mag.md3 (MODELDEF Model 1), copied here as
+  # cola_piledriver_mag.md3. Its 20 frames ARE the reload: seated at frames 0..1 (x -20.9, z 1.5), drops straight
+  # down -Z to z -37 by frame 5, swings forward/up (x +7.9) and back in by frame 11 (measured, mag centroid per frame).
+  # Fires PiledriverClip (shells), reload state ReloadStart at PDRV B. Archetype shotgun_drum; mag = the cassette mesh.
+  carved      mag  file cola_piledriver_mag.md3  (the mod's own mesh, not carved by us)  seat_origin [-20.9, 0.0, 1.5]
