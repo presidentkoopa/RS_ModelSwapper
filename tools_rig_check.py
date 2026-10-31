@@ -11,8 +11,8 @@ and keeps the last dumped frame. One contact sheet per run: /home/claude/cards/r
 donor, labelled. Prints PASS/FAIL per donor: FAIL = any pack script error / VM abort in the log, or no frame.
 The engine's own statusbarcore / DI_ITEM_CENTER lines (QuestZDoom 17.3's, present in every run) are not counted.
 
-The pk3 is built the way build.ps1 -Static does, minus MODELDEF.rsb / MODELDEF.rsrpump (they still name the
-archived models/ tree, 2026-10-31) and minus everything in cards/ the engine does not read (.card, sheets, notes).
+The pk3 is built the way build.ps1 -Static does (MODELDEF.rsb / .rsrpump are now generated for the MS 1.5 donors by
+tools_reload_modeldefs.py), minus everything in cards/ the engine does not read (.card, sheets, notes).
 """
 import argparse, os, re, subprocess, sys, zipfile, glob, shutil
 
@@ -43,7 +43,7 @@ def build_pk3(out=PK3):
     os.chdir(HERE)
     z = zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED)
     quest = {'zscript.txt': 'quest/zscript.txt', 'MENUDEF': 'quest/MENUDEF', 'CVARINFO': 'quest/CVARINFO'}
-    for f in ('zscript.txt', 'modeldef', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF'):
+    for f in ('zscript.txt', 'modeldef', 'MODELDEF.rsb', 'MODELDEF.rsrpump', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF'):
         src = quest.get(f, f) if os.path.exists(quest.get(f, f)) else f
         if os.path.exists(src): z.write(src, f)
     for f in sorted(os.listdir('.')):

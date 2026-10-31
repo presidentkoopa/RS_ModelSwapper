@@ -1,0 +1,26 @@
+version "4.10"
+// TEST ONLY -- never ships (tools_rig_reload.py --kind break loads it beside the pack). The break-open part of
+// the Depot rig's probe (RSQ_WeaponDepot tools/rig/probe/zscript.txt), same line format, so the Depot driver's
+// geometry (brk.py) reads it unchanged: when a break-open reload is OPEN, print the hand base/tip and each
+// chamber's tip and bore at the opened angle.
+class MSBreakProbe : EventHandler
+{
+	bool bdumped;
+	override void WorldTick()
+	{
+		let mo = PlayerPawn(players[consoleplayer].mo);
+		if (!mo || level.maptime < 5) return;
+		let bs = RSB_Handler.StateOf(mo);
+		if (bs && bs.phase == RSB.OPEN && !bdumped)
+		{
+			bdumped = true;
+			Vector3 hb = RSB_Guns.HandBase(bs.gun), ht = RSB_Guns.HandTip(bs.gun);
+			Console.Printf("B22 BREAK gun %d nch %d theta %.2f hb %.3f %.3f %.3f ht %.3f %.3f %.3f", bs.gun, bs.nch, bs.theta, hb.x, hb.y, hb.z, ht.x, ht.y, ht.z);
+			for (int k = 0; k < bs.nch; k++)
+			{
+				Vector3 tk = bs.TipAt(k, bs.theta), bk = bs.BoreAt(k, bs.theta);
+				Console.Printf("B22 CH %d tip %.3f %.3f %.3f bore %.4f %.4f %.4f depth %.3f", k, tk.x, tk.y, tk.z, bk.x, bk.y, bk.z, bs.Depth(k));
+			}
+		}
+	}
+}
