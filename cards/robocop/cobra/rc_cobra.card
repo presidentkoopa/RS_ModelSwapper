@@ -1,11 +1,11 @@
 weapon rc_cobra
-  archetype   rifle        # owner-confirmed
+  archetype   rifle_mag        # owner-confirmed
   model       rc_cobra.md3   space WPN   idle_frame 0
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
   parts
     barrel   surf 0  rest [138.49, -0.01, 8.18]  axis [-1.0, 0.0, 0.0]  travel 28.74  frames 2..3
-    leg      surf 1  rest [47.09, -6.6, -0.95]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
-    leg2     surf 2  rest [45.49, 7.74, -0.96]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    bipod    surf 1  rest [47.09, -6.6, -0.95]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    bipod2   surf 2  rest [45.49, 7.74, -0.96]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
     trigger  surf 4  rest [0.2, -0.07, -2.63]  axis [-0.986, 0.0, 0.165]  travel 1.25  frames 1..1  rot 27deg axis [0.0, 1.0, -0.0]
     muzzle    [152.87, 1.72, 9.58]
   grip        line [-3.61, 1.69, -1.67] [-10.17, -1.66, -16.73]  trigger [0.2, -0.07, -2.63]   # centroid-based; owner's hand fit supersedes
@@ -19,3 +19,7 @@ weapon rc_cobra
   states      # modeldefs/weapons/rifle.txt + actors/weapons/cobra.txt (statephase.py)
     Ready              2 tics  frames 0
     Fire              29 tics  frames 0,1,2,3,0
+  # RELOAD (owner, 2026-10-31): "the gigantic gun has a box mag just past the trigger". MEASURED: the box is in cobra_body at
+  # x 6.5..28.4, z -17.7 up, y +-3.2, but its side faces are single triangles that run up to z +4.3 (the receiver top): the
+  # artist merged mag and receiver. No clean carve without splitting triangles on a plane at z ~ -7.5. OPEN: owner to choose
+  # (a) plane-split in the carve tool, (b) carve mag+receiver block together, (c) no reload. cobra_leg_* = folded bipod.
