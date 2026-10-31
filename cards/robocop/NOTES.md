@@ -8,7 +8,7 @@ GOLD: artist-named surfaces on every gun.
 | auto9 | auto9.md3 12f, ONE surface | NO (owner: the classic Auto-9 does not reload). Nothing carved | |
 | ksg (bullpup pump) | ksg.md3 5f | pump: `front` (2949 v) is the slide forend; `barrel`, `trigger` named; `back` = body | no shell geometry; shells would come from the runtime |
 | shotgun | shotgun.md3 9f | `pump` named (256 v), 15.8 travel in the fire frames | |
-| cobra (Cobra assault cannon) | cobra.md3 4f + cobra_scope.md3 | OPEN (owner: box mag just past the trigger). The box is merged into cobra_body with triangles reaching the receiver top: needs a plane split to carve. `cobra_barrel` recoils 28.8, `cobra_leg_*` = folded bipod, trigger; scope is its own mesh (5 surfaces incl. glass + view) -- a live-scope candidate | |
+| cobra (Cobra assault cannon) | cobra.md3 4f + cobra_scope.md3 | NO RELOAD for now (owner moved on). The box mag past the trigger is real but The box is merged into cobra_body with triangles reaching the receiver top: needs a plane split to carve. `cobra_barrel` recoils 28.8, `cobra_leg_*` = folded bipod, trigger; scope is its own mesh (5 surfaces incl. glass + view) -- a live-scope candidate | |
 | chaingun (Tribes Vengeance) | chaingun.md3 6f | no; barrels (left+right) spin 9.3 | |
 | m27 (Skynet plasma rifle) | m27_rifle.md3 2f, 9 named surfaces | no | trigger only |
 | chainsaw (Quake Champions gauntlet = grinder) | chainsaw.md3 45f | melee; `chainsaw_blade` runs 73 | |

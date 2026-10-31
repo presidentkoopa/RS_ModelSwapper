@@ -22,4 +22,4 @@ weapon rc_cobra
   # RELOAD (owner, 2026-10-31): "the gigantic gun has a box mag just past the trigger". MEASURED: the box is in cobra_body at
   # x 6.5..28.4, z -17.7 up, y +-3.2, but its side faces are single triangles that run up to z +4.3 (the receiver top): the
   # artist merged mag and receiver. No clean carve without splitting triangles on a plane at z ~ -7.5. OPEN: owner to choose
-  # (a) plane-split in the carve tool, (b) carve mag+receiver block together, (c) no reload. cobra_leg_* = folded bipod.
+  # OWNER 2026-10-31: "fk em, let's move on" -> NO RELOAD for now; the plane-split carve is the way if ever wanted. cobra_leg_* = folded bipod.
