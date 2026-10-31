@@ -9,7 +9,7 @@ where it goes, the hands do the reload. "The mesh says it doesn't reload" was a 
 |---|---|---|---|---|
 | SSG.md3 | a bullpup PUMP shotgun (KSG style), not a break-action | pump = forend+front grip (surf 5) and barrel sleeve (surf 1) slide back 10.8 cm together, frames 6..11 | none modelled | surfaces named by role: 0 trigger, 6 rear grip, 10 stock |
 | Shotgun.md3 | a MAGAZINE shotgun | box mag (surf 6, artist-named "Mag", never animated: 8.5 x 12.4 x 13.2 under the receiver); bolt (surf 2) 10.8 cm and charging handle (surf 1) 7.3 cm on fire | none modelled | artist surfaces are named: Sights, Trigger, Receiver, Frame, Mag |
-| tec9.md3 | open-bolt SMG | bolt (surf 3) 7.1 cm on fire; cocking handle (surf 2) with it; WHOLE MAGAZINE CARVED out of the body (owner), 1008 tris, base plate to receiver; drops -Z | none modelled | first carve of the pass; slab must reach the receiver line |
+| tec9.md3 | open-bolt SMG | ALREADY DONE in RS_VR_Weapons (tec9_wm.md3 + wm_tec9_mag.md3, WMCARD.07_smg): mag carved, full card. Raw mesh adds: bolt 7.1 cm on fire frames 3..4 | yes, on the RS_VR_Weapons card (-y side) | the re-carve here was wasted; check RS_VR_Weapons first |
 | Chaingun.md3 | six-barrel rotary | the six barrels (surf 5..10) ARE separate and spin 45 deg per fire frame | none modelled | side grip surf 14 for the support hand |
 | RPG.md3 | six-tube rocket pod on the chaingun body | tubes (surf 9,13..17) are still; whole gun recoils 45 deg on fire (removed in _stable) | n/a | |
 | Saw.md3 | chainsaw | blade (surf 3) is its own surface, static; surf 5 is a spark effect on fire | n/a | the chain can be made to run: the blade is separable |

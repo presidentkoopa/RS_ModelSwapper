@@ -25,3 +25,10 @@ the carved mesh is labelled. The carve moves whole triangles and changes nothing
 are inside the selector, and a magazine's side triangles run from the base plate up INTO the receiver:
 so the slab must reach the receiver line, or you get the collar and the base plate and no magazine
 (TEC9, first try). Render the carved piece ALONE and look at it before trusting the triangle count.
+
+## FIRST, check what is already done (2026-10-31, the TEC9 lesson)
+The well (VR_WeaponSetRebuild) holds raw downloads. The finished, parted, carded copies live as `_wm`
+meshes in RS_VR_Weapons (`models/<set>/...`, cards in `WMCARD.*`) and on ModelSwapper's shelf. Before
+measuring or carving anything from the well, look there. The TEC9 was re-carved here for an hour while
+`tec9_wm.md3` + `wm_tec9_mag.md3` + a full card sat in RS_VR_Weapons. A `_wm` copy is usually frame 0
+only: the raw mesh's motion (bolt travel, pump stroke) is still worth measuring and adding to its card.

@@ -1,28 +1,10 @@
-weapon mg_tec9
-  archetype   pistol_mag        # owner-confirmed
-  model       mg_tec9.md3   space WPN   idle_frame 0
-  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
-  parts
-    trigger  surf 1  rest [32.22, -0.0, -4.46]  axis [-0.979, 0.0, 0.204]  travel 1.06  frames 1..5  rot 25deg axis [0.0, 1.0, -0.0]
-    handle   surf 2  rest [38.33, 2.49, 1.46]  axis [-1.0, -0.0, -0.0]  travel 7.09  frames 3..4
-    bolt     surf 3  rest [38.07, -0.22, 0.57]  axis [-1.0, 0.001, -0.001]  travel 7.09  frames 3..4
-    mag      surf 4  rest [38.2, -0.01, -4.21]  axis [-0.024, 0.11, -0.994]  travel 0.00  frames -..-
-    mag_well  [38.2, -0.01, -4.21]  mouth [40.31, -0.03, 0.03]  axis [-0.024, 0.11, -0.994]  travel_clear 0.00
-    muzzle    [53.75, 0.44, 0.08]
-  grip        line [30.58, 0.55, -3.7] [26.78, -0.0, -13.42]  trigger [32.22, -0.0, -4.46]   # centroid-based; owner's hand fit supersedes
-  support     feature palm [43.93, 0.0, -0.88]   # one-handed gun; placeholder
-  carve       mag
-  phases
-    idle         0..0
-    fire         1..1
-    idle         2..2
-    fire         3..3
-    idle         4..4
-    fire         5..5
-  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5529
-  carved      mag  seat_origin [38.2, -0.01, -4.21]  file mg_tec9_mag.md3
-  # OWNER, 2026-10-31: the magazine is detachable, THE WHOLE MAGAZINE, base plate to receiver. Carved
-  # out of the body surface with tools/carve/md3_carve_surface.py --slab-axis z --slab -18 0.1
-  # --centre 38.4 0 --half 2.6 1.8: 1008 triangles. The first cut (slab top -3.6) took only the collar
-  # and base plate, because the mag's side triangles reach up to z 0 inside the receiver and a triangle
-  # moves only when all three vertices are selected. sheet.png shows the cut. Drops -Z.
+# TEC9: ALREADY DONE in RS_VR_Weapons (models/vanilla/smgs/Tec9, WMCARD.07_smg, weapon "WM_Tec9").
+# The owner pointed there after a wasted re-carve here (2026-10-31). That copy is the reference:
+#   tec9_wm.md3    frame 0, surfaces named body / magazine / trigger / bolt
+#   wm_tec9_mag.md3 the magazine lifted out (792 tris, with the three rounds on top), re-origined
+#   card: capacity 32, muzzle (14.44, -0.08, 2.00), ejectport (-3.0, -2.2, 2.5) on -y (measured by
+#         vertex count), ejectdir (-0.3, -0.9, 0.4), magcenter (-1.088, -0.107, -1.181), magscale 0.374
+# What the raw MeatGrinder mesh adds that the _wm copy (frame 0 only) does not have:
+#   bolt (surf 3) runs 7.09 cm back along the bore on fire frames 3..4; cocking handle (surf 2) with it.
+#   Measured by tools/hqt/md3label.py on the 6-frame original.
+# Hands: both holds are headset recordings (grip + support on the magazine well, pistol-style).
