@@ -15,7 +15,7 @@ Every mesh in the well (E:\DOOMWork\VR_WeaponSetRebuild) gets one folder here, n
                     parts named by the owner (`--assign`), nothing typed twice.
 - `<gun>.md3`       the same mesh, lossless, surfaces renamed to the vocabulary, frames named by phase,
                     tags added (tag_grip, tag_support, tag_mag_well, tag_chamber, tag_eject, tag_muzzle, tag_load).
-- `<gun>_stable.md3`  the mesh with baked psprite sway removed, when there was any.
+- `<gun>_stable.md3 (NOT kept in the repo: re-derivable with md3label; bloat cut 2026-10-31)`  the mesh with baked psprite sway removed, when there was any.
 - `<gun>_<part>.md3`  carved parts (mag, shell) at their seated origin.
 - `sheet.png`       the labelled mesh at its key frames, one colour per part. LOOK AT IT.
 
