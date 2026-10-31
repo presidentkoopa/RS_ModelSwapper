@@ -2015,6 +2015,19 @@ class RS_ForeignModelHandler : StaticEventHandler
 		State f = d.FindState('Fire');
 		if (f == null) return true;          // no Fire at all -- not a gun
 
+		// A weapon that takes ammo, or draws a muzzle flash, is a gun whatever its Fire chain looks like.
+		// The walk below follows NextState only, so a Fire built of zero-tic A_Jump branches reads as
+		// "falls into Ready, shows nothing": the generic weapons pack's DoubleSG (Fire -> FireSingle ->
+		// Goto Reload -> Goto Ready, every real frame behind a jump) was ruled not a gun and never got its
+		// model -- the engine drew its 2D sprite in the hand instead (rig, 2026-10-31).
+		class<Weapon> wc = (class<Weapon>)(type);
+		if (wc)
+		{
+			let wd = GetDefaultByType(wc);
+			if (wd.AmmoType1 || wd.AmmoType2) return false;
+		}
+		if (d.FindState('Flash') || d.FindState('AltFlash')) return false;
+
 		// Entry states of the labels we must not wander into.
 		State rdy = d.FindState('Ready');
 		State sel = d.FindState('Select');
