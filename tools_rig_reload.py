@@ -112,6 +112,50 @@ def run_break(a):
     print('frames in', d2)
 
 
+def run_pump(a):
+    """Depot pump.py, against ModelSwapper: fire twice, reload, take shells one by one from a pouch into the
+    loading port (handrot.place: the shell's axis along the port's push), then fire and work the pump by hand.
+    Geometry from RSP_Guns (zscript_depot/rsr/rsr_pump_guns.zs) for the donor's slot; PALM is pump.py's."""
+    import handrot as h  # Depot tools/rig
+    t = open(os.path.join(HERE, 'zscript_depot/rsr/rsr_pump_guns.zs')).read()
+    m = re.search(r'if \(donor == "%s"\)\s+return (\d+);' % re.escape(a.donor), t)
+    if not m: sys.exit('%s has no pump slot in RSP_Guns' % a.donor)
+    i = int(m.group(1))
+    def tb(fn):
+        b = re.search(r'static \w+ %s\(int i\)\s*\{(.*?)\n\t\}' % fn, t, re.S).group(1)
+        v = [float(x) for x in re.search(r'case %d:\s*return \(?([^;]*?)\)?;' % i, b).group(1).split(',')]
+        return v[0] if len(v) == 1 else tuple(v)
+    PORT, PUSH, DEPTH, SHELL, AXIS = tb('Port'), tb('Push'), tb('Depth'), tb('ShellInHand'), tb('AxisInHand')
+    GRAB, PULL, TRAVEL = tb('Grab'), tb('Pull'), tb('Travel')
+    PALM = (-1.5, 2.0, -4.5)
+    print('donor %s -> pump slot %d: port %s grab %s travel %.2f' % (a.donor, i, PORT, GRAB, TRAVEL))
+    at = lambda sv: h.place(SHELL, AXIS, tuple(PORT[k] + PUSH[k] * sv for k in range(3)), PUSH)[0]
+    pump = lambda f: h.place(PALM, (1, 0, 0), tuple(GRAB[k] + PULL[k] * TRAVEL * f for k in range(3)), (1, 0, 0))[0]
+    if not a.no_build: print('pk3', rc.build_pk3())
+    sh = rc.shelf(); fam, idx = sh[a.donor]; fist = sh['MS_BD_Fist'][1]
+    picks = ';%s:%s:%d:%d;rsq_hands:melee:%d:%d;' % (a.weapon, fam, idx, idx, fist, fist)
+    FAR = '-0.25 1.3 -0.3 30 0 0'; pouch = rig.lpose(0, 40, -30)
+    load = ''
+    for n in range(a.shells):
+        load += ('qz_lhand "%s"; wait 10; qz_ltrigger 1; wait 10; qz_lhand "%s"; wait 12; qz_lhand "%s"; wait 12; '
+                 'qz_lhand "%s"; wait 15; qz_ltrigger 0; wait 10; ' % (pouch, at(-6), at(-2), at(DEPTH + 0.5)))
+    s = ('wait 120; god; qz_hmd "%s"; rsr_reload 1; rsr_grab_with 0; rsr_debug 1; ms_hand_pump 1; give ammo; give %s; wait 2; use %s; wait 170; '
+         '+attack; wait 3; -attack; wait 50; +attack; wait 3; -attack; wait 50; +reload; wait 4; -reload; wait 40; ' % (a.hmd, a.weapon, a.weapon) + load +
+         # off hand on the forend and gripping BEFORE the shot (the gun then waits at the mod's pump for the
+         # stroke); a 1-tic trigger press (fire held through the pump point ends the wait); back, forward
+         'qz_lhand "%s"; wait 10; qz_ltrigger 1; wait 10; +attack; wait 1; -attack; wait 10; qz_lhand "%s"; wait 12; '
+         'qz_lhand "%s"; wait 12; qz_ltrigger 0; wait 30; '
+         'qz_ltrigger 1; wait 6; +attack; wait 1; -attack; wait 10; qz_lhand "%s"; wait 12; qz_lhand "%s"; wait 12; qz_ltrigger 0; wait 40; quit'
+         % (pump(0), pump(1.0), pump(0), pump(1.0), pump(0)))
+    d, tt = rig_run(a, picks, s, 'pump')
+    ma = re.search(r'^\s+%s\s+slot\s+-?\d+\s+->\s+\S+\s+(MS_\w+)' % re.escape(a.weapon), tt, re.M)
+    errs = sorted(set(l.strip() for l in tt.splitlines() if rc.ERR.search(l) and not rc.ENGINE_NOISE.search(l)))
+    print('applied donor:', ma.group(1) if ma else None)
+    for l in [l for l in tt.splitlines() if re.match(r'(rsp t|\[MSJOIN\])', l)][:30]: print('   ', l[:160])
+    print('pack errors:', len(errs)); [print('   ', e[:160]) for e in errs[:5]]
+    print('frames in', d)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--donor', required=True)
@@ -119,12 +163,18 @@ def main():
     ap.add_argument('--extra', nargs='*', default=[])
     ap.add_argument('--tag', default='reload')
     ap.add_argument('--no-build', action='store_true')
-    ap.add_argument('--kind', default='mag', choices=['mag', 'break'], help='mag = magazine (RSR_Guns); break = break-open / revolver (RSB_Guns, Depot brk.py)')
+    ap.add_argument('--kind', default='mag', choices=['mag', 'break', 'pump'], help='mag = magazine (RSR_Guns); break = break-open / revolver (RSB_Guns, Depot brk.py)')
+    ap.add_argument('--pk3', default=None, help='a pk3 to test instead of building one (e.g. a test-only build)')
+    ap.add_argument('--shells', type=int, default=2)
     ap.add_argument('--flick', default='70 0 0', help='break: gun-hand rotation that flicks the action shut (brk.py default)')
     ap.add_argument('--hmd', default='0 1.6 0 -45 -25 0', help='head pose for the frames (pitch down, yaw right: looks at the gun at the rig rest pose)')
     a = ap.parse_args()
+    if a.pk3:
+        rc.PK3 = a.pk3; a.no_build = True
     if a.kind == 'break':
         return run_break(a)
+    if a.kind == 'pump':
+        return run_pump(a)
     i = slot_for(a.donor)
     if not i:
         sys.exit('%s has no reload slot in RSR_Guns (no measured magazine reload)' % a.donor)
