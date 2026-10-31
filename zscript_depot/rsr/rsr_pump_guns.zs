@@ -43,7 +43,8 @@ class RSP_Guns abstract
 		if (donor == "MS_BD_Shotgun")	return 2;
 		if (donor == "MS_BW_Shotgun")	return 3;
 		if (donor == "MS_Cola_Ks23")	return 4;
-		if (donor == "MS_VP_Shotgun")	return 5;
+		if (donor == "MS_MG_Ssg")	return 5;
+		if (donor == "MS_VP_Shotgun")	return 6;
 		return 0;
 	}
 
@@ -55,7 +56,8 @@ class RSP_Guns abstract
 		case 2:	return (40.107, 0.022, -2.784);
 		case 3:	return (11.978, -1.635, 2.038);
 		case 4:	return (18.515, -0.014, 1.874);
-		case 5:	return (34.466, -0.000, 1.257);
+		case 5:	return (31.733, 0.005, -5.803);
+		case 6:	return (34.466, -0.000, 1.257);
 		}
 		return (0, 0, 0);
 	}
@@ -68,7 +70,8 @@ class RSP_Guns abstract
 		case 2:	return (-1.000, 0.000, -0.002);
 		case 3:	return (-1.000, 0.000, 0.000);
 		case 4:	return (-1.000, 0.000, 0.000);
-		case 5:	return (-0.999, 0.000, -0.046);
+		case 5:	return (-1.000, -0.000, -0.000);
+		case 6:	return (-0.999, 0.000, -0.046);
 		}
 		return (0, 0, 0);
 	}
@@ -81,7 +84,8 @@ class RSP_Guns abstract
 		case 2:	return 6.395;
 		case 3:	return 7.038;
 		case 4:	return 6.793;
-		case 5:	return 10.176;
+		case 5:	return 12.095;
+		case 6:	return 10.176;
 		}
 		return 0;
 	}
@@ -94,7 +98,8 @@ class RSP_Guns abstract
 		case 2:	return (0.000, -0.002, 1.000);
 		case 3:	return (0.000, 0.000, 1.000);
 		case 4:	return (0.000, 0.000, 1.000);
-		case 5:	return (-0.000, -0.034, 0.740);
+		case 5:	return (-0.000, -0.000, 0.909);
+		case 6:	return (-0.000, -0.034, 0.740);
 		}
 		return (0, 0, 0);
 	}
@@ -107,7 +112,8 @@ class RSP_Guns abstract
 		case 2:	return 1.000;
 		case 3:	return 0.000;
 		case 4:	return 0.000;
-		case 5:	return 0.000;
+		case 5:	return 1.000;
+		case 6:	return 0.000;
 		}
 		return 0;
 	}
@@ -120,7 +126,8 @@ class RSP_Guns abstract
 		case 2:	return (0.000, -0.002, 1.000);
 		case 3:	return (0.000, 0.000, 1.000);
 		case 4:	return (0.000, 0.000, 1.000);
-		case 5:	return (0.000, -0.046, 0.999);
+		case 5:	return (-0.000, -0.000, 1.000);
+		case 6:	return (0.000, -0.046, 0.999);
 		}
 		return (0, 0, 0);
 	}
@@ -133,7 +140,8 @@ class RSP_Guns abstract
 		case 2:	return (19.015, 0.024, -2.788);
 		case 3:	return (18.818, 0.028, -1.029);
 		case 4:	return (7.189, 0.008, -2.518);
-		case 5:	return (11.603, -0.387, 2.692);
+		case 5:	return (-18.622, -0.000, -6.347);
+		case 6:	return (11.603, -0.387, 2.692);
 		}
 		return (0, 0, 0);
 	}
@@ -147,6 +155,7 @@ class RSP_Guns abstract
 		case 3:	return (1.000, 0.000, 0.000);
 		case 4:	return (1.000, 0.000, 0.000);
 		case 5:	return (1.000, 0.000, 0.000);
+		case 6:	return (1.000, 0.000, 0.000);
 		}
 		return (0, 0, 0);
 	}
@@ -159,7 +168,8 @@ class RSP_Guns abstract
 		case 2:	return 6.380;
 		case 3:	return 6.880;
 		case 4:	return 6.410;
-		case 5:	return 1.500;
+		case 5:	return 6.000;
+		case 6:	return 1.500;
 		}
 		return 0;
 	}
@@ -172,7 +182,8 @@ class RSP_Guns abstract
 		case 2:	return (-0.686, -3.453, -0.153);
 		case 3:	return (0.000, -1.942, 0.003);
 		case 4:	return (3.342, -4.138, -4.159);
-		case 5:	return (-0.000, 0.649, 1.106);
+		case 5:	return (0.000, 0.000, 0.000);
+		case 6:	return (-0.000, 0.649, 1.106);
 		}
 		return (0, 0, 0);
 	}
@@ -185,7 +196,8 @@ class RSP_Guns abstract
 		case 2:	return (1.504, 2.834, -2.415);
 		case 3:	return (1.430, 2.835, -2.531);
 		case 4:	return (1.570, 2.833, -2.311);
-		case 5:	return (2.168, 2.823, -1.371);
+		case 5:	return (1.948, 2.827, -1.718);
+		case 6:	return (2.168, 2.823, -1.371);
 		}
 		return (0, 0, 0);
 	}
@@ -199,6 +211,7 @@ class RSP_Guns abstract
 		case 3:	return (0.537, -0.009, 0.844);
 		case 4:	return (0.537, -0.009, 0.844);
 		case 5:	return (0.537, -0.009, 0.844);
+		case 6:	return (0.537, -0.009, 0.844);
 		}
 		return (0, 0, 0);
 	}
@@ -211,7 +224,8 @@ class RSP_Guns abstract
 		case 2:	return (2.400, -28.526, 34.014);
 		case 3:	return (3.082, -28.773, 34.110);
 		case 4:	return (6.198, -6.785, 3.402);
-		case 5:	return (-2.572, -20.267, 23.133);
+		case 5:	return (0.000, 0.000, 0.000);
+		case 6:	return (-2.572, -20.267, 23.133);
 		}
 		return (0, 0, 0);
 	}
@@ -224,7 +238,8 @@ class RSP_Guns abstract
 		case 2:	return (0.976, 57.529, 0.536);
 		case 3:	return (0.976, 57.529, 0.536);
 		case 4:	return (0.976, 57.529, 0.536);
-		case 5:	return (-0.976, 57.529, -0.536);
+		case 5:	return (0.000, 0.000, 0.000);
+		case 6:	return (-0.976, 57.529, -0.536);
 		}
 		return (0, 0, 0);
 	}
@@ -237,7 +252,8 @@ class RSP_Guns abstract
 		case 2:	return (-1.000, 1.000, 1.000);
 		case 3:	return (-1.000, 1.000, 1.000);
 		case 4:	return (-1.000, 1.000, 1.000);
-		case 5:	return (1.350, 1.350, 1.350);
+		case 5:	return (-1.100, 1.100, 1.100);
+		case 6:	return (1.350, 1.350, 1.350);
 		}
 		return (0, 0, 0);
 	}
@@ -250,7 +266,8 @@ class RSP_Guns abstract
 		case 2:	return (0.000, 0.000, -5.000);
 		case 3:	return (0.000, 0.000, -5.000);
 		case 4:	return (0.000, -28.000, -7.000);
-		case 5:	return (0.000, 0.000, 0.000);
+		case 5:	return (0.000, 0.000, -6.000);
+		case 6:	return (0.000, 0.000, 0.000);
 		}
 		return (0, 0, 0);
 	}
@@ -264,6 +281,7 @@ class RSP_Guns abstract
 		case 3:	return 'QP2G';
 		case 4:	return 'QP3G';
 		case 5:	return 'QP4G';
+		case 6:	return 'QP5G';
 		}
 		return 'None';
 	}
@@ -277,6 +295,7 @@ class RSP_Guns abstract
 		case 3:	return 'QP2P';
 		case 4:	return 'QP3P';
 		case 5:	return 'QP4P';
+		case 6:	return 'QP5P';
 		}
 		return 'None';
 	}
@@ -290,6 +309,7 @@ class RSP_Guns abstract
 		case 3:	return 'QP2W';
 		case 4:	return 'QP3W';
 		case 5:	return 'QP4W';
+		case 6:	return 'QP5W';
 		}
 		return 'None';
 	}
@@ -302,7 +322,8 @@ class RSP_Guns abstract
 		case 2:	return "SHTG A";
 		case 3:	return "SHTG A";
 		case 4:	return "SHTG A";
-		case 5:	return "SHTG A";
+		case 5:	return "SHT2 A";
+		case 6:	return "SHTG A";
 		}
 		return "";
 	}
@@ -316,6 +337,7 @@ class RSP_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -329,6 +351,7 @@ class RSP_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -342,6 +365,7 @@ class RSP_Guns abstract
 		case 3:	return 0;
 		case 4:	return 0;
 		case 5:	return 0;
+		case 6:	return 0;
 		}
 		return 0;
 	}
@@ -355,6 +379,7 @@ class RSP_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -368,6 +393,7 @@ class RSP_Guns abstract
 		case 3:	return 0;
 		case 4:	return 0;
 		case 5:	return 0;
+		case 6:	return 0;
 		}
 		return 0;
 	}
@@ -381,6 +407,7 @@ class RSP_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -394,6 +421,7 @@ class RSP_Guns abstract
 		case 3:	return 0;
 		case 4:	return 0;
 		case 5:	return 0;
+		case 6:	return 0;
 		}
 		return 0;
 	}
@@ -407,6 +435,7 @@ class RSP_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -420,6 +449,7 @@ class RSP_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -433,6 +463,7 @@ class RSP_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -446,8 +477,23 @@ class RSP_Guns abstract
 		case 3:	return 0;
 		case 4:	return 0;
 		case 5:	return 0;
+		case 6:	return 0;
 		}
 		return 0;
+	}
+
+	clearscope static bool OwnShell(int i)
+	{
+		switch (i)
+		{
+		case 1:	return true;
+		case 2:	return true;
+		case 3:	return true;
+		case 4:	return true;
+		case 5:	return false;
+		case 6:	return true;
+		}
+		return false;
 	}
 
 	clearscope static int EjectFrames(int i)
@@ -459,6 +505,7 @@ class RSP_Guns abstract
 		case 3:	return 0;
 		case 4:	return 0;
 		case 5:	return 0;
+		case 6:	return 0;
 		}
 		return 0;
 	}
@@ -491,6 +538,9 @@ class RSP_Sprites_Cards : Actor
 		QP4G A 0;
 		QP4P ABC 0;
 		QP4W A 0;
+		QP5G A 0;
+		QP5P ABC 0;
+		QP5W A 0;
 		Stop;
 	}
 }

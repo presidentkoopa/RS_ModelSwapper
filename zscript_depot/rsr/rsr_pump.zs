@@ -1148,7 +1148,7 @@ class RSP_Sprites : Actor
 		RQUH A 0;
 		RQUQ ABCDEFGHI 0;
 		RQUX A 0;
-		RQUN A 0;
+		RQUN AB 0;
 		Stop;
 	}
 }
@@ -1222,7 +1222,8 @@ class RSP_Handler : EventHandler
 		// the gun idle, and gating this on the LOAD mode left the hand open round a shell it was
 		// holding. The pump poses below still need a mode, since only a stroke sets `held`.
 		if (s.hand == RSP.CARRY || s.hand == RSP.INSERT)
-			return "RspShell";			// Ermac's one-shell hold (the shell is layer 2210 / 2122)
+			// MS 1.5: a gun whose mesh has no shell of its own shows Ermac's shell in the hold instead
+			return (s.gun > 0 && !RSP_Guns.OwnShell(s.gun)) ? "RspShellOwn" : "RspShell";	// Ermac's one-shell hold (the shell is layer 2210 / 2122)
 		if (s.mode == RSP.NONE)
 			return "";
 		if (s.held && !s.steadied && RSP.SteadyOn())

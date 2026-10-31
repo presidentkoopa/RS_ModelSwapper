@@ -117,14 +117,95 @@ def rack_20(donor):
                 return float(m.group(1)), "2.0's rack_frac on the same mesh (%s, %s)" % (c[3], c[5].split()[0])
     return None, None
 
+
+def find_port(m, rf, skip, grip_x):
+    """the loading port of a gun whose mesh has no shell: the longest stretch of OPEN underside behind the
+    grip (body vertices there sit high: the tube channel is open), measured at the rest frame"""
+    v = np.concatenate([m[i]['xyz'][rf] for i in range(len(m)) if i not in skip])
+    x0 = float(v[:, 0].min())
+    bins = []
+    for x in np.arange(x0, grip_x, 1.0):
+        sl = v[(v[:, 0] >= x) & (v[:, 0] < x + 1.0)]
+        bins.append((x + 0.5, float(sl[:, 2].min()) if len(sl) else None))
+    zs = [z for _, z in bins if z is not None]
+    if not zs:
+        return None
+    floor = float(min(zs))          # the solid underside (the stock's bottom); open where it sits 3+ units higher
+    run, best = [], []
+    for x, z in bins:
+        if z is None or z > floor + 3.0:
+            run.append((x, z))
+            if len(run) > len(best):
+                best = list(run)
+        else:
+            run = []
+    best = [(x, z) for x, z in best if z is not None]
+    if len(best) < 3:
+        return None
+    return np.array([(best[0][0] + best[-1][0]) / 2, 0.0, min(z for _, z in best)]), (best[0][0], best[-1][0], floor)
+
+
+def build_noshell(donor, card, blk, lock, parts, pump):
+    """a pump gun whose mesh has no shell: the pump stroke and hand loading without a drawn shell of the gun's
+    own (the hand shows Ermac's shell: RSP_Guns.OwnShell false). Port: find_port; push: along the bore."""
+    text = open(card).read()
+    mesh = os.path.join(ROOT, blk['path'], blk['model'])
+    m = load_md3(mesh)
+    sc, of, rf = blk['scale'], blk['off'], blk['frame']
+    rides = [p for k in ('barrel', 'bolt', 'slide') for p in parts.get(k, []) if p['frames'] == pump['frames'] and abs(p['travel'] - pump['travel']) < 0.5]
+    gl = re.search(r'^\s+grip\s+line\s+' + V3, text, re.M)
+    grip_x = float(gl.group(1)) if gl else float(pump['rest'][0])
+    fp = find_port(m, rf, [pump['surf']] + [p['surf'] for p in rides] + [p['surf'] for k in ('trigger', 'grip') for p in parts.get(k, [])], grip_x)
+    if fp is None:
+        return None, 'no shell mesh, and no open underside behind the grip to load through'
+    port_m, (xa, xb, floor) = fp
+    if not re.search(r'archetype\s+shotgun_pump', text):
+        return None, 'no shell mesh, and not a pump shotgun (its pump part is something else)'
+    if xb - xa > 16.0:
+        return None, 'no shell mesh; the open underside behind the grip runs %.0f units (x %.1f..%.1f): too long for a loading port, not trusted' % (xb - xa, xa, xb)
+    port = to_flu(port_m[None, :], sc, of)[0]
+    bore = to_flu(np.array([[1.0, 0, 0]]), sc, (0, 0, 0))[0] - to_flu(np.zeros((1, 3)), sc, (0, 0, 0))[0]
+    bore = bore / np.linalg.norm(bore)
+    pump_c = to_flu(m[pump['surf']]['xyz'][rf], sc, of).mean(0)
+    pull = -bore
+    travel = pump['travel'] * 1.02 * abs(sc[1])
+    from rgeo import shift_hook, pca
+    g = dict(key=donor, cls=donor, set='ms', mesh=mesh, path=blk['path'], model=blk['model'], skin=blk['skin'] or 'rsr_clear.png',
+             scale=sc, off=of, extra='\tNoInterpolation\n' if blk['nointerp'] else '', ready_frame=rf, nsurf=len(m),
+             pump_surfs=[pump['surf']], bolt_surfs=[p['surf'] for p in rides], shell_surf=-1, shell_frame=rf,
+             lead=tuple(bore), depth=6.0, own_shell=False,
+             ready_sprite='', spr_gun='', spr_part='', spr_world='', waits='',
+             snd=dict(shell=('', 0), back=('', 0), fwd=('', 0), land=''), reserve='', magammo='', eject_frames=[], eject_hooks=[])
+    g['grab'] = pump_c; g['pull'] = pull; g['travel'] = float(travel)
+    g['pump_hook'] = shift_hook(sc, pull); g['support_hook'] = shift_hook(GP.HAND_SCALE, pull)
+    g['bolt_ratio'] = 1.0 if rides else 0.0
+    g['port'] = port; g['push'] = bore; g['shell_ref'] = port; g['lead_v'] = bore
+    g['port_hook'] = np.zeros(3); g['push_hook'] = shift_hook(sc, bore); g['shell_len'] = 6.0
+    # the shell in the hand is Ermac's own (MODELDEF hold RQUN B): its middle and crimp axis in the off-hand frame
+    es = load_md3(os.path.join(ROOT, 'models', 'rsq', 'shot_shell.md3'))
+    ep = to_flu(es[0]['xyz'][0], GP.HAND_SCALE, GP.HAND_OFF)
+    ec, evt, _ = pca(ep); ea = evt[0]
+    t = (ep - ep.mean(0)) @ ea; hi = t > (t.max() + t.min()) / 2
+    if np.linalg.norm((ep[hi] - ep.mean(0)) - np.outer(t[hi], ea), axis=1).max() > np.linalg.norm((ep[~hi] - ep.mean(0)) - np.outer(t[~hi], ea), axis=1).max():
+        ea = -ea
+    g['shell_in_hand'] = ep.mean(0); g['axis_in_hand'] = ea; g['ermac_mid'] = GP.mid(ep, ea)
+    g['hand_hook'] = np.zeros(3); g['hand_rot'] = np.zeros(3)
+    g['world_scale'] = (0.0, 0.0, 0.0); g['world_off'] = (0.0, 0.0, 0.0)
+    frac, how = pump_frac(donor, lock, pump['frames'])
+    if frac < 0:
+        f2, how2 = rack_20(donor)
+        if f2 is not None:
+            frac, how = f2, how2
+    return dict(g=g, sv=None, frac=frac, frac_how=how + '; no shell mesh: port = open underside x %.1f..%.1f' % (xa, xb), port=port, pump=pump_c, travel=travel, noshell=True), None
+
 def build(donor, card, blk, lock):
     text = open(card).read()
     parts, load = card_parts(text)
     pump = (parts.get('pump') or [None])[0]; shell = (parts.get('shell') or [None])[0]
-    if not pump or not shell:
-        return None, 'no pump or no shell part on the card'
-    if not load:
-        return None, 'the card names no loading point (`load ... frame N`)'
+    if not pump:
+        return None, 'no pump part on the card'
+    if not shell or not load:
+        return build_noshell(donor, card, blk, lock, parts, pump)
     mesh = os.path.join(ROOT, blk['path'], blk['model'])
     m = load_md3(mesh)
     sc, of, rf = blk['scale'], blk['off'], blk['frame']
@@ -165,6 +246,18 @@ def build(donor, card, blk, lock):
     return dict(g=g, sv=sv, frac=frac, frac_how=how, port=port, pump=pump_c, travel=travel), None
 
 
+def noshell_modeldef(g):
+    """gen_pump.modeldef without the gun-shell blocks (the shell alone at the port, in the hand, dropped)"""
+    g2 = dict(g, shell_surf=g['pump_surfs'][0])
+    out, keep, cur = [], True, []
+    for l in GP.modeldef(g2):
+        if l.startswith('// ') and l != GP.modeldef(g2)[0]:
+            keep = not ('shell' in l)
+        if keep:
+            out.append(l)
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--dry', action='store_true'); ap.add_argument('--only', default='')
     a = ap.parse_args()
@@ -196,7 +289,8 @@ def main():
         g['spr_gun'], g['spr_part'], g['spr_world'] = 'QP%sG' % code, 'QP%sP' % code, 'QP%sW' % code
         g['ready_sprite'] = '%s A' % re.search(r'"\w+\|%s\|(\w{4})\|' % donor, shelf).group(1)
         try:
-            GP.compute(g, r['sv'])
+            if not r.get('noshell'):
+                GP.compute(g, r['sv'])
         except Exception as e:
             rep.append('| %s | left out: gen_pump refused: %s |' % (donor, e)); continue
         g['frac'] = r['frac']
@@ -214,7 +308,8 @@ def main():
         '// GENERATED by tools_kit/card_pump.py from the MS 1.5 cards (gen_pump.py unchanged) -- do not edit by hand.\n' + '\n'.join(zs) + '\n')
     md = ['// GENERATED by tools_kit/card_pump.py (gen_pump.modeldef, unchanged) -- the card guns\' pump layers.']
     for g in guns:
-        md += GP.modeldef(g)
+        lines = GP.modeldef(g) if g.get('own_shell', True) else noshell_modeldef(g)
+        md += lines
     open(os.path.join(ROOT, 'MODELDEF.rsrpump'), 'w').write('\n'.join(md) + '\n' + GP.HANDS_MODELDEF)
     rk = ['// GENERATED by tools_kit/card_pump.py -- do not edit by hand.',
           '// Where each pump donor\'s pump starts in its fire-then-pump, as a fraction of those tics (-1: none).',

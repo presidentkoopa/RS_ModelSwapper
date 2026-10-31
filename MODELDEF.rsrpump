@@ -377,6 +377,76 @@ Model RSP_DroppedShell
 	USEACTORROLL
 	FrameIndex QP3W A 0 15
 }
+// RSR-PUMP (zscript/rsr/rsr_pump.zs, tools/gen_pump.py): MS_MG_Ssg. The gun's own model and
+// frames; pieces shown or hidden by a clear skin (every surface has its own SurfaceSkin:
+// models_md3.cpp reads SurfaceSkin only when a block has no Skin).
+
+// the gun without its pump and bolt (they are on their own layers while the hand works it)
+Model MS_MG_Ssg
+{
+	Path "cards/meatgrinder/ssg"
+	Model 0 "mg_ssg.md3"
+	SurfaceSkin 0 0 "SSG.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "SSG.png"
+	SurfaceSkin 0 3 "SSG.png"
+	SurfaceSkin 0 4 "SSG.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "SSG.png"
+	SurfaceSkin 0 7 "SSG.png"
+	SurfaceSkin 0 8 "SSG.png"
+	SurfaceSkin 0 9 "SSG.png"
+	SurfaceSkin 0 10 "SSG.png"
+	Scale -1.1000 1.1000 1.1000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -6.0000
+	FrameIndex QP4G A 0 0
+}
+
+// the pump alone (main controller)
+Model RSR_GunParts
+{
+	Path "cards/meatgrinder/ssg"
+	Model 0 "mg_ssg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "SSG.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -1.1000 1.1000 1.1000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -6.0000
+	FrameIndex QP4P A 0 0
+}
+
+// the bolt alone: it moves with the pump
+Model RSR_GunParts
+{
+	Path "cards/meatgrinder/ssg"
+	Model 0 "mg_ssg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "SSG.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	Scale -1.1000 1.1000 1.1000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -6.0000
+	FrameIndex QP4P B 0 0
+}
+
 // RSR-PUMP (zscript/rsr/rsr_pump.zs, tools/gen_pump.py): MS_VP_Shotgun. The gun's own model and
 // frames; pieces shown or hidden by a clear skin (every surface has its own SurfaceSkin:
 // models_md3.cpp reads SurfaceSkin only when a block has no Skin).
@@ -392,7 +462,7 @@ Model MS_VP_Shotgun
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex QP4G A 0 0
+	FrameIndex QP5G A 0 0
 }
 
 // the pump alone (main controller)
@@ -406,7 +476,7 @@ Model RSR_GunParts
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex QP4P A 0 0
+	FrameIndex QP5P A 0 0
 }
 
 // the shell alone, at the loading port
@@ -420,7 +490,7 @@ Model RSR_GunParts
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex QP4P C 0 11
+	FrameIndex QP5P C 0 11
 }
 
 // the shell alone, in the off hand (off controller)
@@ -434,7 +504,7 @@ Model RSQ_Hands
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex QP4P C 0 11
+	FrameIndex QP5P C 0 11
 }
 
 // a dropped shell (world)
@@ -450,7 +520,7 @@ Model RSP_DroppedShell
 	ZOffset 0.9022
 	USEACTORPITCH
 	USEACTORROLL
-	FrameIndex QP4W A 0 11
+	FrameIndex QP5W A 0 11
 }
 
 // RSR-PUMP: Ermac's one-shell hold (ammo_hand frame 1) without his shell: the gun's own shell is
@@ -463,4 +533,19 @@ Model RSQ_Hands
 	Scale -1.0 1.0 1.0
 	Offset 0.0 -24.0 -10.0
 	FrameIndex RQUN A 0 1
+}
+
+// MS 1.5 (2026-10-31): the same hold WITH Ermac's own shell (shot_shell.md3, modelled in his hand's space), for a
+// pump gun whose mesh has no shell of its own (RSP_Guns.OwnShell false): the hand still shows a round
+Model RSQ_Hands
+{
+	Path "models/rsq"
+	Model 0 "ammo_hand.md3"
+	Skin 0 "hand.png"
+	Model 1 "shot_shell.md3"
+	Skin 1 "shells.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQUN B 0 1
+	FrameIndex RQUN B 1 0
 }

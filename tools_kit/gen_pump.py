@@ -228,7 +228,22 @@ Model RSQ_Hands
 	Offset 0.0 -24.0 -10.0
 	FrameIndex RQUN A 0 %d
 }
-''' % (SHELL_POSE, SHELL_POSE)
+
+// MS 1.5 (2026-10-31): the same hold WITH Ermac's own shell (shot_shell.md3, modelled in his hand's space), for a
+// pump gun whose mesh has no shell of its own (RSP_Guns.OwnShell false): the hand still shows a round
+Model RSQ_Hands
+{
+	Path "models/rsq"
+	Model 0 "ammo_hand.md3"
+	Skin 0 "hand.png"
+	Model 1 "shot_shell.md3"
+	Skin 1 "shells.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	FrameIndex RQUN B 0 %d
+	FrameIndex RQUN B 1 0
+}
+''' % (SHELL_POSE, SHELL_POSE, SHELL_POSE)
 
 
 def zs(guns):
@@ -331,6 +346,7 @@ def zs(guns):
     # which the gun's own card already states.
     table('Loaded', 'String', [g['magammo'] for g in guns], st)
     table('Cap', 'int', [int(g.get('cap', 0)) for g in guns], lambda x: '%d' % x)
+    table('OwnShell', 'bool', [g.get('own_shell', True) for g in guns], lambda x: 'true' if x else 'false')   # MS 1.5: false = no shell in the mesh (Ermac's shown)
     table('EjectFrames', 'int', [len(g['eject_frames']) for g in guns], lambda x: '%d' % x)
     L.append('\t// the set\'s own ejected shell, frame k (V+): its place on the gun in the ready pose')
     L.append('\tclearscope static Vector3 EjectHook(int i, int k)')

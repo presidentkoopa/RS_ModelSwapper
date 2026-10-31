@@ -8,6 +8,7 @@ class RSP_Rack abstract
 		if (donor == "MS_BD_Shotgun")	return 0.6406;
 		if (donor == "MS_BW_Shotgun")	return 0.2727;
 		if (donor == "MS_Cola_Ks23")	return -1.0000;
+		if (donor == "MS_MG_Ssg")	return 0.5455;
 		if (donor == "MS_VP_Shotgun")	return 0.5500;
 		return -1;
 	}

@@ -717,6 +717,7 @@ class RSQ_Hands : Weapon
 	FreeHand: RQHN A -1; Stop;
 	AmmoH: RQHN H -1; Stop;		// a closed hand
 	RspShell: RQUN A -1; Stop;	// RSR-PUMP: Ermac's one-shell hold (ammo_hand frame 1), round the gun's own shell
+	RspShellOwn: RQUN B -1; Stop;	// MS 1.5: the same hold WITH Ermac's own shell, for a pump gun whose mesh has none (MODELDEF.rsrpump)
 	RsrHold: RQHN I -1; Stop;	// real reload: Ermac's hold, round the gun's own magazine (rsr)
 	RsbShell: RQHN J -1; Stop;	// RSR-BREAK: Ermac's hold of one shell (ammo_hand 1), round the gun's own round
 	RsbCell: RQHN L -1; Stop;	// RSR-BREAK: Ermac's hold of a cell (ammo_hand 5), round the gun's own speedloader
