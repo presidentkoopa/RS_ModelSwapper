@@ -389,7 +389,12 @@ class RSR_State play
 		String res = RSR_Guns.Reserve(i);
 		let rinv = RSR.ReserveOf(mo, i);
 		bool named = res != "";
-		if (named && (!rinv || rinv.Amount <= 0) || !named && rinv && rinv.Amount <= 0)
+		// ModelSwapper, Reload Order "mod's reload first": the mod's own reload has already run and moved
+		// its reserve into the gun -- the reserve can be empty now because of that very reload (Weapons of
+		// Saturn MachineRifle, rig 2026-10-31: "reserve RifleAmmo is empty", no magazine ever came). The
+		// mod decided the reload happened; the hand brings the magazine it loaded.
+		bool modDid = !named && RSR.PlayerInt(mo.player, 'ms_mod_first', 1) != 0 && MS_ReloadJoin.Drives(mo.player, mo.player.ReadyWeapon);
+		if (!modDid && (named && (!rinv || rinv.Amount <= 0) || !named && rinv && rinv.Amount <= 0))
 		{
 			if (RSR.Debug(mo.player))
 			{
