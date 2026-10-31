@@ -153,7 +153,9 @@ def build(c, codes_used):
     comp = gen_rsr.compute(dict(g), {g['key']: sv})
     # the layers draw from the donor's own folder with its own skin (the same file as the card's)
     comp['path'], comp['model'] = c['path'], c['model']
-    if c['skin'] and 'skins' not in comp:
+    if c.get('skins') and 'skins' not in comp:      # a donor skinned surface by surface (SurfaceSkin, no Skin)
+        comp['skins'] = c['skins']
+    elif c['skin'] and 'skins' not in comp:
         comp['skin'] = c['skin']
     return comp, None, code
 
@@ -223,6 +225,14 @@ def main(dry, only):
     if dry:
         return
     # sprite registration + NoMag tokens (a MODELDEF naming an unknown sprite stops the pk3 loading)
+    # sprites the previous list registered for rows still in the table (rows this run did not build, e.g. the
+    # 2.0-measured rows tools_reload_modeldefs keeps) stay registered: their layers name them
+    oldsp = re.search(r'class RSR_Sprites_Cards : Actor.*?Spawn:\n(.*?)\n\t\tStop;', rsr, re.S)
+    if oldsp:
+        for sname, fr in re.findall(r'^\t\t(\w{4}) (\w+) 0;', oldsp.group(1), re.M):
+            body = re.sub(r'class RSR_Sprites_Cards.*', '', rsr, flags=re.S)
+            if sname not in sprites and "'%s'" % sname in body:
+                sprites[sname] = set(fr)
     rsr = re.sub(r'\n// Card-regenerated guns \(tools_kit/regen_rows\.py\).*', '', rsr, flags=re.S).rstrip('\n') + '\n'
     rsr += '\n// Card-regenerated guns (tools_kit/regen_rows.py)\n'
     rsr += ''.join('class %s : RSVR_Token {}\n' % n for n in sorted(set(tokens)) if not re.search(r'^class %s\b' % n, rsr, re.M | re.I))

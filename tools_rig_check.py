@@ -43,9 +43,12 @@ def build_pk3(out=PK3):
     os.chdir(HERE)
     z = zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED)
     quest = {'zscript.txt': 'quest/zscript.txt', 'MENUDEF': 'quest/MENUDEF', 'CVARINFO': 'quest/CVARINFO'}
-    for f in ('zscript.txt', 'modeldef', 'MODELDEF.rsb', 'MODELDEF.rsrpump', 'MODELDEF.cards', 'MODELDEF.rsq', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF'):
+    for f in ('zscript.txt', 'modeldef', 'MODELDEF.rsb', 'MODELDEF.rsrpump', 'MODELDEF.cards', 'MODELDEF.cards2x', 'MODELDEF.rsq', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF'):
         src = quest.get(f, f) if os.path.exists(quest.get(f, f)) else f
         if os.path.exists(src): z.write(src, f)
+    if os.path.exists('SNDINFO.ms'): z.write('SNDINFO.ms', 'SNDINFO.ms')      # the reload foley (2.0) and sounds/ below
+    for root, ds, fs in os.walk('sounds'):
+        for f in fs: z.write(os.path.join(root, f), os.path.join(root, f))
     for f in sorted(os.listdir('.')):
         if f.startswith('WMCARD.'): z.write(f, f)
     for root, ds, fs in os.walk('zscript'):

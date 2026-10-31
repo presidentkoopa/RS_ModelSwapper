@@ -35,7 +35,8 @@ def main():
     os.chdir(HERE)
     att = json.load(open('reload_names.json'))
     gen = open('modeldef').read()
-    for lump in ('MODELDEF.rsb', 'MODELDEF.rsrpump', 'MODELDEF.cards'):
+    # MODELDEF.rsrpump is tools_kit/card_pump.py's now (measured from the cards); not rewritten here
+    for lump in ('MODELDEF.rsb', 'MODELDEF.cards'):
         src = open(os.path.join('reload_1x', lump)).read()
         parts = re.split(r'(?=^// RS real VR reload)', src, flags=re.M)
         head, secs = (parts[0], parts[1:]) if not parts[0].startswith('// RS real VR reload') else ('', parts)
@@ -77,6 +78,14 @@ def main():
             if 'rsr_clear.png' in sec2 and not os.path.exists(os.path.join(cdir, 'rsr_clear.png')):
                 shutil.copy(os.path.join('reload_1x', 'rsr_clear.png'), os.path.join(cdir, 'rsr_clear.png'))
             out.append(sec2); kept.append('%s -> %s' % (old, new))
+        if lump == 'MODELDEF.cards':
+            # tools_kit/card_mag.py owns MODELDEF.cards (rows measured from the MS 1.5 cards). The 2.0 sections go to
+            # MODELDEF.cards2x, only for donors card_mag did not build
+            built = set(re.findall(r'^Model\s+(\w+)', open('MODELDEF.cards').read(), re.M))
+            keep = [x for x in out[1:] if re.search(r'^Model\s+(\w+)', x, re.M).group(1) not in built]
+            kept = [k for k in kept if k.split(' -> ')[1] not in built]
+            out = [out[0].replace('reload_1x/MODELDEF.cards', 'reload_1x/MODELDEF.cards (donors card_mag did not build)')] + keep
+            lump = 'MODELDEF.cards2x'
         open(lump, 'w').write(''.join(out))
         print('%s: kept %s; left out %s' % (lump, kept or '-', left or '-'))
 
