@@ -1,0 +1,28 @@
+weapon cola_particlegun
+  archetype   energy        # owner-confirmed
+  model       cola_particlegun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 0  rest [-7.02, 6.71, 5.33]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    trigger  surf 1  rest [0.19, 0.05, -1.83]  axis [-0.98, 0.0, 0.198]  travel 1.08  frames 1..1  rot 34deg axis [-0.0, 1.0, -0.0]
+    stock    surf 3  rest [-36.03, 0.13, 4.07]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    mag_well  [-7.02, 6.71, 5.33]  mouth [-7.08, 4.81, 9.69]  axis [0.0, 0.0, 0.0]  travel_clear 0.00
+    muzzle    [49.62, 2.52, 7.73]
+  grip        line [-2.61, 0.59, -0.87] [-6.23, 1.14, -12.31]  trigger [0.19, 0.05, -1.83]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [16.69, 0.06, 6.8]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 3717
+  carved      mag  surfs [0]  seat_origin [-7.02, 6.71, 5.33]  file cola_particlegun_mag.md3
+  states      # modeldef.toothpastelaser.txt + toothpastelaser.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire               1 tics  frames 0
+    RefireCheck        1 tics  frames 0
+    FireForReal        2 tics  frames 0
+    FireHeavy          7 tics  frames 0
+    FireMedium         4 tics  frames 0
+    FireLow            2 tics  frames 0
+    FireFinish        21 tics  frames 0
+    Altfire            6 tics  frames 0

@@ -1,0 +1,25 @@
+weapon cola_plasmagun
+  archetype   energy        # owner-confirmed
+  model       cola_plasmagun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    wheel    surf 1  rest [3.98, 0.05, 4.16]  axis [-0.651, 0.002, 0.759]  travel 0.05  frames -..-
+    heat     surf 2  rest [10.67, 0.02, 9.26]  axis [0.995, 0.044, -0.085]  travel 0.02  frames -..-
+    muzzle    [24.31, -0.0, 4.14]
+  grip        line [-2.23, 1.69, 4.31] [-1.31, -0.0, -8.09]  trigger [4.26, -0.04, 3.5]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [8.26, -0.04, 3.5]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..2
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 3463
+  states      # modeldef.plasmagun.txt + plasmaautorifle.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Ready1             1 tics  frames 0
+    Ready2             1 tics  frames 0
+    Ready3             1 tics  frames 0
+    Overheat           2 tics  frames 0
+    OverheatLoop      16 tics  frames 0
+    OverheatFlamer    16 tics  frames 0
+    Altfire           18 tics  frames 0
+    Dryfire           13 tics  frames 0
+    Fire               3 tics  frames 0

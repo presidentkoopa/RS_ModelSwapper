@@ -1,0 +1,28 @@
+weapon cola_piledriver
+  archetype   melee        # owner-confirmed
+  model       cola_piledriver.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    cylinder surf 1  rest [-14.33, -6.31, 8.65]  axis [0.302, -0.921, -0.247]  travel 0.01  frames -..-
+    muzzle    [39.64, 0.0, 7.69]
+  grip        line [-0.47, 0.37, 0.09] [-5.0, 0.95, -10.02]  trigger [0.11, 0.0, 3.03]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [4.11, 0.0, 3.03]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..19
+  baked_cant   frames 6..19 up to 47.7 deg   # psprite-era hand sway; removed in cola_piledriver_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 994
+  states      # modeldef.piledriver.txt + piledriver.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire              11 tics  frames 0
+    FireWeak          16 tics  frames 0
+    FireMedium        15 tics  frames 0
+    FireHeavy         15 tics  frames 0
+    FireSuperHeavy    15 tics  frames 0
+    AltCheck           2 tics  frames 0
+    Dryfire            1 tics  frames 0
+    BenignDryfire      3 tics  frames 0
+    Drypressure        3 tics  frames 0
+    Reload             2 tics  frames 0
+    ReloadStart       42 tics  frames 1,2,3,4,5,11,12,13,14,15,16,17,18,19,0
+    Altfire           25 tics  frames 0

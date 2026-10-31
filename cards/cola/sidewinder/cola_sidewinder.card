@@ -1,0 +1,27 @@
+weapon cola_sidewinder
+  archetype   launcher        # owner-confirmed
+  model       cola_sidewinder.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    bolt     surf 0  rest [24.18, 7.82, 9.78]  axis [-1.0, 0.0, 0.0]  travel 9.62  frames 30..38
+    trigger  surf 2  rest [23.05, 0.02, -6.66]  axis [-1.0, 0.0, 0.002]  travel 0.58  frames 1..7
+    loading_bay surf 3  rest [34.2, 8.86, 4.88]  axis [0.0, -0.253, -0.968]  travel 0.73  frames 16..40  rot 8deg axis [-1.0, -0.0, -0.0]
+    display  surf 4  rest [8.85, -0.66, 15.64]  axis [1.0, -0.002, 0.03]  travel 0.01  frames -..-
+    plate    surf 5  rest [21.84, 0.5, 11.02]  axis [-0.216, -0.002, 0.976]  travel 0.01  frames -..-
+    muzzle    [80.19, 1.92, 9.53]
+  grip        line [21.11, -1.14, -8.87] [16.86, -1.28, -18.09]  trigger [23.05, 0.02, -6.66]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [33.34, 0.5, 7.82]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..9
+    idle         10..29
+    pump         30..39
+    idle         40..44
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6311
+  states      # modeldef.missilelauncher.txt + missilelauncher.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Ready2             1 tics  frames 4
+    Ready3             1 tics  frames 9
+    Ready4             1 tics  frames 14
+    Ready5             1 tics  frames 19

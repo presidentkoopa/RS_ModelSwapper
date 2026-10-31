@@ -1,0 +1,31 @@
+weapon cola_carddeck
+  archetype   thrown        # owner-confirmed
+  model       cola_carddeck.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    card     surf 0  rest [15.49, 17.34, 2.74]  axis [-0.02, 0.74, -0.673]  travel 11.57  frames 0..10  rot 23deg axis [0.55, 0.79, 0.27]
+    card2    surf 1  rest [15.8, 18.34, 3.18]  axis [-0.016, 0.741, -0.671]  travel 11.45  frames 0..10  rot 23deg axis [0.55, 0.79, 0.27]
+    deck     surf 2  rest [15.37, 16.98, 1.51]  axis [-0.05, 0.749, -0.66]  travel 11.73  frames 0..10  rot 23deg axis [0.55, 0.79, 0.27]
+    muzzle    [31.66, 0.41, 4.5]
+  grip        line [9.25, -7.08, 3.67] [1.66, 21.98, -8.22]  trigger [10.64, 6.42, 3.12]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [14.64, 6.42, 3.12]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..10
+  baked_cant   frames 0..10 up to 21.9 deg   # psprite-era hand sway; removed in cola_carddeck_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 802
+  states      # modeldef.cards.txt + cards.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire               8 tics  frames 1,2,3,4
+    Fire0              4 tics  frames 1,2,3,4
+    Fire1              5 tics  frames 1,2,3,4
+    Fire2              6 tics  frames 1,2,3,4
+    Fire3              6 tics  frames 1,2,3,4
+    BringUp           10 tics  frames 4,3,2,1,0
+    Altfire            8 tics  frames 0,1,2,3,4
+    AltFire1           4 tics  frames 1,2,3,4
+    AltFire2           4 tics  frames 1,2,3,4
+    AltFire3           4 tics  frames 1,2,3,4
+    Dryfire           10 tics  frames 0,8,9,10,9,8
+    Hold               4 tics  frames 0
+    AltFire            4 tics  frames 1,2,3,4

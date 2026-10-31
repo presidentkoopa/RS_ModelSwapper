@@ -1,0 +1,15 @@
+weapon cola_frypan
+  archetype   melee        # owner-confirmed
+  model       cola_frypan.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 0  rest [-2.33, 42.66, 48.85]  axis [0.671, -0.732, -0.118]  travel 0.89  frames 3..4  rot 9deg axis [-0.74, -0.67, 0.07]
+    muzzle    [-1.22, 57.44, 91.7]
+  grip        line [-16.62, 50.05, 73.02] [-22.73, 57.27, 63.55]  trigger [-15.67, 56.16, 75.07]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [-11.67, 56.16, 75.07]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..4
+  baked_cant   frames 1..4 up to 107.9 deg   # psprite-era hand sway; removed in cola_frypan_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 677
+  states      # modeldef.frypan.txt + cards.txt (statephase.py)
