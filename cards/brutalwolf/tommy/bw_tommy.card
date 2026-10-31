@@ -1,0 +1,30 @@
+weapon bw_tommy
+  archetype   pistol_mag        # owner-confirmed
+  model       bw_tommy.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    bolt     surf 1  rest [25.7, -1.36, 2.51]  axis [1.0, -0.0, -0.0]  travel 9.30  frames 2..5
+    trigger  surf 2  rest [30.85, -0.01, -3.94]  axis [-1.0, 0.0, 0.005]  travel 0.69  frames 1..2  rot 20deg axis [-0.0, 1.0, -0.0]
+    mag      surf 3  rest [37.03, -0.01, -1.83]  axis [0.0, -0.0, -1.0]  travel 13.99  frames 7..10
+    mag_well  [37.03, -0.01, -1.83]  mouth [35.62, -0.7, 2.7]  axis [0.0, -0.0, -1.0]  travel_clear 13.99
+    muzzle    [73.27, -0.0, 1.91]
+  grip        line [27.7, -0.0, -3.05] [23.97, -0.0, -14.33]  trigger [30.85, -0.01, -3.94]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [34.26, 0.04, -1.52]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..6
+    mag_out      7..7
+    mag_in       8..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7040
+  carved      mag  seat_origin [37.03, -0.01, -1.83]  file bw_tommy_mag.md3
+  states      # from Modeldef.Tommy.def + Actors/Weaps/THOMP.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               6 tics  frames 0,1,2,3,4,5
+    Fire2              6 tics  frames 0,1,2,3,4,5
+    Reload            20 tics  frames 6,7,8,9,10,9,8,7,6
+    Reload2           15 tics  frames 6,7,8,9,10
+    ContinueReload    10 tics  frames 10,9,8,7,6

@@ -1,0 +1,37 @@
+weapon bw_chaingun
+  archetype   pistol_mag        # owner-confirmed
+  model       bw_chaingun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [30.89, -0.01, -2.08]  axis [0.964, 0.0, -0.265]  travel 0.50  frames -..-  rot 10deg axis [0.0, -1.0, -0.0]
+    cover    surf 2  rest [59.48, -35.16, -7.93]  axis [0.0, -0.281, -0.96]  travel 43.65  frames 6..15  rot 45deg axis [1.0, 0.0, 0.0]
+    muzzle    [124.88, 0.17, -2.58]
+  grip        line [27.52, 1.08, -1.17] [24.94, -0.03, -20.27]  trigger [30.89, -0.01, -2.08]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [56.45, 2.9, -4.56]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..5
+    fire         6..6
+    idle         7..7
+    fire         8..8
+    idle         9..9
+    fire         10..10
+    idle         11..11
+    fire         12..12
+    idle         13..13
+    fire         14..14
+    idle         15..15
+    fire         16..16
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 10133
+  states      # from Modeldef.Chaingun.def + Actors/Weaps/CHAINGUN.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire              36 tics  frames 0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2
+    Fire2              4 tics  frames 2,0,3,1
+    Hold               4 tics  frames 3,0,3,1
+    AltFire           27 tics  frames 0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2
+    SpinFinish        36 tics  frames 0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2
+    SpinFinish3       36 tics  frames 3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5
+    SpinFinish2       36 tics  frames 0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2
+    SpinFinish4       36 tics  frames 3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5
+    Reload            20 tics  frames 15,14,13,12,11,10,9,8,7,6
+    Reload2           55 tics  frames 6,7,8,9,10,11,12,13,14,15,14,13,12,11,10,9,8,7,6

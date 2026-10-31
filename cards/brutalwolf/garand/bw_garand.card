@@ -1,0 +1,24 @@
+weapon bw_garand
+  archetype   pistol_mag        # owner-confirmed
+  model       bw_garand.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    clip     surf 0  rest [43.56, -0.04, -0.24]  axis [0.0, -0.0, 1.0]  travel 11.39  frames 5..13
+    bolt     surf 2  rest [51.17, -2.71, 2.72]  axis [-1.0, 0.0, 0.0]  travel 10.00  frames 4..13
+    bolt2    surf 3  rest [43.51, 0.09, 3.07]  axis [-0.984, 0.0, -0.176]  travel 10.10  frames 4..13  rot 10deg axis [0.0, -1.0, -0.0]
+    trigger  surf 4  rest [32.09, -0.01, -4.61]  axis [-0.924, -0.0, 0.381]  travel 0.41  frames -..-  rot 15deg axis [0.0, 1.0, 0.0]
+    muzzle    [115.89, -0.02, 3.25]
+  grip        line [29.53, 0.66, -3.66] [21.44, 0.66, -8.75]  trigger [32.09, -0.01, -4.61]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [62.44, 0.06, 0.76]   # one-handed gun; placeholder
+  carve       clip
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..13
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 22262
+  carved      clip  seat_origin [43.56, -0.04, -0.24]  file bw_garand_clip.md3
+  states      # from Modeldef.Garand.def + Actors/Weaps/M1GARAND.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    FIRE               9 tics  frames 1,2,3,4,3,2
+    LastFIRE           7 tics  frames 1,2,3,4,5
+    Reload            36 tics  frames 6,7,8,9,10,11,12,0

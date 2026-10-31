@@ -1,0 +1,29 @@
+weapon bw_stg44
+  archetype   pistol_mag        # owner-confirmed
+  model       bw_stg44.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 2  rest [42.96, 0.0, -7.42]  axis [0.0, -0.0, -1.0]  travel 14.00  frames 5..9
+    trigger  surf 14  rest [30.66, 0.01, -4.54]  axis [-0.981, 0.0, 0.194]  travel 0.54  frames 1..1  rot 20deg axis [0.0, 1.0, 0.0]
+    bolt     surf 17  rest [30.77, 0.47, 4.83]  axis [-1.0, 0.0, 0.0]  travel 9.00  frames 2..9
+    handle   surf 21  rest [41.18, 2.34, 5.02]  axis [-1.0, 0.0, 0.0]  travel 9.00  frames 2..9
+    mag_well  [42.96, 0.0, -7.42]  mouth [42.91, 0.64, 2.39]  axis [0.0, -0.0, -1.0]  travel_clear 14.00
+    muzzle    [87.23, 0.66, 2.3]
+  grip        line [28.56, -1.08, -3.55] [22.78, 0.39, -11.61]  trigger [30.66, 0.01, -4.54]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [37.24, -0.06, -0.05]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..4
+    mag_out      5..5
+    mag_in       6..9
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 11475
+  carved      mag  seat_origin [42.96, 0.0, -7.42]  file bw_stg44_mag.md3
+  states      # from Modeldef.STG44.def + Actors/Weaps/STG44.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               5 tics  frames 1,2,3,4,0
+    Fire2              5 tics  frames 1,2,3,4,3
+    Reload            32 tics  frames 5,6,7,8,9,8,7,6,5
+    Reload2           17 tics  frames 5,6,7,8,9
+    ContinueReload    12 tics  frames 9,8,7,6,5

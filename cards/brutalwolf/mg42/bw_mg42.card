@@ -1,0 +1,24 @@
+weapon bw_mg42
+  archetype   pistol_mag        # owner-confirmed
+  model       bw_mg42.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 0  rest [31.28, -0.16, -3.94]  axis [-0.997, 0.0, -0.076]  travel 0.50  frames -..-  rot 15deg axis [0.0, 1.0, -0.0]
+    cover    surf 2  rest [40.31, 7.05, 6.38]  axis [0.0, 0.478, -0.879]  travel 15.54  frames 10..14  rot 40deg axis [-1.0, 0.0, -0.0]
+    handle   surf 3  rest [32.68, -6.27, 1.41]  axis [-0.991, -0.135, 0.0]  travel 15.86  frames 5..14  rot 90deg axis [0.0, -0.0, -1.0]
+    bolt     surf 4  rest [27.18, -4.28, 1.01]  axis [-1.0, 0.0, 0.0]  travel 10.00  frames 6..14
+    muzzle    [124.94, -0.14, 5.27]
+  grip        line [23.3, 1.34, -3.06] [23.8, 0.89, -13.63]  trigger [31.28, -0.16, -3.94]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [50.38, -0.12, 4.31]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..14
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 18972
+  states      # from Modeldef.MG42.def + Actors/Weaps/mg42.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               5 tics  frames 1,3,2,4
+    Reload            36 tics  frames 5,6,7,8,9,10,11,12,13,14,13,12,11,10,9,8,7,6,5
+    Reload2           26 tics  frames 5,6,7,8,9,10,11,12,13
+    ContinueReload    39 tics  frames 14,13,12,11,10,9,8,7,6,5

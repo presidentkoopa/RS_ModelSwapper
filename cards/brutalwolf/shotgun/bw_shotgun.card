@@ -1,0 +1,33 @@
+weapon bw_shotgun
+  archetype   shotgun_pump        # owner-confirmed
+  model       bw_shotgun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    pump     surf 2  rest [41.16, -1.6, 2.0]  axis [-1.0, 0.0, 0.0]  travel 6.90  frames 9..17
+    pump2    surf 3  rest [70.61, 0.02, -1.01]  axis [-1.0, -0.0, -0.001]  travel 6.90  frames 9..17
+    trigger  surf 5  rest [31.83, 0.01, -3.57]  axis [-1.0, -0.0, 0.0]  travel 0.50  frames -..-
+    shell    surf 6  rest [46.63, 0.03, 2.19]  axis [-0.685, -0.0, -0.729]  travel 18.79  frames 9..28
+    muzzle    [97.8, -0.11, 3.48]
+  grip        line [28.78, -1.84, -2.58] [22.05, 0.05, -7.92]  trigger [31.83, 0.01, -3.57]   # centroid-based; owner's hand fit supersedes
+  support     feature bar [41.16, -1.6, 2.0]  axis [-1.0, 0.0, 0.0]  travel 6.90   # the pump: the support hand works it
+    load      [47.86, 0.03, -1.01]  frame 28   # where the shell ends up: the loading port
+  carve       shell
+  phases
+    idle         0..0
+    fire         1..2
+    idle         3..7
+    pump         8..18
+    load         19..28
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 21884
+  carved      shell  seat_origin [46.63, 0.03, 2.19]  file bw_shotgun_shell.md3
+  states      # from Modeldef.TRGun.def + Actors/Weaps/TRENCHGUN.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               6 tics  frames 1,2,3,4,5,2
+    Pumping1          27 tics  frames 6,7,8,9,10,11,12,13,14,15,16,17,16,15,14,13,12,11,10,9,8,7,6
+    Pumping2          27 tics  frames 6,7,8,9,10,11,12,13,14,15,16,17,16,15,14,13,12,11,10,9,8,7,6
+    Reload             9 tics  frames 0,18,19
+    ReloadLoop        15 tics  frames 20,21,22,23,24,25,26,27,28,0
+    FinishReload      20 tics  frames 15,16,17,16,15,14,13,12,11,10,9,8,7,6
+    Reload2            7 tics  frames 0,18,19
+    ReloadLoop2       11 tics  frames 20,21,22,23,24,25,26,27,28
+    FinishReload2      9 tics  frames 14,13,12,11,10,9,8,7,6

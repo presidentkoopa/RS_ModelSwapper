@@ -1,0 +1,28 @@
+weapon bw_bar
+  archetype   pistol_mag        # owner-confirmed
+  model       bw_bar.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    mag      surf 1  rest [45.12, 0.11, -2.07]  axis [0.0, 0.0, -1.0]  travel 16.99  frames 5..9
+    handle   surf 3  rest [37.48, 2.9, -0.14]  axis [-1.0, 0.0, -0.0]  travel 13.00  frames 5..9
+    bolt     surf 4  rest [46.94, -0.17, 3.41]  axis [-1.0, 0.0, 0.0]  travel 4.00  frames 1..9
+    bolt2    surf 5  rest [41.51, -0.07, 3.6]  axis [-0.983, 0.0, -0.181]  travel 4.02  frames 1..9  rot 10deg axis [0.0, -1.0, 0.0]
+    mag_well  [45.12, 0.11, -2.07]  mouth [45.42, -0.81, 1.23]  axis [0.0, 0.0, -1.0]  travel_clear 16.99
+    muzzle    [139.88, -0.52, 2.8]
+  grip        line [65.95, -9.94, 1.97] [67.53, -8.58, 0.55]  trigger [69.6, -0.44, 1.0]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [73.6, -0.44, 1.0]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..4
+    mag_out      5..5
+    mag_in       6..9
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6002
+  carved      mag  seat_origin [45.12, 0.11, -2.07]  file bw_bar_mag.md3
+  states      # from Modeldef.BAR.def + Actors/Weaps/BAR.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               7 tics  frames 0,1,2,3
+    Fire2              7 tics  frames 1,2,3,2
+    UnZoom             5 tics  frames 4,3,2,1,0
+    Reload2           22 tics  frames 5,6,7,8,9
+    ContinueReload    25 tics  frames 9,8,7,6,5,0
+    Reload            31 tics  frames 5,6,7,8,9,8,7,6,5,0

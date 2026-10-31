@@ -1,0 +1,35 @@
+weapon bw_luger
+  archetype   pistol_mag        # owner-confirmed
+  model       bw_luger.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    toggle   surf 1  rest [22.82, -0.01, 0.79]  axis [-0.65, 0.0, 0.76]  travel 3.09  frames 1..12  rot 80deg axis [-0.0, -1.0, 0.0]
+    toggle2  surf 2  rest [26.92, 0.0, 0.86]  axis [-0.94, 0.0, 0.34]  travel 4.24  frames 2..12  rot 50deg axis [-0.0, 1.0, -0.0]
+    toggle3  surf 3  rest [30.28, -0.0, 0.63]  axis [-0.999, 0.0, -0.039]  travel 4.80  frames 2..12  rot 5deg axis [0.0, 1.0, -0.0]
+    trigger  surf 4  rest [31.68, 0.02, -3.77]  axis [-0.997, 0.0, 0.072]  travel 0.48  frames -..-  rot 15deg axis [-0.0, 1.0, -0.0]
+    mag      surf 5  rest [23.86, -0.08, -8.96]  axis [-0.581, -0.0, -0.814]  travel 17.20  frames 7..11
+    mag_well  [23.86, -0.08, -8.96]  mouth [27.36, -0.53, -0.41]  axis [-0.581, -0.0, -0.814]  travel_clear 17.20
+    muzzle    [44.77, 0.09, 0.45]
+  grip        line [22.56, 1.42, -2.78] [22.14, 0.12, -14.28]  trigger [31.68, 0.02, -3.77]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [31.36, 0.2, -2.81]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..6
+    mag_out      7..7
+    mag_in       8..11
+    idle         12..12
+  baked_cant   frames 12..12 up to 5.0 deg   # psprite-era hand sway; removed in bw_luger_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5912
+  carved      mag  seat_origin [23.86, -0.08, -8.96]  file bw_luger_mag.md3
+  states      # from Modeldef.Luger.def + Actors/Weaps/LUGER.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               5 tics  frames 1,2,3,4,5
+    Fire2              5 tics  frames 1,2,3,4,5
+    UnZoom             4 tics  frames 3,2,1,0
+    Reload            45 tics  frames 6,7,8,9,10,11,10,9,8,7,12,0
+    Reload2           14 tics  frames 6,7,8,9,10,11
+    ContinueReload    25 tics  frames 11,10,9,8,7,12,0

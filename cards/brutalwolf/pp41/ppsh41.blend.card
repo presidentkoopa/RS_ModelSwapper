@@ -1,0 +1,10 @@
+weapon ppsh41
+  source      ppsh41.blend   blender 2.91.10   frames 0..9
+  space       world = the MD3 frame (Main Hand at the origin, scale 25); units = MD3 model units
+  handle      loc [25.00, 0.00, -3.00]  rot_deg [-0.0, -180.0, -0.0]   # the gun under the hand: the artist's grip relation
+  parts
+    extra     armature "Extra"  rest [36.20, 0.00, 2.70]  axis [1.000, 0.000, 0.000]  travel 7.60  frames 1..4  meshes ['ppsh-41_3_low.011'] (201 verts)
+    body      armature "Handle.001"  rest [49.00, -0.00, -1.00]  axis [0.091, 0.000, -0.996]  travel 11.05  frames 2..9  meshes ['Circle.004'] (1661 verts)
+    trigger   armature "Trigger"  rest [31.20, 0.00, -2.90]  axis [-0.999, -0.000, 0.054]  travel 2.01  frames 2..4  meshes ['ppsh-41_3_low.008'] (221 verts)
+  body        meshes ['ppsh-41_3_low.006', 'ppsh-41_3_low.007', 'ppsh-41_3_low.009', 'ppsh-41_3_low.010']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes
