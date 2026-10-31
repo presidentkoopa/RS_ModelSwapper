@@ -16,6 +16,7 @@ import os; IDLE=int(os.environ.get('IDLE','0'))
 # VIEW=side (default, looks along -Y) or top (looks down -Z): swing-out cylinders and side drums only show from the top
 VIEW=os.environ.get('VIEW','side')
 if VIEW=='top': Rv=np.array([[1,0,0],[0,0,1],[0,-1,0]])@Rv
+if VIEW=='bottom': Rv=np.array([[1,0,0],[0,0,-1],[0,1,0]])@Rv   # looks up +Z: loading ports and magazine wells
 fig,axs=plt.subplots(1,len(frames),figsize=(4.2*len(frames),4.2))
 for ax,f in zip(np.atleast_1d(axs),frames):
     R,t=kabsch(B[IDLE],B[f])
