@@ -36,7 +36,8 @@ def main():
     att = json.load(open('reload_names.json'))
     gen = open('modeldef').read()
     # MODELDEF.rsrpump is tools_kit/card_pump.py's now (measured from the cards); not rewritten here
-    for lump in ('MODELDEF.rsb', 'MODELDEF.cards'):
+    # MODELDEF.rsb is tools_kit/card_break.py's now (measured from the cards); not rewritten here
+    for lump in ('MODELDEF.cards',):
         src = open(os.path.join('reload_1x', lump)).read()
         parts = re.split(r'(?=^// RS real VR reload)', src, flags=re.M)
         head, secs = (parts[0], parts[1:]) if not parts[0].startswith('// RS real VR reload') else ('', parts)

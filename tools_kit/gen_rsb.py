@@ -394,7 +394,8 @@ def modeldef(g):
         of = off or g['off']
         b = ['', '// ' + comment, 'Model %s' % cls, '{', '\tPath "%s"' % (path or g['path']), '\tModel 0 "%s"' % (model or g['model'])]
         for si in range(nsurf if nsurf is not None else n):
-            b.append('\tSurfaceSkin 0 %d "%s"' % (si, (skin or g['skin']) if si in show else clear))
+            own = skin or (g['skins'][si] if g.get('skins') and model is None and si < len(g['skins']) else g['skin'])   # per-surface skins (MS 1.5 blocks)
+            b.append('\tSurfaceSkin 0 %d "%s"' % (si, own if si in show else clear))
         b += ['\tScale %.4f %.4f %.4f' % tuple(sc), '\tOffset %.4f %.4f 0.0' % (of[0], of[1]), '\tZOffset %.4f' % of[2]]
         if g['extra'] and scale is None:
             b.append(g['extra'])
@@ -412,6 +413,7 @@ def modeldef(g):
     hide_gun = set(g['hinged']) | rnd | set(g.get('rounds6', [])) | ({g['loader'][0]} if g.get('loader') else set())
     if g['key'] == 'V+/VR_SuperShotgun':
         hide_gun |= {0, 1}          # its new shells (collapsed at rest anyway)
+    hide_gun |= set(g.get('hide', []))   # parts the card measures hidden at rest (card_break.py)
     sg, sp, sw = g['sprites']
     out += block(g['cls'], [(sg, 'A', g['ready'])], [i for i in range(n) if i not in hide_gun],
                  'the gun without its hinged part and rounds (the gun\'s layer while the action is open)')
@@ -680,7 +682,7 @@ def main(out, check=None):
             check_views(g, m, check)
     os.makedirs(out + '/zscript/rsr', exist_ok=True)
     open(out + '/zscript/rsr/rsb_guns.zs', 'w').write('\n'.join(zs(guns)) + '\n')
-    for stn in ('bd', 'vp'):
+    for stn in sorted({g['set'] for g in guns}):
         lines = []
         for g in guns:
             if g['set'] == stn:
