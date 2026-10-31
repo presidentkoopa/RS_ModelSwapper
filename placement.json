@@ -1,0 +1,2558 @@
+{
+ "MS_AE_M260b": {
+  "scale": [
+   -1.1,
+   1.1,
+   1.1
+  ],
+  "offset": [
+   0.0001,
+   -30.0,
+   -6.9992
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_AE_Flamer",
+  "note": "1.x mesh models/hud/AE_Flamer/m260b.md3 = card - t, t=[np.float64(29.5), np.float64(0.3438), np.float64(2.6875)]"
+ },
+ "MS_AE_M37a2": {
+  "scale": [
+   -1.1,
+   1.1,
+   1.1
+  ],
+  "offset": [
+   0.0008,
+   -30.0003,
+   -7.0
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_AE_Shotgun",
+  "note": "1.x mesh models/hud/AE_Shotgun/m37a2.md3 = card - t, t=[np.float64(17.3906), np.float64(0.2344), np.float64(1.25)]"
+ },
+ "MS_AE_M4a3": {
+  "scale": [
+   -0.82,
+   0.82,
+   0.82
+  ],
+  "offset": [
+   0.0002,
+   -28.9999,
+   -7.9994
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_AE_Pistol",
+  "note": "1.x mesh models/hud/AE_Pistol/m4a3.md3 = card - t, t=[np.float64(-1.0938), np.float64(-0.0156), np.float64(-0.5312)]"
+ },
+ "MS_BD_Assaultshotgun": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   0.0001,
+   0.0003,
+   -4.9998
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_AssaultShotgun",
+  "note": "1.x mesh models/hud/AssaultShotgun/AssaultShotgun.md3 = card - t, t=[np.float64(54.6562), np.float64(-0.0469), np.float64(-0.9062)]"
+ },
+ "MS_BD_Axe": {
+  "scale": [
+   -1.5,
+   1.5,
+   1.5
+  ],
+  "offset": [
+   -0.0001,
+   10.0004,
+   5.0011
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_BrutalAxe",
+  "note": "1.x mesh models/hud/Axe/BrutalAxe.md3 = card - t, t=[np.float64(36.4062), np.float64(0.0312), np.float64(8.1875)]"
+ },
+ "MS_BD_Bfg": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   -0.0001,
+   0.0,
+   0.0004
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_VR_BFG9000",
+  "note": "1.x mesh models/hud/BFG9000/BFG.md3 = card - t, t=[np.float64(54.5), np.float64(-0.0781), np.float64(1.0156)]"
+ },
+ "MS_BD_Boot": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   -0.0004,
+   0.0,
+   -4.9996
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_Boot",
+  "note": "1.x mesh models/hud/Kick/Boot.md3 = card - t, t=[np.float64(32.25), np.float64(0.0156), np.float64(-35.1094)]"
+ },
+ "MS_BD_Dragonslayer": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   -0.0001,
+   0.0,
+   -5.0004
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_DSweap",
+  "note": "1.x mesh models/hud/DSweap/DSweap.md3 = card - t, t=[np.float64(32.625), np.float64(-2.2031), np.float64(0.8594)]"
+ },
+ "MS_BD_Grenade": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   -0.0001,
+   -0.0001,
+   -4.9997
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_nade",
+  "note": "1.x mesh models/hud/Grenade/nade.md3 = card - t, t=[np.float64(20.9219), np.float64(0.2969), np.float64(-18.0312)]"
+ },
+ "MS_BD_M79": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   0.0001,
+   -0.0001,
+   -4.9999
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_M79",
+  "note": "1.x mesh models/hud/GrenadeLauncher/M79.md3 = card - t, t=[np.float64(41.2969), np.float64(-0.0469), np.float64(-0.8281)]"
+ },
+ "MS_BD_Machinegun": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   0.0001,
+   -0.0003,
+   -5.0005
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_Machinegun",
+  "note": "1.x mesh models/hud/Machinegun/Machinegun.md3 = card - t, t=[np.float64(52.5938), np.float64(0.2031), np.float64(0.8125)]"
+ },
+ "MS_BD_Minigun": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   0.0004,
+   0.0001,
+   -0.0002
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_Chaingun",
+  "note": "1.x mesh models/hud/Chaingun/Chaingun.md3 = card - t, t=[np.float64(69.3281), np.float64(0.4844), np.float64(-8.4688)]"
+ },
+ "MS_BD_Plasma": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   0.0003,
+   -0.0005,
+   -0.0004
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_PlasmaRifle",
+  "note": "1.x mesh models/hud/PlasmaRifle/PlasmaRifle.md3 = card - t, t=[np.float64(60.6875), np.float64(-0.4688), np.float64(-1.2656)]"
+ },
+ "MS_BD_Railgun": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   -0.0004,
+   -0.0004,
+   -5.0
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_RailGun",
+  "note": "1.x mesh models/hud/RailGun/RailGun.md3 = card - t, t=[np.float64(52.5156), np.float64(0.1406), np.float64(2.75)]"
+ },
+ "MS_BD_Rifle": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   -0.0002,
+   -0.0004,
+   -4.9996
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_Rifle",
+  "note": "1.x mesh models/hud/RifleBD/Rifle.md3 = card - t, t=[np.float64(39.5156), np.float64(0.3438), np.float64(2.2656)]"
+ },
+ "MS_BD_Rpg": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   0.0,
+   -0.0001,
+   -0.0001
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_RocketLauncher",
+  "note": "1.x mesh models/hud/RocketLauncher/RPG.md3 = card - t, t=[np.float64(14.1719), np.float64(-3.25), np.float64(8.8281)]"
+ },
+ "MS_BD_Smg": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   0.0003,
+   -0.0005,
+   -4.9996
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_BrutalSMG",
+  "note": "1.x mesh models/hud/SMG/BrutalSMG.md3 = card - t, t=[np.float64(38.4375), np.float64(0.1562), np.float64(-5.9844)]"
+ },
+ "MS_BD_Unmaker": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   0.0004,
+   -0.0005,
+   -5.0004
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_BD_Unmaker",
+  "note": "1.x mesh models/hud/Unmaker/Unmaker.md3 = card - t, t=[np.float64(56.4375), np.float64(-0.0156), np.float64(-3.6406)]"
+ },
+ "MS_Cola_Piledriver": {
+  "scale": [
+   -1.0,
+   1.0,
+   1.0
+  ],
+  "offset": [
+   -0.0,
+   -27.9999,
+   -7.9996
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_Jackhammer",
+  "note": "1.x mesh models/hud/Jackhammer/jackhammer.md3 = card - t, t=[np.float64(-3.0469), np.float64(-1.375), np.float64(4.2656)]"
+ },
+ "MS_Cola_Revolver": {
+  "scale": [
+   -0.7,
+   0.7,
+   0.7
+  ],
+  "offset": [
+   0.0001,
+   -27.9998,
+   -6.9996
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_Cola_Revolver",
+  "note": "1.x mesh models/hud/Cola_Revolver/revolver.md3 = card - t, t=[np.float64(5.7031), np.float64(-0.0312), np.float64(4.3438)]"
+ },
+ "MS_MG_Bolter": {
+  "scale": [
+   -1.1,
+   1.1,
+   1.1
+  ],
+  "offset": [
+   0.0004,
+   0.0001,
+   -6.0004
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_MG_Bolter",
+  "note": "1.x mesh models/hud/Bolter/Bolter.md3 = card - t, t=[np.float64(37.6719), np.float64(0.2031), np.float64(-4.4688)]"
+ },
+ "MS_RC_Chainsaw": {
+  "scale": [
+   -0.85,
+   0.85,
+   0.85
+  ],
+  "offset": [
+   -0.0005,
+   -21.9994,
+   -9.9994
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_RC_Chainsaw",
+  "note": "1.x mesh models/hud/RC_Chainsaw/chainsaw.md3 = card - t, t=[np.float64(12.3125), np.float64(-0.25), np.float64(2.4688)]"
+ },
+ "MS_RC_M32": {
+  "scale": [
+   -0.62,
+   0.62,
+   0.62
+  ],
+  "offset": [
+   -0.0001,
+   -30.0008,
+   -8.0001
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_RC_M32",
+  "note": "1.x mesh models/hud/RC_M32/m32.md3 = card - t, t=[np.float64(41.6875), np.float64(0.1562), np.float64(7.5938)]"
+ },
+ "MS_VP_Chainsaw": {
+  "scale": [
+   1.35,
+   1.35,
+   1.35
+  ],
+  "offset": [
+   -0.0,
+   -0.0005,
+   -0.0007
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_Chainsaw",
+  "note": "1.x mesh models/hud/Chainsaw/chainsaw.md3 = card - t, t=[np.float64(33.4219), np.float64(-1.8281), np.float64(-11.3906)]"
+ },
+ "MS_VP_M16": {
+  "scale": [
+   1.35,
+   1.35,
+   1.35
+  ],
+  "offset": [
+   0.0002,
+   0.0009,
+   0.0004
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_Rifle",
+  "note": "1.x mesh models/hud/Rifle/m16.md3 = card - t, t=[np.float64(33.9844), np.float64(0.125), np.float64(-2.0625)]"
+ },
+ "MS_VP_Rev": {
+  "scale": [
+   1.35,
+   1.35,
+   1.35
+  ],
+  "offset": [
+   -0.0,
+   -0.0015,
+   0.0008
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_Revolver",
+  "note": "1.x mesh models/hud/Revolver/rev.md3 = card - t, t=[np.float64(25.0781), np.float64(0.0), np.float64(-3.4688)]"
+ },
+ "MS_VP_Shotgun": {
+  "scale": [
+   1.35,
+   1.35,
+   1.35
+  ],
+  "offset": [
+   -0.0002,
+   -0.0005,
+   0.0009
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_Shotgun",
+  "note": "1.x mesh models/hud/Shotgun/shotgun.md3 = card - t, t=[np.float64(30.9219), np.float64(0.0312), np.float64(-2.9844)]"
+ },
+ "MS_VP_Ssg": {
+  "scale": [
+   1.35,
+   1.35,
+   1.35
+  ],
+  "offset": [
+   -0.0,
+   0.0005,
+   0.0003
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "1x-compensated",
+  "ref": "MS_SuperShotgun",
+  "note": "1.x mesh models/hud/SuperShotgun/ssg.md3 = card - t, t=[np.float64(26.9219), np.float64(0.0), np.float64(-2.2188)]"
+ },
+ "MS_AE_Knife": {
+  "scale": [
+   -1.8281,
+   1.8281,
+   1.8281
+  ],
+  "offset": [
+   1.828,
+   7.7194,
+   -14.1538
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 26.4 vs ref 32.1 (k=1.219); grip lands where the ref grip lands"
+ },
+ "MS_AE_Loader": {
+  "scale": [
+   -0.2814,
+   0.2814,
+   0.2814
+  ],
+  "offset": [
+   28.667,
+   -2.4311,
+   8.4068
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 171.3 vs ref 32.1 (k=0.188); grip lands where the ref grip lands"
+ },
+ "MS_AE_M41a": {
+  "scale": [
+   -1.1835,
+   1.1835,
+   1.1835
+  ],
+  "offset": [
+   -3.2094,
+   -37.0198,
+   -8.6549
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 55.1 vs ref 65.3 (k=1.183); grip lands where the ref grip lands"
+ },
+ "MS_AE_M56": {
+  "scale": [
+   -0.7087,
+   0.7087,
+   0.7087
+  ],
+  "offset": [
+   -0.4347,
+   -66.5876,
+   11.985
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Minigun",
+  "ref": "MS_BD_Minigun",
+  "note": "family chaingun; grip->muzzle 134.5 vs ref 95.3 (k=0.709); grip lands where the ref grip lands"
+ },
+ "MS_AE_Satchel": {
+  "scale": [
+   -0.7356,
+   0.7356,
+   0.7356
+  ],
+  "offset": [
+   -4.7787,
+   -33.3388,
+   -10.9912
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Grenade",
+  "ref": "MS_BD_Grenade",
+  "note": "family grenade; grip->muzzle 13.4 vs ref 9.8 (k=0.736); grip lands where the ref grip lands"
+ },
+ "MS_BD_Bfg10k": {
+  "scale": [
+   -0.9577,
+   0.9577,
+   0.9577
+  ],
+  "offset": [
+   -0.0754,
+   -1.1371,
+   -0.137
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Bfg",
+  "ref": "MS_BD_Bfg",
+  "note": "family bfg; grip->muzzle 90.0 vs ref 86.2 (k=0.958); grip lands where the ref grip lands"
+ },
+ "MS_BD_Buzzsaw": {
+  "scale": [
+   -0.5032,
+   0.5032,
+   0.5032
+  ],
+  "offset": [
+   0.7212,
+   -34.2699,
+   -11.077
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Machinegun",
+  "ref": "MS_BD_Machinegun",
+  "note": "family machinegun; grip->muzzle 102.9 vs ref 51.8 (k=0.503); grip lands where the ref grip lands"
+ },
+ "MS_BD_Chainsaw": {
+  "scale": [
+   -3.2802,
+   3.2802,
+   3.2802
+  ],
+  "offset": [
+   0.9784,
+   134.371,
+   178.8127
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_RC_Chainsaw",
+  "ref": "MS_RC_Chainsaw",
+  "note": "family saw; grip->muzzle 6.4 vs ref 24.6 (k=3.859); grip lands where the ref grip lands"
+ },
+ "MS_BD_Fist": {
+  "scale": [
+   -7.2866,
+   7.2866,
+   7.2866
+  ],
+  "offset": [
+   17.6335,
+   155.5682,
+   79.9711
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 6.6 vs ref 32.1 (k=4.858); grip lands where the ref grip lands"
+ },
+ "MS_BD_Flamecannon": {
+  "scale": [
+   -1.2564,
+   1.2564,
+   1.2564
+  ],
+  "offset": [
+   -17.1209,
+   -0.094,
+   -0.6657
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M260b",
+  "ref": "MS_AE_M260b",
+  "note": "family flamethrower; grip->muzzle 39.3 vs ref 44.8 (k=1.142); grip lands where the ref grip lands"
+ },
+ "MS_BD_Flamethrower": {
+  "scale": [
+   -0.7458,
+   0.7458,
+   0.7458
+  ],
+  "offset": [
+   -4.347,
+   -58.8742,
+   3.8344
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M260b",
+  "ref": "MS_AE_M260b",
+  "note": "family flamethrower; grip->muzzle 66.1 vs ref 44.8 (k=0.678); grip lands where the ref grip lands"
+ },
+ "MS_BD_Hellishmissile": {
+  "scale": [
+   -1.3284,
+   1.3284,
+   1.3284
+  ],
+  "offset": [
+   -12.0605,
+   52.334,
+   6.8614
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rpg",
+  "ref": "MS_BD_Rpg",
+  "note": "family rocket; grip->muzzle 61.5 vs ref 81.6 (k=1.328); grip lands where the ref grip lands"
+ },
+ "MS_BD_Mp40": {
+  "scale": [
+   -0.5174,
+   0.5174,
+   0.5174
+  ],
+  "offset": [
+   2.1039,
+   -16.7968,
+   -6.8222
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Smg",
+  "ref": "MS_BD_Smg",
+  "note": "family smg; grip->muzzle 65.6 vs ref 34.0 (k=0.517); grip lands where the ref grip lands"
+ },
+ "MS_BD_Pistol": {
+  "scale": [
+   -0.8987,
+   0.8987,
+   0.8987
+  ],
+  "offset": [
+   0.3837,
+   -4.472,
+   -4.7468
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 21.6 vs ref 23.6 (k=1.096); grip lands where the ref grip lands"
+ },
+ "MS_BD_Revolver": {
+  "scale": [
+   -1.504,
+   1.504,
+   1.504
+  ],
+  "offset": [
+   -0.093,
+   26.2861,
+   -1.1301
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_Cola_Revolver",
+  "ref": "MS_Cola_Revolver",
+  "note": "family revolver; grip->muzzle 20.0 vs ref 43.1 (k=2.149); grip lands where the ref grip lands"
+ },
+ "MS_BD_Shotgun": {
+  "scale": [
+   -1.0012,
+   1.0012,
+   1.0012
+  ],
+  "offset": [
+   -1.4324,
+   6.3847,
+   -5.3242
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M37a2",
+  "ref": "MS_AE_M37a2",
+  "note": "family shotgun; grip->muzzle 63.0 vs ref 57.3 (k=0.910); grip lands where the ref grip lands"
+ },
+ "MS_BD_Ssg": {
+  "scale": [
+   2.3603,
+   2.3603,
+   2.3603
+  ],
+  "offset": [
+   2.1465,
+   28.2095,
+   2.837
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_VP_Ssg",
+  "ref": "MS_VP_Ssg",
+  "note": "family supershotgun; grip->muzzle 18.7 vs ref 32.7 (k=1.748); grip lands where the ref grip lands"
+ },
+ "MS_BW_1911": {
+  "scale": [
+   -0.8608,
+   0.8608,
+   0.8608
+  ],
+  "offset": [
+   2.5621,
+   -5.8532,
+   -5.3298
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 22.5 vs ref 23.6 (k=1.050); grip lands where the ref grip lands"
+ },
+ "MS_BW_Axe": {
+  "scale": [
+   -2.016,
+   2.016,
+   2.016
+  ],
+  "offset": [
+   -1.7742,
+   69.0455,
+   2.7778
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family axe; grip->muzzle 23.9 vs ref 32.1 (k=1.344); grip lands where the ref grip lands"
+ },
+ "MS_BW_Bar": {
+  "scale": [
+   -0.6944,
+   0.6944,
+   0.6944
+  ],
+  "offset": [
+   -5.5621,
+   -1.2652,
+   -14.5985
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Machinegun",
+  "ref": "MS_BD_Machinegun",
+  "note": "family machinegun; grip->muzzle 74.5 vs ref 51.8 (k=0.694); grip lands where the ref grip lands"
+ },
+ "MS_BW_Chaingun": {
+  "scale": [
+   -0.9789,
+   0.9789,
+   0.9789
+  ],
+  "offset": [
+   2.3376,
+   -2.0,
+   6.8651
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Minigun",
+  "ref": "MS_BD_Minigun",
+  "note": "family chaingun; grip->muzzle 97.4 vs ref 95.3 (k=0.979); grip lands where the ref grip lands"
+ },
+ "MS_BW_Flame": {
+  "scale": [
+   -3.2151,
+   3.2151,
+   3.2151
+  ],
+  "offset": [
+   -11.5273,
+   222.2268,
+   3.6796
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M260b",
+  "ref": "MS_AE_M260b",
+  "note": "family flamethrower; grip->muzzle 15.3 vs ref 44.8 (k=2.923); grip lands where the ref grip lands"
+ },
+ "MS_BW_Garand": {
+  "scale": [
+   -0.7532,
+   0.7532,
+   0.7532
+  ],
+  "offset": [
+   -1.3631,
+   -6.8475,
+   -5.9928
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 86.6 vs ref 65.3 (k=0.753); grip lands where the ref grip lands"
+ },
+ "MS_BW_Grenade": {
+  "scale": [
+   -0.6426,
+   0.6426,
+   0.6426
+  ],
+  "offset": [
+   -3.9272,
+   -11.1429,
+   -12.928
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Grenade",
+  "ref": "MS_BD_Grenade",
+  "note": "family grenade; grip->muzzle 15.3 vs ref 9.8 (k=0.643); grip lands where the ref grip lands"
+ },
+ "MS_BW_Kar98": {
+  "scale": [
+   -0.7477,
+   0.7477,
+   0.7477
+  ],
+  "offset": [
+   -1.3592,
+   -7.4747,
+   -6.5888
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 87.3 vs ref 65.3 (k=0.748); grip lands where the ref grip lands"
+ },
+ "MS_BW_Knife": {
+  "scale": [
+   -2.3176,
+   2.3176,
+   2.3176
+  ],
+  "offset": [
+   -0.0001,
+   31.1472,
+   22.495
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 20.8 vs ref 32.1 (k=1.545); grip lands where the ref grip lands"
+ },
+ "MS_BW_Luger": {
+  "scale": [
+   -0.8623,
+   0.8623,
+   0.8623
+  ],
+  "offset": [
+   2.8483,
+   -5.7409,
+   -5.9711
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 22.5 vs ref 23.6 (k=1.052); grip lands where the ref grip lands"
+ },
+ "MS_BW_Mg42": {
+  "scale": [
+   -0.5074,
+   0.5074,
+   0.5074
+  ],
+  "offset": [
+   2.0201,
+   -35.2369,
+   -11.6777
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Machinegun",
+  "ref": "MS_BD_Machinegun",
+  "note": "family machinegun; grip->muzzle 102.0 vs ref 51.8 (k=0.507); grip lands where the ref grip lands"
+ },
+ "MS_BW_Mp40": {
+  "scale": [
+   -0.6169,
+   0.6169,
+   0.6169
+  ],
+  "offset": [
+   1.7003,
+   -12.1375,
+   -6.9975
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Smg",
+  "ref": "MS_BD_Smg",
+  "note": "family smg; grip->muzzle 55.0 vs ref 34.0 (k=0.617); grip lands where the ref grip lands"
+ },
+ "MS_BW_Pp41": {
+  "scale": [
+   -0.3195,
+   0.3195,
+   0.3195
+  ],
+  "offset": [
+   2.1287,
+   -17.4977,
+   -6.9944
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 60.7 vs ref 23.6 (k=0.390); grip lands where the ref grip lands"
+ },
+ "MS_BW_Shotgun": {
+  "scale": [
+   -0.9095,
+   0.9095,
+   0.9095
+  ],
+  "offset": [
+   -1.2436,
+   1.7729,
+   -7.0626
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M37a2",
+  "ref": "MS_AE_M37a2",
+  "note": "family shotgun; grip->muzzle 69.3 vs ref 57.3 (k=0.827); grip lands where the ref grip lands"
+ },
+ "MS_BW_Stg44": {
+  "scale": [
+   -1.1063,
+   1.1063,
+   1.1063
+  ],
+  "offset": [
+   -3.055,
+   2.5066,
+   -4.8221
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 59.0 vs ref 65.3 (k=1.106); grip lands where the ref grip lands"
+ },
+ "MS_BW_Tommy": {
+  "scale": [
+   -0.7407,
+   0.7407,
+   0.7407
+  ],
+  "offset": [
+   1.7003,
+   -9.3431,
+   -6.5705
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Smg",
+  "ref": "MS_BD_Smg",
+  "note": "family smg; grip->muzzle 45.8 vs ref 34.0 (k=0.741); grip lands where the ref grip lands"
+ },
+ "MS_CX_Largezorcher": {
+  "scale": [
+   -3.2768,
+   3.2768,
+   3.2768
+  ],
+  "offset": [
+   13.799,
+   -8.5418,
+   -19.9602
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M37a2",
+  "ref": "MS_AE_M37a2",
+  "note": "family shotgun; grip->muzzle 19.2 vs ref 57.3 (k=2.979); grip lands where the ref grip lands"
+ },
+ "MS_CX_Lazdevice": {
+  "scale": [
+   -1.8088,
+   1.8088,
+   1.8088
+  ],
+  "offset": [
+   56.6088,
+   19.6511,
+   -12.0043
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Bfg",
+  "ref": "MS_BD_Bfg",
+  "note": "family bfg; grip->muzzle 47.7 vs ref 86.2 (k=1.809); grip lands where the ref grip lands"
+ },
+ "MS_CX_Minizorcher": {
+  "scale": [
+   -1.4744,
+   1.4744,
+   1.4744
+  ],
+  "offset": [
+   3.2604,
+   -22.4231,
+   -15.1803
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 13.1 vs ref 23.6 (k=1.798); grip lands where the ref grip lands"
+ },
+ "MS_CX_Phasingzorcher": {
+  "scale": [
+   -2.4263,
+   2.4263,
+   2.4263
+  ],
+  "offset": [
+   13.3815,
+   24.9833,
+   -8.6995
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Plasma",
+  "ref": "MS_BD_Plasma",
+  "note": "family plasma; grip->muzzle 30.1 vs ref 73.0 (k=2.426); grip lands where the ref grip lands"
+ },
+ "MS_CX_Rapidzorcher": {
+  "scale": [
+   -4.0025,
+   4.0025,
+   4.0025
+  ],
+  "offset": [
+   61.1978,
+   -24.1769,
+   -6.9681
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Minigun",
+  "ref": "MS_BD_Minigun",
+  "note": "family chaingun; grip->muzzle 23.8 vs ref 95.3 (k=4.002); grip lands where the ref grip lands"
+ },
+ "MS_CX_Spoon": {
+  "scale": [
+   -5.0178,
+   5.0178,
+   5.0178
+  ],
+  "offset": [
+   -4.4158,
+   9.3835,
+   10.9673
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 9.6 vs ref 32.1 (k=3.345); grip lands where the ref grip lands"
+ },
+ "MS_CX_Spork": {
+  "scale": [
+   -1.6996,
+   1.6996,
+   1.6996
+  ],
+  "offset": [
+   13.9126,
+   -17.6921,
+   -7.7041
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_RC_Chainsaw",
+  "ref": "MS_RC_Chainsaw",
+  "note": "family saw; grip->muzzle 12.3 vs ref 24.6 (k=2.000); grip lands where the ref grip lands"
+ },
+ "MS_CX_Superlargezorcher": {
+  "scale": [
+   2.8452,
+   2.8452,
+   2.8452
+  ],
+  "offset": [
+   -13.1205,
+   -11.9056,
+   -11.7533
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_VP_Ssg",
+  "ref": "MS_VP_Ssg",
+  "note": "family supershotgun; grip->muzzle 15.5 vs ref 32.7 (k=2.108); grip lands where the ref grip lands"
+ },
+ "MS_CX_Zorchpropulsor": {
+  "scale": [
+   -2.8609,
+   2.8609,
+   2.8609
+  ],
+  "offset": [
+   20.1767,
+   32.9516,
+   4.6326
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rpg",
+  "ref": "MS_BD_Rpg",
+  "note": "family rocket; grip->muzzle 28.5 vs ref 81.6 (k=2.861); grip lands where the ref grip lands"
+ },
+ "MS_Cola_Carddeck": {
+  "scale": [
+   -0.4163,
+   0.4163,
+   0.4163
+  ],
+  "offset": [
+   -6.8878,
+   -24.5589,
+   -11.8277
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Grenade",
+  "ref": "MS_BD_Grenade",
+  "note": "family grenade; grip->muzzle 23.6 vs ref 9.8 (k=0.416); grip lands where the ref grip lands"
+ },
+ "MS_Cola_Frypan": {
+  "scale": [
+   -1.9044,
+   1.9044,
+   1.9044
+  ],
+  "offset": [
+   95.3129,
+   -33.5761,
+   -135.7198
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 25.3 vs ref 32.1 (k=1.270); grip lands where the ref grip lands"
+ },
+ "MS_Cola_Ks23": {
+  "scale": [
+   -1.0225,
+   1.0225,
+   1.0225
+  ],
+  "offset": [
+   0.0003,
+   -35.373,
+   -9.3783
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M37a2",
+  "ref": "MS_AE_M37a2",
+  "note": "family shotgun; grip->muzzle 61.6 vs ref 57.3 (k=0.930); grip lands where the ref grip lands"
+ },
+ "MS_Cola_Particlegun": {
+  "scale": [
+   -1.3791,
+   1.3791,
+   1.3791
+  ],
+  "offset": [
+   -1.236,
+   -30.83,
+   -3.5206
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Plasma",
+  "ref": "MS_BD_Plasma",
+  "note": "family plasma; grip->muzzle 53.0 vs ref 73.0 (k=1.379); grip lands where the ref grip lands"
+ },
+ "MS_Cola_Plasmagun": {
+  "scale": [
+   -2.7468,
+   2.7468,
+   2.7468
+  ],
+  "offset": [
+   2.5924,
+   -33.3558,
+   -16.559
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Plasma",
+  "ref": "MS_BD_Plasma",
+  "note": "family plasma; grip->muzzle 26.6 vs ref 73.0 (k=2.747); grip lands where the ref grip lands"
+ },
+ "MS_Cola_Sidewinder": {
+  "scale": [
+   -1.3178,
+   1.3178,
+   1.3178
+  ],
+  "offset": [
+   -3.8123,
+   29.1294,
+   15.3491
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rpg",
+  "ref": "MS_BD_Rpg",
+  "note": "family rocket; grip->muzzle 62.0 vs ref 81.6 (k=1.318); grip lands where the ref grip lands"
+ },
+ "MS_D64_Boot": {
+  "scale": [
+   -1.6922,
+   1.6922,
+   1.6922
+  ],
+  "offset": [
+   -2.1669,
+   20.0875,
+   51.8583
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Boot",
+  "ref": "MS_BD_Boot",
+  "note": "family kick; grip->muzzle 17.8 vs ref 30.1 (k=1.692); grip lands where the ref grip lands"
+ },
+ "MS_D64_Chainsaw": {
+  "scale": [
+   -0.8005,
+   0.8005,
+   0.8005
+  ],
+  "offset": [
+   16.0275,
+   29.6719,
+   0.0381
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_RC_Chainsaw",
+  "ref": "MS_RC_Chainsaw",
+  "note": "family saw; grip->muzzle 26.2 vs ref 24.6 (k=0.942); grip lands where the ref grip lands"
+ },
+ "MS_HX_Cryogun": {
+  "scale": [
+   -1.4938,
+   1.4938,
+   1.4938
+  ],
+  "offset": [
+   -3.0804,
+   33.1354,
+   -2.7336
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Plasma",
+  "ref": "MS_BD_Plasma",
+  "note": "family plasma; grip->muzzle 48.9 vs ref 73.0 (k=1.494); grip lands where the ref grip lands"
+ },
+ "MS_HX_Melee": {
+  "scale": [
+   -4.9423,
+   4.9423,
+   4.9423
+  ],
+  "offset": [
+   -0.0001,
+   93.4415,
+   62.2046
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 9.8 vs ref 32.1 (k=3.295); grip lands where the ref grip lands"
+ },
+ "MS_HX_Nuker": {
+  "scale": [
+   -2.3482,
+   2.3482,
+   2.3482
+  ],
+  "offset": [
+   -0.2303,
+   40.4333,
+   9.149
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Bfg",
+  "ref": "MS_BD_Bfg",
+  "note": "family bfg; grip->muzzle 36.7 vs ref 86.2 (k=2.348); grip lands where the ref grip lands"
+ },
+ "MS_HX_Pistol": {
+  "scale": [
+   -0.38,
+   0.38,
+   0.38
+  ],
+  "offset": [
+   1.0425,
+   -17.0185,
+   -6.6928
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 51.0 vs ref 23.6 (k=0.463); grip lands where the ref grip lands"
+ },
+ "MS_HX_Reznator": {
+  "scale": [
+   -0.5313,
+   0.5313,
+   0.5313
+  ],
+  "offset": [
+   -3.2161,
+   -17.5925,
+   -6.0042
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 36.5 vs ref 23.6 (k=0.648); grip lands where the ref grip lands"
+ },
+ "MS_HX_Stick": {
+  "scale": [
+   -1.2973,
+   1.2973,
+   1.2973
+  ],
+  "offset": [
+   -1.6995,
+   21.654,
+   14.0739
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 37.2 vs ref 32.1 (k=0.865); grip lands where the ref grip lands"
+ },
+ "MS_HX_Tazer": {
+  "scale": [
+   -2.6929,
+   2.6929,
+   2.6929
+  ],
+  "offset": [
+   2.1354,
+   51.7943,
+   5.0152
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 7.2 vs ref 23.6 (k=3.284); grip lands where the ref grip lands"
+ },
+ "MS_HX_Uzi": {
+  "scale": [
+   -1.1886,
+   1.1886,
+   1.1886
+  ],
+  "offset": [
+   0.6424,
+   3.5517,
+   -4.6932
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Smg",
+  "ref": "MS_BD_Smg",
+  "note": "family smg; grip->muzzle 28.6 vs ref 34.0 (k=1.189); grip lands where the ref grip lands"
+ },
+ "MS_HX_Zooka": {
+  "scale": [
+   -11.0965,
+   11.0965,
+   11.0965
+  ],
+  "offset": [
+   -121.2647,
+   944.736,
+   -29.0748
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rpg",
+  "ref": "MS_BD_Rpg",
+  "note": "family rocket; grip->muzzle 7.4 vs ref 81.6 (k=11.097); grip lands where the ref grip lands"
+ },
+ "MS_HP_Blaster": {
+  "scale": [
+   -0.4388,
+   0.4388,
+   0.4388
+  ],
+  "offset": [
+   1.5229,
+   -24.7344,
+   -10.8827
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 44.2 vs ref 23.6 (k=0.535); grip lands where the ref grip lands"
+ },
+ "MS_HP_Cannon": {
+  "scale": [
+   -0.1844,
+   0.1844,
+   0.1844
+  ],
+  "offset": [
+   4.4241,
+   -35.7683,
+   -9.7707
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_M79",
+  "ref": "MS_BD_M79",
+  "note": "family launcher; grip->muzzle 117.9 vs ref 21.8 (k=0.184); grip lands where the ref grip lands"
+ },
+ "MS_HP_Rifle": {
+  "scale": [
+   -1.4194,
+   1.4194,
+   1.4194
+  ],
+  "offset": [
+   1.6884,
+   -29.8285,
+   -12.4543
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 46.0 vs ref 65.3 (k=1.419); grip lands where the ref grip lands"
+ },
+ "MS_HP_Wand": {
+  "scale": [
+   -1.3162,
+   1.3162,
+   1.3162
+  ],
+  "offset": [
+   3.6771,
+   -26.1033,
+   -6.7889
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 14.7 vs ref 23.6 (k=1.605); grip lands where the ref grip lands"
+ },
+ "MS_MG_Bfg": {
+  "scale": [
+   -1.1233,
+   1.1233,
+   1.1233
+  ],
+  "offset": [
+   -1.0387,
+   7.8648,
+   0.4011
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Bfg",
+  "ref": "MS_BD_Bfg",
+  "note": "family bfg; grip->muzzle 76.8 vs ref 86.2 (k=1.123); grip lands where the ref grip lands"
+ },
+ "MS_MG_Chaingun": {
+  "scale": [
+   -1.3559,
+   1.3559,
+   1.3559
+  ],
+  "offset": [
+   0.9821,
+   21.8379,
+   20.3227
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Minigun",
+  "ref": "MS_BD_Minigun",
+  "note": "family chaingun; grip->muzzle 70.3 vs ref 95.3 (k=1.356); grip lands where the ref grip lands"
+ },
+ "MS_MG_Knife": {
+  "scale": [
+   -5.434,
+   5.434,
+   5.434
+  ],
+  "offset": [
+   -2.4454,
+   115.3232,
+   86.7487
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 8.9 vs ref 32.1 (k=3.623); grip lands where the ref grip lands"
+ },
+ "MS_MG_Rpg": {
+  "scale": [
+   -1.3375,
+   1.3375,
+   1.3375
+  ],
+  "offset": [
+   -2.6043,
+   51.4002,
+   20.2987
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rpg",
+  "ref": "MS_BD_Rpg",
+  "note": "family rocket; grip->muzzle 61.0 vs ref 81.6 (k=1.338); grip lands where the ref grip lands"
+ },
+ "MS_MG_Saw": {
+  "scale": [
+   -0.2092,
+   0.2092,
+   0.2092
+  ],
+  "offset": [
+   10.7928,
+   -19.0506,
+   -6.1536
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_RC_Chainsaw",
+  "ref": "MS_RC_Chainsaw",
+  "note": "family saw; grip->muzzle 100.1 vs ref 24.6 (k=0.246); grip lands where the ref grip lands"
+ },
+ "MS_MG_Shotgun": {
+  "scale": [
+   -1.086,
+   1.086,
+   1.086
+  ],
+  "offset": [
+   0.9402,
+   10.5016,
+   -5.5104
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M37a2",
+  "ref": "MS_AE_M37a2",
+  "note": "family shotgun; grip->muzzle 58.0 vs ref 57.3 (k=0.987); grip lands where the ref grip lands"
+ },
+ "MS_MG_Ssg": {
+  "scale": [
+   1.0016,
+   1.0016,
+   1.0016
+  ],
+  "offset": [
+   -2.173,
+   0.4242,
+   1.6149
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_VP_Ssg",
+  "ref": "MS_VP_Ssg",
+  "note": "family supershotgun; grip->muzzle 44.1 vs ref 32.7 (k=0.742); grip lands where the ref grip lands"
+ },
+ "MS_MG_Tec9": {
+  "scale": [
+   -1.4386,
+   1.4386,
+   1.4386
+  ],
+  "offset": [
+   1.5852,
+   -40.4629,
+   0.5212
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Smg",
+  "ref": "MS_BD_Smg",
+  "note": "family smg; grip->muzzle 23.6 vs ref 34.0 (k=1.439); grip lands where the ref grip lands"
+ },
+ "MS_PD_Blunderbuss": {
+  "scale": [
+   -1.2142,
+   1.2142,
+   1.2142
+  ],
+  "offset": [
+   2.2511,
+   -5.9088,
+   -14.0716
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M37a2",
+  "ref": "MS_AE_M37a2",
+  "note": "family shotgun; grip->muzzle 51.9 vs ref 57.3 (k=1.104); grip lands where the ref grip lands"
+ },
+ "MS_PD_Bomb": {
+  "scale": [
+   -4.419,
+   4.419,
+   4.419
+  ],
+  "offset": [
+   7.8145,
+   16.7964,
+   -43.5307
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Grenade",
+  "ref": "MS_BD_Grenade",
+  "note": "family grenade; grip->muzzle 2.2 vs ref 9.8 (k=4.419); grip lands where the ref grip lands"
+ },
+ "MS_PD_Cannon": {
+  "scale": [
+   -0.4163,
+   0.4163,
+   0.4163
+  ],
+  "offset": [
+   5.5149,
+   -25.9288,
+   -9.19
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_M79",
+  "ref": "MS_BD_M79",
+  "note": "family launcher; grip->muzzle 52.3 vs ref 21.8 (k=0.416); grip lands where the ref grip lands"
+ },
+ "MS_PD_Cutlass": {
+  "scale": [
+   -3.7786,
+   3.7786,
+   3.7786
+  ],
+  "offset": [
+   -5.5254,
+   -7.7715,
+   -41.2053
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Dragonslayer",
+  "ref": "MS_BD_Dragonslayer",
+  "note": "family sword; grip->muzzle 39.2 vs ref 148.2 (k=3.779); grip lands where the ref grip lands"
+ },
+ "MS_PD_Flintlock": {
+  "scale": [
+   -0.707,
+   0.707,
+   0.707
+  ],
+  "offset": [
+   2.6277,
+   -14.4135,
+   -11.1186
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 27.4 vs ref 23.6 (k=0.862); grip lands where the ref grip lands"
+ },
+ "MS_PD_Grog": {
+  "scale": [
+   -0.2024,
+   0.2024,
+   0.2024
+  ],
+  "offset": [
+   -3.5758,
+   -25.5931,
+   -11.2448
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Grenade",
+  "ref": "MS_BD_Grenade",
+  "note": "family grenade; grip->muzzle 48.6 vs ref 9.8 (k=0.202); grip lands where the ref grip lands"
+ },
+ "MS_PD_Mortar": {
+  "scale": [
+   -0.7188,
+   0.7188,
+   0.7188
+  ],
+  "offset": [
+   3.053,
+   -16.0127,
+   -12.7764
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_M79",
+  "ref": "MS_BD_M79",
+  "note": "family launcher; grip->muzzle 30.3 vs ref 21.8 (k=0.719); grip lands where the ref grip lands"
+ },
+ "MS_PD_Musket": {
+  "scale": [
+   -0.8442,
+   0.8442,
+   0.8442
+  ],
+  "offset": [
+   -0.5264,
+   -16.2,
+   -11.8983
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 77.3 vs ref 65.3 (k=0.844); grip lands where the ref grip lands"
+ },
+ "MS_PD_Nock": {
+  "scale": [
+   -1.1022,
+   1.1022,
+   1.1022
+  ],
+  "offset": [
+   -3.7228,
+   -12.3046,
+   -13.059
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 59.2 vs ref 65.3 (k=1.102); grip lands where the ref grip lands"
+ },
+ "MS_PD_Repeater": {
+  "scale": [
+   -1.1164,
+   1.1164,
+   1.1164
+  ],
+  "offset": [
+   7.2834,
+   -19.9133,
+   1.2648
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 58.5 vs ref 65.3 (k=1.116); grip lands where the ref grip lands"
+ },
+ "MS_PD_Superpistol": {
+  "scale": [
+   -0.3829,
+   0.3829,
+   0.3829
+  ],
+  "offset": [
+   1.2638,
+   -22.5681,
+   -9.8044
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 50.6 vs ref 23.6 (k=0.467); grip lands where the ref grip lands"
+ },
+ "MS_PD_Swivelcannon": {
+  "scale": [
+   -0.3403,
+   0.3403,
+   0.3403
+  ],
+  "offset": [
+   3.8087,
+   -29.7363,
+   -7.5705
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_M79",
+  "ref": "MS_BD_M79",
+  "note": "family launcher; grip->muzzle 63.9 vs ref 21.8 (k=0.340); grip lands where the ref grip lands"
+ },
+ "MS_PO_Glove": {
+  "scale": [
+   -3.4911,
+   3.4911,
+   3.4911
+  ],
+  "offset": [
+   -14.8371,
+   -11.24,
+   9.1363
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 13.8 vs ref 32.1 (k=2.327); grip lands where the ref grip lands"
+ },
+ "MS_RC_Auto9": {
+  "scale": [
+   -0.6791,
+   0.6791,
+   0.6791
+  ],
+  "offset": [
+   2.3437,
+   -18.37,
+   -12.6468
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 28.5 vs ref 23.6 (k=0.828); grip lands where the ref grip lands"
+ },
+ "MS_RC_Chaingun": {
+  "scale": [
+   -1.7833,
+   1.7833,
+   1.7833
+  ],
+  "offset": [
+   36.5015,
+   -22.4842,
+   -6.0324
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Minigun",
+  "ref": "MS_BD_Minigun",
+  "note": "family chaingun; grip->muzzle 53.5 vs ref 95.3 (k=1.783); grip lands where the ref grip lands"
+ },
+ "MS_RC_Cobra": {
+  "scale": [
+   -0.416,
+   0.416,
+   0.416
+  ],
+  "offset": [
+   -1.1572,
+   -30.5921,
+   -8.0549
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 156.9 vs ref 65.3 (k=0.416); grip lands where the ref grip lands"
+ },
+ "MS_RC_Fist": {
+  "scale": [
+   -4.1275,
+   4.1275,
+   4.1275
+  ],
+  "offset": [
+   -5.0356,
+   -22.6187,
+   0.3305
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 11.7 vs ref 32.1 (k=2.752); grip lands where the ref grip lands"
+ },
+ "MS_RC_Ksg": {
+  "scale": [
+   -0.7427,
+   0.7427,
+   0.7427
+  ],
+  "offset": [
+   1.2616,
+   -53.4471,
+   -7.1587
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M37a2",
+  "ref": "MS_AE_M37a2",
+  "note": "family shotgun; grip->muzzle 84.9 vs ref 57.3 (k=0.675); grip lands where the ref grip lands"
+ },
+ "MS_RC_M27": {
+  "scale": [
+   -0.9232,
+   0.9232,
+   0.9232
+  ],
+  "offset": [
+   -4.0716,
+   -51.8715,
+   -3.234
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Plasma",
+  "ref": "MS_BD_Plasma",
+  "note": "family plasma; grip->muzzle 79.1 vs ref 73.0 (k=0.923); grip lands where the ref grip lands"
+ },
+ "MS_RC_Shotgun": {
+  "scale": [
+   -1.2626,
+   1.2626,
+   1.2626
+  ],
+  "offset": [
+   -1.1737,
+   38.8061,
+   -20.5202
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M37a2",
+  "ref": "MS_AE_M37a2",
+  "note": "family shotgun; grip->muzzle 49.9 vs ref 57.3 (k=1.148); grip lands where the ref grip lands"
+ },
+ "MS_UV_ChaingunD4": {
+  "scale": [
+   -1.5416,
+   1.5416,
+   1.5416
+  ],
+  "offset": [
+   12.5495,
+   -34.4126,
+   7.8318
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Minigun",
+  "ref": "MS_BD_Minigun",
+  "note": "family chaingun; grip->muzzle 61.8 vs ref 95.3 (k=1.542); grip lands where the ref grip lands"
+ },
+ "MS_UV_ShotgunD4": {
+  "scale": [
+   -1.2821,
+   1.2821,
+   1.2821
+  ],
+  "offset": [
+   2.353,
+   -20.6319,
+   -9.0628
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M37a2",
+  "ref": "MS_AE_M37a2",
+  "note": "family shotgun; grip->muzzle 49.2 vs ref 57.3 (k=1.166); grip lands where the ref grip lands"
+ },
+ "MS_UV_SsgD4": {
+  "scale": [
+   6.1418,
+   6.1418,
+   6.1418
+  ],
+  "offset": [
+   -19.9375,
+   -28.7474,
+   -8.8564
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_VP_Ssg",
+  "ref": "MS_VP_Ssg",
+  "note": "family supershotgun; grip->muzzle 7.2 vs ref 32.7 (k=4.550); grip lands where the ref grip lands"
+ },
+ "MS_HV_Crossbow": {
+  "scale": [
+   -0.9668,
+   0.9668,
+   0.9668
+  ],
+  "offset": [
+   0.9531,
+   -28.5877,
+   1.3143
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rifle",
+  "ref": "MS_BD_Rifle",
+  "note": "family rifle; grip->muzzle 67.5 vs ref 65.3 (k=0.967); grip lands where the ref grip lands"
+ },
+ "MS_HV_Dragonclaw": {
+  "scale": [
+   -4.8641,
+   4.8641,
+   4.8641
+  ],
+  "offset": [
+   1.5752,
+   46.8907,
+   1.3111
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 4.0 vs ref 23.6 (k=5.932); grip lands where the ref grip lands"
+ },
+ "MS_HV_Gauntlet": {
+  "scale": [
+   -7.2945,
+   7.2945,
+   7.2945
+  ],
+  "offset": [
+   38.9524,
+   -80.5455,
+   -7.1707
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 6.6 vs ref 32.1 (k=4.863); grip lands where the ref grip lands"
+ },
+ "MS_HV_Mace": {
+  "scale": [
+   -7.1416,
+   7.1416,
+   7.1416
+  ],
+  "offset": [
+   0.2856,
+   181.8764,
+   86.8371
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 6.7 vs ref 32.1 (k=4.761); grip lands where the ref grip lands"
+ },
+ "MS_HV_Phoenixrod": {
+  "scale": [
+   -1.2975,
+   1.2975,
+   1.2975
+  ],
+  "offset": [
+   -2.4138,
+   -4.8271,
+   6.6311
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Rpg",
+  "ref": "MS_BD_Rpg",
+  "note": "family rocket; grip->muzzle 62.9 vs ref 81.6 (k=1.297); grip lands where the ref grip lands"
+ },
+ "MS_HV_Skullrod": {
+  "scale": [
+   -7.0507,
+   7.0507,
+   7.0507
+  ],
+  "offset": [
+   2.6037,
+   374.0221,
+   35.9619
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Plasma",
+  "ref": "MS_BD_Plasma",
+  "note": "family plasma; grip->muzzle 10.4 vs ref 73.0 (k=7.051); grip lands where the ref grip lands"
+ },
+ "MS_HV_Staff": {
+  "scale": [
+   -8.4149,
+   8.4149,
+   8.4149
+  ],
+  "offset": [
+   -24.7398,
+   775.2341,
+   141.688
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 5.7 vs ref 32.1 (k=5.610); grip lands where the ref grip lands"
+ },
+ "MS_HV_Wand": {
+  "scale": [
+   -0.6922,
+   0.6922,
+   0.6922
+  ],
+  "offset": [
+   1.6238,
+   -1.3982,
+   -6.5134
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 28.0 vs ref 23.6 (k=0.844); grip lands where the ref grip lands"
+ },
+ "MS_VP_Minigun": {
+  "scale": [
+   -3.4547,
+   3.4547,
+   3.4547
+  ],
+  "offset": [
+   -12.1585,
+   84.0985,
+   5.0289
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Minigun",
+  "ref": "MS_BD_Minigun",
+  "note": "family chaingun; grip->muzzle 27.6 vs ref 95.3 (k=3.455); grip lands where the ref grip lands"
+ },
+ "MS_VP_Plasma": {
+  "scale": [
+   -2.3144,
+   2.3144,
+   2.3144
+  ],
+  "offset": [
+   -4.989,
+   18.3629,
+   -2.2209
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Plasma",
+  "ref": "MS_BD_Plasma",
+  "note": "family plasma; grip->muzzle 31.6 vs ref 73.0 (k=2.314); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Flaregun": {
+  "scale": [
+   -1.046,
+   1.046,
+   1.046
+  ],
+  "offset": [
+   0.3372,
+   -23.3332,
+   -11.977
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M4a3",
+  "ref": "MS_AE_M4a3",
+  "note": "family pistol; grip->muzzle 18.5 vs ref 23.6 (k=1.276); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Lifeleech": {
+  "scale": [
+   -2.5226,
+   2.5226,
+   2.5226
+  ],
+  "offset": [
+   -1.747,
+   -28.063,
+   -7.0916
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Plasma",
+  "ref": "MS_BD_Plasma",
+  "note": "family plasma; grip->muzzle 29.0 vs ref 73.0 (k=2.523); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Napalm": {
+  "scale": [
+   -1.4984,
+   1.4984,
+   1.4984
+  ],
+  "offset": [
+   -3.015,
+   -48.7032,
+   3.0531
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_AE_M260b",
+  "ref": "MS_AE_M260b",
+  "note": "family flamethrower; grip->muzzle 32.9 vs ref 44.8 (k=1.362); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Pitchfork": {
+  "scale": [
+   -3.7364,
+   3.7364,
+   3.7364
+  ],
+  "offset": [
+   -38.0744,
+   135.1015,
+   37.7659
+  ],
+  "angle": 0.0,
+  "pitch": -10.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Axe",
+  "ref": "MS_BD_Axe",
+  "note": "family melee (no stamped donor; FALLBACK via axe); grip->muzzle 12.9 vs ref 32.1 (k=2.491); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Sawedoff": {
+  "scale": [
+   1.9748,
+   1.9748,
+   1.9748
+  ],
+  "offset": [
+   1.1342,
+   -37.7425,
+   7.8944
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_VP_Ssg",
+  "ref": "MS_VP_Ssg",
+  "note": "family supershotgun; grip->muzzle 22.4 vs ref 32.7 (k=1.463); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Spraycan": {
+  "scale": [
+   -0.2848,
+   0.2848,
+   0.2848
+  ],
+  "offset": [
+   -3.9088,
+   -30.2043,
+   -8.6678
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Grenade",
+  "ref": "MS_BD_Grenade",
+  "note": "family grenade; grip->muzzle 34.6 vs ref 9.8 (k=0.285); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Teslagun": {
+  "scale": [
+   -2.0328,
+   2.0328,
+   2.0328
+  ],
+  "offset": [
+   2.1786,
+   -4.178,
+   -14.3764
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Plasma",
+  "ref": "MS_BD_Plasma",
+  "note": "family plasma; grip->muzzle 35.9 vs ref 73.0 (k=2.033); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Tommygun": {
+  "scale": [
+   -0.7314,
+   0.7314,
+   0.7314
+  ],
+  "offset": [
+   3.4923,
+   -13.096,
+   -14.0081
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Smg",
+  "ref": "MS_BD_Smg",
+  "note": "family smg; grip->muzzle 46.4 vs ref 34.0 (k=0.731); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Voodoo": {
+  "scale": [
+   -0.7275,
+   0.7275,
+   0.7275
+  ],
+  "offset": [
+   -4.9296,
+   -32.5789,
+   -11.8785
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Grenade",
+  "ref": "MS_BD_Grenade",
+  "note": "family grenade; grip->muzzle 13.5 vs ref 9.8 (k=0.728); grip lands where the ref grip lands"
+ },
+ "MS_ZB_Zippo": {
+  "scale": [
+   -4.1083,
+   4.1083,
+   4.1083
+  ],
+  "offset": [
+   5.8376,
+   -29.9712,
+   -47.8494
+  ],
+  "angle": 0.0,
+  "pitch": 0.0,
+  "roll": 0.0,
+  "method": "family-ref:MS_BD_Grenade",
+  "ref": "MS_BD_Grenade",
+  "note": "family grenade; grip->muzzle 2.4 vs ref 9.8 (k=4.108); grip lands where the ref grip lands"
+ }
+}

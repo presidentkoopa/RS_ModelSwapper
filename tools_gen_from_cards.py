@@ -86,6 +86,17 @@ def FAMILY(arche, gun):
     return None
 
 
+def place_lines(pl):
+    """MODELDEF lines from a placement.json entry. Offset comes last of the three position keys so an explicit
+    zoffset still wins when present (the engine takes whichever of Offset.z / ZOffset came last)."""
+    f3 = lambda v: ' '.join('%.4f' % float(x) for x in v)
+    out = ['\tScale %s' % f3(pl['scale']), '\tOffset %s' % f3(pl['offset'])]
+    if pl.get('zoffset') is not None: out.append('\tZOffset %.4f' % float(pl['zoffset']))
+    for key, tag in (('angle', 'AngleOffset'), ('pitch', 'PitchOffset'), ('roll', 'RollOffset')):
+        if pl.get(key) is not None: out.append('\t%s %.4f' % (tag, float(pl[key])))
+    return out
+
+
 def main_skin(dn):
     """The folder's main texture: the biggest image that is not a render sheet or a muzzle flash."""
     c = [f for f in dn['skins'] if not f.lower().startswith('sheet') and not re.search(r'mf\d*\.|flash|muzzle|_n\.|_r\.|_m\.|_ao\.|_bm\.', f.lower())]
@@ -108,7 +119,13 @@ def parse_blocks(text):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--well', default='/mnt/user-data/uploads/VR_WeaponSetRebuild'); ap.add_argument('--extra', nargs='*', default=['/home/claude/rs_aliens_vr-weaponsq'], help='more roots holding the sets'' own MODELDEFs (the Aliens Q repo)')
+    ap.add_argument('--placement', default='placement.json', help='per-donor Scale/Offset table (the placement agent writes it); missing file = skipped')
     a = ap.parse_args(); os.chdir(HERE)
+    placement = {}
+    if os.path.exists(a.placement):
+        import json
+        try: placement = json.load(open(a.placement))
+        except Exception as e: print('placement.json unreadable:', e); placement = {}
     # ---- the well: every staged mesh by signature, every MODELDEF block by (path,file)
     well_mesh = {}; well_blocks = {}
     for p in glob.glob(a.well + '/**/*.md3', recursive=True):
@@ -158,6 +175,9 @@ def main():
         b = dn['src']; lines = ['Model %s' % dn['name'], '{',
                                 '\t// source: %s' % (os.path.relpath(dn['srcfile'], a.well) if dn['srcfile'] else 'no well match -> PLACEMENT needed'),
                                 '\tPath "%s"' % dn['dir'], '\tModel 0 "%s"' % dn['mesh']]
+        pl = placement.get(dn['name'])
+        dn['placement'] = ('%s (%s)' % (pl.get('method', '?'), pl.get('ref', '-'))) if pl else ''
+        if pl: lines.append('\t// placement: %s (%s)%s' % (pl.get('method', '?'), pl.get('ref', '-'), (' -- ' + pl['note']) if pl.get('note') else ''))
         if b:
             body = b['body']
             sk = re.findall(r'^\s*(SurfaceSkin\s+0\s+\d+\s+"[^"]+"|Skin\s+0\s+"[^"]+")', body, re.M)
@@ -165,13 +185,16 @@ def main():
             if not sk and dn['skins']:
                 sk = ['Skin 0 "%s"' % main_skin(dn)]; dn['skin_note'] = 'source skin %s not in folder; used %s' % (re.findall(r'Skin\s+0\s+"([^"]+)"', body)[:1], main_skin(dn))
             lines += ['\t' + s.strip() for s in sk]
-            for key in ('Scale', 'Offset', 'ZOffset', 'AngleOffset', 'PitchOffset', 'RollOffset'):
-                mm = re.search(r'^\s*%s\s+([^\n/]+)' % key, body, re.M)
-                if mm: lines.append('\t%s %s' % (key, mm.group(1).strip()))
+            if not pl:
+                for key in ('Scale', 'Offset', 'ZOffset', 'AngleOffset', 'PitchOffset', 'RollOffset'):
+                    mm = re.search(r'^\s*%s\s+([^\n/]+)' % key, body, re.M)
+                    if mm: lines.append('\t%s %s' % (key, mm.group(1).strip()))
             if re.search(r'NoInterpolation', body): lines.append('\tNoInterpolation')
         else:
             if dn['skins']: lines.append('\tSkin 0 "%s"' % main_skin(dn))
-            lines += ['\tScale 1.0 1.0 1.0', '\tOffset 0.0 0.0 0.0']
+            if not pl: lines += ['\tScale 1.0 1.0 1.0', '\tOffset 0.0 0.0 0.0']
+        if pl:
+            lines += place_lines(pl)
         anchor = ANCHOR.get(dn['fam'] or '', 'PISG')
         lines += ['\tFrameIndex %s A 0 %d' % (anchor, min(dn['idle'], dn['nfr'] - 1)), '\tFrameIndex MSBL A 0 9999', '}', '']
         out.append('\n'.join(lines))
@@ -197,11 +220,13 @@ def main():
     t = re.sub(r'(static const string NAMES\[\] = \{\n).*?(\n\t\t\};)', lambda m: m.group(1) + names + m.group(2), t, count=1, flags=re.S)
     open(zs, 'w').write(t)
     # ---- report
-    rep = ['# gen_from_cards report', '', '| donor | set/gun | family | source block | skins |', '|---|---|---|---|---|']
+    rep = ['# gen_from_cards report', '', '| donor | set/gun | family | source block | placement | skins |', '|---|---|---|---|---|---|']
     for dn in donors:
-        rep.append('| %s | %s/%s | %s | %s | %s |' % (dn['name'], dn['set'], dn['gun'], dn['fam'] or '**NONE (not shelved)**',
-                   ('%s::%s' % (os.path.relpath(dn['srcfile'], a.well), dn['src']['name'])) if dn['src'] else ('mesh matched, no block' if dn['srcfile'] else '**PLACEMENT needed**'), ', '.join(dn['skins'][:3]) + (' -- ' + dn['skin_note'] if dn.get('skin_note') else '')))
+        rep.append('| %s | %s/%s | %s | %s | %s | %s |' % (dn['name'], dn['set'], dn['gun'], dn['fam'] or '**NONE (not shelved)**',
+                   ('%s::%s' % (os.path.relpath(dn['srcfile'], a.well), dn['src']['name'])) if dn['src'] else ('mesh matched, no block' if dn['srcfile'] else '**PLACEMENT needed**'),
+                   dn.get('placement') or '(source numbers)', ', '.join(dn['skins'][:3]) + (' -- ' + dn['skin_note'] if dn.get('skin_note') else '')))
     open('gen_from_cards.report.md', 'w').write('\n'.join(rep) + '\n')
+    print('placed from %s: %d' % (a.placement, sum(1 for d in donors if d.get('placement'))))
     print('donors', len(donors), '| shelved', sum(1 for d in donors if d['fam']), '| with source block', sum(1 for d in donors if d['src']), '| placement needed', sum(1 for d in donors if not d['srcfile']))
 
 
