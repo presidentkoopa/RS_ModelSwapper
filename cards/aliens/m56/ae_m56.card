@@ -21,7 +21,9 @@ weapon ae_m56
     idle         24..27
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4921
   carved      mag  seat_origin [-0.39, 11.39, 0.06]  file ae_m56_mag.md3
-  # OWNER, 2026-10-31: two hands, both headset holds. Left: the bicycle handle, the angled bar standing
-  # out of the receiver at x 25..34, y +9..+21 (model units, idle frame). Right: the vertical handle at
-  # x 10..15, y -5..-10. The grip line above is the tool's centroid guess and is wrong for this gun.
-  # The magazine drum (surf 3) slides back 33 cm to come off; its latch (surf 4) swings 94 deg first.
+  # OWNER, 2026-10-31 (corrected from his marked-up sheet): the rear pistol grip with the trigger
+  # surface is UNUSED -- not the grip, not the support. The MAIN hand is on the VERTICAL BAR hanging
+  # under the receiver just behind the drum: x -4..4, y -6..-10 (right side), z -8..-9.6. The SUPPORT
+  # hand is on the HORIZONTAL HANDLEBAR on top, forward of the drum: x 24..36, z 8..12, running across
+  # y -6..+20 (a bar through the fist). The tool's grip line above is wrong for this gun. Both holds
+  # are headset recordings. Magazine drum (surf 3) slides back 33 cm after its latch (surf 4) swings 94 deg.
