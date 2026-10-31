@@ -17,3 +17,11 @@ weapon bw_1911
     fire         1..9
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2487
   carved      mag  seat_origin [26.29, 0.04, -4.66]  file bw_1911_mag.md3
+  states      # from Modeldef.1911.def + Actors/Weaps/1911.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               4 tics  frames 1,2,3,4
+    UnZoom             4 tics  frames 3,2,1,0
+    Fire2              4 tics  frames 1,2,3,4
+    Reload            29 tics  frames 4,6,7,8,9,8,7,6,4,0
+    Reload2           16 tics  frames 4,6,7,8,9
+    ContinueReload    14 tics  frames 9,8,7,6,4,0

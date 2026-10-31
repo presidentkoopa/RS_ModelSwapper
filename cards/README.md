@@ -33,3 +33,10 @@ took the collar and base plate only, the second took the whole box plus 216 rece
 The good cut (792 tris, the magazine and nothing else) follows the mesh's own seams. Render the carved
 piece ALONE and count what came with it before it goes on a card. A parted mesh that already exists and
 is proven to drop in game beats a new carve.
+
+## Three sources, always (2026-10-31, BrutalWolf)
+1. The MESH: what moves, how far, along what axis (tools/hqt/md3label.py).
+2. The MODELDEF + the weapon's states: which frames play under which state, in what order, forwards and
+   backwards (tools/hqt/statephase.py). A pump that only goes back in the mesh comes home in the code.
+3. The .BLEND, when there is one: the artist's part names, authored paths and grip (tools/hqt/blendcard.py).
+A card that used only the mesh is lying by omission.

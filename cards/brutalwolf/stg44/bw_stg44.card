@@ -20,3 +20,10 @@ weapon bw_stg44
     mag_in       6..9
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 11475
   carved      mag  seat_origin [42.96, 0.0, -7.42]  file bw_stg44_mag.md3
+  states      # from Modeldef.STG44.def + Actors/Weaps/STG44.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               5 tics  frames 1,2,3,4,0
+    Fire2              5 tics  frames 1,2,3,4,3
+    Reload            32 tics  frames 5,6,7,8,9,8,7,6,5
+    Reload2           17 tics  frames 5,6,7,8,9
+    ContinueReload    12 tics  frames 9,8,7,6,5

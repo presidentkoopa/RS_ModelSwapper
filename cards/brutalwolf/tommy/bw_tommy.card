@@ -21,3 +21,10 @@ weapon bw_tommy
     mag_in       8..10
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7040
   carved      mag  seat_origin [37.03, -0.01, -1.83]  file bw_tommy_mag.md3
+  states      # from Modeldef.Tommy.def + Actors/Weaps/THOMP.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               6 tics  frames 0,1,2,3,4,5
+    Fire2              6 tics  frames 0,1,2,3,4,5
+    Reload            20 tics  frames 6,7,8,9,10,9,8,7,6
+    Reload2           15 tics  frames 6,7,8,9,10
+    ContinueReload    10 tics  frames 10,9,8,7,6

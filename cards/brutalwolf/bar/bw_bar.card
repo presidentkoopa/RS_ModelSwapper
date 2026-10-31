@@ -18,3 +18,11 @@ weapon bw_bar
     mag_in       6..9
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 6002
   carved      mag  seat_origin [45.12, 0.11, -2.07]  file bw_bar_mag.md3
+  states      # from Modeldef.BAR.def + Actors/Weaps/BAR.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               7 tics  frames 0,1,2,3
+    Fire2              7 tics  frames 1,2,3,2
+    UnZoom             5 tics  frames 4,3,2,1,0
+    Reload2           22 tics  frames 5,6,7,8,9
+    ContinueReload    25 tics  frames 9,8,7,6,5,0
+    Reload            31 tics  frames 5,6,7,8,9,8,7,6,5,0

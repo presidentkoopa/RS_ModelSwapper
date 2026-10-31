@@ -28,3 +28,12 @@ weapon bw_kar98
     idle         4..25
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 9448
   carved      clip  seat_origin [3.13, 0.01, -9.62]  file bw_kar98_clip.md3
+  states      # from Modeldef.Kar98.def + Actors/Weaps/KAR98.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    FIRE              12 tics  frames 1,2,3,4,5,3,4,2
+    Reloading         22 tics  frames 7,8,9,10,11,10,9,8,7
+    Reloading2        22 tics  frames 7,8,9,10,11,10,9,8,7
+    ContinueReloading  36 tics  frames 7,8,9,10,17,18,19,20,21,22,23,24,25,11,10,9,8,7
+    Reload2            8 tics  frames 7,8,9,10
+    ContinueLoop      10 tics  frames 12,13,14,15,16
+    FinishReload      10 tics  frames 11,10,9,8,7

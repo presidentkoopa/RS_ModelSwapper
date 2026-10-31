@@ -10,3 +10,17 @@ weapon bw_flame
   phases
     idle         0..9
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1763
+  states      # from Modeldef.Flame.def + Actors/Weaps/LANCIAMERDA.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               2 tics  frames 3,4
+    Fire2              2 tics  frames 3,4
+    Fire3              1 tics  frames 5
+    Finish1            1 tics  frames 5
+    Fire4              2 tics  frames 6
+    Finish2            2 tics  frames 6,5
+    Fire5              1 tics  frames 7
+    Finish3            3 tics  frames 7,6,5
+    Fire6              2 tics  frames 8
+    Finish4            4 tics  frames 8,7,6,5
+    Fire7              2 tics  frames 9
+    Finish5            5 tics  frames 9,8,7,6,5

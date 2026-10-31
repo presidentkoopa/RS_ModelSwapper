@@ -23,3 +23,15 @@ weapon bw_chaingun
     idle         15..15
     fire         16..16
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 10133
+  states      # from Modeldef.Chaingun.def + Actors/Weaps/CHAINGUN.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire              36 tics  frames 0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2
+    Fire2              4 tics  frames 2,0,3,1
+    Hold               4 tics  frames 3,0,3,1
+    AltFire           27 tics  frames 0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2
+    SpinFinish        36 tics  frames 0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2
+    SpinFinish3       36 tics  frames 3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5
+    SpinFinish2       36 tics  frames 0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2
+    SpinFinish4       36 tics  frames 3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5
+    Reload            20 tics  frames 15,14,13,12,11,10,9,8,7,6
+    Reload2           55 tics  frames 6,7,8,9,10,11,12,13,14,15,14,13,12,11,10,9,8,7,6

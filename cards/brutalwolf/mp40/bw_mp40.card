@@ -24,3 +24,12 @@ weapon bw_mp40
     mag_in       6..9
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 14658
   carved      mag  seat_origin [55.09, 0.01, -5.6]  file bw_mp40_mag.md3
+  states      # from Modeldef.MP40.def + Actors/Weaps/MP40.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               4 tics  frames 1,2,3,4
+    Fire2              5 tics  frames 1,2,3,4
+    UnZoom             6 tics  frames 5,4,3,2,1,0
+    Reload            16 tics  frames 5,6,7,8,9,8,7,6,5
+    Reload2            5 tics  frames 5,6,7,8,9
+    ContinueReload    10 tics  frames 9,8,7,6,5
+    Stay               2 tics  frames 8

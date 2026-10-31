@@ -27,3 +27,12 @@ Real reload animations on most guns. Baked hand sway only on the melee (axe 112,
 | Flame, Axe, Knife, Grenade | no parts | n/a | holds only |
 
 Tool: tools/hqt/blendcard.py (new this pass: the Depot had obj2md3 for blends, nothing that read a rig).
+
+## The frame map (2026-10-31, after the owner: "that shotgun doesn't seem like it pumps")
+It pumps. The mesh only has the back-stroke; the code plays `ZSGP ABCDEFGHI`, holds `JKL`, then
+`KJIHGFEDCBA`: a full stroke every shot and again after the reload. The MODELDEF (sprite frame -> mesh
+frame) and the weapon's states (which sprite frames, in what order) are the frame map; vertex motion
+alone cannot show a cycle. `tools/hqt/statephase.py` reads both and every card here now carries a
+`states` block. Corrections it made: all reloads here are there-and-back (mag out, same frames reversed
+as the fresh one seats); the chaingun's barrels DO spin (0,1,2 cycling) and its reload is the side box
+opening 6..15 and back; the Kar98 has two reloads, single rounds (7..11) and the stripper clip (17..25).

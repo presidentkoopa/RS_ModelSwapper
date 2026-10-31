@@ -25,3 +25,11 @@ weapon bw_luger
   baked_cant   frames 12..12 up to 5.0 deg   # psprite-era hand sway; removed in bw_luger_stable.md3
   authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5912
   carved      mag  seat_origin [23.86, -0.08, -8.96]  file bw_luger_mag.md3
+  states      # from Modeldef.Luger.def + Actors/Weaps/LUGER.txt (tools/hqt/statephase.py): the frames each weapon state PLAYS, in order.
+              # The mesh alone cannot show a cycle: the code runs the frames forward, holds, and runs them back.
+    Fire               5 tics  frames 1,2,3,4,5
+    Fire2              5 tics  frames 1,2,3,4,5
+    UnZoom             4 tics  frames 3,2,1,0
+    Reload            45 tics  frames 6,7,8,9,10,11,10,9,8,7,12,0
+    Reload2           14 tics  frames 6,7,8,9,10,11
+    ContinueReload    25 tics  frames 11,10,9,8,7,12,0
