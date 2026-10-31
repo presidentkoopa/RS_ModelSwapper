@@ -1,0 +1,10 @@
+weapon Stick
+  source      Stick.blend   blender 2.81.16   frames 0..10
+  space       world = the MD3 frame (Main Hand at the origin, scale 28); units = MD3 model units
+  handle      loc [25.71, 0.43, -3.43]  rot_deg [-0.0, -160.0, 0.0]   # the gun under the hand: the artist's grip relation
+  parts
+    cube      armature "Armature.002"  rest [30.82, 0.43, -1.41]  axis [0.874, -0.000, -0.486]  travel 13.68  frames 7..10  meshes ['Cube.002'] (28 verts)
+    cone      armature "Armature.003"  rest [75.14, -0.19, -0.05]  axis [-0.958, -0.000, 0.287]  travel 79.95  frames 7..10  meshes ['Cone'] (65 verts)
+    cube      armature "Armature.004"  rest [35.26, -0.00, 2.25]  axis [0.357, -0.000, -0.934]  travel 17.01  frames 7..10  meshes ['Cube.001'] (20 verts)
+  body        meshes ['Cube', 'Cube.003', 'Cylinder', 'Cylinder.001', 'Cylinder.002', 'Sphere', 'Sphere.001', 'Sphere.002']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes

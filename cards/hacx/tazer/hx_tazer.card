@@ -1,0 +1,22 @@
+weapon hx_tazer
+  archetype   pistol_mag        # owner-confirmed
+  model       hx_tazer.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [30.21, 0.01, -5.96]  axis [-0.967, -0.0, -0.254]  travel 0.44  frames -..-  rot 10deg axis [0.0, 1.0, 0.0]
+    muzzle    [34.02, 0.7, -0.27]
+  grip        line [28.59, 0.19, -4.97] [19.73, 0.81, -16.98]  trigger [30.21, 0.01, -5.96]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [22.26, 0.85, -6.2]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..6
+    lower        7..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 15509
+  states      # Modeldef.Tazer.def + filter/Hacx/Weapons.txt (statephase.py)
+    Idle               1 tics  frames 0
+    Fire              19 tics  frames 0,1,4,3,2,0
+    AltFire           17 tics  frames 5,6,7,8,9,10,9,8,7,6,5,0

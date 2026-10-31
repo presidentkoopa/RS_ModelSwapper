@@ -348,6 +348,7 @@ def main():
         sel=W[(along < refa) & (along > refa-12) & ((W@down) > (ref@down)-1.0)]
         if len(sel) < 10: sel=W[(W@down) > (ref@down)+1.0]
         if len(sel) < 10: sel = W[(W@down) > (ref@down)]
+        if len(sel) < 3: sel = W	# nothing below the trigger (a crossbow's flat stock): the whole body; the owner's hand fit supersedes anyway
         grip=sel.mean(0)
         gl0=sel[np.argmin(sel@down)]; gl1=sel[np.argmax(sel@down)]
         card.append(f"  grip        line {np.round(gl0,2).tolist()} {np.round(gl1,2).tolist()}  trigger {np.round(trg,2).tolist()}   # centroid-based; owner's hand fit supersedes")

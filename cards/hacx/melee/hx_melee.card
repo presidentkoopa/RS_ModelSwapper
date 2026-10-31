@@ -1,0 +1,17 @@
+weapon hx_melee
+  archetype   pistol_mag        # owner-confirmed
+  model       hx_melee.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [31.58, 0.0, 1.06]
+  grip        line [25.86, -0.0, -6.84] [23.8, -0.0, -15.7]  trigger [26.37, -0.0, -7.83]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [30.37, -0.0, -7.83]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..1
+    lower        2..5
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2388
+  states      # Modeldef.Melee.def + filter/Hacx/Weapons.txt (statephase.py)
+    Fire              13 tics  frames 1,2,3,4,5
+    KickFinish         4 tics  frames 4,3,2,0
+    KickSuper          8 tics  frames 5

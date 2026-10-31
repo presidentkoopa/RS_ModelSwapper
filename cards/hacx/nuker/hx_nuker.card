@@ -1,0 +1,25 @@
+weapon hx_nuker
+  archetype   pistol_mag        # owner-confirmed
+  model       hx_nuker.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [29.72, 0.01, -6.26]  axis [-1.0, -0.0, 0.019]  travel 0.46  frames -..-  rot 15deg axis [0.0, 1.0, -0.0]
+    part     surf 2  rest [63.82, 0.0, 0.4]  axis [0.703, 0.0, -0.712]  travel 2.85  frames 1..5
+    part2    surf 3  rest [65.35, -0.0, 4.02]  axis [0.255, -0.0, 0.967]  travel 7.85  frames 1..5
+    part3    surf 5  rest [73.61, 0.0, -1.01]  axis [0.702, 0.0, -0.712]  travel 2.85  frames 1..5
+    muzzle    [58.62, -6.36, 14.78]
+  grip        line [28.67, 0.66, -5.28] [21.62, 1.16, -18.89]  trigger [29.72, 0.01, -6.26]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [31.13, -0.16, -1.59]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..2
+    fire         3..3
+    idle         4..6
+    lower        7..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7101
+  states      # Modeldef.Nuker.def + filter/Hacx/Weapons.txt (statephase.py)
+    Idle               1 tics  frames 0
+    Fire              60 tics  frames 1,2,3,4,5,4,3,2,1,0
+    AltFire           15 tics  frames 6,7,8,9,10,0,10,9,8,7,6
