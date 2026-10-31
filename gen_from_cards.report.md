@@ -70,7 +70,7 @@
 | MS_Cola_Plasmagun | cola/plasmagun | plasma | Cola-3-VR-Weapons/models/weapons/plasmagun/plasmagun.md3::PlasmaAutorifle | (source numbers) | heat.png, heat1.png, heat2.png |
 | MS_Cola_Revolver | cola/revolver | revolver | Cola-3-VR-Weapons/models/weapons/pistol/revolver.md3::ColaHandgun | (source numbers) | revolver.png, sheet.png |
 | MS_Cola_Sidewinder | cola/sidewinder | rocket | Cola-3-VR-Weapons/models/weapons/sidewinder/sidewinder.md3::MissileLauncher | (source numbers) | rocket_mf.png, rocket_mf10.png, rocket_mf2.png |
-| MS_D64_Boot | d64/boot | kick | mesh matched, no block: D64Retribution/Models/Weapons/Hud/Boot/Boot.md3 | (source numbers) | Boot.png, sheet.png |
+| MS_D64_Boot | d64/boot | kick | D64Retribution/Models/Weapons/Hud/Boot/Boot.md3::ClassicRocketLauncher | (source numbers) | Boot.png, sheet.png |
 | MS_D64_Chainsaw | d64/chainsaw | saw | D64Retribution/Models/Weapons/Hud/Chain_saw/Chain_saw.md3::_64Chainsaw | (source numbers) | Chain_saw.png, sheet.png |
 | MS_HX_Cryogun | hacx/cryogun | plasma | HacX/MODELS/Cryogun/cryogun.md3::_HacxCryogun | (source numbers) | cryogun.png, sheet.png |
 | MS_HX_Melee | hacx/melee | melee | HacX/MODELS/Melee/melee.md3::_Melee | (source numbers) | melee.png, sheet.png |
