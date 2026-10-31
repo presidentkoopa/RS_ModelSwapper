@@ -7,33 +7,33 @@
 | MS_AE_M260b | 0 | 0 | ready FLBFA |
 | MS_AE_M37a2 | 1 | 0 | ready ATSGA |
 | MS_AE_M41a | 0 | 0 | ready PULSA |
-| MS_AE_M4a3 | 0 | 0 | ready YM91A |
+| MS_AE_M4a3 | 0 | 0 | emptyready MM91A |
 | MS_AE_M56 | 0 | 0 | ready SMRTA |
 | MS_AE_Satchel | 0 | 0 | ready STCGA |
 | MS_BD_Assaultshotgun | 4 | 4 | ready A12GA |
 | MS_BD_Axe | 8 | 5 | ready AXEGA |
 | MS_BD_Bfg | 6 | 6 | ready BFGNA |
 | MS_BD_Bfg10k | 6 | 6 | ready BG2GA |
-| MS_BD_Boot | 53 | - | actor ClassicRocketLauncher not found |
-| MS_BD_Buzzsaw | 0 | - | no source block |
+| MS_BD_Boot | 53 | - | Ready frame not in block ClassicRocketLauncher |
+| MS_BD_Buzzsaw | 0 | 0 | ready HBUSA |
 | MS_BD_Chainsaw | 0 | 15 | ready SAWGA |
 | MS_BD_Dragonslayer | 0 | 0 | ready DSLAA |
-| MS_BD_Fist | 0 | 0 | ready PONGA |
+| MS_BD_Fist | 0 | 48 | ready PKFSA |
 | MS_BD_Flamecannon | 0 | 0 | ready FLMGA |
 | MS_BD_Flamethrower | 0 | - | no source block |
 | MS_BD_Grenade | 2 | 0 | ready GRHOA |
 | MS_BD_Hellishmissile | 8 | 0 | ready RVCGA |
 | MS_BD_M79 | 3 | 3 | ready GLANA |
 | MS_BD_Machinegun | 4 | 4 | ready MGN1A |
-| MS_BD_Minigun | 4 | 4 | ready CHAGA |
+| MS_BD_Minigun | 4 | 4 | ready PKCGA |
 | MS_BD_Mp40 | 2 | 2 | ready MP40A |
-| MS_BD_Pistol | 2 | 2 | ready PISTF |
-| MS_BD_Plasma | 4 | 4 | ready PLSNA |
+| MS_BD_Pistol | 2 | 2 | ready PKPIA |
+| MS_BD_Plasma | 4 | 4 | ready 3LSGA |
 | MS_BD_Railgun | 3 | 2 | ready RAILA |
-| MS_BD_Revolver | 0 | - | actor Revolver not found |
+| MS_BD_Revolver | 0 | 0 | ready REVOA |
 | MS_BD_Rifle | 3 | 3 | ready RIFGA |
-| MS_BD_Rpg | 4 | 5 | ready RLNGA |
-| MS_BD_Shotgun | 4 | 4 | ready SHTNA |
+| MS_BD_Rpg | 4 | 5 | ready PKRLA |
+| MS_BD_Shotgun | 4 | 4 | ready PKSGA |
 | MS_BD_Smg | 3 | 3 | ready SMGGA |
 | MS_BD_Ssg | 1 | 1 | ready SHTZA |
 | MS_BD_Unmaker | 0 | 0 | ready UNHGA |
@@ -70,7 +70,7 @@
 | MS_Cola_Plasmagun | 0 | 0 | ready ZPL0A |
 | MS_Cola_Revolver | 0 | 0 | ready RPISA |
 | MS_Cola_Sidewinder | 0 | 0 | ready SWRLA |
-| MS_D64_Boot | 0 | - | actor ClassicRocketLauncher not found |
+| MS_D64_Boot | 0 | - | Ready frame not in block ClassicRocketLauncher |
 | MS_D64_Chainsaw | 0 | 15 | ready SAWGA |
 | MS_HX_Cryogun | 0 | 0 | ready CGUNA |
 | MS_HX_Melee | 0 | 0 | ready MELEA |
@@ -116,7 +116,7 @@
 | MS_RC_M27 | 0 | 0 | ready PLMRA |
 | MS_RC_M32 | 0 | 0 | ready MMISA |
 | MS_RC_Shotgun | 0 | 0 | ready PSHTA |
-| MS_UV_ChaingunD4 | 0 | - | no source block |
+| MS_UV_ChaingunD4 | 0 | - | Ready frame not in block Vanilla_Chaingun |
 | MS_UV_ShotgunD4 | 0 | - | Ready frame not in block Vanilla_Shotgun |
 | MS_UV_SsgD4 | 3 | - | Ready frame not in block Vanilla_SuperShotgun |
 | MS_HV_Crossbow | 0 | 0 | ready CRBWA |
@@ -141,6 +141,6 @@
 | MS_ZB_Sawedoff | 0 | 0 | ready WP01A |
 | MS_ZB_Spraycan | 0 | 0 | ready SPRRA |
 | MS_ZB_Teslagun | 0 | 0 | ready TESLA |
-| MS_ZB_Tommygun | 3 | - | no source block |
+| MS_ZB_Tommygun | 3 | 3 | ready TOMGA |
 | MS_ZB_Voodoo | 2 | - | actor OffhandVoodooDoll not found |
 | MS_ZB_Zippo | 0 | - | actor Zippo not found |

@@ -128,7 +128,7 @@ def ready_frame(block, idx):
     if not block: return None, 'no source block'
     text = idx.get(block['name'].lower())
     if not text: return None, 'actor %s not found' % block['name']
-    B = {(b.group(1).upper(), b.group(2)): int(b.group(3)) for b in re.finditer(r'FrameIndex\s+(\w{4})\s+([A-Z\[\]\\])\s+\d+\s+(\d+)', block['body'])}
+    B = {(b.group(1).upper(), b.group(2)): int(b.group(3)) for b in re.finditer(r'FrameIndex\s+(\w{4})\s+([A-Za-z\[\]\\])\s+\d+\s+(\d+)', block['body'], re.I)}
     lab = {}; open_ = []; last_row = True
     for line in text.splitlines():
         st = line.strip()
@@ -144,6 +144,12 @@ def ready_frame(block, idx):
         for spr, letters in lab.get(want, []):
             f = B.get((spr, letters[0]))
             if f is not None: return f, '%s %s%s' % (want, spr, letters[0])
+    # variant model sets (D4, alt, classic) run their own ready label: any label with 'ready' in it
+    for L in sorted(lab):
+        if 'ready' not in L or L in ('ready', 'ready.loop', 'readyloop'): continue
+        for spr, letters in lab[L]:
+            f = B.get((spr, letters[0]))
+            if f is not None: return f, '%s %s%s' % (L, spr, letters[0])
     return None, 'Ready frame not in block %s' % block['name']
 
 def sig(m): return (m['nframes'], tuple(s['xyz'].shape[1] for s in m['surfs']))
@@ -152,9 +158,9 @@ def f0(m): return np.concatenate([s['xyz'][0].ravel() for s in m['surfs']])
 
 def parse_blocks(text):
     out = []
-    for m in re.finditer(r'Model\s+(\w+)\s*\{(.*?)\}', text, re.S):
+    for m in re.finditer(r'Model\s+(\w+)\s*\{(.*?)\}', text, re.S | re.I):
         body = m.group(2)
-        p = re.search(r'Path\s+"([^"]+)"', body); f = re.search(r'Model\s+0\s+"([^"]+)"', body)
+        p = re.search(r'Path\s+"([^"]+)"', body, re.I); f = re.search(r'Model\s+0\s+"([^"]+)"', body, re.I)
         if not p or not f: continue
         out.append(dict(name=m.group(1), path=p.group(1).replace('\\', '/').strip('/'), file=f.group(1), body=body))
     return out
@@ -162,6 +168,7 @@ def parse_blocks(text):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--well', default='/mnt/user-data/uploads/VR_WeaponSetRebuild'); ap.add_argument('--extra', nargs='*', default=['/home/claude/rs_aliens_vr-weaponsq'], help='more roots holding the sets'' own MODELDEFs (the Aliens Q repo)')
+    ap.add_argument('--actors', nargs='*', default=sorted(glob.glob('/home/claude/parents/*')), help='parent mods (text lumps) read for actor states only, never for MODELDEF blocks')
     ap.add_argument('--placement', default='placement.json', help='per-donor Scale/Offset table (the placement agent writes it); missing file = skipped')
     a = ap.parse_args(); os.chdir(HERE)
     placement = {}
@@ -180,10 +187,10 @@ def main():
         if os.path.splitext(p)[1].lower() in ('.png', '.jpg', '.md3', '.md2', '.wav', '.ogg', '.kvx', '.flac', '.mp3', '.pk3', '.wad', '.zip', '.blend', '.psd', '.tga', '.iqm', '.bmp'): continue
         try: t = open(p, errors='ignore').read()
         except Exception: continue
-        if 'FrameIndex' not in t and 'Model 0' not in t: continue
+        if 'frameindex' not in t.lower() and 'model 0' not in t.lower(): continue
         for b in parse_blocks(t):
             well_blocks.setdefault((os.path.dirname(p), b['path'].lower(), b['file'].lower()), []).append(b)
-    idx = actor_index([a.well] + a.extra)
+    idx = actor_index([a.well] + a.extra + a.actors)
     # ---- cards
     donors = []; report = []
     for card in sorted(glob.glob('cards/*/*/*.card')):
@@ -210,6 +217,26 @@ def main():
                 # prefer the block whose Model name is a real actor with a readable Ready state
                 src = next((b for b in cands if ready_frame(b, idx)[0] is not None), (cands or [None])[0])
                 if src: break
+        if src is None:
+            # carved or re-encoded card mesh: same frame count and same whole-mesh frame-0 bounds,
+            # inside this set's own well folder (never another set's)
+            setdir = os.path.join(a.well, WELL_DIR[sset])
+            allv = np.concatenate([s_['xyz'][0] for s_ in m['surfs']]); lo, hi = allv.min(0), allv.max(0)
+            best = None
+            for key, lst in well_mesh.items():
+                if key[0] != nfr: continue
+                for p, wm in lst:
+                    if not p.startswith(setdir): continue
+                    wv = np.concatenate([s_['xyz'][0] for s_ in wm['surfs']])
+                    err = max(np.abs(wv.min(0) - lo).max(), np.abs(wv.max(0) - hi).max())
+                    if err < 0.5 and (best is None or err < best[0]): best = (err, p)
+            if best:
+                p = best[1]; srcfile = p
+                rel = os.path.relpath(p, a.well).replace('\\', '/')
+                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile)]
+                same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and mdir.startswith(setdir)]
+                cands = exact + [b for b in same_set if b not in exact]
+                src = next((b for b in cands if ready_frame(b, idx)[0] is not None), (cands or [None])[0])
         card_idle = idle; rf, rwhy = ready_frame(src, idx)
         if rf is not None and rf < nfr: idle = rf
         skins = sorted(f for f in os.listdir(d) if f.lower().endswith(('.png', '.jpg', '.tga')))
@@ -232,16 +259,16 @@ def main():
         if pl: lines.append('\t// placement: %s (%s)%s' % (pl.get('method', '?'), pl.get('ref', '-'), (' -- ' + pl['note']) if pl.get('note') else ''))
         if b:
             body = b['body']
-            sk = re.findall(r'^\s*(SurfaceSkin\s+0\s+\d+\s+"[^"]+"|Skin\s+0\s+"[^"]+")', body, re.M)
+            sk = re.findall(r'^\s*(SurfaceSkin\s+0\s+\d+\s+"[^"]+"|Skin\s+0\s+"[^"]+")', body, re.M | re.I)
             sk = [s for s in sk if re.search(r'"([^"]+)"', s).group(1) in dn['skins'] or re.search(r'"([^"]+)"', s).group(1).lower() in [x.lower() for x in dn['skins']]]
             if not sk and dn['skins']:
                 sk = ['Skin 0 "%s"' % main_skin(dn)]; dn['skin_note'] = 'source skin %s not in folder; used %s' % (re.findall(r'Skin\s+0\s+"([^"]+)"', body)[:1], main_skin(dn))
             lines += ['\t' + s.strip() for s in sk]
             if not pl:
                 for key in ('Scale', 'Offset', 'ZOffset', 'AngleOffset', 'PitchOffset', 'RollOffset'):
-                    mm = re.search(r'^\s*%s\s+([^\n/]+)' % key, body, re.M)
+                    mm = re.search(r'^\s*%s\s+([^\n/]+)' % key, body, re.M | re.I)
                     if mm: lines.append('\t%s %s' % (key, mm.group(1).strip()))
-            if re.search(r'NoInterpolation', body): lines.append('\tNoInterpolation')
+            if re.search(r'NoInterpolation', body, re.I): lines.append('\tNoInterpolation')
         else:
             if dn['skins']: lines.append('\tSkin 0 "%s"' % main_skin(dn))
             if not pl: lines += ['\tScale 1.0 1.0 1.0', '\tOffset 0.0 0.0 0.0']
@@ -275,7 +302,7 @@ def main():
     rep = ['# gen_from_cards report', '', '| donor | set/gun | family | source block | placement | skins |', '|---|---|---|---|---|---|']
     for dn in donors:
         rep.append('| %s | %s/%s | %s | %s | %s | %s |' % (dn['name'], dn['set'], dn['gun'], dn['fam'] or '**NONE (not shelved)**',
-                   ('%s::%s' % (os.path.relpath(dn['srcfile'], a.well), dn['src']['name'])) if dn['src'] else ('mesh matched, no block' if dn['srcfile'] else '**PLACEMENT needed**'),
+                   ('%s::%s' % (os.path.relpath(dn['srcfile'], a.well), dn['src']['name'])) if dn['src'] else (('mesh matched, no block: ' + os.path.relpath(dn['srcfile'], a.well)) if dn['srcfile'] else '**PLACEMENT needed**'),
                    dn.get('placement') or '(source numbers)', ', '.join(dn['skins'][:3]) + (' -- ' + dn['skin_note'] if dn.get('skin_note') else '')))
     open('gen_from_cards.report.md', 'w').write('\n'.join(rep) + '\n')
     print('placed from %s: %d' % (a.placement, sum(1 for d in donors if d.get('placement'))))
