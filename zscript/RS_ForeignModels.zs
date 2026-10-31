@@ -110,7 +110,7 @@ class RS_ForeignShelf
 			"axe|MS_BD_Axe|PUNG|0|5|15",
 			"bfg|MS_BD_Bfg|BFGG|0|6|16",
 			"bfg|MS_BD_Bfg10k|BFGG|0|6|21",
-			"kick|MS_BD_Boot|PUNG|0|53|58",
+			"kick|MS_BD_Boot|PUNG|0|5|58",
 			"machinegun|MS_BD_Buzzsaw|CHGG|0|0|3",
 			"saw|MS_BD_Chainsaw|SAWG|0|15|65",
 			"sword|MS_BD_Dragonslayer|PUNG|0|0|10",

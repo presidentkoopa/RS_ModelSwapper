@@ -14,7 +14,7 @@
 | MS_BD_Axe | 8 | 5 | ready AXEGA |
 | MS_BD_Bfg | 6 | 6 | ready BFGNA |
 | MS_BD_Bfg10k | 6 | 6 | ready BG2GA |
-| MS_BD_Boot | 53 | - | Ready frame not in block ClassicRocketLauncher |
+| MS_BD_Boot | 5 | - | Ready frame not in block ClassicRocketLauncher |
 | MS_BD_Buzzsaw | 0 | 0 | ready HBUSA |
 | MS_BD_Chainsaw | 0 | 15 | ready SAWGA |
 | MS_BD_Dragonslayer | 0 | 0 | ready DSLAA |

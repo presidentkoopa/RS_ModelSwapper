@@ -1,6 +1,6 @@
 weapon bd_boot
-  archetype   pistol_mag        # owner-confirmed
-  model       bd_boot.md3   space WPN   idle_frame 53
+  archetype   melee        # boot (owner); was pistol_mag
+  model       bd_boot.md3   space WPN   idle_frame 5   # Modeldef.ClassicRPG.def KIK1 A = 5 (parsed)
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
   parts
     muzzle    [68.78, -1.19, -5.31]
