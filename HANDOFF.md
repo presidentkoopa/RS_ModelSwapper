@@ -60,6 +60,8 @@ All with 0 pack errors. Frames: `/home/claude/shots/rigreload_<tag>_<donor>/`.
 - `tools_rig_check.py --donors ... --weapon ... --extra ...` (draw check; give ammo first for guns that need it).
 
 ## Not done / open, in order
+0. **Next test mod (owner, 2026-10-31): Project Brutality, the big one** -- https://github.com/pa1nki113r/Project_Brutality
+   (build its pk3 from the repo; run the draw check and every reload kind against its weapons' own Reload states).
 1. **2.0 bug: SSG and M79 glitch on the second reload.** Not yet reproduced or worked on. Next task.
 2. **Charging handle "stick" (2.0 note):** did not reproduce on 6 runs (above). Possible cause the owner may mean:
    after an empty reload the gun waits for the handle and will not fire until racked, with no cue. Owner to say if a
