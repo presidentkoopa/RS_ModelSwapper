@@ -1,0 +1,24 @@
+weapon hp_wand
+  archetype   energy        # owner-confirmed
+  model       hp_wand.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [13.22, -2.62, 1.25]
+  grip        line [-0.69, 1.56, -1.2] [11.28, 1.47, -3.06]  trigger [-1.28, 0.97, -0.15]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [2.72, 0.97, -0.15]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..12
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 243
+  states      # modeldef.wand.txt + actors/D_WEAPON*.txt (statephase.py)
+    Ready              2 tics  frames 0
+    Fire               1 tics  frames 0
+    Hold               1 tics  frames 0
+    MainFireEnd        6 tics  frames 0
+    Altshot            2 tics  frames 0
+    Decay2             1 tics  frames 0
+    Decay1             2 tics  frames 0
+    Lag               10 tics  frames 0
+    EndshotRapid       3 tics  frames 0
+    EndshotFlamethrower   3 tics  frames 0
+    AltFire            8 tics  frames 0

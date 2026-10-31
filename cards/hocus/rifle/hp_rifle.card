@@ -1,0 +1,24 @@
+weapon hp_rifle
+  archetype   energy        # owner-confirmed
+  model       hp_rifle.md3   space WPN   idle_frame 1
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [43.33, -0.05, 16.19]
+  grip        line [-0.52, 2.5, 2.61] [-3.56, -1.02, -10.05]  trigger [0.28, -0.07, 1.78]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [4.28, -0.07, 1.78]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5064
+  states      # modeldef.rifle.txt + actors/D_WEAPON*.txt (statephase.py)
+    Ready              2 tics  frames 0
+    Fire               9 tics  frames 1,0
+    Shot0              8 tics  frames 1,2,3
+    Shot1             10 tics  frames 1,2,3,0
+    Shot2             14 tics  frames 1,2,3,0
+    Shot3             14 tics  frames 1,2,3,0
+    Shot4             16 tics  frames 1,2,3,0
+    Shot5             19 tics  frames 1,2,3,0
+    Shot6             20 tics  frames 1,2,3,0
+    Endshot            2 tics  frames 0
+    AltFire            8 tics  frames 0

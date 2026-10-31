@@ -1,0 +1,30 @@
+weapon hp_blaster
+  archetype   energy        # owner-confirmed
+  model       hp_blaster.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    plasma   surf 1  rest [13.26, -0.05, 5.8]  axis [-0.58, -0.021, -0.815]  travel 0.00  frames -..-
+    muzzle    [45.08, 2.39, 8.33]
+  grip        line [1.05, -0.23, 5.73] [-4.34, 0.06, -10.77]  trigger [6.91, -0.01, 4.79]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [10.91, -0.01, 4.79]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..5
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2374
+  states      # modeldef.blaster.txt + actors/D_WEAPON*.txt (statephase.py)
+    Ready              2 tics  frames 0
+    Fire               6 tics  frames 0,2,0
+    Shot0              2 tics  frames 2
+    Shot1              4 tics  frames 0,2
+    Shot2              4 tics  frames 0,2
+    Shot2b             4 tics  frames 2
+    RFReset            1 tics  frames 2
+    Shot3              4 tics  frames 0,2
+    Fire2              5 tics  frames 0,2,0
+    PowShot0           2 tics  frames 2
+    Powshot1           6 tics  frames 0,2
+    Powshot2           4 tics  frames 0,2
+    Powshot3           5 tics  frames 0,2
+    Endshot            6 tics  frames 2,1,5,4
+    Endshot2           1 tics  frames 0
+    Continue           5 tics  frames 0

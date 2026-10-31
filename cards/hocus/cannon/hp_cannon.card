@@ -1,0 +1,22 @@
+weapon hp_cannon
+  archetype   launcher        # owner-confirmed
+  model       hp_cannon.md3   space WPN   idle_frame 1
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [66.38, -2.94, 26.67]
+  grip        line [-46.78, 13.63, -2.11] [-48.77, -13.64, -13.39]  trigger [-36.87, -0.33, -0.39]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [-32.87, -0.33, -0.39]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..5
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1442
+  states      # modeldef.cannon.txt + actors/D_WEAPON*.txt (statephase.py)
+    Ready              3 tics  frames 0
+    Fire              25 tics  frames 0,1,2,3,4,5,0
+    LightningSpellRapid   4 tics  frames 0
+    LightningSpellRapidRefire  12 tics  frames 1,2,3,4
+    EndshotRapid      10 tics  frames 5,0
+    LightningSpellFlamethrower   4 tics  frames 0,1
+    LightningSpellFlamethrowerRefire   7 tics  frames 1,2,3
+    EndshotFlamethrower  10 tics  frames 5,0
+    AltFire            8 tics  frames 0
