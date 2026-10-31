@@ -1,4 +1,4 @@
-weapon cola_sidewinder
+weapon cola_sidewinder   # the Cola 3 MISSILE LAUNCHER (mesh name "sidewinder", modeldef.missilelauncher.txt)
   archetype   launcher        # owner-confirmed
   model       cola_sidewinder.md3   space WPN   idle_frame 0
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
