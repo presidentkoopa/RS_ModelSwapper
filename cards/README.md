@@ -17,3 +17,9 @@ supersedes"). The hand's real hold (wrist on the gun + finger pose) is recorded 
 headset and added to the card as its `grip` block; nothing here is re-measured when that lands.
 
 Tools: tools/hqt/ (HighQualityTools, restored from archive/depot-2026-10-28 on 2026-10-31).
+
+## When a part is welded into the body (2026-10-31, TEC9)
+The labeller only sees surfaces. A magazine the artist left inside the body surface is carved out first
+with `tools/carve/md3_carve_surface.py` (a slab crossed with a cylinder, or `--half HA HB` for a box), then
+the carved mesh is labelled. The carve moves whole triangles and changes nothing else; check the triangle
+count it reports against the part you meant.

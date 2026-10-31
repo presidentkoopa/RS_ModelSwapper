@@ -3,13 +3,15 @@ weapon mg_tec9
   model       mg_tec9.md3   space WPN   idle_frame 0
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
   parts
-    trigger  surf 1  rest [32.22, -0.0, -4.46]  axis [-0.979, 0.0, 0.204]  travel 1.06  frames 1..5  rot 25deg axis [-0.0, 1.0, -0.0]
+    trigger  surf 1  rest [32.22, -0.0, -4.46]  axis [-0.979, -0.0, 0.204]  travel 1.06  frames 1..5  rot 25deg axis [0.0, 1.0, -0.0]
     handle   surf 2  rest [38.33, 2.49, 1.46]  axis [-1.0, -0.0, -0.0]  travel 7.09  frames 3..4
     bolt     surf 3  rest [38.07, -0.22, 0.57]  axis [-1.0, 0.001, -0.001]  travel 7.09  frames 3..4
+    mag      surf 4  rest [37.51, -0.0, -8.97]  axis [-0.048, 0.708, -0.705]  travel 0.00  frames -..-
+    mag_well  [37.51, -0.0, -8.97]  mouth [36.47, 0.56, -3.81]  axis [-0.048, 0.708, -0.705]  travel_clear 0.00
     muzzle    [53.75, -0.67, -0.05]
   grip        line [30.58, -0.55, -3.7] [26.78, -0.0, -13.42]  trigger [32.22, -0.0, -4.46]   # centroid-based; owner's hand fit supersedes
-  support     feature palm [43.48, 0.0, -1.81]   # one-handed gun; placeholder
-  carve       
+  support     feature palm [43.71, 0.0, -0.91]   # one-handed gun; placeholder
+  carve       mag
   phases
     idle         0..0
     fire         1..1
@@ -17,4 +19,10 @@ weapon mg_tec9
     fire         3..3
     idle         4..4
     fire         5..5
-  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5469
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 5494
+  carved      mag  seat_origin [37.51, -0.0, -8.97]  file mg_tec9_mag.md3
+  # OWNER, 2026-10-31: the magazine is detachable. It was welded into the body surface, so it was
+  # carved out first (tools/carve/md3_carve_surface.py --slab-axis z --slab -18 -3.6 --centre 38.2 0
+  # --half 3 2: 450 triangles, mesh otherwise untouched) and THEN labelled. Its sides are four tall
+  # quads with no vertices between z -16 and -10, so a render shades them like the body: the cut is
+  # right, check mg_tec9_mag.md3. Well mouth at z -3.8; the mag drops straight down (-Z).
