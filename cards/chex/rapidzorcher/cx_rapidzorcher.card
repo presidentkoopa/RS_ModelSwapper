@@ -1,0 +1,18 @@
+weapon cx_rapidzorcher
+  archetype   chaingun        # owner-confirmed
+  model       cx_rapidzorcher.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    barrel   surf 1  rest [18.39, 0.01, 1.98]  axis [-0.01, -0.996, -0.085]  travel 0.04  frames -..-  rot 141deg axis [1.0, 0.0, -0.0]
+    muzzle    [19.88, 0.3, 4.8]
+  grip        line [1.19, 14.97, 3.17] [-1.52, 0.0, -1.16]  trigger [7.08, 0.02, 2.19]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [11.08, 0.02, 2.19]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..21
+  baked_cant   frames 4..13 up to 2.4 deg   # psprite-era hand sway; removed in cx_rapidzorcher_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 1  frame_names_in_source no  verts 8060
+  states      # modeldef.chaingun.txt + chaingun.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire               8 tics  frames 1,2,3,4,5,6,7,8
+    Hold              13 tics  frames 10,11,12,13,14,15,16,17,18,19,20,21

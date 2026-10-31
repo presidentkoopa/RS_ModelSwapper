@@ -1,0 +1,16 @@
+weapon cx_spoon
+  archetype   melee        # owner-confirmed
+  model       cx_spoon.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [16.77, -0.78, -0.42]
+  grip        line [7.2, -0.88, 0.41] [7.94, 0.22, -1.03]  trigger [7.96, -0.03, -0.58]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [11.96, -0.03, -0.58]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..11
+  baked_cant   frames 2..11 up to 24.0 deg   # psprite-era hand sway; removed in cx_spoon_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 1  frame_names_in_source no  verts 1344
+  states      # modeldef.fist.txt + fist.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire              23 tics  frames 3,5,7,9,11,9,7,5,3

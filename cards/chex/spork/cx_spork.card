@@ -1,0 +1,15 @@
+weapon cx_spork
+  archetype   melee        # owner-confirmed
+  model       cx_spork.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [16.89, -0.64, -0.41]
+  grip        line [5.33, 3.48, 0.66] [3.61, 0.56, -5.91]  trigger [6.42, -0.08, -0.33]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [10.42, -0.08, -0.33]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..186
+  baked_cant   frames 7..180 up to 6.5 deg   # psprite-era hand sway; removed in cx_spork_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 1  frame_names_in_source no  verts 4089
+  states      # modeldef.chainsaw.txt + chainsaw.txt (statephase.py)
+    Ready              8 tics  frames 35,4,9,14,19,24,29,34

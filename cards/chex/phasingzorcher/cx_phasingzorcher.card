@@ -1,0 +1,17 @@
+weapon cx_phasingzorcher
+  archetype   energy        # owner-confirmed
+  model       cx_phasingzorcher.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [50.91, -0.17, 1.47]
+  grip        line [21.52, 6.36, 1.64] [19.97, 3.25, -9.31]  trigger [30.5, 0.96, 0.76]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [34.5, 0.96, 0.76]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..41
+    lower        42..44
+  authoring   surfaces_named_in_source no  tags_in_source 1  frame_names_in_source no  verts 10432
+  states      # modeldef.plasmagun.txt + plasmagun.txt (statephase.py)
+    Ready              1 tics  frames 0
+    Fire               5 tics  frames 4
+    Hold              26 tics  frames 4,5,6,7,8,9,10,11,12,13,14,13,12,11,10,9,8,7,6,5
