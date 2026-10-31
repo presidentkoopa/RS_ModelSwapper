@@ -1,21 +1,26 @@
 weapon vplus_minigun
+  author      alek (alek_DoomGuns_v1.1a), not Ermac; shipped in the Vanilla VR Plus folders (owner)
   archetype   pistol_mag        # owner-confirmed
   model       vplus_minigun.md3   space WPN   idle_frame 0
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
   parts
-    part     surf 2  rest [36.6, 6.58, 0.64]  axis [0.0, -0.978, 0.207]  travel 1.12  frames 2..3  rot 6deg axis [1.0, -0.0, -0.0]
+    # mag = the ammo box on the side, carved (owner: box with the chain coming out); round = the chain (owner)
+    round    surf 2  rest [36.6, 6.58, 0.64]  axis [0.0, -0.978, 0.207]  travel 1.12  frames 2..3  rot 6deg axis [1.0, -0.0, -0.0]
     trigger  surf 3  rest [36.22, -4.8, -0.55]  axis [0.0, 0.595, 0.804]  travel 1.72  frames 12..15  rot 121deg axis [-1.0, -0.0, -0.0]
+    mag      surf 5  rest [36.6, 5.02, -11.77]  axis [0.0, 0.0, 1.0]  travel 0.00  frames -..-
+  ports
+    chamber   [36.6, 6.58, 0.64]  frame 0
+    eject     [36.6, 17.18, 0.64]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    mag_well  [36.6, 5.02, -11.77]  mouth [33.16, 11.91, -8.16]  axis [0.0, 0.0, 0.0]  travel_clear 0.00
     muzzle    [59.69, 1.73, 1.73]
-  grip        line [32.72, -3.89, 0.2] [33.16, -1.86, -14.17]  trigger [36.22, -4.8, -0.55]   # centroid-based; owner's hand fit supersedes
-  support     feature palm [35.56, -0.44, -0.79]   # one-handed gun; placeholder
-  carve       
+  grip        line [32.72, -3.89, 0.2] [35.94, -7.48, -13.75]  trigger [36.22, -4.8, -0.55]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [35.47, -0.54, -0.55]   # one-handed gun; placeholder
+  carve       mag
   phases
     idle         0..11
     fire         12..12
     idle         13..13
     fire         14..14
     idle         15..15
-  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1060
-  # OWNER 2026-10-31: the BOX on the right side with the bullet chain (surf 2 = the chain, 32 v, moves 1.2) is the ammo box.
-  # MEASURED: the box (x 33..42.5, y 4.9..11.9, z -14..1) is welded into the body like the Cobra mag -- a geometric carve takes
-  # 8..14 triangles and leaves the walls (18 orphan verts). Needs the plane-split carve. Until then: surf 2 = chain (round), box not separable.
+  authoring   surfaces_named_in_source no  tags_in_source 3  frame_names_in_source no  verts 1068
+  carved      mag  surfs [5]  seat_origin [36.6, 5.02, -11.77]  file vplus_minigun_mag.md3

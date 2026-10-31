@@ -1,4 +1,5 @@
 weapon vplus_m16
+  author      alek (alek_DoomGuns_v1.1a), not Ermac; shipped in the Vanilla VR Plus folders (owner)
   archetype   pistol_mag        # owner-confirmed
   model       vplus_m16.md3   space WPN   idle_frame 0
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
