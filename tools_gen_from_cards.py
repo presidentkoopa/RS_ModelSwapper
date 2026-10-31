@@ -129,13 +129,17 @@ def ready_frame(block, idx):
     text = idx.get(block['name'].lower())
     if not text: return None, 'actor %s not found' % block['name']
     B = {(b.group(1).upper(), b.group(2)): int(b.group(3)) for b in re.finditer(r'FrameIndex\s+(\w{4})\s+([A-Z\[\]\\])\s+\d+\s+(\d+)', block['body'])}
-    lab = {}; cur = None
+    lab = {}; open_ = []; last_row = True
     for line in text.splitlines():
         st = line.strip()
         for m in re.finditer(r'([A-Za-z_][\w.]*)\s*:(?!:)', st.split('"')[0]):
-            cur = m.group(1).lower(); lab.setdefault(cur, [])
+            # stacked labels (Ready: / Ready3:) share the rows that follow them
+            if last_row: open_ = []
+            open_.append(m.group(1).lower()); lab.setdefault(open_[-1], []); last_row = False
         m = re.match(r'^(?:[A-Za-z_][\w.]*\s*:\s*)*(\w{4})\s+"?([A-Z\[\]\\#]+)"?\s+(-?\d+)', st)
-        if m and cur: lab[cur].append((m.group(1).upper(), m.group(2)))
+        if m and open_:
+            for L in open_: lab[L].append((m.group(1).upper(), m.group(2)))
+            last_row = True
     for want in ('ready', 'ready.loop', 'readyloop'):
         for spr, letters in lab.get(want, []):
             f = B.get((spr, letters[0]))
@@ -178,7 +182,7 @@ def main():
         except Exception: continue
         if 'FrameIndex' not in t and 'Model 0' not in t: continue
         for b in parse_blocks(t):
-            well_blocks.setdefault((os.path.dirname(p), b['path'].lower(), b['file'].lower()), b)
+            well_blocks.setdefault((os.path.dirname(p), b['path'].lower(), b['file'].lower()), []).append(b)
     idx = actor_index([a.well] + a.extra)
     # ---- cards
     donors = []; report = []
@@ -200,9 +204,11 @@ def main():
                 srcfile = p
                 rel = os.path.relpath(p, a.well).replace('\\', '/')
                 setdir = os.path.join(a.well, WELL_DIR[sset])
-                exact = [b for (mdir, bpath, bfile), b in well_blocks.items() if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile)]
-                same_set = [b for (mdir, bpath, bfile), b in well_blocks.items() if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra))]
-                src = (exact or same_set or [None])[0]
+                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile)]
+                same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra))]
+                cands = exact + [b for b in same_set if b not in exact]
+                # prefer the block whose Model name is a real actor with a readable Ready state
+                src = next((b for b in cands if ready_frame(b, idx)[0] is not None), (cands or [None])[0])
                 if src: break
         card_idle = idle; rf, rwhy = ready_frame(src, idx)
         if rf is not None and rf < nfr: idle = rf

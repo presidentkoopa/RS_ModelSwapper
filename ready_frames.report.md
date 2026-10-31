@@ -2,41 +2,41 @@
 
 | donor | card idle | OG Ready frame | how |
 |---|---|---|---|
-| MS_AE_Knife | 0 | - | Ready frame not in block AE_Holster_Knife |
+| MS_AE_Knife | 0 | 0 | ready ATKNA |
 | MS_AE_Loader | 5 | 0 | ready SAWGA |
 | MS_AE_M260b | 0 | 0 | ready FLBFA |
 | MS_AE_M37a2 | 1 | 0 | ready ATSGA |
 | MS_AE_M41a | 0 | 0 | ready PULSA |
-| MS_AE_M4a3 | 0 | - | Ready frame not in block M4A3Pistol_3D |
+| MS_AE_M4a3 | 0 | 0 | ready YM91A |
 | MS_AE_M56 | 0 | 0 | ready SMRTA |
-| MS_AE_Satchel | 0 | - | Ready frame not in block AE_Holster_Satchel |
-| MS_BD_Assaultshotgun | 4 | - | Ready frame not in block AssaultShotgun |
+| MS_AE_Satchel | 0 | 0 | ready STCGA |
+| MS_BD_Assaultshotgun | 4 | 4 | ready A12GA |
 | MS_BD_Axe | 8 | 5 | ready AXEGA |
-| MS_BD_Bfg | 6 | - | actor VanillaBFG9000 not found |
-| MS_BD_Bfg10k | 6 | - | Ready frame not in block BFG10k |
+| MS_BD_Bfg | 6 | 6 | ready BFGNA |
+| MS_BD_Bfg10k | 6 | 6 | ready BG2GA |
 | MS_BD_Boot | 53 | - | actor ClassicRocketLauncher not found |
 | MS_BD_Buzzsaw | 0 | - | no source block |
-| MS_BD_Chainsaw | 0 | - | Ready frame not in block Chain_saw |
+| MS_BD_Chainsaw | 0 | 15 | ready SAWGA |
 | MS_BD_Dragonslayer | 0 | 0 | ready DSLAA |
-| MS_BD_Fist | 0 | - | actor ClassicRocketLauncher not found |
-| MS_BD_Flamecannon | 0 | - | Ready frame not in block FlameCannon |
+| MS_BD_Fist | 0 | 0 | ready PONGA |
+| MS_BD_Flamecannon | 0 | 0 | ready FLMGA |
 | MS_BD_Flamethrower | 0 | - | no source block |
-| MS_BD_Grenade | 2 | - | actor ClassicRocketLauncher not found |
-| MS_BD_Hellishmissile | 8 | - | Ready frame not in block HellishMissileLauncher |
-| MS_BD_M79 | 3 | - | Ready frame not in block GrenadeLauncher |
-| MS_BD_Machinegun | 4 | - | Ready frame not in block Machinegun |
-| MS_BD_Minigun | 4 | - | actor ClassicChaingun not found |
-| MS_BD_Mp40 | 2 | - | Ready frame not in block MP40 |
-| MS_BD_Pistol | 2 | - | actor ClassicPistol not found |
-| MS_BD_Plasma | 4 | - | actor ClassicPlasmaRifle not found |
-| MS_BD_Railgun | 3 | - | Ready frame not in block RailGun |
+| MS_BD_Grenade | 2 | 0 | ready GRHOA |
+| MS_BD_Hellishmissile | 8 | 0 | ready RVCGA |
+| MS_BD_M79 | 3 | 3 | ready GLANA |
+| MS_BD_Machinegun | 4 | 4 | ready MGN1A |
+| MS_BD_Minigun | 4 | 4 | ready CHAGA |
+| MS_BD_Mp40 | 2 | 2 | ready MP40A |
+| MS_BD_Pistol | 2 | 2 | ready PISTF |
+| MS_BD_Plasma | 4 | 4 | ready PLSNA |
+| MS_BD_Railgun | 3 | 2 | ready RAILA |
 | MS_BD_Revolver | 0 | - | actor Revolver not found |
-| MS_BD_Rifle | 3 | - | Ready frame not in block Rifle |
-| MS_BD_Rpg | 4 | - | actor ClassicRocketLauncher not found |
-| MS_BD_Shotgun | 4 | - | actor ClassicShotgun not found |
+| MS_BD_Rifle | 3 | 3 | ready RIFGA |
+| MS_BD_Rpg | 4 | 5 | ready RLNGA |
+| MS_BD_Shotgun | 4 | 4 | ready SHTNA |
 | MS_BD_Smg | 3 | 3 | ready SMGGA |
-| MS_BD_Ssg | 1 | - | Ready frame not in block SSG |
-| MS_BD_Unmaker | 0 | - | Ready frame not in block Unmaker |
+| MS_BD_Ssg | 1 | 1 | ready SHTZA |
+| MS_BD_Unmaker | 0 | 0 | ready UNHGA |
 | MS_BW_1911 | 0 | 0 | ready 1911A |
 | MS_BW_Axe | 0 | - | Ready frame not in block Colt |
 | MS_BW_Bar | 0 | 0 | ready BARHA |
@@ -45,7 +45,7 @@
 | MS_BW_Garand | 0 | 0 | ready M1GGA |
 | MS_BW_Grenade | 0 | - | Ready frame not in block Colt |
 | MS_BW_Kar98 | 0 | 0 | ready ZK9GA |
-| MS_BW_Knife | 0 | - | Ready frame not in block Colt |
+| MS_BW_Knife | 0 | 0 | ready ATKNA |
 | MS_BW_Luger | 0 | 0 | ready LUGEA |
 | MS_BW_Mg42 | 0 | 0 | ready ZMGGA |
 | MS_BW_Mp40 | 0 | 0 | ready MP40A |
@@ -65,13 +65,13 @@
 | MS_Cola_Carddeck | 2 | 0 | ready VDCKA |
 | MS_Cola_Frypan | 0 | - | Ready frame not in block ColaHandgun |
 | MS_Cola_Ks23 | 0 | - | actor DualPumpShotgun not found |
-| MS_Cola_Particlegun | 0 | - | Ready frame not in block ToothpasteLaser |
+| MS_Cola_Particlegun | 0 | 0 | ready TPLGA |
 | MS_Cola_Piledriver | 0 | 0 | ready PDRVA |
 | MS_Cola_Plasmagun | 0 | 0 | ready ZPL0A |
 | MS_Cola_Revolver | 0 | 0 | ready RPISA |
 | MS_Cola_Sidewinder | 0 | 0 | ready SWRLA |
 | MS_D64_Boot | 0 | - | actor ClassicRocketLauncher not found |
-| MS_D64_Chainsaw | 0 | - | Ready frame not in block Chain_saw |
+| MS_D64_Chainsaw | 0 | 15 | ready SAWGA |
 | MS_HX_Cryogun | 0 | 0 | ready CGUNA |
 | MS_HX_Melee | 0 | 0 | ready MELEA |
 | MS_HX_Nuker | 0 | 0 | ready NUKEA |
@@ -88,7 +88,7 @@
 | MS_MG_Bfg | 0 | 0 | ready BFGNA |
 | MS_MG_Bolter | 0 | - | no source block |
 | MS_MG_Chaingun | 0 | 16 | ready BWCSA |
-| MS_MG_Knife | 0 | - | Ready frame not in block Colt |
+| MS_MG_Knife | 0 | 0 | ready ATKNA |
 | MS_MG_Rpg | 0 | - | no source block |
 | MS_MG_Saw | 0 | - | no source block |
 | MS_MG_Shotgun | 0 | 0 | ready ZSGGA |
@@ -97,7 +97,7 @@
 | MS_PD_Blunderbuss | 0 | 28 | ready SGUNA |
 | MS_PD_Bomb | 0 | 50 | ready BOMBA |
 | MS_PD_Cannon | 0 | 49 | ready CANOA |
-| MS_PD_Cutlass | 0 | - | Ready frame not in block PDVR_Cutlass |
+| MS_PD_Cutlass | 0 | 1 | ready SWORA |
 | MS_PD_Flintlock | 0 | 19 | ready PISGA |
 | MS_PD_Grog | 0 | 60 | ready PLSGA |
 | MS_PD_Mortar | 0 | 28 | ready MRTRA |
@@ -121,7 +121,7 @@
 | MS_UV_SsgD4 | 3 | - | Ready frame not in block Vanilla_SuperShotgun |
 | MS_HV_Crossbow | 0 | 0 | ready CRBWA |
 | MS_HV_Dragonclaw | 0 | 0 | ready BLSRA |
-| MS_HV_Gauntlet | 0 | - | Ready frame not in block HVRGauntlets |
+| MS_HV_Gauntlet | 0 | 0 | ready GAUNA |
 | MS_HV_Mace | 0 | - | Ready frame not in block HVRMace |
 | MS_HV_Phoenixrod | 0 | 0 | ready PHNXA |
 | MS_HV_Skullrod | 0 | - | Ready frame not in block HVRSkullRod |
