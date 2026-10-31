@@ -1,0 +1,17 @@
+weapon hd_bfg
+  archetype   energy        # owner-confirmed
+  model       hd_bfg.md3   space WPN   idle_frame 6
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [32.96, 0.01, -4.25]  axis [-0.992, -0.0, 0.127]  travel 0.69  frames 7..9  rot 30deg axis [-0.0, 1.0, -0.0]
+    muzzle    [112.45, 7.47, 5.91]
+  grip        line [26.89, 1.78, -3.25] [23.97, -1.28, -18.28]  trigger [32.96, 0.01, -4.25]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [58.65, -0.09, 1.05]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..3
+    idle         4..6
+    fire         7..10
+    idle         11..15
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 7173
+  states      # Modeldef.Doom.Weapons.def (no actor file in the well: vanilla Doom weapons) (statephase.py)

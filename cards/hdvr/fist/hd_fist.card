@@ -1,0 +1,20 @@
+weapon hd_fist
+  archetype   melee        # owner-confirmed
+  model       hd_fist.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    glove2   surf 1  rest [-0.0, 20.0, 0.0]  axis [0.85, -0.484, -0.208]  travel 62.67  frames 1..56  HIDDEN at idle; appears 35..52
+  ports
+    chamber   [59.98, 9.88, -13.0]  frame 52
+    eject     [59.98, 14.95, -13.0]  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side
+    muzzle    [32.89, 1.83, -6.44]
+  grip        line [26.36, 2.42, -5.56] [26.08, -0.09, -12.19]  trigger [26.48, 1.26, -6.52]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [30.48, 1.26, -6.52]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..34
+    load         35..52
+    idle         53..56
+  baked_cant   frames 5..56 up to 110.5 deg   # psprite-era hand sway; removed in hd_fist_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2310
+  states      # Modeldef.Doom.Weapons.def (no actor file in the well: vanilla Doom weapons) (statephase.py)

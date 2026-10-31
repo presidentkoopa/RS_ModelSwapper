@@ -1,0 +1,14 @@
+weapon hd_chainsaw
+  archetype   melee        # owner-confirmed
+  model       hd_chainsaw.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    chain    surf 0  rest [42.34, 3.77, -1.88]  axis [-0.101, -0.0, -0.995]  travel 1.62  frames 3..7
+    muzzle    [88.0, -1.92, -3.19]
+  grip        line [66.62, -2.36, -7.66] [55.14, -2.3, -8.94]  trigger [66.63, -2.15, -5.06]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [70.63, -2.15, -5.06]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..7
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 28372
+  states      # Modeldef.Doom.Weapons.def (no actor file in the well: vanilla Doom weapons) (statephase.py)
