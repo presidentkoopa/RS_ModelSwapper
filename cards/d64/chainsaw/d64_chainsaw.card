@@ -1,0 +1,23 @@
+weapon d64_chainsaw
+  archetype   melee        # owner-confirmed
+  model       d64_chainsaw.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    blade    surf 1  rest [70.99, -2.16, -5.2]  axis [-0.0, 1.0, -0.0]  travel 24.47  frames 1..7
+    chain    surf 2  rest [77.6, 10.07, -5.02]  axis [-0.0, 1.0, -0.0]  travel 12.23  frames 1..7
+    chain2   surf 3  rest [47.99, 9.83, -6.2]  axis [0.0, 1.0, 0.0]  travel 12.23  frames 1..7
+    part     surf 4  rest [38.9, 4.17, -2.34]  axis [0.0, 1.0, 0.0]  travel 12.23  frames 1..7
+    chain3   surf 5  rest [77.6, -2.14, -5.02]  axis [-0.0, 1.0, -0.0]  travel 12.23  frames 1..7
+    chain4   surf 6  rest [47.99, -1.88, -6.2]  axis [0.0, 1.0, 0.0]  travel 12.23  frames 1..7
+    muzzle    [96.22, 9.94, -3.64]
+  grip        line [70.48, 10.03, -8.27] [61.05, 9.83, -9.64]  trigger [70.55, 10.08, -5.18]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [74.55, 10.08, -5.18]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..7
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 34760
+  states      # Modeldef.64Chain_saw.def (statephase.py; vanilla/D64 weapon states, Saw_fix.txt for the saw)
+    Deselect           2 tics  frames 2
+    Select             3 tics  frames 2
+    Ready              8 tics  frames 2,3,2,3
+    Fire               9 tics  frames 4,5,4,5

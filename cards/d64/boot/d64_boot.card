@@ -1,0 +1,16 @@
+weapon d64_boot
+  archetype   melee        # owner-confirmed
+  model       d64_boot.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [52.14, 0.39, -39.92]
+  grip        line [35.0, -4.17, -38.8] [27.03, 2.05, -52.14]  trigger [35.66, -0.01, -39.79]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [39.66, -0.01, -39.79]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..17
+    lower        18..18
+    idle         19..20
+  baked_cant   frames 9..19 up to 108.9 deg   # psprite-era hand sway; removed in d64_boot_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 19068
+  states      # Modeldef.64Fist.def (statephase.py; vanilla/D64 weapon states, Saw_fix.txt for the saw)

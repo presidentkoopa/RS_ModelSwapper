@@ -19,9 +19,9 @@ Those six are BD21 with PBR materials (materials/*_n/_r/_m/_ao) and a vanilla-Do
 binds PISG/SHTG/SHT2/MISG/PLSG/CHGG). "Variants copy rows": no second fit, no second card. The credits.txt says
 sketchfab sources; the bytes say BD21.
 
-Carded here (new meshes):
+Carded here (new meshes; the BFG turned out NOT to be new, see its row):
 | gun | mesh | reload | parts |
 |---|---|---|---|
-| bfg | BFG.md3 16f (RD-100 remix) | no | surf 1 (52 v) = trigger |
+| bfg | BFG.md3 16f = BD21 BFG MESH (same surfaces; 9 of 16 frames re-animated) -- found on the D64 double-check | no | copy cards/bd21/bfg rows; the hdvr/bfg card is kept only as a record of the re-animated frames |
 | chainsaw | Chainsaw.md3 8f (3DHaupt animated) | no | surf 0 = the chain (moves 8 along the bar), body = surf 1 (--body 1) |
 | fist | fist.md3 57f | no | two glove surfaces (punch animation) |
