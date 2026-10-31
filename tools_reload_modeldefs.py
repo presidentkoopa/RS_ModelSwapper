@@ -25,11 +25,17 @@ def block(text, name):
     return m.group(1) if m else None
 
 
+def slot_of(table, donor):
+    t = open(os.path.join('zscript_depot/rsr', table)).read()
+    m = re.search(r'if \(donor == "%s"\)\s+return (\d+);' % re.escape(donor), t)
+    return int(m.group(1)) if m else None
+
+
 def main():
     os.chdir(HERE)
     att = json.load(open('reload_names.json'))
     gen = open('modeldef').read()
-    for lump in ('MODELDEF.rsb', 'MODELDEF.rsrpump'):
+    for lump in ('MODELDEF.rsb', 'MODELDEF.rsrpump', 'MODELDEF.cards'):
         src = open(os.path.join('reload_1x', lump)).read()
         parts = re.split(r'(?=^// RS real VR reload)', src, flags=re.M)
         head, secs = (parts[0], parts[1:]) if not parts[0].startswith('// RS real VR reload') else ('', parts)
@@ -42,6 +48,10 @@ def main():
             if not a or not a['match'].split()[0] in ('exact', 'moved'):
                 left.append('%s (%s)' % (old, 'not attached' if not a else 'card re-split: ' + a['match'])); continue
             new = a['donor']; cdir = os.path.dirname(a['card_mesh']); cfile = os.path.basename(a['card_mesh'])
+            # a donor reloads on ONE slot: the first `donor == "<new>"` match in its table. Keep only the section
+            # measured for that slot (2.0 has several names on one mesh: MS_BD_Unmaker, MS_brt_Unmaker, ...)
+            if slot_of(a['table'], new) != a['slot']:
+                left.append('%s (not %s\'s slot)' % (old, new)); continue
             nb = block(gen, new)
             nplace = [l.strip() for l in nb.splitlines() if l.strip().split(' ')[0] in PLACE]
             m0 = re.search(r'Path\s+"([^"]+)"\s*\n\s*Model\s+0\s+"([^"]+)"', sec)
@@ -61,7 +71,8 @@ def main():
                 return '\n'.join(lines[:i] + ['\t' + p for p in nplace] + lines[i:])
             sec2 = re.sub(r'(Model\s+\w+\s*\{)(.*?)(\n\})', lambda mm: mm.group(1) + fix(mm.group(2)) + mm.group(3), sec, flags=re.S)
             sec2 = re.sub(r'^Model\s+%s\b' % re.escape(old), 'Model %s' % new, sec2, flags=re.M)
-            if opath in sec2 or ofile in re.sub(r'//[^\n]*', '', sec2):
+            _nc = re.sub(r'//[^\n]*', '', sec2)
+            if ('"%s"' % opath) in _nc or ('"%s"' % ofile) in _nc:
                 raise SystemExit('%s: a 1.x path is left in the %s section' % (lump, new))
             if 'rsr_clear.png' in sec2 and not os.path.exists(os.path.join(cdir, 'rsr_clear.png')):
                 shutil.copy(os.path.join('reload_1x', 'rsr_clear.png'), os.path.join(cdir, 'rsr_clear.png'))

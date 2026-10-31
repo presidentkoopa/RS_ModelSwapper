@@ -12,9 +12,9 @@
 | MS_AE_Satchel | 0 | 0 | ready STCGA |
 | MS_BD_Assaultshotgun | 4 | 4 | ready A12GA |
 | MS_BD_Axe | 8 | 5 | ready AXEGA |
-| MS_BD_Bfg | 6 | 6 | ready BFGNA |
+| MS_BD_Bfg | 6 | 6 | ready BFGNA (actor big_fucking_gun) |
 | MS_BD_Bfg10k | 6 | 6 | ready BG2GA |
-| MS_BD_Boot | 5 | - | Ready frame not in block ClassicRocketLauncher |
+| MS_BD_Boot | 5 | - | actor ClassicRocketLauncher not found |
 | MS_BD_Buzzsaw | 0 | 0 | ready HBUSA |
 | MS_BD_Chainsaw | 0 | 15 | ready SAWGA |
 | MS_BD_Dragonslayer | 0 | 0 | ready DSLAA |
@@ -30,7 +30,7 @@
 | MS_BD_Pistol | 2 | 2 | ready PISTF |
 | MS_BD_Plasma | 4 | 4 | ready PLSNA |
 | MS_BD_Railgun | 3 | 2 | ready RAILA |
-| MS_BD_Revolver | 0 | 0 | ready REVOA |
+| MS_BD_Revolver | 0 | - | actor Revolver not found |
 | MS_BD_Rifle | 3 | 3 | ready RIFGA |
 | MS_BD_Rpg | 4 | 5 | ready RLNGA |
 | MS_BD_Shotgun | 4 | 4 | ready SHTNA |
@@ -64,7 +64,7 @@
 | MS_CX_Zorchpropulsor | 0 | 0 | ready MISGA |
 | MS_Cola_Carddeck | 2 | 0 | ready VDCKA |
 | MS_Cola_Frypan | 0 | - | Ready frame not in block ColaHandgun |
-| MS_Cola_Ks23 | 0 | 0 | ready 2SHTA |
+| MS_Cola_Ks23 | 0 | - | actor DualPumpShotgun not found |
 | MS_Cola_Particlegun | 0 | 0 | ready TPLGA |
 | MS_Cola_Piledriver | 0 | 0 | ready PDRVA |
 | MS_Cola_Plasmagun | 0 | 0 | ready ZPL0A |
@@ -86,12 +86,12 @@
 | MS_HP_Rifle | 1 | 0 | ready ELECA |
 | MS_HP_Wand | 0 | 0 | ready WANXA |
 | MS_MG_Bfg | 0 | 0 | ready BFGNA |
-| MS_MG_Bolter | 0 | 0 | ready PLSCA |
-| MS_MG_Chaingun | 0 | 0 | ready MGUGA |
-| MS_MG_Knife | 0 | 0 | ready FSTZA |
-| MS_MG_Rpg | 0 | 0 | ready RLNCA |
-| MS_MG_Saw | 0 | 0 | ready SAWGC |
-| MS_MG_Shotgun | 0 | 0 | ready SHTGA |
+| MS_MG_Bolter | 0 | - | no source block |
+| MS_MG_Chaingun | 0 | - | no source block |
+| MS_MG_Knife | 0 | - | no source block |
+| MS_MG_Rpg | 0 | - | no source block |
+| MS_MG_Saw | 0 | - | no source block |
+| MS_MG_Shotgun | 0 | - | no source block |
 | MS_MG_Ssg | 0 | 0 | ready SSGGA |
 | MS_MG_Tec9 | 0 | 0 | ready MGNGA |
 | MS_PD_Blunderbuss | 0 | 0 | ready SGUNA |
@@ -129,9 +129,9 @@
 | MS_HV_Wand | 0 | 0 | ready GWNDA |
 | MS_VP_Chainsaw | 0 | 0 | ready SAWGA |
 | MS_VP_M16 | 0 | 0 | ready RIFLA |
-| MS_VP_Minigun | 0 | 0 | ready CHGGA |
-| MS_VP_Pistol | 0 | 0 | ready PISGA |
-| MS_VP_Plasma | 0 | 0 | ready PLSGA |
+| MS_VP_Minigun | 0 | - | no source block |
+| MS_VP_Pistol | 0 | - | no source block |
+| MS_VP_Plasma | 0 | - | no source block |
 | MS_VP_Rev | 0 | 0 | ready REVLA |
 | MS_VP_Shotgun | 2 | 0 | ready SHTGA |
 | MS_VP_Ssg | 0 | 0 | ready SHT2A |

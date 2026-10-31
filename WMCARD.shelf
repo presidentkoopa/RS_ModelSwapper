@@ -205,8 +205,8 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = 0.350, -0.557, -0.753
-    distance = 1.64
+    axis     = 0.745, -0.660, -0.101
+    distance = 18.41
   end
 end
 
@@ -709,8 +709,8 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = 0.350, -0.557, -0.753
-    distance = 1.64
+    axis     = 0.745, -0.660, -0.101
+    distance = 18.41
   end
 end
 
@@ -811,8 +811,8 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = 0.350, -0.557, -0.753
-    distance = 1.64
+    axis     = 0.745, -0.660, -0.101
+    distance = 18.41
   end
 end
 
@@ -1014,8 +1014,8 @@ part magazine
   grabradius = 2.5
   dof
     kind     = slide
-    axis     = 0.350, -0.557, -0.753
-    distance = 1.64
+    axis     = 0.745, -0.660, -0.101
+    distance = 18.41
   end
 end
 

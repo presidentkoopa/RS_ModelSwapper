@@ -7,81 +7,6 @@ version "4.13"
 // exact class-pointer test).
 // ============================================================================
 
-
-// World-anchored display classes. Named by RS_Holsters via string
-// substitution -- see zscript/RS_ForeignWorldModels.zs.
-// MSBL -- THE PRIVATE BLANK ANCHOR.
-//
-// Every donor's MODELDEF block carries one row pointing at frame 9999, which
-// BlankWeaponFlashes pins a flash layer to so the layer resolves a model that
-// draws nothing. That row USED to be letter B of the donor's stock anchor
-// (PISG, SHTG, CHGG ...). The interpolation target is taken from the DECLARED
-// next state's sprite (models.cpp, FindModelFrame(actor, nextState->sprite,
-// ...)) against the foreign weapon carrying our modelDef -- and vanilla's own
-// pistol chain is literally PISG A -> PISG B. So a foreign weapon could
-// resolve our out-of-range row by accident and the held weapon vanished for
-// that rendered frame.
-//
-// MSBL is a name no mod uses. A MODELDEF FrameIndex row is a hard parse error
-// if its sprite name does not already exist, and GetSpriteIndex only registers
-// a name it has seen in a STATE -- so this class exists for no other reason
-// than to declare that state. It is never spawned.
-class MS_BlankAnchor : Actor { States { Spawn: MSBL A -1; Stop; } }
-
-class MS_PU_AE_Flamer : MS_PickupModel {}
-class MS_PU_AE_Pistol : MS_PickupModel {}
-class MS_PU_AE_Shotgun : MS_PickupModel {}
-class MS_PU_BD_Boot : MS_PickupModel {}
-class MS_PU_BD_BrutalAxe : MS_PickupModel {}
-class MS_PU_BD_DSweap : MS_PickupModel {}
-class MS_PU_BD_BrutalSMG : MS_PickupModel {}
-class MS_PU_BD_Flamethrower2 : MS_PickupModel {}
-class MS_PU_BD_M79 : MS_PickupModel {}
-class MS_PU_BD_Machinegun : MS_PickupModel {}
-class MS_PU_BD_nade : MS_PickupModel {}
-class MS_PU_BD_RailGun : MS_PickupModel {}
-class MS_PU_BD_Rifle : MS_PickupModel {}
-class MS_PU_BD_Unmaker : MS_PickupModel {}
-class MS_PU_Chaingun : MS_PickupModel {}
-class MS_PU_Chainsaw : MS_PickupModel {}
-class MS_PU_Fist : MS_PickupModel {}
-class MS_PU_Cola_Revolver : MS_PickupModel {}
-class MS_PU_Jackhammer : MS_PickupModel {}
-class MS_PU_MG_Bolter : MS_PickupModel {}
-class MS_PU_MG_Tec9 : MS_PickupModel {}
-class MS_PU_Pistol : MS_PickupModel {}
-class MS_PU_Pistol2 : MS_PickupModel {}
-class MS_PU_PlasmaRifle : MS_PickupModel {}
-class MS_PU_RC_Auto9 : MS_PickupModel {}
-class MS_PU_RC_Chainsaw : MS_PickupModel {}
-class MS_PU_RC_M32 : MS_PickupModel {}
-class MS_PU_Revolver : MS_PickupModel {}
-class MS_PU_Revolver2 : MS_PickupModel {}
-class MS_PU_Rifle : MS_PickupModel {}
-class MS_PU_RocketLauncher : MS_PickupModel {}
-class MS_PU_Shotgun : MS_PickupModel {}
-class MS_PU_SuperShotgun : MS_PickupModel {}
-class MS_PU_VR_BFG9000 : MS_PickupModel {}
-
-#include "zscript/RS_ForeignFork.zs"
-#include "zscript/RS_ForeignPersist.zs"
-#include "zscript/RS_ForeignAnim.zs"
-#include "zscript/RS_ForeignRemap.zs"
-#include "zscript/RS_ForeignModels.zs"
-#include "zscript/RS_ForeignArchetypeService.zs"
-#include "zscript/RS_ForeignModelsMenu.zs"
-#include "zscript/RS_ForeignWorldModels.zs"
-#include "zscript/RS_ForeignEffects.zs"
-#include "zscript/RS_ForeignDebug.zs"
-#include "zscript/RS_ForeignReload.zs"
-
-// Stubs for the imported VR weapon packages. The engine binds a model to a
-// CLASS, so every Model block in modeldef needs one of these or the donor is
-// silently dropped -- which looks like it worked.
-
-// Stubs for the remaining imported packages.
-
-// Stubs for ZionVR.
 // GEN-DONORS-BEGIN (tools_gen_from_cards.py)
 class MS_AE_Knife : Actor {}
 class MS_AE_Loader : Actor {}
@@ -227,3 +152,78 @@ class MS_ZB_Tommygun : Actor {}
 class MS_ZB_Voodoo : Actor {}
 class MS_ZB_Zippo : Actor {}
 // GEN-DONORS-END
+
+// World-anchored display classes. Named by RS_Holsters via string
+// substitution -- see zscript/RS_ForeignWorldModels.zs.
+// MSBL -- THE PRIVATE BLANK ANCHOR.
+//
+// Every donor's MODELDEF block carries one row pointing at frame 9999, which
+// BlankWeaponFlashes pins a flash layer to so the layer resolves a model that
+// draws nothing. That row USED to be letter B of the donor's stock anchor
+// (PISG, SHTG, CHGG ...). The interpolation target is taken from the DECLARED
+// next state's sprite (models.cpp, FindModelFrame(actor, nextState->sprite,
+// ...)) against the foreign weapon carrying our modelDef -- and vanilla's own
+// pistol chain is literally PISG A -> PISG B. So a foreign weapon could
+// resolve our out-of-range row by accident and the held weapon vanished for
+// that rendered frame.
+//
+// MSBL is a name no mod uses. A MODELDEF FrameIndex row is a hard parse error
+// if its sprite name does not already exist, and GetSpriteIndex only registers
+// a name it has seen in a STATE -- so this class exists for no other reason
+// than to declare that state. It is never spawned.
+class MS_BlankAnchor : Actor { States { Spawn: MSBL A -1; Stop; } }
+
+class MS_PU_AE_Flamer : MS_PickupModel {}
+class MS_PU_AE_Pistol : MS_PickupModel {}
+class MS_PU_AE_Shotgun : MS_PickupModel {}
+class MS_PU_BD_Boot : MS_PickupModel {}
+class MS_PU_BD_BrutalAxe : MS_PickupModel {}
+class MS_PU_BD_DSweap : MS_PickupModel {}
+class MS_PU_BD_BrutalSMG : MS_PickupModel {}
+class MS_PU_BD_Flamethrower2 : MS_PickupModel {}
+class MS_PU_BD_M79 : MS_PickupModel {}
+class MS_PU_BD_Machinegun : MS_PickupModel {}
+class MS_PU_BD_nade : MS_PickupModel {}
+class MS_PU_BD_RailGun : MS_PickupModel {}
+class MS_PU_BD_Rifle : MS_PickupModel {}
+class MS_PU_BD_Unmaker : MS_PickupModel {}
+class MS_PU_Chaingun : MS_PickupModel {}
+class MS_PU_Chainsaw : MS_PickupModel {}
+class MS_PU_Fist : MS_PickupModel {}
+class MS_PU_Cola_Revolver : MS_PickupModel {}
+class MS_PU_Jackhammer : MS_PickupModel {}
+class MS_PU_MG_Bolter : MS_PickupModel {}
+class MS_PU_MG_Tec9 : MS_PickupModel {}
+class MS_PU_Pistol : MS_PickupModel {}
+class MS_PU_Pistol2 : MS_PickupModel {}
+class MS_PU_PlasmaRifle : MS_PickupModel {}
+class MS_PU_RC_Auto9 : MS_PickupModel {}
+class MS_PU_RC_Chainsaw : MS_PickupModel {}
+class MS_PU_RC_M32 : MS_PickupModel {}
+class MS_PU_Revolver : MS_PickupModel {}
+class MS_PU_Revolver2 : MS_PickupModel {}
+class MS_PU_Rifle : MS_PickupModel {}
+class MS_PU_RocketLauncher : MS_PickupModel {}
+class MS_PU_Shotgun : MS_PickupModel {}
+class MS_PU_SuperShotgun : MS_PickupModel {}
+class MS_PU_VR_BFG9000 : MS_PickupModel {}
+
+#include "zscript/RS_ForeignFork.zs"
+#include "zscript/RS_ForeignPersist.zs"
+#include "zscript/RS_ForeignAnim.zs"
+#include "zscript/RS_ForeignRemap.zs"
+#include "zscript/RS_ForeignModels.zs"
+#include "zscript/RS_ForeignArchetypeService.zs"
+#include "zscript/RS_ForeignModelsMenu.zs"
+#include "zscript/RS_ForeignWorldModels.zs"
+#include "zscript/RS_ForeignEffects.zs"
+#include "zscript/RS_ForeignDebug.zs"
+#include "zscript/RS_ForeignReload.zs"
+
+// Stubs for the imported VR weapon packages. The engine binds a model to a
+// CLASS, so every Model block in modeldef needs one of these or the donor is
+// silently dropped -- which looks like it worked.
+
+// Stubs for the remaining imported packages.
+
+// Stubs for ZionVR.

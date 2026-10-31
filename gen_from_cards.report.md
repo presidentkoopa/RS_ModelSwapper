@@ -23,7 +23,7 @@
 | MS_BD_Flamethrower | bd21/flamethrower | flamethrower | br_vr/PK3_pbr/Models/Weapons/Hud/Flamethrower2/Flamethrower2.md3::Flamethrower2 | (source numbers) | Flamethrower2.png, sheet.png |
 | MS_BD_Grenade | bd21/grenade | grenade | br_vr/PK3_pbr/Models/Weapons/Hud/Grenade/nade.md3::HandGrenades | (source numbers) | nade.png, sheet.png |
 | MS_BD_Hellishmissile | bd21/hellishmissile | rocket | br_vr/PK3_pbr/Models/Weapons/Hud/HellishMissile/HellishMissile.md3::HellishMissileLauncher | (source numbers) | HellishMissile.png, sheet.png |
-| MS_BD_M79 | bd21/m79 | launcher | br_vr/PK3_pbr/Models/Weapons/Hud/M79/M79.md3::GrenadeLauncher | (source numbers) | M79.png, sheet.png |
+| MS_BD_M79 | bd21/m79 | launcher | br_vr/PK3_pbr/Models/Weapons/Hud/M79/M79.md3::GrenadeLauncher | (source numbers) | M79.png, rsr_clear.png, sheet.png |
 | MS_BD_Machinegun | bd21/machinegun | machinegun | br_vr/PK3_pbr/Models/Weapons/Hud/Machinegun/Machinegun.md3::Machinegun | (source numbers) | Machinegun.png, sheet.png |
 | MS_BD_Minigun | bd21/minigun | chaingun | br_vr/PK3_pbr/Models/Weapons/Hud/Minigun/minigun.md3::Minigun | (source numbers) | chaingun.png, sheet.png, sheet_top.png -- source skin ['Minigun.png'] not in folder; used chaingun.png |
 | MS_BD_Mp40 | bd21/mp40 | smg | br_vr/PK3_pbr/Models/Weapons/Hud/MP40/MP40.md3::MP40 | (source numbers) | MP40.png, sheet.png |

@@ -170,6 +170,79 @@ class RSR abstract
 		}
 		return false;
 	}
+
+	// The weapon layer is waiting on the hands. In a pack that owns its guns that is the
+	// gun's own RSR_Wait state. In ModelSwapper the gun is somebody else's and has no such
+	// state, so MS_ReloadJoin parks it on MS_ReloadStates.MS_Hold instead -- and until this
+	// accepted that, Draw never swapped a ModelSwapper gun to its gun-without-magazine frame:
+	// the magazine stayed in the gun while a second one was in your hand.
+	// ModelSwapper's own reload foley is named ms/... (SNDINFO.ms). The player can turn it off
+	// (ms_reload_sounds 0) and hear only the loaded mod: its own reload still plays its own sounds
+	// when the hands hand the gun back. A pack's own names are never touched.
+	// "ModelSwapper quiet" (owner, 2026-10-27): every hand reload in this pack is on a loaded mod's
+	// gun, and that gun's own reload plays its own sounds and drops its own magazine. With
+	// ms_reload_sounds 0 -- the shipped default -- ModelSwapper adds NONE: no foley under any name
+	// (ms/... or a row naming the mod's own sound) and no dropped magazine, shell or casing of its own
+	// (Quiet). Before, "mod's reload first" played both sets and dropped two magazines (triage
+	// finding 3). 1 puts ModelSwapper's foley and drops back.
+	play static bool Quiet(PlayerPawn mo)
+	{
+		return mo && PlayerInt(mo.player, 'ms_reload_sounds', 0) == 0;
+	}
+
+	play static bool Muted(PlayerPawn mo, String snd)
+	{
+		return Quiet(mo);
+	}
+
+	play static bool InHold(PSprite psp, Weapon w)
+	{
+		if (!psp || !w)
+			return false;
+		if (psp.CurState == w.FindState("RSR_Wait"))
+			return true;
+		let hold = GetDefaultByType('MS_ReloadStates').FindState("MS_Hold");
+		if (hold && psp.CurState == hold)
+			return true;
+		// ModelSwapper, Reload Order "mod's reload first": the mod's own reload states run while the
+		// hands work, before the gun is parked; it is drawn as held all the same
+		return psp.ID == PSP_WEAPON && MS_ReloadJoin.Drives(psp.Owner, w);
+	}
+
+	// The reserve a fresh magazine is taken from. A table that names one (a pack that owns
+	// its guns) is used as is. ModelSwapper's rows name none, because the gun belongs to the
+	// loaded mod and so does its ammo: the reserve is that weapon's own. A magazine weapon
+	// usually carries two ammo types, the rounds in the gun and the reserve; the reserve is
+	// the larger store. An empty answer means "no reserve to check" -- the mod's own reload
+	// still decides what a reload is worth, this only stops a hand pulling a magazine out of
+	// nothing.
+	play static Inventory ReserveOf(PlayerPawn mo, int gun)
+	{
+		String res = RSR_Guns.Reserve(gun);
+		if (res != "")
+		{
+			class<Inventory> rc = res;
+			return rc ? mo.FindInventory(rc) : null;
+		}
+		return WeaponStore(mo, true);
+	}
+
+	// One of the held weapon's own two ammo stores: the reserve (the larger) or what is loaded
+	// in the gun (the smaller -- a magazine, a shotgun's tube). A weapon with one store has it
+	// as its reserve and nothing loaded. ModelSwapper reads a foreign gun's ammo through this.
+	play static Inventory WeaponStore(PlayerPawn mo, bool reserve)
+	{
+		let w = mo && mo.player ? mo.player.ReadyWeapon : null;
+		if (!w)
+			return null;
+		Inventory a1 = w.Ammo1, a2 = w.Ammo2;
+		if (!a1 || !a2 || a1 == a2)
+			return reserve ? (a1 ? a1 : a2) : null;
+		bool twoBig = a2.MaxAmount > a1.MaxAmount;
+		if (reserve)
+			return twoBig ? a2 : a1;
+		return twoBig ? a1 : a2;
+	}
 }
 
 // one player's reload
@@ -314,12 +387,17 @@ class RSR_State play
 	{
 		int i = gun;
 		String res = RSR_Guns.Reserve(i);
-		class<Inventory> rc = res;
-		if (rc && mo.CountInv(rc) <= 0)
+		let rinv = RSR.ReserveOf(mo, i);
+		bool named = res != "";
+		if (named && (!rinv || rinv.Amount <= 0) || !named && rinv && rinv.Amount <= 0)
 		{
 			if (RSR.Debug(mo.player))
+			{
+				String rn = res;
+				if (rinv) rn = rinv.GetClassName();
 				Console.Printf("rsr t%d gun %d: no magazine to take, reserve %s is empty",
-					mo.Level.maptime, i, res);
+					mo.Level.maptime, i, rn);
+			}
 			return false;
 		}
 		Vector3 hand = OffPoint(RSR.PalmGrab());
@@ -337,7 +415,7 @@ class RSR_State play
 
 	void PlaySnd(PlayerPawn mo, String snd)
 	{
-		if (snd == "")
+		if (snd == "" || RSR.Muted(mo, snd))
 			return;
 		mo.A_StartSound(snd, RSR_Guns.Channel(gun));
 		if (RSR.Debug(mo.player))
@@ -347,6 +425,8 @@ class RSR_State play
 	// a magazine falls: the gun's own magazine as a world actor, where it is now
 	void Fall(PlayerPawn mo, Vector3 at)
 	{
+		if (RSR.Quiet(mo))
+			return;		// the mod's reload drops its own magazine
 		Vector3 pos = RSVR_VRHand.HandPos(mo) + FromGun(at);
 		let m = RSR_DroppedMag(Actor.Spawn('RSR_DroppedMag', pos));
 		if (!m)
@@ -356,7 +436,7 @@ class RSR_State play
 		m.angle = atan2(F.y, F.x);
 		m.pitch = -asin(clamp(F.z, -1, 1));
 		m.vel = mo.vel + (0, 0, -1.5);
-		m.BounceSound = RSR_Guns.SndLand(gun);
+		m.BounceSound = RSR.Muted(mo, RSR_Guns.SndLand(gun)) ? "" : RSR_Guns.SndLand(gun);
 		m.target = mo;
 	}
 
@@ -760,7 +840,7 @@ class RSR_State play
 		if (psp && i > 0)
 		{
 			Name gs = RSR_Guns.SprGun(i);
-			if (active && psp.CurState == w.FindState("RSR_Wait"))
+			if (active && RSR.InHold(psp, w))
 			{
 				if (phase >= RSR.DROP && phase <= RSR.INSERT)
 				{

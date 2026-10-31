@@ -859,8 +859,18 @@ class RS_ForeignScanner
 	// Is this one of OURS?
 	static bool IsOurs(string cn)
 	{
-		return (cn.IndexOf("MS_") == 0 || cn.IndexOf("RS_") == 0
-		     || cn.IndexOf("VR_") == 0 || cn.IndexOf("Vanilla_") == 0);
+		// 2026-10-26: the Quest build's hands and reloads are ours too. RSQ_Hands is a Weapon (the
+		// off-hand weapon that draws the free hand and the magazine in it); unlisted here it was
+		// scanned as a melee weapon and given the shelf's KNIFE: the owner's "all the offhand ever
+		// sees is a knife" (gate shots, MS_BD22_M79 on the rig: a knife where the off hand is).
+		// Class names are case-insensitive and GetClassName() gives the spelling the class was
+		// first named with: the scan saw "rsq_hands" (gate, [DBG] listed rsq_hands ... as melee),
+		// which a case-sensitive "RSQ_" test missed. Compared lower-cased.
+		string lc = cn; lc = lc.MakeLower();
+		return (lc.IndexOf("ms_") == 0 || lc.IndexOf("rs_") == 0
+		     || lc.IndexOf("vr_") == 0 || lc.IndexOf("vanilla_") == 0
+		     || lc.IndexOf("rsq_") == 0 || lc.IndexOf("rsr_") == 0 || lc.IndexOf("rsb_") == 0
+		     || lc.IndexOf("rsp_") == 0 || lc.IndexOf("rsk_") == 0 || lc.IndexOf("rsm_") == 0);
 	}
 
 	// The nine Chex Quest weapons, which GZDoom compiles into every session
@@ -1051,6 +1061,58 @@ class RS_ForeignScanner
 	// changing which index a given class name lands on. Wrap-safe: the
 	// multiply can overflow into negative territory on a long name, so the
 	// final % is corrected the same way CyclePick already does.
+	// THE PROFILE HOOK. A ModelSwapper profile would be a curated pick set for a detected mod,
+	// and it would win over the auto guess (never over the player's own picks). NONE EXISTS: the
+	// only per-mod memory in this pack is the player's own pick archive (RS_ForeignPersist,
+	// rs_fm_picks, keyed by class name). Return a shelf index here when one is built; -1 = none.
+	static int ProfilePick(string cls, string arch, RS_ForeignShelf shelf)
+	{
+		return -1;
+	}
+
+	// Does ModelSwapper have a measured hand reload for this donor (a magazine, pump or
+	// break-open row)? A donor without one draws, but no hand reload runs on it.
+	static bool DonorReloads(string donor)
+	{
+		return RSR_Guns.SlotForDonor(donor) > 0 || RSP_Guns.SlotForDonor(donor) > 0 || RSB_Guns.SlotForDonor(donor) > 0;
+	}
+
+	// PREFER A MODEL THAT RELOADS (owner, 2026-10-27). The auto guess used to HashPick across the
+	// whole family, so 12 of BD22's 17 guns wore a model with no reload row while the lifted
+	// MS_BD22_* models (rows measured) went unused. Now, within the gun's family:
+	//   1. the lifted model of this very gun (MS_BD22_<class>, names compared without "Brutal" and
+	//      "_": BrutalSMG -> SMG, Shot_Gun -> Shotgun; GrenadeLauncher -> M79), when it has a row;
+	//   2. else one of the family's donors that has a row, chosen by the class-name hash;
+	//   3. else -1: the old hash over the whole family.
+	static int ReloadablePick(string cls, string arch, RS_ForeignShelf shelf)
+	{
+		int have = shelf.Count(arch);
+		if (have <= 0 || arch == "any")
+			return -1;
+		string want = cls.MakeLower();
+		want.Replace("_", "");
+		want.Replace("brutal", "");
+		if (want == "grenadelauncher") want = "m79";
+		Array<int> rows;
+		for (int k = 0; k < have; k++)
+		{
+			string d = shelf.NameAt(arch, k);
+			if (!DonorReloads(d))
+				continue;
+			if (d.IndexOf("MS_BD22_") == 0)
+			{
+				string n = d.Mid(8);
+				n = n.MakeLower();
+				if (n == want)
+					return k;
+			}
+			rows.Push(k);
+		}
+		if (rows.Size() == 0)
+			return -1;
+		return rows[HashPick(cls, rows.Size())];
+	}
+
 	static int HashPick(string cls, int n)
 	{
 		if (n <= 0) return 0;
@@ -1301,7 +1363,17 @@ class RS_ForeignScanner
 			if (pick == 0 && shelf)
 			{
 				int have = shelf.Count(e.archetype);
-				if (have > 1) pick = HashPick(e.clsName, have);
+				// The order (owner, 2026-10-27): a pick the player made in the menu (rs_fm_picks,
+				// applied after this scan by RS_ForeignModelHandler) always wins; then a ModelSwapper
+				// profile for the loaded mod; then this guess, which prefers a model that reloads.
+				int prof = ProfilePick(e.clsName, e.archetype, shelf);
+				if (prof >= 0) pick = prof;
+				else
+				{
+					int rl = ReloadablePick(e.clsName, e.archetype, shelf);
+					if (rl >= 0) pick = rl;
+					else if (have > 1) pick = HashPick(e.clsName, have);
+				}
 			}
 
 			e.modelPick1    = pick;
@@ -2487,6 +2559,14 @@ class RS_ForeignModelHandler : StaticEventHandler
 			// mod's own layers are all it has and must be left alone.
 			if (mLastMain == null && mLastOff == null) continue;
 			if (!(c is 'Weapon')) continue;
+			// OUR OWN LAYERS ARE NOT THE MOD'S. The hands (RSQ_Hands: the free hand, the magazine,
+			// shell or round in it) and the reloads' part carriers are Weapon subclasses too, so
+			// this blanked them: the gate saw "blanking layer 2201 of rsq_hands" -- the magazine in
+			// the off hand pinned to the blank anchor (owner, first headset pass: "magazines and
+			// shells do not appear in the offhand").
+			// (by name: this file is in the desktop build too, which has none of these classes)
+			Name ocn = c.GetClassName();
+			if (ocn == 'RSQ_Hands' || ocn == 'RSR_PartStates' || ocn == 'RSB_PartStates' || ocn == 'MS_ReloadStates') continue;
 
 			int si = (c == mLastOff) ? mFlashSprOff : mFlashSprMain;
 			if (si < 0) continue;

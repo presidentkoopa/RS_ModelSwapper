@@ -60,7 +60,7 @@ def probe_pk3():
 def rig_run(a, picks, script, tag, every='12'):
     d = os.path.join(rc.SHOTS, 'rigreload_%s_%s_%s' % (a.tag, tag, a.donor)); shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
     args = ['./qz', '-iwad', rc.IWAD, '-file'] + [os.path.abspath(x) for x in a.extra] + [rc.PK3, probe_pk3(), '-warp', '1',
-            '-nomonsters', '-nosound', '+set', 'rs_foreignmodels_dump', 'true', '+set', 'rs_fm_picks', '"%s"' % picks, '+' + script]
+            '-nomonsters', '-nosound', '+set', 'rs_foreignmodels_dump', 'true', '+set', 'rsq_hands', '1', '+set', 'rs_fm_picks', '"%s"' % picks, '+' + script]
     env = dict(os.environ, QZ_RES='320', QZ_DUMP_EVERY=every, QZ_DUMP_DIR=d)
     with open(os.path.join(d, 'out.txt'), 'w') as fo:
         try:
@@ -143,9 +143,9 @@ def main():
          % (a.hmd, a.weapon, a.weapon, pouch, at(W, A, T, M + 3), at(W, A, T, M * 0.5), at(W, A, T, 0)))
     d = os.path.join(rc.SHOTS, 'rigreload_%s_%s' % (a.tag, a.donor)); shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
     args = ['./qz', '-iwad', rc.IWAD, '-file'] + [os.path.abspath(x) for x in a.extra] + [rc.PK3, '-warp', '1',
-            '-nomonsters', '-nosound', '+set', 'rs_foreignmodels_dump', 'true', '+set', 'rs_fm_picks', '"%s"' % picks,
+            '-nomonsters', '-nosound', '+set', 'rs_foreignmodels_dump', 'true', '+set', 'rsq_hands', '1', '+set', 'rs_fm_picks', '"%s"' % picks,
             '+logfile', os.path.join(d, 'log.txt'), '+' + s]
-    env = dict(os.environ, QZ_RES='320', QZ_DUMP_EVERY='12', QZ_DUMP_DIR=d)
+    env = dict(os.environ, QZ_RES=os.environ.get('QZ_RES', '320'), QZ_DUMP_EVERY='12', QZ_DUMP_DIR=d)
     with open(os.path.join(d, 'out.txt'), 'w') as fo:
         try:
             subprocess.run(args, cwd=rc.RIG, env=env, stdout=fo, stderr=subprocess.STDOUT, timeout=400)

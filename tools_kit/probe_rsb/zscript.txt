@@ -10,6 +10,13 @@ class MSBreakProbe : EventHandler
 	{
 		let mo = PlayerPawn(players[consoleplayer].mo);
 		if (!mo || level.maptime < 5) return;
+		if (level.maptime % 70 == 0)
+		{
+			let rw = mo.player.ReadyWeapon, ow = mo.player.OffhandWeapon;
+			let op = mo.player.FindPSprite(PSP_OFFHANDWEAPON);
+			let fh = mo.player.FindPSprite(RSQ_Layers.FREEHAND);
+			Console.Printf("MSP t%d main %s off %s offpsp %s spr %s shown %d invr %d freehand %s", level.maptime, rw ? rw.GetClassName() : 'none', ow ? ow.GetClassName() : 'none', op && op.CurState ? "yes" : "no", op ? op.Sprite.. "" : "-", RSQ_Hands.Shown(mo), RSVR_VRHand.InVR(mo), fh && fh.CurState ? String.Format("spr %d fr %d caller %s", fh.Sprite, fh.Frame, fh.Caller ? fh.Caller.GetClassName() .. "" : "none") : "none");
+		}
 		let bs = RSB_Handler.StateOf(mo);
 		if (bs && bs.phase == RSB.OPEN && !bdumped)
 		{

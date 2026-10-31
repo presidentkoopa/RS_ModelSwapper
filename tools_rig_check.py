@@ -43,7 +43,7 @@ def build_pk3(out=PK3):
     os.chdir(HERE)
     z = zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED)
     quest = {'zscript.txt': 'quest/zscript.txt', 'MENUDEF': 'quest/MENUDEF', 'CVARINFO': 'quest/CVARINFO'}
-    for f in ('zscript.txt', 'modeldef', 'MODELDEF.rsb', 'MODELDEF.rsrpump', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF'):
+    for f in ('zscript.txt', 'modeldef', 'MODELDEF.rsb', 'MODELDEF.rsrpump', 'MODELDEF.cards', 'MODELDEF.rsq', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF'):
         src = quest.get(f, f) if os.path.exists(quest.get(f, f)) else f
         if os.path.exists(src): z.write(src, f)
     for f in sorted(os.listdir('.')):
@@ -56,6 +56,9 @@ def build_pk3(out=PK3):
             z.write('zscript/static/RS_ForeignFork.zs' if f == 'RS_ForeignFork.zs' else p, p)
     for root, ds, fs in os.walk('zscript_depot'):
         for f in fs: z.write(os.path.join(root, f), os.path.join(root, f))
+    for root, ds, fs in os.walk('models/rsq'):
+        for f in fs:
+            if f.lower().endswith(('.md3', '.png')): z.write(os.path.join(root, f), os.path.join(root, f))
     n = 0
     for root, ds, fs in os.walk('cards'):
         for f in fs:
@@ -101,7 +104,7 @@ def run_one(donor, fam, idx, extra, tag, weapon=None, fist_idx=None):
     cmds = ['wait 120', 'god', 'qz_rhand "0.0 1.68 -0.40 20 -70 0"', 'give ammo', 'give %s' % cls, 'wait 2',
             'use %s' % cls, 'wait 170', 'quit']
     args = ['./qz', '-iwad', IWAD, '-file'] + list(extra) + [PK3, '-warp', '1', '-nomonsters', '-nosound',
-            '+set', 'rs_foreignmodels_dump', 'true', '+set', 'rs_fm_picks', '"%s"' % picks, '+' + '; '.join(cmds)]
+            '+set', 'rs_foreignmodels_dump', 'true', '+set', 'rsq_hands', '1', '+set', 'rs_fm_picks', '"%s"' % picks, '+' + '; '.join(cmds)]
     env = dict(os.environ, QZ_RES='480', QZ_DUMP_EVERY='145', QZ_DUMP_DIR=d)
     log = open(os.path.join(d, 'log.txt'), 'w')
     try:

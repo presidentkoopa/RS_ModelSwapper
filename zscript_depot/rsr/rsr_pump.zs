@@ -27,6 +27,35 @@
 
 class RSP abstract
 {
+	// The reserve and the tube. A table that names them (a pack that owns its guns) is used as
+	// is; ModelSwapper's rows name neither, because the shotgun is the loaded mod's and so is its
+	// ammo: then they are the weapon's own two stores (RSR.WeaponStore -- the larger the reserve,
+	// the smaller the tube, its MaxAmount the tube's capacity).
+	play static bool NoReserve(PlayerPawn mo, int i)
+	{
+		String r = RSP_Guns.Reserve(i);
+		if (r != "")
+		{
+			class<Inventory> rc = r;
+			return rc && mo.CountInv(rc) <= 0;
+		}
+		let a = RSR.WeaponStore(mo, true);
+		return a && a.Amount <= 0;
+	}
+
+	play static bool TubeFull(PlayerPawn mo, int i)
+	{
+		String l = RSP_Guns.Loaded(i);
+		if (l != "")
+		{
+			class<Inventory> lc = l;
+			int cap = RSP_Guns.Cap(i);
+			return lc && cap > 0 && mo.CountInv(lc) >= cap;
+		}
+		let a = RSR.WeaponStore(mo, false);
+		return a && a.Amount >= a.MaxAmount;
+	}
+
 	// layers (rsq/hands.zs owns 2100, 2101, 2200; rsr/vreload.zs 2102-2104, 2201; the break-open
 	// reload (team/reload_break) 2105-2111, 2202)
 	const PUMP = 2120;			// RSR_GunParts (main controller): the pump, where the hand has it
@@ -34,6 +63,11 @@ class RSP abstract
 	const SHELL = 2122;			// RSR_GunParts: the shell going in at the loading port
 	const EJECT = 2123;			// RSR_GunParts: the set's own ejected shell (V+: its own frames)
 	const HANDSHELL = 2210;		// RSQ_Hands (off controller): the shell in the hand
+	// Options, VR Reload: Shells per grab (ms_shell_grab, 1-4): the 2nd-4th shell carried beside it
+	// (rsp_stack.ms.zs, measured on Ermac's hold by tools_kit/shell_stack.py)
+	const HANDSHELL2 = 2211;
+	const HANDSHELL4 = 2213;
+	const MAXGRAB = 4;
 	const LAYER_FIRST = 2120;
 	const LAYER_LAST = 2123;
 
@@ -125,6 +159,11 @@ class RSP_State play
 	bool done;					// PUMPING: the stroke is done (the gun is ready at minTic)
 	bool waitHand;					// PUMPING after the hand loaded an empty gun: it waits for the hand (fire: the set's own pump)
 	int shells;					// shells pushed home this reload
+	int carried;				// shells in the off hand, the one going in included (ms_shell_grab)
+	// ModelSwapper: the mod's own reload has loaded its tube already (a whole-tube reload, MS_ReloadJoin);
+	// the hand's shells are the ones the mod paid for, so its emptied reserve does not stop a grab
+	bool paid;
+	int owe;					// ...and how many shells the hand still owes it
 
 	// the pump
 	bool held;					// the hand has it
@@ -161,7 +200,7 @@ class RSP_State play
 
 	void PlaySnd(PlayerPawn mo, String snd, int chan)
 	{
-		if (snd == "")
+		if (snd == "" || RSR.Muted(mo, snd))
 			return;
 		mo.A_StartSound(snd, chan);
 		if (RSR.Debug(mo.player))
@@ -244,18 +283,14 @@ class RSP_State play
 		{
 		case RSP.EMPTY:
 			if (grabPress && !pumpGrab && CanTakeShell(mo))
-			{
-				hand = RSP.CARRY;
-				geo.Buzz(mo);
-				Log(mo, String.Format("took a shell %.0f cm from the gun hand (no reload needed)", offLocal.Length()));
-			}
+				TakeShells(mo, " (no reload needed)");
 			break;
 
 		case RSP.CARRY:
 		{
 			if (!grabDown)
 			{
-				DropShell(mo, geo.OffPoint(RSP_Guns.ShellInHand(gun)));
+				DropAll(mo, geo.OffPoint(RSP_Guns.ShellInHand(gun)));
 				hand = RSP.EMPTY;
 				break;
 			}
@@ -312,6 +347,9 @@ class RSP_State play
 			if (!grabDown)
 			{
 				DropShell(mo, InsertPoint());
+				carried = max(0, carried - 1);
+				if (carried > 0)
+					DropAll(mo, geo.OffPoint(RSP_Guns.ShellInHand(gun)));
 				hand = RSP.EMPTY;
 				s = sPrev = 0;
 				break;
@@ -334,8 +372,8 @@ class RSP_State play
 				mo.GiveInventory('RSP_ShellIn', credit);
 				PlaySnd(mo, RSP_Guns.SndShell(gun), RSP_Guns.ChanShell(gun));
 				geo.Buzz(mo);
-				Log(mo, String.Format("shell home (%d credited), gun idle", credit));
-				hand = RSP.EMPTY;
+				ShellHome();
+				Log(mo, String.Format("shell home (%d credited), gun idle, %d left in the hand", credit, carried));
 				s = sPrev = 0;
 			}
 			break;
@@ -363,12 +401,9 @@ class RSP_State play
 		relPrev = down;
 		if (!edge || mode == RSP.LOAD)
 			return;
-		class<Inventory> rc = RSP_Guns.Reserve(i);
-		if (rc && mo.CountInv(rc) <= 0)
+		if (RSP.NoReserve(mo, i))
 			return;								// nothing in reserve to insert
-		class<Inventory> lc = RSP_Guns.Loaded(i);
-		int cap = RSP_Guns.Cap(i);
-		if (lc && cap > 0 && mo.CountInv(lc) >= cap)
+		if (RSP.TubeFull(mo, i))
 			return;								// the tube is full
 		mo.GiveInventory('RSP_Insert', 1);
 		Log(mo, "reload pressed: the hand insert takes it");
@@ -564,10 +599,79 @@ class RSP_State play
 		return RSP_Guns.Port(gun) + RSP_Guns.Push(gun) * s + lat * f;
 	}
 
+	// how many shells one grab takes: Shells per grab (ms_shell_grab, 1-4), no more than the reserve
+	// holds (a mod's own count; a reload the mod has already paid for is not limited by it)
+	int GrabCount(PlayerPawn mo)
+	{
+		int n = clamp(RSR.PlayerInt(mo.player, 'ms_shell_grab', 1), 1, RSP.MAXGRAB);
+		if (paid)
+			return clamp(owe, 1, n);
+		String r = RSP_Guns.Reserve(gun);
+		int have = 0;
+		if (r != "")
+		{
+			class<Inventory> rc = r;
+			have = rc ? mo.CountInv(rc) : 0;
+		}
+		else
+		{
+			let a = RSR.WeaponStore(mo, true);
+			have = a ? a.Amount : 0;
+		}
+		// and no more than the tube has room for (the mod's own count; its own rule may stop sooner)
+		int room = n;
+		String l = RSP_Guns.Loaded(gun);
+		if (l != "")
+		{
+			class<Inventory> lc = l;
+			int cap = RSP_Guns.Cap(gun);
+			if (lc && cap > 0)
+				room = cap - mo.CountInv(lc);
+		}
+		else
+		{
+			let tb = RSR.WeaponStore(mo, false);
+			if (tb)
+				room = tb.MaxAmount - tb.Amount;
+		}
+		return clamp(min(have, room), 1, n);
+	}
+
+	void TakeShells(PlayerPawn mo, String how)
+	{
+		hand = RSP.CARRY;
+		carried = GrabCount(mo);
+		geo.Buzz(mo);
+		Log(mo, String.Format("took %d shell%s %.0f cm from the gun hand%s", carried, carried == 1 ? "" : "s", offLocal.Length(), how));
+	}
+
+	// one shell pushed home: the rest stay in the hand
+	void ShellHome()
+	{
+		carried = max(0, carried - 1);
+		hand = carried > 0 ? RSP.CARRY : RSP.EMPTY;
+	}
+
+	// the hand lets go: every shell in it falls
+	void DropAll(PlayerPawn mo, Vector3 at)
+	{
+		int n = max(1, carried);
+		Vector3 e = RSP_Stack.Dir() * RSP_Stack.Spacing(gun);
+		for (int k = 0; k < n; k++)
+			DropShell(mo, at + (k > 0 ? geo.OffDirInGun(e) * k : (0, 0, 0)));
+		carried = 0;
+	}
+
 	bool CanTakeShell(PlayerPawn mo, bool quiet = false)
 	{
-		class<Inventory> rc = RSP_Guns.Reserve(gun);
-		if (rc && mo.CountInv(rc) <= 0)
+		if (paid && RSR_ReloadHandler.Wanted(mo))
+		{
+			if (owe <= 0)
+				return false;
+			Vector3 pm = geo.OffPoint(RSR.PalmGrab());
+			return (pm - RSP_Guns.Port(gun)).Length() >= RSP.POUCH_MIN;
+		}
+		if (RSP.NoReserve(mo, gun))
 		{
 			if (!quiet)
 				Log(mo, "no shells left to take");
@@ -589,6 +693,8 @@ class RSP_State play
 	// a shell falls: the gun's own shell as a world actor, where it is now (gun frame cm)
 	void DropShell(PlayerPawn mo, Vector3 at)
 	{
+		if (RSR.Quiet(mo))
+			return;		// ModelSwapper quiet: the mod's own reload spawns its own
 		Vector3 pos = RSVR_VRHand.HandPos(mo) + geo.FromGun(at);
 		let d = RSP_DroppedShell(Actor.Spawn('RSP_DroppedShell', pos));
 		Log(mo, "the shell drops");
@@ -599,7 +705,7 @@ class RSP_State play
 		d.angle = atan2(geo.F.y, geo.F.x);
 		d.pitch = -asin(clamp(geo.F.z, -1, 1));
 		d.vel = mo.vel + (0, 0, -1.0);
-		d.BounceSound = RSP_Guns.SndLand(gun);
+		d.BounceSound = RSR.Muted(mo, RSP_Guns.SndLand(gun)) ? "" : RSP_Guns.SndLand(gun);
 		d.target = mo;
 	}
 
@@ -721,11 +827,7 @@ class RSP_State play
 				End(mo);		// the weapon ends the reload (RSP_LFwd)
 			}
 			else if (!held && pull <= 0 && grabPress && !pumpGrab && CanTakeShell(mo))
-			{
-				hand = RSP.CARRY;
-				geo.Buzz(mo);
-				Log(mo, String.Format("took a shell %.0f cm from the gun hand", offLocal.Length()));
-			}
+				TakeShells(mo, "");
 			break;
 		}
 
@@ -733,7 +835,7 @@ class RSP_State play
 		{
 			if (!grabDown)
 			{
-				DropShell(mo, geo.OffPoint(RSP_Guns.ShellInHand(gun)));
+				DropAll(mo, geo.OffPoint(RSP_Guns.ShellInHand(gun)));
 				hand = RSP.EMPTY;
 				break;
 			}
@@ -790,6 +892,9 @@ class RSP_State play
 			if (!grabDown)
 			{
 				DropShell(mo, InsertPoint());		// let go before it is home: it falls out
+				carried = max(0, carried - 1);
+				if (carried > 0)
+					DropAll(mo, geo.OffPoint(RSP_Guns.ShellInHand(gun)));
 				hand = RSP.EMPTY;
 				s = sPrev = 0;
 				break;
@@ -818,8 +923,8 @@ class RSP_State play
 				mo.GiveInventory('RSP_ShellIn', credit);
 				PlaySnd(mo, RSP_Guns.SndShell(gun), RSP_Guns.ChanShell(gun));
 				geo.Buzz(mo);
-				Log(mo, String.Format("shell %d home", shells));
-				hand = RSP.EMPTY;
+				ShellHome();
+				Log(mo, String.Format("shell %d home, %d left in the hand", shells, carried));
 				s = sPrev = 0;
 				lat = latPrev = (0, 0, 0);
 			}
@@ -878,9 +983,14 @@ class RSP_State play
 	void Abort(PlayerPawn mo)
 	{
 		if (mode == RSP.LOAD && hand == RSP.CARRY)
-			DropShell(mo, geo.OffPoint(RSP_Guns.ShellInHand(gun)));
+			DropAll(mo, geo.OffPoint(RSP_Guns.ShellInHand(gun)));
 		else if (mode == RSP.LOAD && hand == RSP.INSERT)
+		{
 			DropShell(mo, InsertPoint());
+			carried = max(0, carried - 1);
+			if (carried > 0)
+				DropAll(mo, geo.OffPoint(RSP_Guns.ShellInHand(gun)));
+		}
 		End(mo);
 	}
 
@@ -889,9 +999,14 @@ class RSP_State play
 		if (mode != RSP.NONE)
 			Log(mo, "end");
 		if (mode == RSP.LOAD)
+		{
 			hand = RSP.EMPTY;		// the loading loop's hand; the free feed keeps its own shell
+			carried = 0;
+		}
 		mode = RSP.NONE;
 		weap = null;
+		paid = false;
+		owe = 0;
 		held = backDone = done = waitHand = false;
 		pull = pullPrev = s = sPrev = 0;
 		lat = latPrev = (0, 0, 0);
@@ -903,6 +1018,8 @@ class RSP_State play
 	{
 		if (!psp.CurState)
 			return false;
+		if (RSR.InHold(psp, w))
+			return true;		// ModelSwapper: a foreign shotgun parked by MS_ReloadJoin
 		Array<String> list;
 		RSP_Guns.WaitLabels(i).Split(list, " ", TOK_SKIPEMPTY);
 		for (int k = 0; k < list.Size(); k++)
@@ -962,6 +1079,12 @@ class RSP_State play
 		RSR.SetPart(p, RSP.EJECT, parts, eject, sp, 3 + max(k, 0));
 		Actor hands = p.OffhandWeapon;
 		RSR.SetPart(p, RSP.HANDSHELL, hands is 'RSQ_Hands' ? hands : null, handShell, sp, 2);
+		// Shells per grab: the rest of the grab, beside the one in the fingers (or going in)
+		for (int k = 1; k < RSP.MAXGRAB; k++)
+		{
+			bool more = mine && (hand == RSP.CARRY && carried > k || hand == RSP.INSERT && carried > k);
+			RSR.SetPart(p, RSP.HANDSHELL + k, hands is 'RSQ_Hands' ? hands : null, more, sp, 2);
+		}
 	}
 }
 
@@ -1119,7 +1242,7 @@ class RSP_Handler : EventHandler
 	// rsq/hands.zs ModifyBobLayer3D: the layers this places
 	clearscope static bool Places(Actor owner, int layer)
 	{
-		if (layer >= RSP.LAYER_FIRST && layer <= RSP.LAYER_LAST || layer == RSP.HANDSHELL)
+		if (layer >= RSP.LAYER_FIRST && layer <= RSP.LAYER_LAST || layer >= RSP.HANDSHELL && layer <= RSP.HANDSHELL4)
 			return true;
 		// TEST ONLY (rsr_test_offdraw): the free hand at the scripted off hand, with a pump gun
 		return layer == 2200 && RSP.TestCvar('rsr_test_offdraw') && owner && owner.player && RSP_Guns.Index(owner.player.ReadyWeapon) > 0;
@@ -1158,9 +1281,15 @@ class RSP_Handler : EventHandler
 			return t + RSP_Guns.EjectHook(i, k), r;
 		}
 		case RSP.HANDSHELL:
+		case RSP.HANDSHELL2:
+		case RSP.HANDSHELL2 + 1:
+		case RSP.HANDSHELL4:
 		{
+			// the k-th shell of the grab: the held shell moved k spacings along the measured stack
+			// direction (off controller frame, cm), before the hook's turn
 			Vector3 hr = RSP_Guns.HandRot(i);
-			return t + RSP_Guns.HandHook(i) + Unturn(hr, DeskShift(s, RSP_Guns.Scale(i))), r + hr;
+			Vector3 st = RSP_Stack.Dir() * (RSP_Stack.Spacing(i) * (layer - RSP.HANDSHELL));
+			return t + RSP_Guns.HandHook(i) + Unturn(hr, DeskShift(s, RSP_Guns.Scale(i)) + RSP.HookOf(i, st)), r + hr;
 		}
 		case 2200:
 			return t + DeskShift(s, (-1, 1, 1)), r;
@@ -1236,16 +1365,15 @@ class RSP_Handler : EventHandler
 				s.FreeFeed(mo, i);	// a shell straight into the port, no reload button, any time
 				// 1.43 (owner: "with use it just appears in offhand"): where a trigger grab would take a
 				// shell now, the Use key grabs too (the tube has room, the hand is free and away from the port)
-				class<Inventory> lc = RSP_Guns.Loaded(i);
-				int cap = RSP_Guns.Cap(i);
 				s.feedOK = s.hand == RSP.EMPTY && s.geo
 					&& !(s.mode == RSP.LOAD || s.mode == RSP.PUMPING && (s.held || s.pull > 0 || s.backDone))
-					&& !(lc && cap > 0 && mo.CountInv(lc) >= cap) && s.CanTakeShell(mo, true);
+					&& !RSP.TubeFull(mo, i) && s.CanTakeShell(mo, true);
 			}
 			else if (s.mode == RSP.NONE && s.hand != RSP.EMPTY)
 			{
 				// the gun is gone, or VR reloading is off, and the free feed still had a shell
 				s.hand = RSP.EMPTY;
+				s.carried = 0;
 				s.s = s.sPrev = 0;
 			}
 			if (s.mode != RSP.NONE)

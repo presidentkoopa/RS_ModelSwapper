@@ -1,114 +1,100 @@
 {
- "MS_AE_Flamer": {
-  "card_mesh": "cards/aliens/m260b/ae_m260b.md3",
-  "donor": "MS_AE_M260b",
-  "match": "moved [29.5, 0.34, 2.69]",
-  "slot": 1,
+ "MS_BD22_AssaultShotgun": {
+  "card_mesh": "cards/bd21/assaultshotgun/bd_assaultshotgun.md3",
+  "donor": "MS_BD_Assaultshotgun",
+  "match": "exact",
+  "slot": 35,
   "table": "rsr_guns.ms.zs"
  },
- "MS_AE_Pistol": {
-  "card_mesh": "cards/aliens/m4a3/ae_m4a3.md3",
-  "donor": "MS_AE_M4a3",
-  "match": "moved [-1.09, -0.02, -0.53]",
-  "slot": 2,
+ "MS_BD22_MP40": {
+  "card_mesh": "cards/bd21/mp40/bd_mp40.md3",
+  "donor": "MS_BD_Mp40",
+  "match": "exact",
+  "slot": 34,
   "table": "rsr_guns.ms.zs"
  },
  "MS_BD_AssaultShotgun": {
   "card_mesh": "cards/bd21/assaultshotgun/bd_assaultshotgun.md3",
   "donor": "MS_BD_Assaultshotgun",
   "match": "moved [54.66, -0.05, -0.91]",
-  "slot": 3,
+  "slot": 79,
   "table": "rsr_guns.ms.zs"
  },
  "MS_BD_BrutalSMG": {
   "card_mesh": "cards/bd21/smg/bd_smg.md3",
   "donor": "MS_BD_Smg",
   "match": "moved [38.44, 0.16, -5.98]",
-  "slot": 4,
+  "slot": 41,
   "table": "rsr_guns.ms.zs"
  },
  "MS_BD_Flamethrower2": {
   "card_mesh": "cards/bd21/flamethrower/bd_flamethrower.md3",
   "donor": "MS_BD_Flamethrower",
   "match": "moved+resplit [57.03, 0.47, -8.36]",
-  "slot": 5,
+  "slot": 81,
   "table": "rsr_guns.ms.zs"
  },
  "MS_BD_RailGun": {
   "card_mesh": "cards/bd21/railgun/bd_railgun.md3",
   "donor": "MS_BD_Railgun",
   "match": "moved [52.52, 0.14, 2.75]",
-  "slot": 6,
+  "slot": 74,
   "table": "rsr_guns.ms.zs"
  },
  "MS_BD_Rifle": {
   "card_mesh": "cards/bd21/rifle/bd_rifle.md3",
   "donor": "MS_BD_Rifle",
   "match": "moved [39.52, 0.34, 2.27]",
-  "slot": 7,
+  "slot": 75,
   "table": "rsr_guns.ms.zs"
  },
  "MS_BD_Unmaker": {
   "card_mesh": "cards/bd21/unmaker/bd_unmaker.md3",
   "donor": "MS_BD_Unmaker",
   "match": "moved [56.44, -0.02, -3.64]",
-  "slot": 8,
+  "slot": 83,
   "table": "rsr_guns.ms.zs"
  },
  "MS_MG_Bolter": {
   "card_mesh": "cards/meatgrinder/bolter/mg_bolter.md3",
   "donor": "MS_MG_Bolter",
-  "match": "moved [37.67, 0.2, -4.47]",
-  "slot": 10,
+  "match": "moved+resplit [37.67, 0.2, -4.47]",
+  "slot": 86,
   "table": "rsr_guns.ms.zs"
  },
  "MS_MG_Tec9": {
   "card_mesh": "cards/meatgrinder/tec9/tec9.md3",
   "donor": "MS_MG_Tec9",
   "match": "moved+resplit [39.31, 0.08, -1.66]",
-  "slot": 11,
-  "table": "rsr_guns.ms.zs"
- },
- "MS_alien_flamer": {
-  "card_mesh": "cards/aliens/m260b/ae_m260b.md3",
-  "donor": "MS_AE_M260b",
-  "match": "exact",
-  "slot": 1,
-  "table": "rsr_guns.ms.zs"
- },
- "MS_alien_pistol": {
-  "card_mesh": "cards/aliens/m4a3/ae_m4a3.md3",
-  "donor": "MS_AE_M4a3",
-  "match": "exact",
-  "slot": 2,
+  "slot": 88,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_AssaultShotgun": {
   "card_mesh": "cards/bd21/assaultshotgun/bd_assaultshotgun.md3",
   "donor": "MS_BD_Assaultshotgun",
   "match": "exact",
-  "slot": 3,
+  "slot": 80,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_BrutalSMG": {
   "card_mesh": "cards/bd21/smg/bd_smg.md3",
   "donor": "MS_BD_Smg",
   "match": "exact",
-  "slot": 4,
+  "slot": 42,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_Flamethrower2": {
   "card_mesh": "cards/bd21/flamethrower/bd_flamethrower.md3",
   "donor": "MS_BD_Flamethrower",
   "match": "moved+resplit [0.0, 0.0, 0.0]",
-  "slot": 5,
+  "slot": 82,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_HitlersBuzzsaw": {
   "card_mesh": "cards/bd21/buzzsaw/bd_buzzsaw.md3",
   "donor": "MS_BD_Buzzsaw",
   "match": "moved+resplit [0.0, 0.0, 0.0]",
-  "slot": 9,
+  "slot": 85,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_M79": {
@@ -122,175 +108,175 @@
   "card_mesh": "cards/bd21/mp40/bd_mp40.md3",
   "donor": "MS_BD_Mp40",
   "match": "exact",
-  "slot": 12,
+  "slot": 45,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_PlasmaGun": {
   "card_mesh": "cards/bd21/plasma/bd_plasma.md3",
   "donor": "MS_BD_Plasma",
   "match": "exact",
-  "slot": 14,
+  "slot": 48,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_RPG": {
   "card_mesh": "cards/bd21/rpg/bd_rpg.md3",
   "donor": "MS_BD_Rpg",
   "match": "exact",
-  "slot": 19,
+  "slot": 58,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_RailGun": {
   "card_mesh": "cards/bd21/railgun/bd_railgun.md3",
   "donor": "MS_BD_Railgun",
   "match": "exact",
-  "slot": 6,
+  "slot": 43,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_Rifle": {
   "card_mesh": "cards/bd21/rifle/bd_rifle.md3",
   "donor": "MS_BD_Rifle",
   "match": "exact",
-  "slot": 7,
+  "slot": 72,
   "table": "rsr_guns.ms.zs"
  },
  "MS_brt_Unmaker": {
   "card_mesh": "cards/bd21/unmaker/bd_unmaker.md3",
   "donor": "MS_BD_Unmaker",
   "match": "exact",
-  "slot": 8,
+  "slot": 84,
   "table": "rsr_guns.ms.zs"
  },
  "MS_chex_largezorcher": {
   "card_mesh": "cards/chex/largezorcher/cx_largezorcher.md3",
   "donor": "MS_CX_Largezorcher",
   "match": "exact",
-  "slot": 20,
+  "slot": 62,
   "table": "rsr_guns.ms.zs"
  },
  "MS_chex_superlargezorcher": {
   "card_mesh": "cards/chex/superlargezorcher/cx_superlargezorcher.md3",
   "donor": "MS_CX_Superlargezorcher",
   "match": "exact",
-  "slot": 21,
+  "slot": 63,
   "table": "rsr_guns.ms.zs"
  },
  "MS_d64_BrutalPistol": {
   "card_mesh": "cards/bd21/pistol/bd_pistol.md3",
   "donor": "MS_BD_Pistol",
   "match": "exact",
-  "slot": 18,
+  "slot": 55,
   "table": "rsr_guns.ms.zs"
  },
  "MS_d64_PlasmaGun": {
   "card_mesh": "cards/bd21/plasma/bd_plasma.md3",
   "donor": "MS_BD_Plasma",
   "match": "exact",
-  "slot": 14,
+  "slot": 49,
   "table": "rsr_guns.ms.zs"
  },
  "MS_d64_RPG": {
   "card_mesh": "cards/bd21/rpg/bd_rpg.md3",
   "donor": "MS_BD_Rpg",
   "match": "exact",
-  "slot": 19,
+  "slot": 59,
   "table": "rsr_guns.ms.zs"
  },
  "MS_meat_Bolter": {
   "card_mesh": "cards/meatgrinder/bolter/mg_bolter.md3",
   "donor": "MS_MG_Bolter",
-  "match": "exact",
-  "slot": 10,
+  "match": "moved+resplit [0.0, 0.0, 0.0]",
+  "slot": 87,
   "table": "rsr_guns.ms.zs"
  },
  "MS_meat_TEC9": {
   "card_mesh": "cards/meatgrinder/tec9/tec9.md3",
   "donor": "MS_MG_Tec9",
   "match": "moved+resplit [0.0, 0.0, 0.0]",
-  "slot": 11,
+  "slot": 89,
   "table": "rsr_guns.ms.zs"
  },
  "MS_qvplus_guns": {
   "card_mesh": "cards/vplus/m16/vplus_m16.md3",
   "donor": "MS_VP_M16",
   "match": "exact",
-  "slot": 16,
+  "slot": 52,
   "table": "rsr_guns.ms.zs"
  },
  "MS_vplus_guns": {
   "card_mesh": "cards/vplus/m16/vplus_m16.md3",
   "donor": "MS_VP_M16",
   "match": "exact",
-  "slot": 16,
+  "slot": 53,
   "table": "rsr_guns.ms.zs"
  },
  "MS_wolf_BAR": {
   "card_mesh": "cards/brutalwolf/bar/bw_bar.md3",
   "donor": "MS_BW_Bar",
   "match": "exact",
-  "slot": 22,
+  "slot": 64,
   "table": "rsr_guns.ms.zs"
  },
  "MS_wolf_Garand": {
   "card_mesh": "cards/brutalwolf/garand/bw_garand.md3",
   "donor": "MS_BW_Garand",
   "match": "exact",
-  "slot": 23,
+  "slot": 65,
   "table": "rsr_guns.ms.zs"
  },
  "MS_wolf_KAR98": {
   "card_mesh": "cards/brutalwolf/kar98/bw_kar98.md3",
   "donor": "MS_BW_Kar98",
   "match": "exact",
-  "slot": 24,
+  "slot": 73,
   "table": "rsr_guns.ms.zs"
  },
  "MS_wolf_Luger": {
   "card_mesh": "cards/brutalwolf/luger/bw_luger.md3",
   "donor": "MS_BW_Luger",
   "match": "exact",
-  "slot": 25,
+  "slot": 66,
   "table": "rsr_guns.ms.zs"
  },
  "MS_wolf_MG42": {
   "card_mesh": "cards/brutalwolf/mg42/bw_mg42.md3",
   "donor": "MS_BW_Mg42",
   "match": "exact",
-  "slot": 9,
+  "slot": 44,
   "table": "rsr_guns.ms.zs"
  },
  "MS_wolf_MP40": {
   "card_mesh": "cards/brutalwolf/mp40/bw_mp40.md3",
   "donor": "MS_BW_Mp40",
   "match": "exact",
-  "slot": 26,
+  "slot": 67,
   "table": "rsr_guns.ms.zs"
  },
  "MS_wolf_PP41": {
   "card_mesh": "cards/brutalwolf/pp41/bw_pp41.md3",
   "donor": "MS_BW_Pp41",
   "match": "exact",
-  "slot": 27,
+  "slot": 68,
   "table": "rsr_guns.ms.zs"
  },
  "MS_wolf_Shotgun": {
   "card_mesh": "cards/brutalwolf/shotgun/bw_shotgun.md3",
   "donor": "MS_BW_Shotgun",
   "match": "exact",
-  "slot": 28,
+  "slot": 69,
   "table": "rsr_guns.ms.zs"
  },
  "MS_wolf_Tommy": {
   "card_mesh": "cards/brutalwolf/tommy/bw_tommy.md3",
   "donor": "MS_BW_Tommy",
   "match": "exact",
-  "slot": 29,
+  "slot": 70,
   "table": "rsr_guns.ms.zs"
  },
  "MS_zblood_shotgun": {
   "card_mesh": "cards/zblood/sawedoff/zb_sawedoff.md3",
   "donor": "MS_ZB_Sawedoff",
   "match": "exact",
-  "slot": 30,
+  "slot": 71,
   "table": "rsr_guns.ms.zs"
  }
 }

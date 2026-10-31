@@ -158,6 +158,16 @@ user int rsr_grab_buttons = 67108864;	// usercmd buttons that grab anywhere: BT_
 user int rsr_magrelease = 268435456;	// usercmd buttons that drop the magazine: BT_OFFHANDRELOAD; the gun's own reload always does
 user int rsr_pouch = 0;				// where a new magazine is taken: 0 anywhere 20 cm from the gun, 1 low (40 cm below the eyes)
 user bool rsr_eat_grip = true;		// while a reload has the off hand, its grip key does nothing else (rthumb is +speed in some layouts)
+user bool ms_mod_first = true;	// magazine and break-open guns: the mod's reload runs at the press, the gun holds its fire until the hands finish; off: held first, the mod's reload after
+user bool ms_off_fist = true;	// the off hand is these hands (the fists) unless a gun is moved there; off: a mod's own off-hand weapon stays
+// Options, VR Reload: Shells per grab (owner, 2026-10-26). One grab at the pouch takes this many shells
+// (1-4) into the off hand; each one pushed home counts. A mod whose reload loads one shell per pass is
+// paced shell by shell; a mod that loads its whole tube at once reloads first and its fire is held until
+// the hand has pushed as many shells as it loaded (rsr/rsr_pump.zs, RS_ForeignReload.zs).
+user int ms_shell_grab = 1;
+user bool ms_hand_pump = true;	// pump a foreign shotgun by hand after each shot (off: the mod pumps by itself)
+user bool ms_charge_dry = true;	// a gun reloaded from empty asks for its charging handle (off: the magazine is the whole reload)
+user int ms_reload_sounds = 0;	// 0 (default, owner 2026-10-27 "ModelSwapper quiet"): the loaded mod's reload sounds and dropped magazine only; 1 adds ModelSwapper's foley and its own dropped magazine / shell / casing
 user bool rsr_debug = false;		// print every key code pressed, and each reload step
 
 // 1.93: take the charging handle / slide with no reload running, so the action can be cracked

@@ -94,7 +94,7 @@
   "block_name": "VanillaBFG9000",
   "card": "cards/bd21/bfg",
   "frame": 6,
-  "how": "ready BFGNA",
+  "how": "ready BFGNA (actor big_fucking_gun)",
   "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/BFG/BFG.md3",
   "srcfile_abs": null
  },
@@ -112,7 +112,7 @@
   "block_name": "ClassicRocketLauncher",
   "card": "cards/bd21/boot",
   "frame": null,
-  "how": "Ready frame not in block ClassicRocketLauncher",
+  "how": "actor ClassicRocketLauncher not found",
   "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Boot/Boot.md3",
   "srcfile_abs": null
  },
@@ -256,7 +256,7 @@
   "block_name": "Revolver",
   "card": "cards/bd21/revolver",
   "frame": 0,
-  "how": "ready REVOA",
+  "how": "ready REVOA (lock)",
   "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Revolver/Revolver.md3",
   "srcfile_abs": null
  },
@@ -562,7 +562,7 @@
   "block_name": "DualPumpShotgun",
   "card": "cards/cola/ks23",
   "frame": 0,
-  "how": "ready 2SHTA",
+  "how": "ready 2SHTA (lock)",
   "srcfile": "Cola-3-VR-Weapons/models/weapons/shotgun/shotgun_right.md3",
   "srcfile_abs": null
  },
@@ -832,7 +832,7 @@
   "block_name": "PlasmaThrower",
   "card": "cards/meatgrinder/bolter",
   "frame": 0,
-  "how": "ready PLSCA",
+  "how": "ready PLSCA (lock)",
   "srcfile": "BR_VR_MeatGrinder/Models/Bolter/Bolter.md3",
   "srcfile_abs": null
  },
@@ -841,7 +841,7 @@
   "block_name": "ChaingunCannon",
   "card": "cards/meatgrinder/chaingun",
   "frame": 0,
-  "how": "ready MGUGA",
+  "how": "ready MGUGA (lock)",
   "srcfile": "BR_VR_MeatGrinder/Models/ChainGun/Chaingun.md3",
   "srcfile_abs": null
  },
@@ -850,7 +850,7 @@
   "block_name": "GrinderFist",
   "card": "cards/meatgrinder/knife",
   "frame": 0,
-  "how": "ready FSTZA",
+  "how": "ready FSTZA (lock)",
   "srcfile": "BR_VR_MeatGrinder/Models/Knife/knife.md3",
   "srcfile_abs": null
  },
@@ -859,7 +859,7 @@
   "block_name": "MultiRocketLauncher",
   "card": "cards/meatgrinder/rpg",
   "frame": 0,
-  "how": "ready RLNCA",
+  "how": "ready RLNCA (lock)",
   "srcfile": "BR_VR_MeatGrinder/Models/RPG/RPG.md3",
   "srcfile_abs": null
  },
@@ -868,7 +868,7 @@
   "block_name": "SuperSaw",
   "card": "cards/meatgrinder/saw",
   "frame": 0,
-  "how": "ready SAWGC",
+  "how": "ready SAWGC (lock)",
   "srcfile": "BR_VR_MeatGrinder/Models/Saw/Saw.md3",
   "srcfile_abs": null
  },
@@ -877,7 +877,7 @@
   "block_name": "AutoShotgun",
   "card": "cards/meatgrinder/shotgun",
   "frame": 0,
-  "how": "ready SHTGA",
+  "how": "ready SHTGA (lock)",
   "srcfile": "BR_VR_MeatGrinder/Models/Shotgun/Shotgun.md3",
   "srcfile_abs": null
  },
@@ -1147,7 +1147,7 @@
   "block_name": "minigun",
   "card": "cards/vplus/minigun",
   "frame": 0,
-  "how": "ready CHGGA",
+  "how": "ready CHGGA (lock)",
   "srcfile": "_01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/minigun.md3",
   "srcfile_abs": null
  },
@@ -1156,7 +1156,7 @@
   "block_name": "pistolet",
   "card": "cards/vplus/pistol",
   "frame": 0,
-  "how": "ready PISGA",
+  "how": "ready PISGA (lock)",
   "srcfile": "gats/pistolet.md3",
   "srcfile_abs": "/home/claude/parents/alek/models/weapons/hud/gats/pistolet.md3"
  },
@@ -1165,7 +1165,7 @@
   "block_name": "plasmon",
   "card": "cards/vplus/plasma",
   "frame": 0,
-  "how": "ready PLSGA",
+  "how": "ready PLSGA (lock)",
   "srcfile": "questvanillavrplusforclaude/models/weapons/hud/guns/plasma.md3",
   "srcfile_abs": null
  },

@@ -73,9 +73,11 @@ def placement_delta(old_md, old_name, new_md, new_name, om, cm):
     return '%s (%.2f)' % (np.round(d, 2).tolist(), float(np.linalg.norm(d)))
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument('--archive', default='origin/archive-pre')
+    ap = argparse.ArgumentParser(); ap.add_argument('--archive', default='origin/ms20', help='the tree the reload tables were measured on (2.0 branch; 1.x: origin/archive-pre)')
     a = ap.parse_args(); os.chdir(HERE)
-    md = git('show', a.archive + ':modeldef').decode('latin-1')
+    # every MODELDEF lump at the source tree's root (1.x: modeldef; 2.0: MODELDEF.bd22 / .cards / .aliens / ...)
+    roots = [n for n in git('ls-tree', '--name-only', a.archive).decode().splitlines() if re.match(r'(?i)^modeldef(\.|$)', n) and 'before' not in n]
+    md = '\n'.join(git('show', a.archive + ':' + n).decode('latin-1') for n in roots)
     old = {}
     for m in re.finditer(r'Model\s+(\w+)\s*\{(.*?)\}', md, re.S):
         p = re.search(r'Path\s+"([^"]+)"', m.group(2)); f = re.search(r'Model\s+0\s+"([^"]+)"', m.group(2))
@@ -97,7 +99,7 @@ def main():
         t = open(tbl).read()
         t = re.sub(re.escape(BEGIN) + r'.*?' + re.escape(END) + r'\n', '', t, flags=re.S)
         pairs = re.findall(r'if \(donor == "(\w+)"\)\s+return (\d+);', t)
-        add = []; have = {d for d, _ in pairs}
+        add = []; have = {d for d, _ in pairs}; cand = {}
         for d, slot in pairs:
             path = old.get(d)
             src = tree.get(path.lower()) if path else None
@@ -142,12 +144,20 @@ def main():
                 ok = place.endswith('(0.00)') or bool(re.search(r'\((0\.[0-4]\d)\)$', place))
                 if nd and ok:
                     attached.setdefault(d, {'donor': nd, 'card_mesh': key, 'match': hit[1], 'table': os.path.basename(tbl), 'slot': int(slot)})
-                if nd and ok and nd not in have:
-                    add.append((nd, slot)); have.add(nd)
+                if nd and ok:
+                    cand.setdefault(nd, []).append((slot, d))
                 elif nd and not ok:
                     remeasure.setdefault((os.path.basename(tbl), slot, nd), []).append('%s: %s' % (d, place))
             else:
                 rep.append('| %s | %s | %s | %s | no card mesh matches | - |' % (os.path.basename(tbl), slot, d, src))
+        # one slot per new donor: the one whose reload layers exist (a section in reload_1x/ lumps), else the first
+        layered = set()
+        for lump in glob.glob(os.path.join(HERE, 'reload_1x', 'MODELDEF.*')):
+            layered |= set(re.findall(r'^// RS real VR reload[^\n]*\n(?:[^\n]*\n)*?Model\s+(\w+)', open(lump).read(), re.M))
+        for nd, lst in cand.items():
+            if nd in have: continue
+            pick = next((sl for sl, d in lst if d in layered), lst[0][0])
+            add.append((nd, pick)); have.add(nd)
         if add:
             last = list(re.finditer(r'\t\tif \(donor == "\w+"\)\s+return \d+;\n', t))[-1]
             block = BEGIN + '\n' + ''.join('\t\tif (donor == "%s")\treturn %s;\n' % x for x in add) + END + '\n'
