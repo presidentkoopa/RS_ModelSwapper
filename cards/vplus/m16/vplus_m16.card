@@ -1,0 +1,22 @@
+weapon vplus_m16
+  archetype   pistol_mag        # owner-confirmed
+  model       vplus_m16.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    case     surf 1  rest [29.2, 0.78, -0.86]  axis [-0.037, 0.853, -0.521]  travel 45.49  frames 1..40  HIDDEN at idle; appears 1..8
+    trigger  surf 2  rest [22.61, -0.0, -5.31]  axis [-0.992, 0.022, 0.122]  travel 1.01  frames 1..2
+    mag      surf 3  rest [31.0, -0.0, -7.51]  axis [-0.117, -0.0, -0.993]  travel 23.39  frames 11..33  rot 6deg axis [-0.0, 1.0, -0.0]
+    mag_well  [31.0, -0.0, -7.51]  mouth [27.36, -0.91, -3.53]  axis [-0.117, -0.0, -0.993]  travel_clear 23.39
+    muzzle    [56.08, 0.39, 2.42]
+  grip        line [17.83, -0.97, -4.69] [20.72, -0.94, -12.34]  trigger [22.61, -0.0, -5.31]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [39.27, 0.12, -1.2]   # one-handed gun; placeholder
+  carve       mag
+  phases
+    idle         0..0
+    fire         1..1
+    idle         2..11
+    mag_out      12..12
+    mag_in       13..33
+    idle         34..40
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 696
+  carved      mag  seat_origin [31.0, -0.0, -7.51]  file vplus_m16_mag.md3

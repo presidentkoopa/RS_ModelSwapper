@@ -1,0 +1,20 @@
+weapon vplus_shotgun
+  archetype   shotgun_pump        # owner-confirmed
+  model       vplus_shotgun.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    pump     surf 1  rest [41.62, -0.0, -0.51]  axis [-0.999, -0.0, -0.046]  travel 7.39  frames 12..23
+    shell    surf 2  rest [31.3, 0.28, -2.31]  axis [-0.182, 0.615, -0.767]  travel 60.12  frames 0..31  HIDDEN at idle; appears 12..21
+    muzzle    [56.3, -0.0, 1.0]
+  grip        line [13.55, -0.02, -0.95] [17.41, 0.69, -6.52]  trigger [23.52, 0.03, -1.78]   # centroid-based; owner's hand fit supersedes
+  support     feature bar [41.62, -0.0, -0.51]  axis [-0.999, -0.0, -0.046]  travel 7.39   # the pump: the support hand works it
+    load      [24.99, 0.28, -0.31]  frame 11   # where the shell ends up: the loading port
+  carve       shell
+  phases
+    idle         0..11
+    pump         12..13
+    load         14..14
+    pump         15..24
+    idle         25..31
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 597
+  carved      shell  seat_origin [31.3, 0.28, -2.31]  file vplus_shotgun_shell.md3

@@ -1,0 +1,24 @@
+weapon vplus_ssg
+  archetype   shotgun_break        # owner-confirmed
+  model       vplus_ssg.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    shell    surf 0  rest [-16.5, 3.5, -0.91]  axis [0.999, -0.053, 0.001]  travel 47.90  frames 1..25  HIDDEN at idle; appears 14..22
+    shell2   surf 1  rest [-16.5, 3.5, -0.91]  axis [0.996, -0.093, 0.001]  travel 48.04  frames 1..25  HIDDEN at idle; appears 14..22
+    case     surf 2  rest [27.62, 0.93, -1.1]  axis [-0.157, 0.062, -0.986]  travel 56.59  frames 9..22  rot 91deg axis [0.16, -0.22, -0.96]
+    case2    surf 3  rest [27.62, -0.97, -1.1]  axis [-0.323, -0.109, -0.94]  travel 84.60  frames 9..22  rot 179deg axis [-0.01, 0.72, -0.69]
+    barrel   surf 4  rest [39.87, 0.02, -1.32]  axis [-0.274, 0.0, -0.962]  travel 9.03  frames 7..21  rot 59deg axis [0.0, 1.0, 0.0]
+    muzzle    [51.67, 0.98, -0.97]
+  grip        line [19.02, -1.12, -1.92] [14.83, -0.0, -9.08]  trigger [21.33, -0.0, -2.79]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [25.33, -0.0, -2.79]   # one-handed gun; placeholder
+    load      [27.53, 0.93, -1.06]  frame 22   # where the shell ends up: the loading port
+  carve       shell
+  phases
+    idle         0..8
+    open         9..13
+    load         14..21
+    close        22..22
+    idle         23..25
+  baked_cant   frames 7..23 up to 4.0 deg   # psprite-era hand sway; removed in vplus_ssg_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 675
+  carved      shell  seat_origin [-16.5, 3.5, -0.91]  file vplus_ssg_shell.md3
