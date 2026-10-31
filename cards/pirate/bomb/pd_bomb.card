@@ -1,0 +1,16 @@
+weapon pd_bomb
+  archetype   melee        # owner-confirmed
+  model       pd_bomb.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [12.41, 2.27, 7.28]
+  grip        line [10.23, 2.66, 7.52] [10.17, 0.53, -3.39]  trigger [11.12, 3.06, 6.54]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [15.12, 3.06, 6.54]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 464
+  states      # modeldefs/bomb.txt + zscript/weapons/bomb.txt (statephase.py)
+    Ready              1 tics  frames 50
+    Fire               1 tics  frames 50
+    AltFire            1 tics  frames 50

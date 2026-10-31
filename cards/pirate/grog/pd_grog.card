@@ -1,0 +1,18 @@
+weapon pd_grog
+  archetype   thrown        # owner-confirmed
+  model       pd_grog.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger  surf 1  rest [15.1, -0.02, 4.05]  axis [-0.853, 0.0, 0.522]  travel 0.61  frames 1..1  rot 23deg axis [-0.0, 1.0, 0.0]
+    bottle   surf 2  rest [26.53, -10.15, 18.73]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    muzzle    [61.7, -5.61, 9.98]
+  grip        line [13.92, 1.8, 4.67] [4.31, 1.38, -3.64]  trigger [15.1, -0.02, 4.05]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [33.89, -0.21, 10.42]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..1
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 4660
+  states      # modeldefs/grog.txt + zscript/weapons/grog.txt (statephase.py)
+    Ready              1 tics  frames 60
+    Fire               1 tics  frames 61

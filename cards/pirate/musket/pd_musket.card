@@ -1,0 +1,19 @@
+weapon pd_musket
+  archetype   flintlock        # owner-confirmed
+  model       pd_musket.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    frizzen  surf 1  rest [21.43, -3.14, 10.78]  axis [0.744, 0.0, 0.668]  travel 0.80  frames 2..2  rot 42deg axis [-0.0, 1.0, 0.0]
+    cock     surf 2  rest [15.45, -3.29, 11.17]  axis [0.991, 0.0, 0.134]  travel 3.35  frames 2..8  rot 60deg axis [0.0, 1.0, -0.0]
+    trigger  surf 3  rest [16.84, 0.01, 3.03]  axis [-0.94, -0.0, 0.341]  travel 0.63  frames 1..8  rot 32deg axis [-0.0, 1.0, -0.0]
+    muzzle    [92.42, 0.56, 8.53]
+  grip        line [15.27, 1.58, 3.73] [5.91, 1.59, -1.5]  trigger [16.84, 0.01, 3.03]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [50.52, -0.01, 6.83]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..8
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1575
+  states      # modeldefs/musket.txt + zscript/weapons/musket.txt (statephase.py)
+    Ready              1 tics  frames 28
+    Fire               1 tics  frames 28

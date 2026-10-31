@@ -1,0 +1,20 @@
+weapon pd_flintlock
+  archetype   flintlock        # owner-confirmed
+  model       pd_flintlock.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    cock     surf 1  rest [13.16, -2.91, 9.14]  axis [0.951, 0.0, 0.309]  travel 3.42  frames 2..11  rot 67deg axis [-0.0, 1.0, -0.0]
+    frizzen  surf 2  rest [19.09, -2.78, 10.19]  axis [0.658, 0.0, 0.753]  travel 0.37  frames -..-  rot 21deg axis [-0.0, 1.0, 0.0]
+    trigger  surf 3  rest [16.65, -0.05, 3.25]  axis [-0.903, -0.0, 0.43]  travel 0.84  frames 1..11  rot 41deg axis [0.0, 1.0, 0.0]
+    barrel   surf 4  rest [35.74, -0.01, 7.46]  axis [0.0, 0.791, 0.612]  travel 0.01  frames -..-  rot 90deg axis [-1.0, -0.0, 0.0]
+    muzzle    [42.53, 1.12, 6.67]
+  grip        line [15.25, 1.42, 3.89] [6.98, -1.95, -5.84]  trigger [16.65, -0.05, 3.25]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [24.3, -0.01, 4.95]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..11
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1519
+  states      # modeldefs/pistol.txt + zscript/weapons/pistol.txt (statephase.py)
+    Ready              1 tics  frames 19
+    Fire               1 tics  frames 20

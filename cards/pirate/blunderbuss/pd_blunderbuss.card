@@ -1,0 +1,19 @@
+weapon pd_blunderbuss
+  archetype   flintlock        # owner-confirmed
+  model       pd_blunderbuss.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    cock     surf 1  rest [15.14, -3.67, 11.38]  axis [0.978, 0.0, 0.208]  travel 3.84  frames 2..8  rot 68deg axis [0.0, 1.0, 0.0]
+    frizzen  surf 2  rest [21.72, -3.51, 11.33]  axis [0.791, -0.0, 0.611]  travel 0.91  frames 2..2  rot 41deg axis [0.0, 1.0, 0.0]
+    trigger  surf 3  rest [16.9, -0.17, 3.09]  axis [-0.966, -0.0, 0.259]  travel 0.57  frames 1..8  rot 27deg axis [-0.0, 1.0, -0.0]
+    muzzle    [66.27, -3.31, 12.0]
+  grip        line [15.23, 1.5, 3.84] [5.31, -1.91, -1.7]  trigger [16.9, -0.17, 3.09]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [40.23, -0.19, 5.94]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..8
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1774
+  states      # modeldefs/blunderbuss.txt + zscript/weapons/blunderbuss.txt (statephase.py)
+    Ready              1 tics  frames 28
+    Fire               1 tics  frames 28

@@ -1,0 +1,15 @@
+weapon pd_swivelcannon
+  archetype   melee        # owner-confirmed
+  model       pd_swivelcannon.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [56.22, 2.5, -6.97]
+  grip        line [-7.63, 5.58, -7.61] [-7.91, -1.84, -16.33]  trigger [3.31, -0.01, -7.25]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [7.31, -0.01, -7.25]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1996
+  states      # modeldefs/swivelcannon.txt + zscript/weapons/swivelcannon.txt (statephase.py)
+    Ready              1 tics  frames 46
+    Fire               1 tics  frames 46

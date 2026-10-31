@@ -1,0 +1,20 @@
+weapon pd_mortar
+  archetype   flintlock        # owner-confirmed
+  model       pd_mortar.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    cock     surf 1  rest [15.37, -3.54, 10.81]  axis [0.982, 0.0, 0.19]  travel 3.62  frames 1..8  rot 66deg axis [-0.0, 1.0, -0.0]
+    frizzen  surf 2  rest [21.6, -3.39, 10.74]  axis [0.783, 0.0, 0.622]  travel 0.80  frames 1..1  rot 39deg axis [0.0, 1.0, 0.0]
+    trigger  surf 3  rest [17.05, -0.07, 2.93]  axis [-0.931, -0.0, 0.366]  travel 0.75  frames 1..8  rot 34deg axis [-0.0, 1.0, -0.0]
+    muzzle    [45.39, 4.45, 7.23]
+  grip        line [15.48, 1.59, 3.64] [6.13, -1.61, -1.59]  trigger [17.05, -0.07, 2.93]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [34.66, -0.01, 6.87]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..0
+    fire         1..8
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 2173
+  states      # modeldefs/mortar.txt + zscript/weapons/mortar.txt (statephase.py)
+    Ready              1 tics  frames 28
+    Fire               1 tics  frames 28
+    AltFire            1 tics  frames 28
