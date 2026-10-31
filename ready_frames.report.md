@@ -45,7 +45,7 @@
 | MS_BW_Garand | 0 | 0 | ready M1GGA |
 | MS_BW_Grenade | 0 | - | Ready frame not in block Colt |
 | MS_BW_Kar98 | 0 | 0 | ready ZK9GA |
-| MS_BW_Knife | 0 | 0 | ready FSTZA |
+| MS_BW_Knife | 0 | 0 | ready ATKNA |
 | MS_BW_Luger | 0 | 0 | ready LUGEA |
 | MS_BW_Mg42 | 0 | 0 | ready ZMGGA |
 | MS_BW_Mp40 | 0 | 0 | ready MP40A |
@@ -70,8 +70,8 @@
 | MS_Cola_Plasmagun | 0 | 0 | ready ZPL0A |
 | MS_Cola_Revolver | 0 | 0 | ready RPISA |
 | MS_Cola_Sidewinder | 0 | 0 | ready SWRLA |
-| MS_D64_Boot | 0 | - | Ready frame not in block ClassicRocketLauncher |
-| MS_D64_Chainsaw | 0 | 15 | ready SAWGA |
+| MS_D64_Boot | 0 | - | no source block |
+| MS_D64_Chainsaw | 0 | 2 | ready SAWGA |
 | MS_HX_Cryogun | 0 | 0 | ready CGUNA |
 | MS_HX_Melee | 0 | 0 | ready MELEA |
 | MS_HX_Nuker | 0 | 0 | ready NUKEA |
@@ -84,14 +84,14 @@
 | MS_HP_Blaster | 0 | 0 | ready JZWPA |
 | MS_HP_Cannon | 1 | 0 | ready MISGA |
 | MS_HP_Rifle | 1 | 0 | ready ELECA |
-| MS_HP_Wand | 0 | 0 | ready GWNDA |
+| MS_HP_Wand | 0 | 0 | ready WANXA |
 | MS_MG_Bfg | 0 | 0 | ready BFGNA |
 | MS_MG_Bolter | 0 | 0 | ready PLSCA |
-| MS_MG_Chaingun | 0 | 16 | ready BWCSA |
+| MS_MG_Chaingun | 0 | 0 | ready MGUGA |
 | MS_MG_Knife | 0 | 0 | ready FSTZA |
 | MS_MG_Rpg | 0 | 0 | ready RLNCA |
 | MS_MG_Saw | 0 | 0 | ready SAWGC |
-| MS_MG_Shotgun | 0 | 0 | ready ZSGGA |
+| MS_MG_Shotgun | 0 | 0 | ready SHTGA |
 | MS_MG_Ssg | 0 | - | Ready frame not in block SSG |
 | MS_MG_Tec9 | 0 | - | no source block |
 | MS_PD_Blunderbuss | 0 | 28 | ready SGUNA |
@@ -115,7 +115,7 @@
 | MS_RC_Ksg | 0 | - | no source block |
 | MS_RC_M27 | 0 | 0 | ready PLMRA |
 | MS_RC_M32 | 0 | 0 | ready MMISA |
-| MS_RC_Shotgun | 0 | 0 | ready PSHTA |
+| MS_RC_Shotgun | 0 | 0 | ready RSHGA |
 | MS_UV_ChaingunD4 | 0 | - | Ready frame not in block Vanilla_Chaingun |
 | MS_UV_ShotgunD4 | 0 | - | Ready frame not in block Vanilla_Shotgun |
 | MS_UV_SsgD4 | 3 | - | Ready frame not in block Vanilla_SuperShotgun |

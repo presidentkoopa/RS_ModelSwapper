@@ -167,7 +167,7 @@ class RS_ForeignShelf
 			"revolver|MS_Cola_Revolver|PISG|0|0|55",
 			"rocket|MS_Cola_Sidewinder|MISG|0|0|45",
 			"kick|MS_D64_Boot|PUNG|0|0|21",
-			"saw|MS_D64_Chainsaw|SAWG|0|0|8",
+			"saw|MS_D64_Chainsaw|SAWG|0|2|8",
 			"plasma|MS_HX_Cryogun|PLSG|0|0|11",
 			"melee|MS_HX_Melee|PUNG|0|0|6",
 			"bfg|MS_HX_Nuker|BFGG|0|0|11",

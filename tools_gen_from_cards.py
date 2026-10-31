@@ -216,7 +216,7 @@ def main():
                 srcfile = p
                 rel = os.path.relpath(p, a.well).replace('\\', '/')
                 setdir = os.path.join(a.well, WELL_DIR[sset])
-                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile)]
+                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile) and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra + SET_EXTRA.get(sset, [])))]
                 same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra + SET_EXTRA.get(sset, [])))]
                 cands = exact + [b for b in same_set if b not in exact]
                 # prefer the block whose Model name is a real actor with a readable Ready state
@@ -238,7 +238,7 @@ def main():
             if best:
                 p = best[1]; srcfile = p
                 rel = os.path.relpath(p, a.well).replace('\\', '/')
-                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile)]
+                exact = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and rel.lower().endswith(bpath + '/' + bfile) and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in a.extra + SET_EXTRA.get(sset, [])))]
                 same_set = [b for (mdir, bpath, bfile), bl in well_blocks.items() for b in bl if bfile == os.path.basename(p).lower() and (mdir.startswith(setdir) or any(mdir.startswith(x) for x in SET_EXTRA.get(sset, [])))]
                 cands = exact + [b for b in same_set if b not in exact]
                 src = next((b for b in cands if ready_frame(b, idx)[0] is not None), (cands or [None])[0])

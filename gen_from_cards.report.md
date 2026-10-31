@@ -45,7 +45,7 @@
 | MS_BW_Garand | brutalwolf/garand | rifle | BrutalWolf/Models/Garand/garand.md3::M1GARAND | (source numbers) | garand.png, sheet.png |
 | MS_BW_Grenade | brutalwolf/grenade | grenade | BrutalWolf/Models/Grenade/Grenade.md3::Colt | (source numbers) | grenade.png, sheet.png |
 | MS_BW_Kar98 | brutalwolf/kar98 | rifle | BrutalWolf/Models/Kar98/Kar98.md3::Karabine98 | (source numbers) | kar98.png, sheet.png |
-| MS_BW_Knife | brutalwolf/knife | melee | BrutalWolf/Models/Knife/Knife.md3::GrinderFist | (source numbers) | knife.png, sheet.png |
+| MS_BW_Knife | brutalwolf/knife | melee | BrutalWolf/Models/Knife/Knife.md3::Knife_3D | (source numbers) | knife.png, sheet.png |
 | MS_BW_Luger | brutalwolf/luger | pistol | BrutalWolf/Models/Luger/luger.md3::Luger | (source numbers) | Luger.png, sheet.png |
 | MS_BW_Mg42 | brutalwolf/mg42 | machinegun | BrutalWolf/Models/MG42/MG42.md3::MG42 | (source numbers) | MG42.png, sheet.png |
 | MS_BW_Mp40 | brutalwolf/mp40 | smg | BrutalWolf/Models/MP40/MP40.md3::SecretWeapon_MP40 | (source numbers) | MP40.png, sheet.png |
@@ -70,8 +70,8 @@
 | MS_Cola_Plasmagun | cola/plasmagun | plasma | Cola-3-VR-Weapons/models/weapons/plasmagun/plasmagun.md3::PlasmaAutorifle | (source numbers) | heat.png, heat1.png, heat2.png |
 | MS_Cola_Revolver | cola/revolver | revolver | Cola-3-VR-Weapons/models/weapons/pistol/revolver.md3::ColaHandgun | (source numbers) | revolver.png, sheet.png |
 | MS_Cola_Sidewinder | cola/sidewinder | rocket | Cola-3-VR-Weapons/models/weapons/sidewinder/sidewinder.md3::MissileLauncher | (source numbers) | rocket_mf.png, rocket_mf10.png, rocket_mf2.png |
-| MS_D64_Boot | d64/boot | kick | D64Retribution/Models/Weapons/Hud/Boot/Boot.md3::ClassicRocketLauncher | (source numbers) | Boot.png, sheet.png |
-| MS_D64_Chainsaw | d64/chainsaw | saw | D64Retribution/Models/Weapons/Hud/Chain_saw/Chain_saw.md3::Chain_saw | (source numbers) | Chain_saw.png, sheet.png |
+| MS_D64_Boot | d64/boot | kick | mesh matched, no block: D64Retribution/Models/Weapons/Hud/Boot/Boot.md3 | (source numbers) | Boot.png, sheet.png |
+| MS_D64_Chainsaw | d64/chainsaw | saw | D64Retribution/Models/Weapons/Hud/Chain_saw/Chain_saw.md3::_64Chainsaw | (source numbers) | Chain_saw.png, sheet.png |
 | MS_HX_Cryogun | hacx/cryogun | plasma | HacX/MODELS/Cryogun/cryogun.md3::_HacxCryogun | (source numbers) | cryogun.png, sheet.png |
 | MS_HX_Melee | hacx/melee | melee | HacX/MODELS/Melee/melee.md3::_Melee | (source numbers) | melee.png, sheet.png |
 | MS_HX_Nuker | hacx/nuker | bfg | HacX/MODELS/Nuker/Nuker.md3::_HacxNuker | (source numbers) | Nuker.png, can.png, sheet.png |
@@ -84,14 +84,14 @@
 | MS_HP_Blaster | hocus/blaster | pistol | Hocus-Doom-VR/Models/weapons/blaster/blaster.md3::JazzGun | (source numbers) | BlasterPlasma.png, BlasterPlasma_bm.jpg, BlasterPlasma_fire.png |
 | MS_HP_Cannon | hocus/cannon | launcher | Hocus-Doom-VR/Models/weapons/cannon/cannon.md3::RocketLawnchair | (source numbers) | cannon.png, cannon_mf.png, cannon_mf2.png |
 | MS_HP_Rifle | hocus/rifle | rifle | Hocus-Doom-VR/Models/weapons/rifle/rifle.md3::ElectromanGun | (source numbers) | rifle.png, rifle_mf.png, sheet.png |
-| MS_HP_Wand | hocus/wand | pistol | Hocus-Doom-VR/Models/weapons/wand/wand.md3::HVRWand | (source numbers) | magicwand.png, magicwand_bm.jpg, phoenix_tex1.png -- source skin ['wand.png'] not in folder; used wand_fire.png |
+| MS_HP_Wand | hocus/wand | pistol | Hocus-Doom-VR/Models/weapons/wand/wand.md3::ZPower_Wand | (source numbers) | magicwand.png, magicwand_bm.jpg, phoenix_tex1.png |
 | MS_MG_Bfg | meatgrinder/bfg | bfg | BR_VR_MeatGrinder/Models/BFG/BFG.md3::BFG9K | (source numbers) | BFG_9k.png, BFG_9k2.png, sheet.png |
 | MS_MG_Bolter | meatgrinder/bolter | plasma | BR_VR_MeatGrinder/Models/Bolter/Bolter.md3::PlasmaThrower | (source numbers) | bolter.png, sheet.png |
-| MS_MG_Chaingun | meatgrinder/chaingun | chaingun | BR_VR_MeatGrinder/Models/ChainGun/Chaingun.md3::BWGatling | (source numbers) | Chaingun.png, sheet.png |
+| MS_MG_Chaingun | meatgrinder/chaingun | chaingun | BR_VR_MeatGrinder/Models/ChainGun/Chaingun.md3::ChaingunCannon | (source numbers) | Chaingun.png, sheet.png |
 | MS_MG_Knife | meatgrinder/knife | melee | BR_VR_MeatGrinder/Models/Knife/knife.md3::GrinderFist | (source numbers) | Knife.png, sheet.png |
 | MS_MG_Rpg | meatgrinder/rpg | rocket | BR_VR_MeatGrinder/Models/RPG/RPG.md3::MultiRocketLauncher | (source numbers) | RPG.png, sheet.png |
 | MS_MG_Saw | meatgrinder/saw | saw | BR_VR_MeatGrinder/Models/Saw/Saw.md3::SuperSaw | (source numbers) | Saw.png, sheet.png |
-| MS_MG_Shotgun | meatgrinder/shotgun | shotgun | BR_VR_MeatGrinder/Models/Shotgun/Shotgun.md3::TRGUN | (source numbers) | Shotgun.png, sheet.png |
+| MS_MG_Shotgun | meatgrinder/shotgun | shotgun | BR_VR_MeatGrinder/Models/Shotgun/Shotgun.md3::AutoShotgun | (source numbers) | Shotgun.png, sheet.png |
 | MS_MG_Ssg | meatgrinder/ssg | supershotgun | BR_VR_MeatGrinder/Models/SSG/SSG.md3::SSG | (source numbers) | sheet.png, ssg.png |
 | MS_MG_Tec9 | meatgrinder/tec9 | smg | **PLACEMENT needed** | (source numbers) | sheet.png, tec9.png |
 | MS_PD_Blunderbuss | pirate/blunderbuss | shotgun | pirate-doom-vr/models/blunderbuss/blunderbuss.md3::PDVR_Blunderbuss | (source numbers) | sheet.png, shotgun.png -- source skin [] not in folder; used shotgun.png |
@@ -115,7 +115,7 @@
 | MS_RC_Ksg | robocop/ksg | shotgun | mesh matched, no block: Robocop-Retribution/models/weapons/ksg/ksg.md3 | (source numbers) | ksg_back.png, ksg_front.png, sheet.png |
 | MS_RC_M27 | robocop/m27 | plasma | Robocop-Retribution/models/weapons/m27/m27_rifle.md3::M27PlasmaRifle | (source numbers) | m27_plasmagun.jpg, m27_plasmagun2.jpg -- source skin [] not in folder; used m27_plasmagun.jpg |
 | MS_RC_M32 | robocop/m32 | launcher | Robocop-Retribution/models/weapons/m32/m32.md3::MiniMissileShooter | (source numbers) | m32_tex1.png, m32_tex2.png, sheet.png |
-| MS_RC_Shotgun | robocop/shotgun | shotgun | Robocop-Retribution/models/weapons/shotgun/shotgun.md3::PumpShotgun | (source numbers) | robohand.jpg, sheet.png, shotgun.jpg -- source skin ['shotgun.png'] not in folder; used robohand.jpg |
+| MS_RC_Shotgun | robocop/shotgun | shotgun | Robocop-Retribution/models/weapons/shotgun/shotgun.md3::RoboShotgun | (source numbers) | robohand.jpg, sheet.png, shotgun.jpg |
 | MS_UV_ChaingunD4 | universal_voxel/chaingun_d4 | chaingun | Universal_Doom_VoxelWeapons_VR/MODELS/Weapons/Hud/Chaingun_D4/schaingun.md3::Vanilla_Chaingun | (source numbers) | schaingun.png, sheet.png |
 | MS_UV_ShotgunD4 | universal_voxel/shotgun_d4 | shotgun | Universal_Doom_VoxelWeapons_VR/MODELS/Weapons/Hud/Shotgun_D4/sshot.md3::Vanilla_Shotgun | (source numbers) | sheet.png, sshot.png, sshot_bm.png |
 | MS_UV_SsgD4 | universal_voxel/ssg_d4 | supershotgun | Universal_Doom_VoxelWeapons_VR/MODELS/Weapons/Hud/SSG_D4/sssg.md3::Vanilla_SuperShotgun | (source numbers) | sheet.png, sshell.png, sssg.png |
