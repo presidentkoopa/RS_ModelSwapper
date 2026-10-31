@@ -1,0 +1,12 @@
+weapon po_glove
+  archetype   melee        # owner-confirmed
+  model       po_glove.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [17.22, -0.14, 3.31]
+  grip        line [4.44, -4.25, 0.08] [-0.31, -1.31, -5.09]  trigger [5.37, -0.65, -0.13]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [9.37, -0.65, -0.13]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..4
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 160
