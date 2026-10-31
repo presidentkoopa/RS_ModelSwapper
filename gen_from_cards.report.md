@@ -18,22 +18,22 @@
 | MS_BD_Buzzsaw | bd21/buzzsaw | machinegun | br_vr/PK3_pbr/Models/Weapons/Hud/HitlersBuzzsaw/HitlersBuzzsaw.md3::HitlersBuzzsaw | (source numbers) | HitlersBuzzsaw.png, sheet.png, sheet_top.png |
 | MS_BD_Chainsaw | bd21/chainsaw | saw | br_vr/PK3_pbr/Models/Weapons/Hud/Chain_saw/Chain_saw.md3::Chain_saw | (source numbers) | BloodB.png, BloodG.png, BloodR.png |
 | MS_BD_Dragonslayer | bd21/dragonslayer | sword | br_vr/PK3_pbr/Models/Weapons/Hud/DSweap/DSweap.md3::DSweap | (source numbers) | DSweap.png, sheet.png |
-| MS_BD_Fist | bd21/fist | melee | br_vr/PK3_pbr/Models/Weapons/Hud/Fist/fistclosed.md3::ClassicFist | (source numbers) | fist.png, sheet.png |
+| MS_BD_Fist | bd21/fist | melee | br_vr/PK3_pbr/Models/Weapons/Hud/Fist/fistclosed.md3::Melee_Attacks | (source numbers) | fist.png, sheet.png |
 | MS_BD_Flamecannon | bd21/flamecannon | flamethrower | br_vr/PK3_pbr/Models/Weapons/Hud/FlameCannon/FlameCannon.md3::FlameCannon | (source numbers) | FlameCannon.png, sheet.png |
 | MS_BD_Flamethrower | bd21/flamethrower | flamethrower | br_vr/PK3_pbr/Models/Weapons/Hud/Flamethrower2/Flamethrower2.md3::Flamethrower2 | (source numbers) | Flamethrower2.png, sheet.png |
 | MS_BD_Grenade | bd21/grenade | grenade | br_vr/PK3_pbr/Models/Weapons/Hud/Grenade/nade.md3::HandGrenades | (source numbers) | nade.png, sheet.png |
 | MS_BD_Hellishmissile | bd21/hellishmissile | rocket | br_vr/PK3_pbr/Models/Weapons/Hud/HellishMissile/HellishMissile.md3::HellishMissileLauncher | (source numbers) | HellishMissile.png, sheet.png |
 | MS_BD_M79 | bd21/m79 | launcher | br_vr/PK3_pbr/Models/Weapons/Hud/M79/M79.md3::GrenadeLauncher | (source numbers) | M79.png, sheet.png |
 | MS_BD_Machinegun | bd21/machinegun | machinegun | br_vr/PK3_pbr/Models/Weapons/Hud/Machinegun/Machinegun.md3::Machinegun | (source numbers) | Machinegun.png, sheet.png |
-| MS_BD_Minigun | bd21/minigun | chaingun | br_vr/PK3_pbr/Models/Weapons/Hud/Minigun/minigun.md3::ClassicChaingun | (source numbers) | chaingun.png, sheet.png, sheet_top.png -- source skin ['Minigun.png'] not in folder; used chaingun.png |
+| MS_BD_Minigun | bd21/minigun | chaingun | br_vr/PK3_pbr/Models/Weapons/Hud/Minigun/minigun.md3::Minigun | (source numbers) | chaingun.png, sheet.png, sheet_top.png -- source skin ['Minigun.png'] not in folder; used chaingun.png |
 | MS_BD_Mp40 | bd21/mp40 | smg | br_vr/PK3_pbr/Models/Weapons/Hud/MP40/MP40.md3::MP40 | (source numbers) | MP40.png, sheet.png |
-| MS_BD_Pistol | bd21/pistol | pistol | br_vr/PK3_pbr/Models/Weapons/Hud/BrutalPistol/BrutalPistol.md3::ClassicPistol | (source numbers) | mf2.png, pistol.png, sheet.png -- source skin ['BrutalPistol.png'] not in folder; used pistol.png |
-| MS_BD_Plasma | bd21/plasma | plasma | br_vr/PK3_pbr/Models/Weapons/Hud/Plasma_Gun/Plasma.md3::ClassicPlasmaRifle | (source numbers) | PlasmaRifle.png, sheet.png -- source skin ['Plasma.png'] not in folder; used PlasmaRifle.png |
+| MS_BD_Pistol | bd21/pistol | pistol | br_vr/PK3_pbr/Models/Weapons/Hud/BrutalPistol/BrutalPistol.md3::BrutalPistol | (source numbers) | mf2.png, pistol.png, sheet.png -- source skin ['BrutalPistol.png'] not in folder; used pistol.png |
+| MS_BD_Plasma | bd21/plasma | plasma | br_vr/PK3_pbr/Models/Weapons/Hud/Plasma_Gun/Plasma.md3::Plasma_Gun | (source numbers) | PlasmaRifle.png, sheet.png -- source skin ['Plasma.png'] not in folder; used PlasmaRifle.png |
 | MS_BD_Railgun | bd21/railgun | railgun | br_vr/PK3_pbr/Models/Weapons/Hud/RailGun/RailGun.md3::RailGun | (source numbers) | RailGun.png, sheet.png |
 | MS_BD_Revolver | bd21/revolver | revolver | br_vr/PK3_pbr/Models/Weapons/Hud/Revolver/Revolver.md3::Revolver | (source numbers) | revolver_base.png, sheet.png -- source skin ['Revolver.png'] not in folder; used revolver_base.png |
 | MS_BD_Rifle | bd21/rifle | rifle | br_vr/PK3_pbr/Models/Weapons/Hud/Rifle/Rifle.md3::Rifle | (source numbers) | Rifle.png, sheet.png |
-| MS_BD_Rpg | bd21/rpg | rocket | br_vr/PK3_pbr/Models/Weapons/Hud/RPG/RPG.md3::ClassicRocketLauncher | (source numbers) | RPG.png, sheet.png |
-| MS_BD_Shotgun | bd21/shotgun | shotgun | br_vr/PK3_pbr/Models/Weapons/Hud/Shotgun/Shotgun.md3::ClassicShotgun | (source numbers) | MF1.png, MF2.png, Shotgun.png |
+| MS_BD_Rpg | bd21/rpg | rocket | br_vr/PK3_pbr/Models/Weapons/Hud/RPG/RPG.md3::Rocket_Launcher | (source numbers) | RPG.png, sheet.png |
+| MS_BD_Shotgun | bd21/shotgun | shotgun | br_vr/PK3_pbr/Models/Weapons/Hud/Shotgun/Shotgun.md3::Shot_Gun | (source numbers) | MF1.png, MF2.png, Shotgun.png |
 | MS_BD_Smg | bd21/smg | smg | br_vr/PK3_pbr/Models/Weapons/Hud/BrutalSMG/BrutalSMG.md3::BrutalSMG | (source numbers) | BrutalSMG.png, sheet.png |
 | MS_BD_Ssg | bd21/ssg | supershotgun | br_vr/PK3_pbr/Models/Weapons/Hud/SSG/ssg.md3::SSG | (source numbers) | MF1.png, MF2.png, sheet.png |
 | MS_BD_Unmaker | bd21/unmaker | unmaker | br_vr/PK3_pbr/Models/Weapons/Hud/Unmaker/Unmaker.md3::Unmaker | (source numbers) | Unmaker.png, sheet.png |

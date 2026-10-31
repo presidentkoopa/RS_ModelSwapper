@@ -114,7 +114,7 @@ class RS_ForeignShelf
 			"machinegun|MS_BD_Buzzsaw|CHGG|0|0|3",
 			"saw|MS_BD_Chainsaw|SAWG|0|15|65",
 			"sword|MS_BD_Dragonslayer|PUNG|0|0|10",
-			"melee|MS_BD_Fist|PUNG|0|48|75",
+			"melee|MS_BD_Fist|PUNG|0|0|75",
 			"flamethrower|MS_BD_Flamecannon|PLSG|0|0|8",
 			"flamethrower|MS_BD_Flamethrower|PLSG|0|0|6",
 			"grenade|MS_BD_Grenade|MISG|0|0|27",

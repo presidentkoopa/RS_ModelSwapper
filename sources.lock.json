@@ -1,0 +1,1289 @@
+{
+ "MS_AE_Knife": {
+  "block": "\n\tPath \"Models\\Weapons\\knife\"\n\tModel 0 \"knife.md3\"\n\tSkin 0 \"knife.png\"\n\n\tScale -0.65 0.65 0.65\n\tOffset 0.0 -16.0 -16.0\n\t\n\tNOINTERPOLATION\n\n\t//Ready\n\tFrameIndex ATKN A 0 0\n\n\t//Slash\n\tFrameIndex ATKN B 0 1\n\tFrameIndex ATKN C 0 2\n\tFrameIndex ATKN D 0 3\n\tFrameIndex ATKN E 0 4\n\tFrameIndex ATKN F 0 5\n\tFrameIndex ATKN G 0 6\n\tFrameIndex ATKN H 0 7\n\tFrameIndex ATKN I 0 8\n\tFrameIndex ATKN J 0 9\n\tFrameIndex ATKN K 0 10\n\tFrameIndex ATKN L 0 11\n\tFrameIndex ATKN M 0 12\n\tFrameIndex ATKN N 0 13\n\tFrameIndex ATKN O 0 14\n\tFrameIndex ATKN P 0 15\n\tFrameIndex ATKN Q 0 16\n\tFrameIndex ATKN R 0 17\n\tFrameIndex ATKN S 0 18\n",
+  "block_name": "Knife_3D",
+  "card": "cards/aliens/knife",
+  "frame": 0,
+  "how": "ready ATKNA",
+  "srcfile": "Aliens-Eradication-VR-addon/models/weapons/knife/knife.md3",
+  "srcfile_abs": null
+ },
+ "MS_AE_Loader": {
+  "block": "\n\tPath \"Models\\Weapons\\mech\"\n\tModel 0 \"mechloader.md3\"\n\t// FIXED 2026-10-23: surfaces 0 and 2 had their skins crossed. mechloader.md3 names\n\t// them MechCover / MechArms.001 / MechGuard.001 and its OWN shaders are grate /\n\t// upper / upper -- so the cover was being painted with the arm texture and the big\n\t// guard with the 256x512 grate. The pickup block below has always had it right.\n\tSurfaceSkin 0 0 \"loader_grate.png\"\n\tSurfaceSkin 0 1 \"loader_upper.png\"\n\tSurfaceSkin 0 2 \"loader_upper.png\"\n\n\tScale -1.0 1.0 1.0\n\tOffset -10.0 40.0 -10.0\n\n\t//Ready\n\tFrameIndex SAWG A 0 0\n\n\t//Attack\n\tFrameIndex SAWG B 0 1\n\tFrameIndex SAWG C 0 2\n\tFrameIndex SAWG D 0 3\n\tFrameIndex SAWG E 0 4\n\tFrameIndex SAWG F 0 5\n\tFrameIndex SAWG G 0 6\n\tFrameIndex SAWG H 0 7\n\tFrameIndex SAWG I 0 8\n\tFrameIndex SAWG J 0 9\n\tFrameIndex SAWG K 0 10\n\tFrameIndex SAWG L 0 11\n\tFrameIndex SAWG M 0 12\n\tFrameIndex SAWG N 0 13\n\tFrameIndex SAWG O 0 14\n\t\n\t//Alt fire\n\tFrameIndex SAWG P 0 15\n\tFrameIndex SAWG Q 0 16\n\tFrameIndex SAWG R 0 17\n\tFrameIndex SAWG S 0 18\n\tFrameIndex SAWG T 0 19\n\tFrameIndex SAWG U 0 20\n",
+  "block_name": "Loader_3D",
+  "card": "cards/aliens/loader",
+  "frame": 0,
+  "how": "ready SAWGA",
+  "srcfile": "Aliens-Eradication-VR-addon/models/weapons/mech/mechloader.md3",
+  "srcfile_abs": null
+ },
+ "MS_AE_M260b": {
+  "block": "\n\tPath \"Models\\Weapons\\flamer\"\n\tModel 0 \"m260b.md3\"\n\tSkin 0 \"m260b.png\"\n\n\tScale -1.1 1.1 1.1\n\tOffset 0.0 -30.0 -7.0\n\n\t//Ready\n\tFrameIndex FLBF A 0 0\n\tFrameIndex FLMT A 0 0\n\n\t//Fire\n\tFrameIndex FLMT B 0 1\n\tFrameIndex FLMT C 0 2\n\tFrameIndex FLMT D 0 3\n\n\t//Reloading - drop canister\n\tFrameIndex FLMT E 0 5\n\tFrameIndex FLMT F 0 6\n\tFrameIndex FLMT G 0 7\n\tFrameIndex FLMT H 0 8\n\tFrameIndex FLMT I 0 9\n\n\t//Reloading - add new canister\n\tFrameIndex FLMT L 0 11\n\tFrameIndex FLMT M 0 12\n\tFrameIndex FLMT N 0 13\n\tFrameIndex FLMT O 0 14\n\tFrameIndex FLMT P 0 15\n\tFrameIndex FLMT Q 0 16\n\tFrameIndex FLMT R 0 17\n\tFrameIndex FLMT S 0 18\n\tFrameIndex FLMT T 0 19\n",
+  "block_name": "M240Flamethrower_3D",
+  "card": "cards/aliens/m260b",
+  "frame": 0,
+  "how": "ready FLBFA",
+  "srcfile": "Aliens-Eradication-VR-addon/models/weapons/flamer/m260b.md3",
+  "srcfile_abs": null
+ },
+ "MS_AE_M37a2": {
+  "block": "\n\tPath \"Models\\Weapons\\shotgun\"\n\tModel 0 \"m37a2.md3\"\n\tSkin 0 \"m37a2.png\"\n\n\tScale -1.1 1.1 1.1\n\tOffset 0.0 -30.0 -7.0\n\n\t//Ready\n\tFrameIndex ATSG A 0 0\n\n\t//Fire\n\tFrameIndex ATSG B 0 1\n\tFrameIndex ATSG C 0 2\n\tFrameIndex ATSG D 0 3\n\n\t//Pump\n\tFrameIndex ATSG E 0 4\n\tFrameIndex ATSG F 0 5\n\tFrameIndex ATSG G 0 6\n\tFrameIndex ATSG H 0 7\n\tFrameIndex ATSG I 0 8\n\tFrameIndex ATSG J 0 9\n\tFrameIndex ATSG K 0 10\n\tFrameIndex ATSG L 0 11\n\tFrameIndex ATSG M 0 12\n\tFrameIndex ATSG N 0 13\n",
+  "block_name": "NewShotgun_3D",
+  "card": "cards/aliens/m37a2",
+  "frame": 0,
+  "how": "ready ATSGA",
+  "srcfile": "Aliens-Eradication-VR-addon/models/weapons/shotgun/m37a2.md3",
+  "srcfile_abs": null
+ },
+ "MS_AE_M41a": {
+  "block": "\n\tPath \"Models\\Weapons\\rifle\"\n\tModel 0 \"m41a.md3\"\n\tSkin 0 \"m41a.png\"\n\n\tScale -1.1 1.1 1.1\n\tOffset 0.0 -30.0 -9.0\n\n\t//Ready\n\tFrameIndex PULS A 0 0\n\n\t//Fire\n\tFrameIndex PULS B 0 1\n\tFrameIndex PULS C 0 2\n\tFrameIndex PULS D 0 3\n\n\t//Fire grenade\n\tFrameIndex PULS E 0 4\n\tFrameIndex PULS F 0 5\n\tFrameIndex PULS G 0 6\n\tFrameIndex PULS H 0 7\n\tFrameIndex PULS I 0 8\n\t\n\t//Pump\n\tFrameIndex PULS J 0 9\n\tFrameIndex PULS K 0 10\n\tFrameIndex PULS L 0 11\n\tFrameIndex PULS M 0 12\n\tFrameIndex PULS N 0 13\n",
+  "block_name": "PulseRifle_3D",
+  "card": "cards/aliens/m41a",
+  "frame": 0,
+  "how": "ready PULSA",
+  "srcfile": "Aliens-Eradication-VR-addon/models/weapons/rifle/m41a.md3",
+  "srcfile_abs": null
+ },
+ "MS_AE_M4a3": {
+  "block": "\n\tPath \"Models\\Weapons\\pistol\"\n\tModel 0 \"m4a3.md3\"\n\tSkin 0 \"m4a3.png\"\n\n\tScale -0.82 0.82 0.82\n\tOffset 0.0 -29.0 -8.0\n\n\t//Ready\n\tFrameIndex MM91 A 0 0\n\t\n\t//Fire\n\tFrameIndex MM91 B 0 1\n\tFrameIndex MM91 C 0 2\n\tFrameIndex MM91 D 0 3\n\tFrameIndex MM91 E 0 4\n\tFrameIndex MM91 F 0 5\n\t\n\t//Reload\n\tFrameIndex MM91 G 0 6\n\tFrameIndex MM91 H 0 7\n\t\n\t\n\t//Insert new clip\n\tFrameIndex MM91 M 0 11\n\tFrameIndex MM91 N 0 12\n\tFrameIndex MM91 O 0 13\n\tFrameIndex MM91 P 0 14\n\tFrameIndex MM91 Q 0 15\n\tFrameIndex MM91 R 0 16\n\tFrameIndex MM91 S 0 17\n\tFrameIndex MM91 T 0 18\n\tFrameIndex MM91 U 0 19\n",
+  "block_name": "M4A3Pistol_3D",
+  "card": "cards/aliens/m4a3",
+  "frame": 0,
+  "how": "realready MM91A",
+  "srcfile": "Aliens-Eradication-VR-addon/models/weapons/pistol/m4a3.md3",
+  "srcfile_abs": null
+ },
+ "MS_AE_M56": {
+  "block": "\n\tPath \"Models\\Weapons\\smartgun\"\n\tModel 0 \"m56.md3\"\n\tSkin 0 \"m56.png\"\n\n\tScale -0.9 0.9 0.9\n\tOffset 0.0 -30.0 -7.0\n\n\t//Ready\n\tFrameIndex SMRT A 0 0\n\n\t//Fire\n\tFrameIndex SMRT B 0 0\n\tFrameIndex SMRT C 0 0\n",
+  "block_name": "Smartgun_3D",
+  "card": "cards/aliens/m56",
+  "frame": 0,
+  "how": "ready SMRTA",
+  "srcfile": "Aliens-Eradication-VR-addon/models/weapons/smartgun/m56.md3",
+  "srcfile_abs": null
+ },
+ "MS_AE_Satchel": {
+  "block": "\n\tPath \"Models\\Weapons\\grenade\"\n\tModel 0 \"satchel_charge.md3\"\n\tSurfaceSkin 0 0 \"satchel_cover.png\"\n\tSurfaceSkin 0 1 \"satchel_pocket.png\"\n\tSurfaceSkin 0 2 \"satchel.png\"\n\tSurfaceSkin 0 3 \"satchel_charge.png\"\n\n\tScale -1.7 1.7 1.7\n\tOffset 0.0 -30.0 -7.0\n\n\t//Ready\n\tFrameIndex STCF A 0 0\n\tFrameIndex STCF B 0 0\n\tFrameIndex STCG A 0 0\n\n\t//Ready\n\tFrameIndex STCG B 0 1\n\tFrameIndex STCG C 0 2\n\tFrameIndex STCG D 0 3\n\tFrameIndex STCG E 0 4\n",
+  "block_name": "Satcheler_3D",
+  "card": "cards/aliens/satchel",
+  "frame": 0,
+  "how": "ready STCGA",
+  "srcfile": "Aliens-Eradication-VR-addon/models/weapons/grenade/satchel_charge.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Assaultshotgun": {
+  "block": " \n   Path \"Models/Weapons/Hud/AssaultShotgun\"\n   Model 0 \"AssaultShotgun.md3\"\n   Skin 0 \"AssaultShotgun.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\t//Ready\n\n\tFrameIndex\tA12S\tA\t0\t0\n\tFrameIndex\tA12S\tB\t0\t1\n\tFrameIndex\tA12S\tC\t0\t2\n\tFrameIndex\tA12S\tD\t0\t3\n\n\n\t//Aim and Fire\n\n\tFrameIndex\tA12G\tA\t0\t4\n\t\n\tFrameIndex\tA12F\tA\t0\t5\n\tFrameIndex\tA12F\tB\t0\t6\n\tFrameIndex\tA12F\tC\t0\t7\n\tFrameIndex\tA12F\tD\t0\t8\n\tFrameIndex\tA12F\tE\t0\t9\n\tFrameIndex\tA12F\tF\t0\t10\n\n\n\n\t//Reload\n\n\tFrameIndex\tA12R\tA\t0\t11\n\tFrameIndex\tA12R\tB\t0\t12\n\tFrameIndex\tA12R\tC\t0\t13\n\tFrameIndex\tA12R\tD\t0\t14\n\tFrameIndex\tA12R\tE\t0\t15\n\tFrameIndex\tA12R\tF\t0\t16\n\tFrameIndex\tA12R\tG\t0\t17\n\tFrameIndex\tA12R\tH\t0\t18\n\tFrameIndex\tA12R\tI\t0\t19\n\tFrameIndex\tA12R\tJ\t0\t20\n\tFrameIndex\tA12R\tK\t0\t21\n\tFrameIndex\tA12R\tL\t0\t22\n\tFrameIndex\tA12R\tM\t0\t23\n\tFrameIndex\tA12R\tN\t0\t24\n\tFrameIndex\tA12R\tO\t0\t25\n\tFrameIndex\tA12R\tP\t0\t26\n\tFrameIndex\tA12R\tQ\t0\t27\n\tFrameIndex\tA12R\tR\t0\t28\n\tFrameIndex\tA12R\tS\t0\t29\n\tFrameIndex\tA12R\tT\t0\t30\n\tFrameIndex\tA12R\tU\t0\t31\n\n\n//Sprint\n\n\tFrameIndex A1SP\t\tA\t0\t3\n\n\t//Zoom\n\n\tFrameIndex\tA12A\tA\t0\t4\n\tFrameIndex\tA12A\tB\t0\t5\n\tFrameIndex\tA12A\tC\t0\t6\n\tFrameIndex\tA12A\tD\t0\t7\n\tFrameIndex\tA12A\tE\t0\t8\n\tFrameIndex\tA12A\tF\t0\t9\n\tFrameIndex\tA12A\tG\t0\t10\n\n\n",
+  "block_name": "AssaultShotgun",
+  "card": "cards/bd21/assaultshotgun",
+  "frame": 4,
+  "how": "ready A12GA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/AssaultShotgun/AssaultShotgun.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Axe": {
+  "block": " \n   Path \"Models/Weapons/Hud/BrutalAxe\"\n   Model 0 \"BrutalAxe.md3\"\n   Skin 0 \"BrutalAxe.png\"\n   Scale -1.5 1.5 1.5\n   Offset 0.0 10.0 0.0\n   NoInterpolation\n   ZOffset 5\n   PitchOffset -10\n\n\t//Ready\n\n\tFrameIndex\tAXES\tA\t0\t0\n\tFrameIndex\tAXES\tB\t0\t1\n\tFrameIndex\tAXES\tC\t0\t2\n\tFrameIndex\tAXES\tD\t0\t3\n\n\n\t//Aim and Fire\n\n\tFrameIndex\tAXEG\tA\t0\t5\n\tFrameIndex\tAXEG\tB\t0\t6\n\tFrameIndex\tAXEG\tC\t0\t7\n\tFrameIndex\tAXEG\tD\t0\t8\n\tFrameIndex\tAXEG\tE\t0\t9\n\n\tFrameIndex\tAXEF\tA\t0\t10\n\tFrameIndex\tAXEF\tB\t0\t11\n\tFrameIndex\tAXEF\tC\t0\t12\n\tFrameIndex\tAXEF\tD\t0\t13\n\tFrameIndex\tAXEF\tE\t0\t14\n\n\n//Sprint\n\n\tFrameIndex\tAXEP\tA\t0\t3\n\t\n",
+  "block_name": "BrutalAxe",
+  "card": "cards/bd21/axe",
+  "frame": 5,
+  "how": "ready AXEGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/BrutalAxe/BrutalAxe.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Bfg": {
+  "block": " \n   Path \"Models/Weapons/Hud/BFG\"\n   Model 0 \"BFG.md3\"\n   Skin 0 \"BFG.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n   Nointerpolation\n   \nFrameIndex\tBFGS\tA\t0\t0\nFrameIndex\tBFGS\tB\t0\t1\nFrameIndex\tBFGS\tC\t0\t2\nFrameIndex\tBFGS\tD\t0\t3\nFrameIndex\tBFGS\tE\t0\t4\nFrameIndex\tBFGS\tF\t0\t5   \n\nFrameIndex\tBFGN\tA\t0\t6\n\n\n",
+  "block_name": "VanillaBFG9000",
+  "card": "cards/bd21/bfg",
+  "frame": 6,
+  "how": "ready BFGNA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/BFG/BFG.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Bfg10k": {
+  "block": " \n   Path \"Models/Weapons/Hud/BFG\"\n   Model 0 \"BFG_10k.md3\"\n   Skin 0 \"BFG_10k.png\"\n   Model 1 \"BFG_Flame.md3\"\n   Skin 1 \"BFG_Flame.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\t//Ready\n\n\tFrameIndex\tBG2G\tA\t0\t6\n\tFrameIndex\tBG2G\tB\t0\t6\n\tFrameIndex\tBG2G\tC\t0\t6\n\tFrameIndex\tBG2G\tD\t0\t6\n\t\n\tFrameIndex\tBG2G\tA\t1\t6\n\tFrameIndex\tBG2G\tB\t1\t7\n\tFrameIndex\tBG2G\tC\t1\t8\n\tFrameIndex\tBG2G\tD\t1\t9\n\t\n\t//Aim and Fire\n\n\tFrameIndex\tBG2G\tE\t0\t6\n\t\n\tFrameIndex\tBG2G\tE\t1\t10\n\n\n",
+  "block_name": "BFG10k",
+  "card": "cards/bd21/bfg10k",
+  "frame": 6,
+  "how": "ready BG2GA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/BFG/BFG_10k.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Boot": {
+  "block": " \n   Path \"Models/Weapons/Hud/Boot\"\n   Model 0 \"Boot.md3\"\n   Skin 0 \"Boot.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n   \n\t//FrameIndex\t3DKI\tA\t0\t0\n\t//FrameIndex\t3DKI\tB\t0\t1\n\t//FrameIndex\t3DKI\tC\t0\t2\n\t//FrameIndex\t3DKI\tD\t0\t3\n\t//FrameIndex\t3DKI\tE\t0\t4\n\n\tFrameIndex\tKIK1\tA\t0\t5\n\tFrameIndex\tKIK1\tB\t0\t6\n\tFrameIndex\tKIK1\tC\t0\t7\n\tFrameIndex\tKIK1\tD\t0\t8\n\tFrameIndex\tKIK1\tE\t0\t9\n\n\tFrameIndex\tKIK2\tA\t0\t10\n\tFrameIndex\tKIK2\tB\t0\t11\n\tFrameIndex\tKIK2\tC\t0\t12\n\tFrameIndex\tKIK2\tD\t0\t13\n\tFrameIndex\tKIK2\tE\t0\t14\n\n\tFrameIndex\tKIKF\tA\t0\t15\n\tFrameIndex\tKIKF\tB\t0\t16\n\tFrameIndex\tKIKF\tC\t0\t17\n\tFrameIndex\tKIKF\tD\t0\t18\n\tFrameIndex\tKIKF\tE\t0\t19\n\n\tFrameIndex\tKICK\tA\t0\t20\n\tFrameIndex\tKICK\tB\t0\t21\n\tFrameIndex\tKICK\tC\t0\t22\n\tFrameIndex\tKICK\tD\t0\t23\n\tFrameIndex\tKICK\tE\t0\t24\n\tFrameIndex\tKICK\tF\t0\t25\n\tFrameIndex\tKICK\tG\t0\t26\n\tFrameIndex\tKICK\tH\t0\t27\n\tFrameIndex\tKICK\tI\t0\t28\n\tFrameIndex\tKICK\tJ\t0\t29\n\tFrameIndex\tKICK\tK\t0\t30\n\tFrameIndex\tKICK\tL\t0\t31\n\tFrameIndex\tKICK\tM\t0\t32\n\tFrameIndex\tKICK\tN\t0\t33\n\tFrameIndex\tKICK\tO\t0\t34\n\tFrameIndex\tKICK\tP\t0\t35\n\tFrameIndex\tKICK\tQ\t0\t36\n\tFrameIndex\tKICK\tR\t0\t37\n\tFrameIndex\tKICK\tS\t0\t38\n\tFrameIndex\tKICK\tT\t0\t39\n\tFrameIndex\tKICK\tU\t0\t40\n\n\t//FrameIndex\tKLCK\tJ\t0\t41\n\t//FrameIndex\tKLCK\tK\t0\t42\n\t//FrameIndex\tKLCK\tL\t0\t43\n\t//FrameIndex\tKLCK\tM\t0\t44\n\t//FrameIndex\tKLCK\tN\t0\t45\n\t//FrameIndex\tKLCK\tO\t0\t46\n\t//FrameIndex\tKLCK\tP\t0\t47\n\t//FrameIndex\tKLCK\tQ\t0\t48\n\t//FrameIndex\tKLCK\tR\t0\t49\n\t//FrameIndex\tKLCK\tS\t0\t50\n\t//FrameIndex\tKLCK\tT\t0\t51\n\t//FrameIndex\tKLCK\tU\t0\t52\n\n\tFrameIndex\tSTOM\tA\t0\t53\n\tFrameIndex\tSTOM\tB\t0\t54\n\tFrameIndex\tSTOM\tC\t0\t55\n\tFrameIndex\tSTOM\tD\t0\t56\n\tFrameIndex\tSTOM\tE\t0\t57\n\t\n",
+  "block_name": "ClassicRocketLauncher",
+  "card": "cards/bd21/boot",
+  "frame": null,
+  "how": "Ready frame not in block ClassicRocketLauncher",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Boot/Boot.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Buzzsaw": {
+  "block": " \n   Path \"Models/Weapons/Hud/HitlersBuzzsaw\"\n   Model 0 \"HitlersBuzzsaw.md3\"\n   Skin 0 \"HitlersBuzzsaw.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\n\n//Aim Fire\n\nFrameIndex\tHBUS\tA\t0\t0\nFrameIndex\tHBUS\tB\t0\t1\nFrameIndex\tHBUS\tC\t0\t2\n\n",
+  "block_name": "HitlersBuzzsaw",
+  "card": "cards/bd21/buzzsaw",
+  "frame": 0,
+  "how": "ready HBUSA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/HitlersBuzzsaw/HitlersBuzzsaw.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Chainsaw": {
+  "block": " \n   Path \"Models/Weapons/Hud/Chain_saw\"\n   Model 0 \"Chain_saw.md3\"\n   Skin 0 \"Chain_saw.png\"\n   Scale -1.5 1.5 1.5\n   Offset 0.0 10.0 0.0\n   ZOffset -5\n   NOINTERPOLATION\n\n//Ready\n\nFrameIndex\tSAWY\tA\t0\t0\nFrameIndex\tSAWY\tB\t0\t1\nFrameIndex\tSAWY\tC\t0\t2\nFrameIndex\tSAWY\tD\t0\t3\nFrameIndex\tSAWY\tE\t0\t4\n\nFrameIndex\tSAWS\tA\t0\t5\nFrameIndex\tSAWS\tB\t0\t6\nFrameIndex\tSAWS\tC\t0\t7\nFrameIndex\tSAWS\tD\t0\t8\nFrameIndex\tSAWS\tE\t0\t9\nFrameIndex\tSAWS\tF\t0\t10\nFrameIndex\tSAWS\tG\t0\t11\nFrameIndex\tSAWS\tH\t0\t12\n\n\n//Aim and Fire\n\nFrameIndex\tSAWG\tA\t0\t15\nFrameIndex\tSAWG\tB\t0\t16\n\nFrameIndex\tCSA1\tA\t0\t27\nFrameIndex\tCSA1\tB\t0\t28\nFrameIndex\tCSA1\tC\t0\t29\nFrameIndex\tCSA1\tD\t0\t30\nFrameIndex\tCSA1\tE\t0\t31\nFrameIndex\tCSA1\tF\t0\t32\nFrameIndex\tCSA1\tG\t0\t33\nFrameIndex\tCSA1\tH\t0\t34\nFrameIndex\tCSA1\tI\t0\t35\nFrameIndex\tCSA1\tJ\t0\t36\nFrameIndex\tCSA1\tK\t0\t37\nFrameIndex\tCSA1\tL\t0\t38\nFrameIndex\tCSA1\tM\t0\t39\nFrameIndex\tCSA1\tN\t0\t40\nFrameIndex\tCSA1\tO\t0\t41\nFrameIndex\tCSA1\tP\t0\t42\nFrameIndex\tCSA1\tQ\t0\t43\n\n//VR Modded\n\nFrameIndex\tVSAW\tC\t0\t13\nFrameIndex\tVSAW\tD\t0\t14\n\n\n\n\n//AltFire\n\nFrameIndex\tCSA2\tA\t0\t44\nFrameIndex\tCSA2\tB\t0\t45\nFrameIndex\tCSA2\tC\t0\t46\nFrameIndex\tCSA2\tD\t0\t47\nFrameIndex\tCSA2\tE\t0\t48\nFrameIndex\tCSA2\tF\t0\t49\nFrameIndex\tCSA2\tG\t0\t50\nFrameIndex\tCSA2\tH\t0\t51\nFrameIndex\tCSA2\tI\t0\t52\n\nFrameIndex\tCSA2\tJ\t0\t53\nFrameIndex\tCSA2\tK\t0\t54\nFrameIndex\tCSA2\tL\t0\t55\n\nFrameIndex\tCSA2\tM\t0\t56\nFrameIndex\tCSA2\tN\t0\t57\nFrameIndex\tCSA2\tO\t0\t58\nFrameIndex\tCSA2\tP\t0\t59\nFrameIndex\tCSA2\tQ\t0\t60\n\n",
+  "block_name": "Chain_saw",
+  "card": "cards/bd21/chainsaw",
+  "frame": 15,
+  "how": "ready SAWGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Chain_saw/Chain_saw.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Dragonslayer": {
+  "block": " \n   Path \"Models/Weapons/Hud/DSweap\"\n   Model 0 \"DSweap.md3\"\n   Skin 0 \"DSweap.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\n\n//Aim Fire\n\nFrameIndex\tDSLA\tA\t0\t0\nFrameIndex\tDSLA\tB\t0\t1\nFrameIndex\tDSLA\tC\t0\t2\nFrameIndex\tDSLA\tD\t0\t3\nFrameIndex\tDSLA\tE\t0\t4\n\n//Ready\n\nFrameIndex\tDSLC\tA\t0\t5\nFrameIndex\tDSLC\tB\t0\t6\nFrameIndex\tDSLC\tC\t0\t7\nFrameIndex\tDSLC\tD\t0\t8\n\n",
+  "block_name": "DSweap",
+  "card": "cards/bd21/dragonslayer",
+  "frame": 0,
+  "how": "ready DSLAA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/DSweap/DSweap.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Fist": {
+  "block": " \n   Path \"Models/Weapons/Hud/FIST\"\n   Model 0 \"fistclosed.md3\"\n   Skin 0 \"fist.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\tNoInterpolation\n\nFrameIndex\tPONG\tA\t0\t0\nFrameIndex\tPONG\tB\t0\t1\nFrameIndex\tPONG\tC\t0\t2\nFrameIndex\tPONG\tD\t0\t3\nFrameIndex\tPONG\tE\t0\t4\nFrameIndex\tPONG\tF\t0\t5\nFrameIndex\tPONG\tG\t0\t6\nFrameIndex\tPONG\tH\t0\t7\nFrameIndex\tPONG\tI\t0\t8\nFrameIndex\tPONG\tJ\t0\t9\nFrameIndex\tPONG\tK\t0\t10\nFrameIndex\tPONG\tL\t0\t11\nFrameIndex\tPONG\tM\t0\t12\nFrameIndex\tPONG\tN\t0\t13\n\nFrameIndex\tPUN3\tA\t0\t14\nFrameIndex\tPUN3\tB\t0\t15\nFrameIndex\tPUN3\tC\t0\t16\nFrameIndex\tPUN3\tD\t0\t17\nFrameIndex\tPUN3\tE\t0\t18\nFrameIndex\tPUN3\tF\t0\t19\nFrameIndex\tPUN3\tG\t0\t20\nFrameIndex\tPUN3\tH\t0\t21\n\nFrameIndex\tPUN5\tA\t0\t22\nFrameIndex\tPUN5\tB\t0\t23\nFrameIndex\tPUN5\tC\t0\t24\nFrameIndex\tPUN5\tD\t0\t25\nFrameIndex\tPUN5\tE\t0\t26\nFrameIndex\tPUN5\tF\t0\t27\nFrameIndex\tPUN5\tG\t0\t28\nFrameIndex\tPUN5\tH\t0\t29\nFrameIndex\tPUN5\tI\t0\t30\nFrameIndex\tPUN5\tJ\t0\t31\nFrameIndex\tPUN5\tK\t0\t32\nFrameIndex\tPUN5\tL\t0\t33\nFrameIndex\tPUN5\tM\t0\t34\n\n//Needs debug. does not show up on tactical start.\n\nFrameIndex\tPUNS\tA\t0\t35\nFrameIndex\tPUNS\tB\t0\t36\nFrameIndex\tPUNS\tC\t0\t37\nFrameIndex\tPUNS\tD\t0\t38\nFrameIndex\tPUNS\tE\t0\t39\nFrameIndex\tPUNS\tF\t0\t40\nFrameIndex\tPUNS\tG\t0\t41\nFrameIndex\tPUNS\tH\t0\t42\nFrameIndex\tPUNS\tI\t0\t43\nFrameIndex\tPUNS\tJ\t0\t44\n\n//Throw\n\nFrameIndex\tTHRF\tA\t0\t45\nFrameIndex\tTHRF\tB\t0\t46\nFrameIndex\tTHRF\tC\t0\t47\nFrameIndex\tTHRF\tD\t0\t48\nFrameIndex\tTHRF\tE\t0\t49\nFrameIndex\tTHRF\tF\t0\t50\n\n//Pickup\n\nFrameIndex\tPKUP\tA\t0\t51\nFrameIndex\tPKUP\tB\t0\t52\nFrameIndex\tPKUP\tC\t0\t53\nFrameIndex\tPKUP\tD\t0\t54\nFrameIndex\tPKUP\tE\t0\t55\nFrameIndex\tPKUP\tF\t0\t56\n\n//Sprint\n\nFrameIndex\tPUNR\tA\t0\t0\n\n//Rude\n\nFrameIndex\tFUCK\tA\t0\t61\nFrameIndex\tFUCK\tB\t0\t62\nFrameIndex\tFUCK\tC\t0\t63\nFrameIndex\tFUCK\tD\t0\t64\nFrameIndex\tFUCK\tE\t0\t64\nFrameIndex\tFUCK\tF\t0\t66\nFrameIndex\tFUCK\tG\t0\t67\nFrameIndex\tFUCK\tH\t0\t68\nFrameIndex\tFUCK\tI\t0\t69\nFrameIndex\tFUCK\tJ\t0\t69\nFrameIndex\tFUCK\tK\t0\t71\nFrameIndex\tFUCK\tL\t0\t72\nFrameIndex\tFUCK\tM\t0\t73\nFrameIndex\tFUCK\tN\t0\t74\nFrameIndex\tFUCK\tO\t0\t74\n\n\n",
+  "block_name": "Melee_Attacks",
+  "card": "cards/bd21/fist",
+  "frame": 0,
+  "how": "ready PONGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Fist/fistclosed.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Flamecannon": {
+  "block": " \n   Path \"Models/Weapons/Hud/FlameCannon\"\n   Model 0 \"FlameCannon.md3\"\n   Skin 0 \"FlameCannon.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\n//Ready\n\n\tFrameIndex\tFLMG\tA\t0\t0\n\n//Aim and Fire\n\n\tFrameIndex\tFLMF\tA\t0\t1\n\tFrameIndex\tFLMF\tB\t0\t2\n\tFrameIndex\tFLMF\tC\t0\t3\n\tFrameIndex\tFLMF\tD\t0\t4\n\tFrameIndex\tFLMF\tE\t0\t5\n\tFrameIndex\tFLMF\tF\t0\t6\n\tFrameIndex\tFLMF\tG\t0\t7\n\t\n\n\n\n\n\n//Sprint\n\n//Zoom\n\n",
+  "block_name": "FlameCannon",
+  "card": "cards/bd21/flamecannon",
+  "frame": 0,
+  "how": "ready FLMGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/FlameCannon/FlameCannon.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Flamethrower": {
+  "block": " \n   Path \"Models/Weapons/Hud/Flamethrower2\"\n   Model 0 \"Flamethrower2.md3\"\n   Skin 0 \"Flamethrower2.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\n//Aim and Fire\n\nFrameIndex\tFLMT\tA\t0\t0\nFrameIndex\tFLMT\tB\t0\t1\nFrameIndex\tFLMT\tC\t0\t2\nFrameIndex\tFLMT\tD\t0\t3\nFrameIndex\tFLMT\tE\t0\t4\n\n\n",
+  "block_name": "Flamethrower2",
+  "card": "cards/bd21/flamethrower",
+  "frame": 0,
+  "how": "ready FLMTA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Flamethrower2/Flamethrower2.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Grenade": {
+  "block": " \n   Path \"Models/Weapons/Hud/Grenade\"\n   Model 0 \"nade.md3\"\n   Skin 0 \"nade.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -10\n\n\t//Ready\n\n\tFrameIndex\tGRHO\tA\t0\t0\n\tFrameIndex\tGRHO\tB\t0\t1\n\n\t//Aim and Fire\n\n\tFrameIndex\tGRHO\tC\t0\t2\n\n\tFrameIndex\tGRTH\tA\t0\t3\n\tFrameIndex\tGRTH\tB\t0\t4\n\tFrameIndex\tGRTH\tC\t0\t5\n\tFrameIndex\tGRTH\tD\t0\t6\n\tFrameIndex\tGRTH\tE\t0\t7\n\tFrameIndex\tGRTH\tF\t0\t8\n\tFrameIndex\tGRTH\tG\t0\t9\n\t\n\tFrameIndex\tGRTH\tH\t0\t10\n\tFrameIndex\tGRTH\tI\t0\t11\n\tFrameIndex\tGRTH\tJ\t0\t12\n\tFrameIndex\tGRTH\tK\t0\t13\n\tFrameIndex\tGRTH\tL\t0\t14\n\tFrameIndex\tGRTH\tM\t0\t15\n\n",
+  "block_name": "HandGrenades",
+  "card": "cards/bd21/grenade",
+  "frame": 0,
+  "how": "ready GRHOA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Grenade/nade.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Hellishmissile": {
+  "block": " \n   Path \"Models/Weapons/Hud/HellishMissile\"\n   Model 0 \"HellishMissile.md3\"\n   Skin 0 \"HellishMissile.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\n//Ready\n\n\tFrameIndex\tRVCG\tA\t0\t0\n\n//Aim and Fire\n\n\tFrameIndex\tRVCG\tB\t0\t1\n\tFrameIndex\tRVCG\tC\t0\t2\n\tFrameIndex\tRVCG\tD\t0\t3\n\tFrameIndex\tRVCG\tE\t0\t4\n\t\n\tFrameIndex\tRVCG\tF\t0\t5\n\tFrameIndex\tRVCG\tG\t0\t6\n\tFrameIndex\tRVCG\tH\t0\t7\n\tFrameIndex\tRVCG\tI\t0\t8\n\n\n//No Target?\n\n\tFrameIndex\tRVCG\tJ\t0\t9\n\n\n//Sprint\n\n//Zoom\n\n",
+  "block_name": "HellishMissileLauncher",
+  "card": "cards/bd21/hellishmissile",
+  "frame": 0,
+  "how": "ready RVCGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/HellishMissile/HellishMissile.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_M79": {
+  "block": " \n   Path \"Models/Weapons/Hud/M79\"\n   Model 0 \"M79.md3\"\n   Skin 0 \"M79.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\t//Ready\n\n\tFrameIndex\tGLSW\tA\t0\t0\n\tFrameIndex\tGLSW\tB\t0\t1\n\tFrameIndex\tGLSW\tC\t0\t2\n\n\n\t//Aim and Fire\n\n\tFrameIndex\tGLAN\tA\t0\t3\n\n\tFrameIndex\tGLAF\tA\t0\t4\n\tFrameIndex\tGLAF\tB\t0\t5\n\tFrameIndex\tGLAF\tC\t0\t6\n\n\n\t//Reload\n\n\tFrameIndex\tGLR1\tA\t0\t7\n\tFrameIndex\tGLR1\tB\t0\t8\n\tFrameIndex\tGLR1\tC\t0\t9\n\tFrameIndex\tGLR1\tD\t0\t10\n\tFrameIndex\tGLR1\tE\t0\t11\n\tFrameIndex\tGLR1\tF\t0\t12\n\tFrameIndex\tGLR1\tG\t0\t13\n\tFrameIndex\tGLR1\tH\t0\t14\n\tFrameIndex\tGLR1\tI\t0\t15\n\tFrameIndex\tGLR1\tJ\t0\t16\n\tFrameIndex\tGLR1\tK\t0\t17\n\tFrameIndex\tGLR1\tL\t0\t18\n\tFrameIndex\tGLR1\tM\t0\t19\n\tFrameIndex\tGLR1\tN\t0\t20\n\tFrameIndex\tGLR1\tO\t0\t21\n\tFrameIndex\tGLR1\tP\t0\t22\n\tFrameIndex\tGLR1\tQ\t0\t23\n\tFrameIndex\tGLR1\tR\t0\t24\n\tFrameIndex\tGLR1\tS\t0\t25\n\tFrameIndex\tGLR1\tT\t0\t26\n\tFrameIndex\tGLR1\tU\t0\t27\n\tFrameIndex\tGLR1\tV\t0\t28\n\tFrameIndex\tGLR1\tW\t0\t29\n\tFrameIndex\tGLR1\tX\t0\t30\n\tFrameIndex\tGLR1\tY\t0\t31\n\tFrameIndex\tGLR1\tZ\t0\t32\n\n\n\t//Sprint\n\n\tFrameIndex\tGLAN\tS\t0\t2\n\n//Zoom\n\n",
+  "block_name": "GrenadeLauncher",
+  "card": "cards/bd21/m79",
+  "frame": 3,
+  "how": "ready GLANA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/M79/M79.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Machinegun": {
+  "block": " \n   Path \"Models/Weapons/Hud/Machinegun\"\n   Model 0 \"Machinegun.md3\"\n   Skin 0 \"Machinegun.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\t//Ready\n\t\n\tFrameIndex\tMGS1\tA\t0\t0\n\tFrameIndex\tMGS1\tB\t0\t1\n\tFrameIndex\tMGS1\tC\t0\t2\n\tFrameIndex\tMGS1\tD\t0\t3\n\n\t//Aim and Fire\n\t\n\tFrameIndex\tMGN1\tA\t0\t4\n\tFrameIndex\tMGN1\tB\t0\t5\n\tFrameIndex\tMGN1\tK\t0\t6\n\tFrameIndex\tMGN1\tC\t0\t7\n\tFrameIndex\tMGN1\tD\t0\t8\n\tFrameIndex\tMGN1\tE\t0\t9\n\tFrameIndex\tMGN1\tF\t0\t10\n\n\t//Alt-Fire\n\t\n\tFrameIndex\tMGN2\tA\t0\t11\n\tFrameIndex\tMGN2\tB\t0\t12\n\tFrameIndex\tMGN2\tC\t0\t13\n\tFrameIndex\tMGN2\tD\t0\t14\n\tFrameIndex\tMGN2\tE\t0\t15\n\tFrameIndex\tMGN2\tF\t0\t16\n\tFrameIndex\tMGN2\tG\t0\t17\n\t\n\t//Reload Alt\n\t\n\tFrameIndex\tMGN2\tH\t0\t18\n\tFrameIndex\tMGN2\tI\t0\t19\n\tFrameIndex\tMGN2\tJ\t0\t20\n\tFrameIndex\tMGN2\tK\t0\t21\n\tFrameIndex\tMGN2\tL\t0\t22\n\tFrameIndex\tMGN2\tM\t0\t23\n\tFrameIndex\tMGN2\tN\t0\t24\n\tFrameIndex\tMGN2\tO\t0\t25\n\tFrameIndex\tMGN2\tP\t0\t26\n\tFrameIndex\tMGN2\tQ\t0\t27\n\tFrameIndex\tMGN2\tR\t0\t28\n\tFrameIndex\tMGN2\tS\t0\t29\n\tFrameIndex\tMGN2\tT\t0\t30\n\tFrameIndex\tMGN2\tU\t0\t31\n\tFrameIndex\tMGN2\tV\t0\t32\n\tFrameIndex\tMGN2\tW\t0\t33\n\tFrameIndex\tMGN2\tX\t0\t34\n\tFrameIndex\tMGN2\tY\t0\t35\n\n\n\t//Sprint\n\t\n\tFrameIndex MGN1\t\tS\t0 \t3\n\n",
+  "block_name": "Machinegun",
+  "card": "cards/bd21/machinegun",
+  "frame": 4,
+  "how": "ready MGN1A",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Machinegun/Machinegun.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Minigun": {
+  "block": " \n   Path \"Models/Weapons/Hud/Minigun\"\n   Model 0 \"Minigun.md3\"\n   Skin 0 \"Minigun.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\t//Ready\n\n\tFrameIndex\tCHGS\tA\t0\t0\n\tFrameIndex\tCHGS\tB\t0\t1\n\tFrameIndex\tCHGS\tC\t0\t2\n\tFrameIndex\tCHGS\tD\t0\t3\n\n\t\n\t//Aim and Fire\n\t\n\tFrameIndex\tCHAG\tA\t0\t4\n\tFrameIndex\tCHAG\tB\t0\t5\n\tFrameIndex\tCHAG\tC\t0\t6\n\tFrameIndex\tCHAG\tD\t0\t7\n\t\n\tFrameIndex\tCHAF\tA\t0\t8\n\tFrameIndex\tCHAF\tB\t0\t9\n\tFrameIndex\tCHAF\tC\t0\t10\n\tFrameIndex\tCHAF\tD\t0\t11\n\n\t//Alt-Fire\n\n\tFrameIndex\tCHAE\tA\t0\t12\n\tFrameIndex\tCHAE\tB\t0\t13\n\tFrameIndex\tCHAE\tC\t0\t14\n\tFrameIndex\tCHAE\tD\t0\t15\n\n\t//Sprint\n\t\n\tFrameIndex CHSP\t\tA\t0\t3\n\n\t//Zoom\n\n",
+  "block_name": "Minigun",
+  "card": "cards/bd21/minigun",
+  "frame": 4,
+  "how": "ready CHAGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Minigun/minigun.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Mp40": {
+  "block": " \n   Path \"Models/Weapons/Hud/MP40\"\n   Model 0 \"MP40.md3\"\n   Skin 0 \"MP40.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\t//Ready\n\n\tFrameIndex\tMP4S\tA\t0\t0\n\tFrameIndex\tMP4S\tB\t0\t1\n\n\n\t//Aim and Fire\n\n\tFrameIndex\tMP40\tA\t0\t2\n\tFrameIndex\tMP40\tB\t0\t3\n\tFrameIndex\tMP40\tC\t0\t4\n\tFrameIndex\tMP40\tD\t0\t5\n\tFrameIndex\tMP40\tE\t0\t6\n\n\t//Reload\n\n\tFrameIndex\tMP4R\tA\t0\t7\n\tFrameIndex\tMP4R\tB\t0\t8\n\tFrameIndex\tMP4R\tC\t0\t9\n\tFrameIndex\tMP4R\tD\t0\t10\n\tFrameIndex\tMP4R\tE\t0\t11\n\tFrameIndex\tMP4R\tF\t0\t12\n\tFrameIndex\tMP4R\tG\t0\t13\n\n\n\t//Sprint\n\n\tFrameIndex\tM40s\tA\t0\t1\n\n\t//Zoom\n\t\n\tFrameIndex\tMP4D\tA\t0\t2\n\tFrameIndex\tMP4D\tB\t0\t2\n\tFrameIndex\tMP4D\tC\t0\t2\n\t\n\tFrameIndex\tMP41\tA\t0\t2\n\tFrameIndex\tMP41\tB\t0\t2\n\tFrameIndex\tMP41\tC\t0\t2\n\tFrameIndex\tMP41\tD\t0\t3\n\tFrameIndex\tMP41\tE\t0\t3\n\tFrameIndex\tMP41\tF\t0\t4\n\tFrameIndex\tMP41\tG\t0\t5\n\tFrameIndex\tMP41\tH\t0\t6\n\tFrameIndex\tMP41\tI\t0\t6\n\n",
+  "block_name": "MP40",
+  "card": "cards/bd21/mp40",
+  "frame": 2,
+  "how": "ready MP40A",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/MP40/MP40.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Pistol": {
+  "block": " \n   Path \"Models/Weapons/Hud/BrutalPistol\"\n   Model 0 \"BrutalPistol.md3\"\n   Skin 0 \"BrutalPistol.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 -4.0 0.0\n   ZOffset -5\n\tNoInterpolation\n   \n\n   \n\t//Ready weapon\n\t\nFrameIndex\tPISS\tA\t0\t0\nFrameIndex\tPISS\tB\t0\t1\n\n\t//Aim and Fire\n\t\n\n\tFrameIndex\tPIST\tF\t0\t2\n\tFrameIndex\tPIST\tA\t0\t3\n\tFrameIndex\tPIST\tB\t0\t4\n\tFrameIndex\tPIST\tC\t0\t5\n\tFrameIndex\tPIST\tD\t0\t6\n\tFrameIndex\tPIST\tE\t0\t7\n\n\t//Reload\n\t\n\tFrameIndex\tPISR\tA\t0\t8\n\tFrameIndex\tPISR\tB\t0\t9\n\tFrameIndex\tPISR\tC\t0\t10\n\tFrameIndex\tPISR\tD\t0\t11\n\tFrameIndex\tPISR\tE\t0\t12\n\tFrameIndex\tPISR\tF\t0\t13\n\tFrameIndex\tPISR\tG\t0\t14\n\tFrameIndex\tPISR\tH\t0\t15\n\tFrameIndex\tPISR\tI\t0\t16\n\tFrameIndex\tPISR\tJ\t0\t17\n\tFrameIndex\tPISR\tK\t0\t18\n\tFrameIndex\tPISR\tL\t0\t19\n\tFrameIndex\tPISR\tM\t0\t20\n\tFrameIndex\tPISR\tN\t0\t21\n\tFrameIndex\tPISR\tO\t0\t22\n\tFrameIndex\tPISR\tP\t0\t23\n\tFrameIndex\tPISR\tQ\t0\t24\n\tFrameIndex\tPISR\tR\t0\t25\n\t\n\t\n\t//Sprint\n\t\n\tFrameIndex\tPISP\tA\t0\t27\n\t\n\t\n\t//Pistol Whip\n\t\n\tFrameIndex\tPISA\tA\t0\t28\n\tFrameIndex\tPISA\tB\t0\t29\n\tFrameIndex\tPISA\tC\t0\t30\n\tFrameIndex\tPISA\tD\t0\t31\n\tFrameIndex\tPISA\tE\t0\t32\n\tFrameIndex\tPISA\tF\t0\t33\n\tFrameIndex\tPISA\tG\t0\t34\n\tFrameIndex\tPISA\tH\t0\t35\n\tFrameIndex\tPISA\tI\t0\t36\n\tFrameIndex\tPISA\tJ\t0\t37\n\t\n",
+  "block_name": "BrutalPistol",
+  "card": "cards/bd21/pistol",
+  "frame": 2,
+  "how": "ready PISTF",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/BrutalPistol/BrutalPistol.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Plasma": {
+  "block": " \n   Path \"Models/Weapons/Hud/Plasma_Gun\"\n   Model 0 \"Plasma.md3\"\n   Skin 0 \"Plasma.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\t//Ready\n\t\n\tFrameIndex\tPLS9\tA\t0\t0\n\tFrameIndex\tPLS9\tB\t0\t1\n\tFrameIndex\tPLS9\tC\t0\t2\n\tFrameIndex\tPLS9\tD\t0\t3\n\n\n\t//Aim and Fire\n\t\n\tFrameIndex\tPLSN\tA\t0\t4\n\tFrameIndex\tPLST\tA\t0\t5\n\tFrameIndex\tPLST\tB\t0\t6\n\tFrameIndex\tPLST\tC\t0\t7\n\tFrameIndex\tPLST\tD\t0\t8\n\t\t\n\t//Alt-Fire recoil\n\n\tFrameIndex\tPLSN\tB\t0\t9\n\tFrameIndex\tPLSN\tC\t0\t10\n\tFrameIndex\tPLSN\tD\t0\t11\n\tFrameIndex\tPLSN\tE\t0\t12\n\t\n\tFrameIndex\tPLSN\tF\t0\t13\n\tFrameIndex\tPLSN\tG\t0\t14\n\t\n\tFrameIndex\tPLSN\tJ\t0\t15\n\tFrameIndex\tPLSN\tK\t0\t16\n\tFrameIndex\tPLSN\tL\t0\t17\n\n\n\t//Reload\n\t\n\tFrameIndex\tPLSR\tA\t0\t18\n\tFrameIndex\tPLSR\tB\t0\t19\n\tFrameIndex\tPLSR\tC\t0\t20\n\tFrameIndex\tPLSR\tD\t0\t21\n\tFrameIndex\tPLSR\tE\t0\t22\n\tFrameIndex\tPLSR\tF\t0\t23\n\tFrameIndex\tPLSR\tG\t0\t24\n\tFrameIndex\tPLSR\tH\t0\t25\n\tFrameIndex\tPLSR\tI\t0\t26\n\tFrameIndex\tPLSR\tJ\t0\t27\n\tFrameIndex\tPLSR\tK\t0\t28\n\tFrameIndex\tPLSR\tL\t0\t29\n\n\n\t//Sprint\n\t\n\tFrameIndex\tPLSP\tA\t0\t3\n\t\n",
+  "block_name": "Plasma_Gun",
+  "card": "cards/bd21/plasma",
+  "frame": 4,
+  "how": "ready PLSNA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Plasma_Gun/Plasma.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Railgun": {
+  "block": " \n   Path \"Models/Weapons/Hud/RailGun\"\n   Model 0 \"RailGun.md3\"\n   Skin 0 \"RailGun.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\t//Ready\n\n\tFrameIndex\tRAIS\tA\t0\t0\n\tFrameIndex\tRAIS\tB\t0\t1\n\tFrameIndex\tRAIS\tC\t0\t2\n\n\n//Aim and Fire\n\n\tFrameIndex\tRAIL\tD\t0\t3\n\t\n\tFrameIndex\tRAIF\tA\t0\t4\n\tFrameIndex\tRAIF\tB\t0\t5\n\tFrameIndex\tRAIF\tC\t0\t6\n\tFrameIndex\tRAIF\tD\t0\t7\n\tFrameIndex\tRAIF\tE\t0\t8\n\tFrameIndex\tRAIF\tF\t0\t9\n\tFrameIndex\tRAIF\tG\t0\t10\n\n\n\t//Reload\n\n\tFrameIndex\tRAIR\tA\t0\t11\n\tFrameIndex\tRAIR\tB\t0\t12\n\tFrameIndex\tRAIR\tC\t0\t13\n\tFrameIndex\tRAIR\tD\t0\t14\n\tFrameIndex\tRAIR\tE\t0\t15\n\tFrameIndex\tRAIR\tF\t0\t16\n\t\n\tFrameIndex\tRAIR\tG\t0\t17\n\tFrameIndex\tRAIR\tH\t0\t18\n\tFrameIndex\tRAIR\tI\t0\t19\n\tFrameIndex\tRAIR\tJ\t0\t20\n\tFrameIndex\tRAIR\tK\t0\t21\n\tFrameIndex\tRAIR\tL\t0\t22\n\tFrameIndex\tRAIR\tM\t0\t23\n\tFrameIndex\tRAIR\tN\t0\t24\n\tFrameIndex\tRAIR\tO\t0\t25\n\tFrameIndex\tRAIR\tP\t0\t26\n\tFrameIndex\tRAIR\tQ\t0\t27\n\tFrameIndex\tRAIR\tR\t0\t28\n\tFrameIndex\tRAIR\tS\t0\t29\n\tFrameIndex\tRAIR\tT\t0\t30\n\tFrameIndex\tRAIR\tU\t0\t31\n\tFrameIndex\tRAIR\tV\t0\t32\n\tFrameIndex\tRAIR\tW\t0\t33\n\tFrameIndex\tRAIR\tX\t0\t34\n\n\n\t//Sprint\n\n\tFrameIndex\tRAIL\tA\t0\t2\n\tFrameIndex\tRAIL\tB\t0\t2\n\tFrameIndex\tRAIL\tC\t0\t2\n\n//Zoom\n\n\tFrameIndex\tRAIZ\tA\t0\t3\n\tFrameIndex\tRAIZ\tB\t0\t36\n\t\n\n",
+  "block_name": "RailGun",
+  "card": "cards/bd21/railgun",
+  "frame": 2,
+  "how": "ready RAILA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/RailGun/RailGun.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Revolver": {
+  "block": " \n   Path \"Models/Weapons/Hud/Revolver\"\n   Model 0 \"Revolver.md3\"\n   Skin 0 \"Revolver.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\n\n//Aim and Fire\n\nFrameIndex\tREVO\tA\t0\t0\nFrameIndex\tREVO\tB\t0\t1\nFrameIndex\tREVO\tC\t0\t2\nFrameIndex\tREVO\tD\t0\t3\nFrameIndex\tREVO\tE\t0\t4\nFrameIndex\tREVO\tF\t0\t5\nFrameIndex\tREVO\tG\t0\t6\nFrameIndex\tREVO\tH\t0\t7\nFrameIndex\tREVO\tI\t0\t8\nFrameIndex\tREVO\tJ\t0\t9\nFrameIndex\tREVO\tK\t0\t10\nFrameIndex\tREVO\tL\t0\t11\nFrameIndex\tREVO\tM\t0\t12\nFrameIndex\tREVO\tN\t0\t13\nFrameIndex\tREVO\tO\t0\t14\nFrameIndex\tREVO\tP\t0\t15\nFrameIndex\tREVO\tQ\t0\t16\nFrameIndex\tREVO\tR\t0\t17\n\t\n//Reload\n\nFrameIndex\tREVR\tA\t0\t18\nFrameIndex\tREVR\tB\t0\t19\nFrameIndex\tREVR\tC\t0\t20\nFrameIndex\tREVR\tD\t0\t21\nFrameIndex\tREVR\tE\t0\t22\nFrameIndex\tREVR\tF\t0\t23\nFrameIndex\tREVR\tG\t0\t24\nFrameIndex\tREVR\tH\t0\t25\nFrameIndex\tREVR\tI\t0\t26\nFrameIndex\tREVR\tJ\t0\t27\nFrameIndex\tREVR\tK\t0\t28\nFrameIndex\tREVR\tL\t0\t29\nFrameIndex\tREVR\tM\t0\t30\n\n\n//Sprint\n\nFrameIndex\tREVP\tB\t0\t32\n\n",
+  "block_name": "Revolver",
+  "card": "cards/bd21/revolver",
+  "frame": 0,
+  "how": "ready REVOA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Revolver/Revolver.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Rifle": {
+  "block": " \n   Path \"Models/Weapons/Hud/Rifle\"\n   Model 0 \"Rifle.md3\"\n   Skin 0 \"Rifle.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\tNoInterpolation\n   \n\t//Ready weapon\n\t\n\tFrameIndex RIFS A 0 0\n\tFrameIndex RIFS B 0 1\n\tFrameIndex RIFS C 0 2\n\t\n\n\n\t//Aim and Firing\n\t\n   FrameIndex RIFG A 0 3\n   FrameIndex RIFF A 0 4\n   FrameIndex RIFF B 0 5\n   FrameIndex RIFF C 0 6\n   \n   \n   //Reload\n   \n   \n   FrameIndex RIFR A 0 7\n   FrameIndex RIFR B 0 8\n   FrameIndex RIFR C 0 9\n   FrameIndex RIFR D 0 10\n   FrameIndex RIFR E 0 11\n   FrameIndex RIFR F 0 12\n   FrameIndex RIFR G 0 13\n   FrameIndex RIFR H 0 14\n   FrameIndex RIFR I 0 15\n   FrameIndex RIFR J 0 16\n   FrameIndex RIFR K 0 17\n   FrameIndex RIFR L 0 18\n   FrameIndex RIFR M 0 19\n   FrameIndex RIFR N 0 20\n   FrameIndex RIFR O 0 21\n   FrameIndex RIFR P 0 22\n   FrameIndex RIFR Q 0 23\n   FrameIndex RIFR R 0 24\n   FrameIndex RIFR S 0 25\n   FrameIndex RIFR T 0 26\n   \n   //Zoom\n   \n   FrameIndex RIFZ A 0 27\n   FrameIndex RIFZ B 0 28\n   FrameIndex RIFZ C 0 29\n   \n   //Zoom Aim and Fire\n   \n   FrameIndex RI2G A 0 3\n   FrameIndex RI2F A 0 4\n   FrameIndex RI2F B 0 5\n   FrameIndex RI2F C 0 6\n   \n   //Sprint\n   \n   FrameIndex RISP A 0 30\n   FrameIndex RISP B 0 31\n   \n   //Start / Right reload\n   \n   FrameIndex R2RL A 0 21\n   FrameIndex R2RL B 0 22\n   FrameIndex R2RL C 0 23\n   FrameIndex R2RL D 0 24\n   FrameIndex R2RL E 0 25   \n   \n",
+  "block_name": "Rifle",
+  "card": "cards/bd21/rifle",
+  "frame": 3,
+  "how": "ready RIFGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Rifle/Rifle.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Rpg": {
+  "block": " \n   Path \"Models/Weapons/Hud/RPG\"\n   Model 0 \"RPG.md3\"\n   Skin 0 \"RPG.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   NoInterpolation\n   ZOffset -5\n\n\t//Ready\n\t\n\tFrameIndex\tMISS\tA\t0\t0\n\tFrameIndex\tMISS\tB\t0\t1\n\tFrameIndex\tMISS\tC\t0\t2\n\tFrameIndex\tMISS\tD\t0\t3\n\tFrameIndex\tMISS\tE\t0\t4\n\n\n\t//Aim and Barrel Roll\n\t\n\tFrameIndex\tRLNG\tA\t0\t5\n\tFrameIndex\tRLNG\tB\t0\t6\n\tFrameIndex\tRLNG\tC\t0\t7\n\tFrameIndex\tRLNG\tD\t0\t8\n\t\n\t//Fire\n\n\tFrameIndex\tRLNF\tA\t0\t9\n\tFrameIndex\tRLNF\tB\t0\t10\n\tFrameIndex\tRLNF\tC\t0\t11\n\tFrameIndex\tRLNF\tD\t0\t12\n\tFrameIndex\tRLNF\tE\t0\t13\n\tFrameIndex\tRLNF\tF\t0\t14\n\tFrameIndex\tRLNF\tG\t0\t15\n\tFrameIndex\tRLNF\tH\t0\t16\n\t\n\t//Reload\n\t\n\tFrameIndex\tMISR\tA\t0\t17\n\tFrameIndex\tMISR\tB\t0\t18\n\tFrameIndex\tMISR\tC\t0\t19\n\tFrameIndex\tMISR\tD\t0\t20\n\tFrameIndex\tMISR\tE\t0\t21\n\tFrameIndex\tMISR\tF\t0\t22\n\tFrameIndex\tMISR\tG\t0\t23\n\tFrameIndex\tMISR\tH\t0\t24\n\tFrameIndex\tMISR\tI\t0\t25\n\tFrameIndex\tMISR\tJ\t0\t26\n\tFrameIndex\tMISR\tK\t0\t27\n\tFrameIndex\tMISR\tL\t0\t28\n\tFrameIndex\tMISR\tM\t0\t29\n\tFrameIndex\tMISR\tN\t0\t30\n\tFrameIndex\tMISR\tO\t0\t31\n\tFrameIndex\tMISR\tP\t0\t32\n\tFrameIndex\tMISR\tQ\t0\t33\n\tFrameIndex\tMISR\tR\t0\t34\n\n\n\t//Sprint\n\t\n\tFrameIndex\tMISP\tA\t0\t3\n\n\t//Zoom\n\t\n\tFrameIndex\tMIAI\tA\t0\t35\n\tFrameIndex\tMIAI\tB\t0\t36\n\tFrameIndex\tMIAI\tC\t0\t37\n\tFrameIndex\tMIAI\tD\t0\t38\n\tFrameIndex\tMIAI\tE\t0\t39\n\n\n",
+  "block_name": "Rocket_Launcher",
+  "card": "cards/bd21/rpg",
+  "frame": 5,
+  "how": "ready RLNGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/RPG/RPG.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Shotgun": {
+  "block": " \n   Path \"Models/Weapons/Hud/ShotGun\"\n   Model 0 \"Shotgun.md3\"\n   Skin 0 \"Shotgun.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\tNoInterpolation\n\t\n\t//Ready\n\n\tFrameIndex\tSHSS\tA\t0\t0\n\tFrameIndex\tSHSS\tB\t0\t1\n\tFrameIndex\tSHSS\tC\t0\t2\n\tFrameIndex\tSHSS\tD\t0\t3\n\n\n\n\n\t//Aim and Fire\n\n\tFrameIndex\tSHTN\tA\t0\t4\n\tFrameIndex\tSHTA\tA\t0\t4\n\tFrameIndex\tSHTA\tB\t0\t5\n\tFrameIndex\tSHTA\tC\t0\t6\n\tFrameIndex\tSHTA\tD\t0\t7\n\tFrameIndex\tSHTA\tE\t0\t8\n\n\t//Pump\n\t\n\tFrameIndex\tSHTN\tB\t0\t9\n\tFrameIndex\tSHTN\tC\t0\t10\n\tFrameIndex\tSHTN\tD\t0\t11\n\tFrameIndex\tSHTN\tE\t0\t12\n\tFrameIndex\tSHTN\tF\t0\t13\n\tFrameIndex\tSHTN\tG\t0\t14\n\tFrameIndex\tSHTN\tH\t0\t15\n\tFrameIndex\tSHTN\tI\t0\t16\n\tFrameIndex\tSHTN\tJ\t0\t17\n\tFrameIndex\tSHTN\tK\t0\t18\n\tFrameIndex\tSHTN\tL\t0\t19\n\tFrameIndex\tSHTN\tM\t0\t20\n\tFrameIndex\tSHTN\tN\t0\t21\n\tFrameIndex\tSHTN\tO\t0\t22\n\n\n\t//Reload\n\n\tFrameIndex\tSSHR\tA\t0\t23\n\tFrameIndex\tSSHR\tB\t0\t24\n\tFrameIndex\tSSHR\tC\t0\t25\n\tFrameIndex\tSSHR\tD\t0\t26\n\tFrameIndex\tSSHR\tE\t0\t27\n\tFrameIndex\tSSHR\tF\t0\t28\n\tFrameIndex\tSSHR\tG\t0\t29\n\tFrameIndex\tSSHR\tH\t0\t30\n\tFrameIndex\tSSHR\tI\t0\t31\n\n\n\t//Sprint\n\n\tFrameIndex\tSTRN\tA\t0\t3\n\n\n\t//Zoom\n\n\tFrameIndex\tSHT8\tA\t0\t4\n\tFrameIndex\tSHT8\tD\t0\t4\n\tFrameIndex\tSHT8\tE\t0\t4\n\tFrameIndex\tSHT8\tF\t0\t5\n\tFrameIndex\tSHT8\tG\t0\t6\n\tFrameIndex\tSHT8\tH\t0\t8\n\tFrameIndex\tSHT8\tI\t0\t32\n\tFrameIndex\tSHT8\tJ\t0\t33\n\tFrameIndex\tSHT8\tK\t0\t34\n\tFrameIndex\tSHT8\tL\t0\t35\n\n\n",
+  "block_name": "Shot_Gun",
+  "card": "cards/bd21/shotgun",
+  "frame": 4,
+  "how": "ready SHTNA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Shotgun/Shotgun.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Smg": {
+  "block": " \n   Path \"Models/Weapons/Hud/BrutalSMG\"\n   Model 0 \"BrutalSMG.md3\"\n   Skin 0 \"BrutalSMG.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\tNoInterpolation\n\t\n   //Ready\n   \n\tFrameIndex\tSMGS\tA\t0\t0\n\tFrameIndex\tSMGS\tB\t0\t1\n\tFrameIndex\tSMGS\tC\t0\t2\n   \n   \n   //Aim and Fire\n\n\tFrameIndex  SMGG\tA\t0\t3 \n\tFrameIndex\tSMGF\tA\t0\t4\n\tFrameIndex\tSMGF\tB\t0\t5\n\tFrameIndex\tSMGF\tC\t0\t6\n\t\n\t//Reload\n\t\n\tFrameIndex\tSMGR\tA\t0\t7\n\tFrameIndex\tSMGR\tB\t0\t8\n\tFrameIndex\tSMGR\tC\t0\t9\n\tFrameIndex\tSMGR\tD\t0\t10\n\tFrameIndex\tSMGR\tE\t0\t11\n\tFrameIndex\tSMGR\tF\t0\t12\n\tFrameIndex\tSMGR\tG\t0\t13\n\tFrameIndex\tSMGR\tH\t0\t14\n\tFrameIndex\tSMGR\tI\t0\t15\n\tFrameIndex\tSMGR\tJ\t0\t16\n\tFrameIndex\tSMGR\tK\t0\t17\n\tFrameIndex\tSMGR\tL\t0\t18\n\tFrameIndex\tSMGR\tM\t0\t19\n\tFrameIndex\tSMGR\tN\t0\t20\n\tFrameIndex\tSMGR\tO\t0\t21\n\tFrameIndex\tSMGR\tP\t0\t22\n\tFrameIndex\tSMGR\tQ\t0\t23\n\tFrameIndex\tSMGR\tR\t0\t24\n\tFrameIndex\tSMGR\tS\t0\t25\n\tFrameIndex\tSMGR\tT\t0\t26\n\n\t//Sprint\n\t\n\tFrameIndex\tSMSP\tA\t0\t2\t\n\t\n\t//Zoom\n\t\n\tFrameIndex\tSMGA\tA\t0\t3\n\tFrameIndex\tSMGA\tB\t0\t4\n\tFrameIndex\tSMGA\tC\t0\t5\n\tFrameIndex\tSMGA\tD\t0\t6\n\tFrameIndex\tSMGA\tE\t0\t3\n\tFrameIndex\tSMGA\tF\t0\t2\n\n",
+  "block_name": "BrutalSMG",
+  "card": "cards/bd21/smg",
+  "frame": 3,
+  "how": "ready SMGGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/BrutalSMG/BrutalSMG.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Ssg": {
+  "block": " \n   Path \"Models/Weapons/Hud/SSG\"\n   Model 0 \"SSG.md3\"\n   Skin 0 \"ssg.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\tNoInterpolation\n\t\n\t//Ready\n\t\n\tFrameIndex\tSHT5\tA\t0\t47\n\tFrameIndex\tSHT5\tB\t0\t48\n\tFrameIndex\tSHT5\tC\t0\t49\n\tFrameIndex\tSHT5\tD\t0\t50\n\tFrameIndex\tSHT5\tE\t0\t51\n\n\n\t//Aim and Fire\n\n\tFrameIndex\tSHTZ\tA\t0\t1\n\tFrameIndex\tSHOF\tA\t0\t2\n\tFrameIndex\tSHOF\tB\t0\t3\n\tFrameIndex\tSHOF\tC\t0\t4\n\tFrameIndex\tSHOF\tD\t0\t5\n\tFrameIndex\tSHOF\tE\t0\t6\n\tFrameIndex\tSHOF\tF\t0\t7\n\tFrameIndex\tSHOF\tG\t0\t8\n\tFrameIndex\tSHOF\tH\t0\t9\n\tFrameIndex\tSHOF\tI\t0\t10\n\n\t//Indivisual Barrels\n\t\n\tFrameIndex\tSHTU\tA\t0\t11\n\tFrameIndex\tSHTU\tB\t0\t12\n\n\t//Reload\n\n\tFrameIndex\tSHTZ\tB\t0\t13\n\tFrameIndex\tSHTZ\tC\t0\t14\n\tFrameIndex\tSHTZ\tD\t0\t15\n\tFrameIndex\tSHTZ\tE\t0\t16\n\tFrameIndex\tSHTZ\tF\t0\t17\n\tFrameIndex\tSHTZ\tG\t0\t18\n\tFrameIndex\tSHTZ\tH\t0\t19\n\tFrameIndex\tSHTZ\tI\t0\t20\n\tFrameIndex\tSHTZ\tJ\t0\t21\n\tFrameIndex\tSHTZ\tK\t0\t22\n\tFrameIndex\tSHTZ\tL\t0\t23\n\tFrameIndex\tSHTZ\tM\t0\t24\n\tFrameIndex\tSHTZ\tN\t0\t25\n\tFrameIndex\tSHTZ\tO\t0\t26\n\tFrameIndex\tSHTZ\tP\t0\t27\n\tFrameIndex\tSHTZ\tQ\t0\t28\n\tFrameIndex\tSHTZ\tR\t0\t29\n\tFrameIndex\tSHTZ\tS\t0\t30\n\tFrameIndex\tSHTZ\tT\t0\t31\n\tFrameIndex\tSHTZ\tU\t0\t32\n\tFrameIndex\tSHTZ\tV\t0\t33\n\tFrameIndex\tSHTZ\tW\t0\t34\n\tFrameIndex\tSHTZ\tX\t0\t35\n\tFrameIndex\tSHTZ\tY\t0\t36\n\tFrameIndex\tSHTZ\tZ\t0\t37\n\n\t//Reload One barrel\n\t\n\tFrameIndex\tSHT7\tL\t0\t38\n\tFrameIndex\tSHT7\tM\t0\t39\n\tFrameIndex\tSHT7\tN\t0\t40\n\tFrameIndex\tSHT7\tO\t0\t41\n\tFrameIndex\tSHT7\tP\t0\t42\n\n\t//RaiseReload\n\t\n\tFrameIndex\tSHO9\tD\t0\t43\n\tFrameIndex\tSHO9\tE\t0\t44\n\tFrameIndex\tSHO9\tF\t0\t45\n\tFrameIndex\tSHO9\tG\t0\t46\n\n\t\n\t//Sprint\n\t\n\tFrameIndex SSRU\t\tA\t0\t0\n\n\t//Zoom\n\n",
+  "block_name": "SSG",
+  "card": "cards/bd21/ssg",
+  "frame": 1,
+  "how": "ready SHTZA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/SSG/ssg.md3",
+  "srcfile_abs": null
+ },
+ "MS_BD_Unmaker": {
+  "block": " \n   Path \"Models/Weapons/Hud/Unmaker\"\n   Model 0 \"Unmaker.md3\"\n   Skin 0 \"Unmaker.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\n\n\n//Aim and Idle\n\n\tFrameIndex\tUNHG\tA\t0\t0\n\tFrameIndex\tUNHG\tB\t0\t1\n\tFrameIndex\tUNHG\tC\t0\t2\n\tFrameIndex\tUNHG\tD\t0\t3\n\t\n//ready weapon\n\t\n\tFrameIndex\tUNHS\tA\t0\t4\n\tFrameIndex\tUNHS\tB\t0\t5\n\tFrameIndex\tUNHS\tC\t0\t6\n\tFrameIndex\tUNHS\tD\t0\t7\n\t\n\t\n//Firing\n\t\n\tFrameIndex\tUNHF\tA\t0\t8\n\tFrameIndex\tUNHF\tB\t0\t9\n\tFrameIndex\tUNHF\tC\t0\t10\n\tFrameIndex\tUNHF\tD\t0\t11\n\tFrameIndex\tUNHF\tE\t0\t12\n\tFrameIndex\tUNHF\tF\t0\t13\n\tFrameIndex\tUNHF\tG\t0\t14\n\tFrameIndex\tUNHF\tH\t0\t15\n\n\t\n\n\n\n\n\n//Sprint\n\n//Zoom\n\n",
+  "block_name": "Unmaker",
+  "card": "cards/bd21/unmaker",
+  "frame": 0,
+  "how": "ready UNHGA",
+  "srcfile": "br_vr/PK3_pbr/Models/Weapons/Hud/Unmaker/Unmaker.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_1911": {
+  "block": " \n   Path \"Models/1911/\"\n   Model 0 \"1911.md3\"\n   Skin 0 \"1911.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\t1911\tA\t0\t0\n\nFrameIndex\t1911\tB\t0\t1\nFrameIndex\t1911\tC\t0\t2\nFrameIndex\t1911\tD\t0\t3\nFrameIndex\t1911\tE\t0\t4\n\nFrameIndex\t1911\tF\t0\t5\nFrameIndex\t1911\tG\t0\t6\nFrameIndex\t1911\tH\t0\t7\nFrameIndex\t1911\tI\t0\t8\nFrameIndex\t1911\tJ\t0\t9\n\n",
+  "block_name": "Colt",
+  "card": "cards/brutalwolf/1911",
+  "frame": 0,
+  "how": "ready 1911A",
+  "srcfile": "BrutalWolf/Models/1911/1911.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Axe": {
+  "block": " \n   Path \"Models/Axe/\"\n   Model 0 \"Axe.md3\"\n   Skin 0 \"Axe.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tVAXE\tA\t0\t0\n\nFrameIndex\tVAXE\tB\t0\t1\nFrameIndex\tVAXE\tC\t0\t2\nFrameIndex\tVAXE\tD\t0\t3\nFrameIndex\tVAXE\tE\t0\t4\nFrameIndex\tVAXE\tF\t0\t5\n\nFrameIndex\tVAXE\tG\t0\t6\nFrameIndex\tVAXE\tH\t0\t7\nFrameIndex\tVAXE\tI\t0\t8\nFrameIndex\tVAXE\tJ\t0\t9\nFrameIndex\tVAXE\tK\t0\t10\n\n",
+  "block_name": "Colt",
+  "card": "cards/brutalwolf/axe",
+  "frame": null,
+  "how": "Ready frame not in block Colt",
+  "srcfile": "BrutalWolf/Models/Axe/Axe.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Bar": {
+  "block": " \n   Path \"Models/BAR/\"\n   Model 0 \"BAR.md3\"\n   Skin 0 \"BAR.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tBARH\tA\t0\t0\n\nFrameIndex\tBARH\tB\t0\t1\nFrameIndex\tBARH\tC\t0\t2\nFrameIndex\tBARH\tD\t0\t3\nFrameIndex\tBARH\tE\t0\t4\n\nFrameIndex\tBARH\tF\t0\t5\nFrameIndex\tBARH\tG\t0\t6\nFrameIndex\tBARH\tH\t0\t7\nFrameIndex\tBARH\tI\t0\t8\nFrameIndex\tBARH\tJ\t0\t9\n\n",
+  "block_name": "BWBar",
+  "card": "cards/brutalwolf/bar",
+  "frame": 0,
+  "how": "ready BARHA",
+  "srcfile": "BrutalWolf/Models/BAR/bar.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Chaingun": {
+  "block": " \n   Path \"Models/Chaingun/\"\n   Model 0 \"Chaingun.md3\"\n   Skin 0 \"Chaingun.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tBWCG\tA\t0\t0\nFrameIndex\tBWCG\tB\t0\t1\nFrameIndex\tBWCG\tC\t0\t2\n\nFrameIndex\tBWCG\tD\t0\t3\nFrameIndex\tBWCG\tE\t0\t4\nFrameIndex\tBWCG\tF\t0\t5\n\nFrameIndex\tBWCR\tA\t0\t6\nFrameIndex\tBWCR\tB\t0\t7\nFrameIndex\tBWCR\tC\t0\t8\nFrameIndex\tBWCR\tD\t0\t9\nFrameIndex\tBWCR\tE\t0\t10\nFrameIndex\tBWCR\tF\t0\t11\nFrameIndex\tBWCR\tG\t0\t12\nFrameIndex\tBWCR\tH\t0\t13\nFrameIndex\tBWCR\tI\t0\t14\nFrameIndex\tBWCR\tJ\t0\t15\n\nFrameIndex\tBWCS\tA\t0\t16\n",
+  "block_name": "BWGatling",
+  "card": "cards/brutalwolf/chaingun",
+  "frame": 16,
+  "how": "ready BWCSA",
+  "srcfile": "BrutalWolf/Models/Chaingun/Chaingun.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Flame": {
+  "block": " \n   Path \"Models/Flame/\"\n   Model 0 \"Flame.md3\"\n   Skin 0 \"Flame.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tFLMG\tA\t0\t0\nFrameIndex\tFLMG\tB\t0\t1\nFrameIndex\tFLMG\tC\t0\t2\n\n//Brillian hack to ask same frames, so i don't have to do so much work!\n//TODO: make some flame animations.\n\nFrameIndex\tFLMF\tA\t0\t3\nFrameIndex\tFLMF\tB\t0\t4\nFrameIndex\tFLMF\tC\t0\t5\nFrameIndex\tFLMF\tD\t0\t6\nFrameIndex\tFLMF\tE\t0\t7\nFrameIndex\tFLMF\tF\t0\t8\nFrameIndex\tFLMF\tG\t0\t9\n\nFrameIndex\tFLM1\tA\t0\t3\nFrameIndex\tFLM1\tB\t0\t4\nFrameIndex\tFLM1\tC\t0\t5\nFrameIndex\tFLM1\tD\t0\t6\nFrameIndex\tFLM1\tE\t0\t7\nFrameIndex\tFLM1\tF\t0\t8\nFrameIndex\tFLM1\tG\t0\t9\n\nFrameIndex\tFLM2\tA\t0\t3\nFrameIndex\tFLM2\tB\t0\t4\nFrameIndex\tFLM2\tC\t0\t5\nFrameIndex\tFLM2\tD\t0\t6\nFrameIndex\tFLM2\tE\t0\t7\nFrameIndex\tFLM2\tF\t0\t8\nFrameIndex\tFLM2\tG\t0\t9\n",
+  "block_name": "Flamethrower_BW",
+  "card": "cards/brutalwolf/flame",
+  "frame": 0,
+  "how": "ready FLMGA",
+  "srcfile": "BrutalWolf/Models/Flame/Flame.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Garand": {
+  "block": " \n   Path \"Models/Garand/\"\n   Model 0 \"Garand.md3\"\n   Skin 0 \"Garand.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tM1GG\tA\t0\t0\n\nFrameIndex\tM1GG\tB\t0\t1\nFrameIndex\tM1GG\tC\t0\t2\n\nFrameIndex\tM1GA\tD\t0\t3\nFrameIndex\tM1GA\tE\t0\t4\nFrameIndex\tM1GA\tF\t0\t5\n\nFrameIndex\tM1GR\tA\t0\t6\nFrameIndex\tM1GR\tB\t0\t7\nFrameIndex\tM1GR\tC\t0\t8\nFrameIndex\tM1GR\tD\t0\t9\nFrameIndex\tM1GR\tE\t0\t10\nFrameIndex\tM1GR\tF\t0\t11\nFrameIndex\tM1GR\tG\t0\t12\n\n\n\n",
+  "block_name": "M1GARAND",
+  "card": "cards/brutalwolf/garand",
+  "frame": 0,
+  "how": "ready M1GGA",
+  "srcfile": "BrutalWolf/Models/Garand/garand.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Grenade": {
+  "block": " \n   Path \"Models/Grenade/\"\n   Model 0 \"Grenade.md3\"\n   Skin 0 \"Grenade.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset 0\n   PITCHFROMMOMENTUM\n\n\nFrameIndex\tNADE\tA\t0\t0\n\nFrameIndex\tNADE\tB\t0\t1\nFrameIndex\tNADE\tC\t0\t2\nFrameIndex\tNADE\tD\t0\t3\nFrameIndex\tNADE\tE\t0\t4\nFrameIndex\tNADE\tF\t0\t5\n\n",
+  "block_name": "Colt",
+  "card": "cards/brutalwolf/grenade",
+  "frame": null,
+  "how": "Ready frame not in block Colt",
+  "srcfile": "BrutalWolf/Models/Grenade/Grenade.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Kar98": {
+  "block": " \n   Path \"Models/KAR98/\"\n   Model 0 \"KAR98.md3\"\n   Skin 0 \"KAR98.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tZK9G\tA\t0\t0\n\nFrameIndex\tZK9G\tB\t0\t1\nFrameIndex\tZK9G\tC\t0\t2\nFrameIndex\tZK9G\tD\t0\t3\nFrameIndex\tZK9G\tE\t0\t4\nFrameIndex\tZK9G\tF\t0\t5\nFrameIndex\tZK9G\tG\t0\t6\n\nFrameIndex\tZK9R\tA\t0\t7\nFrameIndex\tZK9R\tB\t0\t8\nFrameIndex\tZK9R\tC\t0\t9\nFrameIndex\tZK9R\tD\t0\t10\nFrameIndex\tZK9R\tE\t0\t11\n\nFrameIndex\tZK9R\tF\t0\t12\nFrameIndex\tZK9R\tG\t0\t13\nFrameIndex\tZK9R\tH\t0\t14\nFrameIndex\tZK9R\tI\t0\t15\nFrameIndex\tZK9R\tJ\t0\t16\n\nFrameIndex\tZK9R\tK\t0\t17\nFrameIndex\tZK9R\tL\t0\t18\nFrameIndex\tZK9R\tM\t0\t19\nFrameIndex\tZK9R\tN\t0\t20\nFrameIndex\tZK9R\tO\t0\t21\n\nFrameIndex\tZK9R\tP\t0\t22\nFrameIndex\tZK9R\tQ\t0\t23\nFrameIndex\tZK9R\tR\t0\t24\nFrameIndex\tZK9R\tS\t0\t25\n\n",
+  "block_name": "Karabine98",
+  "card": "cards/brutalwolf/kar98",
+  "frame": 0,
+  "how": "ready ZK9GA",
+  "srcfile": "BrutalWolf/Models/Kar98/Kar98.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Knife": {
+  "block": " \n   Path \"Models/Knife/\"\n   Model 0 \"Knife.md3\"\n   Skin 0 \"Knife.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tKNIG\tA\t0\t0\n\nFrameIndex\tKNIF\tA\t0\t1\nFrameIndex\tKNIF\tB\t0\t2\nFrameIndex\tKNIF\tC\t0\t3\nFrameIndex\tKNIF\tD\t0\t4\nFrameIndex\tKNIF\tE\t0\t5\nFrameIndex\tKNIF\tF\t0\t6\nFrameIndex\tKNIF\tG\t0\t7\nFrameIndex\tKNIF\tH\t0\t8\nFrameIndex\tKNIF\tI\t0\t9\nFrameIndex\tKNIF\tJ\t0\t10\n\n",
+  "block_name": "Colt",
+  "card": "cards/brutalwolf/knife",
+  "frame": null,
+  "how": "Ready frame not in block Colt",
+  "srcfile": "BrutalWolf/Models/Knife/Knife.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Luger": {
+  "block": " \n   Path \"Models/Luger/\"\n   Model 0 \"Luger.md3\"\n   Skin 0 \"Luger.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tLUGE\tA\t0\t0\n\nFrameIndex\tLUGE\tB\t0\t1\nFrameIndex\tLUGE\tC\t0\t2\nFrameIndex\tLUGE\tD\t0\t3\nFrameIndex\tLUGE\tE\t0\t4\nFrameIndex\tLUGE\tF\t0\t5\n\nFrameIndex\tLUGE\tG\t0\t6\nFrameIndex\tLUGE\tH\t0\t7\nFrameIndex\tLUGE\tI\t0\t8\nFrameIndex\tLUGE\tJ\t0\t9\nFrameIndex\tLUGE\tK\t0\t10\nFrameIndex\tLUGE\tL\t0\t11\n\nFrameIndex\tLUGE\tM\t0\t12\n\n",
+  "block_name": "Luger",
+  "card": "cards/brutalwolf/luger",
+  "frame": 0,
+  "how": "ready LUGEA",
+  "srcfile": "BrutalWolf/Models/Luger/luger.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Mg42": {
+  "block": " \n   Path \"Models/MG42/\"\n   Model 0 \"MG42.md3\"\n   Skin 0 \"MG42.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tZMGG\tA\t0\t0\n\nFrameIndex\tZMGG\tB\t0\t1\nFrameIndex\tZMGG\tC\t0\t2\nFrameIndex\tZMGG\tD\t0\t3\nFrameIndex\tZMGG\tE\t0\t4\n\nFrameIndex\tZMGG\tF\t0\t5\nFrameIndex\tZMGG\tG\t0\t6\nFrameIndex\tZMGG\tH\t0\t7\nFrameIndex\tZMGG\tI\t0\t8\n\nFrameIndex\tZMGG\tJ\t0\t9\nFrameIndex\tZMGG\tK\t0\t10\nFrameIndex\tZMGG\tL\t0\t11\nFrameIndex\tZMGG\tM\t0\t12\nFrameIndex\tZMGG\tN\t0\t13\nFrameIndex\tZMGG\tR\t0\t14\n",
+  "block_name": "MG42",
+  "card": "cards/brutalwolf/mg42",
+  "frame": 0,
+  "how": "ready ZMGGA",
+  "srcfile": "BrutalWolf/Models/MG42/MG42.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Mp40": {
+  "block": " \n   Path \"Models/MP40/\"\n   Model 0 \"MP40.md3\"\n   Skin 0 \"MP40.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tMP40\tA\t0\t0\n\nFrameIndex\tMP40\tB\t0\t1\nFrameIndex\tMP40\tC\t0\t2\nFrameIndex\tMP40\tD\t0\t3\nFrameIndex\tMP40\tE\t0\t4\n\nFrameIndex\tMP40\tF\t0\t5\nFrameIndex\tMP40\tG\t0\t6\nFrameIndex\tMP40\tH\t0\t7\nFrameIndex\tMP40\tI\t0\t8\nFrameIndex\tMP40\tJ\t0\t9\n\n",
+  "block_name": "SecretWeapon_MP40",
+  "card": "cards/brutalwolf/mp40",
+  "frame": 0,
+  "how": "ready MP40A",
+  "srcfile": "BrutalWolf/Models/MP40/MP40.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Pp41": {
+  "block": " \n   Path \"Models/PP41/\"\n   Model 0 \"PP41.md3\"\n   Skin 0 \"PP41.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tPP41\tA\t0\t0\n\nFrameIndex\tPP41\tB\t0\t1\nFrameIndex\tPP41\tC\t0\t2\nFrameIndex\tPP41\tD\t0\t3\nFrameIndex\tPP41\tE\t0\t4\n\nFrameIndex\tPP41\tF\t0\t5\nFrameIndex\tPP41\tG\t0\t6\nFrameIndex\tPP41\tH\t0\t7\nFrameIndex\tPP41\tI\t0\t8\nFrameIndex\tPP41\tJ\t0\t9\n\n",
+  "block_name": "PPSH41",
+  "card": "cards/brutalwolf/pp41",
+  "frame": 0,
+  "how": "ready PP41A",
+  "srcfile": "BrutalWolf/Models/PP41/PP41.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Shotgun": {
+  "block": " \n   Path \"Models/Shotgun/\"\n   Model 0 \"Shotgun.md3\"\n   Skin 0 \"Shotgun.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tZSGG\tA\t0\t0\n\n//Firing\nFrameIndex\tZSGG\tB\t0\t1\nFrameIndex\tZSGG\tC\t0\t2\nFrameIndex\tZSGG\tD\t0\t3\nFrameIndex\tZSGG\tE\t0\t4\nFrameIndex\tZSGG\tF\t0\t5\n\n//Pumping\nFrameIndex\tZSGP\tA\t0\t6\nFrameIndex\tZSGP\tB\t0\t7\nFrameIndex\tZSGP\tC\t0\t8\nFrameIndex\tZSGP\tD\t0\t9\nFrameIndex\tZSGP\tE\t0\t10\nFrameIndex\tZSGP\tF\t0\t11\nFrameIndex\tZSGP\tG\t0\t12\nFrameIndex\tZSGP\tH\t0\t13\nFrameIndex\tZSGP\tI\t0\t14\nFrameIndex\tZSGP\tJ\t0\t15\nFrameIndex\tZSGP\tK\t0\t16\nFrameIndex\tZSGP\tL\t0\t17\n\n//Reloading\nFrameIndex\tZSGR\tA\t0\t18\nFrameIndex\tZSGR\tB\t0\t19\nFrameIndex\tZSGR\tC\t0\t20\nFrameIndex\tZSGR\tD\t0\t21\nFrameIndex\tZSGR\tE\t0\t22\nFrameIndex\tZSGR\tF\t0\t23\nFrameIndex\tZSGR\tG\t0\t24\nFrameIndex\tZSGR\tH\t0\t25\nFrameIndex\tZSGR\tI\t0\t26\nFrameIndex\tZSGR\tJ\t0\t27\nFrameIndex\tZSGR\tK\t0\t28\n\n\n\n",
+  "block_name": "TRGUN",
+  "card": "cards/brutalwolf/shotgun",
+  "frame": 0,
+  "how": "ready ZSGGA",
+  "srcfile": "BrutalWolf/Models/Shotgun/Shotgun.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Stg44": {
+  "block": " \n   Path \"Models/STG44/\"\n   Model 0 \"STG44.md3\"\n   Skin 0 \"STG44.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tZSTG\tA\t0\t0\n\nFrameIndex\tZSTG\tB\t0\t1\nFrameIndex\tZSTG\tC\t0\t2\nFrameIndex\tZSTG\tD\t0\t3\nFrameIndex\tZSTG\tE\t0\t4\n\nFrameIndex\tZSTG\tF\t0\t5\nFrameIndex\tZSTG\tG\t0\t6\nFrameIndex\tZSTG\tH\t0\t7\nFrameIndex\tZSTG\tI\t0\t8\nFrameIndex\tZSTG\tJ\t0\t9\n\n",
+  "block_name": "STG44",
+  "card": "cards/brutalwolf/stg44",
+  "frame": 0,
+  "how": "ready ZSTGA",
+  "srcfile": "BrutalWolf/Models/STG44/STG44.md3",
+  "srcfile_abs": null
+ },
+ "MS_BW_Tommy": {
+  "block": " \n   Path \"Models/Tommy/\"\n   Model 0 \"Tommy.md3\"\n   Skin 0 \"Tommy.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\n\n//Aim\n\nFrameIndex\tTOMY\tA\t0\t0\n\n//Fire\n\nFrameIndex\tTOMY\tB\t0\t1\nFrameIndex\tTOMY\tC\t0\t2\nFrameIndex\tTOMY\tD\t0\t3\nFrameIndex\tTOMY\tE\t0\t4\nFrameIndex\tTOMY\tF\t0\t5\n\n//Reload\n\nFrameIndex\tTOMY\tG\t0\t6\nFrameIndex\tTOMY\tH\t0\t7\nFrameIndex\tTOMY\tI\t0\t8\nFrameIndex\tTOMY\tJ\t0\t9\nFrameIndex\tTOMY\tK\t0\t10\n\n",
+  "block_name": "Thompson",
+  "card": "cards/brutalwolf/tommy",
+  "frame": 0,
+  "how": "ready TOMYA",
+  "srcfile": "BrutalWolf/Models/Tommy/Tommy.md3",
+  "srcfile_abs": null
+ },
+ "MS_CX_Largezorcher": {
+  "block": "\n\tPath \"models/weapons/largezorcher\"\n\tModel 0 \"LargeZorcher.md3\"\n\tModel 1 \"LargeZorcher_g.md3\"\n\tSurfaceSkin 0 0 \"LargeZorcher.png\"\n\tSurfaceSkin 0 1 \"LargeZorcher.png\"\n\tSurfaceSkin 0 2 \"meter_r.png\"\n\tSurfaceSkin 0 3 \"meter_r.png\"\n\tSurfaceSkin 0 4 \"meter_r.png\"\n\tSurfaceSkin 0 5 \"meter_r.png\"\n\tSurfaceSkin 0 6 \"meter_g.png\"\n\tSurfaceSkin 0 7 \"meter_g.png\"\n\tSurfaceSkin 0 8 \"meter_g.png\"\n\tSurfaceSkin 0 9 \"LargeZorch_box.png\"\n\t//SurfaceSkin 0 10 \"LargeZorcher_clip_g.png\"\n\tSurfaceSkin 0 12 \"LargeZorcher_clip_e.png\"\n\tSurfaceSkin 0 13 \"LargeZorcher_clip_e.png\"\n\tSurfaceSkin 0 14 \"LargeZorcher_clip_e.png\"\n\tSurfaceSkin 0 15 \"LargeZorcher_clip_e.png\"\n\tSkin 1 \"LargeZorcher_clip_g.png\"\n\n\tOffset 1.0 -26.0 -14.0\n\tScale -1.0 1.0 1.0\n\n\t//Ready\n\tFrameIndex SHTG A 0 0\tFrameIndex SHTG A 1 0\n\t\n\t//Fire\n\tSurfaceSkin 0 1 \"LargeZorcher_F.png\"\n\tSurfaceSkin 0 6 \"meter_r.png\"\n\tFrameIndex SHTG B 0 3\tFrameIndex SHTG B 1 0\n\tSurfaceSkin 0 1 \"LargeZorcher.png\"\n\tSurfaceSkin 0 7 \"meter_r.png\"\n\tSurfaceSkin 0 8 \"meter_r.png\"\n\tFrameIndex SHTG C 0 27\tFrameIndex SHTG C 1 17\n\tFrameIndex SHTG D 0 28\tFrameIndex SHTG D 1 18\n\tSurfaceSkin 0 8 \"meter_g.png\"\n\tFrameIndex SHTG E 0 29\tFrameIndex SHTG E 1 21\n\tFrameIndex SHTG F 0 30\tFrameIndex SHTG F 1 22\n\tSurfaceSkin 0 7 \"meter_g.png\"\n\tFrameIndex SHTG G 0 31\tFrameIndex SHTG G 1 23\n\tFrameIndex SHTG H 0 32\tFrameIndex SHTG H 1 24\n\tSurfaceSkin 0 6 \"meter_g.png\"\n\tFrameIndex SHTG I 0 33\tFrameIndex SHTG I 1 25\n\tSurfaceSkin 0 5 \"meter_g.png\"\n\tFrameIndex SHTG J 0 34\tFrameIndex SHTG J 1 26\n\tFrameIndex SHTG K 0 35\tFrameIndex SHTG K 1 27\n\tSurfaceSkin 0 4 \"meter_g.png\"\n\tFrameIndex SHTG L 0 36\tFrameIndex SHTG L 1 28\n\tFrameIndex SHTG M 0 37\tFrameIndex SHTG M 1 29\n\tSurfaceSkin 0 3 \"meter_g.png\"\n\tFrameIndex SHTG N 0 38\tFrameIndex SHTG N 1 30\n\tFrameIndex SHTG O 0 39\tFrameIndex SHTG O 1 31\n\tSurfaceSkin 0 2 \"meter_g.png\"\n\tFrameIndex SHTG P 0 40\tFrameIndex SHTG P 1 32\n\tFrameIndex SHTG Q 0 41\tFrameIndex SHTG Q 1 33\n\tFrameIndex SHTG R 0 42\tFrameIndex SHTG R 1 34\n\tFrameIndex SHTG S 0 43\tFrameIndex SHTG S 1 35\n\tFrameIndex SHTG T 0 44\tFrameIndex SHTG T 1 36\n\tFrameIndex SHTG U 0 45\tFrameIndex SHTG U 1 37\n\tFrameIndex SHTG V 0 46\tFrameIndex SHTG V 1 38\n\tFrameIndex SHTG W 0 47\tFrameIndex SHTG W 1 39\n\tFrameIndex SHTG X 0 48\tFrameIndex SHTG X 1 40\n\tFrameIndex SHTG Y 0 49\tFrameIndex SHTG Y 1 41\n\tFrameIndex SHTG Z 0 50\tFrameIndex SHTG Z 1 42\n\tFrameIndex SHT2 A 0 51\tFrameIndex SHT2 A 1 43\n\tFrameIndex SHT2 B 0 52\tFrameIndex SHT2 B 1 44\n\tFrameIndex SHT2 C 0 53\tFrameIndex SHT2 C 1 45\n\tFrameIndex SHT2 D 0 54\tFrameIndex SHT2 D 1 46\n\tFrameIndex SHT2 E 0 55\tFrameIndex SHT2 E 1 47\n\tFrameIndex SHT2 F 0 56\tFrameIndex SHT2 F 1 48\n\tFrameIndex SHT2 G 0 57\tFrameIndex SHT2 G 1 49\n\tSurfaceSkin 0 2 \"meter_r.png\"\n\tSurfaceSkin 0 3 \"meter_r.png\"\n\tFrameIndex SHT2 H 0 58\tFrameIndex SHT2 H 1 50\n\tFrameIndex SHT2 I 0 59\tFrameIndex SHT2 I 1 51\n\tSurfaceSkin 0 4 \"meter_r.png\"\n\tSurfaceSkin 0 5 \"meter_r.png\"\n\tFrameIndex SHT2 J 0 59\tFrameIndex SHT2 J 1 50\n",
+  "block_name": "NewLargeZorcher",
+  "card": "cards/chex/largezorcher",
+  "frame": 0,
+  "how": "ready SHTGA",
+  "srcfile": "Chex-Quest-VR-Weapons/models/weapons/largezorcher/LargeZorcher.md3",
+  "srcfile_abs": null
+ },
+ "MS_CX_Lazdevice": {
+  "block": "\n\tPath \"models/weapons/lazdevice\"\n\tModel 0 \"LAZDevice.md3\"\n\tSurfaceSkin 0 0 \"LAZDevice.png\"\n\tSurfaceSkin 0 1 \"LAZDevice.png\"\n\tSurfaceSkin 0 2 \"LAZDevice.png\"\n\tSurfaceSkin 0 3 \"LAZDevice_screen.png\"\n\tSurfaceSkin 0 4 \"blank_white.png\"\n\n\tOffset 5.0 -26.0 -14.0\n\tScale -1.0 1.0 1.0\n\n\tFrameIndex BFGG A 0 0\n\tSurfaceSkin 0 0 \"LAZDevice_F.png\"\n\tSurfaceSkin 0 1 \"LAZDevice_F.png\"\n\tFrameIndex BFGG B 0 1\n\tFrameIndex BFGG C 0 2\n\tFrameIndex BFGG D 0 3\n\tFrameIndex BFGG E 0 4\n",
+  "block_name": "NewLAZDevice",
+  "card": "cards/chex/lazdevice",
+  "frame": 0,
+  "how": "ready BFGGA",
+  "srcfile": "Chex-Quest-VR-Weapons/models/weapons/lazdevice/LAZDevice.md3",
+  "srcfile_abs": null
+ },
+ "MS_CX_Minizorcher": {
+  "block": "\n\tPath \"models/weapons/minizorcher\"\n\tModel 0 \"MiniZorcher.md3\"\n\tSurfaceSkin 0 0 \"MiniZorcher.png\"\n\tSurfaceSkin 0 1 \"MiniZorcher.png\"\n\tSurfaceSkin 0 2 \"meter_r.png\"\n\tSurfaceSkin 0 3 \"meter_r.png\"\n\tSurfaceSkin 0 4 \"meter_r.png\"\n\tSurfaceSkin 0 5 \"meter_g.png\"\n\tSurfaceSkin 0 6 \"meter_g.png\"\n\tSurfaceSkin 0 7 \"meter_g.png\"\n\tSurfaceSkin 0 8 \"meter_g.png\"\n\n\tOffset 1.0 -26.0 -14.0\n\tScale -1.0 1.0 1.0\n\n\tFrameIndex PISG A 0 0\n\tSurfaceSkin 0 1 \"MiniZorcher_f.png\"\n\tSurfaceSkin 0 5 \"meter_r.png\"\n\tFrameIndex PISG B 0 4\n\tSurfaceSkin 0 6 \"meter_r.png\"\n\tFrameIndex PISG C 0 4\n\tSurfaceSkin 0 7 \"meter_r.png\"\n\tFrameIndex PISG D 0 8\n\tSurfaceSkin 0 8 \"meter_r.png\"\n\tFrameIndex PISG E 0 8\n",
+  "block_name": "NewMiniZorcher",
+  "card": "cards/chex/minizorcher",
+  "frame": 0,
+  "how": "ready PISGA",
+  "srcfile": "Chex-Quest-VR-Weapons/models/weapons/minizorcher/MiniZorcher.md3",
+  "srcfile_abs": null
+ },
+ "MS_CX_Phasingzorcher": {
+  "block": "\n\tPath \"models/weapons/phasingzorcher\"\n\tModel 0 \"PhasingZorcher.md3\"\n\tSurfaceSkin 0 0 \"PhasingZorcher.png\"\n\tSurfaceSkin 0 1 \"PhasingZorcher.png\"\n\tSurfaceSkin 0 2 \"meter_r.png\"\n\tSurfaceSkin 0 3 \"meter_r.png\"\n\tSurfaceSkin 0 4 \"meter_g.png\"\n\tSurfaceSkin 0 5 \"meter_g.png\"\n\n\tOffset 2.0 -26.0 -12.0\n\tScale -1.0 1.0 1.0\n\n\tFrameIndex PLSG A 0 0\n\tSurfaceSkin 0 1 \"PhasingZorcher_F.png\"\n\tFrameIndex PLSG B 0 4\n\tFrameIndex PLSG C 0 5\n\tFrameIndex PLSG D 0 6\n\tFrameIndex PLSG E 0 7\n\tFrameIndex PLSG F 0 8\n\tFrameIndex PLSG G 0 9\n\tFrameIndex PLSG H 0 10\n\tFrameIndex PLSG I 0 11\n\tFrameIndex PLSG J 0 12\n\tFrameIndex PLSG K 0 13\n\tFrameIndex PLSG L 0 14\n",
+  "block_name": "NewPhasingZorcher",
+  "card": "cards/chex/phasingzorcher",
+  "frame": 0,
+  "how": "ready PLSGA",
+  "srcfile": "Chex-Quest-VR-Weapons/models/weapons/phasingzorcher/PhasingZorcher.md3",
+  "srcfile_abs": null
+ },
+ "MS_CX_Rapidzorcher": {
+  "block": "\n\tPath \"models/weapons/rapidzorcher\"\n\tModel 0 \"RapidZorcher.md3\"\n\tSurfaceSkin 0 0 \"RapidZorcher.png\"\n\tSurfaceSkin 0 1 \"RapidZorcher.png\"\n\tSurfaceSkin 0 2 \"meter_r.png\"\n\tSurfaceSkin 0 3 \"meter_g.png\"\n\tSurfaceSkin 0 4 \"meter_g.png\"\n\tSurfaceSkin 0 5 \"meter_g.png\"\n\tOffset 1.0 -26.0 -14.0\n\tScale -1.0 1.0 1.0\n\n\t//Ready\n\tFrameIndex CHGG A 0 0\n\t\n\t//Fire\n\tFrameIndex CHGG B 0 1\n\tSurfaceSkin 0 0 \"RapidZorcher_F.png\"\n\tSurfaceSkin 0 1 \"RapidZorcher_F.png\"\n\tSurfaceSkin 0 3 \"meter_r.png\"\n\tSurfaceSkin 0 4 \"meter_r.png\"\n\tSurfaceSkin 0 5 \"meter_r.png\"\n\tFrameIndex CHGG C 0 2\n\tFrameIndex CHGG D 0 3\n\tFrameIndex CHGG E 0 4\n\tFrameIndex CHGG F 0 5\n\tFrameIndex CHGG G 0 6\n\tFrameIndex CHGG H 0 7\n\tFrameIndex CHGG I 0 8\n\tFrameIndex CHGG J 0 9\n\t\n\t//Hold fire\n\tFrameIndex CHGG K 0 10\n\tFrameIndex CHGG L 0 11\n\tFrameIndex CHGG M 0 12\n\tFrameIndex CHGG N 0 13\n\tFrameIndex CHGG O 0 14\n\tFrameIndex CHGG P 0 15\n\tFrameIndex CHGG Q 0 16\n\tFrameIndex CHGG R 0 17\n\tFrameIndex CHGG S 0 18\n\tFrameIndex CHGG T 0 19\n\tFrameIndex CHGG U 0 20\n\tFrameIndex CHGG V 0 21\n",
+  "block_name": "NewRapidZorcher",
+  "card": "cards/chex/rapidzorcher",
+  "frame": 0,
+  "how": "ready CHGGA",
+  "srcfile": "Chex-Quest-VR-Weapons/models/weapons/rapidzorcher/RapidZorcher.md3",
+  "srcfile_abs": null
+ },
+ "MS_CX_Spoon": {
+  "block": "\n\tPath \"models/weapons/spoon\"\n\tModel 0 \"spoon.md3\"\n\tSkin 0 \"spoon.png\"\n\n\tOffset 1.0 -26.0 -14.0\n\tScale -1.0 1.0 1.0\n\n\tFrameIndex PUNG A 0 0\n\tFrameIndex PUNG B 0 3\n\tFrameIndex PUNG C 0 5\n\tFrameIndex PUNG D 0 7\n\tFrameIndex PUNG E 0 9\n\tFrameIndex PUNG F 0 11\n",
+  "block_name": "NewBootspoon",
+  "card": "cards/chex/spoon",
+  "frame": 0,
+  "how": "ready PUNGA",
+  "srcfile": "Chex-Quest-VR-Weapons/models/weapons/spoon/spoon.md3",
+  "srcfile_abs": null
+ },
+ "MS_CX_Spork": {
+  "block": "\n\tPath \"models/weapons/spork\"\n\tModel 0 \"spork.md3\"\n\tModel 1 \"spork_spark.md3\"\n\tSkin 0 \"spork.png\"\n\tSkin 1 \"spork_mf3.png\"\n\n\tOffset 1.0 -26.0 -14.0\n\tScale -1.0 1.0 1.0\n\n\tFrameIndex SAWG A 0 0\tFrameIndex SAWG A 1 0\n\tFrameIndex SAWG B 0 4\tFrameIndex SAWG A 1 4\n\tSkin 1 \"spork_mf4.png\"\n\tFrameIndex SAWG C 0 9\tFrameIndex SAWG A 1 9\n\tFrameIndex SAWG D 0 14\tFrameIndex SAWG A 1 14\n\tSkin 1 \"spork_mf5.png\"\n\tFrameIndex SAWG E 0 19\tFrameIndex SAWG A 1 19\n\tFrameIndex SAWG F 0 24\tFrameIndex SAWG A 1 24\n\tSkin 1 \"spork_mf6.png\"\n\tFrameIndex SAWG G 0 29\tFrameIndex SAWG A 1 29\n\tFrameIndex SAWG H 0 34\tFrameIndex SAWG A 1 35\n",
+  "block_name": "NewSuperBootspork",
+  "card": "cards/chex/spork",
+  "frame": 0,
+  "how": "ready SAWGA",
+  "srcfile": "Chex-Quest-VR-Weapons/models/weapons/spork/spork.md3",
+  "srcfile_abs": null
+ },
+ "MS_CX_Superlargezorcher": {
+  "block": "\n\tPath \"models/weapons/superlargezorcher\"\n\tModel 0 \"SuperLargeZorcher.md3\"\n\tModel 1 \"SuperLargeZorcher_g.md3\"\n\tSurfaceSkin 0 0 \"LargeZorcher.png\"\n\tSurfaceSkin 0 1 \"LargeZorcher.png\"\n\tSurfaceSkin 0 2 \"LargeZorcher.png\"\n\tSurfaceSkin 0 3 \"meter_r.png\"\n\tSurfaceSkin 0 4 \"meter_r.png\"\n\tSurfaceSkin 0 5 \"meter_r.png\"\n\tSurfaceSkin 0 6 \"meter_r.png\"\n\tSurfaceSkin 0 7 \"meter_g.png\"\n\tSurfaceSkin 0 8 \"meter_g.png\"\n\tSurfaceSkin 0 9 \"meter_g.png\"\n\tSurfaceSkin 0 10 \"LargeZorch_box.png\"\n\t//SurfaceSkin 0 10 \"LargeZorcher_clip_g.png\"\n\tSurfaceSkin 0 13 \"LargeZorcher_clip_e.png\"\n\tSurfaceSkin 0 14 \"LargeZorcher_clip_e.png\"\n\tSurfaceSkin 0 15 \"LargeZorcher_clip_e.png\"\n\tSurfaceSkin 0 16 \"LargeZorcher_clip_e.png\"\n\tSkin 1 \"LargeZorcher_clip_g.png\"\n\n\tOffset 1.0 -26.0 -14.0\n\tScale -1.0 1.0 1.0\n\n\t//Ready\n\tFrameIndex SHT2 A 0 0\tFrameIndex SHT2 A 1 0\n\t\n\t//Fire\n\tSurfaceSkin 0 1 \"LargeZorcher_F.png\"\n\tSurfaceSkin 0 2 \"LargeZorcher_F.png\"\n\tSurfaceSkin 0 7 \"meter_r.png\"\n\tFrameIndex SHT2 B 0 3\tFrameIndex SHT2 B 1 3\n\tSurfaceSkin 0 8 \"meter_r.png\"\n\tSurfaceSkin 0 9 \"meter_r.png\"\n\tFrameIndex SHT2 C 0 4\tFrameIndex SHT2 C 1 4\n\tFrameIndex SHT2 D 0 5\tFrameIndex SHT2 D 1 5\n\tSurfaceSkin 0 9 \"meter_g.png\"\n\tFrameIndex SHT2 E 0 6\tFrameIndex SHT2 E 1 6\n\tFrameIndex SHT2 F 0 8\tFrameIndex SHT2 F 1 8\n\tSurfaceSkin 0 8 \"meter_g.png\"\n\tFrameIndex SHT2 G 0 9\tFrameIndex SHT2 G 1 9\n\tFrameIndex SHT2 H 0 10\tFrameIndex SHT2 H 1 10\n\tSurfaceSkin 0 7 \"meter_g.png\"\n\tFrameIndex SHT2 I 0 11\tFrameIndex SHT2 I 1 11\n\tFrameIndex SHT2 J 0 12\tFrameIndex SHT2 J 1 12\n\t\n\t\n\tSurfaceSkin 0 1 \"LargeZorcher.png\"\n\tSurfaceSkin 0 2 \"LargeZorcher.png\"\n\tSurfaceSkin 0 6 \"meter_g.png\"\n\tFrameIndex SH2F C 0 18\tFrameIndex SH2F C 1 18\n\tSurfaceSkin 0 5 \"meter_g.png\"\n\tFrameIndex SH2F D 0 19\tFrameIndex SH2F D 1 19\n\tSurfaceSkin 0 4 \"meter_g.png\"\n\tFrameIndex SH2F E 0 20\tFrameIndex SH2F E 1 20\n\tSurfaceSkin 0 3 \"meter_g.png\"\n\tFrameIndex SH2F F 0 21\tFrameIndex SH2F F 1 21\n\tFrameIndex SH2F G 0 22\tFrameIndex SH2F G 1 22\n\tFrameIndex SH2F H 0 23\tFrameIndex SH2F H 1 23\n\tFrameIndex SH2F I 0 24\tFrameIndex SH2F I 1 24\n\tFrameIndex SH2F J 0 25\tFrameIndex SH2F J 1 25\n\tFrameIndex SH2F K 0 26\tFrameIndex SH2F K 1 26\n\tFrameIndex SH2F L 0 27\tFrameIndex SH2F L 1 27\n\tFrameIndex SH2F M 0 28\tFrameIndex SH2F M 1 28\n\tFrameIndex SH2F N 0 29\tFrameIndex SH2F N 1 29\n\tFrameIndex SH2F O 0 30\tFrameIndex SH2F O 1 30\n\tFrameIndex SH2F P 0 31\tFrameIndex SH2F P 1 31\n\tFrameIndex SH2F Q 0 32\tFrameIndex SH2F Q 1 32\n\tFrameIndex SH2F R 0 33\tFrameIndex SH2F R 1 33\n\tFrameIndex SH2F S 0 34\tFrameIndex SH2F S 1 34\n\tFrameIndex SH2F T 0 35\tFrameIndex SH2F T 1 35\n\tFrameIndex SH2F U 0 36\tFrameIndex SH2F U 1 36\n\tFrameIndex SH2F V 0 39\tFrameIndex SH2F V 1 39\n\tFrameIndex SH2F W 0 40\tFrameIndex SH2F W 1 40\n\tFrameIndex SH2F X 0 41\tFrameIndex SH2F X 1 41\n\tFrameIndex SH2F Y 0 42\tFrameIndex SH2F Y 1 42\n\tFrameIndex SH2F Z 0 43\tFrameIndex SH2F Z 1 43\n\tFrameIndex SH2R A 0 44\tFrameIndex SH2R A 1 44\n\tFrameIndex SH2R B 0 45\tFrameIndex SH2R B 1 45\n\tFrameIndex SH2R C 0 46\tFrameIndex SH2R C 1 46\n\tFrameIndex SH2R D 0 47\tFrameIndex SH2R D 1 47\n\tFrameIndex SH2R E 0 48\tFrameIndex SH2R E 1 48\n\tFrameIndex SH2R F 0 49\tFrameIndex SH2R F 1 49\n\tFrameIndex SH2R G 0 50\tFrameIndex SH2R G 1 50\n\tSurfaceSkin 0 3 \"meter_r.png\"\n\tSurfaceSkin 0 4 \"meter_r.png\"\n\tFrameIndex SH2R H 0 51\tFrameIndex SH2R H 1 51\n\tFrameIndex SH2R I 0 52\tFrameIndex SH2R I 1 52\n\tSurfaceSkin 0 5 \"meter_r.png\"\n\tSurfaceSkin 0 6 \"meter_r.png\"\n\tFrameIndex SH2R J 0 53\tFrameIndex SH2R J 1 53\n",
+  "block_name": "NewSuperLargeZorcher",
+  "card": "cards/chex/superlargezorcher",
+  "frame": 0,
+  "how": "ready SHT2A",
+  "srcfile": "Chex-Quest-VR-Weapons/models/weapons/superlargezorcher/SuperLargeZorcher.md3",
+  "srcfile_abs": null
+ },
+ "MS_CX_Zorchpropulsor": {
+  "block": "\n\tPath \"models/weapons/zorchpropulsor\"\n\tModel 0 \"ZorchPropulsor.md3\"\n\tSkin 0 \"ZorchPropulsor.png\"\n\n\tOffset 4.0 -26.0 -12.0\n\tScale -1.0 1.0 1.0\n\n\tFrameIndex MISG A 0 0\n\tSkin 0 \"ZorchPropulsor_F0.png\"\n\tFrameIndex MISG B 0 9\n\tSkin 0 \"ZorchPropulsor_F1.png\"\n\tFrameIndex MISG C 0 11\n\tFrameIndex MISG D 0 13\n\tSkin 0 \"ZorchPropulsor_F2.png\"\n\tFrameIndex MISG E 0 14\n\tFrameIndex MISG F 0 15\n\tSkin 0 \"ZorchPropulsor_F3.png\"\n\tFrameIndex MISG G 0 16\n\tFrameIndex MISG H 0 17\n\tSkin 0 \"ZorchPropulsor_F4.png\"\n\tFrameIndex MISG I 0 18\n\tFrameIndex MISG J 0 19\n\tSkin 0 \"ZorchPropulsor_F0.png\"\n\tFrameIndex MISG K 0 20\n\tFrameIndex MISG L 0 22\n\tFrameIndex MISG M 0 23\n\tFrameIndex MISG N 0 24\n\tFrameIndex MISG O 0 25\n\tFrameIndex MISG P 0 26\n\tFrameIndex MISG Q 0 27\n\tFrameIndex MISG R 0 28\n\tFrameIndex MISG S 0 29\n\tFrameIndex MISG T 0 30\n\tFrameIndex MISG U 0 31\n",
+  "block_name": "NewZorchPropulsor",
+  "card": "cards/chex/zorchpropulsor",
+  "frame": 0,
+  "how": "ready MISGA",
+  "srcfile": "Chex-Quest-VR-Weapons/models/weapons/zorchpropulsor/ZorchPropulsor.md3",
+  "srcfile_abs": null
+ },
+ "MS_Cola_Carddeck": {
+  "block": "\n   Path \"Models\\Weapons\\cards\"\n   Model 0 \"card_deck.md3\"\n   SurfaceSkin 0 0 \"card_deck.png\"\n   SurfaceSkin 0 1 \"card_deck.png\"\n   SurfaceSkin 0 2 \"card_deck.png\"\n   SurfaceSkin 0 3 \"arms.png\"\n   \n   Scale -0.75 0.75 0.75\n   Offset -6.0 -22.0 -12.0\n   \n   FrameIndex VDCK A 0 0\n   FrameIndex VDCK B 0 1\n   FrameIndex VDCK C 0 2\n   FrameIndex VDCK D 0 3\n   FrameIndex VDCK E 0 4\n   \n   //Empty hand\n   FrameIndex VDCE A 0 8\n   FrameIndex VDCE B 0 9\n   FrameIndex VDCE C 0 10\n",
+  "block_name": "CardThrower",
+  "card": "cards/cola/carddeck",
+  "frame": 0,
+  "how": "ready VDCKA",
+  "srcfile": "Cola-3-VR-Weapons/models/weapons/cards/card_deck.md3",
+  "srcfile_abs": null
+ },
+ "MS_Cola_Frypan": {
+  "block": "\n   Path \"Models\\Weapons\\frypan\"\n   Model 0 \"fry_pan.md3\"\n   SurfaceSkin 0 0 \"arms.png\"\n   SurfaceSkin 0 1 \"fry_pan.png\"\n   \n   Scale -0.8 0.8 0.8\n   Offset -10.0 -22.0 -12.0\n   \n   FrameIndex FPAN A 0 0\n   FrameIndex FPAN B 0 1\n   FrameIndex FPAN C 0 2\n   FrameIndex FPAN D 0 3\n   FrameIndex FPAN E 0 4\n",
+  "block_name": "ColaHandgun",
+  "card": "cards/cola/frypan",
+  "frame": null,
+  "how": "Ready frame not in block ColaHandgun",
+  "srcfile": "Cola-3-VR-Weapons/models/weapons/frypan/fry_pan.md3",
+  "srcfile_abs": null
+ },
+ "MS_Cola_Ks23": {
+  "block": "\n   Path \"Models\\Weapons\\shotgun\"\n   Model 0 \"shotgun_right.md3\"\n   Skin 0 \"shotgun.png\"\n   \n   Scale -1.0 1.0 1.0\n   Offset 0.0 -28.0 -7.0\n   \n   //Ready\n   FrameIndex 2SHT A 0 0\n   \n   //Fire\n   FrameIndex 2SHT B 0 1\n   FrameIndex 2SHT C 0 2\n   \n   //Pump\n   FrameIndex 2SHT D 0 3\n   FrameIndex 2SHT E 0 4\n   FrameIndex 2SHT F 0 5\n   FrameIndex 2SHT J 0 8\n   FrameIndex 2SHT K 0 9\n   FrameIndex 2SHT L 0 10\n",
+  "block_name": "DualPumpShotgun",
+  "card": "cards/cola/ks23",
+  "frame": 0,
+  "how": "ready 2SHTA",
+  "srcfile": "Cola-3-VR-Weapons/models/weapons/shotgun/shotgun_right.md3",
+  "srcfile_abs": null
+ },
+ "MS_Cola_Particlegun": {
+  "block": "\n   Path \"Models\\Weapons\\toothpastelaser\"\n   Model 0 \"particlegun.md3\"\n   SurfaceSkin 0 0 \"particlegun_ammo.png\"\n   SurfaceSkin 0 1 \"particlegun.jpg\"\n   SurfaceSkin 0 2 \"particlegun.jpg\"\n   SurfaceSkin 0 3 \"particlegun.jpg\"\n   Model 1 \"particlegun_display.md3\"\n   Skin 1 \"particlegun_display1.png\"\n   \n   Scale -1.2 1.2 1.2\n   Offset 0.0 -28.0 -5.0\n   \n   //Ready\n   FrameIndex TPLG A 0 0\tFrameIndex TPLG A 1 0\n   FrameIndex TPLG B 0 1\tFrameIndex TPLG B 1 0\n   \n   //Fire\n   Skin 1 \"particlegun_display5.png\"\n   FrameIndex TPLG E 0 1\tFrameIndex TPLG E 1 0\n",
+  "block_name": "ToothpasteLaser",
+  "card": "cards/cola/particlegun",
+  "frame": 0,
+  "how": "ready TPLGA",
+  "srcfile": "Cola-3-VR-Weapons/models/weapons/toothpastelaser/particlegun.md3",
+  "srcfile_abs": null
+ },
+ "MS_Cola_Piledriver": {
+  "block": "\n   Path \"Models\\Weapons\\piledriver\"\n   Model 0 \"jackhammer.md3\"\n   SurfaceSkin 0 0 \"jackhammer.png\"\n   SurfaceSkin 0 1 \"gas_label.png\"\n   Model 1 \"jackhammer_mag.md3\"\n   Skin 1 \"jackhammer_mag.png\"\n   \n   Scale -1.0 1.0 1.0\n   Offset 0.0 -28.0 -8.0\n   \n   //Ready\n   FrameIndex PDRV A 0 0\tFrameIndex PDRV A 1 0\n   \n   //Reload\n   FrameIndex PDRV B 0 1\tFrameIndex PDRV B 1 1\n   FrameIndex PDRV C 0 2\tFrameIndex PDRV C 1 2\n   FrameIndex PDRV D 0 3\tFrameIndex PDRV D 1 3\n   FrameIndex PDRV E 0 4\tFrameIndex PDRV E 1 4\n   FrameIndex PDRV F 0 5\tFrameIndex PDRV F 1 5\n   FrameIndex PDRV L 0 11\tFrameIndex PDRV L 1 11\n   FrameIndex PDRV M 0 12\tFrameIndex PDRV M 1 12\n   FrameIndex PDRV N 0 13\tFrameIndex PDRV N 1 13\n   FrameIndex PDRV O 0 14\tFrameIndex PDRV O 1 14\n   FrameIndex PDRV P 0 15\tFrameIndex PDRV P 1 15\n   FrameIndex PDRV Q 0 16\tFrameIndex PDRV Q 1 16\n   FrameIndex PDRV R 0 17\tFrameIndex PDRV R 1 17\n   FrameIndex PDRV S 0 18\tFrameIndex PDRV S 1 18\n   FrameIndex PDRV T 0 19\tFrameIndex PDRV T 1 19\n",
+  "block_name": "Piledriver",
+  "card": "cards/cola/piledriver",
+  "frame": 0,
+  "how": "ready PDRVA",
+  "srcfile": "Cola-3-VR-Weapons/models/weapons/piledriver/jackhammer.md3",
+  "srcfile_abs": null
+ },
+ "MS_Cola_Plasmagun": {
+  "block": "\n   Path \"Models\\Weapons\\plasmagun\"\n   Model 0 \"plasmagun.md3\"\n   SurfaceSkin 0 0 \"rifle.png\"\n   SurfaceSkin 0 1 \"rifle.png\"\n   SurfaceSkin 0 2 \"heat1.png\"\n   \n   Scale -1.4 1.4 1.4\n   Offset 0.0 -28.0 -7.0\n   \n   //Orange laser\n   FrameIndex ZPL0 A 0 0\n   FrameIndex ZPL0 B 0 1\n   \n   //Purple laser\n   SurfaceSkin 0 2 \"heat2.png\"\n   FrameIndex ZPL1 A 0 0\n   FrameIndex ZPL1 B 0 1\n   \n   //Blue laser\n   SurfaceSkin 0 2 \"heat3.png\"\n   FrameIndex ZPL2 A 0 0\n   FrameIndex ZPL2 B 0 1\n   \n   //Green laser\n   SurfaceSkin 0 2 \"heat4.png\"\n   FrameIndex ZPL3 A 0 0\n   FrameIndex ZPL3 B 0 1\n   \n   //display off\n   SurfaceSkin 0 2 \"heat.png\"\n   FrameIndex ZPLV A 0 0\n   \n   //Red display warning\n   SurfaceSkin 0 2 \"heat5.png\"\n   FrameIndex ZPLV B 0 0\n",
+  "block_name": "PlasmaAutorifle",
+  "card": "cards/cola/plasmagun",
+  "frame": 0,
+  "how": "ready ZPL0A",
+  "srcfile": "Cola-3-VR-Weapons/models/weapons/plasmagun/plasmagun.md3",
+  "srcfile_abs": null
+ },
+ "MS_Cola_Revolver": {
+  "block": "\n   Path \"Models\\Weapons\\pistol\"\n   Model 0 \"revolver.md3\"\n   Skin 0 \"revolver.png\"\n   \n   Scale -0.7 0.7 0.7\n   Offset 0.0 -28.0 -7.0\n   \n   //Ready\n   FrameIndex RPIS A 0 0\n   \n   //Fire 1\n   FrameIndex RPIS B 0 1\n   FrameIndex RPIS C 0 2\n   FrameIndex RPIS D 0 3\n   FrameIndex RPIS E 0 4\n   FrameIndex RPIS F 0 5\n   \n   //Fire 2\n   FrameIndex RPIS G 0 6\n   FrameIndex RPIS H 0 7\n   FrameIndex RPIS I 0 8\n   FrameIndex RPIS J 0 9\n   FrameIndex RPIS K 0 10\n   \n   //Fire 3\n   FrameIndex RPIS L 0 11\n   FrameIndex RPIS M 0 12\n   FrameIndex RPIS N 0 13\n   FrameIndex RPIS O 0 14\n   FrameIndex RPIS P 0 15\n   \n   //Fire 4\n   FrameIndex RPIS Q 0 16\n   FrameIndex RPIS R 0 17\n   FrameIndex RPIS S 0 18\n   FrameIndex RPIS T 0 19\n   FrameIndex RPIS U 0 20\n   \n   //Fire 5\n   FrameIndex RPIS V 0 21\n   FrameIndex RPIS W 0 22\n   FrameIndex RPIS X 0 23\n   FrameIndex RPIS Y 0 24\n   FrameIndex RPIS Z 0 25\n   \n   //Fire 6\n   FrameIndex RPI2 A 0 26\n   FrameIndex RPI2 B 0 27\n   FrameIndex RPI2 C 0 28\n   FrameIndex RPI2 D 0 29\n   FrameIndex RPI2 E 0 30\n",
+  "block_name": "ColaHandgun",
+  "card": "cards/cola/revolver",
+  "frame": 0,
+  "how": "ready RPISA",
+  "srcfile": "Cola-3-VR-Weapons/models/weapons/pistol/revolver.md3",
+  "srcfile_abs": null
+ },
+ "MS_Cola_Sidewinder": {
+  "block": "\n   Path \"Models\\Weapons\\sidewinder\"\n   Model 0 \"sidewinder.md3\"\n   SurfaceSkin 0 0 \"smr.png\"\n   SurfaceSkin 0 1 \"smr.png\"\n   SurfaceSkin 0 2 \"smr.png\"\n   SurfaceSkin 0 3 \"smr.png\"\n   SurfaceSkin 0 4 \"smr_ext1.png\"\n   SurfaceSkin 0 5 \"smr_plate.png\"\n   Model 1 \"sw_ammo_reload.md3\"\n   Skin 1 \"smr_ammo.png\"\n   \n   Scale -1.0 1.0 1.0\n   Offset 0.0 -6.0 -3.0\n   \n   //Ready\n   FrameIndex SWRL A 0 0\tFrameIndex SWRL A 1 0\n   FrameIndex SWRL B 0 0\tFrameIndex SWRL B 1 4\n   FrameIndex SWRL C 0 0\tFrameIndex SWRL C 1 9\n   FrameIndex SWRL D 0 0\tFrameIndex SWRL D 1 14\n   FrameIndex SWRL E 0 0\tFrameIndex SWRL E 1 19\n",
+  "block_name": "MissileLauncher",
+  "card": "cards/cola/sidewinder",
+  "frame": 0,
+  "how": "ready SWRLA",
+  "srcfile": "Cola-3-VR-Weapons/models/weapons/sidewinder/sidewinder.md3",
+  "srcfile_abs": null
+ },
+ "MS_D64_Boot": {
+  "block": null,
+  "block_name": null,
+  "card": "cards/d64/boot",
+  "frame": null,
+  "how": "no source block",
+  "srcfile": "D64Retribution/Models/Weapons/Hud/Boot/Boot.md3",
+  "srcfile_abs": null
+ },
+ "MS_D64_Chainsaw": {
+  "block": " \n   Path \"Models/Weapons/Hud/Chain_saw\"\n   Model 0 \"Chain_saw.md3\"\n   Skin 0 \"Chain_saw.png\"\n   Scale -1.5 1.5 1.5\n   Offset 0.0 10.0 0.0\n   ZOffset -5\n   NOINTERPOLATION\n\n//Ready\n\nFrameIndex\tSAWG\tA\t0\t2\nFrameIndex\tSAWG\tB\t0\t3\nFrameIndex\tSAWG\tC\t0\t2\nFrameIndex\tSAWG\tD\t0\t3\n\n\n//Aim and Fire\n\nFrameIndex\tSAWF\tA\t0\t4\nFrameIndex\tSAWF\tB\t0\t5\n\n",
+  "block_name": "_64Chainsaw",
+  "card": "cards/d64/chainsaw",
+  "frame": 2,
+  "how": "ready SAWGA",
+  "srcfile": "D64Retribution/Models/Weapons/Hud/Chain_saw/Chain_saw.md3",
+  "srcfile_abs": null
+ },
+ "MS_HP_Blaster": {
+  "block": "\n   Path \"models/weapons/blaster\"\n   Model 0 \"blaster.md3\"\n   SurfaceSkin 0 0 \"blastergun.png\"\n   SurfaceSkin 0 1 \"BlasterPlasma.png\"\n   Scale -0.95 0.95 0.95\n   Offset 0.0 -28.0 -10.0\n   \n   //Ready\n   FrameIndex JZWP A 0 0\n   \n   //Fire\n   SurfaceSkin 0 1 \"BlasterPlasma_fire.png\"\n   \n   FrameIndex JZWP B 0 2\n   FrameIndex JZWP C 0 1\n   FrameIndex JZWP D 0 5\n   FrameIndex JZWP E 0 4\n",
+  "block_name": "JazzGun",
+  "card": "cards/hocus/blaster",
+  "frame": 0,
+  "how": "ready JZWPA",
+  "srcfile": "Hocus-Doom-VR/Models/weapons/blaster/blaster.md3",
+  "srcfile_abs": null
+ },
+ "MS_HP_Cannon": {
+  "block": "\n   Path \"models/weapons/cannon\"\n   Model 0 \"cannon.md3\"\n   Skin 0 \"cannon.png\"\n   Scale -0.72 0.72 0.72\n   Offset 0.0 -24.0 -15.0\n   \n   //Ready\n   FrameIndex MISG A 0 0\n   \n   //Fire\n   FrameIndex MISG B 0 1\n   FrameIndex MISG C 0 2\n   FrameIndex MISG D 0 3\n   FrameIndex MISG E 0 4\n   FrameIndex MISG F 0 5\n",
+  "block_name": "RocketLawnchair",
+  "card": "cards/hocus/cannon",
+  "frame": 0,
+  "how": "ready MISGA",
+  "srcfile": "Hocus-Doom-VR/Models/weapons/cannon/cannon.md3",
+  "srcfile_abs": null
+ },
+ "MS_HP_Rifle": {
+  "block": "\n   Path \"models/weapons/rifle\"\n   Model 0 \"rifle.md3\"\n   Skin 0 \"rifle.png\"\n   Scale -0.88 0.88 0.88\n   Offset 0.0 -24.0 -9.0\n   \n   //Ready\n   FrameIndex ELEC A 0 0\n   FrameIndex ELEC B 0 1\n   FrameIndex ELEC C 0 2\n   FrameIndex ELEC D 0 3\n",
+  "block_name": "ElectromanGun",
+  "card": "cards/hocus/rifle",
+  "frame": 0,
+  "how": "ready ELECA",
+  "srcfile": "Hocus-Doom-VR/Models/weapons/rifle/rifle.md3",
+  "srcfile_abs": null
+ },
+ "MS_HP_Wand": {
+  "block": "\n   Path \"models/weapons/wand\"\n   Model 0 \"wand.md3\"\n   Skin 0 \"magicwand.png\"\n   Model 1 \"wand_crystal_big.md3\"\n   Skin 1 \"magicwand.png\"\n   Scale -1.2 1.2 1.2\n   Offset 0.0 -24.0 -10.0\n   \n   //Ready\n   FrameIndex WANX A 0 0\tFrameIndex WANX A 0 0\n",
+  "block_name": "ZPower_Wand",
+  "card": "cards/hocus/wand",
+  "frame": 0,
+  "how": "ready WANXA",
+  "srcfile": "Hocus-Doom-VR/Models/weapons/wand/wand.md3",
+  "srcfile_abs": null
+ },
+ "MS_HV_Crossbow": {
+  "block": " \n\tPath \"models/weapons/crossbow\"\n\tModel 0 \"xbow.md3\"\n\tModel 1 \"arrow.md3\"\n\tSkin 1 \"fleches.png\"\n\tModel 2 \"arrow_trail.md3\"\n\tSkin 2 \"lc1x.png\"\n\tModel 3 \"xbow_hand.md3\"\n\tSkin 3 \"hand.png\"\n\tScale -0.82 0.82 0.82\n\tOffset 0.0 -22 -7.0\n\n\t//Ready\n\tFrameIndex CRBW A 0 0\tFrameIndex CRBW A 1 0\tFrameIndex CRBW A 2 0\tFrameIndex CRBW A 3 0\n",
+  "block_name": "HVRCrossbow",
+  "card": "cards/voidwalker/crossbow",
+  "frame": 0,
+  "how": "ready CRBWA",
+  "srcfile": "heretic-voidwalker/models/weapons/crossbow/xbow.md3",
+  "srcfile_abs": null
+ },
+ "MS_HV_Dragonclaw": {
+  "block": " \n\tPath \"models/weapons/blaster\"\n\tModel 0 \"dragonclaw.md3\"\n\tModel 1 \"claw_hand.md3\"\n\tSkin 1 \"hand.png\"\n\tScale -0.82 0.82 0.82\n\tOffset 0.0 -22 -7.0\n\n\t//Ready\n\tFrameIndex BLSR A 0 0\tFrameIndex BLSR A 1 0\n\t\n\t//Fire\n\tFrameIndex BLSR B 0 0\tFrameIndex BLSR B 1 0\n",
+  "block_name": "HVRBlaster",
+  "card": "cards/voidwalker/dragonclaw",
+  "frame": 0,
+  "how": "ready BLSRA",
+  "srcfile": "heretic-voidwalker/models/weapons/blaster/dragonclaw.md3",
+  "srcfile_abs": null
+ },
+ "MS_HV_Gauntlet": {
+  "block": " \n\tPath \"models/weapons/gauntlet\"\n\tModel 0 \"gauntlet.md3\"\n\tScale -0.82 0.82 0.82\n\tOffset 0.0 -22 -7.0\n\n\t//Ready\n\tFrameIndex GAUN A 0 0\n\t\n\t//Fire\n\tFrameIndex GAUN B 0 1\n\tFrameIndex GAUN C 0 2\n",
+  "block_name": "HVRGauntlets",
+  "card": "cards/voidwalker/gauntlet",
+  "frame": 0,
+  "how": "ready GAUNA (actor puff)",
+  "srcfile": "heretic-voidwalker/models/weapons/gauntlet/gauntlet.md3",
+  "srcfile_abs": null
+ },
+ "MS_HV_Mace": {
+  "block": " \n\tPath \"models/weapons/mace\"\n\tModel 0 \"mace.md3\"\n\tSkin 0 \"FireMace.png\"\n\tModel 1 \"mace_spike.md3\"\n\tSkin 1 \"FireMace2.png\"\n\tModel 2 \"mace_cap.md3\"\n\tSkin 2 \"FireMace.png\"\n\tModel 3 \"mace_hand.md3\"\n\tSkin 3 \"hand.png\"\n\tScale -0.82 0.82 0.82\n\tOffset 0.0 -22 -7.0\n\t\n\t//Fire\n\tFrameIndex MACE C 0 0\tFrameIndex MACE C 1 1\tFrameIndex MACE C 2 1\tFrameIndex MACE C 3 0\n\tFrameIndex MACE D 0 0\tFrameIndex MACE D 1 2\tFrameIndex MACE D 2 2\tFrameIndex MACE D 3 0\n\tFrameIndex MACE E 0 0\tFrameIndex MACE E 1 3\tFrameIndex MACE E 2 3\tFrameIndex MACE E 3 0\n\t\n\tNOINTERPOLATION\n\n\t//Ready\n\tFrameIndex MACE A 0 0\tFrameIndex MACE A 1 0\tFrameIndex MACE A 2 0\tFrameIndex MACE A 3 0\n\t\n\t//Fire\n\tFrameIndex MACE B 0 0\tFrameIndex MACE B 1 0\tFrameIndex MACE B 2 0\tFrameIndex MACE B 3 0\n",
+  "block_name": "HVRMace",
+  "card": "cards/voidwalker/mace",
+  "frame": 0,
+  "how": "ready MACEA (actor ball)",
+  "srcfile": "heretic-voidwalker/models/weapons/mace/mace.md3",
+  "srcfile_abs": null
+ },
+ "MS_HV_Phoenixrod": {
+  "block": " \n\tPath \"models/weapons/phoenixrod\"\n\tModel 0 \"phoenixrod.md3\"\n\tSkin 0 \"Phx-Rod.png\"\n\tModel 1 \"crystal.md3\"\n\tSkin 1 \"Phx-Rod.png\"\n\tModel 2 \"rod_hand.md3\"\n\tSkin 2 \"hand.png\"\n\tScale -0.82 0.82 0.82\n\tOffset 0.0 -22 -7.0\n\n\t//Ready\n\tFrameIndex PHNX A 0 0\tFrameIndex PHNX A 1 0\tFrameIndex PHNX A 2 0\n\t\n\t//Fire\n\tSkin 1 \"Phx-Crystal.png\"\n\tFrameIndex PHNX B 0 0\tFrameIndex PHNX B 1 0\tFrameIndex PHNX B 2 0\n",
+  "block_name": "HVRPhoenixRod",
+  "card": "cards/voidwalker/phoenixrod",
+  "frame": 0,
+  "how": "ready PHNXA",
+  "srcfile": "heretic-voidwalker/models/weapons/phoenixrod/phoenixrod.md3",
+  "srcfile_abs": null
+ },
+ "MS_HV_Skullrod": {
+  "block": " \n\tPath \"models/weapons/skullrod\"\n\tModel 0 \"skullrod.md3\"\n\tSkin 0 \"g_skull.png\"\n\tModel 1 \"horns.md3\"\n\tSkin 1 \"g_skull.png\"\n\tModel 2 \"staff_hand.md3\"\n\tSkin 2 \"hand.png\"\n\tScale -0.82 0.82 0.82\n\tOffset 0.0 -22 -7.0\n\n\t//Ready\n\tFrameIndex HROD A 0 0\tFrameIndex HROD A 1 0\tFrameIndex HROD A 2 0\n\t\n\t//Fire\n\tSkin 1 \"skull_fx1.png\"\n\tFrameIndex HROD B 0 0\tFrameIndex HROD B 1 0\tFrameIndex HROD B 2 0\n",
+  "block_name": "HVRSkullRod",
+  "card": "cards/voidwalker/skullrod",
+  "frame": 0,
+  "how": "ready HRODA (actor mo)",
+  "srcfile": "heretic-voidwalker/models/weapons/skullrod/skullrod.md3",
+  "srcfile_abs": null
+ },
+ "MS_HV_Staff": {
+  "block": " \n\tPath \"models/weapons/staff\"\n\tModel 0 \"staff.md3\"\n\tModel 1 \"staff_hand.md3\"\n\tSkin 1 \"hand.png\"\n\tScale -0.82 0.82 0.82\n\tOffset 0.0 -22 -7.0\n\n\t//Ready\n\tFrameIndex STFF A 0 0\tFrameIndex STFF A 1 0\n\t\n\t//Fire\n\tFrameIndex STFF B 0 1\tFrameIndex STFF B 1 1\n\tFrameIndex STFF C 0 2\tFrameIndex STFF C 1 2\n\tFrameIndex STFF D 0 3\tFrameIndex STFF D 1 3\n\tFrameIndex STFF E 0 4\tFrameIndex STFF E 1 4\n\tFrameIndex STFF F 0 5\tFrameIndex STFF F 1 5\n\tFrameIndex STFF G 0 6\tFrameIndex STFF G 1 6\n\tFrameIndex STFF H 0 7\tFrameIndex STFF H 1 7\n",
+  "block_name": "HVRStaff",
+  "card": "cards/voidwalker/staff",
+  "frame": 0,
+  "how": "ready STFFA",
+  "srcfile": "heretic-voidwalker/models/weapons/staff/staff.md3",
+  "srcfile_abs": null
+ },
+ "MS_HV_Wand": {
+  "block": " \n\tPath \"models/weapons/wand\"\n\tModel 0 \"wand.md3\"\n\tSkin 0 \"wand.png\"\n\tModel 1 \"wand_hand.md3\"\n\tSkin 1 \"hand.png\"\n\tScale -0.82 0.82 0.82\n\tOffset 0.0 -22 -7.0\n\n\t//Ready\n\tFrameIndex GWND A 0 0\tFrameIndex GWND A 1 0\n\t\n\t//Fire\n\tSkin 0 \"wand_glow.png\"\n\tFrameIndex GWND B 0 0\tFrameIndex GWND B 1 0\n\t\n\tModel 2 \"wand_crystal.md3\"\n\tSkin 2 \"crystal.png\"\n\tFrameIndex GWND C 0 0\tFrameIndex GWND C 1 0\tFrameIndex GWND C 2 0\n",
+  "block_name": "HVRWand",
+  "card": "cards/voidwalker/wand",
+  "frame": 0,
+  "how": "ready GWNDA",
+  "srcfile": "heretic-voidwalker/models/weapons/wand/wand.md3",
+  "srcfile_abs": null
+ },
+ "MS_HX_Cryogun": {
+  "block": " \n   Path \"Models/Cryogun/\"\n   Model 0 \"Cryogun.md3\"\n   Skin 0 \"Cryogun.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tCGUN\tA\t0\t0\nFrameIndex\tCGUN\tB\t0\t1\nFrameIndex\tCGUN\tC\t0\t2\nFrameIndex\tCGUN\tD\t0\t3\nFrameIndex\tCGUN\tE\t0\t4\n\nFrameIndex\tCGUN\tF\t0\t5\nFrameIndex\tCGUN\tG\t0\t6\nFrameIndex\tCGUN\tH\t0\t7\nFrameIndex\tCGUN\tI\t0\t8\nFrameIndex\tCGUN\tJ\t0\t9\nFrameIndex\tCGUN\tK\t0\t10\n\n",
+  "block_name": "_HacxCryogun",
+  "card": "cards/hacx/cryogun",
+  "frame": 0,
+  "how": "ready CGUNA",
+  "srcfile": "HacX/MODELS/Cryogun/cryogun.md3",
+  "srcfile_abs": null
+ },
+ "MS_HX_Melee": {
+  "block": " \n   Path \"Models/Melee/\"\n   Model 0 \"Melee.md3\"\n   Skin 0 \"Melee.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tMELE\tA\t0\t0\nFrameIndex\tMELE\tB\t0\t1\nFrameIndex\tMELE\tC\t0\t2\nFrameIndex\tMELE\tD\t0\t3\nFrameIndex\tMELE\tE\t0\t4\nFrameIndex\tMELE\tF\t0\t5\n\n",
+  "block_name": "_Melee",
+  "card": "cards/hacx/melee",
+  "frame": 0,
+  "how": "ready MELEA",
+  "srcfile": "HacX/MODELS/Melee/melee.md3",
+  "srcfile_abs": null
+ },
+ "MS_HX_Nuker": {
+  "block": " \n   Path \"Models/Nuker/\"\n   Model 0 \"Nuker.md3\"\n   Skin 0 \"Nuker.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\n\nFrameIndex\tNUKE\tA\t0\t0\n\nFrameIndex\tNUKE\tB\t0\t1\nFrameIndex\tNUKE\tC\t0\t2\nFrameIndex\tNUKE\tD\t0\t3\nFrameIndex\tNUKE\tE\t0\t4\nFrameIndex\tNUKE\tF\t0\t5\n\nFrameIndex\tNUKE\tG\t0\t6\nFrameIndex\tNUKE\tH\t0\t7\nFrameIndex\tNUKE\tI\t0\t8\nFrameIndex\tNUKE\tJ\t0\t9\nFrameIndex\tNUKE\tK\t0\t10\n\n",
+  "block_name": "_HacxNuker",
+  "card": "cards/hacx/nuker",
+  "frame": 0,
+  "how": "ready NUKEA",
+  "srcfile": "HacX/MODELS/Nuker/Nuker.md3",
+  "srcfile_abs": null
+ },
+ "MS_HX_Pistol": {
+  "block": " \n   Path \"Models/Pistol/\"\n   Model 0 \"Pistol.md3\"\n   Skin 0 \"Pistol.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tSPIS\tA\t0\t0\nFrameIndex\tSPIS\tB\t0\t1\nFrameIndex\tSPIS\tC\t0\t2\nFrameIndex\tSPIS\tD\t0\t3\nFrameIndex\tSPIS\tE\t0\t4\nFrameIndex\tSPIS\tF\t0\t5\nFrameIndex\tSPIS\tG\t0\t6\nFrameIndex\tSPIS\tH\t0\t7\nFrameIndex\tSPIS\tI\t0\t8\nFrameIndex\tSPIS\tJ\t0\t9\nFrameIndex\tSPIS\tK\t0\t10\n\n\n",
+  "block_name": "_HacxPistol",
+  "card": "cards/hacx/pistol",
+  "frame": 0,
+  "how": "ready SPISA",
+  "srcfile": "HacX/MODELS/Pistol/pistol.md3",
+  "srcfile_abs": null
+ },
+ "MS_HX_Reznator": {
+  "block": " \n   Path \"Models/Reznator/\"\n   Model 0 \"Reznator.md3\"\n   Skin 0 \"Reznator.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tREZT\tA\t0\t0\nFrameIndex\tREZT\tB\t0\t1\n\n\n",
+  "block_name": "_HacxReznator",
+  "card": "cards/hacx/reznator",
+  "frame": 0,
+  "how": "ready REZTA",
+  "srcfile": "HacX/MODELS/Reznator/Reznator.md3",
+  "srcfile_abs": null
+ },
+ "MS_HX_Stick": {
+  "block": " \n   Path \"Models/Stick/\"\n   Model 0 \"Stick.md3\"\n   Skin 0 \"Stick.png\"\n   Scale -1.9 1.9 1.9\n   Offset 0.0 25.0 0.0\n   ZOffset -5\n\n\nFrameIndex\tSTIC\tA\t0\t0\nFrameIndex\tSTIC\tB\t0\t1\n\nFrameIndex\tSTIC\tC\t0\t2\nFrameIndex\tSTIC\tD\t0\t3\nFrameIndex\tSTIC\tE\t0\t4\nFrameIndex\tSTIC\tF\t0\t5\n\nFrameIndex\tSTIC\tG\t0\t6\nFrameIndex\tSTIC\tH\t0\t7\nFrameIndex\tSTIC\tI\t0\t8\nFrameIndex\tSTIC\tJ\t0\t9\nFrameIndex\tSTIC\tK\t0\t10\n",
+  "block_name": "_HacxAntigun",
+  "card": "cards/hacx/stick",
+  "frame": 0,
+  "how": "ready STICA",
+  "srcfile": "HacX/MODELS/Stick/Stick.md3",
+  "srcfile_abs": null
+ },
+ "MS_HX_Tazer": {
+  "block": " \n   Path \"Models/tazer/\"\n   Model 0 \"tazer.md3\"\n   Skin 0 \"tazer.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tTAZE\tA\t0\t0\nFrameIndex\tTAZE\tB\t0\t1\nFrameIndex\tTAZE\tC\t0\t2\nFrameIndex\tTAZE\tD\t0\t3\nFrameIndex\tTAZE\tE\t0\t4\n\nFrameIndex\tTAZE\tF\t0\t5\nFrameIndex\tTAZE\tG\t0\t6\nFrameIndex\tTAZE\tH\t0\t7\nFrameIndex\tTAZE\tI\t0\t8\nFrameIndex\tTAZE\tJ\t0\t9\nFrameIndex\tTAZE\tK\t0\t10\n\n",
+  "block_name": "_HacxTazer",
+  "card": "cards/hacx/tazer",
+  "frame": 0,
+  "how": "ready TAZEA",
+  "srcfile": "HacX/MODELS/tazer/tazer.md3",
+  "srcfile_abs": null
+ },
+ "MS_HX_Uzi": {
+  "block": " \n   Path \"Models/UZI/\"\n   Model 0 \"UZI.md3\"\n   Skin 0 \"UZI.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   //ZOffset -5\n\nFrameIndex\tZUZI\tA\t0\t0\n\nFrameIndex\tZUZI\tB\t0\t1\nFrameIndex\tZUZI\tC\t0\t2\nFrameIndex\tZUZI\tD\t0\t3\nFrameIndex\tZUZI\tE\t0\t4\n\nFrameIndex\tZUZI\tF\t0\t5\nFrameIndex\tZUZI\tG\t0\t6\nFrameIndex\tZUZI\tH\t0\t7\nFrameIndex\tZUZI\tI\t0\t8\nFrameIndex\tZUZI\tJ\t0\t9\nFrameIndex\tZUZI\tK\t0\t10\n\nFrameIndex\tZUZI\tL\t0\t11\nFrameIndex\tZUZI\tM\t0\t12\nFrameIndex\tZUZI\tN\t0\t13\nFrameIndex\tZUZI\tO\t0\t14\nFrameIndex\tZUZI\tP\t0\t15\n\n",
+  "block_name": "_HacxUzi",
+  "card": "cards/hacx/uzi",
+  "frame": 0,
+  "how": "ready ZUZIA",
+  "srcfile": "HacX/MODELS/UZI/UZI.md3",
+  "srcfile_abs": null
+ },
+ "MS_HX_Zooka": {
+  "block": " \n   Path \"Models/Zooka/\"\n   Model 0 \"Zooka.md3\"\n   Skin 0 \"Zooka.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\nFrameIndex\tZOKA\tA\t0\t0\nFrameIndex\tZOKA\tB\t0\t1\nFrameIndex\tZOKA\tC\t0\t2\nFrameIndex\tZOKA\tD\t0\t3\nFrameIndex\tZOKA\tE\t0\t4\nFrameIndex\tZOKA\tF\t0\t5\nFrameIndex\tZOKA\tG\t0\t6\nFrameIndex\tZOKA\tH\t0\t7\nFrameIndex\tZOKA\tI\t0\t8\nFrameIndex\tZOKA\tJ\t0\t9\nFrameIndex\tZOKA\tK\t0\t10\n\n",
+  "block_name": "_HacxPhotonZooka",
+  "card": "cards/hacx/zooka",
+  "frame": 0,
+  "how": "ready ZOKAA",
+  "srcfile": "HacX/MODELS/Zooka/Zooka.md3",
+  "srcfile_abs": null
+ },
+ "MS_MG_Bfg": {
+  "block": " \n   Path \"Models/BFG/\"\n   Model 0 \"BFG.md3\"\n   Skin 0 \"BFG_9k.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -6\n\nFrameIndex\tBFGN\tA\t0\t0\n\nFrameIndex\tBFGA\tF\t0\t10\n\n",
+  "block_name": "BFG9K",
+  "card": "cards/meatgrinder/bfg",
+  "frame": 0,
+  "how": "ready BFGNA",
+  "srcfile": "BR_VR_MeatGrinder/Models/BFG/BFG.md3",
+  "srcfile_abs": null
+ },
+ "MS_MG_Bolter": {
+  "block": " \n   Path \"Models/Bolter/\"\n   Model 0 \"Bolter.md3\"\n   Skin 0 \"Bolter.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -6\n\nFrameIndex\tPLSC\tA\t0\t0\n\nFrameIndex\tPLSF\tA\t0\t1\nFrameIndex\tPLSF\tB\t0\t2\n\n\nFrameIndex\tPLSC\tB\t0\t3\nFrameIndex\tPLSC\tC\t0\t4\nFrameIndex\tPLSC\tD\t0\t5\n\n\n",
+  "block_name": "PlasmaThrower",
+  "card": "cards/meatgrinder/bolter",
+  "frame": 0,
+  "how": "ready PLSCA",
+  "srcfile": "BR_VR_MeatGrinder/Models/Bolter/Bolter.md3",
+  "srcfile_abs": null
+ },
+ "MS_MG_Chaingun": {
+  "block": " \n   Path \"Models/ChainGun/\"\n   Model 0 \"Chaingun.md3\"\n   Skin 0 \"Chaingun.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -6\n\nFrameIndex\tMGUG\tA\t0\t0\nFrameIndex\tMGUG\tB\t0\t1\nFrameIndex\tMGUG\tC\t0\t2\nFrameIndex\tMGUG\tD\t0\t3\n\nFrameIndex\tMGUF\tA\t0\t4\nFrameIndex\tMGUF\tB\t0\t5\n\n",
+  "block_name": "ChaingunCannon",
+  "card": "cards/meatgrinder/chaingun",
+  "frame": 0,
+  "how": "ready MGUGA",
+  "srcfile": "BR_VR_MeatGrinder/Models/ChainGun/Chaingun.md3",
+  "srcfile_abs": null
+ },
+ "MS_MG_Knife": {
+  "block": " \n   Path \"Models/Knife/\"\n   Model 0 \"Knife.md3\"\n   Skin 0 \"Knife.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -6\n\n\nFrameIndex\tFSTZ\tA\t0\t0\nFrameIndex\tFSTZ\tB\t0\t1\nFrameIndex\tFSTZ\tC\t0\t2\nFrameIndex\tFSTZ\tD\t0\t3\nFrameIndex\tFSTZ\tE\t0\t4\nFrameIndex\tFSTZ\tF\t0\t5\nFrameIndex\tFSTZ\tG\t0\t6\nFrameIndex\tFSTZ\tH\t0\t7\nFrameIndex\tFSTZ\tI\t0\t8\n\n\n\n",
+  "block_name": "GrinderFist",
+  "card": "cards/meatgrinder/knife",
+  "frame": 0,
+  "how": "ready FSTZA",
+  "srcfile": "BR_VR_MeatGrinder/Models/Knife/knife.md3",
+  "srcfile_abs": null
+ },
+ "MS_MG_Rpg": {
+  "block": " \n   Path \"Models/RPG/\"\n   Model 0 \"RPG.md3\"\n   Skin 0 \"RPG.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -6\n   \nFrameIndex\tRLNC\tA\t0\t0\nFrameIndex\tRLNC\tB\t0\t1\nFrameIndex\tRLNC\tC\t0\t2\nFrameIndex\tRLNC\tD\t0\t3\n\nFrameIndex\tRLNF\tA\t0\t4\nFrameIndex\tRLNF\tB\t0\t5\nFrameIndex\tRLNF\tC\t0\t6\n\n",
+  "block_name": "MultiRocketLauncher",
+  "card": "cards/meatgrinder/rpg",
+  "frame": 0,
+  "how": "ready RLNCA",
+  "srcfile": "BR_VR_MeatGrinder/Models/RPG/RPG.md3",
+  "srcfile_abs": null
+ },
+ "MS_MG_Saw": {
+  "block": " \n   Path \"Models/Saw/\"\n   Model 0 \"Saw.md3\"\n   Skin 0 \"Saw.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 0.0 0.0\n   ZOffset -5\n\n\nFrameIndex\tSAWG\tC\t0\t0\nFrameIndex\tSAWG\tD\t0\t1\n\n\nFrameIndex\tSAWF\tA\t0\t2\nFrameIndex\tSAWF\tB\t0\t3\nFrameIndex\tSAWF\tC\t0\t4\nFrameIndex\tSAWF\tD\t0\t5\n\n",
+  "block_name": "SuperSaw",
+  "card": "cards/meatgrinder/saw",
+  "frame": 0,
+  "how": "ready SAWGC",
+  "srcfile": "BR_VR_MeatGrinder/Models/Saw/Saw.md3",
+  "srcfile_abs": null
+ },
+ "MS_MG_Shotgun": {
+  "block": " \n   Path \"Models/Shotgun/\"\n   Model 0 \"Shotgun.md3\"\n   Skin 0 \"Shotgun.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -6\n\nFrameIndex\tSHTG\tA\t0\t0\nFrameIndex\tSHTG\tB\t0\t1\nFrameIndex\tSHTG\tC\t0\t2\nFrameIndex\tSHTG\tD\t0\t3\n\n",
+  "block_name": "AutoShotgun",
+  "card": "cards/meatgrinder/shotgun",
+  "frame": 0,
+  "how": "ready SHTGA",
+  "srcfile": "BR_VR_MeatGrinder/Models/Shotgun/Shotgun.md3",
+  "srcfile_abs": null
+ },
+ "MS_MG_Ssg": {
+  "block": " \n   Path \"Models/SSG/\"\n   Model 0 \"SSG.md3\"\n   Skin 0 \"SSG.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -6\n\nFrameIndex\tSSGG\tA\t0\t0\n\nFrameIndex\tSSGF\tA\t0\t1\nFrameIndex\tSSGF\tB\t0\t2\nFrameIndex\tSSGF\tC\t0\t3\nFrameIndex\tSSGF\tD\t0\t4\nFrameIndex\tSSGF\tE\t0\t5\n\nFrameIndex\tSSGG\tB\t0\t6\nFrameIndex\tSSGG\tC\t0\t7\nFrameIndex\tSSGG\tD\t0\t8\nFrameIndex\tSSGG\tE\t0\t9\nFrameIndex\tSSGG\tF\t0\t10\nFrameIndex\tSSGG\tG\t0\t11\n\nFrameIndex\tSSGA\tA\t0\t6\nFrameIndex\tSSGA\tB\t0\t6\n\n",
+  "block_name": "SSG",
+  "card": "cards/meatgrinder/ssg",
+  "frame": 0,
+  "how": "ready SSGGA",
+  "srcfile": "BR_VR_MeatGrinder/Models/SSG/SSG.md3",
+  "srcfile_abs": null
+ },
+ "MS_MG_Tec9": {
+  "block": " \n   Path \"Models/TEC9/\"\n   Model 0 \"TEC9.md3\"\n   Skin 0 \"TEC9.png\"\n   Scale -1.1 1.1 1.1\n   Offset 0.0 0.0 0.0\n   ZOffset -6\n\nFrameIndex\tMGNG\tA\t0\t0\n\nFrameIndex\tMGNF\tA\t0\t1\nFrameIndex\tMGNF\tB\t0\t2\n\n\nFrameIndex\tMGNG\tB\t0\t3\nFrameIndex\tMGNG\tC\t0\t4\nFrameIndex\tMGNG\tD\t0\t5\n\n\n",
+  "block_name": "Machinegun",
+  "card": "cards/meatgrinder/tec9",
+  "frame": 0,
+  "how": "ready MGNGA",
+  "srcfile": "BR_VR_MeatGrinder/Models/TEC9/tec9.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Blunderbuss": {
+  "block": "\n\tPath \"models/blunderbuss\"\n\tModel 0 \"blunderbuss.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex SGUN A 0 0 \tFrameIndex SGUN A 1 28\n\t\n\t//Fire\n\tFrameIndex SGUN B 0 1 \tFrameIndex SGUN B 1 29\n\tFrameIndex SGUN C 0 2 \tFrameIndex SGUN C 1 30\n\tFrameIndex SGUN D 0 3 \tFrameIndex SGUN D 1 31\n\tFrameIndex SGUN E 0 4 \tFrameIndex SGUN E 1 32\n\tFrameIndex SGUN F 0 5 \tFrameIndex SGUN F 1 33\n\tFrameIndex SGUN G 0 6 \tFrameIndex SGUN G 1 34\n\tFrameIndex SGUN H 0 7 \tFrameIndex SGUN H 1 35\n\tFrameIndex SGUN I 0 8 \tFrameIndex SGUN I 1 36\n",
+  "block_name": "PDVR_Blunderbuss",
+  "card": "cards/pirate/blunderbuss",
+  "frame": 0,
+  "how": "ready SGUNA",
+  "srcfile": "pirate-doom-vr/models/blunderbuss/blunderbuss.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Bomb": {
+  "block": "\n\tPath \"models/bomb\"\n\tModel 0 \"bomb.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex BOMB A 0 0 \tFrameIndex BOMB A 1 50\n\t\n\t//Fire\n\tFrameIndex BOMB B 0 1 \tFrameIndex BOMB B 1 51\n",
+  "block_name": "PDVR_Bomb",
+  "card": "cards/pirate/bomb",
+  "frame": 0,
+  "how": "ready BOMBA",
+  "srcfile": "pirate-doom-vr/models/bomb/bomb.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Cannon": {
+  "block": "\n\tPath \"models/cannon\"\n\tModel 0 \"cannon.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex CANO A 0 0 \tFrameIndex CANO A 1 49\n",
+  "block_name": "PDVR_Cannon",
+  "card": "cards/pirate/cannon",
+  "frame": 0,
+  "how": "ready CANOA",
+  "srcfile": "pirate-doom-vr/models/cannon/cannon.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Cutlass": {
+  "block": "\n\tPath \"models/cutlass\"\n\tModel 0 \"cutlass.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex SWOR A 0 0 \tFrameIndex SWOR A 1 1\n\t\n\t//Attack\n\tFrameIndex SWOR B 0 1 \tFrameIndex SWOR B 1 2\n\tFrameIndex SWOR C 0 2 \tFrameIndex SWOR C 1 3\n\tFrameIndex SWOR D 0 3 \tFrameIndex SWOR D 1 4\n\tFrameIndex SWOR E 0 4 \tFrameIndex SWOR E 1 5\n\tFrameIndex SWOR F 0 5 \tFrameIndex SWOR F 1 6\n\tFrameIndex SWOR G 0 6 \tFrameIndex SWOR G 1 7\n\tFrameIndex SWOR H 0 7 \tFrameIndex SWOR H 1 8\n\tFrameIndex SWOR I 0 8 \tFrameIndex SWOR I 1 9\n\t\n\t//Slash\n\tFrameIndex SWOR J 0 10 \tFrameIndex SWOR J 1 11\n\tFrameIndex SWOR K 0 11 \tFrameIndex SWOR K 1 12\n\tFrameIndex SWOR L 0 12 \tFrameIndex SWOR L 1 13\n\tFrameIndex SWOR M 0 13 \tFrameIndex SWOR M 1 14\n\tFrameIndex SWOR N 0 14 \tFrameIndex SWOR N 1 15\n\tFrameIndex SWOR O 0 15 \tFrameIndex SWOR O 1 16\n\tFrameIndex SWOR P 0 16 \tFrameIndex SWOR P 1 17\n\tFrameIndex SWOR Q 0 17 \tFrameIndex SWOR Q 1 18\n",
+  "block_name": "PDVR_Cutlass",
+  "card": "cards/pirate/cutlass",
+  "frame": 0,
+  "how": "ready SWORA (actor puff)",
+  "srcfile": "pirate-doom-vr/models/cutlass/cutlass.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Flintlock": {
+  "block": "\n\tPath \"models/pistol\"\n\tModel 0 \"flintlock.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Fire\n\tFrameIndex PISG B 0 1 \tFrameIndex PISG B 1 20\n\tFrameIndex PISG C 0 2 \tFrameIndex PISG C 1 21\n\tFrameIndex PISG D 0 3 \tFrameIndex PISG D 1 22\n\tFrameIndex PISG E 0 4 \tFrameIndex PISG E 1 23\n\tFrameIndex PISG F 0 5 \tFrameIndex PISG F 1 24\n\tFrameIndex PISG G 0 6 \tFrameIndex PISG G 1 25\n\tFrameIndex PISG H 0 7 \tFrameIndex PISG H 1 26\n\tFrameIndex PISG I 0 8 \tFrameIndex PISG I 1 27\n\tFrameIndex PISG J 0 9 \tFrameIndex PISG J 1 27\n\tFrameIndex PISG K 0 10 \tFrameIndex PISG K 1 27\n\t\n\tNOINTERPOLATION\n\t\n\t//Ready\n\tFrameIndex PISG A 0 0 \tFrameIndex PISG A 1 19\n",
+  "block_name": "PDVR_Flintlock",
+  "card": "cards/pirate/flintlock",
+  "frame": 0,
+  "how": "ready PISGA",
+  "srcfile": "pirate-doom-vr/models/pistol/flintlock.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Grog": {
+  "block": "\n\tPath \"models/grog\"\n\tModel 0 \"grog.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex PLSG A 0 0 \tFrameIndex PLSG A 1 60\n\t\n\t//Fire\n\tFrameIndex PLSG B 0 1 \tFrameIndex PLSG B 1 61\n",
+  "block_name": "PDVR_GrogSpitter",
+  "card": "cards/pirate/grog",
+  "frame": 0,
+  "how": "ready PLSGA",
+  "srcfile": "pirate-doom-vr/models/grog/grog.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Mortar": {
+  "block": "\n\tPath \"models/mortar\"\n\tModel 0 \"mortar.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex MRTR A 0 0 \tFrameIndex MRTR A 1 28\n\t\n\t//Fire\n\tFrameIndex MRTR B 0 1 \tFrameIndex MRTR B 1 29\n\tFrameIndex MRTR C 0 2 \tFrameIndex MRTR C 1 30\n\tFrameIndex MRTR D 0 3 \tFrameIndex MRTR D 1 31\n\tFrameIndex MRTR E 0 4 \tFrameIndex MRTR E 1 32\n\tFrameIndex MRTR F 0 5 \tFrameIndex MRTR F 1 33\n\tFrameIndex MRTR G 0 6 \tFrameIndex MRTR G 1 34\n\tFrameIndex MRTR H 0 7 \tFrameIndex MRTR H 1 35\n\tFrameIndex MRTR I 0 8 \tFrameIndex MRTR I 1 36\n",
+  "block_name": "PDVR_Mortar",
+  "card": "cards/pirate/mortar",
+  "frame": 0,
+  "how": "ready MRTRA",
+  "srcfile": "pirate-doom-vr/models/mortar/mortar.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Musket": {
+  "block": "\n\tPath \"models/musket\"\n\tModel 0 \"musket.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex SGUN A 0 0 \tFrameIndex SGUN A 1 28\n\t\n\t//Fire\n\tFrameIndex SGUN B 0 1 \tFrameIndex SGUN B 1 29\n\tFrameIndex SGUN C 0 2 \tFrameIndex SGUN C 1 30\n\tFrameIndex SGUN D 0 3 \tFrameIndex SGUN D 1 31\n\tFrameIndex SGUN E 0 4 \tFrameIndex SGUN E 1 32\n\tFrameIndex SGUN F 0 5 \tFrameIndex SGUN F 1 33\n\tFrameIndex SGUN G 0 6 \tFrameIndex SGUN G 1 34\n\tFrameIndex SGUN H 0 7 \tFrameIndex SGUN H 1 35\n\tFrameIndex SGUN I 0 8 \tFrameIndex SGUN I 1 36\n",
+  "block_name": "PDVR_Musket",
+  "card": "cards/pirate/musket",
+  "frame": 0,
+  "how": "ready SGUNA",
+  "srcfile": "pirate-doom-vr/models/musket/musket.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Nock": {
+  "block": "\n\tPath \"models/nock\"\n\tModel 0 \"nock.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex SHT2 A 0 0 \tFrameIndex SHT2 A 1 28\n\t\n\t//Fire\n\tFrameIndex SHT2 B 0 1 \tFrameIndex SHT2 B 1 29\n\tFrameIndex SHT2 C 0 2 \tFrameIndex SHT2 C 1 30\n\tFrameIndex SHT2 D 0 3 \tFrameIndex SHT2 D 1 31\n\tFrameIndex SHT2 E 0 4 \tFrameIndex SHT2 E 1 32\n\tFrameIndex SHT2 F 0 5 \tFrameIndex SHT2 F 1 33\n\tFrameIndex SHT2 G 0 6 \tFrameIndex SHT2 G 1 34\n\tFrameIndex SHT2 H 0 7 \tFrameIndex SHT2 H 1 35\n\tFrameIndex SHT2 I 0 8 \tFrameIndex SHT2 I 1 36\n",
+  "block_name": "PDVR_NockGun",
+  "card": "cards/pirate/nock",
+  "frame": 0,
+  "how": "ready SHT2A",
+  "srcfile": "pirate-doom-vr/models/nock/nock.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Repeater": {
+  "block": "\n\tPath \"models/repeater\"\n\tModel 0 \"repeater.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex GATL A 0 0 \tFrameIndex GATL A 1 46\n\t\n\t//Fire\n\tFrameIndex GATL B 0 1 \tFrameIndex GATL B 1 47\n\tFrameIndex GATL C 0 2\tFrameIndex GATL C 1 48\n",
+  "block_name": "PDVR_Repeater",
+  "card": "cards/pirate/repeater",
+  "frame": 0,
+  "how": "ready GATLA",
+  "srcfile": "pirate-doom-vr/models/repeater/repeater.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Superpistol": {
+  "block": "\n\tPath \"models/s_pistol\"\n\tModel 0 \"s_pistol.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex SHT2 A 0 0 \tFrameIndex SHT2 A 1 52\n\t\n\t//Fire\n\tFrameIndex SHT2 B 0 1 \tFrameIndex SHT2 B 1 53\n\tFrameIndex SHT2 C 0 2 \tFrameIndex SHT2 C 1 54\n\tFrameIndex SHT2 D 0 3 \tFrameIndex SHT2 D 1 55\n\tFrameIndex SHT2 E 0 4 \tFrameIndex SHT2 E 1 56\n\tFrameIndex SHT2 F 0 5 \tFrameIndex SHT2 F 1 57\n\tFrameIndex SHT2 G 0 6 \tFrameIndex SHT2 G 1 58\n",
+  "block_name": "PDVR_SuperPistol",
+  "card": "cards/pirate/superpistol",
+  "frame": 0,
+  "how": "ready SHT2A",
+  "srcfile": "pirate-doom-vr/models/s_pistol/s_pistol.md3",
+  "srcfile_abs": null
+ },
+ "MS_PD_Swivelcannon": {
+  "block": "\n\tPath \"models/s_cannon\"\n\tModel 0 \"s_cannon.md3\"\n\t\n\tPath \"models/glove\"\n\tModel 1 \"glove.md3\"\n\t\n\tScale -1.0 1.0 1.0\n\tOffset 0.0 -16.0 -11.0\n\t\n\t//Ready\n\tFrameIndex MINI A 0 0 \tFrameIndex MINI A 1 46\n",
+  "block_name": "PDVR_SwivelCannon",
+  "card": "cards/pirate/swivelcannon",
+  "frame": 0,
+  "how": "ready MINIA",
+  "srcfile": "pirate-doom-vr/models/s_cannon/s_cannon.md3",
+  "srcfile_abs": null
+ },
+ "MS_PO_Glove": {
+  "block": "\n\tPath \"models/glove\"\n\tModel 0 \"glove.md3\"\n\n\tScale -1.2 1.2 1.2\n\tOffset 0.0 -10.0 -10.0\n\n\tFrameIndex FIST A 0 0\n\tFrameIndex FIST B 0 1\n\tFrameIndex FIST C 0 2\n\tFrameIndex FIST D 0 3\n\tFrameIndex FIST E 0 4\n",
+  "block_name": "VRBoxingFist",
+  "card": "cards/punchout/glove",
+  "frame": 0,
+  "how": "ready FISTA",
+  "srcfile": "virtual-punch-out/models/glove/glove.md3",
+  "srcfile_abs": null
+ },
+ "MS_RC_Auto9": {
+  "block": "\n   Path \"models/weapons/auto9\"\n   Model 0 \"auto9.md3\"\n   Skin 0 \"auto9.png\"\n   Scale -0.85 .85 .85\n   Offset 0.0 -25.0 -7.0\n   \n   //Ready\n   FrameIndex AUT9 A 0 0\n   \n   //Fire\n   FrameIndex AUT9 B 0 1\n   FrameIndex AUT9 C 0 2\n   \n   //Gun spin\n   FrameIndex AUT9 D 0 4\n   FrameIndex AUT9 E 0 5\n   FrameIndex AUT9 F 0 6\n   FrameIndex AUT9 G 0 7\n   FrameIndex AUT9 H 0 8\n   FrameIndex AUT9 I 0 9\n   FrameIndex AUT9 J 0 10\n   FrameIndex AUT9 K 0 11\n",
+  "block_name": "Auto9",
+  "card": "cards/robocop/auto9",
+  "frame": 0,
+  "how": "ready AUT9A",
+  "srcfile": "Robocop-Retribution/models/weapons/auto9/auto9.md3",
+  "srcfile_abs": null
+ },
+ "MS_RC_Chaingun": {
+  "block": "\n   Path \"models/weapons/chaingun\"\n   Model 0 \"chaingun.md3\"\n   SurfaceSkin 0 0 \"chaingun.png\"\n   SurfaceSkin 0 1 \"chaingun.png\"\n   SurfaceSkin 0 2 \"chaingunfin.png\"\n   SurfaceSkin 0 3 \"chaingun.png\"\n   SurfaceSkin 0 4 \"chaingun.png\"\n   SurfaceSkin 0 5 \"chaingunfin.png\"\n   SurfaceSkin 0 6 \"chaingun.png\"\n   Scale -1.25 1.25 1.25\n   Offset 0.0 -28.0 -10.0\n   \n   //Ready\n   FrameIndex SHRP A 0 0\n   \n   //Fire\n   FrameIndex SHRP B 0 1\n   FrameIndex SHRP C 0 2\n   FrameIndex SHRP D 0 3\n   FrameIndex SHRP E 0 4\n   FrameIndex SHRP F 0 5\n",
+  "block_name": "Ed209Gun",
+  "card": "cards/robocop/chaingun",
+  "frame": 0,
+  "how": "ready SHRPA",
+  "srcfile": "Robocop-Retribution/models/weapons/chaingun/chaingun.md3",
+  "srcfile_abs": null
+ },
+ "MS_RC_Chainsaw": {
+  "block": "\n   Path \"models/weapons/chainsaw\"\n   Model 0 \"chainsaw.md3\"\n   Skin 0 \"chainsaw.png\"\n   Scale -0.85 0.85 0.85\n   Offset 0.0 -22.0 -10.0\n   \n   FrameIndex HSAW A 0 0\n   FrameIndex HSAW B 0 1\n   FrameIndex HSAW C 0 2\n   FrameIndex HSAW D 0 3\n   FrameIndex HSAW E 0 4\n   FrameIndex HSAW F 0 5\n   FrameIndex HSAW G 0 6\n   FrameIndex HSAW H 0 7\n   FrameIndex HSAW I 0 8\n   FrameIndex HSAW J 0 9\n   FrameIndex HSAW K 0 10\n   FrameIndex HSW2 A 0 11\n   FrameIndex HSW2 B 0 12\n   FrameIndex HSW2 C 0 13\n   FrameIndex HSW2 D 0 14\n   FrameIndex HSW2 E 0 15\n   FrameIndex HSW2 F 0 16\n   FrameIndex HSW2 G 0 17\n   FrameIndex HSW2 H 0 18\n   FrameIndex HSW2 I 0 19\n   FrameIndex HSW2 J 0 20\n   FrameIndex HSW2 K 0 21\n   FrameIndex HSW2 L 0 22\n   FrameIndex HSW2 M 0 23\n   FrameIndex HSW2 N 0 24\n   FrameIndex HSW2 O 0 25\n   FrameIndex HSW2 P 0 26\n   FrameIndex HSW2 Q 0 27\n   FrameIndex HSW2 R 0 28\n   FrameIndex HSW2 S 0 29\n   FrameIndex HSW2 T 0 30\n   FrameIndex HSW2 U 0 31\n   FrameIndex HSW2 V 0 32\n   FrameIndex HSW2 W 0 33\n   FrameIndex HSW2 X 0 34\n   FrameIndex HSW2 Y 0 35\n   FrameIndex HSW2 Z 0 36\n",
+  "block_name": "Grinder",
+  "card": "cards/robocop/chainsaw",
+  "frame": 0,
+  "how": "ready HSAWA",
+  "srcfile": "Robocop-Retribution/models/weapons/chainsaw/chainsaw.md3",
+  "srcfile_abs": null
+ },
+ "MS_RC_Cobra": {
+  "block": "\n   Path \"models/weapons/cobra\"\n   Model 0 \"cobra.md3\"\n   Skin 0 \"cobra_tex.jpg\"\n   Model 1 \"cobra_scope.md3\"\n   SurfaceSkin 1 0 \"cobra_tex.jpg\"\n   SurfaceSkin 1 1 \"cobra_scope_buttons.jpg\"\n   SurfaceSkin 1 2 \"cobra_scope_glass.jpg\"\n   SurfaceSkin 1 3 \"cobra_tex.jpg\"\n   SurfaceSkin 1 4 \"cobra_tex.jpg\"\n   Scale -0.61 0.61 0.61\n   Offset 0.0 -30.0 -8.0\n   \n   //Ready\n   FrameIndex COBR A 0 0\tFrameIndex COBR A 0 0\n   \n   //Fire\n   FrameIndex COBR B 0 1\tFrameIndex COBR B 0 1\n   FrameIndex COBR C 0 2\tFrameIndex COBR C 0 2\n   FrameIndex COBR D 0 3\tFrameIndex COBR D 0 3\n",
+  "block_name": "CobraAssaultCannon",
+  "card": "cards/robocop/cobra",
+  "frame": 0,
+  "how": "ready COBRA",
+  "srcfile": "Robocop-Retribution/models/weapons/cobra/cobra.md3",
+  "srcfile_abs": null
+ },
+ "MS_RC_Fist": {
+  "block": "\n   Path \"models/weapons/fist\"\n   Model 0 \"robohand.md3\"\n   Skin 0 \"robohand.jpg\"\n   Scale -0.85 .85 .85\n   Offset 0.0 -25.0 -7.0\n   \n   //Ready\n   FrameIndex RPUN A 0 0\n   \n   //Punch\n   FrameIndex RPUN B 0 1\n   FrameIndex RPUN C 0 2\n   FrameIndex RPUN D 0 3\n   FrameIndex RPUN E 0 4\n   FrameIndex RPUN F 0 5\n   \n   //Open spike\n   FrameIndex RPUN G 0 6\n   FrameIndex RPUN H 0 7\n   FrameIndex RPUN I 0 8\n   \n   //Stab\n   FrameIndex RPUN J 0 9\n   FrameIndex RPUN K 0 10\n   FrameIndex RPUN L 0 11\n   FrameIndex RPUN M 0 12\n   FrameIndex RPUN N 0 13\n",
+  "block_name": "RoboFist",
+  "card": "cards/robocop/fist",
+  "frame": 0,
+  "how": "ready RPUNA",
+  "srcfile": "Robocop-Retribution/models/weapons/fist/robohand.md3",
+  "srcfile_abs": null
+ },
+ "MS_RC_Ksg": {
+  "block": null,
+  "block_name": null,
+  "card": "cards/robocop/ksg",
+  "frame": null,
+  "how": "no source block",
+  "srcfile": "Robocop-Retribution/models/weapons/ksg/ksg.md3",
+  "srcfile_abs": null
+ },
+ "MS_RC_M27": {
+  "block": "\n   Path \"models/weapons/m27\"\n   Model 0 \"m27_rifle.md3\"\n   SurfaceSkin 0 0 \"m27_plasmagun.png\"\n   SurfaceSkin 0 1 \"m27_plasmagun2.png\"\n   SurfaceSkin 0 2 \"m27_plasmagun.png\"\n   SurfaceSkin 0 3 \"m27_plasmagun.png\"\n   SurfaceSkin 0 4 \"m27_plasmagun.png\"\n   SurfaceSkin 0 5 \"m27_plasmagun2.png\"\n   SurfaceSkin 0 6 \"m27_plasmagun2.png\"\n   SurfaceSkin 0 7 \"m27_plasmagun2.png\"\n   SurfaceSkin 0 8 \"m27_plasmagun.png\"\n   Scale -0.9 0.9 0.9\n   Offset 0.0 -30.0 -8.0\n   \n   //Ready\n   FrameIndex PLMR A 0 0\n   \n   //Fire\n   FrameIndex PLMR B 0 1\n   FrameIndex PLMR C 0 1\n",
+  "block_name": "M27PlasmaRifle",
+  "card": "cards/robocop/m27",
+  "frame": 0,
+  "how": "ready PLMRA",
+  "srcfile": "Robocop-Retribution/models/weapons/m27/m27_rifle.md3",
+  "srcfile_abs": null
+ },
+ "MS_RC_M32": {
+  "block": "\n   Path \"models/weapons/m32\"\n   Model 0 \"m32.md3\"\n   SurfaceSkin 0 0 \"m32_tex1.png\"\n   SurfaceSkin 0 1 \"m32_tex2.png\"\n   SurfaceSkin 0 2 \"m32_tex1.png\"\n   SurfaceSkin 0 3 \"m32_tex1.png\"\n   SurfaceSkin 0 4 \"m32_tex2.png\"\n   SurfaceSkin 0 5 \"m32_tex2.png\"\n   SurfaceSkin 0 6 \"m32_tex1.png\"\n   SurfaceSkin 0 7 \"m32_tex2.png\"\n   SurfaceSkin 0 8 \"m32_tex1.png\"\n   Scale -0.62 0.62 0.62\n   Offset 0.0 -30.0 -8.0\n   \n   NOINTERPOLATION\n   \n   //Ready\n   FrameIndex MMIS A 0 0\n",
+  "block_name": "MiniMissileShooter",
+  "card": "cards/robocop/m32",
+  "frame": 0,
+  "how": "ready MMISA",
+  "srcfile": "Robocop-Retribution/models/weapons/m32/m32.md3",
+  "srcfile_abs": null
+ },
+ "MS_RC_Shotgun": {
+  "block": "\n   Path \"models/weapons/shotgun\"\n   Model 0 \"shotgun.md3\"\n   Skin 0 \"shotgun.jpg\"\n   Scale -0.85 .85 .85\n   Offset 0.0 -25.0 -7.0\n   \n   //Ready\n   FrameIndex RSHG A 0 0\n   \n   //Fire\n   FrameIndex RSHG B 0 1\n   FrameIndex RSHG C 0 2\n   FrameIndex RSHG D 0 3\n   FrameIndex RSHG E 0 4\n   \n   //Pump\n   FrameIndex RSHG F 0 5\n   FrameIndex RSHG G 0 6\n   FrameIndex RSHG H 0 7\n",
+  "block_name": "RoboShotgun",
+  "card": "cards/robocop/shotgun",
+  "frame": 0,
+  "how": "ready RSHGA",
+  "srcfile": "Robocop-Retribution/models/weapons/shotgun/shotgun.md3",
+  "srcfile_abs": null
+ },
+ "MS_UV_ChaingunD4": {
+  "block": "\n   Path \"Models/Weapons/Hud/Chaingun_D4\"\n   Model 0 \"schaingun.md3\"\n   Skin 0 \"schaingun.png\"\n   Scale -1.7 1.7 1.8\n   Offset 0.0 -13.0 -4.0\n   \n   FrameIndex CGD4 A 0 0\n   FrameIndex CGD4 B 0 1\n",
+  "block_name": "Vanilla_Chaingun",
+  "card": "cards/universal_voxel/chaingun_d4",
+  "frame": 0,
+  "how": "ready CGD4A",
+  "srcfile": "Universal_Doom_VoxelWeapons_VR/MODELS/Weapons/Hud/Chaingun_D4/schaingun.md3",
+  "srcfile_abs": null
+ },
+ "MS_UV_ShotgunD4": {
+  "block": " \n   Path \"Models/Weapons/Hud/Shotgun_D4\"\n   Model 0 \"sshot.md3\"\n   Skin 0 \"sshot.png\"\n   Scale -1.05 1.05 1.05\n   Offset 0.0 -29.0 -6.0\n\n   NOINTERPOLATION\n\n   FrameIndex SHD4 A 0 0\n   FrameIndex SHD4 B 0 1\n   FrameIndex SHD4 C 0 2\n   FrameIndex SHD4 D 0 3\n",
+  "block_name": "Vanilla_Shotgun",
+  "card": "cards/universal_voxel/shotgun_d4",
+  "frame": 0,
+  "how": "ready SHD4A",
+  "srcfile": "Universal_Doom_VoxelWeapons_VR/MODELS/Weapons/Hud/Shotgun_D4/sshot.md3",
+  "srcfile_abs": null
+ },
+ "MS_UV_SsgD4": {
+  "block": " \n   Path \"Models/Weapons/Hud/SSG_D4\"\n   Model 0 \"sssg.md3\"\n   Skin 0 \"sssg.png\"\n   Scale -1.0 1.0 1.0\n   Offset 0.0 -28.0 -4.0\n   \n   INTERPOLATEDOUBLEDFRAMES\n\n   FrameIndex SGD4 A 0 0\n   FrameIndex SGD4 B 0 1\n   FrameIndex SGD4 C 0 2\n   FrameIndex SGD4 D 0 3\n   FrameIndex SGD4 H 0 7\n",
+  "block_name": "Vanilla_SuperShotgun",
+  "card": "cards/universal_voxel/ssg_d4",
+  "frame": 0,
+  "how": "ready SGD4A",
+  "srcfile": "Universal_Doom_VoxelWeapons_VR/MODELS/Weapons/Hud/SSG_D4/sssg.md3",
+  "srcfile_abs": null
+ },
+ "MS_VP_Chainsaw": {
+  "block": "\n\t   Path \"Models/Weapons/Hud/Chainsaw\"\n\t   Model 0 \"Chainsaw.md3\"\n\t\tSkin 0 \"Chainsaw.png\"\n\n\t\tOffset 0.0 14.0 0.0\n\t\tScale -1.5 1.5 1.5\n\n\n\tFrameIndex SAWG C 0 5 \n\tFrameIndex SAWG D 0 7\t  \n\tNOINTERPOLATION\n\tFrameIndex SAWG A 0 0\t   \n\tNOINTERPOLATION\n\tFrameIndex SAWG B 0 3\t\n\t",
+  "block_name": "Vanilla_Chainsaw",
+  "card": "cards/vplus/chainsaw",
+  "frame": 0,
+  "how": "ready SAWGA",
+  "srcfile": "_01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/chainsaw.md3",
+  "srcfile_abs": null
+ },
+ "MS_VP_M16": {
+  "block": " \n   Path \"Models/Weapons/hud/guns\"\n   Model 0 \"m16.md3\"\n   Skin 0 \"WPN-M16.png\"\n  \n   Scale 1.35 1.35 1.35\n\n//zoffset -10\n//offset 10 10 -5 //desktop\n\n\n   FrameIndex RIFL A 0 0   FrameIndex RIFL A 1 0\n   FrameIndex RIFL B 0 1   FrameIndex RIFL B 1 1\n   FrameIndex RIFL C 0 2   FrameIndex RIFL C 1 2\n   FrameIndex RIFL D 0 3   FrameIndex RIFL D 1 3\n   FrameIndex RIFL E 0 4   FrameIndex RIFL E 1 4\n   FrameIndex RIFL F 0 5   FrameIndex RIFL F 1 5\n   FrameIndex RIFL G 0 6   FrameIndex RIFL G 1 6\n   FrameIndex RIFL H 0 7   FrameIndex RIFL H 1 7\n   FrameIndex RIFL I 0 8   FrameIndex RIFL I 1 8\n   FrameIndex RIFL J 0 9   FrameIndex RIFL J 1 9\n   FrameIndex RIFL K 0 10   FrameIndex RIFL K 1 10\n   FrameIndex RIFL L 0 11   FrameIndex RIFL L 1 11\n   FrameIndex RIFL M 0 12   FrameIndex RIFL M 1 12\n   FrameIndex RIFL N 0 13   FrameIndex RIFL N 1 13\n   FrameIndex RIFL O 0 14   FrameIndex RIFL O 1 14\n   FrameIndex RIFL P 0 15   FrameIndex RIFL P 1 15\n   FrameIndex RIFL Q 0 16   FrameIndex RIFL Q 1 16\n   FrameIndex RIFL R 0 17   FrameIndex RIFL R 1 17\n   FrameIndex RIFL S 0 18   FrameIndex RIFL S 1 18\n   FrameIndex RIFL T 0 19   FrameIndex RIFL T 1 19\n   FrameIndex RIFL U 0 20   FrameIndex RIFL U 1 20\n   FrameIndex RIFL V 0 21   FrameIndex RIFL V 1 21\n   FrameIndex RIFL W 0 22   FrameIndex RIFL W 1 22\n   FrameIndex RIFL X 0 23   FrameIndex RIFL X 1 23\n   FrameIndex RIFL Y 0 24   FrameIndex RIFL Y 1 24\n   FrameIndex RIFL Z 0 25   FrameIndex RIFL Z 1 25\n\t//draw, cowboy\n   FrameIndex RIFK A 0 26   FrameIndex RIFK a 1 26\n   FrameIndex RIFK B 0 27   FrameIndex RIFK b 1 27\n   FrameIndex RIFK C 0 28   FrameIndex RIFK c 1 28\n   FrameIndex RIFK D 0 29   FrameIndex RIFK d 1 29\n   FrameIndex RIFK E 0 30   FrameIndex RIFK e 1 30\n   FrameIndex RIFK F 0 31   FrameIndex RIFK f 1 31\n   FrameIndex RIFK g 0 32   FrameIndex RIFK g 1 32\n   FrameIndex RIFK h 0 33   FrameIndex RIFK h 1 33\n   FrameIndex RIFK i 0 34   FrameIndex RIFK i 1 34\n   FrameIndex RIFK j 0 35   FrameIndex RIFK j 1 35\n   FrameIndex RIFK k 0 36   FrameIndex RIFK k 1 36\n   FrameIndex RIFK l 0 37   FrameIndex RIFK l 1 37\n   FrameIndex RIFK m 0 38   FrameIndex RIFK m 1 38\n   FrameIndex RIFK n 0 39   FrameIndex RIFK n 1 39\n   FrameIndex RIFK o 0 40   FrameIndex RIFK o 1 40\n\n\n",
+  "block_name": "VR_Rifle",
+  "card": "cards/vplus/m16",
+  "frame": 0,
+  "how": "ready RIFLA",
+  "srcfile": "_01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/m16.md3",
+  "srcfile_abs": null
+ },
+ "MS_VP_Minigun": {
+  "block": " \n   Path \"Models/Weapons/Hud/guns\"\n   Model 0 \"minigun.md3\"\n   Skin 0 \"WPN-GUNS.png\"\n  \n   Scale 1.35 1.35 1.35\n\n//zoffset -5\n//offset 20 0 0\n//offset 10 10 -5 //desktop\n\n   FrameIndex CHGG A 0 0   FrameIndex CHGG A 1 0\n   FrameIndex CHGG B 0 1   FrameIndex CHGG B 1 1\n   FrameIndex CHGG C 0 2   FrameIndex CHGG C 1 2\n   FrameIndex CHGG D 0 3   FrameIndex CHGG D 1 3\n   FrameIndex CHGG E 0 4   FrameIndex CHGG E 1 4\n   FrameIndex CHGG F 0 5   FrameIndex CHGG F 1 5\n   FrameIndex CHGG G 0 6   FrameIndex CHGG G 1 6\n   FrameIndex CHGG H 0 7   FrameIndex CHGG H 1 7\n   FrameIndex CHGG i 0 8   FrameIndex CHGG i 1 8\n   FrameIndex CHGG j 0 9   FrameIndex CHGG j 1 9\n   FrameIndex CHGG k 0 10   FrameIndex CHGG k 1 10\n   FrameIndex CHGG l 0 11   FrameIndex CHGG l 1 12\n   FrameIndex CHGG m 0 12   FrameIndex CHGG m 1 12\n   FrameIndex CHGG n 0 13   FrameIndex CHGG n 1 13\n   FrameIndex CHGG o 0 14   FrameIndex CHGG o 1 14\n   FrameIndex CHGG p 0 15   FrameIndex CHGG p 1 15\n\n",
+  "block_name": "minigun",
+  "card": "cards/vplus/minigun",
+  "frame": 0,
+  "how": "ready CHGGA",
+  "srcfile": "_01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/minigun.md3",
+  "srcfile_abs": null
+ },
+ "MS_VP_Pistol": {
+  "block": " \n   Path \"Models/Weapons/hud/gats\"\n   Model 0 \"pistolet.md3\"\n   Skin 0 \"WPN-9MM.png\"\n  \n   Scale 1.35 1.35 1.35\n\n//zoffset -10\n//offset 10 10 -5 //desktop\n\n\n   FrameIndex PISG A 0 0   FrameIndex PISG A 1 0\n   FrameIndex PISG B 0 1   FrameIndex PISG B 1 1\n   FrameIndex PISG C 0 2   FrameIndex PISG C 1 2\n   FrameIndex PISG D 0 3   FrameIndex PISG D 1 3\n   FrameIndex PISG E 0 4   FrameIndex PISG E 1 4\n   FrameIndex PISG F 0 5   FrameIndex PISG F 1 5\n   FrameIndex PISG G 0 6   FrameIndex PISG G 1 6\n   FrameIndex PISG H 0 7   FrameIndex PISG H 1 7\n   FrameIndex PISG I 0 8   FrameIndex PISG I 1 8\n   FrameIndex PISG J 0 9   FrameIndex PISG J 1 9\n   FrameIndex PISG K 0 10   FrameIndex PISG K 1 10\n   FrameIndex PISG L 0 11   FrameIndex PISG L 1 11\n   FrameIndex PISG M 0 12   FrameIndex PISG M 1 12\n   FrameIndex PISG N 0 13   FrameIndex PISG N 1 13\n   FrameIndex PISG O 0 14   FrameIndex PISG O 1 14\n   FrameIndex PISG P 0 15   FrameIndex PISG P 1 15\n   FrameIndex PISG Q 0 16   FrameIndex PISG Q 1 16\n   FrameIndex PISG R 0 17   FrameIndex PISG R 1 17\n   FrameIndex PISG S 0 18   FrameIndex PISG S 1 18\n   FrameIndex PISG T 0 19   FrameIndex PISG T 1 19\n   FrameIndex PISG U 0 20   FrameIndex PISG U 1 20\n   FrameIndex PISG V 0 21   FrameIndex PISG V 1 21\n   FrameIndex PISG W 0 22   FrameIndex PISG W 1 22\n   FrameIndex PISG X 0 23   FrameIndex PISG X 1 23\n   FrameIndex PISG Y 0 24   FrameIndex PISG Y 1 24\n   FrameIndex PISG Z 0 25   FrameIndex PISG Z 1 25\n\t//draw, cowboy\n   FrameIndex PISD A 0 26   FrameIndex PISD a 1 26\n   FrameIndex PISD B 0 27   FrameIndex PISD b 1 27\n   FrameIndex PISD C 0 28   FrameIndex PISD c 1 28\n   FrameIndex PISD D 0 29   FrameIndex PISD d 1 29\n   FrameIndex PISD E 0 30   FrameIndex PISD e 1 30\n   FrameIndex PISD F 0 31   FrameIndex PISD f 1 31\n\n",
+  "block_name": "pistolet",
+  "card": "cards/vplus/pistol",
+  "frame": 0,
+  "how": "ready PISGA",
+  "srcfile": "gats/pistolet.md3",
+  "srcfile_abs": "/home/claude/parents/alek/models/weapons/hud/gats/pistolet.md3"
+ },
+ "MS_VP_Plasma": {
+  "block": " \n   Path \"Models/Weapons/Hud/guns\"\n   Model 0 \"plasma.md3\"\n   Skin 0 \"WPN-PLAS.png\"\n  \n   Scale 1.35 1.35 1.35\n\n//zoffset -1\n//offset 10 10 -5 //desktop\n\n   FrameIndex PLSG A 0 0   FrameIndex PLSG A 1 0\n   FrameIndex PLSG B 0 1   FrameIndex PLSG B 1 1\n   FrameIndex PLSG C 0 2   FrameIndex PLSG C 1 2\n   FrameIndex PLSG D 0 3   FrameIndex PLSG D 1 3\n   FrameIndex PLSG E 0 4   FrameIndex PLSG E 1 4\n   FrameIndex PLSG F 0 5   FrameIndex PLSG F 1 5\n   FrameIndex PLSG G 0 6   FrameIndex PLSG G 1 6\n   FrameIndex PLSG H 0 7   FrameIndex PLSG H 1 7\n   FrameIndex PLSG I 0 8   FrameIndex PLSG I 1 8\n   FrameIndex PLSG J 0 9   FrameIndex PLSG J 1 9\n   FrameIndex PLSG K 0 10   FrameIndex PLSG K 1 10\n   FrameIndex PLSG L 0 11   FrameIndex PLSG L 1 11\n   FrameIndex PLSG M 0 12   FrameIndex PLSG M 1 12\n   FrameIndex PLSG N 0 13   FrameIndex PLSG N 1 13\n   FrameIndex PLSG O 0 14   FrameIndex PLSG O 1 14\n   FrameIndex PLSG P 0 15   FrameIndex PLSG P 1 15\n   FrameIndex PLSG Q 0 16   FrameIndex PLSG Q 1 16\n   FrameIndex PLSG R 0 17   FrameIndex PLSG R 1 17\n   FrameIndex PLSG S 0 18   FrameIndex PLSG S 1 18\n   FrameIndex PLSG T 0 19   FrameIndex PLSG T 1 19\n   FrameIndex PLSG U 0 20   FrameIndex PLSG U 1 20\n\n",
+  "block_name": "plasmon",
+  "card": "cards/vplus/plasma",
+  "frame": 0,
+  "how": "ready PLSGA",
+  "srcfile": "questvanillavrplusforclaude/models/weapons/hud/guns/plasma.md3",
+  "srcfile_abs": null
+ },
+ "MS_VP_Rev": {
+  "block": " \n   Path \"Models/Weapons/hud/gats\"\n   Model 0 \"rev.md3\"\n   Skin 0 \"WPN-REV.png\"\n  \n   Scale 1.35 1.35 1.35\n\n//zoffset -10\n//offset 10 10 -5 //desktop\n\n\n   FrameIndex REVL A 0 0   FrameIndex REVL A 1 0\n   FrameIndex REVL B 0 1   FrameIndex REVL B 1 1\n   FrameIndex REVL C 0 2   FrameIndex REVL C 1 2\n   FrameIndex REVL D 0 3   FrameIndex REVL D 1 3\n   FrameIndex REVL E 0 4   FrameIndex REVL E 1 4\n   FrameIndex REVL F 0 5   FrameIndex REVL F 1 5\n   FrameIndex REVL G 0 6   FrameIndex REVL G 1 6\n   FrameIndex REVL H 0 7   FrameIndex REVL H 1 7\n   FrameIndex REVL I 0 8   FrameIndex REVL I 1 8\n   FrameIndex REVL J 0 9   FrameIndex REVL J 1 9\n   FrameIndex REVL K 0 10   FrameIndex REVL K 1 10\n   FrameIndex REVL L 0 11   FrameIndex REVL L 1 11\n   FrameIndex REVL M 0 12   FrameIndex REVL M 1 12\n   FrameIndex REVL N 0 13   FrameIndex REVL N 1 13\n   FrameIndex REVL O 0 14   FrameIndex REVL O 1 14\n   FrameIndex REVL P 0 15   FrameIndex REVL P 1 15\n   FrameIndex REVL Q 0 16   FrameIndex REVL Q 1 16\n   FrameIndex REVL R 0 17   FrameIndex REVL R 1 17\n   FrameIndex REVL S 0 18   FrameIndex REVL S 1 18\n   FrameIndex REVL T 0 19   FrameIndex REVL T 1 19\n   FrameIndex REVL U 0 20   FrameIndex REVL U 1 20\n   FrameIndex REVL V 0 21   FrameIndex REVL V 1 21\n   FrameIndex REVL W 0 22   FrameIndex REVL W 1 22\n   FrameIndex REVL X 0 23   FrameIndex REVL X 1 23\n   FrameIndex REVL Y 0 24   FrameIndex REVL Y 1 24\n   FrameIndex REVL Z 0 25   FrameIndex REVL Z 1 25\n\t//draw, cowboy\n   FrameIndex REVO A 0 26   FrameIndex REVO a 1 26\n   FrameIndex REVO B 0 27   FrameIndex REVO b 1 27\n   FrameIndex REVO C 0 28   FrameIndex REVO c 1 28\n   FrameIndex REVO D 0 29   FrameIndex REVO d 1 29\n   FrameIndex REVO E 0 30   FrameIndex REVO e 1 30\n   FrameIndex REVO F 0 31   FrameIndex REVO f 1 31\n   FrameIndex REVO g 0 32   FrameIndex REVO g 1 32\n   FrameIndex REVO h 0 33   FrameIndex REVO h 1 33\n   FrameIndex REVO i 0 34   FrameIndex REVO i 1 34\n   FrameIndex REVO j 0 35   FrameIndex REVO j 1 35\n   FrameIndex REVO k 0 36   FrameIndex REVO k 1 36\n   FrameIndex REVO l 0 37   FrameIndex REVO l 1 37\n   FrameIndex REVO m 0 38   FrameIndex REVO m 1 38\n   FrameIndex REVO n 0 39   FrameIndex REVO n 1 39\n   FrameIndex REVO o 0 40   FrameIndex REVO o 1 40\n\n\n",
+  "block_name": "VR_Revolver",
+  "card": "cards/vplus/rev",
+  "frame": 0,
+  "how": "ready REVLA",
+  "srcfile": "_01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/gats/rev.md3",
+  "srcfile_abs": null
+ },
+ "MS_VP_Shotgun": {
+  "block": " \n   Path \"Models/Weapons/Hud/guns\"\n   Model 0 \"shotgun.md3\"\n   Skin 0 \"WPN-GUNS.png\"\n  \n   Scale 1.35 1.35 1.35\n\n//zoffset -10\n//offset 10 10 -5 //desktop\n\n   FrameIndex SHTG A 0 0   FrameIndex SHTG A 1 0\n   FrameIndex SHTG B 0 1   FrameIndex SHTG B 1 1\n   FrameIndex SHTG C 0 2   FrameIndex SHTG C 1 2\n   FrameIndex SHTG D 0 3   FrameIndex SHTG D 1 3\n   FrameIndex SHTG E 0 4   FrameIndex SHTG E 1 4\n   FrameIndex SHTG F 0 5   FrameIndex SHTG F 1 5\n   FrameIndex SHTG G 0 6   FrameIndex SHTG G 1 6\n   FrameIndex SHTG H 0 7   FrameIndex SHTG H 1 7\n   FrameIndex SHTG I 0 8   FrameIndex SHTG I 1 8\n   FrameIndex SHTG J 0 9   FrameIndex SHTG J 1 9\n   FrameIndex SHTG K 0 10   FrameIndex SHTG K 1 10\n   FrameIndex SHTG L 0 11   FrameIndex SHTG L 1 11\n   FrameIndex SHTG M 0 12   FrameIndex SHTG M 1 12\n   FrameIndex SHTG N 0 13   FrameIndex SHTG N 1 13\n   FrameIndex SHTG O 0 14   FrameIndex SHTG O 1 14\n   FrameIndex SHTG P 0 15   FrameIndex SHTG P 1 15\n   FrameIndex SHTG Q 0 16   FrameIndex SHTG Q 1 16\n   FrameIndex SHTG R 0 17   FrameIndex SHTG R 1 17\n   FrameIndex SHTG S 0 18   FrameIndex SHTG S 1 18\n   FrameIndex SHTG T 0 19   FrameIndex SHTG T 1 19\n   FrameIndex SHTG U 0 20   FrameIndex SHTG U 1 20\n   FrameIndex SHTG V 0 21   FrameIndex SHTG V 1 21\n   FrameIndex SHTG W 0 22   FrameIndex SHTG W 1 22\n   FrameIndex SHTG X 0 23   FrameIndex SHTG X 1 23\n   FrameIndex SHTG Y 0 24   FrameIndex SHTG Y 1 24\n   FrameIndex SHTG Z 0 25   FrameIndex SHTG Z 1 25\n\n\n",
+  "block_name": "VR_Shotgun",
+  "card": "cards/vplus/shotgun",
+  "frame": 0,
+  "how": "ready SHTGA",
+  "srcfile": "_01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/shotgun.md3",
+  "srcfile_abs": null
+ },
+ "MS_VP_Ssg": {
+  "block": " \n   Path \"Models/Weapons/Hud/guns\"\n   Model 0 \"ssg.md3\"\n   Skin 0 \"WPN-GUNS.png\"\n  \n   Scale 1.35 1.35 1.35\n\n//zoffset -10\n//offset 20 0 0\n//offset 10 10 -5 //desktop\n\n   FrameIndex SHT2 A 0 0   FrameIndex SHT2 A 1 0\n   FrameIndex SHT2 B 0 1   FrameIndex SHT2 B 1 1\n   FrameIndex SHT2 C 0 2   FrameIndex SHT2 C 1 2\n   FrameIndex SHT2 D 0 3   FrameIndex SHT2 D 1 3\n   FrameIndex SHT2 E 0 4   FrameIndex SHT2 E 1 4\n   FrameIndex SHT2 F 0 5   FrameIndex SHT2 F 1 5\n   FrameIndex SHT2 G 0 6   FrameIndex SHT2 G 1 6\n   FrameIndex SHT2 H 0 7   FrameIndex SHT2 H 1 7\n   FrameIndex SHT2 I 0 8   FrameIndex SHT2 I 1 8\n   FrameIndex SHT2 J 0 9   FrameIndex SHT2 J 1 9\n   FrameIndex SHT2 K 0 10   FrameIndex SHT2 K 1 10\n   FrameIndex SHT2 L 0 11   FrameIndex SHT2 L 1 11\n   FrameIndex SHT2 M 0 12   FrameIndex SHT2 M 1 12\n   FrameIndex SHT2 N 0 13   FrameIndex SHT2 N 1 13\n   FrameIndex SHT2 O 0 14   FrameIndex SHT2 O 1 14\n   FrameIndex SHT2 P 0 15   FrameIndex SHT2 P 1 15\n   FrameIndex SHT2 Q 0 16   FrameIndex SHT2 Q 1 16\n   FrameIndex SHT2 R 0 17   FrameIndex SHT2 R 1 17\n   FrameIndex SHT2 S 0 18   FrameIndex SHT2 S 1 18\n   FrameIndex SHT2 T 0 19   FrameIndex SHT2 T 1 19\n   FrameIndex SHT2 U 0 20   FrameIndex SHT2 U 1 20\n   FrameIndex SHT2 V 0 21   FrameIndex SHT2 V 1 21\n   FrameIndex SHT2 W 0 22   FrameIndex SHT2 W 1 22\n   FrameIndex SHT2 X 0 23   FrameIndex SHT2 X 1 23\n   FrameIndex SHT2 Y 0 24   FrameIndex SHT2 Y 1 24\n\n",
+  "block_name": "VR_SuperShotgun",
+  "card": "cards/vplus/ssg",
+  "frame": 0,
+  "how": "ready SHT2A",
+  "srcfile": "_01_DOOM_VanillaVRPlus_ErmacPack/models/weapons/hud/guns/ssg.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Flaregun": {
+  "block": " \n   Path \"models/3d/weapons/flaregun\"\n   Model 0 \"flaregun.md3\"\n   Skin 0 \"flaregun.png\"\n   \n   Scale -1.3 1.3 1.3\n   Offset 0.0 -24.0 -12.0\n   \n   //Ready\n   FrameIndex FLAR A 0 3\n   \n   //Fire\n   FrameIndex FLAR B 0 4\n   FrameIndex FLAR C 0 5\n   FrameIndex FLAR D 0 6\n   FrameIndex FLAR E 0 7\n   FrameIndex FLAR F 0 8\n   FrameIndex FLAR G 0 9\n   FrameIndex FLAR H 0 10\n   FrameIndex FLAR I 0 11\n   FrameIndex FLAR J 0 12\n   FrameIndex FLAR K 0 13\n   FrameIndex FLAR L 0 14\n",
+  "block_name": "FlareGun",
+  "card": "cards/zblood/flaregun",
+  "frame": 3,
+  "how": "ready FLARA",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/flaregun/flaregun.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Lifeleech": {
+  "block": " \n   Path \"models/3d/weapons/lifeleech\"\n   Model 0 \"lifeleech.md3\"\n   Skin 0 \"lifeleech.png\"\n   \n   Scale -2 2 2\n   Offset 3.0 -15.0 -10.0\n   PitchOffset -17.0\n   \n   //Ready\n   FrameIndex LLST A 0 0\n   \n   //Fire   \n   FrameIndex LLST B 0 1\n   FrameIndex LLST C 0 2\n   FrameIndex LLST D 0 3\n   FrameIndex LLST E 0 4\n   FrameIndex LLST F 0 5\n   FrameIndex LLST G 0 6\n   FrameIndex LLST H 0 7\n   FrameIndex LLST I 0 8\n   FrameIndex LLST J 0 9\n   FrameIndex LLST K 0 10\n   FrameIndex LLST L 0 11\n   FrameIndex LLST M 0 12\n   FrameIndex LLST N 0 13\n   FrameIndex LLST O 0 14\n   FrameIndex LLST P 0 15\n   FrameIndex LLST Q 0 16\n   FrameIndex LLST R 0 17\n   FrameIndex LLST S 0 17\n   FrameIndex LLST Z 0 17\n",
+  "block_name": "LifeLeech",
+  "card": "cards/zblood/lifeleech",
+  "frame": 0,
+  "how": "ready LLSTA",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/lifeleech/lifeleech.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Napalm": {
+  "block": " \n   Path \"models/3d/weapons/napalm\"\n   Model 0 \"napalm.md3\"\n   Skin 0 \"napalm1.png\"\n   \n   Scale -2.0 2.0 2.0\n   Offset 0.0 -22.0 0.0\n   \n   //Ready\n   FrameIndex NLAN A 0 3\n   FrameIndex NLAN B 0 3\n   FrameIndex NLAN C 0 3\n   FrameIndex NLAN D 0 3\n   FrameIndex NLAN E 0 3\n   \n   //Fire\n   Skin 0 \"napalm0.png\"\n   FrameIndex NLAN F 0 4\n   FrameIndex NLAN G 0 5\n   FrameIndex NLAN H 0 6\n   FrameIndex NLAN I 0 7\n",
+  "block_name": "NapalmLauncher",
+  "card": "cards/zblood/napalm",
+  "frame": 3,
+  "how": "ready NLANA",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/napalm/napalm.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Pitchfork": {
+  "block": " \n   Path \"models/3d/weapons/pitchfork\"\n   Model 0 \"pitchfork.md3\"\n   Skin 0 \"pitchfork.png\"\n   \n   Scale -1.5 1.5 1.5\n   Offset 0.0 -25.0 -12.0\n   \n   NOINTERPOLATION\n   \n   //Ready\n   FrameIndex PITC A 0 3\n",
+  "block_name": "Pitchfork",
+  "card": "cards/zblood/pitchfork",
+  "frame": 3,
+  "how": "ready PITCA",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/pitchfork/pitchfork.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Sawedoff": {
+  "block": " \n   Path \"models/3d/weapons/shotgun\"\n   Model 0 \"shotgun.md3\"\n   Skin 0 \"shotgun.png\"\n   \n   Scale -1.3 1.3 1.3\n   Offset 0.0 -17.0 -8.0\n   \n   //Ready\n   FrameIndex WP01 A 0 0\n   \n   //Fire - first barrel\n   FrameIndex SWNF A 0 1\n   FrameIndex SWNF B 0 2\n   FrameIndex SWNF C 0 3\n   \n   //Fire - 2nd barrel\n   FrameIndex SWNF D 0 4\n   FrameIndex SWNF E 0 5\n   FrameIndex SWNF F 0 6\n   \n   //Fire - both barrels\n   FrameIndex SWNF G 0 7\n   FrameIndex SWNF H 0 8\n   FrameIndex SWNF I 0 9\n   FrameIndex SWNF J 0 10\n   FrameIndex SWNF HK 0 11\n   \n   //Reload start\n   FrameIndex SWNR A 0 12\n   FrameIndex SWNR B 0 13\n   FrameIndex SWNR C 0 14\n   FrameIndex SWNR D 0 15\n   FrameIndex SWNR G 0 18\n   \n   //Reload End\n   FrameIndex SWNR R 0 29\n   FrameIndex SWNR S 0 30\n   FrameIndex SWNR T 0 31\n   FrameIndex SWNR U 0 32\n",
+  "block_name": "Sawedoff",
+  "card": "cards/zblood/sawedoff",
+  "frame": 0,
+  "how": "ready WP01A",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/shotgun/shotgun.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Spraycan": {
+  "block": " \n   Path \"models/3d/weapons/Spraycan\"\n   Model 0 \"Spraycan.md3\"\n   SurfaceSkin 0 0 \"empty.png\"\n   SurfaceSkin 0 1 \"Spraycan.png\"\n   \n   Scale -0.8 0.8 0.8\n   Offset 0.0 -28.0 -26.0\n   \n   //Ready\n   FrameIndex SPRR A 0 0\n   FrameIndex SPRR B 0 0\n   FrameIndex SPRR C 0 0\n   \n   //Fire\n   FrameIndex SPRF A 0 0\n   FrameIndex SPRF B 0 0\n   FrameIndex SPRF C 0 0\n",
+  "block_name": "Spraycan",
+  "card": "cards/zblood/spraycan",
+  "frame": 0,
+  "how": "ready SPRRA",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/spraycan/spraycan.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Teslagun": {
+  "block": " \n   Path \"models/3d/weapons/teslagun\"\n   Model 0 \"teslagun.md3\"\n   Skin 0 \"tesla0.png\"\n   \n   Scale -1.3 1.3 1.3\n   Offset 0.0 -20.0 -11.0\n   \n   //Ready\n   FrameIndex TESL A 0 0\n   \n   //Fire\n   FrameIndex TESL B 0 1\n   FrameIndex TESL C 0 2\n   FrameIndex TESL D 0 3\n   FrameIndex TESL E 0 4\n   FrameIndex TESL F 0 5\n   FrameIndex TESL G 0 6\n   \n   FrameIndex TEXX A 0 7\n   FrameIndex TEXX B 0 8\n   FrameIndex TEXX C 0 9\n   \n   //Alt fire\n   FrameIndex TES2 A 0 11\n   FrameIndex TES2 B 0 12\n   FrameIndex TES2 C 0 13\n   FrameIndex TES2 D 0 14\n   FrameIndex TES2 E 0 15\n   FrameIndex TES2 F 0 16\n   FrameIndex TES2 G 0 17\n   FrameIndex TES2 H 0 18\n   FrameIndex TES2 I 0 19\n   FrameIndex TES2 J 0 20\n   FrameIndex TES2 K 0 21\n   FrameIndex TES2 L 0 22\n   FrameIndex TES2 M 0 23\n   FrameIndex TES2 N 0 24\n   FrameIndex TES2 O 0 25\n   FrameIndex TES2 P 0 26\n   FrameIndex TES2 Q 0 27\n   FrameIndex TES2 R 0 28\n   FrameIndex TES2 S 0 29\n   FrameIndex TES2 T 0 30\n   FrameIndex TES2 U 0 31\n   FrameIndex TES2 V 0 32\n   FrameIndex TES2 W 0 33\n   FrameIndex TES2 X 0 34\n   FrameIndex TES2 Y 0 35\n   FrameIndex TES2 Z 0 36\n   FrameIndex TES3 A 0 37\n   FrameIndex TES3 B 0 38\n   FrameIndex TES3 C 0 39\n   FrameIndex TES3 D 0 40\n   \n   //Recoil\n   FrameIndex TE2F A 0 41\n   FrameIndex TE2F B 0 42\n   FrameIndex TE2F C 0 43\n   FrameIndex TE2F D 0 44\n   FrameIndex TE2F E 0 45\n   FrameIndex TE2F F 0 46\n",
+  "block_name": "TeslaRifle",
+  "card": "cards/zblood/teslagun",
+  "frame": 0,
+  "how": "ready TESLA",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/teslagun/teslagun.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Tommygun": {
+  "block": " \n   Path \"models/3d/weapons/tommygun\"\n   Model 0 \"tommygun.md3\"\n   Skin 0 \"tommygun.png\"\n   \n   Scale -1.2 1.2 1.2\n   Offset 0.0 4.0 -16.0\n   \n   //Ready\n   FrameIndex TOMG A 0 3\n   \n   //Fire\n   FrameIndex TOMF A 0 4\n   FrameIndex TOMF B 0 5\n   FrameIndex TOMF C 0 4\n   FrameIndex TOMF D 0 5\n   FrameIndex TOMF E 0 4\n   FrameIndex TOMF F 0 5\n   FrameIndex TOMF G 0 4\n   FrameIndex TOMF H 0 5\n   \n   /*\n   //Spray bullets\n   FrameIndex TOF2 A 0 6\n   FrameIndex TOF2 B 0 7\n   FrameIndex TOF2 C 0 8\n   FrameIndex TOF2 D 0 9\n   FrameIndex TOF2 E 0 10\n   FrameIndex TOF2 F 0 11\n   FrameIndex TOF2 G 0 12\n   FrameIndex TOF2 H 0 13\n   FrameIndex TOF2 I 0 14\n   FrameIndex TOF2 J 0 15\n   FrameIndex TOF2 K 0 16\n   FrameIndex TOF2 L 0 17\n   FrameIndex TOF2 M 0 18\n   FrameIndex TOF2 N 0 5\n   */\n",
+  "block_name": "Tommygun",
+  "card": "cards/zblood/tommygun",
+  "frame": 3,
+  "how": "ready TOMGA",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/tommygun/tommygun.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Voodoo": {
+  "block": " \n   Path \"models/3d/weapons/voodoo\"\n   Model 0 \"voodoo_doll.md3\"\n   Skin 0 \"voodoo.png\"\n   \n   Scale 0.6 0.6 0.6\n   Offset 0.0 -30.0 -8.0\n   \n   FrameIndex DOLL A 0 0\n   FrameIndex DOLL B 0 1\n   FrameIndex DOLL C 0 6\n   FrameIndex DOLL D 0 12\n   FrameIndex DOLL E 0 17\n",
+  "block_name": "OffhandVoodooDoll",
+  "card": "cards/zblood/voodoo",
+  "frame": null,
+  "how": "actor OffhandVoodooDoll not found",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/voodoo/voodoo_doll.md3",
+  "srcfile_abs": null
+ },
+ "MS_ZB_Zippo": {
+  "block": " \n   Path \"models/3d/weapons/zippo\"\n   Model 0 \"zippo.md3\"\n   Skin 0 \"zippo.png\"\n   \n   Scale -0.7 0.7 0.7\n   Offset 0.0 -28.0 -11.0\n   \n   //Ready\n   FrameIndex ZIPO A 0 0\n   \n   //Ready lit\n   FrameIndex ZIPO B 0 4\n   FrameIndex ZIPO C 0 5\n   FrameIndex ZIPO D 0 6\n   \n   //Open Lid\n   FrameIndex ZIPO E 0 1\n   FrameIndex ZIPO F 0 2\n   FrameIndex ZIPO G 0 3\n",
+  "block_name": "Zippo",
+  "card": "cards/zblood/zippo",
+  "frame": null,
+  "how": "actor Zippo not found",
+  "srcfile": "ZBlood-VR/ZBlood-VR-Weapons/models/3d/weapons/zippo/zippo.md3",
+  "srcfile_abs": null
+ }
+}

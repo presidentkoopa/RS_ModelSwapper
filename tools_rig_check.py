@@ -18,7 +18,7 @@ import argparse, os, re, subprocess, sys, zipfile, glob, shutil
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RIG = '/home/claude/rig'
-IWAD = '/home/claude/doom2.wad'
+IWAD = os.environ.get('MS_IWAD', '/home/claude/doom2.wad')
 PK3 = '/tmp/claude-0/ModelSwapper-QUEST.pk3'
 SHOTS = '/home/claude/shots'
 SHEETS = '/home/claude/cards'
@@ -81,26 +81,40 @@ def shelf():
     return out
 
 
-def run_one(donor, fam, idx, extra, tag):
-    cls, slot = FAMILY_WEAPON.get(fam, ('Pistol', 2))
+def run_one(donor, fam, idx, extra, tag, weapon=None, fist_idx=None):
+    """One rig run. What every earlier run got wrong, fixed here (2026-10-31):
+    * the pin string goes in with +set and embedded quotes ("\"...\""), and starts with ';' -- the engine
+      splits the command line on ';' and keeps a literal quote on the first record, so the first record is a
+      throwaway and every real record sits between separators;
+    * the off hand (rsq_hands) and the fist are pinned too (rsq_hands otherwise wears a hash-picked melee donor
+      in every frame);
+    * the gun is selected the way the Depot rig's drivers do it: wait 120 for the player, give, use, then 170
+      tics for the select animation (tools/rig/README.md traps);
+    * the hand sits where the Depot rig shoots guns: in front of the eye, side-on (cmp2.py POSE);
+    * the donor actually applied is read back from the rs_foreignmodels_dump table, not assumed."""
+    cls = weapon or FAMILY_WEAPON.get(fam, ('Pistol', 2))[0]
     d = os.path.join(SHOTS, 'rigcheck_%s_%s' % (tag, donor)); shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
-    # The pick goes in with +set so the cvar exists BEFORE RS_ForeignPickPersist.Load() reads it at the first scan
-    # (a plain console command runs too late and the first scan pins the auto-guess). The weapon switch waits a
-    # second of tics so the player exists when `give all` / `slot N` run.
-    cmds = ['god', 'qz_rhand "0.25 0.9 -0.1 0 0 0"', 'wait 40', 'give all', 'slot %d' % slot, 'wait 5', 'slot %d' % slot]
+    recs = ['%s:%s:%d:%d' % (cls, fam, idx, idx)]
+    if fist_idx is not None:
+        recs += ['rsq_hands:melee:%d:%d' % (fist_idx, fist_idx), 'Fist:melee:%d:%d' % (fist_idx, fist_idx)]
+    picks = ';' + ';'.join(recs) + ';'
+    cmds = ['wait 120', 'god', 'qz_rhand "0.0 1.68 -0.40 20 -70 0"', 'give ammo', 'give %s' % cls, 'wait 2',
+            'use %s' % cls, 'wait 170', 'quit']
     args = ['./qz', '-iwad', IWAD, '-file'] + list(extra) + [PK3, '-warp', '1', '-nomonsters', '-nosound',
-            '+set', 'rs_fm_picks', '%s:%s:%d:%d;' % (cls, fam, idx, idx), '+' + '; '.join(cmds)]
-    env = dict(os.environ, QZ_LOGCAT='1', QZ_RES='480', QZ_DUMP_EVERY='250', QZ_DUMP_DIR=d)
+            '+set', 'rs_foreignmodels_dump', 'true', '+set', 'rs_fm_picks', '"%s"' % picks, '+' + '; '.join(cmds)]
+    env = dict(os.environ, QZ_RES='480', QZ_DUMP_EVERY='145', QZ_DUMP_DIR=d)
     log = open(os.path.join(d, 'log.txt'), 'w')
     try:
-        subprocess.run(args, cwd=RIG, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=80)
+        subprocess.run(args, cwd=RIG, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=240)
     except subprocess.TimeoutExpired:
-        pass   # the rig has no quit; the timeout IS the stop
+        pass
     log.close()
     text = open(os.path.join(d, 'log.txt'), errors='ignore').read()
     errs = sorted(set(l.strip() for l in text.splitlines() if ERR.search(l) and not ENGINE_NOISE.search(l)))
+    m = re.search(r'^\s+%s\s+slot\s+-?\d+\s+->\s+\S+\s+(MS_\w+)' % re.escape(cls), text, re.M)
+    applied = m.group(1) if m else None
     frames = sorted(glob.glob(os.path.join(d, '*.ppm')))
-    return dict(donor=donor, fam=fam, idx=idx, cls=cls, dir=d, errs=errs, frames=frames)
+    return dict(donor=donor, fam=fam, idx=idx, cls=cls, dir=d, errs=errs, frames=frames, applied=applied)
 
 
 def sheet(results, tag):
@@ -129,6 +143,7 @@ def main():
     ap.add_argument('--extra', nargs='*', default=[], help='extra pk3s loaded BEFORE ModelSwapper (a mod to swap on)')
     ap.add_argument('--tag', default='check')
     ap.add_argument('--no-build', action='store_true', help='reuse the pk3 already at %s' % PK3)
+    ap.add_argument('--weapon', default=None, help='weapon class to hold instead of the vanilla one for the family (e.g. RwPistol on Doomablo)')
     a = ap.parse_args()
     if not a.no_build:
         p, mb, n = build_pk3(); print('pk3 %s (%d MB, %d card files)' % (p, mb, n))
@@ -137,9 +152,10 @@ def main():
         if donor not in sh:
             print('%-28s FAIL  not on the shelf (SHELF[] in RS_ForeignModels.zs)' % donor); continue
         fam, idx = sh[donor]
-        r = run_one(donor, fam, idx, [os.path.abspath(x) for x in a.extra], a.tag); results.append(r)
-        ok = bool(r['frames']) and not r['errs']
-        print('%-28s %s  family %s #%d on %s, %d error line(s), %d frame(s)%s' % (donor, 'PASS' if ok else 'FAIL', fam, idx, r['cls'], len(r['errs']), len(r['frames']), ('  log: ' + r['dir'] + '/log.txt') if not ok else ''))
+        fist = sh.get('MS_BD_Fist', (None, None))[1]
+        r = run_one(donor, fam, idx, [os.path.abspath(x) for x in a.extra], a.tag, a.weapon, fist); results.append(r)
+        ok = bool(r['frames']) and not r['errs'] and r['applied'] == donor
+        print('%-28s %s  family %s #%d on %s, applied %s, %d error line(s), %d frame(s)%s' % (donor, 'PASS' if ok else 'FAIL', fam, idx, r['cls'], r['applied'], len(r['errs']), len(r['frames']), ('  log: ' + r['dir'] + '/log.txt') if not ok else ''))
         for e in r['errs'][:5]: print('      ' + e[:160])
     if results:
         print('sheet:', sheet(results, a.tag))

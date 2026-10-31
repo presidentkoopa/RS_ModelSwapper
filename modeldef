@@ -237,7 +237,7 @@ Model MS_BD_Fist
 	Offset 0.0 0.0 0.0
 	ZOffset -5
 	NoInterpolation
-	FrameIndex PUNG A 0 48
+	FrameIndex PUNG A 0 0
 	FrameIndex MSBL A 0 9999
 }
 
@@ -358,7 +358,7 @@ Model MS_BD_Pistol
 	Model 0 "bd_pistol.md3"
 	Skin 0 "pistol.png"
 	Scale -1.0 1.0 1.0
-	Offset 0.0 0.0 0.0
+	Offset 0.0 -4.0 0.0
 	ZOffset -5
 	NoInterpolation
 	FrameIndex PISG A 0 2

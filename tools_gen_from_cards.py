@@ -199,8 +199,9 @@ def parse_blocks(text):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--well', default='/mnt/user-data/uploads/VR_WeaponSetRebuild'); ap.add_argument('--extra', nargs='*', default=['/home/claude/rs_aliens_vr-weaponsq'], help='more roots holding the sets'' own MODELDEFs (the Aliens Q repo)')
-    ap.add_argument('--actors', nargs='*', default=sorted(glob.glob('/home/claude/parents/*')), help='parent mods (text lumps) read for actor states only, never for MODELDEF blocks')
-    ap.add_argument('--set-extra', nargs='*', default=['meatgrinder=/mnt/user-data/uploads/__Games/MeatGrinder/BR_VR_MeatGrinder', 'vplus=/home/claude/parents/alek'], help='SET=DIR: more MODELDEF/actor files that belong to that one set only (owner\'s D: copy where the well copy is short)')
+    ap.add_argument('--actors', nargs='*', default=[], help='parent mods (text lumps) read for actor states only, never for MODELDEF blocks. Used 2026-10-31: brutalv21.lite-wo, meatgrinderV2C, ZBloody_Hell_v1915, Blood weapons_VR_Ermac, Heretic-Voidwalker, ww-cola3-v2.5, robocop.pk3 (owner D: __Games / uploads)')
+    ap.add_argument('--set-extra', nargs='*', default=[], help='Used 2026-10-31: meatgrinder=<D: __Games/MeatGrinder/BR_VR_MeatGrinder> vplus=<alek_DoomGuns_v1.1a unpacked>. ' + 'SET=DIR: more MODELDEF/actor files that belong to that one set only (owner\'s D: copy where the well copy is short)')
+    ap.add_argument('--lock', default='sources.lock.json', help='per-donor record of what the sources resolved to (source mesh, block text, held frame); used when a source folder is not given')
     ap.add_argument('--placement', default='placement.json', help='per-donor Scale/Offset table (the placement agent writes it); missing file = skipped')
     a = ap.parse_args(); os.chdir(HERE)
     placement = {}
@@ -227,6 +228,7 @@ def main():
             b['dir'] = os.path.dirname(p)
             well_blocks.setdefault((os.path.dirname(p), b['path'].lower(), b['file'].lower()), []).append(b)
     idx = actor_index([a.well] + a.extra + a.actors + [v for vs in SET_EXTRA.values() for v in vs])
+    idx_own = actor_index([a.well] + a.extra + [v for vs in SET_EXTRA.values() for v in vs])	# actors the VR sets define themselves
     # ---- cards
     donors = []; report = []
     for card in sorted(glob.glob('cards/*/*/*.card')):
@@ -255,7 +257,8 @@ def main():
                 # inside each tier prefer the block whose actor's Ready state resolves
                 own = [b for b in cands if b.get('dir', '').startswith(setdir)]
                 tier = own or cands
-                src = next((b for b in tier if ready_frame(b, idx)[0] is not None), (tier or [None])[0])
+                # an actor the VR set defines itself beats one only a parent mod defines (BD's Classic* modes)
+                src = next((b for b in tier if ready_frame(b, idx_own)[0] is not None), None) or next((b for b in tier if ready_frame(b, idx)[0] is not None), (tier or [None])[0])
                 if src: break
         if src is None:
             # carved or re-encoded card mesh: same frame count and same whole-mesh frame-0 bounds,
@@ -278,7 +281,7 @@ def main():
                 cands = exact + [b for b in same_set if b not in exact]
                 own = [b for b in cands if b.get('dir', '').startswith(setdir)]
                 tier = own or cands
-                src = next((b for b in tier if ready_frame(b, idx)[0] is not None), (tier or [None])[0])
+                src = next((b for b in tier if ready_frame(b, idx_own)[0] is not None), None) or next((b for b in tier if ready_frame(b, idx)[0] is not None), (tier or [None])[0])
         card_idle = idle; rf, rwhy = ready_frame(src, idx)
         if rf is not None and rf < nfr: idle = rf
         skins = sorted(f for f in os.listdir(d) if f.lower().endswith(('.png', '.jpg', '.tga')))
@@ -289,6 +292,31 @@ def main():
         fo.write('# Rest frame per donor: OG MODELDEF Ready state vs card idle\n\n| donor | card idle | OG Ready frame | how |\n|---|---|---|---|\n')
         for dn in donors:
             fo.write('| %s | %d | %s | %s |\n' % (dn['name'], dn['card_idle'], '-' if dn['rf'] is None else dn['rf'], dn['rwhy']))
+    # ---- the lock: what every donor resolved to. A donor this run cannot resolve (its add-on folder was
+    # not passed) takes its last resolution from the committed lock, so the output does not depend on
+    # folders outside the repo.
+    import json
+    lock = json.load(open(a.lock)) if os.path.exists(a.lock) else {}
+    for dn in donors:
+        L = lock.get(dn['name'])
+        if dn['src'] is None and L and L.get('block'):
+            dn['src'] = {'name': L['block_name'], 'body': L['block'], 'path': '', 'file': ''}
+            dn['srcfile'] = dn['srcfile'] or L.get('srcfile_abs')
+            dn['rf'], dn['rwhy'] = L.get('frame'), (L.get('how') or '').replace(' (lock)', '') + ' (lock)'
+            if dn['rf'] is not None and dn['rf'] < dn['nfr']: dn['idle'] = dn['rf']
+        elif dn['rf'] is None and L and L.get('frame') is not None and L.get('block') and dn['src'] and L.get('block_name') == dn['src']['name']:
+            # same model name, but this run could not tell which of its blocks is the weapon: the lock knows
+            dn['src'] = {'name': L['block_name'], 'body': L['block'], 'path': '', 'file': ''}
+            dn['rf'], dn['rwhy'] = L['frame'], (L.get('how') or '').replace(' (lock)', '') + ' (lock)'
+            if dn['rf'] < dn['nfr']: dn['idle'] = dn['rf']
+    newlock = {}
+    for dn in donors:
+        b = dn['src']
+        newlock[dn['name']] = {'card': dn['dir'], 'srcfile': (os.path.relpath(dn['srcfile'], a.well) if dn['srcfile'] and dn['srcfile'].startswith(a.well) else (os.path.basename(os.path.dirname(dn['srcfile'])) + '/' + os.path.basename(dn['srcfile']) if dn['srcfile'] else None)),
+                               'srcfile_abs': dn['srcfile'] if dn['srcfile'] and not dn['srcfile'].startswith(a.well) else None,
+                               'block_name': b['name'] if b else None, 'block': b['body'] if b else None,
+                               'frame': dn['rf'], 'how': dn['rwhy']}
+    json.dump(newlock, open(a.lock, 'w'), indent=1, sort_keys=True)
     byname = {dn['name']: dn for dn in donors}
     for dst, srcn in COPY_ROWS.items():
         if dst in byname and srcn in byname and byname[dst]['src'] is None:
@@ -310,7 +338,7 @@ def main():
             sk = [s for s in sk if re.search(r'"([^"]+)"', s).group(1) in dn['skins'] or re.search(r'"([^"]+)"', s).group(1).lower() in [x.lower() for x in dn['skins']]]
             if not sk and dn['skins']:
                 sk = ['Skin 0 "%s"' % main_skin(dn)]; dn['skin_note'] = 'source skin %s not in folder; used %s' % (re.findall(r'Skin\s+0\s+"([^"]+)"', body)[:1], main_skin(dn))
-            lines += ['\t' + s.strip() for s in sk]
+            lines += ['\t' + s.strip() for s in sk]	# exactly as written: a later line for the same surface wins in GZDoom
             if not pl:
                 for key in ('Scale', 'Offset', 'ZOffset', 'AngleOffset', 'PitchOffset', 'RollOffset'):
                     mm = re.search(r'^\s*%s\s+([^\n/]+)' % key, body, re.M | re.I)
