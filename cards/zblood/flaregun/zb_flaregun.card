@@ -1,0 +1,17 @@
+weapon zb_flaregun
+  archetype   flaregun        # owner-confirmed
+  model       zb_flaregun.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    trigger_guard surf 1  rest [4.44, -0.03, 2.56]  axis [0.536, -0.008, 0.844]  travel 0.05  frames -..-
+    trigger  surf 2  rest [4.66, -0.03, 2.58]  axis [0.548, -0.009, 0.837]  travel 0.05  frames -..-
+    muzzle    [19.19, -0.05, 9.7]
+  grip        line [1.78, -1.23, 3.45] [-1.22, -0.0, -3.38]  trigger [4.66, -0.03, 2.58]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [12.0, -0.03, 6.29]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..1
+    idle         2..22
+  baked_cant   frames 5..13 up to 42.3 deg   # psprite-era hand sway; removed in zb_flaregun_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 525
+  states      # modeldef.flaregun.txt + actors/Weapons/Flaregun.txt (statephase.py)

@@ -1,0 +1,17 @@
+weapon zb_voodoo
+  archetype   thrown        # owner-confirmed
+  model       zb_voodoo.md3   space WPN   idle_frame 2
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    part     surf 1  rest [-2.13, 10.5, -0.13]  axis [0.16, 0.33, 0.93]  travel 2.14  frames 6..17  rot 27deg axis [0.97, 0.12, -0.21]
+    part2    surf 2  rest [-1.08, -12.01, 2.02]  axis [-0.172, 0.527, 0.832]  travel 2.57  frames 1..17  rot 15deg axis [-1.0, 0.01, -0.0]
+    muzzle    [7.8, -1.34, 2.12]
+  grip        line [-5.73, -1.36, 2.17] [-3.16, -3.91, -1.61]  trigger [-0.15, 1.77, 1.65]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [3.85, 1.77, 1.65]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..17
+  baked_cant   frames 1..17 up to 15.2 deg   # psprite-era hand sway; removed in zb_voodoo_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 268
+  states      # modeldef.voodoodoll.txt + actors/Weapons/VoodooDoll.txt (statephase.py)
+    Ready              1 tics  frames 0

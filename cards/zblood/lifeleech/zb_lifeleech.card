@@ -1,0 +1,20 @@
+weapon zb_lifeleech
+  archetype   energy        # owner-confirmed
+  model       zb_lifeleech.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    grip     surf 1  rest [-5.59, 0.12, -2.07]  axis [-0.38, -0.116, -0.918]  travel 2.69  frames 2..18
+    handgrip surf 2  rest [-19.06, -0.16, -6.48]  axis [-0.171, -0.123, -0.978]  travel 3.62  frames 1..18
+    eye      surf 3  rest [24.22, 0.21, 8.65]  axis [-0.864, -0.051, 0.5]  travel 5.04  frames 2..19
+    muzzle    [27.67, -1.53, 8.14]
+  grip        line [-0.33, 0.12, 0.94] [-16.48, 0.12, -6.98]  trigger [-5.59, 0.12, -2.07]   # from the grip surface
+  support     feature palm [22.69, 0.28, 6.88]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..19
+  baked_cant   frames 6..18 up to 3.1 deg   # psprite-era hand sway; removed in zb_lifeleech_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 648
+  states      # modeldef.lifeleech.txt + actors/Weapons/LifeLeech.txt (statephase.py)
+    Ready              1 tics  frames 0
+    AltFire            1 tics  frames 0
+    Fire               1 tics  frames 0

@@ -1,0 +1,14 @@
+weapon zb_pitchfork
+  archetype   melee        # owner-confirmed
+  model       zb_pitchfork.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [44.59, 2.5, 1.59]
+  grip        line [44.05, -10.19, -0.67] [-26.92, 1.16, -0.7]  trigger [32.92, 0.0, 0.47]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [36.92, 0.0, 0.47]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..10
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 130
+  states      # modeldef.pitchfork.txt + actors/Weapons/Pitchfork.txt (statephase.py)
+    Ready              2 tics  frames 3

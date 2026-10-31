@@ -1,0 +1,20 @@
+weapon zb_napalm
+  archetype   launcher        # owner-confirmed
+  model       zb_napalm.md3   space WPN   idle_frame 3
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    bottom   surf 1  rest [15.59, 0.21, -4.62]  axis [-0.456, 0.278, -0.845]  travel 0.01  frames -..-
+    handle   surf 2  rest [1.7, 0.15, -6.15]  axis [0.627, 0.777, -0.059]  travel 0.01  frames -..-
+    trigger  surf 3  rest [4.38, 0.03, -4.28]  axis [-0.735, 0.009, 0.678]  travel 0.40  frames -..-  rot 25deg axis [0.01, 1.0, 0.0]
+    muzzle    [33.81, -0.78, 4.75]
+  grip        line [1.98, 0.66, -3.53] [3.19, 0.23, -4.25]  trigger [4.38, 0.03, -4.28]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [16.51, 0.58, -0.17]   # one-handed gun; placeholder
+  carve       
+  phases
+    raise        0..1
+    idle         2..3
+    fire         4..5
+    idle         6..12
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 533
+  states      # modeldef.napalm.txt + actors/Weapons/NapalmLauncher.txt (statephase.py)
+    Ready              1 tics  frames 3
