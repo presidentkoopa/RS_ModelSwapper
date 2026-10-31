@@ -1,0 +1,14 @@
+weapon bw_axe
+  archetype   pistol_mag        # owner-confirmed
+  model       bw_axe.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    muzzle    [70.22, 0.0, 11.44]
+  grip        line [46.36, -0.88, 10.16] [43.5, -0.02, 4.13]  trigger [46.79, -0.0, 9.18]   # centroid-based; owner's hand fit supersedes
+  support     feature palm [50.79, -0.0, 9.18]   # one-handed gun; placeholder
+  carve       
+  phases
+    idle         0..6
+    lower        7..10
+  baked_cant   frames 1..5 up to 111.8 deg   # psprite-era hand sway; removed in bw_axe_stable.md3
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 1691

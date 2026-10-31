@@ -19,3 +19,10 @@ where it goes, the hands do the reload. "The mesh says it doesn't reload" was a 
 
 Tool fix this folder: md3label.py crashed on an --assign'd part that never moves (the RPG tubes); now written
 with travel 0.
+
+## Blend sources (2026-10-31): br_vr\Brutaldoom_blend_files\_Meatgrinder
+Same rig tree as BrutalWolf but the armatures are unnamed (older files); blendcard.py walks it by shape and
+takes roles from the mesh names. The important find: these guns were AUTHORED TILTED 20 deg in the hand
+(Handle rot -160 vs the Wolf set's -180): that is the grip rake, captured in the artist's own file. Each
+folder has <gun>.blend.card beside the MD3 card. CHAING.blend has no part armatures (the barrels spin only
+in the exported MD3).

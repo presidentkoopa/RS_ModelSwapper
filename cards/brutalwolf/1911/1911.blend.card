@@ -1,0 +1,11 @@
+weapon 1911
+  source      1911.blend   blender 2.81.16   frames 0..9
+  space       world = the MD3 frame (Main Hand at the origin, scale 25); units = MD3 model units
+  handle      loc [25.00, 0.00, -3.00]  rot_deg [-0.0, -180.0, -0.0]   # the gun under the hand: the artist's grip relation
+  parts
+    armature  armature "Armature"  rest [23.00, 0.00, -13.00]  axis [-0.321, 0.000, -0.947]  travel 13.47  frames 2..9  meshes ['model.004'] (81 verts)
+    extra     armature "Extra"  rest [28.93, 0.00, 0.93]  axis [-1.000, 0.000, -0.003]  travel 6.34  frames 2..9  meshes ['model.003'] (365 verts)
+    trigger   armature "Trigger"  rest [29.68, 0.00, -2.83]  axis [-0.987, -0.000, 0.161]  travel 2.36  frames 1..4  meshes ['model.001'] (31 verts)
+    trigger   armature "Trigger.001"  rest [22.78, 0.00, -1.92]  axis [-0.996, 0.000, -0.094]  travel 2.09  frames 2..4  meshes ['model.002'] (56 verts)
+  body        meshes ['model']
+  authoring   rig=ZMC TEMPLATE  roles_from_armature_names yes  paths_authored yes
