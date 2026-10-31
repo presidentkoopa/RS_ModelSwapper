@@ -3,14 +3,21 @@ weapon cx_lazdevice
   model       cx_lazdevice.md3   space WPN   idle_frame 0
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
   parts
-    muzzle    [58.31, 11.58, 21.42]
+    mag      surf 1  rest [36.51, 11.87, 18.75]  axis [0.129, -0.001, 0.992]  travel 0.01  frames -..-
+    mag2     surf 2  rest [36.49, 11.57, 16.68]  axis [-0.02, -0.001, 1.0]  travel 0.01  frames -..-
+    part     surf 4  rest [15.12, 11.73, 17.74]  axis [-0.695, -0.235, -0.679]  travel 0.06  frames -..-
+    mag_well  [36.51, 11.87, 18.75]  mouth [44.19, 10.67, 22.38]  axis [0.129, -0.001, 0.992]  travel_clear 0.01
+    muzzle    [59.94, -0.78, 7.95]
   grip        line [25.73, 32.28, 4.84] [22.97, 11.58, -22.88]  trigger [27.51, 11.58, 3.86]   # centroid-based; owner's hand fit supersedes
   support     feature palm [31.51, 11.58, 3.86]   # one-handed gun; placeholder
-  carve       
+  carve       mag
   phases
     idle         0..10
   authoring   surfaces_named_in_source no  tags_in_source 1  frame_names_in_source no  verts 15604
+  carved      mag  surfs [1, 2]  seat_origin [36.5, 11.67, 17.4]  file cx_lazdevice_mag.md3
   states      # modeldef.bfg.txt + bfg.txt (statephase.py)
     Ready              1 tics  frames 0
     Fire              60 tics  frames 0,1,2,3,4,3,2,1
     OldFire           71 tics  frames 0,1
+  # RELOAD (creative, 2026-10-31): Chex has no reload; the rack of seven cells on top (surfs 1+2) is carded as the
+  # "Phasing Zorcher Recharge" magazine. Never animated: the runtime lifts and seats it from this card.

@@ -3,7 +3,7 @@ weapon cx_minizorcher
   model       cx_minizorcher.md3   space WPN   idle_frame 0
   bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
   parts
-    part     surf 1  rest [15.36, 0.02, 1.97]  axis [-0.999, -0.001, 0.032]  travel 0.86  frames 6..11
+    sleeve   surf 1  rest [15.36, 0.02, 1.97]  axis [-0.999, -0.001, 0.032]  travel 0.86  frames 6..11
     trigger  surf 2  rest [6.57, 4.07, 3.93]  axis [0.999, -0.0, 0.054]  travel 0.34  frames -..-
     trigger2 surf 3  rest [6.15, 2.05, 3.96]  axis [0.999, -0.0, 0.052]  travel 0.34  frames -..-
     hammer   surf 4  rest [6.03, 0.67, 3.97]  axis [0.999, -0.0, 0.052]  travel 0.34  frames -..-
@@ -23,3 +23,4 @@ weapon cx_minizorcher
   states      # modeldef.pistol.txt + pistol.txt (statephase.py)
     Ready              1 tics  frames 0
     Fire              19 tics  frames 4,8,4
+  # NO RELOAD (2026-10-31): nothing clip-shaped on the mesh; surf 1 is a barrel sleeve moving 1.2 on fire. Surfs 2..8 are tiny trim.
