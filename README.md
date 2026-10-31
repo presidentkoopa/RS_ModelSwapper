@@ -1,115 +1,138 @@
-<img width="1248" height="1011" alt="Untitled" src="https://github.com/user-attachments/assets/b21b0fef-8a9f-41d2-a60f-d264206f1716" />
+<img width="1248" height="1011" alt="ModelSwapper" src="https://github.com/user-attachments/assets/b21b0fef-8a9f-41d2-a60f-d264206f1716" />
+
 # ModelSwapper
 
-3D weapons for any Doom mod, made for playing in VR.
+**3D weapons for any Doom weapon mod, made for VR, with hand reloads on the guns that can reload.**
 
-The usual way to get one is for someone to hand-author a model set for a specific mod: every weapon modelled, fitted to the hand and animated to that mod's timing. That is a lot of work for a single mod, and the Doom VR community is small. Most weapon mods will never get a set of their own, including ones people love.
-
-ModelSwapper doesn't wait for that. It carries one shelf of models and fits it to whatever you load.
+Load a weapon mod, then load ModelSwapper. Every weapon the mod gives you wears a 3D model, held in your hand, and
+you can put any model on any weapon. Where the model can be reloaded, you reload it by hand: pull the magazine and
+seat a new one, work the pump, break the shotgun and load the shells, swing out the cylinder. The mod's own code still
+decides the ammo, the rules and the sounds. Nothing is written for any one mod, so a mod released tomorrow works the
+same way as one from 2016.
 
 ![The model picker, with Project Brutality loaded](media/pb-choose-models.png)
 
-Every weapon the loaded mod gives you, the family it was sorted into, and the model it is wearing. Any model can go on any weapon.
+## Status: version 1.5 (2026-10-31)
 
-**Coming in 2.0: VR hands and hand reloading on any mod. Our models, their code.** Load any weapon mod, even one written long before VR, and its guns reload by hand the way each model is built: pull the magazine and seat a new one, break the shotgun and load the shells, work the pump, swing out the cylinder. The mod's own reload decides the ammo, rules and sounds. 2.0 is in progress on the `modelswapper-2.0-bd22-lift` branch, and its README says honestly what works today and what does not. Also coming: renamed models and selectable skins.
+All results below were run on the QuestZDoom 17.3 test rig. **None are headset-confirmed yet.**
 
-## Project goal and status (MS 1.5, 2026-10-31)
+| | |
+|---|---|
+| Models | 143 meshes from 17 VR weapon sets, every one selectable on any weapon |
+| Placement | each model sits where its own set's hand-authored MODELDEF puts it, on the frame that set shows at Ready |
+| Magazine reloads | 37 models, generated from their cards |
+| Pump reloads | 6 shotguns (the Meatgrinder SSG uses Ermac's shell in the loading hand) |
+| Break-open / revolver | 5 models (BD M79, BD revolver, BD SSG, V+ revolver with speedloader, V+ SSG) |
+| Charging handle | asked for after an empty reload; racked by the off hand |
 
-**Goal.** Load any Doom weapon mod in VR, pick any of our 3D models for any of its weapons, and reload by hand the
-ones whose model can be reloaded (magazine out and in, shells into a pump or break-action, cylinder swung out) --
-the mod's own code deciding ammo, rules and sounds. Quest (QuestZDoom 17.3) and PCVR.
+Shown working on two mods that reload properly, with 0 script errors from the pack:
 
-**Where it stands (measured, 2026-10-31).**
-- The model well was rebuilt from scratch into one unified system: `cards/<set>/<gun>/` holds, for every mesh, its
-  card (measured parts, roles, states), the labelled mesh, the carved reload parts, its textures and a render sheet.
-  143 donors; every card mesh has all of its source frames (checked against the source mesh, frame count and space).
-  The measuring tools live in RSQ_WeaponDepot (`tools/hqt`, `tools/carve`); the cards and meshes live here.
-- The donor systems are GENERATED from the cards (`tools_gen_from_cards.py` -> `modeldef`, donor stubs, shelf, names).
-  **There is no placement math.** Every donor copies its own set's calibrated MODELDEF block (Skin, Scale, Offset,
-  ZOffset, angles) and rests on the frame that block shows at the weapon's Ready state:
-  - 142 of 143 donors on their own set's block. The exception is the Robocop KSG: the mod dropped it, no MODELDEF
-    names the held mesh, so it sits at Scale 1.
-  - Held frame read from the original code (Ready state through the block's model-0 FrameIndex, A_ReplaceSprite and
-    renamed/pasted blocks followed) for the large majority; the rest are overlay parts or owner answers, each noted
-    in `ready_frames.report.md`.
-  - `sources.lock.json` records what every donor resolved to, so the output reproduces from this repo alone.
-    The parent mods and add-on sources used to resolve it are listed in the generator's `--actors` / `--set-extra` help.
-- `tools_rig_check.py` builds the Quest pk3, runs a donor on the Linux QuestZDoom rig on doom2 (+ a mod), pins the
-  off hand, selects the gun the Depot-rig way, reads back the donor actually applied and makes a contact sheet.
-- Rig, doom2 + Doomablo 0.9.1a, zero script errors from the pack: Doomablo's pistol, shotgun, rifle, SSG, rocket
-  launcher and chaingun wear BD21's pistol, shotgun, rifle, SSG, RPG and minigun; alek's pistol on the pistol.
-  Rig only, not headset-confirmed.
-- Repository = three things: systems, cards (meshes + textures), the generators. Everything older is on branch
-  `archive/pre-cards-2026-10-31` (see `ARCHIVE.md`).
+| Mod | Weapon | Model | Reload |
+|---|---|---|---|
+| Generic weapons | ARifle | BD rifle | magazine, and charging handle when shot dry |
+| Generic weapons | Beretta | BD pistol | magazine + slide |
+| Generic weapons | Riotgun | BD shotgun | shells into the port, pump after the shot |
+| Generic weapons | DoubleSG | BD SSG | break open, two shells, flick shut |
+| Weapons of Saturn | MachineRifle | BD rifle | magazine |
+| Weapons of Saturn | Beretta / 1911 / MP40 | BD pistol / BW 1911 / BD MP40, BD SMG | magazine + slide or handle |
+| Weapons of Saturn | Riotgun | BD shotgun | shells + pump |
+| Weapons of Saturn | Coachgun | BD SSG | break open, shell, flick shut |
 
-**Next.** 1) Reload: re-point `MODELDEF.rsb` / `MODELDEF.rsrpump` and the WMCARD props at the cards, then drive one
-hand reload on the rig (BD21 rifle on Doomablo's assault rifle). 2) Picks across all 143 donors on the rig.
-3) Zion and Samsara: large sets, tabled, to be done together later. The other well folders are duplicates and are
-ignored.
+What is still open is listed in [HANDOFF.md](HANDOFF.md), most important first.
+
+## Using it
+
+- **Desktop VR:** `ModelSwapper.pk3`, for [UZDXREMA](https://github.com/presidentkoopa/UZDXREMA). Models animate with
+  the weapon.
+- **Quest:** `ModelSwapper-QUEST.pk3`, for [QuestZDoom](https://github.com/emawind84/QuestZDoom) 17.3. Same models,
+  picker and reloads. The models hold their rest pose, because animating them needs engine features Quest does not
+  have.
+
+Load it **after** your weapon mod. The model picker lists every weapon the mod defines and which family it was sorted
+into (pistol, shotgun, rifle, launcher and so on), with the model it is wearing. Pick any model for any weapon.
+
+Reload options are in the menu. **Reload Order** decides whether the mod's own reload runs first (the default) or the
+hands go first. **Charging Handle After Empty** decides whether an empty gun asks for its handle. The menu also has
+pump-by-hand-after-a-shot and shells per grab.
 
 ## How it works
 
-ModelSwapper reads every weapon the loaded mods define and sorts each one into a family, such as pistol, shotgun, rifle or launcher. It goes by the weapon's name, its ammo and its parent class, and finally by the weapon slot it sits in, so nothing is left without a model. Each weapon then wears a model from its family.
+1. **Sorting.** ModelSwapper reads every weapon the loaded mods define and sorts each into a family. It looks at the
+   name, the ammo, the parent class, and last the weapon slot, so no weapon is ever left without a model. A weapon
+   that takes ammo or shows a muzzle flash always counts as a gun. Handlebars, lanterns and other helpers a mod builds
+   out of weapon code don't get a model.
+2. **Wearing a model.** The weapon's model data is pointed at the chosen model, so the engine draws our model in its
+   place, with that model's own skin, scale and offsets. On desktop the weapon's own states drive the model's frames
+   every tic.
+3. **Hand reloads.** When a weapon wearing one of our models reloads, the join (`zscript/RS_ForeignReload.zs`) takes
+   over:
+   - It lets the mod's own reload run, so its ammo and rules stand.
+   - It holds the weapon while the hands do the reload.
+   - It gives the weapon back when the hands finish.
 
-The animation is driven by the weapon's own code. Every Doom weapon already reports what it is doing each tic through its states: ready, fire, reload, raise, lower. When a model is attached, ModelSwapper maps those states onto the model's frames, and from then on the model plays whatever the weapon is doing. A reload lasts exactly as long on the model as it does in the mod, a partial reload plays short, and the very first shot is already in time, with nothing to learn or calibrate.
+   Which reload a model gets comes from its slot in the reload tables: magazine (`RSR_Guns`), pump (`RSP_Guns`) or
+   break-open (`RSB_Guns`). The slot is looked up from the model in the hand, not from the mod's weapon class. That's
+   why it works on mods nobody has looked at.
 
-Nothing in it is written for a particular mod, so a pack released tomorrow works the same way as one from 2016. It has been calibrated against the following mods:
+## The cards
 
-- vanilla Doom
-- Brutal Doom v21 and v22
-- Brutal Doom 64, Doom 64 Unseen Evil and Doom 64 Retribution
-- Project Brutality 0.4.1
-- Golden Souls 1 and 2
-- Ashes 2063 and Ashes Afterglow
-- DoomRL Arsenal
-- Guncaster
-- MetaDoom
-- Trailblazer
-- Combined Arms
-- Final Doomer
-- LegenDoom Lite
-- Complex Doom
-- Lithium
-- Dakka
-- Pandemonia
-- MeatGrinder
-- VanillaVR Plus
-- the DOOM Infinite demo
-- SELACO - Uses its own models.
-- Wolfenstein: Blade of Agony - Recommend to use WW2 Addon.
+Everything starts from `cards/<set>/<gun>/`. Each folder holds:
+- **The card** (`.card`): measured parts, roles, states, muzzle, grip and magazine well.
+- **The labelled mesh** with all of its source frames.
+- **The carved reload parts:** magazine, pump, hinge, rounds.
+- **Its textures and a render sheet.**
 
+The cards are measured with the RSQ_WeaponDepot tools (`tools/hqt`, `tools/carve`). The donor system and every
+reload table are **generated** from them. Nothing is placed or wired by hand.
 
-Each one's weapon code was checked against the model menu, so the menu lists the guns you can actually hold and leaves out the vehicles, meat shields, ledge grabs and other helpers a mod builds out of weapon code.
+| Generator | Writes |
+|---|---|
+| `tools_gen_from_cards.py` | `modeldef`, donor stubs, shelf + names (each model on its own set's MODELDEF block; `sources.lock.json` makes it reproducible from this repo alone) |
+| `tools_kit/card_mag.py` | magazine rows `zscript_depot/rsr/rsr_guns.ms.zs` + layers `MODELDEF.cards` |
+| `tools_kit/card_pump.py` | pump rows `rsr_pump_guns.zs`, `rsp_rack.ms.zs` + layers `MODELDEF.rsrpump` |
+| `tools_kit/card_break.py` | break-open rows `rsb_guns.zs` + layers `MODELDEF.rsb` |
+| `tools_reload_modeldefs.py` | `MODELDEF.cards2x`: the 2.0-measured layers for the few models card_mag does not build |
 
+Regenerate in that order. Each generator writes a report (`*.report.md`) saying what it built and why it left
+anything out.
 
-36 models across 22 weapon families, built from 34 meshes (the rest are alternate finishes), about 30 MB in all. 
+## Building
 
+`./build.ps1` builds the desktop pk3; `./build.ps1 -Static` builds the Quest pk3. `tools_zs_lint.py` checks the
+ZScript before anything is packed.
 
-All 35 are in renders/, and renders/sheets/ lays the before and after views side by side.
+## Testing on the rig
 
-## Tools
+The rig is QuestZDoom 17.3 on Linux, run on the real `doom2.wad`, with simulated head and hand poses.
 
-Everything used on the models is in this repo. The scripts need Python 3, and the renderer also needs Pillow.
+- `tools_rig_check.py --donors MS_BD_Pistol,... --weapon <class> --extra <mod.pk3>` builds the Quest pk3. It puts
+  each model on a weapon, reads back the model actually applied, and makes a contact sheet.
+- `tools_rig_reload.py --kind mag|pump|break --donor <model> --weapon <class> --extra <mod.pk3>` drives one full
+  hand reload and prints every phase. For magazine guns:
+  - `--clicks N` or `--fire-tics N` shoots the gun dry first.
+  - `--rack` works the charging handle.
 
-- tools_md3_pitch.py reads an MD3 mesh and measures the angle of every frame.
-- tools_md3_reorigin.py centres a mesh on its origin and verifies the result byte by byte.
-- tools_md3_compensate.py works out the position setting that keeps a centred gun exactly where it was, using a copy of the engine's own transform.
-- tools_reorigin_all.py runs both over every model and stamps each model definition so a block can never be adjusted twice.
-- tools_md3_render.py draws the wireframe renders shown above.
-- tools_clip_audit.py shows which frames each animation uses and which frames nothing plays.
-- tools_pitch_audit.py finds raise and sprint frames that swing the gun away from its resting angle.
-- tools_model_inventory.py writes a full inventory of every model: frames, poses, angles and animations.
-- tools_gen_pickups.ps1 generates the pickup model definitions from the meshes.
-- tools_gen_bd21.ps1 generates the Brutal Doom v21 shelf from Brutal Doom's own model definitions.
-- tools_zs_lint.py checks the ZScript for syntax errors before build.ps1 packs anything.
-- tools_make_pb_offhand_patch.py builds a VR patch from your own copy of Project Brutality 0.4.1: its guns move between hands without crashing, and casings, smoke and muzzle sparks come off the gun instead of your face. Load it after PB.
+**Test reloads on a mod whose weapons really have a Reload state.** The generic weapons pack and Weapons of Saturn
+both do. Doomablo's shotgun and super shotgun reload inside Fire, so they never hand over a reload.
 
-## Which build
+## Repository
 
-ModelSwapper.pk3 is the desktop VR build, for [UZDXREMA](https://github.com/presidentkoopa/UZDXREMA). Models are animated, reloads included.
+- `zscript/`: the model swapper, the reload join, the picker.
+- `zscript_depot/`: the reload system and the VR hands, plus the generated reload tables.
+- `cards/`: the meshes, textures and cards.
+- `tools_kit/`: the generators and the measuring kit.
+- `tools_*.py`: placement, rig and mesh tools.
+- `models/rsq`, `sounds/`, `SNDINFO.ms`: the VR hands and the reload foley.
+- `reload_1x/`: the 1.x / 2.0 reload layers kept as reference for `tools_reload_modeldefs.py`.
 
-ModelSwapper-QUEST.pk3 is for standalone Quest, on [QuestZDoom](https://github.com/emawind84/QuestZDoom). Same models and the same picker, but the models hold still, because animation needs engine features Quest doesn't have. Fit In Hand and the muzzle flash setting are engine features too, so they do nothing there.
+Earlier work, including the 1.x model shelf and the 2.0 branch (`modelswapper-2.0-bd22-lift`), is described in
+[ARCHIVE.md](ARCHIVE.md). The old tree is on branch `archive/pre-cards-2026-10-31`.
 
-Load either one after your weapon mod. To build them from source, run ./build.ps1, or ./build.ps1 -Static for the Quest build.
+## Credits
 
-INTERNALS.md explains the binding, classification and animation in detail, along with what they can't do. ENGINE_CHANGES.md covers the engine changes the animation needs.
+The models are the work of the VR weapon set authors: Ermac, alek, and the Brutal Doom, Brutal Wolfenstein, Aliens,
+MeatGrinder, HacX, Chex, Cola, Doom 64, Robocop, Universal Voxel, ZBlood and other set makers. See each set's
+`cards/<set>/NOTES.md`. The VR hands are Ermac's.
+
+ModelSwapper builds on teambeef QuestZDoom, ported to PC by Emawind84, moved into UZDoom by Ermac, and brought up
+to UZDoom 5.0 with its VR features by presidentkoopa.
