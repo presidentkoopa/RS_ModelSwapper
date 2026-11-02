@@ -1,0 +1,451 @@
+
+//with hand
+Model RLRocketLauncher
+{
+	Path "models/rocketlauncher"
+	Model 0 "rocketlauncher.md3"
+	Model 1 "rockets.md3"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex RLWH A 0 0	FrameIndex RLWH A 1 0	FrameIndex RLWH A 2 95
+	
+	//Fire
+	FrameIndex RLWH D 0 0	FrameIndex RLWH D 1 0	FrameIndex RLWH D 2 96
+	
+	//No rocket
+	FrameIndex RLWH G 0 0	FrameIndex RLWH G 1 99	FrameIndex RLWH G 2 95
+	
+	//Dry fire
+	FrameIndex RLWH H 0 0	FrameIndex RLWH H 1 99	FrameIndex RLWH H 2 96
+	
+	//Reload
+	FrameIndex RLWH I 0 0	FrameIndex RLWH I 1 1	FrameIndex RLWH I 2 95
+	FrameIndex RLWH J 0 0	FrameIndex RLWH J 1 2	FrameIndex RLWH J 2 95
+	FrameIndex RLWH K 0 0	FrameIndex RLWH K 1 3	FrameIndex RLWH K 2 95
+	FrameIndex RLWH L 0 0	FrameIndex RLWH L 1 4	FrameIndex RLWH L 2 95
+	
+	Path "models/rocketlauncher"
+	Model 1 "rockets2.md3"
+	
+	//Ready
+	FrameIndex RLWH B 0 0	FrameIndex RLWH B 1 2	FrameIndex RLWH B 2 95
+	
+	//Fire
+	FrameIndex RLWH E 0 0	FrameIndex RLWH E 1 2	FrameIndex RLWH E 2 96
+	
+	//Slide ammo
+	FrameIndex RLWH M 0 0	FrameIndex RLWH M 1 0	FrameIndex RLWH M 2 95
+	FrameIndex RLWH N 0 0	FrameIndex RLWH N 1 1	FrameIndex RLWH N 2 95
+	FrameIndex RLWH O 0 0	FrameIndex RLWH O 1 2	FrameIndex RLWH O 2 95
+	
+	Model 1 "rockets3.md3"
+	
+	//Ready
+	FrameIndex RLWH C 0 0	FrameIndex RLWH C 1 2	FrameIndex RLWH C 2 95
+	
+	//Fire
+	FrameIndex RLWH F 0 0	FrameIndex RLWH F 1 2	FrameIndex RLWH F 2 96
+	
+	//Slide ammo
+	FrameIndex RLWH P 0 0	FrameIndex RLWH P 1 0	FrameIndex RLWH P 2 95
+	FrameIndex RLWH Q 0 0	FrameIndex RLWH Q 1 1	FrameIndex RLWH Q 2 95
+	FrameIndex RLWH R 0 0	FrameIndex RLWH R 1 2	FrameIndex RLWH R 2 95
+}
+
+//with hand (PBR texture)
+Model RLRocketLauncher
+{
+	Path "models/rocketlauncher"
+	Model 0 "rocketlauncher.md3"
+	Skin 0 "rocketlauncher_HD.png"
+	Model 1 "rockets.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	Skin 2 "hand_HD.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex RLWP A 0 0	FrameIndex RLWP A 1 0	FrameIndex RLWP A 2 95
+	
+	//Fire
+	FrameIndex RLWP D 0 0	FrameIndex RLWP D 1 0	FrameIndex RLWP D 2 96
+	
+	//No rocket
+	FrameIndex RLWP G 0 0	FrameIndex RLWP G 1 99	FrameIndex RLWP G 2 95
+	
+	//Dry fire
+	FrameIndex RLWP H 0 0	FrameIndex RLWP H 1 99	FrameIndex RLWP H 2 96
+	
+	//Reload
+	FrameIndex RLWP I 0 0	FrameIndex RLWP I 1 1	FrameIndex RLWP I 2 95
+	FrameIndex RLWP J 0 0	FrameIndex RLWP J 1 2	FrameIndex RLWP J 2 95
+	FrameIndex RLWP K 0 0	FrameIndex RLWP K 1 3	FrameIndex RLWP K 2 95
+	FrameIndex RLWP L 0 0	FrameIndex RLWP L 1 4	FrameIndex RLWP L 2 95
+	
+	Path "models/rocketlauncher"
+	Model 1 "rockets2.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	//Ready
+	FrameIndex RLWP B 0 0	FrameIndex RLWP B 1 2	FrameIndex RLWP B 2 95
+	
+	//Fire
+	FrameIndex RLWP E 0 0	FrameIndex RLWP E 1 2	FrameIndex RLWP E 2 96
+	
+	//Slide ammo
+	FrameIndex RLWP M 0 0	FrameIndex RLWP M 1 0	FrameIndex RLWP M 2 95
+	FrameIndex RLWP N 0 0	FrameIndex RLWP N 1 1	FrameIndex RLWP N 2 95
+	FrameIndex RLWP O 0 0	FrameIndex RLWP O 1 2	FrameIndex RLWP O 2 95
+	
+	Model 1 "rockets3.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	//Ready
+	FrameIndex RLWP C 0 0	FrameIndex RLWP C 1 2	FrameIndex RLWP C 2 95
+	
+	//Fire
+	FrameIndex RLWP F 0 0	FrameIndex RLWP F 1 2	FrameIndex RLWP F 2 96
+	
+	//Slide ammo
+	FrameIndex RLWP P 0 0	FrameIndex RLWP P 1 0	FrameIndex RLWP P 2 95
+	FrameIndex RLWP Q 0 0	FrameIndex RLWP Q 1 1	FrameIndex RLWP Q 2 95
+	FrameIndex RLWP R 0 0	FrameIndex RLWP R 1 2	FrameIndex RLWP R 2 95
+}
+
+//with both hands
+Model RLRocketLauncher
+{
+	Path "models/rocketlauncher"
+	Model 0 "rocketlauncher.md3"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	Model 3 "hand2.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	Path "models/rocketlauncher"
+	Model 1 "rockets2.md3"
+	
+	//Slide ammo
+	FrameIndex RL2H M 0 0	FrameIndex RL2H M 1 0	FrameIndex RL2H M 2 95  FrameIndex RL2H M 3 80
+	FrameIndex RL2H N 0 0	FrameIndex RL2H N 1 1	FrameIndex RL2H N 2 95  FrameIndex RL2H N 3 80
+	FrameIndex RL2H O 0 0	FrameIndex RL2H O 1 2	FrameIndex RL2H O 2 95  FrameIndex RL2H O 3 80
+	
+	Model 1 "rockets3.md3"
+	
+	//Slide ammo
+	FrameIndex RL2H P 0 0	FrameIndex RL2H P 1 0	FrameIndex RL2H P 2 95  FrameIndex RL2H P 3 80
+	FrameIndex RL2H Q 0 0	FrameIndex RL2H Q 1 1	FrameIndex RL2H Q 2 95  FrameIndex RL2H Q 3 80
+	FrameIndex RL2H R 0 0	FrameIndex RL2H R 1 2	FrameIndex RL2H R 2 95  FrameIndex RL2H R 3 80
+	
+	NOINTERPOLATION
+	
+	Model 1 "rockets.md3"
+	
+	//Ready
+	FrameIndex RL2H A 0 0	FrameIndex RL2H A 1 0	FrameIndex RL2H A 2 95	FrameIndex RL2H A 3 80
+	
+	//Fire
+	FrameIndex RL2H D 0 0	FrameIndex RL2H D 1 0	FrameIndex RL2H D 2 96  FrameIndex RL2H D 3 80
+	
+	//No rocket
+	FrameIndex RL2H G 0 0	FrameIndex RL2H G 1 99	FrameIndex RL2H G 2 95  FrameIndex RL2H G 3 80
+	
+	//Dry fire
+	FrameIndex RL2H H 0 0	FrameIndex RL2H H 1 99	FrameIndex RL2H H 2 96  FrameIndex RL2H H 3 80
+	
+	//Reload
+	FrameIndex RL2H I 0 0	FrameIndex RL2H I 1 1	FrameIndex RL2H I 2 95  FrameIndex RL2H I 3 87
+	FrameIndex RL2H J 0 0	FrameIndex RL2H J 1 2	FrameIndex RL2H J 2 95  FrameIndex RL2H J 3 88
+	FrameIndex RL2H K 0 0	FrameIndex RL2H K 1 3	FrameIndex RL2H K 2 95  FrameIndex RL2H K 3 89
+	FrameIndex RL2H L 0 0	FrameIndex RL2H L 1 4	FrameIndex RL2H L 2 95  FrameIndex RL2H L 3 90
+	
+	Model 1 "rockets2.md3"
+	
+	//Ready
+	FrameIndex RL2H B 0 0	FrameIndex RL2H B 1 2	FrameIndex RL2H B 2 95  FrameIndex RL2H B 3 80
+	
+	//Fire
+	FrameIndex RL2H E 0 0	FrameIndex RL2H E 1 2	FrameIndex RL2H E 2 96  FrameIndex RL2H E 3 80
+	
+	Model 1 "rockets3.md3"
+	
+	//Ready
+	FrameIndex RL2H C 0 0	FrameIndex RL2H C 1 2	FrameIndex RL2H C 2 95  FrameIndex RL2H C 3 80
+	
+	//Fire
+	FrameIndex RL2H F 0 0	FrameIndex RL2H F 1 2	FrameIndex RL2H F 2 96  FrameIndex RL2H F 3 80
+}
+
+//with both hands (PBR texture)
+Model RLRocketLauncher
+{
+	Path "models/rocketlauncher"
+	Model 0 "rocketlauncher.md3"
+	Skin 0 "rocketlauncher_HD.png"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	Skin 2 "hand_HD.png"
+	Model 3 "hand2.md3"
+	Skin 3 "hand_HD.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	Path "models/rocketlauncher"
+	Model 1 "rockets2.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	//Slide ammo
+	FrameIndex RL2P M 0 0	FrameIndex RL2P M 1 0	FrameIndex RL2P M 2 95  FrameIndex RL2P M 3 80
+	FrameIndex RL2P N 0 0	FrameIndex RL2P N 1 1	FrameIndex RL2P N 2 95  FrameIndex RL2P N 3 80
+	FrameIndex RL2P O 0 0	FrameIndex RL2P O 1 2	FrameIndex RL2P O 2 95  FrameIndex RL2P O 3 80
+	
+	Model 1 "rockets3.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	//Slide ammo
+	FrameIndex RL2P P 0 0	FrameIndex RL2P P 1 0	FrameIndex RL2P P 2 95  FrameIndex RL2P P 3 80
+	FrameIndex RL2P Q 0 0	FrameIndex RL2P Q 1 1	FrameIndex RL2P Q 2 95  FrameIndex RL2P Q 3 80
+	FrameIndex RL2P R 0 0	FrameIndex RL2P R 1 2	FrameIndex RL2P R 2 95  FrameIndex RL2P R 3 80
+	
+	NOINTERPOLATION
+	
+	Model 1 "rockets.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	//Ready
+	FrameIndex RL2P A 0 0	FrameIndex RL2P A 1 0	FrameIndex RL2P A 2 95	FrameIndex RL2P A 3 80
+	
+	//Fire
+	FrameIndex RL2P D 0 0	FrameIndex RL2P D 1 0	FrameIndex RL2P D 2 96  FrameIndex RL2P D 3 80
+	
+	//No rocket
+	FrameIndex RL2P G 0 0	FrameIndex RL2P G 1 99	FrameIndex RL2P G 2 95  FrameIndex RL2P G 3 80
+	
+	//Dry fire
+	FrameIndex RL2P H 0 0	FrameIndex RL2P H 1 99	FrameIndex RL2P H 2 96  FrameIndex RL2P H 3 80
+	
+	//Reload
+	FrameIndex RL2P I 0 0	FrameIndex RL2P I 1 1	FrameIndex RL2P I 2 95  FrameIndex RL2P I 3 87
+	FrameIndex RL2P J 0 0	FrameIndex RL2P J 1 2	FrameIndex RL2P J 2 95  FrameIndex RL2P J 3 88
+	FrameIndex RL2P K 0 0	FrameIndex RL2P K 1 3	FrameIndex RL2P K 2 95  FrameIndex RL2P K 3 89
+	FrameIndex RL2P L 0 0	FrameIndex RL2P L 1 4	FrameIndex RL2P L 2 95  FrameIndex RL2P L 3 90
+	
+	Model 1 "rockets2.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	//Ready
+	FrameIndex RL2P B 0 0	FrameIndex RL2P B 1 0	FrameIndex RL2P B 2 95  FrameIndex RL2P B 3 80
+	
+	//Fire
+	FrameIndex RL2P E 0 0	FrameIndex RL2P E 1 0	FrameIndex RL2P E 2 96  FrameIndex RL2P E 3 80
+	
+	Model 1 "rockets3.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	//Ready
+	FrameIndex RL2P C 0 0	FrameIndex RL2P C 1 0	FrameIndex RL2P C 2 95  FrameIndex RL2P C 3 80
+	
+	//Fire
+	FrameIndex RL2P F 0 0	FrameIndex RL2P F 1 0	FrameIndex RL2P F 2 96  FrameIndex RL2P F 3 80
+}
+
+//without hand
+Model RLRocketLauncher
+{
+	Path "models/rocketlauncher"
+	Model 0 "rocketlauncher.md3"
+	Model 1 "rockets.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex RLNH A 0 0	FrameIndex RLNH A 1 0
+	
+	//Fire
+	FrameIndex RLNH D 0 0	FrameIndex RLNH D 1 0
+	
+	//No rocket
+	FrameIndex RLNH G 0 0	FrameIndex RLNH G 1 9
+	
+	//Dry fire
+	FrameIndex RLNH H 0 0	FrameIndex RLNH H 1 9
+	
+	//Reload
+	FrameIndex RLNH I 0 0	FrameIndex RLNH I 1 1
+	FrameIndex RLNH J 0 0	FrameIndex RLNH J 1 2
+	FrameIndex RLNH K 0 0	FrameIndex RLNH K 1 3
+	FrameIndex RLNH L 0 0	FrameIndex RLNH L 1 4
+	
+	Path "models/rocketlauncher"
+	Model 1 "rockets2.md3"
+	
+	//Ready
+	FrameIndex RLNH B 0 0	FrameIndex RLNH B 1 2
+	
+	//Fire
+	FrameIndex RLNH E 0 0	FrameIndex RLNH E 1 2
+	
+	//Slide ammo
+	FrameIndex RLNH M 0 0	FrameIndex RLNH M 1 0
+	FrameIndex RLNH N 0 0	FrameIndex RLNH N 1 1
+	FrameIndex RLNH O 0 0	FrameIndex RLNH O 1 2
+	
+	Model 1 "rockets3.md3"
+	
+	//Ready
+	FrameIndex RLNH C 0 0	FrameIndex RLNH C 1 2
+	
+	//Fire
+	FrameIndex RLNH F 0 0	FrameIndex RLNH F 1 2
+	
+	//Slide ammo
+	FrameIndex RLNH P 0 0	FrameIndex RLNH P 1 0
+	FrameIndex RLNH Q 0 0	FrameIndex RLNH Q 1 1
+	FrameIndex RLNH R 0 0	FrameIndex RLNH R 1 2
+}
+
+//without hand (PBR texture)
+Model RLRocketLauncher
+{
+	Path "models/rocketlauncher"
+	Model 0 "rocketlauncher.md3"
+	Skin 0 "rocketlauncher_HD.png"
+	Model 1 "rockets.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex RLNP A 0 0	FrameIndex RLNP A 1 0
+	
+	//Fire
+	FrameIndex RLNP D 0 0	FrameIndex RLNP D 1 0
+	
+	//No rocket
+	FrameIndex RLNP G 0 0	FrameIndex RLNP G 1 9
+	
+	//Dry fire
+	FrameIndex RLNP H 0 0	FrameIndex RLNP H 1 9
+	
+	//Reload
+	FrameIndex RLNP I 0 0	FrameIndex RLNP I 1 1
+	FrameIndex RLNP J 0 0	FrameIndex RLNP J 1 2
+	FrameIndex RLNP K 0 0	FrameIndex RLNP K 1 3
+	FrameIndex RLNP L 0 0	FrameIndex RLNP L 1 4
+	
+	Path "models/rocketlauncher"
+	Model 1 "rockets2.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	//Ready
+	FrameIndex RLNP B 0 0	FrameIndex RLNP B 1 2
+	
+	//Fire
+	FrameIndex RLNP E 0 0	FrameIndex RLNP E 1 2
+	
+	//Slide ammo
+	FrameIndex RLNP M 0 0	FrameIndex RLNP M 1 0
+	FrameIndex RLNP N 0 0	FrameIndex RLNP N 1 1
+	FrameIndex RLNP O 0 0	FrameIndex RLNP O 1 2
+	
+	Model 1 "rockets3.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	
+	//Ready
+	FrameIndex RLNP C 0 0	FrameIndex RLNP C 1 2
+	
+	//Fire
+	FrameIndex RLNP F 0 0	FrameIndex RLNP F 1 2
+	
+	//Slide ammo
+	FrameIndex RLNP P 0 0	FrameIndex RLNP P 1 0
+	FrameIndex RLNP Q 0 0	FrameIndex RLNP Q 1 1
+	FrameIndex RLNP R 0 0	FrameIndex RLNP R 1 2
+}
+
+//muzzle flash
+Model RLRocketLauncher
+{
+	Path "models/rocketlauncher"
+	Model 0 "rl_mf.md3"
+	SurfaceSkin 0 0 "muzzle_flash1.png"
+	SurfaceSkin 0 1 "muzzle_flash3.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex RLMF A 0 0
+	
+	SurfaceSkin 0 0 "muzzle_flash2.png"
+	SurfaceSkin 0 1 "muzzle_flash1.png"
+	FrameIndex RLMF B 0 0
+	
+	SurfaceSkin 0 0 "muzzle_flash3.png"
+	SurfaceSkin 0 1 "muzzle_flash2.png"
+	FrameIndex RLMF C 0 0
+}
+
+Model BDExplosionParticle
+{
+	Path "models/common"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer2.png"
+	Scale 1.5 1.5 6.0
+
+	PITCHFROMMOMENTUM
+
+	FrameIndex SPRK S 0 0
+}
+
+Model BDExplosionParticle2
+{
+	Path "models/common"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer2.png"
+	Scale 1.5 1.5 6.0
+
+	PITCHFROMMOMENTUM
+
+	FrameIndex SPRK A 0 0
+}
+
+Model BDExplosionParticleBig
+{
+	Path "models/common"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer2.png"
+	Scale 1.5 1.5 6.0
+
+	PITCHFROMMOMENTUM
+
+	FrameIndex SPRK A 0 0
+}
+
+Model ExplosionSpike
+{
+	Path "models/common"
+	Model 0 "tracer.md3"
+	Skin 0 "tracer2.png"
+	Scale 1.5 1.5 6.0
+
+	PITCHFROMMOMENTUM
+
+	FrameIndex SPRK A 0 0
+}

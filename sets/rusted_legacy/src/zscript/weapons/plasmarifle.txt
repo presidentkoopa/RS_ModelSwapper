@@ -1,0 +1,703 @@
+
+class RLPlasmaRifle : DoomWeaponZ replaces PlasmaRifle
+{
+	int beamCount;
+
+	Default
+	{
+	Weapon.SelectionOrder 101;
+	Weapon.AmmoUse1 0;
+	Weapon.AmmoGive1 40;
+	Weapon.AmmoUse2 1;
+	Weapon.AmmoGive2 0;
+	Weapon.AmmoType1 "Cell";
+	Weapon.AmmoType2 "PlasmaCell";
+	Inventory.PickupMessage "$GOTPLASMA";
+	Tag "$TAG_PLASMARIFLE";
+	+WEAPON.NOAUTOAIM;
+	+WEAPON.NOAUTOFIRE;
+	+WEAPON.AMMO_OPTIONAL;
+	+WEAPON.ALT_AMMO_OPTIONAL;
+	+WEAPON.NOALERT;
+	}
+	
+	override void Tick()
+	{
+		if(!owner || !owner.player || owner.health < 1) return;
+		
+		Super.Tick();
+		if(owner.player.ReadyWeapon == self) checkOffhandGrab();
+		
+		//set the ammo display overlay
+		if(owner.player.readyweapon is "RLPlasmaRifle" || owner.player.offhandweapon is "RLPlasmaRifle")
+		{
+			let pspr = owner.player.GetPSprite(2003);
+			pspr.Caller = self;
+			pspr.SetState(ResolveState("AmmoOverlay"));
+			pspr = owner.player.GetPSprite(2004);
+			pspr.Caller = self;
+			pspr.SetState(ResolveState("AmmoOverlay2"));
+			pspr = owner.player.GetPSprite(2005);
+			pspr.Caller = self;
+			pspr.SetState(ResolveState("AmmoOverlay3"));
+		}
+		else
+		{
+			let pspr = owner.player.FindPSprite(2003);
+			if(pspr) pspr.Destroy();
+			pspr = owner.player.FindPSprite(2004);
+			if(pspr) pspr.Destroy();
+			pspr = owner.player.FindPSprite(2005);
+			if(pspr) pspr.Destroy();
+		}
+	}
+	
+	private void checkOffhandGrab()
+	{
+		if(weaponModel < 2 || !(owner.player.offhandweapon is "RLOffhandFist") || owner.countinv("ImmersiveInteractToken"))
+		{
+			owner.player.mo.SetInventory("HandInteractToken", 0);
+			return;
+		}
+		
+		if(GetAge() % 10 != 0) return;
+	
+		let pmo = owner.player.mo;
+		int hand = bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 8, pitch, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 gripPos = _puff.pos;
+		
+		double handDistGrip = level.Vec3Diff(gripPos, owner.OffhandPos).Length();
+		
+		if(handDistGrip <= 4)
+		{
+			pmo.SetInventory("HandInteractToken", 1);
+		}
+		else
+		{
+			pmo.SetInventory("HandInteractToken", 0);
+		}
+	}
+	
+	private void firePlasmaBall()
+	{
+		let pmo = owner.player.mo;
+		int hand = bOffhandWeapon;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		let _puff = pmo.LineAttack(angle, 30, pitch+7, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 spawnPos = _puff.pos;
+		
+		_puff = pmo.LineAttack(angle, PLAYERMISSILERANGE, pitch, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 destPos = _puff.pos;
+		
+		let pball = pmo.SpawnPlayerMissile("NewPlasmaball");
+		if(pball)
+		{
+			pball.SetOrigin(spawnPos, false);
+			pball.A_SetAngle(pball.AngleTo(_puff));
+			pball.A_SetPitch(GetPitchTo(pball, _puff));
+			pball.Vel3DFromAngle(GetDefaultSpeed("NewPlasmaball"), pball.angle, pball.pitch);
+			pmo.takeinventory("PlasmaCell", 1);
+			
+			if(!performanceMode)
+			{
+				int debrispawncount = random(4, 8);
+				for(int i = 0; i < debrispawncount; i++)
+				{
+					let pdebris = Actor.Spawn("BDBluePlasmaPiece2", spawnPos);
+					pdebris.Vel3DFromAngle(pdebris.default.speed, pdebris.AngleTo(_puff) + random(15, 40) * random(-1,1), random(-40,40));
+				}
+			}
+			A_AlertMonsters();
+		}
+	}
+	
+	private void firePlasmaBlast()
+	{
+		let pmo = owner.player.mo;
+		let totalammo = pmo.CountInv("PlasmaCell");
+		int spentAmmo;
+		
+		if(beamCount < 3)
+		{
+			spentAmmo += 10;
+			pmo.SpawnPlayerMissile("PlasmaBeamBlast", aimflags: ALF_NOFRIENDS);
+			if(beamCount > 1 && totalammo >= 20)
+			{
+				pmo.SpawnPlayerMissile("PlasmaBeamBlast", aimflags: ALF_NOFRIENDS);
+				spentAmmo += 10;
+			}
+		}
+		else
+		{
+			if(totalammo >= 30)
+			{
+				pmo.SpawnPlayerMissile("PlasmaBeamBlast2", aimflags: ALF_NOFRIENDS);
+				spentAmmo += 10;
+			}
+			if(beamCount > 3 && totalammo >= 42)
+			{	
+				pmo.SpawnPlayerMissile("PlasmaBeamBlast3", aimflags: ALF_NOFRIENDS);
+				spentAmmo += 12;
+			}
+			if(beamCount == 5 && totalammo >= 55)
+			{
+				pmo.SpawnPlayerMissile("PlasmaBeamBlast4", aimflags: ALF_NOFRIENDS);
+				spentAmmo += 13;
+			}
+		}
+		pmo.A_StartSound("weapons/plasma/beamblast", CHAN_WEAPON);
+		totalammo = totalammo - spentAmmo;
+		if(!(owner.player.cheats & CF_INFINITEAMMO)) pmo.SetInventory("PlasmaCell", totalammo);
+		beamCount = 0;
+	}
+	
+	private bool hasEnoughBeamAmmo()
+	{
+		let pmo = owner.player.mo;
+		let totalammo = pmo.CountInv("PlasmaCell");
+		int ammocount = beamCount * 10;
+		if(beamCount > 3) ammocount += (beamCount - 3) * 2;
+		if(beamCount > 4) ammocount += 1;
+		if(ammocount > totalammo)
+			return false;
+		else
+			return true;
+	}
+	
+	action void A_FirePlasmaBall()
+	{
+		invoker.firePlasmaBall();
+	}
+	
+	action void A_FirePlasmaBlast()
+	{
+		invoker.firePlasmaBlast();
+	}
+	
+	action void A_CheckImmersiveReloadAction1()
+	{
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 8, pitch-15, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 magReloadPos = _puff.pos;
+		
+		invoker.showWeaponMarker(magReloadPos);
+		
+		double handDistMag = level.Vec3Diff(magReloadPos, player.mo.OffhandPos).Length();
+		if(handDistMag <= 3) invoker.setReloadStep(2, 1);
+	}
+	
+	action void A_SpawnWeaponFlash()
+	{
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 30, pitch+7, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		if(_puff)
+		{
+			if(random[flash](0,9) > 5)
+				Actor.Spawn("RLVRPlasmaFlash", _puff.pos);
+			else
+				Actor.Spawn("RLVRPlasmaFlash2", _puff.pos);
+		}
+	}
+	
+	action void A_ReloadMag()
+	{
+		let pmo = invoker.owner;
+		let magammo = pmo.CountInv("PlasmaCell");
+		let totalammo = pmo.CountInv("Cell");
+		int addammo;
+		if(magammo == 0)
+		{
+			addammo = 100;
+			addammo = addammo > totalammo ? totalammo : addammo;
+		}
+		else
+		{
+			addammo = 100 - magammo;
+			addammo = addammo > totalammo ? totalammo : addammo;
+		}
+		magammo += addammo;
+		totalammo = totalammo - addammo;
+		totalammo = totalammo < 0 ? 0 : totalammo;
+		pmo.SetInventory("PlasmaCell", magammo);
+		if(!(player.cheats & CF_INFINITEAMMO)) pmo.SetInventory("Cell", totalammo);
+		invoker.weaponUnloaded = false;
+	}
+	
+	action void A_UnloadMag()
+	{
+		let pmo = invoker.owner;
+		int maxammo = RLVRMapCheck.isLoRMap() ? 150 : 300;
+		if(pmo.CountInv("backpack")) maxammo *= 2;
+		let magammo = pmo.CountInv("PlasmaCell");
+		let totalammo = pmo.CountInv("Cell");
+		if(totalammo + magammo > maxammo) return;
+		pmo.SetInventory("PlasmaCell", 0);
+		pmo.SetInventory("Cell", totalammo + magammo);
+		invoker.weaponUnloaded = true;
+	}
+	
+	States
+	{
+	Ready:
+		PLSG A 0 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, "ReadyNoAmmo");
+		#### A 1 A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		Loop;
+	ReadyNoAmmo:
+		PLSG I 0 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### I 1 A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		Goto Ready;
+	Deselect:
+		PLSG A 0 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### A 1 A_Lower (160);
+		Loop;
+	Select:
+		PLSG A 0 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### A 1 A_Raise (160);
+		Loop;
+	DryFire:
+		#### # 0 A_JumpIf(invoker.autoReload, "Reload");
+		#### # 0 A_StartSound("weapon/dryfire", CHAN_WEAPON);
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, "DryFireNoAmmo");
+		PLSG BBBBBBBBBB 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		Goto Ready;
+	DryFireNoAmmo:
+		PLSG JJJJJJJJJJ 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		Goto ReadyNoAmmo;
+	Fire:
+		PLSG A 0 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 0 A_JumpIfInventory("PlasmaCell", 1, 1);
+		Goto DryFire;
+		#### # 0 A_GunFlash("MuzzleFlash");
+		#### # 0 A_SpawnWeaponFlash;
+		#### A 3 A_FirePlasmaBall;
+		#### # 0 A_StartSound("weapons/plasma/fire", CHAN_WEAPON);
+		#### B 20 A_ReFire;
+		Goto Ready;
+	Altfire:
+		PLSG A 0 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 0 A_JumpIfInventory("PlasmaCell", 10, 1);
+		Goto DryFire;
+		#### A 0 A_StartSound("weapons/plasma/charge", CHAN_WEAPON);
+		#### A 0 A_AlertMonsters;
+		#### ################# 1
+		{
+			A_FireProjectile ("PlasmaBeam", 0, 0);
+			A_SpawnWeaponFlash();
+		}
+		#### # 0 A_Refire("PlasmaBeamAttack");
+		Goto Ready;
+	PlasmaBeamAttack:
+		PLSG A 0 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 1 A_JumpIf(!invoker.hasEnoughBeamAmmo(), "PlasmaBeamBlast");
+		#### # 0 A_StartSound("weapons/plasma/fullcharged", CHAN_WEAPON);
+		#### ################# 1
+		{
+			A_FireProjectile ("PlasmaBeam", 0, 0);
+			A_SpawnWeaponFlash();
+		}
+		#### # 0 { invoker.beamCount++; }
+		#### # 0 A_JumpIf(invoker.beamCount > 4, "PlasmaBeamBlast");
+		#### # 1 A_ReFire ("PlasmaBeamAttack");
+	PlasmaBeamBlast:
+		#### # 0 A_StopSound(CHAN_WEAPON);
+		#### # 1 A_FirePlasmaBlast;
+		#### A 0 A_StartSound("weapons/plasma/beamfire", CHAN_WEAPON);
+		#### AAAAAAAAAA 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		goto Ready;
+	Reload:
+		PLSG ######## 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 0 A_JumpIfInventory("Cell", 1, 1);
+		Goto ReloadNoAmmo;
+		#### # 0 A_JumpIf(invoker.ImmersiveReload, "ImmersiveReload");
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, 15);
+		#### # 0 A_StartSound("weapons/chaingun/clipout", CHAN_WEAPON);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_JumpIf(invoker.performanceMode, 2);
+		#### # 1 A_FireProjectile("RLPlasmaMagSpawner", 0, 0, 0, -10, FPF_NOAUTOAIM, 0);
+		#### CCCCCCCCCC 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### DDEEEFFFGGG 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 0 A_StartSound("weapons/chaingun/clipin", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_OffhandHaptic; 								//haptic
+		#### HHH 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 0 A_StartSound("weapons/plasma/ready", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_ReloadMag;
+		Goto Ready;
+	ReloadNoAmmo:
+		#### ##### 1;
+		Goto Ready;
+	Zoom:
+	UnloadAmmo:
+		#### # 1 A_JumpIf(invoker.weaponUnloaded, "ReadyNoAmmo");
+		PLSG A 0 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### ######## 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 0 A_UnloadMag;
+		#### # 0 A_StartSound("weapons/chaingun/clipout", CHAN_WEAPON);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_JumpIf(invoker.performanceMode, 2);
+		#### # 1 A_FireProjectile("RLPlasmaMagSpawner", 0, 0, 0, -10, FPF_NOAUTOAIM, 0);
+		Goto Ready;
+	ImmersiveReload:
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, 5);
+		#### # 0 A_StartSound("weapons/chaingun/clipout", CHAN_WEAPON);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_JumpIf(invoker.performanceMode, 2);
+		#### # 0 A_FireProjectile("RLPlasmaMagSpawner", 0, 0, 0, -10, FPF_NOAUTOAIM, 0);
+		#### # 0 { invoker.setReloadStep(1); }
+		PLSG I 1
+		{
+			A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		}
+		#### # 0 A_CheckImmersiveReloadAction1();
+		#### # 0 A_JumpIf(player.mo.countinv("ImmersiveReloadStep") == 2, "ImmersiveReloadMag");
+		Goto ImmersiveReload+6;
+	ImmersiveReloadMag:
+		#### # 0 { invoker.hideWeaponMarker(); }
+		#### DDEEFFGG 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 0 A_StartSound("weapons/chaingun/clipin", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_OffhandHaptic; 								//haptic
+		#### HH 1 A_SetAltModel("PLSP", "PL2H", "PL2P", "PLNH", "PLNP");
+		#### # 0 A_StartSound("weapons/plasma/ready", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_ReloadMag;
+		#### # 0 { invoker.setReloadStep(0); }
+		Goto Ready;
+	MuzzleFlash:
+		TNT1 A 0 A_OverlayFlags(OverlayID(), PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
+		TNT1 A 0 A_OverlayRenderstyle(OverlayID(), STYLE_Add);
+		TNT1 A 0 A_OverlayAlpha(OverlayID(), invoker.flashAlpha);
+		TNT1 A 0 A_JumpIf(invoker.showFLashSprite == false, 2);
+		PLSF A 4 Bright A_Light1;
+		Goto LightDone;
+		TNT1 A 0;
+		Stop;
+	AmmoOverlay:
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == -1, "AmmoOverlay1_9");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 0, "AmmoOverlay1_0");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 1, "AmmoOverlay1_1");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 2, "AmmoOverlay1_2");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 3, "AmmoOverlay1_3");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 4, "AmmoOverlay1_4");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 5, "AmmoOverlay1_5");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 6, "AmmoOverlay1_6");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 7, "AmmoOverlay1_7");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 8, "AmmoOverlay1_8");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter1 == 9, "AmmoOverlay1_9");
+		TNT1 A 1;
+	AmmoOverlay1_0:
+		PDP1 A 1;
+		Goto AmmoOverlay;
+	AmmoOverlay1_1:
+		PDP1 B 1;
+		Goto AmmoOverlay;
+	AmmoOverlay1_2:
+		PDP1 C 1;
+		Goto AmmoOverlay;
+	AmmoOverlay1_3:
+		PDP1 D 1;
+		Goto AmmoOverlay;
+	AmmoOverlay1_4:
+		PDP1 E 1;
+		Goto AmmoOverlay;
+	AmmoOverlay1_5:
+		PDP1 F 1;
+		Goto AmmoOverlay;
+	AmmoOverlay1_6:
+		PDP1 G 1;
+		Goto AmmoOverlay;
+	AmmoOverlay1_7:
+		PDP1 H 1;
+		Goto AmmoOverlay;
+	AmmoOverlay1_8:
+		PDP1 I 1;
+		Goto AmmoOverlay;
+	AmmoOverlay1_9:
+		PDP1 J 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2:
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == -1, "AmmoOverlay2_9");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 0, "AmmoOverlay2_0");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 1, "AmmoOverlay2_1");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 2, "AmmoOverlay2_2");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 3, "AmmoOverlay2_3");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 4, "AmmoOverlay2_4");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 5, "AmmoOverlay2_5");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 6, "AmmoOverlay2_6");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 7, "AmmoOverlay2_7");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 8, "AmmoOverlay2_8");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter2 == 9, "AmmoOverlay2_9");
+		TNT1 A 1;
+	AmmoOverlay2_0:
+		PDP2 A 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2_1:
+		PDP2 B 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2_2:
+		PDP2 C 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2_3:
+		PDP2 D 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2_4:
+		PDP2 E 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2_5:
+		PDP2 F 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2_6:
+		PDP2 G 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2_7:
+		PDP2 H 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2_8:
+		PDP2 I 1;
+		Goto AmmoOverlay;
+	AmmoOverlay2_9:
+		PDP2 J 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3:
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == -1, "AmmoOverlay3_9");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 0, "AmmoOverlay3_0");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 1, "AmmoOverlay3_1");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 2, "AmmoOverlay3_2");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 3, "AmmoOverlay3_3");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 4, "AmmoOverlay3_4");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 5, "AmmoOverlay3_5");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 6, "AmmoOverlay3_6");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 7, "AmmoOverlay3_7");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 8, "AmmoOverlay3_8");
+		TNT1 A 0 A_JumpIf(invoker.clipCounter3 == 9, "AmmoOverlay3_9");
+		TNT1 A 1;
+	AmmoOverlay3_0:
+		PDP3 A 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3_1:
+		PDP3 B 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3_2:
+		PDP3 C 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3_3:
+		PDP3 D 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3_4:
+		PDP3 E 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3_5:
+		PDP3 F 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3_6:
+		PDP3 G 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3_7:
+		PDP3 H 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3_8:
+		PDP3 I 1;
+		Goto AmmoOverlay;
+	AmmoOverlay3_9:
+		PDP3 J 1;
+		Goto AmmoOverlay;
+	Spawn:
+		PLAS A -1;
+		Stop;
+	PlaceHolder:
+		PLSP A 1;
+		PL2H A 1;
+		PL2P A 1;
+		PLNH A 1;
+		PLNP A 1;
+		Stop;
+	}
+}
+
+class PlasmaCell : Ammo
+{
+	Default
+	{
+	Inventory.maxamount 100;
+	Inventory.Icon "CELLA0";
+	}
+}
+
+class NewPlasmaball : FastProjectile
+{  
+	Default
+	{
+	Radius 13;
+	Height 8;
+	Speed 25;
+	Damage 5;
+	Obituary "$OB_MPPLASMARIFLE";
+	missiletype "BlueFlarePlasmaTrail";
+	missileheight 8;
+	damagetype "PlasmaDamage";
+	decal "BluePlasmaSplat";
+	renderstyle "Add";
+	scale .2;
+	alpha .8;
+	SeeSound "";
+	DeathSound "weapons/plasmax";
+	+DONTBLAST
+	+FORCEXYBILLBOARD
+	+THRUGHOST
+	+NOEXTREMEDEATH
+	+BLOODLESSIMPACT
+	}
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_PlaySound("weapons/plasma/fire");
+		TNT1 A 0 A_SetScale(scale.x*randompick(-1,1),scale.y*randompick(-1,1));
+		TNT1 A 0 A_SpawnItemEx("BDBlueFlarePlasma",0,0,0,vel.x,vel.y,vel.z,0,SXF_SETMASTER|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY);
+		PLBA ABCDEF 2 bright;
+		goto spawn+4;
+	Death:
+		TNT1 A 0 A_RemoveChildren(1,RMVF_EVERYTHING);
+		TNT1 AAAAAA 0 A_SpawnProjectile("BDBluePlasmaShred",0,0,random(-360,360),2,random(-90,90));
+		PLSE AABBCCDDEE 1 A_SpawnProjectile("BDBluePlasmaPiece",0,0,random(-360,360),2,random(-50,50));
+		TNT1 A 0 bright A_SpawnItem("WeaponSmoke");
+	Explosion:
+		TNT1 A 0;
+		TNT1 A 0 A_SetScale(0.2*randompick(-1,1),0.2*randompick(-1,1));
+		PEXP ABCDEFGHIJKLM 2 bright A_FadeOut(0.05);
+		stop;
+	}
+}
+
+class PlasmaBeam : NewPlasmaball
+{
+	Default
+	{
+	Speed 90;
+	Radius 13;
+	Height 8;
+	Damage 0;
+	Decal "";
+	damagetype "PlasmaDamage";
+	scale 0.1;
+	SeeSound "";
+	DeathSound "";
+	-RIPPER
+	-CANNOTPUSH
+	-NODAMAGETHRUST
+	-NOEXTREMEDEATH
+	+SPAWNSOUNDSOURCE
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_SetScale(scale.x*randompick(-1,1),scale.y*randompick(-1,1));
+		TNT1 AAA 3 A_SpawnItemEx("BDBlueFlarePlasma",0,0,0,vel.x,vel.y,vel.z,0,SXF_SETMASTER|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY);
+		PLBA ABCDEF 2 bright;
+		goto spawn+4;
+	Death:
+	Explosion:
+		TNT1 AA 1 A_SpawnProjectile("BDBluePlasmaPiece",0,0,random(-360,360),2,random(-50,50));
+		stop;
+	}
+}
+
+class PlasmaBeamBlast : PlasmaBeam
+{
+	Default
+	{
+	Speed 250;
+	Radius 13;
+	Height 8;
+	Damage 20;
+	RenderStyle "AddShaded";
+	StencilColor "659bff";
+	Alpha 1.0;
+	Decal "BigScorch";
+	damagetype "PlasmaDamage";
+	scale 0.7;
+	SeeSound "";
+	DeathSound "weapons/plasma/beamblast2";
+	Projectile;
+	-RIPPER
+	+SPAWNSOUNDSOURCE
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 2;
+		loop;
+	Death:
+	Explosion:
+		TNT1 A 1 A_Explode(150, 150, 0, true, 30);
+	PlasmaExplode:
+		TNT1 A 0 A_SpawnItemEx("BDWhiteShockwave");
+		TNT1 A 1 A_StartSound("rocket/explode", volume: 0.8);
+		TNT1 AAAAAAAAAAAAAAA 0 A_SpawnProjectile("BluePlasmaSpark",0,0,random(-360,360),2,random(-50,50));
+		BFGB ABCDEFG 2;
+		Stop;
+	}
+}
+
+class PlasmaBeamBlast2 : PlasmaBeamBlast
+{
+	States
+	{
+	Death:
+	Explosion:
+		TNT1 A 1 A_Explode(200, 180, 0, true, 30);
+		Goto PlasmaExplode;
+	}
+}
+
+class PlasmaBeamBlast3 : PlasmaBeamBlast
+{
+	States
+	{
+	Death:
+	Explosion:
+		TNT1 A 1 A_Explode(250, 240, 0, true, 60);
+		TNT1 A 0 A_SpawnItemEx("BDExplosionSimpleSmokeColumn");
+		Goto PlasmaExplode;
+	}
+}
+
+class PlasmaBeamBlast4 : PlasmaBeamBlast
+{
+	States
+	{
+	Death:
+	Explosion:
+		TNT1 A 1 A_Explode(300, 320, 0, true, 80);
+		Goto PlasmaExplode;
+	}
+}

@@ -1,0 +1,191 @@
+// Copyright 2018-2020 Alexander Kromm (m8f/mmaulwurff)
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/
+//
+// This cvar loader is taken from laser sight mod by Alexander Kromm (m8f/mmaulwurff)
+
+class rlvr_Settings
+{
+  int weaponModel()   					{ return weaponModelCvar.getInt();   	}
+  int pickupModel()   					{ return pickupModelCvar.getInt();  	}
+  bool distModel()   					{ return distModelCvar.getBool();  	}
+  int modelDist()   					{ return modelDistCvar.getInt();  	}
+  bool flashSprite()   					{ return flashSpriteCvar.getBool();   	}
+  double flashAlpha()   				{ return flashAlphaCvar.getDouble();   	}
+  bool aimLaser()   					{ return laserBeamCvar.getBool();   	}
+  int laserColor()   					{ return laserColorCvar.getInt();   	}
+  double laserAlpha()   				{ return laserAlphaCvar.getDouble();   	}
+  bool bulletTracer()   				{ return bulletTracerCvar.getBool();   	}
+  bool weaponSwitch()   				{ return weaponSwitchCvar.getBool();   	}
+  bool perfMode()   					{ return perfModeCvar.getBool();   	}
+  bool autoReload()   					{ return autoReloadCvar.getBool();   	}
+  bool ImmersiveReload()   				{ return ImmersiveReloadCvar.getBool(); }
+  bool weaponMarker()   				{ return weaponMarkerCvar.getBool(); 	}
+  bool ShoulderAmmoGrab()   				{ return ShoulderAmmoCvar.getBool(); 	}
+  double ShoulderTouchDist()   				{ return ShoulderDistCvar.getDouble(); 	}
+  bool simpleHUD()   					{ return simpleHUDCvar.getBool();   	}
+  bool shieldSaw()   					{ return SSCvar.getBool();   		}
+  int shieldSawModel()   				{ return SSModelCvar.getInt();   	}
+  bool SSShoulderGrab()   				{ return SSShoulderGrabCvar.getBool();   }
+  double shieldSawRange()   				{ return SSRangeCvar.getDouble();   	}
+  double shieldSawDamageMult()   			{ return SSDMultCvar.getDouble();   	}
+  double shieldSawSpeedMult()   			{ return SSSMultCvar.getDouble();   	}
+  bool shieldSawBounce()   				{ return SSBounceCvar.getBool();   	}
+  bool shieldSawCallBack()   				{ return SSCallCvar.getBool();   	}
+  bool shieldSawMotionThrow()   			{ return SSMThrowCvar.getBool();   	}
+  int shieldSawAiming()   				{ return SSAimCvar.getInt();   		}
+  bool wristWatchEnabled()   				{ return WWatchCvar.getBool();   	}
+  int wristWatchMode()   				{ return WWatchModeCvar.getInt();   	}
+  int wristWatchColor()   				{ return WWatchColorCvar.getInt();   	}
+  bool watchBracerEnabled()   				{ return WWatchBracerCvar.getBool();   	}
+  bool WeaponHUD()   					{ return WeapHUDCvar.getBool();   	}
+  int WeaponHUDScale()   				{ return WeapHUDScaleCvar.getInt();   	}
+  int WeaponHUDBG()   					{ return WeapHUDBGCvar.getInt();   	}
+  int WeaponHUDColor()   				{ return WeapHUDColorCvar.getInt();   	}
+  
+  int vrControlScheme() 				{ return controlSchemeCvar.isDefined() ? controlSchemeCvar.getInt() : 0; }
+
+  static
+  rlvr_Settings of()
+  {
+    let result = new("rlvr_Settings");
+
+    result.weaponModelCvar 		   		= rlvr_CVar.of("rl_weaponmodel");
+    result.pickupModelCvar 		   		= rlvr_CVar.of("rl_pickupmodel");
+    result.distModelCvar   				= rlvr_CVar.of("rl_loadsprite");
+    result.modelDistCvar   				= rlvr_CVar.of("rl_model_dist");
+    result.flashSpriteCvar 		   		= rlvr_CVar.of("rl_flashsprite");
+    result.flashAlphaCvar 		   		= rlvr_CVar.of("rl_flashalpha");
+    result.laserBeamCvar 	   			= rlvr_CVar.of("rl_laserbeam");
+    result.laserColorCvar 	   			= rlvr_CVar.of("rl_lasercolor");
+    result.laserAlphaCvar 	   			= rlvr_CVar.of("rl_laseralpha");
+    result.bulletTracerCvar 	   			= rlvr_CVar.of("rl_tracers");
+    result.weaponSwitchCvar   				= rlvr_CVar.of("rl_fastswitch");
+    result.perfModeCvar 	   			= rlvr_CVar.of("rl_perfmode");
+    result.autoReloadCvar 	   			= rlvr_CVar.of("rl_autoreload");
+    result.ImmersiveReloadCvar 	   			= rlvr_CVar.of("rl_imreload");
+    result.weaponMarkerCvar 	   			= rlvr_CVar.of("rl_wmarker");
+    result.ShoulderAmmoCvar 	   			= rlvr_CVar.of("rl_ammograb");
+    result.ShoulderDistCvar 	   			= rlvr_CVar.of("rl_stouch_dist");
+    result.simpleHUDCvar 	   			= rlvr_CVar.of("rl_simplehud");
+    result.SSCvar 	   				= rlvr_CVar.of("rl_ss");
+    result.SSModelCvar 	   				= rlvr_CVar.of("rl_ss_model");
+    result.SSShoulderGrabCvar 	   			= rlvr_CVar.of("rl_ss_shouldergrab");
+    result.SSRangeCvar 	   				= rlvr_CVar.of("rl_ss_range");
+    result.SSDMultCvar 	   				= rlvr_CVar.of("rl_ss_dmult");
+    result.SSSMultCvar 	   				= rlvr_CVar.of("rl_ss_smult");
+    result.SSBounceCvar 	   			= rlvr_CVar.of("rl_ss_bounce");
+    result.SSCallCvar 	   				= rlvr_CVar.of("rl_ss_call");
+    result.SSMThrowCvar 	   			= rlvr_CVar.of("rl_ss_mthrow");
+    result.SSAimCvar 	   				= rlvr_CVar.of("rl_ss_aim");
+    result.SSAimCvar 	   				= rlvr_CVar.of("rl_ss_aim");
+    result.WWatchCvar 	   				= rlvr_CVar.of("rl_wwatch");
+    result.WWatchModeCvar 	   			= rlvr_CVar.of("rl_wwatch_mode");
+    result.WWatchColorCvar 	   			= rlvr_CVar.of("rl_wwatch_color");
+    result.WWatchBracerCvar 	   			= rlvr_CVar.of("rl_wwatch_bracer");
+    result.WeapHUDCvar 	   				= rlvr_CVar.of("rl_weaphud");
+    result.WeapHUDScaleCvar 	   			= rlvr_CVar.of("rl_weaphud_scale");
+    result.WeapHUDBGCvar 	   			= rlvr_CVar.of("rl_weaphud_bg");
+    result.WeapHUDColorCvar 	   			= rlvr_CVar.of("rl_weaphud_color");
+    
+    result.controlSchemeCvar 	   			= rlvr_CVar.of("vr_control_scheme");
+
+    return result;
+  }
+
+  private rlvr_CVar weaponModelCvar;
+  private rlvr_CVar pickupModelCvar;
+  private rlvr_CVar distModelCvar;
+  private rlvr_CVar modelDistCvar;
+  private rlvr_CVar flashSpriteCvar;
+  private rlvr_CVar flashAlphaCvar;
+  private rlvr_CVar laserBeamCvar;
+  private rlvr_CVar laserColorCvar;
+  private rlvr_CVar laserAlphaCvar;
+  private rlvr_CVar bulletTracerCvar;
+  private rlvr_CVar weaponSwitchCvar;
+  private rlvr_CVar perfModeCvar;
+  private rlvr_CVar autoReloadCvar;
+  private rlvr_CVar ImmersiveReloadCvar;
+  private rlvr_CVar weaponMarkerCvar;
+  private rlvr_CVar ShoulderAmmoCvar;
+  private rlvr_CVar ShoulderDistCvar;
+  private rlvr_CVar simpleHUDCvar;
+  private rlvr_CVar SSCvar;
+  private rlvr_CVar SSModelCvar;
+  private rlvr_CVar SSShoulderGrabCvar;
+  private rlvr_CVar SSRangeCvar;
+  private rlvr_CVar SSDMultCvar;
+  private rlvr_CVar SSSMultCvar;
+  private rlvr_CVar SSBounceCvar;
+  private rlvr_CVar SSCallCvar;
+  private rlvr_CVar SSMThrowCvar;
+  private rlvr_CVar SSAimCvar;
+  private rlvr_CVar WWatchCvar;
+  private rlvr_CVar WWatchModeCvar;
+  private rlvr_CVar WWatchColorCvar;
+  private rlvr_CVar WWatchBracerCvar;
+  private rlvr_CVar WeapHUDCvar;
+  private rlvr_CVar WeapHUDScaleCvar;
+  private rlvr_CVar WeapHUDBGCvar;
+  private rlvr_CVar WeapHUDColorCvar;
+  
+  private rlvr_CVar controlSchemeCvar;
+
+} // class rlvr_Settings
+
+/**
+ * This class provides access to a user or server Cvar.
+ *
+ * Accessing Cvars through this class is faster because calling Cvar.GetCvar()
+ * is costly. This class caches the result of Cvar.GetCvar() and handles
+ * loading a savegame.
+ */
+class rlvr_CVar
+{
+
+// public: /////////////////////////////////////////////////////////////////////
+
+  static
+  rlvr_CVar of(String name)
+  {
+    let result = new("rlvr_CVar");
+    result._name = name;
+    return result;
+  }
+
+  bool   isDefined() { load(); return (_cvar != NULL);   }
+
+  String getString() { load(); return _cvar.GetString(); }
+  bool   getBool()   { load(); return _cvar.GetInt();    }
+  int    getInt()    { load(); return _cvar.GetInt();    }
+  double getDouble() { load(); return _cvar.GetFloat();  }
+
+// private: ////////////////////////////////////////////////////////////////////
+
+  private
+  void load()
+  {
+    if (_cvar == NULL)
+    {
+      PlayerInfo player = players[consolePlayer];
+
+      _cvar = Cvar.GetCvar(_name, player);
+    }
+  }
+
+  private String         _name;
+  private transient Cvar _cvar;
+
+} // class rlvr_CVar

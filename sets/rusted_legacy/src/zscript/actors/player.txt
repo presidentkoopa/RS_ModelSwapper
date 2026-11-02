@@ -1,0 +1,19 @@
+
+class RLVRPlayer : DoomPlayer
+{
+	Default
+	{
+		Player.StartItem "RLPistol";
+		Player.StartItem "RLFist";
+		Player.StartItem "RLOffhandFist";
+		Player.StartItem "Clip", 34;
+		Player.StartItem "PistolMag", 16;
+		Player.WeaponSlot 1, "RLFist", "RLOffhandFist", "RLChainsaw";
+		Player.WeaponSlot 2, "RLPistol";
+		Player.WeaponSlot 3, "RLShotgun", "HellShotgun", "RLSuperShotgun";
+		Player.WeaponSlot 4, "RLChaingun";
+		Player.WeaponSlot 5, "RLRocketLauncher";
+		Player.WeaponSlot 6, "RLPlasmaRifle", "RLIncinerator";
+		Player.WeaponSlot 7, "RLBFG9000", "RLHeatwave";
+	}
+}

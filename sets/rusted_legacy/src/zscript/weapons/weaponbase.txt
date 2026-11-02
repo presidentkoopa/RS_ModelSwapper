@@ -1,0 +1,297 @@
+
+class DoomWeaponZ : DoomWeapon
+{
+	protected int weaponModel;
+	protected int pickupModel;
+	protected bool showFLashSprite;
+	protected double flashAlpha;
+	protected bool aimLaser;
+	protected int laserColor;
+	protected double laserAlpha;
+	protected int laserActivateDelay;
+	protected bool disableTracer;
+	protected bool fastSwitchWeapon;
+	protected bool performanceMode;
+	protected bool autoReload;
+	protected bool ImmersiveReload;
+	protected bool weaponMarker;
+	protected bool ImmersiveAmmoGrab;
+	protected bool shieldSaw;
+	protected double shieldSawModel;
+	protected double shieldSawRange;
+	protected double shieldSawDamageMult;
+	protected double shieldSawSpeedMult;
+	protected bool shieldSawBounce;
+	protected bool shieldSawCallBack;
+	protected bool shieldSawMotionThrow;
+	protected int shieldSawAiming;
+	protected bool wristWatchEnabled;
+	protected int wristWatchMode;
+	protected int wristWatchColor;
+	protected bool watchBracerEnabled;
+	protected bool WeaponHUDEnabled;
+	protected int WeaponHUDScale;
+	protected int WeaponHUDBG;
+	protected int WeaponHUDColor;
+	protected int vrControlScheme;
+	protected bool weaponUnloaded;
+	protected int lastReloadTime;
+	protected actor marker1, marker2;
+	protected int markerShowDelay;
+	protected int devCounter;
+	protected rlvr_Settings _settings;
+	
+	override void PostBeginPlay()
+	{
+		getModSettings();
+	}
+	
+	override void Tick()
+	{
+		if(GetAge() && GetAge() % 70 == 0) getModSettings();
+	
+		if(!owner || !owner.player) return;
+		let pmo = owner.player.mo;
+		
+		if(owner.player.ReadyWeapon == self)
+		{
+			calculateHUDValues(owner.player);
+			clearWatchHUD(owner.player);
+			if(wristWatchEnabled) setWatchHUD(owner.player);
+			
+			clearWeaponHUD(owner.player);
+			if(WeaponHUDEnabled) setWeaponHUD(owner.player);
+			
+			clearLaserPointer(owner.player);
+			if(CheckWeaponState("Reload") || CheckWeaponState("InsertAmmo") || CheckWeaponState("ReloadNoShells") || CheckWeaponState("ReloadLeft") || CheckWeaponState("UnloadAmmo") || CheckWeaponState("OpenBarrel") || CheckWeaponState("WaitReload") || CheckWeaponState("ImmersiveReloadMag") || CheckWeaponState("ImmersiveReloadWait2")) laserActivateDelay = 35;
+			if(laserActivateDelay) laserActivateDelay--;
+			if(aimLaser && !laserActivateDelay) setLaserPointer(owner.player);
+			
+			if(CheckWeaponState("Ready"))
+			{
+				owner.setinventory("ImmersiveInteractToken", 0);
+				owner.setinventory("ImmersiveReloadStep", 0);
+				owner.setinventory("grabbedAmmo", 0);
+				if(marker1) marker1.destroy();
+				if(marker2) marker2.destroy();
+			}
+		}
+		else
+		{
+			if(marker1) marker1.destroy();
+			if(marker2) marker2.destroy();
+		}
+	}
+	
+	protected void getModSettings()
+	{
+		_settings = rlvr_Settings.of();
+		
+		weaponModel 			= _settings.weaponModel();
+		pickupModel 			= _settings.pickupModel();
+		showFLashSprite 		= _settings.flashSprite();
+		flashAlpha 			= _settings.flashAlpha();
+		aimLaser 			= _settings.aimLaser();
+		laserColor 			= _settings.laserColor();
+		laserAlpha 			= _settings.laserAlpha();
+		disableTracer 			= !_settings.bulletTracer();
+		fastSwitchWeapon 		= _settings.weaponSwitch();
+		performanceMode 		= _settings.perfMode();
+		autoReload 			= _settings.autoReload();
+		ImmersiveReload 		= _settings.ImmersiveReload();
+		weaponMarker 			= _settings.weaponMarker();
+		ImmersiveAmmoGrab 		= _settings.ShoulderAmmoGrab();
+		shieldSaw 			= _settings.shieldSaw();
+		shieldSawModel 			= _settings.shieldSawModel();
+		shieldSawRange 			= _settings.shieldSawRange();
+		shieldSawDamageMult 		= _settings.shieldSawDamageMult();
+		shieldSawSpeedMult 		= _settings.shieldSawSpeedMult();
+		shieldSawBounce 		= _settings.shieldSawBounce();
+		shieldSawCallBack 		= _settings.shieldSawCallBack();
+		shieldSawMotionThrow 		= _settings.shieldSawMotionThrow();
+		shieldSawAiming 		= _settings.shieldSawAiming();
+		wristWatchEnabled 		= _settings.wristWatchEnabled();
+		wristWatchMode 			= _settings.wristWatchMode();
+		wristWatchColor 		= _settings.wristWatchColor();
+		watchBracerEnabled 		= _settings.watchBracerEnabled();
+		WeaponHUDEnabled 		= _settings.WeaponHUD();
+		WeaponHUDScale 			= _settings.WeaponHUDScale();
+		WeaponHUDBG 			= _settings.WeaponHUDBG();
+		WeaponHUDColor 			= _settings.WeaponHUDColor();
+		
+		vrControlScheme 		= _settings.vrControlScheme();
+		
+		if(developer == 2)
+		{
+			if(devCounter < 8)
+				devCounter++;
+			else
+				devCounter = 0;
+			laserColor = wristWatchColor = devCounter > 7 ? 7 : devCounter;
+			WeaponHUDColor = devCounter;
+		}
+	}
+	
+	protected double GetPitchTo(Actor source, Actor target, double zOfs = 0, double targZOfs = 0, bool absolute = false)
+	{
+		Vector3 origin = (source.pos.xy, source.pos.z - source.floorClip + zOfs);
+		Vector3 dest = (target.pos.xy, target.pos.z - target.floorClip + targZOfs);
+
+		Vector3 diff;
+		if (!absolute)
+			diff = level.Vec3Diff(origin, dest);
+		else
+			diff = dest - origin;
+
+		return -atan2(diff.z, diff.xy.Length());
+	}
+	
+	protected double GetFOVDistance(PlayerPawn viewer, Actor other)
+	{
+		//detailed example here about how to use LevelLocals.SphericalCoords in: https://github.com/ZDoom/gzdoom/pull/553
+
+		// Get the world position (x,y,z) of the player's eyes.
+		Vector3 viewpoint = viewer.Pos;
+		viewpoint.Z = viewer.Player.viewz;
+
+		// Get the world position of the middle of the other actor.
+		// Actor.Pos is normally at the very bottom of the actor, so we'll take
+		// other.Pos and add half of its height.
+		Vector3 otherCenter = other.Pos;
+		otherCenter.Z += other.Height * .5;
+
+		// Get the player actor's yaw and pitch.
+		Vector2 viewAngles = (viewer.Angle, viewer.Pitch);
+
+		// Compute how close the other actor is to the player's crosshairs.
+		Vector3 sphericalCoords = LevelLocals.SphericalCoords(viewpoint, otherCenter, viewAngles);
+		double distanceFromCenter = sphericalCoords.XY.Length();
+
+		return distanceFromCenter;
+	}
+	
+	//This is to check if player reached for shoulder first when grabbing ammo from shoulder is enabled 
+	protected void setReloadStep(int setItemCount = 0, bool checkAmmoGrab = false)
+	{
+		if(!owner || !owner.player || owner.player.health < 1) return;
+		
+		let pmo = owner.player.mo;
+		
+		if(checkAmmoGrab)
+		{
+			if(ImmersiveAmmoGrab && !pmo.countinv("grabbedAmmo")) return;
+		}
+		
+		if(setItemCount)
+			pmo.giveInventory("ImmersiveInteractToken", 1);
+		else
+			pmo.setInventory("ImmersiveInteractToken", 0);
+		
+		if(setItemCount > 1) pmo.setinventory("grabbedAmmo", 0);
+		
+		pmo.setinventory("ImmersiveReloadStep", setItemCount);
+	}
+	
+	protected void showWeaponMarker(vector3 markerPos)
+	{
+		if(owner.vel.x > 1 || owner.vel.y > 1 || owner.vel.z > 1 || !weaponMarker)
+		{
+			markerShowDelay = 35;
+			if(marker1) marker1.bInvisible = true;
+			if(marker2) marker2.bInvisible = true;
+			return;
+		}
+	
+		if(!marker1) marker1 = Actor.Spawn("RLVRWeaponMarker", markerPos);
+		marker1.SetOrigin(markerPos, true);
+		
+		if(!marker2) marker2 = Actor.Spawn("RLVRWeaponMarker2", markerPos);
+		marker2.SetOrigin(markerPos, true);
+		
+		if(!markerShowDelay)
+		{
+			marker1.bInvisible = false;
+			marker2.bInvisible = false;
+		}
+		else
+		{
+			markerShowDelay--;
+		}
+	}
+	
+	protected void hideWeaponMarker()
+	{
+		if(marker1) marker1.bInvisible = true;
+		if(marker2) marker2.bInvisible = true;
+	}
+	
+	action bool CheckWeaponState(Statelabel st, int layer = PSP_WEAPON)
+	{
+		if(invoker.owner) player = invoker.owner.player;
+		if (!player) return false;
+
+		let weap = invoker == player.OffhandWeapon ? player.OffhandWeapon : player.ReadyWeapon;
+		if (weap.bOffhandWeapon && layer == PSP_WEAPON)
+			layer = PSP_OFFHANDWEAPON;
+		let psp = player.FindPSprite(layer);
+		if (psp && InStateSequence(psp.curstate, ResolveState(st)))
+			return true;
+		else
+			return false;
+	}
+	
+	action void SetWeaponState(Statelabel st, int layer = PSP_WEAPON)
+	{
+		if (!player) return;
+
+		let weap = invoker == player.OffhandWeapon ? player.OffhandWeapon : player.ReadyWeapon;
+		if (weap.bOffhandWeapon && layer == PSP_WEAPON)
+			layer = PSP_OFFHANDWEAPON;
+		player.SetPsprite(layer, weap.findstate(st), false, weap);
+	}
+	
+	action void A_SetAltModel(String spritePBR, String sprite2H = "----", String sprite2HPBR = "----", String spriteNH = "----", String spriteNHPBR = "----", bool pickup=false, float sscale=0.7)
+	{
+		int wsprite = -1;
+		
+		if(player && (player.mo.CountInv("HandInteractToken") || (player.mo.CountInv("ImmersiveReloadStep") > 1 && player.mo.CountInv("ImmersiveReloadStep") < 6)))
+		{
+			if(invoker.weaponModel == 3)
+			{
+				if(sprite2HPBR != "----") wsprite = GetSpriteIndex(sprite2HPBR);
+			}
+			else
+			{
+				if(sprite2H != "----") wsprite = GetSpriteIndex(sprite2H);
+			}
+		}
+		else if(player && invoker.weaponModel == 3 && spritePBR != "----") wsprite = GetSpriteIndex(spritePBR);
+		else if(player && invoker.weaponModel == 1 && spriteNHPBR != "----") wsprite = GetSpriteIndex(spriteNHPBR);
+		else if(player && invoker.weaponModel == 0 && spriteNH != "----") wsprite = GetSpriteIndex(spriteNH);
+
+		if (wsprite != -1) {
+			
+			if(pickup)
+			{
+				invoker.sprite = wsprite;
+				invoker.A_SetScale(sscale);
+			}
+			else
+			{
+				if(player)
+				{
+					int mainhand = !invoker.bOffhandWeapon;
+					if(mainhand)
+						Player.GetPSprite(PSP_WEAPON).sprite = wsprite;
+					else
+						Player.GetPSprite(PSP_OFFHANDWEAPON).sprite = wsprite;
+				}
+			}
+		}
+	}
+	
+	action void A_OffhandHaptic()
+	{
+		if(player.mo.countinv("HandInteractToken") || player.mo.countinv("ImmersiveInteractToken")) RLVRHapticHelper.BuzzHand(1);
+	}
+}

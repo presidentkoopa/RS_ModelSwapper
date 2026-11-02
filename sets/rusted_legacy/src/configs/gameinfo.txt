@@ -1,0 +1,17 @@
+
+GameInfo
+{
+	ForceTextInMenus = true
+	menufontcolor_title = "Red"  		//Title text right at the 
+	menufontcolor_label = "Tan"       	//Most menu entries
+	menufontcolor_value = "White"     	//Options like Yes, No, Doom-Like etc
+	menufontcolor_action = "White"		//The main menu choices for sub-menustop
+	menufontcolor_header = "White"		//Dunno! - I think I maybe over-rode this in MENUDEF
+	menufontcolor_highlight = "Brick"	//Selected and waiting for input (e.g. key customisation) 
+	menufontcolor_selection = "Brick"   	//Selection colour for most menu items
+	MenuSliderColor = "Fire"		//The option slider buttons
+	
+	PlayerClasses = "RLVRPlayer"
+
+	AddEventHandlers = "RLVRHUDHandler", "RLVRVestHandler", "RLVRHapticHelper", "RLVRConfigHandler", "RLVRReplacementHandler", "RLVRSecrettHandler", "RLVR_HudMessageHandler", "RLVRTipsHelper", "RLVRMapCheck"
+}

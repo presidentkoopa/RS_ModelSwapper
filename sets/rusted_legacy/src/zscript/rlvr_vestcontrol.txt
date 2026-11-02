@@ -1,0 +1,139 @@
+
+Class RLVRVestHandler : EventHandler
+{
+	override void WorldTick()
+	{
+		if(_isTitlemap) return;
+		
+		Playerinfo player = Players[ConsolePlayer];
+		if(!player) return;
+		
+		if(!player.mo.countinv("RLVRVestCOntrol")) player.mo.giveinventory("RLVRVestCOntrol", 1);
+	}
+
+	override void WorldLoaded(WorldEvent event)
+	{
+		_isTitlemap = CheckTitlemap();
+	}
+
+	private static bool CheckTitlemap()
+	{
+		bool isTitlemap = (level.mapname == "TITLEMAP");
+		return isTitlemap;
+	}
+	
+	private bool _isTitlemap;
+}
+
+Class RLVRVestControl : Inventory
+{
+	transient bool ImmersiveAmmoGrab;
+	transient double shoulderTouchDist;
+	transient vector3 shoulder1pos, shoulder2pos;
+	transient int vestTouchHaptic[2];
+	transient bool shieldGrabFromShoulder;
+	transient int shieldEquipDelay;
+	private rlvr_Settings _settings;
+	
+	Enum Vest_Slots
+	{
+	SHOULDER_1 = 0,
+	SHOULDER_2 = 1
+	}
+
+	Default
+	{
+		+INVENTORY.UNDROPPABLE;
+		+INVENTORY.UNTOSSABLE;
+		+INVENTORY.UNCLEARABLE;
+		+INVENTORY.PERSISTENTPOWER;
+		inventory.maxamount 1;
+	}
+	
+	override void PostBeginPlay()
+	{
+		getModSettings();
+	}
+	
+	override void DoEffect()
+	{
+		if(!owner || !owner.player || owner.player.mo.health < 1)
+		{
+			destroy();
+			return;
+		}
+		
+		if(GetAge() && GetAge() % 100 == 0) getModSettings();
+		
+		let pmo = owner.player.mo;
+		
+		double heightAdjust = owner.player.viewheight * clamp(owner.player.CrouchFactor, 0.2, 1.0) + 5;
+		
+		shoulder1pos = pmo.Vec3Angle(8.5, pmo.angle - 80, heightAdjust, true);
+		shoulder2pos = pmo.Vec3Angle(8.5, pmo.angle + 80, heightAdjust, true);
+		
+		//main hand
+		//checkSlotInteraction(0, SHOULDER_1);
+		//checkSlotInteraction(0, SHOULDER_2);
+		
+		//off-hand
+		checkSlotInteraction(1, SHOULDER_1);
+		checkSlotInteraction(1, SHOULDER_2);
+		
+		Super.DoEffect();
+	}
+	
+	private void getModSettings()
+	{
+		_settings = rlvr_Settings.of();
+		
+		ImmersiveAmmoGrab 	= _settings.ShoulderAmmoGrab();
+		shoulderTouchDist 	= _settings.ShoulderTouchDist();
+		shieldGrabFromShoulder 	= _settings.SSShoulderGrab();
+	}
+	
+	private void checkSlotInteraction(int hand, int slot)
+	{
+		vector3 handPos = hand == 1 ? owner.player.mo.offhandpos : owner.player.mo.attackpos;
+		vector3 shoulderPos = slot == SHOULDER_1 ? shoulder1pos : shoulder2pos;
+		let handDist = level.vec3diff(handPos, shoulderPos).length();
+		if(handDist <= shoulderTouchDist)
+		{
+			if(hand && ImmersiveAmmoGrab && owner.countinv("ImmersiveReloadStep") == 1)
+			{
+				owner.setinventory("grabbedAmmo", 1);
+			}
+			else if(hand && owner.player.offhandweapon is "RLOffhandFist" && !owner.countinv("shieldSawActive") && !owner.countinv("ImmersiveInteractToken"))
+			{
+				if(!shieldEquipDelay && shieldGrabFromShoulder)
+				{
+					RLOffhandFist(owner.findinventory("RLOffhandFist")).shieldMode = !RLOffhandFist(owner.findinventory("RLOffhandFist")).shieldMode;
+				}
+				shieldEquipDelay = 70;
+			}
+		}
+		else
+		{
+			if(shieldEquipDelay) shieldEquipDelay--;
+		}
+		
+		tryVestTouchHaptic(hand);
+	}
+	
+	private void tryVestTouchHaptic(int hand = 0)
+	{
+		vector3 handPos = hand == 1 ? owner.player.mo.offhandpos : owner.player.mo.attackpos;
+		let handDist1 = level.vec3diff(handPos, shoulder1pos).length();
+		let handDist2 = level.vec3diff(handPos, shoulder2pos).length();
+		
+		if(handDist1 <= shoulderTouchDist || handDist2 <= shoulderTouchDist)
+		{
+			vestTouchHaptic[hand]++; //suppress continuos haptics
+			if(vestTouchHaptic[hand] == 1) RLVRHapticHelper.BuzzHand(hand);
+		}
+		else
+		{
+			vestTouchHaptic[hand] = 0;
+		}
+	}
+}

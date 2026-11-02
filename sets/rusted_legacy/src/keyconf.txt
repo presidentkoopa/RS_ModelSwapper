@@ -1,0 +1,15 @@
+clearplayerclasses
+addplayerclass RLVRPlayer
+
+weaponsection "RLVR"
+
+setslot 1 RLFist RLOffhandFist RLChainsaw
+setslot 2 RLPistol
+setslot 3 RLShotgun HellShotgun RLSuperShotgun
+setslot 4 RLChaingun
+setslot 5 RLRocketLauncher
+setslot 6 RLPlasmaRifle RLIncinerator
+setslot 7 RLBFG9000 RLHeatwave
+setslot 8 
+setslot 9
+setslot 0

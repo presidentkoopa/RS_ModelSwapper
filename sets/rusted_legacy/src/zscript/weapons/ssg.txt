@@ -1,0 +1,503 @@
+
+class RLSuperShotgun : DoomWeaponZ replaces SuperShotgun
+{
+	Default
+	{
+	Weapon.SelectionOrder 401;
+	Weapon.AmmoUse1 0;
+	Weapon.AmmoGive1 6;
+	Weapon.AmmoUse2 0;
+	Weapon.AmmoGive2 2;
+	Weapon.AmmoType1 "Shell";
+	Weapon.AmmoType2 "SSGShells";
+	Inventory.PickupMessage "$GOTSHOTGUN2";
+	Obituary "$OB_MPSSHOTGUN";
+	Tag "$TAG_SUPERSHOTGUN";
+	+WEAPON.NOAUTOAIM;
+	+WEAPON.NOAUTOFIRE;
+	+WEAPON.AMMO_OPTIONAL;
+	+WEAPON.ALT_AMMO_OPTIONAL;
+	+WEAPON.NOALERT;
+	}
+	
+	override void Tick()
+	{
+		if(!owner || !owner.player || owner.health < 1) return;
+		
+		Super.Tick();
+		if(owner.player.ReadyWeapon == self) checkOffhandGrab();
+	}
+	
+	void checkOffhandGrab()
+	{
+		if(weaponModel < 2 || !(owner.player.offhandweapon is "RLOffhandFist") || owner.countinv("ImmersiveInteractToken"))
+		{
+			owner.player.mo.SetInventory("HandInteractToken", 0);
+			return;
+		}
+		
+		if(GetAge() % 10 != 0) return;
+	
+		let pmo = owner.player.mo;
+		int hand = bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 7, pitch, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 gripPos1 = _puff.pos;
+		
+		_puff = pmo.LineAttack(angle, 11, pitch, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 gripPos2 = _puff.pos;
+		
+		double handDistGrip1 = level.Vec3Diff(gripPos1, owner.OffhandPos).Length();
+		double handDistGrip2 = level.Vec3Diff(gripPos2, owner.OffhandPos).Length();
+		
+		if(handDistGrip1 <= 4 || handDistGrip2 <= 4 )
+		{
+			pmo.SetInventory("HandInteractToken", 1);
+		}
+		else
+		{
+			pmo.SetInventory("HandInteractToken", 0);
+		}
+	}
+	
+	action void A_CheckImmersiveReloadAction1()
+	{
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 16, pitch+18, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 barrelPos = _puff.pos;
+		
+		invoker.showWeaponMarker(barrelPos);
+		
+		double handDistBarrel = level.Vec3Diff(barrelPos, invoker.owner.OffhandPos).Length();
+		if(handDistBarrel <= 3) invoker.setReloadStep(2);
+	}
+	
+	action void A_CheckImmersiveReloadAction2()
+	{
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 7, pitch+55, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 ammoPos = _puff.pos;
+		
+		invoker.showWeaponMarker(ammoPos);
+		
+		double handDistAmmo = level.Vec3Diff(ammoPos, invoker.owner.OffhandPos).Length();
+		if(handDistAmmo <= 3 ) invoker.setReloadStep(3, 1);
+	}
+	
+	action void A_CheckImmersiveReloadAction3()
+	{
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 12, pitch-12, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 barrelPos = _puff.pos;
+		
+		invoker.showWeaponMarker(barrelPos);
+		
+		double handDistBarrel = level.Vec3Diff(barrelPos, invoker.owner.OffhandPos).Length();
+		if(handDistBarrel <= 3 ) invoker.setReloadStep(4);
+	}
+	
+	action void A_SpawnWeaponFlash()
+	{
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 27, pitch+5, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		if(_puff) Actor.Spawn("RLVRShotgunBigFlash", _puff.pos);
+	}
+	
+	action void A_SpawnWeaponFlash2()
+	{
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 27, pitch+5, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		if(_puff) Actor.Spawn("RLVRShotgunFlash", _puff.pos);
+	}
+	
+	action void A_ReloadShells()
+	{
+		let pmo = invoker.owner;
+		let ssgammo = pmo.CountInv("SSGShells");
+		let totalammo = pmo.CountInv("Shell");
+		int addammo;
+		addammo = 2 - ssgammo;
+		addammo = addammo > totalammo ? totalammo : addammo;
+		ssgammo += addammo;
+		totalammo = totalammo - addammo;
+		totalammo = totalammo < 0 ? 0 : totalammo;
+		pmo.SetInventory("SSGShells", ssgammo);
+		if(!(player.cheats & CF_INFINITEAMMO)) pmo.SetInventory("Shell", totalammo);
+		invoker.weaponUnloaded = false;
+	}
+	
+	action void A_UnloadShells()
+	{
+		let pmo = invoker.owner;
+		int maxammo = pmo.CountInv("backpack") ? 100 : 50;
+		let ssgammo = pmo.CountInv("SSGShells");
+		let totalammo = pmo.CountInv("Shell");
+		if(totalammo + ssgammo > maxammo) return;
+		pmo.SetInventory("SSGShells", 0);
+		pmo.SetInventory("Shell", totalammo + ssgammo);
+		invoker.weaponUnloaded = true;
+	}
+	
+	States
+	{
+	Ready:
+		TNT1 A 0;
+		SSG1 A 0 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### # 1 A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		Loop;
+	Deselect:
+		SSG1 A 0 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### A 1 A_Lower (160);
+		Loop;
+	Select:
+		SSG1 A 0 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### A 1 A_Raise (160);
+		Loop;
+	DryFire:
+		#### # 0 A_JumpIf(invoker.autoReload, "Reload");
+		#### # 0 A_StartSound("weapon/dryfire", CHAN_WEAPON);
+		#### B 10;
+		Goto Ready;
+	Fire:
+		SSG1 A 0 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### A 0 A_JumpIfInventory("SSGSingleShotFired",1,"AltFireSecond");
+		#### A 0 A_JumpIfInventory("SSGShells", 1, 1);
+		Goto DryFire;
+		#### BC 2 A_AlertMonsters;
+		#### A 0 bright A_FireBullets (11.2, 7.1, 20, 5, "EnhancedShotPuff",0);
+		#### A 0 A_StartSound ("weapons/ssg/fire", CHAN_WEAPON);
+		#### # 0 A_JumpIf(invoker.disableTracer, 11);
+		#### ########## 0 A_FireProjectile("Bullettracer", frandom(-3, 3), 0, 0, 0, FPF_NOAUTOAIM, 0);
+		#### # 0 A_TakeInventory("SSGShells", 2);
+		#### D 3 A_GunFlash("MuzzleFlash");
+		#### # 0 A_SpawnWeaponFlash;
+		#### # 0 A_FireProjectile("ShotgunBarrel1Smoke",0,0,0,0,FPF_NOAUTOAIM,0);
+		#### # 0 A_FireProjectile("ShotgunBarrel2Smoke",0,0,0,0,FPF_NOAUTOAIM,0);
+		#### EF 3;
+		#### G 5;
+		#### A 9;
+		Goto Ready;
+		SSG2 A 0;
+	AltFire:
+		SSG1 A 0 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### A 0 A_JumpIfInventory("SSGSingleShotFired", 1, "AltFireSecond");
+		#### A 0 A_JumpIfInventory("SSGShells", 1, 1);
+		Goto DryFire;
+		#### HI 2;
+		#### A 0 A_GiveInventory("SSGSingleShotFired",1);
+		#### A 0 A_FireBullets(10,6.5,10,5,"EnhancedShotPuff",0);
+		#### A 0 A_StartSound ("weapons/shotgun/fire", CHAN_WEAPON);
+		#### # 0 A_JumpIf(invoker.disableTracer, 7);
+		#### ###### 0 A_FireProjectile("Bullettracer", frandom(-3, 3), 0, 0, 0, FPF_NOAUTOAIM, 0);
+		#### # 0 A_TakeInventory("SSGShells", 1);
+		#### J 2 A_GunFlash("MuzzleFlashLeft");
+		#### # 0 A_SpawnWeaponFlash2;
+		#### A 0 A_FireProjectile("ShotgunBarrel1Smoke",0,0,0,0,FPF_NOAUTOAIM,0);
+		#### KL 2;
+		#### M 3;
+		#### A 5;
+		Goto Ready;
+	AltFireSecond:
+		#### A 0 A_Takeinventory("SSGSingleShotFired",1);
+		#### A 0 A_JumpIfInventory("SSGShells", 1, 1);
+		Goto DryFire;
+		#### NO 2;
+		#### A 0 A_FireBullets(10,6.5,10,5,"EnhancedShotPuff",0);
+		#### A 0 A_StartSound ("weapons/shotgun/fire", CHAN_WEAPON);
+		#### # 0 A_JumpIf(invoker.disableTracer, 7);
+		#### ###### 0 A_FireProjectile("Bullettracer", frandom(-3, 3), 0, 0, 0, FPF_NOAUTOAIM, 0);
+		#### # 0 A_TakeInventory("SSGShells", 1);
+		#### P 2 A_GunFlash("MuzzleFlashRight");
+		#### A 0 A_FireProjectile("ShotgunBarrel2Smoke",0,0,0,0,FPF_NOAUTOAIM,0);
+		#### QR 2;
+		#### S 3;
+		#### A 5;
+		Goto Ready;
+	Reload:
+		#### # 0 A_JumpIf(invoker.ImmersiveReload, "ImmersiveReload");
+		#### ######## 1;
+		#### # 0 A_JumpIfInventory("Shell", 1, 1);
+		Goto ReloadNoAmmo;
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, "ReloadNoShells");
+		SSG1 T 0 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### # 0 A_JumpIfInventory("SSGSingleShotFired", 1, "ReloadLeft");
+		#### T 2 A_StartSound ("weapons/ssg/open", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_OffhandHaptic; 								//haptic
+		SSG1 UUVVWW 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		SSG1 XXYYZZ 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### # 0 A_JumpIf(invoker.performanceMode, 3);
+		#### # 0 A_FireProjectile("SSGShellSpawner", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+		#### # 0 A_FireProjectile("SSGShell2Spawner", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+	InsertAmmo:
+		SSG2 AAAAAAAAAA 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		SSG2 BBCC 2 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### D 2 A_StartSound ("weapons/ssg/reload", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_OffhandHaptic; 								//haptic
+		SSG2 EEEFFGG 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### H 2 A_StartSound ("weapons/ssg/reload", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_ReloadShells;
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_OffhandHaptic; 								//haptic
+		SSG2 MMMNNNOOO 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### # 0 A_StartSound ("weapons/ssg/close", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_OffhandHaptic; 								//haptic
+		Goto Ready;
+	ReloadNoShells:
+		#### # 2 A_StartSound ("weapons/ssg/open", CHAN_WEAPON, CHANF_OVERLAP);
+		SSG2 PPQQRRSS 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		Goto InsertAmmo;
+	ReloadLeft:
+		#### T 2 A_StartSound ("weapons/ssg/open", CHAN_WEAPON, CHANF_OVERLAP);
+		SSG1 UUVVWW 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		//#### XXYYZZ 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		SSG2 IIIIIIIIII 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### # 0 A_JumpIf(invoker.performanceMode, 2);
+		#### # 0 A_FireProjectile("SSGShellSpawner", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+		SSG2 JJKK 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### L 2 A_StartSound ("weapons/ssg/reload", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_ReloadShells;
+		#### # 0 A_Takeinventory("SSGSingleShotFired",1);
+		SSG2 MMNNOO 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### # 0 A_StartSound ("weapons/ssg/close", CHAN_WEAPON, CHANF_OVERLAP);
+		Goto Ready;
+	ReloadNoAmmo:
+		#### ##### 1;
+		Goto Ready;
+	Zoom:
+	UnloadAmmo:
+		#### ######## 1;
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, "Ready");
+		SSG1 T 0 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### # 0 A_JumpIfInventory("SSGSingleShotFired", 1, "ReloadLeft");
+		#### T 2 A_StartSound ("weapons/ssg/open", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_OffhandHaptic; 								//haptic
+		SSG1 UUVVWW 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		SSG1 XXYYZZ 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### # 0 A_UnloadShells;
+		#### # 0 A_JumpIf(invoker.performanceMode, 3);
+		#### # 0 A_FireProjectile("SSGShellSpawner", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+		#### # 0 A_FireProjectile("SSGShell2Spawner", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+		SSG1 ZZZ 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		SSG2 TTUUVV 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		Goto Ready;
+	ImmersiveReload:
+		SSG1 AAAAAAAA 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### # 0 { invoker.setReloadStep(6); }
+		SSG1 A 1
+		{
+			A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		}
+		#### # 0 A_CheckImmersiveReloadAction1();
+		#### # 0 A_JumpIf(player.mo.countinv("ImmersiveReloadStep") == 2, "OpenBarrel");
+		Goto ImmersiveReload+8;
+	OpenBarrel:
+		#### # 0 { invoker.hideWeaponMarker(); }
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, "ImmersiveReloadNoShells");
+		SSG1 T 0 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### T 2 A_StartSound ("weapons/ssg/open", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_OffhandHaptic; 								//haptic
+		SSG1 UUVVWW 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		SSG1 XXYY 1 A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+		#### # 0 A_JumpIf(invoker.performanceMode, 3);
+		#### # 0 A_FireProjectile("SSGShellSpawner", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+		#### # 0 A_FireProjectile("SSGShell2Spawner", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+		#### # 0 { invoker.setReloadStep(1); }
+		Goto WaitReload;
+	ImmersiveReloadNoShells:
+		SSG2 T 0 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### P 2 A_StartSound ("weapons/ssg/open", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_OffhandHaptic; 								//haptic
+		SSG2 PPQQRRSS 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### # 0 { invoker.setReloadStep(1); }
+	WaitReload:
+		SSG1 Z 1
+		{
+			A_SetAltModel("SSG3", "SSG5", "SSG7", "SSNH", "SSN3");
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		}
+		#### # 0 A_CheckImmersiveReloadAction2();
+		#### # 0 A_JumpIf(player.mo.countinv("ImmersiveReloadStep") == 3, "ImmersiveReloadMag");
+		Loop;
+	ImmersiveReloadMag:
+		#### # 0 { invoker.hideWeaponMarker(); }
+		SSG2 BBCC 2 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### D 2 A_StartSound ("weapons/ssg/reload", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_OffhandHaptic; 								//haptic
+		SSG2 EEEFFGG 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### H 2 A_StartSound ("weapons/ssg/reload", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_OffhandHaptic; 								//haptic
+		#### # 0 { invoker.setReloadStep(6); }
+	ImmersiveReloadWait2:
+		SSG2 H 1
+		{
+			A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		}
+		#### # 0 A_CheckImmersiveReloadAction3();
+		#### # 0 A_JumpIf(player.mo.countinv("ImmersiveReloadStep") == 4, "CloseBarrel");
+		Loop;
+	CloseBarrel:
+		#### # 0 { invoker.hideWeaponMarker(); }
+		SSG2 MMMNNNOOO 1 A_SetAltModel("SSG4", "SSG6", "SSG8", "SSN2", "SSN4");
+		#### # 0 A_StartSound ("weapons/ssg/close", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 A_OffhandHaptic; 								//haptic
+		#### # 0 A_ReloadShells;
+		Goto Ready;
+	MuzzleFlash:
+		TNT1 A 0 A_OverlayFlags(OverlayID(), PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
+		TNT1 A 0 A_OverlayRenderstyle(OverlayID(), STYLE_Add);
+		TNT1 A 0 A_OverlayAlpha(OverlayID(), invoker.flashAlpha);
+		TNT1 A 0 A_JumpIf(invoker.showFLashSprite == false, 2);
+		TNT1 A 0 A_Jump(256, "MuzzleFlash1", "MuzzleFlash2", "MuzzleFlash3", "MuzzleFlash4", "MuzzleFlash5");
+		TNT1 A 0;
+		stop;
+	MuzzleFlash1:
+		SSMF A 2 Bright A_Light2;
+		TNT1 A 5 Bright A_Light2;
+		Goto LightDone;
+	MuzzleFlash2:
+		SSMF B 2 Bright A_Light2;
+		TNT1 A 5 Bright A_Light2;
+		Goto LightDone;
+	MuzzleFlash3:
+		SSMF C 2 Bright A_Light2;
+		TNT1 A 5 Bright A_Light2;
+		Goto LightDone;
+	MuzzleFlash4:
+		SSMF D 2 Bright A_Light2;
+		TNT1 A 5 Bright A_Light2;
+		Goto LightDone;
+	MuzzleFlash5:
+		SSMF E 2 Bright A_Light2;
+		TNT1 A 5 Bright A_Light2;
+		Goto LightDone;
+	MuzzleFlashLeft:
+		TNT1 A 0 A_OverlayFlags(OverlayID(), PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
+		TNT1 A 0 A_OverlayRenderstyle(OverlayID(), STYLE_Add);
+		TNT1 A 0 A_OverlayAlpha(OverlayID(), 0.9);
+		TNT1 A 0 A_Jump(256, "MuzzleFlash6", "MuzzleFlash7", "MuzzleFlash8", "MuzzleFlash9", "MuzzleFlash10");
+		stop;
+	MuzzleFlash6:
+		SSMF F 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash7:
+		SSMF G 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash8:
+		SSMF H 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash9:
+		SSMF I 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash10:
+		SSMF J 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlashRight:
+		TNT1 A 0 A_OverlayFlags(OverlayID(), PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
+		TNT1 A 0 A_OverlayRenderstyle(OverlayID(), STYLE_Add);
+		TNT1 A 0 A_OverlayAlpha(OverlayID(), 0.9);
+		TNT1 A 0 A_Jump(256, "MuzzleFlash11", "MuzzleFlash12", "MuzzleFlash13", "MuzzleFlash14", "MuzzleFlash15");
+		stop;
+	MuzzleFlash11:
+		SSMF K 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash12:
+		SSMF L 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash13:
+		SSMF M 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash14:
+		SSMF N 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash15:
+		SSMF O 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	Spawn:
+		SGN2 A -1;
+		Stop;
+	PlaceHolder:
+		SSG2 A 1;
+		SSG3 A 1;
+		SSG4 A 1;
+		SSG5 A 1;
+		SSG6 A 1;
+		SSG7 A 1;
+		SSG8 A 1;
+		SSNH A 1;
+		SSN2 A 1;
+		SSN3 A 1;
+		SSN4 A 1;
+	}
+}
+
+class SSGShells : Ammo
+{
+	Default
+	{
+	Inventory.maxamount 2;
+	Inventory.Icon "SHELA0";
+	}
+}
+
+class SSGSingleShotFired : Inventory
+{
+	Default
+	{
+	Inventory.maxamount 1;
+	}
+}

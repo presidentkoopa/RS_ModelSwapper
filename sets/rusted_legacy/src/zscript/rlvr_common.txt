@@ -1,0 +1,472 @@
+
+mixin class optimizeHelper
+{
+	protected bool performanceMode;
+	protected rlvr_Settings _settings;
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+			
+		_settings = rlvr_Settings.of();
+		performanceMode = _settings.perfMode();
+	}
+	
+	protected double GetPitchTo(Actor source, Actor target, double zOfs = 0, double targZOfs = 0, bool absolute = false)
+	{
+		Vector3 origin = (source.pos.xy, source.pos.z - source.floorClip + zOfs);
+		Vector3 dest = (target.pos.xy, target.pos.z - target.floorClip + targZOfs);
+
+		Vector3 diff;
+		if (!absolute)
+			diff = level.Vec3Diff(origin, dest);
+		else
+			diff = dest - origin;
+
+		return -atan2(diff.z, diff.xy.Length());
+	}
+}
+
+Class RLVRHUDHandler : Eventhandler
+{
+	override void WorldTick()
+	{
+		if(_isTitlemap) return;
+		
+		Playerinfo player = Players[ConsolePlayer];
+		if(!player) return;
+		
+		if(Level.Time % 100 == 0)
+		{
+			bool simpleHud = CVar.GetCVar("rl_simplehud", player).GetBool();
+			
+			if(simpleHud)
+				player.mo.setinventory("vanillahud", 0);
+			else
+				player.mo.setinventory("vanillahud", 1);
+		}
+	}
+
+	override void WorldLoaded(WorldEvent event)
+	{
+		_isTitlemap = CheckTitlemap();
+	}
+
+	private static bool CheckTitlemap()
+	{
+		bool isTitlemap = (level.mapname == "TITLEMAP");
+		return isTitlemap;
+	}
+	
+	private bool _isTitlemap;
+}
+
+//it loads the settings into player's inventory so other actors can check them without scanning for actual cvars
+Class RLVRConfigHandler : Eventhandler
+{
+	override void WorldTick()
+	{
+		if(level.mapname == "TITLEMAP") return;
+	
+		Playerinfo player = Players[ConsolePlayer];
+		if(!player) return;
+		let pmo = player.mo;
+		if(pmo.health < 1) return;
+		
+		if(level.time % 70 == 0) 
+		{
+			_settings 			= rlvr_Settings.of();
+			int pickupModel 		= _settings.pickupModel();
+			bool distModel 			= _settings.distModel();
+			int modelDist 			= _settings.modelDist();
+			
+			if(!pmo.countinv("RLVRConfigItem")) pmo.giveinventory("RLVRConfigItem", 1);
+			
+			let configItem = RLVRConfigItem(pmo.findinventory("RLVRConfigItem"));
+			
+			configItem.pickupModel = pickupModel;
+			configItem.distModel = distModel;
+			configItem.modelDist = modelDist;
+			
+			if(developer == 2)
+			{
+				//auto-cycle between models for dev test
+				if(test_count == 2)
+					test_count = 0;
+				else
+					test_count++;
+				configItem.pickupModel = test_count;
+			}
+		}
+	}
+	
+	private rlvr_Settings _settings;
+	private int test_count;
+}
+
+//inventory item where the configs are stored
+Class RLVRConfigItem : Inventory
+{
+	Default
+	{
+	Inventory.maxamount 1;
+	}
+	
+	int pickupModel;
+	bool distModel;
+	int modelDist;
+}
+
+class vanillahud : Inventory
+{
+	Default
+	{
+	Inventory.maxamount 1;
+	}
+}
+
+class HandInteractToken : Inventory
+{
+	Default
+	{
+	Inventory.maxamount 1;
+	}
+}
+
+class ImmersiveReloadStep : Inventory
+{
+	Default
+	{
+	Inventory.maxamount 6;
+	}
+}
+
+class ImmersiveInteractToken : Inventory
+{
+	Default
+	{
+	Inventory.maxamount 1;
+	}
+}
+
+class grabbedAmmo : Inventory
+{
+	Default
+	{
+	Inventory.maxamount 1;
+	}
+}
+
+Class RLVRHapticHelper : EventHandler
+{
+	static void BuzzHand(int hand = 0)
+	{
+		Let player = Players[ConsolePlayer].mo;
+		if(!player || player.health < 1) return;
+		
+		player.LineAttack(0, 0, 0, 1, "melee", "RLVRHapticDummy", LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ | (hand ? LAF_ISOFFHAND : 0));
+	}
+	
+	static void Buzz()
+	{
+		RLVRHapticHelper.BuzzHand();
+		RLVRHapticHelper.BuzzHand(1);
+	}
+	
+	static void BuzzOffhand()
+	{
+		RLVRHapticHelper.BuzzHand(1);
+	}
+	
+	static void BuzzWeapon(Weapon weap)
+	{
+		if(!weap || !weap.owner) return;
+		
+		int hand = weap.bOffhandWeapon ? 1 : 0;
+		RLVRHapticHelper.BuzzHand(hand);
+	}
+}
+
+Class RLVRHapticDummy : Actor
+{
+	Default
+	{
+		Mass        0;
+		Radius      1;
+		Height      2;
+		Damage 		1;
+		DamageType "Melee";
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+BLOODLESSIMPACT;
+		+PUFFONACTORS;
+		+DONTSPLASH;
+		+NOTRIGGER;
+		+NOTARGET;
+		+FORCEXYBILLBOARD;
+		+NOTONAUTOMAP;
+		+SKYEXPLODE;
+	}
+
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 1;
+		stop;
+	}
+}
+
+class RLVRTipsHelper : EventHandler
+{
+	Array<string> missingKeys;
+	int messageDelay;
+	bool messagetDone;
+	bool alertDone;
+	bool hasMissingBinds;
+	
+	override void WorldTick()
+	{
+		if(level.mapname == "TITLEMAP") return;
+		
+		if(alertDone) return;
+		
+		PlayerInfo player = players[consoleplayer];
+		bool showAlert = CVar.GetCvar("rl_show_tips", player).GetBool();
+		
+		if(!showAlert) return;
+		
+		//show queued missing keybind alert messages
+		if(missingKeys.size() && !messageDelay)
+		{
+			let keyName = missingKeys[0];
+			RLVR_HudMessage.Create(String.Format(Stringtable.Localize("$RLVRALERTMISSINGBIND"), keyName),
+					fontname: "smallfont",
+					fontColor: Font.CR_Orange,
+					alignment: RLVR_HudMessage.ALIGN_CENTER,
+					fadeInTime: 4,
+					typetime: 1,
+					holdTime: 70,
+					fadeOutTime: 8
+			);
+			missingKeys.delete(0);
+			messageDelay = 190;
+		}
+		
+		if(hasMissingBinds && missingKeys.size() == 0 && !messageDelay)
+		{
+			alertDone = true;
+			RLVR_HudMessage.Create(Stringtable.Localize("$RLVRALERTDONEMESSAGE"),
+					fontname: "smallfont",
+					fontColor: Font.CR_White,
+					alignment: RLVR_HudMessage.ALIGN_CENTER,
+					fadeInTime: 4,
+					typetime: 1,
+					holdTime: 100,
+					fadeOutTime: 8
+			);
+		}
+		
+		if(messageDelay) messageDelay--;
+	}
+	
+	override void PlayerEntered (PlayerEvent e)
+	{
+		if(level.mapname == "TITLEMAP") return;
+		
+		PlayerInfo player = players[e.PlayerNumber];
+		bool showAlert = CVar.GetCvar("rl_show_tips", player).GetBool();
+		
+		//clear previously queued messages if exist
+		let handler = RLVR_HudMessageHandler(StaticEventHandler.Find("RLVR_HudMessageHandler"));
+		for (int i = 0; i < handler.hudmessages.Size(); i++)
+		{
+			let othermsg = handler.hudmessages[i];
+			if (othermsg) othermsg.destroy();
+		}
+		
+		if(showAlert)
+		{
+			if(missingKeys.size()) missingKeys.clear();
+			Array<int> binds;
+			
+			Bindings.GetAllKeysForCommand(binds, "+reload");
+			if (!binds.Size())
+			{
+				missingKeys.push("Reload");
+				hasMissingBinds = true;
+			}
+			
+			Bindings.GetAllKeysForCommand(binds, "+zoom");
+			if (!binds.Size())
+			{
+				missingKeys.push("Zoom");
+				hasMissingBinds = true;
+			}
+			
+			Bindings.GetAllKeysForCommand(binds, "+oh_attack");
+			if (!binds.Size())
+			{
+				missingKeys.push("Offhand Attack");
+				hasMissingBinds = true;
+			}
+			
+			Bindings.GetAllKeysForCommand(binds, "+oh_altatk");
+			if (!binds.Size())
+			{
+				missingKeys.push("Offhand Alt-Attack");
+				hasMissingBinds = true;
+			}
+		}
+	}
+}
+
+class RLVRDUmmyPuff1 : Actor
+{
+	Default
+	{
+	Radius 1;
+	Height 1;
+	Speed 0;
+	Damage 0;
+	+NOINTERACTION;
+	+NOGRAVITY;
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_JumpIf(developer == 1, "showDot");
+		TNT1 A 2;
+		Stop;
+	ShowDot:
+		TNT1 A 2 A_SpawnParticle("FF 00 00", SPF_FULLBRIGHT, 1, 5);
+		Stop;
+	}
+}
+
+class RLVRWeaponMarker : RLVRDUmmyPuff1
+{
+	transient actor marker2;
+
+	Default
+	{
+	XScale 0.024;
+	YScale 0.020;
+	+ROLLSPRITE
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		MRKR A 1 A_SetRoll(roll+2);
+		loop;
+	}
+}
+
+class RLVRWeaponMarker2 : RLVRWeaponMarker
+{
+	Default
+	{
+	XScale 0.018;
+	YScale 0.015;
+	+ROLLSPRITE
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		MRKR A 2 A_SetRoll(roll-2);
+		loop;
+	}
+}
+
+class RLVRPistolFlash : RLVRDUmmyPuff1
+{
+	Default
+	{
+	RenderStyle "None";
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 2;
+		Stop;
+	}
+}
+
+class RLVRShotgunFlash : RLVRPistolFlash {}
+
+class RLVRShotgunBigFlash : RLVRPistolFlash {}
+
+class RLVRChaingunFlash : RLVRPistolFlash {}
+
+class RLVRRocketFlash : RLVRPistolFlash {}
+
+class RLVRPlasmaFlash : RLVRPistolFlash {}
+
+class RLVRPlasmaFlash2 : RLVRPistolFlash {}
+
+class RLVRBFGFlash : RLVRPistolFlash {}
+
+class RLVRBFGFlash2 : RLVRPistolFlash {}
+
+class RLVRBFGPurpleFlash : RLVRPistolFlash {}
+
+class RLVRBFGPurpleFlash2 : RLVRPistolFlash {}
+
+class RLVRHeatFlash : RLVRPistolFlash {}
+
+class RLVRHeatFlash2 : RLVRPistolFlash {}
+
+class RLVRHeatFlash3 : RLVRPistolFlash {}
+
+class RLVRFlameFlash : RLVRPistolFlash {}
+
+class RLVRFlameFlash2 : RLVRPistolFlash {}
+
+
+Class RLVRMapCheck : EventHandler
+{
+	static bool isLoRMap()
+	{
+		let mapChecksum = Level.GetChecksum();
+		
+		bool match = false;
+		for(int i = 0; i < RLVRMapCheck.LoR_Level_checksum.size(); i++)
+		{
+			if(mapChecksum == RLVRMapCheck.LoR_Level_checksum[i])
+			{
+				match = true;
+				break;
+			}
+		}
+		
+		return match;
+	}
+	
+	static const string LoR_Level_checksum[] = {
+		"bf34c34c5dfc8bb47228cc304f9a6748", //map01 - Scar Gate
+		"b6447217725a2a709d6d021cde15fe10", //map02 - Sanguine Wastes
+		"9cf62332047e32231cbf561b9a5c051c", //map03 - Spirit Drains
+		"1f03040bfcfe879f9668a3508837447b", //map04 - Descending Inferno
+		"4a90bfb792e753cbd4c43503cfbe5c7c", //map05 - Creeping Hate
+		"69c24af5b5a89df3caca20e865e5b035", //map06 - The Coiled City
+		"a60aa2dcb864fd77efed64c26c60b781", //map07 - Forfeited Salvation
+		"ecd6b4c5d9eccbe08928ed2ff32c2e71", //map08 - Second Coming
+		"1699e255b8c0db86ebb00e5b3c44b4aa", //map09 - Falsehood
+		"025209896e41b6660d89d62fc4c37b36", //map10 - Dis Union
+		"8a2c0869eaa69fb7b441cd2b648978d0", //map11 - Echoes of Pain
+		"5e548b849971fecaf2f6a659d2269d92", //map12 - The Rack
+		"bd7e48e646e28ee424d9288a8ef7ef7d", //map13 - Soul Silo
+		"a3f7a58fc08c369f1360741a99f1497c", //map14 - Brink
+		"95b94864754ac50446a456a88da3e052", //map15 - Ash Mill
+		"f206766043c4d9ba2c36f76106f96279", //map16 - Panopticon
+		"867b6ad67389a077ce3c9e3cc896f484" //map99 - Test Map
+	};
+}

@@ -28,7 +28,7 @@ repo except the three that cannot be committed.
 | `RSQ_FBX` | `hand_final.fbx`, the FBX hand | `tools/handfit/core/fbx_hand/hand_final.fbx` (in the repo) |
 | `RSQ_FBX_TEX` | its textures folder | `<folder of RSQ_FBX>/textures` |
 | `RSQ_ERMAC` | Ermac's `doom-force-unleashed_devbuild/models` | none: only measuring scripts read it |
-| `RSQ_RL` | the whole Rusted Legacy dev build (`models/`, `modeldefs/`, `zscript/`), read by `sets/rusted_legacy/tools/rl_measure.py` | the parent of `RSQ_ERMAC` |
+| `RSQ_RL` | the whole Rusted Legacy dev build (`models/`, `modeldefs/`, `zscript/`), read by `sets/rusted_legacy/tools/rl_measure.py` | `sets/rusted_legacy/src` (his build, committed) |
 | `RSQ_MODELSWAPPER` | an RS_ModelSwapper checkout (`core/hands_tool/scene.py` can read its meshes) | `rs_modelswapper/` beside the Depot |
 | `B22_RIG`, `B22_PK3`, `B22_IWAD`, `B22_BD22`, `B22_VOX`, `B22_BUILD`, `B22_NOPROBE`, `QZ_RES`, `QZ_DUMP_EVERY`, `QZ_DUMP_DIR`, `QZ_SNDLOG` | the rig (chapter 2) | |
 

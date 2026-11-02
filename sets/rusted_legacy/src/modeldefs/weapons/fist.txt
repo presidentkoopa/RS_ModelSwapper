@@ -1,0 +1,203 @@
+
+Model RLFist
+{
+	Path "models/hand"
+	Model 0 "hand.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex FIST A 0 0
+	
+	//Fist
+	FrameIndex FIST B 0 1
+	
+	//Punch
+	FrameIndex FIST C 0 2
+	FrameIndex FIST D 0 3
+	FrameIndex FIST E 0 4
+	FrameIndex FIST F 0 5
+}
+
+//with PBR texture
+Model RLFist
+{
+	Path "models/hand"
+	Model 0 "hand.md3"
+	Skin 0 "hand_HD.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex FSTP A 0 0
+	
+	//Fist
+	FrameIndex FSTP B 0 1
+	
+	//Punch
+	FrameIndex FSTP C 0 2
+	FrameIndex FSTP D 0 3
+	FrameIndex FSTP E 0 4
+	FrameIndex FSTP F 0 5
+}
+
+Model RLOffhandFist
+{
+	Path "models/hand"
+	Model 0 "hand.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex FIST A 0 0
+	
+	//Fist
+	FrameIndex FIST B 0 1
+	
+	//Punch
+	FrameIndex FIST C 0 2
+	FrameIndex FIST D 0 3
+	FrameIndex FIST E 0 4
+	FrameIndex FIST F 0 5
+	
+	//No fist
+	FrameIndex FIST Z 0 200
+}
+
+//with PBR texture
+Model RLOffhandFist
+{
+	Path "models/hand"
+	Model 0 "hand.md3"
+	Skin 0 "hand_HD.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex FSTP A 0 0
+	
+	//Fist
+	FrameIndex FSTP B 0 1
+	
+	//Punch
+	FrameIndex FSTP C 0 2
+	FrameIndex FSTP D 0 3
+	FrameIndex FSTP E 0 4
+	FrameIndex FSTP F 0 5
+	
+	//No fist
+	FrameIndex FSTP Z 0 200
+}
+
+
+//holding ammo
+
+Model RLOffhandFist
+{
+	Path "models/ammo_hand"
+	Model 0 "ammo_hand.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//pistol
+	Model 1 "mag_pistol.md3"
+	FrameIndex FIST Q 0 0	FrameIndex FIST Q 1 0
+	
+	//shotgun
+	Model 1 "shot_shell.md3"
+	FrameIndex FIST R 0 1	FrameIndex FIST R 1 0
+	
+	//super shotgun
+	Model 1 "shot_shell2.md3"
+	FrameIndex FIST S 0 2	FrameIndex FIST S 1 0
+	
+	//chaingun
+	Model 1 "mag_chaingun.md3"
+	FrameIndex FIST T 0 3	FrameIndex FIST T 1 0
+	
+	//rocket
+	Model 1 "pod_rocket.md3"
+	FrameIndex FIST U 0 4	FrameIndex FIST U 1 0
+	
+	//plasma
+	Model 1 "mag_plasma.md3"
+	FrameIndex FIST V 0 5	FrameIndex FIST V 1 0
+	
+	//bfg
+	Model 1 "pod_bfg.md3"
+	FrameIndex FIST W 0 6	FrameIndex FIST W 1 0
+	
+	//calamity blade
+	Model 1 "pod_heat.md3"
+	FrameIndex FIST X 0 7	FrameIndex FIST X 1 0
+	
+	//flame can
+	Model 1 "flame_can.md3"
+	FrameIndex FIST Y 0 8	FrameIndex FIST Y 1 0
+	
+	//hell shotgun
+	Model 1 "shot_shell.md3"
+	Skin 1 "hellshells.png"
+	FrameIndex FIST P 0 1	FrameIndex FIST P 1 0
+}
+
+//holding ammo (PBR texture)
+
+Model RLOffhandFist
+{
+	Path "models/ammo_hand"
+	Model 0 "ammo_hand.md3"
+	Skin 0 "hand_HD.png"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//hell shotgun
+	Model 1 "shot_shell.md3"
+	Skin 1 "hellshells.png"
+	FrameIndex FSTP P 0 1	FrameIndex FSTP P 1 0
+	
+	//pistol
+	Model 1 "mag_pistol.md3"
+	Skin 1 "berettam9_HD.jpg"
+	FrameIndex FSTP Q 0 0	FrameIndex FSTP Q 1 0
+	
+	//shotgun
+	Model 1 "shot_shell.md3"
+	Skin 1 "shells.png"
+	FrameIndex FSTP R 0 1	FrameIndex FSTP R 1 0
+	
+	//super shotgun
+	Model 1 "shot_shell2.md3"
+	Skin 1 "shells.png"
+	FrameIndex FSTP S 0 2	FrameIndex FSTP S 1 0
+	
+	//chaingun
+	Model 1 "mag_chaingun.md3"
+	Skin 1 "chaingun_HD.png"
+	FrameIndex FSTP T 0 3	FrameIndex FSTP T 1 0
+	
+	//rocket
+	Model 1 "pod_rocket.md3"
+	Skin 1 "rocketlauncher_HD.png"
+	FrameIndex FSTP U 0 4	FrameIndex FSTP U 1 0
+	
+	//plasma
+	Model 1 "mag_plasma.md3"
+	Skin 1 "plasmarifle_HD.png"
+	FrameIndex FSTP V 0 5	FrameIndex FSTP V 1 0
+	
+	//bfg
+	Model 1 "pod_bfg.md3"
+	Skin 1 "bfg9000_HD.png"
+	FrameIndex FSTP W 0 6	FrameIndex FSTP W 1 0
+	
+	//calamity blade
+	Model 1 "pod_heat.md3"
+	Skin 1 "bfg2_HD.png"
+	FrameIndex FSTP X 0 7	FrameIndex FSTP X 1 0
+	
+	//flame can
+	Model 1 "flame_can.md3"
+	Skin 1 "flamethrower_HD.png"
+	FrameIndex FSTP Y 0 8	FrameIndex FSTP Y 1 0
+}

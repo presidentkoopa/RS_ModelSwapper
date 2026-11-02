@@ -1,0 +1,165 @@
+
+material texture "models/hand/hand.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/shieldsaw/shieldsaw.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/shieldsaw/shieldsaw_b.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/shieldsaw/shield_saw.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/shieldsaw/shieldsaw_HD.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/pistol/berettam9.jpg"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/chainsaw/chainsaw.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/shotgun/shotgun.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/hellshotgun/hellshotgun.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/shotgun/shells.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/hellshotgun/shells.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/common/bullet.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/common/shell.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ssg/ssg.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ssg/shells.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/chaingun/chaingun.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/rocketlauncher/rocketlauncher.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/plasmarifle/plasmarifle.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/bfg9000/bfg9000.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/bfg9000/bfg9000_off.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/heatwave/bfg2.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/heatwave/heatwave.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/incinerator/flamethrower.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ammo_hand/hand.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ammo_hand/berettam9.jpg"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ammo_hand/shells.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ammo_hand/chaingun.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ammo_hand/rocketlauncher.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ammo_hand/plasmarifle.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ammo_hand/bfg9000.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ammo_hand/bfg2.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/ammo_hand/flamethrower.png"
+{
+	shader "shaders/SimSun.fp"
+}
+
+material texture "models/common/dopefish.png"
+{
+	shader "shaders/SimSun.fp"
+}

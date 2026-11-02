@@ -1,0 +1,269 @@
+base Doom;
+height 0;
+monospacefonts true, "0";
+
+statusbar fullscreen, fullscreenoffsets // ZDoom HUD
+{
+	///// VANILLA HUD /////
+	
+	InInventory vanillahud, 1
+	{
+	
+	//health
+	//drawimage "MEDIA0", 20, -2, centerbottom;
+	//drawnumber 2147483647, HUDFONT_DOOM, untranslated, health, drawshadow, 82, -20;
+	drawmugshot "STF", 5, 3, -34;
+	drawnumber 2147483647, HUDFONT_DOOM, untranslated, health, drawshadow, 82, -25;
+
+	//armor
+	//drawimage armoricon, 20, -24, centerbottom;
+	//drawnumber 2147483647, HUDFONT_DOOM, untranslated, armor, drawshadow, whennotzero, 82, -39;
+	drawimage armoricon, 20, -35, centerbottom;
+	drawnumber 2147483647, HUDFONT_DOOM, untranslated, armor, drawshadow, whennotzero, 82, -51;
+
+	//ammo
+	drawimage ammoicon1, -14, -4, centerbottom;
+	drawnumber 2147483647, HUDFONT_DOOM, untranslated, ammo1, drawshadow, -25, -20;
+
+	usesammo
+	{
+		//secondary ammo and inventory
+		usessecondaryammo
+		{
+			drawimage ammoicon2, -14, -27, centerbottom;
+			drawnumber 2147483647, HUDFONT_DOOM, untranslated, ammo2, drawshadow, -25, -43;
+			inventorybarnotvisible
+			{
+				drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, HUDFONT_DOOM, -14, -39, -26, -56, untranslated;
+			}
+		}
+		else //no secondary ammo
+		{
+			inventorybarnotvisible
+			{
+				drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, HUDFONT_DOOM, -14, -21, -26, -38, untranslated;
+			}
+		}
+	}
+	else // no ammo but inventory
+	{
+		inventorybarnotvisible
+		{
+			drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, HUDFONT_DOOM, -14, -3, -26, -20, untranslated;
+		}
+	}
+
+	gamemode deathmatch
+	{
+		drawnumber 2147483647, HUDFONT_DOOM, untranslated, frags, drawshadow, -3, 1;
+	}
+	else
+	{
+		// let's hope no mod ever uses 100 keys...
+		//drawkeybar 100, vertical, reverserows, auto, -10, 2, 0, 3, auto;
+		drawkeybar 100, vertical, reverserows, auto, 103, -50, 0, 3, auto;
+	}
+	
+	}
+	
+	///// SIMPLE HUD /////
+	
+	InInventory not vanillahud, 1
+	{
+	
+	// health
+	drawimage "HEALTH", 18, -10, centerbottom;
+	drawnumber 3, MM2FONTB, white, health, 65, -22;
+
+	// armor
+	inInventory BasicArmor, 1
+	{
+		drawimage "ARMOR", 18, -29, centerbottom;
+		drawstring MM2FONTS, white, "Armor", 48, -52;
+	}
+	drawnumber 3, MM2FONTB, white, armor, whennotzero, 65, -41;
+	drawnumber 2, MM2FONTS, white, savepercent, whennotzero, 65, -52;
+
+	// ammo
+	usesammo
+	{
+		drawimage "AMMO", -18, -10, centerbottom;
+	}
+	drawnumber 3, MM2FONTB, white, ammo1, -29, -22;
+	
+	usessecondaryammo
+	{
+		drawimage "AMMOALT", -18, -29, centerbottom;
+		drawnumber 3, MM2FONTB, white, ammo2, -29, -41;
+	}
+	
+	// selected inventory item
+	inventorybarnotvisible
+	{
+		DrawSelectedInventory centerbottom, MM2FONTS, 0+center, -10, 0+center, -10, white;
+	}
+
+	// frags + keys
+	gamemode deathmatch
+	{
+		inInventory BasicArmor, 1
+		{
+			drawimage "DEATH", 18, -56, centerbottom;
+			drawnumber 3, MM2FONTB, white, frags, 65, -68;
+		}
+		else
+		{
+			drawimage "DEATH", 18, -29, centerbottom;
+			drawnumber 4, MM2FONTB, white, frags, 65, -41;
+		}
+	}
+	else
+	{
+		//drawkeybar 100, horizontal, reverse, auto, -18, 10, 0, 0, auto;
+		drawkeybar 100, vertical, reverserows, auto, 83, -41, 0, 3, auto;
+	}
+	
+	}
+}
+
+statusbar normal // Standard Doom Status bar
+{
+	///// VANILLA HUD /////
+	
+	InInventory vanillahud, 1
+	{
+	
+	drawimage "STBAR", 0, 168;
+	drawimage "STTPRCNT", 90, 171;
+	drawimage "STTPRCNT", 221, 171;
+	drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, 171;
+	drawnumber 3, HUDFONT_DOOM, untranslated, health, 90, 171;
+	drawnumber 3, HUDFONT_DOOM, untranslated, armor, 221, 171;
+
+	//keys
+	drawswitchableimage keyslot 2 && 5, "nullimage", "STKEYS0", "STKEYS3", "STKEYS6", 239, 171;
+	drawswitchableimage keyslot 3 && 6, "nullimage", "STKEYS1", "STKEYS4", "STKEYS7", 239, 181;
+	drawswitchableimage keyslot 1 && 4, "nullimage", "STKEYS2", "STKEYS5", "STKEYS8", 239, 191;
+
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo(Clip), 288, 173;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo(Shell), 288, 179;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo(RocketAmmo), 288, 185;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo(Cell), 288, 191;
+
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammocapacity(Clip), 314, 173;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammocapacity(Shell), 314, 179;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammocapacity(RocketAmmo), 314, 185;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammocapacity(Cell), 314, 191;
+	gamemode deathmatch, teamgame
+	{
+		drawnumber 2, HUDFONT_DOOM, untranslated, frags, 138, 171;
+	}
+	gamemode cooperative, singleplayer
+	{
+		drawimage "STARMS", 104, 168;
+		drawswitchableimage weaponslot 2, "STGNUM2", "STYSNUM2", 111, 172; 
+		drawswitchableimage weaponslot 3, "STGNUM3", "STYSNUM3", 123, 172;
+		drawswitchableimage weaponslot 4, "STGNUM4", "STYSNUM4", 135, 172;
+		drawswitchableimage weaponslot 5, "STGNUM5", "STYSNUM5", 111, 182;
+		drawswitchableimage weaponslot 6, "STGNUM6", "STYSNUM6", 123, 182;
+		drawswitchableimage weaponslot 7, "STGNUM7", "STYSNUM7", 135, 182;
+	}
+	gamemode cooperative, deathmatch, teamgame
+	{
+		drawimage translatable "STFBANY", 143, 169;
+	}
+	drawselectedinventory alternateonempty, INDEXFONT, 143, 168
+	{
+		drawmugshot "STF", 5, 143, 168;
+	}
+	
+	}
+	
+	///// SIMPLE HUD /////
+	
+	InInventory not vanillahud, 1
+	{
+	
+	// health
+	drawimage "HEALTH", 0, 178;
+	drawnumber 3, MM2FONTB, white, health, 52, 178;
+
+	// armor
+	inInventory BasicArmor, 1
+	{
+		drawimage "ARMOR", 0, 159;
+		drawstring MM2FONTS, white, "Armor", 36, 148;
+	}
+	drawnumber 3, MM2FONTB, white, armor, whennotzero, 52, 159;
+	drawnumber 2, MM2FONTS, white, savepercent, whennotzero, 53, 148;
+
+	// ammo
+	usesammo
+	{
+		drawimage "AMMO", 310, 178;
+	}
+	drawnumber 4, MM2FONTB, white, ammo1, 305, 178;
+	
+	usessecondaryammo
+	{
+		drawimage "AMMOALT", 316, 172, centerbottom;
+		drawnumber 4, MM2FONTB, white, ammo2, 306, 160;
+	}
+	
+	// selected inventory item
+	inventorybarnotvisible
+	{
+		DrawSelectedInventory centerbottom, MM2FONTS, 235, 160;
+	}
+
+	// frags + keys
+	gamemode deathmatch
+	{
+		inInventory BasicArmor, 1
+		{
+			drawimage "DEATH", 100, -56, centerbottom;
+			drawnumber 3, MM2FONTB, white, frags, 147, -68;
+		}
+		else
+		{
+			drawimage "DEATH", 100, -29, centerbottom;
+			drawnumber 3, MM2FONTB, white, frags, 147, -41;
+		}
+	}
+	else
+	{
+		drawkeybar 100, vertical, reverserows, auto, 70, 159, 0, 3, auto;
+	}
+	
+	}
+}
+
+statusbar inventory // Standard bar overlay (ZDoom Addition)
+{
+	///// VANILLA HUD /////
+	
+	InInventory vanillahud, 1
+	{
+	
+	drawinventorybar Doom, 7, INDEXFONT, 50, 170;
+	
+	}
+	
+	///// SIMPLE HUD /////
+	
+	InInventory not vanillahud, 1
+	{
+	
+	drawinventorybar Doom, translucent, 6, INDEXFONT, 80, 160;
+	
+	}
+}
+
+statusbar inventoryfullscreen, fullscreenoffsets // ZDoom HUD overlay.
+{
+	drawinventorybar Doom, translucent, 7, INDEXFONT, -106+center, -31;
+}
+
+statusbar Automap
+{
+}

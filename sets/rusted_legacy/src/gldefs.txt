@@ -1,0 +1,5 @@
+
+#include "gldefs/brightmaps.txt"
+#include "gldefs/shading.txt"
+#include "gldefs/pbr.txt"
+#include "gldefs/dynlights.txt"

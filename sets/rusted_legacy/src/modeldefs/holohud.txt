@@ -1,0 +1,6431 @@
+
+Model RLFist
+{
+	Path "models/common"
+	Model 0 "w_dial.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 0
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 0
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 0
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 0
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 0
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 0
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 0
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 0
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 0
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 0
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 0
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 0
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 0
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 0
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 0
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 0
+	
+	//watch belt
+	Model 0 "w_belt.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 0
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 0
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 0
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 0
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 0
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 0
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 0
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 0
+	
+	//hp bars
+	Model 0 "w_hp_bar.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 0
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 0
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 0
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 0
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 0
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 0
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 0
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 0
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 0
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 0
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 0
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 0
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 0
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 0
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 0
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 0
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 0
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 0
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 0
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 0
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 0
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 0
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 0
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 0
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 0
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 0
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 0
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 0
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 0
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 0
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 0
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 0
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 0
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 0
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 0
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 0
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 0
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 0
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 0
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 0
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 0
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 0
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 0
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 0
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 0
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 0
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 0
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 0
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 0
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 0
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 0
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 0
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 0
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 0
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 0
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 0
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 0
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 0
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 0
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 0
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 0
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 0
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 0
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 0
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 0
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 0
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 0
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 0
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 0
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 0
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 0
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 0
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 0
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 0
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 0
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 0
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 0
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 0
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 0
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 0
+	
+	
+	//hp left digit
+	Model 0 "w_hp_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 0
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 0
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 0
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 0
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 0
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 0
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 0
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 0
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 0
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 0
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 0
+	
+	
+	//hp mid digit
+	Model 0 "w_hp_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 0
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 0
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 0
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 0
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 0
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 0
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 0
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 0
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 0
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 0
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 0
+	
+	
+	//hp right digit
+	Model 0 "w_hp_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 0
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 0
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 0
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 0
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 0
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 0
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 0
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 0
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 0
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 0
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 0
+	
+	
+	//armor left digit
+	Model 0 "w_armor_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 0
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 0
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 0
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 0
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 0
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 0
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 0
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 0
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 0
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 0
+	
+	
+	//armor mid digit
+	Model 0 "w_armor_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 0
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 0
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 0
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 0
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 0
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 0
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 0
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 0
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 0
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 0
+	
+	
+	//armor right digit
+	Model 0 "w_armor_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 0
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 0
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 0
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 0
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 0
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 0
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 0
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 0
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 0
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 0
+}
+
+
+Model RLPistol
+{
+	Path "models/common"
+	Model 0 "w_dial.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 6
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 6
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 6
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 6
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 6
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 6
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 6
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 6
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 6
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 6
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 6
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 6
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 6
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 6
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 6
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 6
+	
+	//watch belt
+	Model 0 "w_belt.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 6
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 6
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 6
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 6
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 6
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 6
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 6
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 6
+	
+	//hp bars
+	Model 0 "w_hp_bar.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 6
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 6
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 6
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 6
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 6
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 6
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 6
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 6
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 6
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 6
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 6
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 6
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 6
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 6
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 6
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 6
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 6
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 6
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 6
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 6
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 6
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 6
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 6
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 6
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 6
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 6
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 6
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 6
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 6
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 6
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 6
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 6
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 6
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 6
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 6
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 6
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 6
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 6
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 6
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 6
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 6
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 6
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 6
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 6
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 6
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 6
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 6
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 6
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 6
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 6
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 6
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 6
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 6
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 6
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 6
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 6
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 6
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 6
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 6
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 6
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 6
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 6
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 6
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 6
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 6
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 6
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 6
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 6
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 6
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 6
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 6
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 6
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 6
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 6
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 6
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 6
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 6
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 6
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 6
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 6
+	
+	
+	//hp left digit
+	Model 0 "w_hp_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 6
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 6
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 6
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 6
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 6
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 6
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 6
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 6
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 6
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 6
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 6
+	
+	
+	//hp mid digit
+	Model 0 "w_hp_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 6
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 6
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 6
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 6
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 6
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 6
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 6
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 6
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 6
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 6
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 6
+	
+	
+	//hp right digit
+	Model 0 "w_hp_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 6
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 6
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 6
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 6
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 6
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 6
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 6
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 6
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 6
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 6
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 6
+	
+	
+	//armor left digit
+	Model 0 "w_armor_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 6
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 6
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 6
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 6
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 6
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 6
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 6
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 6
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 6
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 6
+	
+	
+	//armor mid digit
+	Model 0 "w_armor_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 6
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 6
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 6
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 6
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 6
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 6
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 6
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 6
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 6
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 6
+	
+	
+	//armor right digit
+	Model 0 "w_armor_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 6
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 6
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 6
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 6
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 6
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 6
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 6
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 6
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 6
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 6
+}
+
+
+Model RLChainsaw
+{
+	Path "models/common"
+	Model 0 "w_dial.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 29
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 29
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 29
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 29
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 29
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 29
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 29
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 29
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 29
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 29
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 29
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 29
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 29
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 29
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 29
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 29
+	
+	//watch belt
+	Model 0 "w_belt.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 29
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 29
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 29
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 29
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 29
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 29
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 29
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 29
+	
+	//hp bars
+	Model 0 "w_hp_bar.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 29
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 29
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 29
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 29
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 29
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 29
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 29
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 29
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 29
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 29
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 29
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 29
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 29
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 29
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 29
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 29
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 29
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 29
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 29
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 29
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 29
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 29
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 29
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 29
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 29
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 29
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 29
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 29
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 29
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 29
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 29
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 29
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 29
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 29
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 29
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 29
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 29
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 29
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 29
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 29
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 29
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 29
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 29
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 29
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 29
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 29
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 29
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 29
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 29
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 29
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 29
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 29
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 29
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 29
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 29
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 29
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 29
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 29
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 29
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 29
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 29
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 29
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 29
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 29
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 29
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 29
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 29
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 29
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 29
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 29
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 29
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 29
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 29
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 29
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 29
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 29
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 29
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 29
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 29
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 29
+	
+	
+	//hp left digit
+	Model 0 "w_hp_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 29
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 29
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 29
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 29
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 29
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 29
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 29
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 29
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 29
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 29
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 29
+	
+	
+	//hp mid digit
+	Model 0 "w_hp_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 29
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 29
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 29
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 29
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 29
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 29
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 29
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 29
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 29
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 29
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 29
+	
+	
+	//hp right digit
+	Model 0 "w_hp_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 29
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 29
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 29
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 29
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 29
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 29
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 29
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 29
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 29
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 29
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 29
+	
+	
+	//armor left digit
+	Model 0 "w_armor_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 29
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 29
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 29
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 29
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 29
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 29
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 29
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 29
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 29
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 29
+	
+	
+	//armor mid digit
+	Model 0 "w_armor_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 29
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 29
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 29
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 29
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 29
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 29
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 29
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 29
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 29
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 29
+	
+	
+	//armor right digit
+	Model 0 "w_armor_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 29
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 29
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 29
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 29
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 29
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 29
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 29
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 29
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 29
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 29
+}
+
+
+Model RLShotgun
+{
+	Path "models/common"
+	Model 0 "w_dial2.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 30
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 30
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 30
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 30
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 30
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 30
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 30
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 30
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 30
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 30
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 30
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 30
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 30
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 30
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 30
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 30
+	
+	//watch belt
+	Model 0 "w_belt2.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 30
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 30
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 30
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 30
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 30
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 30
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 30
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 30
+	
+	//hp bars
+	Model 0 "w_hp_bar2.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 30
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 30
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 30
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 30
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 30
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 30
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 30
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 30
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 30
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 30
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 30
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 30
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 30
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 30
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 30
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 30
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 30
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 30
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 30
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 30
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 30
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 30
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 30
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 30
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 30
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 30
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 30
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 30
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 30
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 30
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 30
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 30
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 30
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 30
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 30
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 30
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 30
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 30
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 30
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 30
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar2.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 30
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 30
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 30
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 30
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 30
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 30
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 30
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 30
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 30
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 30
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 30
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 30
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 30
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 30
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 30
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 30
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 30
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 30
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 30
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 30
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 30
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 30
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 30
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 30
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 30
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 30
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 30
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 30
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 30
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 30
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 30
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 30
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 30
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 30
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 30
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 30
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 30
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 30
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 30
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 30
+	
+	
+	//hp left digit
+	Model 0 "w_hp2_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 30
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 30
+	
+	
+	//hp mid digit
+	Model 0 "w_hp2_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 30
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 30
+	
+	
+	//hp right digit
+	Model 0 "w_hp2_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 30
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 30
+	
+	
+	//armor left digit
+	Model 0 "w_armor2_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 30
+	
+	
+	//armor mid digit
+	Model 0 "w_armor2_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 30
+	
+	
+	//armor right digit
+	Model 0 "w_armor2_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 30
+}
+
+
+Model HellShotgun
+{
+	Path "models/common"
+	Model 0 "w_dial2.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 30
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 30
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 30
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 30
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 30
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 30
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 30
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 30
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 30
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 30
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 30
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 30
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 30
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 30
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 30
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 30
+	
+	//watch belt
+	Model 0 "w_belt2.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 30
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 30
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 30
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 30
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 30
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 30
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 30
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 30
+	
+	//hp bars
+	Model 0 "w_hp_bar2.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 30
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 30
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 30
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 30
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 30
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 30
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 30
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 30
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 30
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 30
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 30
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 30
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 30
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 30
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 30
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 30
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 30
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 30
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 30
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 30
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 30
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 30
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 30
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 30
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 30
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 30
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 30
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 30
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 30
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 30
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 30
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 30
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 30
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 30
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 30
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 30
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 30
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 30
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 30
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 30
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar2.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 30
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 30
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 30
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 30
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 30
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 30
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 30
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 30
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 30
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 30
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 30
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 30
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 30
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 30
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 30
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 30
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 30
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 30
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 30
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 30
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 30
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 30
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 30
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 30
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 30
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 30
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 30
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 30
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 30
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 30
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 30
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 30
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 30
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 30
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 30
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 30
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 30
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 30
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 30
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 30
+	
+	
+	//hp left digit
+	Model 0 "w_hp2_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 30
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 30
+	
+	
+	//hp mid digit
+	Model 0 "w_hp2_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 30
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 30
+	
+	
+	//hp right digit
+	Model 0 "w_hp2_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 30
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 30
+	
+	
+	//armor left digit
+	Model 0 "w_armor2_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 30
+	
+	
+	//armor mid digit
+	Model 0 "w_armor2_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 30
+	
+	
+	//armor right digit
+	Model 0 "w_armor2_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 30
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 30
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 30
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 30
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 30
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 30
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 30
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 30
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 30
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 30
+}
+
+
+Model RLSuperShotgun
+{
+	Path "models/common"
+	Model 0 "w_dial2.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 47
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 47
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 47
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 47
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 47
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 47
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 47
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 47
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 47
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 47
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 47
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 47
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 47
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 47
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 47
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 47
+	
+	//watch belt
+	Model 0 "w_belt2.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 47
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 47
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 47
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 47
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 47
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 47
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 47
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 47
+	
+	//hp bars
+	Model 0 "w_hp_bar2.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 47
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 47
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 47
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 47
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 47
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 47
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 47
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 47
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 47
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 47
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 47
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 47
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 47
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 47
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 47
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 47
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 47
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 47
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 47
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 47
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 47
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 47
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 47
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 47
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 47
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 47
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 47
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 47
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 47
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 47
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 47
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 47
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 47
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 47
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 47
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 47
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 47
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 47
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 47
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 47
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar2.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 47
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 47
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 47
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 47
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 47
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 47
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 47
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 47
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 47
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 47
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 47
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 47
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 47
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 47
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 47
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 47
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 47
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 47
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 47
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 47
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 47
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 47
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 47
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 47
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 47
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 47
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 47
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 47
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 47
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 47
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 47
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 47
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 47
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 47
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 47
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 47
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 47
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 47
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 47
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 47
+	
+	
+	//hp left digit
+	Model 0 "w_hp2_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 47
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 47
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 47
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 47
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 47
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 47
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 47
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 47
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 47
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 47
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 47
+	
+	
+	//hp mid digit
+	Model 0 "w_hp2_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 47
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 47
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 47
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 47
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 47
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 47
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 47
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 47
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 47
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 47
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 47
+	
+	
+	//hp right digit
+	Model 0 "w_hp2_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 47
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 47
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 47
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 47
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 47
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 47
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 47
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 47
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 47
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 47
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 47
+	
+	
+	//armor left digit
+	Model 0 "w_armor2_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 47
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 47
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 47
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 47
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 47
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 47
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 47
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 47
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 47
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 47
+	
+	
+	//armor mid digit
+	Model 0 "w_armor2_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 47
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 47
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 47
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 47
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 47
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 47
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 47
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 47
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 47
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 47
+	
+	
+	//armor right digit
+	Model 0 "w_armor2_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 47
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 47
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 47
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 47
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 47
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 47
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 47
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 47
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 47
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 47
+}
+
+
+Model RLChaingun
+{
+	Path "models/common"
+	Model 0 "w_dial.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 84
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 84
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 84
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 84
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 84
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 84
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 84
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 84
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 84
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 84
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 84
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 84
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 84
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 84
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 84
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 84
+	
+	//watch belt
+	Model 0 "w_belt.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 84
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 84
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 84
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 84
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 84
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 84
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 84
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 84
+	
+	//hp bars
+	Model 0 "w_hp_bar.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 84
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 84
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 84
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 84
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 84
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 84
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 84
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 84
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 84
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 84
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 84
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 84
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 84
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 84
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 84
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 84
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 84
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 84
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 84
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 84
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 84
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 84
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 84
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 84
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 84
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 84
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 84
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 84
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 84
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 84
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 84
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 84
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 84
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 84
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 84
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 84
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 84
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 84
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 84
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 84
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 84
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 84
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 84
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 84
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 84
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 84
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 84
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 84
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 84
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 84
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 84
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 84
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 84
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 84
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 84
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 84
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 84
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 84
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 84
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 84
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 84
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 84
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 84
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 84
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 84
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 84
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 84
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 84
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 84
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 84
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 84
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 84
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 84
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 84
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 84
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 84
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 84
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 84
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 84
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 84
+	
+	
+	//hp left digit
+	Model 0 "w_hp_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 84
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 84
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 84
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 84
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 84
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 84
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 84
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 84
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 84
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 84
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 84
+	
+	
+	//hp mid digit
+	Model 0 "w_hp_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 84
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 84
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 84
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 84
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 84
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 84
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 84
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 84
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 84
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 84
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 84
+	
+	
+	//hp right digit
+	Model 0 "w_hp_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 84
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 84
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 84
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 84
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 84
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 84
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 84
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 84
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 84
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 84
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 84
+	
+	
+	//armor left digit
+	Model 0 "w_armor_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 84
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 84
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 84
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 84
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 84
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 84
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 84
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 84
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 84
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 84
+	
+	
+	//armor mid digit
+	Model 0 "w_armor_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 84
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 84
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 84
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 84
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 84
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 84
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 84
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 84
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 84
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 84
+	
+	
+	//armor right digit
+	Model 0 "w_armor_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 84
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 84
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 84
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 84
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 84
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 84
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 84
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 84
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 84
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 84
+}
+
+
+Model RLRocketLauncher
+{
+	Path "models/common"
+	Model 0 "w_dial.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 95
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 95
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 95
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 95
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 95
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 95
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 95
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 95
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 95
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 95
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 95
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 95
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 95
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 95
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 95
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 95
+	
+	//watch belt
+	Model 0 "w_belt.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 95
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 95
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 95
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 95
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 95
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 95
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 95
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 95
+	
+	//hp bars
+	Model 0 "w_hp_bar.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 95
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 95
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 95
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 95
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 95
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 95
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 95
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 95
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 95
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 95
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 95
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 95
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 95
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 95
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 95
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 95
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 95
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 95
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 95
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 95
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 95
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 95
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 95
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 95
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 95
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 95
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 95
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 95
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 95
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 95
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 95
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 95
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 95
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 95
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 95
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 95
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 95
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 95
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 95
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 95
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 95
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 95
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 95
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 95
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 95
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 95
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 95
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 95
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 95
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 95
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 95
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 95
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 95
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 95
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 95
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 95
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 95
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 95
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 95
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 95
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 95
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 95
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 95
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 95
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 95
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 95
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 95
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 95
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 95
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 95
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 95
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 95
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 95
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 95
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 95
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 95
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 95
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 95
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 95
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 95
+	
+	
+	//hp left digit
+	Model 0 "w_hp_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 95
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 95
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 95
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 95
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 95
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 95
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 95
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 95
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 95
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 95
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 95
+	
+	
+	//hp mid digit
+	Model 0 "w_hp_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 95
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 95
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 95
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 95
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 95
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 95
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 95
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 95
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 95
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 95
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 95
+	
+	
+	//hp right digit
+	Model 0 "w_hp_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 95
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 95
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 95
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 95
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 95
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 95
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 95
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 95
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 95
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 95
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 95
+	
+	
+	//armor left digit
+	Model 0 "w_armor_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 95
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 95
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 95
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 95
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 95
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 95
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 95
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 95
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 95
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 95
+	
+	
+	//armor mid digit
+	Model 0 "w_armor_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 95
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 95
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 95
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 95
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 95
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 95
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 95
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 95
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 95
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 95
+	
+	
+	//armor right digit
+	Model 0 "w_armor_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 95
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 95
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 95
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 95
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 95
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 95
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 95
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 95
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 95
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 95
+}
+
+
+Model RLPlasmaRifle
+{
+	Path "models/common"
+	Model 0 "w_dial.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 106
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 106
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 106
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 106
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 106
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 106
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 106
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 106
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 106
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 106
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 106
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 106
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 106
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 106
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 106
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 106
+	
+	//watch belt
+	Model 0 "w_belt.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 106
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 106
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 106
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 106
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 106
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 106
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 106
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 106
+	
+	//hp bars
+	Model 0 "w_hp_bar.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 106
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 106
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 106
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 106
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 106
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 106
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 106
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 106
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 106
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 106
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 106
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 106
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 106
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 106
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 106
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 106
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 106
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 106
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 106
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 106
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 106
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 106
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 106
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 106
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 106
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 106
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 106
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 106
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 106
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 106
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 106
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 106
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 106
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 106
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 106
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 106
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 106
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 106
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 106
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 106
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 106
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 106
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 106
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 106
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 106
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 106
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 106
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 106
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 106
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 106
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 106
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 106
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 106
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 106
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 106
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 106
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 106
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 106
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 106
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 106
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 106
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 106
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 106
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 106
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 106
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 106
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 106
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 106
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 106
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 106
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 106
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 106
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 106
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 106
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 106
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 106
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 106
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 106
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 106
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 106
+	
+	
+	//hp left digit
+	Model 0 "w_hp_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 106
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 106
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 106
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 106
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 106
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 106
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 106
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 106
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 106
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 106
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 106
+	
+	
+	//hp mid digit
+	Model 0 "w_hp_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 106
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 106
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 106
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 106
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 106
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 106
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 106
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 106
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 106
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 106
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 106
+	
+	
+	//hp right digit
+	Model 0 "w_hp_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 106
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 106
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 106
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 106
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 106
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 106
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 106
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 106
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 106
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 106
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 106
+	
+	
+	//armor left digit
+	Model 0 "w_armor_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 106
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 106
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 106
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 106
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 106
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 106
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 106
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 106
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 106
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 106
+	
+	
+	//armor mid digit
+	Model 0 "w_armor_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 106
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 106
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 106
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 106
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 106
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 106
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 106
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 106
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 106
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 106
+	
+	
+	//armor right digit
+	Model 0 "w_armor_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 106
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 106
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 106
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 106
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 106
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 106
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 106
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 106
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 106
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 106
+}
+
+
+Model RLBFG9000
+{
+	Path "models/common"
+	Model 0 "w_dial2.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 113
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 113
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 113
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 113
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 113
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 113
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 113
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 113
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 113
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 113
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 113
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 113
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 113
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 113
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 113
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 113
+	
+	//watch belt
+	Model 0 "w_belt2.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 113
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 113
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 113
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 113
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 113
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 113
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 113
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 113
+	
+	//hp bars
+	Model 0 "w_hp_bar2.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 113
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 113
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 113
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 113
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 113
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 113
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 113
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 113
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 113
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 113
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 113
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 113
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 113
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 113
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 113
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 113
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 113
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 113
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 113
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 113
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 113
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 113
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 113
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 113
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 113
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 113
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 113
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 113
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 113
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 113
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 113
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 113
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 113
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 113
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 113
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 113
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 113
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 113
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 113
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 113
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar2.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 113
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 113
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 113
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 113
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 113
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 113
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 113
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 113
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 113
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 113
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 113
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 113
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 113
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 113
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 113
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 113
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 113
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 113
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 113
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 113
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 113
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 113
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 113
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 113
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 113
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 113
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 113
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 113
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 113
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 113
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 113
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 113
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 113
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 113
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 113
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 113
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 113
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 113
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 113
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 113
+	
+	
+	//hp left digit
+	Model 0 "w_hp2_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 113
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 113
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 113
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 113
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 113
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 113
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 113
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 113
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 113
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 113
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 113
+	
+	
+	//hp mid digit
+	Model 0 "w_hp2_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 113
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 113
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 113
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 113
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 113
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 113
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 113
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 113
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 113
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 113
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 113
+	
+	
+	//hp right digit
+	Model 0 "w_hp2_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 113
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 113
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 113
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 113
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 113
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 113
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 113
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 113
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 113
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 113
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 113
+	
+	
+	//armor left digit
+	Model 0 "w_armor2_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 113
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 113
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 113
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 113
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 113
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 113
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 113
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 113
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 113
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 113
+	
+	
+	//armor mid digit
+	Model 0 "w_armor2_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 113
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 113
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 113
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 113
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 113
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 113
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 113
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 113
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 113
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 113
+	
+	
+	//armor right digit
+	Model 0 "w_armor2_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 113
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 113
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 113
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 113
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 113
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 113
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 113
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 113
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 113
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 113
+}
+
+
+Model RLHeatwave
+{
+	Path "models/common"
+	Model 0 "w_dial.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 126
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 126
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 126
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 126
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 126
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 126
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 126
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 126
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 126
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 126
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 126
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 126
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 126
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 126
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 126
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 126
+	
+	//watch belt
+	Model 0 "w_belt.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 126
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 126
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 126
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 126
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 126
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 126
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 126
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 126
+	
+	//hp bars
+	Model 0 "w_hp_bar.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 126
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 126
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 126
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 126
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 126
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 126
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 126
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 126
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 126
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 126
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 126
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 126
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 126
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 126
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 126
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 126
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 126
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 126
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 126
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 126
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 126
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 126
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 126
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 126
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 126
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 126
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 126
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 126
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 126
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 126
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 126
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 126
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 126
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 126
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 126
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 126
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 126
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 126
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 126
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 126
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 126
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 126
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 126
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 126
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 126
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 126
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 126
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 126
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 126
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 126
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 126
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 126
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 126
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 126
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 126
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 126
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 126
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 126
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 126
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 126
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 126
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 126
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 126
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 126
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 126
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 126
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 126
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 126
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 126
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 126
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 126
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 126
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 126
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 126
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 126
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 126
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 126
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 126
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 126
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 126
+	
+	
+	//hp left digit
+	Model 0 "w_hp_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 126
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 126
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 126
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 126
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 126
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 126
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 126
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 126
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 126
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 126
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 126
+	
+	
+	//hp mid digit
+	Model 0 "w_hp_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 126
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 126
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 126
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 126
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 126
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 126
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 126
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 126
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 126
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 126
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 126
+	
+	
+	//hp right digit
+	Model 0 "w_hp_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 126
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 126
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 126
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 126
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 126
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 126
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 126
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 126
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 126
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 126
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 126
+	
+	
+	//armor left digit
+	Model 0 "w_armor_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 126
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 126
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 126
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 126
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 126
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 126
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 126
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 126
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 126
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 126
+	
+	
+	//armor mid digit
+	Model 0 "w_armor_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 126
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 126
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 126
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 126
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 126
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 126
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 126
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 126
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 126
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 126
+	
+	
+	//armor right digit
+	Model 0 "w_armor_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 126
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 126
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 126
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 126
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 126
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 126
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 126
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 126
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 126
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 126
+}
+
+
+Model RLIncinerator
+{
+	Path "models/common"
+	Model 0 "w_dial.md3"
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//watch dial
+	Skin 0 "watchface.png"
+	FrameIndex WH00 A 0 151
+	
+	Skin 0 "watchface2.png"
+	FrameIndex WH00 B 0 151
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH00 C 0 151
+	
+	Skin 0 "watchface4.png"
+	FrameIndex WH00 D 0 151
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH00 E 0 151
+	
+	Skin 0 "watchface6.png"
+	FrameIndex WH00 F 0 151
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH00 G 0 151
+	
+	Skin 0 "watchface8.png"
+	FrameIndex WH00 H 0 151
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH00 I 0 151
+	
+	Skin 0 "watchface10.png"
+	FrameIndex WH00 J 0 151
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH00 K 0 151
+	
+	Skin 0 "watchface12.png"
+	FrameIndex WH00 L 0 151
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH00 M 0 151
+	
+	Skin 0 "watchface14.png"
+	FrameIndex WH00 N 0 151
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH00 O 0 151
+	
+	Skin 0 "watchface16.png"
+	FrameIndex WH00 P 0 151
+	
+	//watch belt
+	Model 0 "w_belt.md3"
+	Skin 0 "watchface.png"
+	FrameIndex WH01 A 0 151
+	
+	Skin 0 "watchface3.png"
+	FrameIndex WH01 B 0 151
+	
+	Skin 0 "watchface5.png"
+	FrameIndex WH01 C 0 151
+	
+	Skin 0 "watchface7.png"
+	FrameIndex WH01 D 0 151
+	
+	Skin 0 "watchface9.png"
+	FrameIndex WH01 E 0 151
+	
+	Skin 0 "watchface11.png"
+	FrameIndex WH01 F 0 151
+	
+	Skin 0 "watchface13.png"
+	FrameIndex WH01 G 0 151
+	
+	Skin 0 "watchface15.png"
+	FrameIndex WH01 H 0 151
+	
+	//hp bars
+	Model 0 "w_hp_bar.md3"
+	Skin 0 "h01.png"
+	FrameIndex WH02 A 0 151
+	
+	Skin 0 "h02.png"
+	FrameIndex WH02 B 0 151
+	
+	Skin 0 "h03.png"
+	FrameIndex WH02 C 0 151
+	
+	Skin 0 "h04.png"
+	FrameIndex WH02 D 0 151
+	
+	Skin 0 "h05.png"
+	FrameIndex WH02 E 0 151
+	
+	Skin 0 "h06.png"
+	FrameIndex WH02 F 0 151
+	
+	Skin 0 "h07.png"
+	FrameIndex WH02 G 0 151
+	
+	Skin 0 "h08.png"
+	FrameIndex WH02 H 0 151
+	
+	Skin 0 "h09.png"
+	FrameIndex WH02 I 0 151
+	
+	Skin 0 "h10.png"
+	FrameIndex WH02 J 0 151
+	
+	Skin 0 "h11.png"
+	FrameIndex WH02 K 0 151
+	
+	Skin 0 "h12.png"
+	FrameIndex WH02 L 0 151
+	
+	Skin 0 "h13.png"
+	FrameIndex WH02 M 0 151
+	
+	Skin 0 "h14.png"
+	FrameIndex WH02 N 0 151
+	
+	Skin 0 "h15.png"
+	FrameIndex WH02 O 0 151
+	
+	Skin 0 "h16.png"
+	FrameIndex WH02 P 0 151
+	
+	Skin 0 "h17.png"
+	FrameIndex WH02 Q 0 151
+	
+	Skin 0 "h18.png"
+	FrameIndex WH02 R 0 151
+	
+	Skin 0 "h19.png"
+	FrameIndex WH02 S 0 151
+	
+	Skin 0 "h20.png"
+	FrameIndex WH02 T 0 151
+	
+	Skin 0 "h21.png"
+	FrameIndex WH03 A 0 151
+	
+	Skin 0 "h22.png"
+	FrameIndex WH03 B 0 151
+	
+	Skin 0 "h23.png"
+	FrameIndex WH03 C 0 151
+	
+	Skin 0 "h24.png"
+	FrameIndex WH03 D 0 151
+	
+	Skin 0 "h25.png"
+	FrameIndex WH03 E 0 151
+	
+	Skin 0 "h26.png"
+	FrameIndex WH03 F 0 151
+	
+	Skin 0 "h27.png"
+	FrameIndex WH03 G 0 151
+	
+	Skin 0 "h28.png"
+	FrameIndex WH03 H 0 151
+	
+	Skin 0 "h29.png"
+	FrameIndex WH03 I 0 151
+	
+	Skin 0 "h30.png"
+	FrameIndex WH03 J 0 151
+	
+	Skin 0 "h31.png"
+	FrameIndex WH03 K 0 151
+	
+	Skin 0 "h32.png"
+	FrameIndex WH03 L 0 151
+	
+	Skin 0 "h33.png"
+	FrameIndex WH03 M 0 151
+	
+	Skin 0 "h34.png"
+	FrameIndex WH03 N 0 151
+	
+	Skin 0 "h35.png"
+	FrameIndex WH03 O 0 151
+	
+	Skin 0 "h36.png"
+	FrameIndex WH03 P 0 151
+	
+	Skin 0 "h37.png"
+	FrameIndex WH03 Q 0 151
+	
+	Skin 0 "h38.png"
+	FrameIndex WH03 R 0 151
+	
+	Skin 0 "h39.png"
+	FrameIndex WH03 S 0 151
+	
+	Skin 0 "h40.png"
+	FrameIndex WH03 T 0 151
+	
+	
+	//armor bars
+	Model 0 "w_armor_bar.md3"
+	Skin 0 "s01.png"
+	FrameIndex WH04 A 0 151
+	
+	Skin 0 "s02.png"
+	FrameIndex WH04 B 0 151
+	
+	Skin 0 "s03.png"
+	FrameIndex WH04 C 0 151
+	
+	Skin 0 "s04.png"
+	FrameIndex WH04 D 0 151
+	
+	Skin 0 "s05.png"
+	FrameIndex WH04 E 0 151
+	
+	Skin 0 "s06.png"
+	FrameIndex WH04 F 0 151
+	
+	Skin 0 "s07.png"
+	FrameIndex WH04 G 0 151
+	
+	Skin 0 "s08.png"
+	FrameIndex WH04 H 0 151
+	
+	Skin 0 "s09.png"
+	FrameIndex WH04 I 0 151
+	
+	Skin 0 "s10.png"
+	FrameIndex WH04 J 0 151
+	
+	Skin 0 "s11.png"
+	FrameIndex WH04 K 0 151
+	
+	Skin 0 "s12.png"
+	FrameIndex WH04 L 0 151
+	
+	Skin 0 "s13.png"
+	FrameIndex WH04 M 0 151
+	
+	Skin 0 "s14.png"
+	FrameIndex WH04 N 0 151
+	
+	Skin 0 "s15.png"
+	FrameIndex WH04 O 0 151
+	
+	Skin 0 "s16.png"
+	FrameIndex WH04 P 0 151
+	
+	Skin 0 "s17.png"
+	FrameIndex WH04 Q 0 151
+	
+	Skin 0 "s18.png"
+	FrameIndex WH04 R 0 151
+	
+	Skin 0 "s19.png"
+	FrameIndex WH04 S 0 151
+	
+	Skin 0 "s20.png"
+	FrameIndex WH04 T 0 151
+	
+	Skin 0 "s21.png"
+	FrameIndex WH05 A 0 151
+	
+	Skin 0 "s22.png"
+	FrameIndex WH05 B 0 151
+	
+	Skin 0 "s23.png"
+	FrameIndex WH05 C 0 151
+	
+	Skin 0 "s24.png"
+	FrameIndex WH05 D 0 151
+	
+	Skin 0 "s25.png"
+	FrameIndex WH05 E 0 151
+	
+	Skin 0 "s26.png"
+	FrameIndex WH05 F 0 151
+	
+	Skin 0 "s27.png"
+	FrameIndex WH05 G 0 151
+	
+	Skin 0 "s28.png"
+	FrameIndex WH05 H 0 151
+	
+	Skin 0 "s29.png"
+	FrameIndex WH05 I 0 151
+	
+	Skin 0 "s30.png"
+	FrameIndex WH05 J 0 151
+	
+	Skin 0 "s31.png"
+	FrameIndex WH05 K 0 151
+	
+	Skin 0 "s32.png"
+	FrameIndex WH05 L 0 151
+	
+	Skin 0 "s33.png"
+	FrameIndex WH05 M 0 151
+	
+	Skin 0 "s34.png"
+	FrameIndex WH05 N 0 151
+	
+	Skin 0 "s35.png"
+	FrameIndex WH05 O 0 151
+	
+	Skin 0 "s36.png"
+	FrameIndex WH05 P 0 151
+	
+	Skin 0 "s37.png"
+	FrameIndex WH05 Q 0 151
+	
+	Skin 0 "s38.png"
+	FrameIndex WH05 R 0 151
+	
+	Skin 0 "s39.png"
+	FrameIndex WH05 S 0 151
+	
+	Skin 0 "s40.png"
+	FrameIndex WH05 T 0 151
+	
+	
+	//hp left digit
+	Model 0 "w_hp_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH06 A 0 151
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH06 B 0 151
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH06 C 0 151
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH06 D 0 151
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH06 E 0 151
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH06 F 0 151
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH06 G 0 151
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH06 H 0 151
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH06 I 0 151
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH06 J 0 151
+	
+	Skin 0 "digit_g.png"
+	FrameIndex WH06 Z 0 151
+	
+	
+	//hp mid digit
+	Model 0 "w_hp_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH07 A 0 151
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH07 B 0 151
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH07 C 0 151
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH07 D 0 151
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH07 E 0 151
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH07 F 0 151
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH07 G 0 151
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH07 H 0 151
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH07 I 0 151
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH07 J 0 151
+	
+	Skin 0 "digit_o.png"
+	FrameIndex WH07 Z 0 151
+	
+	
+	//hp right digit
+	Model 0 "w_hp_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH08 A 0 151
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH08 B 0 151
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH08 C 0 151
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH08 D 0 151
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH08 E 0 151
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH08 F 0 151
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH08 G 0 151
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH08 H 0 151
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH08 I 0 151
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH08 J 0 151
+	
+	Skin 0 "digit_d.png"
+	FrameIndex WH08 Z 0 151
+	
+	
+	//armor left digit
+	Model 0 "w_armor_d1.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH09 A 0 151
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH09 B 0 151
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH09 C 0 151
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH09 D 0 151
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH09 E 0 151
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH09 F 0 151
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH09 G 0 151
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH09 H 0 151
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH09 I 0 151
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH09 J 0 151
+	
+	
+	//armor mid digit
+	Model 0 "w_armor_d2.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH10 A 0 151
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH10 B 0 151
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH10 C 0 151
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH10 D 0 151
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH10 E 0 151
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH10 F 0 151
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH10 G 0 151
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH10 H 0 151
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH10 I 0 151
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH10 J 0 151
+	
+	
+	//armor right digit
+	Model 0 "w_armor_d3.md3"
+	Skin 0 "digit_0.png"
+	FrameIndex WH11 A 0 151
+	
+	Skin 0 "digit_1.png"
+	FrameIndex WH11 B 0 151
+	
+	Skin 0 "digit_2.png"
+	FrameIndex WH11 C 0 151
+	
+	Skin 0 "digit_3.png"
+	FrameIndex WH11 D 0 151
+	
+	Skin 0 "digit_4.png"
+	FrameIndex WH11 E 0 151
+	
+	Skin 0 "digit_5.png"
+	FrameIndex WH11 F 0 151
+	
+	Skin 0 "digit_6.png"
+	FrameIndex WH11 G 0 151
+	
+	Skin 0 "digit_7.png"
+	FrameIndex WH11 H 0 151
+	
+	Skin 0 "digit_8.png"
+	FrameIndex WH11 I 0 151
+	
+	Skin 0 "digit_9.png"
+	FrameIndex WH11 J 0 151
+}

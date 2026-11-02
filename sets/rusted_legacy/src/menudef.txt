@@ -1,0 +1,296 @@
+
+DEFAULTLISTMENU
+{
+	Font "BigFont", "White", "Gold"
+	Selector "M_SKULL1", -26, -5
+}
+
+LISTMENU "MainMenu"
+{
+	Position 115, 72
+	IfGame(Doom, Chex)
+	{
+		StaticPatch 94, 2, "M_DOOM"
+		Position 97, 72
+		IfOption(ReadThis)
+		{
+			Position 97, 64
+		}
+	}
+	IfGame(Strife)
+	{
+		StaticPatch 84, 2, "M_STRIFE"
+		Position 97, 45
+	}
+	IfGame(Heretic)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 40, 10, "M_SKL01"
+		StaticPatch 232, 10, "M_SKL00"
+		Position 110, 56
+	}
+	IfGame(Hexen)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 37, 80, "FBULB0"
+		StaticPatch 278, 80, "FBULA0"
+		Position 110, 56
+	}
+	
+	Position 110, 72
+	TextItem "$MNU_NEWGAME", 	"n", "PlayerclassMenu"
+	TextItem "$MNU_OPTIONS", 	"o", "OptionsMenu"
+	TextItem "$MNU_RLVROPTIONS", 	"v", "RLVR_Options"
+	TextItem "$MNU_LOADGAME", 	"l", "LoadGameMenu"
+	TextItem "$MNU_SAVEGAME", 	"s", "SaveGameMenu"
+	TextItem "$MNU_QUITGAME", 	"q", "QuitMenu"
+}
+
+LISTMENU "MainMenuTextOnly" //override for GZDoom
+{
+	Position 115, 92
+	IfGame(Doom, Chex)
+	{
+		StaticPatch 94, 2, "M_DOOM"
+		Position 97, 72
+		IfOption(ReadThis)
+		{
+			Position 97, 64
+		}
+	}
+	IfGame(Strife)
+	{
+		StaticPatch 84, 2, "M_STRIFE"
+		Position 97, 45
+	}
+	IfGame(Heretic)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 40, 10, "M_SKL01"
+		StaticPatch 232, 10, "M_SKL00"
+		Position 110, 56
+	}
+	IfGame(Hexen)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 37, 80, "FBULB0"
+		StaticPatch 278, 80, "FBULA0"
+		Position 110, 56
+	}
+	
+	Position 110, 72
+	TextItem "$MNU_NEWGAME", 	"n", "PlayerclassMenu"
+	TextItem "$MNU_OPTIONS", 	"o", "OptionsMenu"
+	TextItem "$MNU_RLVROPTIONS", 	"v", "RLVR_Options"
+	TextItem "$MNU_LOADGAME", 	"l", "LoadGameMenu"
+	TextItem "$MNU_SAVEGAME", 	"s", "SaveGameMenu"
+	TextItem "$MNU_QUITGAME", 	"q", "QuitMenu"
+}
+
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "$RLVR_OPTIONS", "RLVR_Options"
+}
+
+AddOptionMenu "OptionsMenuSimple"
+{
+	Submenu "$RLVR_OPTIONS", "RLVR_Options"
+}
+
+OptionValue "RLVR_Models_Option" {
+	0, "$RLVR_OPT_NOHAND"
+	1, "$RLVR_OPT_NOHAND2"
+	2, "$RLVR_OPT_HAND"
+	3, "$RLVR_OPT_HAND2"
+}
+
+OptionValue "RLVR_PickupModel_Option" {
+	0, "$RLVR_OPT_SPRITE"
+	1, "$RLVR_OPT_VOXEL"
+	2, "$RLVR_OPT_3D"
+}
+
+OptionValue "RLVR_DistModel_Option" {
+	0, "$RLVR_OPT_DIST_MODEL"
+	1, "$RLVR_OPT_DIST_SPRITE"
+}
+
+OptionValue "RLVR_DropReplace_Option" {
+	0, "$RLVR_DROP_NOCHANGE"
+	1, "$RLVR_DROP_REPLACE"
+	2, "$RLVR_DROP_REMOVE"
+}
+
+OptionValue "RLVR_LaserColor_Option" {
+	0, "$RLVR_LASER_RED"
+	1, "$RLVR_LASER_YELLOW"
+	2, "$RLVR_LASER_GREEN"
+	3, "$RLVR_LASER_CYAN"
+	4, "$RLVR_LASER_BLUE"
+	5, "$RLVR_LASER_PURPLE"
+	6, "$RLVR_LASER_PINK"
+	7, "$RLVR_LASER_WHITE"
+}
+
+OptionValue "RLVR_WeaponSwitch_Option" {
+	0, "$RLVR_OPT_DEFAULT"
+	1, "$RLVR_OPT_FAST"
+}
+
+OptionValue "RLVR_ShowHide" {
+	0, "$RLVR_HIDE"
+	1, "$RLVR_SHOW"
+}
+
+OptionValue "RLVR_SS_Model_Option" {
+	0, "$RLVR_SS_MODEL_CLASSIC"
+	1, "$RLVR_SS_MODEL_TDA"
+}
+
+OptionValue "RLVR_SS_Aim_Option" {
+	0, "$RLVR_SS_AIM_OPT1"
+	1, "$RLVR_SS_AIM_OPT2"
+	2, "$RLVR_SS_AIM_OPT3"
+}
+
+OptionValue "RLVR_Hud_Option" {
+	11, "$RLVR_HUD_SHOW"
+	12, "$RLVR_HUD_HIDE"
+}
+
+OptionValue "RLVR_WatchMode_Option" {
+	0, "$RLVR_WATCH_HEALTHARMOR"
+	1, "$RLVR_WATCH_AMMO"
+}
+
+OptionValue "RLVR_WatchColor_Option" {
+	0, "$RLVR_HUD_WHITE"
+	1, "$RLVR_HUD_RED"
+	2, "$RLVR_HUD_YELLOW"
+	3, "$RLVR_HUD_GREEN"
+	4, "$RLVR_HUD_CYAN"
+	5, "$RLVR_HUD_BLUE"
+	6, "$RLVR_HUD_PURPLE"
+	7, "$RLVR_HUD_PINK"
+}
+
+OptionValue "RLVR_WeapHUD_BG_Option" {
+	0, "$RLVR_WEAPHUD_NOBG"
+	1, "$RLVR_WEAPHUD_BORDER"
+	2, "$RLVR_WEAPHUD_FULLBG"
+}
+
+OptionValue "RLVR_WeapHUD_Scale_Option" {
+	1, "$RLVR_WEAPHUD_SMALL"
+	2, "$RLVR_WEAPHUD_BIG"
+	3, "$RLVR_WEAPHUD_BIG_MINIMAL"
+}
+
+OptionValue "RLVR_WeapHUDColor_Option" {
+	0, "$RLVR_HUD_WHITE"
+	1, "$RLVR_HUD_GRAY"
+	2, "$RLVR_HUD_RED"
+	3, "$RLVR_HUD_YELLOW"
+	4, "$RLVR_HUD_GREEN"
+	5, "$RLVR_HUD_CYAN"
+	6, "$RLVR_HUD_BLUE"
+	7, "$RLVR_HUD_PURPLE"
+	8, "$RLVR_HUD_PINK"
+}
+
+OptionValue "RLVR_DevMode" {
+	0, "Off"
+	1, "On"
+	2, "Debug"
+}
+
+OptionMenu "RLVR_Options" {
+
+	Class "RLVROptionMenu"
+	Title "$RLVR_OPTIONS"
+	
+	StaticText " "
+	StaticText "$RLVR_GAMEPLAY_OPTION", "Gold"
+	RLVROption "$RLVR_PICKUP_MODEL", 	"$RLVR_PICKUP_MODEL_NOTE", 		"rl_pickupmodel", 		"RLVR_PickupModel_Option"
+	RLVROption "$RLVR_DIST_MODEL", 		"$RLVR_DIST_MODEL_NOTE", 		"rl_loadsprite", 		"RLVR_DistModel_Option", rl_pickupmodel
+	Slider "$RLVR_MODEL_DIST", 							"rl_model_dist", 		100, 5000, 100.0, 0, rl_loadsprite
+	RLVROption "$RLVR_CUSTOM_DROPS", 	"$RLVR_CUSTOM_DROPS_NOTE", 		"rl_drop_replace", 		"RLVR_DropReplace_Option"
+	RLVRSlider "$RLVR_PLAYER_HEIGHT", 	"$RLVR_PLAYER_HEIGHT_NOTE", 		"vr_height_adjust", 		-0.5, 1.0, 0.01, 2
+	RLVRSlider "$RLVR_ST_RANGE", 		"$RLVR_ST_RANGE_NOTE",	 		"rl_stouch_dist", 		1.0, 10.0, 0.5, 1
+	RLVROption "$RLVR_PERF_MODE",		"$RLVR_PERF_MODE_NOTE", 		"rl_perfmode", 			"OnOff"
+	RLVROption "$RLVR_SHOW_TIPS",		"$RLVR_SHOW_TIPS_NOTE", 		"rl_show_tips", 		"YesNo"
+	SafeCommand "$OPTMNU_DEFAULTS", "resetcvar rl_pickupmodel rl_loadsprite rl_model_dist rl_drop_replace rl_stouch_dist vr_height_adjust rl_perfmode rl_show_tips"
+	
+	StaticText " "
+	StaticText "$RLVR_WEAPONS", "Gold"
+	RLVROption "$RLVR_WEAPON_MODEL", 	"$RLVR_WEAPON_MODEL_NOTE", 		"rl_weaponmodel", 		"RLVR_Models_Option"
+	RLVROption "$RLVR_WEAPON_FLASH", 	"$RLVR_WEAPON_FLASH_NOTE",		"rl_flashsprite", 		"OnOff"
+	RLVRSlider "$RLVR_WEAPON_FLASH_ALPHA",	"$RLVR_WEAPON_FLASH_ALPHA_NOTE", 	"rl_flashalpha", 		0.1, 1.0, 0.1, 1, rl_flashsprite
+	RLVROption "$RLVR_WEAPON_LASER",	"$RLVR_WEAPON_LASER_NOTE", 		"rl_laserbeam", 		"OnOff"
+	RLVROption "$RLVR_WEAPON_LASERCOLOR",	"$RLVR_WEAPON_LASERCOLOR_NOTE", 	"rl_lasercolor", 		"RLVR_LaserColor_Option", rl_laserbeam
+	RLVRSlider "$RLVR_WEAPON_LASER_ALPHA", 	"$RLVR_WEAPON_LASER_ALPHA_NOTE", 	"rl_laseralpha", 		0.1, 1.0, 0.1, 1, rl_laserbeam
+	RLVROption "$RLVR_WEAPON_TRACER",	"$RLVR_WEAPON_TRACER_NOTE", 		"rl_tracers", 			"OnOff"
+	//Option "$RLVR_WEAPON_SWITCH", 						"rl_fastswitch", 		"RLVR_WeaponSwitch_Option"
+	Submenu "$RLVR_SS_OPTIONS", "RLVR_SS_Options"
+	SafeCommand "$OPTMNU_DEFAULTS", "resetcvar rl_weaponmodel rl_flashsprite rl_flashalpha rl_laserbeam rl_lasercolor rl_laseralpha rl_tracers rl_fastswitch"
+	
+	StaticText " "
+	StaticText "$RLVR_RELOAD_OPTION", "Gold"
+	RLVROption "$RLVR_AUTORELOAD", 		"$RLVR_AUTORELOAD_NOTE", 		"rl_autoreload", 		"YesNo"
+	RLVROption "$RLVR_IMRELOAD", 		"$RLVR_IMRELOAD_NOTE",	 		"rl_imreload", 			"YesNo"
+	RLVROption "$RLVR_WMARKER", 		"$RLVR_WMARKER_NOTE",			"rl_wmarker", 			"RLVR_ShowHide"
+	RLVROption "$RLVR_AMMOGRAB", 		"$RLVR_AMMOGRAB_NOTE",			"rl_ammograb", 			"YesNo", rl_imreload
+	SafeCommand "$OPTMNU_DEFAULTS", "resetcvar rl_autoreload rl_imreload rl_wmarker rl_ammograb"
+	StaticText " "
+	RLVRControl "$RLVR_RELOADKEY",		"$RLVR_RELOADKEY_NOTE",	 		"+reload"
+	RLVRControl "$RLVR_UNLOADKEY", 		"$RLVR_UNLOADKEY_NOTE", 		"+zoom"
+	
+	StaticText " "
+	StaticText "$RLVR_CLASSIC_HUDOPTIONS", "Gold"
+	RLVROption "$RLVR_SHOW_HUD",		"$RLVR_SHOW_HUD_NOTE", 			"screenblocks", 		"RLVR_Hud_Option"
+	RLVROption "$RLVR_SIMPLE_HUD", 		"$RLVR_SIMPLE_HUD_NOTE", 		"rl_simplehud", 		"OnOff"
+	ScaleSlider "$RLVR_MSG_SCALE", 							"con_scaletext", 			0.0, 8.0, 1.0, "$SCALEMNU_USEUI"
+	ScaleSlider "$RLVR_CON_SCALE", 							"con_scale", 				0.0, 8.0, 1.0, "$SCALEMNU_USEUI"
+	Option "$RLVR_SHOW_FPS", 							"vid_fps", 				"OnOff"
+	SafeCommand "$OPTMNU_DEFAULTS", "resetcvar screenblocks rl_simplehud con_scaletext con_scale vid_fps"
+	
+	StaticText " "
+	StaticText "$RLVR_VR_HUDOPTIONS", "Gold"
+	RLVROption "$RLVR_WATCH_HUD", 		"$RLVR_WATCH_HUD_NOTE", 		"rl_wwatch", 			"OnOff"
+	RLVROption "$RLVR_WATCH_MODE", 		"$RLVR_WATCH_MODE_NOTE", 		"rl_wwatch_mode", 		"RLVR_WatchMode_Option", rl_wwatch
+	RLVROption "$RLVR_WATCH_COLOR", 	"$RLVR_WATCH_COLOR_NOTE",		"rl_wwatch_color", 		"RLVR_WatchColor_Option", rl_wwatch
+	RLVROption "$RLVR_WATCH_BRACER", 	"$RLVR_WATCH_BRACER_NOTE",		"rl_wwatch_bracer", 		"OnOff", rl_wwatch
+	RLVROption "$RLVR_WEAP_HUD", 		"$RLVR_WEAP_HUD_NOTE",			"rl_weaphud", 			"OnOff"
+	RLVROption "$RLVR_WEAP_HUDBG", 		"$RLVR_WEAP_HUDBG_NOTE", 		"rl_weaphud_bg", 		"RLVR_WeapHUD_BG_Option", rl_weaphud
+	RLVROption "$RLVR_WEAP_HUDSCALE", 	"$RLVR_WEAP_HUDSCALE_NOTE",		"rl_weaphud_scale", 		"RLVR_WeapHUD_Scale_Option", rl_weaphud
+	RLVROption "$RLVR_WEAP_HUDCOLOR", 	"$RLVR_WEAP_HUDCOLOR_NOTE",		"rl_weaphud_color", 		"RLVR_WeapHUDColor_Option", rl_weaphud
+	SafeCommand "$OPTMNU_DEFAULTS", "resetcvar rl_wwatch rl_wwatch_mode rl_wwatch_color rl_wwatch_bracer rl_weaphud rl_weaphud_bg rl_weaphud_scale rl_weaphud_color"
+	
+	StaticText " "
+	StaticText "Developer", "Gold"
+	Option "Developer Mode", 		"developer", 			"RLVR_DevMode"
+}
+
+OptionMenu "RLVR_SS_Options" {
+
+	Class "RLVROptionMenu"
+	Title "$RLVR_SS_OPTIONS"
+	
+	StaticText " "
+	StaticText "$RLVR_SS_NOTE", "gray"
+	StaticText " "
+	Option "$RLVR_SS_WEAP", 				 			"rl_ss", 			"OnOff"
+	RLVROption "$RLVR_SS_MODEL", 		"$RLVR_SS_MODEL_NOTE", 			"rl_ss_model", 			"RLVR_SS_Model_Option"
+	RLVROption "$RLVR_SS_SHOULDERGRAB", 	"$RLVR_SS_SHOULDERGRAB_NOTE", 		"rl_ss_shouldergrab", 		"YesNo"
+	RLVRMotionOption "$RLVR_SS_MTHROW", 	"$RLVR_SS_MTHROW_NOTE", 		"rl_ss_mthrow", 		"OnOff", rl_ss
+	RLVROption "$RLVR_SS_AIM", 		"$RLVR_SS_AIM_NOTE",			"rl_ss_aim", 			"RLVR_SS_Aim_Option", rl_ss
+	RLVRSlider "$RLVR_SS_RANGE", 		"$RLVR_SS_RANGE_NOTE", 			"rl_ss_range", 			5.0, 30.0, 0.5, 1, rl_ss
+	RLVRSlider "$RLVR_SS_DMULT", 		"$RLVR_SS_DMULT_NOTE", 			"rl_ss_dmult", 			0.5, 5.0, 0.1, 1, rl_ss
+	RLVRSlider "$RLVR_SS_SMULT", 		"$RLVR_SS_SMULT_NOTE", 			"rl_ss_smult", 			0.5, 5.0, 0.1, 1, rl_ss
+	RLVROption "$RLVR_SS_BOUNCE", 		"$RLVR_SS_BOUNCE_NOTE", 		"rl_ss_bounce", 		"YesNo", rl_ss
+	RLVROption "$RLVR_SS_CALL", 		"$RLVR_SS_CALL_NOTE", 			"rl_ss_call", 			"YesNo", rl_ss
+	SafeCommand "$OPTMNU_DEFAULTS", "resetcvar rl_ss rl_ss_model rl_ss_range rl_ss_dmult rl_ss_smult rl_ss_bounce rl_ss_call rl_ss_mthrow rl_ss_aim"
+	StaticText " "
+	RLVRControl "$RLVR_OH_ATTACK",		"$RLVR_OH_ATTACK_NOTE", 		"+oh_attack"
+	RLVRControl "$RLVR_OH_ALTATTACK",	"$RLVR_OH_ALTATTACK_NOTE", 		"+oh_altatk"
+}

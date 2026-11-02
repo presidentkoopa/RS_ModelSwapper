@@ -1,0 +1,179 @@
+[enu default]
+MNU_RLVROPTIONS 		= "Mod Options";
+
+RLVR_OPTIONS 			= "FORCE Unleashed Options";
+
+RLVR_GAMEPLAY_OPTION 		= "Gameplay Options";
+RLVR_PICKUP_MODEL 		= "Pickup Graphics";
+RLVR_PICKUP_MODEL_NOTE 		= "Graphics for all pickups including weapons and ammo";
+RLVR_DIST_MODEL 		= "Distant Pickups";
+RLVR_DIST_MODEL_NOTE 		= "How pickup items at distance renders as";
+RLVR_MODEL_DIST 		= "Model Load Distance";
+RLVR_CUSTOM_DROPS 		= "Custom Mod Pickups";
+RLVR_CUSTOM_DROPS_NOTE 		= "How to manage incompatible weapon/ammo drops from other mods";
+RLVR_PLAYER_HEIGHT 		= "Adjust Player Height";
+RLVR_PLAYER_HEIGHT_NOTE 	= "Adjust player height if you are playing on sitting position";
+RLVR_ST_RANGE 			= "Shoulder Touch Range";
+RLVR_ST_RANGE_NOTE 		= "Touch Range for grabbing stuff from shoulders";
+RLVR_PERF_MODE 			= "Performance Mode";
+RLVR_PERF_MODE_NOTE 		= "Enabling performance mode will disable some SFX";
+RLVR_SHOW_TIPS 			= "Alert Missing Keybinds";
+RLVR_SHOW_TIPS_NOTE 		= "Alert you about missing Keybinds at level start";
+
+RLVR_WEAPONS 			= "Weapon Settings";
+RLVR_WEAPON_MODEL 		= "Weapon Model";
+RLVR_WEAPON_MODEL_NOTE 		= "Options to toggle hands and PBR textures for weapons";
+RLVR_WEAPON_FLASH 		= "Muzzle Flash Sprite";
+RLVR_WEAPON_FLASH_NOTE 		= "Toggle muzzle flash sprites for weapons";
+RLVR_WEAPON_FLASH_ALPHA 	= "Flash Sprite Opacity";
+RLVR_WEAPON_FLASH_ALPHA_NOTE 	= "Set transparency for the muzzle flash sprites";
+RLVR_WEAPON_LASER 		= "Aiming Laser";
+RLVR_WEAPON_LASER_NOTE 		= "Toggle aiming laser for weapons";
+RLVR_WEAPON_LASERCOLOR 		= "Laser Color";
+RLVR_WEAPON_LASERCOLOR_NOTE 	= "Select your prefered color for aiming laser";
+RLVR_WEAPON_LASER_ALPHA 	= "Laser Opacity";
+RLVR_WEAPON_LASER_ALPHA_NOTE 	= "Set transparency for the aiming laser";
+RLVR_WEAPON_TRACER 		= "Bullet Tracer";
+RLVR_WEAPON_TRACER_NOTE 	= "Toggle bullet tracer for hitscan weapons";
+RLVR_WEAPON_SWITCH 		= "Fast Switching";
+
+RLVR_RELOAD_OPTION 		= "Weapon Reload Options";
+RLVR_AUTORELOAD 		= "Allow Auto Reload";
+RLVR_AUTORELOAD_NOTE 		= "Weapons automatically go to reload state while out of ammo";
+RLVR_IMRELOAD 			= "Immersive Reloading";
+RLVR_IMRELOAD_NOTE 		= "Lets you reload weapons with touch based gestures";
+RLVR_WMARKER 			= "Weapon Touch Marker";
+RLVR_WMARKER_NOTE 		= "Shows a marker for touch spots in immersive reload mode";
+RLVR_AMMOGRAB 			= "Grab Ammo from Shoulder";
+RLVR_AMMOGRAB_NOTE 		= "Lets you grab ammo from shoulders in immersive reloads";
+RLVR_RELOADKEY 			= "Reloading";
+RLVR_RELOADKEY_NOTE 		= "Bind a key to reload weapons";
+RLVR_UNLOADKEY 			= "Unload Ammo";
+RLVR_UNLOADKEY_NOTE 		= "Bind a key to unload weapon ammo";
+
+RLVR_CLASSIC_HUDOPTIONS 	= "Classic HUD Options";
+RLVR_SHOW_HUD 			= "Classic HUD";
+RLVR_SHOW_HUD_NOTE 		= "Toggle Classic HUD floating in front of you";
+RLVR_SIMPLE_HUD 		= "Simple HUD";
+RLVR_SIMPLE_HUD_NOTE 		= "Enable simple HUD style as classic HUD";
+RLVR_MSG_SCALE 			= "Message Scale";
+RLVR_CON_SCALE 			= "Console Message Scale";
+RLVR_SHOW_FPS 			= "Show FPS";
+
+RLVR_VR_HUDOPTIONS 		= "VR HUD Options";
+RLVR_WATCH_HUD 			= "Wrist HUD";
+RLVR_WATCH_HUD_NOTE 		= "Enable VR style wrist watch HUD";
+RLVR_WATCH_MODE 		= "Wrist Watch Shows";
+RLVR_WATCH_MODE_NOTE 		= "What to display on wrist watch";
+RLVR_WATCH_COLOR 		= "Wrist Watch Color";
+RLVR_WATCH_COLOR_NOTE 		= "Select a wrist watch color";
+RLVR_WATCH_BRACER 		= "Wrist Watch Strap";
+RLVR_WATCH_BRACER_NOTE 		= "Toggle strap for wrist watch";
+RLVR_WEAP_HUD 			= "Ammo HUD";
+RLVR_WEAP_HUD_NOTE 		= "Enable ammo HUD on weapons";
+RLVR_WEAP_HUDSCALE 		= "Ammo HUD Scale";
+RLVR_WEAP_HUDSCALE_NOTE 	= "Select preferred size for ammo HUD";
+RLVR_WEAP_HUDBG 		= "Ammo HUD Background";
+RLVR_WEAP_HUDBG_NOTE 		= "Toggle translucent background for ammo HUD";
+RLVR_WEAP_HUDCOLOR 		= "Ammo HUD Color";
+RLVR_WEAP_HUDCOLOR_NOTE 	= "Select preferred color for ammo HUD";
+
+RLVR_SS_OPTIONS 		= "Shield Saw Options";
+RLVR_SS_NOTE 			= "Shield Saw is activated by Off-hand Fist Alt-fire";
+RLVR_SS_WEAP 			= "Shield Saw";
+RLVR_SS_MODEL 			= "Shield Model";
+RLVR_SS_MODEL_NOTE 		= "Select prefered shield saw model";
+RLVR_SS_SHOULDERGRAB 		= "Grab From Shoulder";
+RLVR_SS_SHOULDERGRAB_NOTE 	= "Lets you grab shield saw from shoulders";
+RLVR_SS_RANGE 			= "Throw Range";
+RLVR_SS_RANGE_NOTE 		= "How far shield saw can travel before returning";
+RLVR_SS_DMULT 			= "Damage Multiplier";
+RLVR_SS_DMULT_NOTE 		= "How much damage shield saw does when thrown";
+RLVR_SS_SMULT 			= "Speed Multiplier";
+RLVR_SS_SMULT_NOTE 		= "How fast shield saw can travel when thrown";
+RLVR_SS_BOUNCE 			= "Bounce On Hit";
+RLVR_SS_BOUNCE_NOTE 		= "Lets shield saw bounce when hitting wall/floor";
+RLVR_SS_CALL 			= "Call Back Anytime";
+RLVR_SS_CALL_NOTE 		= "Lets you call shield saw back with off-hand fire key";
+RLVR_SS_MTHROW 			= "Motion Throw";
+RLVR_SS_MTHROW_NOTE 		= "Lets you perform VR motion throw with shield saw";
+RLVR_SS_AIM 			= "Throw Aiming";
+RLVR_SS_AIM_NOTE 		= "Auto aiming option for motion throw";
+RLVR_OH_ATTACK 			= "Off-hand Attack";
+RLVR_OH_ATTACK_NOTE 		= "Bind a key for Off-hand Attack if not already bound";
+RLVR_OH_ALTATTACK 		= "Off-hand Alt-Attack";
+RLVR_OH_ALTATTACK_NOTE 		= "Bind a key for Off-hand Alt-Attack if not already bound";
+
+RLVR_LASER_RED 			= "Red";
+RLVR_LASER_YELLOW 		= "Yellow";
+RLVR_LASER_GREEN 		= "Green";
+RLVR_LASER_CYAN 		= "Cyan";
+RLVR_LASER_BLUE 		= "Blue";
+RLVR_LASER_PURPLE 		= "Purple";
+RLVR_LASER_PINK 		= "Pink";
+RLVR_LASER_WHITE 		= "White";
+
+RLVR_OPT_HAND 			= "With Hand";
+RLVR_OPT_HAND2 			= "With Hand (PBR)";
+RLVR_OPT_NOHAND 		= "Without Hand";
+RLVR_OPT_NOHAND2 		= "Without Hand (PBR)";
+
+RLVR_OPT_SPRITE 		= "Sprite";
+RLVR_OPT_VOXEL 			= "Voxel";
+RLVR_OPT_3D 			= "3D Model";
+
+RLVR_OPT_DIST_MODEL 		= "Load as Sprite";
+RLVR_OPT_DIST_SPRITE 		= "Load as Voxel/Model";
+
+RLVR_DROP_NOCHANGE 		= "Don't Replace";
+RLVR_DROP_REPLACE 		= "Random Replace";
+RLVR_DROP_REMOVE 		= "Delete";
+
+RLVR_OPT_DEFAULT 		= "Default";
+RLVR_OPT_FAST 			= "Fast";
+
+RLVR_HIDE 			= "Hide";
+RLVR_SHOW 			= "Show";
+
+RLVR_SS_MODEL_CLASSIC 		= "Classic";
+RLVR_SS_MODEL_TDA 		= "The Dark Ages";
+
+RLVR_SS_AIM_OPT1 		= "Default";
+RLVR_SS_AIM_OPT2 		= "Hand Guided";
+RLVR_SS_AIM_OPT3 		= "Auto-Aim and Guided";
+
+RLVR_HUD_SHOW 			= "On";
+RLVR_HUD_HIDE 			= "Off";
+
+RLVR_WATCH_HEALTHARMOR 		= "Health and Armor";
+RLVR_WATCH_AMMO 		= "Weapon Ammo";
+RLVR_WEAPHUD_SMALL 		= "Small";
+RLVR_WEAPHUD_BIG 		= "Big";
+RLVR_WEAPHUD_BIG_MINIMAL 	= "Big (Minimal)";
+RLVR_WEAPHUD_NOBG 		= "None";
+RLVR_WEAPHUD_BORDER 		= "Border Only";
+RLVR_WEAPHUD_FULLBG 		= "Translucent";
+
+RLVR_HUD_WHITE 			= "White";
+RLVR_HUD_GRAY 			= "Gray";
+RLVR_HUD_RED 			= "Red";
+RLVR_HUD_YELLOW 		= "Yellow";
+RLVR_HUD_GREEN 			= "Green";
+RLVR_HUD_CYAN 			= "Cyan";
+RLVR_HUD_BLUE 			= "Blue";
+RLVR_HUD_PURPLE 		= "Purple";
+RLVR_HUD_PINK 			= "Pink";
+
+TAG_HELLSHOTGUN 		= "The Judgement";
+GOTHELLSHOTGUN 			= "Hasta la vista, baby!";
+OB_MPHELLSHOTGUN 		= "%k found %o unworthy of living and served justice";
+TAG_HEATWAVEWEAP 		= "Calamity Blade";
+GOTHEATWAVEWEAP 		= "You got the calamity blade! Hot damn!";
+OB_MPHEATWAVEWEAP 		= "%o was vaporized by %k's calamity blade.";
+TAG_INCINERATOR 		= "Incinerator";
+GOTINCINERATOR 			= "You got the incinerator!";
+OB_INCINERATOR 			= "%o was burnt to crisp by %k's incinerator.";
+GOTDOPEFISH 			= "Dopefish lives!";
+
+RLVRALERTMISSINGBIND 		= "%s key binding is missing.\nGo to Options > Customize Constrols > Actions menu\nto bind the key";
+RLVRALERTDONEMESSAGE 		= "To stop these alerts go to Mod settings\nand turn off Alert Missing Keybinds";

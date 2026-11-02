@@ -1,0 +1,263 @@
+
+//with hand
+Model RLHeatwave
+{
+	Path "models/heatwave"
+	Model 0 "heatwave.md3"
+	Model 1 "heat_mag.md3"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	NOINTERPOLATION
+	
+	//Ready
+	FrameIndex HETG A 0 0	FrameIndex HETG A 1 0	FrameIndex HETG A 2 126
+	
+	//Fire
+	FrameIndex HETG B 0 1	FrameIndex HETG B 1 0   FrameIndex HETG B 2 127
+	
+	//Charging up
+	FrameIndex HETG C 0 2	FrameIndex HETG C 1 0   FrameIndex HETG C 2 127
+	FrameIndex HETG D 0 3	FrameIndex HETG D 1 0   FrameIndex HETG D 2 127
+	FrameIndex HETG E 0 4	FrameIndex HETG E 1 0 	FrameIndex HETG E 2 127
+
+	//Eject ammo
+	FrameIndex HETG F 0 0	FrameIndex HETG F 1 5 	FrameIndex HETG F 2 126
+	
+	//Insert ammo
+	FrameIndex HETG G 0 0	FrameIndex HETG G 1 1 	FrameIndex HETG G 2 126
+	FrameIndex HETG H 0 0	FrameIndex HETG H 1 2 	FrameIndex HETG H 2 126
+	FrameIndex HETG I 0 0	FrameIndex HETG I 1 3 	FrameIndex HETG I 2 126
+	FrameIndex HETG J 0 0	FrameIndex HETG J 1 4 	FrameIndex HETG J 2 126
+	
+	//Ready (no ammo)
+	FrameIndex HETG K 0 0	FrameIndex HETG K 1 5	FrameIndex HETG K 2 126
+}
+
+//with hand (PBR texture)
+Model RLHeatwave
+{
+	Path "models/heatwave"
+	Model 0 "heatwave.md3"
+	Skin 0 "heatwave_HD.png"
+	Model 1 "heat_mag.md3"
+	Skin 1 "bfg2_HD.png"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	Skin 2 "hand_HD.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	NOINTERPOLATION
+	
+	//Ready
+	FrameIndex HETP A 0 0	FrameIndex HETP A 1 0	FrameIndex HETP A 2 126
+	
+	//Fire
+	FrameIndex HETP B 0 1	FrameIndex HETP B 1 0   FrameIndex HETP B 2 127
+	
+	//Charging up
+	FrameIndex HETP C 0 2	FrameIndex HETP C 1 0   FrameIndex HETP C 2 127
+	FrameIndex HETP D 0 3	FrameIndex HETP D 1 0   FrameIndex HETP D 2 127
+	FrameIndex HETP E 0 4	FrameIndex HETP E 1 0 	FrameIndex HETP E 2 127
+
+	//Eject ammo
+	FrameIndex HETP F 0 0	FrameIndex HETP F 1 5 	FrameIndex HETP F 2 126
+	
+	//Insert ammo
+	FrameIndex HETP G 0 0	FrameIndex HETP G 1 1 	FrameIndex HETP G 2 126
+	FrameIndex HETP H 0 0	FrameIndex HETP H 1 2 	FrameIndex HETP H 2 126
+	FrameIndex HETP I 0 0	FrameIndex HETP I 1 3 	FrameIndex HETP I 2 126
+	FrameIndex HETP J 0 0	FrameIndex HETP J 1 4 	FrameIndex HETP J 2 126
+	
+	//Ready (no ammo)
+	FrameIndex HETP K 0 0	FrameIndex HETP K 1 5	FrameIndex HETP K 2 126
+}
+
+//with both hands
+Model RLHeatwave
+{
+	Path "models/heatwave"
+	Model 0 "heatwave.md3"
+	Model 1 "heat_mag.md3"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	Model 3 "hand2.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	NOINTERPOLATION
+	
+	//Ready
+	FrameIndex HT2H A 0 0	FrameIndex HT2H A 1 0	FrameIndex HT2H A 2 126		FrameIndex HT2H A 3 111	
+	                        
+	//Fire                  
+	FrameIndex HT2H B 0 1	FrameIndex HT2H B 1 0	FrameIndex HT2H B 2 127         FrameIndex HT2H B 3 111
+	                        
+	//Charging up           
+	FrameIndex HT2H C 0 2	FrameIndex HT2H C 1 0	FrameIndex HT2H C 2 127         FrameIndex HT2H C 3 111
+	FrameIndex HT2H D 0 3	FrameIndex HT2H D 1 0	FrameIndex HT2H D 2 127         FrameIndex HT2H D 3 111
+	FrameIndex HT2H E 0 4	FrameIndex HT2H E 1 0	FrameIndex HT2H E 2 127         FrameIndex HT2H E 3 111
+
+	//Eject ammo
+	FrameIndex HT2H F 0 0	FrameIndex HT2H F 1 5 	FrameIndex HT2H F 2 126		FrameIndex HT2H F 3 113
+	
+	//Insert ammo
+	FrameIndex HT2H G 0 0	FrameIndex HT2H G 1 1 	FrameIndex HT2H G 2 126		FrameIndex HT2H G 3 113
+	FrameIndex HT2H H 0 0	FrameIndex HT2H H 1 2 	FrameIndex HT2H H 2 126		FrameIndex HT2H H 3 114
+	FrameIndex HT2H I 0 0	FrameIndex HT2H I 1 3 	FrameIndex HT2H I 2 126		FrameIndex HT2H I 3 115
+	FrameIndex HT2H J 0 0	FrameIndex HT2H J 1 4 	FrameIndex HT2H J 2 126		FrameIndex HT2H J 3 116
+	
+	//Ready (no ammo)
+	FrameIndex HT2H K 0 0	FrameIndex HT2H K 1 5	FrameIndex HT2H K 2 126		FrameIndex HT2H K 3 111	
+}
+
+//with both hands (PBR texture)
+Model RLHeatwave
+{
+	Path "models/heatwave"
+	Model 0 "heatwave.md3"
+	Skin 0 "heatwave_HD.png"
+	Model 1 "heat_mag.md3"
+	Skin 1 "bfg2_HD.png"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	Skin 2 "hand_HD.png"
+	Model 3 "hand2.md3"
+	Skin 3 "hand_HD.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	NOINTERPOLATION
+	
+	//Ready
+	FrameIndex HT2P A 0 0	FrameIndex HT2P A 1 0	FrameIndex HT2P A 2 126		FrameIndex HT2P A 3 111	
+	                        
+	//Fire                  
+	FrameIndex HT2P B 0 1	FrameIndex HT2P B 1 0	FrameIndex HT2P B 2 127         FrameIndex HT2P B 3 111
+	                        
+	//Charging up           
+	FrameIndex HT2P C 0 2	FrameIndex HT2P C 1 0	FrameIndex HT2P C 2 127         FrameIndex HT2P C 3 111
+	FrameIndex HT2P D 0 3	FrameIndex HT2P D 1 0	FrameIndex HT2P D 2 127         FrameIndex HT2P D 3 111
+	FrameIndex HT2P E 0 4	FrameIndex HT2P E 1 0	FrameIndex HT2P E 2 127         FrameIndex HT2P E 3 111
+
+	//Eject ammo
+	FrameIndex HT2P F 0 0	FrameIndex HT2P F 1 5 	FrameIndex HT2P F 2 126		FrameIndex HT2P F 3 113
+	
+	//Insert ammo
+	FrameIndex HT2P G 0 0	FrameIndex HT2P G 1 1 	FrameIndex HT2P G 2 126		FrameIndex HT2P G 3 113
+	FrameIndex HT2P H 0 0	FrameIndex HT2P H 1 2 	FrameIndex HT2P H 2 126		FrameIndex HT2P H 3 114
+	FrameIndex HT2P I 0 0	FrameIndex HT2P I 1 3 	FrameIndex HT2P I 2 126		FrameIndex HT2P I 3 115
+	FrameIndex HT2P J 0 0	FrameIndex HT2P J 1 4 	FrameIndex HT2P J 2 126		FrameIndex HT2P J 3 116
+	
+	//Ready (no ammo)
+	FrameIndex HT2P K 0 0	FrameIndex HT2P K 1 5	FrameIndex HT2P K 2 126		FrameIndex HT2P K 3 111	
+}
+
+//without hand
+Model RLHeatwave
+{
+	Path "models/heatwave"
+	Model 0 "heatwave.md3"
+	Model 1 "heat_mag.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	NOINTERPOLATION
+	
+	//Ready
+	FrameIndex HTNH A 0 0	FrameIndex HTNH A 1 0
+	
+	//Fire
+	FrameIndex HTNH B 0 1	FrameIndex HTNH B 1 0
+	
+	//Charging up
+	FrameIndex HTNH C 0 2	FrameIndex HTNH C 1 0
+	FrameIndex HTNH D 0 3	FrameIndex HTNH D 1 0
+	FrameIndex HTNH E 0 4	FrameIndex HTNH E 1 0
+
+	//Eject ammo
+	FrameIndex HTNH F 0 0	FrameIndex HTNH F 1 5
+	
+	//Insert ammo
+	FrameIndex HTNH G 0 0	FrameIndex HTNH G 1 1
+	FrameIndex HTNH H 0 0	FrameIndex HTNH H 1 2
+	FrameIndex HTNH I 0 0	FrameIndex HTNH I 1 3
+	FrameIndex HTNH J 0 0	FrameIndex HTNH J 1 4
+	
+	//Ready (no ammo)
+	FrameIndex HTNH K 0 0	FrameIndex HTNH K 1 5
+}
+
+//with hand (PBR texture)
+Model RLHeatwave
+{
+	Path "models/heatwave"
+	Model 0 "heatwave.md3"
+	Skin 0 "heatwave_HD.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	NOINTERPOLATION
+	
+	//Ready
+	FrameIndex HTNP A 0 0	FrameIndex HTNP A 1 0
+	
+	//Fire
+	FrameIndex HTNP B 0 1	FrameIndex HTNP B 1 0
+	
+	//Charging up
+	FrameIndex HTNP C 0 2	FrameIndex HTNP C 1 0
+	FrameIndex HTNP D 0 3	FrameIndex HTNP D 1 0
+	FrameIndex HTNP E 0 4	FrameIndex HTNP E 1 0
+
+	//Eject ammo
+	FrameIndex HTNP F 0 0	FrameIndex HTNP F 1 5
+	
+	//Insert ammo
+	FrameIndex HTNP G 0 0	FrameIndex HTNP G 1 1
+	FrameIndex HTNP H 0 0	FrameIndex HTNP H 1 2
+	FrameIndex HTNP I 0 0	FrameIndex HTNP I 1 3
+	FrameIndex HTNP J 0 0	FrameIndex HTNP J 1 4
+	
+	//Ready (no ammo)
+	FrameIndex HTNP K 0 0	FrameIndex HTNP K 1 5
+}
+
+//flash
+Model RLHeatwave
+{
+	Path "models/heatwave"
+	Model 0 "heatflame1.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex HETC A 0 0
+	FrameIndex HETC B 0 1
+	
+	Model 1 "heatflame2.md3"
+	
+	FrameIndex HETC C 0 1	FrameIndex HETC C 1 1
+	
+	Model 0 "heatflame5.md3"
+	Model 2 "heatflame3.md3"
+	
+	FrameIndex HETC D 0 2	FrameIndex HETC D 1 2	FrameIndex HETC D 2 2
+	
+	Model 3 "heatflame4.md3"
+	
+	FrameIndex HETC E 0 3	FrameIndex HETC E 1 3	FrameIndex HETC E 2 3	FrameIndex HETC E 3 3
+}

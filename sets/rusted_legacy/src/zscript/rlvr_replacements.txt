@@ -1,0 +1,434 @@
+
+Class RLVRReplacementHandler : EventHandler
+{
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		if(GameInfo.GameType & GAME_Doom)
+		{
+			//Weapons
+			if(e.Replacee is "Pistol") 				e.Replacement = 'RLPistol';
+			if(e.Replacee is "Chainsaw") 				e.Replacement = 'RLVRChainsaw_Pickup';
+			if(e.Replacee is "Shotgun") 				e.Replacement = 'RLVRShotgun_Pickup';
+			if(e.Replacee is "SuperShotgun") 			e.Replacement = 'RLSuperShotgun_Pickup';
+			if(e.Replacee is "Chaingun") 				e.Replacement = 'RLChaingun_Pickup';
+			if(e.Replacee is "RocketLauncher") 			e.Replacement = 'RLRocketLauncher_Pickup';
+			if(e.Replacee is "PlasmaRifle") 			{ if(RLVRMapCheck.isLoRMap()) { e.Replacement = 'RLIncinerator_Pickup'; } else { e.Replacement = 'RLPlasmaRifle_Pickup'; } }
+			if(e.Replacee is "BFG9000") 				{ if(RLVRMapCheck.isLoRMap()) { e.Replacement = 'RLHeatwave_Pickup'; } else { e.Replacement = 'RLBFG9000_Pickup'; } }
+			
+			//ammo
+			if(e.Replacee is "Clip") 				e.Replacement = 'Clip_Pickup';
+			if(e.Replacee is "Clipbox") 				e.Replacement = 'Clipbox_Pickup';
+			if(e.Replacee is "Shell") 				e.Replacement = 'Shell_Pickup';
+			if(e.Replacee is "Shellbox") 				e.Replacement = 'Shellbox_Pickup';
+			if(e.Replacee is "RocketAmmo") 				e.Replacement = 'RocketAmmo_Pickup';
+			if(e.Replacee is "RocketBox") 				e.Replacement = 'RocketBox_Pickup';
+			if(e.Replacee is "Cell") 				e.Replacement = 'Cell_Pickup';
+			if(e.Replacee is "CellPack") 				e.Replacement = 'CellPack_Pickup';
+		}
+	}
+	
+	//must replace all custom weapons and ammo drops
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		playerinfo player = Players[ConsolePlayer];
+		let pmo = player.mo;
+		let spawnedThing = e.Thing;
+	
+		//do no replace drops from heretic/hexen/strife. they will be handled by filter lumps
+		if((GameInfo.GameType & GAME_Heretic) || (GameInfo.GameType & GAME_Hexen) || (GameInfo.GameType & GAME_Strife)) return;
+		
+		bool replaceCustomDrops = Cvar.GetCVar("rl_drop_replace", player).GetBool();
+	
+		String spawnerClass = spawnedThing.GetClassName();
+		spawnerClass = spawnerClass.MakeLower();
+		
+		for(int i = 0; i < RLVR_pickup_items.Size(); i++) {
+			if(spawnedThing && spawnerClass == RLVR_pickup_items[i]) //ignore pickup items from this mod
+			{
+				return;
+				break;
+			}
+		}
+		
+		//now try to match weapons based on parent class
+		if(spawnedThing && spawnedThing is "weapon")
+		{
+			bool weapon_replaced;
+			if(spawnedThing is "supershotgun" || spawnerClass.IndexOf("supershotgun") >= 0 || spawnerClass.IndexOf("ssg") >= 0 || spawnerClass.IndexOf("sawed") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RLSuperShotgun", 1);
+				else
+					Actor.Spawn("RLSuperShotgun_Pickup", spawnedThing.pos);
+				weapon_replaced = true;
+			}
+			else if(spawnedThing is "shotgun" || spawnerClass.IndexOf("shotgun") >= 0 || spawnerClass.IndexOf("shotty") >= 0 || spawnerClass.IndexOf("boomstick") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RLShotgun", 1);
+				else
+					Actor.Spawn("RLVRShotgun_Pickup", spawnedThing.pos);
+				weapon_replaced = true;
+			}
+			else if(spawnedThing is "rocketlauncher" || spawnerClass.IndexOf("rpg") >= 0 || spawnerClass.IndexOf("rocket") >= 0 || spawnerClass.IndexOf("missile") >= 0 || spawnerClass.IndexOf("grenade") >= 0 || spawnerClass.IndexOf("flak") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RLRocketLauncher", 1);
+				else
+					Actor.Spawn("RLRocketLauncher_Pickup", spawnedThing.pos);
+				weapon_replaced = true;
+			}
+			else if(spawnedThing is "plasmarifle" || spawnerClass.IndexOf("plasma") >= 0 || spawnerClass.IndexOf("laser") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RLPlasmaRifle", 1);
+				else
+					Actor.Spawn("RLPlasmaRifle_Pickup", spawnedThing.pos);
+				weapon_replaced = true;
+			}
+			else if(spawnedThing is "bfg9000" || spawnerClass.IndexOf("bfg") >= 0 || spawnerClass.IndexOf("blackhole") >= 0 || spawnerClass.IndexOf("mass") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RLBFG9000", 1);
+				else
+					Actor.Spawn("RLBFG9000_Pickup", spawnedThing.pos);
+				weapon_replaced = true;
+			}
+			else if(spawnerClass.IndexOf("flame") >= 0 || spawnerClass.IndexOf("lightning") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RLIncinerator", 1);
+				else
+					Actor.Spawn("RLIncinerator_Pickup", spawnedThing.pos);
+				weapon_replaced = true;
+			}
+			else if(spawnedThing is "chaingun" || spawnerClass.IndexOf("chaingun") >= 0 || spawnerClass.IndexOf("machinegun") >= 0 || spawnerClass.IndexOf("smg") >= 0 || spawnerClass.IndexOf("assault") >= 0 || spawnerClass.IndexOf("rifle") >= 0 || spawnerClass.IndexOf("mp") >= 0 || spawnerClass.IndexOf("machine") >= 0 || spawnerClass.IndexOf("carbine") >= 0 || spawnerClass.IndexOf("ak47") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RLChaingun", 1);
+				else
+					Actor.Spawn("RLChaingun_Pickup", spawnedThing.pos);
+				weapon_replaced = true;
+			}
+			else if(spawnedThing is "pistol" || spawnerClass.IndexOf("pistol") >= 0 || spawnerClass.IndexOf("magnum") >= 0 || spawnerClass.IndexOf("colt") >= 0 || spawnerClass.IndexOf("berreta") >= 0 || spawnerClass.IndexOf("luger") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RLPistol", 1);
+				else
+					Actor.Spawn("RLPistol", spawnedThing.pos);
+				weapon_replaced = true;
+			}
+			else if(spawnedThing is "chainsaw" || spawnerClass.IndexOf("saw") >= 0 || spawnerClass.IndexOf("grind") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RLChainsaw", 1);
+				else
+					Actor.Spawn("RLVRChainsaw_Pickup", spawnedThing.pos);
+				weapon_replaced = true;
+			}
+			
+			if(weapon_replaced && spawnedThing)
+			{
+				spawnedThing.Destroy();
+				return;
+			}
+		}
+		
+		//try to match weapons based on class name
+		if(spawnedThing && spawnedThing is "Ammo")
+		{
+			bool ammo_replaced;
+			if(spawnedThing is "clipbox" || (spawnerClass.IndexOf("clip") >= 0 && spawnerClass.IndexOf("box") >= 0) || spawnerClass.IndexOf("rifle") >= 0 || (spawnerClass.IndexOf("rifle") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("heavy") >= 0 && spawnerClass.IndexOf("machine") >= 0))
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("Clipbox", 1);
+				else
+					Actor.Spawn("Clipbox", spawnedThing.pos);
+				ammo_replaced = true;
+			}
+			else if(spawnedThing is "clip" || spawnerClass.IndexOf("clip") >= 0 || spawnerClass.IndexOf("smg") >= 0 || spawnerClass.IndexOf("rifle") >= 0 || spawnerClass.IndexOf("machine") >= 0 || spawnerClass.IndexOf("minigun") >= 0 || spawnerClass.IndexOf("chain") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("Clipbox_Pickup", 1);
+				else
+					Actor.Spawn("Clipbox_Pickup", spawnedThing.pos);
+				ammo_replaced = true;
+			}
+			else if(spawnedThing is "shellbox" || (spawnerClass.IndexOf("shell") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("slug") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("ssg") >= 0 && spawnerClass.IndexOf("box") >= 0))
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("Shellbox", 1);
+				else
+					Actor.Spawn("Shellbox", spawnedThing.pos);
+				ammo_replaced = true;
+			}
+			else if(spawnedThing is "shell" || spawnerClass.IndexOf("slug") >= 0 || spawnerClass.IndexOf("incendiary") >= 0 || spawnerClass.IndexOf("shotgun") >= 0 || spawnerClass.IndexOf("ssg") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("Shell_Pickup", 1);
+				else
+					Actor.Spawn("Shell_Pickup", spawnedThing.pos);
+				ammo_replaced = true;
+			}
+			else if(spawnedThing is "rocketbox" || (spawnerClass.IndexOf("rocket") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("rocket") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("grenade") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("grenade") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("missile") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("missile") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("rpg") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("rpg") >= 0 && spawnerClass.IndexOf("pack") >= 0))
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RocketBox_Pickup", 1);
+				else
+					Actor.Spawn("RocketBox_Pickup", spawnedThing.pos);
+				ammo_replaced = true;
+			}
+			else if(spawnedThing is "rocket" || spawnerClass.IndexOf("grenade") >= 0 || spawnerClass.IndexOf("missile") >= 0 || spawnerClass.IndexOf("rpg") >= 0 || spawnerClass.IndexOf("tank") >= 0 || spawnerClass.IndexOf("mech") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("RocketAmmo_Pickup", 1);
+				else
+					Actor.Spawn("RocketAmmo_Pickup", spawnedThing.pos);
+				ammo_replaced = true;
+			}
+			else if(spawnedThing is "cellpack" || (spawnerClass.IndexOf("cell") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("cell") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("plasma") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("plasma") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("fuel") >= 0 && spawnerClass.IndexOf("box") >= 0)  || (spawnerClass.IndexOf("fuel") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("gas") >= 0 && spawnerClass.IndexOf("big") >= 0) || (spawnerClass.IndexOf("laser") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("electric") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("rail") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("soul") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("soul") >= 0 && spawnerClass.IndexOf("pack") >= 0) || (spawnerClass.IndexOf("energy") >= 0 && spawnerClass.IndexOf("box") >= 0) || (spawnerClass.IndexOf("energy") >= 0 && spawnerClass.IndexOf("pack") >= 0))
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("CellPack_Pickup", 1);
+				else
+					Actor.Spawn("CellPack_Pickup", spawnedThing.pos);
+				ammo_replaced = true;
+			}
+			else if(spawnedThing is "cell" || spawnerClass.IndexOf("plasma") >= 0 || spawnerClass.IndexOf("fuel") >= 0 || spawnerClass.IndexOf("gas") >= 0 || spawnerClass.IndexOf("can") >= 0 || spawnerClass.IndexOf("laser") >= 0  || spawnerClass.IndexOf("electric") >= 0 || spawnerClass.IndexOf("rail") >= 0 || spawnerClass.IndexOf("soul") >= 0 || spawnerClass.IndexOf("energy") >= 0)
+			{
+				if(spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+					pmo.GiveInventory("Cell_Pickup", 1);
+				else
+					Actor.Spawn("Cell_Pickup", spawnedThing.pos);
+				ammo_replaced = true;
+			}
+		}
+		
+		if(spawnedThing && spawnedThing is "Ammo" || spawnedThing is "Weapon")
+		{
+			
+			//if this thing is given by the game into iventory destroy it immediately
+			if(spawnedThing && spawnedThing.bNoBlockmap && spawnedThing.bNoSector && Inventory(spawnedThing).owner && Inventory(spawnedThing).owner is "PlayerPawn")
+			{
+				spawnedThing.Destroy();
+				return;
+			}
+			
+			//Remove all custom ammo or weapon from inventory
+			let invitem = Inventory(spawnedThing);
+			if(invitem.owner && invitem.owner is "PlayerPawn" && (spawnedThing is "Ammo" || spawnedThing is "Weapon")) {
+				invitem.owner.RemoveInventory(invitem);
+			}
+			
+			if(replaceCustomDrops == 1)
+			{
+				//Replace all spawned custom weapon and ammo
+				if(spawnedThing is "Weapon") { spawnedThing.Spawn("UnknownWeaponReplacer", spawnedThing.pos); }
+				if(spawnedThing is "Ammo") { spawnedThing.Spawn("UnknownAmmoReplacer", spawnedThing.pos); }
+			}
+			else if(replaceCustomDrops == 2)
+			{
+				spawnedThing.Destroy();
+			}
+		}
+	}
+	
+	static const string RLVR_pickup_items[] = {
+	
+		//weapons
+		"rlfist",
+		"rloffhandfist",
+		"rlpistol",
+		"rlchainsaw",
+		"rlshotgun",
+		"rlsupershotgun",
+		"rlchaingun",
+		"rlrocketlauncher",
+		"rlplasmarifle",
+		"rlbfg9000",
+		"rlheatwave",
+		"rlincinerator",
+		"hellshotgun",
+		"rlvrchainsaw_pickup",
+		"rlvrshotgun_pickup",
+		"rlsupershotgun_pickup",
+		"rlchaingun_pickup",
+		"rlrocketlauncher_pickup",
+		"rlplasmarifle_pickup",
+		"rlbfg9000_pickup",
+		"rlincinerator_pickup",
+		"rlheatwave_pickup",
+		"hellshotgun_pickup",
+		"dopefish_pickup",
+		
+		//ammo
+		"clip",
+		"clipbox",
+		"shell",
+		"shellbox",
+		"rocketammo",
+		"rocketbox",
+		"cell",
+		"cellpack",
+		"clip_pickup",
+		"clipbox_pickup",
+		"shell_pickup",
+		"shellbox_pickup",
+		"rocketammo_pickup",
+		"rocketbox_pickup",
+		"cell_pickup",
+		"cellpack_pickup",
+		"pistolmag",
+		"shottyshells",
+		"ssgshells",
+		"chaingunmag",
+		"rocketpack",
+		"plasmacell",
+		"bfgcell",
+		"fuelcell",
+		"fuelcan",
+		"hellshells"
+	};
+}
+
+Class UnknownWeaponReplacer : RandomSpawner
+{
+	Default
+	{
+	DropItem "RLVRShotgun_Pickup", 		255, 14;
+	DropItem "RLSuperShotgun_Pickup", 	255, 10;
+	DropItem "RLChaingun_Pickup", 		255, 7;
+	DropItem "RLRocketLauncher_Pickup", 	255, 6;
+	DropItem "RLPlasmaRifle_Pickup", 	255, 4;
+	DropItem "RLIncinerator_Pickup", 	255, 4;
+	DropItem "RLBFG9000_Pickup", 		255, 2;
+	DropItem "RLHeatwave_Pickup", 		255, 1;
+	DropItem "HellShotgun_Pickup", 		255, 1;
+	}
+}
+
+Class UnknownAmmoReplacer : RandomSpawner
+{
+	Default
+	{
+	DropItem "Clip_Pickup", 		255, 12;
+	DropItem "Shell_Pickup", 		255, 11;
+	DropItem "RocketAmmo_Pickup", 		255, 8;
+	DropItem "Cell_Pickup", 		255, 7;
+	DropItem "Clipbox_Pickup", 		255, 5;
+	DropItem "Shellbox_Pickup", 		255, 4;
+	DropItem "RocketBox_Pickup", 		255, 2;
+	DropItem "CellPack_Pickup", 		255, 1;
+	}
+}
+
+Class RLVRSecrettHandler : EventHandler
+{
+	bool incineratorSpawned;
+	bool calamityBladeSpawned;
+	bool dopeFishSpawned;
+
+	//these secret weapons may drop only once per level
+	override void WorldThingDied(WorldEvent e)
+	{
+		if(e.thing is "Fatso" && !incineratorSpawned && !RLVRMapCheck.isLoRMap())
+		{
+			if(random[dropsecret](1,10) > 8) //20% drop chance for Incinerator from Mancubus
+			{
+				e.thing.A_DropItem("RLIncinerator_Pickup");
+				incineratorSpawned = true;
+			}
+		}
+		
+		if(e.thing is "BaronOfHell" && !dopeFishSpawned)
+		{
+			if(random[dropsecret](1,10) > 8) //20% drop chance for Dope Fish from Baron
+			{
+				e.thing.A_DropItem("DopeFish_Pickup");
+				dopeFishSpawned = true;
+			}
+		}
+		
+		if(e.thing is "CyberDemon" && !calamityBladeSpawned && !RLVRMapCheck.isLoRMap())
+		{
+			if(random[dropsecret](1,7) > 5) //28.5% drop chance for Calamity Blade from Cyber Demon
+			{
+				e.thing.A_DropItem("RLHeatwave_Pickup");
+				calamityBladeSpawned = true;
+			}
+		}
+	}
+
+	//Example code from https://github.com/jekyllgrim/Painslayer/blob/8d81cfef7af4997ed46b3dfe98bce7d4f83c7897/ZPainkiller/pk_events.zs#L235
+	
+	//secret weapons may also spawn in secret areas (but not in Legacy of Rust maps)
+	override void WorldLoaded(WorldEvent e) {
+		if (level.Mapname == "TITLEMAP" || RLVRMapCheck.isLoRMap())
+			return;
+		
+		//iterate throguh sectors:
+		for (int i = 0; i < level.Sectors.Size(); i++) {
+			Sector curSec = level.Sectors[i];
+
+			if (!curSec.IsSecret())	//do nothing if not secret
+				continue;
+			vector3 cCenter = (curSec.centerspot.x, curSec.centerspot.y, curSec.floorplane.ZAtPoint(curSec.centerspot));
+			if (!level.IsPointInLevel(cCenter))	//do nothing if out of bounds
+				continue;
+			//do nothing if sector height is 0:
+			if (curSec.floorplane.ZAtPoint(curSec.centerspot) == curSec.ceilingplane.ZAtPoint(curSec.centerspot))
+				continue;
+			
+			vector2 sectorBB = SectorBounds(curSec); 
+			double secSize = (sectorBB.x + sectorBB.y) / 2;
+			//console.printf("sector %d size %d",curSec.sectornum,secSize);
+			
+			if (secsize < 64) //don't spawn is not enough space
+				continue;
+			
+			bool dontSpawn;
+			int spawnChance = random(1,10);
+			if(skill < 2)
+				dontSpawn = spawnChance < 10; // 10% spawn chance in easier skills
+			if(skill == 2)
+				dontSpawn = spawnChance < 9; // 20% spawn chance in medium skills
+			else if(skill == 3)
+				dontSpawn = spawnChance < 6; // 50% spawn chance in UV skill
+			else if(skill > 3)
+				dontSpawn = spawnChance < 3; // 80% spawn chance in UV+ skill
+			if(dontSpawn)
+				continue;
+			
+			array<String> secretItems = { "RLHeatwave_Pickup", "RLIncinerator_Pickup", "HellShotgun_Pickup", "DopeFish_Pickup" };
+			let selectedItem = secretItems[random[randomSecret](0,3)];
+			actor secretDrop = Actor.Spawn(selectedItem);
+			if(secretDrop)
+			{
+				//delete it if the space is occupied already
+				if(secretDrop.CheckMove(cCenter.xy))
+					secretDrop.SetOrigin(cCenter, false);
+				else
+					secretDrop.destroy();
+			}
+		}
+	}
+	
+	//returns the size of a sector:
+	Vector2 SectorBounds (Sector sec) {
+		Vector2 posMin = ( double.Infinity,  double.Infinity);
+		Vector2 posMax = (-double.Infinity, -double.Infinity);
+
+		for (int i = 0; i < sec.lines.Size (); i++) {
+			Line l = sec.Lines [i];
+			posMin = (
+				min (min (posMin.X, l.v1.p.X), l.v2.p.X),
+				min (min (posMin.Y, l.v1.p.Y), l.v2.p.Y)
+			);
+			posMax = (
+				max (max (posMax.X, l.v1.p.X), l.v2.p.X),
+				max (max (posMax.Y, l.v1.p.Y), l.v2.p.Y)
+			);
+		}
+		return (posMax - posMin);
+	}
+}

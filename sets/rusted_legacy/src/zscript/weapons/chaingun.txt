@@ -1,0 +1,541 @@
+
+class RLChaingun : DoomWeaponZ replaces Chaingun
+{
+	transient bool spinning, loadingAmmo;
+
+	Default
+	{
+	Weapon.SelectionOrder 701;
+	Weapon.AmmoUse1 0;
+	Weapon.AmmoGive1 40;
+	Weapon.AmmoUse2 1;
+	Weapon.AmmoGive2 20;
+	Weapon.AmmoType1 "Clip";
+	Weapon.AmmoType2 "ChaingunMag";
+	Inventory.PickupMessage "$GOTCHAINGUN";
+	Obituary "$OB_MPCHAINGUN";
+	Tag "$TAG_CHAINGUN";
+	+WEAPON.NOAUTOAIM;
+	+WEAPON.NOAUTOFIRE;
+	+WEAPON.AMMO_OPTIONAL;
+	+WEAPON.NOALERT;
+	}
+	
+	override void Tick()
+	{
+		if(!owner || !owner.player || owner.health < 1) return;
+		
+		Super.Tick();
+		if(owner.player.ReadyWeapon == self) checkOffhandGrab();
+		
+		//set the ammo belt overlay
+		if(owner.player.readyweapon is "RLChaingun" || owner.player.offhandweapon is "RLChaingun")
+		{
+			let pspr = owner.player.GetPSprite(2002);
+			pspr.Caller = self;
+			if(!loadingAmmo) pspr.SetState(ResolveState("AmmoOverlay"));
+		}
+		else
+		{
+			let pspr = owner.player.FindPSprite(2002);
+			if(pspr) pspr.Destroy();
+		}
+	}
+	
+	private void checkOffhandGrab()
+	{
+		if(weaponModel < 2 || !(owner.player.offhandweapon is "RLOffhandFist") || owner.countinv("ImmersiveInteractToken"))
+		{
+			owner.player.mo.SetInventory("HandInteractToken", 0);
+			return;
+		}
+		
+		if(GetAge() % 10 != 0) return;
+	
+		let pmo = owner.player.mo;
+		int hand = bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 9.5, pitch+15, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 gripPos1 = _puff.pos;
+		
+		_puff = pmo.LineAttack(angle, 8, pitch, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 gripPos2 = _puff.pos;
+		
+		double handDistGrip1 = level.Vec3Diff(gripPos1, owner.OffhandPos).Length();
+		double handDistGrip2 = level.Vec3Diff(gripPos2, owner.OffhandPos).Length();
+		
+		if(handDistGrip1 <= 4 || handDistGrip2 <= 4)
+		{
+			pmo.SetInventory("HandInteractToken", 1);
+		}
+		else
+		{
+			pmo.SetInventory("HandInteractToken", 0);
+		}
+	}
+	
+	action void A_FireBullets2(double spread_xy, double spread_z, int numbullets, int damageperbullet, class<Actor> pufftype = "BulletPuff", int flags = 1, double range = 0, class<Actor> missile = null, double Spawnheight = 32, double Spawnofs_xy = 0)
+	{
+		let player = player;
+		if (!player) return;
+
+		let pawn = PlayerPawn(self);
+		let weapon = player.ReadyWeapon;
+
+		int i;
+		double bangle;
+		double bslope = 0.;
+		int laflags = (flags & FBF_NORANDOMPUFFZ)? LAF_NORANDOMPUFFZ : 0;
+		FTranslatedLineTarget t;
+		actor puff;
+
+		if ((flags & FBF_USEAMMO) && weapon &&  stateinfo != null && stateinfo.mStateType == STATE_Psprite)
+		{
+			if (!weapon.DepleteAmmo(weapon.bAltFire, true))
+				return;	// out of ammo
+		}
+		
+		if (range == 0)	range = PLAYERMISSILERANGE;
+
+		if (!(flags & FBF_NOFLASH)) pawn.PlayAttacking2 ();
+
+		if (!(flags & FBF_NOPITCH)) bslope = BulletSlope();
+		bangle = Angle;
+
+		if (pufftype == NULL) pufftype = 'BulletPuff';
+
+		if (weapon != NULL)
+		{
+			A_StartSound(weapon.AttackSound, CHAN_WEAPON);
+		}
+
+		if (!player.refire || numbullets == 0)
+		{
+			int damage = damageperbullet;
+
+			if (!(flags & FBF_NORANDOM))
+				damage *= random[cabullet](1, 3);
+
+			puff = LineAttack(bangle, range, bslope, damage, 'Hitscan', pufftype, laflags, t);
+		}
+		else 
+		{
+			if (numbullets < 0)
+				numbullets = 1;
+			for (i = 0; i < numbullets; i++)
+			{
+				double pangle = bangle;
+				double slope = bslope;
+
+				if (flags & FBF_EXPLICITANGLE)
+				{
+					pangle += spread_xy;
+					slope += spread_z;
+				}
+				else
+				{
+					pangle += spread_xy * Random2[cabullet]() / 255.;
+					slope += spread_z * Random2[cabullet]() / 255.;
+				}
+
+				int damage = damageperbullet;
+
+				if (!(flags & FBF_NORANDOM))
+					damage *= random[cabullet](1, 3);
+
+				puff = LineAttack(pangle, range, slope, damage, 'Hitscan', pufftype, laflags, t);
+			}
+		}
+		
+		if(invoker.disableTracer || !puff) return;
+		
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		let _puff = pmo.LineAttack(angle, 33, pitch+10, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 spawnPos = _puff.pos;
+		
+		let _tracer = pmo.SpawnPlayerMissile("BulletTracer");
+		if(_tracer)
+		{
+			_tracer.A_SetAngle(_tracer.AngleTo(puff));
+			_tracer.A_SetPitch(invoker.GetPitchTo(_tracer, puff));
+			_tracer.Vel3DFromAngle(GetDefaultSpeed("BulletTracer"), _tracer.angle, _tracer.pitch);
+		}
+	}
+	
+	private void fireTracer()
+	{
+		let pmo = owner.player.mo;
+		int hand = bOffhandWeapon;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		let _puff = pmo.LineAttack(angle, 33, pitch+10, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 spawnPos = _puff.pos;
+		
+		_puff = pmo.LineAttack(angle, PLAYERMISSILERANGE, pitch, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 destPos = _puff.pos;
+		
+		let _tracer = Actor.Spawn("BulletTracer", spawnPos);
+		if(_tracer)
+		{
+			_tracer.A_SetAngle(_tracer.AngleTo(_puff));
+			_tracer.A_SetPitch(GetPitchTo(_tracer, _puff));
+			_tracer.Vel3DFromAngle(GetDefaultSpeed("BulletTracer"), _tracer.angle, _tracer.pitch);
+		}
+	}
+	
+	action void A_CheckImmersiveReloadAction1()
+	{
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 6, pitch-25, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		vector3 magReloadPos = _puff.pos;
+		
+		invoker.showWeaponMarker(magReloadPos);
+		
+		double handDistMag = level.Vec3Diff(magReloadPos, invoker.owner.OffhandPos).Length();
+		if(handDistMag <= 3) invoker.setReloadStep(2, 1);
+	}
+	
+	action void A_SpawnWeaponFlash()
+	{
+		let pmo = player.mo;
+		int hand = invoker.bOffhandWeapon;
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		int laflags = LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ;
+		if(hand) laflags |= LAF_ISOFFHAND;
+		
+		_puff = pmo.LineAttack(angle, 30, pitch+10, 0, "melee", "RLVRDUmmyPuff1", laflags);
+		if(_puff)
+		{
+			if(random[flash](0,9) > 5)
+				Actor.Spawn("RLVRChaingunFlash", _puff.pos);
+			else
+				Actor.Spawn("RLVRShotgunFlash", _puff.pos);
+		}
+	}
+	
+	action void A_ReloadMag()
+	{
+		let pmo = invoker.owner;
+		let magammo = pmo.CountInv("ChaingunMag");
+		let totalammo = pmo.CountInv("Clip");
+		int addammo;
+		if(magammo == 0)
+		{
+			addammo = 60;
+			addammo = addammo > totalammo ? totalammo : addammo;
+		}
+		else
+		{
+			addammo = 60 - magammo;
+			addammo = addammo > totalammo ? totalammo : addammo;
+		}
+		magammo += addammo;
+		totalammo = totalammo - addammo;
+		totalammo = totalammo < 0 ? 0 : totalammo;
+		pmo.SetInventory("ChaingunMag", magammo);
+		if(!(player.cheats & CF_INFINITEAMMO)) pmo.SetInventory("Clip", totalammo);
+		invoker.weaponUnloaded = false;
+	}
+	
+	action void A_UnloadMag()
+	{
+		let pmo = invoker.owner;
+		int maxammo = pmo.CountInv("backpack") ? 400 : 200;
+		let magammo = pmo.CountInv("ChaingunMag");
+		let totalammo = pmo.CountInv("Clip");
+		if(totalammo + magammo > maxammo) return;
+		pmo.SetInventory("ChaingunMag", 0);
+		pmo.SetInventory("Clip", totalammo + magammo);
+		invoker.weaponUnloaded = true;
+	}
+	
+	States
+	{
+	Ready:
+		TNT1 A 0;
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, "ReadyNoAmmo");
+		CGUN A 0 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### A 1 A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		Loop;
+	ReadyNoAmmo:
+		CGUN Y 0 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### Y 1 A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		Loop;
+	Deselect:
+		#### A 0 A_StopSound(CHAN_WEAPON);
+		CGUN A 0 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### A 1 A_Lower (120);
+		Loop;
+	Select:
+		CGUN A 0 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### A 1 A_Raise (120);
+		Loop;
+	DryFire:
+		#### # 0 A_JumpIf(invoker.autoReload, "Reload");
+		#### # 0 A_StopSound(CHAN_BODY);
+		#### # 0 A_StartSound("weapons/chaingun/spin", CHAN_WEAPON);
+		CGUN CDEFCDEF 1
+		{
+			invoker.spinning = true;
+			A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		}
+		#### # 1 A_Refire("DryFire");
+		Goto FireDone;
+	Fire:
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, "ReadyNoAmmo");
+		#### # 0 A_StartSound("weapons/chaingun/start", CHAN_WEAPON);
+		CGUN CCCDDDEEEFFF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		CGUN CCDDEEFF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+	SpinLoop:
+		#### # 0 A_StopSound(CHAN_BODY);
+		#### # 0 A_StartSound("weapons/chaingun/spin", CHAN_WEAPON);
+		CGUN CDEFCDEF 1
+		{
+			invoker.spinning = true;
+			A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+			A_Refire();
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		}
+		Loop;
+	Hold:
+		#### # 0 A_StartSound("weapons/chaingun/spin2", CHAN_BODY, CHANF_OVERLAP);
+		#### # 0 A_JumpIfInventory("ChaingunMag", 1, 1);
+		Goto DryFire;
+		#### # 0 A_FireBullets2(5.6, 0, 1, 5, "EnhancedBulletPuff");
+		#### # 0 A_TakeInventory("ChaingunMag", 1);
+		#### # 0 A_StartSound("weapons/chaingun/fire", CHAN_WEAPON);
+		#### # 0 A_GunFlash("MuzzleFlash");
+		#### # 0 A_SpawnWeaponFlash;
+		#### # 0 A_AlertMonsters();
+		#### # 0 A_JumpIf(invoker.performanceMode, 3);
+		#### # 0 A_FireProjectile("CGCasingSpawner", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+		#### # 0 A_FireProjectile("ChaingunBarrelSmoke",0,0,0,0,FPF_NOAUTOAIM,0);
+		CGUN CDEF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 A_JumpIfInventory("ChaingunMag", 1, 1);
+		Goto DryFire;
+		#### # 0 A_FireBullets2(5.6, 0, 1, 5, "EnhancedBulletPuff");
+		#### # 0 A_TakeInventory("ChaingunMag", 1);
+		#### # 0 A_StartSound("weapons/chaingun/fire", CHAN_WEAPON);
+		#### # 0 A_GunFlash("MuzzleFlash");
+		#### # 0 A_SpawnWeaponFlash;
+		#### # 0 A_AlertMonsters();
+		#### # 0 A_JumpIf(invoker.performanceMode, 3);
+		#### # 0 A_FireProjectile("CGCasingSpawner", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+		#### # 0 A_FireProjectile("ChaingunBarrelSmoke",0,0,0,0,FPF_NOAUTOAIM,0);
+		CGUN CDEF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 A_ReFire;
+		Goto SpinLoop;
+	FireDone:
+	AltFire:
+		#### # 1 A_JumpIf(invoker.spinning == false, "SkipAltFire");
+		#### # 0 A_StopSound(CHAN_WEAPON);
+		#### # 0 A_StartSound("weapons/chaingun/stop", CHAN_WEAPON);
+		CGUN CDEF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		CGUN CCDDEEFF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		CGUN CCCDDDEEEFFF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 { invoker.spinning = false; }
+	SkipAltFire:
+		#### A 0;
+		Goto Ready;
+	Reload:
+		#### # 1 A_JumpIf(invoker.spinning == false, "StopAndReload");
+		#### # 0 A_StopSound(CHAN_WEAPON);
+		#### # 0 A_StartSound("weapons/chaingun/stop", CHAN_WEAPON);
+		CGUN CDEF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		CGUN CCDDEEFF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		CGUN CCCDDDEEEFFF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 { invoker.spinning = false; }
+	StopAndReload:
+		CGUN ######## 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 A_JumpIfInventory("Clip", 1, 1);
+		Goto ReloadNoAmmo;
+		#### # 0 A_JumpIf(invoker.ImmersiveReload, "ImmersiveReload");
+		#### # 1 A_JumpIf(invoker.weaponUnloaded, 21);
+		#### # 0 A_StartSound("weapons/chaingun/clipout", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_JumpIf(invoker.performanceMode, 2);
+		#### # 0 A_FireProjectile("RLChaingunMagSpawner", 0, 0, 0, -10, FPF_NOAUTOAIM, 0);
+		CGUN GGGGGGGG 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		CGUN HHHHHHHH 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		CGUN IIIJJJKKK 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 A_StartSound("weapons/chaingun/clipin", CHAN_WEAPON);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_OffhandHaptic; 								//haptic
+		CGUN LLLMMM 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 A_ReloadMag;
+		#### # 0 { invoker.loadingAmmo = true; }
+		#### MMMMMMMMMM 1;
+		Goto Ready;
+	ReloadNoAmmo:
+		#### ##### 1;
+		Goto Ready;
+	Zoom:
+	UnloadAmmo:
+		#### # 1 A_JumpIf(invoker.weaponUnloaded, "ReadyNoAmmo");
+		#### # 1 A_JumpIf(invoker.spinning == false, 30);
+		#### # 0 A_StopSound(CHAN_WEAPON);
+		#### # 0 A_StartSound("weapons/chaingun/stop", CHAN_WEAPON);
+		CGUN CDEF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		CGUN CCDDEEFF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		CGUN CCCDDDEEEFFF 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 { invoker.spinning = false; }
+		CGUN AAAAAAAA 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 A_StartSound("weapons/chaingun/clipout", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_JumpIf(invoker.performanceMode, 2);
+		#### # 0 A_FireProjectile("RLChaingunMagSpawner", 0, 0, 0, -10, FPF_NOAUTOAIM, 0);
+		#### # 0 A_UnloadMag;
+		Goto Ready;
+	ImmersiveReload:
+		#### # 0 A_JumpIf(invoker.weaponUnloaded, 5);
+		#### # 0 A_StartSound("weapons/chaingun/clipout", CHAN_WEAPON, CHANF_OVERLAP);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_JumpIf(invoker.performanceMode, 2);
+		#### # 0 A_FireProjectile("RLChaingunMagSpawner", 0, 0, 0, -10, FPF_NOAUTOAIM, 0);
+		#### # 0 { invoker.setReloadStep(1); }
+	WaitReload:
+		CGUN G 1
+		{
+			A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		}
+		#### # 0 A_CheckImmersiveReloadAction1();
+		#### # 0 A_JumpIf(player.mo.countinv("ImmersiveReloadStep") == 2, "ImmersiveReloadMag");
+		Loop;
+	ImmersiveReloadMag:
+		#### # 0 { invoker.hideWeaponMarker(); }
+		CGUN HHIIJJKK 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 A_StartSound("weapons/chaingun/clipin", CHAN_WEAPON);
+		#### # 0 { RLVRHapticHelper.BuzzHand(); } 						//haptic
+		#### # 0 A_OffhandHaptic; 								//haptic
+		CGUN LLMM 1 A_SetAltModel("CG2P", "CG2H", "CGHP", "CGNH", "CGNP");
+		#### # 0 A_ReloadMag;
+		#### # 0 { invoker.loadingAmmo = true; }
+		#### MMMMMMMMMM 1;
+		#### # 0 { invoker.setReloadStep(0); }
+		Goto Ready;
+	AmmoOverlay:
+		TNT1 A 0 A_JumpIf(invoker.loadingAmmo, "LoadNewAmmo");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") > 10, "Ammo1");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") > 9, "Ammo2");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") > 8, "Ammo3");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") > 7, "Ammo4");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") > 6, "Ammo5");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") > 5, "Ammo6");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") > 4, "Ammo7");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") > 3, "Ammo8");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") > 2, "Ammo9");
+		TNT1 A 0 A_JumpIf(invoker.owner.countinv("ChaingunMag") == 0, "NoAmmo");
+		Goto Ammo10;
+	Ammo1:
+		CGNA A 1;
+		Goto AmmoOverlay;
+	Ammo2:
+		CGNA B 1;
+		Goto AmmoOverlay;
+	Ammo3:
+		CGNA C 1;
+		Goto AmmoOverlay;
+	Ammo4:
+		CGNA D 1;
+		Goto AmmoOverlay;
+	Ammo5:
+		CGNA E 1;
+		Goto AmmoOverlay;
+	Ammo6:
+		CGNA F 1;
+		Goto AmmoOverlay;
+	Ammo7:
+		CGNA G 1;
+		Goto AmmoOverlay;
+	Ammo8:
+		CGNA H 1;
+		Goto AmmoOverlay;
+	Ammo9:
+		CGNA I 1;
+		Goto AmmoOverlay;
+	Ammo10:
+		CGNA J 1;
+		Goto AmmoOverlay;
+	NoAmmo:
+		TNT1 A 1;
+		Goto AmmoOverlay;
+	LoadNewAmmo:
+		CGNA JIHGFEDCBA 3;
+		TNT1 A 0 { invoker.loadingAmmo = false; }
+		Goto AmmoOverlay;
+	MuzzleFlash:
+		TNT1 A 0 A_OverlayFlags(OverlayID(), PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
+		TNT1 A 0 A_OverlayRenderstyle(OverlayID(), STYLE_Add);
+		TNT1 A 0 A_OverlayAlpha(OverlayID(), invoker.flashAlpha);
+		TNT1 A 0 A_JumpIf(invoker.disableTracer, 2);
+		//TNT1 A 0 A_FireProjectile("BulletTracer", 0, 0, 0, 0, FPF_NOAUTOAIM, 0);
+		//TNT1 A 0 { invoker.fireTracer(); }
+		TNT1 A 0 A_JumpIf(invoker.showFLashSprite == false, 2);
+		TNT1 A 0 A_Jump(256, "MuzzleFlash1", "MuzzleFlash2", "MuzzleFlash3", "MuzzleFlash4", "MuzzleFlash5");
+		TNT1 A 0;
+		stop;
+	MuzzleFlash1:
+		CGMF A 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash2:
+		CGMF B 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash3:
+		CGMF C 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash4:
+		CGMF D 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	MuzzleFlash5:
+		CGMF E 2 Bright A_Light1;
+		TNT1 A 5 Bright A_Light1;
+		Goto LightDone;
+	Spawn:
+		MGUN A -1;
+		Stop;
+	PlaceHolder:
+		CG2P A 1;
+		CG2H A 1;
+		CGHP A 1;
+		CGNH A 1;
+		CGNP A 1;
+		Stop;
+	}
+}
+
+class ChaingunMag : Ammo
+{
+	Default
+	{
+	Inventory.maxamount 60;
+	Inventory.Icon "CLIPA0";
+	}
+}

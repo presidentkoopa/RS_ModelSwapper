@@ -1,0 +1,819 @@
+
+extend class RLOffhandFist
+{
+	double shieldAttackRange;
+	double shieldDamageMult;
+	double shieldSpeedMult;
+	bool shieldMotionThrow;
+	int shieldThrowAim;
+	bool shieldBounce;
+	bool forceCallBack;
+	actor shieldFlying;
+	bool shieldReturned;
+	actor throwTarget;
+	actor protectorShield;
+	bool sawAttack;
+	const SHIELDSAW_RANGE = DEFMELEERANGE * 0.3;
+	
+	private void setupShieldSawWeapon()
+	{
+		shieldAttackRange = 64 * shieldSawRange;
+		shieldDamageMult = shieldSawDamageMult;
+		shieldSpeedMult = shieldSawSpeedMult;
+		shieldBounce = shieldSawBounce;
+		forceCallBack = shieldSawCallBack;
+		shieldThrowAim = shieldSawAiming;
+		if(!shieldFlying) shieldReturned = true;
+		
+		bool ovrdrive_loaded = CVar.GetCVar("ovrdrive_loaded") != NULL;
+		shieldMotionThrow = !ovrdrive_loaded ? false : shieldSawMotionThrow;
+	}
+	
+	private void checkForProtectorShield()
+	{
+		if(shieldMode && !shieldFlying && !sawAttack)
+		{
+			if(!protectorShield) protectorShield = Actor.Spawn("RLProtectorShield");
+			protectorShield.master = owner;
+		}
+		else
+		{
+			if(protectorShield) protectorShield.destroy();
+		}
+	}
+	
+	//motion throw attack
+	private void motionThrowShield()
+	{
+		bool mainhandThrow, offhandThrow;
+		
+		bool ovrdrive_loaded = CVar.GetCVar("ovrdrive_loaded") != NULL;
+		if(ovrdrive_loaded) {
+		
+			// ===== Using api from oVRdrive mod to detect motion throw =====
+			// it has fail-safe so doesn't crash if oVRdrive is not loaded
+			
+			string throwhMotionClass1 = "vmMainhandThrow";
+			string throwhMotionClass2 = "vmOffhandThrow";
+			class<Inventory> mainhandThrowHandler = throwhMotionClass1;
+			class<Inventory> offhandThrowHandler = throwhMotionClass2;
+		
+			string whiphMotionClass1 = "vmMainhandWhip";
+			string whiphMotionClass2 = "vmOffhandWhip";
+			class<Inventory> mainhandWhipHandler = whiphMotionClass1;
+			class<Inventory> offhandWhipHandler = whiphMotionClass2;
+    
+			if(bOffhandWeapon)
+			{
+				if((offhandThrowHandler && owner.countInv(offhandThrowHandler)) || (offhandWhipHandler && owner.countInv(offhandWhipHandler)))
+					offhandThrow = true;
+			}
+			else
+			{
+				if((mainhandThrowHandler && owner.countInv(mainhandThrowHandler)) || (mainhandWhipHandler && owner.countInv(mainhandWhipHandler)))
+					mainhandThrow = true;
+			}
+			
+			// ===== End oVRdrive api =====
+			
+			
+			let handPitch = -(bOffhandWeapon ? owner.OffhandPitch : owner.AttackPitch);
+			let handRoll = bOffhandWeapon ? owner.OffhandRoll : owner.AttackRoll;
+			
+			if(shieldFlying || (!mainhandThrow && !offhandThrow)) //if no throw detected or thrown already, skip
+			{
+				shieldReturned = false;
+				return;
+			}
+			
+			actor mo;
+			double nearestDist;
+			
+			if(throwTarget && throwTarget.health < 1) throwTarget = NULL; //delete the previous auto-aim target if dead
+			
+			if(shieldThrowAim == 2) //find a target if auto-aim enabled
+			{
+				ThinkerIterator ts = ThinkerIterator.Create();
+				While (mo = Actor(ts.Next()))
+				{
+					if(mo && mo.bIsMonster && mo.bSolid && owner.Distance2D(mo) <= shieldAttackRange && mo.health > 0 && owner.CheckSight(mo) && !(mo == owner))
+					{
+						let FOVDist = GetFOVDistance(PlayerPawn(owner), mo);
+						if(((nearestDist && FOVDist < nearestDist) || !nearestDist) && FOVDist < 30)
+						{
+							nearestDist = FOVDist;
+							throwTarget = mo;
+						}
+					}
+				}
+			}
+			
+			int alflags = 0;
+			if (bOffhandWeapon) alflags |= ALF_ISOFFHAND;
+			shieldFlying = owner.SpawnPlayerMissile ("ShieldSawWeapon", aimflags: alflags);
+					
+			if(shieldFlying)
+			{
+				shieldReturned = false;
+				shieldFlying.master = owner;
+				shieldFlying.target = owner;
+				ShieldSawWeapon(shieldFlying).damageMult = shieldDamageMult;
+				ShieldSawWeapon(shieldFlying).speedMult = shieldSpeedMult;
+				double spawnRoll = bOffhandWeapon ? owner.OffhandRoll : owner.AttackRoll;
+				ShieldSawWeapon(shieldFlying).spawnRoll = spawnRoll;
+				ShieldSawWeapon(shieldFlying).hand = bOffhandWeapon;
+				if(!shieldBounce) shieldFlying.ClearBounce();
+				
+				if(throwTarget)
+				{
+					shieldFlying.tracer = throwTarget;
+					let bodyTarget = Actor.Spawn("RLVRDUmmyPuff1", (throwTarget.pos.xy, throwTarget.pos.z + throwTarget.height * 2/3));
+					shieldFlying.Vel3DFromAngle(GetDefaultSpeed(shieldFlying.getClassname()) * shieldSpeedMult, shieldFlying.AngleTo(bodyTarget), GetPitchTo(shieldFlying, bodyTarget));
+				}
+				else
+				{
+					double pitchAdjust = 0;
+					if(handroll > 31 || handroll < -31) pitchAdjust = -20;
+					if(pitchAdjust)
+					{
+						shieldFlying.Vel3DFromAngle(GetDefaultSpeed(shieldFlying.getClassname()) * shieldSpeedMult, shieldFlying.angle, shieldFlying.pitch + pitchAdjust);
+					}
+				}
+				
+				shieldReturned = false;
+				A_StartSound("weapons/shield/throw", CHAN_WEAPON);
+				owner.A_AlertMonsters(640);
+				SetWeaponState("ShieldWaitReturn");
+			}
+		
+		}
+	}
+	
+	private void guideShieldMotion()
+	{
+		if(!shieldThrowAim || throwTarget) return;
+		if(shieldFlying && ShieldSawWeapon(shieldFlying).bouncing) return;
+	
+		int laflags = LAF_NORANDOMPUFFZ | LAF_NOIMPACTDECAL | LAF_NOINTERACT;
+		int alflags = 0;
+		if (bOffhandWeapon)
+		{
+			laflags |= LAF_ISOFFHAND;
+			alflags |= ALF_ISOFFHAND;
+		}
+		
+		double pitch = owner.AimTarget() ? owner.BulletSlope(null, alflags) : owner.pitch;
+		let aimGuide = owner.LineAttack(owner.angle, shieldAttackRange, pitch, 0, "none", "RLVRDUmmyPuff1", laflags);
+		
+		if(aimGuide && shieldFlying && !shieldFlying.bRIPPER && !ShieldSawWeapon(shieldFlying).shieldHit)
+		{
+			shieldFlying.Vel3DFromAngle(GetDefaultSpeed(shieldFlying.getClassname()) * shieldSpeedMult, shieldFlying.AngleTo(aimGuide), GetPitchTo(shieldFlying, aimGuide));
+		}
+	}
+	
+	action void A_ShieldMotionThrow()
+	{
+		invoker.motionThrowShield();
+	}
+	
+	action void A_GuideShieldMotion()
+	{
+		invoker.guideShieldMotion();
+	}
+	
+	//non-motion attack
+	action bool A_ShieldThrow()
+	{
+		if (player == null) return false;
+
+		int laflags = LAF_ISMELEEATTACK;
+		int alflags = 0;
+		Weapon weapon = invoker == player.OffhandWeapon ? player.OffhandWeapon : player.ReadyWeapon;
+		if (weapon != null && weapon.bOffhandWeapon)
+		{
+			laflags |= LAF_ISOFFHAND;
+			alflags |= ALF_ISOFFHAND;
+		}
+		
+		double damage = random[ShieldAtk](40, 55) * clamp(invoker.shieldDamageMult, 1, 10);
+		if (invoker.owner.countInv("PowerStrength")) damage *= 5;
+		
+		//try short-range attack first
+		FTranslatedLineTarget t;
+		for (int i = 0; i < 16; i++)
+		{
+			for (int j = 1; j >= -1; j -= 2)
+			{
+				double ang = angle + j*i*(45. / 32);
+				double slope = AimLineAttack(ang, SHIELDSAW_RANGE, t, 0., ALF_CHECK3D | alflags);
+				
+				LineAttack(ang, SHIELDSAW_RANGE, slope, damage, 'Melee', "RLVRDUmmyPuff1", laflags, t);
+				if (t.linetarget != null)
+				{
+					if (t.linetarget.bIsMonster || t.linetarget.player)
+					{
+						t.linetarget.Thrust(10, t.attackAngleFromSource);
+					}
+					return false;
+				}
+			}
+		}
+		
+		// didn't find any targets in melee range, so set to throw out shield
+		invoker.shieldFlying = SpawnPlayerMissile ("ShieldSawWeapon", aimflags: alflags);
+			
+		if(invoker.shieldFlying)
+		{
+			invoker.shieldReturned = false;
+			invoker.shieldFlying.master = invoker.owner;
+			invoker.shieldFlying.target = invoker.owner;
+			ShieldSawWeapon(invoker.shieldFlying).damageMult = invoker.shieldDamageMult;
+			ShieldSawWeapon(invoker.shieldFlying).speedMult = invoker.shieldSpeedMult;
+			double spawnRoll = invoker.bOffhandWeapon ? invoker.owner.OffhandRoll : invoker.owner.AttackRoll;
+			ShieldSawWeapon(invoker.shieldFlying).spawnRoll = spawnRoll;
+			ShieldSawWeapon(invoker.shieldFlying).hand = invoker.bOffhandWeapon;
+			if(!invoker.shieldBounce) invoker.shieldFlying.ClearBounce();
+		}
+		
+		invoker.shieldReturned = false;
+		A_StartSound("weapons/shield/throw", CHAN_WEAPON);
+		A_AlertMonsters(640);
+		return true;
+	}
+	
+	action void A_CheckShieldFlying()
+	{
+		//if(invoker.shieldFlying && invoker.shieldFlying.GetAge() > (invoker.shieldAttackRange * 2 / invoker.shieldFlying.speed) + 70 && !invoker.owner.countInv("HandInteractToken") ) invoker.shieldFlying.destroy();
+		if(!invoker.shieldFlying)
+		{
+			invoker.shieldReturned = true;
+			invoker.shieldIdle = false;
+		}
+	}
+	
+	private void circularSawAttack()
+	{
+		let player = owner.player;
+		let pmo = owner.player.mo;
+		
+		int laflags = 0;
+		if (bOffhandWeapon) laflags |= LAF_ISOFFHAND;
+		
+		double ang = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		double damage = 2;
+		
+		for(int i = 0; i <= 12; i++)
+		{
+			pmo.LineAttack(ang, SHIELDSAW_RANGE, pitch + i*30, damage, 'Melee', "ShieldSawPuff", laflags);
+		}
+		
+		sawAttack = true;
+	}
+	
+	action void A_CircularSawAttack()
+	{
+		invoker.circularSawAttack();
+	}
+	
+	action void A_CallShieldBack()
+	{
+		if(invoker.shieldFlying && invoker.forceCallBack)
+		{
+			ShieldSawWeapon(invoker.shieldFlying).forceReturnToMaster();
+		}
+	}
+
+	States
+	{
+	ReadyShield:
+		#### A 0 A_JumpIf(invoker.shieldSawModel == 1, 3);
+		SHLD A 0 A_SetAltModel("SHD2", "----", "----", "SHNH", "SHN2");
+		#### A 0 A_Jump(256, 2);
+		STDA A 0 A_SetAltModel("SDAP", "----", "----", "SDNH", "SDNP");
+		#### # 0 { invoker.setupShieldSawWeapon(); }
+		#### # 0 A_JumpIf(invoker.shieldReturned == false, "ShieldWaitReturn");
+		#### A 0 A_JumpIf(invoker.shieldIdle == false, "ReadyShieldSaw");
+		#### A 1
+		{
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+			invoker.sawAttack = false;
+			A_TakeInventory("shieldSawActive", 1);
+		}
+		Goto Ready;
+	ReadyShieldSaw:
+		#### E 1
+		{
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+			invoker.sawAttack = false;
+			A_TakeInventory("shieldSawActive", 1);
+		}
+		Goto Ready;
+	ShieldSawActivate:
+		#### # 0 A_GiveInventory("shieldSawActive", 1);
+		#### # 0
+		{
+			if(invoker.shieldIdle) Return ResolveState("ActivateSaw");
+			Return ResolveState(null);
+		}
+		#### # 1 A_Refire;
+		Goto Ready;
+	ActivateSaw:
+		#### # 0 A_StartSound("weapon/shieldsaw/draw", CHAN_WEAPON);
+		#### BCDE 2;
+		#### E 10 { invoker.shieldIdle = false; }
+		Goto ReadyShieldSaw;
+	ShieldSawAttack:
+		#### # 0 A_JumpIf(invoker.shieldFlying, "CallBackShield");
+		#### # 0 A_JumpIf(invoker.shieldIdle, "ActivateSaw");
+		//#### E 6 A_StartSound("weapons/chainsaw/draw", CHAN_WEAPON);
+		#### FGH 3;
+		#### FGH 2;
+	ShieldSawLoop:
+		#### # 0 A_StartSound("weapon/shieldsaw/loop", CHAN_WEAPON);
+		#### # 0 A_CircularSawAttack;
+		#### FGH 1;
+		#### # 0 A_Refire("ShieldSawLoop");
+		#### # 0 A_JumpIf(invoker.shieldMotionThrow == false, "ShieldThrow");
+		#### # 0 A_ShieldMotionThrow();
+		#### # 0 A_JumpIf(!invoker.shieldFlying, 2);
+		#### # 0 A_StopSound(CHAN_WEAPON);
+		Goto ShieldWaitReturn;
+		#### FGH 2;
+		#### FGH 3;
+		#### FGH 4;
+		Goto ReadyShieldSaw;
+	ShieldThrow:
+		#### # 1 A_ShieldThrow();
+	ShieldWaitReturn:
+		FIST # 0 A_SetAltModel("FSTP", "----", "----", "----", "FSTP");
+		#### A 1
+		{
+			A_GuideShieldMotion();
+			A_CheckShieldFlying();
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		}
+		Goto Ready;
+	CallBackShield:
+		FIST # 0 A_SetAltModel("FSTP", "----", "----", "----", "FSTP");
+		#### A 1
+		{
+			A_CallShieldBack();
+			A_WeaponReady(WRF_ALLOWRELOAD | WRF_ALLOWZOOM);
+		}
+		Goto Ready;
+	PlaceHolder:
+		SHD2 A 1;
+		SHNH A 1;
+		SHN2 A 1;
+		SDAP A 1;
+		SDNH A 1;
+		SDNP A 1;
+	}
+}
+
+class shieldSawActive : Inventory
+{
+	Default
+	{
+	Inventory.maxamount 1;
+	}
+}
+
+class ShieldSawWeapon : Actor
+{
+	mixin optimizeHelper;
+
+	double spawnRoll;
+	int hand;
+	transient int maxAge;
+	transient int stalled;
+	transient int cutThrough;
+	transient vector3 prevPos;
+	bool bouncing;
+	vector3 lastBouncePos;
+	double bounceIgnoreGuideDist;
+	bool shieldHit;
+	double damageMult;
+	double speedMult;
+	
+	Default
+	{
+		Speed 20;
+		Radius 10;
+		Height 10;
+		DamageFunction (setShieldDamage(10));
+		DamageType "Saw";
+		scale 0.5;
+		Projectile;
+		DeathSound "FighterHammerExplode";
+		Obituary "$OB_MPFWEAPHAMMERR";
+		BounceType "Doom";
+		BounceFactor 1.0;
+		BounceCount 5;
+		+INTERPOLATEANGLES
+		+USEBOUNCESTATE
+	}
+	
+	private double setShieldDamage(double baseDamage)
+	{
+		damageMult = clamp(damageMult, 1, 10);
+		double newDamage = baseDamage * random[shieldAttack](1, 8) * damageMult;
+		/*double range;
+		if(master) range = RLOffhandFist(master.findinventory("RLOffhandFist")).shieldAttackRange;
+		range = Clamp(range, 1, range);
+		double dist = Clamp(target.Distance2D(self), target.radius, range); 
+		double distFac = 1.0 - (dist / 1024.0);
+		newDamage = Clamp(round(newDamage * distFac), 1, newDamage);*/
+		return newDamage;
+	}
+	
+	override void BeginPlay()
+	{
+		double maxRange;
+		if(master)
+			maxRange = RLOffhandFist(master.findinventory("RLOffhandFist")).shieldAttackRange;
+		else
+			maxRange = 1000;
+		maxAge = ceil(maxRange / speed);
+		bounceIgnoreGuideDist = 5 * 64;
+		
+		Super.BeginPlay();
+		A_ChangeVelocity(vel.x * speedMult, vel.y * speedMult, vel.z * speedMult, CVF_REPLACE);
+	}
+	
+	override void Tick()
+	{
+		Super.Tick();
+		
+		if(!InStateSequence (curState, ResolveState("Death")) && !InStateSequence (curState, ResolveState("XDeath")) && !(master && master.countinv("HandInteractToken")))
+		{
+			let trail = Actor.Spawn("ShieldSawWeaponGlow", pos);
+			ShieldSawWeaponGlow(trail).spawnRoll = spawnRoll;
+			trail.A_SetAngle(angle);
+		}
+		
+		if(!shieldHit)
+		{
+			//if(GetAge() == 1) SetSpawnAngle();
+			if(GetAge() == 35)
+			{
+				tracer = target;
+				target = self;
+				bRIPPER = true;
+			}
+			if(GetAge() > maxAge) A_ReturnToMaster();
+			
+			if(bouncing)
+			{
+				if(Level.Vec3Diff(pos, lastBouncePos).Length() > bounceIgnoreGuideDist) bouncing = false;
+			}
+		}
+		
+		if(bRIPPER)
+		{
+			if(master && master.countinv("HandInteractToken"))
+			{
+				bMISSILE = bSolid = false;
+				A_ChangeVelocity(0, 0, 0, CVF_REPLACE);
+				SetOrigin((pos.xy, floorz), true);
+				if(!InStateSequence (curState, ResolveState("FallWaitReturn"))) SetStateLabel("FallWaitReturn");
+				return;
+			}
+			else
+			{
+				bMISSILE = bSolid = true;
+			}
+			
+			if(self && self.Distance2D(master) < 50)
+			{
+				destroy();
+				return;
+			}
+			else if(self && self.Distance2D(master) < 90)
+				bMISSILE = false;
+			
+			if(self && Level.vec3Diff(pos, prevPos).Length() < 3) stalled++;
+			if(stalled > 3)
+			{
+				bNOCLIP = true;
+				stalled = 0;
+				ReturnToMaster();
+				cutThrough = 5;
+			}
+			
+			if(cutThrough) cutThrough--;
+			if(!cutThrough) bNOCLIP = false;
+		}
+		
+		prevPos = pos;
+	}
+	
+	override int DoSpecialDamage (Actor victim, int damage, Name damagetype)
+	{
+		if(!bRIPPER) tracer = victim;
+		if (master && victim)
+		{
+			if(victim == master)
+			{
+				destroy();
+				return 0;
+			}
+			else
+			{
+				return damage;
+			}
+		}
+		
+		Super.DoSpecialDamage(victim, damage, damagetype);
+		return damage;
+	}
+	
+	void SetSpawnAngle()
+	{
+		if(spawnRoll >= 20 && spawnRoll < 40)
+			SetStateLabel("SpawnR30");
+		else if(spawnRoll >= 40 && spawnRoll < 80)
+			SetStateLabel("SpawnR60");
+		else if(spawnRoll >= 80)
+			SetStateLabel("SpawnR90");
+		else if(spawnRoll <= -20 && spawnRoll > -40)
+			SetStateLabel("Spawn30");
+		else if(spawnRoll <= -40 && spawnRoll > -80)
+			SetStateLabel("Spawn60");
+		else if(spawnRoll <= -80)
+			SetStateLabel("Spawn90");
+		else
+			SetStateLabel("SpawnShield");
+	}
+	
+	void ReturnToMaster()
+	{
+		if(!master) master = players[consoleplayer].mo;
+		let dummyTrace = Actor.Spawn("RLVRDUmmyPuff1", (hand ? master.OffhandPos : master.AttackPos));
+		
+		if(dummyTrace)
+			Vel3DFromAngle(GetDefaultSpeed("ShieldSawWeapon") * 2, AngleTo(dummyTrace), GetPitchTo(self, dummyTrace));
+		else
+			Vel3DFromAngle(GetDefaultSpeed("ShieldSawWeapon") * 2, AngleTo(master), GetPitchTo(self, master));
+	}
+	
+	void forceReturnToMaster()
+	{
+		A_ReturnToMaster();
+	}
+	
+	action void A_StickOnSurface()
+	{
+		if(bRIPPER)
+		{
+			A_ReturnToMaster();
+			return;
+		}
+		
+		if(invoker.tracer)
+		{
+			double newZ = invoker.pos.z;
+			if(!invoker.tracer.bSolid) newZ = invoker.tracer.pos.z + 12;
+			if(invoker.tracer != invoker.master) invoker.SetOrigin((invoker.tracer.pos.xy, newZ), true);
+		}
+	}
+	
+	action void A_ReturnToMaster()
+	{
+		invoker.bMISSILE = true;
+		invoker.bRIPPER = true;
+		invoker.SetDamage(invoker.setShieldDamage(3));
+		invoker.ClearBounce();
+		invoker.ReturnToMaster();
+		invoker.SetSpawnAngle();
+	}
+
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		#### # 0 SetSpawnAngle;
+	SpawnShield:
+		SH00 A 1;
+		SH00 BCDEFGHIJKL 1 A_StartSound ("FighterHammerContinuous");
+		Loop;
+	Spawn30:
+		SH30 A 1;
+		SH30 BCDEFGHIJKL 1 A_StartSound ("FighterHammerContinuous");
+		Loop;
+	Spawn60:
+		SH60 A 1;
+		SH60 BCDEFGHIJKL 1 A_StartSound ("FighterHammerContinuous");
+		Loop;
+	Spawn90:
+		SH90 A 1;
+		SH90 BCDEFGHIJKL 1 A_StartSound ("FighterHammerContinuous");
+		Loop;
+	SpawnR30:
+		SR30 A 1;
+		SR30 BCDEFGHIJKL 1 A_StartSound ("FighterHammerContinuous");
+		Loop;
+	SpawnR60:
+		SR60 A 1;
+		SR60 BCDEFGHIJKL 1 A_StartSound ("FighterHammerContinuous");
+		Loop;
+	SpawnR90:
+		SR90 A 1;
+		SR90 BCDEFGHIJKL 1 A_StartSound ("FighterHammerContinuous");
+		Loop;
+	Bounce:
+		#### # 0 A_StartSound("weapons/shield/bounce");
+		#### # 1
+		{
+			invoker.bouncing = true;
+			invoker.lastBouncePos = invoker.pos;
+			Actor.Spawn("ShieldSawSparks", invoker.pos);
+		}
+		Goto Spawn;
+	Death:
+	Crash:
+		#### # 0
+		{
+			invoker.shieldHit = true;
+			A_StartSound("weapons/shield/hithard");
+		}
+	WaitReturn:
+		#### MNOPMNOPMNOP 3
+		{
+			A_StickOnSurface();
+			if(random(0,10) > 6) Actor.Spawn("ShieldSawSparks", invoker.pos);
+		}
+		#### # 0 A_JumpIf((invoker.master && invoker.master.countinv("HandInteractToken")), "WaitReturn");
+		#### # 0 A_ReturnToMaster();
+		Stop;
+	XDeath:
+		#### # 0
+		{
+			invoker.shieldHit = true;
+		}
+	WaitReturnOnMonster:
+		#### MNOPMNOPMNOP 2
+		{
+			A_StickOnSurface();
+			A_StartSound("weapons/fleshimpact");
+			if(random(0,10) > 7) Actor.Spawn("ShieldSawBloods", invoker.pos);
+			A_Explode(5.0 * invoker.damageMult, 10, XF_NOSPLASH);
+		}
+		#### # 0 A_JumpIf((invoker.master && invoker.master.countinv("HandInteractToken")), "WaitReturnOnMonster");
+		#### # 0 A_ReturnToMaster();
+		Stop;
+	FallWaitReturn:
+		#### A 10;
+		#### # 0 A_JumpIf((invoker.master && invoker.master.countinv("HandInteractToken")), "FallWaitReturn");
+		#### # 0 A_ReturnToMaster();
+		Stop;
+	}
+}
+
+class ShieldSawWeaponGlow : Actor
+{
+	double spawnRoll;
+	
+	Default
+	{
+	RenderStyle "Add";
+	damage 0;
+	+NOINTERACTION
+	+SKYEXPLODE
+	}
+	
+	void SetSpawnAngle()
+	{
+		if(spawnRoll >= 20 && spawnRoll < 40)
+			SetStateLabel("SpawnR30");
+		else if(spawnRoll >= 40 && spawnRoll < 80)
+			SetStateLabel("SpawnR60");
+		else if(spawnRoll >= 80)
+			SetStateLabel("SpawnR90");
+		else if(spawnRoll <= -20 && spawnRoll > -40)
+			SetStateLabel("Spawn30");
+		else if(spawnRoll <= -40 && spawnRoll > -80)
+			SetStateLabel("Spawn60");
+		else if(spawnRoll <= -80)
+			SetStateLabel("Spawn90");
+		else
+			SetStateLabel("SpawnShield");
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		#### # 0 SetSpawnAngle;
+	SpawnShield:
+		SG00 A 2;
+		Stop;
+	Spawn30:
+		SG30 A 2;
+		Stop;
+	Spawn60:
+		SG60 A 2;
+		Stop;
+	Spawn90:
+		SG90 A 2;
+		Stop;
+	SpawnR30:
+		SR30 A 2;
+		Stop;
+	SpawnR60:
+		SR60 A 2;
+		Stop;
+	SpawnR90:
+		SR90 A 2;
+		Stop;
+	Death:
+	Xdeath:
+		TNT1 A 0;
+		Stop;
+	}
+}
+
+CLass RLProtectorShield : Actor
+{
+	Default
+	{
+	Radius 15;
+	Height 30;
+	Mass 1;
+	Scale 1;
+	Species "RLPlayer";
+	BloodType "ShieldSawSparks";
+	+SHOOTABLE
+	//+REFLECTIVE
+	+AIMREFLECT
+	+NOGRAVITY
+	+DONTTHRUST
+	+NOBLOOD
+	+NOPAIN
+	+DONTRIP
+	+NOTARGET
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 35;
+		Stop;
+	}
+	
+	override void Tick()
+	{
+		if(master)
+		{
+			let pmo = master.player.mo;
+			vector3 mPos =  pmo.OffhandPos + (Actor.AngleToVector(pmo.offhandangle+180, 1), 0) * (pmo.radius + radius);
+			SetOrigin(mPos - (0,0,height/2), false);
+			A_SetAngle(pmo.OffhandAngle + 90);
+		}
+		
+		Super.Tick();
+	}
+	
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+	{
+		//don't reflect projectiles from player
+		if(master && source is master.player.mo.getclassname())
+		{
+			bREFLECTIVE = false;
+			bAIMREFLECT = false;
+			bSHOOTABLE = false;
+		}
+		else if(master && master.player)
+		{
+			bREFLECTIVE = false;
+			
+			if(inflictor.bMISSILE)
+			{
+				A_StartSound("weapons/shield/throw", CHAN_WEAPON);
+				Actor.Spawn("BDWhiteShockWaveSmall", pos + (0,0,height/2));
+				
+				//random chance of player deflecting missile
+				if(random[deflect](0,9) > 6)
+				{
+					bREFLECTIVE = true;;
+				}
+				else
+				{
+					//random chance of player getting hurt
+					if(random[deflect](0,9) > 5) master.DamageMobj(inflictor, source, damage*0.1, mod, flags, angle);
+				}
+			}
+			else
+			{
+				A_StartSound("weapons/shield/hit", CHAN_WEAPON);
+				Actor.Spawn("ShieldSawSparks", pos + (0,0,height/2));
+			}
+		}
+		
+		Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+		return 1;
+	}
+
+}

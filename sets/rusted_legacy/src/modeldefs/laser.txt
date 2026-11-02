@@ -1,0 +1,288 @@
+
+Model RLPistol
+{ 
+	Path "models/common"
+	Model 0 "laser.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex LASR A 0 0
+	
+	Skin 0 "laser2.png"
+	FrameIndex LASR B 0 0
+	
+	Skin 0 "laser3.png"
+	FrameIndex LASR C 0 0
+	
+	Skin 0 "laser4.png"
+	FrameIndex LASR D 0 0
+	
+	Skin 0 "laser5.png"
+	FrameIndex LASR E 0 0
+	
+	Skin 0 "laser6.png"
+	FrameIndex LASR F 0 0
+	
+	Skin 0 "laser7.png"
+	FrameIndex LASR G 0 0
+	
+	Skin 0 "laser8.png"
+	FrameIndex LASR H 0 0
+}
+
+Model RLShotgun
+{ 
+	Path "models/common"
+	Model 0 "laser.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex LASR A 0 1
+	
+	Skin 0 "laser2.png"
+	FrameIndex LASR B 0 1
+	
+	Skin 0 "laser3.png"
+	FrameIndex LASR C 0 1
+	
+	Skin 0 "laser4.png"
+	FrameIndex LASR D 0 1
+	
+	Skin 0 "laser5.png"
+	FrameIndex LASR E 0 1
+	
+	Skin 0 "laser6.png"
+	FrameIndex LASR F 0 1
+	
+	Skin 0 "laser7.png"
+	FrameIndex LASR G 0 1
+	
+	Skin 0 "laser8.png"
+	FrameIndex LASR H 0 1
+}
+
+Model RLSuperShotgun
+{ 
+	Path "models/common"
+	Model 0 "laser.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex LASR A 0 2
+	
+	Skin 0 "laser2.png"
+	FrameIndex LASR B 0 2
+	
+	Skin 0 "laser3.png"
+	FrameIndex LASR C 0 2
+	
+	Skin 0 "laser4.png"
+	FrameIndex LASR D 0 2
+	
+	Skin 0 "laser5.png"
+	FrameIndex LASR E 0 2
+	
+	Skin 0 "laser6.png"
+	FrameIndex LASR F 0 2
+	
+	Skin 0 "laser7.png"
+	FrameIndex LASR G 0 2
+	
+	Skin 0 "laser8.png"
+	FrameIndex LASR H 0 2
+}
+
+Model RLChaingun
+{ 
+	Path "models/common"
+	Model 0 "laser.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -34.0 -10.0
+	
+	FrameIndex LASR A 0 3
+	
+	Skin 0 "laser2.png"
+	FrameIndex LASR B 0 3
+	
+	Skin 0 "laser3.png"
+	FrameIndex LASR C 0 3
+	
+	Skin 0 "laser4.png"
+	FrameIndex LASR D 0 3
+	
+	Skin 0 "laser5.png"
+	FrameIndex LASR E 0 3
+	
+	Skin 0 "laser6.png"
+	FrameIndex LASR F 0 3
+	
+	Skin 0 "laser7.png"
+	FrameIndex LASR G 0 3
+	
+	Skin 0 "laser8.png"
+	FrameIndex LASR H 0 3
+}
+
+Model RLRocketLauncher
+{ 
+	Path "models/common"
+	Model 0 "laser.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex LASR A 0 4
+	
+	Skin 0 "laser2.png"
+	FrameIndex LASR B 0 4
+	
+	Skin 0 "laser3.png"
+	FrameIndex LASR C 0 4
+	
+	Skin 0 "laser4.png"
+	FrameIndex LASR D 0 4
+	
+	Skin 0 "laser5.png"
+	FrameIndex LASR E 0 4
+	
+	Skin 0 "laser6.png"
+	FrameIndex LASR F 0 4
+	
+	Skin 0 "laser7.png"
+	FrameIndex LASR G 0 4
+	
+	Skin 0 "laser8.png"
+	FrameIndex LASR H 0 4
+}
+
+Model RLPlasmaRifle
+{ 
+	Path "models/common"
+	Model 0 "laser.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex LASR A 0 5
+	
+	Skin 0 "laser2.png"
+	FrameIndex LASR B 0 5
+	
+	Skin 0 "laser3.png"
+	FrameIndex LASR C 0 5
+	
+	Skin 0 "laser4.png"
+	FrameIndex LASR D 0 5
+	
+	Skin 0 "laser5.png"
+	FrameIndex LASR E 0 5
+	
+	Skin 0 "laser6.png"
+	FrameIndex LASR F 0 5
+	
+	Skin 0 "laser7.png"
+	FrameIndex LASR G 0 5
+	
+	Skin 0 "laser8.png"
+	FrameIndex LASR H 0 5
+}
+
+Model RLBFG9000
+{ 
+	Path "models/common"
+	Model 0 "laser.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -28.0 -10.0
+	
+	FrameIndex LASR A 0 0
+	
+	Skin 0 "laser2.png"
+	FrameIndex LASR B 0 0
+	
+	Skin 0 "laser3.png"
+	FrameIndex LASR C 0 0
+	
+	Skin 0 "laser4.png"
+	FrameIndex LASR D 0 0
+	
+	Skin 0 "laser5.png"
+	FrameIndex LASR E 0 0
+	
+	Skin 0 "laser6.png"
+	FrameIndex LASR F 0 0
+	
+	Skin 0 "laser7.png"
+	FrameIndex LASR G 0 0
+	
+	Skin 0 "laser8.png"
+	FrameIndex LASR H 0 0
+}
+
+Model RLHeatwave
+{ 
+	Path "models/common"
+	Model 0 "laser.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex LASR A 0 6
+	
+	Skin 0 "laser2.png"
+	FrameIndex LASR B 0 6
+	
+	Skin 0 "laser3.png"
+	FrameIndex LASR C 0 6
+	
+	Skin 0 "laser4.png"
+	FrameIndex LASR D 0 6
+	
+	Skin 0 "laser5.png"
+	FrameIndex LASR E 0 6
+	
+	Skin 0 "laser6.png"
+	FrameIndex LASR F 0 6
+	
+	Skin 0 "laser7.png"
+	FrameIndex LASR G 0 6
+	
+	Skin 0 "laser8.png"
+	FrameIndex LASR H 0 6
+}
+
+Model RLIncinerator
+{ 
+	Path "models/common"
+	Model 0 "laser.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex LASR A 0 7
+	
+	Skin 0 "laser2.png"
+	FrameIndex LASR B 0 7
+	
+	Skin 0 "laser3.png"
+	FrameIndex LASR C 0 7
+	
+	Skin 0 "laser4.png"
+	FrameIndex LASR D 0 7
+	
+	Skin 0 "laser5.png"
+	FrameIndex LASR E 0 7
+	
+	Skin 0 "laser6.png"
+	FrameIndex LASR F 0 7
+	
+	Skin 0 "laser7.png"
+	FrameIndex LASR G 0 7
+	
+	Skin 0 "laser8.png"
+	FrameIndex LASR H 0 7
+}

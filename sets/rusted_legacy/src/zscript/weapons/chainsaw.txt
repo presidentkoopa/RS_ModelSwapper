@@ -1,0 +1,223 @@
+
+class RLChainsaw : DoomWeaponZ replaces Chainsaw
+{
+	const MELEEDELTA = 20;
+
+	Default
+	{
+		Weapon.KickBack 0;
+		Weapon.SelectionOrder 2201;
+		Weapon.UpSound "weapons/sawup";
+		Weapon.ReadySound "weapons/sawidle";
+		Inventory.PickupMessage "$GOTCHAINSAW";
+		Obituary "$OB_MPCHAINSAW";
+		Tag "$TAG_CHAINSAW";
+		+WEAPON.MELEEWEAPON		
+		+WEAPON.NOAUTOSWITCHTO
+	}
+	
+	override void Tick()
+	{
+		if(!owner || !owner.player || owner.health < 1) return;
+		
+		Super.Tick();
+		if(owner.player.ReadyWeapon == self) checkOffhandGrab();
+	}
+	
+	void checkOffhandGrab()
+	{
+		if(weaponModel < 2 || GetAge() < lastReloadTime+35 || !(owner.player.offhandweapon is "RLOffhandFist"))
+		{
+			owner.player.mo.SetInventory("HandInteractToken", 0);
+			return;
+		}
+		
+		if(GetAge() % 10 != 0) return;
+	
+		let pmo = owner.player.mo;
+		int hand = bOffhandWeapon;
+		
+		Actor _puff;
+		double angle = pmo.angle;
+		double pitch = pmo.AimTarget() ? pmo.BulletSlope(null, ALF_PORTALRESTRICT) : pmo.pitch;
+		_puff = pmo.LineAttack(angle+40, 6.5, pitch-15, 0, "melee", "RLVRDUmmyPuff1", LAF_NOIMPACTDECAL | LAF_NOINTERACT | LAF_NORANDOMPUFFZ | (hand ? LAF_ISOFFHAND : 0));
+		vector3 handlebarPos = _puff.pos;
+		
+		double handDist = level.Vec3Diff(handlebarPos, owner.OffhandPos).Length();
+		if(handDist <= 8)
+		{
+			pmo.SetInventory("HandInteractToken", 1);
+		}
+		else
+		{
+			pmo.SetInventory("HandInteractToken", 0);
+		}
+	}
+	
+	action void A_SawAttack(sound fullsound = "weapons/sawfull", sound hitsound = "weapons/sawhit", int damage = 2, class<Actor> pufftype = "BulletPuff", int flags = 0, double range = 0, double spread_xy = 2.8125, double spread_z = 0, double lifesteal = 0, int lifestealmax = 0, class<BasicArmorBonus> armorbonustype = "ArmorBonus")
+	{
+		FTranslatedLineTarget t;
+
+		if (player == null)
+		{
+			return;
+		}
+
+		if (pufftype == null)
+		{
+			pufftype = 'BulletPuff';
+		}
+		if (damage == 0)
+		{
+			damage = 2;
+		}
+		if (!(flags & SF_NORANDOM))
+		{
+			damage *=  random[Saw](1, 10);
+		}
+		if (range == 0)
+		{ 
+			range = MeleeRange + MELEEDELTA + (1. / 65536.); // MBF21 SAWRANGE;
+		}
+
+		double ang = angle + spread_xy * (Random2[Saw]() / 255.);
+		double slope = AimLineAttack (ang, range, t) + spread_z * (Random2[Saw]() / 255.);
+
+		Weapon weap = player.ReadyWeapon;
+		if (weap != null && !(flags & SF_NOUSEAMMO) && !(!t.linetarget && (flags & SF_NOUSEAMMOMISS)) && !weap.bDehAmmo &&
+			invoker == weap && stateinfo != null && stateinfo.mStateType == STATE_Psprite)
+		{
+			if (!weap.DepleteAmmo (weap.bAltFire))
+				return;
+		}
+
+		//int puffFlags = (flags & SF_NORANDOMPUFFZ) ? LAF_NORANDOMPUFFZ : 0;
+		int puffFlags = LAF_NORANDOMPUFFZ;
+
+		Actor puff;
+		int actualdamage;
+		[puff, actualdamage] = LineAttack (ang, range, slope, damage, 'Melee', 'ChainsawPuff', puffFlags, t);
+		if(puff)
+		{
+			double rollAngle = invoker.bOffhandWeapon ? player.mo.OffhandRoll : player.mo.AttackRoll;
+			ChainsawPuff(puff).rollAngle = rollAngle;
+			puff.A_SetAngle(player.mo.angle);
+		}
+
+		if (!t.linetarget)
+		{
+			if ((flags & SF_RANDOMLIGHTMISS) && (Random[Saw]() > 64))
+			{
+				player.extralight = !player.extralight;
+			}
+			A_StartSound (fullsound, CHAN_WEAPON);
+			return;
+		}
+
+		if (flags & SF_RANDOMLIGHTHIT)
+		{
+			int randVal = Random[Saw]();
+			if (randVal < 64)
+			{
+				player.extralight = 0;
+			}
+			else if (randVal < 160)
+			{
+				player.extralight = 1;
+			}
+			else
+			{
+				player.extralight = 2;
+			}
+		}
+
+		if (lifesteal && !t.linetarget.bDontDrain)
+		{
+			if (flags & SF_STEALARMOR)
+			{
+				if (armorbonustype == null)
+				{
+					armorbonustype = "ArmorBonus";
+				}
+				if (armorbonustype != null)
+				{
+					BasicArmorBonus armorbonus = BasicArmorBonus(Spawn(armorbonustype));
+					armorbonus.SaveAmount = int(armorbonus.SaveAmount * actualdamage * lifesteal);
+					armorbonus.MaxSaveAmount = lifestealmax <= 0 ? armorbonus.MaxSaveAmount : lifestealmax;
+					armorbonus.bDropped = true;
+					armorbonus.ClearCounters();
+
+					if (!armorbonus.CallTryPickup (self))
+					{
+						armorbonus.Destroy ();
+					}
+				}
+			}
+
+			else
+			{
+				GiveBody (int(actualdamage * lifesteal), lifestealmax);
+			}
+		}
+
+		A_StartSound (hitsound, CHAN_WEAPON);
+		
+		if (!(flags & SF_NOPULLIN))
+			bJustAttacked = true;
+	}
+	
+	States
+	{
+	Ready:
+		TNT1 A 0;
+		#### # 0 A_StartSound("weapons/chainsaw/start", CHAN_WEAPON);
+		SAWG CCCCCC 1 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		#### # 0 A_StartSound("weapons/chainsaw/idle", CHAN_WEAPON, CHANF_OVERLAP);
+		SAWG CCCCCCCC 1
+		{
+			A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+			A_WeaponReady();
+		}
+		#### # 0 A_JumpIf(invoker.performanceMode, 2);
+		#### # 0 A_FireProjectile("ChainSawSmoke",0,0,0,0,FPF_NOAUTOAIM,0);
+		#### # 0;
+		Goto Ready+8;
+	Deselect:
+		SAWG # 0 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		#### C 1 A_Lower (160);
+		Loop;
+	Select:
+		SAWG # 0 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		#### C 1 A_Raise (160);
+		Loop;
+	Fire:
+		SAWG # 0 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		#### # 0 A_StartSound("weapons/chainsaw/loop", CHAN_WEAPON);
+		#### AA 1 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		#### B 1 A_SawAttack("", "", 1, "ChainsawPuff", 0, 120, 5, 0);
+		SAWG BA 1 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		#### A 1 A_SawAttack("", "", 1, "ChainsawPuff", 0, 120, 5, 0);
+		SAWG BB 1 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		#### A 1 A_SawAttack("", "", 1, "ChainsawPuff", 0, 120, 5, 0);
+		SAWG ABB 1 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		#### B 0 A_ReFire;
+	FireDone:
+		#### # 0 A_StopSound(CHAN_WEAPON);
+		#### A 1 A_StartSound("weapons/chainsaw/loopend", CHAN_WEAPON, CHANF_OVERLAP);
+		#### AAB 1 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		//#### B 1 A_StartSound("weapons/chainsaw/draw", CHAN_WEAPON, CHANF_OVERLAP);
+		#### BAAAABBB 1 A_SetAltModel("SAWP", "SW2H", "SW2P", "SWNH", "SWNP");
+		#### B 1 A_StartSound("weapons/chainsaw/stop", CHAN_WEAPON, CHANF_OVERLAP);
+		Goto Ready+8;
+	Spawn:
+		CSAW A -1;
+		Stop;
+	PlaceHolder:
+		SAWP A 1;
+		SW2H A 1;
+		SW2P A 1;
+		SWNH A 1;
+		SWNP A 1;
+		Stop;
+	}
+}

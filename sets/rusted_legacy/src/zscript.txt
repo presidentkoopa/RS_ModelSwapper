@@ -1,0 +1,36 @@
+version "3.0"
+
+#include "zscript/rlvr_settings.txt"
+
+#include "zscript/weapons/weaponbase.txt"
+#include "zscript/weapons/weaponhud.txt"
+#include "zscript/weapons/weaponhud2.txt"
+#include "zscript/weapons/weaponlaser.txt"
+
+#include "zscript/weapons/fist.txt"
+#include "zscript/weapons/pistol.txt"
+#include "zscript/weapons/chainsaw.txt"
+#include "zscript/weapons/shotgun.txt"
+#include "zscript/weapons/hellshotgun.txt"
+#include "zscript/weapons/ssg.txt"
+#include "zscript/weapons/chaingun.txt"
+#include "zscript/weapons/rocketlauncher.txt"
+#include "zscript/weapons/plasmarifle.txt"
+#include "zscript/weapons/bfg9000.txt"
+#include "zscript/weapons/heatwave.txt"
+#include "zscript/weapons/incinerator.txt"
+#include "zscript/weapons/shieldsaw.txt"
+
+#include "zscript/actors/player.txt"
+
+#include "zscript/actors/pickups.txt"
+#include "zscript/actors/casings.txt"
+#include "zscript/actors/decorations.txt"
+#include "zscript/actors/smokes.txt"
+#include "zscript/actors/flames.txt"
+
+#include "zscript/rlvr_common.txt"
+#include "zscript/rlvr_vestcontrol.txt"
+#include "zscript/rlvr_replacements.txt"
+#include "zscript/rlvr_optionmenu.txt"
+#include "zscript/rlvr_hudmsg.txt"

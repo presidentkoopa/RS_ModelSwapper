@@ -1,9 +1,11 @@
 # sets/rusted_legacy: Ermac's Rusted Legacy, measured (plan step S4)
 
 **Source:** Ermac's Rusted Legacy dev build (`doom-force-unleashed_devbuild`, last edited 2025-06-03), the owner's
-copy at `E:\DOOMWork\_old\doom-force-unleashed_devbuild`. His code is MIT (c) 2025 iAmErmac; his meshes come from
-Sketchfab and other sources under their own licences (his README's credits). **His files are not in this repo:**
-set `RSQ_RL` to the dev build (or `RSQ_ERMAC` to its `models/`). Nothing in his folder was changed.
+copy at `E:\DOOMWork\_old\doom-force-unleashed_devbuild`, **committed whole in `src/`** (1195 files, meshes and code,
+byte-identical to the owner's copy; owner 2026-11-02 04:40). Ermac to the owner: "go have fun with my fork, i've
+kept the codes as clean as possible". His code is MIT (c) 2025 iAmErmac (`src/LICENSE`); his meshes come from Sketchfab
+and other sources under their own licences (`src/README.md` credits). Single-frame meshes are listed in
+`single_frame_ok.txt` for the Depot's mesh hook.
 
 **State:** measured only. No rig run yet, nothing in a headset. Nothing here is "shown working".
 
@@ -14,7 +16,7 @@ set `RSQ_RL` to the dev build (or `RSQ_ERMAC` to its `models/`). Nothing in his 
 - `tools/rl_measure.py`: the measuring script. Depot tools only (`tools/hqt/md3label.py`, `tools/hqt/gripmeasure.py`,
   the fitter core's `gunview` / `hudrender`).
 
-    RSQ_RL=<his dev build> python3 sets/rusted_legacy/tools/rl_measure.py pistol shotgun ssg chaingun plasma \
+    RSQ_RL=sets/rusted_legacy/src python3 sets/rusted_legacy/tools/rl_measure.py pistol shotgun ssg chaingun plasma \
         rocket hellshotgun incinerator bfg heatwave chainsaw
 
   Re-run from the Depot on 2026-11-02: all 11 cards byte-identical to the first run.
@@ -73,8 +75,8 @@ chainsaw has none). The watch sits within ~1.3 cm of the gun hand's wrist in eve
   player, then a canned animation. Nothing follows the hand.
 
 ## Next (S4)
-1. The rig: doom2 -> his build, zero script errors, before any change counts.
-2. His build in as the base, the audit bugs fixed.
+1. The rig: doom2 -> his build (`src/`), zero script errors, before any change counts.
+2. The audit bugs fixed in `src/`.
 3. Reloads by hand: magazine (pistol, chaingun, plasma, heatwave), pump (shotgun), break (ssg), sideways clip
    (rocket); new kinds: lever (hell shotgun), canister + valve (incinerator), tray + lid (BFG).
 4. His gun ammo display and wrist watch kept and polished (owner, 2026-11-02 04:30).

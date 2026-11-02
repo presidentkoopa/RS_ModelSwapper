@@ -1,0 +1,386 @@
+
+//with hand
+Model RLBFG9000
+{
+	Path "models/bfg9000"
+	Model 0 "bfg9000.md3"
+	Model 1 "bfg9000_pod.md3"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex BFGG A 0 0	FrameIndex BFGG A 1 0	FrameIndex BFGG A 2 113
+	
+	//Fire
+	FrameIndex BFGG B 0 1	FrameIndex BFGG B 1 0	FrameIndex BFGG B 2 114
+	
+	//Open hatch
+	FrameIndex BFGG C 0 0	FrameIndex BFGG C 1 0	FrameIndex BFGG C 2 113
+	
+	//Insert Pod
+	FrameIndex BFGG K 0 5	FrameIndex BFGG K 1 7	FrameIndex BFGG K 2 113
+	FrameIndex BFGG L 0 5	FrameIndex BFGG L 1 8	FrameIndex BFGG L 2 113
+	FrameIndex BFGG M 0 5	FrameIndex BFGG M 1 9	FrameIndex BFGG M 2 113
+	FrameIndex BFGG N 0 5	FrameIndex BFGG N 1 10	FrameIndex BFGG N 2 113
+	FrameIndex BFGG O 0 5	FrameIndex BFGG O 1 11	FrameIndex BFGG O 2 113
+	
+	Path "models/bfg9000"
+	Skin 1 "bfg9000_off.png"
+	
+	//Open hatch
+	FrameIndex BFGG D 0 2	FrameIndex BFGG D 1 1	FrameIndex BFGG D 2 113
+	FrameIndex BFGG E 0 3	FrameIndex BFGG E 1 2	FrameIndex BFGG E 2 113
+	FrameIndex BFGG F 0 4	FrameIndex BFGG F 1 3	FrameIndex BFGG F 2 113
+	FrameIndex BFGG G 0 5	FrameIndex BFGG G 1 4	FrameIndex BFGG G 2 113
+	FrameIndex BFGG H 0 5	FrameIndex BFGG H 1 5	FrameIndex BFGG H 2 113
+	FrameIndex BFGG I 0 5	FrameIndex BFGG I 1 6	FrameIndex BFGG I 2 113
+	
+	//Empty pod
+	FrameIndex BFGG J 0 5	FrameIndex BFGG J 1 99	FrameIndex BFGG J 2 113
+	
+	//Ready (no ammo)
+	FrameIndex BFGG P 0 5	FrameIndex BFGG P 1 99	FrameIndex BFGG P 2 113
+	
+	//Unload ammo
+	FrameIndex BFGG Q 0 2	FrameIndex BFGG Q 1 1	FrameIndex BFGG Q 2 113
+	FrameIndex BFGG R 0 3	FrameIndex BFGG R 1 2	FrameIndex BFGG R 2 113
+	FrameIndex BFGG S 0 4	FrameIndex BFGG S 1 3	FrameIndex BFGG S 2 113
+	FrameIndex BFGG T 0 5	FrameIndex BFGG T 1 4	FrameIndex BFGG T 2 113
+	FrameIndex BFGG U 0 5	FrameIndex BFGG U 1 5	FrameIndex BFGG U 2 113
+	FrameIndex BFGG V 0 5	FrameIndex BFGG V 1 6	FrameIndex BFGG V 2 113
+}
+
+//with hand (PBR texture)
+Model RLBFG9000
+{
+	Path "models/bfg9000"
+	Model 0 "bfg9000.md3"
+	SurfaceSkin 0 0 "bfg9000_HD.png"
+	Model 1 "bfg9000_pod.md3"
+	Skin 1 "bfg9000_HD.png"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	Skin 2 "hand_HD.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex BFGP A 0 0	FrameIndex BFGP A 1 0	FrameIndex BFGP A 2 113
+	
+	//Fire
+	FrameIndex BFGP B 0 1	FrameIndex BFGP B 1 0	FrameIndex BFGP B 2 114
+	
+	//Open hatch
+	FrameIndex BFGP C 0 0	FrameIndex BFGP C 1 0	FrameIndex BFGP C 2 113
+	
+	//Insert Pod
+	FrameIndex BFGP K 0 5	FrameIndex BFGP K 1 7	FrameIndex BFGP K 2 113
+	FrameIndex BFGP L 0 5	FrameIndex BFGP L 1 8	FrameIndex BFGP L 2 113
+	FrameIndex BFGP M 0 5	FrameIndex BFGP M 1 9	FrameIndex BFGP M 2 113
+	FrameIndex BFGP N 0 5	FrameIndex BFGP N 1 10	FrameIndex BFGP N 2 113
+	FrameIndex BFGP O 0 5	FrameIndex BFGP O 1 11	FrameIndex BFGP O 2 113
+	
+	Path "models/bfg9000"
+	Skin 1 "bfg9000_off_hd.png"
+	
+	//Open hatch
+	FrameIndex BFGP D 0 2	FrameIndex BFGP D 1 1	FrameIndex BFGP D 2 113
+	FrameIndex BFGP E 0 3	FrameIndex BFGP E 1 2	FrameIndex BFGP E 2 113
+	FrameIndex BFGP F 0 4	FrameIndex BFGP F 1 3	FrameIndex BFGP F 2 113
+	FrameIndex BFGP G 0 5	FrameIndex BFGP G 1 4	FrameIndex BFGP G 2 113
+	FrameIndex BFGP H 0 5	FrameIndex BFGP H 1 5	FrameIndex BFGP H 2 113
+	FrameIndex BFGP I 0 5	FrameIndex BFGP I 1 6	FrameIndex BFGP I 2 113
+	
+	//Empty pod
+	FrameIndex BFGP J 0 5	FrameIndex BFGP J 1 99	FrameIndex BFGP J 2 113
+	
+	//Ready (no ammo)
+	FrameIndex BFGP P 0 5	FrameIndex BFGP P 1 99	FrameIndex BFGP P 2 113
+	
+	//Unload Ammo
+	FrameIndex BFGP Q 0 2	FrameIndex BFGP Q 1 1	FrameIndex BFGP Q 2 113
+	FrameIndex BFGP R 0 3	FrameIndex BFGP R 1 2	FrameIndex BFGP R 2 113
+	FrameIndex BFGP S 0 4	FrameIndex BFGP S 1 3	FrameIndex BFGP S 2 113
+	FrameIndex BFGP T 0 5	FrameIndex BFGP T 1 4	FrameIndex BFGP T 2 113
+	FrameIndex BFGP U 0 5	FrameIndex BFGP U 1 5	FrameIndex BFGP U 2 113
+	FrameIndex BFGP V 0 5	FrameIndex BFGP V 1 6	FrameIndex BFGP V 2 113
+}
+
+//with both hands
+Model RLBFG9000
+{
+	Path "models/bfg9000"
+	Model 0 "bfg9000.md3"
+	Model 1 "bfg9000_pod.md3"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	Model 3 "hand2.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	NOINTERPOLATION
+	
+	//Ready
+	FrameIndex BG2H A 0 0	FrameIndex BG2H A 1 0	FrameIndex BG2H A 2 113		FrameIndex BG2H A 3 98
+	
+	//Fire
+	FrameIndex BG2H B 0 1	FrameIndex BG2H B 1 0	FrameIndex BG2H B 2 114		FrameIndex BG2H B 3 98
+	
+	//Open hatch
+	FrameIndex BG2H C 0 0	FrameIndex BG2H C 1 0	FrameIndex BG2H C 2 113		FrameIndex BG2H C 3 99
+	
+	//Insert Pod
+	FrameIndex BG2H K 0 5	FrameIndex BG2H K 1 7	FrameIndex BG2H K 2 113		FrameIndex BG2H K 3 106
+	FrameIndex BG2H L 0 5	FrameIndex BG2H L 1 8	FrameIndex BG2H L 2 113         FrameIndex BG2H L 3 107
+	FrameIndex BG2H M 0 5	FrameIndex BG2H M 1 9	FrameIndex BG2H M 2 113         FrameIndex BG2H M 3 108
+	FrameIndex BG2H N 0 5	FrameIndex BG2H N 1 10	FrameIndex BG2H N 2 113         FrameIndex BG2H N 3 109
+	FrameIndex BG2H O 0 5	FrameIndex BG2H O 1 11	FrameIndex BG2H O 2 113         FrameIndex BG2H O 3 110
+	
+	Path "models/bfg9000"
+	Skin 1 "bfg9000_off.png"
+	
+	//Open hatch
+	FrameIndex BG2H D 0 2	FrameIndex BG2H D 1 1	FrameIndex BG2H D 2 113		FrameIndex BG2H D 3 100
+	FrameIndex BG2H E 0 3	FrameIndex BG2H E 1 2	FrameIndex BG2H E 2 113         FrameIndex BG2H E 3 101
+	FrameIndex BG2H F 0 4	FrameIndex BG2H F 1 3	FrameIndex BG2H F 2 113         FrameIndex BG2H F 3 102
+	FrameIndex BG2H G 0 5	FrameIndex BG2H G 1 4	FrameIndex BG2H G 2 113         FrameIndex BG2H G 3 103
+	FrameIndex BG2H H 0 5	FrameIndex BG2H H 1 5	FrameIndex BG2H H 2 113         FrameIndex BG2H H 3 103
+	FrameIndex BG2H I 0 5	FrameIndex BG2H I 1 6	FrameIndex BG2H I 2 113         FrameIndex BG2H I 3 103
+	
+	//Empty pod
+	FrameIndex BG2H J 0 5	FrameIndex BG2H J 1 99	FrameIndex BG2H J 2 113		FrameIndex BG2H J 3 103
+	
+	//Ready (no ammo)
+	FrameIndex BG2H P 0 5	FrameIndex BG2H P 1 99	FrameIndex BG2H P 2 113		FrameIndex BG2H P 3 98
+	
+	//Unload Ammo
+	FrameIndex BG2H Q 0 2	FrameIndex BG2H Q 1 1	FrameIndex BG2H Q 2 113		FrameIndex BG2H D 3 98
+	FrameIndex BG2H R 0 3	FrameIndex BG2H R 1 2	FrameIndex BG2H R 2 113         FrameIndex BG2H E 3 98
+	FrameIndex BG2H S 0 4	FrameIndex BG2H S 1 3	FrameIndex BG2H S 2 113         FrameIndex BG2H F 3 98
+	FrameIndex BG2H T 0 5	FrameIndex BG2H T 1 4	FrameIndex BG2H T 2 113         FrameIndex BG2H G 3 98
+	FrameIndex BG2H U 0 5	FrameIndex BG2H U 1 5	FrameIndex BG2H U 2 113         FrameIndex BG2H H 3 98
+	FrameIndex BG2H V 0 5	FrameIndex BG2H V 1 6	FrameIndex BG2H V 2 113         FrameIndex BG2H I 3 98
+}
+
+//with both hands (PBR texture)
+Model RLBFG9000
+{
+	Path "models/bfg9000"
+	Model 0 "bfg9000.md3"
+	SurfaceSkin 0 0 "bfg9000_HD.png"
+	Model 1 "bfg9000_pod.md3"
+	Skin 1 "bfg9000_HD.png"
+	
+	Path "models/hand"
+	Model 2 "hand.md3"
+	Skin 2 "hand_HD.png"
+	Model 3 "hand2.md3"
+	Skin 3 "hand_HD.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	NOINTERPOLATION
+	
+	//Ready
+	FrameIndex BG2P A 0 0	FrameIndex BG2P A 1 0	FrameIndex BG2P A 2 113		FrameIndex BG2P A 3 98
+	
+	//Fire
+	FrameIndex BG2P B 0 1	FrameIndex BG2P B 1 0	FrameIndex BG2P B 2 114		FrameIndex BG2P B 3 98
+	
+	//Open hatch
+	FrameIndex BG2P C 0 0	FrameIndex BG2P C 1 0	FrameIndex BG2P C 2 113		FrameIndex BG2P C 3 99
+	
+	//Insert Pod
+	FrameIndex BG2P K 0 5	FrameIndex BG2P K 1 7	FrameIndex BG2P K 2 113		FrameIndex BG2P K 3 106
+	FrameIndex BG2P L 0 5	FrameIndex BG2P L 1 8	FrameIndex BG2P L 2 113         FrameIndex BG2P L 3 107
+	FrameIndex BG2P M 0 5	FrameIndex BG2P M 1 9	FrameIndex BG2P M 2 113         FrameIndex BG2P M 3 108
+	FrameIndex BG2P N 0 5	FrameIndex BG2P N 1 10	FrameIndex BG2P N 2 113         FrameIndex BG2P N 3 109
+	FrameIndex BG2P O 0 5	FrameIndex BG2P O 1 11	FrameIndex BG2P O 2 113         FrameIndex BG2P O 3 110
+	
+	Path "models/bfg9000"
+	Skin 1 "bfg9000_off_HD.png"
+	
+	//Open hatch
+	FrameIndex BG2P D 0 2	FrameIndex BG2P D 1 1	FrameIndex BG2P D 2 113		FrameIndex BG2P D 3 100
+	FrameIndex BG2P E 0 3	FrameIndex BG2P E 1 2	FrameIndex BG2P E 2 113         FrameIndex BG2P E 3 101
+	FrameIndex BG2P F 0 4	FrameIndex BG2P F 1 3	FrameIndex BG2P F 2 113         FrameIndex BG2P F 3 102
+	FrameIndex BG2P G 0 5	FrameIndex BG2P G 1 4	FrameIndex BG2P G 2 113         FrameIndex BG2P G 3 103
+	FrameIndex BG2P H 0 5	FrameIndex BG2P H 1 5	FrameIndex BG2P H 2 113         FrameIndex BG2P H 3 103
+	FrameIndex BG2P I 0 5	FrameIndex BG2P I 1 6	FrameIndex BG2P I 2 113         FrameIndex BG2P I 3 103
+	
+	//Empty pod
+	FrameIndex BG2P J 0 5	FrameIndex BG2P J 1 99	FrameIndex BG2P J 2 113		FrameIndex BG2P J 3 103
+	
+	//Ready (no ammo)
+	FrameIndex BG2P P 0 5	FrameIndex BG2P P 1 99	FrameIndex BG2P P 2 113		FrameIndex BG2P P 3 98
+	
+	//Unload Ammo
+	FrameIndex BG2P Q 0 2	FrameIndex BG2P Q 1 1	FrameIndex BG2P Q 2 113		FrameIndex BG2P Q 3 98
+	FrameIndex BG2P R 0 3	FrameIndex BG2P R 1 2	FrameIndex BG2P R 2 113         FrameIndex BG2P R 3 98
+	FrameIndex BG2P S 0 4	FrameIndex BG2P S 1 3	FrameIndex BG2P S 2 113         FrameIndex BG2P S 3 98
+	FrameIndex BG2P T 0 5	FrameIndex BG2P T 1 4	FrameIndex BG2P T 2 113         FrameIndex BG2P T 3 98
+	FrameIndex BG2P U 0 5	FrameIndex BG2P U 1 5	FrameIndex BG2P U 2 113         FrameIndex BG2P U 3 98
+	FrameIndex BG2P V 0 5	FrameIndex BG2P V 1 6	FrameIndex BG2P V 2 113         FrameIndex BG2P V 3 98
+}
+//without hand
+Model RLBFG9000
+{
+	Path "models/bfg9000"
+	Model 0 "bfg9000.md3"
+	Model 1 "bfg9000_pod.md3"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex BGNH A 0 0	FrameIndex BGNH A 1 0
+	
+	//Fire
+	FrameIndex BGNH B 0 1	FrameIndex BGNH B 1 0
+	
+	//Open hatch
+	FrameIndex BGNH C 0 0	FrameIndex BGNH C 1 0
+	
+	//Insert Pod
+	FrameIndex BGNH K 0 5	FrameIndex BGNH K 1 7
+	FrameIndex BGNH L 0 5	FrameIndex BGNH L 1 8
+	FrameIndex BGNH M 0 5	FrameIndex BGNH M 1 9
+	FrameIndex BGNH N 0 5	FrameIndex BGNH N 1 10
+	FrameIndex BGNH O 0 5	FrameIndex BGNH O 1 11
+	
+	Path "models/bfg9000"
+	Skin 1 "bfg9000_off.png"
+	
+	//Open hatch
+	FrameIndex BGNH D 0 2	FrameIndex BGNH D 1 1
+	FrameIndex BGNH E 0 3	FrameIndex BGNH E 1 2
+	FrameIndex BGNH F 0 4	FrameIndex BGNH F 1 3
+	FrameIndex BGNH G 0 5	FrameIndex BGNH G 1 4
+	FrameIndex BGNH H 0 5	FrameIndex BGNH H 1 5
+	FrameIndex BGNH I 0 5	FrameIndex BGNH I 1 6
+	
+	//Empty pod
+	FrameIndex BGNH J 0 5	FrameIndex BGNH J 1 99
+	
+	//Ready (no ammo)
+	FrameIndex BGNH P 0 5	FrameIndex BGNH P 1 99
+	
+	//Unload Ammo
+	FrameIndex BGNH Q 0 2	FrameIndex BGNH Q 1 1
+	FrameIndex BGNH R 0 3	FrameIndex BGNH R 1 2
+	FrameIndex BGNH S 0 4	FrameIndex BGNH S 1 3
+	FrameIndex BGNH T 0 5	FrameIndex BGNH T 1 4
+	FrameIndex BGNH U 0 5	FrameIndex BGNH U 1 5
+	FrameIndex BGNH V 0 5	FrameIndex BGNH V 1 6
+}
+
+//without hand (PBR texture)
+Model RLBFG9000
+{
+	Path "models/bfg9000"
+	Model 0 "bfg9000.md3"
+	SurfaceSkin 0 0 "bfg9000_HD.png"
+	Model 1 "bfg9000_pod.md3"
+	Skin 1 "bfg9000_HD.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	//Ready
+	FrameIndex BGNP A 0 0	FrameIndex BGNP A 1 0
+	
+	//Fire
+	FrameIndex BGNP B 0 1	FrameIndex BGNP B 1 0
+	
+	//Open hatch
+	FrameIndex BGNP C 0 0	FrameIndex BGNP C 1 0
+	
+	//Insert Pod
+	FrameIndex BGNP K 0 5	FrameIndex BGNP K 1 7
+	FrameIndex BGNP L 0 5	FrameIndex BGNP L 1 8
+	FrameIndex BGNP M 0 5	FrameIndex BGNP M 1 9
+	FrameIndex BGNP N 0 5	FrameIndex BGNP N 1 10
+	FrameIndex BGNP O 0 5	FrameIndex BGNP O 1 11
+	
+	Path "models/bfg9000"
+	Skin 1 "bfg9000_off_hd.png"
+	
+	//Open hatch
+	FrameIndex BGNP D 0 2	FrameIndex BGNP D 1 1
+	FrameIndex BGNP E 0 3	FrameIndex BGNP E 1 2
+	FrameIndex BGNP F 0 4	FrameIndex BGNP F 1 3
+	FrameIndex BGNP G 0 5	FrameIndex BGNP G 1 4
+	FrameIndex BGNP H 0 5	FrameIndex BGNP H 1 5
+	FrameIndex BGNP I 0 5	FrameIndex BGNP I 1 6
+	
+	//Empty pod
+	FrameIndex BGNP J 0 5	FrameIndex BGNP J 1 99
+	
+	//Empty pod
+	FrameIndex BGNP P 0 5	FrameIndex BGNP P 1 99
+	
+	//Unload Ammo
+	FrameIndex BGNP Q 0 2	FrameIndex BGNP Q 1 1
+	FrameIndex BGNP R 0 3	FrameIndex BGNP R 1 2
+	FrameIndex BGNP S 0 4	FrameIndex BGNP S 1 3
+	FrameIndex BGNP T 0 5	FrameIndex BGNP T 1 4
+	FrameIndex BGNP U 0 5	FrameIndex BGNP U 1 5
+	FrameIndex BGNP V 0 5	FrameIndex BGNP V 1 6
+}
+
+//meter_overlay
+Model RLBFG9000
+{
+	Path "models/bfg9000"
+	Model 0 "bfg9000_meter.md3"
+	Skin 0 "bfg_meter1.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex BFGM A 0 0
+	
+	Skin 0 "bfg_meter2.png"
+	FrameIndex BFGM B 0 0
+	
+	Skin 0 "bfg_meter3.png"
+	FrameIndex BFGM C 0 0
+	
+	Skin 0 "bfg_meter4.png"
+	FrameIndex BFGM D 0 0
+	
+	Skin 0 "bfg_meter5.png"
+	FrameIndex BFGM E 0 0
+	
+	Skin 0 "bfg_meter6.png"
+	FrameIndex BFGM F 0 0
+	
+	Skin 0 "bfg_meter7.png"
+	FrameIndex BFGM G 0 0
+}
+
+//muzzle flash
+Model RLBFG9000
+{
+	Path "models/bfg9000"
+	Model 0 "bfg9000_mf.md3"
+	Skin 0 "bfg_mf1.png"
+	
+	Scale -1.0 1.0 1.0
+	Offset 0.0 -24.0 -10.0
+	
+	FrameIndex BFGF A 0 0
+	FrameIndex BFGF B 0 1
+	FrameIndex BFGF C 0 2
+	FrameIndex BFGF D 0 3
+	FrameIndex BFGF E 0 4
+}

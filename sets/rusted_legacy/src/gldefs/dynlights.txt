@@ -1,0 +1,241 @@
+pointlight FlashYellowSmall
+{
+    color 0.98 0.81 0.34
+    size 25
+    offset 0 0 0
+}
+
+pointlight FlashYellowMedium
+{
+    color 0.98 0.81 0.34
+    size 35
+    offset 0 0 0
+}
+
+pointlight FlashYellowBig
+{
+    color 0.98 0.81 0.34
+    size 45
+    offset 0 0 0
+}
+
+pointlight FlashYellowHuge
+{
+    color 0.98 0.81 0.34
+    size 60
+    offset 0 0 0
+}
+
+pointlight FlashOrangeSmall
+{
+    color 0.94 0.4 0.13
+    size 25
+    offset 0 0 0
+}
+
+pointlight FlashOrange
+{
+    color 0.94 0.4 0.13
+    size 35
+    offset 0 0 0
+}
+
+pointlight FlashOrangeMedium
+{
+    color 0.94 0.4 0.13
+    size 45
+    offset 0 0 0
+}
+
+pointlight FlashOrangeBig
+{
+    color 0.94 0.4 0.13
+    size 50
+    offset 0 0 0
+}
+
+pointlight FlashBlueSmall
+{
+    color 0.0 0.68 0.94
+    size 20
+    offset 0 0 0
+}
+
+pointlight FlashBlue
+{
+    color 0.0 0.68 0.94
+    size 35
+    offset 0 0 0
+}
+
+pointlight FlashBlueBig
+{
+    color 0.0 0.68 0.94
+    size 50
+    offset 0 0 0
+}
+
+pointlight FlashGreen
+{
+    color 0.0 1.0 0.15
+    size 70
+    offset 0 0 0
+}
+
+pointlight FlashGreenBig
+{
+    color 0.0 1.0 0.15
+    size 80
+    offset 0 0 0
+}
+
+pointlight FlashPurple
+{
+    color 0.35 0.16 0.64
+    size 50
+    offset 0 0 0
+}
+
+pointlight FlashPurpleBig
+{
+    color 0.35 0.16 0.64
+    size 65
+    offset 0 0 0
+}
+
+object RLVRPistolFlash
+{
+	frame TNT1A { light FlashYellowSmall }
+}
+
+object RLVRShotgunFlash
+{
+	frame TNT1A { light FlashYellowMedium }
+}
+
+object RLVRShotgunBigFlash
+{
+	frame TNT1A { light FlashYellowBig }
+}
+
+object RLVRChaingunFlash
+{
+	frame TNT1A { light FlashYellowBig }
+}
+
+object RLVRRocketFlash
+{
+	frame TNT1A { light FlashOrangeBig }
+}
+
+object RLVRPlasmaFlash
+{
+	frame TNT1A { light FlashBlue }
+}
+
+object RLVRPlasmaFlash2
+{
+	frame TNT1A { light FlashBlueBig }
+}
+
+object RLVRBFGFlash
+{
+	frame TNT1A { light FlashGreen }
+}
+
+object RLVRBFGFlash2
+{
+	frame TNT1A { light FlashGreenBig }
+}
+
+object RLVRBFGPurpleFlash
+{
+	frame TNT1A { light FlashPurple }
+}
+
+object RLVRBFGPurpleFlash2
+{
+	frame TNT1A { light FlashPurpleBig }
+}
+
+object RLVRHeatFlash
+{
+	frame TNT1A { light FlashYellowMedium }
+}
+
+object RLVRHeatFlash2
+{
+	frame TNT1A { light FlashYellowBig }
+}
+
+object RLVRHeatFlash3
+{
+	frame TNT1A { light FlashYellowHuge }
+}
+
+object RLVRFlameFlash
+{
+	frame TNT1A { light FlashOrangeMedium }
+}
+
+object RLVRFlameFlash2
+{
+	frame TNT1A { light FlashOrangeBig }
+}
+
+object Rocket2
+{
+	frame MISL { light FlashOrangeSmall }
+	frame EXPL { light FlashOrangeBig }
+}
+
+object Rocket3
+{
+	frame MISL { light FlashOrangeSmall }
+	frame EXPL { light FlashOrangeBig }
+}
+
+object NewPlasmaball
+{
+	frame PLBA { light FlashBlueSmall }
+}
+
+object BDFlamethrowerMissile
+{
+	frame FIR3 { light FlashOrange }
+	frame FIR3B { light FlashOrangeMedium }
+	frame FIR3D { light FlashOrangeMedium }
+	frame FIR3F { light FlashOrangeMedium }
+}
+
+object BDFlamethrowerFireParticles
+{
+	frame FIR3 { light FlashOrangeSmall }
+	frame FIR3B { light FlashOrange }
+	frame FIR3D { light FlashOrange }
+	frame FIR3F { light FlashOrange }
+	frame FIR3H { light FlashOrange }
+	frame FIR3J { light FlashOrange }
+}
+
+object BDSuperBFGBall
+{
+	frame BFS1 { light FlashGreenBig }
+}
+
+object MiniBlackHoleCorona
+{
+	frame BKHLC { light FlashPurple }
+}
+
+object BlackHoleExplosion
+{
+	frame BKHLB { light FlashPurpleBig }
+}
+
+object RLHeatWaveRipper
+{
+	frame HETB { light FlashYellowBig }
+	frame HETBA { light FlashYellowMedium }
+	frame HETBC { light FlashYellowMedium }
+}
