@@ -47,7 +47,8 @@ example, the toolset proven on BD22, and the handbook. Everything older is on `a
 ## Open
 - S4 (2026-11-02): his build committed whole in sets/rusted_legacy/src; booted on tools/rig/bin/qz with freedoom2 (doom2.wad
   not reachable this session), 0 script errors, all 11 guns in hand; 4 audit bugs fixed (README). Rig only.
-- S4 next: owner's call on the panels hidden when aiming (rocket, BFG, plasma) and the BFG watch; headset check of the reloads (wrist turns listed in the set
+- S4 next (owner, 2026-11-02 06:45; paused, "we will come back to this"): go gun by gun for behaviors, wire in
+  optional sounds and ballistics. Also open: owner's call on the panels hidden when aiming (rocket, BFG, plasma) and the BFG watch; headset check of the reloads (wrist turns listed in the set
   README). The plasma muzzle (two bores) needs refining. ShieldSaw from UBQS at the end.
 - Nothing in BD22 2.0.1 has been confirmed in the owner's headset yet (its own README says so).
 - Outside the repo by design: the game data (`RSQ_GAMEDATA`), the FBX hand (`RSQ_FBX`), Ermac's models

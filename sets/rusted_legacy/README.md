@@ -169,6 +169,7 @@ state labels by name. Now (`rsrl_hudfast 1`, default; `zscript/rsrl/rsrl_hudfast
   this one: the border window 0 pixels different, the watch view different only in console text.
 
 ## Next (S4)
+0. Owner, 2026-11-02 06:45 (paused, coming back): gun by gun for behaviors, optional sounds and ballistics.
 1. DONE: rig boot (freedoom2, 0 script errors) and the four certain audit fixes. Re-run on doom2.wad when it is staged.
 3. DONE on the rig (2026-11-02), see "Hand reloads" below: all 10 reloadable guns, 20 gates, by hand.
 4. His gun ammo display and wrist watch kept and polished (owner, 2026-11-02 04:30): first pass DONE, see "HUD polish".
