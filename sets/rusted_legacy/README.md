@@ -64,19 +64,37 @@ Rules his files needed (all in the script):
 chainsaw has none). The watch sits within ~1.3 cm of the gun hand's wrist in every Ready pose.
 
 ## Found in his build (code and asset audit, 2026-11-02)
-- Pistol MODELDEF: `FrameIndex PISG S 0 22  FrameIndex PISG J 1 99` (`J` should be `S`): probably hides the
-  magazine on frame J, the first frame of the immersive reload.
-- Sounds with no file: `weapons/pistol/reload` (`breload`), `blackhole/cancel` (`bhcancel`). Played but never
-  defined: incinerator burn / flame death / fizzle, `weapons/sawidle`, `weapons/sawup`, `weapons/plasmax`,
-  `props/redfire`, `flak/frag`, `fighterhammerexplode`. SNDINFO line 265 `rolloff gascan/whoosh` lacks its `$`.
-- Unused: `berreta_pickup.md3`, `rl_laser.md3`, `tracer2.md3`; states `Laser0`, the heatwave's `FlashCharge1`,
-  `Disappear`, `Explosion`; 17 Brutal Doom effect classes never spawned (his README: BD material is temporary).
-- His reload: an off-hand proximity trigger (3 units) at a point from `LineAttack(angle, 5, pitch-100)` off the
-  player, then a canned animation. Nothing follows the hand.
+Rig: his build boots on QuestZDoom 17.3 (tools/rig/bin/qz) with freedoom2.wad (his README supports Freedoom; the
+owner's doom2.wad was not reachable this session), MAP01, 0 script errors; all 11 guns drawn in hand
+(`sheets/rig_baseline_all_guns.png`). Rig only, not headset-confirmed.
+
+**Fixed (step S4, 2026-11-02), each against his own definitions; boots clean after:**
+- `modeldefs/weapons/pistol.txt:45` `FrameIndex PISG J 1 99` -> `PISG S 1 99` (the S row had set J's magazine slot
+  to hidden, and left S's unset). Data fix; the frame difference is not isolated on the rig yet
+  (`sheets/rig_pistol_reload_base_vs_fix1.png`).
+- `sndinfo.txt`: `$random rocket/explode` listed `weapons/explode1-6`, which do not exist; his file defines
+  `grenade/explode1-6` (rexplod1-6). Rocket explosions were silent; now they use his sounds.
+- `sndinfo.txt:265` `rolloff gascan/whoosh` -> `$rolloff gascan/whoosh` (the line was a sound named "rolloff").
+- `zscript/weapons/incinerator.txt` 637 / 647: `weapons/IncineratorFlame/death|fizzle` (undefined) ->
+  `weapons/flame/death|fizzle`, the names his SNDINFO defines for those files (dsincht1-3).
+
+**Corrected:** `weapons/sawup`, `weapons/sawidle`, `weapons/plasmax`, `weapons/incinerator/burn` are defined by the
+engine's own Doom SNDINFO (qzdoom.pk3 filter/game-doomchex): not bugs.
+
+**Still open (no file of his fits; owner's call):** `flak/frag` (casing bounce, BD leftover), `props/redfire`
+(flame death, BD leftover), `blackhole/cancel` (his SNDINFO names `bhcancel`, the file is not in his build),
+`FighterHammerExplode` (ShieldSaw: out of scope). `weapons/pistol/reload` -> `breload` has no file but nothing
+plays it.
+
+Unused in his build: `berreta_pickup.md3`, `rl_laser.md3`, `tracer2.md3`; states `Laser0`, the heatwave's
+`FlashCharge1`, `Disappear`, `Explosion`, `ImmersiveReloadWait3` (incinerator); 17 Brutal Doom effect classes never
+spawned; pistol mesh frames 8-21 (a slide-lock fire cycle) never played.
+
+His reload: an off-hand proximity trigger (3 units) at a point from `LineAttack(angle, 5, pitch-100)` off the
+player, then a canned animation. Nothing follows the hand.
 
 ## Next (S4)
-1. The rig: doom2 -> his build (`src/`), zero script errors, before any change counts.
-2. The audit bugs fixed in `src/`.
+1. DONE: rig boot (freedoom2, 0 script errors) and the four certain audit fixes. Re-run on doom2.wad when it is staged.
 3. Reloads by hand: magazine (pistol, chaingun, plasma, heatwave), pump (shotgun), break (ssg), sideways clip
    (rocket); new kinds: lever (hell shotgun), canister + valve (incinerator), tray + lid (BFG).
 4. His gun ammo display and wrist watch kept and polished (owner, 2026-11-02 04:30).

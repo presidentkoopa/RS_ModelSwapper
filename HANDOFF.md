@@ -37,8 +37,9 @@ example, the toolset proven on BD22, and the handbook. Everything older is on `a
   them back, proven, before it starts.
 
 ## Open
-- S4 next: the rig on doom2 -> Rusted Legacy (zero script errors), his build in as the base with the audit bugs fixed,
-  then hand reloads (sets/rusted_legacy/README.md "Next"). The plasma muzzle (two bores) needs refining.
+- S4 (2026-11-02): his build committed whole in sets/rusted_legacy/src; booted on tools/rig/bin/qz with freedoom2 (doom2.wad
+  not reachable this session), 0 script errors, all 11 guns in hand; 4 audit bugs fixed (README). Rig only.
+- S4 next: hand reloads (sets/rusted_legacy/README.md "Next"). The plasma muzzle (two bores) needs refining.
 - Nothing in BD22 2.0.1 has been confirmed in the owner's headset yet (its own README says so).
 - Outside the repo by design: the game data (`RSQ_GAMEDATA`), the FBX hand (`RSQ_FBX`), Ermac's models
   (`RSQ_ERMAC`, measuring scripts only).

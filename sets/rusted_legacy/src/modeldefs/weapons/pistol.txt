@@ -42,7 +42,7 @@ Model RLPistol
 	//Ready
 	FrameIndex PISG A 0 0	FrameIndex PISG A 1 0	FrameIndex PISG A 2 6
 	FrameIndex PISG B 0 23	FrameIndex PISG B 1 0   FrameIndex PISG B 2 6
-	FrameIndex PISG S 0 22	FrameIndex PISG J 1 99   FrameIndex PISG S 2 6
+	FrameIndex PISG S 0 22	FrameIndex PISG S 1 99   FrameIndex PISG S 2 6
 	
 	//dry fire
 	FrameIndex PISG Y 0 23	FrameIndex PISG Y 1 99  FrameIndex PISG Y 2 7

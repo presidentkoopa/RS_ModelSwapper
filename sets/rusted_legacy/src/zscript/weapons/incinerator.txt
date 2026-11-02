@@ -634,7 +634,7 @@ class RLIncineratorFlame : Actor
 		// scale and spriteoffset changes it appears smoother.
 		TNT1 A 0 
 		{
-			A_StartSound("weapons/IncineratorFlame/death");
+			A_StartSound("weapons/flame/death");
 			scale *= 0.3;
 			alpha = default.alpha;
 		}
@@ -644,7 +644,7 @@ class RLIncineratorFlame : Actor
 		IFLR D 4;
 		IFLR E 2 A_Explode;
 		IFLR F 4;
-		IFLR G 2 A_StartSound("weapons/IncineratorFlame/fizzle");
+		IFLR G 2 A_StartSound("weapons/flame/fizzle");
 		IFLR H 2 A_Explode();
 		IFLR I 4;
 		IFLR J 2 A_Explode();

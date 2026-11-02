@@ -262,7 +262,7 @@ $volume gascan/drop 0.3
 
 gascan/whoosh 				gcangas
 $volume gascan/whoosh 0.1
-rolloff gascan/whoosh 600 1000
+$rolloff gascan/whoosh 600 1000
 
 $random weapons/ricochet 		{ ricochet1 ricochet2 ricochet3 ricochet4 ricochet5 ricochet6 ricochet7 }
 ricochet1     				ricoche1
@@ -278,7 +278,7 @@ $rolloff weapons/ricochet  200 700
 
 rocket/loop				rlloop
 
-$random rocket/explode 			{weapons/explode1 weapons/explode2 weapons/explode3 weapons/explode4 weapons/explode5 weapons/explode6}
+$random rocket/explode 			{grenade/explode1 grenade/explode2 grenade/explode3 grenade/explode4 grenade/explode5 grenade/explode6}
 grenade/explode1			rexplod1
 grenade/explode2			rexplod2
 grenade/explode3			rexplod3
