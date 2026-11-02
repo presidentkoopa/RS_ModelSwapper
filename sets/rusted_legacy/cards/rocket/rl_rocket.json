@@ -1,0 +1,649 @@
+{
+ "gun": "rocket",
+ "archetype": "launcher",
+ "block": "//with both hands",
+ "ready_sprite": "RL2HA",
+ "ready_frames": {
+  "0": 0,
+  "1": 0,
+  "2": 95,
+  "3": 80
+ },
+ "models": {
+  "0": "models/rocketlauncher/rocketlauncher.md3",
+  "2": "models/hand/hand.md3",
+  "3": "models/hand/hand2.md3",
+  "1": "models/rocketlauncher/rockets.md3"
+ },
+ "mesh": "models/rocketlauncher/rocketlauncher.md3",
+ "mesh_frames": 1,
+ "idle_frame": 0,
+ "bore": [
+  1.0,
+  0.0,
+  0.03
+ ],
+ "bore_src": "long axis of 'rocketlauncher'",
+ "muzzle": [
+  90.43,
+  -0.35,
+  12.51
+ ],
+ "parts": [
+  {
+   "surf": 1,
+   "name": "rl_trigger",
+   "role": "trigger",
+   "rest": [
+    8.88,
+    -0.28,
+    -0.45
+   ],
+   "verts": 46,
+   "travel": 0.0,
+   "note": "never moves in any frame the block plays"
+  }
+ ],
+ "hands": {
+  "hand": {
+   "mesh": "hand",
+   "frame": 95,
+   "note": "",
+   "axis": [
+    0.9986,
+    -0.0055,
+    -0.0529
+   ],
+   "axis_normals": [
+    0.9321,
+    -0.258,
+    -0.2542
+   ],
+   "point": [
+    -1.898,
+    -0.117,
+    -6.066
+   ],
+   "radius": 1.125,
+   "fit_radius": 2.599,
+   "extent": [
+    -11.26,
+    6.06
+   ],
+   "hand_extent": [
+    -11.26,
+    4.74
+   ],
+   "chord_mode": 2.25,
+   "facets": 281
+  },
+  "hand2": {
+   "mesh": "hand2",
+   "frame": 80,
+   "note": "",
+   "axis": [
+    0.5589,
+    -0.7565,
+    0.3396
+   ],
+   "axis_normals": [
+    0.1062,
+    -0.1167,
+    0.9875
+   ],
+   "point": [
+    23.659,
+    -4.831,
+    1.98
+   ],
+   "radius": 1.125,
+   "fit_radius": 3.24,
+   "extent": [
+    -15.39,
+    6.79
+   ],
+   "hand_extent": [
+    -16.01,
+    6.1
+   ],
+   "chord_mode": 2.25,
+   "facets": 106
+  }
+ },
+ "piece": {
+  "model": "models/rocketlauncher/rockets.md3",
+  "frames": 5,
+  "seat_frame": 0,
+  "seat": [
+   3.4,
+   8.95,
+   12.86
+  ],
+  "extent_cm": [
+   22.3,
+   26.7,
+   8.45
+  ],
+  "path": [
+   {
+    "state": "Reload",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HJ",
+    "frame": 2,
+    "pos": [
+     3.4,
+     22.55,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HJ",
+    "frame": 2,
+    "pos": [
+     3.4,
+     22.55,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HJ",
+    "frame": 2,
+    "pos": [
+     3.4,
+     22.55,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HK",
+    "frame": 3,
+    "pos": [
+     3.4,
+     16.56,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HK",
+    "frame": 3,
+    "pos": [
+     3.4,
+     16.56,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HK",
+    "frame": 3,
+    "pos": [
+     3.4,
+     16.56,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HI",
+    "frame": 1,
+    "pos": [
+     3.4,
+     24.98,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HJ",
+    "frame": 2,
+    "pos": [
+     3.4,
+     22.55,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HJ",
+    "frame": 2,
+    "pos": [
+     3.4,
+     22.55,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HJ",
+    "frame": 2,
+    "pos": [
+     3.4,
+     22.55,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HK",
+    "frame": 3,
+    "pos": [
+     3.4,
+     16.56,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HK",
+    "frame": 3,
+    "pos": [
+     3.4,
+     16.56,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "RL2HL",
+    "frame": 4,
+    "pos": [
+     3.4,
+     8.95,
+     12.86
+    ]
+   }
+  ],
+  "approach": {
+   "from_frame": 3,
+   "state": "ImmersiveReloadMag",
+   "pos": [
+    3.4,
+    16.56,
+    12.86
+   ],
+   "stroke": 7.61,
+   "axis": [
+    0.0,
+    -1.0,
+    0.0
+   ]
+  }
+ },
+ "phases": {
+  "Ready": [
+   0
+  ],
+  "Ready2": [
+   0
+  ],
+  "Ready3": [
+   0
+  ],
+  "ReadyNoAmmo": [
+   0
+  ],
+  "Deselect": [
+   0
+  ],
+  "Select": [
+   0
+  ],
+  "DryFire": [
+   0
+  ],
+  "Fire": [
+   0
+  ],
+  "Fire2": [
+   0
+  ],
+  "Fire3": [
+   0
+  ],
+  "AltFire": [
+   0
+  ],
+  "AltFire2": [
+   0
+  ],
+  "AltFire3": [
+   0
+  ],
+  "Reload": [
+   0
+  ],
+  "ImmersiveReload": [
+   0
+  ],
+  "ImmersiveReloadMag": [
+   0
+  ],
+  "PlaceHolder": [
+   0
+  ]
+ },
+ "unused_mesh_frames": [],
+ "hud": {
+  "gun_display": {
+   "mesh": "ammo_hud_bg.md3",
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "offset": [
+    -10.0,
+    -55.0,
+    3.0
+   ],
+   "centre": [
+    25.0,
+    17.26,
+    16.31
+   ],
+   "facing": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "size": [
+    0.0,
+    9.04,
+    3.68
+   ]
+  },
+  "wrist_watch": {
+   "mesh": "w_dial.md3",
+   "frame": 95,
+   "sprite": "WH00A",
+   "offset": [
+    0.0,
+    -24.0,
+    -10.0
+   ],
+   "centre": [
+    -12.01,
+    1.96,
+    -5.19
+   ],
+   "facing": [
+    -0.01,
+    1.0,
+    -0.0
+   ],
+   "size": [
+    5.99,
+    0.41,
+    5.96
+   ],
+   "worn_on": "hand (gun hand; his watch frame is the gun hand's one-hand pose)",
+   "hand_gap_cm": {
+    "hand": 1.34,
+    "hand2": 25.51
+   }
+  }
+ }
+}

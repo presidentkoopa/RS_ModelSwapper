@@ -1,0 +1,40 @@
+weapon rl_incinerator
+  archetype   flamethrower
+  source      Rusted Legacy dev build (Ermac), models/incinerator/flamethrower.md3  block '//with hand'  Ready FLMGA {0: 0, 1: 0, 2: 151}
+  space       CTL  controller frame, cm, F forward L left U up (Scale -1 1 1, Offset 0 -24 -10, vr_weaponScale 1.02)
+  model       models/incinerator/flamethrower.md3   idle_frame 0   frames 18
+  bore        [1.0, -0.0, -0.09]   # from the long axis of 'flamethrower.nozzle'
+  parts
+    trigger  surf 1 'flamethrower_trigger'  rest [-0.14, -0.03, -6.87]  axis [-1.0, 0.0, -0.0]  travel 1.35  frames 1..1
+    deco     surf 2 'flamethrower_bolts'  rest [19.47, 0.0, 5.97]  STILL (no frame moves it)
+    barrel   surf 3 'flamethrower.nozzle'  rest [82.06, -0.02, 2.22]  STILL (no frame moves it)
+    lever    surf 4 'flamethrower_lever'  rest [41.1, 5.03, -8.2]  axis [-0.91, 0.0, 0.42]  travel 3.5  frames 3..16  rot 99.3deg axis [0.0, 1.0, 0.0]
+    valve    surf 5 'flamethrower_valve'  rest [41.27, 0.64, -6.14]  STILL (no frame moves it)
+    muzzle    [100.43, 0.03, 6.31]
+  grip        hand.md3 frame 151  held_axis [0.9614, -0.0118, -0.2749]  point [-1.043, -0.255, -6.482]  radius 1.125  extent [-12.87, 5.23]   # Ermac's own hand, gripmeasure
+  support     none in the Ready row
+  piece       models/incinerator/gascan.md3  seat_frame 0  seat [53.98, 1.37, -6.15]  size [55.06, 12.08, 12.0]
+    approach  from frame 3 (ImmersiveReloadMag) at [50.39, 0.72, -9.51]  stroke 4.96 cm  axis [0.72, 0.13, 0.68]
+  phases      # mesh frames each of his states plays
+    Ready                    0..0
+    ReadyNoAmmo              7..7
+    Select                   0..0
+    Deselect                 0..0
+    DryFire                  1..1
+    DryFireNoAmmo            7..7
+    Fire                     1..1
+    FireLoop                 0..1
+    FireNoGas                1..1
+    FireEnd                  1..1
+    Reload                   2..17
+    UnloadAmmo               [0, 2, 3, 4, 5, 6, 7]
+    ImmersiveReload          0..0
+    CloseValve               2..5
+    WaitReload               6..6
+    ReleaseCan               7..7
+    ImmersiveReloadWait2     7..7
+    ImmersiveReloadMag       [8, 9, 10, 11, 13]
+    ImmersiveReloadWait3     13..13
+    ImmersiveReloadDone      15..17
+  ammo_hud    ammo_hud_bg.md3  centre [10.0, 12.26, 7.31]  facing [-1.0, -0.0, -0.0]  size [0.0, 9.04, 3.68]  Offset [-5.0, -40.0, -6.0]
+  watch_hud   w_dial.md3  centre [-12.01, 1.96, -5.19]  facing [-0.01, 1.0, -0.0]  size [5.99, 0.41, 5.96]  frame 151 (WH00A)  worn_on hand (gun hand; his watch frame is the gun hand's one-hand pose)  gap {'hand': 1.38}

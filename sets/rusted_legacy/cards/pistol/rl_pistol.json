@@ -1,0 +1,1164 @@
+{
+ "gun": "pistol",
+ "archetype": "pistol_mag",
+ "block": "//with both hands",
+ "ready_sprite": "PS2HA",
+ "ready_frames": {
+  "0": 0,
+  "1": 0,
+  "2": 19,
+  "3": 4
+ },
+ "models": {
+  "0": "models/pistol/berreta.md3",
+  "1": "models/pistol/berreta_mag.md3",
+  "2": "models/hand/hand.md3",
+  "3": "models/hand/hand2.md3"
+ },
+ "mesh": "models/pistol/berreta.md3",
+ "mesh_frames": 24,
+ "idle_frame": 0,
+ "bore": [
+  1.0,
+  -0.0,
+  -0.0
+ ],
+ "bore_src": "slide stroke ('slide')",
+ "muzzle": [
+  20.22,
+  -0.01,
+  3.38
+ ],
+ "parts": [
+  {
+   "surf": 0,
+   "name": "hammer",
+   "role": "hammer",
+   "rest": [
+    -2.9,
+    0.01,
+    3.83
+   ],
+   "verts": 82,
+   "travel": 3.03,
+   "axis": [
+    -0.71,
+    0.0,
+    -0.71
+   ],
+   "rot": 56.8,
+   "rot_axis": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "frames": [
+    1,
+    7
+   ],
+   "peak": 5
+  },
+  {
+   "surf": 1,
+   "name": "trigger",
+   "role": "trigger",
+   "rest": [
+    5.97,
+    0.0,
+    -1.84
+   ],
+   "verts": 101,
+   "travel": 1.27,
+   "axis": [
+    -0.95,
+    -0.0,
+    0.31
+   ],
+   "rot": 40.8,
+   "rot_axis": [
+    0.0,
+    1.0,
+    -0.0
+   ],
+   "frames": [
+    1,
+    23
+   ],
+   "peak": 5
+  },
+  {
+   "surf": 2,
+   "name": "slide",
+   "role": "slide",
+   "rest": [
+    5.49,
+    0.12,
+    3.64
+   ],
+   "verts": 1231,
+   "travel": 6.14,
+   "axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "rot": 0.0,
+   "rot_axis": [
+    -0.63,
+    0.77,
+    -0.06
+   ],
+   "frames": [
+    3,
+    23
+   ],
+   "peak": 5
+  }
+ ],
+ "hands": {
+  "hand": {
+   "mesh": "hand",
+   "frame": 19,
+   "note": "pistol, two-handed  (gun hand)",
+   "axis": [
+    0.9424,
+    0.0134,
+    -0.3343
+   ],
+   "axis_normals": [
+    0.9538,
+    -0.1988,
+    -0.2252
+   ],
+   "point": [
+    -0.629,
+    -0.464,
+    -5.472
+   ],
+   "radius": 1.125,
+   "fit_radius": 3.051,
+   "extent": [
+    -12.96,
+    5.09
+   ],
+   "hand_extent": [
+    -12.96,
+    6.35
+   ],
+   "chord_mode": 2.25,
+   "facets": 283
+  },
+  "hand2": {
+   "mesh": "hand2",
+   "frame": 4,
+   "note": "pistol support, cupped under the gun hand",
+   "axis": [
+    0.9354,
+    -0.2365,
+    -0.2629
+   ],
+   "axis_normals": [
+    0.8405,
+    -0.3535,
+    -0.4106
+   ],
+   "point": [
+    -0.024,
+    1.93,
+    -7.142
+   ],
+   "radius": 1.375,
+   "fit_radius": 3.845,
+   "extent": [
+    -13.17,
+    5.96
+   ],
+   "hand_extent": [
+    -13.19,
+    5.33
+   ],
+   "chord_mode": 2.75,
+   "facets": 81
+  }
+ },
+ "piece": {
+  "model": "models/pistol/berreta_mag.md3",
+  "frames": 14,
+  "seat_frame": 0,
+  "seat": [
+   0.33,
+   0.01,
+   -1.2
+  ],
+  "extent_cm": [
+   6.71,
+   2.39,
+   13.0
+  ],
+  "path": [
+   {
+    "state": "Reload",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HM",
+    "frame": 10,
+    "pos": [
+     -1.41,
+     0.01,
+     -9.67
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HM",
+    "frame": 10,
+    "pos": [
+     -1.41,
+     0.01,
+     -9.67
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HM",
+    "frame": 10,
+    "pos": [
+     -1.41,
+     0.01,
+     -9.67
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HN",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HN",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HN",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "ImmersiveReload",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "ImmersiveReload",
+    "sprite": "PS2HJ",
+    "frame": 8,
+    "pos": [
+     -0.48,
+     0.01,
+     -3.83
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HL",
+    "frame": 9,
+    "pos": [
+     -1.7,
+     0.01,
+     -14.86
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HM",
+    "frame": 10,
+    "pos": [
+     -1.41,
+     0.01,
+     -9.67
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HM",
+    "frame": 10,
+    "pos": [
+     -1.41,
+     0.01,
+     -9.67
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HM",
+    "frame": 10,
+    "pos": [
+     -1.41,
+     0.01,
+     -9.67
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HN",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HN",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HN",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "PS2HO",
+    "frame": 11,
+    "pos": [
+     -0.79,
+     0.01,
+     -5.63
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HP",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   },
+   {
+    "state": "ImmersiveReloadDone",
+    "sprite": "PS2HQ",
+    "frame": 0,
+    "pos": [
+     0.33,
+     0.01,
+     -1.2
+    ]
+   }
+  ],
+  "approach": {
+   "from_frame": 11,
+   "state": "ImmersiveReloadMag",
+   "pos": [
+    -0.79,
+    0.01,
+    -5.63
+   ],
+   "stroke": 4.57,
+   "axis": [
+    0.25,
+    0.0,
+    0.97
+   ]
+  }
+ },
+ "phases": {
+  "Ready": [
+   0
+  ],
+  "ReadyEmpty": [
+   23
+  ],
+  "ReadyNoMag": [
+   22
+  ],
+  "Deselect": [
+   0
+  ],
+  "Select": [
+   0
+  ],
+  "DryFire": [
+   23
+  ],
+  "DryFireNoMag": [
+   23
+  ],
+  "Fire": [
+   1
+  ],
+  "FireShot": [
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "Hold": [
+   2
+  ],
+  "Reload": [
+   0,
+   22
+  ],
+  "UnloadAmmo": [
+   22
+  ],
+  "ImmersiveReload": [
+   22
+  ],
+  "WaitReload": [
+   22
+  ],
+  "ImmersiveReloadMag": [
+   22
+  ],
+  "ImmersiveReloadWait2": [
+   23
+  ],
+  "ImmersiveReloadDone": [
+   0,
+   22
+  ],
+  "PlaceHolder": [
+   0
+  ]
+ },
+ "unused_mesh_frames": [
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21
+ ],
+ "hud": {
+  "gun_display": {
+   "mesh": "ammo_hud_bg.md3",
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "offset": [
+    0.0,
+    -32.0,
+    -10.0
+   ],
+   "centre": [
+    2.0,
+    7.26,
+    3.31
+   ],
+   "facing": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "size": [
+    0.0,
+    9.04,
+    3.68
+   ]
+  },
+  "wrist_watch": {
+   "mesh": "w_dial.md3",
+   "frame": 6,
+   "sprite": "WH00A",
+   "offset": [
+    0.0,
+    -24.0,
+    -10.0
+   ],
+   "centre": [
+    -12.01,
+    1.96,
+    -5.19
+   ],
+   "facing": [
+    -0.01,
+    1.0,
+    -0.0
+   ],
+   "size": [
+    5.99,
+    0.41,
+    5.96
+   ],
+   "worn_on": "hand (gun hand; his watch frame is the gun hand's one-hand pose)",
+   "hand_gap_cm": {
+    "hand": 1.32,
+    "hand2": 1.26
+   }
+  }
+ }
+}

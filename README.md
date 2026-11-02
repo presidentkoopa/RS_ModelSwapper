@@ -16,6 +16,7 @@ through the same process.
 | `sets/bd22q/` | BD22 VR Weapons Q 2.0.1, copied from [presidentkoopa/RS_Brutal22WeaponsQ](https://github.com/presidentkoopa/RS_Brutal22WeaponsQ) `main` at b360875: `src/` (the pack), `build.py`, `VERSION`, its own `README.md` and `CLAUDE.md`, its set-only tools (`tools/`: hand tones, HUD, Moonlight ammo), its hand-fit data (`handfit/poses`, `handfit/fits`) and the 1.92 holds rendered (`reference/192_poses`, where every 2.0 grip started). Its history, handoffs and renders stay in that repo. |
 | `sets/vanilla/` `sets/vanilla_plus/` `sets/modern/` | the c2q-built sets (were `vanilla_0.9`, `plus_0.7`, `modern_0.9`). Built from REMA's single-frame `_wm` meshes, so every gun is a still: they are rebuilt from the animated originals, never patched. |
 | `sets/aliens/` | RS_Aliens_VR-WeaponsQ @ 1ee0cd2, verbatim. |
+| `sets/rusted_legacy/` | Ermac's Rusted Legacy dev build, measured (S4): cards, sheets and `tools/rl_measure.py`. His files stay outside the repo (`RSQ_RL`). |
 | `tools/rig/` | the QuestZDoom 17.3 test rig for Linux (prebuilt `bin/`, version-guarded by `PINS`), its drivers and probe. |
 | `tools/handfit/` | hand fitting: the fitter core (`core/`), the gun port (`port/`), support hands (`support192/`), off-hand holds and fists (`offhand/`), grenade, melee, the PC fit farm (`farm/`), and the shared modules (`fitter_lib/`, `heavies/`, `shotguns/`). |
 | `tools/scope3x/` | the live 3x scope rig driver and its measurement. |

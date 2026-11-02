@@ -7,6 +7,10 @@
 example, the toolset proven on BD22, and the handbook. Everything older is on `archive/depot-2026-10-28`.
 
 ## Done (measured)
+- S4 (2026-11-02): `sets/rusted_legacy`, Ermac's Rusted Legacy dev build measured: 11 cards (his MODELDEF placement,
+  his hands, his reload pieces' seats and strokes, his gun ammo display and wrist watch), 4 sheets, and
+  `tools/rl_measure.py` on Depot tools only (`tools/hqt/gripmeasure.py` added from RS_ModelSwapper; `RSQ_RL` added
+  to `tools/depot.py`). Re-run from the Depot: 11 cards byte-identical. Not on the rig yet. See its README.
 - W1, the layout (2026-10-28). See README.md "The layout". The archive branch `archive/depot-2026-10-28` = old
   `main` db001eb (confirmed with `git ls-remote`).
 - `sets/bd22q` = RS_Brutal22WeaponsQ `main` b360875 (2.0.1): `src/`, `build.py`, `VERSION`, `README.md`,
@@ -33,6 +37,8 @@ example, the toolset proven on BD22, and the handbook. Everything older is on `a
   them back, proven, before it starts.
 
 ## Open
+- S4 next: the rig on doom2 -> Rusted Legacy (zero script errors), his build in as the base with the audit bugs fixed,
+  then hand reloads (sets/rusted_legacy/README.md "Next"). The plasma muzzle (two bores) needs refining.
 - Nothing in BD22 2.0.1 has been confirmed in the owner's headset yet (its own README says so).
 - Outside the repo by design: the game data (`RSQ_GAMEDATA`), the FBX hand (`RSQ_FBX`), Ermac's models
   (`RSQ_ERMAC`, measuring scripts only).

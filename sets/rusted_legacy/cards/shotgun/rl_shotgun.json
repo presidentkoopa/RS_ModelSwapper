@@ -1,0 +1,967 @@
+{
+ "gun": "shotgun",
+ "archetype": "shotgun_pump",
+ "block": "//with both hands",
+ "ready_sprite": "SH2HA",
+ "ready_frames": {
+  "0": 0,
+  "1": 99,
+  "2": 30,
+  "3": 15
+ },
+ "models": {
+  "0": "models/shotgun/shotgun.md3",
+  "1": "models/shotgun/shell.md3",
+  "2": "models/hand/hand.md3",
+  "3": "models/hand/hand2.md3"
+ },
+ "mesh": "models/shotgun/shotgun.md3",
+ "mesh_frames": 13,
+ "idle_frame": 0,
+ "bore": [
+  1.0,
+  -0.0,
+  -0.0
+ ],
+ "bore_src": "pump stroke ('shotgun_pump')",
+ "muzzle": [
+  78.48,
+  0.02,
+  5.88
+ ],
+ "parts": [
+  {
+   "surf": 1,
+   "name": "shotgun_trigger",
+   "role": "trigger",
+   "rest": [
+    4.72,
+    0.04,
+    -1.28
+   ],
+   "verts": 73,
+   "travel": 1.09,
+   "axis": [
+    -0.66,
+    -0.0,
+    0.75
+   ],
+   "rot": 33.8,
+   "rot_axis": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "frames": [
+    1,
+    6
+   ],
+   "peak": 5
+  },
+  {
+   "surf": 2,
+   "name": "shotgun_pump",
+   "role": "pump",
+   "rest": [
+    39.52,
+    0.03,
+    1.6
+   ],
+   "verts": 96,
+   "travel": 6.28,
+   "axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "rot": 0.0,
+   "rot_axis": [
+    0.14,
+    0.97,
+    0.22
+   ],
+   "frames": [
+    7,
+    11
+   ],
+   "peak": 9
+  },
+  {
+   "surf": 3,
+   "name": "shotgun_breach",
+   "role": "bolt",
+   "rest": [
+    17.67,
+    -1.27,
+    6.31
+   ],
+   "verts": 10,
+   "travel": 6.28,
+   "axis": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "rot": 0.0,
+   "rot_axis": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frames": [
+    7,
+    11
+   ],
+   "peak": 9
+  }
+ ],
+ "hands": {
+  "hand": {
+   "mesh": "hand",
+   "frame": 30,
+   "note": "shotgun             (gun hand)",
+   "axis": [
+    0.6354,
+    0.1061,
+    -0.7649
+   ],
+   "axis_normals": [
+    0.829,
+    -0.1891,
+    -0.5264
+   ],
+   "point": [
+    -6.276,
+    -0.634,
+    -1.383
+   ],
+   "radius": 1.375,
+   "fit_radius": 2.757,
+   "extent": [
+    -11.94,
+    5.16
+   ],
+   "hand_extent": [
+    -12.39,
+    4.15
+   ],
+   "chord_mode": 2.75,
+   "facets": 238
+  },
+  "hand2": {
+   "mesh": "hand2",
+   "frame": 15,
+   "note": "shotgun / rifle forend support",
+   "axis": [
+    0.9751,
+    -0.0463,
+    0.2171
+   ],
+   "axis_normals": [
+    0.9956,
+    -0.0657,
+    -0.0662
+   ],
+   "point": [
+    39.268,
+    0.114,
+    1.183
+   ],
+   "radius": 2.125,
+   "fit_radius": 3.065,
+   "extent": [
+    -8.17,
+    7.28
+   ],
+   "hand_extent": [
+    -11.09,
+    6.32
+   ],
+   "chord_mode": 4.25,
+   "facets": 136
+  }
+ },
+ "piece": {
+  "model": "models/shotgun/shell.md3",
+  "frames": 5,
+  "seat_frame": 4,
+  "seat": [
+   18.97,
+   0.07,
+   0.45
+  ],
+  "extent_cm": [
+   6.61,
+   2.34,
+   3.17
+  ],
+  "path": [
+   {
+    "state": "Reload",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HO",
+    "frame": 2,
+    "pos": [
+     13.87,
+     0.07,
+     -5.41
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HP",
+    "frame": 3,
+    "pos": [
+     17.17,
+     0.07,
+     -1.59
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "Reload",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ReloadDone",
+    "sprite": "SH2HI",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "ReloadDone",
+    "sprite": "SH2HI",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "ReloadDone",
+    "sprite": "SH2HJ",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "ReloadDone",
+    "sprite": "SH2HJ",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "ReloadDone",
+    "sprite": "SH2HJ",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "ReloadDone",
+    "sprite": "SH2HJ",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "ReloadDone",
+    "sprite": "SH2HM",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "ReloadDone",
+    "sprite": "SH2HM",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "SH2HI",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "SH2HI",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "SH2HJ",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "SH2HJ",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "SH2HJ",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "SH2HJ",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "SH2HM",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "UnloadAmmo",
+    "sprite": "SH2HM",
+    "frame": 0,
+    "pos": [
+     17.26,
+     0.07,
+     5.92
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HO",
+    "frame": 2,
+    "pos": [
+     13.87,
+     0.07,
+     -5.41
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HO",
+    "frame": 2,
+    "pos": [
+     13.87,
+     0.07,
+     -5.41
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HO",
+    "frame": 2,
+    "pos": [
+     13.87,
+     0.07,
+     -5.41
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HP",
+    "frame": 3,
+    "pos": [
+     17.17,
+     0.07,
+     -1.59
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HP",
+    "frame": 3,
+    "pos": [
+     17.17,
+     0.07,
+     -1.59
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HP",
+    "frame": 3,
+    "pos": [
+     17.17,
+     0.07,
+     -1.59
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HN",
+    "frame": 1,
+    "pos": [
+     12.11,
+     0.07,
+     -7.47
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HO",
+    "frame": 2,
+    "pos": [
+     13.87,
+     0.07,
+     -5.41
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HO",
+    "frame": 2,
+    "pos": [
+     13.87,
+     0.07,
+     -5.41
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HO",
+    "frame": 2,
+    "pos": [
+     13.87,
+     0.07,
+     -5.41
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HP",
+    "frame": 3,
+    "pos": [
+     17.17,
+     0.07,
+     -1.59
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HP",
+    "frame": 3,
+    "pos": [
+     17.17,
+     0.07,
+     -1.59
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HP",
+    "frame": 3,
+    "pos": [
+     17.17,
+     0.07,
+     -1.59
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   },
+   {
+    "state": "ImmersiveReloadMag",
+    "sprite": "SH2HQ",
+    "frame": 4,
+    "pos": [
+     18.97,
+     0.07,
+     0.45
+    ]
+   }
+  ],
+  "approach": {
+   "from_frame": 3,
+   "state": "ImmersiveReloadMag",
+   "pos": [
+    17.17,
+    0.07,
+    -1.59
+   ],
+   "stroke": 2.72,
+   "axis": [
+    0.66,
+    0.0,
+    0.75
+   ]
+  }
+ },
+ "phases": {
+  "Ready": [
+   0
+  ],
+  "Deselect": [
+   0
+  ],
+  "Select": [
+   0
+  ],
+  "DryFire": [
+   1
+  ],
+  "Fire": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "Reload": [
+   0
+  ],
+  "ReloadDone": [
+   0,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "UnloadAmmo": [
+   0,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "ImmersiveReload": [
+   0
+  ],
+  "ImmersiveReloadMag": [
+   0
+  ],
+  "WaitReload": [
+   0
+  ],
+  "PlaceHolder": [
+   0
+  ]
+ },
+ "unused_mesh_frames": [],
+ "hud": {
+  "gun_display": {
+   "mesh": "ammo_hud_bg.md3",
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "offset": [
+    -1.0,
+    -34.0,
+    -10.0
+   ],
+   "centre": [
+    4.0,
+    8.26,
+    3.31
+   ],
+   "facing": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "size": [
+    0.0,
+    9.04,
+    3.68
+   ]
+  },
+  "wrist_watch": {
+   "mesh": "w_dial.md3",
+   "frame": 30,
+   "sprite": "WH00A",
+   "offset": [
+    0.0,
+    -24.0,
+    -10.0
+   ],
+   "centre": [
+    -15.7,
+    -0.74,
+    3.87
+   ],
+   "facing": [
+    -0.17,
+    0.98,
+    0.05
+   ],
+   "size": [
+    5.94,
+    1.4,
+    5.96
+   ],
+   "worn_on": "hand (gun hand; his watch frame is the gun hand's one-hand pose)",
+   "hand_gap_cm": {
+    "hand": 1.33,
+    "hand2": 44.99
+   }
+  }
+ }
+}

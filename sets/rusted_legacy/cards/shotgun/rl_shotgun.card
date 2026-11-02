@@ -1,0 +1,30 @@
+weapon rl_shotgun
+  archetype   shotgun_pump
+  source      Rusted Legacy dev build (Ermac), models/shotgun/shotgun.md3  block '//with both hands'  Ready SH2HA {0: 0, 1: 99, 2: 30, 3: 15}
+  space       CTL  controller frame, cm, F forward L left U up (Scale -1 1 1, Offset 0 -24 -10, vr_weaponScale 1.02)
+  model       models/shotgun/shotgun.md3   idle_frame 0   frames 13
+  bore        [1.0, -0.0, -0.0]   # from the pump stroke ('shotgun_pump')
+  parts
+    trigger  surf 1 'shotgun_trigger'  rest [4.72, 0.04, -1.28]  axis [-0.66, -0.0, 0.75]  travel 1.09  frames 1..6  rot 33.8deg axis [-0.0, 1.0, -0.0]
+    pump     surf 2 'shotgun_pump'  rest [39.52, 0.03, 1.6]  axis [-1.0, 0.0, 0.0]  travel 6.28  frames 7..11
+    bolt     surf 3 'shotgun_breach'  rest [17.67, -1.27, 6.31]  axis [-1.0, -0.0, -0.0]  travel 6.28  frames 7..11
+    muzzle    [78.48, 0.02, 5.88]
+  grip        hand.md3 frame 30  held_axis [0.6354, 0.1061, -0.7649]  point [-6.276, -0.634, -1.383]  radius 1.375  extent [-11.94, 5.16]   # Ermac's own hand, gripmeasure
+  support     hand2.md3 frame 15  held_axis [0.9751, -0.0463, 0.2171]  point [39.268, 0.114, 1.183]  radius 2.125  extent [-8.17, 7.28]   # Ermac's own hand, gripmeasure
+  piece       models/shotgun/shell.md3  seat_frame 4  seat [18.97, 0.07, 0.45]  size [6.61, 2.34, 3.17]
+    approach  from frame 3 (ImmersiveReloadMag) at [17.17, 0.07, -1.59]  stroke 2.72 cm  axis [0.66, 0.0, 0.75]
+  phases      # mesh frames each of his states plays
+    Ready                    0..0
+    Deselect                 0..0
+    Select                   0..0
+    DryFire                  1..1
+    Fire                     0..12
+    Reload                   0..0
+    ReloadDone               [0, 8, 9, 10, 11, 12]
+    UnloadAmmo               [0, 8, 9, 10, 11, 12]
+    ImmersiveReload          0..0
+    ImmersiveReloadMag       0..0
+    WaitReload               0..0
+    PlaceHolder              0..0
+  ammo_hud    ammo_hud_bg.md3  centre [4.0, 8.26, 3.31]  facing [-1.0, -0.0, -0.0]  size [0.0, 9.04, 3.68]  Offset [-1.0, -34.0, -10.0]
+  watch_hud   w_dial.md3  centre [-15.7, -0.74, 3.87]  facing [-0.17, 0.98, 0.05]  size [5.94, 1.4, 5.96]  frame 30 (WH00A)  worn_on hand (gun hand; his watch frame is the gun hand's one-hand pose)  gap {'hand': 1.33, 'hand2': 44.99}

@@ -1,0 +1,37 @@
+weapon rl_pistol
+  archetype   pistol_mag
+  source      Rusted Legacy dev build (Ermac), models/pistol/berreta.md3  block '//with both hands'  Ready PS2HA {0: 0, 1: 0, 2: 19, 3: 4}
+  space       CTL  controller frame, cm, F forward L left U up (Scale -1 1 1, Offset 0 -24 -10, vr_weaponScale 1.02)
+  model       models/pistol/berreta.md3   idle_frame 0   frames 24
+  bore        [1.0, -0.0, -0.0]   # from the slide stroke ('slide')
+  parts
+    hammer   surf 0 'hammer'  rest [-2.9, 0.01, 3.83]  axis [-0.71, 0.0, -0.71]  travel 3.03  frames 1..7  rot 56.8deg axis [-0.0, -1.0, 0.0]
+    trigger  surf 1 'trigger'  rest [5.97, 0.0, -1.84]  axis [-0.95, -0.0, 0.31]  travel 1.27  frames 1..23  rot 40.8deg axis [0.0, 1.0, -0.0]
+    slide    surf 2 'slide'  rest [5.49, 0.12, 3.64]  axis [-1.0, 0.0, 0.0]  travel 6.14  frames 3..23
+    muzzle    [20.22, -0.01, 3.38]
+  grip        hand.md3 frame 19  held_axis [0.9424, 0.0134, -0.3343]  point [-0.629, -0.464, -5.472]  radius 1.125  extent [-12.96, 5.09]   # Ermac's own hand, gripmeasure
+  support     hand2.md3 frame 4  held_axis [0.9354, -0.2365, -0.2629]  point [-0.024, 1.93, -7.142]  radius 1.375  extent [-13.17, 5.96]   # Ermac's own hand, gripmeasure
+  piece       models/pistol/berreta_mag.md3  seat_frame 0  seat [0.33, 0.01, -1.2]  size [6.71, 2.39, 13.0]
+    approach  from frame 11 (ImmersiveReloadMag) at [-0.79, 0.01, -5.63]  stroke 4.57 cm  axis [0.25, 0.0, 0.97]
+  phases      # mesh frames each of his states plays
+    Ready                    0..0
+    ReadyEmpty               23..23
+    ReadyNoMag               22..22
+    Deselect                 0..0
+    Select                   0..0
+    DryFire                  23..23
+    DryFireNoMag             23..23
+    Fire                     1..1
+    FireShot                 3..7
+    Hold                     2..2
+    Reload                   [0, 22]
+    UnloadAmmo               22..22
+    ImmersiveReload          22..22
+    WaitReload               22..22
+    ImmersiveReloadMag       22..22
+    ImmersiveReloadWait2     23..23
+    ImmersiveReloadDone      [0, 22]
+    PlaceHolder              0..0
+  ammo_hud    ammo_hud_bg.md3  centre [2.0, 7.26, 3.31]  facing [-1.0, -0.0, -0.0]  size [0.0, 9.04, 3.68]  Offset [0.0, -32.0, -10.0]
+  watch_hud   w_dial.md3  centre [-12.01, 1.96, -5.19]  facing [-0.01, 1.0, -0.0]  size [5.99, 0.41, 5.96]  frame 6 (WH00A)  worn_on hand (gun hand; his watch frame is the gun hand's one-hand pose)  gap {'hand': 1.32, 'hand2': 1.26}
+  unused      mesh frames no state draws: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
