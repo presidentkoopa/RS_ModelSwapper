@@ -4,7 +4,7 @@
 
 # PLAN: the RSQ Weapon Depot workshop (owner, 2026-10-28; this file is the only plan)
 
-Current step: **W1**
+Current step: **S4**
 
 `none` is also a legal current step, and `tools/check_plan.py` accepts it only while every `- F<n>` and
 `- W<n>` line here is marked DONE. To do new work, add an item in a `[plan]` commit and name it here.
@@ -37,6 +37,11 @@ bd22q 1.97-1.99 work, the rig, the first fitter) is on the branch `archive/depot
       Rebuild from the animated originals (they are stills today), then the handbook.
 - S2  sets/modern: player class, every Doom drop / pickup -> a modern gun, start Glock.
 - S3  sets/aliens: RS_Aliens_VR-WeaponsQ, through the handbook.
+- S4  sets/rusted_legacy: Ermac's Rusted Legacy dev build (owner, 2026-11-02 04:24 "you may begin. Proceed until
+      measuring is done"; 04:37 "put it in RSQ WeaponDepot"). Measured cards first (his own MODELDEF placement,
+      his hands, his reload pieces, his gun ammo display and wrist watch), then the BD22 treatment: real hand
+      reloads, his HUDs kept and polished (owner 04:30), unfinished work finished. His meshes stay outside the
+      repo (RSQ_ERMAC / RSQ_RL); the ShieldSaw comes from UBQS at the end.
 
 ## To consider, not scheduled (each needs the owner's yes)
 - C1  RS_VR_Reload's own meshes for clips and magazines (its dropped magazine glows and shows its ammo).
