@@ -2,6 +2,9 @@ version "3.0"
 
 #include "zscript/rlvr_settings.txt"
 
+#include "zscript/rsrl/rsrl_reload.zs"
+#include "zscript/rsrl/rsrl_table.zs"
+
 #include "zscript/weapons/weaponbase.txt"
 #include "zscript/weapons/weaponhud.txt"
 #include "zscript/weapons/weaponhud2.txt"

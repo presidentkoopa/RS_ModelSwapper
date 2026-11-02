@@ -12,7 +12,7 @@ user float rl_laseralpha	= 0.3;
 user bool rl_fastswitch		= true;
 user bool rl_perfmode		= false;
 user bool rl_autoreload		= true;
-user bool rl_imreload		= false;
+user bool rl_imreload		= true;
 user bool rl_wmarker		= true;
 user bool rl_ammograb 		= true;
 user float rl_stouch_dist 	= 4.0;
@@ -37,3 +37,6 @@ user int rl_weaphud_bg 		= 1;
 user int rl_weaphud_color 	= 0;
 user int rl_drop_replace 	= 1;
 user bool rl_show_tips 		= true;
+// RSQ Weapon Depot (S4): measured hand reloads in VR (zscript/rsrl), and their log
+user int rsrl_handreload	= 1;
+user int rsrl_debug		= 0;

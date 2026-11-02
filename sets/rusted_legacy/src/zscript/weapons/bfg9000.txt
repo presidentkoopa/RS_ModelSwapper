@@ -113,6 +113,8 @@ class RLBFG9000 : DoomWeaponZ replaces BFG9000
 	
 	action void A_CheckImmersiveReloadAction1()
 	{
+		// RSRL (RSQ Weapon Depot): measured hand reload, row 16; his touch test below runs outside VR or with rsrl_handreload 0
+		if (RSRL_Reload.On(invoker)) { bool rsDone; Vector3 rsAt; [rsDone, rsAt] = RSRL_Reload.Gate(invoker, 16, !invoker.ImmersiveAmmoGrab || invoker.owner.CountInv("grabbedAmmo") > 0); invoker.showWeaponMarker(rsAt); if (rsDone) invoker.setReloadStep(2); return; }
 		let pmo = player.mo;
 		int hand = invoker.bOffhandWeapon;
 		Actor _puff;
@@ -132,6 +134,8 @@ class RLBFG9000 : DoomWeaponZ replaces BFG9000
 	
 	action void A_CheckImmersiveReloadAction2()
 	{
+		// RSRL (RSQ Weapon Depot): measured hand reload, row 17; his touch test below runs outside VR or with rsrl_handreload 0
+		if (RSRL_Reload.On(invoker)) { bool rsDone; Vector3 rsAt; [rsDone, rsAt] = RSRL_Reload.Gate(invoker, 17, !invoker.ImmersiveAmmoGrab || invoker.owner.CountInv("grabbedAmmo") > 0); invoker.showWeaponMarker(rsAt); if (rsDone) invoker.setReloadStep(3, 1); return; }
 		let pmo = player.mo;
 		int hand = invoker.bOffhandWeapon;
 		Actor _puff;
@@ -155,6 +159,8 @@ class RLBFG9000 : DoomWeaponZ replaces BFG9000
 	
 	action void A_CheckImmersiveReloadAction3()
 	{
+		// RSRL (RSQ Weapon Depot): measured hand reload, row 18; his touch test below runs outside VR or with rsrl_handreload 0
+		if (RSRL_Reload.On(invoker)) { bool rsDone; Vector3 rsAt; [rsDone, rsAt] = RSRL_Reload.Gate(invoker, 18, !invoker.ImmersiveAmmoGrab || invoker.owner.CountInv("grabbedAmmo") > 0); invoker.showWeaponMarker(rsAt); if (rsDone) invoker.setReloadStep(4); return; }
 		let pmo = player.mo;
 		int hand = invoker.bOffhandWeapon;
 		Actor _puff;

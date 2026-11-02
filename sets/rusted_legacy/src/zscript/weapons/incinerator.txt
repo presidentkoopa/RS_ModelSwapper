@@ -147,6 +147,8 @@ class RLIncinerator : DoomWeaponZ
 	
 	action void A_CheckImmersiveReloadAction1()
 	{
+		// RSRL (RSQ Weapon Depot): measured hand reload, row 12; his touch test below runs outside VR or with rsrl_handreload 0
+		if (RSRL_Reload.On(invoker)) { bool rsDone; Vector3 rsAt; [rsDone, rsAt] = RSRL_Reload.Gate(invoker, 12, !invoker.ImmersiveAmmoGrab || invoker.owner.CountInv("grabbedAmmo") > 0); invoker.showWeaponMarker(rsAt); if (rsDone) invoker.setReloadStep(2); return; }
 		let pmo = player.mo;
 		int hand = invoker.bOffhandWeapon;
 		Actor _puff;
@@ -166,6 +168,8 @@ class RLIncinerator : DoomWeaponZ
 	
 	action void A_CheckImmersiveReloadAction2()
 	{
+		// RSRL (RSQ Weapon Depot): measured hand reload, row 13; his touch test below runs outside VR or with rsrl_handreload 0
+		if (RSRL_Reload.On(invoker)) { bool rsDone; Vector3 rsAt; [rsDone, rsAt] = RSRL_Reload.Gate(invoker, 13, !invoker.ImmersiveAmmoGrab || invoker.owner.CountInv("grabbedAmmo") > 0); invoker.showWeaponMarker(rsAt); if (rsDone) invoker.setReloadStep(3); return; }
 		let pmo = player.mo;
 		int hand = invoker.bOffhandWeapon;
 		Actor _puff;
@@ -185,6 +189,8 @@ class RLIncinerator : DoomWeaponZ
 	
 	action void A_CheckImmersiveReloadAction3()
 	{
+		// RSRL (RSQ Weapon Depot): measured hand reload, row 14; his touch test below runs outside VR or with rsrl_handreload 0
+		if (RSRL_Reload.On(invoker)) { bool rsDone; Vector3 rsAt; [rsDone, rsAt] = RSRL_Reload.Gate(invoker, 14, !invoker.ImmersiveAmmoGrab || invoker.owner.CountInv("grabbedAmmo") > 0); invoker.showWeaponMarker(rsAt); if (rsDone) invoker.setReloadStep(4, 1); return; }
 		let pmo = player.mo;
 		int hand = invoker.bOffhandWeapon;
 		Actor _puff;
@@ -208,6 +214,8 @@ class RLIncinerator : DoomWeaponZ
 	
 	action void A_CheckImmersiveReloadAction4()
 	{
+		// RSRL (RSQ Weapon Depot): measured hand reload, row 15; his touch test below runs outside VR or with rsrl_handreload 0
+		if (RSRL_Reload.On(invoker)) { bool rsDone; Vector3 rsAt; [rsDone, rsAt] = RSRL_Reload.Gate(invoker, 15, !invoker.ImmersiveAmmoGrab || invoker.owner.CountInv("grabbedAmmo") > 0); invoker.showWeaponMarker(rsAt); if (rsDone) invoker.setReloadStep(5); return; }
 		let pmo = player.mo;
 		int hand = invoker.bOffhandWeapon;
 		Actor _puff;

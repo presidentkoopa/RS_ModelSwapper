@@ -52,6 +52,8 @@ class RLPistol : DoomWeaponZ
 	
 	action void A_CheckImmersiveReloadAction1()
 	{
+		// RSRL (RSQ Weapon Depot): measured hand reload, row 0; his touch test below runs outside VR or with rsrl_handreload 0
+		if (RSRL_Reload.On(invoker)) { bool rsDone; Vector3 rsAt; [rsDone, rsAt] = RSRL_Reload.Gate(invoker, 0, !invoker.ImmersiveAmmoGrab || invoker.owner.CountInv("grabbedAmmo") > 0); invoker.showWeaponMarker(rsAt); if (rsDone) invoker.setReloadStep(2, 1); return; }
 		let pmo = player.mo;
 		int hand = invoker.bOffhandWeapon;
 		Actor _puff;
@@ -71,6 +73,8 @@ class RLPistol : DoomWeaponZ
 	
 	action void A_CheckImmersiveReloadAction2()
 	{
+		// RSRL (RSQ Weapon Depot): measured hand reload, row 1; his touch test below runs outside VR or with rsrl_handreload 0
+		if (RSRL_Reload.On(invoker)) { bool rsDone; Vector3 rsAt; [rsDone, rsAt] = RSRL_Reload.Gate(invoker, 1, !invoker.ImmersiveAmmoGrab || invoker.owner.CountInv("grabbedAmmo") > 0); invoker.showWeaponMarker(rsAt); if (rsDone) invoker.setReloadStep(3); return; }
 		let pmo = player.mo;
 		int hand = invoker.bOffhandWeapon;
 		Actor _puff;

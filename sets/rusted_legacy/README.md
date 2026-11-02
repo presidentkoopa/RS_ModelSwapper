@@ -93,8 +93,39 @@ spawned; pistol mesh frames 8-21 (a slide-lock fire cycle) never played.
 His reload: an off-hand proximity trigger (3 units) at a point from `LineAttack(angle, 5, pitch-100)` off the
 player, then a canned animation. Nothing follows the hand.
 
+## Hand reloads (RSRL, 2026-11-02; rig only, not headset-confirmed)
+His immersive reload walks each gun through steps; each step waits in a gate (`A_CheckImmersiveReloadActionN`) that
+only tests whether the off hand is within 2-3 units of a point. Now, in VR with `rsrl_handreload 1` (default), each gate
+asks `src/zscript/rsrl/rsrl_reload.zs` instead, and calls HIS `setReloadStep(...)` with HIS arguments only when the hand
+has really done the job. His animations, sounds, shoulder ammo grab, markers and ammo code all still run. Outside VR or
+with `rsrl_handreload 0` his touch test runs unchanged.
+- **Insert** (a piece drawn in his off hand): the piece is captured in a cylinder about the measured seat axis (side
+  3.5 cm, square to the mouth within 40 deg, up to stroke + 6 cm out), and must be pushed home along it (to 1 cm) without
+  leaving (side 5.5, 55 deg). BD22 RSR tolerances.
+- **Stroke** (empty hand on a part): palm within 7 cm of the part, then moved along its measured axis 0.85 of travel
+  (rotating parts 0.6 of the chord). The pump goes back, then forward again.
+- Gates: pistol mag, slide; shotgun shell, pump; SSG barrel down, shells, barrel up; chaingun / plasma / heatwave mag;
+  rocket clip from the side; hell shotgun shell, chamber lever; incinerator lever, pull the can, new can, lever back;
+  BFG lid open, pod, lid closed.
+- Every number: `tools/gen_rsrl.py` reads the cards (seat, approach, stroke, parts), and measures the piece in his off
+  hand (fist.txt ammo_hand frame + piece model), the piece's axis at the mouth, and his empty-hand palm (hand.md3
+  frame 1, front 10 cm: -1.05, 2.62, -5.49). It writes `src/zscript/rsrl/rsrl_table.zs` and patches his 10 gun files
+  (2 lines per gate, idempotent, CRLF kept). Re-run it after re-measuring.
+- `rl_imreload` now defaults to **true** (his default was false), so the hand reloads are what a new player gets.
+  New cvars: `rsrl_handreload` (1), `rsrl_debug` (0; 1 logs captures/grabs/done, 2 every 7 tics).
+
+Shown on the rig (`tools/rl_drive.py`, freedoom2, tools/rig/bin/qz 17.3): all 10 guns, 20 of 20 gates passed by
+hand motion alone, 0 script errors; sheets in `sheets/reloads/rig_reload_<gun>.png` (side view, looked at: piece
+comes in from the mouth side, his in-gun animation then plays, the gun ends in Ready). Wrong-way run (`RL_NEG=1`):
+pistol mag and shotgun shell turned 60 deg off their mouth axis were never captured; the incinerator lever pushed
+against its travel was let go.
+
+Not yet: headset. Some pieces need a real wrist turn to seat (the rig pitched the off hand by): pistol +13, chaingun
++17, plasma +15, shotgun -39, rocket 0, hell shell +69, heatwave -69, BFG pod -69, gas can -66, SSG shells -83 deg.
+That is his in-hand pose against his gun's mouth; if it feels wrong in the headset the fix is the in-hand pose
+(fist.txt), not the tolerance. The SSG approach axis is his animation's (it swings in from the right, L -0.47).
+
 ## Next (S4)
 1. DONE: rig boot (freedoom2, 0 script errors) and the four certain audit fixes. Re-run on doom2.wad when it is staged.
-3. Reloads by hand: magazine (pistol, chaingun, plasma, heatwave), pump (shotgun), break (ssg), sideways clip
-   (rocket); new kinds: lever (hell shotgun), canister + valve (incinerator), tray + lid (BFG).
+3. DONE on the rig (2026-11-02), see "Hand reloads" below: all 10 reloadable guns, 20 gates, by hand.
 4. His gun ammo display and wrist watch kept and polished (owner, 2026-11-02 04:30).
