@@ -17,6 +17,8 @@ example, the toolset proven on BD22, and the handbook. Everything older is on `a
 - S4 (2026-11-02): his HUD polish, first pass: watch stays on the wrist and ammo panel on the gun through recoil,
   punches and the hell shotgun spin (measured up to 56 cm off before; `tools/gen_hudfollow.py`, verified 0.012 cm
   panel / 0.3 cm watch); panel background layer bug fixed; HUD audit 0 problems. Rig only.
+- S4 (2026-11-02): his HUD made cheap: ~100 -> ~14 us per tic on the rig, no per-tic allocations, same frames
+  (compiled from his state chains; 0 differences over 17k layer-tics both ways). `rsrl_hudfast 0` = his code.
 - W1, the layout (2026-10-28). See README.md "The layout". The archive branch `archive/depot-2026-10-28` = old
   `main` db001eb (confirmed with `git ls-remote`).
 - `sets/bd22q` = RS_Brutal22WeaponsQ `main` b360875 (2.0.1): `src/`, `build.py`, `VERSION`, `README.md`,

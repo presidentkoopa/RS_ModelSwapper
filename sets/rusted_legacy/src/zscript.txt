@@ -11,6 +11,8 @@ version "3.0"
 #include "zscript/weapons/weaponhud.txt"
 #include "zscript/weapons/weaponhud2.txt"
 #include "zscript/weapons/weaponlaser.txt"
+#include "zscript/rsrl/rsrl_hudfast.zs"
+#include "zscript/rsrl/rsrl_hudfast_table.zs"
 
 #include "zscript/weapons/fist.txt"
 #include "zscript/weapons/pistol.txt"

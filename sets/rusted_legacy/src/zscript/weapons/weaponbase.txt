@@ -55,26 +55,42 @@ class DoomWeaponZ : DoomWeapon
 		
 		if(owner.player.ReadyWeapon == self)
 		{
-			calculateHUDValues(owner.player);
-			clearWatchHUD(owner.player);
-			if(wristWatchEnabled) setWatchHUD(owner.player);
-			
-			clearWeaponHUD(owner.player);
-			if(WeaponHUDEnabled) setWeaponHUD(owner.player);
-			RSRL_HudFollow.Apply(self, owner.player);	// RSQ Weapon Depot: keep the watch on the wrist and the panel on the gun while they animate
-			
-			clearLaserPointer(owner.player);
-			if(CheckWeaponState("Reload") || CheckWeaponState("InsertAmmo") || CheckWeaponState("ReloadNoShells") || CheckWeaponState("ReloadLeft") || CheckWeaponState("UnloadAmmo") || CheckWeaponState("OpenBarrel") || CheckWeaponState("WaitReload") || CheckWeaponState("ImmersiveReloadMag") || CheckWeaponState("ImmersiveReloadWait2")) laserActivateDelay = 35;
-			if(laserActivateDelay) laserActivateDelay--;
-			if(aimLaser && !laserActivateDelay) setLaserPointer(owner.player);
-			
-			if(CheckWeaponState("Ready"))
+			// RSQ Weapon Depot: rsrl_hudfast 1 draws the same HUD without the per-tic cost (zscript/rsrl/rsrl_hudfast.zs);
+			// rsrl_hudfast 0 or rsrl_hudcheck 1 runs his code below as he wrote it
+			if (!rshCvProf) { rshCvProf = CVar.GetCVar('rsrl_hudprof', owner.player); rshCvCheck = CVar.GetCVar('rsrl_hudcheck', owner.player); rshCvFast = CVar.GetCVar('rsrl_hudfast', owner.player); }
+			int rshprof = rshCvProf ? rshCvProf.GetInt() : 0;
+			bool rshcheck = rshCvCheck && rshCvCheck.GetInt() == 1;
+			double rsht0 = rshprof ? MSTimeF() : 0;
+			if ((!rshCvFast || rshCvFast.GetInt()) && !rshcheck)
 			{
-				owner.setinventory("ImmersiveInteractToken", 0);
-				owner.setinventory("ImmersiveReloadStep", 0);
-				owner.setinventory("grabbedAmmo", 0);
-				if(marker1) marker1.destroy();
-				if(marker2) marker2.destroy();
+				RSH_Tick(owner.player);
+				if (rshprof) RSH_Prof(owner.player, rsht0, true);
+			}
+			else
+			{
+				calculateHUDValues(owner.player);
+				clearWatchHUD(owner.player);
+				if(wristWatchEnabled) setWatchHUD(owner.player);
+			
+				clearWeaponHUD(owner.player);
+				if(WeaponHUDEnabled) setWeaponHUD(owner.player);
+				if (rshcheck) RSH_Check(owner.player);
+				RSRL_HudFollow.Apply(self, owner.player);	// RSQ Weapon Depot: keep the watch on the wrist and the panel on the gun while they animate
+			
+				clearLaserPointer(owner.player);
+				if(CheckWeaponState("Reload") || CheckWeaponState("InsertAmmo") || CheckWeaponState("ReloadNoShells") || CheckWeaponState("ReloadLeft") || CheckWeaponState("UnloadAmmo") || CheckWeaponState("OpenBarrel") || CheckWeaponState("WaitReload") || CheckWeaponState("ImmersiveReloadMag") || CheckWeaponState("ImmersiveReloadWait2")) laserActivateDelay = 35;
+				if(laserActivateDelay) laserActivateDelay--;
+				if(aimLaser && !laserActivateDelay) setLaserPointer(owner.player);
+			
+				if(CheckWeaponState("Ready"))
+				{
+					owner.setinventory("ImmersiveInteractToken", 0);
+					owner.setinventory("ImmersiveReloadStep", 0);
+					owner.setinventory("grabbedAmmo", 0);
+					if(marker1) marker1.destroy();
+					if(marker2) marker2.destroy();
+				}
+				if (rshprof) RSH_Prof(owner.player, rsht0, false);
 			}
 		}
 		else

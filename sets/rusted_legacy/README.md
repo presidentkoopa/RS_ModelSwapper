@@ -147,8 +147,24 @@ His watch and gun display are kept as he made them (meshes, colours, scales, num
 
 Measured but not changed (owner's call): from an eye behind the sights the rocket and BFG panels are hidden by the gun
 body and plasma's is half hidden (`tools/rl_hud_view.py`). From the rig's default eye every panel is in full view.
-The BFG's watch is hidden from both eyes by the gun. His layers are destroyed and rebuilt every tic (17 layers),
-which costs performance on a Quest; that is not changed.
+The BFG's watch is hidden from both eyes by the gun: it is not inside the mesh (2 of 41 dial points touch it), it
+sits under the BFG's body, which covers the gun hand from every angle tried on the rig.
+
+## HUD performance (2026-11-02; rig)
+His Tick, every tic: turns ammo/health/armor into strings, destroys and re-makes 17 HUD layers + the laser (18 new
+PSprite objects per tic, garbage for the collector), runs ~150 A_JumpIf calls through their state chains, resolves 10
+state labels by name. Now (`rsrl_hudfast 1`, default; `zscript/rsrl/rsrl_hudfast.zs`):
+- his state chains are compiled to functions by `tools/gen_hudfast.py` (377 labels), so the frame each layer shows is
+  the one his chain picks; layers are made once and only get sprite and frame set, and only when his values, his
+  settings or the pose changed; his calculateHUDValues runs only when its inputs changed; labels resolved once;
+  the laser is re-made only when his laser settings change. No per-tic allocations.
+- measured on the rig (`rsrl_hudprof 1`, shotgun held, 350-tic averages): his ~100 us per tic, fast ~14 us (7x).
+- same picture: `rsrl_hudcheck 1` runs his code and the compiled chains together, all 12 classes and a sweep of every
+  menu setting kind, god mode, firing: 17,255 layer-tics, 0 differ. `rsrl_hudcheck 2` checks the fast path's drawn
+  layers (with skipped redraws and the follow poses) every tic: 17,255 layer-tics, 0 wrong. `rsrl_hudfast 0` = his code.
+- kept as he renders it: his hud_bracer sets the bracer's render flags but the DIAL's style and alpha (Add 0.8), so the
+  dial is additive, not the Translucent 0.7 his hud_bg asks for. Probably a copy slip like the panel one; not changed
+  because it is the look you see now.
 
 ## Next (S4)
 1. DONE: rig boot (freedoom2, 0 script errors) and the four certain audit fixes. Re-run on doom2.wad when it is staged.

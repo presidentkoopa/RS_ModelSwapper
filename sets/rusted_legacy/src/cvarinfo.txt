@@ -41,3 +41,6 @@ user bool rl_show_tips 		= true;
 user int rsrl_handreload	= 1;
 user int rsrl_debug		= 0;
 user int rsrl_hudfollow		= 1;
+user int rsrl_hudfast		= 1;
+user int rsrl_hudcheck		= 0;
+user int rsrl_hudprof		= 0;
