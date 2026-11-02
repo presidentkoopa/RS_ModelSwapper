@@ -125,7 +125,32 @@ Not yet: headset. Some pieces need a real wrist turn to seat (the rig pitched th
 That is his in-hand pose against his gun's mouth; if it feels wrong in the headset the fix is the in-hand pose
 (fist.txt), not the tolerance. The SSG approach axis is his animation's (it swings in from the right, L -0.47).
 
+## HUD polish (2026-11-02; rig only, not headset-confirmed)
+His watch and gun display are kept as he made them (meshes, colours, scales, numbers, menu). Measured first:
+- `tools/rl_hud_audit.py`: every frame his HUD states can reach (all menu choices) has a MODELDEF frame in every
+  class, and every file exists. One bug: the gun display's background set its translucency on the WATCH layer
+  (`PSP_WHUD_Dial`, weaponhud2.txt), so the full background was always opaque. Fixed to `PSP_HHUD_BG`.
+- The cards measured every watch on `w_dial.md3`; the shotgun, SSG, hell shotgun and BFG wear `w_dial2.md3`
+  (inner wrist). `rl_measure.py` now reads the dial from the block; those 4 cards' watch rows changed, nothing else.
+- `tools/rl_watch_drift.py`: his watch and panel are drawn at ONE pose per gun, but the gun and hand animate. Off the
+  wrist / off the gun (worst): fist punch 55.7 cm, SSG 19.3 / 19.7, shotgun 13.3 / 13.1, hell shotgun 13.3 / 13.5,
+  pistol 3.7 / 4.4. The other guns: under 1 cm in every frame.
+- The fix (`tools/gen_hudfollow.py`, the method's rule that everything on the gun moves with it): each pose more than
+  1 cm off gets its own copy of his HUD blocks. The watch uses the dial frame made for that hand frame (his meshes
+  have one per hand frame), and the panel uses copies of his panel meshes with the gun body's measured motion baked
+  in (`models/common/rsrl_<gun>_*.md3`). `zscript/rsrl/rsrl_hudfollow*.zs` swaps the layers' sprites from his
+  Tick. Checked: 945 baked panel frames within 0.012 cm of the body's motion; the watch on its wrist within 0.3 cm in
+  every pose. 70 poses (pistol 7, shotgun 8, SSG 18, hell 33, fist 4). Ready frames are his blocks, untouched.
+  `rsrl_hudfollow 0` turns it off.
+- Rig: `sheets/hud/rig_shotgun_recoil_follow_off_vs_on.png`. Off: in the recoil the watch stays in the air. On: the
+  watch goes with the wrist and the panel with the gun. 0 script errors; the 4 guns' hand reloads re-run, all gates pass.
+
+Measured but not changed (owner's call): from an eye behind the sights the rocket and BFG panels are hidden by the gun
+body and plasma's is half hidden (`tools/rl_hud_view.py`). From the rig's default eye every panel is in full view.
+The BFG's watch is hidden from both eyes by the gun. His layers are destroyed and rebuilt every tic (17 layers),
+which costs performance on a Quest; that is not changed.
+
 ## Next (S4)
 1. DONE: rig boot (freedoom2, 0 script errors) and the four certain audit fixes. Re-run on doom2.wad when it is staged.
 3. DONE on the rig (2026-11-02), see "Hand reloads" below: all 10 reloadable guns, 20 gates, by hand.
-4. His gun ammo display and wrist watch kept and polished (owner, 2026-11-02 04:30).
+4. His gun ammo display and wrist watch kept and polished (owner, 2026-11-02 04:30): first pass DONE, see "HUD polish".

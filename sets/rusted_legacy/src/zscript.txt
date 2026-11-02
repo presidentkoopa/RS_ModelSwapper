@@ -4,6 +4,8 @@ version "3.0"
 
 #include "zscript/rsrl/rsrl_reload.zs"
 #include "zscript/rsrl/rsrl_table.zs"
+#include "zscript/rsrl/rsrl_hudfollow.zs"
+#include "zscript/rsrl/rsrl_hudfollow_table.zs"
 
 #include "zscript/weapons/weaponbase.txt"
 #include "zscript/weapons/weaponhud.txt"

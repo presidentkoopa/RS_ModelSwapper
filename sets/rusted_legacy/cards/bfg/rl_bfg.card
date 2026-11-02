@@ -31,4 +31,4 @@ weapon rl_bfg
     ImmersiveReloadDone      [0, 2, 3]
     Placeholder              0..0
   ammo_hud    ammo_hud_bg.md3  centre [13.0, 22.26, 9.31]  facing [-1.0, -0.0, -0.0]  size [0.0, 9.04, 3.68]  Offset [-15.0, -43.0, -4.0]
-  watch_hud   w_dial.md3  centre [-12.48, -6.53, -6.6]  facing [-0.62, 0.55, 0.56]  size [4.91, 5.15, 5.16]  frame 113 (WH00A)  worn_on hand (gun hand; his watch frame is the gun hand's one-hand pose)  gap {'hand': 1.05, 'hand2': 38.18}
+  watch_hud   w_dial2.md3  centre [-12.26, -8.77, -5.41]  facing [-0.41, 0.11, 0.91]  size [5.56, 5.99, 2.82]  frame 113 (WH00A)  worn_on hand (gun hand; his watch frame is the gun hand's one-hand pose)  gap {'hand': 0.7, 'hand2': 38.99}

@@ -478,7 +478,8 @@ def measure_hud(m, actor):
         pl = block_pl(wb[0])
         fr = re.search(r'FrameIndex\s+(\S+)\s+(\S)\s+0\s+(\d+)', wb[0])
         f = int(fr.group(3))
-        c, n, sz, X = panel('models/common/w_dial.md3', f, pl)
+        wm = re.search(r'Model\s+0\s+"([^"]+)"', wb[0]).group(1)	# w_dial.md3, or w_dial2.md3 (shotgun, SSG, hell, BFG)
+        c, n, sz, X = panel('models/common/' + wm, f, pl)
         # which hand wears it: the nearer hand mesh at Ready
         near = {}
         for slot, key in ((2, 'hand'), (3, 'hand2')):
@@ -487,7 +488,7 @@ def measure_hud(m, actor):
                 if hf < hm['nframes']:
                     H = np.vstack([to_flu(md3label.surf_xyz(sf)[hf]) for sf in hm['surfs']])
                     near[key] = float(np.min(np.linalg.norm(H - c, axis=1)))
-        out['wrist_watch'] = dict(mesh='w_dial.md3', frame=f, sprite=fr.group(1) + fr.group(2), offset=pl['off'],
+        out['wrist_watch'] = dict(mesh=wm, frame=f, sprite=fr.group(1) + fr.group(2), offset=pl['off'],
                                   centre=r2(c), facing=r2(n), size=r2(sz),
                                   worn_on='hand (gun hand; his watch frame is the gun hand\'s one-hand pose)' if near.get('hand', 99) < 3 else (min(near, key=near.get) if near else None),
                                   hand_gap_cm={k: round(v, 2) for k, v in near.items()}, _X=X)

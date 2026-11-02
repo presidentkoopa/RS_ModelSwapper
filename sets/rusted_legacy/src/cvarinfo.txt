@@ -40,3 +40,4 @@ user bool rl_show_tips 		= true;
 // RSQ Weapon Depot (S4): measured hand reloads in VR (zscript/rsrl), and their log
 user int rsrl_handreload	= 1;
 user int rsrl_debug		= 0;
+user int rsrl_hudfollow		= 1;

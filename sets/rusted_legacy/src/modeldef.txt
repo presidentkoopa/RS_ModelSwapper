@@ -20,3 +20,4 @@
 #include "modeldefs/ammo.txt"
 #include "modeldefs/casings.txt"
 #include "modeldefs/decorations.txt"
+#include "modeldefs/rsrl_hudfollow.txt"

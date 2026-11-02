@@ -61,6 +61,7 @@ class DoomWeaponZ : DoomWeapon
 			
 			clearWeaponHUD(owner.player);
 			if(WeaponHUDEnabled) setWeaponHUD(owner.player);
+			RSRL_HudFollow.Apply(self, owner.player);	// RSQ Weapon Depot: keep the watch on the wrist and the panel on the gun while they animate
 			
 			clearLaserPointer(owner.player);
 			if(CheckWeaponState("Reload") || CheckWeaponState("InsertAmmo") || CheckWeaponState("ReloadNoShells") || CheckWeaponState("ReloadLeft") || CheckWeaponState("UnloadAmmo") || CheckWeaponState("OpenBarrel") || CheckWeaponState("WaitReload") || CheckWeaponState("ImmersiveReloadMag") || CheckWeaponState("ImmersiveReloadWait2")) laserActivateDelay = 35;

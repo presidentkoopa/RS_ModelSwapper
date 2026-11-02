@@ -27,4 +27,4 @@ weapon rl_shotgun
     WaitReload               0..0
     PlaceHolder              0..0
   ammo_hud    ammo_hud_bg.md3  centre [4.0, 8.26, 3.31]  facing [-1.0, -0.0, -0.0]  size [0.0, 9.04, 3.68]  Offset [-1.0, -34.0, -10.0]
-  watch_hud   w_dial.md3  centre [-15.7, -0.74, 3.87]  facing [-0.17, 0.98, 0.05]  size [5.94, 1.4, 5.96]  frame 30 (WH00A)  worn_on hand (gun hand; his watch frame is the gun hand's one-hand pose)  gap {'hand': 1.33, 'hand2': 44.99}
+  watch_hud   w_dial2.md3  centre [-15.38, -1.51, 6.28]  facing [-0.09, -0.82, -0.56]  size [5.99, 3.63, 5.12]  frame 30 (WH00A)  worn_on hand (gun hand; his watch frame is the gun hand's one-hand pose)  gap {'hand': 0.79, 'hand2': 45.18}

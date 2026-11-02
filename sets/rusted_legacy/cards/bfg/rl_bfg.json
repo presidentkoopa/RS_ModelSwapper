@@ -1585,7 +1585,7 @@
    ]
   },
   "wrist_watch": {
-   "mesh": "w_dial.md3",
+   "mesh": "w_dial2.md3",
    "frame": 113,
    "sprite": "WH00A",
    "offset": [
@@ -1594,24 +1594,24 @@
     -10.0
    ],
    "centre": [
-    -12.48,
-    -6.53,
-    -6.6
+    -12.26,
+    -8.77,
+    -5.41
    ],
    "facing": [
-    -0.62,
-    0.55,
-    0.56
+    -0.41,
+    0.11,
+    0.91
    ],
    "size": [
-    4.91,
-    5.15,
-    5.16
+    5.56,
+    5.99,
+    2.82
    ],
    "worn_on": "hand (gun hand; his watch frame is the gun hand's one-hand pose)",
    "hand_gap_cm": {
-    "hand": 1.05,
-    "hand2": 38.18
+    "hand": 0.7,
+    "hand2": 38.99
    }
   }
  }

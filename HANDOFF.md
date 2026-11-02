@@ -14,6 +14,9 @@ example, the toolset proven on BD22, and the handbook. Everything older is on `a
 - S4 (2026-11-02): Rusted Legacy hand reloads, all 10 reloadable guns (20 gates: mags, shells, pump, slide, barrel,
   levers, gas can, BFG lid and pod) by measured hand motion (`zscript/rsrl`, `tools/gen_rsrl.py`). Rig run
   (`tools/rl_drive.py`): 20/20 gates passed, 0 script errors, frames looked at; wrong-way motions refused. Rig only.
+- S4 (2026-11-02): his HUD polish, first pass: watch stays on the wrist and ammo panel on the gun through recoil,
+  punches and the hell shotgun spin (measured up to 56 cm off before; `tools/gen_hudfollow.py`, verified 0.012 cm
+  panel / 0.3 cm watch); panel background layer bug fixed; HUD audit 0 problems. Rig only.
 - W1, the layout (2026-10-28). See README.md "The layout". The archive branch `archive/depot-2026-10-28` = old
   `main` db001eb (confirmed with `git ls-remote`).
 - `sets/bd22q` = RS_Brutal22WeaponsQ `main` b360875 (2.0.1): `src/`, `build.py`, `VERSION`, `README.md`,
@@ -42,7 +45,7 @@ example, the toolset proven on BD22, and the handbook. Everything older is on `a
 ## Open
 - S4 (2026-11-02): his build committed whole in sets/rusted_legacy/src; booted on tools/rig/bin/qz with freedoom2 (doom2.wad
   not reachable this session), 0 script errors, all 11 guns in hand; 4 audit bugs fixed (README). Rig only.
-- S4 next: his ammo display and wrist watch polish; headset check of the reloads (wrist turns listed in the set
+- S4 next: owner's call on the panels hidden when aiming (rocket, BFG, plasma) and the BFG watch; headset check of the reloads (wrist turns listed in the set
   README). The plasma muzzle (two bores) needs refining. ShieldSaw from UBQS at the end.
 - Nothing in BD22 2.0.1 has been confirmed in the owner's headset yet (its own README says so).
 - Outside the repo by design: the game data (`RSQ_GAMEDATA`), the FBX hand (`RSQ_FBX`), Ermac's models
