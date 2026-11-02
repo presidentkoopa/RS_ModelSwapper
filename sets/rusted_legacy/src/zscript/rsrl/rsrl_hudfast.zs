@@ -22,6 +22,7 @@ extend class DoomWeaponZ
 	Array<int> rshSpr;			// SpriteID per RSH sprite index, 0 = not looked up yet
 	Array<int> rshVar;			// SpriteID per (pose * BASES + base), 0 = not looked up yet
 	int rshTNT1;
+	int rshDialStyle;
 	Array<State> rshLab;		// his labels, resolved once
 	bool rshLabOk;
 	int rshSig[12];				// inputs of calculateHUDValues last time
@@ -48,21 +49,22 @@ extend class DoomWeaponZ
 	RSH_HoldB:
 		TNT1 A -1 Bright;
 		Stop;
-	// his overlay calls, as his chains leave them (hud_bg then hud_bracer; whud_bg)
-	RSH_StyleDial:
+	// his overlay calls, as his Tick leaves them each tic: hud_bg sets the dial Translucent 0.7, hud_bracer
+	// sets the bracer's flags and the dial Add 0.8, then whud_bg (gun display on) sets the dial Translucent 0.7
+	// again. So the dial ends Translucent 0.7 with the gun display on, Add 0.8 with it off; the panel keeps
+	// the default style (whud_bg's calls name the dial layer, not the panel).
+	RSH_StyleDialT:
 		TNT1 A 0 A_OverlayFlags(1050, PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
 		TNT1 A 0 A_OverlayRenderStyle(1050, STYLE_Translucent);
 		TNT1 A 0 A_OverlayAlpha(1050, 0.7);
+		Goto RSH_Hold;
+	RSH_StyleDialA:
+		TNT1 A 0 A_OverlayFlags(1050, PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
 		TNT1 A 0 A_OverlayRenderStyle(1050, STYLE_Add);
 		TNT1 A 0 A_OverlayAlpha(1050, 0.8);
 		Goto RSH_Hold;
 	RSH_StyleBelt:
 		TNT1 A 0 A_OverlayFlags(1051, PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
-		Goto RSH_Hold;
-	RSH_StylePanel:
-		TNT1 A 0 A_OverlayFlags(1060, PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
-		TNT1 A 0 A_OverlayRenderStyle(1060, STYLE_Translucent);
-		TNT1 A 0 A_OverlayAlpha(1060, 0.7);
 		Goto RSH_Hold;
 	}
 
@@ -179,17 +181,19 @@ extend class DoomWeaponZ
 	{
 		int code = RSH_Entry(layer);
 		let psp = p.FindPSprite(layer);
-		if (!psp || psp.Caller != self)
+		int dstyle = WeaponHUDEnabled ? 1 : 2;
+		if (!psp || psp.Caller != self || (layer == 1050 && rshDialStyle != dstyle))
 		{
 			psp = p.GetPSprite(layer);
 			psp.Caller = self;
 			State st = ResolveState("RSH_Hold");
 			if (layer == 1050)
-				st = ResolveState("RSH_StyleDial");
+			{
+				st = dstyle == 1 ? ResolveState("RSH_StyleDialT") : ResolveState("RSH_StyleDialA");
+				rshDialStyle = dstyle;
+			}
 			else if (layer == 1051)
 				st = ResolveState("RSH_StyleBelt");
-			else if (layer == 1060)
-				st = ResolveState("RSH_StylePanel");
 			psp.SetState(st);
 		}
 		bool bright = code >= 0 && (code & 1);

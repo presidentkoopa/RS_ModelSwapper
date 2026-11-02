@@ -128,8 +128,10 @@ That is his in-hand pose against his gun's mouth; if it feels wrong in the heads
 ## HUD polish (2026-11-02; rig only, not headset-confirmed)
 His watch and gun display are kept as he made them (meshes, colours, scales, numbers, menu). Measured first:
 - `tools/rl_hud_audit.py`: every frame his HUD states can reach (all menu choices) has a MODELDEF frame in every
-  class, and every file exists. One bug: the gun display's background set its translucency on the WATCH layer
-  (`PSP_WHUD_Dial`, weaponhud2.txt), so the full background was always opaque. Fixed to `PSP_HHUD_BG`.
+  class, and every file exists. His gun-display background block sets its style on the WATCH dial layer
+  (`PSP_WHUD_Dial`, weaponhud2.txt), not the panel. I first "fixed" that to the panel, which dimmed his border
+  window to 70% (owner noticed, 06:39); reverted the same day. It stays as he wrote it: the panel keeps full
+  brightness, the dial ends Translucent 0.7.
 - The cards measured every watch on `w_dial.md3`; the shotgun, SSG, hell shotgun and BFG wear `w_dial2.md3`
   (inner wrist). `rl_measure.py` now reads the dial from the block; those 4 cards' watch rows changed, nothing else.
 - `tools/rl_watch_drift.py`: his watch and panel are drawn at ONE pose per gun, but the gun and hand animate. Off the
@@ -162,9 +164,9 @@ state labels by name. Now (`rsrl_hudfast 1`, default; `zscript/rsrl/rsrl_hudfast
 - same picture: `rsrl_hudcheck 1` runs his code and the compiled chains together, all 12 classes and a sweep of every
   menu setting kind, god mode, firing: 17,255 layer-tics, 0 differ. `rsrl_hudcheck 2` checks the fast path's drawn
   layers (with skipped redraws and the follow poses) every tic: 17,255 layer-tics, 0 wrong. `rsrl_hudfast 0` = his code.
-- kept as he renders it: his hud_bracer sets the bracer's render flags but the DIAL's style and alpha (Add 0.8), so the
-  dial is additive, not the Translucent 0.7 his hud_bg asks for. Probably a copy slip like the panel one; not changed
-  because it is the look you see now.
+- styles exactly as his code leaves them each tic: the dial Translucent 0.7 (Add 0.8 only with the gun display
+  off), the bracer's flags, the panel at its default. Rig, default settings, his original build (412eb5b) against
+  this one: the border window 0 pixels different, the watch view different only in console text.
 
 ## Next (S4)
 1. DONE: rig boot (freedoom2, 0 script errors) and the four certain audit fixes. Re-run on doom2.wad when it is staged.

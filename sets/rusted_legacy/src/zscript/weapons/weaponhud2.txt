@@ -64,9 +64,9 @@ extend class DoomWeaponZ
 	States
 	{
 	whud_bg:
-		TNT1 A 0 A_OverlayFlags(PSP_HHUD_BG, PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
-		TNT1 A 0 A_OverlayRenderstyle(PSP_HHUD_BG, STYLE_Translucent);
-		TNT1 A 0 A_OverlayAlpha(PSP_HHUD_BG, 0.7);	// RSQ Weapon Depot: was PSP_WHUD_Dial (the watch layer, which sets its own); this block draws PSP_HHUD_BG
+		TNT1 A 0 A_OverlayFlags(PSP_WHUD_Dial, PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true);
+		TNT1 A 0 A_OverlayRenderstyle(PSP_WHUD_Dial, STYLE_Translucent);
+		TNT1 A 0 A_OverlayAlpha(PSP_WHUD_Dial, 0.7);
 		TNT1 A 0 A_JumpIf(invoker.WeaponHUDScale == 2, "whud_bg2");
 		TNT1 A 0 A_JumpIf(invoker.WeaponHUDScale == 3, "whud_bg3");
 		TNT1 A 0 A_JumpIf(invoker.WeaponHUDBG == 1, "whud_bg_borderonly");

@@ -9,9 +9,9 @@
 //   hud_bracer: A_OverlayFlags(PSP_WHUD_Belt, PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true)
 //   hud_bracer: A_OverlayRenderstyle(PSP_WHUD_Dial, STYLE_Add)
 //   hud_bracer: A_OverlayAlpha(PSP_WHUD_Dial, 0.8)
-//   whud_bg: A_OverlayFlags(PSP_HHUD_BG, PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true)
-//   whud_bg: A_OverlayRenderstyle(PSP_HHUD_BG, STYLE_Translucent)
-//   whud_bg: A_OverlayAlpha(PSP_HHUD_BG, 0.7)
+//   whud_bg: A_OverlayFlags(PSP_WHUD_Dial, PSPF_RENDERSTYLE | PSPF_FORCEALPHA, true)
+//   whud_bg: A_OverlayRenderstyle(PSP_WHUD_Dial, STYLE_Translucent)
+//   whud_bg: A_OverlayAlpha(PSP_WHUD_Dial, 0.7)
 
 extend class DoomWeaponZ
 {

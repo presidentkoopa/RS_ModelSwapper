@@ -153,8 +153,8 @@ def main():
         for lab, items in st.items():
             o = {i[1] for i in items if i[0] == 'ovl'}
             if name == 'weaponhud2.txt' and lab.startswith('whud_bg') and o and o != {'PSP_HHUD_BG'}:
-                bad += 1
-                print('  LAYER %s %s: overlay calls on %s, the block draws PSP_HHUD_BG' % (name, lab, ' '.join(sorted(o))))
+                print('  NOTE %s %s: overlay calls on %s, the block draws PSP_HHUD_BG (kept: it is the look in game, the'
+                      ' dial ends Translucent 0.7 and the panel keeps its default style)' % (name, lab, ' '.join(sorted(o))))
     # files named by HUD model blocks
     for f, c, p in files:
         if f.startswith('holohud') and not exists(p):
