@@ -1,3 +1,14 @@
+# TABLED (owner, 2026-11-03 09:04) -- PB set: reload feel
+
+Owner tested ProjBrut_MS.pk3 himself. Wanted and not there yet: a magazine / clip IN THE HAND during the reload,
+and the meshes animating (slide locked back when empty, etc.). Open question: ModelSwapper's point is not touching
+the mod's code, but with reloadable meshes and the BD22 set's success, a PB-specific layer may be worth it. Parked;
+revisit with the owner before any work.
+Also open from the rig runs (rig only, not headset): PB_Pistol's reload joined magazine slot 104 (MS_VP_Pistol's row)
+where the profile says MS_BD_Pistol (slot 55) -- check which donor is actually worn. The rig frames never clearly
+showed a mesh in hand (mostly PB's sprite): unproven. PB plays an opening sequence; rig scripts need ~420 tics of
+settle (tools_rig_reload.py --settle was tried, not committed).
+
 # ModelSwapper 2.0 scoping + M32 swing-out (2026-11-03) -- read this block first
 
 **Not rig-run.** This session had no rig (/home/claude/rig absent, no engine): everything below is mesh- and
