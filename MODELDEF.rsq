@@ -127,7 +127,7 @@ Model RSQ_Hands
 	Model 0 "ammo_hand.md3"
 	Skin 0 "hand.png"
 	Model 1 "rsq_ring.md3"
-	Skin 1 "cards/bd21/grenade/nade.png"
+	Skin 1 "nade.png"   // copy of cards/bd21/grenade/nade.png: a skin resolves under this block's Path, so the cards/ path was models/rsq/cards/...
 	Scale -1.0 1.0 1.0
 	Offset 0.0 -24.0 -10.0
 	FrameIndex RQHR A 0 1

@@ -109,7 +109,11 @@ $files = $files | Where-Object { $_.FullName -notmatch '\\models\\blend\\' }
 # been wired to yet is 177MB of geometry the engine will never ask for. This is
 # derived, not a list, so a folder starts shipping the moment a Model block points
 # at it. The asset-ref check below is what catches an over-exclusion.
-$mdRefs = [regex]::Matches((Get-Content (Join-Path $root 'modeldef') -Raw), '(?i)Path\s+"models/([^/"]+)') |
+# EVERY MODELDEF lump, not modeldef alone: MODELDEF.rsq's VR hands live in models/rsq, and reading modeldef only
+# dropped them from every -Static pk3 (the verify below read modeldef only too, so it passed). 2026-11-03.
+$mdText = (Get-ChildItem $root -File | Where-Object { $_.Name -eq 'modeldef' -or $_.Name -like 'MODELDEF.*' } |
+           ForEach-Object { Get-Content $_.FullName -Raw }) -join "`n"
+$mdRefs = [regex]::Matches($mdText, '(?i)Path\s+"models/([^/"]+)') |
           ForEach-Object { $_.Groups[1].Value.ToLower() } | Sort-Object -Unique
 # modeldef is not the only thing that names a mesh. The reload cards name the
 # LOOSE MAGAZINE the player holds -- magmodel -- plus loose rounds, belts and the
