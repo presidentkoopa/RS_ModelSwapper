@@ -1609,6 +1609,25 @@ Model MS_RC_M32
 	FrameIndex MSBL A 0 9999
 }
 
+Model MS_CW_Nailgun
+{
+	// source: Garry's Mod workshop c_smg1 (Cold War t9 nailgun), Source MDL; cards/gmod_cw/nailgun/NOTES.md
+	Path "cards/gmod_cw/nailgun"
+	Model 0 "cw_nailgun.md3"
+	SurfaceSkin 0 0 "cw_nailgun_decal.png"
+	SurfaceSkin 0 1 "cw_nailgun_front.png"
+	SurfaceSkin 0 2 "cw_nailgun_grip.png"
+	SurfaceSkin 0 3 "cw_nailgun_front.png"
+	SurfaceSkin 0 4 "cw_nailgun_magazine.png"
+	SurfaceSkin 0 5 "cw_nailgun_grip.png"
+	Scale 2.4 2.4 2.4
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	NoInterpolation
+	FrameIndex CHGG A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
 Model MS_RC_Shotgun
 {
 	// source: Robocop-Retribution/models/weapons/shotgun/shotgun.md3

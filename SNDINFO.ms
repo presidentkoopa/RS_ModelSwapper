@@ -241,6 +241,11 @@ $alias ms/card/cola_particlegun/magin ms/bd22/plasmagun/magin
 $alias ms/card/cola_particlegun/slideback ms/bd22/rifle/slideback
 $alias ms/card/cola_particlegun/slidefwd ms/bd22/rifle/slidefwd
 $alias ms/card/cola_particlegun/magdrop ms/magdrop
+$alias ms/card/cw_nailgun/magout ms/bd22/smg/magout
+$alias ms/card/cw_nailgun/magin ms/bd22/smg/magin
+$alias ms/card/cw_nailgun/slideback ms/bd22/smg/slideback
+$alias ms/card/cw_nailgun/slidefwd ms/bd22/smg/slidefwd
+$alias ms/card/cw_nailgun/magdrop ms/magdrop
 $alias ms/card/hx_cryogun/magout ms/bd22/pistol/magout
 $alias ms/card/hx_cryogun/magin ms/bd22/pistol/magin
 $alias ms/card/hx_cryogun/slideback ms/bd22/pistol/slideback

@@ -148,6 +148,9 @@ class RS_ForeignClip
 			"MS_Jackhammer|altfire|6@1,7@1,8@1,9@1,10@1,16@1,17@1,18@1,19@1|0|-1|-1",
 			"MS_Jackhammer|ready|0@1|-1|-1|-1",
 			"MS_Jackhammer|select|0@1|-1|-1|-1",
+			// MS_CW_Nailgun: frames are its own reload sequence (every 4th of 157): mag out 9-13, swing, seat 22-26.
+			"MS_CW_Nailgun|ready|0@1|-1|-1|-1",
+			"MS_CW_Nailgun|reload|8-27@2|-1|-1|-1",
 			"MS_RC_M32|ready|0@1|-1|-1|-1",
 			"MS_RC_M32|fire|1@3,2@3,3@3,4@3,5@3,6@3|0|-1|-1",
 			// 2026-11-03: 7-36 were fire cycles two to six. The mesh had no reload; frames 37-59 are the

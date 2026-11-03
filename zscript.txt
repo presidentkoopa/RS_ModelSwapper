@@ -121,6 +121,7 @@ class MS_RC_Fist : Actor {}
 class MS_RC_Ksg : Actor {}
 class MS_RC_M27 : Actor {}
 class MS_RC_M32 : Actor {}
+class MS_CW_Nailgun : Actor {}
 class MS_RC_Shotgun : Actor {}
 class MS_UV_ChaingunD4 : Actor {}
 class MS_UV_ShotgunD4 : Actor {}

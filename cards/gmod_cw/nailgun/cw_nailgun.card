@@ -1,0 +1,26 @@
+weapon cw_nailgun
+  source      owner upload 2026-11-03 (Garry's Mod workshop: c_smg1 replacement, Cold War "t9 nailgun"), Source MDL v48.
+              Read by srcmdl.py; frames = the model's OWN `reload` sequence (157 frames @60, every 4th) skinned by
+              src_frames.py in the RECEIVER's frame (tag_sling), so arm/camera motion drops out. Mesh shifted +9.4 x into
+              HUD space (palm onto the shelf donors' palm). Nails (j_bullet_00..13) merged into the mag surface.
+  archetype   smg        # PB_Nailgun; magazine-fed
+  model       cw_nailgun.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    lever    surf 3  rest [17.4, 0.93, -2.09]  axis [0.0, -1.0, -0.014]  travel 0.22  frames -..-  rot 26deg axis [-1.0, 0.0, -0.0]
+    mag      surf 4  rest [16.5, -0.01, -5.36]  axis [0.125, 0.0, -0.992]  travel 8.5  frames 10..25  rot 20deg axis [0.34, -0.83, 0.45]
+    trigger  surf 5  rest [12.27, 0.0, -1.94]  axis [-0.51, 0.0, 0.86]  travel 0.01  frames -..-
+    mag_well  [16.5, -0.01, -5.36]  mouth [15.87, -0.01, -0.33]  axis [0.125, 0.0, -0.992]  travel_clear 8.5   # MEASURED from the reload
+              # anim: j_mag1 seats along (-0.125,0,0.992) over anim frames 93-105 and drops 8.5 straight (33-48) before the
+              # hand swings it away; md3label's axis [-0.442,0.409,-0.798] averaged the whole swing
+    muzzle    [19.3, -0.05, 0.55]
+  grip        line [11.17, 0.0, -0.94] [10.05, 0.0, -6.94]  trigger [12.27, 0.0, -1.94]   # centroid-based; owner's hand fit supersedes
+  support     feature magwell [16.5, 0.0, -5.36]   # the magazine, held like an SMG mag well; owner's fit supersedes
+  carve       mag
+  phases
+    idle         0..9
+    mag_out      10..10
+    mag_in       11..25
+    idle         26..39
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 27938
+  carved      mag  seat_origin [16.5, -0.01, -5.36]  file cw_nailgun_mag.md3

@@ -2416,6 +2416,82 @@ Model RSR_DroppedMag
 	USEACTORROLL
 	FrameIndex QWJW A 0 0
 }
+// RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): MS_CW_Nailgun.
+// The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
+// are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
+
+// the gun without its magazine (ready frame)
+Model MS_CW_Nailgun
+{
+	Path "cards/gmod_cw/nailgun"
+	Model 0 "cw_nailgun.md3"
+	SurfaceSkin 0 0 "cw_nailgun_decal.png"
+	SurfaceSkin 0 1 "cw_nailgun_front.png"
+	SurfaceSkin 0 2 "cw_nailgun_grip.png"
+	SurfaceSkin 0 3 "cw_nailgun_front.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "cw_nailgun_grip.png"
+	Scale 2.4000 2.4000 2.4000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QWTM A 0 0
+}
+
+// the magazine alone, at the gun (main controller)
+Model RSR_GunParts
+{
+	Path "cards/gmod_cw/nailgun"
+	Model 0 "cw_nailgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "cw_nailgun_magazine.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale 2.4000 2.4000 2.4000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QWTP A 0 0
+}
+
+// the magazine alone, in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "cards/gmod_cw/nailgun"
+	Model 0 "cw_nailgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "cw_nailgun_magazine.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale 2.4000 2.4000 2.4000
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex QWTP A 0 0
+}
+
+// the dropped magazine (world)
+Model RSR_DroppedMag
+{
+	Path "cards/gmod_cw/nailgun"
+	Model 0 "cw_nailgun.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "cw_nailgun_magazine.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	Scale 0.8323 -0.8323 0.8323
+	Offset -13.7298 -0.0054 0.0
+	ZOffset 3.7151
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex QWTW A 0 0
+}
 // RS real VR reload (zscript/rsr/vreload.zs, team/reload/tools/gen_rsr.py): MS_HX_Cryogun.
 // The gun's own model and frames; pieces shown or hidden by a clear skin (HUD models
 // are alpha-tested at gl_mask_threshold, so a clear surface is not drawn).
