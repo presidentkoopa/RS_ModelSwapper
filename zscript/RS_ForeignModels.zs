@@ -210,7 +210,7 @@ class RS_ForeignShelf
 			"melee|MS_RC_Fist|PUNG|0|0|15",
 			"shotgun|MS_RC_Ksg|SHTG|0|0|5",
 			"plasma|MS_RC_M27|PLSG|0|0|2",
-			"launcher|MS_RC_M32|MISG|0|0|37",
+			"launcher|MS_RC_M32|MISG|0|0|60",
 			"shotgun|MS_RC_Shotgun|SHTG|0|0|9",
 			"chaingun|MS_UV_ChaingunD4|CHGG|0|0|2",
 			"shotgun|MS_UV_ShotgunD4|SHTG|0|0|4",

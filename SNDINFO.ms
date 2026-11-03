@@ -271,11 +271,6 @@ $alias ms/card/mg_tec9/magin ms/bd22/pistol/magin
 $alias ms/card/mg_tec9/slideback ms/bd22/pistol/slideback
 $alias ms/card/mg_tec9/slidefwd ms/bd22/pistol/slidefwd
 $alias ms/card/mg_tec9/magdrop ms/magdrop
-$alias ms/card/rc_m32/magout ms/bd22/pistol/magout
-$alias ms/card/rc_m32/magin ms/bd22/pistol/magin
-$alias ms/card/rc_m32/slideback ms/bd22/pistol/slideback
-$alias ms/card/rc_m32/slidefwd ms/bd22/pistol/slidefwd
-$alias ms/card/rc_m32/magdrop ms/magdrop
 $alias ms/card/vp_m16/magout ms/bd22/pistol/magout
 $alias ms/card/vp_m16/magin ms/bd22/pistol/magin
 $alias ms/card/vp_m16/slideback ms/bd22/pistol/slideback

@@ -1595,6 +1595,13 @@ Model MS_RC_M32
 	SurfaceSkin 0 6 "m32_tex1.png"
 	SurfaceSkin 0 7 "m32_tex2.png"
 	SurfaceSkin 0 8 "m32_tex1.png"
+	// surfaces 9..14: the six 40 mm rounds added for the swing-out reload (BD M79 round, its own skin)
+	SurfaceSkin 0 9 "rc_m32_round_m79.png"
+	SurfaceSkin 0 10 "rc_m32_round_m79.png"
+	SurfaceSkin 0 11 "rc_m32_round_m79.png"
+	SurfaceSkin 0 12 "rc_m32_round_m79.png"
+	SurfaceSkin 0 13 "rc_m32_round_m79.png"
+	SurfaceSkin 0 14 "rc_m32_round_m79.png"
 	Scale -0.62 0.62 0.62
 	Offset 0.0 -30.0 -8.0
 	NoInterpolation

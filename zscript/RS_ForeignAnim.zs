@@ -150,7 +150,9 @@ class RS_ForeignClip
 			"MS_Jackhammer|select|0@1|-1|-1|-1",
 			"MS_RC_M32|ready|0@1|-1|-1|-1",
 			"MS_RC_M32|fire|1@3,2@3,3@3,4@3,5@3,6@3|0|-1|-1",
-			"MS_RC_M32|reload|7-36@2|-1|0|24",
+			// 2026-11-03: 7-36 were fire cycles two to six. The mesh had no reload; frames 37-59 are the
+			// authored swing-out (cards/robocop/m32/rc_m32.card): open 38-43, rounds out 44-47, in 49-52, close 53-58.
+			"MS_RC_M32|reload|38-58@2|-1|0|24",
 			"MS_Beretta|fire|1@1,2@1,3@1,4@1,5@1,6@1,7@1|0|-1|-1",
 			"MS_Beretta|ready|0@1|-1|-1|-1",
 			"MS_Beretta|reload|22@1|-1|-1|-1",

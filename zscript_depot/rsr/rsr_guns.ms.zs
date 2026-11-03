@@ -4031,7 +4031,6 @@ class RSR_Guns abstract
 		if (donor == "MS_HX_Pistol")	return 99;
 		if (donor == "MS_HX_Uzi")	return 100;
 		if (donor == "MS_MG_Shotgun")	return 101;
-		if (donor == "MS_RC_M32")	return 102;
 		if (donor == "MS_VP_Minigun")	return 103;
 		if (donor == "MS_VP_Pistol")	return 104;
 		if (donor == "MS_ZB_Tommygun")	return 105;
@@ -4335,7 +4334,6 @@ class RSR_NoMag_MS_HX_Nuker : RSVR_Token {}
 class RSR_NoMag_MS_HX_Pistol : RSVR_Token {}
 class RSR_NoMag_MS_HX_Uzi : RSVR_Token {}
 class RSR_NoMag_MS_MG_Shotgun : RSVR_Token {}
-class RSR_NoMag_MS_RC_M32 : RSVR_Token {}
 class RSR_NoMag_MS_VP_M16 : RSVR_Token {}
 class RSR_NoMag_MS_VP_Minigun : RSVR_Token {}
 class RSR_NoMag_MS_VP_Pistol : RSVR_Token {}

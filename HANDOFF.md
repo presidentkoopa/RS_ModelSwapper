@@ -1,3 +1,43 @@
+# ModelSwapper 2.0 scoping + M32 swing-out (2026-11-03) -- read this block first
+
+**Not rig-run.** This session had no rig (/home/claude/rig absent, no engine): everything below is mesh- and
+generator-checked only, and tools_zs_lint is clean on the touched files. Uncommitted until the owner says.
+
+### 2.0 = a curated ~30-mesh set, Project Brutality as the coverage test (owner)
+Rule (owner): PB decides what reloads; every mesh on a PB weapon that reloads must have a MEASURED reload row.
+PB profile picks (class -> donor), all with rows: Pistol BD_Pistol, Revolver BD_Revolver, Deagle VP_Pistol (alek),
+SMG BD_Smg, MP40 BD_Mp40, Shotgun BD_Shotgun, SSG BD_Ssg, AutoShotgun BD_Assaultshotgun, QuadSG VP_Ssg (until the
+quad lands), DMR BD_Rifle (DMR fires every 5 tics: not the Ruger), Carbine VP_M16, LMG BW_Bar, MG42 BW_Mg42,
+SuperGL **RC_M32** (below), RL BD_Rpg, M1 BD_Plasma, M2 MG_Bolter, PulseCannon Cola_Particlegun, DemonTech HX_Nuker
+(eyeball), Cryo HX_Cryogun, Flamer BD_Flamethrower, Railgun BD_Railgun. No PB reload: Minigun BD_Minigun, BFG BD_Bfg,
+Unmaker BD_Unmaker; melee BD_Fist / BD_Axe / BD_Chainsaw. **Nailgun: open** (owner is sourcing a mesh).
+Not done yet: `ProfilePick` (RS_ForeignModels.zs) is still a stub returning -1 -- the table above goes there; and
+five TokenArchetype misses for PB: QuadSG -> shotgun ("Sawn-Off"/"Double-Barrel" not matched), Nailgun -> rocket
+(slot fallback), Cryo / PulseCannon ("Dark Matter Rifle") / DemonTech -> rifle (no energy token).
+
+### RC M32: authored swing-out reload (this session)
+The mesh never reloaded (sheet_top frames 0/18/27 identical; its "reload" clip 7-36 was fire cycles 2-6). Its
+magazine row 102 came from the rear plate being labelled `mag`: the hand would have pulled the whole cylinder off.
+- cards/robocop/m32/rc_m32.md3: frames 0-36 untouched, 37-59 appended (swing 38-43, rounds out 44-47, in 49-52,
+  close 53-58). Crane axis x-parallel through yz (12, -17), 100 deg: the smallest arm that clears all six chambers
+  from behind. Six chambers MEASURED on the rear face (R 9.2 at 30+60k deg, bore r 3.72). Six rounds added as
+  surfaces 9-14 = BD M79 round x1.9, skin rc_m32_round_m79.png (copy of M79.png). Built by m32_frames.py (session
+  tools, not in the repo; the card's `source` block records every number).
+- card: surf 2 renamed mag -> plate, surf 5 -> cyl, rounds round..round6. card_break: break slot 4 (VP_Rev and
+  VP_Ssg renumber to 5, 6), hinge fit 0.01 cm, open 100 deg at frame 52, 6 chambers.
+- card_mag rerun: no longer builds the M32 (MODELDEF.cards QWP* layers, foley aliases, NoMag token gone). Its
+  SlotForDonor line removed by hand from rsr_guns.ms.zs (regen keeps unrebuilt rows; RS_ForeignReload.zs:415 only
+  reaches the break system when the mag slot is 0). The case-102 arms are now unreachable data.
+- modeldef: SurfaceSkin 9-14; shelf frameCount 37 -> 60; clip `reload` 7-36 -> 38-58.
+- To check on the rig: `tools_rig_reload.py --kind break --donor MS_RC_M32` against PB's SuperGL (Reload state),
+  two reloads in a row (see open item 1).
+
+### Measured, not yet in the repo (owner uploads, 2026-11-03)
+- Quad barrel (Quad_Shotgun.fbx): rigid named parts, no animation. Hinge pin measured (FBX xy 41.845, -12.368,
+  r 1.608), open 45 deg authored, card quad_sg + 2x2 shell carve (one surface, like bd_ssg_shell). Needs: a set
+  folder, modeldef block, shelf row, card_break run. Lock part assumed to ride the barrel: owner to confirm.
+- Nailgun (NailGunQ1, Quake Champions rip): static card only; dropped (no reload measurement possible as uploaded).
+
 # ModelSwapper 1.5 handoff (2026-10-31, 10:00)
 
 RS_ModelSwapper `main` (GitHub moved it to `presidentkoopa/RS_ModelSwapper`; the old URL still redirects).

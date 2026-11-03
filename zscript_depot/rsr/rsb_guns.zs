@@ -41,8 +41,9 @@ class RSB_Guns abstract
 		if (donor == "MS_BD_M79")	return 1;
 		if (donor == "MS_BD_Revolver")	return 2;
 		if (donor == "MS_BD_Ssg")	return 3;
-		if (donor == "MS_VP_Rev")	return 4;
-		if (donor == "MS_VP_Ssg")	return 5;
+		if (donor == "MS_RC_M32")	return 4;
+		if (donor == "MS_VP_Rev")	return 5;
+		if (donor == "MS_VP_Ssg")	return 6;
 		return 0;
 	}
 
@@ -54,8 +55,9 @@ class RSB_Guns abstract
 		case 1:	return (18.3427, -0.1278, -3.7417);
 		case 2:	return (8.9567, 0.0021, -3.3564);
 		case 3:	return (10.7236, 0.0361, -2.4818);
-		case 4:	return (10.1322, -0.0000, -2.2928);
-		case 5:	return (12.5744, -0.0316, 0.4297);
+		case 4:	return (14.5974, 7.5886, -13.7507);
+		case 5:	return (10.1322, -0.0000, -2.2928);
+		case 6:	return (12.5744, -0.0316, 0.4297);
 		}
 		return (0, 0, 0);
 	}
@@ -68,8 +70,9 @@ class RSB_Guns abstract
 		case 1:	return (0.0000, 1.0000, 0.0000);
 		case 2:	return (-1.0000, 0.0000, 0.0000);
 		case 3:	return (0.0000, 1.0000, 0.0000);
-		case 4:	return (0.0000, 1.0000, 0.0000);
+		case 4:	return (-1.0000, 0.0000, 0.0000);
 		case 5:	return (0.0000, 1.0000, 0.0000);
+		case 6:	return (0.0000, 1.0000, 0.0000);
 		}
 		return (0, 0, 0);
 	}
@@ -82,8 +85,9 @@ class RSB_Guns abstract
 		case 1:	return 29.9743;
 		case 2:	return 90.0115;
 		case 3:	return 30.2792;
-		case 4:	return 85.7928;
-		case 5:	return 58.5600;
+		case 4:	return 99.9989;
+		case 5:	return 85.7928;
+		case 6:	return 58.5600;
 		}
 		return 0;
 	}
@@ -96,8 +100,9 @@ class RSB_Guns abstract
 		case 1:	return 1;
 		case 2:	return 5;
 		case 3:	return 2;
-		case 4:	return 1;
-		case 5:	return 2;
+		case 4:	return 6;
+		case 5:	return 1;
+		case 6:	return 2;
 		}
 		return 0;
 	}
@@ -109,8 +114,9 @@ class RSB_Guns abstract
 		case 1:	return false;
 		case 2:	return false;
 		case 3:	return false;
-		case 4:	return true;
-		case 5:	return false;
+		case 4:	return false;
+		case 5:	return true;
+		case 6:	return false;
 		}
 		return false;
 	}
@@ -124,6 +130,7 @@ class RSB_Guns abstract
 		case 3:	return false;
 		case 4:	return false;
 		case 5:	return false;
+		case 6:	return false;
 		}
 		return false;
 	}
@@ -141,9 +148,15 @@ class RSB_Guns abstract
 		case 20:	return (3.5636, 0.0045, 1.8846);
 		case 24:	return (7.0673, 1.4341, 1.1531);
 		case 25:	return (7.0672, -1.3037, 1.1531);
-		case 32:	return (-1.3523, -0.1391, 1.2546);
-		case 40:	return (5.4147, -1.2745, 3.4838);
-		case 41:	return (5.4147, 1.3340, 3.4838);
+		case 32:	return (6.2417, 4.9956, -1.0271);
+		case 33:	return (6.2419, -0.0419, 1.8826);
+		case 34:	return (6.2417, -5.0810, -1.0271);
+		case 35:	return (6.2418, -5.0810, -6.8450);
+		case 36:	return (6.2419, -0.0419, -9.7541);
+		case 37:	return (6.2418, 4.9956, -6.8450);
+		case 40:	return (-1.3523, -0.1391, 1.2546);
+		case 48:	return (5.4147, -1.2745, 3.4838);
+		case 49:	return (5.4147, 1.3340, 3.4838);
 		}
 		return (0, 0, 0);
 	}
@@ -161,9 +174,15 @@ class RSB_Guns abstract
 		case 20:	return (13.1598, 0.0078, 1.9068);
 		case 24:	return (12.8590, 1.4170, 1.1497);
 		case 25:	return (12.8591, -1.3216, 1.1497);
-		case 32:	return (8.9341, -0.1428, 1.3699);
-		case 40:	return (10.6430, -1.2745, 3.4838);
-		case 41:	return (10.6430, 1.3340, 3.4838);
+		case 32:	return (19.4265, 5.0038, -1.0091);
+		case 33:	return (19.4265, -0.0346, 1.8996);
+		case 34:	return (19.4265, -5.0734, -1.0091);
+		case 35:	return (19.4265, -5.0734, -6.8275);
+		case 36:	return (19.4265, -0.0346, -9.7373);
+		case 37:	return (19.4265, 5.0038, -6.8275);
+		case 40:	return (8.9341, -0.1428, 1.3699);
+		case 48:	return (10.6430, -1.2745, 3.4838);
+		case 49:	return (10.6430, 1.3340, 3.4838);
 		}
 		return (0, 0, 0);
 	}
@@ -181,9 +200,15 @@ class RSB_Guns abstract
 		case 20:	return (1.0000, 0.0003, 0.0023);
 		case 24:	return (1.0000, -0.0029, -0.0006);
 		case 25:	return (1.0000, -0.0031, -0.0006);
-		case 32:	return (0.9999, -0.0004, 0.0112);
-		case 40:	return (1.0000, 0.0000, 0.0000);
-		case 41:	return (1.0000, 0.0000, 0.0000);
+		case 32:	return (1.0000, 0.0006, 0.0014);
+		case 33:	return (1.0000, 0.0006, 0.0013);
+		case 34:	return (1.0000, 0.0006, 0.0014);
+		case 35:	return (1.0000, 0.0006, 0.0013);
+		case 36:	return (1.0000, 0.0006, 0.0013);
+		case 37:	return (1.0000, 0.0006, 0.0013);
+		case 40:	return (0.9999, -0.0004, 0.0112);
+		case 48:	return (1.0000, 0.0000, 0.0000);
+		case 49:	return (1.0000, 0.0000, 0.0000);
 		}
 		return (0, 0, 0);
 	}
@@ -201,9 +226,15 @@ class RSB_Guns abstract
 		case 20:	return (1.0000, -0.0000, 0.0000);
 		case 24:	return (1.0000, 0.0000, 0.0000);
 		case 25:	return (1.0000, 0.0000, 0.0000);
-		case 32:	return (-0.0864, 0.0000, -0.9963);
-		case 40:	return (1.0000, -0.0000, 0.0000);
-		case 41:	return (1.0000, -0.0000, 0.0000);
+		case 32:	return (1.0000, -0.0000, -0.0000);
+		case 33:	return (1.0000, -0.0000, -0.0000);
+		case 34:	return (1.0000, -0.0000, -0.0000);
+		case 35:	return (1.0000, -0.0000, -0.0000);
+		case 36:	return (1.0000, -0.0000, -0.0000);
+		case 37:	return (1.0000, -0.0000, -0.0000);
+		case 40:	return (-0.0864, 0.0000, -0.9963);
+		case 48:	return (1.0000, -0.0000, 0.0000);
+		case 49:	return (1.0000, -0.0000, 0.0000);
 		}
 		return (0, 0, 0);
 	}
@@ -220,9 +251,15 @@ class RSB_Guns abstract
 		case 20:	return (0.0000, 1.0000, -0.0000);
 		case 24:	return (-0.0000, 1.0000, -0.0000);
 		case 25:	return (-0.0000, 1.0000, -0.0000);
-		case 32:	return (-0.0000, 1.0000, 0.0000);
-		case 40:	return (0.0000, 1.0000, -0.0000);
-		case 41:	return (0.0000, 1.0000, -0.0000);
+		case 32:	return (0.0000, 1.0000, -0.0000);
+		case 33:	return (0.0000, 1.0000, -0.0000);
+		case 34:	return (0.0000, 1.0000, -0.0000);
+		case 35:	return (0.0000, 1.0000, -0.0000);
+		case 36:	return (0.0000, 1.0000, -0.0000);
+		case 37:	return (0.0000, 1.0000, -0.0000);
+		case 40:	return (-0.0000, 1.0000, 0.0000);
+		case 48:	return (0.0000, 1.0000, -0.0000);
+		case 49:	return (0.0000, 1.0000, -0.0000);
 		}
 		return (0, 0, 0);
 	}
@@ -239,9 +276,15 @@ class RSB_Guns abstract
 		case 20:	return (0.0000, -0.0000, 1.0000);
 		case 24:	return (-0.0000, -0.0000, 1.0000);
 		case 25:	return (-0.0000, -0.0000, 1.0000);
-		case 32:	return (0.9963, 0.0000, -0.0864);
-		case 40:	return (-0.0000, 0.0000, 1.0000);
-		case 41:	return (-0.0000, 0.0000, 1.0000);
+		case 32:	return (0.0000, 0.0000, 1.0000);
+		case 33:	return (0.0000, 0.0000, 1.0000);
+		case 34:	return (0.0000, 0.0000, 1.0000);
+		case 35:	return (0.0000, 0.0000, 1.0000);
+		case 36:	return (0.0000, 0.0000, 1.0000);
+		case 37:	return (0.0000, 0.0000, 1.0000);
+		case 40:	return (0.9963, 0.0000, -0.0864);
+		case 48:	return (-0.0000, 0.0000, 1.0000);
+		case 49:	return (-0.0000, 0.0000, 1.0000);
 		}
 		return (0, 0, 0);
 	}
@@ -258,9 +301,15 @@ class RSB_Guns abstract
 		case 20:	return (-0.0000, -0.0000, 0.0000);
 		case 24:	return (0.0000, -0.0000, 0.0000);
 		case 25:	return (0.0000, -0.0000, 0.0000);
-		case 32:	return (1.9227, 0.0000, -17.3273);
-		case 40:	return (-0.0000, 0.0000, 0.0000);
-		case 41:	return (-0.0000, 0.0000, 0.0000);
+		case 32:	return (-0.0000, 0.0000, -0.0000);
+		case 33:	return (-0.0000, 0.0000, -0.0000);
+		case 34:	return (-0.0000, 0.0000, -0.0000);
+		case 35:	return (-0.0000, 0.0000, -0.0000);
+		case 36:	return (-0.0000, 0.0000, -0.0000);
+		case 37:	return (-0.0000, 0.0000, -0.0000);
+		case 40:	return (1.9227, 0.0000, -17.3273);
+		case 48:	return (-0.0000, 0.0000, 0.0000);
+		case 49:	return (-0.0000, 0.0000, 0.0000);
 		}
 		return (0, 0, 0);
 	}
@@ -273,8 +322,9 @@ class RSB_Guns abstract
 		case 1:	return (0.2409, 0.0486, -0.9693);
 		case 2:	return (0.5386, 0.0092, -0.8425);
 		case 3:	return (0.5363, 0.0089, -0.8440);
-		case 4:	return (-0.2490, -0.0012, -0.9685);
-		case 5:	return (0.5368, 0.0091, -0.8437);
+		case 4:	return (0.5379, 0.0092, -0.8429);
+		case 5:	return (-0.2490, -0.0012, -0.9685);
+		case 6:	return (0.5368, 0.0091, -0.8437);
 		}
 		return (0, 0, 0);
 	}
@@ -286,8 +336,9 @@ class RSB_Guns abstract
 		case 1:	return (-0.0496, 0.9981, 0.0377);
 		case 2:	return (-0.0094, 0.9999, 0.0049);
 		case 3:	return (-0.0062, 1.0000, 0.0066);
-		case 4:	return (0.0022, 1.0000, -0.0019);
-		case 5:	return (-0.0091, 0.9999, 0.0050);
+		case 4:	return (-0.0098, 0.9999, 0.0047);
+		case 5:	return (0.0022, 1.0000, -0.0019);
+		case 6:	return (-0.0091, 0.9999, 0.0050);
 		}
 		return (0, 0, 0);
 	}
@@ -299,8 +350,9 @@ class RSB_Guns abstract
 		case 1:	return (0.9693, 0.0390, 0.2429);
 		case 2:	return (0.8425, 0.0053, 0.5386);
 		case 3:	return (0.8440, 0.0017, 0.5364);
-		case 4:	return (0.9685, -0.0026, -0.2490);
-		case 5:	return (0.8437, 0.0050, 0.5369);
+		case 4:	return (0.8429, 0.0057, 0.5380);
+		case 5:	return (0.9685, -0.0026, -0.2490);
+		case 6:	return (0.8437, 0.0050, 0.5369);
 		}
 		return (0, 0, 0);
 	}
@@ -312,8 +364,9 @@ class RSB_Guns abstract
 		case 1:	return (-2.9386, 4.3565, -11.2309);
 		case 2:	return (-1.8711, 4.5497, -9.1817);
 		case 3:	return (-2.4369, 1.4551, -10.7462);
-		case 4:	return (0.1911, 5.4982, -1.3209);
-		case 5:	return (0.5887, 4.1569, -10.3550);
+		case 4:	return (-5.8604, -2.0427, -12.0166);
+		case 5:	return (0.1911, 5.4982, -1.3209);
+		case 6:	return (0.5887, 4.1569, -10.3550);
 		}
 		return (0, 0, 0);
 	}
@@ -326,8 +379,9 @@ class RSB_Guns abstract
 		case 1:	return (-1.1707, 3.9914, -4.1832);
 		case 2:	return (-0.6278, 2.8705, -5.7654);
 		case 3:	return (0.3933, 2.8531, -4.1606);
-		case 4:	return (-0.6871, 5.3538, -2.9426);
-		case 5:	return (0.5445, 2.8505, -3.9229);
+		case 4:	return (-1.5910, 2.8869, -7.2793);
+		case 5:	return (-0.6871, 5.3538, -2.9426);
+		case 6:	return (0.5445, 2.8505, -3.9229);
 		}
 		return (0, 0, 0);
 	}
@@ -339,8 +393,9 @@ class RSB_Guns abstract
 		case 1:	return (1.5114, 3.4432, 6.6676);
 		case 2:	return (4.5234, 2.7827, 2.3304);
 		case 3:	return (3.5023, 2.8001, 0.7256);
-		case 4:	return (-3.3601, 5.3726, 6.9911);
-		case 5:	return (3.3511, 2.8026, 0.4879);
+		case 4:	return (5.4866, 2.7662, 3.8443);
+		case 5:	return (-3.3601, 5.3726, 6.9911);
+		case 6:	return (3.3511, 2.8026, 0.4879);
 		}
 		return (0, 0, 0);
 	}
@@ -353,8 +408,9 @@ class RSB_Guns abstract
 		case 1:	return "RsrHold";
 		case 2:	return "RsbShell";
 		case 3:	return "RsbShell";
-		case 4:	return "RsbCell";
-		case 5:	return "RsbShell";
+		case 4:	return "RsbShell";
+		case 5:	return "RsbCell";
+		case 6:	return "RsbShell";
 		}
 		return "";
 	}
@@ -367,8 +423,9 @@ class RSB_Guns abstract
 		case 1:	return (-1.0000, 1.0000, 1.0000);
 		case 2:	return (-1.0000, 1.0000, 1.0000);
 		case 3:	return (-1.0000, 1.0000, 1.0000);
-		case 4:	return (1.3500, 1.3500, 1.3500);
+		case 4:	return (-0.6200, 0.6200, 0.6200);
 		case 5:	return (1.3500, 1.3500, 1.3500);
+		case 6:	return (1.3500, 1.3500, 1.3500);
 		}
 		return (0, 0, 0);
 	}
@@ -380,8 +437,9 @@ class RSB_Guns abstract
 		case 1:	return (0.0000, 0.0000, -5.0000);
 		case 2:	return (0.0000, 0.0000, -5.0000);
 		case 3:	return (0.0000, 0.0000, -5.0000);
-		case 4:	return (0.0000, 0.0000, 0.0000);
+		case 4:	return (0.0000, -30.0000, -8.0000);
 		case 5:	return (0.0000, 0.0000, 0.0000);
+		case 6:	return (0.0000, 0.0000, 0.0000);
 		}
 		return (0, 0, 0);
 	}
@@ -395,6 +453,7 @@ class RSB_Guns abstract
 		case 3:	return 'RBOG';
 		case 4:	return 'RBPG';
 		case 5:	return 'RBQG';
+		case 6:	return 'RBRG';
 		}
 		return 'None';
 	}
@@ -408,6 +467,7 @@ class RSB_Guns abstract
 		case 3:	return 'RBOP';
 		case 4:	return 'RBPP';
 		case 5:	return 'RBQP';
+		case 6:	return 'RBRP';
 		}
 		return 'None';
 	}
@@ -421,6 +481,7 @@ class RSB_Guns abstract
 		case 3:	return 'RBOW';
 		case 4:	return 'RBPW';
 		case 5:	return 'RBQW';
+		case 6:	return 'RBRW';
 		}
 		return 'None';
 	}
@@ -432,8 +493,9 @@ class RSB_Guns abstract
 		case 1:	return "MISG A";
 		case 2:	return "PISG A";
 		case 3:	return "SHT2 A";
-		case 4:	return "PISG A";
-		case 5:	return "SHT2 A";
+		case 4:	return "MISG A";
+		case 5:	return "PISG A";
+		case 6:	return "SHT2 A";
 		}
 		return "";
 	}
@@ -447,7 +509,8 @@ class RSB_Guns abstract
 		case 2:	return "ms/bd22/revolver/open";
 		case 3:	return "ms/bd22/ssg/open";
 		case 4:	return "ms/bd22/revolver/open";
-		case 5:	return "ms/bd22/ssg/open";
+		case 5:	return "ms/bd22/revolver/open";
+		case 6:	return "ms/bd22/ssg/open";
 		}
 		return "";
 	}
@@ -461,6 +524,7 @@ class RSB_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -473,7 +537,8 @@ class RSB_Guns abstract
 		case 2:	return "ms/bd22/revolver/load";
 		case 3:	return "ms/bd22/ssg/load";
 		case 4:	return "ms/bd22/revolver/load";
-		case 5:	return "ms/bd22/ssg/load";
+		case 5:	return "ms/bd22/revolver/load";
+		case 6:	return "ms/bd22/ssg/load";
 		}
 		return "";
 	}
@@ -486,7 +551,8 @@ class RSB_Guns abstract
 		case 2:	return "ms/bd22/revolver/close";
 		case 3:	return "ms/bd22/ssg/close";
 		case 4:	return "ms/bd22/revolver/close";
-		case 5:	return "ms/bd22/ssg/close";
+		case 5:	return "ms/bd22/revolver/close";
+		case 6:	return "ms/bd22/ssg/close";
 		}
 		return "";
 	}
@@ -500,6 +566,7 @@ class RSB_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -513,6 +580,7 @@ class RSB_Guns abstract
 		case 3:	return 5;
 		case 4:	return 5;
 		case 5:	return 5;
+		case 6:	return 5;
 		}
 		return 0;
 	}
@@ -527,6 +595,7 @@ class RSB_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -540,6 +609,7 @@ class RSB_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -551,8 +621,9 @@ class RSB_Guns abstract
 		case 1:	return 1;
 		case 2:	return 1;
 		case 3:	return 1;
-		case 4:	return 6;
-		case 5:	return 1;
+		case 4:	return 1;
+		case 5:	return 6;
+		case 6:	return 1;
 		}
 		return 0;
 	}
@@ -565,7 +636,8 @@ class RSB_Guns abstract
 		case 2:	return 5;
 		case 3:	return 2;
 		case 4:	return 6;
-		case 5:	return 2;
+		case 5:	return 6;
+		case 6:	return 2;
 		}
 		return 0;
 	}
@@ -580,6 +652,7 @@ class RSB_Guns abstract
 		case 3:	return false;
 		case 4:	return false;
 		case 5:	return false;
+		case 6:	return false;
 		}
 		return false;
 	}
@@ -594,6 +667,7 @@ class RSB_Guns abstract
 		case 3:	return (0.0000, 0.0000, 0.0000);
 		case 4:	return (0.0000, 0.0000, 0.0000);
 		case 5:	return (0.0000, 0.0000, 0.0000);
+		case 6:	return (0.0000, 0.0000, 0.0000);
 		}
 		return (0, 0, 0);
 	}
@@ -605,8 +679,9 @@ class RSB_Guns abstract
 		case 1:	return 'MS_BD_M79';
 		case 2:	return 'MS_BD_Revolver';
 		case 3:	return 'MS_BD_Ssg';
-		case 4:	return 'MS_VP_Rev';
-		case 5:	return 'MS_VP_Ssg';
+		case 4:	return 'MS_RC_M32';
+		case 5:	return 'MS_VP_Rev';
+		case 6:	return 'MS_VP_Ssg';
 		}
 		return 'None';
 	}
@@ -621,6 +696,7 @@ class RSB_Guns abstract
 		case 3:	return "";
 		case 4:	return "";
 		case 5:	return "";
+		case 6:	return "";
 		}
 		return "";
 	}
@@ -635,6 +711,7 @@ class RSB_Guns abstract
 		case 3:	return false;
 		case 4:	return false;
 		case 5:	return false;
+		case 6:	return false;
 		}
 		return false;
 	}
@@ -649,6 +726,7 @@ class RSB_Guns abstract
 		case 3:	return "Reloading";
 		case 4:	return "Reloading";
 		case 5:	return "Reloading";
+		case 6:	return "Reloading";
 		}
 		return "";
 	}
@@ -661,8 +739,9 @@ class RSB_Guns abstract
 		case 1:	return 0.0000;
 		case 2:	return 0.0000;
 		case 3:	return 0.0000;
-		case 4:	return 6.1658;
-		case 5:	return 0.0000;
+		case 4:	return 0.0000;
+		case 5:	return 6.1658;
+		case 6:	return 0.0000;
 		}
 		return 0;
 	}
@@ -675,8 +754,9 @@ class RSB_Guns abstract
 		case 1:	return (0.9762, 0.0000, 0.2169);
 		case 2:	return (0.0000, 0.0050, 1.0000);
 		case 3:	return (0.9883, 0.0000, 0.1522);
-		case 4:	return (0.9526, 0.0000, 0.3042);
-		case 5:	return (0.9906, 0.0000, 0.1367);
+		case 4:	return (0.0000, -0.6051, 0.7961);
+		case 5:	return (0.9526, 0.0000, 0.3042);
+		case 6:	return (0.9906, 0.0000, 0.1367);
 		}
 		return (0, 0, 0);
 	}
@@ -688,8 +768,9 @@ class RSB_Guns abstract
 		case 1:	return -5.4859;
 		case 2:	return -13.0415;
 		case 3:	return -5.7129;
-		case 4:	return -4.5674;
-		case 5:	return -6.4101;
+		case 4:	return -11.8706;
+		case 5:	return -4.5674;
+		case 6:	return -6.4101;
 		}
 		return 0;
 	}
@@ -701,8 +782,9 @@ class RSB_Guns abstract
 		case 1:	return 5.7416;
 		case 2:	return 0.5950;
 		case 3:	return 5.7206;
-		case 4:	return 4.5641;
-		case 5:	return 6.4056;
+		case 4:	return 1.7632;
+		case 5:	return 4.5641;
+		case 6:	return 6.4056;
 		}
 		return 0;
 	}
@@ -714,8 +796,9 @@ class RSB_Guns abstract
 		case 1:	return 8.0000;
 		case 2:	return 3.0000;
 		case 3:	return 8.0000;
-		case 4:	return 8.0000;
+		case 4:	return 3.0000;
 		case 5:	return 8.0000;
+		case 6:	return 8.0000;
 		}
 		return 0;
 	}
@@ -727,8 +810,9 @@ class RSB_Guns abstract
 		case 1:	return 32.0220;
 		case 2:	return 9.3192;
 		case 3:	return 29.5595;
-		case 4:	return 22.6268;
-		case 5:	return 31.9086;
+		case 4:	return 24.7082;
+		case 5:	return 22.6268;
+		case 6:	return 31.9086;
 		}
 		return 0;
 	}
@@ -743,10 +827,11 @@ class RSB_Guns abstract
 			-999.0, 28.1, 24.6, 20.6, 18.4, 17.1, 16.5, 15.9, 15.0, 10.1, 8.4, 8.7, 9.2, 9.5, 9.1, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0,
 			-999.0, 46.7, 40.3, 14.4, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0,
 			-999.0, 19.5, 25.4, 20.6, 15.9, 13.8, 11.8, 10.8, 9.8, 8.9, 8.5, 7.9, 4.1, 3.8, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0,
+			-999.0, 37.9, 47.7, 47.8, 41.3, 41.5, 42.2, 41.1, 34.1, 22.9, 20.9, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0,
 			-999.0, 2.7, 7.0, 10.0, 11.4, 12.9, 13.5, 14.1, 13.5, 3.3, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0,
 			-999.0, 44.6, 32.6, 21.8, 17.0, 14.3, 12.3, 10.9, 9.9, 8.6, 4.2, 4.5, 4.7, 4.9, 4.9, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0, -999.0
 		};
-		return i >= 1 && i <= 5 ? e[(i - 1) * 25 + b] : -999;
+		return i >= 1 && i <= 6 ? e[(i - 1) * 25 + b] : -999;
 	}
 }
 
@@ -775,6 +860,9 @@ class RSB_Sprites : Actor
 		RBQG A 0;
 		RBQP ABCDEFGHIJ 0;
 		RBQW ABC 0;
+		RBRG A 0;
+		RBRP ABCDEFGHIJ 0;
+		RBRW ABC 0;
 		RQHN JKL 0;
 		Stop;
 	}
