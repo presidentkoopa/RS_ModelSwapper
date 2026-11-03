@@ -685,7 +685,12 @@ class RS_ForeignScanner
 		if (hay.IndexOf("supershot") >= 0 || hay.IndexOf("ssg") >= 0
 		 || hay.IndexOf("doublebarrel") >= 0 || hay.IndexOf("double barrel") >= 0
 		 || hay.IndexOf("sawedoff") >= 0 || hay.IndexOf("sawed-off") >= 0
-		 || hay.IndexOf("sawed off") >= 0 || hay.IndexOf("coachgun") >= 0) return "supershotgun";
+		 || hay.IndexOf("sawed off") >= 0 || hay.IndexOf("coachgun") >= 0
+		 // British spelling and the hyphenated double barrel (Project Brutality: "Sawn-Off Double-Barrel",
+		 // "Sawn-Off Quad-Barrel Shotgun" -- the quad came out a PUMP shotgun on "shotgun" alone)
+		 || hay.IndexOf("sawn-off") >= 0 || hay.IndexOf("sawn off") >= 0 || hay.IndexOf("sawnoff") >= 0
+		 || hay.IndexOf("double-barrel") >= 0 || hay.IndexOf("quad-barrel") >= 0
+		 || hay.IndexOf("quadbarrel") >= 0 || hay.IndexOf("quadsg") >= 0) return "supershotgun";
 		if (hay.IndexOf("shotgun") >= 0 || hay.IndexOf("shotty") >= 0
 		 || hay.IndexOf("trenchgun") >= 0 || hay.IndexOf("boomstick") >= 0
 		 || hay.IndexOf("pumpaction") >= 0) return "shotgun";
@@ -696,7 +701,10 @@ class RS_ForeignScanner
 		 || hay.IndexOf("machine pistol") >= 0 || hay.IndexOf("ingram") >= 0
 		 || hay.IndexOf("mac10") >= 0 || hay.IndexOf("mac-10") >= 0
 		 || hay.IndexOf("uzi") >= 0 || hay.IndexOf("mp40") >= 0
-		 || hay.IndexOf("tec9") >= 0 || hay.IndexOf("sten") >= 0) return "smg";
+		 || hay.IndexOf("tec9") >= 0 || hay.IndexOf("sten") >= 0
+		 // a nail gun is a handheld magazine-fed tool gun (PB's MIXOM Perforator matched nothing and fell to the
+		 // slot-5 rocket shelf)
+		 || hay.IndexOf("nailgun") >= 0 || hay.IndexOf("nail gun") >= 0) return "smg";
 		// PLASMA before every generic shape word below it. id Software's own
 		// canonical weapon name is "Plasma Rifle" -- it contains "rifle", and
 		// the rifle check used to run first, so the single most standard
@@ -707,7 +715,12 @@ class RS_ForeignScanner
 		// RIFLE below -- just generalised, since rifle isn't the only word
 		// a plasma weapon could be named alongside.
 		if (hay.IndexOf("plasma") >= 0 || hay.IndexOf("energy") >= 0
-		 || hay.IndexOf("beam") >= 0) return "plasma";
+		 || hay.IndexOf("beam") >= 0
+		 // energy weapons NAMED rifles (Project Brutality: Cryogenic Dispersion Rifle, Dark Matter Rifle in class
+		 // PB_PulseCannon, Demon-Tech Rifle) were coming out assault rifles. Not bare "pulse": the Aliens M41A
+		 // "Pulse Rifle" is ballistic.
+		 || hay.IndexOf("cryo") >= 0 || hay.IndexOf("pulsecannon") >= 0 || hay.IndexOf("pulse cannon") >= 0
+		 || hay.IndexOf("dark matter") >= 0 || hay.IndexOf("demontech") >= 0 || hay.IndexOf("demon-tech") >= 0) return "plasma";
 		// MACHINEGUN before CHAINGUN. A fixed single barrel on a bipod (an
 		// MG42, a GH machinegun) is a different weapon from a rotating
 		// barrel cluster (a minigun, a Vulcan/gatling chaingun) -- neither
@@ -1065,13 +1078,70 @@ class RS_ForeignScanner
 	// changing which index a given class name lands on. Wrap-safe: the
 	// multiply can overflow into negative territory on a long name, so the
 	// final % is corrected the same way CyclePick already does.
-	// THE PROFILE HOOK. A ModelSwapper profile would be a curated pick set for a detected mod,
-	// and it would win over the auto guess (never over the player's own picks). NONE EXISTS: the
-	// only per-mod memory in this pack is the player's own pick archive (RS_ForeignPersist,
-	// rs_fm_picks, keyed by class name). Return a shelf index here when one is built; -1 = none.
+	// THE PROFILE HOOK. A ModelSwapper profile is a curated donor per weapon class for a mod we know; it wins
+	// over the auto guess, never over the player's own picks (rs_fm_picks, applied after the scan). Keyed by the
+	// mod's exact class names, so it is inert for every other mod.
+	//
+	// PROJECT BRUTALITY (owner, 2026-11-03): PB decides what reloads; every PB weapon with a Reload state wears a
+	// donor that has a MEASURED hand reload (magazine, pump or break row). Fists / axe / saw, the minigun, BFG
+	// and Unmaker have no PB reload. PB_ChexRifle (Chex mode only) is left to the auto guess.
+
+	// The profile's donor for this weapon class, "" when no profile names it. Class names compare without case.
+	static string ProfileDonor(string cls)
+	{
+		static const string PROFILE[] = {
+			"PB_Fists|MS_BD_Fist",            "PB_Axe|MS_BD_Axe",                "PB_Chainsaw|MS_BD_Chainsaw",
+			"PB_Pistol|MS_BD_Pistol",         "PB_Revolver|MS_BD_Revolver",      "PB_Deagle|MS_VP_Pistol",
+			"PB_SMG|MS_BD_Smg",               "PB_MP40|MS_BD_Mp40",
+			"PB_Shotgun|MS_BD_Shotgun",       "PB_SSG|MS_BD_Ssg",                "PB_Autoshotgun|MS_BD_Assaultshotgun",
+			"PB_QuadSG|MS_QD_Quad",
+			"PB_DMR|MS_BD_Rifle",             "PB_Carbine|MS_VP_M16",            "PB_LMG|MS_BW_Bar",
+			"PB_Minigun|MS_BD_Minigun",       "PB_MG42|MS_BW_Mg42",              "PB_Nailgun|MS_CW_Nailgun",
+			"PB_RocketLauncher|MS_BD_Rpg",    "PB_SuperGL|MS_RC_M32",
+			"PB_M1Plasma|MS_BD_Plasma",       "PB_M2Plasma|MS_MG_Bolter",        "PB_PulseCannon|MS_Cola_Particlegun",
+			"PB_Demontech|MS_HX_Nuker",
+			"PB_CryoRifle|MS_HX_Cryogun",     "PB_Flamethrower|MS_BD_Flamethrower",
+			"PB_Railgun|MS_BD_Railgun",       "PB_BFG9000|MS_BD_Bfg",            "PB_Unmaker|MS_BD_Unmaker"
+		};
+		string want = cls.MakeLower();
+		for (int i = 0; i < PROFILE.Size(); ++i)
+		{
+			int bar = PROFILE[i].IndexOf("|");
+			string k = PROFILE[i].Left(bar);
+			if (k.MakeLower() == want) return PROFILE[i].Mid(bar + 1);
+		}
+		return "";
+	}
+
+	// Where that donor sits on THIS shelf: its family (the row's archetype) and its index within the family, counted
+	// the way RS_ForeignShelf.Get counts (rows in table order, addon rows first). The profile names the donor, so
+	// the weapon takes the donor's family: a pick can sit outside the family the class name would guess (PB's
+	// Demon-Tech rifle wears the Hacx Nuker, a bfg-shelf mesh). False when the donor is not loaded.
+	static bool ProfileFamily(RS_ForeignShelf shelf, string donor, out string fam, out int idx)
+	{
+		fam = ""; idx = -1;
+		if (!shelf || donor.Length() == 0) return false;
+		string tag = "|" .. donor .. "|";
+		for (int i = 0; i < shelf.mRows.Size(); ++i)
+		{
+			if (shelf.mRows[i].IndexOf(tag) < 0) continue;
+			fam = shelf.mRows[i].Left(shelf.mRows[i].IndexOf("|"));
+			string pfx = fam .. "|";
+			int n = 0;
+			for (int j = 0; j < i; ++j)
+				if (shelf.mRows[j].IndexOf(pfx) == 0) n++;
+			idx = n;
+			return true;
+		}
+		return false;
+	}
+
+	// Kept for the call below: a profile pick within an archetype the scan already chose (-1 = none).
 	static int ProfilePick(string cls, string arch, RS_ForeignShelf shelf)
 	{
-		return -1;
+		string fam; int idx;
+		if (!ProfileFamily(shelf, ProfileDonor(cls), fam, idx) || fam != arch) return -1;
+		return idx;
 	}
 
 	// Does ModelSwapper have a measured hand reload for this donor (a magazine, pump or
@@ -1356,7 +1426,6 @@ class RS_ForeignScanner
 
 			bool bySlot; int pick;
 			e.archetype     = RS_ForeignScanner.Classify(type, e.clsName, e.tag, e.slot, ammo1, ammo2, bySlot, pick);
-			e.guessedBySlot = bySlot;
 
 			// pick == 0 is Classify's universal "no deliberate index" value
 			// (the only nonzero it ever hands back is the forced pick 2 for
@@ -1364,7 +1433,16 @@ class RS_ForeignScanner
 			// the auto-guess by class name instead of leaving it at the
 			// shelf's first entry for everything -- every unpinned weapon of
 			// an archetype otherwise wore the exact same donor forever.
-			if (pick == 0 && shelf)
+			// A profile names the donor outright: the weapon takes that donor's family and index, ahead of the
+			// auto guess (the player's own menu pick still wins, applied after this scan).
+			string pfam; int pidx;
+			if (shelf && ProfileFamily(shelf, ProfileDonor(e.clsName), pfam, pidx))
+			{
+				e.archetype = pfam;
+				bySlot = false;
+				pick = pidx;
+			}
+			else if (pick == 0 && shelf)
 			{
 				int have = shelf.Count(e.archetype);
 				// The order (owner, 2026-10-27): a pick the player made in the menu (rs_fm_picks,
@@ -1380,6 +1458,7 @@ class RS_ForeignScanner
 				}
 			}
 
+			e.guessedBySlot = bySlot;
 			e.modelPick1    = pick;
 			e.modelPick2    = pick;
 			e.pinned        = false;

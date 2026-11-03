@@ -11,9 +11,13 @@ quad lands), DMR BD_Rifle (DMR fires every 5 tics: not the Ruger), Carbine VP_M1
 SuperGL **RC_M32** (below), RL BD_Rpg, M1 BD_Plasma, M2 MG_Bolter, PulseCannon Cola_Particlegun, DemonTech HX_Nuker
 (eyeball), Cryo HX_Cryogun, Flamer BD_Flamethrower, Railgun BD_Railgun. No PB reload: Minigun BD_Minigun, BFG BD_Bfg,
 Unmaker BD_Unmaker; melee BD_Fist / BD_Axe / BD_Chainsaw. **Nailgun: open** (owner is sourcing a mesh).
-Not done yet: `ProfilePick` (RS_ForeignModels.zs) is still a stub returning -1 -- the table above goes there; and
-five TokenArchetype misses for PB: QuadSG -> shotgun ("Sawn-Off"/"Double-Barrel" not matched), Nailgun -> rocket
-(slot fallback), Cryo / PulseCannon ("Dark Matter Rifle") / DemonTech -> rifle (no energy token).
+DONE (2026-11-03, later): the table is the PB profile in RS_ForeignScanner.ProfileDonor / ProfileFamily
+(RS_ForeignModels.zs): a profile donor sets the weapon's family AND pick (Demon-Tech wears the bfg-shelf HX_Nuker), the
+player's menu pick still wins. QuadSG -> MS_QD_Quad, Nailgun -> MS_CW_Nailgun (both below, now in the repo). The five
+TokenArchetype misses are fixed (sawn-off / double-barrel / quad-barrel -> supershotgun; nailgun -> smg; cryo,
+pulsecannon, dark matter, demon-tech -> plasma; bare "pulse" deliberately NOT, the Aliens M41A is ballistic).
+NEXT: the PB weaponset spin-out (where it lives is the owner's call: WeaponDepot vs ModelSwapper, to discuss), then
+a rig pass on PB: draw check + every reload kind, two reloads in a row.
 
 ### RC M32: authored swing-out reload (this session)
 The mesh never reloaded (sheet_top frames 0/18/27 identical; its "reload" clip 7-36 was fire cycles 2-6). Its
@@ -32,11 +36,13 @@ magazine row 102 came from the rear plate being labelled `mag`: the hand would h
 - To check on the rig: `tools_rig_reload.py --kind break --donor MS_RC_M32` against PB's SuperGL (Reload state),
   two reloads in a row (see open item 1).
 
-### Measured, not yet in the repo (owner uploads, 2026-11-03)
-- Quad barrel (Quad_Shotgun.fbx): rigid named parts, no animation. Hinge pin measured (FBX xy 41.845, -12.368,
-  r 1.608), open 45 deg authored, card quad_sg + 2x2 shell carve (one surface, like bd_ssg_shell). Needs: a set
-  folder, modeldef block, shelf row, card_break run. Lock part assumed to ride the barrel: owner to confirm.
-- Nailgun (NailGunQ1, Quake Champions rip): static card only; dropped (no reload measurement possible as uploaded).
+### Added to the repo this session (2026-11-03), not rig-run
+- MS_QD_Quad (cards/quad/quad): owner's quad FBX; hinge measured from the lug pin hole, 45 deg open authored, 2x2
+  shell carve; break slot 4, fit res 0.01 cm. Lock riding the barrel is an assumption: owner to confirm.
+- MS_CW_Nailgun (cards/gmod_cw/nailgun): owner's Garry's Mod upload (Source MDL); its own reload animation decoded
+  and skinned in the receiver frame (40 frames); magazine row 106. NOTES.md in the folder.
+- Session tools that read these sources (fbxread/fbx2obj/quad_frames, srcmdl/srcanim/src_frames/vtf2png,
+  m32_frames, shade) are NOT in the repo yet: where they go is part of the WeaponDepot/ModelSwapper talk.
 
 # ModelSwapper 1.5 handoff (2026-10-31, 10:00)
 
