@@ -1,8 +1,7 @@
 """Build the Quest (stock QuestZDoom 17.3) package -- build.ps1 -Static, in Python -- and the Project Brutality set.
 
     python tools_build_pk3.py                 pk3/ModelSwapper-QUEST.pk3
-    python tools_build_pk3.py --pb [PB]       pk3/ProjBrut_MS.pk3: the Quest build + the PB VR patch + the PB menu
-                                              (PB = your Project Brutality 0.4.1 zip or folder, for the patch)
+    python tools_build_pk3.py --pb            pk3/ProjBrut_MS.pk3: the Quest build cut to the PB set + the PB menu
 
 WHY A PORT. build.ps1 needs Windows PowerShell; the rig and the cloud sessions are Linux. This packs exactly what
 build.ps1 -Static packs and runs the same gates, so either one makes the same pk3:
@@ -15,10 +14,8 @@ build.ps1 -Static packs and runs the same gates, so either one makes the same pk
     every modeldef Model/Skin reference resolves inside the pk3; no duplicate Model block, no duplicate class stub,
     no donor without a class stub.
 
-THE PB SET (--pb). Load order: Project Brutality, then ProjBrut_MS.pk3. Adds
-  - PB's zscript/Weapons/BaseWeapon_Functions.zsc rewritten by tools_make_pb_offhand_patch.py (guns in either hand
-    without the empty-hand / wrong-owner crashes; casings, smoke and sparks from the gun instead of your face). It is
-    generated from YOUR copy of PB (hash-checked against 0.4.1), so the patch never goes stale against a different PB.
+THE PB SET (--pb). Load order: Project Brutality, the PB VR offhand patch (its own pk3, from the releases or
+tools_make_pb_offhand_patch.py -- owner, 2026-11-03: never baked into this pk3), then ProjBrut_MS.pk3. Adds
   - MENUDEF.pb: Options > "Project Brutality VR", the settings that matter with PB in one page.
   - textures over 1024 px scaled to 1024 in the packed copy (Quest).
 The PB weapon -> model profile itself is in the shared code (RS_ForeignScanner.ProfileDonor), so it also applies when
@@ -193,18 +190,6 @@ def main():
         files, rewrite, donors, dirs = pb_filter(files)
         print('PB set: %d donors, %d card folders' % (len(donors), len(dirs)))
     if pb:
-        i = sys.argv.index('--pb')
-        src = sys.argv[i + 1] if len(sys.argv) > i + 1 and not sys.argv[i + 1].startswith('-') else None
-        tmp = os.path.join(OUTDIR, '.pb_patch.tmp.pk3')
-        cmd = [sys.executable, '-B', os.path.join(ROOT, 'tools_make_pb_offhand_patch.py')] + ([src] if src else []) + [tmp]
-        r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-        print((r.stdout + r.stderr).strip())
-        if r.returncode != 0 or not os.path.exists(tmp):
-            sys.exit('the PB patch did not build -- not packing (needs your Project Brutality 0.4.1 zip or folder)')
-        with zipfile.ZipFile(tmp) as pz:
-            for n in pz.namelist():
-                if not n.endswith('/'): extra[n] = pz.read(n)
-        os.remove(tmp)
         extra[PB_MENU] = open(os.path.join(ROOT, PB_MENU), 'rb').read()
     with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for rel in files:
