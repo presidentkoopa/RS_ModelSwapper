@@ -401,6 +401,202 @@ Model RSB_GunParts
 	FrameIndex RBOP C 0 1
 }
 
+// RS real VR reload, break-open / revolver (zscript/rsr/rsr_break.zs, tools/gen_rsb.py): MS15/MS_QD_Quad.
+// The gun's own model and frames; pieces shown or hidden by a clear skin.
+
+// the gun without its hinged part and rounds (the gun's layer while the action is open)
+Model MS_QD_Quad
+{
+	Path "cards/quad/quad"
+	Model 0 "quad_sg.md3"
+	SurfaceSkin 0 0 "quad_shotgun.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "quad_shotgun.png"
+	SurfaceSkin 0 10 "quad_shotgun.png"
+	SurfaceSkin 0 11 "quad_shotgun.png"
+	Scale 0.7500 0.7500 0.7500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBPG A 0 0
+}
+
+// the hinged part (main controller), turned about the hinge
+Model RSB_GunParts
+{
+	Path "cards/quad/quad"
+	Model 0 "quad_sg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "quad_shotgun.png"
+	SurfaceSkin 0 2 "quad_shotgun.png"
+	SurfaceSkin 0 3 "quad_shotgun.png"
+	SurfaceSkin 0 4 "quad_shotgun.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	SurfaceSkin 0 11 "rsr_clear.png"
+	Scale 0.7500 0.7500 0.7500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBPP A 0 0
+}
+
+// chamber 0: its round (surface 5)
+Model RSB_GunParts
+{
+	Path "cards/quad/quad"
+	Model 0 "quad_sg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "quad_shell.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	SurfaceSkin 0 11 "rsr_clear.png"
+	Scale 0.7500 0.7500 0.7500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBPP B 0 0
+}
+
+// the round in the off hand (off controller)
+Model RSQ_Hands
+{
+	Path "cards/quad/quad"
+	Model 0 "quad_sg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "quad_shell.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	SurfaceSkin 0 11 "rsr_clear.png"
+	Scale 0.7500 0.7500 0.7500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBPP H 0 0
+}
+
+// a round let go of (world)
+Model RSB_Round
+{
+	Path "cards/quad/quad"
+	Model 0 "quad_sg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "quad_shell.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	SurfaceSkin 0 11 "rsr_clear.png"
+	Scale 0.2601 -0.2601 0.2601
+	Offset -11.1565 1.3142 0.0
+	ZOffset -3.1082
+	USEACTORPITCH
+	USEACTORROLL
+	FrameIndex RBPW A 0 0
+}
+
+// chamber 1: its round (surface 6)
+Model RSB_GunParts
+{
+	Path "cards/quad/quad"
+	Model 0 "quad_sg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "quad_shell.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	SurfaceSkin 0 11 "rsr_clear.png"
+	Scale 0.7500 0.7500 0.7500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBPP C 0 0
+}
+
+// chamber 2: its round (surface 7)
+Model RSB_GunParts
+{
+	Path "cards/quad/quad"
+	Model 0 "quad_sg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "quad_shell.png"
+	SurfaceSkin 0 8 "rsr_clear.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	SurfaceSkin 0 11 "rsr_clear.png"
+	Scale 0.7500 0.7500 0.7500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBPP D 0 0
+}
+
+// chamber 3: its round (surface 8)
+Model RSB_GunParts
+{
+	Path "cards/quad/quad"
+	Model 0 "quad_sg.md3"
+	SurfaceSkin 0 0 "rsr_clear.png"
+	SurfaceSkin 0 1 "rsr_clear.png"
+	SurfaceSkin 0 2 "rsr_clear.png"
+	SurfaceSkin 0 3 "rsr_clear.png"
+	SurfaceSkin 0 4 "rsr_clear.png"
+	SurfaceSkin 0 5 "rsr_clear.png"
+	SurfaceSkin 0 6 "rsr_clear.png"
+	SurfaceSkin 0 7 "rsr_clear.png"
+	SurfaceSkin 0 8 "quad_shell.png"
+	SurfaceSkin 0 9 "rsr_clear.png"
+	SurfaceSkin 0 10 "rsr_clear.png"
+	SurfaceSkin 0 11 "rsr_clear.png"
+	Scale 0.7500 0.7500 0.7500
+	Offset 0.0000 0.0000 0.0
+	ZOffset -5.0000
+	NoInterpolation
+	FrameIndex RBPP E 0 0
+}
+
 // RS real VR reload, break-open / revolver (zscript/rsr/rsr_break.zs, tools/gen_rsb.py): MS15/MS_RC_M32.
 // The gun's own model and frames; pieces shown or hidden by a clear skin.
 
@@ -428,7 +624,7 @@ Model MS_RC_M32
 	Offset 0.0000 -30.0000 0.0
 	ZOffset -8.0000
 	NoInterpolation
-	FrameIndex RBPG A 0 0
+	FrameIndex RBQG A 0 0
 }
 
 // the hinged part (main controller), turned about the hinge
@@ -455,7 +651,7 @@ Model RSB_GunParts
 	Offset 0.0000 -30.0000 0.0
 	ZOffset -8.0000
 	NoInterpolation
-	FrameIndex RBPP A 0 0
+	FrameIndex RBQP A 0 0
 }
 
 // chamber 0: its round (surface 9)
@@ -482,7 +678,7 @@ Model RSB_GunParts
 	Offset 0.0000 -30.0000 0.0
 	ZOffset -8.0000
 	NoInterpolation
-	FrameIndex RBPP B 0 0
+	FrameIndex RBQP B 0 0
 }
 
 // the round in the off hand (off controller)
@@ -509,7 +705,7 @@ Model RSQ_Hands
 	Offset 0.0000 -30.0000 0.0
 	ZOffset -8.0000
 	NoInterpolation
-	FrameIndex RBPP H 0 0
+	FrameIndex RBQP H 0 0
 }
 
 // a round let go of (world)
@@ -537,7 +733,7 @@ Model RSB_Round
 	ZOffset -0.5615
 	USEACTORPITCH
 	USEACTORROLL
-	FrameIndex RBPW A 0 0
+	FrameIndex RBQW A 0 0
 }
 
 // chamber 1: its round (surface 10)
@@ -564,7 +760,7 @@ Model RSB_GunParts
 	Offset 0.0000 -30.0000 0.0
 	ZOffset -8.0000
 	NoInterpolation
-	FrameIndex RBPP C 0 0
+	FrameIndex RBQP C 0 0
 }
 
 // chamber 2: its round (surface 11)
@@ -591,7 +787,7 @@ Model RSB_GunParts
 	Offset 0.0000 -30.0000 0.0
 	ZOffset -8.0000
 	NoInterpolation
-	FrameIndex RBPP D 0 0
+	FrameIndex RBQP D 0 0
 }
 
 // chamber 3: its round (surface 12)
@@ -618,7 +814,7 @@ Model RSB_GunParts
 	Offset 0.0000 -30.0000 0.0
 	ZOffset -8.0000
 	NoInterpolation
-	FrameIndex RBPP E 0 0
+	FrameIndex RBQP E 0 0
 }
 
 // chamber 4: its round (surface 13)
@@ -645,7 +841,7 @@ Model RSB_GunParts
 	Offset 0.0000 -30.0000 0.0
 	ZOffset -8.0000
 	NoInterpolation
-	FrameIndex RBPP F 0 0
+	FrameIndex RBQP F 0 0
 }
 
 // chamber 5: its round (surface 14)
@@ -672,7 +868,7 @@ Model RSB_GunParts
 	Offset 0.0000 -30.0000 0.0
 	ZOffset -8.0000
 	NoInterpolation
-	FrameIndex RBPP G 0 0
+	FrameIndex RBQP G 0 0
 }
 
 // RS real VR reload, break-open / revolver (zscript/rsr/rsr_break.zs, tools/gen_rsb.py): MS15/MS_VP_Rev.
@@ -697,7 +893,7 @@ Model MS_VP_Rev
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBQG A 0 0
+	FrameIndex RBRG A 0 0
 }
 
 // the hinged part (main controller), turned about the hinge
@@ -719,7 +915,7 @@ Model RSB_GunParts
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBQP A 0 0
+	FrameIndex RBRP A 0 0
 }
 
 // the loader's rounds, in the cylinder
@@ -732,7 +928,7 @@ Model RSB_GunParts
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBQP B 0 0
+	FrameIndex RBRP B 0 0
 }
 
 // the speedloader seated on the cylinder
@@ -745,7 +941,7 @@ Model RSB_GunParts
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBQP I 0 0
+	FrameIndex RBRP I 0 0
 }
 
 // the speedloader in the off hand
@@ -758,7 +954,7 @@ Model RSQ_Hands
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBQP H 0 0
+	FrameIndex RBRP H 0 0
 }
 
 // the empty speedloader in the off hand
@@ -771,7 +967,7 @@ Model RSQ_Hands
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBQP J 0 0
+	FrameIndex RBRP J 0 0
 }
 
 // the empty speedloader let go of (world)
@@ -786,7 +982,7 @@ Model RSB_Round
 	ZOffset 1.5100
 	USEACTORPITCH
 	USEACTORROLL
-	FrameIndex RBQW A 0 0
+	FrameIndex RBRW A 0 0
 }
 
 // the full speedloader let go of (world)
@@ -801,7 +997,7 @@ Model RSB_Round
 	ZOffset 1.5100
 	USEACTORPITCH
 	USEACTORROLL
-	FrameIndex RBQW B 0 0
+	FrameIndex RBRW B 0 0
 }
 
 // RS real VR reload, break-open / revolver (zscript/rsr/rsr_break.zs, tools/gen_rsb.py): MS15/MS_VP_Ssg.
@@ -821,7 +1017,7 @@ Model MS_VP_Ssg
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBRG A 0 0
+	FrameIndex RBSG A 0 0
 }
 
 // the hinged part (main controller), turned about the hinge
@@ -838,7 +1034,7 @@ Model RSB_GunParts
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBRP A 0 0
+	FrameIndex RBSP A 0 0
 }
 
 // chamber 0: its round (surface 2)
@@ -855,7 +1051,7 @@ Model RSB_GunParts
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBRP B 0 0
+	FrameIndex RBSP B 0 0
 }
 
 // the round in the off hand (off controller)
@@ -872,7 +1068,7 @@ Model RSQ_Hands
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBRP H 0 0
+	FrameIndex RBSP H 0 0
 }
 
 // a round let go of (world)
@@ -891,7 +1087,7 @@ Model RSB_Round
 	ZOffset 0.4296
 	USEACTORPITCH
 	USEACTORROLL
-	FrameIndex RBRW A 0 0
+	FrameIndex RBSW A 0 0
 }
 
 // chamber 1: its round (surface 3)
@@ -908,5 +1104,5 @@ Model RSB_GunParts
 	Scale 1.3500 1.3500 1.3500
 	Offset 0.0000 0.0000 0.0
 	ZOffset 0.0000
-	FrameIndex RBRP C 0 0
+	FrameIndex RBSP C 0 0
 }

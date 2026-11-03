@@ -1,0 +1,37 @@
+weapon quad_sg
+  source      Quad_Shotgun.fbx (owner upload 2026-11-03): rigid named parts, NO animation. Open/extract frames AUTHORED
+              from the measured hinge by quad_frames.py: pin FBX xy (41.845, -12.368) r 1.608 (circle fit, 40 verts);
+              the frame's front tab ends at the pin centre between the barrel's lugs. Open 45 deg (a shell drawn out of
+              the lower chambers clears the standing breech at ~42); extract 4.0 (shells only;
+              the ejector rides the barrel). FBX->MD3 axes (x,-z,y), then shifted
+              (12.4, 0, 9.7) so the grip palm lands on the shelf donors' palm at Scale 0.75. Lock (hinge2) rides the barrel
+              as a top rib extension: owner to confirm.
+  archetype   shotgun_break        # set by --archetype
+  model       quad_sg.md3   space WPN   idle_frame 0
+  bore        [1.0, 0.0, 0.0]   down [0.0, 0.0, -1.0]
+  parts
+    hinge    surf 1  rest [75.03, 0.0, 10.18]  axis [0.16, -0.0, -0.987]  travel 18.70  frames 1..20  rot 45deg axis [0.0, 1.0, -0.0]
+    hinge2   surf 2  rest [39.62, 0.0, 19.28]  axis [0.981, 0.0, 0.194]  travel 20.18  frames 1..20  rot 45deg axis [-0.0, 1.0, 0.0]
+    hinge3   surf 3  rest [73.79, 0.0, -10.57]  axis [-0.701, -0.0, -0.713]  travel 16.14  frames 1..20  rot 45deg axis [-0.0, 1.0, -0.0]
+    ejector  surf 4  rest [37.43, 0.0, 9.32]  axis [0.848, 0.0, 0.53]  travel 15.80  frames 1..20  rot 45deg axis [0.0, 1.0, -0.0]
+    shell    surf 5  rest [42.89, 5.05, 14.34]  axis [0.981, 0.0, 0.195]  travel 15.65  frames 1..20  rot 45deg axis [-0.0, 1.0, 0.0]
+    shell2   surf 6  rest [42.89, 5.05, 4.26]  axis [0.521, 0.0, 0.853]  travel 10.34  frames 1..20  rot 45deg axis [0.0, 1.0, -0.0]
+    shell3   surf 7  rest [42.89, -5.02, 14.34]  axis [0.981, 0.0, 0.195]  travel 15.65  frames 1..20  rot 45deg axis [-0.0, 1.0, 0.0]
+    shell4   surf 8  rest [42.89, -5.02, 4.26]  axis [0.521, 0.0, 0.853]  travel 10.34  frames 1..20  rot 45deg axis [0.0, 1.0, -0.0]
+    trigger  surf 9  rest [42.04, -0.0, -6.4]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    trigger2 surf 10  rest [46.02, -0.0, -7.35]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    lever    surf 11  rest [32.2, 0.0, 18.61]  axis [0.0, 0.0, 0.0]  travel 0.00  frames -..-
+    muzzle    [98.75, 0.0, 9.33]   # MEASURED: bore exits at FBX x 86.345, centre of the four bores (+ placement shift)
+  grip        line [34.67, 0.0, -5.41] [33.3, 0.0, -19.33]  trigger [42.04, -0.0, -6.4]   # centroid-based; owner's hand fit supersedes
+  support     feature foregrip [74.31, 0.0, -11.14]   # MEASURED: QShotgun_Handle centroid at rest (rides the barrel when it opens)
+    load      [42.89, 5.05, 14.34]  frame 0   # where the shell ends up: the loading port
+  carve       shell
+  phases
+    idle         0..0
+    load         1..1
+    open         2..2
+    load         3..19
+    close        20..20
+    idle         21..22
+  authoring   surfaces_named_in_source no  tags_in_source 0  frame_names_in_source no  verts 21911
+  carved      shell  surfs [5, 6, 7, 8]  seat_origin [42.89, 0.01, 9.30]  file quad_sg_shell.md3   # 2x2 assembly, one surface (quad_shell_carve.py)

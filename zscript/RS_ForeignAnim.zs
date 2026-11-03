@@ -151,6 +151,9 @@ class RS_ForeignClip
 			// MS_CW_Nailgun: frames are its own reload sequence (every 4th of 157): mag out 9-13, swing, seat 22-26.
 			"MS_CW_Nailgun|ready|0@1|-1|-1|-1",
 			"MS_CW_Nailgun|reload|8-27@2|-1|-1|-1",
+			// MS_QD_Quad: authored break-open: open 1-6, extract 7-10, return 12-15, close 16-21.
+			"MS_QD_Quad|ready|0@1|-1|-1|-1",
+			"MS_QD_Quad|reload|1-21@2|-1|-1|-1",
 			"MS_RC_M32|ready|0@1|-1|-1|-1",
 			"MS_RC_M32|fire|1@3,2@3,3@3,4@3,5@3,6@3|0|-1|-1",
 			// 2026-11-03: 7-36 were fire cycles two to six. The mesh had no reload; frames 37-59 are the

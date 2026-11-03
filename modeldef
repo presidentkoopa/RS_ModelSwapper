@@ -1628,6 +1628,31 @@ Model MS_CW_Nailgun
 	FrameIndex MSBL A 0 9999
 }
 
+Model MS_QD_Quad
+{
+	// source: owner upload Quad_Shotgun.fbx; cards/quad/quad/NOTES.md
+	Path "cards/quad/quad"
+	Model 0 "quad_sg.md3"
+	SurfaceSkin 0 0 "quad_shotgun.png"
+	SurfaceSkin 0 1 "quad_shotgun.png"
+	SurfaceSkin 0 2 "quad_shotgun.png"
+	SurfaceSkin 0 3 "quad_shotgun.png"
+	SurfaceSkin 0 4 "quad_shotgun.png"
+	SurfaceSkin 0 5 "quad_shell.png"
+	SurfaceSkin 0 6 "quad_shell.png"
+	SurfaceSkin 0 7 "quad_shell.png"
+	SurfaceSkin 0 8 "quad_shell.png"
+	SurfaceSkin 0 9 "quad_shotgun.png"
+	SurfaceSkin 0 10 "quad_shotgun.png"
+	SurfaceSkin 0 11 "quad_shotgun.png"
+	Scale 0.75 0.75 0.75
+	Offset 0.0 0.0 0.0
+	ZOffset -5
+	NoInterpolation
+	FrameIndex SHT2 A 0 0
+	FrameIndex MSBL A 0 9999
+}
+
 Model MS_RC_Shotgun
 {
 	// source: Robocop-Retribution/models/weapons/shotgun/shotgun.md3
