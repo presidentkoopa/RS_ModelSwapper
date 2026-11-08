@@ -28,6 +28,16 @@ workshop. The plan before the merge is `docs/depot/PLAN.md` (the Depot's) and `H
       `blendcard.py` needs Blender; the import side (`obj2md3 --stable-verts`, `iqm2md3`, `blendanim`) was never run
       end to end on one gun with the card as the result.
 
+- H1  HANDFIT IN BLENDER, STEP 1 (owner, 2026-11-08: "our current fitter and rig system is too taxing on my tokens ...
+      assume I have blender, and these FBX hands"; agreed 18:33). Step 1 = `tools/handfit/blender/`: the pose library
+      (29 BD22 holds + the FBX take's 5 poses, each hand), the add-on (load card, import hand, apply pose, export the
+      files the 2.0.1 pipeline eats, read the gun's six numbers back from the moved gun), the acceptance test
+      (BrutalPistol reproduces the shipped `fbx_b1_R.md3` frame: mean < 0.02, max < 0.30 md3 units). DONE here as
+      "written, not verified" (2026-11-08); done for real when the owner runs `test_brutalpistol.py` and it passes.
+      Step 2 (owner's machine, Claude Code locally): finger snapping, the support hand, the four off holds (pistol
+      trigger, flamethrower, shotgun, revolver) back into BD22 as a hotfix. Step 3: the PB set's hands (18 carry-overs,
+      11 fits), TEST comes off the name.
+
 ## To consider, not scheduled (each needs the owner's yes)
 - C1  Re-run the five cards whose magazine travels under a non-pistol archetype (BD assault shotgun, rifle, RPG, two
       Chex zorchers) so they carry the `mag_out` / `mag_in` phases the merged `md3label` now writes (RECHECK_BASELINE

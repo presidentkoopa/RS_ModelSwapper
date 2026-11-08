@@ -31,7 +31,15 @@ that came out of the Oct-31 batch-carding.** Everything else in either repo is "
 - Rusted Legacy is its own repo: https://github.com/presidentkoopa/RSQ_RustedLegacy (9 commits: the eight S4
   commits by `git subtree split` + one that repoints its two tools at `../rs_modelswapper/tools`, or `RSQ_TOOLS`).
 
+- H1 step 1 (2026-11-08): `tools/handfit/blender/` -- `pose_library.json` (29 BD22 holds via the kit's own FK + the
+  FBX take's 5 poses x 2 hands), `handfit_addon.py`, `test_brutalpistol.py`, README. The non-Blender math is checked
+  against the kit to 0.000000 (gun chain, flu_to_md3, six-number round trip, md3 I/O); the library's BrutalPistol pose
+  lands on the shipped `fbx_b1_R.md3` frame at mean 0.0085 / max 0.240 md3 units. The Blender calls are NOT run
+  (no Blender here): written, not verified.
+
 ## Not done
+- H1: `blender -b --python tools/handfit/blender/test_brutalpistol.py -- --bd22 <RS_Brutal22WeaponsQ>` on the owner's
+  machine. Until it passes, Handfit is not working.
 - Anything on the rig: this session had no engine. First rig run of the merged tree is the next thing to do.
 
 ## Open
