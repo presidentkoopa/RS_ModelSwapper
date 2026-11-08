@@ -27,11 +27,11 @@ that came out of the Oct-31 batch-carding.** Everything else in either repo is "
   `sh tools/install_hooks.sh`; `PLAN.md` is the plan (current step M1).
 
 ## Done (measured), continued
+- RSQ_WeaponDepot `main`: README points here (commit e3266f6). The owner archives the repo in GitHub settings.
 - Rusted Legacy is its own repo: https://github.com/presidentkoopa/RSQ_RustedLegacy (9 commits: the eight S4
   commits by `git subtree split` + one that repoints its two tools at `../rs_modelswapper/tools`, or `RSQ_TOOLS`).
 
 ## Not done
-- The Depot archived read-only, its README pointing here.
 - Anything on the rig: this session had no engine. First rig run of the merged tree is the next thing to do.
 
 ## Open
