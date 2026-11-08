@@ -45,7 +45,7 @@ FBX = os.environ.get('RSQ_FBX', '') or os.path.join(os.path.dirname(os.path.absp
 FBX_TEX = os.environ.get('RSQ_FBX_TEX', '') or (os.path.join(os.path.dirname(FBX), 'textures') if FBX else '')
 ERMAC = os.environ.get('RSQ_ERMAC', '')			# Ermac's doom-force-unleashed_devbuild/models (hand/, ammo_hand/)
 # the whole Rusted Legacy dev build (models/, modeldefs/, zscript/): what sets/rusted_legacy measures. Default: ERMAC's parent.
-RL = os.environ.get('RSQ_RL', '') or (os.path.dirname(os.path.normpath(ERMAC)) if ERMAC else os.path.join(DEPOT, '..', 'rs_rustedlegacy', 'src'))   # Rusted Legacy is its own repo (2026-11-08)
+RL = os.environ.get('RSQ_RL', '') or (os.path.dirname(os.path.normpath(ERMAC)) if ERMAC else os.path.join(DEPOT, '..', 'rsq_rustedlegacy', 'src'))   # Rusted Legacy is its own repo (2026-11-08)
 DOOMWORK = os.environ.get('RSQ_DOOMWORK', '')		# the owner's E:\DOOMWork (REMA, RS_VR_Reload): history tools only
 MODELSWAPPER = _env('RSQ_MODELSWAPPER', DEPOT)		# this repo IS RS_ModelSwapper since the merge; the variable stays for the tools that read it
 CARDS = _env('RSQ_CARDS', os.path.join(DEPOT, 'cards'))		# the card well: one folder per mesh (cards/README.md)

@@ -23,11 +23,14 @@ that came out of the Oct-31 batch-carding.** Everything else in either repo is "
   backslash entries, 0 static world models, 2834 asset refs resolved, 145 donors, 0 duplicate, 0 unstubbed). Rig not
   run this session (no engine here).
 - `tools/depot.py`: `RSQ_SET` defaults to `../rs_brutal22weaponsq` (the set is its own repo), `RSQ_RL` to
-  `../rs_rustedlegacy`, `RSQ_CARDS` = `cards/`. `tools/check_plan.py` knows the merged layout; hooks via
+  `../rsq_rustedlegacy`, `RSQ_CARDS` = `cards/`. `tools/check_plan.py` knows the merged layout; hooks via
   `sh tools/install_hooks.sh`; `PLAN.md` is the plan (current step M1).
 
+## Done (measured), continued
+- Rusted Legacy is its own repo: https://github.com/presidentkoopa/RSQ_RustedLegacy (9 commits: the eight S4
+  commits by `git subtree split` + one that repoints its two tools at `../rs_modelswapper/tools`, or `RSQ_TOOLS`).
+
 ## Not done
-- Rusted Legacy's own repo (the owner creates it; the content is prepared, see the summary).
 - The Depot archived read-only, its README pointing here.
 - Anything on the rig: this session had no engine. First rig run of the merged tree is the next thing to do.
 
