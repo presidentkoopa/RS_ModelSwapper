@@ -1,2 +1,0 @@
-
-include "configs/gameinfo.txt"

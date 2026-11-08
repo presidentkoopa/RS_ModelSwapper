@@ -4,7 +4,7 @@
 set -e
 HERE=$(cd "$(dirname "$0")" && pwd); DEPOT=$(cd "$HERE/../../.." && pwd); T=${TMPDIR:-/tmp}/port_gun_verify.$$
 # the two commits live in the BD22 repo (presidentkoopa/RS_Brutal22WeaponsQ), not in the Depot
-REPO=${RSQ_BD22_REPO:-$DEPOT/../rs_brutal22weaponsq}; FITS=${RSQ_FITS_DIR:-$DEPOT/sets/bd22q/handfit/fits}
+REPO=${RSQ_BD22_REPO:-$DEPOT/../rs_brutal22weaponsq}; FITS=${RSQ_FITS_DIR:-$REPO/handfit/fits}
 mkdir -p "$T/clean" "$T/ref"; cd "$REPO"
 git archive 19f0203 src | tar -x -C "$T/clean"; git archive bdf3fae src | tar -x -C "$T/ref"
 python3 "$HERE/port_gun.py" MP40 "$FITS/MP40_b3.json" --src "$T/clean/src" --tag "batch 3"

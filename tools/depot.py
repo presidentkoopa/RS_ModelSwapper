@@ -15,8 +15,10 @@ def _env(name, default):
     return os.path.abspath(v if v else default)
 
 
-# the set being worked on (its src/, its hand-fit data). Default: BD22 VR Weapons Q.
-SET = _env('RSQ_SET', os.path.join(DEPOT, 'sets', 'bd22q'))
+# the set being worked on (its src/, its hand-fit data). Default: BD22 VR Weapons Q, which is its own repo
+# (presidentkoopa/RS_Brutal22WeaponsQ) checked out beside this one. Sets are not kept in this repo since the
+# merge into RS_ModelSwapper (2026-11-08): the finished ones are their own repos, the cards live in cards/.
+SET = _env('RSQ_SET', os.path.join(DEPOT, '..', 'rs_brutal22weaponsq'))
 SRC = _env('RSQ_SRC', os.path.join(SET, 'src'))
 POSES = _env('RSQ_POSES', os.path.join(SET, 'handfit', 'poses'))		# solved hand poses as data
 FITS = _env('RSQ_FITS_DIR', os.path.join(SET, 'handfit', 'fits'))		# fit records, bakes, port logs
@@ -43,9 +45,10 @@ FBX = os.environ.get('RSQ_FBX', '') or os.path.join(os.path.dirname(os.path.absp
 FBX_TEX = os.environ.get('RSQ_FBX_TEX', '') or (os.path.join(os.path.dirname(FBX), 'textures') if FBX else '')
 ERMAC = os.environ.get('RSQ_ERMAC', '')			# Ermac's doom-force-unleashed_devbuild/models (hand/, ammo_hand/)
 # the whole Rusted Legacy dev build (models/, modeldefs/, zscript/): what sets/rusted_legacy measures. Default: ERMAC's parent.
-RL = os.environ.get('RSQ_RL', '') or (os.path.dirname(os.path.normpath(ERMAC)) if ERMAC else os.path.join(DEPOT, 'sets', 'rusted_legacy', 'src'))
+RL = os.environ.get('RSQ_RL', '') or (os.path.dirname(os.path.normpath(ERMAC)) if ERMAC else os.path.join(DEPOT, '..', 'rs_rustedlegacy', 'src'))   # Rusted Legacy is its own repo (2026-11-08)
 DOOMWORK = os.environ.get('RSQ_DOOMWORK', '')		# the owner's E:\DOOMWork (REMA, RS_VR_Reload): history tools only
-MODELSWAPPER = _env('RSQ_MODELSWAPPER', os.path.join(DEPOT, '..', 'rs_modelswapper'))
+MODELSWAPPER = _env('RSQ_MODELSWAPPER', DEPOT)		# this repo IS RS_ModelSwapper since the merge; the variable stays for the tools that read it
+CARDS = _env('RSQ_CARDS', os.path.join(DEPOT, 'cards'))		# the card well: one folder per mesh (cards/README.md)
 
 
 def need(path, what):

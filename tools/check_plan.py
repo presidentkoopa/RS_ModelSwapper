@@ -65,7 +65,7 @@ if '--audit' in sys.argv:
 errs += still_frame_errors(staged('AM'))
 
 # the layout (README.md "The layout"): nothing else at the top
-KNOWN = {'sets', 'tools', 'docs', 'sources', '.github'}
+KNOWN = {'tools', 'docs', 'sources', 'cards', 'zscript', 'zscript_depot', 'modeldef', 'models', 'sounds', 'quest', 'media', 'pk3', 'reload_1x', '.github'}   # RS_ModelSwapper since 2026-11-08
 for p in staged('ACMR'):
     top = p.split('/')[0]
     if '/' in p and top not in KNOWN:

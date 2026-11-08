@@ -4,7 +4,7 @@ BD_VoxelPack -> pack, ONE engine at a time under an exclusive lock, the rig ini 
   gate_gun.py sheet  <pk3> <Class...>      rest / steady / fire frames from the eye and the side (PNG tiles)
   gate_gun.py hands  <pk3> <job...>        Depot mags.py <ids> / brk<ids> (brk.py) / m203 (the moved rifle's launcher reload)
   gate_gun.py compose <out.png> <Class...> the sheet beside each gun's 1.92 eye / side render
-Env (all optional, tools/depot.py): RSQ_SET (the set; default sets/bd22q), RSQ_GAMEDATA (doom2.wad,
+Env (all optional, tools/depot.py): RSQ_SET (the set; default ../rs_brutal22weaponsq), RSQ_GAMEDATA (doom2.wad,
 brutal22test6.pk3, BD_VoxelPack.pk3; default <depot>/../gamedata), RSQ_RIGLOCK (default <depot>/../rig.lock),
 RSQ_GATE (logs and shots; default <work>/gate). Rig only: nothing here is a headset test."""
 import os as _dpo, sys as _dps; _dps.path.append(_dpo.path.normpath(_dpo.path.join(_dpo.path.dirname(_dpo.path.abspath(__file__)), '../..'))); import depot as _DP	# Depot paths (tools/depot.py)
