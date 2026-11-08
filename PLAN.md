@@ -1,6 +1,6 @@
 # PLAN: RS_ModelSwapper (owner, 2026-11-08; this file is the only plan)
 
-Current step: **M1**
+Current step: **M2**
 
 `none` is also a legal current step; `tools/check_plan.py` accepts it only while every `- F<n>` / `- W<n>` / `- M<n>`
 line here is marked DONE. To do new work, add an item in a `[plan]` commit and name it here.
@@ -16,6 +16,19 @@ workshop. The plan before the merge is `docs/depot/PLAN.md` (the Depot's) and `H
       sets; `recheck_cards.py` as the gate (baseline kept); ModelSwapper's `tools_kit` and `tools_*` under `tools/`
       with every path repo-relative; the Quest pk3 builds from the merged tree; Rusted Legacy split to its own repo;
       the Depot archived read-only with a pointer here. Done when the owner has the summary and the Depot README points here.
+- M2  GENERIC WEAPONS + WEAPONS OF SATURN SETS (owner, 2026-11-08: "spin up mesh sets for these two weapon sets ...
+      hands on guns"). Two ModelSwapper sets the way the PB set exists. Done when: (1) every weapon of each mod is
+      inventoried from the mod's own code (class, parent, slot, ammo, Reload state and its kind, sprites) in
+      `docs/sets/generic_weapons.md` and `docs/sets/weapons_of_saturn.md`; (2) each weapon has a donor from the card
+      well, picked in this order: the pairings seen working on the rig (README "Seen working") stay; a weapon that
+      reloads wears a donor with a MEASURED reload row of the same kind (magazine: rsr_guns.ms.zs SlotForDonor; pump:
+      card_pump.report.md; break: card_break.report.md); else the card archetype and the look (modern donors for
+      modern mods, BD first for their BD22 holds), one line of reason per pick in the docs table; (3) the picks are
+      rows in `RS_ForeignScanner.ProfileDonor` beside the PB rows, with no PB row changed; (4) `tools/ms/build_pk3.py
+      --set <name>` cuts the Quest build to that set's donors (`pk3/<Name>_MS.pk3`), `--pb` still packs the same
+      entries; (5) gates: zs_lint 0 problems, every build_pk3 gate for both sets, check_plan ok; (6) HANDOFF.md has
+      the M2 block (done with the numbers, not done, open). Not in scope: the gun-hand FBX poses (PLAN H1 / Handfit)
+      and any rig run (no engine in this session: "not rig-run" until one happens).
 - F14 CRITICAL, NOT STARTED: THE NEW-GUN PIPELINE, COMPLETE (owner, 2026-10-27, restated 2026-11-08: "a god-tier
       toolset and pipeline to scan imported meshes from a variety of formats and export them as labeled and understood
       .md3 files"). Not to be started before the owner says go. Done = a fresh clone takes one mesh (obj / iqm / blend /
