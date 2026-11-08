@@ -1,0 +1,20 @@
+#!/bin/sh
+# every commit names its plan step: "[step F1] ..." or "[plan] ..."
+head -1 "$1" | grep -Eq '^\[(step [A-Z][0-9]*|plan)\]' || { echo 'commit message must start with "[step <id>]" (an id from PLAN.md) or "[plan]"'; exit 1; }
+
+# AND THE ID MUST BE ONE PLAN.md LISTS. Checking only the SHAPE let `[step F7]` through twice on
+# 2026-10-24 -- F7 matches [A-Z][0-9]* perfectly and is not a step in the plan. check_plan.py did
+# not catch it either: that one validates PLAN.md's own "Current step", not the id in the message.
+# Two checks, neither looking at the thing that was wrong. An invented step is now impossible
+# rather than merely documented afterwards.
+id=$(head -1 "$1" | sed -n 's/^\[step \([A-Z][0-9]*\)\].*/\1/p')
+if [ -n "$id" ]; then
+	root=$(git rev-parse --show-toplevel)
+	# the same item pattern check_plan.py reads: a line beginning "- <id> "
+	grep -Eq "^- $id " "$root/PLAN.md" || {
+		echo "commit message names [step $id], which PLAN.md does not list."
+		echo "Steps PLAN.md has: $(grep -Eo '^- [A-Z][0-9]*' "$root/PLAN.md" | cut -c3- | tr '\n' ' ')"
+		echo 'If the work needs a new step, add it to PLAN.md first in its own [plan] commit.'
+		exit 1
+	}
+fi

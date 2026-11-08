@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+# FBX files stay out, except the FBX hand (owner, 2026-10-28/30: it lives in the repo)
+*.fbx
+!tools/handfit/core/fbx_hand/hand_final.fbx
+# frame dumps: convert to PNG, then delete
+*.ppm
+# run output of every tool (RSQ_WORK default)
+work/
+# tools/rig/setup.sh output (engine sources, rig build, test pk3s, logs, shots)
+tools/rig/build/
+# made at run time in the prebuilt rig by bin/qz and the engine
+tools/rig/bin/libGLESv3.so
+tools/rig/bin/saves/
+# a set's built pack (each set's build.py writes it next to itself)
+sets/*/*.pk3
