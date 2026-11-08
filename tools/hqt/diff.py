@@ -1,4 +1,5 @@
-import sys; sys.path.insert(0, "/home/claude/md3")
+import os
+import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np, sys
 from md3read import read_md3
 m = read_md3(sys.argv[1])

@@ -5,7 +5,7 @@ Label EVERY MD3 under the folder in one pass. For each model: guess the archetyp
 <outdir>/TABLE.md with a confidence flag. Models flagged LOW need one word from the owner
 (the archetype); the rest need nothing. Also <outdir>/sheet.png: one row per model, idle +
 busiest frames, so the whole set is checked by eye in one picture."""
-import sys, os, glob, subprocess, traceback; sys.path.insert(0, '/home/claude/md3')
+import sys, os, glob, subprocess, traceback; HERE=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import numpy as np
 from md3read import read_md3
 
@@ -91,7 +91,7 @@ def main():
         la = ARCH_FOR_LABELLER.get(arch)
         if la and sv['nsurf'] > 1:
             carve = 'mag,round' if la == 'pistol_mag' else ('shell' if la == 'shotgun_pump' else 'loader,case')
-            r = subprocess.run([sys.executable, '/home/claude/md3/md3label.py', f, od, name, '--archetype', la, '--carve', carve, '--idle', str(sv['idle'])],
+            r = subprocess.run([sys.executable, os.path.join(HERE, 'md3label.py'), f, od, name, '--archetype', la, '--carve', carve, '--idle', str(sv['idle'])],
                                capture_output=True, text=True, timeout=600)
             open(os.path.join(od, 'label.log'), 'w').write(r.stdout + r.stderr)
             log = 'card' if r.returncode == 0 and os.path.exists(os.path.join(od, name + '.card')) else f'labeller rc={r.returncode}'

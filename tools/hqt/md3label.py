@@ -25,6 +25,8 @@ import sys, struct, os, argparse
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+import re
+MOVING_ROLE = re.compile(r'^(mag|clip|slide|bolt|trigger|hammer|round|case|casing|shell|cyl|crane|ejector|pump|loader|latch|lever|cage|hinge)\d*$')
 VOCAB = ["body","slide","mag","round","trigger","hammer","pump","cyl","bolt","handle","lever","shell","case","barrel","loader","sight","stock","grip","bead"]
 
 # ---------------------------------------------------------------- raw MD3 I/O (lossless)
@@ -109,11 +111,11 @@ def merge_surfs(surfs):
     out['st']=np.vstack(st).astype('<f4').tobytes(); out['xyz']=np.concatenate(xyz,axis=1).astype('<i2').tobytes()
     return out
 
-def write_single(src_surf, name, xyz_local, path):
-    """One-surface, one-frame MD3 for a carved part. xyz_local: (nverts,3) floats."""
+def write_single(src_surf, name, xyz_local, path, frame=0):
+    """One-surface, one-frame MD3 for a carved part. xyz_local: (nverts,3) floats; the normals come from 'frame'."""
     nv = src_surf['nverts']
     raw = np.frombuffer(src_surf['xyz'], dtype='<i2').reshape(src_surf['nframes'], nv, 4)
-    normals = raw[0,:,3]
+    normals = raw[min(frame, src_surf['nframes']-1),:,3]
     q = np.clip(np.round(xyz_local*64.0), -32768, 32767).astype('<i2')
     v = np.zeros((nv,4), dtype='<i2'); v[:,:3] = q; v[:,3] = normals
     mn, mx = xyz_local.min(0), xyz_local.max(0); rad = float(np.linalg.norm(xyz_local,axis=1).max())
@@ -130,10 +132,13 @@ def kabsch(P,Q):
 def unit(v):
     n=np.linalg.norm(v); return v/n if n>1e-9 else v
 
-def analyse(m, idle, body=None):
+def analyse(m, idle, body=None, exclude=()):
     S=[dict(xyz=surf_xyz(s), nverts=s['nverts'], name=s['name']) for s in m['surfs']]
     # the body is the biggest surface unless told otherwise: a minigun's biggest surface is its SPINNING barrels
-    if body is None: body=max(range(len(S)), key=lambda i:S[i]['nverts'])
+    # (--body). 'exclude' holds the surfaces --assign already named something other than the body: on the MG42
+    # the belt drum outweighs the receiver it hangs off, and '--assign 2=mag' left the drum a magazine with no
+    # motion record and a KeyError (2026-10-24). A surface the caller called something else is not a body candidate.
+    if body is None: body=max([i for i in range(len(S)) if i not in exclude] or list(range(len(S))), key=lambda i:S[i]['nverts'])
     B=S[body]['xyz']; nf=m['nframes']
     # everything in WPN = body space at the idle frame
     Rs=[kabsch(B[f], B[idle]) for f in range(nf)]   # maps frame f body -> idle body
@@ -199,23 +204,31 @@ def main():
     ap.add_argument('--no-stabilize-check', action='store_true')
     ap.add_argument('--body', type=int, default=None, help='surface index that is the still body (default: the biggest)')
     ap.add_argument('--bore', default='1,0,0'); ap.add_argument('--down', default='0,0,-1')
+    ap.add_argument('--split-body', action='store_true', dest='split_body',
+                    help='the body was exported in several slabs (a gun too long for the MD3 range, the Kar98): the grip search runs over every surface labelled body, not only the main one')
+    ap.add_argument('--carve-frame', type=int, default=None, dest='carve_frame',
+                    help='frame to carve and seat parts from (default: the idle frame). Use it when a part is parked out of position at rest (the Kar98 clip waits in the buttstock).')
     a=ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     m=read_raw(a.src)
     nf=m['nframes']
     # idle: first frame whose body pose is shared by the most frames (the sway-free pose)
-    S0=[surf_xyz(s) for s in m["surfs"]]; body0=a.body if a.body is not None else max(range(len(S0)), key=lambda i:S0[i].shape[1])
+    _assign={int(kv.split('=')[0]): kv.split('=')[1] for kv in filter(None, a.assign.split(','))}
+    # only a role that marks a DETACHABLE or MOVING piece keeps a surface from being the body. Authors routinely
+    # call the whole gun 'handle' (the MP40, Kar98, Tommy gun and STG44 all do), and the Tommy gun's card measures
+    # everything against its 'handle' surface: a handle, grip, stock or barrel may still be the frame of reference.
+    _excl={i for i,r in _assign.items() if MOVING_ROLE.match(r)}
+    S0=[surf_xyz(s) for s in m["surfs"]]; body0=a.body if a.body is not None else max([i for i in range(len(S0)) if i not in _excl] or list(range(len(S0))), key=lambda i:S0[i].shape[1])
     if a.idle is None:
         # the raise ends where consecutive-frame body rotation first drops under 2 degrees
         B=S0[body0]; a.idle=0
         for f in range(1,nf):
             ang=np.degrees(np.arccos(np.clip((np.trace(kabsch(B[f-1],B[f])[0])-1)/2,-1,1)))
             if ang<2.0: a.idle=f-1; break
-    S, body, Rs, to_wpn, rest, resid, sway, cant = analyse(m, a.idle, a.body)
+    S, body, Rs, to_wpn, rest, resid, sway, cant = analyse(m, a.idle, a.body, _excl)
     bore=unit(np.array([float(x) for x in a.bore.split(',')])); down=unit(np.array([float(x) for x in a.down.split(',')]))
     roles, info = classify(S, body, rest, resid, bore, down)
-    for kv in filter(None, a.assign.split(',')):
-        k,v=kv.split('='); roles[int(k)]=v
+    roles.update(_assign)
     # unique names: body, body2 ...
     seen={}; names={}
     for i in range(len(S)):
@@ -228,7 +241,16 @@ def main():
     def trav(role,f): i=by_role.get(role); return float(np.linalg.norm(resid[i][f])) if i is not None else 0.0
     fnames=[]
     def moving(role,f,thr=0.5): return trav(role,f)>thr
-    if a.archetype == 'pistol_mag':
+    # The magazine labeller is chosen by what the GUN HAS, not by the archetype string. It used to run only for
+    # --archetype pistol_mag, so a gun carded as smg / rifle / flamethrower fell through to the generic branch,
+    # which never writes mag_out / mag_in -- and mag_in is the phase the reload generator measures the insertion
+    # stroke from: 157 measured guns produced no reload for exactly that reason (2026-10-25). Any gun whose
+    # magazine actually travels gets this branch.
+    _mag_i = by_role.get('mag')
+    # 'travels' = more than 5 units: a reload moves a magazine 8.5 (CW nailgun) to 50 (BD RPG); a drum that only
+    # shakes with recoil moves 2 (ZBlood Tommy gun) and must not turn automatic fire into mag phases.
+    _mag_moves = _mag_i is not None and max((float(np.linalg.norm(resid[_mag_i][f])) for f in range(nf)), default=0.0) > 5.0
+    if a.archetype == 'pistol_mag' or _mag_moves:
         state='raise'
         for f in range(nf):
             if sway[f]>15 and f<a.idle: fnames.append(f"raise_{f}"); continue
@@ -335,16 +357,27 @@ def main():
         eject=chamber+np.array([0,half,0]); card.append(f"    eject     {np.round(eject,2).tolist()}  normal [0.0, 1.0, 0.0]   # chamber + half width, +Y = right; owner confirms side")
         tagdefs.append(("tag_chamber", tag_per_frame(chamber, frame_axes(bore,-down))))
         tagdefs.append(("tag_eject", tag_per_frame(eject, frame_axes(np.array([0,1,0]),-down))))
+    carve_f = a.carve_frame if a.carve_frame is not None else a.idle   # the frame that holds the loaded position
     if 'mag' in by_role:
-        i=by_role['mag']; W=to_wpn(i,a.idle); mouth=W[np.argmax(W@(-down))]  # top of mag at rest
-        card.append(f"    mag_well  {np.round(rest[i],2).tolist()}  mouth {np.round(mouth,2).tolist()}  axis {np.round(info[i]['axis'],3).tolist()}  travel_clear {info[i]['travel']:.2f}")
-        tagdefs.append(("tag_mag_well", tag_per_frame(rest[i], frame_axes(-info[i]['axis'],bore))))
+        # the well is where the magazine SITS WHEN LOADED. At idle that is the same place, unless the author parked
+        # the part elsewhere at rest (the Kar98 clip waits inside the buttstock and the well came out at the butt,
+        # 2026-10-24): --carve-frame names the loaded frame and the well follows it.
+        i=by_role['mag']; W=to_wpn(i,carve_f); mouth=W[np.argmax(W@(-down))]  # top of mag, loaded
+        seat = rest[i] if carve_f == a.idle else W.mean(0)
+        card.append(f"    mag_well  {np.round(seat,2).tolist()}  mouth {np.round(mouth,2).tolist()}  axis {np.round(info[i]['axis'],3).tolist()}  travel_clear {info[i]['travel']:.2f}")
+        tagdefs.append(("tag_mag_well", tag_per_frame(seat, frame_axes(-info[i]['axis'],bore))))
     # muzzle: body point furthest along bore among points near the bore line (top half)
     barrels=[i for i in range(len(S)) if roles[i] in ('barrel','body')]
     W=np.vstack([to_wpn(i,a.idle) for i in barrels]); top=W[W@(-down) > np.median(W@(-down))]
     if len(top)==0: top=W	# a degenerate surface (one point) or a body drawn below the median: use it all
     muz=top[np.argmax(top@bore)]
-    W=to_wpn(body,a.idle)
+    # the grip search below looks for body vertices behind and under the trigger. A gun too big for the MD3 range
+    # gets split into bore-slabs (the Kar98's largest slab spans x 58..116, its trigger is at x 33): every surface
+    # labelled body is the body (2026-10-24).
+    # labelled body is the body -- with --split-body. Not by default: classify() calls every STILL surface 'body'
+    # (a trigger guard, a sight), and searching those moves the grip on guns measured the old way.
+    _bodies=([i for i in range(len(S)) if roles[i]=='body'] if a.split_body else []) or [body]
+    W=np.vstack([to_wpn(i,a.idle) for i in _bodies])
     card.append(f"    muzzle    {np.round(muz,2).tolist()}")
     tagdefs.append(("tag_muzzle", tag_per_frame(muz, frame_axes(bore,-down))))
     # grip: body points below the trigger along 'down'
@@ -419,10 +452,13 @@ def main():
     for role in carve:
         # every surface that carries the role is ONE part (BD22 Weapons Q masks them together:
         # pistol mag = surfs 2+3, RPG pod = surfs 5..12). Merged into one surface, one frame.
+        # A rigid part has the same shape at every frame; the carve frame (--carve-frame) changes only its ORIGIN.
         idx=[i for i in range(len(S)) if roles[i]==role]
-        W=np.vstack([to_wpn(i,a.idle) for i in idx]); c=W.mean(0)
-        write_single(merge_surfs([m['surfs'][i] for i in idx]), role, W-c, os.path.join(a.out,f"{a.name}_{role}.md3"))
-        card.append(f"  carved      {role}  surfs {idx}  seat_origin {np.round(c,2).tolist()}  file {a.name}_{role}.md3")
+        W=np.vstack([to_wpn(i,carve_f) for i in idx]); c=W.mean(0)
+        write_single(merge_surfs([m['surfs'][i] for i in idx]), role, W-c, os.path.join(a.out,f"{a.name}_{role}.md3"),
+                     frame=carve_f if a.carve_frame is not None else 0)   # normals: frame 0 as always, the carve frame only when asked
+        note = '' if carve_f == a.idle else f'  from_frame {carve_f}'
+        card.append(f"  carved      {role}  surfs {idx}  seat_origin {np.round(c,2).tolist()}{note}  file {a.name}_{role}.md3")
     open(os.path.join(a.out,a.name+'.card'),'w').write('\n'.join(card)+'\n')
     print('\n'.join(card))
     print("\nframe names:", fnames)

@@ -2,8 +2,8 @@
 """obj2md3.py in.obj out.md3 skin.png [--axes zxy]
 One MD3 surface per OBJ object (o ...), one frame. --axes maps OBJ (x,y,z) -> MD3 file (x,y,z):
 'zxy' means file x = obj z, file y = obj x, file z = obj y (a proper rotation, bore +X, up +Z)."""
-import sys, struct, numpy as np
-sys.path.insert(0, '/home/claude/md3')
+import sys, os, struct, numpy as np
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from md3label import pad
 
 def enc_normal(n):
@@ -16,6 +16,14 @@ def main():
     src, out, skin = sys.argv[1:4]
     axes = 'zxy'
     if '--axes' in sys.argv: axes = sys.argv[sys.argv.index('--axes') + 1]
+    # Corners are normally deduplicated on (vertex, uv, normal). That splits a vertex
+    # whenever its normal index differs -- fine for one mesh, fatal across the frames
+    # of an animation, because a rotating part gets different normal indices per frame
+    # and the surface comes out with a different vertex COUNT each time (the Kar98's
+    # frame 3 had 887 where frame 0 had 886). MD3 stores a normal per vertex per frame
+    # anyway, so the normal has no business in the identity of a vertex.
+    # --stable-verts keys on (vertex, uv) only, which is what a frame stack needs.
+    stable = '--stable-verts' in sys.argv
     V, VT, VN = [], [], []
     objs = {}; order = []; cur = None
     for ln in open(src, errors='replace'):
@@ -43,14 +51,26 @@ def main():
         for tri in tris:
             ids = []
             for c in tri:
-                if c not in vmap:
-                    vmap[c] = len(verts)
+                key = (c[0], c[1]) if stable else c
+                if key not in vmap:
+                    vmap[key] = len(verts)
                     verts.append(remap(V[c[0]])); sts.append(VT[c[1]] if c[1] >= 0 else (0, 0)); nrm.append(remap(VN[c[2]]) if c[2] >= 0 else (0, 0, 1))
-                ids.append(vmap[c])
+                ids.append(vmap[key])
             tri_idx.append(ids)
         verts = np.array(verts); tri_idx = np.array(tri_idx, dtype='<i4')
+        # 4096/8192 are QUAKE 3's limits, not this engine's. models_md3.cpp has no cap
+        # at all -- it Resize()s to whatever the header says -- and 112 surfaces already
+        # shipping in this mod are over 4096, the largest at 18929 verts. The only real
+        # MD3 constraint is the int16 position format: coordinates are stored as a short
+        # over 64, so nothing may leave +/- 512 model units. Splitting a surface to get
+        # under 4096 buys nothing here and costs plenty (see splitfit.py).
         if len(verts) > 4096 or len(tri_idx) > 8192:
-            print(f"WARNING {name}: {len(verts)} verts / {len(tri_idx)} tris exceeds MD3 limits (4096/8192)")
+            print(f"note {name}: {len(verts)} verts / {len(tri_idx)} tris is over Quake 3's "
+                  f"limits (4096/8192). This engine has no such cap -- only the +/-512 unit range.")
+        ext = np.abs(np.clip(np.round(verts * 64.0), -32768, 32767) / 64.0).max() if len(verts) else 0
+        if ext > 512:
+            print(f"WARNING {name}: reaches {ext:.1f} model units; MD3 stores positions as "
+                  f"int16/64 and cannot hold more than 512. This WILL wrap.")
         xyz = np.zeros((len(verts), 4), dtype='<i2')
         xyz[:, :3] = np.clip(np.round(verts * 64.0), -32768, 32767)
         xyz[:, 3] = [enc_normal(np.array(n)) for n in nrm]

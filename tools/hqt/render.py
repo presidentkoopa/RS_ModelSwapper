@@ -17,7 +17,25 @@ import os; IDLE=int(os.environ.get('IDLE','0'))
 VIEW=os.environ.get('VIEW','side')
 if VIEW=='top': Rv=np.array([[1,0,0],[0,0,1],[0,-1,0]])@Rv
 if VIEW=='bottom': Rv=np.array([[1,0,0],[0,0,-1],[0,1,0]])@Rv   # looks up +Z: loading ports and magazine wells
-fig,axs=plt.subplots(1,len(frames),figsize=(4.2*len(frames),4.2))
+# A split body runs to 15-18 surfaces, and a 12-colour palette that wraps makes
+# surf12 the same red as surf0 -- which is a silent way to assign the wrong index.
+# tab20 carries it to 20 distinct colours; past that, fall back to a hatch-free
+# greyscale ramp so a collision is at least visible as a near-duplicate.
+if len(S)>len(pal):
+    pal=[matplotlib.colors.to_hex(c) for c in matplotlib.colormaps['tab20'].colors]
+    if len(S)>len(pal):
+        pal=pal+[matplotlib.colors.to_hex(matplotlib.colormaps['cubehelix'](t))
+                 for t in np.linspace(0.15,0.85,len(S)-len(pal))]
+cols={i:pal[i%len(pal)] for i in range(len(S))}; cols[body]='#999999'
+lab={i:f'surf{i} {S[i]["name"][:12]}' for i in range(len(S))}
+frames=[int(x) for x in sys.argv[2].split(',')]
+import os; IDLE=int(os.environ.get('IDLE','0'))
+# The legend is the whole point of this render -- it is how a surface INDEX gets
+# matched to a shape before `md3label --assign`. A gun with a dozen surfaces was
+# overflowing a 4.2in figure and the names were being cut off at the edge, so the
+# figure widens and the legend wraps to as many rows as it needs.
+_NCOL=min(4,len(S)); _ROWS=-(-len(S)//_NCOL); _BOT=min(0.45,0.045*_ROWS+0.04)
+fig,axs=plt.subplots(1,len(frames),figsize=(max(4.2*len(frames),9.0),4.2/(1-_BOT)))
 for ax,f in zip(np.atleast_1d(axs),frames):
     R,t=kabsch(B[IDLE],B[f])
     for i,s in enumerate(S):
@@ -32,5 +50,5 @@ for ax,f in zip(np.atleast_1d(axs),frames):
         ax.add_collection(PolyCollection(polys,facecolors=shade,edgecolors='none'))
     ax.autoscale(); ax.set_aspect('equal'); ax.margins(0.05); ax.set_title(f"frame {f}"); ax.axis('off')
 h=[plt.Line2D([],[],color=cols[i],lw=6,label=lab[i]) for i in cols]
-fig.legend(handles=h,loc='lower center',ncol=min(6,len(h)),fontsize=7,frameon=False)
-plt.tight_layout(rect=(0,0.06,1,1)); plt.savefig(sys.argv[3],dpi=110)
+fig.legend(handles=h,loc='lower center',ncol=_NCOL,fontsize=8,frameon=False)
+plt.tight_layout(rect=(0,_BOT,1,1)); plt.savefig(sys.argv[3],dpi=110)

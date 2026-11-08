@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """motion.py -- per-surface rigid motion relative to the body, with rotation and appearance.
 usage: motion.py model.md3 [idle_frame]"""
-import sys; sys.path.insert(0, '/home/claude/md3')
+import os
+import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 from md3read import read_md3
 
@@ -15,7 +16,15 @@ def rot_axis_angle(R):
     return ang, (w/n if n > 1e-9 else np.zeros(3))
 
 m = read_md3(sys.argv[1]); S = m['surfs']; nf = m['nframes']
-body = max(range(len(S)), key=lambda i: S[i]['nverts'])
+# The body is the reference everything else is measured against, and "the surface with
+# the most vertices" is not always it: on a minigun the biggest surface is the BARREL
+# ASSEMBLY, which spins. Measured against it, every static part of the gun appears to
+# counter-rotate 106 degrees and nothing can be read. -b <surf> names the body instead.
+body = None
+if '-b' in sys.argv:
+    k = sys.argv.index('-b'); body = int(sys.argv[k + 1]); del sys.argv[k:k + 2]
+if body is None:
+    body = max(range(len(S)), key=lambda i: S[i]['nverts'])
 B = S[body]['xyz']
 # idle: first frame after which consecutive body rotation < 2 deg (raise ends), else 0
 idle = int(sys.argv[2]) if len(sys.argv) > 2 else 0
