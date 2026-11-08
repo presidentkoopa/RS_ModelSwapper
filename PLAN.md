@@ -37,3 +37,8 @@ workshop. The plan before the merge is `docs/depot/PLAN.md` (the Depot's) and `H
       Decide: generator is the source (re-run and accept), or the hand edits are (teach the generator).
 - C3  One build for Quest and PC VR with animated meshes on both. The owner reports the Quest animation method was
       found; it is not recorded in this repo (README still says Quest models stay in their rest pose).
+- C4  A LIGHTER MODELSWAPPER (owner, 2026-11-08: "too many meshes ... the code is really what matters"). The code
+      stays; the shipped mesh set shrinks to a reasonable number per slot (one per family, slots 1-0), the way the
+      PB set already does (`build_pk3.py --pb` ships only the donors its profile names, 29 meshes). The same cut
+      makes a set-shaped pk3 per mod (a profile + its cards), which is how the owner's own weapon sets could ship
+      from here. `cards/` stays whole as the library; what ships is a selection. Not before the owner picks the list.

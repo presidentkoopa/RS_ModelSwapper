@@ -3,22 +3,25 @@
 ModelSwapper puts VR weapon models on the guns of any Doom weapon mod, and lets you reload them with your hands.
 
 You keep the mod. Its weapons, ammo, damage and reload rules all stay as the mod wrote them. ModelSwapper changes what
-you hold: a 3D model from one of 17 VR weapon sets, placed in your hand where that set's author placed it. When a gun
+you hold: a 3D model from one of 19 VR weapon sets, placed in your hand where that set's author placed it. When a gun
 reloads, your hands do the work the model was built for, while the mod keeps the books.
 
 ## What works today
 
-Tested on the QuestZDoom 17.3 rig. Not yet confirmed in a headset.
+Tested on the QuestZDoom 17.3 rig (the 2026-10-31 runs). Not yet confirmed in a headset. The tree as merged on
+2026-11-08 compiles, lints and packs; it has not been on the rig since (HANDOFF.md).
 
-**Models.** 143 meshes. Any of them can be chosen for any weapon of any mod. Each uses its own set's MODELDEF for
+**Models.** 145 donors from 19 sets (`cards/`). Any of them can be chosen for any weapon of any mod. Each uses its own set's MODELDEF for
 skin, scale, offsets and the frame it rests on.
 
 **Hand reloads, built from the cards:**
-- Magazine: 37 models. Pull the empty, take a fresh one from the pouch, seat it, rack the handle or slide if the gun
-  was shot dry.
-- Pump: 6 shotguns. Push shells into the port one by one, work the pump after a shot.
-- Break-open and revolver: 5 models (BD M79, BD revolver, BD super shotgun, the alek revolver with its speedloader,
-  the alek super shotgun). Open the action, load the rounds, flick it shut.
+- Magazine: 56 donors have a measured row (`zscript_depot/rsr/rsr_guns.ms.zs`). Pull the empty, take a fresh one from
+  the pouch, seat it, rack the handle or slide if the gun was shot dry.
+- Pump: 6 shotguns (Aliens M37A2, BD, BrutalWolf, Cola KS-23, MeatGrinder SSG, alek's shotgun;
+  `card_pump.report.md`). Push shells into the port one by one, work the pump after a shot.
+- Break-open and revolver: 7 (BD M79, BD revolver, BD super shotgun, alek's revolver with its speedloader, alek's
+  super shotgun, the quad-barrel, the RoboCop M32 swing-out; `card_break.report.md`). Open the action, load the
+  rounds, flick it shut.
 
 **Seen working on mods with real reloads (0 pack script errors):**
 
@@ -37,13 +40,16 @@ The open list, in order of priority, is in [HANDOFF.md](HANDOFF.md).
 
 ## Install
 
-| Platform | File | Engine |
-|---|---|---|
-| Quest | `ModelSwapper-QUEST.pk3` | QuestZDoom 17.3 |
-| PC VR | `ModelSwapper.pk3` | UZDXREMA |
+| Platform | File | Engine | Built by |
+|---|---|---|---|
+| Quest | `ModelSwapper-QUEST.pk3` | QuestZDoom 17.3 | `python3 tools/ms/build_pk3.py` (Linux) or `./build.ps1 -Static` (Windows) |
+| Quest, Project Brutality only | `pk3/ProjBrut_MS.pk3` (in the repo) | QuestZDoom 17.3 | `python3 tools/ms/build_pk3.py --pb` |
+| PC VR | `ModelSwapper.pk3` | UZDXREMA | `./build.ps1` |
 
-Load your weapon mod first and ModelSwapper after it. On Quest the models stay in their rest pose (no animation on that
-engine); everything else, reloads included, is the same.
+Load your weapon mod first and ModelSwapper after it. The two builds differ in one file: the Quest build ships
+`zscript/static/RS_ForeignFork.zs`, which draws the models without the PC build's animation table, so on Quest the
+models hold their rest pose today. The owner reports a way to animate them on Quest was found; it is not in this
+repo yet (PLAN.md C3). Everything else, reloads included, is the same on both.
 
 ## In game
 
@@ -89,8 +95,8 @@ Each one writes a `*.report.md` listing what it built and why it skipped anythin
 
 ## Build and test
 
-- `./build.ps1` builds the PC VR pk3. `./build.ps1 -Static` builds the Quest pk3. `tools/ms/zs_lint.py` checks the
-  ZScript before packing.
+- `./build.ps1` builds the PC VR pk3. `./build.ps1 -Static` or `tools/ms/build_pk3.py` builds the Quest pk3 (same
+  contents, same gates). `tools/ms/zs_lint.py` checks the ZScript before packing; both builds run it.
 - `tools/ms/rig_check.py --donors <models> --weapon <class> --extra <mod.pk3>` puts models on a mod's weapons on the
   Linux QuestZDoom rig and makes a contact sheet.
 - `tools/ms/rig_reload.py --kind mag|pump|break --donor <model> --weapon <class> --extra <mod.pk3>` runs one full hand
@@ -124,8 +130,8 @@ One repo holds the method and the product it feeds (RSQ_WeaponDepot merged in on
 | `reload_1x/` | earlier reload layers, reference for `tools/ms/reload_modeldefs.py` |
 
 **Two tiers.** The finished, hand-built VR weapon sets are their own repos ([RS_Brutal22WeaponsQ](https://github.com/presidentkoopa/RS_Brutal22WeaponsQ),
-[RS_Aliens_VR-WeaponsQ](https://github.com/presidentkoopa/RS_Aliens_VR-WeaponsQ); Rusted Legacy is being split out
-too). ModelSwapper is the coverage tier: any of the hundreds of Doom mods gets real meshes and hand reloads by the
+[RS_Aliens_VR-WeaponsQ](https://github.com/presidentkoopa/RS_Aliens_VR-WeaponsQ),
+[RSQ_RustedLegacy](https://github.com/presidentkoopa/RSQ_RustedLegacy), unfinished). ModelSwapper is the coverage tier: any of the hundreds of Doom mods gets real meshes and hand reloads by the
 same method, measured with the same tools, without a set being built for it. The proven BD22 meshes feed it as the
 `BD_*` donors.
 
