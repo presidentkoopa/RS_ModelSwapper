@@ -1,4 +1,4 @@
-# Break-open / revolver reloads from the MS 1.5 cards (tools_kit/card_break.py)
+# Break-open / revolver reloads from the MS 1.5 cards (tools/kit/card_break.py)
 
 - MS_BD_M79              slot 1: body [1] hinged [4] open 30 deg at frame 27, 1 chamber(s) [3], hold big
 - MS_BD_Revolver         slot 2: body [0] hinged [1, 2] open 90 deg at frame 24, 5 chamber(s) [5, 6, 7, 8, 9], hold shell

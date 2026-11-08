@@ -152,7 +152,7 @@ class MS_ReloadJoin : EventHandler
 	// shotgun calls RSP_PumpStart from its fire states at its pump. A foreign shotgun's pump is in
 	// ITS fire states, which we cannot edit -- so the join finds the point from outside: the mod's
 	// fire chain walked from its Fire label, and the tic at which the donor model's pump starts in
-	// its own fire animation (RSP_Rack.Frac, measured from the mesh by tools_kit/rack_frac.py --
+	// its own fire animation (RSP_Rack.Frac, measured from the mesh by tools/kit/rack_frac.py --
 	// the same by-tic laying of a donor's clip over a mod's states the model animation uses).
 	// At that point, with the off hand on the pump, the gun is held and the hand works the pump
 	// (RSP's own stroke: track, back and forward sounds, the spent shell). Then the mod's own fire

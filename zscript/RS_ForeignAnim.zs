@@ -354,9 +354,9 @@ class RS_ForeignClip
 			"MS_VR_BFG9000|fire|12@1,13@1,14@1,15@1|0|-1|-1",
 			"MS_VR_BFG9000|ready|6@1|-1|-1|-1",
 			"MS_VR_BFG9000|select|4@1,5@1,6@1|-1|-1|-1",
-			// BD22Q guns (tools_kit/lift_bd22.py)
+			// BD22Q guns (tools/kit/lift_bd22.py)
 			"MS_BD22_Pistol|ready|3@1|-1|-1|-1",
-			// BD22Q guns (tools_kit/lift_bd22.py)
+			// BD22Q guns (tools/kit/lift_bd22.py)
 			"MS_BD22_Rifle|ready|3@1|-1|-1|-1",
 			"MS_BD22_SMG|ready|3@1|-1|-1|-1",
 			"MS_BD22_MP40|ready|2@1|-1|-1|-1",
@@ -364,11 +364,11 @@ class RS_ForeignClip
 			"MS_BD22_RailGun|ready|3@1|-1|-1|-1",
 			"MS_BD22_PlasmaGun|ready|4@1|-1|-1|-1",
 			"MS_BD22_RocketLauncher|ready|5@1|-1|-1|-1",
-			// BD22Q guns (tools_kit/lift_bd22.py)
+			// BD22Q guns (tools/kit/lift_bd22.py)
 			"MS_BD22_Ruger|ready|0@1|-1|-1|-1",
-			// BD22Q guns (tools_kit/lift_bd22.py)
+			// BD22Q guns (tools/kit/lift_bd22.py)
 			"MS_BD22_Shotgun|ready|4@1|-1|-1|-1",
-			// BD22Q guns (tools_kit/lift_bd22.py)
+			// BD22Q guns (tools/kit/lift_bd22.py)
 			"MS_BD22_SSG|ready|1@1|-1|-1|-1",
 			"MS_BD22_Revolver|ready|0@1|-1|-1|-1",
 			"MS_BD22_M79|ready|3@1|-1|-1|-1"

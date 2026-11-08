@@ -1,4 +1,4 @@
-# Pump rows from the cards (tools_kit/card_pump.py)
+# Pump rows from the cards (tools/kit/card_pump.py)
 
 | donor | result |
 |---|---|

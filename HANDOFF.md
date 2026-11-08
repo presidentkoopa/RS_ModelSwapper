@@ -1,3 +1,44 @@
+# THE MERGE (2026-11-08) -- read this block first
+
+RSQ_WeaponDepot is in this repo now (`git log` has its 183 commits; `docs/depot/` has its README, PLAN, HANDOFF and
+rules as they were). What the owner trusts (2026-11-08): **the toolset, the test rig with its tools, and the cards
+that came out of the Oct-31 batch-carding.** Everything else in either repo is "compiled, not re-verified".
+
+## Done (measured)
+- `tools/hqt/`: one version of each measuring tool. Base = the Depot's copy (the one that carded all 19 sets on
+  2026-10-31). Onto it, ModelSwapper's `tools_kit` fixes of 2026-10-24/25: `namedcard` (Blender primitive names are
+  not roles; `clip` is a magazine; a `mag_cover` is not), `obj2md3 --stable-verts` (same vertex count every frame),
+  `motion -b`, `render` (20 colours, wrapping legend; VIEW/BODY kept), `md3label --carve-frame`, `--split-body`
+  (opt-in), body = biggest surface not --assign'd a MOVING role, and the magazine labeller for any gun whose magazine
+  travels > 5 units (not only `--archetype pistol_mag`).
+- `tools/hqt/recheck_cards.py`: rebuilds each card's md3label command from the card and re-measures. The Depot's
+  md3label on the 148 cards: 127 MATCH, 21 DIFF, every DIFF explained (owner hand-edits to muzzle / phases, carves made
+  with tools/carve, static meshes carded by another writer) -- `tools/hqt/RECHECK_BASELINE.md`. The merged md3label
+  against that baseline: 6 cards change, all one named fix (BD assault shotgun, rifle, RPG and the two Chex zorchers
+  gain `mag_out` / `mag_in`; the CW nailgun, carded with ModelSwapper's copy, now matches). The cards themselves were
+  not rewritten (PLAN C1).
+- `tools/kit/` (was `tools_kit/`) and `tools/ms/` (was `tools_*.py`): moved, every path repo-relative; the 14 measuring
+  tools `tools_kit` duplicated are forwarders to the one copy. `tools/ms/zs_lint.py`: 11 files, 0 problems.
+  `tools/ms/build_pk3.py`: ModelSwapper-QUEST.pk3 built from the merged tree, 850 entries, every gate passed (0
+  backslash entries, 0 static world models, 2834 asset refs resolved, 145 donors, 0 duplicate, 0 unstubbed). Rig not
+  run this session (no engine here).
+- `tools/depot.py`: `RSQ_SET` defaults to `../rs_brutal22weaponsq` (the set is its own repo), `RSQ_RL` to
+  `../rs_rustedlegacy`, `RSQ_CARDS` = `cards/`. `tools/check_plan.py` knows the merged layout; hooks via
+  `sh tools/install_hooks.sh`; `PLAN.md` is the plan (current step M1).
+
+## Not done
+- Rusted Legacy's own repo (the owner creates it; the content is prepared, see the summary).
+- The Depot archived read-only, its README pointing here.
+- Anything on the rig: this session had no engine. First rig run of the merged tree is the next thing to do.
+
+## Open
+- `gen_from_cards.py` lock-only run no longer reproduces `main` (PLAN C2): it drops the hand-added
+  `smg|MS_CW_Nailgun` shelf row, re-sorts, and dies at its report on a donor with a block but no source file. Its
+  output was reverted; only `PREFIX` (quad=QD, gmod_cw=CW) and `WELL_DIR.get()` were added so it runs past the two
+  2026-11-03 sets.
+- Quest animated meshes: the owner says the method was found; not in this repo (PLAN C3).
+- `tools/hqt/compcheck.sh` takes REMA_BIN / REMA_IWAD / REMA_INI / REMA_BASE from the environment now (was hardcoded).
+
 # TABLED (owner, 2026-11-03 09:04) -- PB set: reload feel
 
 Owner tested ProjBrut_MS.pk3 himself. Wanted: a magazine / clip IN THE HAND during the reload, and the meshes
@@ -7,7 +48,7 @@ releases, then Zelda and Castlevania, maybe Excitebike.
 Also open from the rig runs (rig only, not headset): PB_Pistol's reload joined magazine slot 104 (MS_VP_Pistol's row)
 where the profile says MS_BD_Pistol (slot 55) -- check which donor is actually worn. The rig frames never clearly
 showed a mesh in hand (mostly PB's sprite): unproven. PB plays an opening sequence; rig scripts need ~420 tics of
-settle (tools_rig_reload.py --settle was tried, not committed).
+settle (tools/ms/rig_reload.py --settle was tried, not committed).
 
 # ModelSwapper 2.0 scoping + M32 swing-out (2026-11-03) -- read this block first
 
@@ -44,7 +85,7 @@ magazine row 102 came from the rear plate being labelled `mag`: the hand would h
   SlotForDonor line removed by hand from rsr_guns.ms.zs (regen keeps unrebuilt rows; RS_ForeignReload.zs:415 only
   reaches the break system when the mag slot is 0). The case-102 arms are now unreachable data.
 - modeldef: SurfaceSkin 9-14; shelf frameCount 37 -> 60; clip `reload` 7-36 -> 38-58.
-- To check on the rig: `tools_rig_reload.py --kind break --donor MS_RC_M32` against PB's SuperGL (Reload state),
+- To check on the rig: `tools/ms/rig_reload.py --kind break --donor MS_RC_M32` against PB's SuperGL (Reload state),
   two reloads in a row (see open item 1).
 
 ### Added to the repo this session (2026-11-03), not rig-run
@@ -88,19 +129,19 @@ generated from them; nothing is hand-wired.
 All with 0 pack errors. Frames: `/home/claude/shots/rigreload_<tag>_<donor>/`.
 
 ### Reload rows generated from the cards (today)
-- **Magazine** `tools_kit/card_mag.py` -> 2.0's `regen_rows` (unchanged chain: card2quest -> genpack -> gen_rsr).
+- **Magazine** `tools/kit/card_mag.py` -> 2.0's `regen_rows` (unchanged chain: card2quest -> genpack -> gen_rsr).
   37 donors built. Held (keep the mod's reload): `MS_CX_Lazdevice` (its Chex placement puts the cell 52 cm ahead of
   the controller), `MS_RC_Ksg` (no MODELDEF anywhere: struck from the Robocop set, so its placement is a default, not
   measured; needs a real placement first). Writes `MODELDEF.cards` and `zscript_depot/rsr/rsr_guns.ms.zs`.
-- **Break / revolver** `tools_kit/card_break.py` -> 2.0's `gen_rsb` (patched: per-surface skins, card-hidden parts,
+- **Break / revolver** `tools/kit/card_break.py` -> 2.0's `gen_rsb` (patched: per-surface skins, card-hidden parts,
   any set name). 5 donors: BD M79, BD revolver, BD SSG, V+ (alek) revolver with speedloader (home frame 26 measured =
   2.0's hand value), V+ SSG; hinge fits 0.03 cm. Left out: Cola revolver (rounds are one surface), Robocop M32 (no
   hinge on its card), UV SSG D4 and zblood sawed-off (no round on the card). Writes `MODELDEF.rsb`, `rsb_guns.zs`.
-- **Pump** `tools_kit/card_pump.py` -> `gen_pump`. 6 slots: AE M37A2, BD shotgun, BW trench gun, Cola KS-23, MG SSG
+- **Pump** `tools/kit/card_pump.py` -> `gen_pump`. 6 slots: AE M37A2, BD shotgun, BW trench gun, Cola KS-23, MG SSG
   (Ermac shell), VP shotgun. Writes `MODELDEF.rsrpump`, `rsr_pump_guns.zs`, `rsp_rack.ms.zs`.
-- `tools_reload_modeldefs.py` now only writes `MODELDEF.cards2x`: 2.0-measured layers for the 5 donors card_mag
+- `tools/ms/reload_modeldefs.py` now only writes `MODELDEF.cards2x`: 2.0-measured layers for the 5 donors card_mag
   does not build (BW MG42 / Garand / Kar98 / trench gun, zblood sawed-off).
-- Order to regenerate: `card_mag.py`, `card_pump.py`, `card_break.py`, `tools_reload_modeldefs.py`.
+- Order to regenerate: `card_mag.py`, `card_pump.py`, `card_break.py`, `tools/ms/reload_modeldefs.py`.
 
 ### Engine-side fixes today (ZScript)
 - `CannotFire`: a weapon with ammo or a muzzle flash is a gun. The NextState-only walk had ruled the generic DoubleSG
@@ -112,9 +153,9 @@ All with 0 pack errors. Frames: `/home/claude/shots/rigreload_<tag>_<donor>/`.
   `sounds/`, from 2.0) packed by build.ps1 and tools_rig_check.
 
 ### Rig tools
-- `tools_rig_reload.py --kind mag|pump|break --donor X --weapon Y --extra <mod.pk3>`; mag adds `--fire-tics N`
+- `tools/ms/rig_reload.py --kind mag|pump|break --donor X --weapon Y --extra <mod.pk3>`; mag adds `--fire-tics N`
   (hold), `--clicks N` (semi-auto presses), `--rack` (work the charging handle by hand). Break uses the test probe.
-- `tools_rig_check.py --donors ... --weapon ... --extra ...` (draw check; give ammo first for guns that need it).
+- `tools/ms/rig_check.py --donors ... --weapon ... --extra ...` (draw check; give ammo first for guns that need it).
 
 ## Not done / open, in order
 0. **Next test mod (owner, 2026-10-31): Project Brutality, the big one** -- https://github.com/pa1nki113r/Project_Brutality

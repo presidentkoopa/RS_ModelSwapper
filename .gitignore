@@ -15,7 +15,7 @@ ModelSwapper-QUEST.pk3
 # and at ~78MB one of these in history would outweigh the entire repo.
 *.zip
 
-# Generator scratch output -- rebuild with ./tools_gen_bd21.ps1
+# Generator scratch output -- rebuild with tools/ms/gen_bd21.ps1
 .gen/
 
 # Engine log, written into cwd when the engine is run from here
@@ -54,3 +54,20 @@ ModelSwapper-PB-*.pk3
 # Paint.NET layered skin sources that came in beside the blend-file meshes.
 # The engine cannot read them; build.ps1 skips them too.
 *.pdn
+
+# --- from RSQ_WeaponDepot (merged 2026-11-08) ---
+*.pyc
+# FBX files stay out, except the FBX hand (owner, 2026-10-28/30: it lives in the repo)
+*.fbx
+!tools/handfit/core/fbx_hand/hand_final.fbx
+# frame dumps: convert to PNG, then delete
+*.ppm
+# run output of every tool (RSQ_WORK default)
+work/
+# tools/rig/setup.sh output (engine sources, rig build, test pk3s, logs, shots)
+tools/rig/build/
+# made at run time in the prebuilt rig by bin/qz and the engine
+tools/rig/bin/libGLESv3.so
+tools/rig/bin/saves/
+# the generators' scratch (gen_rsb)
+_x/

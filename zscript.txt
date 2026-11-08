@@ -7,7 +7,7 @@ version "4.13"
 // exact class-pointer test).
 // ============================================================================
 
-// GEN-DONORS-BEGIN (tools_gen_from_cards.py)
+// GEN-DONORS-BEGIN (tools/ms/gen_from_cards.py)
 class MS_AE_Knife : Actor {}
 class MS_AE_Loader : Actor {}
 class MS_AE_M260b : Actor {}

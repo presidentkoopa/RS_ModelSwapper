@@ -64,7 +64,7 @@ class RSP abstract
 	const EJECT = 2123;			// RSR_GunParts: the set's own ejected shell (V+: its own frames)
 	const HANDSHELL = 2210;		// RSQ_Hands (off controller): the shell in the hand
 	// Options, VR Reload: Shells per grab (ms_shell_grab, 1-4): the 2nd-4th shell carried beside it
-	// (rsp_stack.ms.zs, measured on Ermac's hold by tools_kit/shell_stack.py)
+	// (rsp_stack.ms.zs, measured on Ermac's hold by tools/kit/shell_stack.py)
 	const HANDSHELL2 = 2211;
 	const HANDSHELL4 = 2213;
 	const MAXGRAB = 4;

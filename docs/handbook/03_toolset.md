@@ -168,7 +168,7 @@ Not tools but data the tools move: `src/zscript/rsr/rsr_guns.bd.zs` (`RSR_Guns`,
 (`RSM_Geo`, under-barrel launchers), `zscript/rsq/counters.zs` (real magazines on guns BD22 never reloads).
 Every row is cm in the weapon controller's frame. Chapter 5 says what each row means.
 **Gap:** the generators that first wrote these tables (`gen_rsr.py`, `gen_rsb.py`) are not in `tools/`
-(`gen_rsr.py` is on the archive branch in `tools/kit/`, `gen_rsb.py` is in RS_ModelSwapper's `tools_kit/`).
+(`gen_rsr.py` is on the archive branch in `tools/kit/`, `gen_rsb.py` is in RS_ModelSwapper's `tools/kit/`).
 For BD22 the rows are moved by `port_gun.py`; a new gun's first rows need the generator back, proven (PLAN F14).
 
 ## 3.6 The scope (`tools/scope3x/`)

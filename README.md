@@ -75,25 +75,25 @@ Each model lives in `cards/<set>/<gun>/` with:
 - the carved reload parts
 - textures and a render sheet
 
-The cards are measured with RSQ_WeaponDepot's `tools/hqt` and `tools/carve`. Everything the game reads is generated
+The cards are measured with `tools/hqt` and `tools/carve` (`docs/handbook/`); `tools/hqt/recheck_cards.py cards` re-measures every card and must report nothing changed against `tools/hqt/RECHECK_BASELINE.md` before any tool change lands. Everything the game reads is generated
 from the cards:
 
-1. `tools_gen_from_cards.py`: model definitions, donor classes, the shelf and names. `sources.lock.json` pins every
+1. `tools/ms/gen_from_cards.py`: model definitions, donor classes, the shelf and names. `sources.lock.json` pins every
    resolution, so it runs from this repo alone.
-2. `tools_kit/card_mag.py`: magazine reload rows and layers.
-3. `tools_kit/card_pump.py`: pump reload rows and layers.
-4. `tools_kit/card_break.py`: break-open and revolver rows and layers.
-5. `tools_reload_modeldefs.py`: the few layers still taken from the 2.0 measurements.
+2. `tools/kit/card_mag.py`: magazine reload rows and layers.
+3. `tools/kit/card_pump.py`: pump reload rows and layers.
+4. `tools/kit/card_break.py`: break-open and revolver rows and layers.
+5. `tools/ms/reload_modeldefs.py`: the few layers still taken from the 2.0 measurements.
 
 Each one writes a `*.report.md` listing what it built and why it skipped anything.
 
 ## Build and test
 
-- `./build.ps1` builds the PC VR pk3. `./build.ps1 -Static` builds the Quest pk3. `tools_zs_lint.py` checks the
+- `./build.ps1` builds the PC VR pk3. `./build.ps1 -Static` builds the Quest pk3. `tools/ms/zs_lint.py` checks the
   ZScript before packing.
-- `tools_rig_check.py --donors <models> --weapon <class> --extra <mod.pk3>` puts models on a mod's weapons on the
+- `tools/ms/rig_check.py --donors <models> --weapon <class> --extra <mod.pk3>` puts models on a mod's weapons on the
   Linux QuestZDoom rig and makes a contact sheet.
-- `tools_rig_reload.py --kind mag|pump|break --donor <model> --weapon <class> --extra <mod.pk3>` runs one full hand
+- `tools/ms/rig_reload.py --kind mag|pump|break --donor <model> --weapon <class> --extra <mod.pk3>` runs one full hand
   reload and prints each phase. For magazine guns, `--clicks` / `--fire-tics` shoot the gun dry first and `--rack`
   works the handle.
 
@@ -102,17 +102,34 @@ reload test.
 
 ## Layout
 
+One repo holds the method and the product it feeds (RSQ_WeaponDepot merged in on 2026-11-08, every commit kept):
+
 | Path | Contents |
 |---|---|
 | `zscript/` | model swapping, filing, the reload join, the menu |
 | `zscript_depot/` | the hand-reload system, VR hands, generated reload tables |
-| `cards/` | models, textures, cards |
-| `tools_kit/` | generators and measuring kit |
-| `tools_*.py` | rig, placement and mesh tools |
+| `cards/` | the card well: one folder per mesh (labelled MD3, card, carved parts, textures, sheet) |
+| `tools/hqt/` | **the measuring pipeline** (High Quality Tools): `md3label`, `namedcard`, `blendcard`, `statephase`, `batch`, `render`, `motion`, `obj2md3`, and `recheck_cards.py`, the regression gate that re-measures every card |
+| `tools/carve/` | carving a part out of a welded mesh (`md3_carve_surface --half / --like`) |
+| `tools/rig/` | the QuestZDoom 17.3 test rig for Linux (`PINS` pins the one engine), its drivers and probe |
+| `tools/int20_rig/`, `tools/scope3x/` | whole-pack checks on the rig; the live 3x scope rig |
+| `tools/handfit/` | the FBX hand fitter and the one method (gun to hand, everything on the gun moves with it) |
+| `tools/kit/` | ModelSwapper's generators (`card_mag`, `card_pump`, `card_break`, `gen_rsb`, `gen_rsr`, ...) and format converters; the measuring tools in here are forwarders to `tools/hqt` |
+| `tools/ms/` | ModelSwapper's own scripts: `gen_from_cards`, `build_pk3`, `zs_lint`, `rig_check`, `rig_reload`, the mod patches |
+| `tools/depot.py` | every path a tool uses, repo-relative or an environment variable (`docs/handbook/03_toolset.md`) |
+| `docs/handbook/` | how VR weapon mechanics are built on QuestZDoom 17.3, with the tools above |
+| `docs/depot/` | the Depot's own README, PLAN, HANDOFF and rules as they were at the merge |
+| `sources/pbvp_v2/` | Project Brutality Voxel Patch v2, verbatim (credit required) |
 | `models/rsq/`, `sounds/`, `SNDINFO.ms` | VR hands and reload sounds |
-| `reload_1x/` | earlier reload layers, reference for `tools_reload_modeldefs.py` |
+| `reload_1x/` | earlier reload layers, reference for `tools/ms/reload_modeldefs.py` |
 
-History of earlier versions: [ARCHIVE.md](ARCHIVE.md), branch `archive/pre-cards-2026-10-31`.
+**Two tiers.** The finished, hand-built VR weapon sets are their own repos ([RS_Brutal22WeaponsQ](https://github.com/presidentkoopa/RS_Brutal22WeaponsQ),
+[RS_Aliens_VR-WeaponsQ](https://github.com/presidentkoopa/RS_Aliens_VR-WeaponsQ); Rusted Legacy is being split out
+too). ModelSwapper is the coverage tier: any of the hundreds of Doom mods gets real meshes and hand reloads by the
+same method, measured with the same tools, without a set being built for it. The proven BD22 meshes feed it as the
+`BD_*` donors.
+
+History of earlier versions: [ARCHIVE.md](ARCHIVE.md), branch `archive/pre-cards-2026-10-31`. The Depot's history is in this repo's log (183 commits, merged 2026-11-08); its sets are on RSQ_WeaponDepot `main`, read-only.
 
 ## Credits
 

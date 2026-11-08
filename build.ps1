@@ -54,7 +54,7 @@ if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsrpump'))) { $in
 if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.cards'))) { $include += 'MODELDEF.cards' }
 # SNDINFO.ms and sounds/ are the reload foley (from the 2.0 branch).
 if ($Static) { $include += 'SNDINFO.ms'; $dirs += @('sounds') }
-# MODELDEF.cards2x: the 2.0-measured layers for donors card_mag.py did not build (tools_reload_modeldefs.py).
+# MODELDEF.cards2x: the 2.0-measured layers for donors card_mag.py did not build (tools/ms/reload_modeldefs.py).
 if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.cards2x'))) { $include += 'MODELDEF.cards2x' }
 if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsq'))) { $include += 'MODELDEF.rsq' }
 # SYNTAX CHECK BEFORE PACKING.
@@ -64,10 +64,10 @@ if ($Static -and (Test-Path (Join-Path $PSScriptRoot 'MODELDEF.rsq'))) { $includ
 # trailing comma in an array initialiser and the first thing to notice was
 # the game refusing to start. This closes it: cheap, no engine, and it
 # fails the build rather than the user's next launch.
-$lint = Join-Path $root 'tools_zs_lint.py'
+$lint = Join-Path $root 'tools/ms/zs_lint.py'
 if (Test-Path $lint) {
     & python $lint | Write-Host
-    if ($LASTEXITCODE -ne 0) { throw "tools_zs_lint.py found problems -- not packing" }
+    if ($LASTEXITCODE -ne 0) { throw "tools/ms/zs_lint.py found problems -- not packing" }
 }
 
 $files = @()

@@ -7,7 +7,7 @@ version "4.13"
 // exact class-pointer test).
 // ============================================================================
 
-// GEN-DONORS-BEGIN (tools_gen_from_cards.py)
+// GEN-DONORS-BEGIN (tools/ms/gen_from_cards.py)
 class MS_AE_Knife : Actor {}
 class MS_AE_Loader : Actor {}
 class MS_AE_M260b : Actor {}
@@ -328,7 +328,7 @@ class MS_PU_VR_BFG9000 : MS_PickupModel {}
 #include "zscript_depot/rsvr/melee.zs"
 #include "zscript_depot/rsq/handler.zs"
 // the BD22 modules this pack does not carry (M203, grenade ring, RSM layers):
-// present and idle, generated from the 1.96b signatures by tools_kit/run_assemble.py
+// present and idle, generated from the 1.96b signatures by tools/kit/run_assemble.py
 #include "zscript_depot/rsq/stubs.zs"
 #include "zscript_depot/rsq/handtable.zs"
 #include "zscript_depot/rsq/gunmoves.zs"

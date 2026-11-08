@@ -1,9 +1,9 @@
-# PLACEMENT_NOTES (tools_placement_from_1x.py, 2026-10-31)
+# PLACEMENT_NOTES (tools/ms/placement_from_1x.py, 2026-10-31)
 
-Formula (tools_md3_compensate.py, the engine-matrix replica): `world = S*R*P + Off`, `Off_new = Off_old + S*R*c'` for a mesh shifted by -c.
+Formula (tools/ms/md3_compensate.py, the engine-matrix replica): `world = S*R*P + Off`, `Off_new = Off_old + S*R*c'` for a mesh shifted by -c.
 tools_md3_reorigin centred each 1.x mesh on its rest centroid c, so 1.x mesh = card mesh - c. The card mesh keeps the original origin,
 so its Offset is the 1.x Offset with that compensation UNDONE: `Off_card = compensate(-t, Scale, Off_1x, Angle, Pitch, Roll)`, t = card_f0 - old_f0.
-ZOffset in a 1.x block overrides Offset.z when it comes after it (engine: last one wins), as tools_reorigin_all.py did.
+ZOffset in a 1.x block overrides Offset.z when it comes after it (engine: last one wins), as tools/ms/reorigin_all.py did.
 
 ## Counts: 1x-compensated 28, family-ref 114
 
