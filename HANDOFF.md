@@ -64,7 +64,9 @@ docs/sets/golden_souls_2.md.
 - handfit_donors.py --write keeps the earlier fits' SlotForDonor lines (it rewrote the block before: the M2 lines
   75-79 were lost for one run and put back; the arrays were never wrong).
 ## Open
-- RailBow wears BD_Railgun whose Oct-31 hand sits low under the body (1.x quality). Handfit later.
+- RailBow: BD_Railgun re-fitted on the owner's ask (19:55 "support hand on rifle"): slot 82, gun hand on the grip + support
+  under the forend at the card's support x; the handfit_donors block now sits FIRST in SlotForDonor so a fit beats an
+  alias or an old row (the renderer reads it the same way).
 - GS2 is theory only; three fits would be new (blunderbuss, crossbow or nailgun for Cupid, the whip or none).
 
 # M2 -- Generic Weapons + Weapons of Saturn sets (2026-11-08, branch `set-profiles`, NOT rig-run)

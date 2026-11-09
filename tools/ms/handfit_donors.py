@@ -29,6 +29,7 @@ from handfit_addon import parse_card  # noqa: E402
 TYPE = {  # donor -> handfit_cards.POSE key (which Ermac pose the gun type takes)
     'MS_BD_Shotgun': 'shotgun', 'MS_BD_Ssg': 'breakaction', 'MS_BD_Minigun': 'chaingun', 'MS_BW_1911': 'pistol', 'MS_HX_Nuker': 'bfg',
     'MS_BD_Revolver': 'revolver', 'MS_CW_Nailgun': 'smg', 'MS_PD_Cannon': 'launcher',   # Golden Souls 1 (M3, 2026-11-08)
+    'MS_BD_Railgun': 'railgun',
 }
 # where the support hand goes when the card's `support feature` is the one-handed placeholder (owner, 2026-11-08):
 #   ('under', surf N, frac): the underside of surface N (the barrels) at frac of the way along that surface;
@@ -36,6 +37,7 @@ TYPE = {  # donor -> handfit_cards.POSE key (which Ermac pose the gun type takes
 #   the Ermac support pose named (91 = fist on a vertical grip).
 SUPPORT_FROM = {
     'MS_BD_Ssg': ('under', 0, 0.5),          # owner: "ssg support hand needs to be under the barrel"
+    'MS_BD_Railgun': ('under_at', 2, 'card'),  # owner 19:55 "support hand on rifle": under the body at the card's support x (forward of the magazine)
     'MS_BD_Minigun': ('part', 'support', 91),   # the side bar is the off-hand handlebar (card, owner 2026-10-31)
 }
 # fits looked at on their sheets (work/handfit/<donor>.png) and refused, with the reason; a refused donor is reported, never written
@@ -96,6 +98,14 @@ def fit(donor, regions, ermac, outdir):
             x = V[:, 0].min() + frac * (V[:, 0].max() - V[:, 0].min())                 # frac of the way along the barrels
             band = V[np.abs(V[:, 0] - x) < 2.0]
             low = band[band[:, 2].argmin()]                                             # their underside there
+            pts['support'] = [float(x), float(band[:, 1].mean()), float(low[2])]
+        elif spec[0] == 'under_at':
+            _, surf, xs = spec
+            m = re.search(r'^\s+support\s+feature\s+\w+\s+\[([^\]]*)\]', raw, re.M)
+            x = float(m.group(1).split(',')[0]) if xs == 'card' and m else float(xs)
+            V = np.asarray(gunview.item_mesh(dict(it))[surf][1], float); band = V[np.abs(V[:, 0] - x) < 2.0]
+            if len(band) == 0: band = V[np.argsort(np.abs(V[:, 0] - x))[:50]]
+            low = band[band[:, 2].argmin()]
             pts['support'] = [float(x), float(band[:, 1].mean()), float(low[2])]
         elif spec[0] == 'part':
             _, role, sup_pose = spec
@@ -161,8 +171,9 @@ def append_rows(rows):
     for fn, key in (('GunHook', 'hook'), ('GunRot', 'rot'), ('SupportHook', 'shook'), ('SupportRot', 'srot'), ('SupportPoint', 'spoint'), ('GunHookTwo', 'hook'), ('GunRotTwo', 'rot')):
         for k, ax in enumerate('xyz'): arr(fn, ax, ['%.3f' % r[key][k] for r in rows])
     lines = [BEGIN] + kept + ['\t\tif (donor == "%s")\treturn %d;\t// Ermac %s / support %s, fitted 2026-11-08 (handfit_donors.py)' % (r['donor'], n0 + i, r['two'], r['sup'] or '-') for i, r in enumerate(rows)] + [END]
-    m = re.search(r'(static int SlotForDonor\(string donor\)\s*\{.*?)(\n\t\treturn 0;\n\t\})', s, re.S)
-    s = s[:m.end(1)] + '\n' + '\n'.join(lines) + s[m.end(1):]
+    m = re.search(r'static int SlotForDonor\(string donor\)\s*\{\s*\n\t\tif \(donor\.Length\(\) == 0\) return 0;\n', s)
+    assert m, 'SlotForDonor head not found'
+    s = s[:m.end()] + '\n'.join(lines) + '\n' + s[m.end():]   # first in the function: a fit written here wins over an alias or an old row
     open(TABLE, 'w', encoding='utf-8').write(s)
     return n0
 

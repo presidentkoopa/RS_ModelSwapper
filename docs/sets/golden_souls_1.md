@@ -27,7 +27,7 @@ Profile rows: `zscript/RS_ForeignModels.zs` ProfileDonor. Set: `tools/ms/build_p
 | Revolver | MS_BD_Revolver | break slot 2 (speedloader) | **yes** (row 80: gun B + cup A; fitted 2026-11-08, hands/MS_BD_Revolver.png) | swing-out revolver; the alek VP_Rev (break 7) has no hand |
 | AK47 | MS_BD_Rifle | magazine 75 | yes (row 10) | the only rifle with a measured magazine row AND a hand row; BW_Stg44 is the closer look but has neither |
 | SpikeGun | MS_CW_Nailgun | magazine 40 (unused: the mod has no reload) | **yes** (row 81: gun F + support B on the magazine, the card's measured `magwell` feature; hands/MS_CW_Nailgun.png) | nail gun for a spike gun |
-| RailBow | MS_BD_Railgun | magazine 43 (unused) | yes (row 34, the Oct-31 fit: the hand sits low under the body, 1.x quality) | the rail gun; HV_Crossbow is the bow look but has no rows |
+| RailBow | MS_BD_Railgun | magazine 43 (unused) | **yes** (row 82: gun F on the grip + support B under the forend forward of the magazine, at the card's support x; fitted 2026-11-08 on the owner's ask, hands/MS_BD_Railgun.png; replaces the Oct-31 row 34 whose hand sat low) | the rail gun; HV_Crossbow is the bow look but has no rows |
 
 Totals: 8 weapons, 8 donors; the 4 reloading weapons on measured rows of their kind (2 magazine, 2 break). Hands:
 7 of 8 (the fist is the hand), the Cannon without. Rig only: nothing in a headset.

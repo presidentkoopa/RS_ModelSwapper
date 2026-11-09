@@ -25,7 +25,9 @@ SUP_FRAME = {v: k for k, v in HC.SUP_LETTER.items()}
 
 def table():
     s = open(os.path.join(ROOT, 'zscript_depot', 'rsq', 'handtable.zs'), encoding='utf-8').read()
-    slot = dict(re.findall(r'if \(donor == "(MS_\w+)"\)\s*return (\d+);', s))
+    slot = {}
+    for k, v in re.findall(r'if \(donor == "(MS_\w+)"\)\s*return (\d+);', s):
+        slot.setdefault(k, v)   # the FIRST match wins, as SlotForDonor returns it: a fit written at the top beats an alias
     def strs(fn):
         return [x.strip().strip('"') for x in re.search(r'static String %s\(int i\)\s*\{\s*static const String v\[\] = \{([^}]*)\}' % fn, s, re.S).group(1).split(',')]
     def vecs(fn):
