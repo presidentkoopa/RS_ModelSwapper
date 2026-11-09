@@ -389,7 +389,7 @@ Model MS_BD_Railgun
 	Offset 0.0 0.0 0.0
 	ZOffset -5
 	NoInterpolation
-	FrameIndex PLSG A 0 2
+	FrameIndex PLSG A 0 3	// 2026-11-08: frame 3, the level gun (the OG Ready frame 2 is the last raise frame: 12 units low, -9 deg); gen_from_cards REST_OVERRIDE
 	FrameIndex MSBL A 0 9999
 }
 

@@ -159,6 +159,8 @@ def append_rows(rows):
     # an earlier run's lines stay: the block is a ledger of every fit written, not the last run's
     old = re.search(re.escape(BEGIN) + r'\n(.*?)' + re.escape(END) + r'\n', s, re.S)
     kept = [l for l in old.group(1).splitlines() if l.strip()] if old else []
+    refit = {r['donor'] for r in rows}
+    kept = [l for l in kept if not any(('"%s"' % d) in l for d in refit)]   # a re-fit replaces its earlier line (the old slot stays in the arrays, unused)
     s = re.sub(re.escape(BEGIN) + r'.*?' + re.escape(END) + r'\n', '', s, flags=re.S)
     n0 = len(re.search(r'static String GunOne\(int i\)\s*\{\s*static const String v\[\] = \{([^}]*)\}', s, re.S).group(1).split(','))
     def arr(fn, name, vals):

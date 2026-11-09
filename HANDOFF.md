@@ -64,6 +64,11 @@ docs/sets/golden_souls_2.md.
 - handfit_donors.py --write keeps the earlier fits' SlotForDonor lines (it rewrote the block before: the M2 lines
   75-79 were lost for one run and put back; the arrays were never wrong).
 ## Open
+- BD_Railgun rest frame: the owner saw the gun tilted on the sheet. Measured: the OG Ready frame the generator took (2)
+  is the last RAISE frame (body 12 units low, pitched -9 deg); the card's idle (3) is level. modeldef + the SHELF row
+  say 3 now, gen_from_cards has REST_OVERRIDE for it, the hands re-fitted on frame 3 (slot 83; a re-fit replaces its
+  ledger line, the old slot stays unused). Every other donor of the three sets checked: rest frame == card idle, or
+  the same pose.
 - RailBow: BD_Railgun re-fitted on the owner's ask (19:55 "support hand on rifle"): slot 82, gun hand on the grip + support
   under the forend at the card's support x; the handfit_donors block now sits FIRST in SlotForDonor so a fit beats an
   alias or an old row (the renderer reads it the same way).

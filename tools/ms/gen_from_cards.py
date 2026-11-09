@@ -30,6 +30,7 @@ PREFIX = {'vplus': 'VP', 'aliens': 'AE', 'meatgrinder': 'MG', 'brutalwolf': 'BW'
           'robocop': 'RC', 'universal_voxel': 'UV', 'zblood': 'ZB', 'punchout': 'PO',
           'quad': 'QD', 'gmod_cw': 'CW'}   # the two 2026-11-03 donors (MS_QD_Quad, MS_CW_Nailgun) were added by hand; named here so the generator agrees
 SKIP_SETS = {'hdvr'}          # owner, 2026-10-31: skip
+REST_OVERRIDE = {'bd21': {'railgun': 3}}   # set -> gun -> rest frame, when the OG Ready frame is a raise frame (see below)
 WELL_DIR = {'vplus': '_01_DOOM_VanillaVRPlus_ErmacPack', 'aliens': 'Aliens-Eradication-VR-addon',
             'meatgrinder': 'BR_VR_MeatGrinder', 'brutalwolf': 'BrutalWolf', 'hacx': 'HacX', 'bd21': 'br_vr/PK3_pbr',
             'chex': 'Chex-Quest-VR-Weapons', 'cola': 'Cola-3-VR-Weapons', 'd64': 'D64Retribution',
@@ -285,6 +286,9 @@ def main():
                 src = next((b for b in tier if ready_frame(b, idx_own)[0] is not None), None) or next((b for b in tier if ready_frame(b, idx)[0] is not None), (tier or [None])[0])
         card_idle = idle; rf, rwhy = ready_frame(src, idx)
         if rf is not None and rf < nfr: idle = rf
+        # the OG Ready frame is not always the gun at rest: BD21's railgun Ready names frame 2, the last raise frame
+        # (body 12 units low, pitched -9 deg, measured 2026-11-08); the card's idle (3) is the level gun. Owner's eye.
+        if gun in REST_OVERRIDE.get(sset, {}): idle = REST_OVERRIDE[sset][gun]
         skins = sorted(f for f in os.listdir(d) if f.lower().endswith(('.png', '.jpg', '.tga')))
         name = 'MS_%s_%s' % (PREFIX[sset], ''.join(w.capitalize() for w in re.split(r'[_\-]', gun)))
         donors.append(dict(name=name, set=sset, gun=gun, dir=d, mesh=os.path.basename(mesh), arche=arche, fam=fam,

@@ -125,7 +125,7 @@ class RS_ForeignShelf
 			"smg|MS_BD_Mp40|CHGG|0|2|14",
 			"pistol|MS_BD_Pistol|PISG|0|2|38",
 			"plasma|MS_BD_Plasma|PLSG|0|4|30",
-			"railgun|MS_BD_Railgun|PLSG|0|2|37",
+			"railgun|MS_BD_Railgun|PLSG|0|3|37",   // rest frame 3 (2026-11-08, see modeldef)
 			"revolver|MS_BD_Revolver|PISG|0|0|33",
 			"rifle|MS_BD_Rifle|CHGG|0|3|32",
 			"rocket|MS_BD_Rpg|MISG|0|5|39",
