@@ -25,10 +25,13 @@ import card2quest as c2q, genpack
 # gripping faces ship in the Depot (tools/kit/gripregions.json) and Ermac's cut hand
 # meshes inside the kit itself, where ermac.py already points -- the same two files the
 # melee fits use.
-REGIONS_JSON = 'E:/DOOMWork/RSQ_WeaponDepot/tools/kit/gripregions.json'
-ERMAC = 'C:/Users/Command/Desktop/Quest_Weapons_Kit/kit/kit/ermac/hand'   # hand.md3 / hand2.md3, the frames the regions were measured on
+# 2026-11-08: the regions come from tools/hqt/gripmeasure.py (RSQ_WORK/gripregions.json, measured from Ermac's full hands:
+# RSQ_ERMAC/hand/hand.md3 + hand2.md3; the RSQ_RustedLegacy build carries them). Environment variables, no machine paths.
+_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+REGIONS_JSON = os.environ.get('RSQ_GRIPREGIONS') or next((q for q in (os.path.join(os.environ.get('RSQ_WORK', os.path.join(_ROOT, 'work')), 'gripregions.json'), os.path.join(_ROOT, 'tools', 'kit', 'gripregions.json')) if os.path.exists(q)), '')
+ERMAC = os.path.join(os.environ.get('RSQ_ERMAC', ''), 'hand')             # hand.md3 / hand2.md3, the frames the regions were measured on
 PL = dict(scale=[-1.0, 1.0, 1.0], off=[0.0, -24.0, -10.0])                # Ermac's placement (ermac.PL)
-REGIONS = json.load(open(REGIONS_JSON))['poses']
+REGIONS = json.load(open(REGIONS_JSON))['poses'] if REGIONS_JSON and os.path.exists(REGIONS_JSON) else {}   # a caller may set it (handfit_donors.py)
 
 # Ermac pose -> the letter the shipped hand.md3 / hand2.md3 carry it under (1.96b MODELDEF.rsq comments)
 GUN_LETTER = {6: 'A', 19: 'B', 30: 'C', 47: 'D', 95: 'E', 106: 'F', 113: 'G', 29: 'H'}

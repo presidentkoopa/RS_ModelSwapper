@@ -41,20 +41,18 @@ rows under the card name too, so they fire.
 | Class | Donor | Reload row | Hand row | Why |
 |---|---|---|---|---|
 | Knuckle | MS_BD_Fist | n/a | no (the fist is the hand) | the only fist on the shelf (melee family); PB's pick |
-| ModChainsaw | MS_VP_Chainsaw | n/a | no | vanilla look (alek's Vanilla Plus saw, card: rear grip + top bar, both headset holds); BD_Chainsaw was the modern alternative |
+| ModChainsaw | MS_VP_Chainsaw | n/a | **yes** (row 79: gun hand only, Ermac F; fitted 2026-11-08, see hands/MS_VP_Chainsaw.png) | vanilla look (alek's Vanilla Plus saw, card: rear grip + top bar, both headset holds); BD_Chainsaw was the modern alternative |
 | Beretta | MS_BD_Pistol | magazine 55 | **yes** (row 38, via its exact twin MS_d64_BrutalPistol; hand_names.py) | SEEN WORKING on the rig (README); VP_Pistol has a magazine row (104) but no hand row, so the rule to switch is not met |
 | ARifle | MS_BD_Rifle | magazine 75 | **yes** (row 10) | SEEN WORKING; VP_M16 has a row (52) but no hand row under its card name |
-| Riotgun | MS_BD_Shotgun | pump slot 2 | no | SEEN WORKING; VP_Shotgun has a pump row (slot 6) but no hand row |
-| DoubleSG | MS_BD_Ssg | break slot 3 | no | SEEN WORKING; VP_Ssg has a break row (slot 7) but no hand row |
-| Minigun | MS_VP_Minigun | magazine 103 (owner-confirmed carved ammo box) | no | vanilla look AND the only chaingun with a measured row; BD_Minigun has no row (PB's minigun never reloads) |
+| Riotgun | MS_BD_Shotgun | pump slot 2 | **yes** (row 75: gun hand C + support B on the pump; fitted 2026-11-08, hands/MS_BD_Shotgun.png) | SEEN WORKING; VP_Shotgun has a pump row (slot 6) but no hand row |
+| DoubleSG | MS_BD_Ssg | break slot 3 | **yes** (row 76: gun hand C; support off, the card has no measured support point; hands/MS_BD_Ssg.png) | SEEN WORKING; VP_Ssg has a break row (slot 7) but no hand row |
+| Minigun | MS_VP_Minigun | magazine 103 (owner-confirmed carved ammo box) | no: fitted and REFUSED, the card's grip line sits on the ammo box, the hand landed there (hands/MS_VP_Minigun.png) | vanilla look AND the only chaingun with a measured row; BD_Minigun has no row (PB's minigun never reloads) |
 | Rlauncher | MS_BD_Rpg | magazine 58 | **yes** (row 66, via its exact twin MS_brt_RPG / MS_d64_RPG; hand_names.py) | the Vanilla Plus RPG IS this mesh (`reload_names`: MS_vplus_RPG = MS_BD_Rpg exact); only rocket donor with a row |
 | PlasRifle | MS_BD_Plasma | magazine 48 | **yes** (row 65, via its exact twin MS_brt_PlasmaGun / MS_d64_PlasmaGun; hand_names.py) | the Vanilla Plus plasma rifle IS this mesh (MS_vplus_PlasmaRifle = MS_BD_Plasma exact); carded VP_Plasma has no magazine |
-| BFG9K | MS_HX_Nuker | magazine 98 (owner-confirmed cell carve) | no | the ONLY bfg-shelf donor with a reload row; the vanilla-look MG_Bfg / BD_Bfg have none (the mod's own reload would run). Owner's call if the look matters more |
+| BFG9K | MS_HX_Nuker | magazine 98 (owner-confirmed cell carve) | **yes** (row 78: gun hand F; support off, no measured support point; hands/MS_HX_Nuker.png) | the ONLY bfg-shelf donor with a reload row; the vanilla-look MG_Bfg / BD_Bfg have none (the mod's own reload would run). Owner's call if the look matters more |
 
-Totals: 10 weapons, 10 donors, 8 reloading weapons all on measured rows (6 magazine, 1 pump, 1 break); hand rows
-under the worn name: 5 of 10 (ARifle, and Beretta, Rlauncher, PlasRifle, BFG9K's twin none -- see below) after
-`tools/ms/hand_names.py` gave the card donors their exact 1.x twins' rows (2026-11-08); Knuckle is the hand itself.
-No hand placement exists anywhere in ModelSwapper for MS_VP_Chainsaw, MS_BD_Shotgun, MS_BD_Ssg, MS_VP_Minigun,
-MS_HX_Nuker: those five need a hand fit (handfit_cards.py's ICP, or Handfit in Blender, PLAN H1).
+Totals: 10 weapons, 10 donors, 8 reloading weapons all on measured rows (6 magazine, 1 pump, 1 break). Hands: 9 of 10
+(the fist is the hand; 4 by the card-name alias `hand_names.py`, 4 fitted 2026-11-08 by `tools/ms/handfit_donors.py`,
+the sheets in `hands/`; the Minigun fit was refused, see its row). Rig only: nothing in a headset.
 
 Classes shared with Weapons of Saturn (`Beretta`, `Riotgun`, `Minigun`) have one profile row each; the picks agree.

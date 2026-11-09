@@ -43,22 +43,20 @@ item in HANDOFF.md).
 | Class | Donor | Reload row | Hand row | Why |
 |---|---|---|---|---|
 | Knuckles | MS_BD_Fist | n/a | no (the fist is the hand) | the only fist on the shelf; PB's pick |
-| Motorsaw | MS_BD_Chainsaw | n/a | no | modern look, BD22 hold; PB's pick |
+| Motorsaw | MS_BD_Chainsaw | n/a | no: the card's grip line is a single point (grip guesser found nothing): needs a measured grip | modern look, BD22 hold; PB's pick |
 | Beretta | MS_BD_Pistol | magazine 55 | **yes** (row 38, via its exact twin MS_d64_BrutalPistol; hand_names.py) | SEEN WORKING on the rig (README) |
 | MP40 | MS_BD_Mp40 | magazine 45 | **yes** (row 66, via its exact twin MS_BD22_MP40 row 62 / MS_brt_MP40 row 31) | SEEN WORKING |
-| 1911 | MS_BW_1911 | magazine 94 | no | SEEN WORKING (BrutalWolf 1911: the same gun) |
+| 1911 | MS_BW_1911 | magazine 94 | **yes** (row 77: gun hand B + the pistol cup A; fitted 2026-11-08, hands/MS_BW_1911.png) | SEEN WORKING (BrutalWolf 1911: the same gun) |
 | MachineRifle | MS_BD_Rifle | magazine 75 | **yes** (row 10) | SEEN WORKING |
-| Riotgun | MS_BD_Shotgun | pump slot 2 | no | SEEN WORKING |
-| Coachgun | MS_BD_Ssg | break slot 3 | no | SEEN WORKING |
-| Minigun | MS_VP_Minigun | magazine 103 (owner-confirmed carved ammo box) | no | the only chaingun with a measured row; BD_Minigun has none (PB's minigun never reloads) |
+| Riotgun | MS_BD_Shotgun | pump slot 2 | **yes** (row 75, see generic_weapons.md) | SEEN WORKING |
+| Coachgun | MS_BD_Ssg | break slot 3 | **yes** (row 76, gun hand only, see generic_weapons.md) | SEEN WORKING |
+| Minigun | MS_VP_Minigun | magazine 103 (owner-confirmed carved ammo box) | no: fitted and REFUSED (generic_weapons.md) | the only chaingun with a measured row; BD_Minigun has none (PB's minigun never reloads) |
 | SaturnV | MS_BD_Rpg | magazine 58 | no (same mesh as 1.x MS_brt_RPG / MS_d64_RPG; hand_names.py) | the only rocket donor with a row; PB's pick |
 | NovaRifle | MS_BD_Plasma | magazine 48 | **yes** (row 65, via its exact twin MS_brt_PlasmaGun / MS_d64_PlasmaGun; hand_names.py) | BD plasma, cell magazine measured; PB's pick |
-| TITAN | MS_HX_Nuker | magazine 98 (owner-confirmed cell carve) | no | the ONLY bfg-shelf donor with a reload row (BD_Bfg has none); PB's Demon-Tech pick |
+| TITAN | MS_HX_Nuker | magazine 98 (owner-confirmed cell carve) | **yes** (row 78, gun hand only, see generic_weapons.md) | the ONLY bfg-shelf donor with a reload row (BD_Bfg has none); PB's Demon-Tech pick |
 
-Totals: 12 weapons, 12 donors, 10 reloading weapons all on measured rows (8 magazine, 1 pump, 1 break); hand rows
-under the worn name: 5 of 12 (MachineRifle, Beretta, MP40, SaturnV, NovaRifle) after `tools/ms/hand_names.py` gave the
-card donors their exact 1.x twins' rows (2026-11-08); Knuckles is the hand itself. No hand placement exists anywhere in
-ModelSwapper for MS_BD_Chainsaw, MS_BW_1911, MS_BD_Shotgun, MS_BD_Ssg, MS_VP_Minigun, MS_HX_Nuker: those six need a
-hand fit (handfit_cards.py's ICP, or Handfit in Blender, PLAN H1).
+Totals: 12 weapons, 12 donors, 10 reloading weapons all on measured rows (8 magazine, 1 pump, 1 break). Hands: 10 of 12
+(the fist is the hand; 4 by `hand_names.py`, 4 fitted 2026-11-08 by `tools/ms/handfit_donors.py`, sheets in `hands/`;
+Motorsaw has no measured grip on its card, the Minigun fit was refused). Rig only: nothing in a headset.
 
 Classes shared with Generic Weapons (`Beretta`, `Riotgun`, `Minigun`) have one profile row each; the picks agree.

@@ -87,16 +87,21 @@ is parsed, measured against the tables, and gate-checked; nothing ran. Picks and
 - Hands on guns: the per-gun FBX gun-hand poses are PLAN H1 / Handfit (Blender), not this item.
 
 ## Open
-- Hands: `tools/ms/hand_names.py` (2026-11-08) gives every card donor the hand row of its byte-identical 1.x twin
-  (`reload_names.json` exact), the way reload_names.py did for the reload tables: 20 rows added in a GENERATED block
-  inside RSQ_HandTable.SlotForDonor (the table's "do not edit by hand" stands: the block is generated, re-run the
-  script). Coverage now: Generic 5 of 10 (ARifle, Beretta, Rlauncher, PlasRifle + the fist is the hand), Saturn 5 of
-  12 (MachineRifle, Beretta, MP40, SaturnV, NovaRifle + the fist). NO hand placement exists anywhere in ModelSwapper
-  for MS_BD_Shotgun, MS_BD_Ssg, MS_BD_Chainsaw, MS_VP_Chainsaw, MS_VP_Minigun, MS_BW_1911, MS_HX_Nuker (7 donors,
-  11 of the sets' 22 weapons): the 1.x BD shotgun / SSG / chainsaw rows exist (MS_brt_SSG, MS_BD22_Shotgun, MS_Chainsaw)
-  but nothing in the repo proves those meshes are the card meshes, so they were NOT aliased (measure, don't guess).
-  Those seven need a hand fit: `tools/kit/handfit_cards.py` (Ermac hand, ICP on the card's palm / support points,
-  sheets to look at) or Handfit in Blender (PLAN H1). Owner's call.
+- Hands, measured (2026-11-08, after the owner's "engage"): the cards' meshes compared vertex for vertex with the 1.x
+  meshes on `archive/pre-cards-2026-10-31` (read only, owner's yes): bd_ssg == 1.x brt SSG (max |d| 0.0000) so
+  MS_BD_Ssg could take MS_brt_SSG's row -- but the row was then re-fitted anyway; bd_shotgun and bd_chainsaw equal
+  their 1.x meshes too, but those never had rows; the vplus hud meshes are the same geometry SHIFTED (pure translation,
+  residual 0.0000) and drawn at other Scale/Offset/rest frame, so their rows do not carry. Ermac's FULL hands are in
+  RSQ_RustedLegacy `src/models/hand/` (the cut frames ModelSwapper ships match them to 0.0000); `tools/hqt/gripmeasure.py`
+  measured the gripping faces from them (`tools/kit/gripregions.json`, 7 poses). `tools/ms/handfit_donors.py` (the
+  handfit_cards.py ICP, inputs from `modeldef` + the card) fitted the six donors without rows; every sheet looked at
+  (`docs/sets/hands/`): BD_Shotgun (gun hand + support on the pump), BD_Ssg, BW_1911 (+ pistol cup), HX_Nuker,
+  VP_Chainsaw written as slots 75-79 (support off where the card's support point is the placeholder); VP_Minigun
+  REFUSED (the card's grip line sits on the ammo box, the hand landed there); BD_Chainsaw not fittable (the card's grip
+  line is one point). Coverage: Generic 9/10, Saturn 10/12. Rig only, nothing in a headset; "face N cm from the gun"
+  per donor in the script's output (0.55-2.09 cm).
+- Still without a hand: MS_VP_Minigun (needs the owner's grip point), MS_BD_Chainsaw (needs a measured grip). Both are
+  a minute each in Handfit (Blender) once H1 passes its test.
 - BFG9K / TITAN wear MS_HX_Nuker because it is the only bfg-shelf donor with a reload row; the vanilla-look MG_Bfg
   and BD_Bfg have none. Owner's call if the look matters more (the mod's own reload would then run).
 - The profile keys carry no mod prefix (`Beretta`, `Minigun`, `1911`...): another mod spelling a class the same way
