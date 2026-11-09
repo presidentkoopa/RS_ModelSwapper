@@ -1,6 +1,6 @@
 # PLAN: RS_ModelSwapper (owner, 2026-11-08; this file is the only plan)
 
-Current step: **M3**
+Current step: **M4**
 
 `none` is also a legal current step; `tools/check_plan.py` accepts it only while every `- F<n>` / `- W<n>` / `- M<n>`
 line here is marked DONE. To do new work, add an item in a `[plan]` commit and name it here.
@@ -46,6 +46,16 @@ workshop. The plan before the merge is `docs/depot/PLAN.md` (the Depot's) and `H
       pk3/GoldenSouls1_MS.pk3 the M2 way; hands by rows or fitted on the cards, every sheet looked at. Golden Souls 2
       theorised only (docs/sets/golden_souls_2.md), not built. Done when the pk3 passes the gates and the sheet is in
       docs/sets/hands. Not rig-run here.
+- M4  GOLDEN SOULS: SUPER MARIO DOOM ENEMIES + HIGH JUMP PATCH (owner, 2026-11-08 23:30: "have a separate agent
+      make a patch for this for GoldenSouls 1 and 2. I want the enemies from this, and the high jump. when i play GS,
+      I want to see these enemies and load our MS to see foreign meshes on GS natural weapon code."). "This" =
+      00_SMD2_00_SuperMarioDoom_Assets_SDMLITE.pk3 (read as data). One patch pk3, `pk3/GoldenSouls_SMD_Enemies.pk3`,
+      loaded after Golden Souls 1 or 2, beside GoldenSouls1_MS.pk3 in either order: (1) the Doom monsters GS's maps
+      spawn wear the SMD enemies (sprites, sounds, cast names), mapping and what the LITE cut lacks in
+      `docs/sets/golden_souls_smd_enemies.md`; (2) the high jump, given to GS's own player class without replacing
+      it, netplay-safe; (3) built by a tool in `tools/ms/` from `sources/smd_lite/` (the SMD lumps used, with
+      CREDITS.txt) + `tools/ms/gs_smd_patch/` (the patch's own lumps); (4) load-checked on tools/rig if an IWAD is
+      at hand, else "written, not verified". Not in scope: the SMD player, weapons, textures, music, maps.
 - H1  HANDFIT IN BLENDER, STEP 1 (owner, 2026-11-08: "our current fitter and rig system is too taxing on my tokens ...
       assume I have blender, and these FBX hands"; agreed 18:33). Step 1 = `tools/handfit/blender/`: the pose library
       (29 BD22 holds + the FBX take's 5 poses, each hand), the add-on (load card, import hand, apply pose, export the
