@@ -18,12 +18,12 @@ is read from the Reload state's own actions, quoted in the last column.
 | Class | Slot | Ammo 1 (mag) / Ammo 2 (reserve) | Reload state | Kind | Sprites | Evidence (actors/weapons/) |
 |---|---|---|---|---|---|---|
 | Knuckle | 1 | - / - | no | melee | GRAB PKFS PUNP | knuckle.txt: Fire only |
-| ModChainsaw | 1 | - / - | no | melee (saw) | CSAW SAWF SAWG SAWN SAWR | chainsaw.txt: Rev / Fire / TurnOff |
+| ModChainsaw | MS_BD_Chainsaw | n/a | no (owner 2026-11-08: chainsaws go without hands until Handfit) | BD's chainsaw (was VP_Chainsaw; its Ermac fit was refused by the owner) |
 | Beretta | 2 | PistolMag / PistolAmmo | yes | magazine, slide after empty | BRLD BRTF BRTT CHLD PIST | pistol.txt:164 `A_FireProjectile("SpentClip1")`, ChamberCheck |
 | ARifle | 2 | RifleMag / RifleAmmo | yes | magazine, charging handle after empty | ASLR ASLT ASRL IRFI IRON IRSW RFLF RIFG RIFL | rifle.txt:167 `RifleMagDrop`, ChamberCheck |
 | Riotgun | 3 | ShotgunMag / Shell | yes | pump, shells one at a time | BOOF RGLS RGSW RIOB RIOT SHZM ZMCK ZMFI ZMFL | shotgun.txt: ReloadLoop one shell, ReloadPump |
-| DoubleSG | 3 | DBSGMag / Shell | yes | break-open, one or two shells | DBBL DBLF DBRL LFTF PKS2 RHTF SH2R SHT2 SHT3 | dbsg.txt: ReloadDouble / ReloadSingle |
-| Minigun | 4 | MinigunMag / Nato | yes | magazine (ammo box) | CHAF CHAG MNIG NGLD RCLD VLCN VLCS | minigun.txt:174 Reload, ReloadWork, NGLD/RCLD box frames |
+| DoubleSG | MS_BD_Ssg | break slot 3 | **yes** (row 76: gun hand C + support B UNDER THE BARRELS, midway; owner 2026-11-08; hands/MS_BD_Ssg.png) | SEEN WORKING |
+| Minigun | MS_BD_Minigun | none (the mod's own ammo-box reload runs) | **yes** (row 80: gun hand F on the rear grip + support E, the fist on the side handlebar the card names; hands/MS_BD_Minigun.png) | owner 2026-11-08: BD's minigun; the VP one's card grip sits on the ammo box (its fit refused, hands/MS_VP_Minigun.png) |
 | Rlauncher | 5 | RocketMag / RocketAmmo | yes | magazine (rocket pack) | LAWN LNCH LNFI LODE | rlaunch.txt:155 `RocketPackDrop` |
 | PlasRifle | 6 | PlasmaMag / Cell | yes | magazine (cell) | PLAS PLCH PLZA PLZG PLZR | plasrifle.txt:208 `PulseCellDrop` |
 | BFG9K | 7 | BFGMag / Cell | yes | magazine (cell) | BFGE BFGN BFGO BFGR BFGX BFGY BFUG LBFG | bfg.txt:170-172 `weapons/bfg/clipout`, `PulseCellDrop` |
@@ -51,8 +51,9 @@ rows under the card name too, so they fire.
 | PlasRifle | MS_BD_Plasma | magazine 48 | **yes** (row 65, via its exact twin MS_brt_PlasmaGun / MS_d64_PlasmaGun; hand_names.py) | the Vanilla Plus plasma rifle IS this mesh (MS_vplus_PlasmaRifle = MS_BD_Plasma exact); carded VP_Plasma has no magazine |
 | BFG9K | MS_HX_Nuker | magazine 98 (owner-confirmed cell carve) | **yes** (row 78: gun hand F; support off, no measured support point; hands/MS_HX_Nuker.png) | the ONLY bfg-shelf donor with a reload row; the vanilla-look MG_Bfg / BD_Bfg have none (the mod's own reload would run). Owner's call if the look matters more |
 
-Totals: 10 weapons, 10 donors, 8 reloading weapons all on measured rows (6 magazine, 1 pump, 1 break). Hands: 9 of 10
-(the fist is the hand; 4 by the card-name alias `hand_names.py`, 4 fitted 2026-11-08 by `tools/ms/handfit_donors.py`,
-the sheets in `hands/`; the Minigun fit was refused, see its row). Rig only: nothing in a headset.
+Totals: 10 weapons, 10 donors, 7 reloading weapons on measured rows (5 magazine, 1 pump, 1 break; the Minigun runs the
+mod's own reload: BD's minigun has no row). Hands: 9 of 10 (the fist is the hand; Beretta, ARifle, Rlauncher, PlasRifle by
+`hand_names.py`; Riotgun, DoubleSG, Minigun, BFG9K fitted 2026-11-08 by `tools/ms/handfit_donors.py`, sheets in `hands/`;
+ModChainsaw without, by the owner). Rig only: nothing in a headset.
 
 Classes shared with Weapons of Saturn (`Beretta`, `Riotgun`, `Minigun`) have one profile row each; the picks agree.

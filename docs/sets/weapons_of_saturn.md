@@ -17,13 +17,13 @@ tic, so the KIND is read from the reload frames and sounds, quoted in the last c
 | Class | Parent | Slot | Ammo 1 (reserve) / Ammo 2 (loaded) | Reload state | Kind | Sprites | Evidence (ACTORS/) |
 |---|---|---|---|---|---|---|---|
 | Knuckles | Fist | 1 | - / - | no | melee (punch, kick) | - (Fist's) | KNUCKLES.txt: Fire / AltFire |
-| Motorsaw | Weapon | 1 | SawFuel (fuel, no reload) | no | melee (saw) | CSAW SAWF SAWN SLCE | CHAINSAW.txt |
+| Motorsaw | MS_BD_Chainsaw | n/a | no (owner 2026-11-08: chainsaws go without hands until Handfit) | modern look; PB's pick |
 | Beretta | Weapon | 2 | Clip / 9mm | yes | magazine, slide after empty | BOOT BRLD BRTF BRTT CHLD GKCK KICK PIST | PISTOL.txt: ReloadChamberCheck, ReloadLoop |
 | MP40 | Weapon | 2 | Clip / MP40Ammo | yes | magazine (also a dual-wield reload, BReload*) | DFSH DHLD DRLD MP4C MP4F MP4R MPGN MPIC PSMP PWHP | MP40.txt:187 `weapons/MP40/reload` |
 | Riotgun | Weapon | 3 | Shell / LoadedShell | yes | pump, shells one at a time | BOOF CSHT RGLS RGSW RIOT SHAT SHZM ZMCK ZMFI ZMFL | RIOTGUN.txt: FirstLoad, ReloadWork, ReloadPump |
-| Coachgun | Weapon | 3 | Shell / LoadedShells | yes | break-open, one or two shells | CCHG DBBL DBLS LFTF PKS2 RHTF SH2R SHT2 | COACHGUN.txt: ReloadDouble / ReloadSingle |
+| Coachgun | MS_BD_Ssg | break slot 3 | **yes** (row 76: gun hand + support under the barrels, see generic_weapons.md) | SEEN WORKING |
 | MachineRifle | Weapon | 4 | RifleAmmo / Magazine | yes | magazine, charging handle after empty | ASLR ASLT IRFI IRON IRSW MRFL RFLF RIFL | MACHINERIFLE.txt: ReloadChamberCheck, ReloadLoop |
-| Minigun | Weapon | 4 | Nato / NatoBelt | yes | magazine (belt box) | CHAF CHAG CHPF MNIG NGLD RCLD VLCN VLCS | MINIGUN.txt:263 `weapons/chaingun/feed`, NGLD/RCLD frames |
+| Minigun | MS_BD_Minigun | none (the mod's own reload runs) | **yes** (row 80, see generic_weapons.md) | owner 2026-11-08: BD's minigun |
 | SaturnV | RocketLauncher | 5 | RocketAmmo / RocketRounds (6) | yes | magazine (one load sound, six rounds) | BRKK HELX LAWN MACX MSLE ROKK SATF SATG SATR SATV | SATURNV.txt:223 Reload, `weapons/launcher/load` once |
 | NovaRifle | weapon | 6 | Cell / Cellpak | yes | magazine (cell) | NOVF PLAS PLCH PLZF PLZG PLZR RALE | NOVARIFLE.txt:115 `weapons/plasmagun/reload` |
 | TITAN | Weapon | 7 | Cell / BFGCell | yes | magazine (cell) | BFFL DBFC DBFF DBFG DEBF | TITAN.txt:129 `weapons/bfg/reload` |
@@ -55,8 +55,9 @@ item in HANDOFF.md).
 | NovaRifle | MS_BD_Plasma | magazine 48 | **yes** (row 65, via its exact twin MS_brt_PlasmaGun / MS_d64_PlasmaGun; hand_names.py) | BD plasma, cell magazine measured; PB's pick |
 | TITAN | MS_HX_Nuker | magazine 98 (owner-confirmed cell carve) | **yes** (row 78, gun hand only, see generic_weapons.md) | the ONLY bfg-shelf donor with a reload row (BD_Bfg has none); PB's Demon-Tech pick |
 
-Totals: 12 weapons, 12 donors, 10 reloading weapons all on measured rows (8 magazine, 1 pump, 1 break). Hands: 10 of 12
-(the fist is the hand; 4 by `hand_names.py`, 4 fitted 2026-11-08 by `tools/ms/handfit_donors.py`, sheets in `hands/`;
-Motorsaw has no measured grip on its card, the Minigun fit was refused). Rig only: nothing in a headset.
+Totals: 12 weapons, 12 donors, 9 reloading weapons on measured rows (7 magazine, 1 pump, 1 break; the Minigun runs the
+mod's own reload). Hands: 10 of 12 (the fist is the hand; Beretta, MP40, MachineRifle, SaturnV, NovaRifle by `hand_names.py`;
+1911, Riotgun, Coachgun, Minigun, TITAN fitted 2026-11-08 by `tools/ms/handfit_donors.py`, sheets in `hands/`; Motorsaw
+without, by the owner). Rig only: nothing in a headset.
 
 Classes shared with Generic Weapons (`Beretta`, `Riotgun`, `Minigun`) have one profile row each; the picks agree.

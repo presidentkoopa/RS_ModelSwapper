@@ -1108,9 +1108,9 @@ class RS_ForeignScanner
 			// three classes the same (Beretta, Riotgun, Minigun) and the picks agree, so each has one row here; the
 			// row keys have no mod prefix, so another mod's `Minigun` would wear the same donor (harmless: it fits).
 			// Shared by both mods:
-			"Beretta|MS_BD_Pistol",           "Riotgun|MS_BD_Shotgun",           "Minigun|MS_VP_Minigun",
+			"Beretta|MS_BD_Pistol",           "Riotgun|MS_BD_Shotgun",           "Minigun|MS_BD_Minigun",   // owner 2026-11-08: BD's, with Ermac hands (the VP one's card grip was wrong); no reload row: the mod's own reload
 			// Generic Weapons:
-			"Knuckle|MS_BD_Fist",             "ModChainsaw|MS_VP_Chainsaw",      "ARifle|MS_BD_Rifle",
+			"Knuckle|MS_BD_Fist",             "ModChainsaw|MS_BD_Chainsaw",      "ARifle|MS_BD_Rifle",   // chainsaw: BD's, no hand (owner 2026-11-08)
 			"DoubleSG|MS_BD_Ssg",             "Rlauncher|MS_BD_Rpg",             "PlasRifle|MS_BD_Plasma",
 			"BFG9K|MS_HX_Nuker",
 			// Weapons of Saturn:

@@ -10,6 +10,7 @@ onto the gun by ICP, searched in a tight window round the card's own grip point;
 the same way round the card's support feature. What differs from handfit_cards.py is only where the inputs come from:
 the donor's block in `modeldef` (placement, rest frame) and its card (grip line, support feature), not the old c2q build.
 
+--write APPENDS slots: to redo a fit, restore zscript_depot/rsq/handtable.zs first (git checkout <before> -- that file).
 Output: one sheet per donor in work/handfit/<donor>.png (side + bottom: gun, gun hand, support hand, the card's points),
 one line per donor, and with --write the rows appended to zscript_depot/rsq/handtable.zs as new slots plus
 `if (donor == ...) return N;` lines in a GENERATED block. LOOK AT THE SHEETS before --write lands anywhere.
@@ -26,11 +27,19 @@ import handfit_cards as HC  # noqa: E402
 from handfit_addon import parse_card  # noqa: E402
 
 TYPE = {  # donor -> handfit_cards.POSE key (which Ermac pose the gun type takes)
-    'MS_BD_Shotgun': 'shotgun', 'MS_BD_Ssg': 'breakaction', 'MS_BD_Chainsaw': 'chainsaw', 'MS_VP_Chainsaw': 'chainsaw',
-    'MS_VP_Minigun': 'chaingun', 'MS_BW_1911': 'pistol', 'MS_HX_Nuker': 'bfg',
+    'MS_BD_Shotgun': 'shotgun', 'MS_BD_Ssg': 'breakaction', 'MS_BD_Minigun': 'chaingun', 'MS_BW_1911': 'pistol', 'MS_HX_Nuker': 'bfg',
+}
+# where the support hand goes when the card's `support feature` is the one-handed placeholder (owner, 2026-11-08):
+#   ('under', surf N, frac): the underside of surface N (the barrels) at frac of the way along that surface;
+#   ('part', role, pose): the centroid of the card part with that role (the minigun's owner-confirmed handlebar), with
+#   the Ermac support pose named (91 = fist on a vertical grip).
+SUPPORT_FROM = {
+    'MS_BD_Ssg': ('under', 0, 0.5),          # owner: "ssg support hand needs to be under the barrel"
+    'MS_BD_Minigun': ('part', 'support', 91),   # the side bar is the off-hand handlebar (card, owner 2026-10-31)
 }
 # fits looked at on their sheets (work/handfit/<donor>.png) and refused, with the reason; a refused donor is reported, never written
 REJECT = {
+    'MS_VP_Chainsaw': 'owner, 2026-11-08: the fit is "a sad embarrassing mess"; chainsaws go without hands until Handfit (Blender)',
     'MS_VP_Minigun': 'the card\'s grip line (centroid-based) sits on the ammo box, not on the pistol grip under the receiver; the hand landed on the box. Needs the owner\'s grip point (Handfit, or a corrected card)',
 }
 TABLE = os.path.join(ROOT, 'zscript_depot', 'rsq', 'handtable.zs')
@@ -76,12 +85,27 @@ def fit(donor, regions, ermac, outdir):
     raw = open(os.path.join(ROOT, b['path'], card_path[0]), encoding='utf-8', errors='replace').read()
     sup_line = next((l for l in raw.splitlines() if l.strip().startswith('support ')), '')
     if 'placeholder' in sup_line: pts.pop('support', None)   # "one-handed gun; placeholder": not a measured point, no support fit
+    sup_pose = None
+    if donor in SUPPORT_FROM:
+        spec = SUPPORT_FROM[donor]
+        if spec[0] == 'under':
+            _, surf, frac = spec
+            surfs = gunview.item_mesh(dict(it)); V = np.asarray(surfs[surf][1], float)   # the barrels, model space, rest frame
+            x = V[:, 0].min() + frac * (V[:, 0].max() - V[:, 0].min())                 # frac of the way along the barrels
+            band = V[np.abs(V[:, 0] - x) < 2.0]
+            low = band[band[:, 2].argmin()]                                             # their underside there
+            pts['support'] = [float(x), float(band[:, 1].mean()), float(low[2])]
+        elif spec[0] == 'part':
+            _, role, sup_pose = spec
+            m = re.search(r'^\s+%s\s+surf \d+\s+rest \[([^\]]*)\]' % role, raw, re.M)
+            if m: pts['support'] = [float(v) for v in m.group(1).split(',')]
     if 'grip_top' not in pts: return None, '%s: card has no grip line' % donor
     if np.allclose(pts['grip_top'], pts['grip_bottom']): return None, '%s: the card\'s grip line is a single point (the grip guesser found nothing): needs a measured grip' % donor
     if donor in REJECT: return None, '%s: NOT written: %s' % (donor, REJECT[donor])
     palm = to_flu([(np.array(pts['grip_top']) + np.array(pts['grip_bottom'])) / 2], it)[0]
     sup_at = to_flu([pts['support']], it)[0] if 'support' in pts else None
     typ = TYPE.get(donor, 'rifle'); two, one, sup, kind, trig = HC.POSE[typ]
+    if sup_pose is not None: sup = sup_pose
     gp = gun_points(it)
     t, err, why = HC.fit_gun(gp, palm, 'hand:%d' % two)
     if t is None: return None, '%s: gun hand: %s' % (donor, why)
