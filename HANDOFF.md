@@ -296,3 +296,25 @@ All with 0 pack errors. Frames: `/home/claude/shots/rigreload_<tag>_<donor>/`.
 - Keep the owner informed: one line when something blocks, before digging. Answer questions directly.
 - Test reloads only on weapons that really reload; never substitute a different weapon class to "test the rows".
 - Unverified changes are not commits; rig-shown changes are.
+
+## 2026-11-09 00:25 Generic Weapons set: the VR HAND RELOAD on the rig (owner: "meshes survive firing and manual reloading")
+Real QuestZDoom 17.3 (tools/rig/bin/qz), OpenXR path, doom2 -> li-gnrcwpn -> pk3/GenericWeapons_MS.pk3 -> tools/rig/probe_ms,
+god, `rsr_reload 1`, off hand driven through the kit's drivers re-pointed at the set: `tools/rig/msmags.py` (magazines,
+mags.py's method), `tools/rig/msload.py` (pump and break, pump.py/brk.py's). Logs: tools/rig/runs/gnrc_*.log (gitignored).
+- MAGAZINES Beretta, ARifle, Rlauncher, PlasRifle, BFG9K: `IDLE>EMPTY>DROP>CARRY>INSERT>SEATED>DONE>IDLE` on every one;
+  the weapon layer stayed on the MS anchor sprite for every tic of the reload (144-174 tics each) EXCEPT one tic at
+  DONE->IDLE where it reads the mod's own 2D sprite before the pin returns (all five, same tic): a one-frame flash if the
+  renderer catches it. The only defect found.
+- PUMP Riotgun: two shells taken from the hand and pushed home (`LOAD/CARRY -> INSERT -> shell 1 home`, `shell 2 home`);
+  then, with the off hand ON the pump before the shot (RS_ForeignReload.ShotWatch's rule: the gun is held at the mod's
+  pump point only if the hand is already there), the stroke by hand: `the hand is on the pump (grab): it pumps` ->
+  `pump at the back` -> `pump forward: stroke done` -> `ready`. Anchor sprite held throughout (spr 6).
+- BREAK DoubleSG: `IDLE>OPENING` (ejected 2) `>OPEN`, hand `FREE>CARRY>INSERT`, `chamber 0 loaded`, gun hand flick
+  `467 deg/s about the hinge` -> `CLOSING>DONE>IDLE`, `loaded 2 this reload`. Anchor sprite held (spr 950, 79 tics).
+- Also measured (not asked for, recorded once): meshes held through FIRING on every gun of Generic (10), Saturn (12) and
+  GS1 (8); Generic's chainsaw fell to its 2D sprite for 3 tics at the start of its fire animation. Saturn's seven
+  magazine guns did the full hand cycle too before the owner said stop. GS1 hand reloads NOT run (owner: "if it works in
+  GNRC it works everywhere else").
+- Rig facts: the engine reads/writes bin/config/qzdoom.ini relative to its cwd and ignores -config (the drivers restore
+  it from git around every run); a `+reload` from a ZScript WorldTick is too late for P_CheckWeaponButtons (console
+  `+reload`/`-reload` works); tools/rig/probe is BD22-only (FiredPrimary, RSQ_Flash, the axe): probe_ms is the MS cut.

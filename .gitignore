@@ -71,3 +71,4 @@ tools/rig/bin/libGLESv3.so
 tools/rig/bin/saves/
 # the generators' scratch (gen_rsb)
 _x/
+tools/rig/runs/
