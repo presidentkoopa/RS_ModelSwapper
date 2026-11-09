@@ -1101,7 +1101,22 @@ class RS_ForeignScanner
 			"PB_M1Plasma|MS_BD_Plasma",       "PB_M2Plasma|MS_MG_Bolter",        "PB_PulseCannon|MS_Cola_Particlegun",
 			"PB_Demontech|MS_HX_Nuker",
 			"PB_CryoRifle|MS_HX_Cryogun",     "PB_Flamethrower|MS_BD_Flamethrower",
-			"PB_Railgun|MS_BD_Railgun",       "PB_BFG9000|MS_BD_Bfg",            "PB_Unmaker|MS_BD_Unmaker"
+			"PB_Railgun|MS_BD_Railgun",       "PB_BFG9000|MS_BD_Bfg",            "PB_Unmaker|MS_BD_Unmaker",
+			// GENERIC WEAPONS (li-gnrcwpn.zip) and WEAPONS OF SATURN (weapons_of_saturn.pk3) -- PLAN M2 (owner,
+			// 2026-11-08). Picks and reasons: docs/sets/generic_weapons.md, docs/sets/weapons_of_saturn.md. Every
+			// weapon that reloads wears a donor with a measured row (magazine / pump / break). The two mods spell
+			// three classes the same (Beretta, Riotgun, Minigun) and the picks agree, so each has one row here; the
+			// row keys have no mod prefix, so another mod's `Minigun` would wear the same donor (harmless: it fits).
+			// Shared by both mods:
+			"Beretta|MS_BD_Pistol",           "Riotgun|MS_BD_Shotgun",           "Minigun|MS_VP_Minigun",
+			// Generic Weapons:
+			"Knuckle|MS_BD_Fist",             "ModChainsaw|MS_VP_Chainsaw",      "ARifle|MS_BD_Rifle",
+			"DoubleSG|MS_BD_Ssg",             "Rlauncher|MS_BD_Rpg",             "PlasRifle|MS_BD_Plasma",
+			"BFG9K|MS_HX_Nuker",
+			// Weapons of Saturn:
+			"Knuckles|MS_BD_Fist",            "Motorsaw|MS_BD_Chainsaw",         "1911|MS_BW_1911",
+			"MP40|MS_BD_Mp40",                "MachineRifle|MS_BD_Rifle",        "Coachgun|MS_BD_Ssg",
+			"SaturnV|MS_BD_Rpg",              "NovaRifle|MS_BD_Plasma",          "TITAN|MS_HX_Nuker"
 		};
 		string want = cls.MakeLower();
 		for (int i = 0; i < PROFILE.Size(); ++i)

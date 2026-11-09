@@ -1,0 +1,45 @@
+// GENERIC WEAPONS VR -- the options page of the Generic Weapons set (pk3/GenericWeapons_MS.pk3,
+// tools/ms/build_pk3.py --set generic_weapons). Modelled on MENUDEF.pb, shorter.
+//
+// Every row is an existing ModelSwapper cvar (quest/CVARINFO); nothing here is a second copy of a setting, so a
+// change here IS the change in "VR Reload" and "Weapon Model Swap Program", and the other way round. Shipped only
+// in the Generic Weapons set.
+
+AddOptionMenu "OptionsMenu"
+{
+	StaticText " "
+	Submenu "Generic Weapons VR", "MSGNRC_Options"
+}
+
+OptionValue "MSGNRC_ReloadMode"
+{
+	1, "By hand (VR)"
+	0, "The mod's own reload"
+}
+
+OptionMenu "MSGNRC_Options"
+{
+	Title "GENERIC WEAPONS VR"
+	StaticText " "
+	StaticText "Every Generic Weapons gun wears a 3D model close to the vanilla look;", "DarkGray"
+	StaticText "the ones that reload, reload by hand. Damage, ammo and sounds stay the mod's.", "DarkGray"
+	StaticText " "
+
+	StaticText "Guns", "Gold"
+	Option "3D Gun Models", "rs_foreignmodels", "OnOff"
+	Submenu "Choose Models", "RSFM_Picker"
+	Command "Back to the Set's Models", "netevent rs-fm-forget-picks"
+	StaticText " "
+
+	StaticText "Reloading", "Gold"
+	Option "Reloading", "rsr_reload", "MSGNRC_ReloadMode"
+	Option "Reload Order", "ms_mod_first", "MS_ReloadOrder"
+	Option "Grab Ammo With", "rsr_grab_with", "RSR_GrabWith"
+	Option "Pump by Hand After a Shot", "ms_hand_pump", "OnOff"
+	Option "Charging Handle After Empty", "ms_charge_dry", "OnOff"
+	StaticText " "
+
+	StaticText "Hands", "Gold"
+	Option "VR Hands", "rsq_hands", "OnOff"
+	Option "Off Hand", "ms_off_fist", "MS_OffHand"
+}

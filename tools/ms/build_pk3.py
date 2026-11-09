@@ -2,6 +2,7 @@
 
     python tools/ms/build_pk3.py                 pk3/ModelSwapper-QUEST.pk3
     python tools/ms/build_pk3.py --pb            pk3/ProjBrut_MS.pk3: the Quest build cut to the PB set + the PB menu
+    python tools/ms/build_pk3.py --set <name>    pk3/<Name>_MS.pk3: the Quest build cut to that set's donors (SETS below)
 
 WHY A PORT. build.ps1 needs Windows PowerShell; the rig and the cloud sessions are Linux. This packs exactly what
 build.ps1 -Static packs and runs the same gates, so either one makes the same pk3:
@@ -25,6 +26,11 @@ THE PB SET SHIPS ONLY PB'S MODELS. The full shelf is 145 donors and 182 MB; the 
 names (RS_ForeignModels.zs ProfileDonor), their card folders, and only their Model blocks in every MODELDEF lump.
 The other donors' class stubs are left out of zscript.txt, so their shelf rows drop at load (RS_ForeignShelf.Build
 keeps a row only when its donor class exists) and the picker offers exactly the PB set.
+
+THE OTHER SETS (--set <name>, PLAN M2) are the same cut for another mod's profile rows. SETS names each set: the pk3 it
+writes, which ProfileDonor rows are its (a class-name regex for a prefixed mod like PB, or the explicit class list for a
+mod whose class names carry no prefix), and the menu lump it adds, if any. `--pb` is `--set pb`. A listed class with no
+profile row is a gate failure, so the script and the ZScript cannot drift apart silently.
 """
 import io, os, re, subprocess, sys, zipfile
 
@@ -34,6 +40,18 @@ INCLUDE = ['zscript.txt', 'modeldef', 'MENUDEF', 'CVARINFO', 'MAPINFO', 'KEYCONF
            'MODELDEF.cards', 'MODELDEF.cards2x', 'MODELDEF.rsq', 'SNDINFO.ms']
 DIRS = ['zscript', 'cards', 'zscript_depot', 'models/rsq', 'sounds']
 PB_MENU = 'MENUDEF.pb'
+
+# set name -> pk3 file, the profile rows that are its (regex on the class name, or an explicit list of class names,
+# spelled as the mod spells them), and the set's MENUDEF lump (None = no page). Picks: docs/sets/<name>.md.
+SETS = {
+    'pb': dict(pk3='ProjBrut_MS.pk3', classes=r'PB_\w+', menu=PB_MENU),
+    'generic_weapons': dict(pk3='GenericWeapons_MS.pk3', menu='MENUDEF.gnrc', classes=[
+        'Knuckle', 'ModChainsaw', 'Beretta', 'ARifle', 'Riotgun', 'DoubleSG', 'Minigun', 'Rlauncher', 'PlasRifle',
+        'BFG9K']),
+    'weapons_of_saturn': dict(pk3='WeaponsOfSaturn_MS.pk3', menu='MENUDEF.saturn', classes=[
+        'Knuckles', 'Motorsaw', 'Beretta', '1911', 'MP40', 'MachineRifle', 'Riotgun', 'Coachgun', 'Minigun', 'SaturnV',
+        'NovaRifle', 'TITAN']),
+}
 
 
 def gather():
@@ -73,10 +91,23 @@ def gather():
     return out
 
 
-def pb_donors():
+def profile_rows():
+    """{class name: donor} for every row of RS_ForeignScanner.ProfileDonor's table."""
     zs = open(os.path.join(ROOT, 'zscript/RS_ForeignModels.zs'), encoding='utf-8').read()
     a = zs.index('static string ProfileDonor'); b = zs.index('};', a)
-    return sorted(set(re.findall(r'"PB_\w+\|(MS_\w+)"', zs[a:b])))
+    return dict(re.findall(r'"([^"|]+)\|(MS_\w+)"', zs[a:b]))
+
+
+def set_donors(name):
+    """the donors a set's profile rows name, sorted; exits when a listed class has no row."""
+    rows = profile_rows()
+    want = SETS[name]['classes']
+    if isinstance(want, str):
+        pat = re.compile(want + r'\Z')
+        return sorted({d for c, d in rows.items() if pat.match(c)})
+    missing = [c for c in want if c not in rows]
+    if missing: sys.exit('set %s lists classes with no ProfileDonor row: %s' % (name, missing))
+    return sorted({rows[c] for c in want})
 
 
 def model_blocks(text):
@@ -88,13 +119,13 @@ def model_blocks(text):
     return out
 
 
-def pb_filter(files):
-    """keep only the PB profile's donors: returns (files, {rel: new bytes} for rewritten lumps, donors, dirs)."""
-    donors = pb_donors()
+def pb_filter(files, name='pb'):
+    """keep only the set's profile donors: returns (files, {rel: new bytes} for rewritten lumps, donors, dirs)."""
+    donors = set_donors(name)
     md = open(os.path.join(ROOT, 'modeldef'), encoding='utf-8-sig').read()
     dirs = {p for s, e, n, p in model_blocks(md) if n in donors}
     missing = [d for d in donors if not any(n == d for s, e, n, p in model_blocks(md))]
-    if missing: sys.exit('PB profile names donors with no modeldef block: %s' % missing)
+    if missing: sys.exit('%s profile names donors with no modeldef block: %s' % (name, missing))
     def card_dir(rel):
         m = re.match(r'(cards/[^/]+/[^/]+)/', rel)
         return m.group(1) if m else None
@@ -160,6 +191,17 @@ def verify(path):
     dup = sorted({d for d in donors if donors.count(d) > 1})
     sdup = sorted({s for s in stubs if stubs.count(s) > 1})
     nostub = sorted(set(donors) - set(stubs))
+    # the menus (zs_lint does not read MENUDEF): every OptionValue an Option row names and every Submenu target is
+    # defined in a packed MENUDEF lump (or is an engine built-in), and no OptionMenu / OptionValue is defined twice
+    menus = ''.join(z.read(n).decode('utf-8-sig', 'replace') for n in z.namelist() if n == 'MENUDEF' or n.startswith('MENUDEF.'))
+    menus = re.sub(r'//[^\n]*', '', menus)
+    om = re.findall(r'(?m)^OptionMenu\s+"([^"]+)"', menus)
+    ov = re.findall(r'(?m)^OptionValue\s+"([^"]+)"', menus)
+    builtin = {'onoff', 'yesno', 'noyes'}
+    badov = sorted({v for v in re.findall(r'(?m)^\s*Option\s+"[^"]*",\s*"[^"]*",\s*"([^"]+)"', menus)
+                    if v.lower() not in builtin and v not in ov})
+    badsm = sorted({m for m in re.findall(r'(?m)^\s*Submenu\s+"[^"]*",\s*"([^"]+)"', menus) if m not in om})
+    dupmenu = sorted({m for m in om if om.count(m) > 1} | {v for v in ov if ov.count(v) > 1})
     mb = os.path.getsize(path) / 1048576
     print(f'{os.path.basename(path)}  --  {len(z.namelist())} entries, {mb:.1f} MB')
     print(f'  backslash entries  : {len(bad)}')
@@ -170,11 +212,19 @@ def verify(path):
     for d in dup: print('    duplicate Model block:', d)
     for d in sdup: print('    duplicate class stub:', d)
     for d in nostub: print('    donor with no class stub:', d)
-    return not (bad or wm or miss or dup or sdup or nostub)
+    print(f'  menus              : {len(om)} OptionMenu, {len(ov)} OptionValue; {len(badov)} undefined OptionValue, '
+          f'{len(badsm)} undefined Submenu, {len(dupmenu)} defined twice')
+    for v in badov: print('    Option names an OptionValue no lump defines:', v)
+    for m in badsm: print('    Submenu names an OptionMenu no lump defines:', m)
+    for m in dupmenu: print('    defined twice:', m)
+    return not (bad or wm or miss or dup or sdup or nostub or badov or badsm or dupmenu)
 
 
 def main():
-    pb = '--pb' in sys.argv
+    name = 'pb' if '--pb' in sys.argv else (sys.argv[sys.argv.index('--set') + 1] if '--set' in sys.argv else None)
+    if name is not None and name not in SETS:
+        sys.exit('unknown set %r: one of %s' % (name, ' '.join(sorted(SETS))))
+    pb = name is not None
     lint = subprocess.run([sys.executable, '-B', os.path.join(ROOT, 'tools', 'ms', 'zs_lint.py')] +
                           [os.path.join('zscript', f) for f in sorted(os.listdir(os.path.join(ROOT, 'zscript'))) if f.endswith('.zs')],
                           cwd=ROOT, capture_output=True, text=True)
@@ -182,15 +232,15 @@ def main():
     if lint.returncode != 0:
         sys.exit('tools/ms/zs_lint.py found problems -- not packing')
     os.makedirs(OUTDIR, exist_ok=True)
-    out = os.path.join(OUTDIR, 'ProjBrut_MS.pk3' if pb else 'ModelSwapper-QUEST.pk3')
+    out = os.path.join(OUTDIR, SETS[name]['pk3'] if pb else 'ModelSwapper-QUEST.pk3')
     files = gather()
     extra = {}
     rewrite = {}
     if pb:
-        files, rewrite, donors, dirs = pb_filter(files)
-        print('PB set: %d donors, %d card folders' % (len(donors), len(dirs)))
-    if pb:
-        extra[PB_MENU] = open(os.path.join(ROOT, PB_MENU), 'rb').read()
+        files, rewrite, donors, dirs = pb_filter(files, name)
+        print('%s set: %d donors, %d card folders' % (name, len(donors), len(dirs)))
+        if SETS[name]['menu']:
+            extra[SETS[name]['menu']] = open(os.path.join(ROOT, SETS[name]['menu']), 'rb').read()
     with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for rel in files:
             if rel in rewrite: z.writestr(rel, rewrite[rel])

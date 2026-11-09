@@ -1,0 +1,45 @@
+// WEAPONS OF SATURN VR -- the options page of the Weapons of Saturn set (pk3/WeaponsOfSaturn_MS.pk3,
+// tools/ms/build_pk3.py --set weapons_of_saturn). Modelled on MENUDEF.pb, shorter.
+//
+// Every row is an existing ModelSwapper cvar (quest/CVARINFO); nothing here is a second copy of a setting, so a
+// change here IS the change in "VR Reload" and "Weapon Model Swap Program", and the other way round. Shipped only
+// in the Weapons of Saturn set.
+
+AddOptionMenu "OptionsMenu"
+{
+	StaticText " "
+	Submenu "Weapons of Saturn VR", "MSSATURN_Options"
+}
+
+OptionValue "MSSATURN_ReloadMode"
+{
+	1, "By hand (VR)"
+	0, "The mod's own reload"
+}
+
+OptionMenu "MSSATURN_Options"
+{
+	Title "WEAPONS OF SATURN VR"
+	StaticText " "
+	StaticText "Every Weapons of Saturn gun wears a modern 3D model (Brutal Doom first);", "DarkGray"
+	StaticText "the ones that reload, reload by hand. Damage, ammo and sounds stay the mod's.", "DarkGray"
+	StaticText " "
+
+	StaticText "Guns", "Gold"
+	Option "3D Gun Models", "rs_foreignmodels", "OnOff"
+	Submenu "Choose Models", "RSFM_Picker"
+	Command "Back to the Set's Models", "netevent rs-fm-forget-picks"
+	StaticText " "
+
+	StaticText "Reloading", "Gold"
+	Option "Reloading", "rsr_reload", "MSSATURN_ReloadMode"
+	Option "Reload Order", "ms_mod_first", "MS_ReloadOrder"
+	Option "Grab Ammo With", "rsr_grab_with", "RSR_GrabWith"
+	Option "Pump by Hand After a Shot", "ms_hand_pump", "OnOff"
+	Option "Charging Handle After Empty", "ms_charge_dry", "OnOff"
+	StaticText " "
+
+	StaticText "Hands", "Gold"
+	Option "VR Hands", "rsq_hands", "OnOff"
+	Option "Off Hand", "ms_off_fist", "MS_OffHand"
+}
