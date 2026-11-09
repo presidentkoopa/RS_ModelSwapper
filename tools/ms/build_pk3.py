@@ -51,6 +51,8 @@ SETS = {
     'weapons_of_saturn': dict(pk3='WeaponsOfSaturn_MS.pk3', menu='MENUDEF.saturn', classes=[
         'Knuckles', 'Motorsaw', 'Beretta', '1911', 'MP40', 'MachineRifle', 'Riotgun', 'Coachgun', 'Minigun', 'SaturnV',
         'NovaRifle', 'TITAN']),
+    'golden_souls_1': dict(pk3='GoldenSouls1_MS.pk3', menu='MENUDEF.gs1', classes=[
+        'Fist2', 'Cannon', 'AutoShotgun', 'OverandUnder', 'Revolver', 'AK47', 'SpikeGun', 'RailBow']),
 }
 
 

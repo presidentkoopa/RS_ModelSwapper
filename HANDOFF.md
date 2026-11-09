@@ -50,6 +50,23 @@ that came out of the Oct-31 batch-carding.** Everything else in either repo is "
 - Quest animated meshes: the owner says the method was found; not in this repo (PLAN C3).
 - `tools/hqt/compcheck.sh` takes REMA_BIN / REMA_IWAD / REMA_INI / REMA_BASE from the environment now (was hardcoded).
 
+# M3 -- Golden Souls 1 set (2026-11-08, NOT rig-run)
+
+Owner 19:41: "theorize on sets for these, but only start with the first GS". GS1 built the M2 way, GS2 theorised in
+docs/sets/golden_souls_2.md.
+## Done (measured)
+- docs/sets/golden_souls_1.md: 8 weapons from dec_weps.dec, a donor each, the reason, the hand row. Profile rows in
+  RS_ForeignModels.zs (Fist2 shared with GS2), MENUDEF.gs1 (no pump row: no pump gun), build_pk3 SETS entry.
+  pk3/GoldenSouls1_MS.pk3: 161 entries, 19.7 MB, every gate passed; lint 0.
+- Hands: BD_Revolver (gun B + cup A) and CW_Nailgun (gun F + support B on its measured magwell) fitted by
+  handfit_donors.py as slots 80-81, sheets looked at (docs/sets/hands). PD_Cannon fit REFUSED (hand inside the
+  barrel): the Cannon goes without. Coverage 7/8. SET_golden_souls_1.png has every weapon.
+- handfit_donors.py --write keeps the earlier fits' SlotForDonor lines (it rewrote the block before: the M2 lines
+  75-79 were lost for one run and put back; the arrays were never wrong).
+## Open
+- RailBow wears BD_Railgun whose Oct-31 hand sits low under the body (1.x quality). Handfit later.
+- GS2 is theory only; three fits would be new (blunderbuss, crossbow or nailgun for Cupid, the whip or none).
+
 # M2 -- Generic Weapons + Weapons of Saturn sets (2026-11-08, branch `set-profiles`, NOT rig-run)
 
 Owner: "spin up mesh sets for these two weapon sets ... hands on guns". No engine in this session: everything below

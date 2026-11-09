@@ -1,0 +1,44 @@
+// GOLDEN SOULS VR -- the options page of the Golden Souls 1 set (pk3/GoldenSouls1_MS.pk3,
+// tools/ms/build_pk3.py --set golden_souls_1). Modelled on MENUDEF.pb, shorter.
+//
+// Every row is an existing ModelSwapper cvar (quest/CVARINFO); nothing here is a second copy of a setting, so a
+// change here IS the change in "VR Reload" and "Weapon Model Swap Program", and the other way round. Shipped only
+// in the Golden Souls 1 set.
+
+AddOptionMenu "OptionsMenu"
+{
+	StaticText " "
+	Submenu "Golden Souls VR", "MSGS1_Options"
+}
+
+OptionValue "MSGS1_ReloadMode"
+{
+	1, "By hand (VR)"
+	0, "The mod's own reload"
+}
+
+OptionMenu "MSGS1_Options"
+{
+	Title "GOLDEN SOULS VR"
+	StaticText " "
+	StaticText "Every Golden Souls gun wears a 3D model; the ones that reload, reload", "DarkGray"
+	StaticText "by hand. Coins, power-ups, damage and sounds stay the mod's.", "DarkGray"
+	StaticText " "
+
+	StaticText "Guns", "Gold"
+	Option "3D Gun Models", "rs_foreignmodels", "OnOff"
+	Submenu "Choose Models", "RSFM_Picker"
+	Command "Back to the Set's Models", "netevent rs-fm-forget-picks"
+	StaticText " "
+
+	StaticText "Reloading", "Gold"
+	Option "Reloading", "rsr_reload", "MSGS1_ReloadMode"
+	Option "Reload Order", "ms_mod_first", "MS_ReloadOrder"
+	Option "Grab Ammo With", "rsr_grab_with", "RSR_GrabWith"
+	Option "Charging Handle After Empty", "ms_charge_dry", "OnOff"
+	StaticText " "
+
+	StaticText "Hands", "Gold"
+	Option "VR Hands", "rsq_hands", "OnOff"
+	Option "Off Hand", "ms_off_fist", "MS_OffHand"
+}

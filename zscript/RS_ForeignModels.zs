@@ -1116,7 +1116,12 @@ class RS_ForeignScanner
 			// Weapons of Saturn:
 			"Knuckles|MS_BD_Fist",            "Motorsaw|MS_BD_Chainsaw",         "1911|MS_BW_1911",
 			"MP40|MS_BD_Mp40",                "MachineRifle|MS_BD_Rifle",        "Coachgun|MS_BD_Ssg",
-			"SaturnV|MS_BD_Rpg",              "NovaRifle|MS_BD_Plasma",          "TITAN|MS_HX_Nuker"
+			"SaturnV|MS_BD_Rpg",              "NovaRifle|MS_BD_Plasma",          "TITAN|MS_HX_Nuker",
+			// GOLDEN SOULS 1 (00_SMD2_A1_GoldenSouls1_Full_1_4.pk3) -- PLAN M3 (owner, 2026-11-08). docs/sets/golden_souls_1.md.
+			// Fist2 is also Golden Souls 2's fist (same donor, one row).
+			"Fist2|MS_BD_Fist",               "Cannon|MS_PD_Cannon",             "AutoShotgun|MS_BD_Assaultshotgun",
+			"OverandUnder|MS_BD_Ssg",         "Revolver|MS_BD_Revolver",         "AK47|MS_BD_Rifle",
+			"SpikeGun|MS_CW_Nailgun",         "RailBow|MS_BD_Railgun"
 		};
 		string want = cls.MakeLower();
 		for (int i = 0; i < PROFILE.Size(); ++i)

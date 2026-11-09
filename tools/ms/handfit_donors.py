@@ -28,6 +28,7 @@ from handfit_addon import parse_card  # noqa: E402
 
 TYPE = {  # donor -> handfit_cards.POSE key (which Ermac pose the gun type takes)
     'MS_BD_Shotgun': 'shotgun', 'MS_BD_Ssg': 'breakaction', 'MS_BD_Minigun': 'chaingun', 'MS_BW_1911': 'pistol', 'MS_HX_Nuker': 'bfg',
+    'MS_BD_Revolver': 'revolver', 'MS_CW_Nailgun': 'smg', 'MS_PD_Cannon': 'launcher',   # Golden Souls 1 (M3, 2026-11-08)
 }
 # where the support hand goes when the card's `support feature` is the one-handed placeholder (owner, 2026-11-08):
 #   ('under', surf N, frac): the underside of surface N (the barrels) at frac of the way along that surface;
@@ -39,6 +40,7 @@ SUPPORT_FROM = {
 }
 # fits looked at on their sheets (work/handfit/<donor>.png) and refused, with the reason; a refused donor is reported, never written
 REJECT = {
+    'MS_PD_Cannon': 'the pirate cannon is a metre-long carried barrel: the ICP put the hand inside its body. No hand until Handfit (Blender)',
     'MS_VP_Chainsaw': 'owner, 2026-11-08: the fit is "a sad embarrassing mess"; chainsaws go without hands until Handfit (Blender)',
     'MS_VP_Minigun': 'the card\'s grip line (centroid-based) sits on the ammo box, not on the pistol grip under the receiver; the hand landed on the box. Needs the owner\'s grip point (Handfit, or a corrected card)',
 }
@@ -144,6 +146,9 @@ def sheet(donor, it, hands, marks, outdir):
 def append_rows(rows):
     """new slots at the end of every array of RSQ_HandTable + SlotForDonor lines in a GENERATED block"""
     s = open(TABLE, encoding='utf-8').read()
+    # an earlier run's lines stay: the block is a ledger of every fit written, not the last run's
+    old = re.search(re.escape(BEGIN) + r'\n(.*?)' + re.escape(END) + r'\n', s, re.S)
+    kept = [l for l in old.group(1).splitlines() if l.strip()] if old else []
     s = re.sub(re.escape(BEGIN) + r'.*?' + re.escape(END) + r'\n', '', s, flags=re.S)
     n0 = len(re.search(r'static String GunOne\(int i\)\s*\{\s*static const String v\[\] = \{([^}]*)\}', s, re.S).group(1).split(','))
     def arr(fn, name, vals):
@@ -155,7 +160,7 @@ def append_rows(rows):
         arr(fn, 'v', ['"%s"' % r[key] for r in rows])
     for fn, key in (('GunHook', 'hook'), ('GunRot', 'rot'), ('SupportHook', 'shook'), ('SupportRot', 'srot'), ('SupportPoint', 'spoint'), ('GunHookTwo', 'hook'), ('GunRotTwo', 'rot')):
         for k, ax in enumerate('xyz'): arr(fn, ax, ['%.3f' % r[key][k] for r in rows])
-    lines = [BEGIN] + ['\t\tif (donor == "%s")\treturn %d;\t// Ermac %s / support %s, fitted 2026-11-08 (handfit_donors.py)' % (r['donor'], n0 + i, r['two'], r['sup'] or '-') for i, r in enumerate(rows)] + [END]
+    lines = [BEGIN] + kept + ['\t\tif (donor == "%s")\treturn %d;\t// Ermac %s / support %s, fitted 2026-11-08 (handfit_donors.py)' % (r['donor'], n0 + i, r['two'], r['sup'] or '-') for i, r in enumerate(rows)] + [END]
     m = re.search(r'(static int SlotForDonor\(string donor\)\s*\{.*?)(\n\t\treturn 0;\n\t\})', s, re.S)
     s = s[:m.end(1)] + '\n' + '\n'.join(lines) + s[m.end(1):]
     open(TABLE, 'w', encoding='utf-8').write(s)
