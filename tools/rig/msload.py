@@ -37,7 +37,16 @@ else:
     if not m: print('\n'.join(l for l in t.splitlines() if re.search(r'^rsb t|Script error|VM abort', l))[:2000]); sys.exit('break never OPENed')
     hb = np.array([float(x) for x in m.group(3, 4, 5)]); ht = np.array([float(x) for x in m.group(6, 7, 8)])
     ch = [(np.array([float(x) for x in a[0:3]]), np.array([float(x) for x in a[3:6]]), float(a[6])) for a in re.findall(r'B22 CH \d+ tip (\S+) (\S+) (\S+) bore (\S+) (\S+) (\S+) depth (\S+)', t)]
-    print('open: gun %s, %d chambers' % (m.group(1), len(ch)))
+    seen = []; dd = []
+    for tk, bk, dep in ch:
+        key = tuple(np.round(tk, 2))
+        if key in seen: continue
+        seen.append(key); dd.append((tk, bk, dep))
+    ch = dd
+    gun_i = int(m.group(1))
+    hinge = re.search(r'B22 HINGE gun %d axis (\S+) (\S+) (\S+)' % gun_i, t)
+    roll_flick = hinge and abs(float(hinge.group(1))) > 0.5
+    print('open: gun %s, %d chambers, hinge %s -> %s flick' % (m.group(1), len(ch), hinge.groups() if hinge else '?', 'ROLL' if roll_flick else 'PITCH'))
     load = ''
     for tk, bk, dep in ch:
         a = ht - hb

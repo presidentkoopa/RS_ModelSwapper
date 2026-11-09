@@ -54,12 +54,20 @@ class MSProbe : EventHandler
 				Console.Printf("B22 PS %d %s phase %d spr %d frame %d statespr %d.%d", level.maptime, pumping ? "PUMP" : "BREAK",
 					pumping ? ps.mode : bs0.phase, int(wp2.Sprite), wp2.Frame, int(wp2.CurState.sprite), wp2.CurState.Frame);
 		}
+		// MS: the GUN hand's frame every tic while a break reload is open (to see what a posed flick does)
+		if (bs0 && bs0.phase == RSB.OPEN)
+		{
+			Vector3 gf = RSVR_VRHand.HandDir(mo, 0, 0, 1.2), gl = RSVR_VRHand.HandDir(mo, 90, 0, 1.2), gu = RSVR_VRHand.HandDir(mo, 0, 90, 1.2);
+			Console.Printf("B22 GH %d F %.2f %.2f %.2f L %.2f %.2f %.2f U %.2f %.2f %.2f flick %.0f roll %.1f pitch %.1f ang %.1f", level.maptime, gf.x, gf.y, gf.z, gl.x, gl.y, gl.z, gu.x, gu.y, gu.z, bs0.flickSeen, mo.AttackRoll, mo.AttackPitch, mo.AttackAngle);
+		}
 		let bs = RSB_Handler.StateOf(mo);
 		if (bs && bs.phase == RSB.OPEN && !bdumped)
 		{
 			bdumped = true;
 			Vector3 hb = RSB_Guns.HandBase(bs.gun), ht = RSB_Guns.HandTip(bs.gun);
 			Console.Printf("B22 BREAK gun %d nch %d theta %.2f hb %.3f %.3f %.3f ht %.3f %.3f %.3f", bs.gun, bs.nch, bs.theta, hb.x, hb.y, hb.z, ht.x, ht.y, ht.z);
+			Vector3 hx = RSB_Guns.Axis(bs.gun);
+			Console.Printf("B22 HINGE gun %d axis %.4f %.4f %.4f", bs.gun, hx.x, hx.y, hx.z);
 			for (int k = 0; k < bs.nch; k++)
 			{
 				Vector3 tk = bs.TipAt(k, bs.theta), bk = bs.BoreAt(k, bs.theta);
