@@ -44,6 +44,8 @@ The open list, in order of priority, is in [HANDOFF.md](HANDOFF.md).
 |---|---|---|---|
 | Quest | `ModelSwapper-QUEST.pk3` | QuestZDoom 17.3 | `python3 tools/ms/build_pk3.py` (Linux) or `./build.ps1 -Static` (Windows) |
 | Quest, Project Brutality only | `pk3/ProjBrut_MS.pk3` (in the repo) | QuestZDoom 17.3 | `python3 tools/ms/build_pk3.py --pb` |
+| Quest, Generic Weapons only | `pk3/GenericWeapons_MS.pk3` (in the repo; picks: `docs/sets/generic_weapons.md`) | QuestZDoom 17.3 | `python3 tools/ms/build_pk3.py --set generic_weapons` |
+| Quest, Weapons of Saturn only | `pk3/WeaponsOfSaturn_MS.pk3` (in the repo; picks: `docs/sets/weapons_of_saturn.md`) | QuestZDoom 17.3 | `python3 tools/ms/build_pk3.py --set weapons_of_saturn` |
 | PC VR | `ModelSwapper.pk3` | UZDXREMA | `./build.ps1` |
 
 Load your weapon mod first and ModelSwapper after it. The two builds differ in one file: the Quest build ships
