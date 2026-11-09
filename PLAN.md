@@ -1,6 +1,6 @@
 # PLAN: RS_ModelSwapper (owner, 2026-11-08; this file is the only plan)
 
-Current step: **M2**
+Current step: **M3**
 
 `none` is also a legal current step; `tools/check_plan.py` accepts it only while every `- F<n>` / `- W<n>` / `- M<n>`
 line here is marked DONE. To do new work, add an item in a `[plan]` commit and name it here.
@@ -41,6 +41,11 @@ workshop. The plan before the merge is `docs/depot/PLAN.md` (the Depot's) and `H
       `blendcard.py` needs Blender; the import side (`obj2md3 --stable-verts`, `iqm2md3`, `blendanim`) was never run
       end to end on one gun with the card as the result.
 
+- M3  GOLDEN SOULS 1 SET (owner, 2026-11-08 19:41: "theorize on sets for these, but only start with the first GS").
+      Doom: The Golden Souls 1 (00_SMD2_A1_GoldenSouls1_Full_1_4.pk3): 8 weapons -> a profile, MENUDEF.gs1,
+      pk3/GoldenSouls1_MS.pk3 the M2 way; hands by rows or fitted on the cards, every sheet looked at. Golden Souls 2
+      theorised only (docs/sets/golden_souls_2.md), not built. Done when the pk3 passes the gates and the sheet is in
+      docs/sets/hands. Not rig-run here.
 - H1  HANDFIT IN BLENDER, STEP 1 (owner, 2026-11-08: "our current fitter and rig system is too taxing on my tokens ...
       assume I have blender, and these FBX hands"; agreed 18:33). Step 1 = `tools/handfit/blender/`: the pose library
       (29 BD22 holds + the FBX take's 5 poses, each hand), the add-on (load card, import hand, apply pose, export the
