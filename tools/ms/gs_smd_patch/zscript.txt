@@ -1,0 +1,4 @@
+version "4.13"
+
+// GoldenSouls_SMD_Enemies.pk3 (PLAN M4). The enemies are sprites and sounds, no code; this is the high jump only.
+#include "zscript/smd_highjump.zs"

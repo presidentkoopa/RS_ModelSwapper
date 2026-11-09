@@ -1,0 +1,164 @@
+//===========================================================================
+//
+// Doom-specific player sounds
+//
+//===========================================================================
+
+$playersound	player	male	*pain100	marpn100
+$playersound	player	male	*pain75		marpn75
+$playersound	player	male	*pain50		marpn50
+$playersound	player	male	*pain25		marpn25
+$playersound	player  male	*falling	marfall
+$playersound	player  male	*dive		dive
+$playersound	player  male	*surface	surface
+$playersound	player  male	*usefail	marhuh
+
+// Helper Dog
+
+$random dog/sight		{ dog/sight1  dog/sight2  dog/sight3 }
+$random dog/attack		{ dog/attack1  dog/attack2 }
+$random dog/pain		{ dog/pain1  dog/pain2 }
+dog/sight1		dsdgsit
+dog/sight2		yoshi
+dog/sight3		maricatu
+dog/active		yahoo
+dog/pain1		wahh
+dog/pain2		wahh2
+dog/attack1		tongue
+dog/attack2		dsdgatk
+
+//===========================================================================
+//
+// MONSTER SOUNDS
+//
+//===========================================================================
+
+// Zombie man
+
+grunt/attack			zapper
+
+// Shotgun guy
+
+shotguy/attack			raygun
+
+// Archvile
+
+vile/raise				revive
+vile/firestrt			shystone
+
+// Revenant
+
+$random skeleton/pain		{ skeleton/pain1  skeleton/pain2 }
+$random skeleton/melee		{ skeleton/melee1  skeleton/melee2 }
+$random skeleton/swing		{ skeleton/swing1  skeleton/swing2 }
+skeleton/pain1			luigiow
+skeleton/pain2			luigiooh
+skeleton/melee1			dsskepch
+skeleton/melee2			dsskepc2
+skeleton/swing1			dsskeswg
+skeleton/swing2			dsskesw2
+skeleton/tracex			shell
+
+// Fatso
+
+fatso/active			warioyea
+fatso/attack			chomp
+fatso/shotx				dsmarxpl
+
+// Chainguy
+
+chainguy/attack			scope
+
+// Imp
+
+imp/pain			dsbgpain
+imp/attack			shystone
+imp/shotx			shyston2
+
+// Demon
+
+demon/active		dssgtact
+demon/pain			dssgtpn
+
+// Spectre
+
+spectre/active		dssgtact
+spectre/pain			dssgtpn
+
+// Cacodemon
+
+caco/active			lakact
+caco/pain			lakpain
+caco/attack			throw
+caco/shotx			dsmarxpl
+
+// Baron of Hell
+
+baron/active		dsbrsact
+baron/pain			dsbrpain
+baron/shotx			dsmarxpl
+
+// Hell Knight
+
+knight/active		dskntact
+knight/pain			dsbrpain
+knight/shotx		dsmarxpl
+
+// Lost Soul
+
+skull/active		dssklact
+skull/pain			dspepain
+skull/death			defeat
+
+// Spider Mastermind
+
+spider/active		dsspiact
+spider/pain			dssppain
+spider/attack		raygun
+spider/walk			null
+
+// Arachnotron
+
+baby/pain			marpn75
+baby/attack			fireball
+baby/shotx			dsmarxpl
+
+// Cyber Demon
+
+cyber/active		dscybact
+cyber/pain			dscypain
+cyber/hoof			null
+
+// Pain Elemental
+
+pain/active			dspeact
+pain/death			defeat
+
+// Wolfenstein SS
+
+$random wolfss/sight 		{ wolfss/sight1  wolfss/sight2  wolfss/sight3 }
+$random wolfss/death		{ wolfss/death1  wolfss/death2  wolfss/death3 }
+wolfss/sight1			dsposit1
+wolfss/sight2			dsposit2
+wolfss/sight3			dsposit3
+wolfss/pain			    dspopain
+wolfss/death1			dspodth1
+wolfss/death2			dspodth2
+wolfss/death3			dspodth3
+wolfss/attack			raygun
+
+intermission/tick			count
+intermission/nextstage	    endcount
+
+menu/activate		pause	// Activate a new menu
+menu/backup			confirm	// Backup to previous menu
+menu/prompt			confirm	// Activate a prompt "menu"
+menu/cursor			mapmove		// Move cursor up/down
+menu/change			count	// Select new value for option
+menu/invalid		wrong		// Menu not available
+menu/dismiss		confirm	// Dismiss a prompt message
+menu/choose			confirm	// Choose a menu item
+menu/clear			pause	// Close top menu
+
+menu/quit1 save
+menu/quit2 save

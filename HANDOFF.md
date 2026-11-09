@@ -50,6 +50,36 @@ that came out of the Oct-31 batch-carding.** Everything else in either repo is "
 - Quest animated meshes: the owner says the method was found; not in this repo (PLAN C3).
 - `tools/hqt/compcheck.sh` takes REMA_BIN / REMA_IWAD / REMA_INI / REMA_BASE from the environment now (was hardcoded).
 
+# M4 -- Golden Souls: Super Mario Doom enemies + high jump patch (2026-11-08, RIG-RUN)
+
+Owner 23:30: "have a separate agent make a patch for this for GoldenSouls 1 and 2. I want the enemies from this, and
+the high jump." Full account: `docs/sets/golden_souls_smd_enemies.md`.
+## Done (measured)
+- The SDMLITE pack inventoried: 1893 entries, NO code of any kind (no DECORATE / ZScript / MAPINFO / ACS); its enemies
+  are the stock Doom monsters redrawn under stock sprite names + stock-named sound lumps + a SNDINFO. Every stock monster
+  frame present (checked against the engine's own state tables). GS1 / GS2 map THINGS parsed: both place Imp, Demon,
+  Caco, Knight, Baron, Revenant, Fatso (GS1 also Arachnotron, Spider, Cyber; GS2 Pain Elemental) through `<Class>New`
+  subclasses that keep stock sprite names -> one sprite-level patch serves both mods, no actor code.
+- `pk3/GoldenSouls_SMD_Enemies.pk3`: 1031 entries, 6.2 MB (939 sprites, 83 sounds, monster SNDINFO + cast/obituary
+  LANGUAGE verbatim from the pack, the jump code). `tools/ms/make_gs_smd_patch.py` builds it from `sources/smd_lite/`
+  (+ PROVENANCE.md, CREDITS.txt) and `tools/ms/gs_smd_patch/`; gates: every named sound packed, every monster sprite,
+  no backslash, no lump shared with GoldenSouls1_MS.pk3 (so either load order works). zs_lint 0 problems.
+- The jump: `SMD_HighJump` Inventory given by an EventHandler (PlayerEntered / Respawned / WorldLoaded), JumpZ from
+  server cvar `smd_jumpz` (default 15 = GS2's own, parsed; GS1's is 8.2), class default back when `smd_highjump` off.
+  GS's player classes untouched. The pack has NO jump number to measure: 15 is GS2's, said so in the doc and the menu.
+- RIG (doom2.wad from the owner's upload, QuestZDoom 17.3): zero script errors on GS1 -> patch, GS1 -> patch -> MS,
+  GS1 -> MS -> patch, GS2 -> patch (init and in-map). Probe lines: TROOA1 and DSBGSIT1 resolve to the patch, FIREA0 to
+  the IWAD; GS1 MAP01 DoomImpNew draws TROO, DemonNew SARG, CacodemonNew HEAD, HellKnightNew BOS2; frames in
+  `docs/sets/smd_enemies/`. JumpZ 15.00 from tic 1 in both mods; off -> 8.20 (GS1) / 15.00 (GS2); `smd_jumpz 30` ->
+  30.00. A jump measured: apex 120.0 units at JumpZ 15, 37.8 at 8.2.
+- Found on the rig, fixed: the EventHandler needed `MAPINFO GameInfo AddEventHandlers` or it never ran.
+## Not done
+- Headset. Sounds heard (`-nosound`; lump resolution only). Spider / Cyber / Arachnotron / Pain Elemental seen drawn in
+  a GS map (sprite-checked only).
+## Open
+- Jump height is GS2's 15, not SMD's (no code in LITE). The Mario `DSJUMP` sound and the Mario player sprite were left
+  out as taste calls; one-liners listed in the doc.
+
 # M3 -- Golden Souls 1 set (2026-11-08, NOT rig-run)
 
 Owner 19:41: "theorize on sets for these, but only start with the first GS". GS1 built the M2 way, GS2 theorised in

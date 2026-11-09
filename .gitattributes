@@ -6,3 +6,6 @@
 *.pcx binary
 *.pk3 binary
 sprites/* binary
+sources/smd_lite/*.orig -text
+sources/smd_lite/sounds/* binary
+sources/smd_lite/sprites/* binary

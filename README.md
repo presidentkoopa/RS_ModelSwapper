@@ -128,6 +128,7 @@ One repo holds the method and the product it feeds (RSQ_WeaponDepot merged in on
 | `docs/handbook/` | how VR weapon mechanics are built on QuestZDoom 17.3, with the tools above |
 | `docs/depot/` | the Depot's own README, PLAN, HANDOFF and rules as they were at the merge |
 | `sources/pbvp_v2/` | Project Brutality Voxel Patch v2, verbatim (credit required) |
+| `sources/smd_lite/` | the Super Mario Doom enemy lumps (sprites, sounds, SNDINFO/LANGUAGE), verbatim from the owner's SDMLITE pack, for `pk3/GoldenSouls_SMD_Enemies.pk3` (CREDITS.txt) |
 | `models/rsq/`, `sounds/`, `SNDINFO.ms` | VR hands and reload sounds |
 | `reload_1x/` | earlier reload layers, reference for `tools/ms/reload_modeldefs.py` |
 

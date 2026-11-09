@@ -1,0 +1,13 @@
+Super Mario Doom enemy assets (sprites and sounds) in GoldenSouls_SMD_Enemies.pk3
+
+Taken unchanged from "00_SMD2_00_SuperMarioDoom_Assets_SDMLITE.pk3" (the Super Mario Doom asset pack, "LITE" cut),
+supplied by the pack's owner on 2026-11-08. The pack carries no author or licence text; this file records what is
+known. Credit for the pixel art and the sound work belongs to the Super Mario Doom mod's makers. Mario, Luigi, Wario,
+Waluigi, Bowser, Donkey Kong, Goomba, Koopa Troopa, Shy Guy, Lakitu, Magikoopa, Boo and the related sounds are
+Nintendo's characters and property; this is a fan patch for personal play, distributed free, no ownership claimed.
+
+What is here (sources/smd_lite, PROVENANCE.md has the numbers): the sprites of the 17 Doom monsters as the pack
+redraws them, the projectiles those monsters fire, the monster sound lumps, and the monster lines of the pack's
+SNDINFO and LANGUAGE. Nothing else of the pack (player, weapons, items, textures, flats, music, maps) is included.
+
+The high jump code (zscript/smd_highjump.zs) is RS_ModelSwapper's (presidentkoopa), MIT like the rest of the repo.

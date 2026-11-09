@@ -1,0 +1,3 @@
+// GoldenSouls_SMD_Enemies.pk3 (PLAN M4). Server cvars: one value for every machine in a game.
+server bool smd_highjump = true;    // off = the Golden Souls player's own JumpZ (GS1 8.2, GS2 15)
+server float smd_jumpz = 15.0;      // the jump height; 15 = Golden Souls 2's own Player.JumpZ (the SDMLITE pack has no player code to measure)

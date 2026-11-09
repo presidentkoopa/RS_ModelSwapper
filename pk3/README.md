@@ -8,3 +8,6 @@ Built packages. Make them with `python tools_build_pk3.py` (Linux / any OS; the 
   The Quest build cut down to the 29 models the PB profile uses, plus Options > "Project Brutality VR".
   Rebuild: `python tools_build_pk3.py --pb`.
 - **ModelSwapper-QUEST.pk3** (when built): the whole shelf, `python tools_build_pk3.py`.
+- **GoldenSouls_SMD_Enemies.pk3** (PLAN M4): Super Mario Doom enemies + a high jump for Doom: The Golden Souls 1 and 2.
+  Load order: **Golden Souls 1 or 2, then this patch**; GoldenSouls1_MS.pk3 before or after it (no shared lump).
+  Rebuild: `python3 tools/ms/make_gs_smd_patch.py`. Docs: `docs/sets/golden_souls_smd_enemies.md`.

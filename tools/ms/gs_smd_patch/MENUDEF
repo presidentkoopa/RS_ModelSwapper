@@ -1,0 +1,14 @@
+// GoldenSouls_SMD_Enemies.pk3 (PLAN M4): Options > "Golden Souls: Mario enemies + jump"
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "Golden Souls: Mario enemies + jump", "SMDGS_Options"
+}
+
+OptionMenu "SMDGS_Options"
+{
+	Title "Golden Souls: Mario enemies + jump"
+	StaticText "The enemies are sprites and sounds: always on while the patch is loaded.", "Grey"
+	StaticText ""
+	Option "High jump", "smd_highjump", "OnOff"
+	Slider "Jump height (GS1 8.2, GS2 15)", "smd_jumpz", 8, 40, 1, 1
+}

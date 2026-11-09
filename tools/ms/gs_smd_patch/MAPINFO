@@ -1,0 +1,5 @@
+// GoldenSouls_SMD_Enemies.pk3 (PLAN M4): the jump handler must be registered or it never runs (found on the rig, 2026-11-08)
+GameInfo
+{
+	AddEventHandlers = "SMD_HighJumpHandler"
+}

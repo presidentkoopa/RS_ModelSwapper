@@ -1,0 +1,107 @@
+[enu default]
+
+QUITMSG1 = "please don't leave, there's more\nkoopas to stomp!";
+QUITMSG2 = "i'd say he's hot on our tail!";
+QUITMSG3 = "i wish luigi were here,\ni could blame him!";
+QUITMSG4 = "you're trying to say you like sega\nbetter than me, right?";
+QUITMSG5 = "thank you mario!\nbut our princess is in another castle!";
+QUITMSG6 = "step right up, if you're ready\nto get... toasted!";
+QUITMSG7 = "i'd insult you if I were smart enough.";
+
+QUITMSG8 = "hey, are you a man or\na mouser?";
+QUITMSG9 = "what are we supposed to do? wave\na magic wand and make it all go away?";
+QUITMSG10 = "looks like you're plumber out of luck!";
+QUITMSG11 = "don't question my orders,\nyou rotten rodent! just do it!";
+QUITMSG12 = "brave men die a single death;\ncowards marry fish-head mermaids!";
+QUITMSG13 = "sounds good to me! let's just\nforget about these koopa guys!";
+QUITMSG14 = "you don't scare me,\nyou linguini-lickin' loser!";
+
+NIGHTMARE = "are you sure? this skill level\nis for super players only.\n\npress y or n.";
+
+GOTARMOR = "Picked up the overalls.";
+GOTMEGA = "Picked up the fiery overalls!";
+GOTHTHBONUS = "Picked up a coin.";
+GOTARMBONUS = "Picked up a frog coin.";
+GOTSTIM = "Picked up a mushroom.";
+GOTMEDINEED = "Picked up a super shroom. Just what you needed!";
+GOTMEDIKIT = "Picked up a super shroom.";
+GOTSUPER = "Ultra shroom!";
+GOTBLUECARD = "Picked up a blue key.";
+GOTYELWCARD = "Picked up a yellow key.";
+GOTREDCARD = "Picked up a red key.";
+GOTBLUESKUL = "Picked up a blue bowser key.";
+GOTYELWSKUL = "Picked up a yellow bowser key.";
+GOTREDSKUL = "Picked up a red bowser key.";
+GOTINVUL = "Super Star!";
+GOTBERSERK = "POW Block!";
+GOTINVIS = "Vanish Cap";
+GOTSUIT = "Frog Suit";
+GOTMAP = "Game Boy Area Map";
+GOTVISOR = "Light Virtualization Visor";
+GOTMSPHERE = "Mega Coin!";
+GOTROCKET = "Picked up a bullet bill.";
+GOTROCKBOX = "Picked up a box of bullet bills.";
+GOTBACKPACK = "Picked up a chest full of ammo!";
+GOTLAUNCHER = "You got the bullet bill launcher!";
+
+STSTR_DQDON = "You are a Superstar!";
+STSTR_DQDOFF = "You were a Superstar...";
+
+// Cast list (must appear in this order)
+CC_ZOMBIE = "KOOPA TROOPA";
+CC_SHOTGUN = "RED KOOPA TROOPA";
+CC_HEAVY = "BLUE KOOPA TROOPA";
+CC_IMP = "SHY GUY";
+CC_DEMON = "GOOMBA";
+CC_LOST = "BOO";
+CC_CACO = "LAKITU";
+CC_HELL = "BLUE MAGIKOOPA";
+CC_BARON = "RED MAGIKOOPA";
+CC_ARACH = "EVIL MARIO";
+CC_PAIN = "BIG BOO";
+CC_REVEN = "EVIL LUIGI";
+CC_MANCU = "WARIO";
+CC_ARCH = "WALUIGI";
+CC_SPIDER = "DONKEY KONG";
+CC_CYBER = "BOWSER";
+CC_HERO = "OUR HERO";
+
+// Obituary strings
+
+OB_STEALTHBABY = "%o thought %g saw an evil mario.";
+OB_STEALTHVILE = "%o thought %g saw Waluigi.";
+OB_STEALTHBARON = "%o thought %g saw a red magikoopa.";
+OB_STEALTHCACO = "%o thought %g saw a lakitu.";
+OB_STEALTHCHAINGUY = "%o thought %g saw a blue koopa troopa.";
+OB_STEALTHDEMON = "%o thought %g saw a goomba.";
+OB_STEALTHKNIGHT = "%o thought %g saw a blue magikoopa.";
+OB_STEALTHIMP = "%o thought %g saw a shy guy.";
+OB_STEALTHFATSO = "%o thought %g saw Wario.";
+OB_STEALTHUNDEAD = "%o thought %g saw an evil luigi.";
+OB_STEALTHSHOTGUY = "%o thought %g saw a red koopa troopa.";
+OB_STEALTHZOMBIE = "%o thought %g saw a koopa troopa.";
+OB_UNDEADHIT = "%o was punched by an evil luigi.";
+OB_IMPHIT = "%o was slapped by a shy guy.";
+OB_CACOHIT = "%o got too close to a lakitu.";
+OB_DEMONHIT = "%o was bit by a goomba.";
+OB_SPECTREHIT = "%o was eaten by a ghostly goomba.";
+OB_BARONHIT = "%o was concussed by a red magikoopa.";
+OB_KNIGHTHIT = "%o was whacked by a blue magikoopa.";
+OB_ZOMBIE = "%o was defeated by a green koopa troopa.";
+OB_SHOTGUY = "%o was shot by a red koopa troopa.";
+OB_VILE = "%o was bombarded by Waluigi.";
+OB_UNDEAD = "%o couldn't evade an evil luigi's spiny shell.";
+OB_FATSO = "%o was squashed by Wario.";
+OB_CHAINGUY = "%o was scoped by a blue koopa troopa.";
+OB_SKULL = "%o was spooked by a boo.";
+OB_IMP = "%o was pelted by a shy guy.";
+OB_CACO = "%o was spinied by a lakitu.";
+OB_BARON = "%o was dazzled by a red magikoopa's magic.";
+OB_KNIGHT = "%o was dazed by a blue magikoopa's magic.";
+OB_SPIDER = "%o stood in awe of Donkey Kong.";
+OB_BABY = "%o let an evil mario get %h.";
+OB_CYBORG = "%o was splattered by Bowser.";
+OB_WOLFSS = "%o met a yellow koopa troopa.";
+OB_DOG = "%o was licked by a yoshi.";
+
+TAG_ROCKETLAUNCHER = "Bullet Bill Launcher";

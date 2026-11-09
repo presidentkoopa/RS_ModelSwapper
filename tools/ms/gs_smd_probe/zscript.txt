@@ -1,0 +1,49 @@
+version "4.13"
+
+// TEST ONLY (PLAN M4): loaded on the rig after GoldenSouls_SMD_Enemies.pk3, never shipped. Prints one SMDPROBE line a
+// second per player (class, JumpZ, the item) and, once, which archive serves the Imp's sprite and sight sound; every
+// monster in the map is listed with the sprite texture it is drawing. make_gs_smd_patch.py --probe zips it to work/.
+class SMD_Probe : EventHandler
+{
+	override void WorldLoaded(WorldEvent e)
+	{
+		int l = Wads.CheckNumForName("TROOA1", Wads.ns_sprites);
+		Console.Printf("SMDPROBE sprite TROOA1 lump %d = %s", l, l >= 0 ? Wads.GetLumpFullName(l) : "none");
+		l = Wads.CheckNumForName("DSBGSIT1", Wads.ns_sounds);
+		Console.Printf("SMDPROBE sound DSBGSIT1 lump %d = %s", l, l >= 0 ? Wads.GetLumpFullName(l) : "none");
+		l = Wads.CheckNumForName("FIREA0", Wads.ns_sprites);
+		Console.Printf("SMDPROBE sprite FIREA0 lump %d = %s (must NOT be the patch)", l, l >= 0 ? Wads.GetLumpFullName(l) : "none");
+		Console.Printf("SMDPROBE map %s", level.MapName);
+	}
+
+	override void WorldTick()
+	{
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (!playeringame[i] || !players[i].mo) continue;
+			let mo = players[i].mo;
+			if (mo.pos.z > mo.floorz + 0.5)
+				Console.Printf("SMDPROBE air tic %d p%d z %.1f above floor (JumpZ %.2f)", level.maptime, i, mo.pos.z - mo.floorz, mo.JumpZ);
+		}
+		if (level.maptime % 35 != 1) return;
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (!playeringame[i] || !players[i].mo) continue;
+			let mo = players[i].mo;
+			Console.Printf("SMDPROBE tic %d p%d %s JumpZ %.2f item %s at (%.0f,%.0f,%.0f) ang %.0f", level.maptime, i, mo.GetClassName(),
+				mo.JumpZ, mo.FindInventory("SMD_HighJump") ? "yes" : "no", mo.pos.x, mo.pos.y, mo.pos.z, mo.angle);
+		}
+		if (level.maptime % 175 == 1)
+		{
+			ThinkerIterator it = ThinkerIterator.Create("Actor");
+			Actor a; int n = 0;
+			while ((a = Actor(it.Next())) && n < 40)
+			{
+				if (!a.bIsMonster || a.health <= 0) continue;
+				n++;
+				Console.Printf("SMDPROBE monster %s draws %s at (%.0f,%.0f)", a.GetClassName(),
+					TexMan.GetName(a.CurState.GetSpriteTexture(0)), a.pos.x, a.pos.y);
+			}
+		}
+	}
+}
